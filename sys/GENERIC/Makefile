@@ -1,6 +1,5 @@
-IDENT=-DGENERIC -DVAX650 -DVAX630 -DVAX730 -DVAX750 -DVAX780 -DVAX8200 -DVAX8600 -DTCP_COMPAT_42 -DNS -DINET -DQUOTA -DNOSUBSINST
+IDENT=-DGENERIC -DVAX650 -DVAX630 -DVAX730 -DVAX750 -DVAX780 -DVAX8200 -DVAX8600 -DTCP_COMPAT_42 -DNS -DINET -DQUOTA
 PARAM=-DTIMEZONE=480 -DDST=1 -DMAXUSERS=8
-INLINEOPTS=-s
 #
 # Copyright (c) 1980, 1986 Regents of the University of California.
 # All rights reserved.  The Berkeley software License Agreement
@@ -1462,7 +1461,7 @@ sys_process.o: ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h
 sys_process.o: ../h/proc.h ../h/inode.h ../h/text.h ../h/seg.h ../h/vm.h
 sys_process.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
 sys_process.o: ../h/vmmeter.h ../h/vmsystm.h ../h/buf.h ../h/acct.h
-sys_process.o: ../h/ptrace.h
+sys_process.o: ../h/ptrace.h ../sys/../vax/cpu.h
 sys_socket.o: ../sys/sys_socket.c ../h/param.h ../h/types.h ../h/signal.h
 sys_socket.o: ../h/../machine/trap.h ../h/../machine/machparam.h
 sys_socket.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h

@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)arff.c	5.6 (Berkeley) 12/26/87";
+static char sccsid[] = "@(#)arff.c	5.8 (Berkeley) 2/14/04";
 #endif not lint
 
 #include <sys/types.h>
@@ -26,7 +26,8 @@ static char sccsid[] = "@(#)arff.c	5.6 (Berkeley) 12/26/87";
 struct rt_dat {
 	u_short	rt_yr:5;	/* year-1972 */
 	u_short	rt_dy:5;	/* day */
-	u_short	rt_mo:5;	/* month */
+	u_short	rt_mo:4;	/* month */
+	u_short	rt_yx:2;	/* year extension */
 };
 
 struct	rt_axent {
@@ -93,7 +94,7 @@ extern char table[256];
 struct rt_dir rt_dir[RT_DIRSIZE] = {
 	{
 	{ 4, 0, 1, 0, 14 },
-	{ { 0, RT_NULL, { 0, 0, 0 }, 486, 0 },
+	{ { 0, RT_NULL, { 0, 0, 0 }, 480, 0 },
 	  { 0, RT_ESEG } }
 	}
 };
@@ -270,10 +271,10 @@ rtls(de)
 		unrad50(2, de->rt_name, name);
 		unrad50(1, &(de->rt_name[2]), ext);
 		day = de->rt_date.rt_dy;
-		year = de->rt_date.rt_yr+72;
+		year = (de->rt_date.rt_yx<<5 | de->rt_date.rt_yr) + 1972;
 		month = de->rt_date.rt_mo;
-		printf("%6.6s  %3.3s	%02d/%02d/%02d	%d\n",name,
-			ext, month, day, year, de->rt_len);
+		printf("%6.6s  %3.3s	%04d-%02d-%02d	%d\n",name,
+			ext, year, month, day, de->rt_len);
 		break;
 
 	case RT_NULL:
@@ -836,7 +837,8 @@ overwrite:
 	timp = localtime(&bufp->st_mtime);
 	de->rt_date.rt_dy = timp->tm_mday;
 	de->rt_date.rt_mo = timp->tm_mon + 1;
-	de->rt_date.rt_yr = timp->tm_year - 72;
+	de->rt_date.rt_yr = (timp->tm_year - 72) & 0x1F;
+	de->rt_date.rt_yx = (timp->tm_year - 72) >> 5;
 	de->rt_stat = RT_FILE;
 	de->rt_pad = 0;
 	de->rt_chan = 0;

@@ -9,8 +9,6 @@ cpu		"VAX750"
 cpu		"VAX730"
 cpu		"VAX630"
 cpu		"VAX650"
-makeoptions	INLINEOPTS="-s"
-options		NOSUBSINST
 ident		GENERIC
 timezone	8 dst
 maxusers	8

@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)srt0.c	7.8 (Berkeley) 11/15/03
+ *	@(#)srt0.c	7.8.1.1 (Berkeley) 2/14/04
  */
 
 #include "../vax/mtpr.h"
@@ -68,7 +68,7 @@ entry:	.globl	entry
 2:
 	movl	$RELOC,sp
 #else
-	movl	0x6DC00,sp		# keep it below 0x70000 like in 4.3
+	movl	$0x6DC00,sp		# keep it below 0x70000 like in 4.3
 #endif
 start:
 #ifndef REL

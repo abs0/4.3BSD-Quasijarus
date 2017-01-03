@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)sys_process.c	7.4 (Berkeley) 12/10/87
+ *	@(#)sys_process.c	7.5 (Berkeley) 1/4/04
  */
 
 #define IPCREG
@@ -23,6 +23,11 @@
 #include "buf.h"
 #include "acct.h"
 #include "ptrace.h"
+
+/* need cpu_has_compat_mode */
+#ifdef vax
+#include "../vax/cpu.h"
+#endif
 
 /*
  * Priority for tracing
@@ -174,9 +179,12 @@ procxmt()
 		if (p == &u.u_ar0[PS]) {
 			ipc.ip_data |= PSL_USERSET;
 			ipc.ip_data &=  ~PSL_USERCLR;
-#ifdef PSL_CM_CLR
-			if (ipc.ip_data & PSL_CM)
+#ifdef vax
+			if (ipc.ip_data & PSL_CM) {
+				if (!cpu_has_compat_mode)
+					goto error;
 				ipc.ip_data &= ~PSL_CM_CLR;
+			}
 #endif
 			goto ok;
 		}

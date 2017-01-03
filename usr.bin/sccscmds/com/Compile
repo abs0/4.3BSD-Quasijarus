@@ -1,0 +1,54 @@
+:
+:
+:	This procedure is used to create the archive file
+:	'comobj.a', which contains the object modules of all the
+:	common subroutines. All work is done in a temporary
+:	directory called 'objwork', in order to prevent damage
+:	to the contents of the 'com' directory.
+:	At the end of processing, the new archive file is moved into 'com'.
+:
+:
+mkdir ../objwork
+chdir ../objwork
+rm -f *
+cp ../com/*.c .
+echo COMPILING:\
+
+cc -c -O *.c
+rm -f *.c
+ar cr \
+comobj.a \
+doie.o \
+dolist.o \
+permiss.o \
+rdmod.o \
+setup.o \
+dodelt.o \
+del_ab.o \
+chksid.o \
+stats_ab.o \
+flushto.o \
+del_ba.o \
+newstats.o \
+sinit.o \
+getline.o \
+putline.o \
+auxf.o \
+sid_ba.o \
+date_ba.o \
+dofile.o \
+pf_ab.o \
+sid_ab.o \
+date_ab.o \
+fmterr.o \
+sidtoser.o \
+chkid.o \
+dohist.o \
+eqsid.o
+
+:rm -f *.o
+
+mv comobj.a ../com
+chdir ..
+:rmdir objwork
+echo "DONE comobj.a"

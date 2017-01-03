@@ -19,6 +19,7 @@
 static char sccsid[] = "@(#)memccpy.c	5.4 (Berkeley) 6/27/88";
 #endif /* LIBC_SCCS and not lint */
 
+
 char *
 memccpy(t, f, c, n)
 	register char *t, *f;

@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.20 (Berkeley) 88/05/21
+#	@(#)Makefile	5.22 (Berkeley) 99/10/09
 #
 # Doing a make install builds /usr/include
 #
@@ -22,13 +22,14 @@ STD=	a.out.h ar.h assert.h ctype.h curses.h ndbm.h disktab.h \
 	fcntl.h fstab.h grp.h lastlog.h math.h memory.h mp.h mtab.h \
 	netdb.h nlist.h pcc.h pwd.h ranlib.h regexp.h resolv.h setjmp.h \
 	sgtty.h stab.h stdio.h string.h strings.h struct.h \
-	sysexits.h time.h ttyent.h tzfile.h utmp.h varargs.h vfont.h
+	sysexits.h time.h ttyent.h tzfile.h utmp.h varargs.h vfont.h \
+	zconf.h zlib.h
 LINKS=	errno.h signal.h syslog.h
 
 NETDIRS=	net netimp netinet netns
 TAHOEDIRS=	tahoe tahoemath tahoevba tahoeif
 VAXDIRS=	vax vaxmba vaxuba vaxif
-SHARED=	symlinks
+SHARED=	copies
 TAGSFILE=tags
 
 all:
@@ -55,7 +56,7 @@ install: ${SHARED}
 		ln -s sys/$$i ${DESTDIR}/usr/include/$$i; \
 	done
 	rm -f ${DESTDIR}/usr/include/machine
-	ln -s ./${MACHINE} ${DESTDIR}/usr/include/machine
+	ln -s ${MACHINE} ${DESTDIR}/usr/include/machine
 	rm -f ${DESTDIR}/usr/include/frame.h
 	ln -s machine/frame.h ${DESTDIR}/usr/include/frame.h
 
@@ -93,7 +94,7 @@ vax.symlinks:
 copies: ${MACHINE}.copies
 	rm -rf ${DESTDIR}/usr/include/sys;
 	mkdir ${DESTDIR}/usr/include/sys; 
-	chmod 775 ${DESTDIR}/usr/include/sys;
+	chmod 755 ${DESTDIR}/usr/include/sys;
 	-(cd /sys/h; tar cf - *.h | (cd ${DESTDIR}/usr/include/sys; tar xpfB -))
 
 tahoe.copies:

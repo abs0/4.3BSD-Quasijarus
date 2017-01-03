@@ -1,0 +1,563 @@
+.\"	@(#)admin.1	6.1 (Berkeley) 5/14/99
+.tr ~
+.tr $%
+.if t .tr #\fB\(em\fP
+.if n .tr #-
+.if n .ds D " -- 
+.if t .ds D _
+.tr @|
+.nr f 0
+.bd S B 3
+.de SP
+.if n .ul
+\%[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+\%[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de ZZ
+.hc ^
+\fB^...\fR
+.hc
+..
+.de AR
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\\fR
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de C1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\\$1
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fR[\fI\\$2\fR]
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fI\\$2\fR
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de FI
+.PP
+.TP 30
+\\$1
+\\$2
+.i0
+..
+.ds F)  \fB\s-1FILES\s+1\fR
+.ds W)  \fB\s-1WARNINGS\s+1\fR
+.ds X)  \fB\s-1EXAMPLES\s+1\fR
+.ds T)  \fB\s-1TABLE\s+1\fR
+.ds K)  \fB\s-1DATA KEYWORDS\s+1\fR
+.ds D)  \fB\s-1DDDDD\s+1\fR
+.ds M)  \fB\s-1MR\s+1\fR
+.ds R)  \fB\s-1RELEASE NUMBER\s+1\fR
+.ds S)  \fB\s-1SCCS\s+1\fR
+.ds I)  \fB\s-1SID\s+1\fR
+.de F1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1\fI\\$2\fR
+\\$3
+.nr f 1
+..
+.de F2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1[\fI\\$2\fR]
+\\$3
+.nr f 1
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.TH ADMIN 1 "May 14, 1999"
+.SH NAME
+admin \(em create and administer \s-1SCCS\s0 files
+.SH SYNOPSIS
+.na
+.B admin
+.SF n
+.SP i \%[name] ]
+.SP r rel ]
+.SP t \%[name] ]
+.if n .br
+.SP f flag\%[flag-val] ]
+.ZZ
+.SP d flag\%[flag-val] ]
+.ZZ
+.br
+.SP a login ]
+.ZZ
+.SP e login ]
+.ZZ
+.SP m \%[mrlist] ]
+.SP y \%[comment] ]
+.SF h
+.SF z
+file
+.ZZ
+.ad
+.SH DESCRIPTION
+.I Admin
+is used to create new \*(S) files
+and change parameters of existing ones.
+Arguments to
+.I admin\c
+,
+which may appear in any order,
+consist of keyletter arguments,
+which begin with \fB\(em,\fR
+and named files
+(note that \*(S) file names must begin with the characters
+\fBs.\fR)\fB.\fR
+If a named file doesn't exist,
+it is created,
+and its parameters are initialized according to
+the specified keyletter arguments.
+Parameters not initialized by a keyletter argument
+are assigned a default value.
+If a named file does exist,
+parameters corresponding to specified keyletter arguments
+are changed,
+and other parameters are left as is.
+.PP
+If a directory is named,
+.I admin
+behaves as though each file in the directory were
+specified as a named file,
+except that non-\*(S) files
+(last component of the pathname does not begin with \fBs.\fR)
+and unreadable files
+are silently ignored.
+If a name of \fB\(em\fR is given, the standard input is read;
+each line of the standard input is taken to be the name of an \*(S) file
+to be processed.
+Again, non-\*(S) files and unreadable files are silently ignored.
+.PP
+The keyletter arguments are as follows.
+Each is explained as though only one named file is to be processed
+since the effects of the arguments
+apply independently to
+each named file.
+.AR n This
+keyletter indicates that a new \*(S) file is to be created.
+.A1 i name The
+\fIname\fR of a file from which the text for a new \*(S) file is to be taken.
+The text constitutes the first delta of the file
+(see
+.B \(emr
+keyletter for delta numbering scheme).
+If the
+.B i
+keyletter is used,
+but the file name is omitted,
+the text is obtained by reading the standard input
+until an end-of-file is encountered.
+If this keyletter is omitted,
+then the \*(S) file is created empty.
+Only one \*(S) file may be created
+by an
+.I admin
+command on which the
+.B i
+keyletter is supplied.
+Using a single
+.I admin
+to create two or more \*(S) files require that they be created
+empty
+(no
+.B \(emi
+keyletter).
+Note that the
+.B \(emi
+keyletter implies the
+.B \(emn
+keyletter.
+.A2 r rel The
+.I rel\c
+ease into which the initial delta is inserted.
+This keyletter may be used only if the
+.B \(emi
+keyletter is also used.
+If the
+.B \(emr
+keyletter is not used,
+the initial delta is inserted into release 1.
+The level of the initial delta is always 1
+(by default initial deltas are named 1.1).
+.A1 t name The
+\fIname\fR of a file from which descriptive text for the \*(S) file
+is to be taken.
+If the
+.B \(emt
+keyletter is used
+and
+.I admin
+is creating a new \*(S) file
+(the
+.B \(emn
+and/or
+.B \(emi
+keyletters also used), the descriptive text file name
+must also
+be supplied.
+In the case of existing \*(S) files:
+(1) a
+.B \(emt
+keyletter without a file name causes removal of descriptive text
+(if any) currently in the \*(S) file, and (2) a
+.B \(emt
+keyletter with a file name causes text (if any) in the
+named file to replace
+the descriptive text (if any) currently in the \*(S) file.
+.A2 f flag This
+keyletter specifies a \fIflag\fR, and, possibly, a value for the \fIflag\fR, to
+be placed in the \*(S) file.
+Several
+.B f
+keyletters may be supplied on a single
+.I admin
+command line.
+The allowable \fIflag\fRs and their values are:
+.F1 b ~ Allows
+use of
+the
+.B \(emb
+keyletter on a
+.IR get\^ (1)
+command to create branch deltas.
+.F1 c ceil The
+highest release
+(i.e., ``ceiling''),
+a number less than or equal to 9999, which may be
+retrieved by a
+.IR get\^ (1)
+command for editing.
+The default value for an unspecified
+.B c
+flag is 9999.
+.F1 f floor The
+lowest release
+(i.e., ``floor''),
+a number greater than 0 but less than 9999,
+which may be retrieved by a
+.IR get\^ (1)
+command for editing.
+The default value for an unspecified
+.B f
+flag is 1.
+.F1 d \s-1SID\s0 The
+default delta number
+(\*(I)) to be used by a
+.IR get\^ (1)
+command.
+.F1 i ~ Causes
+the "No id keywords (ge6)" message issued by
+.IR get\^ (1)
+or
+.IR delta\^ (1)
+to be treated as a fatal error.
+In the absence of this flag, the message is only a warning.
+The message is issued if no
+\*(S) identification keywords
+(see
+.IR get\^ (1))
+are found
+in the text retrieved or stored in the \*(S) file.
+.F1 j ~ Allows
+concurrent
+.IR get\^ (1)
+commands for editing
+on the same \*(I) of an \*(S) file.
+This allows multiple concurrent updates to the same
+version of the \*(S) file.
+.F1 l list A
+\fIlist\fR of releases to which deltas can no longer be made
+.I (get
+.B \(eme
+against one of these ``locked'' releases fails).
+The \fIlist\fR has the following syntax:
+.F1 ~ ~ <list>
+::= <range> \(or <list> , <range>
+.br
+<range>~::=	\*(R) \(or \fBa\fR
+.F1 ~ ~ The
+character \fBa\fR in the \fIlist\fR is equivalent to specifying
+.I "all releases"
+for the named \*(S) file.
+.F1 n ~ Causes
+.IR delta\^ (1)
+to create a ``null'' delta
+in each of those releases (if any) being skipped when a delta is made
+in a
+.I new
+release (e.g., in making delta 5.1 after delta 2.7, releases 3 and 4
+are skipped).
+These null deltas serve as ``anchor points'' so that branch deltas
+may later be created from them.
+The absence of this flag causes skipped releases to be
+non-existent in the \*(S) file
+preventing branch deltas from being created from them in the future.
+.F1 q text User
+definable text substituted for all occurrences
+of the $Q$ keyword in \*(S) file text retrieved by
+.IR get\^ (1).
+.F1 m mod \fIMod\fRule
+name of the \*(S) file
+substituted for all occurrences of the $M$ keyword in \*(S) file
+text retrieved by
+.IR get\^ (1).
+If the
+.B m
+flag is not specified, the value
+assigned is the name of the \*(S) file with the leading
+\fBs.\fR removed.
+.F1 t type \fIType\fR
+of module in the \*(S) file substituted for all occurrences of
+$Y$ keyword in \*(S) file text retrieved by
+.IR get\^ (1).
+.F2 v pgm Causes
+.IR delta\^ (1)
+to prompt for Modification Request (\*(M)) numbers as the
+reason for creating a delta.
+The optional value specifies the name of an \*(M) number validity
+checking program
+(see
+.IR delta\^ (1)).
+.A2 d flag Causes
+removal (deletion) of the specified \fIflag\fR from an \*(S) file.
+The
+.B \(emd
+keyletter
+may be specified only when processing existing
+\*(S) files.
+Several
+.B \(emd
+keyletters may be supplied on a single
+.I admin
+command.
+See the
+.B \(emf
+keyletter for allowable \fIflag\fR names.
+.F1 l list A
+\fIlist\fR of releases to be ``unlocked''.
+See the
+.B \(emf
+keyletter for a description of the
+.B l
+flag and the syntax of a \fIlist\fR.
+.A2 a login A
+\fIlogin\fR name, or numerical \fB\s-2UNIX\s+2\fR group \fB\s-2ID\s+2\fR,
+to be added to the list of users which
+may make deltas (changes) to the \*(S) file.
+A group \fB\s-2ID\s+2\fR is equivalent to specifying all
+\fIlogin\fR names common to that group \fB\s-2ID\s+2\fR.
+Several
+.B a
+keyletters may be used
+on a single
+.I admin
+command line.
+As many \fIlogin\fRs, or numerical group \fB\s-2ID\s+2\fRs, as desired may be on the list simultaneously.
+If the list of users is empty,
+then anyone may add deltas.
+.A2 e login A
+\fIlogin\fR name, or numerical group \fB\s-2ID\s+2\fR, to be erased from the list of users
+allowed to make deltas (changes) to the \*(S) file.
+Specifying a group \fB\s-2ID\s+2\fR is equivalent to specifying all
+\fIlogin\fR names common to that group \fB\s-2ID\s+2\fR.
+Several
+.B e
+keyletters may be used on a single
+.I admin
+command line.
+.A1 y comment The
+.I comment
+text is inserted
+into the \*(S) file as a comment
+for the initial delta in a manner identical to that
+of
+.IR delta\^ (1).
+Omission of the \fB\(emy\fR keyletter results in a default
+comment line being inserted in the form:
+.sp
+.if n \{\
+.br
+date and time created YY/MM/DD HH:MM:SS by
+<logname>\}
+.ie t \{\
+.br
+~~~~~date and time created \fB\s-2YY/MM/DD HH:MM:SS\s+2\fR by <logname>\}
+.sp
+The
+.B \(emy
+keyletter
+is valid only if the
+.B \(emi
+and/or
+.B \(emn
+keyletters are
+specified (i. e. a new \*(S) file is being created).
+.A1 m mrlist The
+list of Modification Requests (\*(M)) numbers is inserted into the \*(S) file
+as the reason for creating the initial delta in a manner
+identical to
+.IR delta\^ (1).
+The
+.B v
+flag must be set and the \*(M) numbers are validated if the
+.B v
+flag has a value (the name of an \*(M) number validation program).
+Diagnostics will occur if the
+.B v
+flag is not set or \*(M) validation fails.
+.AR h Causes
+.I admin
+to check the structure of the \*(S) file
+(see
+.I sccsfile\c
+(5)), and to compare a newly
+computed check-sum (the sum of all the characters in the \*(S) file
+except those in the first line) with the check-sum that is stored
+in the first line of the \*(S) file.
+Appropriate error diagnostics are produced.
+.C1 ~ This
+keyletter inhibits writing on the file, so that it
+nullifies the effect of any other keyletters supplied, and
+is, therefore, only meaningful when processing existing files.
+.AR z The
+\*(S) file check-sum is recomputed and stored in the first line
+of the \*(S) file
+(see
+.B\(emh,
+above).
+.C1 ~ Note
+that use of this keyletter on a truly corrupted file
+may prevent future detection of the corruption.
+.i0
+.SH FILES
+The last component of
+all \*(S) file names must be of the form ``\fBs.\fP\fIfilename\fP''.
+New \*(S) files are given mode 444
+(see
+.IR chmod\^ (1)).
+Write permission
+in the pertinent directory is,
+of course,
+required to create a file.
+All writing done by
+.I admin
+is to a temporary x-file,
+called ``\fBx.\fP\fIfilename\fP'',
+(see
+.IR get\^ (1)),
+created with mode 444 if the
+.I admin
+command is creating a new \*(S) file, or with the same mode
+as the \*(S) file if it exists.
+After successful execution of
+.I admin\c
+,
+the \*(S) file is removed (if it exists), and the x-file
+is renamed with the name of the \*(S) file.
+This ensures that changes are made to the \*(S) file only
+if no errors occurred.
+.PP
+It is recommended that directories containing \*(S) files be mode
+755
+and that \*(S) files themselves be mode 444.
+The mode of the directories allows
+only the owner to modify
+\*(S) files contained in the directories.
+The mode of the \*(S) files prevents any modification
+at all except by \*(S) commands.
+.PP
+If it should be necessary to patch an \*(S) file for any reason,
+the mode may be changed to 644 by the owner
+allowing use of
+.IR ed\^ (1).
+\fICare must be taken!.\fR
+The edited file should
+.I always
+be processed by an
+.I admin
+.B \(emh
+to check for corruption followed by an
+.I admin
+.B \(emz
+to generate a proper check-sum.
+Another
+.I admin
+.B \(emh
+is recommended to ensure the \*(S) file is valid.
+.PP
+.I Admin
+also makes use of
+a transient lock file
+(called ``\fBz.\fP\fIfilename\fP''),
+which is used to prevent simultaneous updates to the \*(S) file by different users.
+See
+.IR get\^ (1)
+for further information.
+.SH "SEE ALSO"
+.na
+get(1),
+delta(1),
+prs(1),
+what(1),
+help(1),
+ed(1),
+sccsfile(5)
+.br
+.I "Source Code Control System User's Guide"
+by L. E. Bonanni and C. A. Salemi.
+.ad
+.SH DIAGNOSTICS
+Use
+.IR help\^ (1)
+for explanations.
+.tr ~~
+.tr $$
+.tr @@

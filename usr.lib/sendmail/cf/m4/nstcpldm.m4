@@ -1,26 +1,32 @@
 divert(10)
 #
-#  Sendmail
-#  Copyright (c) 1983  Eric P. Allman
-#  Berkeley, California
+# Copyright (c) 1983 Eric P. Allman
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
 #
-#  Copyright (c) 1983 Regents of the University of California.
-#  All rights reserved.  The Berkeley software License Agreement
-#  specifies the terms and conditions for redistribution.
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)nstcpldm.m4	1.7 (Berkeley) 3/31/88
+#	@(#)nstcpldm.m4	1.10 (Berkeley) 2/15/89
 #
 divert(0)
 ############################################################
 ############################################################
 #####
-#####		Local Domain TCP Mailer specification
+#####		Local Domain SMTP Mailer specification
 #####
 #####	Messages processed by this specification are assumed to remain
-#####	the local domain -- hence, they must be canonical according to
-#####	RFC822 etc.
-#####
-#####	This mailer is to be used with the Berkeley Name Server.
+#####	the local domain.  Hence, they can refer to hosts that are
+#####	not registered in the NIC host table.
 #####
 ############################################################
 ############################################################
@@ -54,8 +60,10 @@ R$+<@[$+]>		$@$1<@[$2]>			already ok
 
 # output fake domains as user%fake@relay
 
-R$+<@$+.CSNET>		$@$1%$2.CSNET<@relay.cs.net>	user@host.CSNET
-R$+<@$+.BITNET>		$@$1%$2.BITNET<@jade.berkeley.edu>	 user@host.bitnet
+ifdef(`BITNET_RELAY',
+R$+<@$+.BITNET>		$@$1%$2.BITNET<@$B>		user@host.bitnet)
+ifdef(`CSNET_RELAY',
+R$+<@$+.CSNET>		$@$1%$2.CSNET<@$C>		user@host.CSNET)
 R$+<@$+.UUCP>		$@$2!$1<@$w>			user@host.UUCP
 
 
@@ -86,7 +94,9 @@ R$+<@[$+]>		$@$1<@[$2]>			already ok
 
 # output fake domains as user%fake@relay
 
-R$+<@$+.CSNET>		$@$1%$2.CSNET<@relay.cs.net>	user@host.CSNET
-R$+<@$+.BITNET>		$@$1<@$2.BITNET>		user@host.BITNET
+ifdef(`BITNET_RELAY',
+R$+<@$+.BITNET>		$@$1%$2.BITNET<@$B>		user@host.BITNET)
+ifdef(`CSNET_RELAY',
+R$+<@$+.CSNET>		$@$1%$2.CSNET<@$C>		user@host.CSNET)
 R$+<@$+.UUCP>		$@$2!$1				user@host.UUCP
 

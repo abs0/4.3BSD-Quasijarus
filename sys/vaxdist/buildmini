@@ -1,15 +1,14 @@
 #!/bin/sh -
 #
-# Copyright (c) 1990 The Regents of the University of California.
-# All rights reserved.
+# 4.3BSD-Quasijarus release-making script.
 #
-# %sccs.include.redist.sh%
+# This file is freely redistributable.
 #
-#	@(#)buildmini	4.10 (Berkeley) 12/25/98
+#	@(#)buildmini	4.10 (Berkeley) 10/3/99
 #
 
 dist=/sys/vaxdist
-miniroot=ra1d
+miniroot=ra0d
 minimnt=/tmp/mini
 
 date

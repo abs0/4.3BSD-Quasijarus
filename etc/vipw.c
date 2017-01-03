@@ -169,14 +169,14 @@ check()
 			return(0);
 		}
 		if (id > USHRT_MAX) {
-			fprintf(stderr, "vipw: %s > max uid value (%d); %s unchanged.\n", cp, USHRT_MAX, passwd);
+			fprintf(stderr, "vipw: %s > max uid value (%u); %s unchanged.\n", cp, USHRT_MAX, passwd);
 			return(0);
 		}
 		if (!(cp = token(CHN)) || !*cp)		/* gid */
 			goto bad;
 		id = atol(cp);
 		if (id > USHRT_MAX) {
-			fprintf(stderr, "vipw: %s > max gid value (%d); %s unchanged.\n", cp, USHRT_MAX, passwd);
+			fprintf(stderr, "vipw: %s > max gid value (%u); %s unchanged.\n", cp, USHRT_MAX, passwd);
 			return(0);
 		}
 		(void)token(CHN);			/* gcos */

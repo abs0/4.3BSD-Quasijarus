@@ -1,4 +1,4 @@
-/*	%M%	%I%	%E%	*/
+/*	cyreg.h	7.6	88/09/09	*/
 
 /*
  * Tapemaster controller definitions.

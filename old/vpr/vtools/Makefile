@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1	(Berkeley)	11/4/87
+#	@(#)Makefile	6.2	(Berkeley)	9/27/99
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
@@ -38,7 +38,7 @@ install: FRC
 	install -s -o bin -g bin -m 755 rotprt ${DESTDIR}/usr/old/rotprt
 	install -s -o bin -g bin -m 755 vfontinfo ${DESTDIR}/usr/old/vfontinfo
 	install -s -o bin -g bin -m 755 vfw ${DESTDIR}/usr/old/vfw
-	install -s -o bin -g bin -m 755 vwdith ${DESTDIR}/usr/old/vwdith
+	install -s -o bin -g bin -m 755 vwidth ${DESTDIR}/usr/old/vwidth
 
 lint: FRC
 	lint ${CFLAGS} ${SRCS}

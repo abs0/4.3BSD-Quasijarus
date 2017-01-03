@@ -1,9 +1,4 @@
 /*
- * This file is derived from version 7.7 of the VD driver to create
- * a driver compatible with the 4.3BSD-tahoe release.
- */
-
-/*
  * Copyright (c) 1988 Regents of the University of California.
  * All rights reserved.
  *
@@ -694,7 +689,7 @@ setupaddr:
 
 	case VDOP_RAS:
 	case VDOP_GAW:
-		vd->vd_dcb.trailcnt += vd_sgsetup(bp, &vd->vd_rbuf,
+		vd->vd_dcb.trailcnt += vba_sgsetup(bp, &vd->vd_rbuf,
 		    &vd->vd_dcb.trail.sgtrail);
 		break;
 	}

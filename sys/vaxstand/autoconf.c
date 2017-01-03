@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)autoconf.c	7.12 (Berkeley) 8/27/88
+ *	@(#)autoconf.c	7.13 (Berkeley) 9/5/99
  */
 
 #include "param.h"
@@ -144,6 +144,7 @@ configure()
 			switch (bi->biic.bi_dtype) {
 
 			case BIDT_DWBUA:
+			case BIDT_KLESI:
 				if (nuba >= MAXNUBA)	/* sorry */
 					break;
 #ifndef SMALL

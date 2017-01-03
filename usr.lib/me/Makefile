@@ -25,12 +25,12 @@ install: FRC
 	chown bin.bin ${DESTDIR}${MELIB} ${DESTDIR}${TMLIB}
 	chmod 755 ${DESTDIR}${MELIB} ${DESTDIR}${TMLIB}
 	for i in ${MESRCS}; do \
-		strip.sed < $$i > ${DESTDIR}${MELIB}/$$i; \
+		sed -f strip.sed < $$i > ${DESTDIR}${MELIB}/$$i; \
 		chown bin.bin ${DESTDIR}${MELIB}/$$i; \
 		chmod 444 ${DESTDIR}${MELIB}/$$i; \
 	done
 	for i in ${TMSRCS}; do \
-		strip.sed < $$i > ${DESTDIR}${TMLIB}/$$i; \
+		sed -f strip.sed < $$i > ${DESTDIR}${TMLIB}/$$i; \
 		chown bin.bin ${DESTDIR}${TMLIB}/$$i; \
 		chmod 444 ${DESTDIR}${TMLIB}/$$i; \
 	done

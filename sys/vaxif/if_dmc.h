@@ -2,9 +2,19 @@
  * Copyright (c) 1982, 1986 Regents of the University of California.
  * All rights reserved.
  *
- * %sccs.include.redist.c%
+ * Redistribution and use in source and binary forms are permitted
+ * provided that the above copyright notice and this paragraph are
+ * duplicated in all such forms and that any documentation,
+ * advertising materials, and other materials related to such
+ * distribution and use acknowledge that the software was developed
+ * by the University of California, Berkeley.  The name of the
+ * University may not be used to endorse or promote products derived
+ * from this software without specific prior written permission.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+ * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if_dmc.h	7.5 (Berkeley) 6/28/90
+ *	@(#)if_dmc.h	7.5 (Berkeley) 9/7/99
  */
 
 /*
@@ -21,14 +31,15 @@ struct dmcdevice {
 };
 
 /*
- * dmc software packet encapsulation.  This allows the dmc
- * link to be multiplexed among several protocols.
- * The first eight bytes of the dmc header are garbage,
- * since on a vax the uba has been known to mung these
- * bytes.  The next two bytes encapsulate packet type.
+ * dmc/dmv software packet encapsulation.  This allows the
+ * dmc/dmv link to be multiplexed among several protocols.
+ * The first eight bytes of the dmc/dmv header are garbage
+ * for historical reasons (the guy who wrote the original
+ * dmc driver had a broken uba that munged these bytes).
+ * The next two bytes encapsulate packet type.
  */
 struct dmc_header {
-	char	dmc_buf[8];	/* space for uba on vax */
+	char	dmc_buf[8];
 	short	dmc_type;	/* encapsulate packet type */
 };
 
@@ -42,9 +53,8 @@ struct dmc_header {
  * protocol header (256) + trailer descriptor (4).
  * The software link encapsulation header (dmc_header)
  * is handled separately.
-	#define DMCMTU  1284
  */
-#define DMCMTU  1500
+#define DMCMTU  1284
 
 #define	RDYSCAN	16	/* loop delay for RDYI after RQI */
 

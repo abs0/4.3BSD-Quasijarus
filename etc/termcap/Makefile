@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.5	(Berkeley)	1/21/88
+#	@(#)Makefile	5.6	(Berkeley)	10/2/99
 #
 # reorder gives an editor command for most common terminals
 # (in reverse order from n'th to 1'st most commonly used)
@@ -19,7 +19,7 @@ clean: FRC
 
 install: FRC
 	install -c -o bin -g bin -m 444 map3270 ${DESTDIR}/etc/map3270
-	install -o bin -g staff -m 444 termcap ${DESTDIR}/etc/termcap
+	install -o bin -g bin -m 444 termcap ${DESTDIR}/etc/termcap
 	rm -rf ${DESTDIR}/usr/lib/tabset
 	mkdir ${DESTDIR}/usr/lib/tabset
 	chown bin.bin ${DESTDIR}/usr/lib/tabset

@@ -1,14 +1,22 @@
 divert(10)
 #
-#  Sendmail
-#  Copyright (c) 1983  Eric P. Allman
-#  Berkeley, California
+# Copyright (c) 1983 Eric P. Allman
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
 #
-#  Copyright (c) 1983 Regents of the University of California.
-#  All rights reserved.  The Berkeley software License Agreement
-#  specifies the terms and conditions for redistribution.
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)postwriterule.m4	1.7 (Berkeley) 11/4/87
+#	@(#)postwriterule.m4	1.9 (Berkeley) 2/15/89
 #
 divert(0)
 #################################
@@ -25,14 +33,9 @@ R$*<@[$+]>$*		$:$1<@$[[$2]$]>$3		lookup numeric internet addr
 R$*<$+>$*		$1$2$3				defocus
 R@$+:@$+:$+		@$1,@$2:$3			<route-addr> canonical
 
-# UUCP must always be presented in old form (with domains, leave the ".uucp")
+# UUCP must always be presented in old form
 R$+@$-.UUCP		$2!$1				u@h.UUCP => h!u
-R$+@$-.$-.UUCP		$2.$3.uucp!$1			u@h.UUCP => h!u
-R$+@$-.$-.$-.UUCP	$2.$3.$4.uucp!$1		u@h.UUCP => h!u
-R$+@$-.$-.$-.$-.UUCP	$2.$3.$4.$5.uucp!$1		u@h.UUCP => h!u
-R$+@$-.$-.$-.$-.$-.UUCP	$2.$3.$4.$5.$6.uucp!$1		u@h.UUCP => h!u
 
-# delete duplicate local names -- mostly for arpaproto.mc
-R$+%$=w@$=w		$1@$w				u%UCB@UCB => u@UCB
-R$+%$=w@$=w.$D		$1@$w				u%UCB@UCB => u@UCB
-
+# delete duplicate local names
+R$+%$=w@$=w		$1@$w				u%host@host => u@host
+R$+%$=w@$=w.$D		$1@$w				u%host@host => u@host

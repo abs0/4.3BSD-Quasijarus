@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)diskpart.c	5.10 (Berkeley) 7/12/88";
+static char sccsid[] = "@(#)diskpart.c	5.12 (Berkeley) 9/4/99";
 #endif /* not lint */
 
 /*
@@ -100,7 +100,7 @@ main(argc, argv)
 {
 	struct disklabel *dp;
 	register int curcyl, spc, def, part, layout, j;
-	int threshhold, numcyls[NPARTITIONS], startcyl[NPARTITIONS];
+	int threshold, numcyls[NPARTITIONS], startcyl[NPARTITIONS];
 	int totsize = 0;
 	char *lp, *tyname;
 
@@ -130,14 +130,13 @@ main(argc, argv)
 			fprintf(stderr, "%s: unknown disk type\n", *argv);
 			exit(2);
 		}
-	} else {
-		if (dp->d_flags & D_REMOVABLE)
-			tyname = "removable";
-		else if (dp->d_flags & D_RAMDISK)
-			tyname = "simulated";
-		else
-			tyname = "winchester";
 	}
+	if (dp->d_flags & D_REMOVABLE)
+		tyname = "removable";
+	else if (dp->d_flags & D_RAMDISK)
+		tyname = "simulated";
+	else
+		tyname = "winchester";
 	spc = dp->d_secpercyl;
 	/*
 	 * Bad sector table contains one track for the replicated
@@ -147,23 +146,21 @@ main(argc, argv)
 	 * If disk size was specified explicitly, use specified size.
 	 */
 	if (dp->d_type == DTYPE_SMD && dp->d_flags & D_BADSECT &&
-	    totsize == 0) {
+	    totsize == 0)
 		badsecttable = dp->d_nsectors +
 		    roundup(badsecttable, dp->d_nsectors);
-		threshhold = howmany(spc, badsecttable);
-	} else {
+	else
 		badsecttable = 0;
-		threshhold = 0;
-	}
 	/*
 	 * If disk size was specified, recompute number of cylinders
 	 * that may be used, and set badsecttable to any remaining
 	 * fraction of the last cylinder.
 	 */
 	if (totsize != 0) {
-		dp->d_ncylinders = howmany(totsize, spc);
+		dp->d_ncylinders = MAX(dp->d_ncylinders, howmany(totsize, spc));
 		badsecttable = spc * dp->d_ncylinders - totsize;
 	}
+	threshold = howmany(badsecttable, spc);
 
 	/* 
 	 * Figure out if disk is large enough for
@@ -175,7 +172,7 @@ main(argc, argv)
 		curcyl = 0;
 		for (part = PART('a'); part < NPARTITIONS; part++)
 			curcyl += howmany(defpart[def][part], spc);
-		if (curcyl < dp->d_ncylinders - threshhold)
+		if (curcyl < dp->d_ncylinders - threshold)
 			break;
 	}
 	if (def >= NDEFAULTS) {
@@ -296,14 +293,16 @@ main(argc, argv)
 			printf("%s\n", nparts > 0 ? "\\" : "");
 		}
 #ifdef for_now
-		defpart[def][PART('c')] -= badsecttable;
-		part = PART('c');
-		printf("#\t:p%c#%d:", 'a' + part, defpart[def][part]);
-		printf("o%c#%d:b%c#%d:f%c#%d:\n",
-		    'a' + part, spc * startcyl[part],
-		    'a' + part,
-		    defparam[part].p_frag * defparam[part].p_fsize,
-		    'a' + part, defparam[part].p_fsize);
+		if (!totsize && badsecttable) {
+			defpart[def][PART('c')] -= badsecttable;
+			part = PART('c');
+			printf("#\t:p%c#%d:", 'a' + part, defpart[def][part]);
+			printf("o%c#%d:b%c#%d:f%c#%d:\n",
+			    'a' + part, spc * startcyl[part],
+			    'a' + part,
+			    defparam[part].p_frag * defparam[part].p_fsize,
+			    'a' + part, defparam[part].p_fsize);
+		}
 #endif
 		exit(0);
 	}
@@ -381,14 +380,15 @@ gettype:
 		fprintf(stderr, "%s: bad disk type\n", buf);
 		goto gettype;
 	}
-	strncpy(dp->d_typename, buf, sizeof(dp->d_typename));
 	fprintf(stderr, "(type <cr> to get default value, if only one)\n");
-	if (dp->d_type == DTYPE_SMD)
-	   fprintf(stderr, "Do %ss support bad144 bad block forwarding (yes)? ",
-		dp->d_typename);
-	(void) gets(buf);
-	if (*buf != 'n')
-		dp->d_flags |= D_BADSECT;
+	if (dp->d_type == DTYPE_SMD) {
+		fprintf(stderr,
+			"Do %ss support bad144 bad block forwarding (yes)? ",
+			dp->d_typename);
+		(void) gets(buf);
+		if (*buf != 'n')
+			dp->d_flags |= D_BADSECT;
+	}
 	for (fp = fields; fp->f_name != NULL; fp++) {
 again:
 		fprintf(stderr, "%s ", fp->f_name);

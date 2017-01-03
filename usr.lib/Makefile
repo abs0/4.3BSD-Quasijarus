@@ -9,7 +9,7 @@
 # software without specific prior written permission. This software
 # is provided ``as is'' without express or implied warranty.
 #
-#	@(#)Makefile	5.13 (Berkeley) 6/13/88
+#	@(#)Makefile	5.14 (Berkeley) 1/18/99
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
@@ -24,7 +24,7 @@ TAGSDIR=libcurses libdbm libln libm libmp libpc libtermlib
 # Programs that live in subdirectories, and have makefiles of their own.
 #
 SUBDIR=	learn lib2648 libF77 libI77 libU77 libcurses libdbm libg libln \
-	libm libmp libpc libplot libtermlib liby lpr me sendmail
+	libm libmp libpc libplot libtermlib liby libz lpr me sendmail
 
 # C source that lives in the current directory
 #

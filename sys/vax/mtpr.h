@@ -1,10 +1,9 @@
-/*-
- * Copyright (c) 1982, 1986, 1988 The Regents of the University of California.
- * All rights reserved.
+/*
+ * Copyright (c) 1982, 1986, 1988 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
  *
- * %sccs.include.proprietary.c%
- *
- *	@(#)mtpr.h	7.6 (Berkeley) 5/8/91
+ *	@(#)mtpr.h	7.5 (Berkeley) 11/9/88
  */
 
 /*

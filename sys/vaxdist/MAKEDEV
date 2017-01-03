@@ -4,7 +4,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)MAKEDEV	4.31 (Berkeley) 7/16/88
+#	@(#)MAKEDEV	4.32 (Berkeley) 9/7/99
 #
 # Device "make" file.  Valid arguments:
 #	std	standard devices
@@ -140,7 +140,7 @@ mt*)
 	;;
 
 hp*|hk*|up*|ra*|kra*|rl*|rb*)
-	umask 2 ; unit=`expr $i : '..\(.*\)'`
+	umask 2 ; unit=`expr $i : '[^0-9]*\(.*\)'`
 	case $i in
 	hp*) name=hp; blk=0; chr=4;;
 	hk*) name=hk; blk=3; chr=11;;

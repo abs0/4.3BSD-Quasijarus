@@ -1,14 +1,28 @@
+divert(10)dnl
+define(DOMAIN, `DDBerkeley.EDU')
+define(BITNET_RELAY, `DBjade.Berkeley.EDU')
+define(CSNET_RELAY, `DCrelay.cs.net')
+divert(0)dnl
+
 ############################################################
 #
-#  Sendmail
-#  Copyright (c) 1983  Eric P. Allman
-#  Berkeley, California
+# Copyright (c) 1983 Eric P. Allman
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
 #
-#  Copyright (c) 1983 Regents of the University of California.
-#  All rights reserved.  The Berkeley software License Agreement
-#  specifies the terms and conditions for redistribution.
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)ucbvax.mc	1.38 (Berkeley) 4/9/88
+#	@(#)ucbvax.mc	1.41 (Berkeley) 2/15/89
 #
 sinclude(buildinfo)dnl
 #
@@ -38,24 +52,24 @@ DUucbvax
 CUucbvax 
 
 # local UUCP connections
-include(../machdep/uucp.ucbvax.m4)dnl
+include(../sitedep/uucp.ucbvax.m4)dnl
 
 # UUCP connections on ucbarpa
 DWucbarpa.Berkeley.EDU
 define(`CV', CW)dnl
-include(../machdep/uucp.ucbarpa.m4)dnl
+include(../sitedep/uucp.ucbarpa.m4)dnl
 undefine(`CV')dnl
 
 # UUCP connections on ucbcad
 DXcad.Berkeley.EDU
 define(`CV', CX)dnl
-include(../machdep/uucp.cad.m4)dnl
+include(../sitedep/uucp.cad.m4)dnl
 undefine(`CV')dnl
 
 # UUCP connections on cogsci
 DYcogsci.Berkeley.EDU
 define(`CV', CY)dnl
-include(../machdep/uucp.cogsci.m4)dnl
+include(../sitedep/uucp.cogsci.m4)dnl
 undefine(`CV')dnl
 
 # known uucp connections with a smart uucp
@@ -70,7 +84,7 @@ Oa
 
 include(../m4/nsmacros.m4)
 include(../m4/nsclasses.m4)
-include(../m4/nicregistered.m4)
+include(../sitedep/nicregistered.m4)
 include(../m4/version.m4)
 include(../m4/boilerplate.m4)
 
@@ -111,7 +125,7 @@ include(../m4/rule0.m4)
 ################################################
 
 # resolve SMTP UUCP connections
-include(../machdep/smtpuucp.ucbvax.m4)
+include(../sitedep/smtpuucp.ucbvax.m4)
 
 # resolve local UUCP links
 R<@$=V.UUCP>:$+		$#uucp$@$1$:$1:$2		@host.UUCP: ...

@@ -121,7 +121,7 @@ struct vba_driver {
  * allocated by vbainit.
  */
 struct vb_buf {
-	/* these fields set up once by vbinit */
+	/* these fields set up once by vbainit */
 	int	vb_flags;		/* device parameters */
 	struct	pte *vb_map;		/* private page entries */
 	caddr_t	vb_utl;			/* virtual addresses mapped by vb_map */
@@ -135,7 +135,7 @@ struct vb_buf {
 };
 
 /*
- * flags to vbinit
+ * flags to vbainit
  */
 #define	VB_32BIT	0x00		/* device uses 32-bit addressing */
 #define	VB_24BIT	0x01		/* device uses 24-bit addressing */

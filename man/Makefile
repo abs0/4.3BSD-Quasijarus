@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.3 (Berkeley) 7/9/88
+#	@(#)Makefile	5.4 (Berkeley) 10/3/99
 #
 DIRS=	man1 man2 man3 man3f man4 man4/vax man4/tahoe man5 man6 \
 	man7 man8 man8/vax man8/tahoe
@@ -41,12 +41,11 @@ install: FRC
 	install -o bin -g bin -m 444 whatis.db ${DESTDIR}/usr/man/whatis
 	install -c -o bin -g bin -m 444 man.template ${DESTDIR}/usr/man/man.template
 
-manclean: FRC
+clean manclean: FRC
 	for i in ${DIRS}; do \
 		(cd $$i; make ${MFLAGS} clean); \
 	done
 
-clean:
 depend:
 lint:
 tags:

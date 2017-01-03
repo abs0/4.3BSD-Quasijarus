@@ -1,0 +1,212 @@
+.\"	@(#)sccsfile.5	6.1 (Berkeley) 6/1/99
+.tr @@
+.tr $%
+.th SCCSFILE 5 6/1/99
+.sh NAME
+sccsfile \*- format of SCCS file
+.sh DESCRIPTION
+An SCCS file is an ASCII file.
+It consists of six logical parts:
+the
+.it checksum,
+the
+.it "delta table"
+(contains information about each delta),
+.it "user names"
+(contains login names and/or numerical user IDs of users who may add deltas),
+.it flags
+(contains definitions of internal keywords),
+.it comments
+(contains arbitrary descriptive information about the file),
+and the
+.it body
+(contains the actual text lines intermixed with control lines).
+.s1
+Throughout an SCCS file there are lines which begin with the ASCII SOH
+(start of heading) character (octal 001).
+This character is hereafter referred to as
+``the control character''
+and will be represented graphically as
+``@''.
+Any line described below which is not depicted as beginning with
+the control character is prevented from beginning
+with the control character.
+.s1
+Entries of the form
+``DDDDD''
+represent a five digit string
+(a number between 00000 and 99999).
+.s1
+Each logical part of an SCCS file is described in detail below.
+.s1
+.it Checksum.
+The checksum is the first line of an SCCS file.
+The form of the line is:
+.ti +5
+@hDDDDD
+.br
+The value of the checksum is the sum of all characters, except
+those of the first line.
+The ``@h'' provides a ``magic number''
+of (octal) 064001.
+.s1
+.it "Delta table."
+The delta table consists of a variable number of entries of the form:
+.in +5
+.nf
+@s DDDDD/DDDDD/DDDDD
+.if t @d <type> <SCCS ID>  yr/mo/da hr:mi:se  <pgmr>  DDDDD  DDDDD
+.if n @d <type> <SCCS ID> yr/mo/da hr:mi:se <pgmr> DDDDD DDDDD
+@i DDDDD ...
+@x DDDDD ...
+@g DDDDD ...
+@m <MR number>
+  .
+  .
+  .
+@c <comments> ...
+  .
+  .
+  .
+@e
+.fi
+.in -5
+.s1
+The first line
+(@s)
+contains the number of lines
+inserted/deleted/unchanged respectively.
+The second line
+(@d)
+contains the type of the delta
+(currently, normal: `D',
+and
+removed: `R'),
+the SCCS ID of the delta,
+the date and time of creation of the delta,
+the login name corresponding to the real user ID
+at the time the delta was created,
+and the serial numbers of the delta and its predecessor,
+respectively.
+.s1
+The @i, @x, and @g lines contain the serial numbers of deltas
+included, excluded, and ignored, respectively.
+These lines are optional.
+.s1
+The @m lines (optional) each contain one MR number associated with the delta;
+the @c lines contain comments associated with the delta.
+.s1
+The @e line ends the delta table entry.
+.s1
+.it "User names."
+The list of login names and/or numerical user IDs of users who may add deltas to
+the file, separated by newlines.
+The lines containing these login names and/or numerical user IDs are surrounded
+by the bracketing lines ``@u'' and ``@U''.
+An empty list allows anyone
+to make a delta.
+.s1
+.it Flags.
+Keywords used internally
+(see
+.it admin\c
+(1) for more information on their use).
+Each flag line takes the form:
+.ti +5
+@f <flag>	<optional text>
+.br
+The following flags are defined:
+.ti +5
+@f t	<type of program>
+.ti +5
+@f v	<program name>
+.ti +5
+@f i
+.ti +5
+@f b
+.ti +5
+@f m	<module name>
+.ti +5
+@f f	<floor>
+.ti +5
+@f c	<ceiling>
+.ti +5
+@f d	<default-sid>
+.ti +5
+@f n
+.br
+The ``t'' flag defines the replacement for
+the $Y$ identification keyword.
+The ``v'' flag controls prompting for MR numbers
+in addition to comments;
+if the optional text is present it defines
+an MR number validity
+checking
+program.
+The ``i'' flag controls the warning/error
+aspect of the ``No id keywords'' message.
+When the ``i'' flag is not present,
+this message is only a warning;
+when the ``i'' flag is present,
+this message will cause a ``fatal'' error
+(the file will not be gotten, or the delta will not be made).
+When the ``b'' flag is present
+the
+.bd \*-b
+keyletter may be used on the
+.it get
+command to cause a branch in the delta tree.
+The ``m'' flag defines the first choice
+for the replacement text of the $M$ identification keyword.
+The ``f'' flag defines the ``floor'' release;
+the release below which no deltas may be added.
+The ``c'' flag defines the ``ceiling'' release;
+the release above which no deltas may be added.
+The ``d'' flag defines the default SID to be used
+when none is specified on a
+.it get
+command.
+The ``n'' flag causes
+.it delta
+to insert a ``null'' delta (a delta that applies
+.it no
+changes)
+in those releases that are skipped when a delta is made in a
+.it new
+release (e.g., when delta 5.1 is made after delta 2.7, releases 3 and
+4 are skipped).
+The absence of the ``n'' flag causes skipped releases to be completely empty.
+.s1
+.it Comments.
+Arbitrary text surrounded by the bracketing lines ``@t'' and ``@T''.
+The comments section typically will contain a description of the file's purpose.
+.s1
+.it Body.
+The body consists of text lines and control lines.
+Text lines don't begin with the control character,
+control lines do.
+There are three kinds of control lines:
+.it "insert, delete,"
+and
+.it end,
+represented by:
+.ti +5
+@I DDDDD
+.ti +5
+@D DDDDD
+.ti +5
+@E DDDDD
+.br
+respectively.
+The digit string is the serial number corresponding to the delta for the
+control line.
+.sh "SEE ALSO"
+.na
+get(1),
+delta(1),
+admin(1),
+prt(1)
+.br
+.it "SCCS/PWB User's Manual"
+by L. E. Bonanni and A. L. Glasser.
+.tr $$

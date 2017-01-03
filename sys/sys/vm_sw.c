@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)vm_sw.c	7.3 (Berkeley) 5/6/88
+ *	@(#)vm_sw.c	7.4 (Berkeley) 9/8/99
  */
 
 #include "param.h"
@@ -34,7 +34,7 @@ swstrategy(bp)
 	 * enough for us to do a mkfs and restor of the real
 	 * root (sure beats rewriting standalone restor).
 	 */
-#define	MINIROOTSIZE	4096
+#define	MINIROOTSIZE	6144
 	if (rootdev == dumpdev)
 		bp->b_blkno += MINIROOTSIZE;
 #endif

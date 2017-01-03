@@ -9,7 +9,7 @@
 # software without specific prior written permission. This software
 # is provided ``as is'' without express or implied warranty.
 #
-#	@(#)Makefile	4.7 (Berkeley) 4/6/88
+#	@(#)Makefile	4.8 (Berkeley) 9/28/99
 #
 CFLAGS=	-O
 RES=
@@ -17,10 +17,10 @@ LIBC=	/lib/libc.a
 SRCS=	nsquery.c nstest.c
 OBJS=	nsquery.o nstest.o
 
-all: nsquery nstest nslookup
+all: nsquery nslookup
 
 nsquery: ${LIBC}
-	${CC} -o $@ nsquery.c ${RES}
+	${CC} ${CFLAGS} -o $@ nsquery.c ${RES}
 
 # test programs and utilities
 nstest: ${LIBC}
@@ -41,6 +41,7 @@ depend: FRC
 
 install: FRC
 	cd nslookup; make ${MFLAGS} DESTDIR=${DESTDIR} install
+	install -s -o bin -g bin -m 755 nsquery ${DESTDIR}/usr/ucb/nsquery
 
 lint: FRC
 	cd nslookup; make ${MFLAGS} lint
@@ -55,9 +56,9 @@ FRC:
 # DO NOT DELETE THIS LINE -- mkdep uses it.
 # DO NOT PUT ANYTHING AFTER THIS LINE, IT WILL GO AWAY.
 
-nsquery: nsquery.c /usr/include/stdio.h /usr/include/sys/types.h
-nsquery: /usr/include/arpa/nameser.h /usr/include/netdb.h
-nsquery: /usr/include/sys/socket.h /usr/include/netinet/in.h
+nsquery: nsquery.c /usr/include/sys/types.h /usr/include/sys/socket.h
+nsquery: /usr/include/netinet/in.h /usr/include/arpa/inet.h
+nsquery: /usr/include/arpa/nameser.h /usr/include/stdio.h /usr/include/netdb.h
 nsquery: /usr/include/resolv.h
 nstest: nstest.c /usr/include/sys/types.h /usr/include/sys/socket.h
 nstest: /usr/include/netinet/in.h /usr/include/stdio.h

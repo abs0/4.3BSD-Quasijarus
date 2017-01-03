@@ -1,5 +1,5 @@
-IDENT=-DGENERIC -DVAX650 -DVAX630 -DVAX730 -DVAX750 -DVAX780 -DVAX8200 -DVAX8600 -DTCP_COMPAT_42 -DNS -DINET -DQUOTA
-PARAM=-DTIMEZONE=480 -DDST=1 -DMAXUSERS=8
+IDENT=-DGENERIC -DVAX650 -DVAX630 -DVAX730 -DVAX750 -DVAX780 -DVAX8200 -DVAX8600 -DTCP_COMPAT_42 -DNS -DINET -DQUOTA -DNOSUBSINST
+PARAM=-DTIMEZONE=360 -DDST=1 -DMAXUSERS=8
 INLINEOPTS=-s
 #
 # Copyright (c) 1980, 1986 Regents of the University of California.
@@ -114,7 +114,7 @@ CFILES=../net/af.c ../net/if.c ../net/if_loop.c ../net/raw_cb.c \
 	../vaxuba/rk.c ../vaxuba/rl.c ../vaxuba/tm.c ../vaxuba/tmscp.c \
 	../vaxuba/ts.c ../vaxuba/uba.c ../vaxuba/uda.c ../vaxuba/up.c \
 	../vaxuba/ut.c ../vaxuba/qv.c ../vaxuba/qfont.c ../vaxuba/qd.c \
-	../vax/swapgeneric.c swaphkvmunix.c swaphpvmunix.c 
+	../vax/swapgeneric.c 
 
 vmunix: Makefile ../machine/symbols.sort ${INLINECMD} locore.o emulate.o ${OBJS} param.o ioconf.o swapgeneric.o
 	@echo loading vmunix
@@ -132,31 +132,7 @@ swapgeneric.o: ../vax/swapgeneric.c
 	${C2} swapgeneric.s | ${INLINE} | ${AS} -o swapgeneric.o
 	rm -f swapgeneric.s
 
-hkvmunix: Makefile ../machine/symbols.sort ${INLINECMD} locore.o emulate.o ${OBJS} param.o ioconf.o swaphkvmunix.o
-	@echo loading hkvmunix
-	@rm -f hkvmunix
-	@${LD} -n -o hkvmunix -e start -x -T 80000000 locore.o emulate.o ${OBJS} vers.o ioconf.o param.o swaphkvmunix.o
-	@echo rearranging symbols
-	@-symorder ../vax/symbols.sort hkvmunix
-	@size hkvmunix
-	@chmod 755 hkvmunix
-
-swaphkvmunix.o: swaphkvmunix.c
-	${CC} -c -O ${COPTS} swaphkvmunix.c
-
-hpvmunix: Makefile ../machine/symbols.sort ${INLINECMD} locore.o emulate.o ${OBJS} param.o ioconf.o swaphpvmunix.o
-	@echo loading hpvmunix
-	@rm -f hpvmunix
-	@${LD} -n -o hpvmunix -e start -x -T 80000000 locore.o emulate.o ${OBJS} vers.o ioconf.o param.o swaphpvmunix.o
-	@echo rearranging symbols
-	@-symorder ../vax/symbols.sort hpvmunix
-	@size hpvmunix
-	@chmod 755 hpvmunix
-
-swaphpvmunix.o: swaphpvmunix.c
-	${CC} -c -O ${COPTS} swaphpvmunix.c
-
-all: vmunix hkvmunix hpvmunix
+all: vmunix
 
 clean:
 	rm -f eddep *vmunix tags *.o locore.i [a-tv-z]*.s \
@@ -2199,11 +2175,5 @@ swapgeneric.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/systm.h
 swapgeneric.o: ../h/reboot.h ../vax/cons.h ../vax/mtpr.h
 swapgeneric.o: ../vax/../vaxmba/mbareg.h ../vax/../vaxmba/mbavar.h
 swapgeneric.o: ../vax/../vaxuba/ubareg.h ../vax/../vaxuba/ubavar.h
-swaphkvmunix.o: swaphkvmunix.c ../h/param.h ../h/types.h ../h/signal.h
-swaphkvmunix.o: ../h/../machine/trap.h ../h/../machine/machparam.h
-swaphkvmunix.o: machine/endian.h ../h/conf.h
-swaphpvmunix.o: swaphpvmunix.c ../h/param.h ../h/types.h ../h/signal.h
-swaphpvmunix.o: ../h/../machine/trap.h ../h/../machine/machparam.h
-swaphpvmunix.o: machine/endian.h ../h/conf.h
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

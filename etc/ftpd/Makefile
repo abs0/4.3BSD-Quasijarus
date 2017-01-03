@@ -14,21 +14,17 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.6 (Berkeley) 6/18/88
+#	@(#)Makefile	5.7 (Berkeley) 7/13/99
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
-SRCS=	ftpd.c ftpcmd.c glob.c vers.c
-OBJS=	ftpd.o ftpcmd.o glob.o vers.o
+SRCS=	ftpd.c ftpcmd.c glob.c
+OBJS=	ftpd.o ftpcmd.o glob.o
 
 all: ftpd
 
 ftpd: ${OBJS} ${LIBC}
 	${CC} -o $@ ${OBJS}
-
-vers.o: ftpd.c ftpcmd.y
-	sh newvers.sh
-	${CC} ${CFLAGS} -c vers.c
 
 clean: FRC
 	rm -f ${OBJS} ftpd core ftpcmd.c
@@ -73,6 +69,5 @@ glob.o: /usr/include/signal.h /usr/include/machine/trap.h
 glob.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
 glob.o: /usr/include/sys/stat.h /usr/include/sys/dir.h /usr/include/stdio.h
 glob.o: /usr/include/errno.h /usr/include/pwd.h
-vers.o: vers.c
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

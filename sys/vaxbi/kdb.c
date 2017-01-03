@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)kdb.c	7.6 (Berkeley) 7/9/88
+ *	@(#)kdb.c	7.9 (Berkeley) 9/6/99
  */
 
 /*
@@ -158,44 +158,117 @@ struct kdbstats kdbstats;	/* statistics */
 struct size {
 	daddr_t nblocks;
 	daddr_t blkoff;
-} kra81_sizes[8] = {
-#ifdef MARYLAND
-	67832,	0,		/* A=cyl    0 thru   94 + 2 sectors */
-	67828,	67832,		/* B=cyl   95 thru  189 - 2 sectors */
-	-1,	0,		/* C=cyl    0 thru 1247 */
-	-1,	135660,		/* D=cyl  190 thru 1247 */
-	449466,	49324,		/* E xxx */
-	64260,	498790,		/* F xxx */
-	328022,	563050,		/* G xxx */
-	0,	0,
-#else
-	15884,	0,		/* a */
-	33440,	15884,		/* b */
-	-1,	0,		/* c */
-	-1,	49324,		/* d */
-	449466,	49324,		/* e */
-	64260,	498790,		/* f */
-	328022,	563050,		/* g */
-	0,	0,
-#endif
+} kra60_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	33440,	15884,		/* B=sectors 15884 thru 49323 */
+	400176,	0,		/* C=sectors 0 thru 400175 */
+	82080,	49324,		/* 4.2 G => D=sectors 49324 thru 131403 */
+	268772,	131404,		/* 4.2 H => E=sectors 131404 thru 400175 */
+	350852,	49324,		/* F=sectors 49324 thru 400175 */
+	157570,	242606,		/* UCB G => G=sectors 242606 thru 400175 */
+	193282,	49324,		/* UCB H => H=sectors 49324 thru 242605 */
+}, kra70_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	33440,	15972,		/* B=sectors 15972 thru 49411 */
+	547041,	0,		/* C=sectors 0 thru 547040 */
+	15884,	341220,		/* D=sectors 341220 thru 357103 */
+	55936,	357192,		/* E=sectors 357192 thru 413127 */
+	133584,	413457,		/* F=sectors 413457 thru 547040 */
+	205821,	341220,		/* G=sectors 341220 thru 547040 */
+	291346,	49731,		/* H=sectors 49731 thru 341076 */
+}, kra71_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16422,		/* B=sectors 16422 thru 83301 */
+	1367310,0,		/* C=sectors 0 thru 1367309 */
+	15884,	375564,		/* D=sectors 375564 thru 391447 */
+	307200,	391986,		/* E=sectors 391986 thru 699185 */
+	667590,	699720,		/* F=sectors 699720 thru 1367309 */
+	991746,	375564,		/* G=sectors 375564 thru 1367309 */
+	291346,	83538,		/* H=sectors 83538 thru 374883 */
+}, kra72_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16320,		/* B=sectors 16320 thru 83199 */
+	1953300,0,		/* C=sectors 0 thru 1953299 */
+	15884,	375360,		/* D=sectors 375360 thru 391243 */
+	307200,	391680,		/* E=sectors 391680 thru 698879 */
+	1253580,699720,		/* F=sectors 699720 thru 1953299 */
+	1577940,375360,		/* G=sectors 375360 thru 1953299 */
+	291346,	83640,		/* H=sectors 83640 thru 374985 */
 }, kra80_sizes[8] = {
-	15884,	0,		/* A=blk 0 thru 15883 */
-	33440,	15884,		/* B=blk 15884 thru 49323 */
-	-1,	0,		/* C=blk 0 thru end */
-	0,	0,
-	0,	0,
-	0,	0,
-	82080,	49324,		/* G=blk 49324 thru 131403 */
-	-1,	131404,		/* H=blk 131404 thru end */
-}, kra60_sizes[8] = {
-	15884,	0,		/* A=blk 0 thru 15883 */
-	33440,	15884,		/* B=blk 15884 thru 49323 */
-	-1,	0,		/* C=blk 0 thru end */
-	-1,	49324,		/* D=blk 49324 thru end */
-	0,	0,
-	0,	0,
-	82080,	49324,		/* G=blk 49324 thru 131403 */
-	-1,	131404,		/* H=blk 131404 thru end */
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	33440,	15884,		/* B=sectors 15884 thru 49323 */
+	242606,	0,		/* C=sectors 0 thru 242605 */
+	0,	0,		/* D=unused */
+	187640,	49324,		/* UCB H => E=sectors 49324 thru 242605 */
+	82080,	49324,		/* 4.2 G => F=sectors 49324 thru 131403 */
+	187054,	49910,		/* G=sectors 49910 thru 242605 */
+	105560,	131404,		/* 4.2 H => H=sectors 131404 thru 242605 */
+}, kra81_sizes[8] ={
+/*
+ * These are the new standard partition sizes for ra81's.
+ * An RA_COMPAT system is compiled with D, E, and F corresponding
+ * to the 4.2 partitions for G, H, and F respectively.
+ */
+#ifndef	UCBRA
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16422,		/* B=sectors 16422 thru 83301 */
+	891072,	0,		/* C=sectors 0 thru 891071 */
+#ifdef RA_COMPAT
+	82080,	49324,		/* 4.2 G => D=sectors 49324 thru 131403 */
+	759668,	131404,		/* 4.2 H => E=sectors 131404 thru 891071 */
+	478582,	412490,		/* 4.2 F => F=sectors 412490 thru 891071 */
+#else
+	15884,	375564,		/* D=sectors 375564 thru 391447 */
+	307200,	391986,		/* E=sectors 391986 thru 699185 */
+	191352,	699720,		/* F=sectors 699720 thru 891071 */
+#endif RA_COMPAT
+	515508,	375564,		/* G=sectors 375564 thru 891071 */
+	291346,	83538,		/* H=sectors 83538 thru 374883 */
+
+/*
+ * These partitions correspond to the sizes used by sites at Berkeley,
+ * and by those sites that have received copies of the Berkeley driver
+ * with deltas 6.2 or greater (11/15/83).
+ */
+#else UCBRA
+
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	33440,	15884,		/* B=sectors 15884 thru 49323 */
+	891072,	0,		/* C=sectors 0 thru 891071 */
+	15884,	242606,		/* D=sectors 242606 thru 258489 */
+	307200,	258490,		/* E=sectors 258490 thru 565689 */
+	325382,	565690,		/* F=sectors 565690 thru 891071 */
+	648466,	242606,		/* G=sectors 242606 thru 891071 */
+	193282,	49324,		/* H=sectors 49324 thru 242605 */
+
+#endif UCBRA
+}, kra82_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16245,		/* B=sectors 16245 thru 83124 */
+	1216665,0,		/* C=sectors 0 thru 1216664 */
+	15884,	375345,		/* D=sectors 375345 thru 391228 */
+	307200,	391590,		/* E=sectors 391590 thru 698789 */
+	517275,	699390,		/* F=sectors 699390 thru 1216664 */
+	841320,	375345,		/* G=sectors 375345 thru 1216664 */
+	291346,	83790,		/* H=sectors 83790 thru 375135 */
+}, kra90_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16146,		/* B=sectors 16146 thru 83025 */
+	2376153,0,		/* C=sectors 0 thru 2376152 */
+	15884,	374946,		/* D=sectors 374946 thru 390829 */
+	307200,	391092,		/* E=sectors 391092 thru 698291 */
+	1677390,698763,		/* F=sectors 698763 thru 2376152 */
+	2001207,374946,		/* G=sectors 374946 thru 2376152 */
+	291346,	83421,		/* H=sectors 83421 thru 374766 */
+}, kra92_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16146,		/* B=sectors 16146 thru 83025 */
+	2940951,0,		/* C=sectors 0 thru 2940950 */
+	15884,	374946,		/* D=sectors 374946 thru 390829 */
+	307200,	391092,		/* E=sectors 391092 thru 698291 */
+	2242188,698763,		/* F=sectors 698763 thru 2940950 */
+	2566005,374946,		/* G=sectors 374946 thru 2940950 */
+	291346,	83421,		/* H=sectors 83421 thru 374766 */
 };
 /* END OF STUFF WHICH SHOULD BE READ IN PER DISK */
 
@@ -213,9 +286,44 @@ struct	kdbtypes {
 	NULL,		NULL,
 	"ra60",		kra60_sizes,	/* 4 = ra60 */
 	"ra81",		kra81_sizes,	/* 5 = ra81 */
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	"ra82",		kra82_sizes,	/* 11 = ra82 */
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	"ra70",		kra70_sizes,	/* 18 = ra70 */
+	"ra90",		kra90_sizes,	/* 19 = ra90 */
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	"ra92",		kra92_sizes,	/* 29 = ra92 */
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	"ra72",		kra72_sizes,	/* 37 = ra72 */
+	NULL,		NULL,
+	NULL,		NULL,
+	"ra71",		kra71_sizes,	/* 40 = ra71 */
 };
 
-#define NTYPES 6
+#define NTYPES 41
 
 /*
  * Definition of the driver for autoconf and generic MSCP code.

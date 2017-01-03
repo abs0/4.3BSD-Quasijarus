@@ -4,7 +4,7 @@
  * specifies the terms and conditions for redistribution.
  */
 
-/* @(#)strfile.h	1.2 (Berkeley) 5/14/81 */
+/* @(#)strfile.h	5.2 (Berkeley) 9/14/99 */
 
 # define	MAXDELIMS	3
 

@@ -17,14 +17,21 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)version.c	5.60 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)version.c	5.61.1.1 (Berkeley) 10/1/99";
 #endif /* not lint */
 
-char	Version[] = "5.60";
+char	Version[] = "5.61.1.1";
 
 # ifdef COMMENT
 
 SCCS/s.version.c:
+
+D 5.61.1.1	99/10/01 18:43:01	msokolov	485	484	00000/00000/00023
+started Quasijarus Sendmail
+
+D 5.61	88/09/20 22:15:19	eric	484	483	00000/00000/00023
+add I option to insist on Internet domain server; add NAMED_BIND
+compile option to compile in named routines.
 
 D 5.60	88/06/30 15:00:04	bostic	483	482	00011/00009/00012
 install approved copyright notice
@@ -2082,53 +2089,59 @@ D 1.1	80/10/11 13:34:43	eric	1	0	00001/00000/00000
 
 code versions:
 
-alias.o
-	alias.c	5.16 (Berkeley) 7/14/88 (without DBM)
-arpadate.o
+alias.o:
+	alias.c	5.17 (Berkeley) 10/1/99 (with DBM)
+arpadate.o:
 	arpadate.c	5.9 (Berkeley) 6/30/88
-clock.o
-collect.o
-conf.o
+clock.o:
+	clock.c	5.6 (Berkeley) 6/30/88
+collect.o:
+	collect.c	5.4 (Berkeley) 6/30/88
+conf.o:
 	conf.c	5.17 (Berkeley) 6/30/88
-convtime.o
-daemon.o
-	daemon.c	5.26 (Berkeley) 6/30/88 (with daemon mode)
-deliver.o
-	deliver.c	5.22 (Berkeley) 6/30/88
-domain.o
-	domain.c	5.15 (Berkeley) 6/30/88
-envelope.o
+convtime.o:
+	convtime.c	5.3 (Berkeley) 6/30/88
+daemon.o:
+	daemon.c	5.27 (Berkeley) 9/20/88 (with daemon mode)
+deliver.o:
+	deliver.c	5.23 (Berkeley) 9/20/88
+domain.o:
+	domain.c	5.18 (Berkeley) 1/1/89 (with name server)
+envelope.o:
 	envelope.c	5.15 (Berkeley) 6/30/88
-err.o
+err.o:
 	err.c	5.9 (Berkeley) 6/30/88
-headers.o
+headers.o:
 	headers.c	5.10 (Berkeley) 6/30/88
-macro.o
+macro.o:
 	macro.c	5.5 (Berkeley) 6/30/88
-main.o
-	main.c	5.18 (Berkeley) 6/30/88
-	sendmail.h	5.12		6/30/88
-parseaddr.o
+main.o:
+	 Copyright (c) 1988 Regents of the University of California.
+	main.c	5.19 (Berkeley) 9/20/88
+	sendmail.h	5.13		9/20/88
+parseaddr.o:
 	parseaddr.c	5.9 (Berkeley) 6/30/88
-queue.o
+queue.o:
 	queue.c	5.24 (Berkeley) 6/30/88 (with queueing)
-readcf.o
-	readcf.c	5.13 (Berkeley) 6/30/88
-recipient.o
-savemail.o
+readcf.o:
+	readcf.c	5.14 (Berkeley) 9/20/88
+recipient.o:
+	recipient.c	5.12 (Berkeley) 6/30/88
+savemail.o:
 	savemail.c	5.9 (Berkeley) 6/30/88
-srvrsmtp.o
+srvrsmtp.o:
 	srvrsmtp.c	5.22 (Berkeley) 6/30/88 (with SMTP)
-stab.o
+stab.o:
 	stab.c	5.5 (Berkeley) 6/30/88
-stats.o
+stats.o:
 	stats.c	5.10 (Berkeley) 6/30/88
-sysexits.o
+sysexits.o:
 	sysexits.c	5.5 (Berkeley) 6/30/88
-trace.o
-usersmtp.o
+trace.o:
+	trace.c	5.5 (Berkeley) 6/30/88
+usersmtp.o:
 	usersmtp.c	5.10 (Berkeley) 6/30/88 (with SMTP)
-util.o
+util.o:
 	util.c	5.9 (Berkeley) 12/17/86
 
 # endif COMMENT

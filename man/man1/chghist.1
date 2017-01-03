@@ -1,0 +1,138 @@
+.\"	@(#)chghist.1	6.1 (Berkeley) 5/14/99
+.tr ~
+.if n .ds D " -- 
+.if t .ds D _
+.tr @|
+.de SP
+.if n .ul
+[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de DT
+.hc ^
+^...
+.hc
+..
+.de AR
+.s1
+.lp +10 5
+\fB\(em\\$1\\fR	\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+..
+.de FI
+.s1
+.lp +30 30
+\\$1	\\$2
+.i0
+..
+.ds F)  \fB\s-2FILES\s+2\fR
+.de I
+.if n .ul
+\fI\\$1\fR\c
+.if n .ul 0
+\\$2\\$3\\$4\\$5\\$6\\$7\\$8\\$9
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.th CHGHIST 1 5/14/99
+.sh NAME
+chghist \*- change the history entry of an SCCS delta
+.sh SYNOPSIS
+.bd chghist
+.if n .ul
+\fB\(emr\fR\c
+.if n .ul 0
+SID
+name
+.DT
+.sh DESCRIPTION
+.it Chghist
+changes the history information, for the delta specified by the SID, of each
+named SCCS file.
+.s1
+If a directory is named,
+.it chghist
+behaves as though each file in the directory were
+specified as a named file,
+except that non-SCCS files
+(last component of the pathname does not begin with ``s\fB.\fP''),
+and unreadable files,
+are silently ignored.
+If a name of ``\(em'' is given, the standard input is read;
+each line of the standard input is taken to be the name of an SCCS file
+to be processed.
+Again, non-SCCS files, and unreadable files, are silently ignored.
+.s3
+The exact permissions necessary to change the history entry of a delta
+are documented in the
+.it "SCCS/PWB User's Manual."
+Simply stated,
+they are either (1)
+if you made a delta, you can change its history entry;
+or (2)
+if you own the file and directory you can change a history entry.
+.s1
+The new history is read from the standard input.
+If the standard input is a terminal,
+the program will prompt with
+``MRs? '' (only if the file has a
+.bd v
+flag, see
+.it admin\c
+(1))
+and with
+``comments? ''.
+If the standard input is not a terminal,
+no prompt(s) is (are) printed.
+A newline preceded by a ``\\'' is read as
+a blank, and may be used to make
+the entering of the history more convenient.
+The first newline not preceded by a ``\\'' terminates
+the response for the corresponding prompt.
+.s1
+When the history entry of
+a delta table record (see
+.it prt\c
+(1))
+is changed, all old MR entries (if any) are converted to comments, and
+both these and the original comments are preceded by a comment line
+that indicates who made the change and when it was made. The new
+information is entered preceding the old.
+No other changes are made to the delta table entry.
+.sh FILES
+.lp +10 10
+x-file	(see
+.it delta\c
+(1))
+.lp +10 10
+z-file	(see
+.it delta\c
+(1))
+.i0
+.sh "SEE ALSO"
+.na
+admin(1),
+get(1),
+delta(1),
+prt(1),
+help(1),
+sccsfile(5)
+.br
+.it "SCCS/PWB User's Manual"
+by L. E. Bonanni and A. L. Glasser.
+.ad
+.sh DIAGNOSTICS
+Use
+.it help\c
+(1)
+for explanations.
+.tr ~~
+.tr @@

@@ -3,29 +3,24 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.8	(Berkeley)	6/18/87
+#	@(#)Makefile	5.11	(Berkeley)	1/21/99
 #
-CFLAGS=	-O -DBSD4_2 -DSACREDMEM=256000 -DUSERMEM=`cat USERMEM` 
+CFLAGS=	-O -DBSD4_2 -DBITS=16
 LIBC=	/lib/libc.a
-SRCS=	compress.c
-OBJS=	compress.o
+LIBZ=	/usr/lib/libz.a
+SRCS=	compress.c gzcompat.c
+OBJS=	compress.o gzcompat.o
 
-all: compress
+all: compress gzcompat
 
-compress: USERMEM ${OBJS} ${LIBC}
-	${CC} ${CFLAGS} -o $@ ${OBJS}
+compress: compress.o ${LIBC} ${LIBZ}
+	${CC} ${CFLAGS} -o $@ compress.o -lz
 
-# USERMEM may have to be set by hand.  It should contain the amount of
-# available user memory in bytes.  Set it to zero, for physical memory
-# less than 1 Meg.
-USERMEM:
-	sh usermem.sh > USERMEM
+gzcompat: gzcompat.o ${LIBC}
+	${CC} ${CFLAGS} -o $@ gzcompat.o
 
-# Temporarily don't delete USERMEM.  When chroot'ed to /nbsd, usermem.sh
-# fails totally.
 clean: FRC
-	rm -f ${OBJS} core compress
-#	rm -f ${OBJS} core compress USERMEM
+	rm -f ${OBJS} core compress gzcompat
 
 depend: FRC
 	mkdep ${CFLAGS} ${SRCS}
@@ -35,6 +30,7 @@ install: FRC
 	rm -f ${DESTDIR}/usr/ucb/uncompress ${DESTDIR}/usr/ucb/zcat
 	ln ${DESTDIR}/usr/ucb/compress ${DESTDIR}/usr/ucb/uncompress
 	ln ${DESTDIR}/usr/ucb/compress ${DESTDIR}/usr/ucb/zcat
+	install -s -o bin -g bin -m 755 gzcompat ${DESTDIR}/usr/ucb/gzcompat
 
 lint: FRC
 	lint ${CFLAGS} ${SRCS}
@@ -50,5 +46,7 @@ FRC:
 compress.o: compress.c /usr/include/stdio.h /usr/include/ctype.h
 compress.o: /usr/include/signal.h /usr/include/machine/trap.h
 compress.o: /usr/include/sys/types.h /usr/include/sys/stat.h
+compress.o: /usr/include/zlib.h /usr/include/zconf.h
+gzcompat.o: gzcompat.c /usr/include/stdio.h
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

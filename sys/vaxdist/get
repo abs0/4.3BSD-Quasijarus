@@ -1,11 +1,10 @@
 #!/bin/sh -
 #
-# Copyright (c) 1990 The Regents of the University of California.
-# All rights reserved.
+# 4.3BSD-Quasijarus release-making script.
 #
-# %sccs.include.redist.sh%
+# This file is freely redistributable.
 #
-#	@(#)get	4.28 (Berkeley) 12/25/98
+#	@(#)get	4.28 (Berkeley) 9/7/99
 #
 
 # Shell script to build a mini-root file system in preparation for building
@@ -26,8 +25,8 @@ DIRLIST="bin dev etc a tmp usr usr/mdec sys sys/floppy \
 rm -rf $DIRLIST
 mkdir $DIRLIST
 
-ETC="disktab disklabel fsck ifconfig init mknod mount newfs restore \
-	rrestore umount arff flcopy"
+ETC="disktab disklabel diskpart fsck ifconfig init mknod mount newfs restore \
+	rrestore umount arff flcopy passwd group"
 for i in $ETC; do
 	cp /nbsd/etc/$i etc/$i
 done
@@ -41,24 +40,17 @@ ln bin/stty bin/STTY
 cp /nbsd/sys/floppy/[Ma-z0-9]* sys/floppy
 cp /nbsd/sys/consolerl/[Ma-z0-9]* sys/consolerl
 cp /nbsd/sys/cassette/[Ma-z0-9]* sys/cassette
+cp /nbsd/usr/mdec/* usr/mdec
 cp /nbsd/boot boot
 cp /nbsd/pcs750.bin pcs750.bin
 cp /nbsd/.profile .profile
-
-cat >etc/passwd <<EOF
-root::0:10::/:/bin/sh
-EOF
-
-cat >etc/group <<EOF
-wheel:*:0:
-staff:*:10:
-EOF
 
 cat >etc/fstab <<EOF
 /dev/hp0a:/a:xx:1:1
 /dev/up0a:/a:xx:1:1
 /dev/hk0a:/a:xx:1:1
 /dev/ra0a:/a:xx:1:1
+/dev/kra0a:/a:xx:1:1
 /dev/rb0a:/a:xx:1:1
 EOF
 
@@ -93,11 +85,12 @@ cp /nbsd/dev/MAKEDEV dev
 chmod +x dev/MAKEDEV
 cp /dev/null dev/MAKEDEV.local
 cd dev
-./MAKEDEV std hp0 hk0 up0 ra0 rb0
+./MAKEDEV std hp0 hk0 up0 ra0 kra0 rb0
 ./MAKEDEV ts0; mv rmt12 ts0; rm *mt*;
 ./MAKEDEV tm0; mv rmt12 tm0; rm *mt*;
 ./MAKEDEV ht0; mv rmt12 ht0; rm *mt*;
 ./MAKEDEV ut0; mv rmt12 ut0; rm *mt*;
+./MAKEDEV tms0; mv rmt12 tms0; rm *mt*;
 ./MAKEDEV mt0; mv rmt12 xt0; rm *mt*; mv xt0 mt0
 cd ..
 sync

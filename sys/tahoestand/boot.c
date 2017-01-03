@@ -1,6 +1,6 @@
-/*	boot.c	7.2	89/05/24	*/
+/*	boot.c	1.7	88/03/04	*/
 
-#include "machine/mtpr.h"
+#include "../machine/mtpr.h"
 
 #include "param.h"
 #include "inode.h"
@@ -17,8 +17,7 @@
  * boot comes from.
  */
 
-/*#define	DEV_DFLT	1		/* vd/dk */
-#define	DEV_DFLT	2		/* hd */
+#define	DEV_DFLT	1		/* vd/dk */
 
 char line[100];
 
@@ -29,7 +28,7 @@ main()
 {
 	register char *cp;		/* skip r12 */
 	register u_int howto, devtype;	/* howto=r11, devtype=r10 */
-	int io = 0, retry, type;
+	int io, retry, type;
 
 #ifdef lint
 	howto = 0; devtype = 0;
@@ -37,6 +36,7 @@ main()
 	if ((devtype & B_MAGICMASK) != B_DEVMAGIC)
 		devtype = DEV_DFLT << B_TYPESHIFT;	/* unit, partition 0 */
 	bootdev = devtype;
+	printf("\nBoot\n");
 #ifdef JUSTASK
 	howto = RB_ASKNAME|RB_SINGLE;
 #else
@@ -49,8 +49,6 @@ main()
 	}
 #endif
 	for (retry = 0;;) {
-		if (io >= 0)
-			printf("\nBoot");
 		if (howto & RB_ASKNAME) {
 			printf(": ");
 			gets(line);
@@ -80,30 +78,32 @@ copyunix(howto, devtype, io)
 	register char *addr;
 	struct exec x;
 
-	if (read(io, (char *)&x, sizeof(x)) != sizeof(x) || N_BADMAG(x)) {
-		printf("bad magic #\n");
+	i = read(io, (char *)&x, sizeof x);
+	if (i != sizeof x ||
+	    (x.a_magic != 0407 && x.a_magic != 0413 && x.a_magic != 0410)) {
+		printf("Bad format\n");
 		return;
 	}
-	printf("%ld", x.a_text);
-	if (x.a_magic == ZMAGIC && lseek(io, 0x400, 0) == -1)
+	printf("%d", x.a_text);
+	if (x.a_magic == 0413 && lseek(io, 0x400, 0) == -1)
 		goto shread;
 	if (read(io, (char *)RELOC, x.a_text) != x.a_text)
 		goto shread;
 	addr = (char *)(x.a_text + RELOC);
-	if (x.a_magic == ZMAGIC || x.a_magic == NMAGIC)
+	if (x.a_magic == 0413 || x.a_magic == 0410)
 		while ((int)addr & CLOFSET)
 			*addr++ = 0;
-	printf("+%ld", x.a_data);
+	printf("+%d", x.a_data);
 	if (read(io, addr, x.a_data) != x.a_data)
 		goto shread;
 	addr += x.a_data;
-	printf("+%ld", x.a_bss);
+	printf("+%d", x.a_bss);
 	if (howto & RB_KDB && x.a_syms) {
 		for (i = 0; i < x.a_bss; i++)
 			*addr++ = 0;
 		*(int *)addr = x.a_syms;		/* symbol table size */
 		addr += sizeof (int);
-		printf("[+%ld", x.a_syms);
+		printf("[+%d", x.a_syms);
 		if (read(io, addr, x.a_syms) != x.a_syms)
 			goto shread;
 		addr += x.a_syms;
@@ -123,13 +123,13 @@ copyunix(howto, devtype, io)
 	for (i = 0; i < x.a_bss; i++)
 		*addr++ = 0;
 	x.a_entry &= 0x1fffffff;
-	printf(" start 0x%lx\n", x.a_entry);
+	printf(" start 0x%x\n", x.a_entry);
 	mtpr(PADC, 0);		/* Purge data cache */
 	mtpr(PACC, 0);		/* Purge code cache */
 	mtpr(DCR, 1);		/* Enable data cache */
 	(*((int (*)()) x.a_entry))();
 	return;
 shread:
-	printf("short read\n");
+	printf("Short read\n");
 	return;
 }

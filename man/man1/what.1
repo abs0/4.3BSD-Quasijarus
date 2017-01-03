@@ -1,24 +1,81 @@
-.\" Copyright (c) 1980 Regents of the University of California.
-.\" All rights reserved.  The Berkeley software License Agreement
-.\" specifies the terms and conditions for redistribution.
-.\"
-.\"	@(#)what.1	6.1 (Berkeley) 4/29/85
-.\"
-.TH WHAT 1 "April 29, 1985"
-.UC 4
+.\"	@(#)what.1	6.1 (Berkeley) 5/14/99
+.TH WHAT 1 "May 14, 1999"
+.tr $%
 .SH NAME
-what \- show what versions of object modules were used to construct a file
+what \(em identify files
 .SH SYNOPSIS
+.tr ##
 .B what
-name ...
+file
+.ZZ
 .SH DESCRIPTION
+.ad
 .I What
-reads each file and searches for sequences of the form ``@(#)''
-as inserted by the source code control system.  It then prints the remainder
-of the string after this marker, up to a null character, newline, double
-quote, or ``>'' character.
-.SH BUGS
-As SCCS is not licensed with UNIX/32V, this is a rewrite of the
+searches the given files for all occurrences
+of the pattern which
+.IR get\^ (1)
+substitutes for $Z% (this is
+\fB@(#)\fR
+at this printing)
+and prints out what follows until the
+first \fB", >,\fR newline\fB, \\,\fR or null character.
+For example, if the \fB\s-1C\fR\s+1 program in file \fBf.c\fR contains
+.PP
+.RE
+.RS 5
+char iden\(ru\(ru\(ru[] "@(#)identification information";
+.RE
+.PP
+and \fBf.c\fR is compiled to yield \fBf.o\fR and \fBa.out,\fR
+then the command
+.PP
+.RE
+.RS 5
 .I what
-command which is part of SCCS, and may not behave exactly the same as that
-command does.
+f\fB.\fRc f\fB.\fRo a\fB.\fRout
+.RE
+.PP
+will print
+.PP
+.RE
+.RS 8
+f\fB.\fRc:
+.PP
+.RE
+.RS 13
+identification information
+.PP
+.RE
+.RS 8
+f\fB.\fRo:
+.PP
+.RE
+.RS 13
+identification information
+.PP
+.RE
+.RS 8
+a\fB.\fRout:
+.PP
+.RE
+.RS 13
+identification information
+.PP
+.RE
+.I What
+is intended to be used in conjunction with the \*(S) command
+.IR get\^ (1),
+which automatically inserts identifying information,
+but it can also be used where the information is inserted manually.
+.SH "SEE ALSO"
+get(1), help(1)
+.SH DIAGNOSTICS
+Use
+.IR help\^ (1)
+for explanations.
+.SH BUGS
+It's possible that an unintended occurrence of the pattern
+\fB@(#)\fR
+could be
+found just by chance, but this causes no harm in nearly all cases.
+.tr $$

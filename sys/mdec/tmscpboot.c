@@ -1,5 +1,5 @@
 /*
- *	@(#)tmscpboot.c	7.3 (Berkeley) 12/21/98
+ *	@(#)tmscpboot.c	7.4 (Berkeley) 1/8/99
  *
  * TK50 tape boot block for distribution tapes
  * works on Q-bus tk50 drive on uVaxen
@@ -188,7 +188,7 @@ nxtdir:	moval	name(fp),r2
 	# entry IS here; read it in from tape
 
 found:	movzwl	BNUM(r0),tapa(fp)	# start block no., 2 bytes
-	addl2	$2-1,tapa(fp)		# skip over this program (2 blocks)
+	addl2	$7-1,tapa(fp)		# skip over the bootstraps (7 blocks)
 					# minus 1 because we will read THROUGH
 					# this block; so we want to stop just
 					# before it

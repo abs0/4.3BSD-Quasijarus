@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)uda.c	7.9 (Berkeley) 7/9/88
+ *	@(#)uda.c	7.12 (Berkeley) 9/6/99
  */
 
 /*
@@ -190,22 +190,24 @@ rastrategy(io, func)
 
 #ifdef COMPAT_42
 u_long rc25_off[] = { 0, 15884, 0, -1, -1, -1, 25916, -1 };
-u_long rx50_off[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-u_long rd52_off[] = { 0, 15884, 0, 0, 0, 0, 25650, 0 };
-u_long rd53_off[] = { 0, 15884, 0, 0, 0, 33440, 49324, 15884 };
+u_long rx50_off[] = { 0, -1, 0, -1, -1, -1, -1, -1 };
 u_long ra60_off[] = { 0, 15884, 0, 49324, 131404, 49324, 242606, 49324 };
-#define ra70_off ra60_off
+u_long ra70_off[] = { 0, 15972, 0, 341220, 357192, 413457, 341220, 49731 };
+u_long ra71_off[] = { 0, 16422, 0, 375564, 391986, 699720, 375564, 83538 };
+u_long ra72_off[] = { 0, 16320, 0, 375360, 391680, 699720, 375360, 83640 };
 u_long ra80_off[] = { 0, 15884, 0, -1, 49324, 49324, 49910, 131404 };
 #ifndef	UCBRA
 #ifdef RA_COMPAT
 u_long ra81_off[] = { 0, 16422, 0, 49324, 131404, 412490, 375564, 83538 };
 #else
-u_long ra81_off[] = { 0, 16422, 0, 375564, 391986, 699720, 375564, 83538 };
+#define ra81_off ra71_off
 #endif
 #else
 u_long ra81_off[] = { 0, 15884, 0, 242606, 258490, 565690, 242606, 49324 };
 #endif
-u_long ra82_off[] = { 0, 15884, 0, 375345, 391590, 699390, 375345, 83790 };
+u_long ra82_off[] = { 0, 16245, 0, 375345, 391590, 699390, 375345, 83790 };
+u_long ra90_off[] = { 0, 16146, 0, 374946, 391092, 698763, 374946, 83421 };
+#define ra92_off ra90_off
 
 struct mediamap {
 	u_long	id;		/* media ID */
@@ -213,13 +215,15 @@ struct mediamap {
 } ra_map[] = {
 	{ MSCP_MKDRIVE2('R', 'A', 60),		ra60_off },
 	{ MSCP_MKDRIVE2('R', 'A', 70),		ra70_off },
+	{ MSCP_MKDRIVE2('R', 'A', 71),		ra71_off },
+	{ MSCP_MKDRIVE2('R', 'A', 72),		ra72_off },
 	{ MSCP_MKDRIVE2('R', 'A', 80),		ra80_off },
 	{ MSCP_MKDRIVE2('R', 'A', 81),		ra81_off },
 	{ MSCP_MKDRIVE2('R', 'A', 82),		ra82_off },
+	{ MSCP_MKDRIVE2('R', 'A', 90),		ra90_off },
+	{ MSCP_MKDRIVE2('R', 'A', 92),		ra92_off },
 	{ MSCP_MKDRIVE2('R', 'C', 25),		rc25_off },
 	{ MSCP_MKDRIVE3('R', 'C', 'F', 25),	rc25_off },
-	{ MSCP_MKDRIVE2('R', 'D', 52),		rd52_off },
-	{ MSCP_MKDRIVE2('R', 'D', 53),		rd53_off },
 	{ MSCP_MKDRIVE2('R', 'X', 50),		rx50_off },
 	0
 };

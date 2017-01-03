@@ -44,3 +44,12 @@ UUCP_RELAY		`DRcad'
      If defined, this will be the machine to which non-local UUCP traffic
 is forwarded.  If not defined, defaults to ucbvax.
 
+BITNET_RELAY		`DBjade.Berkeley.EDU'
+
+     If defined, this will be the machien to which BITNET traffic
+is forwarded.  If not defined, it defaults to jade.Berkeley.EDU.
+
+CSNET_RELAY		`DCrelay.cs.net'
+
+     If defined, this will be the machine to which CSNET traffic is
+forwarded.  If not defined, it defaults to relay.cs.net.

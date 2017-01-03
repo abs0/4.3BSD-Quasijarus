@@ -16,12 +16,20 @@
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
 
+#include <sendmail.h>
+
 #ifndef lint
-static char sccsid[] = "@(#)domain.c	5.15 (Berkeley) 6/30/88";
+#ifdef NAMED_BIND
+static char sccsid[] = "@(#)domain.c	5.18 (Berkeley) 1/1/89 (with name server)";
+#else
+static char sccsid[] = "@(#)domain.c	5.18 (Berkeley) 1/1/89 (without name server)";
+#endif
 #endif /* not lint */
 
-#include <sendmail.h>
+#ifdef NAMED_BIND
+
 #include <sys/param.h>
+#include <errno.h>
 #include <arpa/nameser.h>
 #include <resolv.h>
 #include <netdb.h>
@@ -46,25 +54,39 @@ getmxrr(host, mxhosts, localhost, rcode)
 	int ancount, qdcount, buflen, seenlocal;
 	u_short pref, localpref, type, prefer[MAXMXHOSTS];
 
+	errno = 0;
 	n = res_search(host, C_IN, T_MX, (char *)&answer, sizeof(answer));
-	if (n < 0) {
+	if (n < 0)
+	{
 #ifdef DEBUG
 		if (tTd(8, 1))
 			printf("getmxrr: res_search failed (errno=%d, h_errno=%d)\n",
 			    errno, h_errno);
 #endif
-		switch(h_errno) {
-		case NO_DATA:
-		case NO_RECOVERY:
+		switch (h_errno)
+		{
+		  case NO_DATA:
+		  case NO_RECOVERY:
+			/* no MX data on this host */
 			goto punt;
-		case HOST_NOT_FOUND:
+
+		  case HOST_NOT_FOUND:
+			/* the host just doesn't exist */
 			*rcode = EX_NOHOST;
 			break;
-		case TRY_AGAIN:
+
+		  case TRY_AGAIN:
+			/* couldn't connect to the name server */
+			if (!UseNameServer && errno == ECONNREFUSED)
+				goto punt;
+
+			/* it might come up later; better queue it up */
 			*rcode = EX_TEMPFAIL;
 			break;
 		}
-		return(-1);
+
+		/* irreconcilable differences */
+		return (-1);
 	}
 
 	/* find first satisfactory answer */
@@ -119,7 +141,8 @@ punt:		mxhosts[0] = strcpy(hostbuf, host);
 	/* sort the records */
 	for (i = 0; i < nmx; i++) {
 		for (j = i + 1; j < nmx; j++) {
-			if (prefer[i] > prefer[j]) {
+			if (prefer[i] > prefer[j] ||
+			    (prefer[i] == prefer[j] && rand() % 1 == 0)) {
 				register int temp;
 				register char *temp1;
 
@@ -162,7 +185,19 @@ getcanonname(host, hbsize)
 
 	loopcnt = 0;
 loop:
+	/*
+	 * Use query type of ANY if possible (NO_WILDCARD_MX), which will
+	 * find types CNAME, A, and MX, and will cause all existing records
+	 * to be cached by our local server.  If there is (might be) a
+	 * wildcard MX record in the local domain or its parents that are
+	 * searched, we can't use ANY; it would cause fully-qualified names
+	 * to match as names in a local domain.
+	 */
+# ifdef NO_WILDCARD_MX
+	n = res_search(host, C_IN, T_ANY, (char *)&answer, sizeof(answer));
+# else
 	n = res_search(host, C_IN, T_CNAME, (char *)&answer, sizeof(answer));
+# endif
 	if (n < 0) {
 #ifdef DEBUG
 		if (tTd(8, 1))
@@ -225,3 +260,25 @@ loop:
 		}
 	}
 }
+
+#else /* not NAMED_BIND */
+
+#include <netdb.h>
+
+getcanonname(host, hbsize)
+	char *host;
+	int hbsize;
+{
+	struct hostent *hp;
+
+	hp = gethostbyname(host);
+	if (hp == NULL)
+		return;
+
+	if (strlen(hp->h_name) >= hbsize)
+		return;
+
+	(void) strcpy(host, hp->h_name);
+}
+
+#endif /* not NAMED_BIND */

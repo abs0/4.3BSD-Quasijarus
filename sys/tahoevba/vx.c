@@ -1,9 +1,4 @@
 /*
- * This file is derived from version 7.2 of the VX driver to create
- * a driver compatible with the 4.3BSD-tahoe release.
- */
-
-/*
  * Copyright (c) 1988 Regents of the University of California.
  * All rights reserved.
  *
@@ -52,7 +47,6 @@
 #include "../tahoe/pte.h"
 
 #include "../tahoevba/vbavar.h"
-#include "../tahoevba/vbaparam.h"
 #include "../tahoevba/vxreg.h"
 #include "../tahoevba/scope.h"
 
@@ -122,22 +116,15 @@ vxprobe(reg, vi)
 	struct vba_device *vi;
 {
 	register int br, cvec;			/* must be r12, r11 */
-	register struct vxdevice *vp;
+	register struct vxdevice *vp = (struct vxdevice *)reg;
 	register struct vx_softc *vs;
-	struct pte *dummypte;
 
 #ifdef lint
 	br = 0; cvec = br; br = cvec;
 	vackint(0); vunsol(0); vcmdrsp(0); vxfreset(0);
 #endif
-	if (!VBIOMAPPED(reg) && !vbmemalloc(16, reg, &dummypte, &reg)) {
-		printf("vx%d: vbmemalloc failed.\n", vi->ui_unit);
-		return(0);
-	}
-	vp = (struct vxdevice *)reg;
 	if (badaddr((caddr_t)vp, 1))
 		return (0);
-	vi->ui_addr = reg;
 	vp->v_fault = 0;
 	vp->v_vioc = V_BSY;
 	vp->v_hdwre = V_RESET;		/* reset interrupt */

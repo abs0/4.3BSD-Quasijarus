@@ -110,7 +110,7 @@ swapresponse(rsp)
 }
 #endif
 
-#ifndef sun
+#ifdef vax
 struct ctl_response_sun {
 	char type;
 	char answer;

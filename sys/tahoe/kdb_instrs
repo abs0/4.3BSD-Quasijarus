@@ -1,5 +1,10 @@
-/*	%WW% (Berkeley) 11/20/86	*/
-/* Copyright(c) 1980 Regents of the University of California */
+/*
+ * Copyright (c) 1980 The Regents of the University of California
+ * All rights reserved.
+ *
+ *	@(#)instrs	1.1 (Berkeley) 11/20/86
+ */
+
 OP("adda",0x8e,2,ACCR+TYPL,ACCM+TYPL,0,0,0,0),
 OP("addb2",0x08,2,ACCR+TYPB,ACCM+TYPB,0,0,0,0),
 OP("addb3",0x18,3,ACCR+TYPB,ACCR+TYPB,ACCW+TYPB,0,0,0),

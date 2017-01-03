@@ -1,18 +1,10 @@
-/*-
- * Copyright (c) 1982, 1986
- *	The Regents of the University of California.  All rights reserved.
- * (c) UNIX System Laboratories, Inc.
- * All or some portions of this file are derived from material licensed
- * to the University of California by American Telephone and Telegraph
- * Co. or Unix System Laboratories, Inc. and are reproduced herein with
- * the permission of UNIX System Laboratories, Inc.
- *
- * %sccs.include.redist.c%
- *
- *	@(#)qfont.c	7.2 (Berkeley) 1/21/94
- */
-
 /*
+ * Copyright (c) 1982, 1986 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
+ *
+ * 		@(#)qfont.c	1.3  Berkeley  6/3/88
+ *
  *	derived from:  "@(#)qfont.c	6.2	ULTRIX	2/4/88"
  */
 

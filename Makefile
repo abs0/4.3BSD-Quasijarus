@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	4.18 (Berkeley) 6/30/88
+#	@(#)Makefile	4.19 (Berkeley) 1/14/99
 #
 # This makefile is designed to be run in one of three ways:
 #
@@ -59,11 +59,11 @@ LIBCDEFS=	HOSTLOOKUP=${HOSTLOOKUP} DFLMON=${DFLMON} DEFS="${DEFS}"
 #
 DESTDIR=
 CFLAGS=		-O
-SRC_MFLAGS=	-k
+SRC_MFLAGS=
 
 LIBDIR=	lib usr.lib
 # order is important, old and man must be #1 and #2
-SRCDIR=	old man bin usr.bin etc ucb new games local
+SRCDIR=	old man bin usr.bin etc ucb games
 
 all: ${LIBDIR} ${SRCDIR}
 

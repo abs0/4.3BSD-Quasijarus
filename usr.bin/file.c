@@ -1,5 +1,5 @@
 #ifndef lint
-static	char sccsid[] = "@(#)file.c	4.15 (Berkeley) 6/1/88";
+static	char sccsid[] = "@(#)file.c	4.16 (Berkeley) 1/21/99";
 #endif
 /*
  * file - determine type of file
@@ -181,6 +181,14 @@ exec:
 		if (buf[2]&0x80)
 			printf("block ");
 		printf("compressed %d bit code data\n", buf[2]&0x1f);
+		return;
+	}
+	if (buf[0] == '\037' && buf[1] == '\241') {
+		printf("strong compressed data\n");
+		return;
+	}
+	if (buf[0] == '\037' && buf[1] == '\213') {
+		printf("gzipped data\n");
 		return;
 	}
 	if(strncmp(buf, "!<arch>\n__.SYMDEF", 17) == 0 ) {

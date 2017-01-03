@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	4.15 (Berkeley) 7/9/88
+#	@(#)Makefile	4.16 (Berkeley) 9/29/99
 #
 RES=
 DEFINES= -DDEBUG -DSTATS
@@ -32,11 +32,14 @@ OBJS=	db_dump.o db_load.o db_lookup.o db_reload.o db_save.o db_update.o \
 	ns_sort.o ns_stats.o $(ALLOC)
 SUBDIR=	tools
 
-all: named
+all: named ${SUBDIR}
 
 named:	${OBJS} ${LIBC}
 	sh newvers.sh
 	${CC} -o $@ version.c ${OBJS} ${LDFLAGS}
+
+tools: FRC
+	cd tools; make ${MFLAGS} RES=${RES}
 
 clean: FRC
 	rm -f ${OBJS} core named version.o version.c
@@ -46,15 +49,27 @@ clean: FRC
 
 depend: FRC
 	mkdep ${CFLAGS} ${SRCS}
+	for i in ${SUBDIR}; do \
+		(cd $$i; make ${MFLAGS} depend); \
+	done
 
 install: FRC
 	install -s -o bin -g bin -m 755 named ${DESTDIR}/etc/named
+	for i in ${SUBDIR}; do \
+		(cd $$i; make ${MFLAGS} install); \
+	done
 
 lint: FRC
 	lint -Dlint ${CFLAGS} ${SRCS}
+	for i in ${SUBDIR}; do \
+		(cd $$i; make ${MFLAGS} lint); \
+	done
 
 tags: FRC
 	ctags -t ${SRCS} ${HDRS}
+	for i in ${SUBDIR}; do \
+		(cd $$i; make ${MFLAGS} tags); \
+	done
 
 FRC:
 

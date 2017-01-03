@@ -15,15 +15,9 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)newvers.sh	4.5 (Berkeley) 7/9/88
+#	@(#)newvers.sh	4.6 (Berkeley) 9/29/99
 #
-if [ ! -r version ]
-then
-	echo 0 > version
-fi
-touch version
 rm -f version.[oc]
-v=`cat version` u=${USER-root} d=`pwd` h=`hostname` t=`date`
-sed -e "s|%VERSION%|#${v}: ${t}|" -e "s|%WHOANDWHERE%|${u}@${h}:${d}|" \
+u=${USER-root} d=`pwd` h=`hostname` t=`date`
+sed -e "s|%VERSION%|${t}|" -e "s|%WHOANDWHERE%|${u}@${h}:${d}|" \
 	< Version.c >version.c
-/bin/echo `expr ${v} + 1` > version

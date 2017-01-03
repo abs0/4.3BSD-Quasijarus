@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)kdb.c	7.4 (Berkeley) 7/8/88
+ *	@(#)kdb.c	7.5 (Berkeley) 9/4/99
  */
 
 /*
@@ -185,10 +185,22 @@ krastrategy(io, func)
 
 #ifdef COMPAT_42
 u_long kra60_off[] = { 0, 15884, 0, 49324, 131404, 49324, 242606, 49324 };
-#define kra70_off kra60_off
+u_long kra70_off[] = { 0, 15972, 0, 341220, 357192, 413457, 341220, 49731 };
+u_long kra71_off[] = { 0, 16422, 0, 375564, 391986, 699720, 375564, 83538 };
+u_long kra72_off[] = { 0, 16320, 0, 375360, 391680, 699720, 375360, 83640 };
 u_long kra80_off[] = { 0, 15884, 0, -1, 49324, 49324, 49910, 131404 };
-u_long kra81_off[] = { 0, 15884, 0, 131404, 49324, 498790, 563050, 131404 };
-u_long kra82_off[] = { 0, 15884, 0, 375345, 391590, 699390, 375345, 83790 }; 
+#ifndef	UCBRA
+#ifdef RA_COMPAT
+u_long kra81_off[] = { 0, 16422, 0, 49324, 131404, 412490, 375564, 83538 };
+#else
+#define kra81_off kra71_off
+#endif
+#else
+u_long kra81_off[] = { 0, 15884, 0, 242606, 258490, 565690, 242606, 49324 };
+#endif
+u_long kra82_off[] = { 0, 16245, 0, 375345, 391590, 699390, 375345, 83790 };
+u_long kra90_off[] = { 0, 16146, 0, 374946, 391092, 698763, 374946, 83421 };
+#define kra92_off kra90_off
 
 struct mediamap {
 	u_long	id;		/* media ID */
@@ -196,9 +208,13 @@ struct mediamap {
 } kra_map[] = {
 	{ MSCP_MKDRIVE2('R', 'A', 60),		kra60_off },
 	{ MSCP_MKDRIVE2('R', 'A', 70),		kra70_off },
+	{ MSCP_MKDRIVE2('R', 'A', 71),		kra71_off },
+	{ MSCP_MKDRIVE2('R', 'A', 72),		kra72_off },
 	{ MSCP_MKDRIVE2('R', 'A', 80),		kra80_off },
 	{ MSCP_MKDRIVE2('R', 'A', 81),		kra81_off },
 	{ MSCP_MKDRIVE2('R', 'A', 82),		kra82_off },
+	{ MSCP_MKDRIVE2('R', 'A', 90),		kra90_off },
+	{ MSCP_MKDRIVE2('R', 'A', 92),		kra92_off },
 	0
 };
 

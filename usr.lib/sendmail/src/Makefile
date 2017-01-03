@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.5 (Berkeley) 7/7/88
+#	@(#)Makefile	5.6 (Berkeley) 9/20/88
 #
 SRCS=	alias.c arpadate.c clock.c collect.c conf.c convtime.c daemon.c \
 	deliver.c domain.c envelope.c err.c headers.c macro.c main.c \
@@ -25,7 +25,7 @@ OBJS=	alias.o arpadate.o clock.o collect.o conf.o convtime.o daemon.o \
 	parseaddr.o queue.o readcf.o recipient.o savemail.o srvrsmtp.o \
 	stab.o stats.o sysexits.o trace.o usersmtp.o util.o
 
-CFLAGS=	-O -I. -I../include -DVMUNIX -DMXDOMAIN
+CFLAGS=	-O -I. -I../include -DVMUNIX
 ASMSED=	../include/asm.sed.${MACHINE}
 
 GET=	sccs get
@@ -149,8 +149,9 @@ domain.o: /usr/include/sys/socket.h /usr/include/netinet/in.h
 domain.o: /usr/include/sysexits.h /usr/include/sys/param.h
 domain.o: /usr/include/sys/types.h /usr/include/signal.h
 domain.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-domain.o: /usr/include/machine/endian.h /usr/include/arpa/nameser.h
-domain.o: /usr/include/resolv.h /usr/include/netdb.h
+domain.o: /usr/include/machine/endian.h /usr/include/errno.h
+domain.o: /usr/include/arpa/nameser.h /usr/include/resolv.h
+domain.o: /usr/include/netdb.h
 envelope.o: envelope.c /usr/include/pwd.h /usr/include/sys/time.h
 envelope.o: /usr/include/time.h sendmail.h /usr/include/stdio.h
 envelope.o: /usr/include/ctype.h /usr/include/setjmp.h conf.h

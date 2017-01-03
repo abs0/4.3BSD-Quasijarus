@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	%W% (Berkeley) %G%
+ *	@(#)dmx.c	7.1 (Berkeley) 1/10/99
  */
 
 /*

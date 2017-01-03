@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)autoconf.c	7.17.1.1 (Berkeley) 12/24/98
+ *	@(#)autoconf.c	7.19 (Berkeley) 9/5/99
  */
 
 /*
@@ -516,6 +516,7 @@ probe_bi(p)
 		}
 
 		case BIDT_DWBUA:
+		case BIDT_KLESI:
 			if (numuba >= NUBA || /*XXX*/numuba > 2) {
 				printf("%d uba's", ++numuba);
 				goto unconfig;

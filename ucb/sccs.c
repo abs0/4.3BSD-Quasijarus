@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)sccs.c	5.6 (Berkeley) 6/29/88";
+static char sccsid[] = "@(#)sccs.c	5.8 (Berkeley) 9/7/99";
 #endif /* not lint */
 
 # include <stdio.h>
@@ -139,7 +139,7 @@ static char sccsid[] = "@(#)sccs.c	5.6 (Berkeley) 6/29/88";
 # endif NOT MYNAME
 
 # ifndef PROGPATH
-# define PROGPATH(name)	"/usr/local/name"	/* place to find binaries */
+# define PROGPATH(name)	"/usr/bin/name"	/* place to find binaries */
 # endif PROGPATH
 
 /****************  End of Configuration Information  ****************/
@@ -205,6 +205,7 @@ struct sccsprog SccsProg[] =
 	"edit",		CMACRO,	NO_SDOT,		"get -e",
 	"delget",	CMACRO,	NO_SDOT,		"delta:mysrp/get:ixbeskcl -t",
 	"deledit",	CMACRO,	NO_SDOT,		"delta:mysrp -n/get:ixbskcl -e -t -g",
+	"bump",		CMACRO,	NO_SDOT,		"get:rixbskcl -e -t/delta:mysr",
 	"fix",		FIX,	NO_SDOT,		NULL,
 	"clean",	CLEAN,	REALUSER|NO_SDOT,	(char *) CLEANC,
 	"info",		CLEAN,	REALUSER|NO_SDOT,	(char *) INFOC,

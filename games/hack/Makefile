@@ -34,7 +34,7 @@ HSOURCES = hack.h hack.mfndpos.h config.h\
 
 SOURCES = $(CSOURCES) $(HSOURCES)
 
-AUX = data help hh rumors hack.6 hack.sh
+AUX = data help hh rumors hack.sh
 
 DISTR = $(SOURCES) $(AUX) READ_ME Makefile date.h hack.onames.h
 

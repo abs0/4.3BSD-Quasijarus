@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)compress.c	@(#)compress.c	5.9 (Berkeley) 5/11/86";
+static char sccsid[] = "@(#)compress.c	@(#)compress.c	5.10 (Berkeley) 1/19/99";
 #endif not lint
 
 /* 
@@ -123,6 +123,7 @@ typedef long int	  count_int;
  typedef	unsigned char	char_type;
 #endif /* UCHAR */
 char_type magic_header[] = { "\037\235" };	/* 1F 9D */
+char_type magic_strong[] = { "\037\241" };	/* 1F A1 */
 
 /* Defines for third byte of header */
 #define BIT_MASK	0x1f
@@ -264,6 +265,7 @@ static char rcs_ident[] = "$Header: compress.c,v 4.0 85/07/30 12:50:00 joe Relea
 #ifdef notdef
 #include <sys/ioctl.h>
 #endif
+#include <zlib.h>
 
 #define ARGVAL() (*++(*argv) || (--argc && *++argv))
 
@@ -345,11 +347,11 @@ code_int getcode();
 
 Usage() {
 #ifdef DEBUG
-fprintf(stderr,"Usage: compress [-dDVfc] [-b maxbits] [file ...]\n");
+fprintf(stderr,"Usage: compress [-dDVfcs] [-b maxbits] [-l level] [file ...]\n");
 }
 int debug = 0;
 #else
-fprintf(stderr,"Usage: compress [-fvc] [-b maxbits] [file ...]\n");
+fprintf(stderr,"Usage: compress [-fvcs] [-b maxbits] [-l level] [file ...]\n");
 }
 #endif /* DEBUG */
 int nomagic = 0;	/* Use a 3-byte magic number header, unless old file */
@@ -383,6 +385,9 @@ int bgnd_flag;
 
 int do_decomp = 0;
 
+int strong_comp = 0;
+int strong_level = Z_DEFAULT_COMPRESSION;
+
 /*****************************************************************
  * TAG( main )
  *
@@ -395,7 +400,12 @@ int do_decomp = 0;
  *
  *      -c:         Write output on stdout, don't remove original.
  *
+ *      -s:         Use the strong compression algorithm and file format
+ *                  instead of the standard one.
+ *
  *      -b:         Parameter limits the max number of bits/code.
+ *
+ *      -l:         Parameters sets the compression level for -s.
  *
  *	-f:	    Forces output file to be generated, even if one already
  *		    exists, and even if no space is saved by compressing.
@@ -476,8 +486,11 @@ register int argc; char **argv;
      * -v => unquiet
      * -f => force overwrite of output file
      * -n => no header: useful to uncompress old files
+     * -s => strong_comp=1
      * -b maxbits => maxbits.  If -b is specified, then maxbits MUST be
      *	    given also.
+     * -l level => strong_level.  If -l is specified, then level MUST be
+     *      given also.
      * -c => cat all output to stdout
      * -C => generate output compatible with compress 2.0.
      * if a string is left, must be an input filename.
@@ -516,6 +529,9 @@ register int argc; char **argv;
 		    case 'C':
 			block_compress = 0;
 			break;
+		    case 's':
+			strong_comp = 1;
+			break;
 		    case 'b':
 			if (!ARGVAL()) {
 			    fprintf(stderr, "Missing maxbits\n");
@@ -523,6 +539,14 @@ register int argc; char **argv;
 			    exit(1);
 			}
 			maxbits = atoi(*argv);
+			goto nextarg;
+		    case 'l':
+			if (!ARGVAL()) {
+			    fprintf(stderr, "Missing level\n");
+			    Usage();
+			    exit(1);
+			}
+			strong_level = atoi(*argv);
 			goto nextarg;
 		    case 'c':
 			zcat_flg = 1;
@@ -547,7 +571,10 @@ register int argc; char **argv;
 
     if(maxbits < INIT_BITS) maxbits = INIT_BITS;
     if (maxbits > BITS) maxbits = BITS;
+    if (strong_level > Z_BEST_COMPRESSION) strong_level = Z_BEST_COMPRESSION;
     maxmaxcode = 1 << maxbits;
+    if (nomagic)
+	strong_comp = 0;
 
     if (*filelist != NULL) {
 	for (fileptr = filelist; *fileptr; fileptr++) {
@@ -566,10 +593,21 @@ register int argc; char **argv;
 		    perm_stat = 1;
 		    continue;
 		}
+#ifndef COMPATIBLE
 		/* Check the magic number */
 		if (nomagic == 0) {
-		    if ((getchar() != (magic_header[0] & 0xFF))
-		     || (getchar() != (magic_header[1] & 0xFF))) {
+		    char_type magic[2];
+
+		    magic[0] = getchar();
+		    magic[1] = getchar();
+		    if ((magic[0] == magic_strong[0])
+		     && (magic[1] == magic_strong[1])) {
+			strong_comp = 1;
+			goto strong_file;
+		    }
+		    strong_comp = 0;
+		    if ((magic[0] != magic_header[0])
+		     || (magic[1] != magic_header[1])) {
 			fprintf(stderr, "%s: not in compressed format\n",
 			    *fileptr);
 		    continue;
@@ -584,7 +622,9 @@ register int argc; char **argv;
 			*fileptr, maxbits, BITS);
 			continue;
 		    }
+strong_file: ;
 		}
+#endif
 		/* Generate output filename */
 		strcpy(ofname, *fileptr);
 		ofname[strlen(*fileptr) - 2] = '\0';  /* Strip off .Z */
@@ -690,10 +730,21 @@ register int argc; char **argv;
 		if(!quiet)
 			putc('\n', stderr);
 	} else {
+#ifndef COMPATIBLE
 	    /* Check the magic number */
 	    if (nomagic == 0) {
-		if ((getchar()!=(magic_header[0] & 0xFF))
-		 || (getchar()!=(magic_header[1] & 0xFF))) {
+		char_type magic[2];
+
+		magic[0] = getchar();
+		magic[1] = getchar();
+		if ((magic[0] == magic_strong[0])
+		 && (magic[1] == magic_strong[1])) {
+		    strong_comp = 1;
+		    goto strong_stdin;
+		}
+		strong_comp = 0;
+		if ((magic[0] != magic_header[0])
+		 || (magic[1] != magic_header[1])) {
 		    fprintf(stderr, "stdin: not in compressed format\n");
 		    exit(1);
 		}
@@ -708,7 +759,9 @@ register int argc; char **argv;
 			maxbits, BITS);
 			exit(1);
 		}
+strong_stdin: ;
 	    }
+#endif
 #ifndef DEBUG
 	    decompress();
 #else
@@ -756,6 +809,43 @@ compress() {
     register int hshift;
 
 #ifndef COMPATIBLE
+    if (strong_comp) {
+	compFile cf;
+	char buf[4096];
+	int len, err;
+
+	putchar(magic_strong[0]); putchar(magic_strong[1]);
+	if(ferror(stdout))
+		writeerr();
+	cf = compress_open(stdout, strong_level);
+	if (cf == NULL) {
+	    fprintf(stderr, "compress: not enough memory for strong compression state info\n");
+	    unlink(ofname);
+	    exit(1);
+	}
+	for (;;) {
+	    len = fread(buf, 1, sizeof(buf), stdin);
+	    if (len < 0) {
+		perror("compress: fread");
+		unlink(ofname);
+		exit(1);
+	    }
+	    if (len == 0)
+		break;
+	    if (compwrite(cf, buf, len) != len) {
+		fprintf(stderr, "compress: compwrite: %s\n", comperror(cf, &err));
+		unlink(ofname);
+		exit(1);
+	    }
+	}
+	if (compclose(cf) != Z_OK) {
+	    fprintf(stderr, "compress: compclose: %s\n", comperror(cf, &err));
+	    unlink(ofname);
+	    exit(1);
+	}
+	return;
+    }
+
     if (nomagic == 0) {
 	putchar(magic_header[0]); putchar(magic_header[1]);
 	putchar((char)(maxbits | block_compress));
@@ -1012,6 +1102,42 @@ decompress() {
     register char_type *stackp;
     register int finchar;
     register code_int code, oldcode, incode;
+
+#ifndef COMPATIBLE
+    if (strong_comp) {
+	compFile cf;
+	char buf[4096];
+	int len, err;
+
+	cf = uncompress_open(stdin);
+	if (cf == NULL) {
+	    fprintf(stderr, "uncompress: not enough memory for strong compression state info\n");
+	    unlink(ofname);
+	    exit(1);
+	}
+	for (;;) {
+	    len = compread(cf, buf, sizeof(buf));
+	    if (len < 0) {
+		fprintf(stderr, "uncompress: compread: %s\n", comperror(cf, &err));
+		unlink(ofname);
+		exit(1);
+	    }
+	    if (len == 0)
+		break;
+	    if (fwrite(buf, 1, len, stdout) != len) {
+		perror("compress: fwrite");
+		unlink(ofname);
+		exit(1);
+	    }
+	}
+	if (compclose(cf) != Z_OK) {
+	    fprintf(stderr, "compress: compclose: %s\n", comperror(cf, &err));
+	    unlink(ofname);
+	    exit(1);
+	}
+	return;
+    }
+#endif /* COMPATIBLE */
 
     /*
      * As above, initialize the first 256 entries in the table.
@@ -1480,7 +1606,7 @@ long int num, den;
 
 version()
 {
-	fprintf(stderr, "%s, Berkeley 5.9 5/11/86\n", rcs_ident);
+	fprintf(stderr, "%s, Berkeley 5.10 1/19/99\n", rcs_ident);
 	fprintf(stderr, "Options: ");
 #ifdef vax
 	fprintf(stderr, "vax, ");

@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.3	(Berkeley)	6/2/87
+#	@(#)Makefile	5.4	(Berkeley)	9/29/99
 #
 
 # If you want something other than Eastern United States time used on your
@@ -11,7 +11,7 @@
 # time zone files, or adding it to a time zone file).
 # Alternately, if you discover you've got the wrong time zone, you can just
 #	zic -l rightzone
-LOCALTIME=	US/Pacific
+LOCALTIME=	US/Central
 
 # If you want code inspired by certain emerging standards, add
 #	-DSTD_INSPIRED
@@ -47,8 +47,8 @@ depend: FRC
 	mkdep ${CFLAGS} ${SRCS}
 
 install: FRC
-	./zic ${DATA}
-	./zic -d ${DESTDIR}/etc/zoneinfo -l ${LOCALTIME} ${DATA}
+	install -s -o bin -g bin -m 755 zdump zic ${DESTDIR}/etc
+	${DESTDIR}/etc/zic -d ${DESTDIR}/etc/zoneinfo -l ${LOCALTIME} ${DATA}
 
 lint: FRC
 	lint ${CFLAGS} ${TZCSRCS}

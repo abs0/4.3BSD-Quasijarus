@@ -14,12 +14,12 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.2 (Berkeley) 7/9/88
+#	@(#)Makefile	5.3 (Berkeley) 6/2/99
 #
 MDIR=	/usr/man/cat8/vax
-SRCS=	arff.8 bad144.8 crash.8 drtest.8 format.8 installboot.8 rxformat.8 \
+SRCS=	arff.8 bad144.8 crash.8 drtest.8 format.8 rxformat.8 \
 	reboot.8
-OBJS=	arff.0 bad144.0 crash.0 drtest.0 format.0 installboot.0 rxformat.0 \
+OBJS=	arff.0 bad144.0 crash.0 drtest.0 format.0 rxformat.0 \
 	reboot.0
 LINKS=	flcopy.0
 

@@ -8,7 +8,7 @@
 # software without specific prior written permission. This software
 # is provided ``as is'' without express or implied warranty.
 #
-#	%W% (Berkeley) %G%
+#	@(#)Makefile	1.1 (Berkeley) 5/14/88
 #
 
 # The following is the telnet makefile for tn3270, using the shared telnet

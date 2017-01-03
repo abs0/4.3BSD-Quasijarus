@@ -23,7 +23,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)main.c	5.18 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)main.c	5.19 (Berkeley) 9/20/88";
 #endif /* not lint */
 
 #define	_DEFINE
@@ -331,7 +331,9 @@ main(argc, argv, envp)
 			tTsetup(tTdvect, sizeof tTdvect, "0-99.1");
 			tTflag(&p[2]);
 			setbuf(stdout, (char *) NULL);
+#ifdef NAMED_BIND
 			_res.options |= RES_DEBUG;
+#endif
 			break;
 #endif
 

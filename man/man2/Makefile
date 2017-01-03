@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.2 (Berkeley) 7/9/88
+#	@(#)Makefile	5.3 (Berkeley) 5/31/99
 #
 MDIR=	/usr/man/cat2
 SRCS=	accept.2 access.2 acct.2 adjtime.2 bind.2 brk.2 chdir.2 chmod.2 \
@@ -29,7 +29,7 @@ SRCS=	accept.2 access.2 acct.2 adjtime.2 bind.2 brk.2 chdir.2 chmod.2 \
 	setquota.2 setregid.2 setreuid.2 shutdown.2 sigblock.2 sigpause.2 \
 	sigreturn.2 sigsetmask.2 sigstack.2 sigvec.2 socket.2 socketpair.2 \
 	stat.2 swapon.2 symlink.2 sync.2 syscall.2 truncate.2 umask.2 \
-	unlink.2 utimes.2 vfork.2 vhangup.2 wait.2 write.2
+	unlink.2 utimes.2 vadvise.2 vfork.2 vhangup.2 wait.2 write.2
 OBJS=	accept.0 access.0 acct.0 adjtime.0 bind.0 brk.0 chdir.0 chmod.0 \
 	chown.0 chroot.0 close.0 connect.0 creat.0 dup.0 execve.0 exit.0 \
 	fcntl.0 flock.0 fork.0 fsync.0 getdtablesize.0 getgid.0 getgroups.0 \
@@ -42,7 +42,7 @@ OBJS=	accept.0 access.0 acct.0 adjtime.0 bind.0 brk.0 chdir.0 chmod.0 \
 	setquota.0 setregid.0 setreuid.0 shutdown.0 sigblock.0 sigpause.0 \
 	sigreturn.0 sigsetmask.0 sigstack.0 sigvec.0 socket.0 socketpair.0 \
 	stat.0 swapon.0 symlink.0 sync.0 syscall.0 truncate.0 umask.0 \
-	unlink.0 utimes.0 vfork.0 vhangup.0 wait.0 write.0
+	unlink.0 utimes.0 vadvise.0 vfork.0 vhangup.0 wait.0 write.0
 LINKS=	dup2.0 sbrk.0 fstat.0 lstat.0 readv.0 recvfrom.0 recvmsg.0 errno.0 \
 	sendmsg.0 sendto.0 wait3.0 fchmod.0 fchown.0 umount.0 writev.0 \
 	getegid.0 geteuid.0 getppid.0 ftruncate.0 sethostid.0 setitimer.0 \

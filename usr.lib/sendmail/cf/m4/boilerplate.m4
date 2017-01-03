@@ -1,14 +1,22 @@
 divert(10)
 #
-#  Sendmail
-#  Copyright (c) 1983  Eric P. Allman
-#  Berkeley, California
+# Copyright (c) 1983 Eric P. Allman
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
 #
-#  Copyright (c) 1983 Regents of the University of California.
-#  All rights reserved.  The Berkeley software License Agreement
-#  specifies the terms and conditions for redistribution.
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)boilerplate.m4	1.1 (Berkeley) 8/8/85
+#	@(#)boilerplate.m4	1.3 (Berkeley) 2/15/89
 #
 divert(0)
 ######################
@@ -25,9 +33,6 @@ Do.:%@!^=/[]
 Dq$g$?x ($x)$.
 # SMTP login message
 De$j Sendmail $v/$Z ready at $b
-
-# forwarding host -- redefine this if you can't talk to the relay directly #
-DF$R
 
 ###############
 #   Options   #
@@ -92,8 +97,6 @@ Pjunk=-100
 Troot
 Tdaemon
 Tuucp
-Teric
-Tnetwork
 
 #########################
 #   Format of headers   #

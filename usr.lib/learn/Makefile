@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	4.4	(Berkeley)	10/3/87
+#	@(#)Makefile	4.5	(Berkeley)	10/2/99
 #
 LESSONS=C editor eqn files macros morefiles
 FILES=	Linfo Xinfo
@@ -16,7 +16,7 @@ install: FRC
 	-[ -d ${DESTDIR}/usr/lib/learn/bin ] || mkdir ${DESTDIR}/usr/lib/learn/bin
 	chmod 755 ${DESTDIR}/usr/lib/learn ${DESTDIR}/usr/lib/learn/log \
 		${DESTDIR}/usr/lib/learn/bin
-	chown root.staff ${DESTDIR}/usr/lib/learn ${DESTDIR}/usr/lib/learn/log \
+	chown root.bin ${DESTDIR}/usr/lib/learn ${DESTDIR}/usr/lib/learn/log \
 		${DESTDIR}/usr/lib/learn/bin
 	install -c -o bin -g bin -m 644 Linfo ${DESTDIR}/usr/lib/learn/Linfo
 	install -c -o bin -g bin -m 644 Xinfo ${DESTDIR}/usr/lib/learn/Xinfo

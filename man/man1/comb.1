@@ -1,0 +1,165 @@
+.\"	@(#)comb.1	6.1 (Berkeley) 5/14/99
+.tr ~
+.tr $%
+.if n .ds D " -- 
+.if t .ds D \(em
+.tr @|
+.de SP
+.if n .ul
+[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de DT
+.hc ^
+^...
+.hc
+..
+.de AR
+.s1
+.lp +10 5
+\fB\(em\\$1\\fR	\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+..
+.de FI
+.s1
+.lp +30 30
+\\$1	\\$2
+.i0
+..
+.ds F)  \fB\s-2FILES\s+2\fR
+.de I
+.if n .ul
+\fI\\$1\fR\c
+.if n .ul 0
+\\$2\\$3\\$4\\$5\\$6\\$7\\$8\\$9
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.th COMB 1 5/14/99
+.sh NAME
+comb \*- combine SCCS deltas
+.sh SYNOPSIS
+.bd comb
+.SF o
+.SF s
+.SP p sid ]
+.SP c list]
+name
+.DT
+.sh DESCRIPTION
+.ad
+.it Comb
+generates a shell procedure (see
+.it sh\c
+(1))
+which, when run, will reconstruct the given SCCS files.
+The reconstructed files will, hopefully, be smaller than the original
+files.
+The arguments may be specified in any order,
+but all keyletter arguments apply to all named SCCS files.
+If a directory is named,
+.it comb
+behaves as though each file in the directory were
+specified as a named file,
+except that non-SCCS files
+(last component of the pathname does not begin with ``s\fB.\fP''),
+and unreadable files
+are silently ignored.
+If a name of ``\(em'' is given, the standard input is read;
+each line of the standard input is taken to be the name of an SCCS file
+to be processed.
+Again, non-SCCS files, and unreadable files are silently ignored.
+.s1
+The generated shell procedure is written on the standard output.
+.s1
+The keyletter
+arguments are as follows.
+Each is explained as though only one named file is to be processed,
+but the effects of any keyletter argument apply independently
+to each named file.
+.AR p The
+SCCS identification string (SID) of the oldest delta to be preserved.
+All older deltas are discarded in the reconstructed file.
+.AR c A
+list
+(see
+.it get\c
+(1)
+for the syntax of a list)
+of deltas to be preserved.
+All other deltas are discarded.
+.AR o This
+argument causes the reconstructed file to be accessed at
+the release of the delta to be created for each
+``get \(eme'' generated.
+Without this argument, the reconstructed file is accessed at
+the most recent ancestor for each ``get \(eme'' generated.
+Use of the
+.bd o
+keyletter may decrease the size of the reconstructed SCCS file.
+It may also alter the shape of the delta tree of the original file.
+.AR s This
+argument causes
+.it comb
+to generate a shell procedure which, when run,
+will
+produce a report giving,
+for each file,
+the file name, size after combining, original size, and
+percentage change
+computed by:
+.br
+.ce 1
+\%100~*~(original~\(em~combined)~/~original
+.br
+(Sizes are in blocks.)
+We recommend that before any SCCS files are actually combined
+one should use this option to determine exactly how much space
+is saved by the combining process.
+.i0
+.s1
+If no keyletter arguments are specified,
+.it comb
+will preserve only leaf deltas and the minimal number of ancestors
+needed to preserve the tree.
+.sh FILES
+.na
+.lp +14 14
+s.COMB	The name of the reconstructed SCCS file.
+.lp +14 14
+comb?????	Temporary.
+.ad
+.lp +0 0
+.sh "SEE ALSO"
+.na
+get(1),
+delta(1),
+admin(1),
+prt(1),
+help(1),
+sccsfile(5),
+.it "SCCS/PWB User's Manual"
+by L. E. Bonanni and A. L. Glasser.
+.ad
+.sh DIAGNOSTICS
+Use
+.it help\c
+(1)
+for explanations.
+.sh BUGS
+.it Comb
+may rearrange the shape of the tree of deltas.
+It may not save any space;
+in fact, it is possible for the reconstructed file to
+actually be larger than the original.
+.tr ~~
+.tr $$
+.tr @@

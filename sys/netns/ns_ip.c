@@ -41,7 +41,9 @@
 #include "../netinet/ip.h"
 #include "../netinet/ip_var.h"
 
-#include "../machine/mtpr.h"
+#ifdef vax
+#include "../vax/mtpr.h"
+#endif
 
 #include "../netns/ns.h"
 #include "../netns/ns_if.h"

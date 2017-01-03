@@ -1,13 +1,18 @@
 divert(10)dnl
 #
-# cogsci UUCP/TCP configuration file
+# cogsci configuration file
 #
-# @(#)cogsci.mc	1.5 (Berkeley) 3/31/88
+# @(#)cogsci.mc	1.6 (Berkeley) 1/3/89
 #
-define(INTERNET_ALIASES, Cwcogsci ucbcogsci)
+define(DOMAIN, `DDBerkeley.EDU')
 define(UUCP_NAME, DUcogsci)
 define(UUCP_ALIASES, CUcogsci)
-define(UUCP_HOSTS_FILE, ../machdep/uucp.cogsci.m4)
-define(EXTERNAL_VERSION, ``#'	`@(#)cogsci.mc	1.5' (Berkeley) `3/31/88'')
+define(UUCP_HOSTS_FILE, ../sitedep/uucp.cogsci.m4)
+define(INTERNET_RELAY, `DAucbvax.Berkeley.EDU')
+define(UUCP_RELAY, DRucbvax.Berkeley.EDU)
+define(BITNET_RELAY, `DBjade.Berkeley.EDU')
+define(CSNET_RELAY, `DCrelay.cs.net')
+define(ARPAKLUDGE, `1')
+define(EXTERNAL_VERSION, ``#'	`@(#)cogsci.mc	1.6' (Berkeley) `1/3/89'')
 divert(0)dnl
-include(ucbproto.mc)
+include(proto.mc)

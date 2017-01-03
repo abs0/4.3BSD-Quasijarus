@@ -1,10 +1,9 @@
-/*-
- * Copyright (c) 1982, 1986 The Regents of the University of California.
- * All rights reserved.
+/*
+ * Copyright (c) 1982, 1986 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
  *
- * %sccs.include.redist.c%
- *
- *	@(#)psreg.h	7.3 (Berkeley) 5/9/91
+ *	@(#)psreg.h	7.2 (Berkeley) 12/22/87
  */
 
 

@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)ftpd.c	5.12 (Berkeley) 6/18/88";
+static char sccsid[] = "@(#)ftpd.c	5.13 (Berkeley) 7/13/99";
 #endif /* not lint */
 
 /*
@@ -57,10 +57,11 @@ static char sccsid[] = "@(#)ftpd.c	5.12 (Berkeley) 6/18/88";
  */
 #define	FTPUSERS	"/etc/ftpusers"
 
+char	version[] = "Version 5.13 July 13, 1999 22:47:46";
+
 extern	int errno;
 extern	char *sys_errlist[];
 extern	char *crypt();
-extern	char version[];
 extern	char *home;		/* pointer to home directory for glob */
 extern	FILE *popen(), *fopen(), *freopen();
 extern	int  pclose(), fclose();

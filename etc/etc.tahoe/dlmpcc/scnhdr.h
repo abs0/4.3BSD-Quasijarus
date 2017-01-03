@@ -1,4 +1,4 @@
-/*	scnhdr.h	1.1	87/11/15	*/
+/*	scnhdr.h	5.1	87/11/15	*/
 /*	@(#)scnhdr.h	2.2 12/15/82	*/
 
 struct scnhdr {

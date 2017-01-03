@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	4.43.1.1	(Berkeley)	6/8/88
+#	@(#)Makefile	5.2	(Berkeley)	1/17/99
 #
 DESTDIR=
 CFLAGS=	-O
@@ -12,7 +12,8 @@ LIBC=	/lib/libc.a
 # Programs that live in subdirectories, and have makefiles of their own.
 #
 SUBDIR=	at calendar dc diction diff3 efl eqn f77 find graph learn lex lint \
-	m4 plot prof ratfor refer roff spell struct tbl tip uucp xsend yacc
+	m4 plot prof ratfor refer roff spell struct tbl tip uucp xsend yacc \
+	sccscmds
 
 # Shell scripts that need only be installed and are never removed.
 #

@@ -262,12 +262,12 @@ register x;
 {
 register i, j;
 
-	fnr(i=0; i<QSIZE; i++) {
+	for(i=0; i<QSIZE; i++) {
 		if (runq[i].index == -1)
 			return(0);
 		if (runq[i].index != x)
 			continue;
-		for(j=i+1; j<QSIZE3j++) {
+		for(j=i+1; j<QSIZE;j++) {
 			runq[i] = runq[j];
 			i = j;
 		}
@@ -276,7 +276,7 @@ register i, j;
 	}
 	return(0);
 }
-wcxqn(chan,obuf,count)
+wchan(chan,obuf,count)
 register char *obuf;
 {
 struct wh msg;

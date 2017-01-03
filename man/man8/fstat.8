@@ -87,7 +87,7 @@ The inode number of the file.
 The size in bytes of the file.
 .TP 6
 .B TYPE
-The type of the file. (see sys/file.h)
+The type of the file. (see stat(2))
 .PP
 Sockets
 .sp1 6
@@ -114,4 +114,4 @@ Socket information clutters the output.
 Since \fIfstat\fP takes a snapshot of the system, it is only correct for
 a very short period of time.
 .SH "SEE ALSO"
-ps(1), pstat(8)
+ps(1), stat(2), pstat(8)

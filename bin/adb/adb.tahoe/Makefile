@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	1.3	(Berkeley)	6/2/87
+#	@(#)Makefile	5.3	(Berkeley)	6/2/87
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
@@ -44,8 +44,7 @@ FRC:
 # DO NOT PUT ANYTHING AFTER THIS LINE, IT WILL GO AWAY.
 
 access.o: access.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-access.o: /usr/include/signal.h /usr/include/machine/trap.h
-access.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+access.o: /usr/include/signal.h /usr/include/machine/machparam.h
 access.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 access.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 access.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -57,8 +56,7 @@ access.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 access.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 access.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 command.o: command.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-command.o: /usr/include/signal.h /usr/include/machine/trap.h
-command.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+command.o: /usr/include/signal.h /usr/include/machine/machparam.h
 command.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 command.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 command.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -70,8 +68,7 @@ command.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 command.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 command.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 expr.o: expr.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-expr.o: /usr/include/signal.h /usr/include/machine/trap.h
-expr.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+expr.o: /usr/include/signal.h /usr/include/machine/machparam.h
 expr.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 expr.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 expr.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -82,8 +79,7 @@ expr.o: mode.h machine.h /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 expr.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 expr.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 format.o: format.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-format.o: /usr/include/signal.h /usr/include/machine/trap.h
-format.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+format.o: /usr/include/signal.h /usr/include/machine/machparam.h
 format.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 format.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 format.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -95,8 +91,7 @@ format.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 format.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 format.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 input.o: input.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-input.o: /usr/include/signal.h /usr/include/machine/trap.h
-input.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+input.o: /usr/include/signal.h /usr/include/machine/machparam.h
 input.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 input.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 input.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -108,8 +103,7 @@ input.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 input.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 input.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 main.o: main.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-main.o: /usr/include/signal.h /usr/include/machine/trap.h
-main.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+main.o: /usr/include/signal.h /usr/include/machine/machparam.h
 main.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 main.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 main.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -124,8 +118,7 @@ message.o: /usr/include/sys/vmparam.h /usr/include/machine/vmparam.h
 message.o: /usr/include/sys/vmmac.h /usr/include/sys/vmmeter.h
 message.o: /usr/include/sys/vmsystm.h
 opset.o: opset.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-opset.o: /usr/include/signal.h /usr/include/machine/trap.h
-opset.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+opset.o: /usr/include/signal.h /usr/include/machine/machparam.h
 opset.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 opset.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 opset.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -137,8 +130,7 @@ opset.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 opset.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 opset.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h optab.h
 optab.o: optab.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-optab.o: /usr/include/signal.h /usr/include/machine/trap.h
-optab.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+optab.o: /usr/include/signal.h /usr/include/machine/machparam.h
 optab.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 optab.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 optab.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -151,8 +143,7 @@ optab.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 optab.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h optab.h
 optab.o: instrs
 output.o: output.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-output.o: /usr/include/signal.h /usr/include/machine/trap.h
-output.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+output.o: /usr/include/signal.h /usr/include/machine/machparam.h
 output.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 output.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 output.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -164,8 +155,7 @@ output.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 output.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 output.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 pcs.o: pcs.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-pcs.o: /usr/include/signal.h /usr/include/machine/trap.h
-pcs.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+pcs.o: /usr/include/signal.h /usr/include/machine/machparam.h
 pcs.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 pcs.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 pcs.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -176,8 +166,7 @@ pcs.o: mode.h machine.h /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 pcs.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 pcs.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 print.o: print.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-print.o: /usr/include/signal.h /usr/include/machine/trap.h
-print.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+print.o: /usr/include/signal.h /usr/include/machine/machparam.h
 print.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 print.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 print.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -189,8 +178,7 @@ print.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 print.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 print.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 runpcs.o: runpcs.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-runpcs.o: /usr/include/signal.h /usr/include/machine/trap.h
-runpcs.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+runpcs.o: /usr/include/signal.h /usr/include/machine/machparam.h
 runpcs.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 runpcs.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 runpcs.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -202,8 +190,7 @@ runpcs.o: /usr/include/sys/vm.h /usr/include/sys/vmparam.h
 runpcs.o: /usr/include/machine/vmparam.h /usr/include/sys/vmmac.h
 runpcs.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 setup.o: setup.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-setup.o: /usr/include/signal.h /usr/include/machine/trap.h
-setup.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+setup.o: /usr/include/signal.h /usr/include/machine/machparam.h
 setup.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 setup.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 setup.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h
@@ -217,8 +204,7 @@ setup.o: /usr/include/sys/vmmeter.h /usr/include/sys/vmsystm.h head.h
 setup.o: /usr/include/frame.h /usr/include/ctype.h /usr/include/sys/stat.h
 setup.o: /usr/include/sys/file.h /usr/include/machine/rpb.h
 sym.o: sym.c defs.h /usr/include/sys/param.h /usr/include/sys/types.h
-sym.o: /usr/include/signal.h /usr/include/machine/trap.h
-sym.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+sym.o: /usr/include/signal.h /usr/include/machine/machparam.h
 sym.o: /usr/include/sys/dir.h /usr/include/machine/psl.h
 sym.o: /usr/include/machine/pte.h /usr/include/sys/user.h
 sym.o: /usr/include/machine/pcb.h /usr/include/sys/dmap.h

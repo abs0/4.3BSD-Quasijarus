@@ -11,7 +11,7 @@
  */
 
 #if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)res_query.c	5.4 (Berkeley) 4/21/88";
+static char sccsid[] = "@(#)res_query.c	5.5 (Berkeley) 9/28/99";
 #endif /* LIBC_SCCS and not lint */
 
 #include <sys/param.h>
@@ -171,7 +171,7 @@ res_search(name, class, type, answer, anslen)
 	 * If the search/default failed, try the name as fully-qualified,
 	 * but only if it contained at least one dot (even trailing).
 	 */
-	if (n)
+	if (n || !strcasecmp(name, "localhost"))
 		return (res_querydomain(name, (char *)NULL, class, type,
 		    answer, anslen));
 	if (got_nodata)

@@ -1,16 +1,15 @@
 #!/bin/sh -
 #
-# Copyright (c) 1990 The Regents of the University of California.
-# All rights reserved.
+# 4.3BSD-Quasijarus release-making script.
 #
-# %sccs.include.redist.sh%
+# This file is freely redistributable.
 #
-#	@(#)maketape	4.34 (Berkeley) 12/26/98
+#	@(#)maketape	4.35 (Berkeley) 10/9/99
 #
 
 # maketape [ 6250 | 1600 [ tapename ] ]
-miniroot=ra1d
-tape=/dev/nrmt8
+miniroot=ra0d
+tape=/dev/rmt12
 type=6250
 block=20
 tflag=cbf
@@ -32,19 +31,19 @@ cd /nbsd/sys/vaxdist/tp
 tp cmf /tmp/tape.$$ boot copy format
 cd /nbsd/sys/mdec
 echo "Build 1st level boot block file"
-cat tsboot htboot tmboot mtboot utboot noboot noboot /tmp/tape.$$ | \
-        dd of=${tape} obs=512 conv=sync
+cat tmscpboot tsboot htboot tmboot mtboot utboot /tmp/tape.$$ | \
+	dd of=${tape} obs=512 conv=sync
 
 echo "Add image of mini-root file system"
 eval dd if=/dev/r${miniroot} count=308 bs=20b conv=sync of=$tape
 
 echo "Add full dump of real file system"
-/etc/dump 0f ${tape} /nbsd
+/etc/dump 0f ${tape} /dev/rra1a
 
 echo "Add tar image of /usr"
 cd /nbsd/usr
-tar ${tflag} ${block} ${tape} MAKEHOSTS adm bin dict doc games hosts \
-	include lib local man mdec msgs new preserve pub spool tmp ucb
+tar ${tflag} ${block} ${tape} MAKEHOSTS adm bin dict games hosts \
+	include lib local man mdec msgs new old preserve pub spool tmp ucb
 
 if [ ${type} != '6250' ]
 then
@@ -64,7 +63,10 @@ cd /nbsd/usr/src/sys
 tar ${tflag} ${block} ${tape} .
 
 echo "Add user source code"
-FILES="Makefile bin cci etc games include lib local man old \
-	ucb usr.bin usr.sbin"
+FILES="Makefile bin cci doc etc games include lib local man old \
+	ucb undoc usr.bin usr.lib"
 cd /nbsd/usr/src
 tar ${tflag} ${block} ${tape} ${FILES}
+
+echo "Done, rewinding tape"
+mt -t ${tape} rew &

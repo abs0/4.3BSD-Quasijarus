@@ -1,5 +1,3 @@
-#	@(#)services	1.16 (Berkeley) 86/04/20
-#
 # Network services, Internet style
 #
 echo		7/tcp

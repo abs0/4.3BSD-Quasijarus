@@ -16,14 +16,6 @@
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-#ifndef lint
-#ifdef DBM
-static char sccsid[] = "@(#)alias.c	5.16 (Berkeley) 7/14/88 (with DBM)";
-#else
-static char sccsid[] = "@(#)alias.c	5.16 (Berkeley) 7/14/88 (without DBM)";
-#endif
-#endif /* not lint */
-
 # include <pwd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -31,6 +23,14 @@ static char sccsid[] = "@(#)alias.c	5.16 (Berkeley) 7/14/88 (without DBM)";
 # include <errno.h>
 # include "sendmail.h"
 # include <sys/file.h>
+
+#ifndef lint
+#ifdef DBM
+static char sccsid[] = "@(#)alias.c	5.17 (Berkeley) 10/1/99 (with DBM)";
+#else
+static char sccsid[] = "@(#)alias.c	5.17 (Berkeley) 10/1/99 (without DBM)";
+#endif
+#endif /* not lint */
 
 /*
 **  ALIAS -- Compute aliases.

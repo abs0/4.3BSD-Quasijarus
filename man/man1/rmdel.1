@@ -1,0 +1,126 @@
+.\"	@(#)rmdel.1	6.1 (Berkeley) 5/14/99
+.tr ~
+.if n .ds D " -- 
+.if t .ds D _
+.tr @|
+.de SP
+.if n .ul
+[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de DT
+.hc ^
+^...
+.hc
+..
+.de AR
+.s1
+.lp +10 5
+\fB\(em\\$1\\fR	\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+..
+.de FI
+.s1
+.lp +30 30
+\\$1	\\$2
+.i0
+..
+.ds F)  \fB\s-2FILES\s+2\fR
+.de I
+.if n .ul
+\fI\\$1\fR\c
+.if n .ul 0
+\\$2\\$3\\$4\\$5\\$6\\$7\\$8\\$9
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.th RMDEL 1 5/14/99
+.sh NAME
+rmdel \*- remove a delta from an SCCS file
+.sh SYNOPSIS
+.bd rmdel
+.if n .ul
+\fB\(emr\fR\c
+.if n .ul 0
+SID
+name
+.DT
+.sh DESCRIPTION
+.it Rmdel
+removes the delta specified by the SID from each
+named SCCS file.
+The delta to be removed must be the newest (most recent) delta
+in its branch in the delta chain of each
+named SCCS file.
+In addition,
+the SID specified must
+.it not
+be that of a version being edited for the purpose of
+making a delta (i. e.,
+if a
+.it p-file
+(see
+.it get\c
+(1)) exists for the named SCCS file,
+the SID specified must
+.it not
+appear in any entry of the
+.it p-file\c
+).
+.s1
+If a directory is named,
+.it rmdel
+behaves as though each file in the directory were
+specified as a named file,
+except that non-SCCS files
+(last component of the pathname does not begin with ``s\fB.\fP''),
+and unreadable files,
+are silently ignored.
+If a name of ``\(em'' is given, the standard input is read;
+each line of the standard input is taken to be the name of an SCCS file
+to be processed.
+Again, non-SCCS files, and unreadable files, are silently ignored.
+.s3
+The exact permissions necessary to remove a delta
+are documented in the
+.it "SCCS/PWB User's Manual."
+Simply stated,
+they are either (1)
+if you make a delta you can remove it;
+or (2)
+if you own the file and directory you can remove a delta.
+.sh FILES
+.lp +10 10
+x-file	(see
+.it delta\c
+(1))
+.lp +10 10
+z-file	(see
+.it delta\c
+(1))
+.i0
+.sh "SEE ALSO"
+get(1),
+delta(1),
+prt(1),
+help(1),
+sccsfile(5)
+.br
+.it "SCCS/PWB User's Manual"
+by L. E. Bonanni and A. L. Glasser
+.br
+.sh DIAGNOSTICS
+Use
+.it help\c
+(1)
+for explanations.
+.tr ~~
+.tr @@

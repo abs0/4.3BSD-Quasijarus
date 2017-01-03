@@ -42,11 +42,6 @@ LIBS= -lm -lcurses -ltermlib
 DEST =		/usr/games/lib/phantasia
 DESTR =		/usr/games
 
-MDIR=	/usr/man/cat6
-
-.SUFFIXES: .6 .0
-
-
 # The following are program constants which are implementation dependent.
 #
 # DEST is passed on.  Note that there is no closing quote here.
@@ -77,7 +72,7 @@ OBJS=	main.o fight.o io.o interplayer.o gamesupport.o misc.o phantglobs.o
 HFILES =	phantdefs.h phantstruct.h macros.h include.h
 LIBC=	/lib/libc.a
 
-all:		phantasia setup phantasia.0
+all:		phantasia setup
 
 # Make the game.
 phantasia:	${OBJS} ${LIBC}
@@ -91,20 +86,15 @@ setup:		phantglobs.o setup.o monsters.asc ${LIBC}
 
 setup.o: ${HFILES}
 
-# Make documentation.
-# The flags below on tbl and nroff are to make a line printable version.
-.6.0:
-	tbl -TX phantasia.6 | /usr/man/manroff > phantasia.0
-
-# Install game and documentation.  Initialize.
+# Install game.  Initialize.
 install: FRC
 	-[ -d ${DESTDIR}/usr/games/lib/phantasia ] || mkdir ${DESTDIR}/usr/games/lib/phantasia
 	chmod 700 /usr/games/lib/phantasia
 	chown games.bin /usr/games/lib/phantasia
 	install -s -o games -g bin -m 4700 phantasia ${DESTDIR}/usr/games/hide
 	(cd ${DESTDIR}/usr/games; rm -f phantasia; ln -s dm phantasia; chown games.bin phantasia)
-	install -c -o games -g bin -m 400 phantasia.0 ${DESTDIR}/usr/games/lib/phantasia/phant.help
-	install -c -o bin -g bin -m 444 phantasia.0 ${DESTDIR}${MDIR}
+	rm -f ${DESTDIR}/usr/games/lib/phantasia/phant.help
+	ln -s /usr/man/cat6/phantasia.0 ${DESTDIR}/usr/games/lib/phantasia/phant.help
 	./setup
 	chown games.bin /usr/games/lib/phantasia/*
 
@@ -125,7 +115,7 @@ convert:	convert.c oldplayer.h phantstruct.h
 
 # Clean up directory after installation.
 clean:
-		${RM} -f *.o core phantasia phant.help phantasia.0 setup
+		${RM} -f *.o core phantasia phant.help setup
 
 depend: FRC
 	mkdep ${CFLAGS} ${SRCS}

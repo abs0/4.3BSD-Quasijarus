@@ -26,7 +26,7 @@
 struct	rusage {
 	struct timeval ru_utime;	/* user time used */
 	struct timeval ru_stime;	/* system time used */
-	long	ru_maxrss;
+	long	ru_maxrss;		/* max resident set size */
 #define	ru_first	ru_ixrss
 	long	ru_ixrss;		/* integral shared memory size */
 	long	ru_idrss;		/* integral unshared data " */

@@ -8,7 +8,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)input.c	1.2 (Berkeley) 10/22/87";
+static char sccsid[] = "@(#)input.c	5.2 (Berkeley) 10/22/87";
 #endif not lint
 
 #include "include.h"

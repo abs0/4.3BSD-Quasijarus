@@ -1,11 +1,3 @@
-/*
- * Copyright (c) 1980 Regents of the University of California.
- * All rights reserved.  The Berkeley software License Agreement
- * specifies the terms and conditions for redistribution.
- *
- *	@(#)tokdefs.h	5.1 (Berkeley) 6/7/85
- */
-
 #define SEOS 1
 #define SCOMMENT 2
 #define SLABEL 3

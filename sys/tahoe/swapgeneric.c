@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	%W% (Berkeley) %G%
+ *	@(#)swapgeneric.c	7.2 (Berkeley) 6/7/88
  */
 
 #include "param.h"
@@ -35,7 +35,6 @@ long	dumplo;
 int	dmmin, dmmax, dmtext;
 
 extern	struct vba_driver vddriver;
-extern	struct vba_driver hdcdriver;
 
 struct	genericconf {
 	caddr_t	gc_driver;
@@ -43,7 +42,6 @@ struct	genericconf {
 	dev_t	gc_root;
 } genericconf[] = {
 	{ (caddr_t)&vddriver,	"dk",	makedev(1, 0),	},
-	{ (caddr_t)&hdcdriver,	"hd",	makedev(2, 0),	},
 	{ 0 },
 };
 
@@ -51,7 +49,7 @@ setconf()
 {
 	register struct vba_device *ui;
 	register struct genericconf *gc;
-	register char *cp, *gp;
+	register char *cp;
 	int unit, swaponroot = 0;
 
 	if (rootdev != NODEV)
@@ -63,13 +61,10 @@ retry:
 		printf("root device? ");
 		gets(name);
 		for (gc = genericconf; gc->gc_driver; gc++)
-			for (cp = name, gp = gc->gc_name; *cp == *gp; cp++)
-				if (!*++gp)
-					goto gotit;
-		printf("use");
-		for (gc = genericconf; gc->gc_driver; gc++)
-			printf(" %s%%d", gc->gc_name);
-		printf("\n");
+			if (gc->gc_name[0] == name[0] &&
+			    gc->gc_name[1] == name[1])
+				goto gotit;
+		printf("use dk%%d\n");
 		goto retry;
 gotit:
 		cp = name + 2;
@@ -107,44 +102,39 @@ doswap:
 		rootdev = dumpdev;
 }
 
-gets(buf)
-	char *buf;
+gets(cp)
+	char *cp;
 {
-	register int c;
 	register char *lp;
+	register c;
 
-	for (lp = buf;;) {
+	lp = cp;
+	for (;;) {
 		printf("%c", c = cngetc()&0177);
 		switch (c) {
 		case '\n':
 		case '\r':
-			*lp = '\0';
+			*lp++ = '\0';
 			return;
 		case '\b':
 		case '\177':
-			if (lp > buf) {
-				--lp;
-				printf("\b \b");
+			if (lp > cp) {
+				printf(" \b");
+				lp--;
 			}
-			break;
+			continue;
 		case '#':
-			if (lp > buf)
-				--lp;
-			break;
-		case 'r'&037:
-			*lp = 0;
-			printf("\n");
-			printf("%s", buf);
-			break;
+			lp--;
+			if (lp < cp)
+				lp = cp;
+			continue;
 		case '@':
 		case 'u'&037:
-		case 'w'&037:
-			lp = buf;
+			lp = cp;
 			printf("%c", '\n');
-			break;
+			continue;
 		default:
 			*lp++ = c;
 		}
 	}
-	/* NOTREACHED */
 }

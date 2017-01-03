@@ -3,14 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)locore.s	7.6 (Berkeley) 5/1/89
- *	9/8/89 (bostic) -- added delay in wbadaddr from 7.10
- *	This had already been patched, but I have no idea by whom; the
- *	following lines had been added:
- *
- *	#if NVX > 0
- *		ADDMAP( NVX * 16384/NBPG )
- *	#endif
+ *	@(#)locore.s	7.2 (Berkeley) 7/6/88
  */
 
 #include "../tahoe/mtpr.h"
@@ -610,7 +603,7 @@ _/**/mname:	.globl	_/**/mname;		\
 	SYSMAP(mmap	,vmmap		,1		)
 	SYSMAP(alignmap	,alignutl	,1		)	/* XXX */
 	SYSMAP(msgbufmap,msgbuf		,MSGBUFPTECNT	)
-	SYSMAP(Mbmap	,mbutl		,NMBCLUSTERS*MCLBYTES/NBPG+CLSIZE )
+	SYSMAP(Mbmap	,mbutl		,NMBCLUSTERS*CLSIZE+CLSIZE )
 	SYSMAP(kmempt	,kmembase	,300*CLSIZE 	)
 #ifdef	GPROF
 	SYSMAP(profmap	,profbase	,600*CLSIZE	)
@@ -619,18 +612,10 @@ _/**/mname:	.globl	_/**/mname;		\
 	 * Enlarge kmempt as needed for bounce buffers allocated
 	 * by tahoe controllers.
 	 */
-#include "hd.h"
-#if NHD > 0
-				ADDMAP(	NHDC*(MAXPHYS/NBPG+CLSIZE) )
-#endif
 #include "dk.h"
-#if NDK > 0
 				ADDMAP(	NVD*(MAXPHYS/NBPG+CLSIZE) )
-#endif
 #include "yc.h"
-#if NYC > 0
 				ADDMAP(	NCY*(MAXPHYS/NBPG+CLSIZE) )
-#endif
 #include "mp.h"
 				ADDMAP(	NMP*14		)
 	SYSMAP(ekmempt	,kmemlimit	,0		)
@@ -639,28 +624,12 @@ _/**/mname:	.globl	_/**/mname;		\
 	SYSMAP(VMEMmap	,vmem		,VBIOSIZE 	)
 	SYSMAP(VMEMmap1	,vmem1		,0		)
 #include "ace.h"
-#if NACE > 0
 				ADDMAP(	NACE*32	)
-#endif
-#if NHD > 0
-				ADDMAP( NHDC )
-#endif
-#include "vx.h"
-#if NVX > 0
-				ADDMAP( NVX * 16384/NBPG )
-#endif
 	SYSMAP(VMEMend	,vmemend	,0		)
 
 	SYSMAP(VBmap	,vbbase		,CLSIZE		)
-#if NHD > 0
-				ADDMAP(	NHDC*(MAXPHYS/NBPG+CLSIZE) )
-#endif
-#if NDK > 0
 				ADDMAP(	NVD*(MAXPHYS/NBPG+CLSIZE) )
-#endif
-#if NYC > 0
 				ADDMAP(	NCY*(MAXPHYS/NBPG+CLSIZE) )
-#endif
 				ADDMAP(	NMP*14		)
 	SYSMAP(eVBmap	,vbend		,0		)
 
@@ -858,33 +827,19 @@ sigcode:
  */
 	.align	2
 _icode:
-	/* try /sbin/init */
-	pushab	b`argv1-l0(pc)
-l0:	pushab	b`init1-l1(pc)
+	pushab	b`argv-l0(pc)
+l0:	pushab	b`init-l1(pc)
 l1:	pushl	$2
 	movab	(sp),fp
 	kcall	$SYS_execv
-	/* try /etc/init */
-	pushab	b`argv2-l2(pc)
-l2:	pushab	b`init2-l3(pc)
-l3:	pushl	$2
-	movab	(sp),fp
-	kcall	$SYS_execv
-	/* give up */
 	pushl	r0
-	pushl	$1
-	movab	(sp),fp
 	kcall	$SYS_exit
 
-init1:	.asciz	"/sbin/init"
-init2:	.asciz	"/etc/init"
+init:	.asciz	"/etc/init"
 	.align	2
 _initflags:
 	.long	0
-argv1:	.long	init1+6-_icode
-	.long	_initflags-_icode
-	.long	0
-argv2:	.long	init2+5-_icode
+argv:	.long	init+5-_icode
 	.long	_initflags-_icode
 	.long	0
 _szicode:
@@ -912,30 +867,6 @@ ENTRY(badaddr, R3|R4)
 1:	bbc	$2,r4,1f; tstl	(r3)
 1:	clrl	r0
 2:	movl	r2,_scb+SCB_BUSERR
-	mtpr	r1,$IPL
-	ret
-
-/*
- * wbadaddr(addr, len, value)
- *	see if write of value to addr with a len type instruction causes
- *	a machine check
- *	len is length of access (1=byte, 2=short, 4=long)
- *	r0 = 0 means good(exists); r0 =1 means does not exist.
- */
-ENTRY(wbadaddr, R3|R4)
-	mfpr	$IPL,r1
-	mtpr	$HIGH,$IPL
-	movl	_scb+SCB_BUSERR,r2
-	movl	4(fp),r3
-	movl	8(fp),r4
-	movab	9f,_scb+SCB_BUSERR
-	bbc	$0,r4,1f; movb	15(fp), (r3)
-1:	bbc	$1,r4,1f; movw	14(fp), (r3)
-1:	bbc	$2,r4,1f; movl	12(fp), (r3)
-1:	movl	$30000,r0		# delay for error interrupt
-1:	decl	r0
-	jneq	1b
-2:	movl	r2,_scb+SCB_BUSERR	# made it w/o machine checks; r0 is 0
 	mtpr	r1,$IPL
 	ret
 

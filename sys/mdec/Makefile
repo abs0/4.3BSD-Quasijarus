@@ -1,15 +1,32 @@
-#	@(#)Makefile	7.9 (Berkeley) 12/26/98
+#
+# Copyright (c) 1980, 1986, 1987 Regents of the University of California.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+#
+#	@(#)Makefile	7.8 (Berkeley) 9/5/99
+#
 
 CFLAGS=	-DLOCORE
 
 # source files that live in the current directory
-SRCS=	hkboot.c hpboot.c htboot.c mtboot.c raboot.c rdboot.c rlboot.c \
-	upboot.c utboot.c tmboot.c tsboot.c tuboot.c httoggle.s mttoggle.s \
-	tmtoggle.s tstoggle.s uttoggle.s tmscpboot.c
+SRCS=	hkboot.c hpboot.c htboot.c kraboot.c mtboot.c raboot.c rdboot.c \
+	rlboot.c upboot.c utboot.c tmboot.c tsboot.c tuboot.c httoggle.s \
+	mttoggle.s tmtoggle.s tstoggle.s uttoggle.s tmscpboot.c
 
 # boot blocks that are preprocessed, then assembled
-BOOTS=	hkboot hpboot htboot mtboot raboot rdboot rlboot upboot utboot \
-	tmboot tmscpboot tsboot tuboot
+BOOTS=	hkboot hpboot htboot kraboot mtboot raboot rdboot rlboot upboot \
+	utboot tmboot tmscpboot tsboot tuboot
 
 # toggle files that are assembled, but not installed
 TOGGLES=httoggle mttoggle tmtoggle tstoggle uttoggle
@@ -51,6 +68,7 @@ depend:
 hkboot: hkboot.c /usr/include/sys/disklabel.h
 hpboot: hpboot.c /usr/include/sys/disklabel.h
 htboot: htboot.c
+kraboot: kraboot.c /usr/include/sys/disklabel.h
 mtboot: mtboot.c
 raboot: raboot.c /usr/include/sys/disklabel.h
 rdboot: rdboot.c

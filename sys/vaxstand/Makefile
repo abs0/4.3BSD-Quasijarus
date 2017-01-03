@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	7.18 (Berkeley) 3/21/89
+#	@(#)Makefile	7.22 (Berkeley) 9/5/99
 #
 
 DESTDIR=
@@ -27,14 +27,16 @@ LS=	/bin/ls
 
 # Collections of C options:
 #	COPTS	device drivers/assembler, not optimized
-#	SMOPTS	"small" versions for 7.5K bootxx programs
-#	730OPTS	"small" versions for 11/730-only versions
+#	SMOPTS	"small" versions for 7.5K bootxx programs (750 only)
+#	RAOPTS	like SMOPTS, but for bootra, which is 750 + 8200 + MVAXen
+#	KRAOPTS	like SMOPTS, but for bootkra, which is 8200 only
 #	CFLAGS	everything else
 
 COPTS=	${DEFS} ${MACH}
 CFLAGS=	-O ${DEFS} ${MACH}
-730OPTS=-O ${DEFS} -DVAX730
-SMOPTS=	${DEFS} -DSMALL -DVAX750 -DVAX630 -DVAX650
+SMOPTS=	${DEFS} -DSMALL -DVAX750
+RAOPTS=	${DEFS} -DSMALL -DVAX750 -DVAX8200 -DVAX630 -DVAX650
+KRAOPTS=${DEFS} -DSMALL -DVAX8200
 
 RELOC=	150000
 LIBSA=	libsa.a
@@ -49,6 +51,8 @@ DRIVERS=autoconf.o hp.o hpmaptype.o ht.o idc.o kdb.o mba.o mt.o qdcons.o \
 	qvcons.o rk.o rl.o tm.o tmscp.o ts.o up.o upmaptype.o uba.o uda.o \
 	ut.o
 SMOBJ=	bootxx.o sm_sys.o sm_autoconf.o 
+RAOBJ=	bootxx.o sm_sys.o ra_autoconf.o 
+KRAOBJ=	bootxx.o sm_sys.o kra_autoconf.o 
 
 # These drivers don't have ecc correction and bad sector forwarding;
 # they are placed in the file system boot area for 750's.  If your
@@ -57,7 +61,7 @@ ODRIVERS=sm_hp.o sm_up.o
 
 MDEC=	boothp boothk bootkra bootup bootra bootrl
 ALL=	boot tpboot cat copy tpcopy format tpformat drtest ls \
-	730boot 730copy 730format 730drtest ${MDEC}
+	${MDEC}
 
 all: ${ALL}
 
@@ -134,39 +138,6 @@ format: format.o srt0.o confhpup.o ${LIBSA}
 drtest: drtest.o srt0.o confhpup.o ${LIBSA}
 	ld -N -o $@ srt0.o drtest.o confhpup.o ${LIBSA} -lc
 
-# for 730s minimize size to avoid microcode botch
-# (won't load files larger than 12.5 Kbytes)
-
-730boot.o: boot.o
-	rm -f $*.c
-	ln -s boot.c $*.c
-	${CC} -c ${730OPTS} $*.c
-	rm -f $*.c
-
-730boot: 730boot.o relsrt0.o 730bootconf.o ${LIBSA}
-	ld -N -T ${RELOC} -o 730boot relsrt0.o 730boot.o 730bootconf.o ${LIBSA} -lc
-
-730bootconf.o: conf.o
-	rm -f $*.c
-	ln -s conf.c $*.c
-	${CC} -c ${730OPTS} -DBOOT $*.c
-	rm -f $*.c
-
-730copy: copy.o srt0.o 730conf.o ${LIBSA}
-	ld -N -o $@ srt0.o copy.o 730conf.o ${LIBSA} -lc
-
-730drtest: drtest.o srt0.o confup.o ${LIBSA}
-	ld -N -o $@ srt0.o drtest.o confup.o ${LIBSA} -lc
-
-730format: format.o srt0.o confup.o ${LIBSA}
-	ld -N -o $@ srt0.o format.o confup.o ${LIBSA} -lc
-
-730conf.o: conf.o
-	rm -f $*.c
-	ln -s conf.c $*.c
-	${CC} -c ${730OPTS} $*.c
-	rm -f $*.c
-
 # bootstrap from ether
 
 ### not yet, rosin, not yet ###
@@ -187,8 +158,8 @@ boothp: relsrt0.o confhp.o sm_hp.o ${SMOBJ} ${LIBSA}
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
 	${LS} -l $@
 
-bootkra: relsrt0.o confkra.o ${SMOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confkra.o ${SMOBJ} ${LIBSA} -lc
+bootkra: relsrt0.o confkra.o ${KRAOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt0.o confkra.o ${KRAOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
@@ -201,8 +172,8 @@ bootup: relsrt0.o confup.o sm_up.o ${SMOBJ} ${LIBSA}
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
 	${LS} -l $@
 
-bootra: relsrt0.o confra.o ${SMOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confra.o ${SMOBJ} ${LIBSA} -lc
+bootra: relsrt0.o confra.o ${RAOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt0.o confra.o ${RAOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
@@ -232,14 +203,29 @@ sm_up.o: up.o
 sm_sys.o: sys.o
 	rm -f sm_sys.c
 	ln -s sys.c sm_sys.c
-	${CC} -c -O ${SMOPTS} sm_sys.c
+	${CC} -c ${CFLAGS} -DSMALL sm_sys.c
 	rm -f sm_sys.c
 
 sm_autoconf.o: autoconf.o
 	rm -f sm_autoconf.c
 	ln -s autoconf.c sm_autoconf.c
-	${CC} -c -O ${SMOPTS} sm_autoconf.c
-	rm -f sm_autoconf.c
+	${CC} -S ${SMOPTS} sm_autoconf.c
+	/lib/c2 -i sm_autoconf.s | as -o sm_autoconf.o
+	rm -f sm_autoconf.s sm_autoconf.c
+
+ra_autoconf.o: autoconf.o
+	rm -f ra_autoconf.c
+	ln -s autoconf.c ra_autoconf.c
+	${CC} -S ${RAOPTS} ra_autoconf.c
+	/lib/c2 -i ra_autoconf.s | as -o ra_autoconf.o
+	rm -f ra_autoconf.s ra_autoconf.c
+
+kra_autoconf.o: autoconf.o
+	rm -f kra_autoconf.c
+	ln -s autoconf.c kra_autoconf.c
+	${CC} -S ${KRAOPTS} kra_autoconf.c
+	/lib/c2 -i kra_autoconf.s | as -o kra_autoconf.o
+	rm -f kra_autoconf.s kra_autoconf.c
 
 confrk.o: confrk.c confxx.o
 confhp.o: confhp.c confxx.o
@@ -272,7 +258,7 @@ confrl.c: confxx.c dev.c
 
 clean:
 	rm -f *.o *.exe *.i sm_*.c libsa.a
-	rm -f boot[a-wyz][a-z].c conf[a-wyz][a-z].c
+	rm -f boot[a-wyz][a-z].c conf[a-wyz][a-z].c confkra.c
 	rm -f ${ALL} a.out core errs sboot bootconf.c
 
 cleandir: clean
@@ -281,37 +267,33 @@ cleandir: clean
 depend: ${SRCS}
 	mkdep ${INCPATH} -DSTANDALONE ${SRCS} ${DUMMIES}
 
-install: FRC
-	install -c -s -o bin -g bin -m 644 format cat copy drtest ls ${DESTDIR}${STAND}
-	install -c -o bin -g bin -m 644 boot pcs750.bin ${DESTDIR}/
+install: installint installext
+
+installint: FRC
 	[ -d ../vaxdist/tp ] || mkdir ../vaxdist/tp
 	cp tpcopy ../vaxdist/tp/copy
 	cp tpboot ../vaxdist/tp/boot
 	cp tpformat ../vaxdist/tp/format
 	cp boot a.out; strip a.out; \
 		dd if=a.out of=../floppy/boot bs=32 skip=1; rm a.out
-	cp 730boot a.out; strip a.out; \
-		dd if=a.out of=../cassette/boot.730 bs=32 skip=1; rm a.out
-	cp ../floppy/boot ../cassette/boot.750
+	cp ../floppy/boot ../cassette/boot
 	cp ../floppy/boot ../consolerl/boot
 	cp copy a.out; strip a.out; \
 		dd if=a.out of=../floppy/copy bs=32 skip=1; rm a.out
-	cp 730copy a.out; strip a.out; \
-		dd if=a.out of=../cassette/copy.730 bs=32 skip=1; rm a.out
-	cp ../floppy/copy ../cassette/copy.750
+	cp ../floppy/copy ../cassette/copy
 	cp ../floppy/copy ../consolerl/copy
 	cp format a.out; strip a.out; \
 		dd if=a.out of=../floppy/format bs=32 skip=1; rm a.out
-	cp 730format a.out; strip a.out; \
-		dd if=a.out of=../cassette/format.730 bs=32 skip=1; rm a.out
-	cp ../floppy/format ../cassette/format.750
+	cp ../floppy/format ../cassette/format
 	cp ../floppy/format ../consolerl/format
 	cp drtest a.out; strip a.out; \
 		dd if=a.out of=../floppy/drtest bs=32 skip=1; rm a.out
-	cp 730drtest a.out; strip a.out; \
-		dd if=a.out of=../cassette/drtest.730 bs=32 skip=1; rm a.out
-	cp ../floppy/drtest ../cassette/drtest.750
+	cp ../floppy/drtest ../cassette/drtest
 	cp ../floppy/drtest ../consolerl/drtest
+
+installext: FRC
+	install -c -s -o bin -g bin -m 644 format cat copy drtest ls ${DESTDIR}${STAND}
+	install -c -o bin -g bin -m 644 boot pcs750.bin ${DESTDIR}/
 	install -c -o bin -g bin -m 444 ${MDEC} ${DESTDIR}/usr/mdec
 	rm -f ${DESTDIR}/usr/mdec/bootrd
 	ln ${DESTDIR}/usr/mdec/bootra ${DESTDIR}/usr/mdec/bootrd

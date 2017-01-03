@@ -11,7 +11,7 @@
  */
 
 #if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)res_mkquery.c	6.7 (Berkeley) 3/7/88";
+static char sccsid[] = "@(#)res_mkquery.c	6.8 (Berkeley) 9/28/99";
 #endif /* LIBC_SCCS and not lint */
 
 #include <stdio.h>
@@ -70,7 +70,7 @@ res_mkquery(op, dname, class, type, data, datalen, newrr, buf, buflen)
 	 * append the default domain name to the one given.
 	 */
 	if ((_res.options & RES_DEFNAMES) && dname != 0 && dname[0] != '\0' &&
-	    index(dname, '.') == NULL) {
+	    index(dname, '.') == NULL && strcasecmp(dname, "localhost")) {
 		if (!(_res.options & RES_INIT))
 			if (res_init() == -1)
 				return(-1);

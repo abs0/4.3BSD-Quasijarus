@@ -17,7 +17,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)main.c	5.15 (Berkeley) 3/26/88";
+static char sccsid[] = "@(#)main.c	5.16 (Berkeley) 9/29/99";
 #endif /* not lint */
 
 /*
@@ -49,7 +49,7 @@ static char sccsid[] = "@(#)main.c	5.15 (Berkeley) 3/26/88";
  *  Location of the help file.
  */
 
-#define HELPFILE "/usr/local/nslookup.help"
+#define HELPFILE "/usr/lib/nslookup.help"
 
 
 #if BSD < 43

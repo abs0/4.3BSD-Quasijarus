@@ -179,7 +179,7 @@ main(argc, argv)
 				lab.d_bbsize = BBSIZE;		/* XXX */
 			}
 			else if (argc == 3) 	/* [ disktype ] */
-				makelabel(argv[2], 0, &lab);
+				makelabel(argv[2], (char *)NULL, &lab);
 			else {
 				fprintf(stderr,
 "Must specify either disktype or bootfiles with -r flag of RESTORE option\n");

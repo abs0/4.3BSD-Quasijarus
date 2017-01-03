@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)uda.c	7.21 (Berkeley) 10/22/88
+ *	@(#)uda.c	7.29 (Berkeley) 9/6/99
  */
 
 /*
@@ -179,13 +179,31 @@ struct ra_info {
 } ra_info[NRA];
 
 /*
- * Software state, per drive
+ * Software state, per drive. The CLOSED, WANTOPEN, RDLABEL, OPEN, and OPENRAW
+ * states are just like in the other drivers, but the ONLINE state doesn't
+ * exist in other drivers and didn't exist in earlier versions of this driver.
+ * In other drivers, the OPEN and OPENRAW states are entered in a routine like
+ * hpinit or upinit, which is only called synchronously, when either attaching
+ * or opening a drive. In our case, however, a drive comes on-line
+ * asynchronously, at interrupt time in udaonline. Earlier versions of this
+ * entered the OPENRAW state in udaonline. This was a disaster. udaonline
+ * doesn't really open the drive, the state it puts the drive in is really just
+ * a slightly different form of the CLOSED state. Declaring it to be open, even
+ * raw, when it really isn't, was a horrible bug. udaopen would treat it as
+ * being already open and wouldn't try to call uda_rainit to read the label,
+ * but since it really isn't open and has no partitions defined, trying to open
+ * any partition resulted in ENXIO, rendering the disk completely inaccessible.
+ *
+ * The ONLINE state has been added to solve this problem. It is a stable state
+ * like CLOSED, OPEN, or OPENRAW, and udaopen treats it the same way as CLOSED,
+ * i.e., calls uda_rainit to read the label.
  */
 #define	CLOSED		0
 #define	WANTOPEN	1
-#define	RDLABEL		2
-#define	OPEN		3
-#define	OPENRAW		4
+#define ONLINE		2
+#define	RDLABEL		3
+#define	OPEN		4
+#define	OPENRAW		5
 
 /*
  * Definition of the driver for autoconf.
@@ -317,9 +335,6 @@ udaprobe(reg, ctlr, um)
 	 * initialise within ten seconds.  Or so I hear; I have not seen
 	 * this manual myself.
 	 */
-#ifdef QBA
-	s = spl6();
-#endif
 	tries = 0;
 again:
 	udaddr->udaip = 0;		/* start initialisation */
@@ -335,13 +350,12 @@ again:
 
 	/* should have interrupted by now */
 #ifdef QBA
-	sc->sc_ipl = br = qbgetpri();
+	sc->sc_ipl = br = 0x15;
 #endif
 	return (sizeof (struct udadevice));
 bad:
 	if (++tries < 2)
 		goto again;
-	splx(s);
 	return (0);
 }
 
@@ -683,7 +697,7 @@ udaopen(dev, flag, fmt)
 	 */
 	ra = &ra_info[unit];
 	while (ra->ra_state != OPEN && ra->ra_state != OPENRAW &&
-	    ra->ra_state != CLOSED)
+	    ra->ra_state != CLOSED && ra->ra_state != ONLINE)
 		sleep((caddr_t)ra, PZERO + 1);
 
 	/*
@@ -800,17 +814,17 @@ uda_rainit(ui, flags)
 		i = ((struct udadevice *)ui->ui_addr)->udaip;
 
 		if (cold) {
-			i = todr() + 1000;
+			i = todr() + 12000;
 			while ((ui->ui_flags & UNIT_ONLINE) == 0)
 				if (todr() > i)
 					break;
 		} else {
-			timeout(wakeup, (caddr_t)&ui->ui_flags, 10 * hz);
+			timeout(wakeup, (caddr_t)&ui->ui_flags, 120 * hz);
 			sleep((caddr_t)&ui->ui_flags, PSWP + 1);
 			splx(s);
 			untimeout(wakeup, (caddr_t)&ui->ui_flags);
 		}
-		if (ra->ra_state != OPENRAW) {
+		if (ra->ra_state != ONLINE) {
 			ra->ra_state = CLOSED;
 			wakeup((caddr_t)ra);
 			return (EIO);
@@ -821,8 +835,10 @@ uda_rainit(ui, flags)
 	lp->d_secsize = DEV_BSIZE;
 	lp->d_secperunit = ra->ra_dsize;
 
-	if (flags & O_NDELAY)
+	if (flags & O_NDELAY) {
+		ra->ra_state = OPENRAW;
 		return (0);
+	}
 	ra->ra_state = RDLABEL;
 	/*
 	 * Set up default sizes until we have the label, or longer
@@ -1555,14 +1571,14 @@ udaonline(ui, mp)
 		return (MSCP_FAILED);
 	}
 
-	ra->ra_state = OPENRAW;
+	ra->ra_state = ONLINE;
 	ra->ra_dsize = (daddr_t)mp->mscp_onle.onle_unitsize;
 	if (!cold)
 		printf("ra%d: uda%d, unit %d, size = %d sectors\n", ui->ui_unit,
 		    ui->ui_ctlr, mp->mscp_unit, ra->ra_dsize);
 	/* can now compute ncyl */
-	ra->ra_geom.rg_ncyl = ra->ra_dsize / ra->ra_geom.rg_ntracks /
-		ra->ra_geom.rg_nsectors;
+	ra->ra_geom.rg_ncyl = howmany(ra->ra_dsize, ra->ra_geom.rg_ntracks *
+		ra->ra_geom.rg_nsectors);
 	return (MSCP_DONE);
 }
 
@@ -2069,23 +2085,41 @@ struct size {
 	157570,	242606,		/* UCB G => G=sectors 242606 thru 400175 */
 	193282,	49324,		/* UCB H => H=sectors 49324 thru 242605 */
 }, ra70_sizes[8] = {
-	15884,	0,		/* A=blk 0 thru 15883 */
-	33440,	15972,		/* B=blk 15972 thru 49323 */
-	-1,	0,		/* C=blk 0 thru end */
-	15884,	341220,		/* D=blk 341220 thru 357103 */
-	55936,	357192,		/* E=blk 357192 thru 413127 */
-	-1,	413457,		/* F=blk 413457 thru end */
-	-1,	341220,		/* G=blk 341220 thru end */
-	291346,	49731,		/* H=blk 49731 thru 341076 */
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	33440,	15972,		/* B=sectors 15972 thru 49411 */
+	547041,	0,		/* C=sectors 0 thru 547040 */
+	15884,	341220,		/* D=sectors 341220 thru 357103 */
+	55936,	357192,		/* E=sectors 357192 thru 413127 */
+	133584,	413457,		/* F=sectors 413457 thru 547040 */
+	205821,	341220,		/* G=sectors 341220 thru 547040 */
+	291346,	49731,		/* H=sectors 49731 thru 341076 */
+}, ra71_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16422,		/* B=sectors 16422 thru 83301 */
+	1367310,0,		/* C=sectors 0 thru 1367309 */
+	15884,	375564,		/* D=sectors 375564 thru 391447 */
+	307200,	391986,		/* E=sectors 391986 thru 699185 */
+	667590,	699720,		/* F=sectors 699720 thru 1367309 */
+	991746,	375564,		/* G=sectors 375564 thru 1367309 */
+	291346,	83538,		/* H=sectors 83538 thru 374883 */
+}, ra72_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16320,		/* B=sectors 16320 thru 83199 */
+	1953300,0,		/* C=sectors 0 thru 1953299 */
+	15884,	375360,		/* D=sectors 375360 thru 391243 */
+	307200,	391680,		/* E=sectors 391680 thru 698879 */
+	1253580,699720,		/* F=sectors 699720 thru 1953299 */
+	1577940,375360,		/* G=sectors 375360 thru 1953299 */
+	291346,	83640,		/* H=sectors 83640 thru 374985 */
 }, ra80_sizes[8] = {
 	15884,	0,		/* A=sectors 0 thru 15883 */
 	33440,	15884,		/* B=sectors 15884 thru 49323 */
 	242606,	0,		/* C=sectors 0 thru 242605 */
 	0,	0,		/* D=unused */
-	193282,	49324,		/* UCB H => E=sectors 49324 thru 242605 */
+	187640,	49324,		/* UCB H => E=sectors 49324 thru 242605 */
 	82080,	49324,		/* 4.2 G => F=sectors 49324 thru 131403 */
-	192696,	49910,		/* G=sectors 49910 thru 242605 */
-	111202,	131404,		/* 4.2 H => H=sectors 131404 thru 242605 */
+	187054,	49910,		/* G=sectors 49910 thru 242605 */
+	105560,	131404,		/* 4.2 H => H=sectors 131404 thru 242605 */
 }, ra81_sizes[8] ={
 /*
  * These are the new standard partition sizes for ra81's.
@@ -2126,45 +2160,45 @@ struct size {
 
 #endif UCBRA
 }, ra82_sizes[8] = {
-	15884,	0,		/* A=blk 0 thru 15883 */
-	66880,	16245,		/* B=blk 16245 thru 83124 */
-	-1,	0,		/* C=blk 0 thru end */
-	15884,	375345,		/* D=blk 375345 thru 391228 */
-	307200,	391590,		/* E=blk 391590 thru 698789 */
-	-1,	699390,		/* F=blk 699390 thru end */
-	-1,	375345,		/* G=blk 375345 thru end */
-	291346,	83790,		/* H=blk 83790 thru 375135 */
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16245,		/* B=sectors 16245 thru 83124 */
+	1216665,0,		/* C=sectors 0 thru 1216664 */
+	15884,	375345,		/* D=sectors 375345 thru 391228 */
+	307200,	391590,		/* E=sectors 391590 thru 698789 */
+	517275,	699390,		/* F=sectors 699390 thru 1216664 */
+	841320,	375345,		/* G=sectors 375345 thru 1216664 */
+	291346,	83790,		/* H=sectors 83790 thru 375135 */
+}, ra90_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16146,		/* B=sectors 16146 thru 83025 */
+	2376153,0,		/* C=sectors 0 thru 2376152 */
+	15884,	374946,		/* D=sectors 374946 thru 390829 */
+	307200,	391092,		/* E=sectors 391092 thru 698291 */
+	1677390,698763,		/* F=sectors 698763 thru 2376152 */
+	2001207,374946,		/* G=sectors 374946 thru 2376152 */
+	291346,	83421,		/* H=sectors 83421 thru 374766 */
+}, ra92_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16146,		/* B=sectors 16146 thru 83025 */
+	2940951,0,		/* C=sectors 0 thru 2940950 */
+	15884,	374946,		/* D=sectors 374946 thru 390829 */
+	307200,	391092,		/* E=sectors 391092 thru 698291 */
+	2242188,698763,		/* F=sectors 698763 thru 2940950 */
+	2566005,374946,		/* G=sectors 374946 thru 2940950 */
+	291346,	83421,		/* H=sectors 83421 thru 374766 */
 }, rc25_sizes[8] = {
 	15884,	0,		/* A=blk 0 thru 15883 */
-	10032,	15884,		/* B=blk 15884 thru 49323 */
-	-1,	0,		/* C=blk 0 thru end */
-	0,	0,		/* D=blk 340670 thru 356553 */
-	0,	0,		/* E=blk 356554 thru 412489 */
-	0,	0,		/* F=blk 412490 thru end */
-	-1,	25916,		/* G=blk 49324 thru 131403 */
-	0,	0,		/* H=blk 131404 thru end */
-}, rd52_sizes[8] = {
-	15884,	0,		/* A=blk 0 thru 15883 */
-	9766,	15884,		/* B=blk 15884 thru 25649 */
-	-1,	0,		/* C=blk 0 thru end */
-	0,	0,		/* D=unused */
-	0,	0,		/* E=unused */
-	0,	0,		/* F=unused */
-	-1,	25650,		/* G=blk 25650 thru end */
-	0,	0,		/* H=unused */
-}, rd53_sizes[8] = {
-	15884,	0,		/* A=blk 0 thru 15883 */
-	33440,	15884,		/* B=blk 15884 thru 49323 */
-	-1,	0,		/* C=blk 0 thru end */
-	0,	0,		/* D=unused */
-	33440,	0,		/* E=blk 0 thru 33439 */
-	-1,	33440,		/* F=blk 33440 thru end */
-	-1,	49324,		/* G=blk 49324 thru end */
-	-1,	15884,		/* H=blk 15884 thru end */
+	10032,	15884,		/* B=blk 15884 thru 25915 */
+	50736,	0,		/* C=blk 0 thru 50735 */
+	0,	0,
+	0,	0,
+	0,	0,
+	24820,	25916,		/* G=blk 25916 thru 50735 */
+	0,	0,
 }, rx50_sizes[8] = {
 	800,	0,		/* A=blk 0 thru 799 */
 	0,	0,
-	-1,	0,		/* C=blk 0 thru end */
+	800,	0,		/* C=blk 0 thru 799 */
 	0,	0,
 	0,	0,
 	0,	0,
@@ -2179,20 +2213,19 @@ struct	udatypes {
 	u_long	ut_id;		/* media drive ID */
 	char	*ut_name;	/* drive type name */
 	struct	size *ut_sizes;	/* partition tables */
-	int	ut_nsectors, ut_ntracks, ut_ncylinders;
 } udatypes[] = {
-	{ MSCP_MKDRIVE2('R', 'A', 60), "ra60", ra60_sizes, 42, 4, 2382 },
-	{ MSCP_MKDRIVE2('R', 'A', 70), "ra70", ra70_sizes, 33, 11, 1507 },
-	{ MSCP_MKDRIVE2('R', 'A', 80), "ra80", ra80_sizes, 31, 14, 559 },
-	{ MSCP_MKDRIVE2('R', 'A', 81), "ra81", ra81_sizes, 51, 14, 1248 },
-	{ MSCP_MKDRIVE2('R', 'A', 82), "ra82", ra82_sizes, 57, 14, 1423 },
-	{ MSCP_MKDRIVE2('R', 'C', 25), "rc25-removable",
-						rc25_sizes, 42, 4, 302 },
-	{ MSCP_MKDRIVE3('R', 'C', 'F', 25), "rc25-fixed",
-						rc25_sizes, 42, 4, 302 },
-	{ MSCP_MKDRIVE2('R', 'D', 52), "rd52", rd52_sizes, 18, 7, 480 },
-	{ MSCP_MKDRIVE2('R', 'D', 53), "rd53", rd53_sizes, 18, 8, 963 },
-	{ MSCP_MKDRIVE2('R', 'X', 50), "rx50", rx50_sizes, 10, 1, 80 },
+	{ MSCP_MKDRIVE2('R', 'A', 60), "ra60", ra60_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 70), "ra70", ra70_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 71), "ra71", ra71_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 72), "ra72", ra72_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 80), "ra80", ra80_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 81), "ra81", ra81_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 82), "ra82", ra82_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 90), "ra90", ra90_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 92), "ra92", ra92_sizes },
+	{ MSCP_MKDRIVE2('R', 'C', 25), "rc25-removable", rc25_sizes },
+	{ MSCP_MKDRIVE3('R', 'C', 'F', 25), "rc25-fixed", rc25_sizes },
+	{ MSCP_MKDRIVE2('R', 'X', 50), "rx50", rx50_sizes },
 	0
 };
 
@@ -2212,9 +2245,7 @@ udamaptype(unit, lp)
 	i = MSCP_MEDIA_DRIVE(ra->ra_mediaid);
 	for (ut = udatypes; ut->ut_id; ut++)
 		if (ut->ut_id == i &&
-		    ut->ut_nsectors == ra->ra_geom.rg_nsectors &&
-		    ut->ut_ntracks == ra->ra_geom.rg_ntracks &&
-		    ut->ut_ncylinders == ra->ra_geom.rg_ncyl)
+		    ut->ut_sizes[2].nblocks == ra->ra_dsize)
 			goto found;
 
 	/* not one we know; fake up a label for the whole drive */
@@ -2235,9 +2266,9 @@ found:
 		lp->d_typename[i] = *p++;
 	lp->d_typename[i] = 0;
 	sz = ut->ut_sizes;
-	lp->d_nsectors = ut->ut_nsectors;
-	lp->d_ntracks = ut->ut_ntracks;
-	lp->d_ncylinders = ut->ut_ncylinders;
+	lp->d_nsectors = ra->ra_geom.rg_nsectors;
+	lp->d_ntracks = ra->ra_geom.rg_ntracks;
+	lp->d_ncylinders = ra->ra_geom.rg_ncyl;
 	lp->d_npartitions = 8;
 	lp->d_secpercyl = lp->d_nsectors * lp->d_ntracks;
 	for (pp = lp->d_partitions; pp < &lp->d_partitions[8]; pp++, sz++) {

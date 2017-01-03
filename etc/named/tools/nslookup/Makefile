@@ -9,7 +9,7 @@
 # software without specific prior written permission. This software
 # is provided ``as is'' without express or implied warranty.
 #
-#	@(#)Makefile	5.16 (Berkeley) 2/20/88
+#	@(#)Makefile	5.17 (Berkeley) 9/29/99
 #
 CFLAGS=	-O
 RES=
@@ -19,24 +19,18 @@ CSRCS=	main.c getinfo.c debug.c send.c skip.c list.c subr.c
 SRCS=	${CSRCS} commands.c
 OBJS=	main.o getinfo.o debug.o send.o skip.o list.o subr.o commands.o
 
-.SUFFIXES: .1 .0
-
-.1.0:
-	${DESTDIR}/usr/man/manroff $*.1 > $*.0
-
 nslookup: ${OBJS} ${LIBC}
 	${CC} -o $@ ${OBJS} ${LIBS}
 
 clean: FRC
-	rm -f ${OBJS} core nslookup commands.c nslookup.0 lex.yy.c lex.yy.o
+	rm -f ${OBJS} core nslookup commands.c lex.yy.c lex.yy.o
 
 depend: ${SRCS} FRC
 	mkdep ${CFLAGS} ${SRCS}
 
-install: nslookup.0 FRC
-	install -s -o bin -g bin -m 755 nslookup ${DESTDIR}/usr/local/nslookup
-	install -c -o bin -g bin -m 444 nslookup.help ${DESTDIR}/usr/local/nslookup.help
-	install -c -o bin -g bin -m 444 nslookup.0 ${DESTDIR}/usr/local/man/cat1/nslookup.0
+install: nslookup FRC
+	install -s -o bin -g bin -m 755 nslookup ${DESTDIR}/usr/ucb/nslookup
+	install -c -o bin -g bin -m 444 nslookup.help ${DESTDIR}/usr/lib/nslookup.help
 
 lint: ${SRCS} FRC
 	lint ${CFLAGS} ${SRCS}
@@ -51,7 +45,8 @@ FRC:
 
 main.o: main.c /usr/include/stdio.h /usr/include/strings.h
 main.o: /usr/include/sys/param.h /usr/include/sys/types.h /usr/include/signal.h
-main.o: /usr/include/machine/trap.h /usr/include/netdb.h
+main.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
+main.o: /usr/include/machine/endian.h /usr/include/netdb.h
 main.o: /usr/include/sys/socket.h /usr/include/netinet/in.h
 main.o: /usr/include/arpa/nameser.h /usr/include/resolv.h /usr/include/signal.h
 main.o: /usr/include/setjmp.h res.h

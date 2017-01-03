@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dmxreg.h	7.1 (Berkeley) 9/4/89
+ *	@(#)dmxreg.h	7.1 (Berkeley) 1/10/99
  *
  * Common structures and definitions
  * for merged DMF and DMZ drivers.

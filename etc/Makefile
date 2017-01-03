@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.26 (Berkeley) 5/5/88
+#	@(#)Makefile	5.27 (Berkeley) 1/25/99
 #
 DESTDIR=
 CFLAGS=	-O
@@ -17,7 +17,7 @@ SUBDIR=	config dump fsck ftpd getty htable implog named newfs \
 
 # Shell scripts that need only be installed and are never removed.
 #
-SCRIPT=	fastboot fasthalt mklost+found
+SCRIPT=	fastboot fasthalt
 
 # C sources that live in the current directory
 #

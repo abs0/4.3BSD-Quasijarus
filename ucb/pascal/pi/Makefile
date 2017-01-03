@@ -3,9 +3,9 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)pimakefile	5.2 (Berkeley) 9/7/85
+#	@(#)Makefile	1.3 (Berkeley) 9/7/99
 #
-SCCSID = "@(#)pimakefile 5.2 9/7/85"
+SCCSID = "@(#)Makefile 1.3 9/7/99"
 
 INSTALLDIR = ${DESTDIR}/usr/ucb
 INSTALLNAME = ${INSTALLDIR}/pi
@@ -14,7 +14,7 @@ SRCDIR = ../src
 VPATH = ../src
 WHOAMI = pi
 VERSION = 3.1
-DATE = 9/7/85
+DATE = 9/7/99
 
 MKSTR = /usr/ucb/mkstr
 EYACC = ../eyacc/eyacc

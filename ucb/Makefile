@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.26 (Berkeley) 6/29/88
+#	@(#)Makefile	5.27 (Berkeley) 1/17/99
 #
 DESTDIR=
 CFLAGS=	-O
@@ -33,21 +33,21 @@ SCRIPT= which
 
 # C source that lives in the current directory
 #
-SRCS=	apply.c biff.c checknr.c clear.c colcrt.c colrm.c expand.c finger.c \
-	fold.c from.c gcore.c groups.c head.c last.c lastcomm.c \
+SRCS=	20b.c apply.c biff.c checknr.c clear.c colcrt.c colrm.c expand.c \
+	finger.c fold.c from.c gcore.c groups.c head.c last.c lastcomm.c \
 	leave.c lock.c logger.c mkstr.c printenv.c quota.c rlogin.c \
 	rsh.c ruptime.c rwho.c sccs.c script.c soelim.c strings.c symorder.c \
 	tail.c tcopy.c ul.c unexpand.c unifdef.c users.c \
-	vacation.c vmstat.c w.c wc.c what.c whereis.c whoami.c whois.c \
+	vacation.c vmstat.c w.c wc.c whereis.c whoami.c whois.c \
 	xstr.c yes.c
 
 # C programs that live in the current directory and do not need
 # explicit make lines.
 #
-STD=	apply biff checknr colcrt colrm expand finger fold from \
+STD=	20b apply biff checknr colcrt colrm expand finger fold from \
 	groups head last lastcomm leave lock logger mkstr printenv \
 	ruptime rwho sccs script soelim strings symorder tail tcopy \
-	unexpand unifdef users whereis whoami whois what wc xstr yes
+	unexpand unifdef users whereis whoami whois wc xstr yes
 
 # C programs that live in the current directory and need explicit make lines.
 #
@@ -110,6 +110,7 @@ vacation:
 # DO NOT DELETE THIS LINE -- mkdep uses it.
 # DO NOT PUT ANYTHING AFTER THIS LINE, IT WILL GO AWAY.
 
+20b: 20b.c /usr/include/stdio.h
 apply: apply.c /usr/include/stdio.h
 biff: biff.c /usr/include/sys/types.h /usr/include/sys/stat.h
 biff: /usr/include/stdio.h
@@ -270,7 +271,6 @@ wc: wc.c /usr/include/sys/param.h /usr/include/sys/types.h
 wc: /usr/include/signal.h /usr/include/machine/trap.h
 wc: /usr/include/machine/machparam.h /usr/include/machine/endian.h
 wc: /usr/include/sys/stat.h /usr/include/sys/file.h /usr/include/stdio.h
-what: what.c /usr/include/stdio.h
 whereis: whereis.c /usr/include/sys/param.h /usr/include/sys/types.h
 whereis: /usr/include/signal.h /usr/include/machine/trap.h
 whereis: /usr/include/machine/machparam.h /usr/include/machine/endian.h

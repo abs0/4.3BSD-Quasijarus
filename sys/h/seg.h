@@ -1,11 +1,14 @@
-/*-
- * Copyright (c) 1982, 1986 The Regents of the University of California.
- * All rights reserved.
+/*
+ * Copyright (c) 1982, 1986 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
  *
- * %sccs.include.redist.c%
- *
- *	@(#)seg.h	7.2 (Berkeley) 2/15/91
+ *	@(#)seg.h	7.1 (Berkeley) 6/4/86
  */
 
-#define	RO	PG_URKR		/* read-only */
-#define	RW	PG_UW		/* read-write */
+/*
+ * Mapper addresses and bits
+ */
+
+#define	RO	PG_URKR		/* access abilities */
+#define	RW	PG_UW

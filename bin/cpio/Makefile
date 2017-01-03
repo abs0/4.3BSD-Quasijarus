@@ -14,20 +14,12 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.3 (Berkeley) 7/9/88
+#	@(#)Makefile	5.4 (Berkeley) 9/27/99
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
 SRCS=	cpio.c
 OBJS=
-MAN=	cpio.0 cpio_format.0
-
-.SUFFIXES: .5 .1 .0
-
-.1.0:
-	${DESTDIR}/usr/man/manroff $*.1 > $*.0
-.5.0:
-	${DESTDIR}/usr/man/manroff $*.5 > $*.0
 
 all: cpio
 
@@ -42,8 +34,6 @@ depend: FRC
 
 install: ${MAN} FRC
 	install -s -o bin -g bin -m 755 cpio ${DESTDIR}/bin/cpio
-	install -c -o bin -g bin -m 444 cpio.0 ${DESTDIR}/usr/man/cat1/cpio.0
-	install -c -o bin -g bin -m 444 cpio_format.0 ${DESTDIR}/usr/man/cat5/cpio.0
 
 lint: FRC
 	lint ${CFLAGS} ${SRCS}

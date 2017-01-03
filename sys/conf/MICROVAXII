@@ -4,8 +4,9 @@
 machine		vax
 cpu		"VAX630"
 makeoptions	INLINEOPTS="-s"
+options		NOSUBSINST
 ident		"MICROVAXII"
-timezone	8 dst
+timezone	6 dst
 maxusers	8
 options		QUOTA
 options		INET

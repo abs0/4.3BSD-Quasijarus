@@ -8,7 +8,7 @@ cpu		"VAX780"
 cpu		"VAX750"
 cpu		"VAX730"
 ident		GENERIC
-timezone	8 dst
+timezone	6 dst
 maxusers	8
 options		QUOTA
 options		INET
@@ -17,8 +17,6 @@ options		"TCP_COMPAT_42"
 options		KADB
 
 config		vmunix		swap generic
-config		hkvmunix	root on hk
-config		hpvmunix	root on hp
 
 controller	mba0	at nexus ?
 controller	mba1	at nexus ?

@@ -1,5 +1,5 @@
 #
-# 	Makefile	4.3	87/06/03
+# 	Makefile	4.4	99/09/14
 #
 MISCSRCS = Readme v6run.1
 SSRCS = compat.s memsiz.s
@@ -91,10 +91,10 @@ dofloat.o: defs.h dofloat.c
 
 install: v7run # v6run v6trc v7trc
 	install -o bin -g bin -m 755 v7run $(DESTDIR)/usr/games/lib/compat
-#	install v6run $(DESTDIR)/usr/local
-#	install v6trc $(DESTDIR)/usr/local
-#	install v7trc $(DESTDIR)/usr/local
-#	chmod 4755 $(DESTDIR)/usr/local/v?run $(DESTDIR)/usr/local/v?trc
+#	: install v6run $(DESTDIR)/usr/local
+#	: install v6trc $(DESTDIR)/usr/local
+#	: install v7trc $(DESTDIR)/usr/local
+#	: chmod 4755 $(DESTDIR)/usr/local/v?run $(DESTDIR)/usr/local/v?trc
 
 clean:
 	rm -f *.o v6run v7run v7trc v6trc

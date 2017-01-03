@@ -1,0 +1,128 @@
+.\"	@(#)bdiff.1	6.1 (Berkeley) 5/14/99
+.tr ~
+.if n .ds D " -- 
+.if t .ds D _
+.tr @|
+.de SP
+.if n .ul
+[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de DT
+.hc ^
+^...
+.hc
+..
+.de AR
+.s1
+.lp +10 5
+\fB\(em\\$1\\fR	\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+..
+.de FI
+.s1
+.lp +30 30
+\\$1	\\$2
+.i0
+..
+.ds F)  \fB\s-2FILES\s+2\fR
+.de I
+.if n .ul
+\fI\\$1\fR\c
+.if n .ul 0
+\\$2\\$3\\$4\\$5\\$6\\$7\\$8\\$9
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.th BDIFF 1 5/14/99
+.sh NAME
+bdiff \*- big diff
+.sh SYNOPSIS
+.bd bdiff
+name1 name2 [numarg]
+.SF s
+.sh DESCRIPTION
+.it Bdiff
+is used in a manner analogous to
+.it diff\c
+(1)
+to find which lines must be changed in two files to bring them
+into agreement.
+Its purpose is to allow processing of files which are too large
+for
+.it diff\c
+(1).
+.it Bdiff
+ignores lines common to the beginning of both files,
+splits the remainder of each file into
+.it n\c
+-line
+segments, and invokes
+.it diff\c
+(1)
+upon corresponding segments.
+The value of
+.it n
+is 3500 by default.
+If the optional third argument is given, and it is
+numeric, it is used as the value for
+.it n.
+This is useful in those cases in which 3500-line segments are
+too large for
+.it diff\c
+(1),
+causing it to fail.
+If
+.it name1
+(\c
+.it name2\c
+)
+is ``\(em'',
+the standard input is read.
+The optional
+.bd \(ems
+(``silent'') argument specifies that
+no diagnostics are to be printed by
+.it bdiff
+(note, however, that this does not suppress possible exclamations by
+.it diff\c
+(1)).
+If both optional arguments are specified, they must appear in the
+order indicated above.
+.s1
+The output of
+.it bdiff
+is exactly that of
+.it diff\c
+(1),
+with line numbers adjusted to account for the segmenting of the files
+(that is, to make it look as if the files had been processed
+whole).
+Note that
+because of the segmenting of the files,
+.it bdiff
+does not necessarily find a
+smallest sufficient set of file differences.
+.sh FILES
+.lp +10 10
+/tmp/bd?????
+.i0
+.sh "SEE ALSO"
+.na
+diff(1)
+.ad
+.sh DIAGNOSTICS
+Use
+.it help\c
+(1)
+for explanations.
+.tr ~~
+.tr @@

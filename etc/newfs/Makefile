@@ -5,7 +5,7 @@
 #
 #	@(#)Makefile	7.3	(Berkeley)	6/2/87
 #
-CFLAGS=	-O -DLOSTDIR -DLOSTFOUNDINO=3
+CFLAGS=	-O
 LIBC=	/lib/libc.a
 SRCS=	newfs.c mkfs.c
 OBJS=	newfs.o mkfs.o

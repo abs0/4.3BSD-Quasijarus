@@ -1,10 +1,9 @@
-/*-
- * Copyright (c) 1982, 1986 The Regents of the University of California.
- * All rights reserved.
+/*
+ * Copyright (c) 1982, 1986 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
  *
- * %sccs.include.redist.c%
- *
- *	@(#)bkmac.h	7.2 (Berkeley) 2/15/91
+ *	@(#)bkmac.h	7.1 (Berkeley) 6/4/86
  */
 
 /*
@@ -12,6 +11,7 @@
  * This is used to replace a call to
  *		(*linesw[tp->t_line].l_rint)(c,tp);
  * with
+ *
  *		if (tp->t_line == NETLDISC)
  *			BKINPUT(c, tp);
  *		else

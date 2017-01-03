@@ -1,0 +1,22 @@
+:	This shell procedure can be used to reconstruct all of SCCS
+:	by issuing the command:
+:
+:		Shell
+:
+:	while in the directory sccs.
+:
+:
+chdir hdr
+get s.*   >../logs   2>../errors
+chdir ../com
+Compile   >>../logs   2>>../errors
+echo "comobj.a created"
+chdir ../cmd
+make   >>../logs   2>>../errors
+chdir ..
+if [ -s errors ]  
+then
+	echo "Construct failed, see 'errors'"
+	exit 1
+fi
+exit 0

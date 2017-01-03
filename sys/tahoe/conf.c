@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)conf.c	7.4 (Berkeley) 5/1/89
+ *	@(#)conf.c	7.3 (Berkeley) 6/29/88
  */
 
 #include "param.h"
@@ -39,19 +39,6 @@ int	vddump(),vdsize();
 #define	vdsize		0
 #endif
 
-#include "hd.h"
-#if NHD > 0
-int	hdopen(),hdclose(),hdstrategy(),hdioctl();
-int	hddump(),hdsize();
-#else
-#define	hdopen		nodev
-#define	hdclose		nodev
-#define	hdstrategy	nodev
-#define	hdioctl		nodev
-#define	hddump		nodev
-#define	hdsize		0
-#endif
-
 #include "yc.h"
 #if NCY > 0
 int	cyopen(),cyclose(),cystrategy(),cydump();
@@ -71,8 +58,8 @@ struct bdevsw	bdevsw[] =
 	  nodev,	0,		0 },
 	{ vdopen,	vdclose,	vdstrategy,	vdioctl,	/*1*/
 	  vddump,	vdsize,		0 },
-	{ hdopen,	hdclose,	hdstrategy,	hdioctl,	/*2*/
-	  hddump,	hdsize,		0 },
+	{ nodev,	nulldev,	nodev,		nodev,		/*2*/
+	  nodev,	0,		0 },
 	{ cyopen,	cyclose,	cystrategy,	cyioctl,	/*3*/
 	  cydump,	0,		B_TAPE },
 	{ nodev,	nodev,		swstrategy,	nodev,		/*4*/
@@ -209,9 +196,9 @@ struct cdevsw	cdevsw[] =
 	vdopen,		vdclose,	rawread,	rawwrite,	/*5*/
 	vdioctl,	nodev,		nulldev,	NULL,
 	seltrue,	nodev,		vdstrategy,
-	hdopen,		hdclose,	rawread,	rawwrite,	/*6*/
-	hdioctl,	nodev,		nulldev,	NULL,
-	seltrue,	nodev,		hdstrategy,
+	nodev,		nulldev,	nodev,		nodev,		/*6*/
+	nodev,		nodev,		nulldev,	NULL,
+	seltrue,	nodev,		NULL,
 	cyopen,		cyclose,	rawread,	rawwrite,	/*7*/
 	cyioctl,	nodev,		cyreset,	NULL,
 	seltrue,	nodev,		cystrategy,

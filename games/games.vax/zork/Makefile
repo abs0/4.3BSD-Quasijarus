@@ -22,7 +22,6 @@ depend: FRC
 	mkdep ${CFLAGS} ${SRCS}
 
 install: FRC
-	-mkdir /usr/games/lib/zorklib > /dev/null 2>&1
 	install -s -o bin -g bin -m 755 zork ${DESTDIR}/usr/games/zork
 	install -c -o bin -g bin -m 755 zorklib/dtext.dat ${DESTDIR}/usr/games/lib
 	install -c -o bin -g bin -m 755 zorklib/dindex.dat ${DESTDIR}/usr/games/lib

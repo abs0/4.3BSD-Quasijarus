@@ -1,0 +1,9 @@
+F PROCESS.REP;1                     	process.rep
+F PSTATUS.C;1                       	pstatus.c
+F PTRACE.C;1                        	ptrace.c
+F PXINFO.H;1                        	pxinfo.h
+F RDWR.C;1                          	rdwr.c
+F RESUME.C;1                        	resume.c
+F RUNCONT.C;1                       	runcont.c
+F START.C;1                         	start.c
+F STEP.C;1                          	step.c

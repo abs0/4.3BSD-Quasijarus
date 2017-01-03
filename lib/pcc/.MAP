@@ -1,0 +1,4 @@
+F LOCALDEF.H;1                      	localdefs.h
+F MAKEFILE.;1                       	Makefile
+D PCC.TAH                           	pcc.tahoe
+D PCC.VAX                           	pcc.vax

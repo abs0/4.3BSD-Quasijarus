@@ -1,0 +1,11 @@
+F ARGRED.S;1                        	argred.s
+F ATAN2.S;1                         	atan2.s
+F CABS.S;1                          	cabs.s
+F CBRT.S;1                          	cbrt.s
+F INFNAN.S;1                        	infnan.s
+F MAKEFILE.;1                       	Makefile
+F MCOUNT.SED;1                      	mcount.sed
+F SINCOS.S;1                        	sincos.s
+F SQRT.S;1                          	sqrt.s
+F SUPPORT.S;1                       	support.s
+F TAN.S;1                           	tan.s

@@ -1,0 +1,10 @@
+F DEFS.;1                           	defs
+F DONAME.C;1                        	doname.c
+F DOSYS.C;1                         	dosys.c
+F FILES.C;1                         	files.c
+F GCOS.C;1                          	gcos.c
+F GRAM.Y;1                          	gram.y
+F IDENT.C;1                         	ident.c
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F MISC.C;1                          	misc.c

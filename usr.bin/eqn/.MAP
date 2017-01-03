@@ -1,0 +1,4 @@
+D COMMON_S                          	common_source
+D EQN                               	eqn
+F MAKEFILE.;1                       	Makefile
+D NEQN                              	neqn

@@ -1,0 +1,13 @@
+F EXTERN.C;1                        	extern.c
+F FLUSH_IN.C;1                      	flush_in.c
+F INIT_FIE.C;1                      	init_field.c
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F MAKE_LEV.C;1                      	make_level.c
+F MOVE.C;1                          	move.c
+F MOVE_ROB.C;1                      	move_robs.c
+F PLAY_LEV.C;1                      	play_level.c
+F QUERY.C;1                         	query.c
+F RND_POS.C;1                       	rnd_pos.c
+F ROBOTS.H;1                        	robots.h
+F SCORE.C;1                         	score.c

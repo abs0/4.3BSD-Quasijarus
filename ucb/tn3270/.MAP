@@ -1,0 +1,16 @@
+D API                               	api
+D ARPA                              	arpa
+D ASCII                             	ascii
+D CTLR                              	ctlr
+D GENERAL                           	general
+F MAKEFILE.;1                       	makefile
+F MAKEFILE.2;1                      	makefile_4.2
+F MAKEFILE.MAK;1                    	makefile.mak
+F README.;1                         	README
+D SYS_CURS                          	sys_curses
+D SYS_DOS                           	sys_dos
+D TELNET                            	telnet
+F TELNET.C;1                        	telnet.c
+F TELNET.EXT;1                      	telnet.ext
+D TOOLS                             	tools
+D UTILITIE                          	utilities

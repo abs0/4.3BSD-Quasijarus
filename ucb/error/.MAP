@@ -1,0 +1,8 @@
+F ERROR.H;1                         	error.h
+F ERRORFIL.C;1                      	errorfilter.c
+F ERRORINP.C;1                      	errorinput.c
+F ERRORMAI.C;1                      	errormain.c
+F ERRORPI.C;1                       	errorpi.c
+F ERRORSUB.C;1                      	errorsubr.c
+F ERRORTOU.C;1                      	errortouch.c
+F MAKEFILE.;1                       	Makefile

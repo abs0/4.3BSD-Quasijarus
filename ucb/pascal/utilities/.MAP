@@ -1,0 +1,16 @@
+F CONFIG.C;1                        	config.c
+F HOW_PC.;1                         	how_pc
+F HOW_PI.;1                         	how_pi
+F HOW_PIX.;1                        	how_pix
+F HOW_PXP.;1                        	how_pxp
+F MAKEFILE.;1                       	Makefile
+F PC.C;1                            	pc.c
+D PC2                               	pc2
+F PC3.C;1                           	pc3.c
+F PC3.H;1                           	pc3.h
+F PCEXTERN.AWK;1                    	pcexterns.awk
+F PIX.C;1                           	pix.c
+F PMERGE.C;1                        	pmerge.c
+F PXREF.P;1                         	pxref.p
+F PX_HEADE.C;1                      	px_header.c
+F WHOAMI.H;1                        	whoami.h

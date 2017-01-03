@@ -1,0 +1,7 @@
+F COMPAT.C;1                        	compat.c
+F DEFS.H;1                          	defs.h.ediff
+F MAKEFILE.;1                       	Makefile
+F MSG.C;1                           	msg.c.ediff
+F NAME.C;1                          	name.c.ediff
+F SERVICE.C;1                       	service.c.edif
+F V6FLAG.C;1                        	v6flag.c

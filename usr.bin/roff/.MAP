@@ -1,0 +1,6 @@
+D COMMON_S                          	common_source
+F MAKEFILE.;1                       	Makefile
+D NROFF                             	nroff
+D NROFF_TE                          	nroff_term
+D TROFF                             	troff
+D TROFF_FO                          	troff_font

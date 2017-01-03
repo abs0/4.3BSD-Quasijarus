@@ -1,0 +1,12 @@
+F :YYFIX.;1                         	:yyfix
+F CODE.C;1                          	code.c
+F FORT.H;1                          	fort.h
+F LOCAL.C;1                         	local.c
+F LOCAL2.C;1                        	local2.c
+F MAC2DEFS.H;1                      	mac2defs.h
+F MACDEFS.H;1                       	macdefs.h
+F MAKEFILE.;1                       	Makefile
+F ORDER.C;1                         	order.c
+F REL.C;1                           	rel.c
+F STAB.C;1                          	stab.c
+F TABLE.C;1                         	table.c

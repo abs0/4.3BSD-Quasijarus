@@ -1,0 +1,6 @@
+F FGETS.S;1                         	fgets.s
+F FPUTS.S;1                         	fputs.s
+F GETS.S;1                          	gets.s
+F MAKEFILE.;1                       	Makefile
+D PROFILED                          	profiled
+F PUTS.S;1                          	puts.s

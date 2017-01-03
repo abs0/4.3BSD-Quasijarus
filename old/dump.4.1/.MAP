@@ -1,0 +1,11 @@
+F DUMP.H;1                          	dump.h
+F DUMPITIM.C;1                      	dumpitime.c
+F DUMPMAIN.C;1                      	dumpmain.c
+F DUMPOPTR.C;1                      	dumpoptr.c
+F DUMPTAPE.C;1                      	dumptape.c
+F DUMPTRAV.C;1                      	dumptraverse.c
+D INCLUDE.4                         	include.4.1
+F L3TOL.C;1                         	l3tol.c
+F MAKEFILE.;1                       	Makefile
+F READ_ME.;1                        	READ_ME
+F UNCTIME.C;1                       	unctime.c

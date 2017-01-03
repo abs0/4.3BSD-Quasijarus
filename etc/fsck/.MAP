@@ -1,0 +1,13 @@
+F DIR.C;1                           	dir.c
+F FSCK.H;1                          	fsck.h
+F INODE.C;1                         	inode.c
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F PASS1.C;1                         	pass1.c
+F PASS1B.C;1                        	pass1b.c
+F PASS2.C;1                         	pass2.c
+F PASS3.C;1                         	pass3.c
+F PASS4.C;1                         	pass4.c
+F PASS5.C;1                         	pass5.c
+F SETUP.C;1                         	setup.c
+F UTILITIE.C;1                      	utilities.c

@@ -1,0 +1,6 @@
+F BIGRAM.C;1                        	bigram.c
+F CODE.C;1                          	code.c
+F FIND.C;1                          	find.c
+F MAKEFILE.;1                       	Makefile
+D TEST                              	test
+F UPDATEDB.CSH;1                    	updatedb.csh

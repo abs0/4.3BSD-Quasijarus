@@ -1,0 +1,10 @@
+F CONFIG.H;1                        	config.h
+F CONFIG.L;1                        	config.l
+F CONFIG.Y;1                        	config.y
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F MKGLUE.C;1                        	mkglue.c
+F MKHEADER.C;1                      	mkheaders.c
+F MKIOCONF.C;1                      	mkioconf.c
+F MKMAKEFI.C;1                      	mkmakefile.c
+F MKSWAPCO.C;1                      	mkswapconf.c

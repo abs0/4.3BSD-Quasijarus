@@ -1,0 +1,8 @@
+F GETTYTAB.;1                       	gettytab
+F GETTYTAB.C;1                      	gettytab.c
+F GETTYTAB.H;1                      	gettytab.h
+F GET_DATE.C;1                      	get_date.c
+F INIT.C;1                          	init.c
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F SUBR.C;1                          	subr.c

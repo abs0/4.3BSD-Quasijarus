@@ -1,0 +1,7 @@
+F ADDR.C;1                          	addr.c
+F BRKTEST.C;1                       	brktest.c
+F COPYOUT.C;1                       	copyout.c
+F ENTERADD.C;1                      	enteraddr.c
+F FPE.C;1                           	fpe.c
+D SPS                               	sps
+F V6MAIL.C;1                        	v6mail.c

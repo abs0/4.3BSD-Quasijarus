@@ -1,0 +1,9 @@
+D C                                 	C
+D EDITOR                            	editor
+D EQN                               	eqn
+D FILES                             	files
+F LINFO.;1                          	Linfo
+D MACROS                            	macros
+F MAKEFILE.;1                       	Makefile
+D MOREFILE                          	morefiles
+F XINFO.;1                          	Xinfo

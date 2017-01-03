@@ -1,0 +1,9 @@
+F DIRLIST.;1                        	dirlist
+F L.CMD;1                           	L.cmds
+F L.SYS;1                           	L.sys
+F LOGIN.COM;1                       	login.com
+F SERVERS.DAT;1                     	servers.dat
+F SERVICES.;1                       	services
+F STARTUUC.COM;1                    	startuucp.com
+F UUCPCLEA.COM;1                    	uucpclean.com
+F UUCPCLEA.SH;1                     	uucpclean.sh

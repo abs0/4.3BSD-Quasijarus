@@ -1,0 +1,14 @@
+F CODEGEN.L;1                       	codeGen.l
+F DFT.FP;1                          	dft.fp
+F FPMACS.L;1                        	fpMacs.l
+F FPMAIN.L;1                        	fpMain.l
+F FPMEASUR.L;1                      	fpMeasures.l
+F FPPP.L;1                          	fpPP.l
+F HANDLERS.L;1                      	handlers.l
+F MAKEFILE.;1                       	Makefile
+F PARSER.L;1                        	parser.l
+F PRIMFP.L;1                        	primFp.l
+F RUNFP.L;1                         	runFp.l
+F SCANNER.L;1                       	scanner.l
+F SPECIALS.L;1                      	specials.l
+F UTILS.L;1                         	utils.l

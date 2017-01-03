@@ -1,0 +1,10 @@
+F CONSTANT.DDL;1                    	constants.ddl
+F LOCALES.DDL;1                     	locales.ddl
+F LOCNAMES.DDL;1                    	locnames.ddl
+F OBJECTS.DDL;1                     	objects.ddl
+F READ_ME.;1                        	READ_ME
+F ROUTINES.DDL;1                    	routines.ddl
+F SAMPLE.DDL;1                      	sample.ddl
+F SAMPLE.IDE;1                      	sample.ideas
+F TRANSIT.DDL;1                     	transit.ddl
+F VERBS.DDL;1                       	verbs.ddl

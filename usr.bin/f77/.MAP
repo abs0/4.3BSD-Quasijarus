@@ -1,0 +1,6 @@
+D F77.TAH                           	f77.tahoe
+D F77.VAX                           	f77.vax
+D FPR                               	fpr
+D FSPLIT                            	fsplit
+F MAKEFILE.;1                       	Makefile
+D TESTF77                           	testf77

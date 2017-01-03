@@ -1,0 +1,6 @@
+D ADB.TAH                           	adb.tahoe
+D ADB.VAX                           	adb.vax
+F MAKEFILE.;1                       	Makefile
+D SCRIPTS                           	scripts
+D SCRIPTS.TAH                       	scripts.tahoe
+D SCRIPTS.VAX                       	scripts.vax

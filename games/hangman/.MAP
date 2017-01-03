@@ -1,0 +1,12 @@
+F ENDGAME.C;1                       	endgame.c
+F EXTERN.C;1                        	extern.c
+F GETGUESS.C;1                      	getguess.c
+F GETWORD.C;1                       	getword.c
+F HANGMAN.H;1                       	hangman.h
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F PLAYGAME.C;1                      	playgame.c
+F PRDATA.C;1                        	prdata.c
+F PRMAN.C;1                         	prman.c
+F PRWORD.C;1                        	prword.c
+F SETUP.C;1                         	setup.c

@@ -1,0 +1,9 @@
+F DIRBLK.;1                         	dirblk
+F FINDPROC.NXT;1                    	findproc.nxt
+F FRAME.;1                          	frame
+F MAKEFILE.;1                       	Makefile
+F PCB.;1                            	pcb
+F PROC.;1                           	proc
+F SETPROC.NXT;1                     	setproc.nxt
+F TRAPFRAM.;1                       	trapframe
+F TTY.;1                            	tty

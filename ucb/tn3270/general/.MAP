@@ -1,0 +1,8 @@
+F BSUBS.EXT;1                       	bsubs.ext
+F GENBSUBS.C;1                      	genbsubs.c
+F GENERAL.H;1                       	general.h
+F GLOBALS.C;1                       	globals.c
+F GLOBALS.H;1                       	globals.h
+F MAKEFILE.;1                       	makefile
+F MAKEFILE.MAK;1                    	makefile.mak
+F VAXBSUBS.S;1                      	vaxbsubs.s

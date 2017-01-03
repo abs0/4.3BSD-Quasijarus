@@ -1,0 +1,37 @@
+#
+# msokolov's Polygon (KA650)
+#
+machine		vax
+cpu		"VAX630"	# just in case
+cpu		"VAX650"
+makeoptions	INLINEOPTS="-s"
+ident		POLYGON
+timezone	5 dst
+maxusers	32
+options		INET
+options		"TCP_COMPAT_42"
+#options		KADB
+
+config		vmunix	root on ra3 swap on ra3 and ra1
+
+controller	uba0	at nexus ?
+
+controller	tmscp0	at uba? csr 0174500		vector tmscpintr
+tape		tms0	at tmscp0 drive 0
+
+controller	uda0	at uba? csr 0172150		vector udaintr
+disk		ra0	at uda0 drive 0
+disk		ra1	at uda0 drive 1
+disk		ra2	at uda0 drive 2
+disk		ra3	at uda0 drive 3
+
+device		dz0	at uba? csr 0160100 flags 0xff	vector dzrint dzxint
+
+controller	zs0	at uba? csr 0172520		vector tsintr
+device		ts0	at zs0 drive 0
+
+pseudo-device	pty
+pseudo-device	loop
+pseudo-device	ether
+
+device		qe0	at uba? csr 0174440	vector qeintr

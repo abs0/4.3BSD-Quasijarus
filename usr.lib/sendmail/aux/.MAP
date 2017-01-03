@@ -1,0 +1,13 @@
+F ADDR.C;1                          	addr.c
+F ARPA.C;1                          	arpa.c
+F BBN_DAEM.C;1                      	bbn_daemon.c
+F DELIVERM.SH;1                     	delivermail.sh
+F MAIL-DM.C;1                       	mail-dm.c
+F MAIL.C;1                          	mail.c
+F MAILSTAT.C;1                      	mailstats.c
+F MAKEFILE.;1                       	Makefile
+F MATCHHDR.C;1                      	matchhdr.c
+F MCONNECT.C;1                      	mconnect.c
+F NEWALIAS.C;1                      	newaliases.c
+F PRALIASE.C;1                      	praliases.c
+F RMAIL.C;1                         	rmail.c

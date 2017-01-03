@@ -1,0 +1,13 @@
+F DOHITS.C;1                        	dohits.c
+F DOHITS.H;1                        	dohits.h
+F ECTYPE.C;1                        	ectype.c
+F ECTYPE.H;1                        	ectype.h
+F MAKEFILE.;1                       	makefile
+F MAKEFILE.MAK;1                    	makefile.mak
+F MKASTODS.C;1                      	mkastods.c
+F MKASTOSC.C;1                      	mkastosc.c
+F MKDCTYPE.C;1                      	mkdctype.c
+F MKDSTOAS.C;1                      	mkdstoas.c
+F MKHITS.C;1                        	mkhits.c
+F MKMAKE.Y;1                        	mkmake.y
+F PRT3270.C;1                       	prt3270.c

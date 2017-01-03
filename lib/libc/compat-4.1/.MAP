@@ -1,0 +1,16 @@
+D COMPAT-4.000                      	compat-4.1.vax
+D COMPAT-4.1                        	compat-4.1.tahoe
+F FTIME.C;1                         	ftime.c
+F GETPW.C;1                         	getpw.c
+F GTTY.C;1                          	gtty.c
+F MAKEFILE.;1                       	Makefile
+F NICE.C;1                          	nice.c
+F PAUSE.C;1                         	pause.c
+D PROFILED                          	profiled
+F RAND.C;1                          	rand.c
+F STTY.C;1                          	stty.c
+F TELL.C;1                          	tell.c
+F TIMES.C;1                         	times.c
+F UTIME.C;1                         	utime.c
+F VLIMIT.C;1                        	vlimit.c
+F VTIMES.C;1                        	vtimes.c

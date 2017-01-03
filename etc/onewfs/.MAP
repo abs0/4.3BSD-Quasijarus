@@ -1,0 +1,4 @@
+F MAKEFILE.;1                       	Makefile
+F MKFS.C;1                          	mkfs.c
+F NEWFS.C;1                         	newfs.c
+D SYS                               	sys

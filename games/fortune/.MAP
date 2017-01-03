@@ -1,0 +1,14 @@
+F DO_TROFF.;1                       	Do_troff
+F FORTUNE.C;1                       	fortune.c
+F MAKEFILE.;1                       	Makefile
+F NOTES.;1                          	notes
+F OBSCENE.;1                        	obscene
+F OBSCENE.SP;1                      	obscene.sp.ok
+F RND.C;1                           	rnd.c
+F SCENE.;1                          	scene
+F SCENE.SP;1                        	scene.sp.ok
+F STRFILE.C;1                       	strfile.c
+F STRFILE.H;1                       	strfile.h
+F TROFF.MAC;1                       	Troff.mac
+F TROFF.SED;1                       	Troff.sed
+F UNSTR.C;1                         	unstr.c

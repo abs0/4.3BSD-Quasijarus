@@ -1,0 +1,4 @@
+F GETHOSTE.C;1                      	gethostent.c
+F GETHOSTN.C;1                      	gethostnamadr.c
+F MAKEFILE.;1                       	Makefile
+D PROFILED                          	profiled

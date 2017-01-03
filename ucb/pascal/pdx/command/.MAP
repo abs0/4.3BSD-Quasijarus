@@ -1,0 +1,5 @@
+F CHANGES.;1                        	Changes
+F GRAMMAR.YAC;1                     	grammar.yacc
+F REMAKE.C;1                        	remake.c
+F TOKEN.LEX;1                       	token.lex
+F Y.TAB;1                           	y.tab.h

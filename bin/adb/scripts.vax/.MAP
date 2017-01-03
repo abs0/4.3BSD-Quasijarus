@@ -1,0 +1,17 @@
+F DIRBLK.;1                         	dirblk
+F DMCSTATS.;1                       	dmcstats
+F FINDPROC.NXT;1                    	findproc.nxt
+F FRAME.;1                          	frame
+F IFUBA.;1                          	ifuba
+F IFUBINFO.;1                       	ifubinfo
+F IFXMT.;1                          	ifxmt
+F MAKEFILE.;1                       	Makefile
+F MBA_DEVI.;1                       	mba_device
+F MBA_HD.;1                         	mba_hd
+F PCB.;1                            	pcb
+F PROC.;1                           	proc
+F SETPROC.NXT;1                     	setproc.nxt
+F STACKTRA.;1                       	stacktrace
+F TRAPFRAM.;1                       	trapframe
+F TTY.;1                            	tty
+F UBAHD.;1                          	ubahd

@@ -1,0 +1,6 @@
+F ALLPRINT.C;1                      	allprint.c
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F REJECT.C;1                        	reject.c
+F YYLESS.C;1                        	yyless.c
+F YYWRAP.C;1                        	yywrap.c

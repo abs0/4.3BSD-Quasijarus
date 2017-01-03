@@ -1,0 +1,7 @@
+F FTPCMD.Y;1                        	ftpcmd.y
+F FTPD.C;1                          	ftpd.c
+L GLOB.C;1                          	glob.c	../../ucb/ftp/glob.c
+F MAKEFILE.;1                       	Makefile
+F NEWVERS.SH;1                      	newvers.sh
+F VERS.C;1                          	vers.c
+F VERSION.;1                        	version

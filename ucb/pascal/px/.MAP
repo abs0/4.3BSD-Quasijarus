@@ -1,0 +1,15 @@
+F CLEAN.SED;1                       	clean.sed
+F INT.C;1                           	int.c
+F INTERP.C;1                        	interp.c
+F MACHDEP.H;1                       	machdep.h
+F MAKEFILE.;1                       	Makefile
+F MAKEFILE.BAK;1                    	Makefile.bak
+F MC68000.SED;1                     	mc68000.sed
+F READ_ME.;1                        	READ_ME
+F TAHOE.SED;1                       	tahoe.sed
+F UTILITIE.C;1                      	utilities.c
+F VARS.H;1                          	vars.h
+F VAX.SED;1                         	vax.sed
+F VERSION.000;1                     	Version.c
+F VERSION.C;1                       	version.c
+L WHOAMI.H;1                        	whoami.h	../src/piwhoami.h

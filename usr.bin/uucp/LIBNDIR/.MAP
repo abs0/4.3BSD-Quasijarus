@@ -1,0 +1,9 @@
+F CLOSEDIR.C;1                      	closedir.c
+F DIRECTOR.3S;1                     	directory.3s
+F MAKEFILE.;1                       	Makefile
+F NDIR.H;1                          	ndir.h
+F OPENDIR.C;1                       	opendir.c
+F READDIR.C;1                       	readdir.c
+F README.;1                         	README
+F SEEKDIR.C;1                       	seekdir.c
+F TELLDIR.C;1                       	telldir.c

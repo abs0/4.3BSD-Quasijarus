@@ -1,0 +1,6 @@
+F DDLCOMP.;1                        	ddlcomp
+F DDLRUN.;1                         	ddlrun
+D DOC                               	doc
+F MAKEFILE.;1                       	Makefile
+F READ_ME.;1                        	READ_ME
+D SAMPLE                            	sample

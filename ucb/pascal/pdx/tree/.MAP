@@ -1,0 +1,11 @@
+F ASSIGN.C;1                        	assign.c
+F BUILD.C;1                         	build.c
+F EVAL.C;1                          	eval.c
+F MISC.C;1                          	misc.c
+F OPINFO.C;1                        	opinfo.c
+F OPINFO.H;1                        	opinfo.h
+F PRTREE.C;1                        	prtree.c
+F TFREE.C;1                         	tfree.c
+F TRACESTO.C;1                      	tracestop.c
+F TREE.REP;1                        	tree.rep
+F TR_EQUAL.C;1                      	tr_equal.c

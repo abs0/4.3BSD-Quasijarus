@@ -1,0 +1,17 @@
+F :YYFIX.;1                         	:yyfix
+F HASH.C;1                          	hash.c
+F LINT.C;1                          	lint.c
+F LLIB-LC.;1                        	llib-lc
+F LLIB-LCU.;1                       	llib-lcurses
+F LLIB-LDB.;1                       	llib-ldbm
+F LLIB-LM.;1                        	llib-lm
+F LLIB-LMP.;1                       	llib-lmp
+F LLIB-LPL.;1                       	llib-lplot
+F LLIB-LTE.;1                       	llib-ltermcap
+F LLIB-POR.;1                       	llib-port
+F LMANIFES.H;1                      	lmanifest.h
+F LPASS2.C;1                        	lpass2.c
+F MACDEFS.H;1                       	macdefs.h
+F MAKEFILE.;1                       	Makefile
+F READ_ME.;1                        	READ_ME
+F SHELL.;1                          	SHELL

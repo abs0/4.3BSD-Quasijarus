@@ -1,0 +1,12 @@
+F CARDS.C;1                         	cards.c
+F CRIB.C;1                          	crib.c
+F CRIBBAGE.H;1                      	cribbage.h
+F CRIBBAGE.N;1                      	cribbage.n
+F CRIBCUR.H;1                       	cribcur.h
+F DECK.H;1                          	deck.h
+F EXTERN.C;1                        	extern.c
+F IO.C;1                            	io.c
+F MACRO.;1                          	macro
+F MAKEFILE.;1                       	Makefile
+F SCORE.C;1                         	score.c
+F SUPPORT.C;1                       	support.c

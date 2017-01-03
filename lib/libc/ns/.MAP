@@ -1,0 +1,4 @@
+F MAKEFILE.;1                       	Makefile
+F NS_ADDR.C;1                       	ns_addr.c
+F NS_NTOA.C;1                       	ns_ntoa.c
+D PROFILED                          	profiled

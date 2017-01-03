@@ -1,0 +1,10 @@
+F S.000;1                           	s.ucbarpa.mc
+F S.001;1                           	s.ucbproto.mc
+F S.002;1                           	s.ucbtcp_fw.mc
+F S.003;1                           	s.cadgroup.mc
+F S.ARP;1                           	s.arpa.mc
+F S.CAD;1                           	s.cad.mc
+F S.COG;1                           	s.cogsci.mc
+F S.MAK;1                           	s.Makefile
+F S.OKE;1                           	s.okeeffe.mc
+F S.UCB;1                           	s.ucbvax.mc

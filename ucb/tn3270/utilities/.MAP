@@ -1,0 +1,6 @@
+F MAKEFILE.;1                       	makefile
+F MAKEFILE.MAK;1                    	makefile.mak
+D SRCCMD                            	srccmd
+F TARREAD.EXE;1                     	tarread.exe
+F TNCOMP.H;1                        	tncomp.h
+F TNRECV.C;1                        	tnrecv.c

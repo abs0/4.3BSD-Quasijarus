@@ -1,0 +1,10 @@
+F ATTRIBUT.C;1                      	attributes.c
+F BTYPES.H;1                        	btypes.h
+F CLASSES.H;1                       	classes.h
+F PREDICAT.C;1                      	predicates.c
+F PRINT.C;1                         	print.c
+F PRINTDEC.C;1                      	printdecl.c
+F PRINTVAL.C;1                      	printval.c
+F SYM.REP;1                         	sym.rep
+F TREE.C;1                          	tree.c
+F WHICH.C;1                         	which.c

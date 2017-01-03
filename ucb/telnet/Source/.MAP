@@ -1,0 +1,16 @@
+F COMMANDS.C;1                      	commands.c
+F DEFINES.H;1                       	defines.h
+F EXTERNS.H;1                       	externs.h
+F FDSET.H;1                         	fdset.h
+F GENERAL.H;1                       	general.h
+F MAIN.C;1                          	main.c
+F NETWORK.C;1                       	network.c
+F RING.C;1                          	ring.c
+F RING.H;1                          	ring.h
+F SYS_BSD.C;1                       	sys_bsd.c
+F SYS_DOS.C;1                       	sys_dos.c
+F TELNET.C;1                        	telnet.c
+F TERMINAL.C;1                      	terminal.c
+F TN3270.C;1                        	tn3270.c
+F TYPES.H;1                         	types.h
+F UTILITIE.C;1                      	utilities.c

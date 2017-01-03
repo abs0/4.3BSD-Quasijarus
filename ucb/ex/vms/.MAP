@@ -1,0 +1,10 @@
+F EX.OPT;1                          	ex.opt
+F FTP.GET;1                         	ftp.get
+F FTP.PUT;1                         	ftp.put
+F MAKEFILE.COM;1                    	makefile.com
+F README.;1                         	README
+F TERMLIB.C;1                       	termlib.c
+F TGOTO.C;1                         	tgoto.c
+F TPUTS.C;1                         	tputs.c
+F VMS.C;1                           	vms.c
+F VMSTTY.H;1                        	vmstty.h

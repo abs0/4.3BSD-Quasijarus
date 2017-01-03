@@ -1,0 +1,8 @@
+F MAKEFILE.;1                       	Makefile
+D PROFILED                          	profiled
+F TC1.C;1                           	tc1.c
+F TC2.C;1                           	tc2.c
+F TC3.C;1                           	tc3.c
+F TERMCAP.C;1                       	termcap.c
+F TGOTO.C;1                         	tgoto.c
+F TPUTS.C;1                         	tputs.c

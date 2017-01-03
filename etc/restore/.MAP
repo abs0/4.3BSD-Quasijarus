@@ -1,0 +1,10 @@
+F DIRS.C;1                          	dirs.c
+F INTERACT.C;1                      	interactive.c
+F MAIN.C;1                          	main.c
+F MAKEFILE.;1                       	Makefile
+F RESTORE.C;1                       	restore.c
+F RESTORE.H;1                       	restore.h
+F SPCL.ADB;1                        	spcl.adb
+F SYMTAB.C;1                        	symtab.c
+F TAPE.C;1                          	tape.c
+F UTILITIE.C;1                      	utilities.c

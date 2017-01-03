@@ -1,0 +1,14 @@
+F ABSTRACT.;1                       	abstract
+F DIAGRAM.;1                        	diagram
+L INTRO.ME;1                        	intro.me	/usr/doc/smm/16.sendmail/intro.me
+F MAKEFILE.;1                       	Makefile
+L OP.ME;1                           	op.me	/usr/doc/smm/07.sendmailop/op.me
+F OP.T;1                            	op.t
+F REFS.;1                           	refs
+F RFC819.LPR;1                      	rfc819.lpr
+F RFC821.LPR;1                      	rfc821.lpr
+F RFC822.LPR;1                      	rfc822.lpr
+F SPELL.GOO;1                       	spell.good
+F SPELL.OUT;1                       	spell.out
+F USENIX.;1                         	usenix
+F USENIX.ME;1                       	usenix.me

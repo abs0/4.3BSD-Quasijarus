@@ -1,0 +1,16 @@
+F ATAND.AWK;1                       	atand.awk
+F ATAND.BC;1                        	atand.bc
+F ATAND.C;1                         	atand.c
+F ATAND.H;1                         	atand.h
+F DOC.;1                            	Doc
+F EXPD.AWK;1                        	expd.awk
+F EXPD.BC;1                         	expd.bc
+F EXPD.C;1                          	expd.c
+F EXPD.TAB;1                        	expd.tab.c
+F LOGD.AWK;1                        	logd.awk
+F LOGD.BC;1                         	logd.bc
+F LOGD.C;1                          	logd.c
+F LOGD.H;1                          	logd.h
+F MAKEFILE.;1                       	Makefile
+F SIND.C;1                          	sind.c
+F SQRTD.C;1                         	sqrtd.c

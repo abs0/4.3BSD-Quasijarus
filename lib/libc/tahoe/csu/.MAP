@@ -1,0 +1,9 @@
+F CRT0.S;1                          	crt0.s
+F GCRT0.H;1                         	gcrt0.h
+F GMON.C;1                          	gmon.c
+L GMON.EX;1                         	gmon.ex	mon.ex
+F GMON.H;1                          	gmon.h
+F MAKEFILE.;1                       	Makefile
+F MCRT0.S;1                         	mcrt0.s
+F MON.C;1                           	mon.c
+F MON.EX;1                          	mon.ex

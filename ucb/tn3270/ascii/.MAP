@@ -1,0 +1,11 @@
+F DEFAULT.MAP;1                     	default.map
+F EBCTAB.C;1                        	ebctab.c
+F MAKEFILE.;1                       	makefile
+F MAKEFILE.MAK;1                    	makefile.mak
+F MAP3270.C;1                       	map3270.c
+F MAP3270.EXT;1                     	map3270.ext
+F MSET.C;1                          	mset.c
+F STATE.H;1                         	state.h
+F TERMCODE.M4;1                     	termcodes.m4
+F TERMIN.C;1                        	termin.c
+F TERMIN.EXT;1                      	termin.ext

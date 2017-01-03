@@ -1,0 +1,11 @@
+F BUG.H;1                           	bug.h
+F BUGFILER.C;1                      	bugfiler.c
+F BUGFORMA.;1                       	bugformat
+F ERROR.C;1                         	error.c
+F GETHEAD.C;1                       	gethead.c
+F MAKEFILE.;1                       	Makefile
+F PROCESS.C;1                       	process.c
+F REDIST.C;1                        	redist.c
+F REPLY.C;1                         	reply.c
+F SENDBUG.SH;1                      	sendbug.sh
+F TODO.;1                           	TODO

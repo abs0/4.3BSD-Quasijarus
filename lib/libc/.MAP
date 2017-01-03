@@ -1,0 +1,11 @@
+D COMPAT-4.1                        	compat-4.1
+D COMPAT-4.3                        	compat-4.3
+D COMPAT-S                          	compat-sys5
+D GEN                               	gen
+D INET                              	inet
+F MAKEFILE.;1                       	Makefile
+D NET                               	net
+D NS                                	ns
+D STDIO                             	stdio
+D TAHOE                             	tahoe
+D VAX                               	vax

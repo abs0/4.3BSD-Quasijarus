@@ -1,0 +1,4 @@
+D OUTPUT                            	output
+F RUNTEST.;1                        	runtest
+F TESTF77.;1                        	testf77
+D TESTS                             	tests

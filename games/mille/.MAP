@@ -1,0 +1,16 @@
+F COMP.C;1                          	comp.c
+F END.C;1                           	end.c
+F EXTERN.C;1                        	extern.c
+F INIT.C;1                          	init.c
+F MAKEFILE.;1                       	Makefile
+F MILLE.C;1                         	mille.c
+F MILLE.H;1                         	mille.h
+F MISC.C;1                          	misc.c
+F MOVE.C;1                          	move.c
+F PRINT.C;1                         	print.c
+F ROLL.C;1                          	roll.c
+F SAVE.C;1                          	save.c
+F TABLE.C;1                         	table.c
+F TYPES.C;1                         	types.c
+F UNCTRL.H;1                        	unctrl.h
+F VARPUSH.C;1                       	varpush.c

@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)tmac.an.new	6.5 (Berkeley) 7/5/88
+.\"	@(#)tmac.an.new	6.6 (Berkeley) 5/28/02
 .\"
 '	DT, PD, SM, and B macros invoked internally.
 '	# month name
@@ -21,10 +21,12 @@
 .if "\nm"11" .ds ]m December
 '	# set the date
 .if n \{.nr m \nm+1
-.	 ie \nd .ds ]W Modified \nm/\nd/\ny
+.	 ie \nd \{.nr y \ny%100
+.		   ds ]W Modified \nm/\nd/\ny\}
 .	 el .ds ]W Printed \n(mo/\n(dy/\n(yr\}
-.if t \{.ie \nd .ds ]W \*(]m \nd, 19\ny
-.	 el .ds ]W \*(]m \n(dy, 19\n(yr\}
+.if t \{.ie \nd \{.if \ny<1900 .nr y \ny+1900
+.		   ds ]W \*(]m \nd, \ny\}
+.	 el .ds ]W \*(]m \n(dy, \n(cn\n(yr\}
 .if t .tr *\(**
 .ie n \{\
 .	ds lq \&"\"

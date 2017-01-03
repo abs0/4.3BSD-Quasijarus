@@ -4,7 +4,7 @@
 # include	"../hdr/had.h"
 # include	<sys/dir.h>
 
-static char Sccsid[] = "@(#)get.c	4.9	2/2/88";
+static char Sccsid[] = "@(#)get.c	4.10	12/14/99";
 
 int	Debug = 0;
 struct packet gpkt;
@@ -474,11 +474,18 @@ register char *old, *new;
 	*new++ = *old++;
 	if (*old != '/')
 		*new++ = *old++;
+	old++;
 	*new++ = ',';
 	*new++ = ' ';
-	*new++ = '1'; *new++ = '9';	/* works for this century at least */
-	*new++ = *++old;
-	*new++ = *++old;
+	if (*old >= '7') {
+		*new++ = '1';
+		*new++ = '9';
+	} else {
+		*new++ = '2';
+		*new++ = '0';
+	}
+	*new++ = *old++;
+	*new++ = *old++;
 	*new = '\0';
 }
 

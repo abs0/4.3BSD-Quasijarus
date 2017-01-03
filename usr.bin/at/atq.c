@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)atq.c	5.1 (Berkeley) 6/6/85";
+static char sccsid[] = "@(#)atq.c	5.2 (Berkeley) 12/31/99";
 #endif not lint
 
 /*
@@ -36,6 +36,7 @@ static char sccsid[] = "@(#)atq.c	5.1 (Berkeley) 6/6/85";
 # include <sys/dir.h>
 # include <sys/stat.h>
 # include <sys/time.h>
+# include <tzfile.h>
 # include <pwd.h>
 # include <ctype.h>
  
@@ -361,7 +362,7 @@ plastrun()
 	 * Print the time that the spooling area was last updated.
 	 */
 	printf("\n LAST EXECUTION TIME: %s ",mthnames[loc->tm_mon]);
-	printf("%d, 19%d ",loc->tm_mday,loc->tm_year);
+	printf("%d, %d ",loc->tm_mday,loc->tm_year + TM_YEAR_BASE);
 	printf("at %d:%02d\n\n",loc->tm_hour,loc->tm_min);
 }
 
@@ -403,13 +404,13 @@ char *filename;
 	 * Pick off the necessary info from the file name and convert the day
 	 * of year to a month and day of month.
 	 */
-	sscanf(filename,"%2d.%3d.%2d%2d",&year,&yday,&hour,&min);
+	sscanf(filename,"%4d.%3d.%2d%2d",&year,&yday,&hour,&min);
 	get_mth_day(year,yday,&month,&day);
 
 	/*
 	 * Format the execution date of a job.
 	 */
-	sprintf(date,"%3s %2d, 19%2d %02d:%02d",mthnames[month],
+	sprintf(date,"%3s %2d, %4d %02d:%02d",mthnames[month],
 						    day, year,hour,min);
 
 	/*
@@ -444,7 +445,7 @@ int year, dayofyear, *month, *day;
 	/*
 	 * Are we dealing with a leap year?
 	 */
-	leap = ((year%4 == 0 && year%100 != 0) || year%100 == 0);
+	leap = isleap(year);
 
 	/*
 	 * Calculate the month of the year and day of the month.
@@ -510,7 +511,7 @@ char *file;
 
 /*
  * Do we want to include a file in the queue? (used by "scandir") We are looking
- * for files with following syntax: yy.ddd.hhhh. so the test is made to see if 
+ * for files with following syntax: yyyy.ddd.hhhh. so the test is made to see if
  * the file name has three dots in it. This test will suffice since the only
  * other files in /usr/spool/at don't have any dots in their name.
  */

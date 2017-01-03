@@ -91,7 +91,7 @@ get_addrs.o: /usr/include/sys/socket.h /usr/include/netinet/in.h talk.h
 get_addrs.o: /usr/include/curses.h /usr/include/stdio.h /usr/include/sgtty.h
 get_addrs.o: /usr/include/sys/ioctl.h /usr/include/sys/ttychars.h
 get_addrs.o: /usr/include/sys/ttydev.h /usr/include/utmp.h /usr/include/errno.h
-get_addrs.o: /usr/include/netdb.h
+get_addrs.o: /usr/include/arpa/inet.h /usr/include/netdb.h
 ctl_transact.o: ctl_transact.c talk_ctl.h /usr/include/sys/types.h
 ctl_transact.o: /usr/include/protocols/talkd.h /usr/include/sys/types.h
 ctl_transact.o: /usr/include/sys/socket.h /usr/include/netinet/in.h talk.h

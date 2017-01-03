@@ -1,4 +1,4 @@
-#	@(#)Makefile	1.7	(Berkeley)	88/12/22
+#	@(#)Makefile	1.8	(Berkeley)	01/05/27
 #
 CFLAGS = -O -w
 PWOBJS=	giveup.o lockit.o rename.o userdir.o \
@@ -8,7 +8,7 @@ PWOBJS=	giveup.o lockit.o rename.o userdir.o \
 	patoi.o patol.o repeat.o repl.o satoi.o sname.o substr.o trnslat.o \
 	verify.o any.o zeropad.o
 WROBJS=	write.o
-PW2OBJS=logname.o pexec.o
+PW2OBJS=logname.o pexec.o index.o
 
 all: libpw.a libwrt.a libPW.a
 	mv -f libpw.a libwrt.a libPW.a ..

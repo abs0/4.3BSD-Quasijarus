@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)cpp.c	1.17 10/22/87";
+static char sccsid[] = "@(#)cpp.c	1.19 4/17/00";
 #endif lint
 
 #ifdef FLEXNAMES
@@ -146,7 +146,7 @@ STATIC	char	*dirnams[MAXINC];	/* actual directory of #include files */
 STATIC	int	fins[MAXINC];
 STATIC	int	lineno[MAXINC];
 
-STATIC	char	*dirs[10];	/* -I and <> directories */
+STATIC	char	*dirs[18];	/* -I and <> directories */
 char *strdex(), *copy(), *subst(), *trmdir();
 struct symtab *stsym();
 STATIC	int	fin	= FIRSTOPEN;
@@ -185,7 +185,7 @@ static jmp_buf env;
 extern FILE *_f[];
 # define symsiz 500
 # else
-# define symsiz 2000		/* std = 500, wnj aug 1979 */
+# define symsiz 4000		/* std = 500, wnj aug 1979 */
 # endif
 STATIC	struct symtab stab[symsiz];
 
@@ -1154,7 +1154,7 @@ main(argc,argv)
 					*prund++ = argv[i]+2;
 					continue;
 				case 'I':
-					if (nd>8) pperror("excessive -I file (%s) ignored",argv[i]);
+					if (nd>16) pperror("excessive -I file (%s) ignored",argv[i]);
 					else dirs[nd++] = argv[i]+2;
 					continue;
 				case '\0': continue;

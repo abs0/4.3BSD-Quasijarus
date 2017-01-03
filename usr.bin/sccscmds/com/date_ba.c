@@ -1,7 +1,7 @@
 # include	"../hdr/defines.h"
 # define DO2(p,n,c)	*p++ = n/10 + '0'; *p++ = n%10 + '0'; *p++ = c;
 
-SCCSID(@(#)date_ba	2.1.1.1);
+static char Sccsid[] = "@(#)date_ba.c	5.2	12/14/99";
 
 date_ba(bdt,adt)
 long *bdt;
@@ -12,7 +12,7 @@ char *adt;
 
 	lcltm = localtime(bdt);
 	p = adt;
-	DO2(p,lcltm->tm_year,'/');
+	DO2(p,(lcltm->tm_year % 100),'/');
 	DO2(p,(lcltm->tm_mon + 1),'/');
 	DO2(p,lcltm->tm_mday,' ');
 	DO2(p,lcltm->tm_hour,':');

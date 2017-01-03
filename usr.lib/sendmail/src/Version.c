@@ -17,14 +17,21 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)version.c	5.61.1.1 (Berkeley) 10/1/99";
+static char sccsid[] = "@(#)version.c	5.61.1.2 (Berkeley) 5/29/02";
 #endif /* not lint */
 
-char	Version[] = "5.61.1.1";
+char	Version[] = "5.61.1.2";
 
 # ifdef COMMENT
 
 SCCS/s.version.c:
+
+D 5.61.1.2	02/05/29 22:17:11	msokolov	486	485	00000/00000/00023
+minor Y2K fix
+fix handling of null from addresses
+Log source IP addresses of everything coming from Internet (daemon mode).
+This feature will help catch Sendmail abusers while not suspending any
+Sendmail civil liberties.
 
 D 5.61.1.1	99/10/01 18:43:01	msokolov	485	484	00000/00000/00023
 started Quasijarus Sendmail
@@ -2102,13 +2109,13 @@ conf.o:
 convtime.o:
 	convtime.c	5.3 (Berkeley) 6/30/88
 daemon.o:
-	daemon.c	5.27 (Berkeley) 9/20/88 (with daemon mode)
+	daemon.c	5.29 (Berkeley) 5/29/02 (with daemon mode)
 deliver.o:
-	deliver.c	5.23 (Berkeley) 9/20/88
+	deliver.c	5.24 (Berkeley) 4/3/00
 domain.o:
 	domain.c	5.18 (Berkeley) 1/1/89 (with name server)
 envelope.o:
-	envelope.c	5.15 (Berkeley) 6/30/88
+	envelope.c	5.17 (Berkeley) 4/3/00
 err.o:
 	err.c	5.9 (Berkeley) 6/30/88
 headers.o:
@@ -2118,7 +2125,7 @@ macro.o:
 main.o:
 	 Copyright (c) 1988 Regents of the University of California.
 	main.c	5.19 (Berkeley) 9/20/88
-	sendmail.h	5.13		9/20/88
+	sendmail.h	5.14		5/29/02
 parseaddr.o:
 	parseaddr.c	5.9 (Berkeley) 6/30/88
 queue.o:
@@ -2130,7 +2137,7 @@ recipient.o:
 savemail.o:
 	savemail.c	5.9 (Berkeley) 6/30/88
 srvrsmtp.o:
-	srvrsmtp.c	5.22 (Berkeley) 6/30/88 (with SMTP)
+	srvrsmtp.c	5.23 (Berkeley) 5/29/02 (with SMTP)
 stab.o:
 	stab.c	5.5 (Berkeley) 6/30/88
 stats.o:

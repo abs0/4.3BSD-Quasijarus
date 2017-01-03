@@ -13,6 +13,7 @@
 
 
 
+
 OP("chmk", CORE, 0xbc, 1, A_RW,0,0,0,0,0),
 OP("chme", CORE, 0xbd, 1, A_RW,0,0,0,0,0),
 OP("chms", CORE, 0xbe, 1, A_RW,0,0,0,0,0),

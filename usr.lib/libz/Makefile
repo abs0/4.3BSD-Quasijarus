@@ -1,6 +1,6 @@
 # Makefile for libz
 #
-#	@(#)Makefile	5.2 (Berkeley) 1/19/99
+#	@(#)Makefile	5.4 (Berkeley) 8/7/00
 
 CFLAGS=	-O
 LIBC=	/lib/libc.a
@@ -19,24 +19,6 @@ all: libz libz_p
 	${CC} ${CFLAGS} -c $*.c
 	@ld -x -r $*.o
 	@mv a.out $*.o
-
-# trees.c and infblock.c are compiled without -O, otherwise the generated code
-# dumps core when executed. Sorry, can't troubleshoot this problem, gotta learn
-# some VAX assembly first...
-
-trees.o: trees.c
-	@${CC} -c -pg trees.c
-	@ld -x -o profiled/trees.o -r trees.o
-	${CC} -c trees.c
-	@ld -x -r trees.o
-	@mv a.out trees.o
-
-infblock.o: infblock.c
-	@${CC} -c -pg infblock.c
-	@ld -x -o profiled/infblock.o -r infblock.o
-	${CC} -c infblock.c
-	@ld -x -r infblock.o
-	@mv a.out infblock.o
 
 libz libz_p: ${OBJS}
 	@echo building profiled libz

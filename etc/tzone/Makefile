@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.4	(Berkeley)	9/29/99
+#	@(#)Makefile	5.5	(Berkeley)	5/23/01
 #
 
 # If you want something other than Eastern United States time used on your
@@ -11,7 +11,7 @@
 # time zone files, or adding it to a time zone file).
 # Alternately, if you discover you've got the wrong time zone, you can just
 #	zic -l rightzone
-LOCALTIME=	US/Central
+LOCALTIME=	US/Pacific
 
 # If you want code inspired by certain emerging standards, add
 #	-DSTD_INSPIRED

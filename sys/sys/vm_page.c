@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)vm_page.c	7.7 (Berkeley) 8/23/87
+ *	@(#)vm_page.c	7.8 (Berkeley) 12/14/00
  */
 
 #include "param.h"
@@ -666,9 +666,9 @@ vminit()
 	 * any single, large process to start random page
 	 * replacement once it fills memory.
 	 */
-        u.u_rlimit[RLIMIT_STACK].rlim_cur = DFLSSIZ;
+        u.u_rlimit[RLIMIT_STACK].rlim_cur = MIN(DFLSSIZ, maxdmap);
         u.u_rlimit[RLIMIT_STACK].rlim_max = MIN(MAXSSIZ, maxdmap);
-        u.u_rlimit[RLIMIT_DATA].rlim_cur = DFLDSIZ;
+        u.u_rlimit[RLIMIT_DATA].rlim_cur = MIN(DFLDSIZ, maxdmap);
         u.u_rlimit[RLIMIT_DATA].rlim_max = MIN(MAXDSIZ, maxdmap);
 	u.u_rlimit[RLIMIT_RSS].rlim_cur = u.u_rlimit[RLIMIT_RSS].rlim_max =
 		ctob(LOOPPAGES - desfree);

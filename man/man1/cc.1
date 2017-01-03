@@ -2,9 +2,9 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)cc.1	6.2 (Berkeley) 6/7/85
+.\"	@(#)cc.1	6.3 (Berkeley) 11/8/03
 .\"
-.TH CC 1 "June 7, 1985"
+.TH CC 1 "November 8, 2003"
 .UC 4
 .SH NAME
 cc \- C compiler
@@ -92,8 +92,28 @@ object-code improver.
 .SM
 .B \-R
 Passed on to
-.I as,
+.IR as ,
 making initialized variables shared and read-only.
+.TP
+.SM
+.B \-J
+Passed on to
+.IR as ,
+telling it to generate long branches/jumps.
+Also
+.I switch
+tables are generated in long form.
+Use this option for compiling source files containing large functions with
+branches exceeding 32 KB when compilation without this option fails with error
+messages from
+.IR as .
+Since
+.I as
+now automatically chooses the optimal form for all regular branches and ignores
+.BR \-J ,
+this option should only be needed now when the offending branches result from
+.I switch
+statements and get compiled in the compact table form.
 .TP
 .SM
 .B \-S

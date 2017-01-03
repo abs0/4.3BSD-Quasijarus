@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)vmparam.h	7.2 (Berkeley) 11/30/87
+ *	@(#)vmparam.h	7.3 (Berkeley) 9/15/02
  */
 
 /*
@@ -17,6 +17,7 @@
  * beginning of the stack respectively.
  */
 #define	USRTEXT		0
+#define	P1LOW		0x40000000		 /* lowest address in P1 */
 #define	USRSTACK	(0x80000000-UPAGES*NBPG) /* Start of user stack */
 #define	BTOPUSRSTACK	(0x400000 - UPAGES)	 /* btop(USRSTACK) */
 /* number of ptes per page */

@@ -1,5 +1,5 @@
 .nr _0 \n(.c
-.\"	@(#)tmac.e	2.31 (Berkeley) 5/21/88
+.\"	@(#)tmac.e	2.32 (Berkeley) 5/28/02
 .\"
 .\" Copyright (c) 1988 Regents of the University of California.
 .\" All rights reserved.
@@ -25,7 +25,7 @@
 .\"*		1919 Addison Street Suite 105				*
 .\"*		Berkeley, California  94704				*
 .\"*									*
-.\"*	VERSION 2.31	First Release: 11 Sept 1978			*
+.\"*	VERSION 2.32	First Release: 11 Sept 1978			*
 .\"*	See file \*(||/revisions for revision history			*
 .\"*									*
 .\"*	Documentation is available.					*
@@ -1056,7 +1056,7 @@
 .if \n(dw=5 .ds dw Thursday
 .if \n(dw=6 .ds dw Friday
 .if \n(dw=7 .ds dw Saturday
-.ds td \*(mo \n(dy, 19\n(yr
+.ds td \*(mo \n(dy, \n(cn\n(yr
 .\"		*** PARAMETRIC INITIALIZATIONS ***
 .if (1m<0.1i)&(\nx!=0) \
 .	vs 9p			\" for 12-pitch DTC terminals

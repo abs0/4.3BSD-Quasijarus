@@ -1,4 +1,4 @@
-/*	c2.h	4.10	85/08/22	*/
+/*	c2.h	4.12	00/08/31	*/
 
 /*
  * Header for object code improver
@@ -9,7 +9,7 @@
 #define	JMP	3
 #define	LABEL	4
 #define	DLABEL	5
-#define	EROU	7
+#define	GLOBL	7
 #define	JSW	9
 #define	MOV	10
 #define	CLR	11
@@ -63,6 +63,8 @@
 #define	LCOMM 59
 #define	COMM 60
 
+#define	EROU	WGEN
+
 #define	JEQ	0
 #define	JNE	1
 #define	JLE	2
@@ -84,10 +86,8 @@
 #define JBCS 18
 #define JBSS 19
 
-#define	JCC 20
-#define	JCS 21
-#define	JVC 22
-#define	JVS 23
+#define	JVC 20
+#define	JVS 21
 
 /*
  *	When the new opcodes were added, the relative

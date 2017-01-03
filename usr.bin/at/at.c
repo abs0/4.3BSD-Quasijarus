@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)at.c	5.5 (Berkeley) 1/18/87";
+static char sccsid[] = "@(#)at.c	5.6 (Berkeley) 12/31/99";
 #endif not lint
 
 /*
@@ -27,13 +27,14 @@ static char sccsid[] = "@(#)at.c	5.5 (Berkeley) 1/18/87";
  *				University of California @ Berkeley
  *
  */
+#include <sys/param.h>
+#include <sys/file.h>
+#include <sys/time.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <signal.h>
 #include <pwd.h>
-#include <sys/param.h>
-#include <sys/time.h>
-#include <sys/file.h>
+#include <tzfile.h>
 
 #define HOUR		100		/* 1 hour (using military time) */
 #define HALFDAY		(12 * HOUR)	/* half a day (12 hours) */
@@ -120,7 +121,7 @@ struct times {
 	int min;			/* min. of hour that job is to be run */
 } attime, nowtime;
 
-char	atfile[100];			/* name of spoolfile "yy.ddd.hhhh.??" */
+char	atfile[100];			/* spoolfile name "yyyy.ddd.hhhh.??" */
 char	*getenv();			/* get info on user's environment */
 char	**environ;			/* user's environment */
 FILE	*spoolfile;			/* spool file */
@@ -481,8 +482,8 @@ FILE **spoolfile;
 }
 
 /*
- * Create the filename for the spoolfile. The format is "yy.ddd.mmmm.??"
- * where "yy" is the year the job will be run, "ddd" the day of year, 
+ * Create the filename for the spoolfile. The format is "yyyy.ddd.mmmm.??"
+ * where "yyyy" is the year the job will be run, "ddd" the day of year, 
  * "mmmm" the hour and minute, and "??" a scratch value used to dis-
  * tinguish between two files that are to be run at the same time.
  */
@@ -496,7 +497,7 @@ char *atfile;
 	int i;				/* scratch variable */
 
 	for (i=0; ; i += 53) {
-		sprintf(atfile, "%s/%02d.%03d.%02d%02d.%02d", ATDIR, year,
+		sprintf(atfile, "%s/%04d.%03d.%02d%02d.%02d", ATDIR, year,
 			dayofyear, hour, minute, (getpid() + i) % 100);
 
 		/*
@@ -703,16 +704,6 @@ countdays()
 	return(dayofyear);
 }
 
-/*
- * Is a year a leap year?
- */
-isleap(year)
-int year;
-
-{
-	return((year%4 == 0 && year%100 != 0) || year%100 == 0);
-}
-
 getdateindex(date)
 char *date;
 {
@@ -765,7 +756,7 @@ struct times *attime;
 	}
 	now = localtime(&time.tv_sec);
 
-	attime->year = nowtime->year = now->tm_year;
+	attime->year = nowtime->year = now->tm_year + TM_YEAR_BASE;
 	attime->yday = nowtime->yday = now->tm_yday;
 	attime->mon = nowtime->mon = now->tm_mon;
 	attime->mday = nowtime->mday = now->tm_mday;

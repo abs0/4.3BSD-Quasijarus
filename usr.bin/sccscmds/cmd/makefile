@@ -1,4 +1,4 @@
-#	makefile	4.6	99/01/07
+#	makefile	4.7	01/05/27
 #
 CFLAGS=	-O -w
 LIBS=	../libpw.a ../libPW.a ../libwrt.a
@@ -121,7 +121,7 @@ install: all
 	ln ${DESTDIR}/usr/bin/chghist ${DESTDIR}/usr/bin/rmdel
 	install -s comb ${DESTDIR}/usr/bin
 	install -s delta ${DESTDIR}/usr/bin
-	install -s help ${DESTDIR}/usr/bin
+	install -s help ${DESTDIR}/usr/bin/sccshelp
 	install -s prt ${DESTDIR}/usr/bin
 	install -s prs ${DESTDIR}/usr/bin
 	install -c sccsdiff.sh ${DESTDIR}/usr/bin/sccsdiff

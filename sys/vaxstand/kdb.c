@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)kdb.c	7.5 (Berkeley) 9/4/99
+ *	@(#)kdb.c	7.7 (Berkeley) 11/24/03
  */
 
 /*
@@ -188,6 +188,7 @@ u_long kra60_off[] = { 0, 15884, 0, 49324, 131404, 49324, 242606, 49324 };
 u_long kra70_off[] = { 0, 15972, 0, 341220, 357192, 413457, 341220, 49731 };
 u_long kra71_off[] = { 0, 16422, 0, 375564, 391986, 699720, 375564, 83538 };
 u_long kra72_off[] = { 0, 16320, 0, 375360, 391680, 699720, 375360, 83640 };
+u_long kra73_off[] = { 0, 33810, 0, 458640, 590940, 2229990, 458640, 166110 };
 u_long kra80_off[] = { 0, 15884, 0, -1, 49324, 49324, 49910, 131404 };
 #ifndef	UCBRA
 #ifdef RA_COMPAT
@@ -210,6 +211,7 @@ struct mediamap {
 	{ MSCP_MKDRIVE2('R', 'A', 70),		kra70_off },
 	{ MSCP_MKDRIVE2('R', 'A', 71),		kra71_off },
 	{ MSCP_MKDRIVE2('R', 'A', 72),		kra72_off },
+	{ MSCP_MKDRIVE2('R', 'A', 73),		kra73_off },
 	{ MSCP_MKDRIVE2('R', 'A', 80),		kra80_off },
 	{ MSCP_MKDRIVE2('R', 'A', 81),		kra81_off },
 	{ MSCP_MKDRIVE2('R', 'A', 82),		kra82_off },

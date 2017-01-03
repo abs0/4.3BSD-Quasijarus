@@ -21,9 +21,9 @@
 
 #ifndef lint
 #ifdef DAEMON
-static char sccsid[] = "@(#)daemon.c	5.27 (Berkeley) 9/20/88 (with daemon mode)";
+static char sccsid[] = "@(#)daemon.c	5.29 (Berkeley) 5/29/02 (with daemon mode)";
 #else
-static char sccsid[] = "@(#)daemon.c	5.27 (Berkeley) 9/20/88 (without daemon mode)";
+static char sccsid[] = "@(#)daemon.c	5.29 (Berkeley) 5/29/02 (without daemon mode)";
 #endif
 #endif /* not lint */
 
@@ -167,6 +167,7 @@ getrequests()
 		auto int lotherend;
 		struct sockaddr_in otherend;
 		extern int RefuseLA;
+		extern char *inet_ntoa();
 
 		/* see if we are rejecting connections */
 		while (getla() > RefuseLA)
@@ -185,6 +186,17 @@ getrequests()
 			sleep(5);
 			continue;
 		}
+
+		/*
+		**  Log the connection.
+		*/
+
+# ifdef LOG
+		if (LogLevel > 1)
+			syslog(LOG_INFO, "connection from %s:%u",
+				inet_ntoa(otherend.sin_addr),
+				otherend.sin_port);
+# endif LOG
 
 		/*
 		**  Create a subprocess to process the mail.
@@ -219,6 +231,9 @@ getrequests()
 			(void) signal(SIGCHLD, SIG_DFL);
 
 			/* determine host name */
+			(void) sprintf(buf, "[%s]",
+				inet_ntoa(otherend.sin_addr));
+			RealHostAddr = newstr(buf);
 			hp = gethostbyaddr((char *) &otherend.sin_addr, sizeof otherend.sin_addr, AF_INET);
 			if (hp != NULL)
 			{
@@ -229,19 +244,15 @@ getrequests()
 					(void) strcat(buf, ".");
 					(void) strcat(buf, NetName);
 				}
+				RealHostName = newstr(buf);
 			}
 			else
 			{
-				extern char *inet_ntoa();
-
-				/* produce a dotted quad */
-				(void) sprintf(buf, "[%s]",
-					inet_ntoa(otherend.sin_addr));
+				/* use the dotted quad */
+				RealHostName = RealHostAddr;
 			}
 
 			/* should we check for illegal connection here? XXX */
-
-			RealHostName = newstr(buf);
 
 			(void) close(DaemonSocket);
 			InChannel = fdopen(t, "r");

@@ -12,7 +12,7 @@ cpu		"VAX650"
 makeoptions	INLINEOPTS="-s"
 options		NOSUBSINST
 ident		GENERIC
-timezone	6 dst
+timezone	8 dst
 maxusers	8
 options		QUOTA
 options		INET

@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)asmain.c	5.3 (Berkeley) 10/22/87";
+static char sccsid[] = "@(#)asmain.c	5.5 (Berkeley) 11/8/03";
 #endif not lint
 
 #include <stdio.h>
@@ -25,7 +25,7 @@ static char sccsid[] = "@(#)asmain.c	5.3 (Berkeley) 10/22/87";
 
 #include <sys/stat.h>
 
-#define	unix_lang_name "VAX/UNIX Assembler V10/22/87 5.3"
+#define	unix_lang_name "VAX/UNIX Assembler V11/8/03 5.5"
 /*
  *	variables to manage reading the assembly source files
  */
@@ -44,7 +44,6 @@ int	anyerrs = 0;	/*no errors yet*/
 int	anywarnings=0;	/*no warnings yet*/
 int	orgwarn = 0;	/*Bad origins*/
 int	passno = 1;	/* current pass*/
-int	jxxxJUMP = 0;	/* in jxxxes that branch too far, use jmp instead of brw */
 int	readonlydata = 0;	/* initialzed data -> text space */
 
 int	nGHnumbers = 0;		/* GH numbers used */
@@ -306,7 +305,10 @@ argprocess(argc, argv)
 					savelabels = 1;
 					break;
 				 case 'J':
-					jxxxJUMP = 1;
+					/*
+					 * Ignore -J, we now have real
+					 * relaxation!
+					 */
 					break;
 #ifdef DEBUG
 				 case 'D':
@@ -414,7 +416,6 @@ i_pass1()
 	fwrite(&strfilepos, sizeof(int), 1, strfile);
 
 	inittokfile();
-	initijxxx();
 }
 
 FILE *tempopen(tname, part)

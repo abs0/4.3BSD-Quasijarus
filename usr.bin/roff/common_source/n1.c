@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)n1.c	4.8 7/21/87";
+static char sccsid[] = "@(#)n1.c	4.9 5/28/02";
 #endif lint
 
 #include "tdef.h"
@@ -142,7 +142,7 @@ extern struct contab {
 		unsigned mx;
 	}x;
 }contab[NM];
-int ms[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+extern int fmt[NN];
 #ifndef NROFF
 int acctf;
 #endif
@@ -403,7 +403,9 @@ cvtime()
 	tmp = localtime(&t);
 	v.dy = tmp->tm_mday;
 	v.dw = tmp->tm_wday + 1;
-	v.yr = tmp->tm_year;
+	v.yr = tmp->tm_year % 100;
+	fmt[2] = 2;	/* make \n(yr 2 digits */
+	v.cn = 19 + tmp->tm_year / 100;
 	v.mo = tmp->tm_mon + 1;
 }
 cnum(a)

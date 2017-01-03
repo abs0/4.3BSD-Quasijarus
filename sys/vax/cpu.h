@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)cpu.h	7.6 (Berkeley) 8/27/88
+ *	@(#)cpu.h	7.7 (Berkeley) 5/3/03
  */
 
 #ifndef LOCORE
@@ -119,6 +119,7 @@ struct	cpuops {
 struct	percpu {
 	short	pc_cputype;		/* cpu type code */
 	short	pc_cpuspeed;		/* relative speed of cpu */
+	short	pc_compatmode;		/* has compatibility mode */
 	short	pc_nioa;		/* number of IO adaptors/nexus blocks */
 	struct	iobus *pc_io;		/* descriptions of IO adaptors */
 	struct	cpuops *pc_ops;		/* per-cpu operations */
@@ -179,6 +180,7 @@ int	mastercpu;		/* if multiple cpus, this identifies master */
 #endif
 struct	percpu percpu[];
 struct	cpuops *cpuops;
+int	cpu_has_compat_mode;
 #endif
 
 /*

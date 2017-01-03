@@ -20,9 +20,9 @@
 
 #ifndef lint
 #ifdef SMTP
-static char sccsid[] = "@(#)srvrsmtp.c	5.22 (Berkeley) 6/30/88 (with SMTP)";
+static char sccsid[] = "@(#)srvrsmtp.c	5.23 (Berkeley) 5/29/02 (with SMTP)";
 #else
-static char sccsid[] = "@(#)srvrsmtp.c	5.22 (Berkeley) 6/30/88 (without SMTP)";
+static char sccsid[] = "@(#)srvrsmtp.c	5.23 (Berkeley) 5/29/02 (without SMTP)";
 #endif
 #endif /* not lint */
 
@@ -112,7 +112,7 @@ smtp()
 	bool hasmail;			/* mail command received */
 	auto ADDRESS *vrfyqueue;
 	ADDRESS *a;
-	char *sendinghost;
+	char *sendinghost, *hellohost;
 	char inp[MAXLINE];
 	char cmdbuf[100];
 	extern char Version[];
@@ -134,7 +134,15 @@ smtp()
 	settime();
 	if (RealHostName != NULL)
 	{
-		CurHostName = RealHostName;
+		if (RealHostName[0] != '[' && RealHostAddr != NULL)
+		{
+			CurHostName = xalloc(strlen(RealHostName) +
+						strlen(RealHostAddr) + 4);
+			sprintf(CurHostName, "%s (%s)", RealHostName,
+				RealHostAddr);
+		}
+		else
+			CurHostName = RealHostName;
 		setproctitle("srvrsmtp %s", CurHostName);
 	}
 	else
@@ -145,7 +153,7 @@ smtp()
 	expand("\001e", inp, &inp[sizeof inp], CurEnv);
 	message("220", inp);
 	SmtpPhase = "startup";
-	sendinghost = NULL;
+	sendinghost = hellohost = NULL;
 	for (;;)
 	{
 		/* arrange for backout */
@@ -210,15 +218,8 @@ smtp()
 					MyHostName);
 				break;
 			}
-			if (RealHostName != NULL && strcasecmp(p, RealHostName))
-			{
-				char hostbuf[MAXNAME];
-
-				(void) sprintf(hostbuf, "%s (%s)", p, RealHostName);
-				sendinghost = newstr(hostbuf);
-			}
-			else
-				sendinghost = newstr(p);
+			if (RealHostName == NULL || strcasecmp(p, RealHostName))
+				hellohost = newstr(p);
 			message("250", "%s Hello %s, pleased to meet you",
 				MyHostName, p);
 			break;
@@ -227,8 +228,34 @@ smtp()
 			SmtpPhase = "MAIL";
 
 			/* force a sending host even if no HELO given */
-			if (RealHostName != NULL && macvalue('s', CurEnv) == NULL)
-				sendinghost = RealHostName;
+			if (RealHostName != NULL)
+			{
+				int c;
+
+				c = strlen(RealHostName) + 1;
+				if (hellohost != NULL)
+					c += strlen(hellohost) + 8;
+				if (RealHostAddr != NULL)
+					c += strlen(RealHostAddr) + 3;
+				sendinghost = xalloc(c);
+				strcpy(sendinghost, RealHostName);
+				if (hellohost != NULL)
+				{
+					strcat(sendinghost, " (HELO ");
+					strcat(sendinghost, hellohost);
+					strcat(sendinghost, ")");
+				}
+				if (RealHostAddr != NULL)
+				{
+					strcat(sendinghost, " (");
+					strcat(sendinghost, RealHostAddr);
+					strcat(sendinghost, ")");
+				}
+			}
+			else if (hellohost != NULL)
+				sendinghost = hellohost;
+			else
+				sendinghost = macvalue('s', CurEnv);
 
 			/* check for validity of this command */
 			if (hasmail)

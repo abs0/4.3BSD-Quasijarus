@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)atrun.c	5.5 (Berkeley) 11/26/86";
+static char sccsid[] = "@(#)atrun.c	5.6 (Berkeley) 12/31/99";
 #endif not lint
 
 /*
@@ -36,6 +36,7 @@ static char sccsid[] = "@(#)atrun.c	5.5 (Berkeley) 11/26/86";
 #endif
 # include <sys/stat.h>
 # include <pwd.h>
+# include <tzfile.h>
 
 # define ATDIR		"/usr/spool/at"		/* spooling area */
 # define TMPDIR		"/tmp"			/* area for temporary files */
@@ -47,7 +48,7 @@ static char sccsid[] = "@(#)atrun.c	5.5 (Berkeley) 11/26/86";
 # define LASTFILE	"/usr/spool/at/lasttimedone"	/* update time file */
 
 
-char nowtime[11];			/* time it is right now (yy.ddd.hhmm) */
+char nowtime[13];			/* time right now (yyyy.ddd.hhmm) */
 char errfile[25];			/* file where we redirect errors to */
 
 
@@ -97,7 +98,7 @@ char **argv;
 }
 
 /*
- * Create a string with the syntax yy.ddd.hhmm that represents the
+ * Create a string with the syntax yyyy.ddd.hhmm that represents the
  * time it is right now. This string is used to determine whether a
  * job should be run.
  */
@@ -124,9 +125,9 @@ char *nowtime;
 
 	/*
 	 * Create a string to be used in determining whether or not a job
-	 * should be run. The syntax is yy.ddd.hhmm .
+	 * should be run. The syntax is yyyy.ddd.hhmm .
 	 */
-	sprintf(nowtime,"%d.%03d.%02d%02d",now->tm_year,
+	sprintf(nowtime,"%d.%03d.%02d%02d",now->tm_year + TM_YEAR_BASE,
 					   now->tm_yday,
 					   now->tm_hour,
 					   now->tm_min);
@@ -484,7 +485,7 @@ struct direct *direntry;
 	 * If a directory entry represents a job, determine if it's time to
 	 * run it.
 	 */
-	return(strncmp(direntry->d_name, nowtime,11) <= 0);
+	return(strncmp(direntry->d_name, nowtime,13) <= 0);
 }
 
 /*

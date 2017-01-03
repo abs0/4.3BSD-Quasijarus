@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)as.h	5.3 (Berkeley) 7/6/85
+ *	@(#)as.h	5.5 (Berkeley) 11/8/03
  */
 
 #define	reg	register
@@ -193,7 +193,7 @@ struct symtab{
  *	Redefinitions of the fields in symtab for
  *	use when the symbol table entry marks a jxxx instruction.
  */
-#define	s_jxbump	s_ptype		/* tag == JX..., how far to expand */
+#define	s_jxstate	s_ptype		/* tag == JX..., relaxation state */
 #define	s_jxfear	s_desc		/* how far needs to be bumped */
 /*
  *	Redefinitions of fields in the struct nlist for symbols so that
@@ -421,7 +421,6 @@ struct strdesc *savestr();
 	extern	int	savelabels;		/*save labels in a.out*/
 	extern	int	orgwarn;		/* questionable origin ? */
 	extern	int	useVM;			/*use virtual memory temp file*/
-	extern	int	jxxxJUMP;		/*use jmp instead of brw for jxxx */
 	extern	int	readonlydata;		/*initialized data into text space*/
 	extern	int	nGHnumbers;		/* GH numbers used */
 	extern	int	nGHopcodes;		/* GH opcodes used */

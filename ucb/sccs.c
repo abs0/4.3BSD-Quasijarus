@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)sccs.c	5.8 (Berkeley) 9/7/99";
+static char sccsid[] = "@(#)sccs.c	5.9 (Berkeley) 5/27/01";
 #endif /* not lint */
 
 # include <stdio.h>
@@ -195,7 +195,7 @@ struct sccsprog SccsProg[] =
 	"comb",		PROG,	0,			PROGPATH(comb),
 	"delta",	PROG,	0,			PROGPATH(delta),
 	"get",		PROG,	0,			PROGPATH(get),
-	"help",		PROG,	NO_SDOT,		PROGPATH(help),
+	"help",		PROG,	NO_SDOT,		PROGPATH(sccshelp),
 	"prs",		PROG,	0,			PROGPATH(prs),
 	"prt",		PROG,	0,			PROGPATH(prt),
 	"rmdel",	PROG,	REALUSER,		PROGPATH(rmdel),
@@ -214,6 +214,7 @@ struct sccsprog SccsProg[] =
 	"unedit",	UNEDIT,	NO_SDOT,		NULL,
 	"diffs",	DIFFS,	NO_SDOT|REALUSER,	NULL,
 	"-diff",	DODIFF,	NO_SDOT|REALUSER,	PROGPATH(bdiff),
+	"nprt",		CMACRO,	NO_SDOT,		"prt -n -a -i",
 	"print",	CMACRO,	0,			"prs -e/get -p -m -s",
 	"branch",	CMACRO,	NO_SDOT,
 		"get:ixrc -e -b/delta: -s -n -ybranch-place-holder/get:pl -e -t -g",

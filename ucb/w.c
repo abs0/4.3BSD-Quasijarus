@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)w.c	5.9 (Berkeley) 1/3/88";
+static char sccsid[] = "@(#)w.c	5.10 (Berkeley) 1/1/03";
 #endif not lint
 
 /*
@@ -138,6 +138,7 @@ main(argc, argv)
 	char *cp;
 	register int curpid, empty;
 	struct winsize win;
+	struct tm *tm;
 
 	login = (argv[0][0] == '-');
 	cp = rindex(argv[0], '/');
@@ -211,7 +212,8 @@ main(argc, argv)
 	time(&now);
 	if (header) {
 		/* Print time of day */
-		prtat(&now);
+		tm = localtime(&now);
+		printf(" %2d:%02d", tm->tm_hour, tm->tm_min);
 
 		/*
 		 * Print how long system has been up.
@@ -246,7 +248,7 @@ main(argc, argv)
 				nusers++;
 		}
 		rewind(ut);
-		printf("  %d user%s", nusers, nusers>1?"s":"");
+		printf("  %d user%s", nusers, nusers!=1?"s":"");
 
 		/*
 		 * Print 1, 5, and 15 minute load averages.
@@ -452,30 +454,25 @@ prttime(tim, tail)
 	printf("%s", tail);
 }
 
-char *weekday[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+char *weekday[] = { "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" };
 char *month[] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun",
 		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 
-/* prtat prints a 12 hour time given a pointer to a time of day */
+/* prtat prints a 24 hour time given a pointer to a time of day */
 prtat(time)
-	long *time;
+	register long *time;
 {
-	struct tm *p;
-	register int hr, pm;
+	register struct tm *p;
 
 	p = localtime(time);
-	hr = p->tm_hour;
-	pm = (hr > 11);
-	if (hr > 11)
-		hr -= 12;
-	if (hr == 0)
-		hr = 12;
 	if (now - *time <= 18 * HR)
-		prttime(hr * 60 + p->tm_min, pm ? "pm" : "am");
+		printf("   %2d:%02d", p->tm_hour, p->tm_min);
 	else if (now - *time <= 7 * DAY)
-		printf(" %s%2d%s", weekday[p->tm_wday], hr, pm ? "pm" : "am");
+		printf(" %s%2d:%02d", weekday[p->tm_wday], p->tm_hour,
+			p->tm_min);
 	else
-		printf(" %2d%s%2d", p->tm_mday, month[p->tm_mon], p->tm_year);
+		printf(" %2d%s%02d", p->tm_mday, month[p->tm_mon],
+			p->tm_year % 100);
 }
 
 /*

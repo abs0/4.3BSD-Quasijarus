@@ -3,7 +3,7 @@
 ## All rights reserved.  The Berkeley software License Agreement
 ## specifies the terms and conditions for redistribution.
 ##
-##	@(#)instrs	5.1 (Berkeley) 4/30/85
+##	@(#)instrs	5.3 (Berkeley) 8/31/00
 ##
 ##	Robert R. Henry
 ##	University of California, Berkeley
@@ -145,8 +145,6 @@ BEGIN{
 			next;
 		}
 		if (flavor == "AS"){
-			if ($4 == "CBR")
-				$4 = "IJXXX";
 			printf("PSEUDO(\"%s\\0%o\\0%s\",", ASpad,length($3),$3);
 			printf("%s, %s),\n", $7, $4);
 			next;
@@ -155,11 +153,7 @@ BEGIN{
 			if ($5 == "C2X")
 				next;
 			printf("\"%s\",", $3);
-			if ($4 == "CBR" && $5 != "JBR"){
-				printf("T(CBR,%s),\n", $5);
-			} else {
-				printf("%s,\n", $5);
-			}
+			printf("%s,\n", $5);
 			next;
 		}
 	}
@@ -191,6 +185,18 @@ BEGIN{
 			next;
 		}
 		printf("T(%s,%s),\n", $4, $5);	# special value
+		next;
+	}
+	if ($6 == "JXXX" || $6 == "JACB") {
+		if (flavor == "ADB"){
+			next;
+		}
+		printf("RELAXOP(\"%s\\0%o\\0%s\",", ASpad,length($3),$3);
+		if ($6 == "JXXX") {
+			printf("CORE, %s, IJXXX),\n", $7);
+		} else {
+			printf("ESCD, %s, IJXXX),\n", $7);
+		}
 		next;
 	}
 	if (flavor == "AS"){
@@ -242,7 +248,7 @@ BEGIN{
 # 000a .line	ILINENO	C2X	MACR 0		1
 # 000a .file	IFILE	C2X	MACR 0		1
 
-# 000a .globl	IGLOBAL	EROU	MACR 0		1
+# 000a .globl	IGLOBAL	GLOBL	MACR 0		1
 # 000a .comm	ICOMM	COMM	MACR 0		2
 # 000a .lcomm	ILCOMM	LCOMM	MACR 0		2
 # 000a .set	ISET	SET	MACR 0		2
@@ -258,32 +264,44 @@ BEGIN{
 
 ## Pseudo jumps
 
-# 000a jbc	CBR	JBC	MACR 0xe1	1	B B
-# 000a jlbc	CBR	JLBC	MACR 0xe9	1	B B
-# 000a jbs	CBR	JBS	MACR 0xe0	1	B B
-# 000a jlbs	CBR	JLBS	MACR 0xe8	1	B B
-# 000a jbcc	CBR	JBCC	MACR 0xe5	1	B B
-# 000a jbsc	CBR	JBSC	MACR 0xe4	1	B B
-# 000a jbcs	CBR	JBCS	MACR 0xe3	1	B B
-# 000a jbss	CBR	JBSS	MACR 0xe2	1	B B
+# 000a jbc	CBR	JBC	JXXX 0xe1	1	B B
+# 000a jlbc	CBR	JLBC	JXXX 0xe9	1	B B
+# 000a jbs	CBR	JBS	JXXX 0xe0	1	B B
+# 000a jlbs	CBR	JLBS	JXXX 0xe8	1	B B
+# 000a jbcc	CBR	JBCC	JXXX 0xe5	1	B B
+# 000a jbsc	CBR	JBSC	JXXX 0xe4	1	B B
+# 000a jbcs	CBR	JBCS	JXXX 0xe3	1	B B
+# 000a jbss	CBR	JBSS	JXXX 0xe2	1	B B
 
-# 000a jbr	CBR	JBR	MACR 0x11	1	B B
-# 000a jcc	CBR	C2X	MACR 0x1e	1	B B
-# 000a jcs	CBR	C2X	MACR 0x1f	1	B B
-# 000a jvc	CBR	C2X	MACR 0x1c	1	B B
-# 000a jvs	CBR	C2X	MACR 0x1d	1	B B
-# 000a jlss	CBR	JLT	MACR 0x19	1	B B
-# 000a jlssu	CBR	JLO	MACR 0x1f	1	B B
-# 000a jleq	CBR	JLE	MACR 0x15	1	B B
-# 000a jlequ	CBR	JLOS	MACR 0x1b	1	B B
-# 000a jeql	CBR	JEQ	MACR 0x13	1	B B
-# 000a jeqlu	CBR	JEQ	MACR 0x13	1	B B
-# 000a jneq	CBR	JNE	MACR 0x12	1	B B
-# 000a jnequ	CBR	JNE	MACR 0x12	1	B B
-# 000a jgeq	CBR	JGE	MACR 0x18	1	B B
-# 000a jgequ	CBR	JHIS	MACR 0x1e	1	B B
-# 000a jgtr	CBR	JGT	MACR 0x14	1	B B
-# 000a jgtru	CBR	JHI	MACR 0x1a	1	B B
+# 000a jbr	JBR	S	JXXX 0x11	1	B B
+# 000a jcc	CBR	JHIS	JXXX 0x1e	1	B B
+# 000a jcs	CBR	JLO	JXXX 0x1f	1	B B
+# 000a jvc	CBR	JVC	JXXX 0x1c	1	B B
+# 000a jvs	CBR	JVS	JXXX 0x1d	1	B B
+# 000a jlss	CBR	JLT	JXXX 0x19	1	B B
+# 000a jlssu	CBR	JLO	JXXX 0x1f	1	B B
+# 000a jleq	CBR	JLE	JXXX 0x15	1	B B
+# 000a jlequ	CBR	JLOS	JXXX 0x1b	1	B B
+# 000a jeql	CBR	JEQ	JXXX 0x13	1	B B
+# 000a jeqlu	CBR	JEQ	JXXX 0x13	1	B B
+# 000a jneq	CBR	JNE	JXXX 0x12	1	B B
+# 000a jnequ	CBR	JNE	JXXX 0x12	1	B B
+# 000a jgeq	CBR	JGE	JXXX 0x18	1	B B
+# 000a jgequ	CBR	JHIS	JXXX 0x1e	1	B B
+# 000a jgtr	CBR	JGT	JXXX 0x14	1	B B
+# 000a jgtru	CBR	JHI	JXXX 0x1a	1	B B
+
+# 000a jacbb	ACB TN1		JXXX 0x9d	4  R B  R B  M B  B W 
+# 000a jacbw	ACB TN1		JXXX 0x3d	4  R W  R W  M W  B W 
+# 000a jacbl	ACB TN1		JXXX 0xf1	4  R L  R L  M L  B W 
+# 000a jacbf	ACB TN1		JXXX 0x4f	4  R F  R F  M F  B W 
+# 000a jacbd	ACB TN1		JXXX 0x6f	4  R D  R D  M D  B W 
+# 000a jacbg	ACB TN1		JACB 0x4f	4  R G  R G  M G  B W 
+# 000a jacbh	ACB TN1		JACB 0x6f	4  R H  R H  M H  B W 
+# 000a jaoblss	AOBLSS S	JXXX 0xf2	3  R L  M L  B B 
+# 000a jaobleq	AOBLEQ S	JXXX 0xf3	3  R L  M L  B B 
+# 000a jsobgeq	SOBGEQ S	JXXX 0xf4	2  M L  B B 
+# 000a jsobgtr	SOBGTR S	JXXX 0xf5	2  M L  B B 
 ##
 ## Registers
 ##
@@ -562,8 +580,8 @@ BEGIN{
 # 261h blss	CBR JLT		CORE 0x19	1  B B 
 # 261i bgtru	CBR JHI		CORE 0x1a	1  B B 
 # 261j blequ	CBR JLOS	CORE 0x1b	1  B B 
-# 261k bvc	CBR 0		CORE 0x1c	1  B B 
-# 261l bvs	CBR 0		CORE 0x1d	1  B B 
+# 261k bvc	CBR JVC		CORE 0x1c	1  B B 
+# 261l bvs	CBR JVS		CORE 0x1d	1  B B 
 # 261m bgequ	CBR JHIS	CORE 0x1e	1  B B 
 # 261n bcc	CBR JHIS	CORE 0x1e	1  B B 
 # 261o blssu	CBR JLO		CORE 0x1f	1  B B 

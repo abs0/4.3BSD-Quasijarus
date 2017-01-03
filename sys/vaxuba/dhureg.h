@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dhureg.h	7.2 (Berkeley) 11/8/88
+ *	@(#)dhureg.h	7.3 (Berkeley) 5/17/02
  */
 
 /* 
@@ -112,7 +112,7 @@ struct dhudevice {
 
 /* Bits in dhubar2 */
 #define	DHU_BA2_DMAGO	0x80		/* transmit dma start */
-#define	DHU_BA2_XBA	0x03		/* top two bits of dma address */
+#define	DHU_BA2_XBA	0x3F		/* top six bits of dma address */
 #define DHU_XBA_SHIFT	16		/* amount to shift xba bits */
 
 /* Bits for dhumctl only:  stat bits are shifted up 16 */

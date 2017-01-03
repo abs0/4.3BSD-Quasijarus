@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)machdep.c	7.17 (Berkeley) 9/22/88
+ *	@(#)machdep.c	7.18 (Berkeley) 5/3/03
  */
 
 #include "param.h"
@@ -424,12 +424,13 @@ sigreturn()
 	register int *regs = u.u_ar0;
 
 	scp = ((struct a *)(u.u_ap))->sigcntxp;
-	if (useracc((caddr_t)scp, sizeof (*scp), B_WRITE) == 0)
+	if (useracc((caddr_t)scp, sizeof (*scp), B_READ) == 0)
 		return;
 	if ((scp->sc_ps & (PSL_MBZ|PSL_IPL|PSL_IS)) != 0 ||
 	    (scp->sc_ps & (PSL_PRVMOD|PSL_CURMOD)) != (PSL_PRVMOD|PSL_CURMOD) ||
 	    ((scp->sc_ps & PSL_CM) &&
-	     (scp->sc_ps & (PSL_FPD|PSL_DV|PSL_FU|PSL_IV)) != 0)) {
+	     (!cpu_has_compat_mode ||
+	      (scp->sc_ps & (PSL_FPD|PSL_DV|PSL_FU|PSL_IV)) != 0))) {
 		u.u_error = EINVAL;
 		return;
 	}
@@ -456,7 +457,7 @@ osigcleanup()
 	scp = (struct sigcontext *)fuword((caddr_t)regs[SP]);
 	if ((int)scp == -1)
 		return;
-	if (useracc((caddr_t)scp, 3 * sizeof (int), B_WRITE) == 0)
+	if (useracc((caddr_t)scp, 3 * sizeof (int), B_READ) == 0)
 		return;
 	u.u_onstack = scp->sc_onstack & 01;
 	u.u_procp->p_sigmask = scp->sc_mask &~

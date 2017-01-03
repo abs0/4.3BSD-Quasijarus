@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.5 (Berkeley) 6/2/87
+#	@(#)Makefile	5.6 (Berkeley) 8/28/00
 #
 #	as.h		Definitions for data structures
 #	asnumber.h	Definitions for all numbers: byte .. G format float
@@ -101,9 +101,9 @@ lint: FRC
 	lint ${CFLAGS} ${SRCS}
 
 clean: FRC
-	rm -f ${OBJS} instrs.as as core a.out errs
+	rm -f ${OBJS} astoks.h instrs.as as core a.out errs
 
-depend: instrs.as FRC
+depend: astoks.h instrs.as FRC
 	mkdep ${CFLAGS} ${SRCS}
 
 install: FRC

@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.1	(Berkeley)	6/5/87
+#	@(#)Makefile	5.2	(Berkeley)	8/29/00
 #
 LIBC=	/lib/libc.a
 DFLAGS=	-DADB
@@ -33,9 +33,9 @@ instrs.adb: ${AS}/instrs
 	(echo FLAVOR ADB; cat ${AS}/instrs) | awk -f ${AS}/instrs > instrs.adb
 
 clean: FRC
-	rm -f ${OBJS} core adb
+	rm -f ${OBJS} core adb instrs.adb
 
-depend: FRC
+depend: instrs.adb FRC
 	mkdep ${CFLAGS} -I. -I${AS} ${SRCS}
 
 install: FRC

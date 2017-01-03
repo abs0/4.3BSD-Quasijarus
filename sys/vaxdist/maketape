@@ -4,26 +4,22 @@
 #
 # This file is freely redistributable.
 #
-#	@(#)maketape	4.35 (Berkeley) 10/9/99
+#	@(#)maketape	4.36 (Berkeley) 12/6/03
 #
 
-# maketape [ 6250 | 1600 [ tapename ] ]
+# maketape releasedir
 miniroot=ra0d
-tape=/dev/rmt12
-type=6250
+fullroot=ra1a
 block=20
 tflag=cbf
 
 if [ $# -gt 0 ]; then
-	type=$1;
+	releasedir=$1;
+else
+	echo usage: $0 releasedir
+	exit
 fi
 
-if [ $# -gt 1 ]; then
-	tape=$2;
-fi
-
-mt -t ${tape} rew
-date
 cd /nbsd
 sync
 
@@ -32,41 +28,25 @@ tp cmf /tmp/tape.$$ boot copy format
 cd /nbsd/sys/mdec
 echo "Build 1st level boot block file"
 cat tmscpboot tsboot htboot tmboot mtboot utboot /tmp/tape.$$ | \
-	dd of=${tape} obs=512 conv=sync
+	dd of=${releasedir}/stand obs=512 conv=sync
 
 echo "Add image of mini-root file system"
-eval dd if=/dev/r${miniroot} count=308 bs=20b conv=sync of=$tape
+dd if=/dev/r${miniroot} count=308 bs=20b conv=sync of=${releasedir}/miniroot
 
 echo "Add full dump of real file system"
-/etc/dump 0f ${tape} /dev/rra1a
+/etc/dump 0f ${releasedir}/rootdump /dev/r${fullroot}
 
 echo "Add tar image of /usr"
 cd /nbsd/usr
-tar ${tflag} ${block} ${tape} MAKEHOSTS adm bin dict games hosts \
+tar ${tflag} ${block} ${releasedir}/usr.tar MAKEHOSTS adm bin dict games hosts \
 	include lib local man mdec msgs new old preserve pub spool tmp ucb
 
-if [ ${type} != '6250' ]
-then
-	echo "Done, rewinding first tape"
-	rsh $remote mt -t ${tape} rew &
-	echo "Mount second tape and hit return when ready"
-	echo "(or type name of next tape drive)"
-	read x
-	if [ "$x" != "" ]
-	then	tape=$x
-	fi
-fi
-
-: tape2:
 echo "Add tar image of system sources"
 cd /nbsd/usr/src/sys
-tar ${tflag} ${block} ${tape} .
+tar ${tflag} ${block} ${releasedir}/srcsys.tar .
 
 echo "Add user source code"
 FILES="Makefile bin cci doc etc games include lib local man old \
 	ucb undoc usr.bin usr.lib"
 cd /nbsd/usr/src
-tar ${tflag} ${block} ${tape} ${FILES}
-
-echo "Done, rewinding tape"
-mt -t ${tape} rew &
+tar ${tflag} ${block} ${releasedir}/src.tar ${FILES}

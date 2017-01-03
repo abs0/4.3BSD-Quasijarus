@@ -72,21 +72,22 @@ FRC:
 
 atq: atq.c /usr/include/stdio.h /usr/include/sys/types.h
 atq: /usr/include/sys/file.h /usr/include/sys/dir.h /usr/include/sys/stat.h
-atq: /usr/include/sys/time.h /usr/include/time.h /usr/include/pwd.h
-atq: /usr/include/ctype.h
+atq: /usr/include/sys/time.h /usr/include/time.h /usr/include/tzfile.h
+atq: /usr/include/pwd.h /usr/include/ctype.h
 atrm: atrm.c /usr/include/stdio.h /usr/include/pwd.h /usr/include/ctype.h
 atrm: /usr/include/sys/types.h /usr/include/sys/dir.h /usr/include/sys/file.h
 atrm: /usr/include/sys/stat.h
-at: at.c /usr/include/stdio.h /usr/include/ctype.h /usr/include/signal.h
-at: /usr/include/machine/trap.h /usr/include/pwd.h /usr/include/sys/param.h
-at: /usr/include/sys/types.h /usr/include/signal.h
+at: at.c /usr/include/sys/param.h /usr/include/sys/types.h
+at: /usr/include/signal.h /usr/include/machine/trap.h
 at: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-at: /usr/include/sys/time.h /usr/include/time.h /usr/include/sys/file.h
+at: /usr/include/sys/file.h /usr/include/sys/time.h /usr/include/time.h
+at: /usr/include/stdio.h /usr/include/ctype.h /usr/include/signal.h
+at: /usr/include/pwd.h /usr/include/tzfile.h
 atrun: atrun.c /usr/include/stdio.h /usr/include/sys/param.h
 atrun: /usr/include/sys/types.h /usr/include/signal.h
 atrun: /usr/include/machine/trap.h /usr/include/machine/machparam.h
 atrun: /usr/include/machine/endian.h /usr/include/sys/dir.h
 atrun: /usr/include/sys/file.h /usr/include/sys/time.h /usr/include/time.h
-atrun: /usr/include/sys/stat.h /usr/include/pwd.h
+atrun: /usr/include/sys/stat.h /usr/include/pwd.h /usr/include/tzfile.h
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

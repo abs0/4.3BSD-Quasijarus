@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dhu.c	7.4 (Berkeley) 1/24/89
+ *	@(#)dhu.c	7.6 (Berkeley) 7/30/02
  */
 
 /*
@@ -88,12 +88,12 @@ struct	uba_driver dhudriver =
  * Local variables for the driver
  */
 /*
- * Baud rates: no 50, 200, or 38400 baud; all other rates are from "Group B".
+ * Baud rates: no 50 or 200 baud; all other rates are from "Group B".
  *	EXTA => 19200 baud
- *	EXTB => 2000 baud
+ *	EXTB => 38400 baud
  */
 char	dhu_speeds[] =
-	{ 0, 0, 1, 2, 3, 4, 0, 5, 6, 7, 8, 10, 11, 13, 14, 9 };
+	{ 0, 0, 1, 2, 3, 4, 0, 5, 6, 7, 8, 10, 11, 13, 14, 15 };
 
 short	dhusoftCAR[NDHU];
 
@@ -236,7 +236,7 @@ dhuopen(dev, flag)
 	if ((dhumctl(dev, DHU_ON, DMSET) & DHU_CAR) ||
 	    (dhusoftCAR[dhu] & (1<<(unit&0xf))))
 		tp->t_state |= TS_CARR_ON;
-	while ((tp->t_state & TS_CARR_ON) == 0) {
+	while (!(tp->t_state & TS_CARR_ON) && !(flag & FNDELAY)) {
 		tp->t_state |= TS_WOPEN;
 		sleep((caddr_t)&tp->t_rawq, TTIPRI);
 	}

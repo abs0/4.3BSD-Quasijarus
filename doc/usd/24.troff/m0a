@@ -1,4 +1,4 @@
-.\"	@(#)m0a	6.2 (Berkeley) 4/21/86
+.\"	@(#)m0a	6.3 (Berkeley) 11/9/03
 .\"
 .pn3
 .br
@@ -503,6 +503,7 @@ Reference	Name	Description
 .xx
 3	\fB%\fR	Current page number.
 19	\fBc&\fR	Number of \fIlines\fR read from current input file.
+-	\fBcn\fR	Current year \(sl 100.
 11.2	\fBct\fR	Character type (set by \fIwidth\fR function).
 7.4	\fBdl\fR	Width (maximum) of last completed diversion.
 7.4	\fBdn\fR	Height (vertical size) of last completed diversion.

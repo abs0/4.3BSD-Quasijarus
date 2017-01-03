@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)emulate.s	7.4 (Berkeley) 8/9/89
+ *	@(#)emulate.s	7.5 (Berkeley) 4/27/03
  */
 
 #if VAX630 || VAX650
@@ -85,8 +85,8 @@ Lcrc_loop:
 	extzv	$4,$28,r0,r1
 	xorl3	r1,(r11)[r10],r0
 	sobgtr	r2,Lcrc_loop
-	tstl	r0
 Lcrc_out:
+	tstl	r0
 	savepsl
 	clrl	r1
 	return
@@ -136,14 +136,20 @@ Lmovtuc_loop:
 	movzbl	(r1),r2
 	movzbl	(r3)[r2],r2
 	cmpl	r2,r11
-	jeql	Lmovtuc_out
-	movzbl	(r1)+,r2
-	movb	(r3)[r2],(r5)+
+	jeql	Lmovtuc_esc
+	incl	r1
+	movb	r2,(r5)+
 	decl	r0
 	sobgtr	r4,Lmovtuc_loop
 Lmovtuc_out:
 	cmpl	r4,r0
 	savepsl
+	clrl	r2
+	return
+Lmovtuc_esc:
+	cmpl	r4,r0
+	savepsl
+	bisl2	$2,4(sp)
 	clrl	r2
 	return
 
@@ -155,10 +161,10 @@ _EMmatchc:
 	arguw(3,r2)		# (3) source length == r2
 	argl(4,r3)		# (4) source address == r3
 	arguw(1,r11)		# (1) substring length == r11
-	jeql	Lmatchc_out	# temp source address == r1
+	jeql	Lmatchc_null	# temp source address == r1
 	addl2	r10,r11		# temp substring address == r0
 	tstl	r2
-	jeql	Lmatchc_out
+	jeql	Lmatchc_null
 Lmatchc_loop:
 	cmpb	(r10),(r3)
 	jneq	Lmatchc_fail
@@ -182,6 +188,10 @@ Lmatchc_succ:
 Lmatchc_out:
 	savepsl
 	return
+Lmatchc_null:			# set registers and condition codes right
+	argl(2,r1)		# for either or both operands null
+	arguw(1,r0)
+	jbr	Lmatchc_out
 
 
 	.align	1
@@ -1193,88 +1203,3 @@ _EMcmpp4:
 
 
 #endif UVAXII
-
-
-#ifdef notdef
-/*
- * Emulation OpCode jump table:
- *	ONLY GOES FROM 0xf8 (-8) TO 0x3B (59)
- */
-#define EMUTABLE	0x43
-#define NOEMULATE	.long noemulate
-#define	EMULATE(a)	.long _EM/**/a
-	.globl	_emJUMPtable
-_emJUMPtable:
-/* f8 */	EMULATE(ashp);	EMULATE(cvtlp);	NOEMULATE;	NOEMULATE
-/* fc */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 00 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 04 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 08 */	EMULATE(cvtps);	EMULATE(cvtsp);	NOEMULATE;	EMULATE(crc)
-/* 0c */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 10 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 14 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 18 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 1c */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 20 */	EMULATE(addp4);	EMULATE(addp6);	EMULATE(subp4);	EMULATE(subp6)
-/* 24 */	EMULATE(cvtpt);	EMULATE(mulp);	EMULATE(cvttp);	EMULATE(divp)
-/* 28 */	NOEMULATE;	EMULATE(cmpc3);	EMULATE(scanc);	EMULATE(spanc)
-/* 2c */	NOEMULATE;	EMULATE(cmpc5);	EMULATE(movtc);	EMULATE(movtuc)
-/* 30 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 34 */	EMULATE(movp);	EMULATE(cmpp3);	EMULATE(cvtpl);	EMULATE(cmpp4)
-/* 38 */	EMULATE(editpc); EMULATE(matchc); EMULATE(locc); EMULATE(skpc)
-
-/*
- * The following is called with the stack set up as follows:
- *
- *	  (sp):	Opcode
- *	 4(sp):	Instruction PC
- *	 8(sp):	Operand 1
- *	12(sp):	Operand 2
- *	16(sp):	Operand 3
- *	20(sp):	Operand 4
- *	24(sp):	Operand 5
- *	28(sp):	Operand 6
- *	32(sp):	Operand 7 (unused)
- *	36(sp):	Operand 8 (unused)
- *	40(sp):	Return PC
- *	44(sp):	Return PSL
- *	48(sp): TOS before instruction
- *
- * Each individual routine is called with the stack set up as follows:
- *
- *	  (sp):	Return address of trap handler
- *	 4(sp):	Opcode (will get return PSL)
- *	 8(sp):	Instruction PC
- *	12(sp):	Operand 1
- *	16(sp):	Operand 2
- *	20(sp):	Operand 3
- *	24(sp):	Operand 4
- *	28(sp):	Operand 5
- *	32(sp):	Operand 6
- *	36(sp):	saved register 11
- *	40(sp):	saved register 10
- *	44(sp):	Return PC
- *	48(sp):	Return PSL
- *	52(sp): TOS before instruction
- */
-
-SCBVEC(emulate):
-	movl	r11,32(sp)		# save register r11 in unused operand
-	movl	r10,36(sp)		# save register r10 in unused operand
-	cvtbl	(sp),r10		# get opcode
-	addl2	$8,r10			# shift negative opcodes
-	subl3	r10,$EMUTABLE,r11	# forget it if opcode is out of range
-	bcs	noemulate
-	movl	_emJUMPtable[r10],r10	# call appropriate emulation routine
-	jsb	(r10)		# routines put return values into regs 0-5
-	movl	32(sp),r11		# restore register r11
-	movl	36(sp),r10		# restore register r10
-	insv	(sp),$0,$4,44(sp)	# and condition codes in Opcode spot
-	addl2	$40,sp			# adjust stack for return
-	rei
-noemulate:
-	addl2	$48,sp			# adjust stack for
-	.word	0xffff			# "reserved instruction fault"
-SCBVEC(emulateFPD):
-	.word	0xffff			# "reserved instruction fault"
-#endif

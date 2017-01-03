@@ -1,6 +1,6 @@
 # ------------------------
 #
-#	Termcap source file	@(#)termcap.src	5.38 (Berkeley) 6/14/88
+#	Termcap source file	@(#)termcap.src	5.40 (Berkeley) 3/22/03
 #	John Kunze, Berkeley
 #
 # Please mail changes to (arpanet):  termcap@berkeley
@@ -1843,28 +1843,58 @@ dP|pro350|decpro|dec pro console:\
 	:se=\E^N:so=\E^H:us=\E^D:ue=\E^C:\
 	:ae=\EG:as=\EF:
 #
-# From: Bracy H. Elton  <elton@lll-crg>
-dl|vt200|vt220|vt200-js|vt220-js|dec vt200 series with jump scroll:\
+# From: Bracy H. Elton  <elton@lll-crg> (modified by Michael Sokolov)
+dl|vt200|vt220|vt200-am|vt220-am|DEC VT200 series:\
 	:im=\E[4h:ei=\E[4l:mi:dc=\E[P:dm=:ed=:al=\E[L:dl=\E[M:\
+	:AL=\E[%dL:DL=\E[%dM:DC=\E[%dP:ec=\E[%dx:\
 	:cs=\E[%i%d;%dr:sf=\ED:sr=\EM:sb=\EM:\
 	:ce=\E[K:cl=\E[H\E[J:cd=\E[J:cm=\E[%i%d;%dH:nd=\E[C:up=\E[A:\
-	:so=\E[7m:se=\E[27m:us=\E[4m:ue=\E[24m:\
+	:so=\E[7m:se=\E[27m:us=\E[4m:ue=\E[24m:ms:\
 	:md=\E[1m:mr=\E[7m:mb=\E[5m:me=\E[m:\
-	:is=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h\E[1;24r\E[24;1H:\
-	:rs=\E>\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:\
+	:is=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?7h\E>\E[1,24r:\
+	:rs=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?3l\E[?7h\E>\E[1,24r\E[24,1H:\
+	:kN=\E[6~:kP=\E[5~:\
 	:tc=vt100:
-dm|vt200-ss|vt220-ss|dec vt200 series with smooth scroll:\
-	:is=\E>\E[?3l\E[?4h\E[?5l\E[?7h\E[?8h\E[1;24r\E[24;1H:\
-	:rs=\E>\E[?3l\E[?4h\E[?5l\E[?7h\E[?8h:\
+dm|vt200-nam|vt220-nam|DEC VT200 series, no am:\
+	:am@:xn@:\
+	:is=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?7l\E>\E[1,24r:\
+	:rs=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?3l\E[?7l\E>\E[1,24r\E[24,1H:\
 	:tc=vt200:
-dn|vt200-w|vt220-w|vt200-wj|vt220-wj|dec vt200 series; 132 col.; jump scroll:\
-	:is=\E>\E[?3h\E[?4l\E[?5l\E[?7h\E[?8h\E[1;24r\E[24;1H:\
-	:rs=\E>\E[?3h\E[?4l\E[?5l\E[?7h\E[?8h:\
-	:co#132:tc=vt200:
-do|vt200-ws|vt220-ws|dec vt200 series; 132 col.; smooth scroll:\
-	:is=\E>\E[?3h\E[?4h\E[?5l\E[?7h\E[?8h\E[1;24r\E[24;1H:\
-	:rs=\E>\E[?3h\E[?4h\E[?5l\E[?7h\E[?8h:\
-	:co#132:tc=vt200:
+dn|vt200-w|vt220-w|vt200-w-am|vt220-w-am|DEC VT200 series, 132 col:\
+	:co#132:\
+	:rs=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?3h\E[?7h\E>\E[1,24r\E[24,1H:\
+	:tc=vt200:
+do|vt200-w-nam|vt220-w-nam|DEC VT200 series, 132 col, no am:\
+	:co#132:am@:xn@:\
+	:is=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?7l\E>\E[1,24r:\
+	:rs=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?3h\E[?7l\E>\E[1,24r\E[24,1H:\
+	:tc=vt200:
+# VT300 series added by Michael Sokolov based on vt200
+dL|vt300|vt320|vt300-am|vt320-am|DEC VT300 series:\
+	:im=\E[4h:ei=\E[4l:mi:dc=\E[P:dm=:ed=:al=\E[L:dl=\E[M:\
+	:AL=\E[%dL:DL=\E[%dM:DC=\E[%dP:ec=\E[%dx:\
+	:cs=\E[%i%d;%dr:sf=\ED:sr=\EM:sb=\EM:\
+	:ce=\E[K:cl=\E[H\E[J:cd=\E[J:cm=\E[%i%d;%dH:nd=\E[C:up=\E[A:\
+	:so=\E[7m:se=\E[27m:us=\E[4m:ue=\E[24m:ms:\
+	:md=\E[1m:mr=\E[7m:mb=\E[5m:me=\E[m:\
+	:is=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?7h\E>\E[1,24r:\
+	:rs=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?3l\E[?7h\E>\E[1,24r\E[24,1H:\
+	:kN=\E[6~:kP=\E[5~:\
+	:tc=vt100:
+dM|vt300-nam|vt320-nam|DEC VT300 series, no am:\
+	:am@:xn@:\
+	:is=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?7l\E>\E[1,24r:\
+	:rs=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?3l\E[?7l\E>\E[1,24r\E[24,1H:\
+	:tc=vt300:
+dN|vt300-w|vt320-w|vt300-w-am|vt320-w-am|DEC VT300 series, 132 col:\
+	:co#132:\
+	:rs=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?3h\E[?7h\E>\E[1,24r\E[24,1H:\
+	:tc=vt300:
+dO|vt300-w-nam|vt320-w-nam|DEC VT300 series, 132 col, no am:\
+	:co#132:am@:xn@:\
+	:is=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?7l\E>\E[1,24r:\
+	:rs=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?3h\E[?7l\E>\E[1,24r\E[24,1H:\
+	:tc=vt300:
 # @(#)termcap	X10/6.6	11/7/86, minus alternate screen, plus :cs
 vs|xterm|vs100|xterm terminal emulator (X window system):\
 	:do=^J:le=^H:ho=\E[H:\

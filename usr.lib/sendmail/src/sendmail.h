@@ -15,7 +15,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)sendmail.h	5.13 (Berkeley) 9/20/88
+ *	@(#)sendmail.h	5.14 (Berkeley) 5/29/02
  */
 
 /*
@@ -25,7 +25,7 @@
 # ifdef _DEFINE
 # define EXTERN
 # ifndef lint
-static char SmailSccsId[] =	"@(#)sendmail.h	5.13		9/20/88";
+static char SmailSccsId[] =	"@(#)sendmail.h	5.14		5/29/02";
 # endif lint
 # else  _DEFINE
 # define EXTERN extern
@@ -521,6 +521,7 @@ EXTERN char	*FileName;	/* name to print on error messages */
 EXTERN char	*SmtpPhase;	/* current phase in SMTP processing */
 EXTERN char	*MyHostName;	/* name of this host for SMTP messages */
 EXTERN char	*RealHostName;	/* name of host we are talking to */
+EXTERN char	*RealHostAddr;	/* address of that host as "[a.b.c.d]" */
 EXTERN char	*CurHostName;	/* current host we are dealing with */
 EXTERN jmp_buf	TopFrame;	/* branch-to-top-of-loop-on-error frame */
 EXTERN bool	QuickAbort;	/*  .... but only if we want a quick abort */

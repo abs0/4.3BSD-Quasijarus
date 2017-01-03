@@ -2,9 +2,9 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)as.1	6.3 (Berkeley) 5/8/86
+.\"	@(#)as.1	6.5 (Berkeley) 11/8/03
 .\"
-.TH AS 1 "May 8, 1986"
+.TH AS 1 "November 8, 2003"
 .UC 4
 .SH NAME
 as \- VAX-11 assembler
@@ -63,9 +63,9 @@ rather than a temporary file.
 Do not complain about errors.
 .TP
 .B \-J
-Use long branches to resolve jumps when byte-displacement branches are
-insufficient.  This must be used when a compiler-generated assembly contains
-branches of more than 32k bytes.
+This flag is obsolete and ignored.
+.I As
+now automatically chooses between byte branches, word branches, and long jumps.
 .TP
 .B \-R
 Make initialized data segments read-only, by concatenating them to
@@ -103,7 +103,3 @@ Auxiliary documentation
 John F. Reiser
 .br
 Robert R. Henry
-.SH BUGS
-.B \-J
-should be eliminated; the assembler should automatically choose among
-byte, word and long branches.

@@ -1,0 +1,70 @@
+.\"	@(#)sccshelp.1	6.2 (Berkeley) 6/12/03
+.tr ~
+.th SCCSHELP 1 6/12/03
+.sh NAME
+sccshelp \*- ask for help
+.sh SYNOPSIS
+.bd sccshelp
+[arg]~...
+.sh DESCRIPTION
+.it Sccshelp
+finds information to explain a message from an SCCS command or explain the use
+of a command.
+Zero or more arguments may be supplied.
+If no arguments are given,
+.it sccshelp
+will prompt for one.
+.s1
+The arguments may be either
+message numbers (which normally appear in parentheses following messages)
+or command names,
+of one of the following types:
+.s1
+.lp +20 10
+type~1	Begins with non-numerics, ends in numerics.
+The non-numeric prefix is usually an abbreviation for the program or
+set of routines which produced the message
+(e.g., ``ge6'', for message 6 from the
+.it get
+command).
+.s1
+.lp +20 10
+type~2	Does not contain numerics (as a command, such as
+.it get
+)
+.s1
+.lp +20 10
+type~3	Is all numeric (e.g., ``212'')
+.i0
+.s1
+The response of the program will be the explanatory information related
+to the argument, if there is any.
+.s1
+When all else fails, try ``sccshelp stuck''.
+.sh FILES
+The ASCII file searched for the explanatory information
+for each type of argument is as follows:
+.s1
+.lp +20 10
+.if n type~1	/usr/lib/help/``prefix-of-argument''
+.if t type~1	/usr/lib/help/\fIprefix-of-argument\fR
+.s1
+.lp +20 10
+type~2	/usr/lib/help/cmds
+.s1
+.lp +20 10
+type~3	/usr/lib/sccs.hf
+.i0
+.s1
+If the file to be searched for either a type 1 or a type 2
+argument does not exist, the search will be attempted on the
+file for the type 3 argument.
+In no case, however, will more than one file be searched per argument.
+.s1
+Anyone wishing to modify the files should list out portions
+of them \*- the format will be obvious.
+.sh DIAGNOSTICS
+Use
+.it sccshelp
+for help.
+.tr ~~

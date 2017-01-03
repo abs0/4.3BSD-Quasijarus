@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)envelope.c	5.15 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)envelope.c	5.17 (Berkeley) 4/3/00";
 #endif /* not lint */
 
 #include <pwd.h>
@@ -316,8 +316,8 @@ settime()
 
 	now = curtime();
 	tm = gmtime(&now);
-	(void) sprintf(tbuf, "%02d%02d%02d%02d%02d", tm->tm_year, tm->tm_mon+1,
-			tm->tm_mday, tm->tm_hour, tm->tm_min);
+	(void) sprintf(tbuf, "%02d%02d%02d%02d%02d", tm->tm_year % 100,
+			tm->tm_mon+1, tm->tm_mday, tm->tm_hour, tm->tm_min);
 	define('t', tbuf, CurEnv);
 	(void) strcpy(dbuf, ctime(&now));
 	*index(dbuf, '\n') = '\0';
@@ -439,6 +439,8 @@ setsender(from)
 	**	Username can return errno != 0 on non-errors.
 	*/
 
+	if (from != NULL && from[0] == '\0')
+		from = "<>";
 	if (QueueRun || OpMode == MD_SMTP || OpMode == MD_ARPAFTP)
 		realname = from;
 	if (realname == NULL || realname[0] == '\0')

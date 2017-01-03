@@ -1,5 +1,5 @@
 #
-#	@(#)disktab	4.23 (Berkeley) 9/6/99
+#	@(#)disktab	4.29 (Berkeley) 11/24/03
 #
 # Disk geometry and partition layout tables. 
 # Key:
@@ -364,7 +364,7 @@ ra82|RA81|DEC RA82 Winchester:\
 	:pg#841320:og#375345:bg#8192:fg#1024:\
 	:ph#291346:oh#83790:bh#8192:fh#1024:
 # RA70
-ra70|RA70|DEC RA70:\
+ra70|RA70|DEC RA70 Winchester:\
 	:ty=winchester:ns#33:nt#11:nc#1507:\
 	:dt=MSCP:\
 	:pa#15884:oa#0:ba#8192:fa#1024:\
@@ -376,7 +376,7 @@ ra70|RA70|DEC RA70:\
 	:pg#205821:og#341220:bg#8192:fg#1024:\
 	:ph#291346:oh#49731:bh#8192:fh#1024:
 # RA71
-ra71|RA71|DEC RA71:\
+ra71|RA71|DEC RA71 Winchester:\
 	:ty=winchester:ns#51:nt#14:nc#1915:\
 	:dt=MSCP:\
 	:pa#15884:oa#0:ba#8192:fa#1024:\
@@ -388,7 +388,7 @@ ra71|RA71|DEC RA71:\
 	:pg#991746:og#375564:bg#8192:fg#1024:\
 	:ph#291346:oh#83538:bh#8192:fh#1024:
 # RA72
-ra72|RA72|DEC RA72:\
+ra72|RA72|DEC RA72 Winchester:\
 	:ty=winchester:ns#51:nt#20:nc#1915:\
 	:dt=MSCP:\
 	:pa#15884:oa#0:ba#8192:fa#1024:\
@@ -399,8 +399,20 @@ ra72|RA72|DEC RA72:\
 	:pf#1253580:of#699720:bf#8192:ff#1024:\
 	:pg#1577940:og#375360:bg#8192:fg#1024:\
 	:ph#291346:oh#83640:bh#8192:fh#1024:
+# RA73
+ra73|RA73|DEC RA73 Winchester:\
+	:ty=winchester:ns#70:nt#21:nc#2667:\
+	:dt=MSCP:\
+	:pa#32768:oa#0:ba#8192:fa#1024:\
+	:pb#131072:ob#33810:bb#8192:fb#1024:tb=swap:\
+	:pc#3920490:oc#0:bc#8192:fc#1024:\
+	:pd#131072:od#458640:bd#8192:fd#1024:\
+	:pe#1638400:oe#590940:be#8192:fe#1024:\
+	:pf#1690500:of#2229990:bf#8192:ff#1024:\
+	:pg#3461850:og#458640:bg#8192:fg#1024:\
+	:ph#291346:oh#166110:bh#8192:fh#1024:
 # RA90
-ra90|RA90|DEC RA90:\
+ra90|RA90|DEC RA90 Winchester:\
 	:ty=winchester:ns#69:nt#13:nc#2649:\
 	:dt=MSCP:\
 	:pa#15884:oa#0:ba#8192:fa#1024:\
@@ -412,7 +424,7 @@ ra90|RA90|DEC RA90:\
 	:pg#2001207:og#374946:bg#8192:fg#1024:\
 	:ph#291346:oh#83421:bh#8192:fh#1024:
 # RA92
-ra92|RA92|DEC RA92:\
+ra92|RA92|DEC RA92 Winchester:\
 	:ty=winchester:ns#69:nt#13:nc#3279:\
 	:dt=MSCP:\
 	:pa#15884:oa#0:ba#8192:fa#1024:\
@@ -424,6 +436,106 @@ ra92|RA92|DEC RA92:\
 	:pg#2566005:og#374946:bg#8192:fg#1024:\
 	:ph#291346:oh#83421:bh#8192:fh#1024:
 #
+# RF disks (DSSI ISEs)
+#
+# RF30
+rf30|RF30|DEC RF30 Winchester:\
+	:ty=winchester:ns#37:nt#6:nc#1320:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#8192:fa#1024:\
+	:pb#33440:ob#15984:bb#8192:fb#1024:tb=swap:\
+	:pc#293040:oc#0:bc#8192:fc#1024:\
+	:pd#15884:od#49506:bd#4096:fd#512:\
+	:pe#55936:oe#65490:be#8192:fe#1024:\
+	:pf#171606:of#121434:bf#8192:ff#1024:\
+	:pg#243534:og#49506:bg#8192:fg#1024:
+# RF31
+rf31|RF31|DEC RF31 Winchester:\
+	:ty=winchester:ns#50:nt#8:nc#1861:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#8192:fa#1024:\
+	:pb#66880:ob#16000:bb#8192:fb#1024:tb=swap:\
+	:pc#744400:oc#0:bc#8192:fc#1024:\
+	:pd#15884:od#374800:bd#4096:fd#512:\
+	:pe#307200:oe#390800:be#8192:fe#1024:\
+	:pf#46400:of#698000:bf#8192:ff#1024:\
+	:pg#369600:og#374800:bg#8192:fg#1024:\
+	:ph#291346:oh#83200:bh#8192:fh#1024:
+# RF35
+rf35|RF35|DEC RF35 Winchester:\
+	:ty=winchester:ns#57:nt#14:nc#2086:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#8192:fa#1024:\
+	:pb#66880:ob#15960:bb#8192:fb#1024:tb=swap:\
+	:pc#1664628:oc#0:bc#8192:fc#1024:\
+	:pd#15884:od#375060:bd#4096:fd#512:\
+	:pe#307200:oe#391020:be#8192:fe#1024:\
+	:pf#966378:of#698250:bf#8192:ff#1024:\
+	:pg#1289568:og#375060:bg#8192:fg#1024:\
+	:ph#291346:oh#82992:bh#8192:fh#1024:
+# RF36 uses zoned recording, so the geometry given is fake.
+# We do not align partitions to the resulting "cylinder" boundaries.
+rf36|RF36|DEC RF36 Winchester:\
+	:ty=winchester:ns#78:nt#16:nc#2505:\
+	:dt=MSCP:\
+	:pa#32768:oa#0:ba#8192:fa#1024:\
+	:pb#131072:ob#32768:bb#8192:fb#1024:tb=swap:\
+	:pc#3125408:oc#0:bc#8192:fc#1024:\
+	:pd#131072:od#455186:bd#8192:fd#1024:\
+	:pe#1638400:oe#586258:be#8192:fe#1024:\
+	:pf#900750:of#2224658:bf#8192:ff#1024:\
+	:pg#2670222:og#455186:bg#8192:fg#1024:\
+	:ph#291346:oh#163840:bh#8192:fh#1024:
+# RF71
+rf71|RF71|DEC RF71 Winchester:\
+	:ty=winchester:ns#37:nt#16:nc#1320:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#8192:fa#1024:\
+	:pb#66880:ob#15984:bb#8192:fb#1024:tb=swap:\
+	:pc#781440:oc#0:bc#8192:fc#1024:\
+	:pd#15884:od#374736:bd#4096:fd#512:\
+	:pe#307200:oe#390720:be#8192:fe#1024:\
+	:pf#83472:of#697968:bf#8192:ff#1024:\
+	:pg#406704:og#374736:bg#8192:fg#1024:\
+	:ph#291346:oh#82880:bh#8192:fh#1024:
+# RF72
+rf72|RF72|DEC RF72 Winchester:\
+	:ty=winchester:ns#50:nt#21:nc#1861:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#8192:fa#1024:\
+	:pb#66880:ob#16800:bb#8192:fb#1024:tb=swap:\
+	:pc#1954050:oc#0:bc#8192:fc#1024:\
+	:pd#15884:od#375900:bd#4096:fd#512:\
+	:pe#307200:oe#392700:be#8192:fe#1024:\
+	:pf#1253700:of#700350:bf#8192:ff#1024:\
+	:pg#1578150:og#375900:bg#8192:fg#1024:\
+	:ph#291346:oh#84000:bh#8192:fh#1024:
+# RF73
+rf73|RF73|DEC RF73 Winchester:\
+	:ty=winchester:ns#70:nt#21:nc#2667:\
+	:dt=MSCP:\
+	:pa#32768:oa#0:ba#8192:fa#1024:\
+	:pb#131072:ob#33810:bb#8192:fb#1024:tb=swap:\
+	:pc#3920490:oc#0:bc#8192:fc#1024:\
+	:pd#131072:od#458640:bd#8192:fd#1024:\
+	:pe#1638400:oe#590940:be#8192:fe#1024:\
+	:pf#1690500:of#2229990:bf#8192:ff#1024:\
+	:pg#3461850:og#458640:bg#8192:fg#1024:\
+	:ph#291346:oh#166110:bh#8192:fh#1024:
+# RF74 uses zoned recording, so the geometry given is fake.
+# We do not align partitions to the resulting "cylinder" boundaries.
+rf74|RF74|DEC RF74 Winchester:\
+	:ty=winchester:ns#96:nt#25:nc#2907:\
+	:dt=MSCP:\
+	:pa#32768:oa#0:ba#8192:fa#1024:\
+	:pb#131072:ob#32768:bb#8192:fb#1024:tb=swap:\
+	:pc#6976375:oc#0:bc#8192:fc#1024:\
+	:pd#131072:od#455186:bd#8192:fd#1024:\
+	:pe#3276800:oe#586258:be#8192:fe#1024:\
+	:pf#3113317:of#3863058:bf#8192:ff#1024:\
+	:pg#6521189:og#455186:bg#8192:fg#1024:\
+	:ph#291346:oh#163840:bh#8192:fh#1024:
+#
 # RC25
 rc25|RC25:\
 	:ty=winchester:ns#42:nt#4:nc#302:\
@@ -432,6 +544,40 @@ rc25|RC25:\
 	:pb#10032:ob#15884:bb#8192:fb#1024:tb=swap:\
 	:pc#50736:oc#0:bc#8192:fc#1024:\
 	:pg#24820:og#25916:bg#8192:fg#1024:
+#
+#  Disks on RQDX Q-bus controllers
+rd52|RD52|DEC RD52 on Microvax:\
+	:ty=winchester:ns#18:nt#7:nc#480:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#4096:fa#1024:\
+	:pb#9766:ob#15884:bb#4096:fb#512:tb=swap:\
+	:pc#60480:oc#0:bc#4096:fc#512:\
+	:pg#34830:og#25650:bg#4096:fg#512:\
+	:b0=rdboot:
+#
+rd53|RD53|DEC RD53 on Microvax:\
+	:ty=winchester:ns#18:nt#8:nc#963:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#8192:fa#1024:\
+	:pb#33440:ob#15884:bb#4096:fb#512:tb=swap:\
+	:pc#138672:oc#0:bc#4096:fc#512:\
+	:pe#33440:oe#0:be#4096:fe#512:\
+	:pf#105232:of#33440:bf#4096:ff#512:\
+	:pg#89348:og#49324:bg#4096:fg#512:\
+	:ph#122788:oh#15884:bh#4096:fh#512:\
+	:b0=rdboot:
+#
+rd54|RD54|DEC RD54 on Microvax:\
+	:ty=winchester:ns#17:nt#15:nc#1225:\
+	:dt=MSCP:\
+	:pa#15884:oa#0:ba#8192:fa#1024:\
+	:pb#33440:ob#16065:bb#8192:fb#1024:tb=swap:\
+	:pc#311200:oc#0:bc#8192:fc#1024:\
+	:pd#15884:od#49725:bd#4096:fd#512:\
+	:pe#55936:oe#65790:be#8192:fe#1024:\
+	:pf#189310:of#121890:bf#8192:ff#1024:\
+	:pg#261475:og#49725:bg#8192:fg#1024:\
+	:b0=rdboot:
 #
 # RX02 floppy disk drives
 #

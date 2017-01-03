@@ -2,9 +2,9 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)ftp.1	6.9 (Berkeley) 6/27/88
+.\"	@(#)ftp.1	6.10 (Berkeley) 6/12/03
 .\"
-.TH FTP 1C "April 29, 1985"
+.TH FTP 1C "June 12, 2003"
 .UC 5
 .SH NAME
 ftp \- ARPANET file transfer program
@@ -167,6 +167,12 @@ If no directory is specified, the current working
 directory on the remote machine is used.  If no local
 file is specified, or \fIlocal-file\fP is \fB-\fP,
 output comes to the terminal.
+If only one argument is specified it is interpreted as
+.IR remote-directory ,
+unless it starts with '|' or '>', in which case
+it is interpreted as
+.IR local-file .
+(In the last case '>' is not part of the filename.)
 .TP
 .B disconnect
 A synonym for
@@ -244,6 +250,12 @@ target local file for receiving
 output.
 If no local file is specified, or if \fIlocal-file\fR is \fB-\fR,
 the output is sent to the terminal.
+If only one argument is specified it is interpreted as
+.IR remote-directory ,
+unless it starts with '|' or '>', in which case
+it is interpreted as
+.IR local-file .
+(In the last case '>' is not part of the filename.)
 .TP
 \fBmacdef\fP \fImacro-name\fP
 Define a macro.

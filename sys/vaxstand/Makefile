@@ -14,14 +14,14 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	7.22 (Berkeley) 9/5/99
+#	@(#)Makefile	7.24 (Berkeley) 11/16/03
 #
 
 DESTDIR=
 STAND=	/stand
 INCPATH=-I. -I../stand -I../h
 VPATH=	../stand:../vax
-DEFS=	${INCPATH} -DSTANDALONE -DCOMPAT_42
+DEFS=	${INCPATH} -DSTANDALONE
 MACH=	-DVAX8600 -DVAX8200 -DVAX780 -DVAX750 -DVAX730 -DVAX630 -DVAX650
 LS=	/bin/ls
 
@@ -32,8 +32,8 @@ LS=	/bin/ls
 #	KRAOPTS	like SMOPTS, but for bootkra, which is 8200 only
 #	CFLAGS	everything else
 
-COPTS=	${DEFS} ${MACH}
-CFLAGS=	-O ${DEFS} ${MACH}
+COPTS=	${DEFS} ${MACH} -DCOMPAT_42
+CFLAGS=	-O ${DEFS} ${MACH} -DCOMPAT_42
 SMOPTS=	${DEFS} -DSMALL -DVAX750
 RAOPTS=	${DEFS} -DSMALL -DVAX750 -DVAX8200 -DVAX630 -DVAX650
 KRAOPTS=${DEFS} -DSMALL -DVAX8200
@@ -50,9 +50,9 @@ DUMMIES=confxx.c
 DRIVERS=autoconf.o hp.o hpmaptype.o ht.o idc.o kdb.o mba.o mt.o qdcons.o \
 	qvcons.o rk.o rl.o tm.o tmscp.o ts.o up.o upmaptype.o uba.o uda.o \
 	ut.o
-SMOBJ=	bootxx.o sm_sys.o sm_autoconf.o 
-RAOBJ=	bootxx.o sm_sys.o ra_autoconf.o 
-KRAOBJ=	bootxx.o sm_sys.o kra_autoconf.o 
+SMOBJ=	bootxx.o sm_sys.o sm_autoconf.o
+RAOBJ=	bootxx.o sm_sys.o ra_autoconf.o sm_uda.o
+KRAOBJ=	bootxx.o sm_sys.o kra_autoconf.o sm_kdb.o
 
 # These drivers don't have ecc correction and bad sector forwarding;
 # they are placed in the file system boot area for 750's.  If your
@@ -200,6 +200,20 @@ sm_up.o: up.o
 	/lib/c2 -i sm_up.s | as -o sm_up.o
 	rm -f sm_up.s sm_up.c
 
+sm_uda.o: uda.o
+	rm -f sm_uda.c
+	ln -s uda.c sm_uda.c
+	${CC} -S ${RAOPTS} sm_uda.c
+	/lib/c2 -i sm_uda.s | as -o sm_uda.o
+	rm -f sm_uda.s sm_uda.c
+
+sm_kdb.o: kdb.o
+	rm -f sm_kdb.c
+	ln -s kdb.c sm_kdb.c
+	${CC} -S ${KRAOPTS} sm_kdb.c
+	/lib/c2 -i sm_kdb.s | as -o sm_kdb.o
+	rm -f sm_kdb.s sm_kdb.c
+
 sm_sys.o: sys.o
 	rm -f sm_sys.c
 	ln -s sys.c sm_sys.c
@@ -278,18 +292,22 @@ installint: FRC
 		dd if=a.out of=../floppy/boot bs=32 skip=1; rm a.out
 	cp ../floppy/boot ../cassette/boot
 	cp ../floppy/boot ../consolerl/boot
+	cp ../floppy/boot ../rx50/boot
 	cp copy a.out; strip a.out; \
 		dd if=a.out of=../floppy/copy bs=32 skip=1; rm a.out
 	cp ../floppy/copy ../cassette/copy
 	cp ../floppy/copy ../consolerl/copy
+	cp ../floppy/copy ../rx50/copy
 	cp format a.out; strip a.out; \
 		dd if=a.out of=../floppy/format bs=32 skip=1; rm a.out
 	cp ../floppy/format ../cassette/format
 	cp ../floppy/format ../consolerl/format
+	cp ../floppy/format ../rx50/format
 	cp drtest a.out; strip a.out; \
 		dd if=a.out of=../floppy/drtest bs=32 skip=1; rm a.out
 	cp ../floppy/drtest ../cassette/drtest
 	cp ../floppy/drtest ../consolerl/drtest
+	cp ../floppy/drtest ../rx50/drtest
 
 installext: FRC
 	install -c -s -o bin -g bin -m 644 format cat copy drtest ls ${DESTDIR}${STAND}

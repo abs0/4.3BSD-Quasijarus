@@ -2,15 +2,15 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)date.1	6.6 (Berkeley) 4/1/87
+.\"	@(#)date.1	6.7 (Berkeley) 11/8/03
 .\"
-.TH DATE 1 "April 1, 1987"
+.TH DATE 1 "November 8, 2003"
 .UC 4
 .SH NAME
 date \- print and set the date
 .SH SYNOPSIS
 .B date
-.RB "[-nu] [-d dst] [-t minutes_west] [yymmddhhmm [" . "ss] ]"
+.RB "[-nu] [-d dst] [-t minutes_west] [yyyymmddhhmm [" . "ss] ]"
 .SH DESCRIPTION
 If no arguments are given, the current date and time are
 printed.  Providing an argument will set the desired date;
@@ -21,8 +21,8 @@ to \fIgettimeofday\fP(2) will return a non-zero \fItz_dsttime\fP.
 \fIMinutes_west\fP provides the number of minutes returned
 by future calls to \fIgettimeofday\fP(2) in \fItz_minuteswest\fP.  The
 \fI-u\fP flag is used to display or set the date in GMT (universal) time.
-.I yy
-represents the last two digits of the year;
+.I yyyy
+is the year;
 the first
 .I mm
 is the month number;
@@ -37,9 +37,9 @@ is the minute number;
 is optional and represents the seconds.
 For example:
 .IP
-date 8506131627
+date 198506131627
 .PP
-sets the date to June 13 1985, 4:27 PM.  The year, month and day may
+sets the date to 1985-06-13, 16:27.  The year, month and day may
 be omitted; the default values will be the current ones.  The system
 operates in GMT.  \fIDate\fP takes care of the conversion to and from
 local standard and daylight-saving time.

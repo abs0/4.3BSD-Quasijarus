@@ -16,7 +16,7 @@ divert(10)
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)boilerplate.m4	1.3 (Berkeley) 2/15/89
+#	@(#)boilerplate.m4	1.4 (Berkeley) 3/27/00
 #
 divert(0)
 ######################
@@ -80,6 +80,8 @@ OW*
 Ox8
 # load average at which we refuse connections
 OX12
+# me too!
+Om
 
 ###########################
 #   Message precedences   #

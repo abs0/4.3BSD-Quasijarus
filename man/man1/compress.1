@@ -1,6 +1,6 @@
-.\"	@(#)compress.1	6.5 (Berkeley) 5/11/86
+.\"	@(#)compress.1	6.6 (Berkeley) 6/2/02
 .\"
-.TH COMPRESS 1 "May 11, 1986"
+.TH COMPRESS 1 "June 2, 2002"
 .UC 6
 .SH NAME
 compress, uncompress, zcat \- compress and expand data
@@ -9,14 +9,13 @@ compress, uncompress, zcat \- compress and expand data
 .ll +8
 .B compress
 [
-.B \-f
-] [
-.B \-v
-] [
-.B \-c
+.B \-fvcs
 ] [
 .B \-b
 .I bits
+] [
+.B \-l
+.I level
 ] [
 .I "name \&..."
 ]
@@ -24,11 +23,7 @@ compress, uncompress, zcat \- compress and expand data
 .br
 .B uncompress
 [
-.B \-f
-] [
-.B \-v
-] [
-.B \-c
+.B \-fvc
 ] [
 .I "name \&..."
 ]
@@ -76,7 +71,7 @@ The nondestructive behavior of
 .I zcat
 is identical to that of
 .I uncompress
-.B \-c.
+.BR \-c .
 .PP
 .I Compress
 uses the modified Lempel-Ziv algorithm popularized in
@@ -110,7 +105,7 @@ the algorithm to adapt to the next "block" of the file.
 Note that the
 .B \-b
 flag is omitted for
-.I uncompress,
+.IR uncompress ,
 since the 
 .I bits
 parameter specified during compression
@@ -118,7 +113,6 @@ is encoded within the output, along with
 a magic number to ensure that neither decompression of random data nor
 recompression of compressed data is attempted. 
 .PP
-.ne 8
 The amount of compression obtained depends on the size of the
 input, the number of
 .I bits
@@ -132,6 +126,79 @@ or adaptive Huffman coding
 .RI ( compact ),
 and takes less time to compute.
 .PP
+If the
+.B \-s
+option is given,
+instead of using the modified Lempel-Ziv algorithm described above (also known
+as LZW for Lempel-Ziv-Welch),
+.I compress
+uses the original Lempel-Ziv algorithm (LZ77).
+Instead of assigning an
+.IR n -bit
+code to each compressed away common substring, which very quickly burns up the
+code space and causes a switch to longer less efficient codes,
+.I compress
+.B \-s
+references common substrings by a {distance, length} pointer
+in the data stream.
+All symbols emitted into the compressed data stream (literals, distances, and
+lengths) are Huffman coded.
+Compared to the original
+.I compress
+LZW algorithm, this version of Lempel-Ziv compression, known as deflation,
+is slower but generally produces a better compression ratio.
+It is therefore termed strong compression.
+.PP
+The output of
+.I compress
+.B \-s
+consists of a magic number, deflated data in the format defined in Internet
+RFC 1951, and 8 check bytes recording CRC-32 and size in bytes of the original
+file, used by
+.I uncompress
+for verification.
+.PP
+The
+.B \-s
+option is not needed for
+.I uncompress
+as it detects the strong compressed format by its magic number.
+The
+.B \-s
+option does not change any other aspect of
+.I compress
+operation besides the compression algorithm,
+nor does use on strong compressed data change any of the behavior of
+.IR uncompress .
+The
+.B \-b
+option is ignored with
+.BR \-s .
+.PP
+A compression
+.I level
+may be specified with
+.BR \-l .
+It is a number between 0 and 9 telling
+.I compress
+how hard it should work to try to find and take advantage of all compression
+opportunities.
+Smaller numbers result in faster compression, but some compression
+opportunities may be missed that would have been found and used with higher
+compression levels, affecting the compression ratio.
+The compression level is meaningful only for strong compression and is ignored
+in the default LZW mode.
+0 indicates no compression, just store the data in the RFC 1951 deflate format.
+The default compression level is 6.
+.PP
+The
+.B \-l
+option is ignored by
+.IR uncompress ,
+and the compression level is not stored in the compressed file,
+as it does not affect the general format of the compressed data or the actions
+required for decompression.
+.PP
 The
 .B \-v
 option causes
@@ -140,8 +207,8 @@ the printing of the percentage reduction of each file.
 If an error occurs, exit status is 1, else
 if the last file was not compressed because it became larger, the status
 is 2; else the status is 0.
-.SH "DIAGNOSTICS"
-Usage: compress [\-fvc] [\-b maxbits] [file ...]
+.SH DIAGNOSTICS
+Usage: compress [\-fvcs] [\-b maxbits] [\-l level] [file ...]
 .in +8
 Invalid options were specified on the command line.
 .in -8
@@ -149,6 +216,11 @@ Missing maxbits
 .in +8
 Maxbits must follow
 .BR \-b \.
+.in -8
+Missing level
+.in +8
+Level must follow
+.BR \-l \.
 .in -8
 .IR file :
 not in compressed format
@@ -222,7 +294,7 @@ for more information.
 No savings is achieved by
 compression.  The input remains virgin.
 .in -8
-.SH "BUGS"
+.SH BUGS
 Although compressed files are compatible between machines with large memory,
 .BR \-b \12
 should be used for file transfer to architectures with 
@@ -231,3 +303,5 @@ series, the Intel 80286, etc.)
 .PP
 .I compress
 should be more flexible about the existence of the `.Z' suffix.
+.SH SEE ALSO
+gzcompat(1)

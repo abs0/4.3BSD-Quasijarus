@@ -3,12 +3,13 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)trap.c	7.3 (Berkeley) 5/19/88
+ *	@(#)trap.c	7.4 (Berkeley) 9/15/02
  */
 
 #include "psl.h"
 #include "reg.h"
 #include "pte.h"
+#include "vmparam.h"
 
 #include "param.h"
 #include "systm.h"
@@ -55,7 +56,8 @@ int	TRAP_TYPES = (sizeof trap_type / sizeof trap_type[0]);
  */
 /*ARGSUSED*/
 trap(sp, type, code, pc, psl)
-	int sp, type;
+	unsigned sp;
+	int type;
 	unsigned code;
 	int pc, psl;
 {
@@ -111,8 +113,12 @@ trap(sp, type, code, pc, psl)
 	 * grow the stack automatically.
 	 */
 	case T_SEGFLT+USER:
-		if (grow((unsigned)locr0[SP]) || grow(code))
-			goto out;
+		if (code >= P1LOW && code < USRSTACK) {
+			if (sp < code && grow(sp))
+				goto out;
+			if (grow(code))
+				goto out;
+		}
 		i = SIGSEGV;
 		break;
 

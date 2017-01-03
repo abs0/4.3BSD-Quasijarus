@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if_qe.c	7.11 (Berkeley) 2/17/89
+ *	@(#)if_qe.c	7.12 (Berkeley) 1/19/03
  */
 
 /* from  @(#)if_qe.c	1.15	(ULTRIX)	4/16/86 */
@@ -372,6 +372,7 @@ qereset(unit, uban)
 		return;
 	printf(" qe%d", unit);
 	qe_softc[unit].qe_if.if_flags &= ~IFF_RUNNING;
+	qe_softc[unit].qe_flags &= ~QEF_RUNNING;
 	qeinit(unit);
 }
 
@@ -569,7 +570,7 @@ qeintr(unit)
 	if( csr & QE_XMIT_INT )
 		qetint( unit );
 	if( csr & QE_NEX_MEM_INT )
-		printf("qe%d: Nonexistent memory interrupt\n", unit);
+		log(LOG_ERR, "qe%d: Nonexistent memory interrupt\n", unit);
 
 	if( addr->qe_csr & QE_RL_INVALID && sc->rring[sc->rindex].qe_status1 == QE_NOTYET ) {
 		buf_addr = (int)&sc->rringaddr[sc->rindex];
@@ -870,9 +871,9 @@ qeioctl(ifp, cmd, data)
 			((struct qedevice *)
 			   (qeinfo[ifp->if_unit]->ui_addr))->qe_csr = QE_RESET;
 			sc->qe_flags &= ~QEF_RUNNING;
-		} else if ((ifp->if_flags & (IFF_UP|IFF_RUNNING)) ==
-		    IFF_RUNNING && (sc->qe_flags & QEF_RUNNING) == 0)
-			qerestart(sc);
+		} else if (ifp->if_flags & IFF_UP &&
+		    (sc->qe_flags & QEF_RUNNING) == 0)
+			qeinit(ifp->if_unit);
 		break;
 
 	default:
@@ -896,7 +897,7 @@ qe_setaddr(physaddr, unit)
 	for (i = 0; i < 6; i++)
 		sc->setup_pkt[i][1] = sc->qe_addr[i] = physaddr[i];
 	sc->qe_flags |= QEF_SETADDR;
-	if (sc->qe_if.if_flags & IFF_RUNNING)
+	if (sc->qe_flags & QEF_RUNNING)
 		qesetup(sc);
 	qeinit(unit);
 }

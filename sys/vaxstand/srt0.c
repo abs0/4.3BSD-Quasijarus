@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)srt0.c	7.6 (Berkeley) 11/8/88
+ *	@(#)srt0.c	7.8 (Berkeley) 11/15/03
  */
 
 #include "../vax/mtpr.h"
@@ -58,14 +58,17 @@ entry:	.globl	entry
 
 	/*
 	 * Booted by VMB: get flags from extended rpb.
-	 * We can only guess at the boot device (here ra(0,0)).
+	 * The only boot device on MicroVAXen is ra (major 9).
+	 * VMB gives us the unit number, but controller has to be 0,
+	 * since stand uda driver doesn't support CSRs other than 0172150.
 	 */
+	movl	$9,r10			# device = ra(n,0)
+	insv	0x64(r11),$16,$4,r10
 	movl	0x30(r11),r11
-	movl	$9,r10			# device = ra(0,0)
 2:
 	movl	$RELOC,sp
 #else
-	movl	$RELOC-0x2400,sp
+	movl	0x6DC00,sp		# keep it below 0x70000 like in 4.3
 #endif
 start:
 #ifndef REL

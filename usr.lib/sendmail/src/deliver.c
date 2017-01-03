@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)deliver.c	5.23 (Berkeley) 9/20/88";
+static char sccsid[] = "@(#)deliver.c	5.24 (Berkeley) 4/3/00";
 #endif /* not lint */
 
 #include <sendmail.h>
@@ -137,7 +137,8 @@ deliver(e, firstto)
 
 	/* rewrite from address, using rewriting rules */
 	expand("\001f", buf, &buf[sizeof buf - 1], e);
-	(void) strcpy(tfrombuf, remotename(buf, m, TRUE, TRUE));
+	(void) strcpy(tfrombuf, remotename(buf[0] != '\0' ? buf : "<>", m,
+		TRUE, TRUE));
 
 	define('g', tfrombuf, e);		/* translated sender address */
 	define('h', host, e);			/* to host */

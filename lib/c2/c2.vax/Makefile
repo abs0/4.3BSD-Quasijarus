@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	4.6	(Berkeley)	6/6/87
+#	@(#)Makefile	4.8	(Berkeley)	8/29/00
 #
 CFLAGS=	-DCOPYCODE -DC2 -O
 ASDIR=	../../../bin/as/as.${MACHINE}
@@ -22,7 +22,7 @@ instrs.c2: ${ASDIR}/instrs
 	(echo FLAVOR C2 ; cat ${ASDIR}/instrs) | awk -f ${ASDIR}/instrs > instrs.c2
 
 clean:
-	rm -f *.o *.s c2
+	rm -f *.o *.s c2 instrs.c2
 
 install:
 	install -o bin -g bin -m 755 -s c2 ${DESTDIR}/lib/c2
@@ -30,7 +30,7 @@ install:
 tags:
 	ctags ${SRCS}
 
-depend:
+depend: instrs.c2
 	mkdep ${CFLAGS} ${SRCS}
 
 # DO NOT DELETE THIS LINE -- mkdep uses it.

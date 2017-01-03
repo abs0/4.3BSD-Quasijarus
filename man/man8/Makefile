@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.6 (Berkeley) 9/29/99
+#	@(#)Makefile	5.7 (Berkeley) 1/24/03
 #
 MDIR=	/usr/man/cat8
 SRCS=	XNSrouted.8 \
@@ -46,7 +46,7 @@ OBJS=	XNSrouted.0 \
 	savecore.0 sendmail.0 shutdown.0 slattach.0 sticky.0 swapon.0 \
 	sync.0 syslogd.0 talkd.0 telnetd.0 tftpd.0 timed.0 timedc.0 trpt.0 \
 	trsp.0 tunefs.0 update.0 uucico.0 uuclean.0 uupoll.0 uusnap.0 \
-	uuxqt.0 vipw.0 zdump.8 zic.8
+	uuxqt.0 vipw.0 zdump.0 zic.0
 LINKS=	accton.0 umount.0 mkfs.0 quotaoff.0 uucpd.0 fasthalt.0
 
 .SUFFIXES: .8 .0

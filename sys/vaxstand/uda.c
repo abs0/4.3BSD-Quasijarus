@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)uda.c	7.12 (Berkeley) 9/6/99
+ *	@(#)uda.c	7.16 (Berkeley) 11/24/03
  */
 
 /*
@@ -191,10 +191,14 @@ rastrategy(io, func)
 #ifdef COMPAT_42
 u_long rc25_off[] = { 0, 15884, 0, -1, -1, -1, 25916, -1 };
 u_long rx50_off[] = { 0, -1, 0, -1, -1, -1, -1, -1 };
+u_long rd52_off[] = { 0, 15884, 0, -1, -1, -1, 25650, -1 };
+u_long rd53_off[] = { 0, 15884, 0, -1, 0, 33440, 49324, 15884 };
+u_long rd54_off[] = { 0, 16065, 0, 49725, 65790, 121890, 49725, -1 };
 u_long ra60_off[] = { 0, 15884, 0, 49324, 131404, 49324, 242606, 49324 };
 u_long ra70_off[] = { 0, 15972, 0, 341220, 357192, 413457, 341220, 49731 };
 u_long ra71_off[] = { 0, 16422, 0, 375564, 391986, 699720, 375564, 83538 };
 u_long ra72_off[] = { 0, 16320, 0, 375360, 391680, 699720, 375360, 83640 };
+u_long ra73_off[] = { 0, 33810, 0, 458640, 590940, 2229990, 458640, 166110 };
 u_long ra80_off[] = { 0, 15884, 0, -1, 49324, 49324, 49910, 131404 };
 #ifndef	UCBRA
 #ifdef RA_COMPAT
@@ -208,6 +212,14 @@ u_long ra81_off[] = { 0, 15884, 0, 242606, 258490, 565690, 242606, 49324 };
 u_long ra82_off[] = { 0, 16245, 0, 375345, 391590, 699390, 375345, 83790 };
 u_long ra90_off[] = { 0, 16146, 0, 374946, 391092, 698763, 374946, 83421 };
 #define ra92_off ra90_off
+u_long rf30_off[] = { 0, 15984, 0, 49506, 65490, 121434, 49506, -1 };
+u_long rf31_off[] = { 0, 16000, 0, 374800, 390800, 698000, 374800, 83200 };
+u_long rf35_off[] = { 0, 15960, 0, 375060, 391020, 698250, 375060, 82992 };
+u_long rf36_off[] = { 0, 32768, 0, 455186, 586258, 2224658, 455186, 163840 };
+u_long rf71_off[] = { 0, 15984, 0, 374736, 390720, 697968, 374736, 82880 };
+u_long rf72_off[] = { 0, 16800, 0, 375900, 392700, 700350, 375900, 84000 };
+#define rf73_off ra73_off
+u_long rf74_off[] = { 0, 32768, 0, 455186, 586258, 3863058, 455186, 163840 };
 
 struct mediamap {
 	u_long	id;		/* media ID */
@@ -217,13 +229,25 @@ struct mediamap {
 	{ MSCP_MKDRIVE2('R', 'A', 70),		ra70_off },
 	{ MSCP_MKDRIVE2('R', 'A', 71),		ra71_off },
 	{ MSCP_MKDRIVE2('R', 'A', 72),		ra72_off },
+	{ MSCP_MKDRIVE2('R', 'A', 73),		ra73_off },
 	{ MSCP_MKDRIVE2('R', 'A', 80),		ra80_off },
 	{ MSCP_MKDRIVE2('R', 'A', 81),		ra81_off },
 	{ MSCP_MKDRIVE2('R', 'A', 82),		ra82_off },
 	{ MSCP_MKDRIVE2('R', 'A', 90),		ra90_off },
 	{ MSCP_MKDRIVE2('R', 'A', 92),		ra92_off },
+	{ MSCP_MKDRIVE2('R', 'F', 30),		rf30_off },
+	{ MSCP_MKDRIVE2('R', 'F', 31),		rf31_off },
+	{ MSCP_MKDRIVE2('R', 'F', 35),		rf35_off },
+	{ MSCP_MKDRIVE2('R', 'F', 36),		rf36_off },
+	{ MSCP_MKDRIVE2('R', 'F', 71),		rf71_off },
+	{ MSCP_MKDRIVE2('R', 'F', 72),		rf72_off },
+	{ MSCP_MKDRIVE2('R', 'F', 73),		rf73_off },
+	{ MSCP_MKDRIVE2('R', 'F', 74),		rf74_off },
 	{ MSCP_MKDRIVE2('R', 'C', 25),		rc25_off },
 	{ MSCP_MKDRIVE3('R', 'C', 'F', 25),	rc25_off },
+	{ MSCP_MKDRIVE2('R', 'D', 52),		rd52_off },
+	{ MSCP_MKDRIVE2('R', 'D', 53),		rd53_off },
+	{ MSCP_MKDRIVE2('R', 'D', 54),		rd54_off },
 	{ MSCP_MKDRIVE2('R', 'X', 50),		rx50_off },
 	0
 };

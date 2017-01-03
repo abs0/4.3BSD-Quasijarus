@@ -16,11 +16,11 @@ divert(10)
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)version.m4	1.35 (Berkeley) 2/15/89
+#	@(#)version.m4	1.36 (Berkeley) 3/27/00
 #
 divert(0)
 ######################
 #   Version Number   #
 ######################
 
-DZ1.35
+DZ1.36

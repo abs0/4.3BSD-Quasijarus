@@ -16,7 +16,7 @@ divert(10)
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)nsmacros.m4	1.10 (Berkeley) 2/15/89
+#	@(#)nsmacros.m4	1.11 (Berkeley) 3/27/00
 #
 divert(0)
 ######################
@@ -28,13 +28,6 @@ ifdef(`DOMAIN',
 DOMAIN,
 `#' YOUR DOMAIN NAME GOES HERE!
 DDYOUR_DOMAIN_NAME)
-
-ifdef(`INTERNET_RELAY',
-`#' Internet relay host -- machines in our domain that are not
-`#' registered with the NIC will be "hidden" behind this relay machine
-`#' with the % kludge`,' although SMTP delivery will still be performed
-`#' by the sending machine.  Someday this will go away.
-INTERNET_RELAY)
 
 ifdef(`UUCP_RELAY',
 `#' UUCP relay host

@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)compress.c	@(#)compress.c	5.10 (Berkeley) 1/19/99";
+static char sccsid[] = "@(#)compress.c	@(#)compress.c	5.11 (Berkeley) 1/30/03";
 #endif not lint
 
 /* 
@@ -810,39 +810,10 @@ compress() {
 
 #ifndef COMPATIBLE
     if (strong_comp) {
-	compFile cf;
-	char buf[4096];
-	int len, err;
-
 	putchar(magic_strong[0]); putchar(magic_strong[1]);
 	if(ferror(stdout))
 		writeerr();
-	cf = compress_open(stdout, strong_level);
-	if (cf == NULL) {
-	    fprintf(stderr, "compress: not enough memory for strong compression state info\n");
-	    unlink(ofname);
-	    exit(1);
-	}
-	for (;;) {
-	    len = fread(buf, 1, sizeof(buf), stdin);
-	    if (len < 0) {
-		perror("compress: fread");
-		unlink(ofname);
-		exit(1);
-	    }
-	    if (len == 0)
-		break;
-	    if (compwrite(cf, buf, len) != len) {
-		fprintf(stderr, "compress: compwrite: %s\n", comperror(cf, &err));
-		unlink(ofname);
-		exit(1);
-	    }
-	}
-	if (compclose(cf) != Z_OK) {
-	    fprintf(stderr, "compress: compclose: %s\n", comperror(cf, &err));
-	    unlink(ofname);
-	    exit(1);
-	}
+	strong_compress();
 	return;
     }
 
@@ -1105,36 +1076,7 @@ decompress() {
 
 #ifndef COMPATIBLE
     if (strong_comp) {
-	compFile cf;
-	char buf[4096];
-	int len, err;
-
-	cf = uncompress_open(stdin);
-	if (cf == NULL) {
-	    fprintf(stderr, "uncompress: not enough memory for strong compression state info\n");
-	    unlink(ofname);
-	    exit(1);
-	}
-	for (;;) {
-	    len = compread(cf, buf, sizeof(buf));
-	    if (len < 0) {
-		fprintf(stderr, "uncompress: compread: %s\n", comperror(cf, &err));
-		unlink(ofname);
-		exit(1);
-	    }
-	    if (len == 0)
-		break;
-	    if (fwrite(buf, 1, len, stdout) != len) {
-		perror("compress: fwrite");
-		unlink(ofname);
-		exit(1);
-	    }
-	}
-	if (compclose(cf) != Z_OK) {
-	    fprintf(stderr, "compress: compclose: %s\n", comperror(cf, &err));
-	    unlink(ofname);
-	    exit(1);
-	}
+	strong_decompress();
 	return;
     }
 #endif /* COMPATIBLE */
@@ -1421,6 +1363,121 @@ in_stack(c, stack_top)
 }
 #endif /* DEBUG */
 
+/* Strong compression mode. These are just hooks into zlib. */
+
+strong_compress()
+{
+	register compFile cf;
+	register char *buf;
+	register int len, buflen;
+	struct stat stbuf;
+	int err;
+	char *errmsg;
+
+	cf = compress_open(stdout, strong_level);
+	if (cf == NULL) {
+	    fprintf(stderr,
+	     "compress: not enough memory for strong compression state info\n");
+	    unlink(ofname);
+	    exit(1);
+	}
+	fstat(0, &stbuf);
+	buflen = stbuf.st_blksize;
+	buf = malloc(buflen);
+	if (buf == NULL) {
+	    fprintf(stderr,
+		"compress: not enough memory for strong compression buffer\n");
+	    unlink(ofname);
+	    exit(1);
+	}
+	for (;;) {
+	    len = read(0, buf, buflen);
+	    if (len < 0) {
+		perror(zcat_flg ? "stdin" : quiet ? "input" : NULL);
+		unlink(ofname);
+		exit(1);
+	    }
+	    if (len == 0)
+		break;
+	    compwrite(cf, buf, len);
+	    errmsg = comperror(cf, &err);
+	    if (err != Z_OK) {
+		fprintf(stderr, "%s: %s\n", ofname, errmsg);
+		unlink ( ofname );
+		exit ( 1 );
+	    }
+	}
+	free(buf);
+	if (compclose(cf) != Z_OK) {
+		fprintf(stderr, "%s: %s\n", ofname, comperror(cf, &err));
+		unlink ( ofname );
+		exit ( 1 );
+	}
+}
+
+strong_decompress()
+{
+	register compFile cf;
+	register char *buf;
+	register int len, buflen;
+	struct stat stbuf;
+	int err;
+	char *errmsg;
+	long pos;
+
+	cf = uncompress_open(stdin);
+	if (cf == NULL) {
+	    fprintf(stderr,
+	   "uncompress: not enough memory for strong compression state info\n");
+	    unlink(ofname);
+	    exit(1);
+	}
+	fstat(1, &stbuf);
+	buflen = stbuf.st_blksize;
+	buf = malloc(buflen);
+	if (buf == NULL) {
+	    fprintf(stderr,
+	      "uncompress: not enough memory for strong compression buffer\n");
+	    unlink(ofname);
+	    exit(1);
+	}
+	for (;;) {
+	    len = compread(cf, buf, buflen);
+	    if (len > 0) {
+		if (write(1, buf, len) != len)
+		    writeerr();
+	    }
+	    errmsg = comperror(cf, &err);
+	    if (err == Z_STREAM_END)
+		break;
+	    if (err != Z_OK) {
+		if (err == Z_ERRNO) {
+		    perror(zcat_flg ? "stdin" : quiet ? "input" : NULL);
+		    unlink(ofname);
+		    exit(1);
+		} else {
+		    fprintf(stderr, "%s\n", errmsg);
+		    unlink(ofname);
+		    exit(1);
+		}
+	    }
+	}
+	free(buf);
+	fstat(0, &stbuf);
+	if ((stbuf.st_mode & S_IFMT) == S_IFREG) {
+	    pos = ftell(stdin);
+	    if (pos < stbuf.st_size)
+		fprintf(stderr,
+	  "warning: compressed data ends at %ld, appendage follows (ignored)\n",
+			pos);
+	}
+	if (compclose(cf) != Z_OK) {
+	    fprintf(stderr, "%s\n", comperror(cf, &err));
+	    unlink(ofname);
+	    exit(1);
+	}
+}
+
 writeerr()
 {
     perror ( ofname );
@@ -1606,7 +1663,7 @@ long int num, den;
 
 version()
 {
-	fprintf(stderr, "%s, Berkeley 5.10 1/19/99\n", rcs_ident);
+	fprintf(stderr, "%s, Berkeley 5.11 1/30/03\n", rcs_ident);
 	fprintf(stderr, "Options: ");
 #ifdef vax
 	fprintf(stderr, "vax, ");

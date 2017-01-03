@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)aspseudo.c	5.1 (Berkeley) 4/30/85";
+static char sccsid[] = "@(#)aspseudo.c	5.2 (Berkeley) 8/29/00";
 #endif not lint
 
 #include <stdio.h>
@@ -15,6 +15,11 @@ static char sccsid[] = "@(#)aspseudo.c	5.1 (Berkeley) 4/30/85";
 	{ \
 		name, popcode, nargs, arg1, arg2, arg3, arg4, arg5, arg6, \
 		(nargs == 0 ? INST0:INSTn), eopcode \
+	}
+#define	RELAXOP(name, eopcode, popcode, tag) \
+	{ \
+		name, popcode, 0,   0, 0, 0, 0, 0, 0, \
+		tag, eopcode \
 	}
 #define	PSEUDO(name, type, tag) \
 	{ \

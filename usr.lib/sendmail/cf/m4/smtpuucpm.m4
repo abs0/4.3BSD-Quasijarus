@@ -16,7 +16,7 @@ divert(10)
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)smtpuucpm.m4	1.2 (Berkeley) 2/15/89
+#	@(#)smtpuucpm.m4	1.3 (Berkeley) 3/27/00
 #
 divert(0)
 ############################################################
@@ -35,7 +35,7 @@ divert(0)
 ############################################################
 ############################################################
 
-Msmtpuucp,	P=[IPC], F=mDFMueXLC, S=13, R=23, A=IPC $h, E=\r\n
+Msmtpuucp,	P=[IPC], F=mDFMueXL, S=13, R=23, A=IPC $h, E=\r\n
 
 define(SMTPUUCPPAIR,
 `R<@$1.uucp>:$+		$`#'smtpuucp$@$2$:`$'2

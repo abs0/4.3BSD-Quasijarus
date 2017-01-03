@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)ftpd.c	5.13 (Berkeley) 7/13/99";
+static char sccsid[] = "@(#)ftpd.c	5.14 (Berkeley) 6/27/00";
 #endif /* not lint */
 
 /*
@@ -57,7 +57,7 @@ static char sccsid[] = "@(#)ftpd.c	5.13 (Berkeley) 7/13/99";
  */
 #define	FTPUSERS	"/etc/ftpusers"
 
-char	version[] = "Version 5.13 July 13, 1999 22:47:46";
+char	version[] = "Version 5.14 June 27, 2000 10:10:55";
 
 extern	int errno;
 extern	char *sys_errlist[];
@@ -606,32 +606,32 @@ fatal(s)
 	dologout(0);
 }
 
-reply(n, s, p0, p1, p2, p3, p4)
+reply(n, s, p0, p1, p2, p3, p4, p5)
 	int n;
 	char *s;
 {
 
 	printf("%d ", n);
-	printf(s, p0, p1, p2, p3, p4);
+	printf(s, p0, p1, p2, p3, p4, p5);
 	printf("\r\n");
 	(void) fflush(stdout);
 	if (debug) {
 		syslog(LOG_DEBUG, "<--- %d ", n);
-		syslog(LOG_DEBUG, s, p0, p1, p2, p3, p4);
+		syslog(LOG_DEBUG, s, p0, p1, p2, p3, p4, p5);
 	}
 }
 
-lreply(n, s, p0, p1, p2, p3, p4)
+lreply(n, s, p0, p1, p2, p3, p4, p5)
 	int n;
 	char *s;
 {
 	printf("%d-", n);
-	printf(s, p0, p1, p2, p3, p4);
+	printf(s, p0, p1, p2, p3, p4, p5);
 	printf("\r\n");
 	(void) fflush(stdout);
 	if (debug) {
 		syslog(LOG_DEBUG, "<--- %d- ", n);
-		syslog(LOG_DEBUG, s, p0, p1, p2, p3, p4);
+		syslog(LOG_DEBUG, s, p0, p1, p2, p3, p4, p5);
 	}
 }
 

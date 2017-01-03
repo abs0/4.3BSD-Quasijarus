@@ -1,7 +1,11 @@
+
+#ifndef lint
+static	char	*sccsid = "@(#)prs.c	4.5	(Berkeley)	5/27/01";
+#endif lint
+
 /*************************************************************************/
 /*									 */
-/*	prs [-d<dataspec>] [-r<sid>] [-c<cutoff>] [-a]			 */
-/*	    [-y<reverse-cutoff>] file ...				 */
+/*	prs [-d<dataspec>] [-r<sid>] [-l] [-e] [-a] file ...		 */
 /*									 */
 /*************************************************************************/
 
@@ -23,17 +27,26 @@
 # include "../hdr/defines.h"
 # include "../hdr/had.h"
 
-static char Sccsid[] = "@(#)prs.c	4.4	1/7/99";
+struct stat Statbuf;
+char Null[1];
+char Error[128];
 
+char	*getwd();
 char	had[26];
-char	Getpgm[] = "/usr/bin/get";
+char	Getpgm[]   =   "get";
+static char defline[]     =     ":Dt:\t:DL:\nMRs:\n:MR:COMMENTS:\n:C:";
+char	*sid_ba();
 char	Sid[32];
 char	Mod[16];
+char	Olddir[BUFSIZ];
+char	Pname[BUFSIZ];
+char	Dir[BUFSIZ];
 char	*Type;
 char	Deltadate[18];
 char	*Deltatime;
-char	tempskel[] = "/tmp/prXXXXXX";	/* used to generate temp file names */
-
+char	tempskel[]   =   "/tmp/prXXXXXX";	/* used to generate temp
+						   file names
+						*/
 char	untmp[32], uttmp[32], cmtmp[32];
 char	mrtmp[32], bdtmp[32];
 FILE	*UNiop;
@@ -41,13 +54,13 @@ FILE	*UTiop;
 FILE	*CMiop;
 FILE	*MRiop;
 FILE	*BDiop;
-char	line[BUFSIZ];
+char	line[BUFSIZ], *getline();
 int	num_files;
-long	cutoff;
-long	revcut;
-char	*dataspec;
+int	HAD_CM, HAD_MR, HAD_FD, HAD_BD, HAD_UN;
+char	dt_line[BUFSIZ];
+char	*dataspec = &defline[0];
 char	iline[BUFSIZ], xline[BUFSIZ], gline[BUFSIZ];
-char	*maket();
+FILE	*maket();
 struct	packet	gpkt;
 struct	sid	sid;
 struct	tm	*Dtime;
@@ -59,7 +72,8 @@ char *argv[];
 	register int j;
 	register char *p;
 	char c;
-	extern prs();
+	char *sid_ab();
+	extern process();
 	extern int Fcnt;
 
 	/*
@@ -67,7 +81,6 @@ char *argv[];
 	routine, and terminate processing.
 	*/
 	Fflags = FTLMSG | FTLCLN | FTLEXIT;
-
 
 	/*
 	The following loop processes keyletters and arguments.
@@ -78,31 +91,25 @@ char *argv[];
 		if (argv[j][0] == '-' && (c = argv[j][1])) {
 			p = &argv[j][2];
 			switch (c) {
-
-			case 'r':	/* delta cutoff */
+			case 'r':	/* specified SID */
 				if (*p) {
 					if (invalid(p))
 						fatal("invalid sid (co8)");
 					sid_ab(p,&sid);
 				}
 				break;
-
-			case 'c':	/* time cutoff */
-				if (*p && date_ab(p,&cutoff))
-					fatal("bad date/time (cm5)");
-				break;
-
-			case 'y':	/* reverse time cutoff */
-				if (*p && date_ab(p,&revcut))
-					fatal ("bad date/time (cm5)");
-				break;
-
-			case 'a':
-				if (*p)
-					fatal("value after a arg (cm7)");
+			case 'l':	/* later than specified SID */
+			case 'e':	/* earlier than specified SID */
+			case 'a':	/* print all delta types (R or D) */
+				if (*p) {
+					sprintf(Error,
+					   "value after %c arg (cm7)",c);
+					fatal(Error);
+				}
 				break;
 			case 'd':	/* dataspec line */
-				dataspec = p;
+				if (*p)
+					dataspec = p;
 				break;
 			default:
 				fatal("unknown key letter (cm1)");
@@ -118,10 +125,11 @@ char *argv[];
 	if (num_files == 0)
 		fatal("missing file arg (cm3)");
 
-	if (!HADD)
-		exit(0);
-	if (HADC && HADY)
-		fatal("both 'c' and 'y' keyletters specified (prs2)");
+	/*
+	check the dataspec line and determine if any tmp files
+	need be created
+	*/
+	ck_spec(dataspec);
 
 	setsig();
 
@@ -133,43 +141,59 @@ char *argv[];
 	Fflags |= FTLJMP;
 
 	/*
-	Call 'prs' routine for each file argument.
+	Call 'process' routine for each file argument.
 	*/
 	for (j = 1; j < argc; j++)
 		if (p = argv[j])
-			do_file(p,prs);
+			do_file(p,process);
 
 	exit(Fcnt ? 1 : 0);
 }
 
 
-prs(file)
+/*
+ * This procedure opens the SCCS file and calls all subsequent
+ * modules to perform 'prs'.  Once the file is finished, process
+ * returns to 'main' to process any other possible files.
+*/
+process(file)
 register	char	*file;
 {
-	int	n;
 	extern	char	had_dir, had_standinp;
+	static	int pr_fname = 0;
 
-	if (setjmp(Fjmp))
-		return;
+	if (setjmp(Fjmp))	/* set up to return here from 'fatal' */
+		return;		/* and return to caller of 'process' */
+
 	sinit(&gpkt,file,1);	/* init packet and open SCCS file */
 
-	gpkt.p_reqsid.s_rel = sid.s_rel;
-	gpkt.p_reqsid.s_lev = sid.s_lev;
-	gpkt.p_reqsid.s_br = sid.s_br;
-	gpkt.p_reqsid.s_seq = sid.s_seq;
-	gpkt.p_cutoff = cutoff;
-	gpkt.p_reopen = 1;
+	/*
+	move value of global sid into gpkt.p_reqsid for
+	later comparision.
+	*/
+
+	gpkt.p_reqsid = sid;
+
+	gpkt.p_reopen = 1;	/* set reopen flag to 1 for 'getline' */
 
 	/*
-	read delta table entries checking only for format error
+	Read delta table entries checking for format error and
+	setting the value for the SID if none was specified.
+	Also check to see if SID specified does in fact exists.
 	*/
-	deltblchk(&gpkt);
 
+	deltblchk(&gpkt);
 	/*
 	create auxiliary file for User Name Section
 	*/
 
-	aux_create(UNiop,untmp,EUSERNAM);
+	if (HAD_UN)
+		aux_create(UNiop,untmp,EUSERNAM);
+	else read_to(EUSERNAM,&gpkt);
+
+	/*
+	store flags (if any) into global array called 'Sflags'
+	*/
 
 	doflags(&gpkt);
 
@@ -177,52 +201,120 @@ register	char	*file;
 	create auxiliary file for the User Text section
 	*/
 
-	aux_create(UTiop,uttmp,EUSERTXT);
+	if (HAD_FD)
+		aux_create(UTiop,uttmp,EUSERTXT);
+	else read_to(EUSERTXT,&gpkt);
 
 	/*
 	indicate to 'getline' that EOF is okay
 	*/
+
 	gpkt.p_chkeof = 1;
 
 	/*
 	read body of SCCS file and create temp file for it
 	*/
+
 	while(read_mod(&gpkt))
 		;
 
-	if (num_files > 1 || had_dir || had_standinp)
-		printf("\n%s:\n",gpkt.p_file);
 	/*
-	Here, file has already been re-opened (by 'getline')
+	Here, file has already been re-opened (by 'getline' after
+	EOF was encountered by 'read_mod' calling 'getline')
 	*/
+
 	getline(&gpkt);		/* skip over header line */
 
+	if (!HADD && !HADR && !HADE && !HADL)
+		HADE = pr_fname = 1;
+	if (!HADD)
+		printf("%s:\n\n",file);
+
 	/*
-	call dodeltbl to read delta table entries
+	call 'dodeltbl' to read delta table entries
+	and determine which deltas are to be considered
 	*/
 
 	dodeltbl(&gpkt);
 
+	/*
+	call 'clean_up' to remove any temporary file created
+	during processing of the SCCS file passed as an argument from
+	'do_file'
+	*/
+
 	clean_up();
 
-	return;
+	return;		/* return to caller of 'process' */
 }
 
 
+/*
+ * This procedure actually reads the delta table entries and
+ * substitutes pre-defined strings and pointers with the information
+ * needed during the scanning of the 'dataspec' line
+*/
 dodeltbl(pkt)
 register struct packet *pkt;
 {
-	int	n;
+	char	*n;
+	int	stopdel;
+	int	found;
 	struct	deltab	dt;
 	struct	stats	stats;
 
 	/*
+	flags used during determination of deltas to be
+	considered
+	*/
+
+	found = stopdel = 0;
+
+	/*
 	Read entire delta table.
 	*/
-	while (getstats(pkt,&stats)) {
+	while (getstats(pkt,&stats) && !stopdel) {
 		if (getadel(pkt,&dt) != BDELTAB)
 			fmterr(pkt);
 
+		/*
+		ignore 'removed' deltas if !HADA keyletter
+		*/
+
+		if (!HADA && dt.d_type != 'D') {
+			read_to(EDELTAB,pkt);
+			continue;
+		}
+
+		/*
+		determine whether or not to consider current delta
+		*/
+
+		if (!(eqsid(&gpkt.p_reqsid, &dt.d_sid)) && !found) {
+			/*
+			if !HADL or HADE keyletter skip delta entry
+			*/
+			if ((!HADL) || HADE) {
+				read_to(EDELTAB,pkt);
+				continue;
+			}
+		}
+		else {
+			found = 1;
+			stopdel = 1;
+		}
+		/*
+		if HADE keyletter read remainder of delta table entries
+		*/
+		if (HADE && stopdel)
+			stopdel = 0;
+		/*
+		create temp file for MRs and comments
+		*/
+		if (HAD_MR)
+			MRiop = maket(mrtmp);
+		if (HAD_CM)
+			CMiop = maket(cmtmp);
 		/*
 		Read rest of delta entry. 
 		*/
@@ -231,9 +323,6 @@ register struct packet *pkt;
 				break;
 			else {
 				switch (pkt->p_line[1]) {
-				case EDELTAB:
-					scanspec(dataspec,&dt,&stats);
-					break;
 				case INCLUDE:
 					getit(iline,n);
 					continue;
@@ -244,8 +333,28 @@ register struct packet *pkt;
 					getit(gline,n);
 					continue;
 				case MRNUM:
-				case COMMENTS:
+					if (HAD_MR)
+						putmr(n);
 					continue;
+				case COMMENTS:
+					if (HAD_CM)
+						putcom(n);
+					continue;
+				case EDELTAB:
+					/*
+					close temp files for MRs and comments
+					*/
+					if (HAD_MR)
+						fclose(MRiop);
+					if (HAD_CM)
+						fclose(CMiop);
+					scanspec(dataspec,&dt,&stats);
+					/*
+					remove temp files for MRs and comments
+					*/
+					unlink(mrtmp);
+					unlink(cmtmp);
+					break;
 				default:
 					fmterr(pkt);
 				}
@@ -264,23 +373,36 @@ register struct packet *pkt;
  * immediately.
 */
 
-static	char	Zkeywd[5] = "@(#)";
+extern	char	*Sflags[];
+static	char	Zkywd[5]   =   "@(#)";
+
 scanspec(spec,dtp,statp)
 char spec[];
 struct	deltab	*dtp;
 struct	stats	*statp;
 {
 
-	extern	char	*Sflags[];
 	register char *lp;
 	register char	*k;
 	union {
 		char	str[2];
-		short	istr;
+		int	istr;
 	} u;
 	register	char	c;
 
+	/* Zero union u (one int may be larger than two char's)
+	*/
+	u.istr = 0;
+
+	/*
+	call 'idsetup' to set certain data keywords for
+	'scanspec' substitution
+	*/
 	idsetup(&dtp->d_sid,&gpkt,&dtp->d_datetime);
+
+	/*
+	scan 'dataspec' line
+	*/
 	for(lp = spec; *lp != 0; lp++) {
 		if(lp[0] == ':' && lp[1] != 0 && lp[2] == ':') {
 			c = *++lp;
@@ -312,6 +434,8 @@ struct	stats	*statp;
 				printf("%s",dtp->d_pgmr);
 				break;
 			case 'C':	/* Comments */
+				if (exists(cmtmp))
+					printfile(cmtmp);
 				break;
 			case 'Y':	/* Type flag */
 				printf("%s",Type);
@@ -320,159 +444,189 @@ struct	stats	*statp;
 				printf("%s",Mod);
 				break;
 			case 'W':	/* Form of what string */
-				printf("%s",Zkeywd);
-				printf("%s",Mod);
-				putchar('\t');
-				printf("%s",Sid);
+				printf("%s%s\t%s",Zkywd,Mod,Sid);
 				break;
 			case 'A':	/* Form of what string */
-				printf("%s",Zkeywd);
-				printf("%s ",Type);
-				printf("%s ",Mod);
-				printf("%s",Sid);
-				printf("%s",Zkeywd);
+				printf("%s%s %s %s%s",Zkywd,Type,Mod,Sid,Zkywd);
 				break;
 			case 'Z':	/* what string constructor */
-				printf("%s",Zkeywd);
+				printf("%s",Zkywd);
 				break;
 			case 'F':	/* File name */
 				printf("%s",sname(gpkt.p_file));
 				break;
 			default:
 				putchar(':');
-				putchar(c);
-				putchar(':');
-				break;
+				--lp;
+				continue;
 			}
 			lp++;
 		}
 		else if(lp[0] == ':' && lp[1] != 0 && lp[2] !=0 && lp[3] == ':') {
 			if (lp[1] == ':') {
 				putchar(':');
-				*lp += 2;
 				continue;
 			}
-			u.str[1] = *++lp;
+#if u370 || u3b
+			u.str[3] = *++lp;
+			u.str[2] = *++lp;
+#else
 			u.str[0] = *++lp;
+			u.str[1] = *++lp;
+#endif
 			switch (u.istr) {
-			case 'Dl':	/* Delta line statistics */
-				printf("%05d",statp->s_ins);
+			case 256*'L'+'D':	/* :DL: Delta line statistics */
+				printf("%.05d",statp->s_ins);
 				putchar('/');
-				printf("%05d",statp->s_del);
+				printf("%.05d",statp->s_del);
 				putchar('/');
-				printf("%05d",statp->s_unc);
+				printf("%.05d",statp->s_unc);
 				break;
-			case 'Li':	/* Lines inserted by delta */
-				printf("%05d",statp->s_ins);
+			case 256*'i'+'L':	/* :Li: Lines inserted by delta */
+				printf("%.05d",statp->s_ins);
 				break;
-			case 'Ld':	/* Lines deleted by delta */
-				printf("%05d",statp->s_del);
+			case 256*'d'+'L':	/* :Ld: Lines deleted by delta */
+				printf("%.05d",statp->s_del);
 				break;
-			case 'Lu':	/* Lines unchanged by delta */
-				printf("%05d",statp->s_unc);
+			case 256*'u'+'L':	/* :Lu: Lines unchanged by delta */
+				printf("%.05d",statp->s_unc);
 				break;
-			case 'DT':	/* Delta type */
+			case 256*'T'+'D':	/* :DT: Delta type */
 				printf("%c",dtp->d_type);
 				break;
-			case 'Dy':	/* Year delta created */
+			case 256*'y'+'D':	/* :Dy: Year delta created */
 				printf("%02d",Dtime->tm_year);
 				break;
-			case 'Dm':	/* Month delta created */
+			case 256*'m'+'D':	/* :Dm: Month delta created */
 				printf("%02d",(Dtime->tm_mon + 1));
 				break;
-			case 'Dd':	/* Day delta created */
+			case 256*'d'+'D':	/* :Dd: Day delta created */
 				printf("%02d",Dtime->tm_mday);
 				break;
-			case 'Th':	/* Hour delta created */
+			case 256*'h'+'T':	/* :Th: Hour delta created */
 				printf("%02d",Dtime->tm_hour);
 				break;
-			case 'Tm':	/* Minutes delta created */
+			case 256*'m'+'T':	/* :Tm: Minutes delta created */
 				printf("%02d",Dtime->tm_min);
 				break;
-			case 'Ts':	/* Seconds delta created */
+			case 256*'s'+'T':	/* :Ts: Seconds delta created */
 				printf("%02d",Dtime->tm_sec);
 				break;
-			case 'DS':	/* Delta sequence number */
+			case 256*'S'+'D':	/* :DS: Delta sequence number */
 				printf("%d",dtp->d_serial);
 				break;
-			case 'DP':	/* Predecessor delta sequence number */
+			case 256*'P'+'D':	/* :DP: Predecessor delta sequence number */
 				printf("%d",dtp->d_pred);
 				break;
-			case 'DI':	/* Deltas included,excluded,ignored */
+			case 256*'I'+'D':	/* :DI: Deltas included,excluded,ignored */
 				printf("%s",iline);
-				putchar('/');
+				if (length(xline))
+					printf("/%s",xline);
+				if (length(gline))
+					printf("/%s",gline);
+				break;
+			case 256*'n'+'D':	/* :Dn: Deltas included */
+				printf("%s",iline);
+				break;
+			case 256*'x'+'D':	/* :Dx: Deltas excluded */
 				printf("%s",xline);
-				putchar('/');
+				break;
+			case 256*'g'+'D':	/* :Dg: Deltas ignored */
 				printf("%s",gline);
 				break;
-			case 'Di':	/* Deltas included */
-				printf("%s",iline);
+			case 256*'R'+'M':	/* :MR: MR numbers */
+				if (exists(mrtmp))
+					printfile(mrtmp);
 				break;
-			case 'Dx':	/* Deltas excluded */
-				printf("%s",xline);
+			case 256*'N'+'U':	/* :UN: User names */
+				if (exists(untmp))
+					printfile(untmp);
 				break;
-			case 'Dg':	/* Deltas ignored */
-				printf("%s",gline);
-				break;
-			case 'MR':	/* MR numbers */
-				break;
-			case 'UN':	/* User names */
-				printfile(untmp);
-				break;
-			case 'MF':	/* MR validation flag */
+			case 256*'F'+'M':	/* :MF: MR validation flag */
 				if (Sflags[VALFLAG - 'a'])
 					printf("yes");
 				else printf("no");
 				break;
-			case 'MP':	/* MR validation program */
+			case 256*'P'+'M':	/* :MP: MR validation program */
 				if (!(k = Sflags[VALFLAG - 'a']))
 					printf("none");
 				else printf("%s",k);
 				break;
-			case 'KF':	/* Keyword err/warn flag */
+			case 256*'F'+'K':	/* :KF: Keyword err/warn flag */
 				if (Sflags[IDFLAG - 'a'])
 					printf("yes");
 				else printf("no");
 				break;
-			case 'BF':	/* Branch flag */
+			case 256*'F'+'B':	/* :BF: Branch flag */
 				if (Sflags[BRCHFLAG - 'a'])
 					printf("yes");
 				else printf("no");
 				break;
-			case 'FB':	/* Floor Boundry */
+			case 256*'B'+'F':	/* :FB: Floor Boundry */
 				if (k = Sflags[FLORFLAG - 'a'])
 					printf("%s",k);
 				else printf("none");
 				break;
-			case 'CB':	/* Ceiling Boundry */
+			case 256*'B'+'C':	/* :CB: Ceiling Boundry */
 				if (k = Sflags[CEILFLAG - 'a'])
 					printf("%s",k);
 				else printf("none");
 				break;
-			case 'Ds':	/* Default SID */
+			case 256*'s'+'D':	/* :Ds: Default SID */
 				if (k = Sflags[DEFTFLAG - 'a'])
 					printf("%s",k);
 				else printf("none");
 				break;
-			case 'ND':	/* Null delta */
+			case 256*'D'+'N':	/* :ND: Null delta */
 				if (Sflags[NULLFLAG - 'a'])
 					printf("yes");
 				else printf("no");
 				break;
-			case 'FD':	/* File descriptive text */
-				printfile(uttmp);
+			case 256*'D'+'F':	/* :FD: File descriptive text */
+				if (exists(uttmp))
+					printfile(uttmp);
 				break;
-			case 'BD':	/* Entire file body */
-				printfile(bdtmp);
+			case 256*'D'+'B':	/* :BD: Entire file body */
+				if (exists(bdtmp))
+					printfile(bdtmp);
 				break;
-			case 'GB':	/* Gotten body from 'get' */
+			case 256*'B'+'G':	/* :GB: Gotten body from 'get' */
 				getbody(&dtp->d_sid,&gpkt);
+				break;
+			case 256*'N'+'P':	/* :PN: Full pathname of File */
+				copy(gpkt.p_file,Dir);
+				dname(Dir);
+				if(getwd(Olddir) == NULL)
+					fatal("getwd failed (prs2)");
+				if(chdir(Dir) != 0)
+					fatal("cannot change directory (prs3)");
+				if(getwd(Pname) == NULL)
+					fatal("getwd failed (prs2)");
+				if(chdir(Olddir) != 0)
+					fatal("cannot change directory (prs3)");
+				printf("%s/",Pname);
+				printf("%s",sname(gpkt.p_file));
+				break;
+			case 256*'L'+'F':	/* :FL: Flag descriptions (as in 'prt') */
+				printflags();
+				break;
+			case 256*'t'+'D':	/* :Dt: Whole delta table line */
+				/*
+				replace newline with null char to make
+				data keyword simple format
+				*/
+				repl(dt_line,'\n','\0');
+				k = dt_line;
+				/*
+				skip control char, line flag, and blank
+				*/
+				k += 3;
+				printf("%s",k);
 				break;
 			default:
 				putchar(':');
-				printf("%c",u.istr);
-				putchar(':');
-				break;
+				lp -= 2;
+				continue;
 			}
 			lp++;
 		}
@@ -523,13 +677,20 @@ struct	stats	*statp;
 }
 
 
+/*
+ * This procedure cleans up all temporary files created during
+ * 'process' that are used for data keyword substitution
+*/
 clean_up()
 {
-	unlink(untmp);
-	unlink(uttmp);
-	unlink(bdtmp);
-	if (gpkt.p_iop)
+	if (gpkt.p_iop)		/* if SCCS file is open, close it */
 		fclose(gpkt.p_iop);
+	xrm(&gpkt);	      /* remove the 'packet' used for this SCCS file */
+	unlink(mrtmp);		/* remove all temporary files from /tmp */
+	unlink(cmtmp);		/*			"		*/
+	unlink(untmp);		/*			"		*/
+	unlink(uttmp);		/*			"		*/
+	unlink(bdtmp);		/*			"		*/
 }
 
 
@@ -565,13 +726,22 @@ register char	*i_sid;
 }
 
 
+/*
+ * This procedure checks the delta table entries for correct format.
+ * It also checks to see if the SID specified by the -r keyletter
+ * is contained in the file.  If no SID was specified assumes the top
+ * delta created (last in time).
+*/
 deltblchk(pkt)
 register struct packet *pkt;
 {
-	int	n;
+	char	*n;
+	int	have;
+	int	found;
 	struct	deltab	dt;
 	struct	stats	stats;
 
+	have = found = 0;
 	/*
 	Read entire delta table.
 	*/
@@ -579,6 +749,30 @@ register struct packet *pkt;
 		if (getadel(pkt,&dt) != BDELTAB)
 			fmterr(pkt);
 
+		/*
+		if no SID was specified, get top delta
+		*/
+		if (pkt->p_reqsid.s_rel == 0 && !have) {
+			/*
+			ignore if "removed" delta 
+			*/
+			if (!HADA && dt.d_type != 'D') {
+				read_to(EDELTAB,pkt);
+				continue;
+			}
+			/*
+			move current SID into SID to look at
+			*/
+			gpkt.p_reqsid = dt.d_sid;
+			found = have = 1;
+		}
+		/*
+		if SID was specified but not located yet check
+		to see if this SID is the one
+		*/
+		if (pkt->p_reqsid.s_rel != 0 && !found)
+			if (eqsid(&gpkt.p_reqsid, &dt.d_sid))
+				found = 1;
 		/*
 		Read rest of delta entry. 
 		*/
@@ -603,11 +797,25 @@ register struct packet *pkt;
 		if (n == NULL || pkt->p_line[0] != CTLCHAR)
 			fmterr(pkt);
 	}
+	/*
+	if not at the beginning of the User Name section
+	there is an internal error
+	*/
 	if (pkt->p_line[1] != BUSERNAM)
 		fmterr(pkt);
+	/*
+	if SID did not exist (the one specified by -r keyletter)
+	then there exists an error
+	*/
+	if (!found)
+		fatal("nonexistent SID (prs1)");
 }
 
 
+/*
+ * This procedure reads the stats line from the delta table entry
+ * and places the statisitics into a structure called "stats".
+*/
 getstats(pkt,statp)
 register struct packet *pkt;
 register struct stats *statp;
@@ -625,29 +833,45 @@ register struct stats *statp;
 }
 
 
+/*
+ * This procedure reads a delta table entry line from the delta
+ * table entry and places the contents of the line into a structure
+ * called "deltab".
+*/
 getadel(pkt,dt)
 register struct packet *pkt;
 register struct deltab *dt;
 {
 	if (getline(pkt) == NULL)
 		fmterr(pkt);
+	copy(pkt->p_line,dt_line);  /* copy delta table line for :Dt: keywd */
 	return(del_ab(pkt->p_line,dt,pkt));
 }
 
+FILE *fdfopen();
 
-
-char	*maket(file)
+/*
+ * This procedure creates the temporary file used during the
+ * "process" subroutine.  The skeleton defined at the beginning
+ * of the program is filled in in this function
+*/
+FILE	*maket(file)
 char	*file;
 {
 	FILE *iop;
+	char *mktemp();
 
-	copy(tempskel,file);
+	copy(tempskel,file);	/* copy file name into the skeleton */
 	iop = xfcreat(mktemp(file),0644);
 
 	return(iop);
 }
 
 
+/*
+ * This procedure prints (on the standard output) the contents of any___
+ * temporary file that may have been created during "process".
+*/
 printfile(file)
 register	char	*file;
 {
@@ -661,40 +885,67 @@ register	char	*file;
 }
 
 
+/*
+ * This procedure reads the body of the SCCS file from beginning to end.
+ * It also creates the temporary file /tmp/prbdtmp____________ which contains
+ * the body of the SCCS file for data keyword substitution.
+*/
 read_mod(pkt)
 register struct packet *pkt;
 {
 	register char *p;
 	int ser;
-	int iord;
+	int iod;
 	register struct apply *ap;
+	int level = 0;
 
-	BDiop = maket(bdtmp);
+	if (HAD_BD)
+		BDiop = maket(bdtmp);
 	while (getline(pkt) != NULL) {
 		p = pkt->p_line;
-		fputs(p,BDiop);
+		if (HAD_BD)
+			fputs(p,BDiop);
 		if (*p++ != CTLCHAR)
 			continue;
 		else {
-			if (!((iord = *p++) == INS || iord == DEL || iord == END))
+			if (!((iod = *p++) == INS || iod == DEL || iod == END))
 				fmterr(pkt);
 			NONBLANK(p);
 			satoi(p,&ser);
-			if (iord == END)
-				remq(pkt,ser);
-			else if ((ap = &pkt->p_apply[ser])->a_code == APPLY)
-				addq(pkt,ser,iord == INS ? YES : NO,iord,ap->a_reason & USER);
-			else
-				addq(pkt,ser,iord == INS ? NO : NULL,iord,ap->a_reason & USER);
+/*
+ * The logic here is really wrong. Best I can tell, pkt->p_apply can never
+ * be anything but NULL in prs. No routine ever sets it. It appears
+ * that the only intent of the code was to check that INS and DEL commands
+ * were matched with an equal amount of END commands. So we'll do that
+ * instead.
+ *			if (iod == END)
+ *				remq(pkt,ser);
+ *			else if ((ap = &pkt->p_apply[ser])->a_code == APPLY)
+ *				addq(pkt,ser,iod == INS ? YES : NO,iod,ap->a_reason & USER);
+ *			else
+ *				addq(pkt,ser,iod == INS ? NO : NULL,iod,ap->a_reason & USER);
+ */
+			if (iod == END) {
+				if (--level < 0)
+					fmterr(pkt);
+			} else
+				level++;
 		}
 	}
-	fclose(BDiop);
-	if (pkt->p_q)
+	if (HAD_BD)
+		fclose(BDiop);
+	if (level != 0)
 		fatal("premature eof (co5)");
 	return(0);
 }
 
 
+/*
+ * This procedure is only called if the :GB: data keyword is specified.
+ * It forks and creates a child process to invoke 'get' with the '-p'
+ * and '-s' options for the SID currently being processed.  Upon
+ * completion, control of the program is returned to 'prs'.
+*/
 getbody(gsid,pkt)
 struct	sid	*gsid;
 struct packet *pkt;
@@ -707,7 +958,7 @@ struct packet *pkt;
 	char	filearg[80];
 
 	sid_ba(gsid,str);
-	sprintf(rarg,"%s",str);
+	sprintf(rarg,"-r%s",str);
 	sprintf(filearg,"%s",pkt->p_file);
 	/*
 	fork here so 'getbody' can execute 'get' to
@@ -715,12 +966,12 @@ struct packet *pkt;
 	*/
 	if ((i = fork()) < 0)
 		fatal("cannot fork, try again");
-	if (i = 0) {
+	if (i == 0) {
 		/*
 		perform 'get' and redirect output
 		to standard output
 		*/
-		execl(Getpgm,Getpgm,"-s","-p","-r",rarg,filearg,0);
+		execlp(Getpgm,Getpgm,"-s","-p",rarg,filearg,0);
 		sprintf(Error,"cannot execute '%s'",Getpgm);
 		fatal(Error);
 	}
@@ -731,6 +982,11 @@ struct packet *pkt;
 }
 
 
+/*
+ * This procedure places the line read in "dodeltbl" into a global string
+ * 'str'.  This procedure is only called for include, exclude or ignore
+ * lines.
+*/
 getit(str,cp)
 register	char	*str, *cp;
 {
@@ -741,13 +997,18 @@ register	char	*str, *cp;
 }
 
 
+/*
+ * This procedure creates an auxiliary file for the iop passed as an argument
+ * for the file name also passed as an argument.  If no text exists for the
+ * named file, an auxiliary file is still created with the text "(none)".
+*/
 aux_create(iop,file,delchar)
 FILE	*iop;
 char	*file;
 char	delchar;
 {
 
-	int	n;
+	char	*n;
 	int	text;
 	/*
 	create auxiliary file for the named section
@@ -765,11 +1026,16 @@ char	delchar;
 	if (n == NULL || gpkt.p_line[0] != CTLCHAR || gpkt.p_line[1] != delchar)
 		fmterr(&gpkt);
 	if (!text)
-		fprintf(iop,"No entries\n");
+		fprintf(iop,"(none)\n");
 	fclose(iop);
 }
 
 
+/*
+ * This procedure sets the values for certain data keywords which are
+ * either shared by more than one data keyword or because substitution
+ * here would be easier than doing it in "scanspec" (more efficient etc.)
+*/
 idsetup(gsid,pkt,bdate)
 struct	sid	*gsid;
 struct	packet	*pkt;
@@ -778,20 +1044,131 @@ long	*bdate;
 
 	register	char	*p;
 	extern	struct	tm	*localtime();
+	char *auxf(), *date_ba();
+
+	/***  There doesn't seem to be a comparable routine in Ultrix
+	sccs_tzset();
+	 ***  and it also doesn't appear to be needed -- depp */
 
 	date_ba(bdate,Deltadate);
-
 	Deltatime = &Deltadate[9];
 	Deltadate[8] = 0;
-
 	sid_ba(gsid,Sid);
-
 	Dtime = localtime(bdate);
-
 	if (p = Sflags[MODFLAG - 'a'])
 		copy(p,Mod);
-	else sprintf(Mod,"%s",sname(pkt->p_file));
-
+	else sprintf(Mod,"%s",auxf(pkt->p_file,'g'));
 	if (!(Type = Sflags[TYPEFLAG - 'a']))
-		Type = "none";
+		Type = Null;
+}
+
+
+/*
+ * This procedure places any MRs that are found in the delta table entry
+ * into the temporary file created for that express purpose (/tmp/prmrtmp____________).
+*/
+putmr(cp)
+register char	*cp;
+{
+
+	cp += 3;
+
+	if (!(*cp) || (*cp == '\n')) {
+		fclose(MRiop);
+		unlink(mrtmp);
+		return;
+	}
+
+	fputs(cp,MRiop);
+}
+
+
+/*
+ * This procedure is the same as "putmr" except it is used for the comment
+ * section of the delta table entries.
+*/
+putcom(cp)
+register char	*cp;
+{
+
+	cp += 3;
+
+	fputs(cp,CMiop);
+
+}
+
+
+/*
+ * This procedure reads through the SCCS file until a line is found
+ * containing the character passed as an argument in the 2nd__ position
+ * of the line.
+*/
+read_to(ch,pkt)
+register char	ch;
+register struct packet *pkt;
+{
+	register char *p;
+	while ((p = getline(pkt)) &&
+			!(*p++ == CTLCHAR && *p == ch))
+		;
+	return;
+}
+
+
+/*
+ * This procedure prints a list of all the flags that are present in the
+ * SCCS file.  The format is the same as 'prt' except the flag description
+ * is _n_o_t preceeded by a "tab".
+*/
+printflags()
+{
+	register	char	*k;
+
+	if (Sflags[BRCHFLAG - 'a'])	/* check for 'branch' flag */
+		printf("branch\n");
+	if ((k = (Sflags[CEILFLAG - 'a'])))	/* check for 'ceiling flag */
+		printf("ceiling\t%s\n",k);
+	if ((k = (Sflags[DEFTFLAG - 'a'])))  /* check for 'default SID' flag */
+		printf("default SID\t%s\n",k);
+	if ((k = (Sflags[FLORFLAG - 'a'])))	/* check for 'floor' flag */
+		printf("floor\t%s\n",k);
+	if (Sflags[IDFLAG - 'a'])	/* check for 'id err/warn' flag */
+		printf("id keywd err/warn\n");
+	if ((k = (Sflags[MODFLAG - 'a'])))	/* check for 'module' flag */
+		printf("module\t%s\n",k);
+	if (Sflags[NULLFLAG - 'a'])	/* check for 'null delta' flag */
+		printf("null delta\n");
+	if ((k = (Sflags[TYPEFLAG - 'a'])))	/* check for 'type' flag */
+		printf("type\t%s\n",k);
+	if (Sflags[VALFLAG - 'a']) {	/* check for 'MR valid' flag */
+		printf("validate MRs\t");
+		/*
+		check for MR validating program
+		(optional)
+		*/
+		if (k = (Sflags[VALFLAG - 'a']))
+			printf("%s\n",k);
+		else putchar('\n');
+	}
+	return;
+}
+
+
+/*
+ * This procedure checks the `dataspec' (if user defined) and determines
+ * if any temporary files need be created for future keyword replacement
+*/
+ck_spec(p)
+register char *p;
+{
+	if (libPW_index(p,":C:") != -1)	/* check for Comment keyword */
+		HAD_CM = 1;
+	if (libPW_index(p,":MR:") != -1)/* check for MR keyword */
+		HAD_MR = 1;
+	if (libPW_index(p,":UN:") != -1)/* check for User name keyword */
+		HAD_UN = 1;
+	if (libPW_index(p,":FD:") != -1)/* check for descriptive text kyword */
+		HAD_FD = 1;
+	if (libPW_index(p,":BD:") != -1)/* check for body keyword */
+		HAD_BD = 1;
 }

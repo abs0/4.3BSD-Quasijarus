@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)00.contents	5.2 (Berkeley) 6/3/86
+.\"	@(#)00.contents	5.3 (Berkeley) 12/4/03
 .\"
 .OH '''SMM Contents'
 .EH 'SMM Contents'''
@@ -148,3 +148,10 @@ Describes UUCP, a program for communicating files between UNIX systems.
 .QP
 The protocols and algorithms used by timed,
 the network time synchronization daemon.
+
+.IP
+.tl 'Bug Fixes and Changes in 4.3BSD-Quasijarus''SMM:23'
+.QP
+This document briefly describes the changes
+made by Quasijarus Project in each successive 4.3BSD-Quasijarus release
+up to the present.

@@ -1,5 +1,5 @@
 #ifndef lint
-static	char sccsid[] = "@(#)c20.c	4.10 (Berkeley) 8/22/85";
+static	char sccsid[] = "@(#)c20.c	4.12 (Berkeley) 8/8/00";
 #endif
 
 /*
@@ -100,7 +100,6 @@ char **argv;
 			refcount();
 			do {
 				iterate();
-				clearreg();
 				niter++;
 			} while (nchange);
 			comjump();
@@ -565,12 +564,13 @@ iterate()
 					decref(rp);
 					nchange++;
 					njp1++;
-					break;
+					goto jmpdone;
 				}
 				rp = rp->forw;
 			}
 			xjump(p);
 			p = codemove(p);
+jmpdone:		;
 		}
 	}
 }

@@ -40,6 +40,7 @@ vaxif/if_de.c		optional de device-driver
 vaxif/if_ddn.c		optional ddn device-driver
 vaxif/if_dmc.c		optional dmc device-driver
 vaxif/if_dmv.c		optional dmv device-driver
+vaxif/if_dsv.c		optional dsv device-driver
 vaxif/if_ec.c		optional ec device-driver
 vaxif/if_en.c		optional en device-driver
 vaxif/if_ex.c		optional ex device-driver

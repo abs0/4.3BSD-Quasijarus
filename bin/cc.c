@@ -1,4 +1,4 @@
-static	char sccsid[] = "@(#)cc.c 4.15 10/22/87";
+static	char sccsid[] = "@(#)cc.c 4.17 8/30/00";
 /*
  * cc - front end for C compiler
  */
@@ -23,7 +23,7 @@ char	*savestr(), *strspl(), *setsuf();
 int	idexit();
 char	**av, **clist, **llist, **plist;
 int	cflag, eflag, oflag, pflag, sflag, wflag, Rflag, exflag, proflag;
-int	fflag, gflag, Gflag, Mflag, debug;
+int	fflag, jflag, gflag, Gflag, Mflag, debug;
 char	*dflag;
 int	exfail;
 char	*chpass;
@@ -78,6 +78,9 @@ main(argc, argv)
 			continue;
 		case 'f':
 			fflag++;
+			continue;
+		case 'J':
+			jflag++;
 			continue;
 		case 'g':
 			if (argv[i][2] == 'o') {
@@ -237,6 +240,8 @@ main(argc, argv)
 		} else if (Gflag) {
 			av[na++] = "-XG";
 		}
+		if (jflag)
+			av[na++] = "-XJ";
 		if (wflag)
 			av[na++] = "-w";
 		av[na] = 0;
@@ -265,6 +270,8 @@ main(argc, argv)
 		na = 3;
 		if (Rflag)
 			av[na++] = "-R";
+		if (jflag)
+			av[na++] = "-J";
 		if (dflag)
 			av[na++] = dflag;
 		av[na++] = assource;

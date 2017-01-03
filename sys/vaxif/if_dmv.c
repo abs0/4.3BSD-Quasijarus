@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if_dmv.c	7.8 (Berkeley) 9/4/89
+ *	@(#)if_dmv.c	7.9 (Berkeley) 3/12/00
  */
 
 /*
@@ -865,7 +865,7 @@ dmvoutput(ifp, m0, dst)
 	register struct dmv_header *dh;
 	register int off;
 
-	if ((ifp->if_flags & IFF_UP) == 0) {
+	if ((ifp->if_flags & (IFF_UP|IFF_RUNNING)) != (IFF_UP|IFF_RUNNING)) {
 		error = ENETDOWN;
 		goto bad;
 	}

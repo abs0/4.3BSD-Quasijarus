@@ -60,9 +60,9 @@ announce.o: /usr/include/syslog.h /usr/include/protocols/talkd.h
 announce.o: /usr/include/sys/types.h /usr/include/sys/socket.h
 process.o: process.c /usr/include/sys/types.h /usr/include/sys/stat.h
 process.o: /usr/include/stdio.h /usr/include/syslog.h /usr/include/netdb.h
-process.o: /usr/include/netinet/in.h /usr/include/protocols/talkd.h
-process.o: /usr/include/sys/types.h /usr/include/sys/socket.h
-process.o: /usr/include/utmp.h
+process.o: /usr/include/netinet/in.h /usr/include/arpa/inet.h
+process.o: /usr/include/protocols/talkd.h /usr/include/sys/types.h
+process.o: /usr/include/sys/socket.h /usr/include/utmp.h
 table.o: table.c /usr/include/stdio.h /usr/include/sys/time.h
 table.o: /usr/include/time.h /usr/include/syslog.h /usr/include/sys/param.h
 table.o: /usr/include/sys/types.h /usr/include/signal.h

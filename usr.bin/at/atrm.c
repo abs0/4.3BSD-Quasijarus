@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)atrm.c	5.3 (Berkeley) 1/18/87";
+static char sccsid[] = "@(#)atrm.c	5.4 (Berkeley) 12/31/99";
 #endif not lint
 
 /*
@@ -244,7 +244,7 @@ usage()
 
 /*
  * Do we want to include a file in the queue? (used by "scandir") We are looking
- * for files with following syntax: yy.ddd.hhhh. so the test is made to see if 
+ * for files with following syntax: yyyy.ddd.hhhh. so the test is made to see if
  * the file name has three dots in it. This test will suffice since the only
  * other files in /usr/spool/at don't have any dots in their name.
  */

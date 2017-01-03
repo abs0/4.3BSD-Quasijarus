@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)process.c	5.6 (Berkeley) 6/18/88";
+static char sccsid[] = "@(#)process.c	5.8 (Berkeley) 5/9/03";
 #endif /* not lint */
 
 /*
@@ -33,6 +33,7 @@ static char sccsid[] = "@(#)process.c	5.6 (Berkeley) 6/18/88";
 #include <syslog.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include <protocols/talkd.h>
 
@@ -116,6 +117,7 @@ do_announce(mp, rp)
 	CTL_RESPONSE *rp;
 {
 	struct hostent *hp;
+	char *remotehost;
 	CTL_MSG *ptr;
 	int result;
 
@@ -128,14 +130,14 @@ do_announce(mp, rp)
 #define	satosin(sa)	((struct sockaddr_in *)(sa))
 	hp = gethostbyaddr(&satosin(&mp->ctl_addr)->sin_addr,
 		sizeof (struct in_addr), AF_INET);
-	if (hp == (struct hostent *)0) {
-		rp->answer = MACHINE_UNKNOWN;
-		return;
-	}
+	if (hp != (struct hostent *)0)
+		remotehost = hp->h_name;
+	else
+		remotehost = inet_ntoa(&satosin(&mp->ctl_addr)->sin_addr);
 	ptr = find_request(mp);
 	if (ptr == (CTL_MSG *) 0) {
 		insert_table(mp, rp);
-		rp->answer = announce(mp, hp->h_name);
+		rp->answer = announce(mp, remotehost);
 		return;
 	}
 	if (mp->id_num > ptr->id_num) {
@@ -145,7 +147,7 @@ do_announce(mp, rp)
 		 */
 		ptr->id_num = new_id();
 		rp->id_num = htonl(ptr->id_num);
-		rp->answer = announce(mp, hp->h_name);
+		rp->answer = announce(mp, remotehost);
 	} else {
 		/* a duplicated request, so ignore it */
 		rp->id_num = htonl(ptr->id_num);

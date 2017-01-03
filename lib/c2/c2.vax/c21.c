@@ -1,5 +1,5 @@
 #ifndef lint
-static	char sccsid[] = "@(#)c21.c 4.24 5/11/88";
+static	char sccsid[] = "@(#)c21.c 4.35 8/31/00";
 #endif
 /* char C21[] = {"@(#)c21.c 1.83 80/10/16 21:18:22 JFR"}; /* sccs ident */
 
@@ -139,8 +139,10 @@ bmove() {
 		} else if (*cp1++=='-' && 0<=(r=getnum(cp1))) {
 			p->op=SUB; p->pop=0; *--cp1='$'; p->code=cp1;
 		}
-		/* fall thru ... */
+		goto std;
 	case CASE:
+		clearuse();
+		/* fall thru ... */
 	default: std:
 		p=bflow(p); break;
 	case MUL:
@@ -389,7 +391,7 @@ ashadd:
 			if (isdigit(regp->code[2]) || reg >= NUSE || uses[reg])
 				goto std;
 		}
-		if (r >= NUSE) goto std;
+		else if (r >= NUSE) goto std;
 		if (reg != r)
 			sprintf(regs[RT1], "r%d", reg);
 		if ((num = getnum(&regs[RT2][2])) <= 0 || num > 63) goto std;
@@ -421,7 +423,7 @@ ashadd:
 	case CBR:
 		if (p->ref->ref!=0) for (r=NUSE;--r>=0;)
 			if (biti[r] & (int)p->ref->ref) {uses[r]=p; regs[r][0]= -1;}
-	case EROU: case JSW:
+	case GLOBL: case JSW:
 	case TEXT: case DATA: case BSS: case ALIGN: case WGEN: case END: ;
 	}
 	}
@@ -520,7 +522,11 @@ mov:
 		if (p->op==TST && equstr(lastrand=regs[RT1], ccloc+1)
 		  && ((0xf&(ccloc[0]>>4))==p->subop || equtype(ccloc[0],p->subop))
 		  &&!source(lastrand)) {
-			delnode(p); p = p->back; nrtst++; nchange++;
+			delnode(p);
+			p = p->back;
+			nrtst++;
+			nchange++;
+			break;
 		}
 		setcc(lastrand,p->subop);
 		break;
@@ -553,7 +559,6 @@ mov:
 			else lastrand=regs[RT2]; /* .mb destinations lose */
 			repladdr(p);
 		}
-		ccloc[0] = 0;
 		break;
 
 	case JBR:
@@ -624,11 +629,10 @@ register struct node *p;
 				p->op=PUSH ; *regs[RT2]=0; p->pop=0;
 			}
 			delnode(p->forw);
-			if (0<=(r2=isreg(lastrand)) && r2<NUSE) {
-				uses[r2]=uses[r]; uses[r]=0;
-			}
 			(void) redun3(p,0);
-			newcode(p); redunm++; flow=r;
+			newcode(p); redunm++;
+			uses[r]=0;
+			regs[r][0]=regs[r][1]=0;
 		} else if (p->op==MOV && p->forw->op!=EXTV && p->forw->op!=EXTZV) {
 			/* superfluous fetch */
 			int nmatch;
@@ -650,12 +654,8 @@ register struct node *p;
 					*cp1++='r'; *cp1++=r+'0'; *cp1=0;
 				}
 				delnode(p); p=p->forw;
-				if (0<=(r2=isreg(src)) && r2<NUSE) {
-					uses[r2]=uses[r]; uses[r]=0;
-				}
 				(void) redun3(p,0);
-				newcode(p); redunm++;
-				return(p);	/* avoid stale uses[] data */
+				newcode(p); redunm++; flow=r;
 			} else splitrand(p);
 		}
 	} else if (p->op==MOV && (p->forw->op==CVT || p->forw->op==MOVZ)
@@ -673,6 +673,13 @@ register struct node *p;
 		case ACB:
 		case AOBLEQ: case AOBLSS: case SOBGTR: case SOBGEQ: break;
 		default:
+			/*
+			 * If flow is already set, we are looking at this
+			 * instruction a second time, so we can't do this
+			 * seeming dead store elimination.
+			 */
+			if (flow >= 0)
+				break;
 			if (uses[r]==0) {/* no direct uses, check for use of condition codes */
 				register struct node *q=p;
 				while ((q=nonlab(q->forw))->combop==JBR) q=q->ref;	/* cc unused, unchanged */
@@ -706,17 +713,17 @@ register struct node *p;
 		if (lastrand!=cp1 && 0<=(r=isreg(cp1)) && r<NUSE && uses[r]==0) {
 			uses[r]=p; cp2=regs[r]; *cp2++=p->subop;
 			if (p->op==ASH && preg==(regs+RT1+1)) cp2[-1]=BYTE; /* stupid DEC */
-			if (p->op==MOV || p->op==PUSH || p->op==CVT || p->op==MOVZ || p->op==COM || p->op==NEG) {
-				if (p->op==PUSH) cp1="-(sp)";
-				else {
-					cp1=regs[RT2];
-					if (0<=(r=isreg(cp1)) && r<NUSE && uses[r]==0)
-						uses[r]=olduse; /* reincarnation!! */
-					/* as in  addl2 r0,r1;  movl r1,r0;  ret  */
-					if (p->op!=MOV) cp1=0;
-				}
-				if (cp1) while (*cp2++= *cp1++);
-				else *cp2=0;
+			if (p->op == MOV) {
+				cp1 = regs[RT2];
+				if (0<=(r=isreg(cp1)) && r<NUSE && uses[r]==0)
+					uses[r]=olduse; /* reincarnation!! */
+				while (*cp2++ = *cp1++)
+					;
+				/* as in  addl2 r0,r1;  movl r1,r0;  ret  */
+			} else if (p->op == PUSH) {
+				cp1 = "-(sp)";
+				while (*cp2++ = *cp1++)
+					;
 			} else *cp2=0;
 			continue;
 		}
@@ -951,54 +958,128 @@ jumpsw()
 	return(nj);
 }
 
+/*
+ * The wonderful VAX architecture has nice loop instructions which neatly
+ * replace some sequences that come out of typical for loops. A loop with a
+ * counter ticking down to 0 will end with a DEC; JGE/JGT at this point, which
+ * is neatly replaced with a SOB. A loop with a counter ticking up to some
+ * limit will end with an INC; CMP; JLE/JLT at this point, which is neatly
+ * replaced with an AOB or ACB (see below). We do these substitutions here.
+ *
+ * There are some gotchas, though. Just like ordinary branches, SOB and AOB
+ * instructions are limited to byte displacements. The original UNIX as relaxed
+ * the former, but not the latter. One can add straightforward relaxing of SOBs
+ * and AOBs to as (by putting roundabout branches after the SOB/AOB that can't
+ * reach), which is what GNU as does. An AOB is always more efficient than INC;
+ * CMP; JLE/JLT, even when relaxed. A SOB, however, is more efficient than DEC;
+ * JGE/JGT only when it's simple. A relaxed DEC; JGE/JGT is more efficient than
+ * a relaxed SOB. Also we can use an ACB instead of an AOB. With a +1 addend
+ * it's almost as efficient as an AOB, but has a word displacement. (It's
+ * wasteful with a -1 addend, though, worse than a relaxed SOB or a DEC;
+ * JGE/JGT, so we don't use it there.) Also an ACB can only replace an AOBLEQ,
+ * but not an AOBLSS.
+ *
+ * The original c2 solution, which was effectively for a non-relaxing
+ * assembler, was to generate a SOB or AOB if the destination is within 8
+ * instructions, or if that doesn't cut it and we were trying to generate an
+ * AOBLEQ, generate an ACB instead. Otherwise, miss the optimisation.
+ *
+ * Fortunately, in 4.3BSD-Quasijarus UNIX as has been improved. It now relaxes
+ * branches three-way without -J like GNU as does. It also relaxes SOBs, AOBs,
+ * and ACBs now. However, it is smarter than GNU as, and in light of the above
+ * considerations relaxes them a little differently. Straightforward relaxing
+ * is done only for AOBs, SOBs revert to DEC; JGE/JGT as that's more efficient.
+ * Also when an AOB is in the word relaxation state and it's an AOBLEQ, it is
+ * changed to an ACB, as that's more efficient than a relaxed AOB. c2 now takes
+ * advantage of this and always emits SOBs and AOBs for as to relax, as its
+ * relaxing will always be at least as good as what c2 used to do in the past,
+ * often better.
+ */
 addsob()
 {
-	register struct node *p, *p1, *p2, *p3;
+	register struct node *p, *p1, *p2, *p3, *p4;
+	register char *t;
 
-	for (p = &first; (p1 = p->forw)!=0; p = p1) {
-	if (p->combop==T(DEC,LONG) && p1->op==CBR) {
-		if (abs(p->seq - p1->ref->seq) > 8) continue;
-		if (p1->subop==JGE || p1->subop==JGT) {
-			if (p1->subop==JGE) p->combop=SOBGEQ; else p->combop=SOBGTR;
-			p->pop=0;
-			p->labno = p1->labno; delnode(p1); nsob++;
+	for (p = &first; (p1 = p->forw) != 0; p = p1) {
+		if (p->combop == T(DEC,LONG)
+		    && (p1->combop == T(CBR,JGE) || p1->combop == T(CBR,JGT))) {
+			/* See if it's a SOB candidate. */
+			if (p1->subop == JGE)
+				p->combop = SOBGEQ;
+			else
+				p->combop = SOBGTR;
+			p->pop = 0;
+			p->labno = p1->labno;
+			delnode(p1);
+			nsob++;
+		} else if (p->combop == T(CMP,LONG)
+			   && (p1->combop == T(CBR,JLE)
+			       || p1->combop == T(CBR,JLT))) {
+			/*
+			 * See if it's an AOB candidate. There must be an INC
+			 * before the CMP and the two must have the same
+			 * operand, which must have no side effects. There's
+			 * one more gotcha here. Usually there will be a label
+			 * between the INC and the CMP with a jump to it at the
+			 * beginning of the loop. We solve this problem by
+			 * adding a DEC before that jump and swapping the INC
+			 * and the label. The inefficiency of the DEC -> jump
+			 * -> INC path on loop entry is compensated for by the
+			 * AOB optimisation, which affects every iteration. Of
+			 * course, we do the DEC insertion and the label swap
+			 * only when we really do the AOB optimisation. (But
+			 * maybe I shouldn't say "of course", as the previous
+			 * incarnation of this code blundered here. :-)
+			 */
+			splitrand(p);
+			if (source(regs[RT1]))
+				continue;
+			if ((p2 = p->back)->combop == T(INC,LONG)) {
+				if (!equstr(p2->code, regs[RT1]))
+					continue;
+			} else if (p2->op == LABEL
+				   && (p3 = p2->back)->combop == T(INC,LONG)) {
+				if (!equstr(p3->code, regs[RT1]))
+					continue;
+				if (p2->refc != 1
+				    || (p4 = p1->ref->back)->combop != JBR
+				    || p4->ref != p2)
+					continue;
+				/* change INC LAB: CMP to LAB: INC CMP */
+				p3->back->forw = p2;
+				p2->back = p3->back;
+				p3->forw = p2->forw;
+				p2->forw->back = p3;
+				p3->back = p2;
+				p2->forw = p3;
+				p2 = p3;
+				/* adjust beginning value by 1 */
+				p3 = alloc(sizeof first);
+				p3->combop = T(DEC,LONG);
+				p3->pop = 0;
+				p3->forw = p4;
+				p3->back = p4->back;
+				p4->back->forw = p3;
+				p4->back = p3;
+				p3->code = p2->code;
+				p3->labno = 0;
+			} else
+				continue;
+			delnode(p2);
+			/* Generate an AOBLEQ or AOBLSS. */
+			if (p1->subop == JLE)
+				p->combop = AOBLEQ;
+			else
+				p->combop = AOBLSS;
+			t = regs[RT2];
+			regs[RT2] = regs[RT1];
+			regs[RT1] = t;
+			p->pop = 0;
+			newcode(p);
+			p->labno = p1->labno;
+			delnode(p1);
+			nsob++;
 		}
-	} else if (p->combop==T(INC,LONG)) {
-		if (p1->op==LABEL && p1->refc==1 && p1->forw->combop==T(CMP,LONG)
-		  && (p2=p1->forw->forw)->combop==T(CBR,JLE)
-		  && (p3=p2->ref->back)->combop==JBR && p3->ref==p1
-		  && p3->forw->op==LABEL && p3->forw==p2->ref) {
-			/* change	INC LAB: CMP	to	LAB: INC CMP */
-			p->back->forw=p1; p1->back=p->back;
-			p->forw=p1->forw; p1->forw->back=p;
-			p->back=p1; p1->forw=p;
-			p1=p->forw;
-			/* adjust beginning value by 1 */
-				p2=alloc(sizeof first); p2->combop=T(DEC,LONG);
-				p2->pop=0;
-				p2->forw=p3; p2->back=p3->back; p3->back->forw=p2;
-				p3->back=p2; p2->code=p->code; p2->labno=0;
-		}
-		if (p1->combop==T(CMP,LONG) && (p2=p1->forw)->op==CBR) {
-			register char *cp1,*cp2;
-			splitrand(p1); if (!equstr(p->code,regs[RT1])) continue;
-			if (abs(p->seq - p2->ref->seq)>8) {/* outside byte displ range */
-				if (p2->subop!=JLE) continue;
-				p->combop=T(ACB,LONG);
-				cp2=regs[RT1]; cp1=regs[RT2]; while (*cp2++= *cp1++); /* limit */
-				cp2=regs[RT2]; cp1="$1"; while (*cp2++= *cp1++); /* increment */
-				cp2=regs[RT3]; cp1=p->code; while (*cp2++= *cp1++); /* index */
-				p->pop=0; newcode(p);
-				p->labno = p2->labno; delnode(p2); delnode(p1); nsob++;
-			} else if (p2->subop==JLE || p2->subop==JLT) {
-				if (p2->subop==JLE) p->combop=AOBLEQ; else p->combop=AOBLSS;
-				cp2=regs[RT1]; cp1=regs[RT2]; while (*cp2++= *cp1++); /* limit */
-				cp2=regs[RT2]; cp1=p->code; while (*cp2++= *cp1++); /* index */
-				p->pop=0; newcode(p);
-				p->labno = p2->labno; delnode(p2); delnode(p1); nsob++;
-			}
-		}
-	}
 	}
 }
 
@@ -1015,7 +1096,7 @@ struct node *p2;
 	if (p1->op>0 && p1->op<MOV)
 		return(0);
 	switch (p1->combop) {
-	case EROU:	case JSW:	case TEXT:	case DATA:
+	case GLOBL:	case JSW:	case TEXT:	case DATA:
 	case BSS:	case ALIGN:	case WGEN:	case END:
 		/*
 		 * Consider all pseudo-ops to be unique.
@@ -1324,7 +1405,9 @@ register struct node *p;
 	p1 = nonlab(p1);
 	if (p1->op==TST) {
 		splitrand(p1);
-		savereg(RT2, "$0", p1->subop);
+		regs[RT2][0] = '$';
+		regs[RT2][1] = '0';
+		regs[RT2][2] = '\0';
 	} else if (p1->op==CMP)
 		splitrand(p1);
 	else

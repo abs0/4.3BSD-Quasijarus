@@ -9,9 +9,9 @@
 # software without specific prior written permission. This software
 # is provided ``as is'' without express or implied warranty.
 #
-#	@(#)Makefile	4.13 (Berkeley) 5/1/88
+#	@(#)Makefile	4.14 (Berkeley) 3/27/00
 #
-SUBDIR=	lib src aux
+SUBDIR=	lib src aux cf/cf
 
 all: ${SUBDIR}
 

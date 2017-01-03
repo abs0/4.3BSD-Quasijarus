@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)kdb.c	7.9 (Berkeley) 9/6/99
+ *	@(#)kdb.c	7.11 (Berkeley) 11/24/03
  */
 
 /*
@@ -194,6 +194,15 @@ struct size {
 	1253580,699720,		/* F=sectors 699720 thru 1953299 */
 	1577940,375360,		/* G=sectors 375360 thru 1953299 */
 	291346,	83640,		/* H=sectors 83640 thru 374985 */
+}, kra73_sizes[8] = {
+	32768,	0,		/* A=sectors 0 thru 32767 */
+	131072,	33810,		/* B=sectors 33810 thru 164881 */
+	3920490,0,		/* C=sectors 0 thru 3920489 */
+	131072,	458640,		/* D=sectors 458640 thru 589711 */
+	1638400,590940,		/* E=sectors 590940 thru 2229339 */
+	1690500,2229990,	/* F=sectors 2229990 thru 3920489 */
+	3461850,458640,		/* G=sectors 458640 thru 3920489 */
+	291346,	166110,		/* H=sectors 166110 thru 457455 */
 }, kra80_sizes[8] = {
 	15884,	0,		/* A=sectors 0 thru 15883 */
 	33440,	15884,		/* B=sectors 15884 thru 49323 */
@@ -321,9 +330,16 @@ struct	kdbtypes {
 	NULL,		NULL,
 	NULL,		NULL,
 	"ra71",		kra71_sizes,	/* 40 = ra71 */
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	NULL,		NULL,
+	"ra73",		kra73_sizes,	/* 47 = ra73 */
 };
 
-#define NTYPES 41
+#define NTYPES 48
 
 /*
  * Definition of the driver for autoconf and generic MSCP code.

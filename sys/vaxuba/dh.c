@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dh.c	7.6 (Berkeley) 1/24/89
+ *	@(#)dh.c	7.7 (Berkeley) 7/30/02
  */
 
 #include "dh.h"
@@ -234,7 +234,7 @@ dhopen(dev, flag)
 	/*
 	 * Wait for carrier, then process line discipline specific open.
 	 */
-	dmopen(dev);
+	dmopen(dev, flag);
 	return ((*linesw[tp->t_line].l_open)(dev, tp));
 }
 
@@ -681,7 +681,7 @@ dhtimer()
 /*
  * Turn on the line associated with dh dev.
  */
-dmopen(dev)
+dmopen(dev, flag)
 	dev_t dev;
 {
 	register struct tty *tp;
@@ -710,7 +710,7 @@ dmopen(dev)
 		if ((addr->dmlstat & DML_CAR) || (dhsoftCAR[dm] & (1 << unit)))
 			tp->t_state |= TS_CARR_ON;
 		addr->dmcsr = DM_IE|DM_SE;
-		if (tp->t_state & TS_CARR_ON)
+		if (tp->t_state & TS_CARR_ON || flag & FNDELAY)
 			break;
 		sleep((caddr_t)&tp->t_rawq, TTIPRI);
 	}

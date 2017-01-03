@@ -16,7 +16,7 @@
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
 ifdef(`EXTERNAL_VERSION', EXTERNAL_VERSION, `#')
-#	@(#)proto.mc	1.21 (Berkeley) 2/15/89
+#	@(#)proto.mc	1.22 (Berkeley) 3/27/00
 #
 sinclude(buildinfo)dnl
 #
@@ -50,8 +50,6 @@ UUCP_ALIASES
 
 include(../m4/nsmacros.m4)
 include(../m4/nsclasses.m4)
-ifdef(`INTERNET_RELAY',
-`include(../sitedep/nicregistered.m4)')
 include(../m4/version.m4)
 include(../m4/boilerplate.m4)
 
@@ -69,8 +67,7 @@ include(../m4/rule3.m4)
 
 include(../m4/localm.m4)
 ifdef(`UUCP_ONLY',,
-`include(../m4/nstcpldm.m4)')
-include(../m4/nstcpm.m4)
+`include(../m4/smtpm.m4)')
 ifdef(`UUCP_NAME',
 `include(../m4/uucpm.m4)'
 `include(../m4/rule5.m4)')
@@ -103,19 +100,10 @@ ifdef(`UUCP_ONLY',,
 
 `ifdef(`UUCP_RELAY',
 `#' forward non-local UUCP traffic to our UUCP relay
-R$*<@$*.UUCP>$*		$`#'tcpld$@$R$:$1<@$2.UUCP>	uucp mail)'
+R$*<@$*.UUCP>$*		$`#'smtp$@$R$:$1<@$2.UUCP>	uucp mail)'
 
-`ifdef(`ARPAKLUDGE',
-`#' hide behind our internet relay when talking to people in the arpa domain
-R$*<@$*.arpa>$*		$`#'tcp$@$2.arpa$:$1<@$2.arpa>$3	user@host.arpa
-
-`#' but speak domains to them if they speak domains too
-R$*<@$*>$*		$`#'tcpld$@$2$:$1<@$2>$3		user@host.domain,
 `#' resolve SMTP traffic
-`ifdef(`INTERNET_RELAY',
-R$*<@$*.$D>$*		$`#'tcpld$@$2.$D$:$1<@$2.$D>$3	user@host.ourdomain
-R$*<@$+>$*		$`#'tcp$@$2$:$1<@$2>$3		user@host.ourdomain,
-R$*<@$+>$*		$`#'tcpld$@$2$:$1<@$2>$3	user@host.domain)')')
+R$*<@$+>$*		$`#'smtp$@$2$:$1<@$2>$3		user@host.domain)
 
 # remaining names must be local
 R$+			$#local$:$1			everything else

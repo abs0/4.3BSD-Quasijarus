@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)ascode.c	5.1 (Berkeley) 4/24/85";
+static char sccsid[] = "@(#)ascode.c	5.2 (Berkeley) 8/29/00";
 #endif not lint
 
 #include <stdio.h>
@@ -106,8 +106,6 @@ insout(opcode, ap, nact)
 	else
 		putins(opcode, ap, nact);
 }
-
-extern	int d124;
 
 putins(opcode, ap, n)
 	struct	Opcode	opcode;
@@ -258,7 +256,7 @@ PASS2:
 					yywarning("%s: destination label is external",
 						FETCHNAME(ITABFETCH(opcode)));
 				if (!ISBYTE(argtype))
-					yyerror("%s: Branch too far(%db): try -J flag",
+					yyerror("%s: Branch too far(%db)",
 						FETCHNAME(ITABFETCH(opcode)),
 						argtype);
 				break;
@@ -271,7 +269,7 @@ PASS2:
 						FETCHNAME(ITABFETCH(opcode)));
 				xp->e_xtype = XABS;
 				if (!ISWORD(argtype))
-					yyerror("%s: Branch too far(%db): try -J flag",
+					yyerror("%s: Branch too far(%db)",
 						FETCHNAME(ITABFETCH(opcode)),
 						argtype);
 				xp->e_xvalue = argtype>>8;

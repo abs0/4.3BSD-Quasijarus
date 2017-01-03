@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)tcp_usrreq.c	7.10 (Berkeley) 6/29/88
+ *	@(#)tcp_usrreq.c	7.12 (Berkeley) 8/1/03
  */
 
 #include "param.h"
@@ -80,6 +80,12 @@ tcp_usrreq(so, req, m, nam, rights)
 	 */
 	if (inp == 0 && req != PRU_ATTACH) {
 		splx(s);
+		/*
+		 * The following corrects an mbuf leak under rare
+		 * circumstances, but has not been fully tested.
+		 */
+		if (m && req != PRU_SENSE)
+			m_freem(m);
 		return (EINVAL);		/* XXX */
 	}
 	if (inp) {
@@ -321,12 +327,19 @@ tcp_ctloutput(op, so, level, optname, mp)
 	struct mbuf **mp;
 {
 	int error = 0;
-	struct inpcb *inp = sotoinpcb(so);
-	register struct tcpcb *tp = intotcpcb(inp);
+	struct inpcb *inp;
+	register struct tcpcb *tp;
 	register struct mbuf *m;
 
+	inp = sotoinpcb(so);
+	if (inp == NULL) {
+		if (op == PRCO_SETOPT && *mp)
+			(void) m_free(*mp);
+		return (ECONNRESET);
+	}
 	if (level != IPPROTO_TCP)
 		return (ip_ctloutput(op, so, level, optname, mp));
+	tp = intotcpcb(inp);
 
 	switch (op) {
 

@@ -1,0 +1,37 @@
+#
+# Ivan, the savior of the Universe
+#
+machine		vax
+cpu		"VAX650"
+ident		IVAN
+timezone	8 dst
+maxusers	128
+options		INET
+options		"TCP_COMPAT_42"
+options		GATEWAY
+#options		KADB
+options		"MAXDSIZ=67108864"
+options		"MAXSSIZ=67108864"
+options		TTYKBHACKS
+
+config		vmunix	root on ra0 swap on ra0 and ra1 and ra2 dumps on ra2
+
+controller	uba0	at nexus ?
+
+controller	tmscp0	at uba? csr 0174500		vector tmscpintr
+tape		tms0	at tmscp0 drive 0
+
+controller	uda0	at uba? csr 0172150		vector udaintr
+disk		ra0	at uda0 drive 0
+disk		ra1	at uda0 drive 1
+disk		ra2	at uda0 drive 2
+disk		ra3	at uda0 drive 3
+
+pseudo-device	pty
+pseudo-device	loop
+pseudo-device	ether
+pseudo-device	ppp	4
+pseudo-device	netmon	8
+
+device		qe0	at uba? csr 0174440	vector qeintr
+device		dhu0	at uba? csr 0160440	vector dhurint dhuxint

@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char *sccsid = "@(#)date.c	4.22 (Berkeley) 4/6/87";
+static char *sccsid = "@(#)date.c	4.23 (Berkeley) 12/14/99";
 #endif not lint
 
 /*
@@ -172,6 +172,7 @@ gtime(ap)
 	register char	*C;		/* pointer into time argument */
 	struct tm	*L;
 	int	day, hour, mins, secs;
+	int	century;
 
 	for (secs = 0, C = ap;*C;++C) {
 		if (*C == '.') {		/* seconds provided */
@@ -186,11 +187,14 @@ gtime(ap)
 	}
 
 	L = localtime((time_t *)&tv.tv_sec);
-	year = L->tm_year;			/* defaults */
+	century = L->tm_year / 100 + 19;	/* defaults */
+	year = L->tm_year % 100;
 	month = L->tm_mon + 1;
 	day = L->tm_mday;
 
 	switch ((int)(C - ap)) {		/* length */
+		case 12:			/* yyyymmddhhmm */
+			century = ATOI2(ap);
 		case 10:			/* yymmddhhmm */
 			year = ATOI2(ap);
 		case 8:				/* mmddhhmm */
@@ -216,7 +220,9 @@ gtime(ap)
 		return(1);
 
 	tv.tv_sec = 0;
-	year += TM_YEAR_BASE;
+	year += century * 100;
+	if (year < EPOCH_YEAR)
+		return(1);
 	if (isleap(year) && month > 2)
 		++tv.tv_sec;
 	for (--year;year >= EPOCH_YEAR;--year)

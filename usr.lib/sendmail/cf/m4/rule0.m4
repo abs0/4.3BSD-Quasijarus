@@ -16,7 +16,7 @@ divert(10)
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)rule0.m4	1.11 (Berkeley) 2/15/89
+#	@(#)rule0.m4	1.13 (Berkeley) 3/27/00
 #
 divert(0)
 ############################################################
@@ -32,16 +32,12 @@ divert(0)
 
 S0
 
-# first make canonical
-R$*<$*>$*		$1$2$3				defocus
-R$+			$:$>3$1				make canonical
-
 # handle special cases
 R$*<@[$+]>$*		$:$1<@$[[$2]$]>$3		numeric internet addr
-R$*<@[$+]>$*		$#tcp$@[$2]$:$1@[$2]$3		numeric internet spec
+R$*<@[$+]>$*		$#smtp$@[$2]$:$1@[$2]$3		numeric internet spec
 R$+			$:$>6$1
 R$-<@$w>		$#local$:$1
-R@			$#error$:Invalid address	handle <> form
+R@			$#local$:$n			handle <> form
 
 # canonicalize using the nameserver if not internal domain
 R$*<@$*.$~I>$*		$:$1<@$[$2.$3$]>$4

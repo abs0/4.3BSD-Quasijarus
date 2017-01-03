@@ -1,7 +1,7 @@
 # include "../hdr/defines.h"
 # include "../hdr/had.h"
 
-static char Sccsid[] = "@(#)prt.c	4.3	2/2/88";
+static char Sccsid[] = "@(#)prt.c	4.4	5/27/01";
 
 /*
 	Program to print parts or all of an SCCS file.
@@ -103,6 +103,7 @@ char *argv[];
 			case 'f':	/* print flags */
 			case 't':	/* print descriptive user-text */
 			case 'b':	/* print body */
+			case 'n':	/* "nice" format */
 				break;
 
 			case 'y':	/* delta cutoff */
@@ -138,6 +139,9 @@ char *argv[];
 
 	if (HADC && HADR)
 		fatal("both 'c' and 'r' keyletters specified (pr2)");
+
+	if (HADN)
+		prefix = 0;
 
 	setsig();
 
@@ -403,8 +407,10 @@ register struct delent *delp;
 		printf("%s:\t",file);
 	}
 
-	printf("%c %s\t%s\t%s\t%s\t%s\t%s",delp->type,delp->osid,
-		delp->datetime,delp->pgmr,delp->serial,delp->pred,statistics);
+	printf(HADN ? "%c %-10s %s  %-8s  %-5s %-5s  %s"
+		    : "%c %s\t%s\t%s\t%s\t%s\t%s",
+	       delp->type, delp->osid, delp->datetime, delp->pgmr,
+	       delp->serial, delp->pred, statistics);
 }
 
 

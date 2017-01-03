@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)cpudata.c	7.5 (Berkeley) 8/27/88
+ *	@(#)cpudata.c	7.6 (Berkeley) 5/3/03
  */
 
 #include "pte.h"
@@ -218,25 +218,25 @@ struct	cpuops ka650_ops = {
 
 struct percpu percpu[] = {
 #if VAX8600
-	{ VAX_8600, 6, 2, io8600, &ka860_ops },
+	{ VAX_8600, 6, 1, 2, io8600, &ka860_ops },
 #endif
 #if VAX8200
-	{ VAX_8200, 2, 1, io8200, &ka820_ops },
+	{ VAX_8200, 2, 0, 1, io8200, &ka820_ops },
 #endif
 #if VAX780
-	{ VAX_780, 2, 1, io780, &ka780_ops },
+	{ VAX_780, 2, 1, 1, io780, &ka780_ops },
 #endif
 #if VAX750
-	{ VAX_750, 1, 1, io750, &ka750_ops },
+	{ VAX_750, 1, 1, 1, io750, &ka750_ops },
 #endif
 #if VAX730
-	{ VAX_730, 1, 1, io730, &ka730_ops },
+	{ VAX_730, 1, 1, 1, io730, &ka730_ops },
 #endif
 #if VAX630
-	{ VAX_630, 2, 1, io630, &ka630_ops },
+	{ VAX_630, 2, 0, 1, io630, &ka630_ops },
 #endif
 #if VAX650
-	{ VAX_650, 4, 1, io630, &ka650_ops },
+	{ VAX_650, 4, 0, 1, io630, &ka650_ops },
 #endif
 	0,
 };

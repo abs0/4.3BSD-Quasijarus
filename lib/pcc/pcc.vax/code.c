@@ -1,5 +1,5 @@
 #ifndef lint
-static char *sccsid ="@(#)code.c	1.10 (Berkeley) 5/31/88";
+static char *sccsid ="@(#)code.c	1.13 (Berkeley) 8/30/00";
 #endif lint
 
 # include "pass1.h"
@@ -10,6 +10,7 @@ static char *sccsid ="@(#)code.c	1.10 (Berkeley) 5/31/88";
 int proflg = 0;	/* are we generating profiling code? */
 int strftn = 0;  /* is the current function one which returns a value */
 int gdebug;
+int jflag;
 int fdefflag;  /* are we within a function definition ? */
 #ifndef STABDOT
 char NULLNAME[8];
@@ -401,13 +402,22 @@ char
 #endif
 
 
-main( argc, argv ) char *argv[]; {
+main(argc, argv)
+	char *argv[];
+{
+	register int i;
+	register char *cp;
 #ifdef BUFSTDERR
 	char errbuf[BUFSIZ];
 	setbuf(stderr, errbuf);
 #endif
-	return(mainp1( argc, argv ));
-	}
+	for (i = 1; i < argc; i++)
+		if (argv[i][0] == '-' && argv[i][1] == 'X')
+			for (cp = &argv[i][2]; *cp; cp++)
+				if (*cp == 'J')
+					jflag++;
+	return(mainp1(argc, argv));
+}
 
 struct sw heapsw[SWITSZ];	/* heap for switches */
 
@@ -427,19 +437,46 @@ genswitch(p,n) register struct sw *p;{
 
 	if( range>0 && range <= 3*n && n>=4 ){ /* implement a direct switch */
 
+		/* the switch expression value in r0 */
 		swlab = getlab();
 		dlab = p->slab >= 0 ? p->slab : getlab();
 
-		/* already in r0 */
-		printf("	casel	r0,$%ld,$%ld\n", p[1].sval, range);
-		printf("L%d:\n", swlab);
-		for( i=1,j=p[1].sval; i<=n; j++) {
-			printf("	.word	L%d-L%d\n", (j == p[i].sval ? ((j=p[i++].sval), p[i-1].slab) : dlab),
-				swlab);
-			}
+		if (!jflag) {
+			/*
+			 * Generate a CASEL instruction. Nice and efficient,
+			 * but limited to word displacements.
+			 */
+			printf("	casel	r0,$%ld,$%ld\n", p[1].sval,
+			       range);
+			printf("L%d:\n", swlab);
+			for (i = 1, j = p[1].sval; i <= n; j++)
+				printf("	.word	L%d-L%d\n",
+				       (j == p[i].sval ? p[i++].slab : dlab),
+				       swlab);
+		} else {
+			/*
+			 * Generate a table of absolute addresses. Longer and
+			 * can't use the nice CASEL instruction, but no limit
+			 * on displacements.
+			 */
+			if (p[1].sval > 0)
+				printf("	subl2	$%ld,r0\n", p[1].sval);
+			if (p[1].sval < 0)
+				printf("	addl2	$%ld,r0\n", -p[1].sval);
+			printf("	cmpl	$%ld,r0\n", range);
+			printf("	jlssu	L%d\n", dlab);
+			printf("	ashl	$2,r0,r0\n");
+			printf("	jmp	*L%d(r0)\n", swlab);
+			printf("L%d:\n", swlab);
+			for (i = 1, j = p[1].sval; i <= n; j++)
+				printf("	.long	L%d\n",
+				       (j == p[i].sval ? p[i++].slab : dlab));
+		}
 
-		if( p->slab >= 0 ) branch( dlab );
-		else printf("L%d:\n", dlab);
+		if (p->slab >= 0 && !jflag)
+			branch(dlab);
+		if (p->slab < 0)
+			printf("L%d:\n", dlab);
 		return;
 
 		}

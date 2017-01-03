@@ -1,4 +1,4 @@
-/*	tdef.h	4.8	87/04/30	*/
+/*	tdef.h	4.9	02/05/28	*/
 
 #include <sys/param.h>
 #undef CMASK			/* XXX */
@@ -52,7 +52,7 @@
 #define NN 132	/*number registers*/
 #endif
 /* #define NN 200	*/
-#define NNAMES 14 /*predefined reg names*/
+#define NNAMES 15 /*predefined reg names*/
 #define NIF 15	/*if-else nesting*/
 #define NS 64	/*name buffer*/
 #define NTM 256	/*tm buffer*/

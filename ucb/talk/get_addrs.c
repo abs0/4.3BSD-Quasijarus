@@ -16,10 +16,11 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)get_addrs.c	5.4 (Berkeley) 6/29/88";
+static char sccsid[] = "@(#)get_addrs.c	5.5 (Berkeley) 5/9/03";
 #endif /* not lint */
 
 #include "talk_ctl.h"
+#include <arpa/inet.h>
 #include <netdb.h>
 
 get_addrs(my_machine_name, his_machine_name)
@@ -27,6 +28,7 @@ get_addrs(my_machine_name, his_machine_name)
 {
 	struct hostent *hp;
 	struct servent *sp;
+	long ip;
 
 	msg.pid = htonl(getpid());
 	/* look up the address of the local host */
@@ -43,14 +45,20 @@ get_addrs(my_machine_name, his_machine_name)
 	 * network address, otherwise do a lookup...
 	 */
 	if (strcmp(his_machine_name, my_machine_name)) {
-		hp = gethostbyname(his_machine_name);
-		if (hp == (struct hostent *) 0 ) {
-			fprintf(stderr,
-			    "talk: %s: Can't figure out network address.\n",
-			    his_machine_name);
-			exit(-1);
+		ip = inet_addr(his_machine_name);
+		if (ip != -1)
+			bcopy(&ip, (char *) &his_machine_addr, sizeof(ip));
+		else {
+			hp = gethostbyname(his_machine_name);
+			if (hp == (struct hostent *) 0 ) {
+			    fprintf(stderr,
+				"talk: %s: Can't figure out network address.\n",
+				his_machine_name);
+			    exit(-1);
+			}
+			bcopy(hp->h_addr, (char *) &his_machine_addr,
+				hp->h_length);
 		}
-		bcopy(hp->h_addr, (char *) &his_machine_addr, hp->h_length);
 	} else
 		his_machine_addr = my_machine_addr;
 	/* find the server's port */

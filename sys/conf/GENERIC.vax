@@ -8,7 +8,7 @@ cpu		"VAX780"
 cpu		"VAX750"
 cpu		"VAX730"
 ident		GENERIC
-timezone	6 dst
+timezone	8 dst
 maxusers	8
 options		QUOTA
 options		INET

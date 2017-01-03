@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)uda.c	7.29 (Berkeley) 9/6/99
+ *	@(#)uda.c	7.34 (Berkeley) 11/24/03
  */
 
 /*
@@ -1576,9 +1576,22 @@ udaonline(ui, mp)
 	if (!cold)
 		printf("ra%d: uda%d, unit %d, size = %d sectors\n", ui->ui_unit,
 		    ui->ui_ctlr, mp->mscp_unit, ra->ra_dsize);
-	/* can now compute ncyl */
-	ra->ra_geom.rg_ncyl = howmany(ra->ra_dsize, ra->ra_geom.rg_ntracks *
-		ra->ra_geom.rg_nsectors);
+	/*
+	 * can now compute ncyl
+	 *
+	 * There are some broken controllers that return zeros for the geometry
+	 * parameters (observed on Emulex QD21 and UC06), causing the ncyl
+	 * calculation below to blow up with a division by zero. We work around
+	 * this by faking nsectors = 1, ntracks = 1, and ncyl = 1 when faced
+	 * with such garbage. Of course this is only usable if one uses pack
+	 * labels, but they are required for third-party disks anyway.
+	 */
+	if (ra->ra_geom.rg_nsectors && ra->ra_geom.rg_ntracks)
+		ra->ra_geom.rg_ncyl = howmany(ra->ra_dsize,
+			ra->ra_geom.rg_ntracks * ra->ra_geom.rg_nsectors);
+	else
+		ra->ra_geom.rg_nsectors = ra->ra_geom.rg_ntracks =
+			ra->ra_geom.rg_ncyl = 1;
 	return (MSCP_DONE);
 }
 
@@ -2111,6 +2124,15 @@ struct size {
 	1253580,699720,		/* F=sectors 699720 thru 1953299 */
 	1577940,375360,		/* G=sectors 375360 thru 1953299 */
 	291346,	83640,		/* H=sectors 83640 thru 374985 */
+}, ra73_sizes[8] = {
+	32768,	0,		/* A=sectors 0 thru 32767 */
+	131072,	33810,		/* B=sectors 33810 thru 164881 */
+	3920490,0,		/* C=sectors 0 thru 3920489 */
+	131072,	458640,		/* D=sectors 458640 thru 589711 */
+	1638400,590940,		/* E=sectors 590940 thru 2229339 */
+	1690500,2229990,	/* F=sectors 2229990 thru 3920489 */
+	3461850,458640,		/* G=sectors 458640 thru 3920489 */
+	291346,	166110,		/* H=sectors 166110 thru 457455 */
 }, ra80_sizes[8] = {
 	15884,	0,		/* A=sectors 0 thru 15883 */
 	33440,	15884,		/* B=sectors 15884 thru 49323 */
@@ -2186,6 +2208,69 @@ struct size {
 	2242188,698763,		/* F=sectors 698763 thru 2940950 */
 	2566005,374946,		/* G=sectors 374946 thru 2940950 */
 	291346,	83421,		/* H=sectors 83421 thru 374766 */
+}, rf30_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	33440,	15984,		/* B=sectors 15984 thru 49423 */
+	293040,	0,		/* C=sectors 0 thru 293039 */
+	15884,	49506,		/* D=sectors 49506 thru 65389 */
+	55936,	65490,		/* E=sectors 65490 thru 121425 */
+	171606,	121434,		/* F=sectors 121434 thru 293039 */
+	243534,	49506,		/* G=sectors 49506 thru 293039 */
+	0,	0,
+}, rf31_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16000,		/* B=sectors 16000 thru 82879 */
+	744400,	0,		/* C=sectors 0 thru 744399 */
+	15884,	374800,		/* D=sectors 374800 thru 390683 */
+	307200,	390800,		/* E=sectors 390800 thru 697999 */
+	46400,	698000,		/* F=sectors 698000 thru 744399 */
+	369600,	374800,		/* G=sectors 374800 thru 744399 */
+	291346,	83200,		/* H=sectors 83200 thru 374545 */
+}, rf35_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	15960,		/* B=sectors 15960 thru 82839 */
+	1664628,0,		/* C=sectors 0 thru 1664627 */
+	15884,	375060,		/* D=sectors 375060 thru 390943 */
+	307200,	391020,		/* E=sectors 391020 thru 698219 */
+	966378,	698250,		/* F=sectors 698250 thru 1664627 */
+	1289568,375060,		/* G=sectors 375060 thru 1664627 */
+	291346,	82992,		/* H=sectors 82992 thru 374337 */
+}, rf36_sizes[8] = {
+	32768,	0,		/* A=sectors 0 thru 32767 */
+	131072,	32768,		/* B=sectors 32768 thru 163839 */
+	3125408,0,		/* C=sectors 0 thru 3125407 */
+	131072,	455186,		/* D=sectors 455186 thru 586257 */
+	1638400,586258,		/* E=sectors 586258 thru 2224657 */
+	900750,	2224658,	/* F=sectors 2224658 thru 3125407 */
+	2670222,455186,		/* G=sectors 455186 thru 3125407 */
+	291346,	163840,		/* H=sectors 163840 thru 455185 */
+}, rf71_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	15984,		/* B=sectors 15984 thru 82863 */
+	781440,	0,		/* C=sectors 0 thru 781439 */
+	15884,	374736,		/* D=sectors 374736 thru 390619 */
+	307200,	390720,		/* E=sectors 390720 thru 697919 */
+	83472,	697968,		/* F=sectors 697968 thru 781439 */
+	406704,	374736,		/* G=sectors 374736 thru 781439 */
+	291346,	82880,		/* H=sectors 82880 thru 374225 */
+}, rf72_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	66880,	16800,		/* B=sectors 16800 thru 83679 */
+	1954050,0,		/* C=sectors 0 thru 1954049 */
+	15884,	375900,		/* D=sectors 375900 thru 391783 */
+	307200,	392700,		/* E=sectors 392700 thru 699899 */
+	1253700,700350,		/* F=sectors 700350 thru 1954049 */
+	1578150,375900,		/* G=sectors 375900 thru 1954049 */
+	291346,	84000,		/* H=sectors 84000 thru 375345 */
+}, rf74_sizes[8] = {
+	32768,	0,		/* A=sectors 0 thru 32767 */
+	131072,	32768,		/* B=sectors 32768 thru 163839 */
+	6976375,0,		/* C=sectors 0 thru 6976374 */
+	131072,	455186,		/* D=sectors 455186 thru 586257 */
+	3276800,586258,		/* E=sectors 586258 thru 3863057 */
+	3113317,3863058,	/* F=sectors 3863058 thru 6976374 */
+	6521189,455186,		/* G=sectors 455186 thru 6976374 */
+	291346,	163840,		/* H=sectors 163840 thru 455185 */
 }, rc25_sizes[8] = {
 	15884,	0,		/* A=blk 0 thru 15883 */
 	10032,	15884,		/* B=blk 15884 thru 25915 */
@@ -2194,6 +2279,33 @@ struct size {
 	0,	0,
 	0,	0,
 	24820,	25916,		/* G=blk 25916 thru 50735 */
+	0,	0,
+}, rd52_sizes[8] = {
+	15884,	0,		/* A=blk 0 thru 15883 */
+	9766,	15884,		/* B=blk 15884 thru 25649 */
+	60480,	0,		/* C=blk 0 thru 60479 */
+	0,	0,		/* D=unused */
+	0,	0,		/* E=unused */
+	0,	0,		/* F=unused */
+	34830,	25650,		/* G=blk 25650 thru 60479 */
+	0,	0,		/* H=unused */
+}, rd53_sizes[8] = {
+	15884,	0,		/* A=blk 0 thru 15883 */
+	33440,	15884,		/* B=blk 15884 thru 49323 */
+	138672,	0,		/* C=blk 0 thru 138671 */
+	0,	0,		/* D=unused */
+	33440,	0,		/* E=blk 0 thru 33439 */
+	105232,	33440,		/* F=blk 33440 thru 138671 */
+	89348,	49324,		/* G=blk 49324 thru 138671 */
+	122788,	15884,		/* H=blk 15884 thru 138671 */
+}, rd54_sizes[8] = {
+	15884,	0,		/* A=sectors 0 thru 15883 */
+	33440,	16065,		/* B=sectors 16065 thru 49504 */
+	311200,	0,		/* C=sectors 0 thru 311199 */
+	15884,	49725,		/* D=sectors 49725 thru 65608 */
+	55936,	65790,		/* E=sectors 65790 thru 121725 */
+	189310,	121890,		/* F=sectors 121890 thru 311199 */
+	261475,	49725,		/* G=sectors 49725 thru 311199 */
 	0,	0,
 }, rx50_sizes[8] = {
 	800,	0,		/* A=blk 0 thru 799 */
@@ -2218,13 +2330,25 @@ struct	udatypes {
 	{ MSCP_MKDRIVE2('R', 'A', 70), "ra70", ra70_sizes },
 	{ MSCP_MKDRIVE2('R', 'A', 71), "ra71", ra71_sizes },
 	{ MSCP_MKDRIVE2('R', 'A', 72), "ra72", ra72_sizes },
+	{ MSCP_MKDRIVE2('R', 'A', 73), "ra73", ra73_sizes },
 	{ MSCP_MKDRIVE2('R', 'A', 80), "ra80", ra80_sizes },
 	{ MSCP_MKDRIVE2('R', 'A', 81), "ra81", ra81_sizes },
 	{ MSCP_MKDRIVE2('R', 'A', 82), "ra82", ra82_sizes },
 	{ MSCP_MKDRIVE2('R', 'A', 90), "ra90", ra90_sizes },
 	{ MSCP_MKDRIVE2('R', 'A', 92), "ra92", ra92_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 30), "rf30", rf30_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 31), "rf31", rf31_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 35), "rf35", rf35_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 36), "rf36", rf36_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 71), "rf71", rf71_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 72), "rf72", rf72_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 73), "rf73", ra73_sizes },
+	{ MSCP_MKDRIVE2('R', 'F', 74), "rf74", rf74_sizes },
 	{ MSCP_MKDRIVE2('R', 'C', 25), "rc25-removable", rc25_sizes },
 	{ MSCP_MKDRIVE3('R', 'C', 'F', 25), "rc25-fixed", rc25_sizes },
+	{ MSCP_MKDRIVE2('R', 'D', 52), "rd52", rd52_sizes },
+	{ MSCP_MKDRIVE2('R', 'D', 53), "rd53", rd53_sizes },
+	{ MSCP_MKDRIVE2('R', 'D', 54), "rd54", rd54_sizes },
 	{ MSCP_MKDRIVE2('R', 'X', 50), "rx50", rx50_sizes },
 	0
 };

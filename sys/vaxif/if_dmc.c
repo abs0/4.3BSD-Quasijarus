@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if_dmc.c	7.5 (Berkeley) 10/22/88
+ *	@(#)if_dmc.c	7.6 (Berkeley) 3/12/00
  */
 
 #include "dmc.h"
@@ -754,7 +754,7 @@ dmcoutput(ifp, m0, dst)
 	register struct dmc_header *dh;
 	register int off;
 
-	if ((ifp->if_flags & IFF_UP) == 0) {
+	if ((ifp->if_flags & (IFF_UP|IFF_RUNNING)) != (IFF_UP|IFF_RUNNING)) {
 		error = ENETDOWN;
 		goto bad;
 	}

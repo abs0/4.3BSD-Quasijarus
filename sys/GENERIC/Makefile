@@ -1,5 +1,5 @@
 IDENT=-DGENERIC -DVAX650 -DVAX630 -DVAX730 -DVAX750 -DVAX780 -DVAX8200 -DVAX8600 -DTCP_COMPAT_42 -DNS -DINET -DQUOTA -DNOSUBSINST
-PARAM=-DTIMEZONE=360 -DDST=1 -DMAXUSERS=8
+PARAM=-DTIMEZONE=480 -DDST=1 -DMAXUSERS=8
 INLINEOPTS=-s
 #
 # Copyright (c) 1980, 1986 Regents of the University of California.
@@ -1822,8 +1822,8 @@ sys_machdep.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/ioctl.h
 sys_machdep.o: ../h/ttychars.h ../h/ttydev.h ../h/file.h ../h/proc.h ../h/uio.h
 sys_machdep.o: ../h/kernel.h ../h/mtio.h ../h/buf.h ../h/trace.h ../vax/dkio.h
 sys_machdep.o: ../vax/pte.h ../vax/../vaxuba/ubareg.h ../vax/../vaxuba/ubavar.h
-trap.o: ../vax/trap.c ../vax/psl.h ../vax/reg.h ../vax/pte.h ../h/param.h
-trap.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
+trap.o: ../vax/trap.c ../vax/psl.h ../vax/reg.h ../vax/pte.h ../vax/vmparam.h
+trap.o: ../h/param.h ../h/types.h ../h/signal.h ../h/../machine/trap.h
 trap.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/dir.h
 trap.o: ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h
 trap.o: ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h assym.s

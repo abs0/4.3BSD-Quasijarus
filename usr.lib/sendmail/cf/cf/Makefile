@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	1.20 (Berkeley) 3/3/89
+#	@(#)Makefile	1.26 (Berkeley) 12/4/03
 #
 ######################################################################
 #
@@ -27,9 +27,13 @@ HOSTS	=	cad.cf cogsci.cf ic.cf okeeffe.cf ucbarpa.cf ucbvax.cf
 
 GROUPS	=	cadgroup.cf cc.cf cchem.cf
 
-PROTOS	=	tcpproto.cf tcpuucpproto.cf uucpproto.cf ucbtcp.cf
+UCBTCP	=	ucbtcp.cf
 
-ALL	=	$(HOSTS) $(GROUPS) $(PROTOS)
+HARHAN	=	harhantcp.cf
+
+PROTOS	=	baretcpproto.cf tcpproto.cf tcpuucpproto.cf uucpproto.cf
+
+ALL	=	$(HOSTS) $(GROUPS) $(UCBTCP) $(HARHAN) $(PROTOS)
 
 GET	=	sccs get
 
@@ -44,20 +48,23 @@ BLDFILE	=	buildinfo
 	m4 $*.mc > $*.cf
 	rm -f $(BLDFILE)
 
-all: $(ALL)
+all: $(PROTOS)
 
 clean:
 	rm -f $(ALL) a.out core make.out
 	rm -f ,*
 
+install:
+	install -c -o bin -g bin -m 644 baretcpproto.cf ${DESTDIR}/usr/lib/sendmail.cf
+
 #
 # Standard files included by all
 #
 $(ALL):	../m4/boilerplate.m4 ../m4/fake_domains.m4 ../m4/localm.m4 \
-	../m4/nsclasses.m4 ../m4/nsmacros.m4 ../m4/nstcpldm.m4 \
-	../m4/nstcpm.m4 ../m4/postwriterule.m4 ../m4/prewriterule.m4 \
+	../m4/nsclasses.m4 ../m4/nsmacros.m4 ../m4/smtpm.m4 \
+	../m4/postwriterule.m4 ../m4/prewriterule.m4 \
 	../m4/rule0.m4 ../m4/rule3.m4 ../m4/rule5.m4 ../m4/smtpuucpm.m4 \
-	../m4/uucpm.m4 ../m4/version.m4 ../sitedep/nicregistered.m4 \
+	../m4/uucpm.m4 ../m4/version.m4 \
 	proto.mc
 
 #
@@ -71,3 +78,4 @@ ucbvax.cf: ../m4/suucpm.m4 ../sitedep/uucp.cad.m4 \
 	../sitedep/uucp.cogsci.m4 ../sitedep/uucp.ucbarpa.m4 \
 	../sitedep/uucp.ucbvax.m4
 
+depend:

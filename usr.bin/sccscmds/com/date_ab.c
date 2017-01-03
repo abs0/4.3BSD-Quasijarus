@@ -1,7 +1,7 @@
 # include	"../hdr/macros.h"
 # include	<tzfile.h>
 
-static char Sccsid[] = "@(#)date_ab.c	4.5	10/6/87";
+static char Sccsid[] = "@(#)date_ab.c	4.6	12/14/99";
 
 /*
 	Function to convert date in the form "yymmddhhmmss" to
@@ -35,7 +35,12 @@ long *bdt;
 	Datep = adt;
 
 	if((y=g2()) == -2) y = 99;
-	if(y<70 || y>99) return(-1);
+	if (y < 0)
+		return(-1);
+	if (y >= 70)
+		y += 1900;
+	else
+		y += 2000;
 
 	if((t=g2()) == -2) t = 12;
 	if(t<1 || t>12) return(-1);
@@ -53,7 +58,6 @@ long *bdt;
 	if(s<0 || s>59) return(-1);
 
 	tim = 0L;
-	y += 1900;
 	for(i=1970; i<y; i++)
 		tim += dysize(i);
 	while(--t)

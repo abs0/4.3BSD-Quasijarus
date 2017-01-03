@@ -1,0 +1,39 @@
+.\"	@(#)gzcompat.1	6.1 (Berkeley) 6/12/03
+.\"
+.TH GZCOMPAT 1 "June 12, 2003"
+.UC 6
+.SH NAME
+gzcompat \- convert between compress \-s and gzip formats
+.SH SYNOPSIS
+.B gzcompat
+[
+.I name
+]
+.SH DESCRIPTION
+.I Gzcompat
+converts deflate-compressed data between
+.I compress
+\-s and
+.I gzip
+formats.
+Input is taken from
+.I name
+if specified or from stdin otherwise.
+The output is sent to stdout.
+If the input is in
+.I compress
+\-s format, the output will be in
+.I gzip
+format.
+If the input is in
+.I gzip
+format, the output will be in
+.I compress
+\-s format.
+.SH SEE ALSO
+compress(1)
+.SH BUGS
+.I Gzcompat
+is a very clumsy solution for working with
+.I gzip
+files.

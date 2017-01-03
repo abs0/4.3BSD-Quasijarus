@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)cmds.c	5.8 (Berkeley) 6/29/88";
+static char sccsid[] = "@(#)cmds.c	5.9 (Berkeley) 6/12/03";
 #endif /* not lint */
 
 /*
@@ -989,6 +989,13 @@ ls(argc, argv)
 {
 	char *cmd;
 
+	if (argc == 2 && (argv[1][0] == '|' || argv[1][0] == '>')) {
+		argc++;
+		argv[2] = argv[1];
+		argv[1] = NULL;
+		if (argv[2][0] == '>')
+			argv[2]++;
+	}
 	if (argc < 2)
 		argc++, argv[1] = NULL;
 	if (argc < 3)

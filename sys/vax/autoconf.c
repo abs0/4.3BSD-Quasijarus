@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)autoconf.c	7.19 (Berkeley) 9/5/99
+ *	@(#)autoconf.c	7.20 (Berkeley) 5/3/03
  */
 
 /*
@@ -158,6 +158,7 @@ VAX 11/78%c, serial# %d(%d), hardware ECO level %d(%d)\n",
 		if (ocp->pc_cputype == cpusid.cpuany.cp_type) {
 			cpuspeed = ocp->pc_cpuspeed;
 			cpuops = ocp->pc_ops;
+			cpu_has_compat_mode = ocp->pc_compatmode;
 			if (cpuops->cpu_init != NULL)
 				(*cpuops->cpu_init)();
 			probeio(ocp);

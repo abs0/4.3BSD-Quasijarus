@@ -1,0 +1,158 @@
+h44159
+s 00037/00015/00047
+d D 6.2 86/04/24 19:55:13 mckusick 2 1
+c update from rfg
+e
+s 00062/00000/00000
+d D 6.1 85/06/24 12:44:59 bloom 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.TH UUQ 1C "%Q%"
+.UC 6
+.SH NAME
+uuq \- examine or manipulate the uucp queue
+.SH SYNOPSIS
+.B uuq
+D 2
+[\fB-l\fP] [\fB-h] [\fB-s\fPsystem] [\fB-u\fPuser] [\fB-d\fPjobno] [\fB-r\fPsdir] [\fB-b\fPbaudrate]
+E 2
+I 2
+[
+.B -l
+] [
+.B -h
+] [
+.BI -s system
+] [
+.BI -u user
+] [
+.BI -d jobno
+] [
+.BI -r sdir
+] [
+.BI -b baud
+]
+E 2
+.SH DESCRIPTION
+.I Uuq
+is used to examine (and possibly delete) entries in the uucp queue.
+.PP
+When listing jobs,
+.I uuq
+D 2
+uses a format reminiscent of ls.
+E 2
+I 2
+uses a format reminiscent of
+.IR ls .
+E 2
+For the long format,
+D 2
+information for each job listed includes:
+E 2
+I 2
+information for each job listed includes
+E 2
+job number, number of files to transfer, user who
+spooled the job, number of bytes to send, type of command requested
+(S for sending files, R for receiving files, X for remote uucp),
+and file or command desired.
+.PP
+Several options are available:
+.TP 10
+.B \-h
+Print only the summary lines for each system.  Summary lines give system
+name, number of jobs for the system, and total number of bytes to send.
+.TP 10
+.B \-l
+Specifies a long format listing.  The default is to list only the
+job numbers sorted across the page.
+D 2
+.TP10
+E 2
+I 2
+.TP 10
+E 2
+.BI \-s system
+Limit output to jobs for systems whose system names begin with \fIsystem\fP.
+.TP 10
+.BI \-u user
+Limit output to jobs for users whose login names begin with \fIuser\fP.
+.TP 10
+.BI \-d jobno
+D 2
+Delete job number \fIjobno\fP (as obtained from a previous uuq command) from
+the uucp queue.
+E 2
+I 2
+Delete job number \fIjobno\fP (as obtained from a previous \fIuuq\fP command)
+from the uucp queue.
+Only the UUCP Administrator is permitted to delete jobs.
+E 2
+.TP 10
+.BI \-r sdir
+Look for files in the spooling directory \fIsdir\fP instead of the default
+directory.
+.TP 10
+D 2
+.BI \-b baudrate
+Use \fIbaudrate\fP to compute the transfer time instead of the default
+800 baud.
+E 2
+I 2
+.BI \-b baud
+Use \fIbaud\fP to compute the transfer time instead of the default
+1200 baud.
+E 2
+.SH FILES
+D 2
+/usr/spool/uucp/C.* \- command files
+E 2
+I 2
+.ta \w'/usr/spool/uucp/D.hostname/D.*   'u
+/usr/spool/uucp/	Default spool directory
+/usr/spool/uucp/C./C.*	Control files
+E 2
+.br
+D 2
+/usr/spool/uucp/D.* \- data files
+E 2
+I 2
+/usr/spool/uucp/D\fIhostname\fP./D.*	Outgoing data files
+/usr/spool/uucp/X./X.*	Outgoing execution files
+E 2
+.SH SEE ALSO
+D 2
+uucp(1C), uux(1C), uulog(1C)
+E 2
+I 2
+uucp(1C), uux(1C), uulog(1C), uusnap(8C)
+E 2
+.SH BUGS
+No information is available on work requested by the remote machine.
+D 2
+.br
+E 2
+I 2
+.PP
+E 2
+The user who requests a remote uucp command is unknown.
+D 2
+.br
+uuq -l can be horrendously slow.
+E 2
+I 2
+.PP
+.B "Uuq -l"
+can be horrendously slow.
+.SH AUTHOR
+Lou Salkind, New York University
+E 2
+E 1

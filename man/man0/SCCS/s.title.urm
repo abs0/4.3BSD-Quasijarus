@@ -1,0 +1,176 @@
+h48548
+s 00002/00002/00059
+d D 6.3 04/10/21 08:03:15 msokolov 5 4
+c label it as 4.3BSD-Quasijarus1 preliminary version
+e
+s 00002/00003/00059
+d D 6.2 86/05/15 18:41:13 mckusick 4 3
+c name change to correspond to abbreviation (URM)
+e
+s 00042/00027/00020
+d D 6.1 86/05/11 00:14:23 mckusick 3 2
+c document distributed with 4.3BSD
+e
+s 00002/00002/00045
+d D 5.1 86/05/11 00:14:03 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00047/00000/00000
+d D 4.1 86/05/11 00:13:33 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 3
+.tl '--''--'
+.ps20
+.sp 4.25i
+E 3
+I 3
+.ps 18
+.vs 22
+.sp 2.75i
+E 3
+.ft B
+D 3
+.ce
+UNIX PROGRAMMER'S MANUAL
+.ps10
+.sp |5i
+.ft I
+.ce
+D 2
+Seventh Edition
+E 2
+I 2
+4.2 Berkeley Software Distribution
+E 2
+.ce
+E 3
+I 3
+D 4
+.ce 3
+UNIX User's Manual
+Reference Guide
+E 4
+I 4
+.ce 2
+UNIX User's Reference Manual
+E 4
+(URM)
+.ps 14
+.vs 16
+.sp |4i
+.ce 2
+4.3 Berkeley Software Distribution
+E 3
+D 5
+Virtual VAX\-11 Version
+E 5
+I 5
+4.3BSD-Quasijarus1 Preliminary Version
+E 5
+.sp |5.75i
+D 3
+.ce
+D 2
+November, 1980
+E 2
+I 2
+August, 1983
+E 2
+.sp |9.2i
+E 3
+.ft R
+I 3
+.pt 12
+.vs 16
+E 3
+.ce
+I 3
+D 5
+April, 1986
+E 5
+I 5
+October, 2004
+E 5
+.sp |8.2i
+.ce 5
+Computer Systems Research Group
+E 3
+Computer Science Division
+D 3
+.ce
+E 3
+Department of Electrical Engineering and Computer Science
+D 3
+.ce
+E 3
+University of California
+D 3
+.ce
+E 3
+Berkeley, California  94720
+.bp
+D 3
+...fp 3 G
+.ll 4.8i
+.in .75i
+E 3
+I 3
+.ll 5.3i
+.in 1.25i
+E 3
+.hy 0
+I 3
+.ps 10
+E 3
+.vs 12p
+D 3
+--
+.sp |8i
+Copyright 1979, Bell Telephone Laboratories, Incorporated.
+Holders of a UNIX\v'-4p'\s-2\fGTM\fP\s0\v'4p'/32V software
+license are permitted to copy this document, or any portion
+of it, as necessary for licensed use of the software,
+E 3
+I 3
+.sp |3.35i
+Copyright 1979, 1980, 1983, 1986 Regents of the University of California.
+Permission to copy these documents or any portion thereof as necessary
+for licensed use of the software is granted to licensees of this
+software, provided this copyright notice and statement of permission
+are included.
+.sp 2
+Copyright 1979, AT&T Bell Laboratories, Incorporated.
+Holders of \x'-1p'UNIX\v'-4p'\s-3TM\s0\v'4p'/32V,
+System III, or System V software licenses are
+permitted to copy these documents, or any portion of them,
+as necessary for licensed use of the software,
+E 3
+provided this copyright notice and statement of permission
+are included.
+D 3
+.bp
+E 3
+I 3
+.sp 2
+This manual reflects system enhancements made at Berkeley and sponsored
+in part by the Defense Advanced Research Projects Agency
+(DoD), Arpa Order No. 4871 monitored by the Naval Electronics Systems
+Command under contract No. N00039-84-C-0089.
+The views and conclusions contained in these documents are those of the
+authors and should not be interpreted as representing official policies,
+either expressed or implied, of the Defense Research Projects Agency
+or of the US Government.
+E 3
+E 1

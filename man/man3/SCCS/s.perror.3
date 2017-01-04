@@ -1,0 +1,119 @@
+h04343
+s 00007/00008/00040
+d D 6.2 87/09/10 11:52:51 bostic 4 3
+c document perror((char *)NULL)
+e
+s 00001/00001/00047
+d D 6.1 85/05/15 15:37:18 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00006/00008/00042
+d D 5.1 85/05/15 15:36:59 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00050/00000/00000
+d D 4.1 85/05/15 15:36:44 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PERROR 3 
+E 2
+I 2
+D 3
+.TH PERROR 3  "19 January 1983"
+E 3
+I 3
+.TH PERROR 3  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+perror, sys_errlist, sys_nerr \- system error messages
+.SH SYNOPSIS
+.nf
+D 4
+.B perror(s)
+.B char *s;
+E 4
+I 4
+.B perror(string)
+.B char *string;
+E 4
+.PP
+.B int sys_nerr;
+.B char *sys_errlist[];
+.fi
+.SH DESCRIPTION
+.I Perror
+D 2
+produces a short error message
+on the standard error file
+E 2
+I 2
+produces a short error message on the standard error file
+E 2
+describing the last error encountered during a call
+D 4
+to the system from a C program.
+First the argument string
+.I s
+is printed, then a colon, then the message and a new-line.
+Most usefully, the argument string is the name
+of the program which incurred the error.
+E 4
+I 4
+to the system from a C program.  If \fIstring\fP is non-NULL,
+it is printed, followed by a colon, followed by a space,
+followed by the message and a new-line.  Otherwise, just the
+message and the new-line are printed.  Most usefully, the argument
+string is the name of the program which incurred the error.
+E 4
+The error number is taken from the external variable
+.I errno
+(see
+.IR intro (2)),
+which is set when errors occur but not cleared when
+non-erroneous calls are made.
+.PP
+D 2
+To simplify variant formatting
+of messages, the vector of message strings
+E 2
+I 2
+To simplify variant formatting of messages, the vector of message strings
+E 2
+.I sys_errlist
+is provided;
+.I errno
+can be used as an index in this table to get the
+message string without the newline.
+.I Sys_nerr
+is the number of messages provided for in the table;
+D 2
+it should be checked because new
+error codes may be added to the system before
+E 2
+I 2
+it should be checked because new error codes may be added to the system before
+E 2
+they are added to the table.
+.SH "SEE ALSO"
+D 2
+intro(2)
+E 2
+I 2
+intro(2),
+psignal(3)
+E 2
+E 1

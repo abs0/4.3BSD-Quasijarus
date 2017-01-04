@@ -2,9 +2,9 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)tty.4	6.7 (Berkeley) 5/19/86
+.\"	@(#)tty.4	6.8 (Berkeley) 1/2/04
 .\"
-.TH TTY 4 "May 19, 1986"
+.TH TTY 4 "January 2, 2004"
 .UC 4
 .SH NAME
 tty \- general terminal interface
@@ -175,6 +175,7 @@ with the parity bit being stripped off before the character is given to
 the program.  By clearing either the EVEN or ODD bit in the flags word
 it is possible to have input characters with that parity discarded (see the
 \fBSummary\fR below.)
+There is also a mode to support 8-bit terminals, see below.
 .PP
 In all of the line disciplines, it is possible to simulate terminal
 input using the TIOCSTI
@@ -327,6 +328,88 @@ An
 to flush the characters in the input or output queues, TIOCFLUSH,
 is also available.
 .LP
+.B "8-bit terminals"
+.PP
+The original Version 7 UNIX tty driver was written with the assumption
+that all terminals transmit and expect back only 7-bit characters plus parity.
+Now, however, the international community has developed and adopted several
+8-bit character sets, such as Soviet KOI-8 and the popular ISO 8859 8-bit
+character sets.
+Fully 8-bit terminals such as DEC VT2xx and VT3xx series are available
+which in their native modes treat the high bit not as parity but as one more
+data bit.
+.PP
+4.3BSD-Quasijarus tty driver provides a mode, enabled by LPASS8 bit in the
+local mode word, for interfacing 8-bit terminals with 8-bit character sets.
+All input and output processing features available for 7-bit characters in the
+old tty driver are available for 8-bit characters when LPASS8 mode is enabled.
+The LPASS8 mode reconfigures the underlying hardware interface for 8-bit
+no parity mode.
+(LPASS8 mode first appeared in 4.3BSD, but was only half-implemented, as
+it only affected input while output characters were still stripped to 7 bits.
+Full 8-bit terminal support is only available in 4.3BSD-Quasijarus.)
+.PP
+8-bit terminal support assumes that the 8-bit character set is structured
+according to ISO standards, i.e., it is assumed to consist of
+C0 (low control), GL (low printable), C1 (high control) and GR (high printable)
+sets, with C0 and GL being ASCII.
+A 96-character GR set is assumed, i.e., 0377 (0xFF) is treated as printable.
+KOI8-E and all ISO 8859 character sets have 96-character GR halves.
+.LP
+.B "Soviet KOI support"
+.PP
+4.3BSD-Quasijarus tty driver supports Soviet KOI-7 and KOI-8 terminals,
+described in
+.IR koi (7).
+KOI-7 terminal support is enabled when LKOI bit is set and LPASS8 bit is
+cleared in the local mode word (see below).
+KOI-8 terminal support is enabled when both LKOI and LPASS8 bits are set in
+the local mode word.
+The tty driver hides the differences between KOI-7 and KOI-8 terminals
+and presents a consistent interface to programs.
+Terminal input is always presented to programs in KOI-8, and
+output is accepted in both KOI-7 and KOI-8 with automatic conversions
+as necessary.
+.PP
+KOI-8 mode is the same as regular LPASS8 mode except for additional output
+processing to catch KOI-7 output and convert it to KOI-8.
+To prevent the KOI-7 to KOI-8 output conversion state machine from getting
+stuck in the state where it converts ASCII characters to Russian letters, it
+is automatically reset whenever a line kill or line reprint function is
+performed, or whenever any input is echoed.
+.PP
+KOI-7 mode processing is more involved.
+In KOI-7 mode the underlying hardware interface is configured for 7 bits
+with even or odd parity, but user programs reading from the tty
+are presented with 8-bit data just like in LPASS8 mode.
+SO (016) and SI (017) characters on input cause the tty driver to switch
+to RUS or LAT mode, respectively, in both cooked and CBREAK modes.
+These characters are also echoed back to the terminal, even if echo is
+otherwise disabled, as KOI-7 terminals may need these characters echoed
+in order to switch between RUS and LAT modes correctly, and this allows
+the operator to recover the terminal after it has been left in the wrong state.
+Input characters between 0100 and 0176 octal, inclusive, are then
+converted to KOI-8 according to the state of the RUS/LAT switch.
+.PP
+Note that 0177 octal on input is
+.I not
+automatically converted to capital hard sign.
+This is done so that the delete key remains available for character erase
+function, for keyboards on which no other key is conveniently available for
+this function.
+To enter capital hard sign, press ^V and then the key that generates
+the 0177 character.
+It will be echoed as ^? since many KOI-7 terminals cannot display the
+capital hard sign, in particular, terminals wishing to be compliant with
+ISO standards must treat 0177 as the delete control character rather than
+capital hard sign when the ISO 5427 character set (ISO-registered version
+of the KOI-7 Russian character set) is active, since it is registered as a
+94-character set.
+.PP
+Output is stripped to 7 bits in KOI-7 mode, but it is first checked
+for KOI-8 Russian characters, and if they are detected, SI and SO control
+characters are automatically inserted.
+.LP
 .B "Upper case terminals and Hazeltines"
 .PP
 If the LCASE bit is set in the tty flags, then
@@ -342,6 +425,10 @@ on output and accepted on input:
 for	\`	|	~	{	}
 use	\e\|\'	\e\|!	\e\|^	\e\|(	\e\|)
 .fi
+.LP
+The LCASE mode only supports ASCII,
+Russian input from or output to Soviet KOI-7 N2 uppercase terminals
+is not supported.
 .PP
 To deal with Hazeltine terminals, which do not understand that ~ has
 been made into an ASCII character, the LTILDE bit may be set in the local
@@ -453,7 +540,9 @@ Processes which are holding or ignoring SIGTTOU signals
 or which are in the middle of a
 .IR vfork (2)
 are excepted and allowed to produce output.
+.LP
 .B "Terminal/window sizes."
+.PP
 In order to accommodate terminals and workstations with variable-sized
 windows, the terminal driver provides a mechanism for obtaining and setting
 the current terminal size.
@@ -587,7 +676,8 @@ ODDP	0000100	Odd parity allowed on input
 RAW	0000040	Raw mode: wake up on all characters, 8-bit interface
 CRMOD	0000020	Map CR into LF; output LF as CR-LF
 ECHO	0000010	Echo (full duplex)
-LCASE	0000004	Map upper case to lower on input and lower to upper on output
+LCASE	0000004	Map upper case to lower on input and lower to upper
+		on output
 CBREAK	0000002	Return each character as soon as typed
 TANDEM	0000001	Automatic flow control
 .DT
@@ -630,6 +720,9 @@ Even parity is generated on output unless ODDP is set and EVENP
 is clear, in which case odd parity is generated.
 Input characters with the wrong parity, as determined by EVENP and
 ODDP, are ignored in cooked and CBREAK mode.
+When LPASS8 mode is enabled, however, the underlying hardware interface
+is configured for 8 bits and no parity, and the EVENP and ODDP flags
+are ignored.
 .PP
 RAW
 disables all processing save output flushing with LFLUSHO;
@@ -638,6 +731,8 @@ it is available; all 8 bits are passed on output.
 A break condition in the input is reported as a null character.
 If the input queue overflows in raw mode all data in the input and output
 queues are discarded; this applies to both new and old drivers.
+Raw mode is intended for binary input and output, for 8-bit terminals
+one should use LPASS8 instead.
 .PP
 CRMOD causes input carriage returns to be turned into
 new-lines, and output and echoed new-lines to be output as a carriage return
@@ -830,6 +925,7 @@ Set the special characters to those given in the structure.
 The third structure associated with each terminal is a local mode word.
 The bits of the local mode word are:
 .sp
+.ta \w'ALLDELAY 'u +\w'0100000 'u
 .nf
 LCRTBS	000001	Backspace on erase rather than echoing erase
 LPRTERA	000002	Printing terminal erase mode
@@ -840,13 +936,16 @@ LLITOUT	000040	Suppress output translations
 LTOSTOP	000100	Send SIGTTOU for background output
 LFLUSHO	000200	Output is being flushed
 LNOHANG	000400	Don't send hangup when carrier drops
-LETXACK	001000	Diablo style buffer hacking (unimplemented)
+LKOI	001000	KOI modes, see above
 LCRTKIL	002000	BS-space-BS erase entire line on line kill
-LPASS8	004000	Pass all 8 bits through on input, in any mode
+LPASS8	004000	Pass all 8 bits through on input and output,
+		in any mode
 LCTLECH	010000	Echo input control chars as ^X, delete as ^?
 LPENDIN	020000	Retype pending input at next read or input character
 LDECCTQ	040000	Only ^Q restarts output after ^S, like DEC systems
-LNOFLSH	100000	Inhibit flushing of pending I/O when an interrupt character is typed.
+LNOFLSH	100000	Inhibit flushing of pending I/O when an interrupt
+		character is typed.
+.DT
 .fi
 .sp
 The applicable
@@ -959,4 +1058,16 @@ tset(1),
 ioctl(2),
 sigvec(2),
 stty(3C),
+koi(7),
 getty(8)
+.SH BUGS
+Prior to introduction of 8-bit terminal support the tty driver
+has been using the high bit of characters internally for its own purposes.
+This internal tinkering with the high bit is still there and can sometimes
+interfere with 8-bit terminal support.
+All output delays must be turned off when using LPASS8 mode.  Delays
+are represented by 8-bit characters in the output queue, and will produce
+garbage characters on output instead of delays in LPASS8 mode.
+On input the literal-next function sets the high bit.
+.PP
+Support for Russian capital hard sign is poor in KOI-7.

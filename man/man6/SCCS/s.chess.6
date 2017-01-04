@@ -1,0 +1,83 @@
+h60235
+s 00001/00001/00024
+d D 6.1 85/05/20 17:10:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00012/00018
+d D 5.1 85/05/20 17:10:46 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00030/00000/00000
+d D 4.1 85/05/20 17:10:38 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHESS 6 
+E 2
+I 2
+D 3
+.TH CHESS 6  "28 July 1983"
+E 3
+I 3
+.TH CHESS 6  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+chess \- the game of chess
+.SH SYNOPSIS
+.B /usr/games/chess
+.SH DESCRIPTION
+.I Chess
+is a computer program that plays class D chess.
+Moves may be given either in standard (descriptive) notation
+or in algebraic notation.
+D 2
+The symbol `+' is used to specify check;
+`o-o' and `o-o-o' specify castling.
+To play black, type `first';
+to print the board, type an empty line.
+E 2
+I 2
+The symbol `+' is used to specify check; `o-o' and `o-o-o' specify castling.
+To play black, type `first'; to print the board, type an empty line.
+E 2
+.PP
+D 2
+Each move is echoed in the appropriate notation followed by
+the program's reply.
+E 2
+I 2
+Each move is echoed in the appropriate notation followed by the program's reply.
+E 2
+.SH FILES
+D 2
+/usr/lib/book		opening `book'
+E 2
+I 2
+/usr/lib/chess		binary image to run in compatibility mode
+E 2
+.SH DIAGNOSTICS
+The most cryptic diagnostic is `eh?' which
+means that the input was syntactically incorrect.
+D 2
+.SH WARNING
+Over-use of this program
+will cause it to go away.
+E 2
+.SH BUGS
+D 2
+Pawns may be promoted only to queens.
+E 2
+I 2
+Pawns may be promoted only to queens.  The book of opening moves
+has disappeared.
+E 2
+E 1

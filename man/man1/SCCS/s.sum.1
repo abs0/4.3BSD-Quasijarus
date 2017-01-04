@@ -1,0 +1,56 @@
+h03584
+s 00001/00001/00021
+d D 6.1 85/04/29 18:00:11 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00020
+d D 5.1 85/04/29 18:00:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00022/00000/00000
+d D 4.1 85/04/29 17:59:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SUM 1 
+E 2
+I 2
+D 3
+.TH SUM 1  "18 January 1983"
+E 3
+I 3
+.TH SUM 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+sum \- sum and count blocks in a file
+.SH SYNOPSIS
+.B sum
+file
+.SH DESCRIPTION
+.I Sum
+calculates and prints a 16-bit checksum for the named file,
+and also prints the number of blocks in the file.
+It is typically used to look for bad spots, or
+to validate a file communicated over
+some transmission line.
+.SH "SEE ALSO"
+wc(1)
+.SH DIAGNOSTICS
+`Read error'
+D 2
+is indistinuishable from end of file on
+E 2
+I 2
+is indistinguishable from end of file on
+E 2
+most devices; check the block count.
+E 1

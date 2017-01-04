@@ -1,0 +1,102 @@
+/usr/src/ucb/SCCS/s.Makefile:
+5.35 05/01/07 19:24:36 msokolov 35 34
+add eps
+remove catemu
+/usr/src/etc/ftpd/SCCS/s.Makefile:
+5.9 05/01/11 06:00:10 msokolov 12 11
+use compiled-in ls instead of /bin/ls
+in preparation for EPS with chroot
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.15 05/01/11 06:00:12 msokolov 28 27
+use compiled-in ls instead of /bin/ls
+in preparation for EPS with chroot
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.20 05/01/11 06:00:14 msokolov 58 57
+use compiled-in ls instead of /bin/ls
+in preparation for EPS with chroot
+/usr/src/etc/ftpd/SCCS/s.Makefile:
+5.10 05/01/12 06:47:12 msokolov 13 12
+added eps.c
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.16 05/01/12 07:31:08 msokolov 29 28
+EPS implemented
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.21 05/01/12 07:31:11 msokolov 59 58
+EPS implemented
+/usr/src/etc/ftpd/SCCS/s.ls.c:
+5.2 05/01/12 07:31:15 msokolov 2 1
+EPS implemented
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.22 05/01/12 07:56:21 msokolov 60 59
+log EPS sessions
+/usr/src/ucb/SCCS/s.eps.c:
+5.2 05/01/12 08:31:08 msokolov 2 1
+implemented passwd, fixed validacctname
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.23 05/01/12 09:06:43 msokolov 61 60
+need to open syslog with LOG_NDELAY so chroot doesn't screw us
+/usr/src/usr.etc/bootpd/SCCS/s.bootpd.c:
+5.2 05/04/17 04:26:55 msokolov 2 1
+always use syslog
+/usr/src/usr.etc/bootpd/SCCS/s.readfile.c:
+5.2 05/04/17 04:26:59 msokolov 2 1
+always use syslog
+/usr/src/usr.etc/bootpd/SCCS/s.bootpd.c:
+5.3 05/04/17 04:52:50 msokolov 3 2
+security: added some anti-bogon guards
+/usr/src/usr.etc/bootpd/SCCS/s.version.c:
+5.2 05/04/17 04:52:53 msokolov 2 1
+security: added some anti-bogon guards
+/usr/src/usr.etc/bootpd/SCCS/s.Makefile:
+5.2 05/04/17 04:53:54 msokolov 2 1
+don't need -DSYSLOG any more, drop -DDEBUG too
+/usr/src/usr.etc/bootpd/SCCS/s.bootpd.c:
+5.4 05/04/17 05:19:28 msokolov 4 3
+d'oh!
+/usr/src/usr.etc/bootpd/SCCS/s.bootpd.c:
+5.5 05/04/17 06:00:33 msokolov 5 4
+enlarge path[] buffer in request()
+I'm not happy with this, but this is the best I can do without changing
+the whole design philosophy.
+/usr/src/etc/tftpd/SCCS/s.tftpd.c:
+5.15 05/04/17 10:08:22 msokolov 30 29
+backport to 4.3BSD
+/usr/src/lib/mip/SCCS/s.config.h:
+4.7 05/04/19 13:38:07 msokolov 7 6
+bump DIMTABSZ to 8400
+/usr/src/doc/ps1/15.yacc/SCCS/s.Makefile:
+6.2 05/05/24 07:23:03 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/ps1/16.lex/SCCS/s.Makefile:
+6.2 05/05/24 07:31:08 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/24.troff/SCCS/s.apndxc:
+6.3 05/06/26 03:11:45 msokolov 3 2
+need to undo .tr &.
+/usr/src/ucb/psutils/SCCS/s.txtps.c:
+5.9 05/07/05 00:29:03 msokolov 9 8
+don't allow 8-bit chars without -8
+/usr/src/ucb/psutils/SCCS/s.txtps.c:
+5.10 05/07/05 00:44:49 msokolov 10 9
+implemented -e option to recode the font to a different encoding vector
+/usr/src/sys/vax/SCCS/s.machdep.c:
+7.22 05/08/25 01:33:52 msokolov 190 189
+microtime:	check for tv_usec overflow needs to be >= 1000000, not >
+/usr/src/doc/smm/22.timed/SCCS/s.Makefile:
+6.2 05/08/25 01:52:48 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/smm/08.timedop/SCCS/s.Makefile:
+6.2 05/08/25 02:37:38 msokolov 2 1
+ditroff => pstroff
+/usr/src/ucb/psutils/SCCS/s.Makefile:
+5.8 05/09/16 04:46:49 msokolov 8 7
+psinclude added
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.14 05/09/17 04:44:36 msokolov 14 13
+allow 2nd char of font name to be a digit
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.5 05/09/17 04:57:59 msokolov 5 4
+allow 2nd char of font name to be a digit
+/usr/src/ucb/SCCS/s.eps.c:
+5.3 05/11/24 23:03:23 msokolov 3 2
+fixed eps create -w option

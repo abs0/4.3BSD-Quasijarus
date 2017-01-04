@@ -1,0 +1,661 @@
+h10270
+s 00003/00002/00093
+d D 4.28 99/09/07 09:45:14 msokolov 28 27
+c add kra
+c mt0 must be made last or it will never make it there!
+e
+s 00044/00065/00051
+d D 4.27 99/01/10 12:37:19 msokolov 27 26
+c 4.3BSD-Quasijarus
+e
+s 00001/00000/00115
+d D 4.26 88/02/29 15:41:57 bostic 26 25
+c add ed; it's nice to be able to edit things
+e
+s 00027/00027/00088
+d D 4.25 86/06/06 20:02:57 karels 25 24
+c sensible copyright
+e
+s 00001/00001/00114
+d D 4.24 86/06/06 18:15:14 bloom 24 23
+c fix the tu78 device
+e
+s 00001/00001/00114
+d D 4.23 86/04/09 14:13:38 bloom 23 22
+c add 8650 to console rl02 update list
+e
+s 00001/00001/00114
+d D 4.22 85/10/23 19:37:06 bloom 22 21
+c use documented flag instead of undocumented one
+e
+s 00001/00000/00114
+d D 4.21 85/09/18 23:16:45 bloom 21 20
+c add comment about 8600 update
+e
+s 00002/00001/00112
+d D 4.20 85/08/12 11:12:53 bloom 20 19
+c add 8600 consolerl
+e
+s 00001/00001/00112
+d D 4.19 85/08/09 09:30:25 bloom 19 18
+c /sys/cassette has a subdirectory to be copied
+e
+s 00001/00000/00112
+d D 4.18 85/08/08 17:52:52 bloom 18 17
+c add pcs750.bin to miniroot
+e
+s 00005/00005/00107
+d D 4.17 85/06/23 16:29:27 karels 17 16
+c 4.3
+e
+s 00007/00002/00105
+d D 4.16 85/06/08 12:11:22 mckusick 16 15
+c Add copyright
+e
+s 00001/00001/00106
+d D 4.15 85/04/06 16:43:07 sam 15 14
+c correct message for updating floppy
+e
+s 00001/00000/00106
+d D 4.14 83/09/25 15:14:46 sam 14 13
+c add test for MAKEDEV
+e
+s 00008/00008/00098
+d D 4.13 83/07/19 21:23:57 sam 13 12
+c remove restriction on disk naming
+e
+s 00005/00004/00101
+d D 4.12 83/07/09 01:38:47 sam 12 11
+c miscellaneous
+e
+s 00004/00001/00101
+d D 4.11 83/03/10 13:01:07 sam 11 10
+c turn off -x and add echo's
+e
+s 00001/00001/00101
+d D 4.10 83/03/03 11:03:45 sam 10 9
+c missing $ 
+e
+s 00007/00006/00095
+d D 4.9 83/02/24 23:51:26 sam 9 8
+c rewind first so restor skips proper number of files
+e
+s 00008/00008/00093
+d D 4.8 83/02/20 19:41:48 sam 8 7
+c american spelling please (sorry robert)
+e
+s 00001/00001/00100
+d D 4.7 83/02/18 01:38:05 sam 7 6
+c don't forget to skip to 3rd file on tape
+e
+s 00006/00007/00095
+d D 4.6 83/02/17 12:26:41 sam 6 5
+c add cassette stuff also
+e
+s 00005/00006/00097
+d D 4.5 83/02/17 12:07:18 sam 5 4
+c more cleanup
+e
+s 00041/00030/00062
+d D 4.4 83/02/13 10:58:53 sam 4 3
+c random stuff
+e
+s 00011/00000/00081
+d D 4.3 82/12/31 12:34:19 sam 3 2
+c put enough stuff on there to make a floppy or cassette
+e
+s 00002/00002/00079
+d D 4.2 82/12/25 20:05:41 sam 2 1
+c bungles
+e
+s 00081/00000/00000
+d D 4.1 82/12/25 19:42:54 sam 1 0
+c date and time created 82/12/25 19:42:54 by sam
+e
+u
+U
+t
+T
+I 2
+D 4
+#! /bin/sh -x
+E 4
+I 4
+D 16
+#! /bin/sh
+E 4
+E 2
+I 1
+#	%W%	%G%
+E 16
+I 16
+D 17
+#!/bin/sh -
+E 17
+I 17
+D 27
+#!/bin/sh
+E 27
+I 27
+#!/bin/sh -
+E 27
+E 17
+#
+D 25
+# Copyright (c) 1980 Regents of the University of California.
+E 25
+I 25
+D 27
+# Copyright (c) 1983 Regents of the University of California.
+E 25
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+E 27
+I 27
+# 4.3BSD-Quasijarus release-making script.
+E 27
+#
+I 27
+# This file is freely redistributable.
+#
+E 27
+#	%W% (Berkeley) %G%
+E 16
+I 4
+#
+E 4
+D 27
+# Shell script to build a mini-root file system
+# in preparation for building a distribution tape.
+# The file system created here is image copied onto
+# tape, then image copied onto disk as the "first"
+D 6
+# step in a cold boot of 4.1b-4.2 systems.
+E 6
+I 6
+D 25
+# step in a cold boot of 4.2 systems.
+E 25
+I 25
+# step in a cold boot of 4.3 systems.
+E 25
+E 6
+#
+I 4
+DISTROOT=/nbsd
+#
+E 27
+I 27
+
+# Shell script to build a mini-root file system in preparation for building
+# a distribution tape.  The file system created here is image copied onto
+# tape, then image copied onto disk as the "first" step in a cold boot of
+# 4.3 systems.
+
+E 27
+E 4
+D 2
+set -x
+E 2
+if [ `pwd` = '/' ]
+then
+	echo You just '(almost)' destroyed the root
+	exit
+fi
+D 4
+cp /sys/GENERIC/vmunix .
+E 4
+I 4
+D 17
+cp $DISTROOT/a/sys/GENERIC/vmunix .
+E 17
+I 17
+D 27
+cp $DISTROOT/sys/GENERIC/vmunix .
+E 17
+E 4
+rm -rf bin; mkdir bin
+rm -rf etc; mkdir etc
+rm -rf a; mkdir a
+D 6
+rm -fr tmp; mkdir tmp
+rm -fr usr; mkdir usr usr/mdec
+rm -fr floppy; mkdir floppy
+E 6
+I 6
+rm -rf tmp; mkdir tmp
+rm -rf usr; mkdir usr usr/mdec
+D 20
+rm -rf sys; mkdir sys sys/floppy sys/cassette
+E 20
+I 20
+rm -rf sys; mkdir sys sys/floppy sys/cassette sys/consolerl
+E 20
+E 6
+D 4
+cp /etc/mkfs etc; strip etc/mkfs
+cp /etc/restor etc; strip etc/restor
+cp /etc/init etc; strip etc/init
+cp /etc/mount etc; strip etc/mount
+cp /etc/mknod etc; strip etc/mknod
+cp /etc/fsck etc; strip etc/fsck
+cp /etc/umount etc; strip etc/umount
+cp /etc/arff etc; strip etc/arff
+cp /etc/flcopy etc; strip etc/flcopy
+cp /bin/mt bin; strip bin/mt
+cp /bin/ls bin; strip bin/ls
+cp /bin/sh bin; strip bin/sh
+cp /bin/mv bin; strip bin/mv
+cp /bin/sync bin; strip bin/sync
+cp /bin/cat bin; strip bin/cat
+cp /bin/mkdir bin; strip bin/mkdir
+cp /bin/stty bin; strip bin/stty; ln bin/stty bin/STTY
+cp /bin/echo bin; strip bin/echo
+I 3
+cp /bin/rm bin; strip bin/rm
+cp /bin/cp bin; strip bin/cp
+cp /bin/expr bin; strip bin/expr
+cp /bin/awk bin; strip bin/awk
+E 3
+cp /usr/mdec/* usr/mdec
+cp /sys/floppy/*boo* floppy
+cp /boot boot
+cp /.profile .profile
+E 4
+I 4
+cp $DISTROOT/etc/disktab etc
+D 5
+cp $DISTROOT/etc/makefs etc; strip etc/makefs
+E 5
+I 5
+D 25
+cp $DISTROOT/etc/newfs etc; strip etc/newfs
+E 5
+cp $DISTROOT/etc/mkfs etc; strip etc/mkfs
+D 12
+cp $DISTROOT/etc/restor etc; strip etc/restor
+E 12
+I 12
+cp $DISTROOT/etc/restore etc; strip etc/restore
+E 12
+cp $DISTROOT/etc/init etc; strip etc/init
+cp $DISTROOT/etc/mount etc; strip etc/mount
+cp $DISTROOT/etc/mknod etc; strip etc/mknod
+cp $DISTROOT/etc/fsck etc; strip etc/fsck
+cp $DISTROOT/etc/umount etc; strip etc/umount
+cp $DISTROOT/etc/arff etc; strip etc/arff
+cp $DISTROOT/etc/flcopy etc; strip etc/flcopy
+cp $DISTROOT/bin/mt bin; strip bin/mt
+cp $DISTROOT/bin/ls bin; strip bin/ls
+cp $DISTROOT/bin/sh bin; strip bin/sh
+cp $DISTROOT/bin/mv bin; strip bin/mv
+cp $DISTROOT/bin/sync bin; strip bin/sync
+cp $DISTROOT/bin/cat bin; strip bin/cat
+cp $DISTROOT/bin/mkdir bin; strip bin/mkdir
+cp $DISTROOT/bin/stty bin; strip bin/stty; ln bin/stty bin/STTY
+cp $DISTROOT/bin/echo bin; strip bin/echo
+cp $DISTROOT/bin/rm bin; strip bin/rm
+cp $DISTROOT/bin/cp bin; strip bin/cp
+cp $DISTROOT/bin/expr bin; strip bin/expr
+I 14
+cp $DISTROOT/bin/[ bin; strip bin/[
+E 14
+cp $DISTROOT/bin/awk bin; strip bin/awk
+I 12
+cp $DISTROOT/bin/make bin; strip bin/make
+E 25
+I 25
+cp $DISTROOT/etc/newfs etc
+cp $DISTROOT/etc/mkfs etc
+cp $DISTROOT/etc/restore etc
+cp $DISTROOT/etc/init etc
+cp $DISTROOT/etc/mount etc
+cp $DISTROOT/etc/mknod etc
+cp $DISTROOT/etc/fsck etc
+cp $DISTROOT/etc/umount etc
+cp $DISTROOT/etc/arff etc
+cp $DISTROOT/etc/flcopy etc
+cp $DISTROOT/bin/mt bin
+I 26
+cp $DISTROOT/bin/ed bin
+E 26
+cp $DISTROOT/bin/ls bin
+cp $DISTROOT/bin/sh bin
+cp $DISTROOT/bin/mv bin
+cp $DISTROOT/bin/sync bin
+cp $DISTROOT/bin/cat bin
+cp $DISTROOT/bin/mkdir bin
+cp $DISTROOT/bin/stty bin; ln bin/stty bin/STTY
+cp $DISTROOT/bin/echo bin
+cp $DISTROOT/bin/rm bin
+cp $DISTROOT/bin/cp bin
+cp $DISTROOT/bin/expr bin
+cp $DISTROOT/bin/[ bin
+cp $DISTROOT/bin/awk bin
+cp $DISTROOT/bin/make bin
+E 25
+E 12
+cp $DISTROOT/usr/mdec/* usr/mdec
+D 6
+cp $DISTROOT/a/sys/floppy/*boo* floppy
+cp $DISTROOT/a/sys/floppy/format floppy
+cp $DISTROOT/a/sys/floppy/copy floppy
+E 6
+I 6
+D 12
+cp $DISTROOT/a/sys/floppy/* sys/floppy
+cp $DISTROOT/a/sys/cassette/* sys/cassette
+E 12
+I 12
+D 17
+cp $DISTROOT/a/sys/floppy/[Ma-z0-9]* sys/floppy
+cp $DISTROOT/a/sys/cassette/[Ma-z0-9]* sys/cassette
+E 12
+E 6
+cp $DISTROOT/a/sys/stand/boot boot
+E 17
+I 17
+cp $DISTROOT/sys/floppy/[Ma-z0-9]* sys/floppy
+I 20
+cp $DISTROOT/sys/consolerl/[Ma-z0-9]* sys/consolerl
+E 20
+D 19
+cp $DISTROOT/sys/cassette/[Ma-z0-9]* sys/cassette
+E 19
+I 19
+cp -r $DISTROOT/sys/cassette/[Ma-z0-9]* sys/cassette
+E 19
+cp $DISTROOT/sys/stand/boot boot
+I 18
+cp $DISTROOT/sys/stand/pcs750.bin pcs750.bin
+E 18
+E 17
+cp $DISTROOT/.profile .profile
+E 4
+I 3
+cat >etc/passwd <<EOF
+root::0:10::/:/bin/sh
+EOF
+cat >etc/group <<EOF
+I 4
+wheel:*:0:
+E 4
+staff:*:10:
+EOF
+E 27
+I 27
+cp /nbsd/sys/GENERIC/vmunix vmunix
+
+# create necessary directories
+DIRLIST="bin dev etc a tmp usr usr/mdec sys sys/floppy \
+	sys/cassette sys/consolerl"
+rm -rf $DIRLIST
+mkdir $DIRLIST
+
+ETC="disktab disklabel diskpart fsck ifconfig init mknod mount newfs restore \
+	rrestore umount arff flcopy passwd group"
+for i in $ETC; do
+	cp /nbsd/etc/$i etc/$i
+done
+
+BIN="[ cat cp dd echo expr ls mkdir mv rcp rm sh stty sync ed awk make mt"
+for i in $BIN; do
+	cp /nbsd/bin/$i bin/$i
+done
+ln bin/stty bin/STTY
+
+cp /nbsd/sys/floppy/[Ma-z0-9]* sys/floppy
+cp /nbsd/sys/consolerl/[Ma-z0-9]* sys/consolerl
+cp /nbsd/sys/cassette/[Ma-z0-9]* sys/cassette
+cp /nbsd/usr/mdec/* usr/mdec
+cp /nbsd/boot boot
+cp /nbsd/pcs750.bin pcs750.bin
+cp /nbsd/.profile .profile
+
+E 27
+E 3
+cat >etc/fstab <<EOF
+/dev/hp0a:/a:xx:1:1
+/dev/up0a:/a:xx:1:1
+/dev/hk0a:/a:xx:1:1
+/dev/ra0a:/a:xx:1:1
+I 28
+/dev/kra0a:/a:xx:1:1
+E 28
+/dev/rb0a:/a:xx:1:1
+EOF
+I 27
+
+E 27
+cat >xtr <<'EOF'
+D 5
+disc=${disc-$disk}
+: ${disc?'Usage: disc=xx tape=xx xtr'}
+: ${tape?'Usage: disc=xx tape=xx xtr'}
+E 5
+I 5
+D 8
+: ${disc?'Usage: disc=xx type=tt tape=yy xtr'}
+: ${type?'Usage: disc=xx type=tt tape=yy xtr'}
+: ${tape?'Usage: disc=xx type=tt tape=yy xtr'}
+E 8
+I 8
+D 13
+: ${disk?'Usage: disk=xx type=tt tape=yy xtr'}
+: ${type?'Usage: disk=xx type=tt tape=yy xtr'}
+: ${tape?'Usage: disk=xx type=tt tape=yy xtr'}
+E 13
+I 13
+D 27
+: ${disk?'Usage: disk=xx0 type=tt tape=yy xtr'}
+: ${type?'Usage: disk=xx0 type=tt tape=yy xtr'}
+: ${tape?'Usage: disk=xx0 type=tt tape=yy xtr'}
+E 27
+I 27
+: ${disk?'Usage: disk=xx0 tape=yy xtr'}
+: ${tape?'Usage: disk=xx0 tape=yy xtr'}
+E 27
+E 13
+E 8
+E 5
+D 11
+set -x
+E 11
+I 11
+echo 'Build root file system'
+E 11
+D 5
+/etc/mkfs /dev/${disc}0a 15884
+E 5
+I 5
+D 8
+/etc/newfs ${disc}0a ${type}
+E 8
+I 8
+D 9
+/etc/newfs ${disk}0a ${type}
+E 9
+I 9
+D 13
+newfs ${disk}0a ${type}
+E 13
+I 13
+D 27
+newfs ${disk}a ${type}
+E 27
+I 27
+newfs ${disk}a
+E 27
+E 13
+E 9
+E 8
+E 5
+sync
+I 11
+echo 'Check the file system'
+E 11
+D 8
+/etc/fsck /dev/r${disc}0a
+/etc/mount /dev/${disc}0a /a
+E 8
+I 8
+D 9
+/etc/fsck /dev/r${disk}0a
+/etc/mount /dev/${disk}0a /a
+E 9
+I 9
+D 13
+fsck /dev/r${disk}0a
+mount /dev/${disk}0a /a
+E 13
+I 13
+fsck /dev/r${disk}a
+mount /dev/${disk}a /a
+E 13
+E 9
+E 8
+D 4
+/etc/restor rsf 3 /dev/${tape}0 /dev/${disc}0a
+E 4
+I 4
+cd /a
+I 11
+echo 'Rewind tape'
+E 11
+D 7
+/etc/restor x .
+E 7
+I 7
+D 9
+/etc/restor xsf 3 /dev/${tape}0
+E 9
+I 9
+D 10
+mt -t /dev/{tape}0 rew
+E 10
+I 10
+D 22
+mt -t /dev/${tape}0 rew
+E 22
+I 22
+mt -f /dev/${tape}0 rew
+E 22
+I 11
+echo 'Restore the dump image of the root'
+E 11
+E 10
+D 12
+restor xsf 3 /dev/${tape}0
+E 12
+I 12
+restore rsf 3 /dev/${tape}0
+E 12
+E 9
+E 7
+cd /
+E 4
+sync
+D 8
+/etc/umount /dev/${disc}0a
+E 8
+I 8
+D 9
+/etc/umount /dev/${disk}0a
+E 9
+I 9
+D 13
+umount /dev/${disk}0a
+E 13
+I 13
+umount /dev/${disk}a
+E 13
+E 9
+E 8
+D 5
+/usr/mdec/installboot /usr/mdec/${disc}boot /usr/mdec/boot${disc} /dev/${disc}0a
+E 5
+sync
+D 8
+/etc/fsck /dev/r${disc}0a
+E 8
+I 8
+D 9
+/etc/fsck /dev/r${disk}0a
+E 9
+I 9
+D 13
+fsck /dev/r${disk}0a
+E 13
+I 13
+fsck /dev/r${disk}a
+E 13
+E 9
+E 8
+echo 'Root filesystem extracted'
+echo
+I 21
+D 23
+echo 'If this is a 8600, update the console rl02'
+E 23
+I 23
+echo 'If this is an 8650 or 8600, update the console rl02'
+E 23
+E 21
+D 15
+echo 'If this is a 780, update floppy'
+E 15
+I 15
+echo 'If this is a 780 or 785, update the floppy'
+E 15
+echo 'If this is a 730, update the cassette'
+EOF
+chmod +x xtr
+rm -rf dev; mkdir dev
+D 4
+cp /sys/dist/MAKEDEV dev
+E 4
+I 4
+D 27
+cp $DISTROOT/sys/dist/MAKEDEV dev
+E 27
+I 27
+cp /nbsd/dev/MAKEDEV dev
+E 27
+chmod +x dev/MAKEDEV
+E 4
+I 3
+cp /dev/null dev/MAKEDEV.local
+E 3
+cd dev
+D 28
+./MAKEDEV std hp0 hk0 up0 ra0 rb0
+E 28
+I 28
+./MAKEDEV std hp0 hk0 up0 ra0 kra0 rb0
+E 28
+./MAKEDEV ts0; mv rmt12 ts0; rm *mt*;
+./MAKEDEV tm0; mv rmt12 tm0; rm *mt*;
+./MAKEDEV ht0; mv rmt12 ht0; rm *mt*;
+D 2
+./MAKEDEV ut0; mv rmt12 jt0; rm *ut*; mv jt0 ut0
+E 2
+I 2
+./MAKEDEV ut0; mv rmt12 ut0; rm *mt*;
+E 2
+D 24
+./MAKEDEV mt0; mv rmt4 xt0; rm *mt*; mv xt0 mt0
+E 24
+I 24
+D 28
+./MAKEDEV mt0; mv rmt12 xt0; rm *mt*; mv xt0 mt0
+E 28
+I 27
+./MAKEDEV tms0; mv rmt12 tms0; rm *mt*;
+I 28
+./MAKEDEV mt0; mv rmt12 xt0; rm *mt*; mv xt0 mt0
+E 28
+E 27
+E 24
+cd ..
+sync
+E 1

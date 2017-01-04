@@ -2,10 +2,10 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)whatis.1	6.4 (Berkeley) 6/30/87
+.\"	@(#)whatis.1	6.5 (Berkeley) 10/20/04
 .\"
-.TH WHATIS 1 "June 30, 1987"
-.UC 4
+.TH WHATIS 1 "October 20, 2004"
+.UC 3
 .SH NAME
 whatis \- describe what a command is
 .SH SYNOPSIS
@@ -26,8 +26,17 @@ la the Bourne shell) with the \fB-M\fP flag.  This search path must be
 a colon (``:'') separated list of directories which \fIwhatis\fP will
 search for files named ``whatis''.  The path can also be set with the
 environmental variable \fIMANPATH\fP.
+.PP
+.I Whatis
+is actually just the
+.B \-f
+option to the
+.IR man (1)
+command.
 .SH FILES
 .DT
 /usr/man/whatis		data base
 .SH "SEE ALSO"
 apropos(1), man(1)
+.SH AUTHOR
+William Joy

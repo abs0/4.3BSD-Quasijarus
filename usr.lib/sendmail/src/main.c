@@ -23,7 +23,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)main.c	5.19 (Berkeley) 9/20/88";
+static char sccsid[] = "@(#)main.c	5.20 (Berkeley) 5/19/06";
 #endif /* not lint */
 
 #define	_DEFINE
@@ -432,6 +432,7 @@ main(argc, argv, envp)
 	if (OpMode == MD_FREEZE || readconfig)
 		readcf(ConfFile);
 
+	OrigOpMode = OpMode;
 	switch (OpMode)
 	{
 	  case MD_FREEZE:

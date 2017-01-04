@@ -1,0 +1,448 @@
+h08367
+s 00005/00000/00266
+d D 6.4 88/07/21 18:32:28 marc 6 5
+c add -follow option
+e
+s 00051/00023/00215
+d D 6.3 86/05/11 06:05:12 lepreau 5 4
+c rework fast find doc; mention -newer bug; add -cpio doc; copyright; formatting
+e
+s 00040/00000/00198
+d D 6.2 85/06/07 00:40:38 serge 4 3
+c added -nouser, -nogroup, -ls, and -xdev
+e
+s 00034/00008/00164
+d D 6.1 85/04/29 17:46:49 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00005/00167
+d D 5.1 85/04/29 17:46:38 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00172/00000/00000
+d D 4.1 85/04/29 17:46:30 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 5
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+E 5
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FIND 1 
+E 2
+I 2
+D 3
+.TH FIND 1  "18 January 1983"
+E 3
+I 3
+.TH FIND 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+find \- find files
+.SH SYNOPSIS
+.B find
+D 5
+pathname-list  expression
+E 5
+I 5
+pathname-list expression
+E 5
+I 3
+.br 
+.B find
+D 5
+name
+E 5
+I 5
+pattern
+E 5
+E 3
+.SH DESCRIPTION
+D 5
+.I Find
+E 5
+I 5
+In the first form above,
+.I find
+E 5
+recursively descends
+the directory hierarchy for
+each pathname in the
+.I pathname-list
+(i.e., one or more pathnames)
+seeking files that match a boolean
+.I expression
+written in the primaries given below.
+In the descriptions, the argument
+.I n
+is used as a decimal integer
+where
+.I +n
+means more than
+.I n,
+.I \-n
+means less than
+.I n
+and
+.I n
+means exactly
+.IR n .
+I 3
+.PP
+D 5
+The second simplified form will list all files on the system
+whose pathname contains
+.I name.
+This is similar to
+.sp
+.ti
+find / -mtime +0 -name "*<name>*" -print
+.sp
+but much faster.
+As with
+.B -name
+below, shell syntax may be used for
+.I name.
+E 5
+I 5
+The second form rapidly searches a database for all pathnames
+which match
+.IR pattern .
+Usually the database is recomputed
+weekly and contains the pathnames
+of all files which are publicly accessible.
+If escaped, normal shell
+\*(lqglobbing\*(rq characters (`*', `?', `[', and ']')
+may be used in
+.IR pattern ,
+but the matching differs in that no characters
+.RI ( e.g. " `/')"
+have to be matched explicitly.
+As a special case, a simple
+.I pattern
+containing no globbing characters
+is matched as though it were
+.IR *pattern* ;
+if any globbing character appears
+there are no implicit globbing characters.
+E 5
+E 3
+.TP 10n
+.BR \-name " filename"
+True if the
+.I filename
+argument matches the current file name.
+Normal
+D 5
+Shell
+E 5
+I 5
+shell
+E 5
+argument syntax may be used if escaped (watch out for
+`[', `?' and `*').
+.TP
+.BR \-perm " onum"
+True if the file permission flags
+exactly
+match the
+octal number
+.I onum
+(see
+.IR  chmod (1)).
+If
+.I onum
+is prefixed by a minus sign,
+more flag bits (017777, see
+.IR   stat (2))
+become significant and
+the flags are compared:
+.IR (flags&onum)==onum .
+.TP
+.BR \-type " c"
+True if the type of the file
+is
+.I c,
+where
+.I c
+is
+D 2
+.B "b, c, d"
+E 2
+I 2
+D 3
+.B "b, c, d, f"
+E 3
+I 3
+.B "b, c, d, f, l"
+E 3
+E 2
+or
+D 2
+.B f
+E 2
+I 2
+D 3
+.B l
+E 3
+I 3
+.B s
+E 3
+E 2
+for
+block special file, character special file,
+D 2
+directory or plain file.
+E 2
+I 2
+D 3
+directory, plain file, or symbolic link.
+E 3
+I 3
+directory, plain file, symbolic link, or socket.
+E 3
+E 2
+.TP
+.BR \-links " n"
+True if the file has
+.I n
+links.
+.TP
+.BR \-user " uname"
+True if the file belongs to the user
+.I uname
+(login name or numeric user ID).
+.TP
+I 4
+.B \-nouser
+True if the file belongs to a user
+.I not
+in the /etc/passwd database.
+.TP
+E 4
+.BR \-group " gname"
+True if the file belongs to group
+.I gname
+(group name or numeric group ID).
+.TP
+I 4
+.B \-nogroup
+True if the file belongs to a group
+.I not
+in the /etc/group database.
+.TP
+E 4
+.BR \-size " n"
+True if the file is
+.I n
+blocks long (512 bytes per block).
+.TP
+.BR \-inum " n"
+True if the file has inode number
+.I n.
+.TP
+.BR \-atime " n"
+True if the file has been accessed in
+.I n
+days.
+.TP
+.BR \-mtime " n"
+True if the file has been modified in
+.I n
+days.
+.TP
+.BR \-exec " command"
+True if the executed command returns
+a zero value as exit status.
+The end of the command must be punctuated by an escaped
+semicolon.
+A command argument `{}' is replaced by the
+current pathname.
+.TP
+.BR \-ok " command"
+Like
+.B \-exec
+except that the generated command is written on
+the standard output, then the standard input is read
+and the command executed only upon response
+.BR y .
+.TP
+.B  \-print
+Always true;
+causes the current pathname to be printed.
+.TP
+I 4
+.B  \-ls
+Always true;
+causes current pathname to be printed together
+with its associated statistics.
+These include (respectively) inode number,
+size in kilobytes (1024 bytes),
+protection mode,
+number of hard links,
+user,
+group,
+size in bytes,
+and modification time.
+If the file is a special file
+the size field will instead contain the major and minor
+device numbers.
+If the file is a symbolic link the
+pathname of the linked-to file is printed preceded by ``->''.
+The format is identical to that of ``ls -gilds''
+(note however that formatting is done internally,
+without executing the ls program).
+.TP
+E 4
+.BR \-newer " file"
+True if
+the current file has been modified more recently than the argument
+.I file.
+I 4
+.TP
+I 5
+.BR \-cpio " file"
+Write the current file on the argument
+.I file
+in
+.I cpio
+format.
+.TP
+E 5
+.B \-xdev
+Always true;
+causes find
+.I not
+to traverse down into a file system different
+from the one on which current
+.I argument
+pathname resides.
+I 6
+.TP
+.B \-follow
+Always true;
+causes find to traverse symbolic links to directories.
+Normally find does not traverse symbolic links.
+E 6
+E 4
+.PP
+The primaries may be combined using the following operators
+(in order of decreasing precedence):
+.TP 4
+1)
+A parenthesized group of primaries and operators
+(parentheses are special to the Shell and must be escaped).
+.TP 4
+2)
+The negation of a primary
+(`!' is the unary
+.I not
+operator).
+.TP 4
+3)
+Concatenation of primaries
+(the
+.I and
+operation
+is implied by the juxtaposition of two primaries).
+.TP 4
+4)
+Alternation of primaries
+.RB "(`" \-o "' is the"
+.I or
+operator).
+D 3
+.SH EXAMPLE
+E 3
+I 3
+.SH EXAMPLES
+.PP
+D 5
+To typeset all variants of manual pages for 'ls':
+E 5
+I 5
+To find all accessible files whose pathname contains `find':
+.IP
+find find
+.PP
+To typeset all variants of manual pages for `ls':
+E 5
+.IP 
+vtroff -man `find '*man*/ls.?'`
+.PP
+E 3
+To remove all files named
+`a.out' or `*.o' that have not been accessed for a week:
+.IP "" .2i
+D 3
+find / \\( \-name a.out \-o \-name '*.o' \\)
+\-atime +7 \-exec rm {} \\;
+E 3
+I 3
+D 5
+find / \\( \-name a.out \-o \-name '*.o' \\) \-atime +7 \-exec rm {} \\;
+E 5
+I 5
+find / \e( \-name a.out \-o \-name '*.o' \e) \-atime +7 \-exec rm {} \e\;
+E 5
+E 3
+.SH FILES
+I 5
+.nf
+.ta \w'/usr/lib/find/find.codes     'u
+E 5
+/etc/passwd
+D 5
+.br
+E 5
+/etc/group
+I 3
+D 5
+.br
+/usr/lib/find/find.codes	coded filenames
+E 5
+I 5
+/usr/lib/find/find.codes	coded pathnames database
+.fi
+E 5
+E 3
+.SH "SEE ALSO"
+D 2
+sh(1), test(1), filsys(5)
+E 2
+I 2
+sh(1), test(1), fs(5)
+I 3
+.br
+Relevant paper in February, 1983 issue of
+.I ;login:.
+E 3
+E 2
+.SH BUGS
+D 3
+The syntax is painful.
+E 3
+I 3
+D 5
+The syntax (except for the second form), is painful.
+E 5
+I 5
+The first form's syntax is painful, and
+the second form's exact semantics is confusing and
+can vary from site to site.
+.PP
+More than one `-newer' option does not work properly.
+E 5
+E 3
+E 1

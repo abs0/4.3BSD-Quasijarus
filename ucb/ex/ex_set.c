@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_set.c	7.5 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_set.c	7.6 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -15,11 +15,11 @@ static char *sccsid = "@(#)ex_set.c	7.5 (Berkeley) 3/9/87";
 /*
  * Set command.
  */
-char	optname[ONMSZ];
+u_char	optname[ONMSZ];
 
 set()
 {
-	register char *cp;
+	register u_char *cp;
 	register struct option *op;
 	register int c;
 	bool no;
@@ -213,7 +213,7 @@ propts()
 propt(op)
 	register struct option *op;
 {
-	register char *name;
+	register u_char *name;
 	
 	name = op->oname;
 

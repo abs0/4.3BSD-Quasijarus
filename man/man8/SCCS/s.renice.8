@@ -1,0 +1,174 @@
+h48709
+s 00004/00007/00071
+d D 6.2 86/05/19 20:05:50 karels 4 3
+c realieyt
+e
+s 00001/00001/00077
+d D 6.1 85/04/27 13:44:51 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00062/00018/00016
+d D 5.1 85/04/27 13:44:21 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00034/00000/00000
+d D 4.1 85/04/27 13:43:58 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RENICE 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH RENICE 8 "24 July 1983"
+E 3
+I 3
+.TH RENICE 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+renice \- alter priority of running process by changing nice
+E 2
+I 2
+renice \- alter priority of running processes
+E 2
+.SH SYNOPSIS
+.B /etc/renice
+D 2
+pid
+[ priority ]
+E 2
+I 2
+priority [ [
+.B \-p
+] pid ... ] [ [
+.B \-g
+] pgrp ... ] [ [
+.B \-u
+] user ... ]
+E 2
+.SH DESCRIPTION
+.I Renice
+D 2
+can be used by the super-user to alter the 
+priority of a running process.
+By default, the nice of the process is made \*(lq19\*(rq which means that it
+will run only when nothing else in the system wants to.  This can be used
+to nail long running processes which are interfering with interactive work.
+E 2
+I 2
+alters the 
+scheduling priority of one or more running processes.
+The
+.I who
+parameters are interpreted as process ID's, process group
+ID's, or user names.
+.IR Renice 'ing
+a process group causes all processes in the process group
+to have their scheduling priority altered.  
+.IR Renice 'ing
+a user causes all processes owned by the user to have
+their scheduling priority altered.
+By default, the processes to be affected are specified by
+their process ID's.  To force 
+.I who
+parameters to be interpreted as process group ID's, a
+.B \-g 
+may be specified.  To force the
+.I who
+parameters to be interpreted as user names, a
+.B \-u
+may be given.  Supplying
+.B \-p
+will reset 
+.I who
+interpretation to be (the default) process ID's.
+For example,
+.sp
+	/etc/renice +1 987 -u daemon root -p 32 
+.sp
+would change the priority of process ID's 987 and 32, and
+all processes owned by users daemon and root.
+E 2
+.PP
+D 2
+.I Renice
+can be given a second argument to choose a nice other than the default.
+Negative nices can be used to make things go very fast.
+E 2
+I 2
+Users other than the super-user may only alter the priority of
+processes they own,
+and can only monotonically increase their ``nice value''
+D 4
+within the range 0 to PRIO_MIN (20).
+E 4
+I 4
+within the range 0 to PRIO_MAX (20).
+E 4
+(This prevents overriding administrative fiats.)
+The super-user
+may alter the priority of any process
+D 4
+and set the priority to any value in the range PRIO_MAX (\-20)
+to PRIO_MIN.
+E 4
+I 4
+and set the priority to any value in the range PRIO_MIN (\-20)
+to PRIO_MAX.
+E 4
+Useful priorities are:
+D 4
+19 (the affected processes will run only when nothing else
+E 4
+I 4
+20 (the affected processes will run only when nothing else
+E 4
+in the system wants to),
+0 (the ``base'' scheduling priority),
+anything negative (to make things go very fast).
+E 2
+.SH FILES
+D 2
+/vmunix
+.br
+/dev/kmem
+E 2
+I 2
+/etc/passwd	to map user names to user ID's
+E 2
+.SH SEE ALSO
+D 2
+nice(1)
+E 2
+I 2
+getpriority(2), setpriority(2)
+E 2
+.SH BUGS
+D 2
+If you make the nice very negative, then the process cannot be interrupted.
+To regain control you must put the nice back (e.g. to 0.)
+E 2
+I 2
+D 4
+If you make the priority very negative,
+then the process cannot be interrupted.
+To regain control you make the priority greater than zero.
+E 4
+Non super-users can not increase scheduling priorities of their own processes,
+even if they were the ones that decreased the priorities in the first place.
+E 2
+E 1

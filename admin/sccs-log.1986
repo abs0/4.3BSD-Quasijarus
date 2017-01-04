@@ -1,0 +1,4059 @@
+/usr/src/usr.bin/SCCS/s.iostat.c:
+4.14 86/01/12 15:13:57 sam 14 13
+add tahoe
+/usr/src/ucb/systat/SCCS/s.disks.c:
+5.3 86/01/12 15:26:22 sam 6 5
+add tahoe
+/usr/src/ucb/systat/SCCS/s.iostat.c:
+5.3 86/01/12 15:26:24 sam 11 10
+add tahoe
+/usr/src/ucb/systat/SCCS/s.swap.c:
+5.3 86/01/12 15:26:27 sam 11 10
+add tahoe
+/usr/src/ucb/systat/SCCS/s.vmstat.c:
+5.5 86/01/12 15:26:29 sam 9 8
+add tahoe
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.3 86/01/12 15:38:21 sam 3 2
+4.3- plus start of autoconfig
+/usr/src/sys/tahoe/SCCS/s.genassym.c:
+1.3 86/01/12 15:38:25 sam 3 2
+4.3- plus start of autoconfig
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.3 86/01/12 15:38:26 sam 3 2
+4.3- plus start of autoconfig
+/usr/src/sys/tahoe/SCCS/s.machdep.c:
+1.3 86/01/12 15:38:34 sam 3 2
+4.3- plus start of autoconfig
+/usr/src/sys/tahoe/SCCS/s.scb.h:
+1.2 86/01/12 15:38:38 sam 2 1
+4.3- plus start of autoconfig
+/usr/src/sys/tahoe/SCCS/s.scb.s:
+1.2 86/01/12 15:38:40 sam 2 1
+4.3- plus start of autoconfig
+/usr/src/sys/tahoe/SCCS/s.vm_machdep.c:
+1.3 86/01/12 15:38:43 sam 3 2
+4.3- plus start of autoconfig
+/usr/src/sys/tahoe/SCCS/s.vmparam.h:
+1.3 86/01/12 15:38:48 sam 3 2
+4.3- plus start of autoconfig
+/usr/src/sys/h/SCCS/s.acct.h:
+1.3 86/01/12 15:40:58 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.fs.h:
+1.3 86/01/12 15:40:59 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.inode.h:
+1.3 86/01/12 15:41:03 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.ioctl.h:
+1.3 86/01/12 15:41:05 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.mbuf.h:
+1.3 86/01/12 15:41:10 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.param.h:
+1.3 86/01/12 15:41:13 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.proc.h:
+1.3 86/01/12 15:41:16 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.protosw.h:
+1.3 86/01/12 15:41:19 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.quota.h:
+1.3 86/01/12 15:41:22 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.socket.h:
+1.3 86/01/12 15:41:24 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.socketvar.h:
+1.3 86/01/12 15:41:26 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.stat.h:
+1.3 86/01/12 15:41:29 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.systm.h:
+1.3 86/01/12 15:41:31 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.text.h:
+1.3 86/01/12 15:41:33 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.ttychars.h:
+1.3 86/01/12 15:41:35 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.types.h:
+1.3 86/01/12 15:41:36 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.unpcb.h:
+1.3 86/01/12 15:41:38 sam 3 2
+4.3-
+/usr/src/sys/h/SCCS/s.vmmeter.h:
+1.3 86/01/12 15:41:40 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.if.c:
+1.3 86/01/12 15:42:50 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.if.h:
+1.3 86/01/12 15:42:53 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.if_loop.c:
+1.3 86/01/12 15:42:56 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.netisr.h:
+1.3 86/01/12 15:42:57 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.raw_cb.c:
+1.3 86/01/12 15:42:59 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.raw_usrreq.c:
+1.3 86/01/12 15:43:00 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.route.c:
+1.3 86/01/12 15:43:03 sam 3 2
+4.3-
+/usr/src/sys/net/SCCS/s.route.h:
+1.3 86/01/12 15:43:06 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.if_ether.c:
+1.3 86/01/12 15:44:05 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.if_ether.h:
+1.3 86/01/12 15:44:08 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.in.c:
+1.3 86/01/12 15:44:10 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.in.h:
+1.3 86/01/12 15:44:14 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.in_pcb.c:
+1.3 86/01/12 15:44:16 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.in_pcb.h:
+1.3 86/01/12 15:44:20 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.in_proto.c:
+1.3 86/01/12 15:44:22 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.in_systm.h:
+1.3 86/01/12 15:44:24 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.in_var.h:
+1.2 86/01/12 15:44:26 sam 2 1
+4.3-
+/usr/src/sys/netinet/SCCS/s.ip.h:
+1.3 86/01/12 15:44:27 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.ip_icmp.c:
+1.3 86/01/12 15:44:30 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.ip_icmp.h:
+1.3 86/01/12 15:44:32 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.ip_input.c:
+1.3 86/01/12 15:44:33 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.ip_output.c:
+1.3 86/01/12 15:44:37 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.ip_var.h:
+1.3 86/01/12 15:44:39 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp.h:
+1.3 86/01/12 15:44:41 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_input.c:
+1.3 86/01/12 15:44:42 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_output.c:
+1.3 86/01/12 15:44:49 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_seq.h:
+1.3 86/01/12 15:44:53 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_subr.c:
+1.3 86/01/12 15:44:55 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_timer.c:
+1.3 86/01/12 15:44:58 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_timer.h:
+1.3 86/01/12 15:45:00 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_usrreq.c:
+1.3 86/01/12 15:45:02 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.tcp_var.h:
+1.3 86/01/12 15:45:05 sam 3 2
+4.3-
+/usr/src/sys/netinet/SCCS/s.udp_usrreq.c:
+1.3 86/01/12 15:45:08 sam 3 2
+4.3-
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.3 86/01/12 15:46:06 sam 3 2
+4.3- plus start of autoconfig
+/usr/src/sys/conf/SCCS/s.param.c:
+1.3 86/01/12 15:46:29 sam 3 2
+4.3-
+/usr/src/sys/conf/SCCS/s.Makefile.tahoe:
+1.3 86/01/12 15:46:40 sam 3 2
+start of autoconfig
+/usr/src/sys/sys/SCCS/s.init_main.c:
+1.3 86/01/12 15:46:59 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.init_sysent.c:
+1.3 86/01/12 15:47:02 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_clock.c:
+1.3 86/01/12 15:47:05 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_descrip.c:
+1.3 86/01/12 15:47:08 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_exec.c:
+1.3 86/01/12 15:47:11 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_exit.c:
+1.3 86/01/12 15:47:15 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_mman.c:
+1.3 86/01/12 15:47:18 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_proc.c:
+1.3 86/01/12 15:47:21 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_prot.c:
+1.3 86/01/12 15:47:23 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_resource.c:
+1.3 86/01/12 15:47:25 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_sig.c:
+1.3 86/01/12 15:47:28 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_time.c:
+1.3 86/01/12 15:47:33 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.kern_xxx.c:
+1.3 86/01/12 15:47:36 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.quota_sys.c:
+1.3 86/01/12 15:47:38 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.subr_log.c:
+1.3 86/01/12 15:47:40 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.subr_prf.c:
+1.3 86/01/12 15:47:41 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.subr_rmap.c:
+1.3 86/01/12 15:47:45 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.subr_xxx.c:
+1.3 86/01/12 15:47:49 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.sys_generic.c:
+1.3 86/01/12 15:47:51 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.sys_inode.c:
+1.3 86/01/12 15:47:53 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.sys_process.c:
+1.3 86/01/12 15:47:55 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.sys_socket.c:
+1.3 86/01/12 15:47:58 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.syscalls.c:
+1.3 86/01/12 15:48:00 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.tty.c:
+1.3 86/01/12 15:48:04 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.tty_conf.c:
+1.3 86/01/12 15:48:12 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.tty_pty.c:
+1.3 86/01/12 15:48:14 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.tty_tb.c:
+1.3 86/01/12 15:48:18 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.ufs_alloc.c:
+1.3 86/01/12 15:48:22 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.ufs_bio.c:
+1.3 86/01/12 15:48:27 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.ufs_inode.c:
+1.3 86/01/12 15:48:31 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.ufs_namei.c:
+1.3 86/01/12 15:48:37 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.ufs_subr.c:
+1.3 86/01/12 15:48:45 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.ufs_syscalls.c:
+1.3 86/01/12 15:48:48 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.uipc_domain.c:
+1.3 86/01/12 15:48:57 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.uipc_mbuf.c:
+1.3 86/01/12 15:48:59 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.uipc_proto.c:
+1.3 86/01/12 15:49:03 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.uipc_socket.c:
+1.3 86/01/12 15:49:06 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.uipc_socket2.c:
+1.3 86/01/12 15:49:10 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.uipc_syscalls.c:
+1.3 86/01/12 15:49:14 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.uipc_usrreq.c:
+1.3 86/01/12 15:49:20 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+1.3 86/01/12 15:49:25 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.vm_pt.c:
+1.3 86/01/12 15:49:35 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.vm_sched.c:
+1.3 86/01/12 15:49:41 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.vm_swap.c:
+1.3 86/01/12 15:49:45 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.vm_swp.c:
+1.3 86/01/12 15:49:48 sam 3 2
+4.3-
+/usr/src/sys/sys/SCCS/s.vm_text.c:
+1.3 86/01/12 15:49:50 sam 3 2
+4.3-
+/usr/src/sys/tahoevba/SCCS/s.cy.c:
+1.3 86/01/12 15:53:04 sam 3 2
+start of autoconfig
+/usr/src/sys/tahoevba/SCCS/s.vbavar.h:
+1.2 86/01/12 15:53:13 sam 2 1
+start of autoconfig
+/usr/src/sys/tahoevba/SCCS/s.vcc.c:
+1.3 86/01/12 15:53:16 sam 3 2
+start of autoconfig
+/usr/src/sys/tahoevba/SCCS/s.vcx.c:
+1.3 86/01/12 15:53:20 sam 3 2
+start of autoconfig
+/usr/src/sys/tahoevba/SCCS/s.vddc.c:
+1.3 86/01/12 15:53:24 sam 3 2
+start of autoconfig
+/usr/src/sys/tahoevba/SCCS/s.vddcreg.h:
+1.2 86/01/12 15:53:30 sam 2 1
+start of autoconfig
+/usr/src/sys/tahoebsc/SCCS/s.bsc.c:
+1.2 86/01/12 16:04:13 sam 2 1
+bsc -> tahoebsc
+/usr/src/sys/tahoebsc/SCCS/s.bscll.c:
+1.2 86/01/12 16:04:16 sam 2 1
+bsc -> tahoebsc
+/usr/src/sys/tahoebsc/SCCS/s.bscm.c:
+1.2 86/01/12 16:04:23 sam 2 1
+bsc -> tahoebsc
+/usr/src/sys/tahoebsc/SCCS/s.bscpsm.c:
+1.2 86/01/12 16:04:27 sam 2 1
+bsc -> tahoebsc
+/usr/src/sys/tahoebsc/SCCS/s.bsctr.c:
+1.2 86/01/12 16:04:34 sam 2 1
+bsc -> tahoebsc
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.4 86/01/12 16:26:59 sam 4 3
+add casts to silence compiler warnings
+/usr/src/bin/SCCS/s.ld.c:
+5.6 86/01/12 17:26:00 sam 23 22
+add kludge on entry point checking for standalone programs
+/usr/src/sys/tahoevba/SCCS/s.vddc.c:
+1.4 86/01/12 17:39:37 sam 4 3
+identify controller type at boot time
+/usr/src/sys/tahoevba/SCCS/s.vcc.c:
+1.4 86/01/12 17:39:53 sam 4 3
+bsc -> tahoebsc; sna -> tahoesna
+/usr/src/sys/tahoevba/SCCS/s.vcm.c:
+1.3 86/01/12 17:39:56 sam 3 2
+bsc -> tahoebsc; sna -> tahoesna
+/usr/src/sys/tahoevba/SCCS/s.vcx.c:
+1.4 86/01/12 17:39:57 sam 4 3
+bsc -> tahoebsc; sna -> tahoesna
+/usr/src/sys/tahoevba/SCCS/s.scope.h:
+1.3 86/01/12 21:46:13 sam 3 2
+fix some includes and make scope points globally controlled
+/usr/src/sys/tahoevba/SCCS/s.vcc.c:
+1.5 86/01/12 21:46:14 sam 5 4
+fix some includes and make scope points globally controlled
+/usr/src/sys/tahoevba/SCCS/s.vcx.c:
+1.5 86/01/12 21:46:17 sam 5 4
+fix some includes and make scope points globally controlled
+/usr/src/sys/tahoevba/SCCS/s.vddc.c:
+1.5 86/01/12 21:46:20 sam 5 4
+fix some includes and make scope points globally controlled
+/usr/src/sys/tahoevba/SCCS/s.vxdebug.h:
+1.2 86/01/12 21:46:25 sam 2 1
+fix some includes and make scope points globally controlled
+/usr/src/sys/tahoevba/SCCS/s.vxreg.h:
+1.2 86/01/13 12:01:19 sam 2 1
+merge vc?.c files and rename  lots of stuff to ease identification;
+c merge all the separate data structures into vx_softc; rename vxblok vxdevice;
+c and lots more...
+/usr/src/sys/tahoevba/SCCS/s.vx.c:
+1.6 86/01/13 12:01:22 sam 6 5
+merge vc?.c files and rename  lots of stuff to ease identification;
+c merge all the separate data structures into vx_softc; rename vxblok vxdevice;
+c and lots more...
+/usr/src/sys/tahoebsc/SCCS/s.bscll.c:
+1.3 86/01/13 23:44:18 sam 3 2
+quick hack after redoing vioc driver (must complete)
+/usr/src/sys/tahoe/SCCS/s.pte.h:
+1.3 86/01/17 00:21:59 sam 3 2
+allocate page tables for drivers at boot time
+/usr/src/sys/tahoevba/SCCS/s.vbavar.h:
+1.3 86/01/20 23:47:44 sam 3 2
+make ui_flags a long so ace driver can get addr of dual ported memory
+/usr/src/sys/tahoevba/SCCS/s.vddcreg.h:
+1.3 86/01/20 23:49:33 sam 3 2
+move POLLTILLDONE to a subroutine
+/usr/src/sys/tahoevba/SCCS/s.vddc.c:
+1.6 86/01/20 23:50:59 sam 6 5
+POLLTILLDONE -> vdpoll; autoconfig page map for i/o buffer; 
+c print controller type at boot time; move part of vdslave into vdprobe
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.5 86/01/20 23:52:28 sam 5 4
+cleanup some more of the autoconfig stuff: eliminate all page 
+c maps defined in locore.s in favor of dynamically allocated entries; rename 
+c some of the iospace definitions and move them into ../tahoevba/vbaparam.h 
+c (will ease vme support sometime?)
+/usr/src/sys/tahoe/SCCS/s.genassym.c:
+1.4 86/01/20 23:52:30 sam 4 3
+cleanup some more of the autoconfig stuff: eliminate all page 
+c maps defined in locore.s in favor of dynamically allocated entries; rename 
+c some of the iospace definitions and move them into ../tahoevba/vbaparam.h 
+c (will ease vme support sometime?)
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.4 86/01/20 23:52:31 sam 4 3
+cleanup some more of the autoconfig stuff: eliminate all page 
+c maps defined in locore.s in favor of dynamically allocated entries; rename 
+c some of the iospace definitions and move them into ../tahoevba/vbaparam.h 
+c (will ease vme support sometime?)
+/usr/src/sys/tahoe/SCCS/s.machparam.h:
+1.2 86/01/20 23:52:36 sam 2 1
+cleanup some more of the autoconfig stuff: eliminate all page 
+c maps defined in locore.s in favor of dynamically allocated entries; rename 
+c some of the iospace definitions and move them into ../tahoevba/vbaparam.h 
+c (will ease vme support sometime?)
+/usr/src/sys/tahoe/SCCS/s.vmparam.h:
+1.4 86/01/20 23:52:37 sam 4 3
+cleanup some more of the autoconfig stuff: eliminate all page 
+c maps defined in locore.s in favor of dynamically allocated entries; rename 
+c some of the iospace definitions and move them into ../tahoevba/vbaparam.h 
+c (will ease vme support sometime?)
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.4 86/01/20 23:56:27 sam 4 3
+eliminate built in config tables: page table are allocated at 
+c boot time with ubmemalloc, dpm addresses are passed thru from config file;
+c eliminate aceStart; rename aceclean to acesetup and call only at init time 
+c (since we allocate dpm page tables at attach time)
+/usr/src/sys/tahoevba/SCCS/s.vd.c:
+1.7 86/01/21 00:25:26 sam 7 6
+rename
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.5 86/01/21 10:01:07 sam 5 4
+remove sizeof workarounds
+/usr/src/sys/tahoestand/SCCS/s.Makefile:
+1.2 86/01/21 11:38:14 sam 2 1
+make things compile again after changing vdreg.h and creatng vbparam.h
+/usr/src/sys/tahoestand/SCCS/s.cy.c:
+1.2 86/01/21 11:38:16 sam 2 1
+make things compile again after changing vdreg.h and creatng vbparam.h
+/usr/src/sys/tahoestand/SCCS/s.udc.c:
+1.2 86/01/21 11:38:18 sam 2 1
+make things compile again after changing vdreg.h and creatng vbparam.h
+/usr/src/sys/tahoestand/SCCS/s.udcformat.c:
+1.2 86/01/21 11:38:20 sam 2 1
+make things compile again after changing vdreg.h and creatng vbparam.h
+/usr/src/sys/tahoestand/SCCS/s.vddc.c:
+1.2 86/01/21 11:38:22 sam 2 1
+make things compile again after changing vdreg.h and creatng vbparam.h
+/usr/src/sys/tahoestand/SCCS/s.vdformat.c:
+1.2 86/01/21 11:38:25 sam 2 1
+make things compile again after changing vdreg.h and creatng vbparam.h
+/usr/src/sys/tahoestand/SCCS/s.xpformat.c:
+1.2 86/01/21 11:38:31 sam 2 1
+make things compile again after changing vdreg.h and creatng vbparam.h
+/usr/src/sys/tahoevba/SCCS/s.vxreg.h:
+1.3 86/01/21 17:43:02 sam 3 2
+fix tabs
+/usr/src/sys/tahoevba/SCCS/s.vx.c:
+1.7 86/01/21 17:44:58 sam 7 6
+random cleanups and typo corrections
+/usr/src/sys/tahoevba/SCCS/s.vx.c:
+1.7 86/01/21 17:49:40 sam 8 6
+cleanups and typos
+/usr/src/sys/netinet/SCCS/s.in.h:
+1.4 86/01/21 18:15:18 sam 4 3
+cross reference with ns.h to define nto* hto* macros
+/usr/src/sys/netns/SCCS/s.ns.h:
+6.9 86/01/21 18:15:38 sam 9 8
+cross reference with in.h to define nto* hto* macros
+/usr/src/sys/sys/SCCS/s.uipc_socket2.c:
+1.4 86/01/21 18:19:25 sam 4 3
+put back sbappendrecord for xns
+/usr/src/usr.lib/lpr/filters/SCCS/s.rvcat.c:
+5.2 86/01/21 20:02:25 sam 10 9
+use bzero
+/usr/src/usr.lib/lpr/filters/SCCS/s.vcat.c:
+5.2 86/01/21 20:03:10 sam 10 9
+use bzero
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.6 86/01/21 22:08:50 sam 6 5
+make xns compile
+/usr/src/sys/netns/SCCS/s.ns_error.c:
+6.6 86/01/21 22:09:22 sam 6 5
+use splclock
+/usr/src/sys/netns/SCCS/s.spp_usrreq.c:
+6.17 86/01/21 22:09:34 sam 20 19
+need systm.h for insque+remque
+/usr/src/lib/pcc.tahoe/SCCS/s.macdefs:
+1.2 86/01/23 00:35:09 sam 2 1
+add ACONFMT for printing address constants in hex
+/usr/src/lib/pcc.tahoe/SCCS/s.local2.c:
+1.2 86/01/23 00:35:41 sam 2 1
+restrict structure assignments to use movblk's; print address constants using ACONFMT
+/usr/src/sys/tahoevba/SCCS/s.vx.c:
+1.8 86/01/23 01:09:09 sam 9 8
+put back tabs
+/usr/src/sys/tahoevba/SCCS/s.vxreg.h:
+1.4 86/01/23 01:09:14 sam 4 3
+put back tabs
+/usr/src/sys/tahoevba/SCCS/s.vd.c:
+1.8 86/01/23 13:16:24 sam 8 7
+allocate io buffers at boot time to save space
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.5 86/01/23 13:18:34 sam 5 4
+make camap large enough to hold 4 i/o buffers for vd driver
+/usr/src/sys/netns/SCCS/s.ns.h:
+6.10 86/01/23 13:20:24 sam 10 9
+avoid long * cast on tahoe
+/usr/src/etc/fsck/SCCS/s.pass5.c:
+5.2 86/01/23 13:34:51 sam 8 7
+temporary (hopefully) patch for compiler bug
+/usr/src/etc/ifconfig/SCCS/s.ifconfig.c:
+4.14 86/01/23 14:03:16 sam 15 14
+ci for sklower (added nesheim code for pt-pt ns links);
+/usr/src/etc/config/SCCS/s.mkglue.c:
+5.4 86/01/23 15:20:34 sam 17 16
+place fixed interrupt counter offsets in separate file to get 
+c them out of scb.s
+/usr/src/etc/config/SCCS/s.mkglue.c:
+5.5 86/01/23 15:30:57 sam 18 17
+offsets must be in bytes
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.6 86/01/23 15:35:40 sam 6 5
+count device interrupts more correctly
+/usr/src/sys/conf/SCCS/s.Makefile.tahoe:
+1.4 86/01/23 15:36:01 sam 4 3
+use vbvec.s file created by config to define standard interrupt counter offsets
+/usr/src/etc/timed/SCCS/s.cmdtab.c:
+2.2 86/01/23 16:17:30 sam 3 2
+purge extra null entry from table and correct search in getcmd
+/usr/src/etc/timed/SCCS/s.timedc.c:
+2.2 86/01/23 16:17:32 sam 5 4
+purge extra null entry from table and correct search in getcmd
+/usr/src/bin/SCCS/s.date.c:
+4.15 86/01/23 16:38:54 sam 17 16
+fix up syslog crud; move timed protocol code to bottom of file and 
+c separate from normal date code
+/usr/src/bin/SCCS/s.mt.c:
+5.2 86/01/23 18:50:25 sam 12 11
+add tahoe cipher
+/usr/src/sys/tahoevba/SCCS/s.vba.c:
+1.3 86/01/24 01:04:23 sam 3 2
+must look at resid in deciding how much data to copy back to user
+/usr/src/sys/sys/SCCS/s.kern_time.c:
+1.4 86/01/24 01:05:30 sam 4 3
+latest update from monet
+/usr/src/sys/sys/SCCS/s.tty_pty.c:
+1.4 86/01/24 01:05:32 sam 4 3
+latest update from monet
+/usr/src/sys/sys/SCCS/s.uipc_domain.c:
+1.4 86/01/24 01:05:35 sam 4 3
+latest update from monet
+/usr/src/sys/sys/SCCS/s.uipc_socket.c:
+1.4 86/01/24 01:05:36 sam 4 3
+latest update from monet
+/usr/src/sys/sys/SCCS/s.uipc_socket2.c:
+1.5 86/01/24 01:05:38 sam 5 4
+latest update from monet
+/usr/src/sys/sys/SCCS/s.uipc_usrreq.c:
+1.4 86/01/24 01:05:41 sam 4 3
+latest update from monet
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+1.4 86/01/24 01:05:43 sam 4 3
+latest update from monet
+/usr/src/sys/sys/SCCS/s.vm_swap.c:
+1.4 86/01/24 01:05:47 sam 4 3
+latest update from monet
+/usr/src/sys/sys/SCCS/s.vm_text.c:
+1.4 86/01/24 01:05:49 sam 4 3
+latest update from monet
+/usr/src/sys/net/SCCS/s.if.h:
+1.4 86/01/24 01:06:16 sam 4 3
+arp stuff moved to if_arp.h
+/usr/src/sys/netinet/SCCS/s.if_ether.c:
+1.4 86/01/24 01:06:57 sam 4 3
+trailer negotiations; cut back on timeouts for aging entries
+/usr/src/sys/netinet/SCCS/s.if_ether.h:
+1.4 86/01/24 01:07:00 sam 4 3
+trailer negotiations; cut back on timeouts for aging entries
+/usr/src/sys/netinet/SCCS/s.ip_input.c:
+1.4 86/01/24 01:07:20 sam 4 3
+count packets
+/usr/src/sys/netinet/SCCS/s.tcp_timer.c:
+1.4 86/01/24 01:09:05 sam 4 3
+purge old exponential backoff table; enlarge used backoff table; 
+c start srrt at default value
+/usr/src/sys/netinet/SCCS/s.tcp_timer.h:
+1.4 86/01/24 01:09:07 sam 4 3
+purge old exponential backoff table; enlarge used backoff table; 
+c start srrt at default value
+/usr/src/sys/netinet/SCCS/s.ip_icmp.c:
+1.4 86/01/24 01:09:22 sam 4 3
+use microtime
+/usr/src/sys/netinet/SCCS/s.tcp.h:
+1.4 86/01/24 01:10:02 sam 4 3
+add user settable options for setting max seg size and stopping delayed acks
+/usr/src/sys/netinet/SCCS/s.tcp_usrreq.c:
+1.4 86/01/24 01:10:42 sam 4 3
+add sockopts for controlling delayed acks and max seg size
+/usr/src/sys/netinet/SCCS/s.tcp_var.h:
+1.4 86/01/24 01:11:11 sam 4 3
+rcv window must be unsigned
+/usr/src/sys/netinet/SCCS/s.tcp_input.c:
+1.4 86/01/24 01:13:48 sam 4 3
+correct window handling according to nagle conversations; add sockopts 
+c for max seg size and no delayed acks; fix bad urgent pointer handling; add 
+c kludge for tacs sending trash in front of syn
+/usr/src/sys/netinet/SCCS/s.tcp_output.c:
+1.4 86/01/24 01:13:52 sam 4 3
+correct window handling according to nagle conversations; add sockopts 
+c for max seg size and no delayed acks; fix bad urgent pointer handling; add 
+c kludge for tacs sending trash in front of syn
+/usr/src/sys/tahoe/SCCS/s.machdep.c:
+1.4 86/01/24 01:14:34 sam 4 3
+add microtime and release cached text inodes before update on boot/crash
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.7 86/01/24 01:14:58 sam 7 6
+negotiate trailer use
+/usr/src/etc/routed/SCCS/s.main.c:
+5.5 86/01/24 01:19:37 sam 19 18
+update from monet
+/usr/src/etc/routed/SCCS/s.startup.c:
+5.3 86/01/24 01:19:40 sam 12 11
+update from monet
+/usr/src/etc/routed/SCCS/s.timer.c:
+5.4 86/01/24 01:19:44 sam 9 8
+update from monet
+/usr/src/sys/tahoe/SCCS/s.machparam.h:
+1.3 86/01/24 02:21:30 sam 3 2
+move keystats definition for use by vmstat
+/usr/src/sys/tahoe/SCCS/s.vm_machdep.c:
+1.4 86/01/24 02:21:52 sam 4 3
+move keystats definition to machparam.h for vmstat
+/usr/src/ucb/SCCS/s.vmstat.c:
+5.5 86/01/24 02:25:39 sam 24 23
+add code and data cache key stats under -s
+/usr/src/sys/tahoe/SCCS/s.SYS.h:
+1.2 86/01/24 14:16:47 sam 2 1
+call to mcount must be callf $4,mcount
+/usr/src/sys/conf/SCCS/s.Makefile.tahoe:
+1.5 86/01/24 14:31:24 sam 5 4
+don't remove vbvec.s or vbglue.s
+/usr/src/lib/mip.tahoe/SCCS/s.match.c:
+1.2 86/01/25 23:53:56 sam 2 1
+upput now takes 2nd parameter indicating offset of upper item
+/usr/src/lib/pcc.tahoe/SCCS/s.local2.c:
+1.3 86/01/25 23:55:34 sam 3 2
+optimize structure assignment based on size and alignment
+/usr/src/usr.lib/libI77/SCCS/s.fmt.c:
+5.2 86/01/26 12:16:00 sam 12 11
+add tahoe
+/usr/src/usr.lib/libg/SCCS/s.dbxxx.s:
+5.3 86/01/26 12:23:13 sam 3 2
+improve portability
+/usr/src/usr.lib/libg/SCCS/s.dbxxx.c:
+5.3 86/01/26 12:33:00 sam 4 2
+improve portability
+/usr/src/sys/tahoevba/SCCS/s.cyreg.h:
+1.2 86/01/26 13:49:15 sam 2 1
+almost working (fsf/bsf don't work properly)
+/usr/src/sys/tahoevba/SCCS/s.cy.c:
+1.4 86/01/26 13:49:18 sam 4 3
+almost working (fsf/bsf don't work properly)
+/usr/src/sys/tahoe/SCCS/s.conf.c:
+1.3 86/01/26 14:15:29 sam 3 2
+purge ps and efs entries for now
+/usr/src/sys/tahoe/SCCS/s.conf.c:
+1.4 86/01/26 14:18:08 sam 4 3
+cy.h -> yc.h
+/usr/src/sys/tahoevba/SCCS/s.cy.c:
+1.5 86/01/26 14:18:43 sam 5 4
+no cy.h
+/usr/src/lib/cpp/SCCS/s.cpp.c:
+1.14 86/01/26 14:30:57 sam 14 13
+define tahoe
+/usr/src/lib/cpp/SCCS/s.yylex.c:
+1.4 86/01/26 14:39:06 sam 4 3
+add tahoe
+/usr/src/sys/sys/SCCS/s.ufs_subr.c:
+1.4 86/01/26 14:59:44 sam 4 3
+put back getfs for quota
+/usr/src/usr.lib/libcurses/SCCS/s.cr_tty.c:
+5.3 86/01/26 15:14:55 sam 20 19
+must define size of ttytype to take sizeof
+/usr/src/usr.lib/libcurses/SCCS/s.curses.c:
+5.3 86/01/26 15:14:57 sam 7 6
+must define size of ttytype to take sizeof
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.8 86/01/26 15:32:22 sam 8 7
+remove acestd's as autoconfig doesn't yet check for previously allocated csr's
+/usr/src/sys/tahoevba/SCCS/s.cy.c:
+1.6 86/01/27 09:16:40 sam 6 5
+fix error reporting 
+/usr/src/ucb/window/SCCS/s.ww.h:
+3.37 86/01/28 20:01:22 sam 51 50
+invert logic on #ifdef to include tahoe
+/usr/src/ucb/window/SCCS/s.ww.h:
+3.37 86/01/28 20:07:52 sam 52 50
+include tahoe by reversing #ifdef
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.7 86/01/29 23:13:57 sam 7 6
+eliminate use of r3 in swtch; fix r2 possibly getting clobbered 
+c by calls to getdatakey and/or getcodekey in resume
+/usr/src/ucb/window/SCCS/s.ttgeneric.c:
+3.28 86/02/02 00:35:22 sam 28 27
+fix from edward; removed extra tt_col += n in gen_write
+/usr/src/etc/SCCS/s.rwhod.c:
+5.7 86/02/02 00:43:58 sam 40 39
+fixes from speck@caltech to cut down on running time by avoiding 
+c full pathnames and using open instead of creat
+/usr/src/ucb/Mail/SCCS/s.strings.c:
+5.3 86/02/02 17:47:34 sam 7 5
+align to longword boundary for tahoe
+/usr/src/lib/pcc.vax/SCCS/s.Makefile:
+1.13 86/02/02 19:25:07 sam 13 12
+add release definition to pcc dir (moved from mip)
+/usr/src/lib/mip/SCCS/s.scan.c:
+1.8 86/02/04 22:10:40 sam 8 7
+move release string to pcc.machine directory
+/usr/src/lib/mip/SCCS/s.pftn.c:
+1.10 86/02/04 22:12:14 sam 11 10
+check parameter stack use carefully (in case of errors)
+/usr/src/lib/mip/SCCS/s.allo.c:
+4.8 86/02/04 22:12:57 sam 8 7
+add "even register" need for tahoe
+/usr/src/lib/mip/SCCS/s.pass2.h:
+4.2 86/02/04 22:12:59 sam 2 1
+add "even register" need for tahoe
+/usr/src/lib/mip/SCCS/s.match.c:
+4.5 86/02/04 22:13:30 sam 5 4
+make upput take a size (in bits) for specifying upper item
+/usr/src/lib/mip/SCCS/s.reader.c:
+4.5 86/02/04 22:14:25 sam 5 4
+add tahoe need SOREG (is this right?)
+/usr/src/lib/mip/SCCS/s.trees.c:
+4.10 86/02/04 22:15:10 sam 10 9
+be more careful about unsigned conversions; put back PRTDCON override for tahoe
+/usr/src/lib/mip/SCCS/s.fort.c:
+4.8 86/02/04 22:15:35 sam 8 7
+fix #ifdef
+/usr/src/lib/pcc.tahoe/SCCS/s.macdefs.h:
+1.3 86/02/04 22:17:35 sam 3 2
+redo for new mip
+/usr/src/lib/pcc.tahoe/SCCS/s.mac2defs.h:
+1.2 86/02/04 22:17:36 sam 2 1
+redo for new mip
+/usr/src/lib/pcc.tahoe/SCCS/s.code.c:
+1.2 86/02/04 22:18:51 sam 2 1
+new include files
+/usr/src/lib/pcc.tahoe/SCCS/s.local2.c:
+1.4 86/02/04 22:19:34 sam 4 3
+new include files; szty and shltype are now macros; define nncon
+/usr/src/lib/pcc.tahoe/SCCS/s.order.c:
+1.2 86/02/04 22:19:50 sam 2 1
+new include files
+/usr/src/lib/pcc.tahoe/SCCS/s.table.c:
+1.2 86/02/04 22:20:00 sam 2 1
+new include files
+/usr/src/lib/pcc.tahoe/SCCS/s.stab.c:
+1.3 86/02/04 22:20:21 sam 3 2
+new include files; fix termination of enums
+/usr/src/lib/pcc.tahoe/SCCS/s.Makefile:
+1.2 86/02/04 22:20:47 sam 2 1
+integrate vax version
+/usr/src/lib/pcc.tahoe/SCCS/s.local.c:
+1.2 86/02/04 22:22:41 sam 2 1
+new include files; don't print leading 0's to cut down on file i/o; 
+c distinguish FCON/DCON; steal vax code massaging mixed type constant initializations
+/usr/src/usr.bin/lint/SCCS/s.Makefile:
+1.10 86/02/05 21:32:38 sam 10 9
+need rel.o from pcc.machine
+/usr/src/etc/SCCS/s.savecore.c:
+5.4 86/02/11 20:16:52 sam 22 21
+use syslog; cleanup
+/usr/src/bin/SCCS/s.chgrp.c:
+5.3 86/02/12 09:36:46 sam 11 10
+update from monet ; chgrp dir before recursing
+/usr/src/bin/SCCS/s.login.c:
+5.11 86/02/12 09:41:37 sam 52 51
+put back compatibility code for setting window size
+/usr/src/bin/SCCS/s.ls.c:
+5.5 86/02/12 09:42:21 sam 28 27
+push back inum's to at most 5 digits
+/usr/src/bin/SCCS/s.nice.c:
+5.2 86/02/12 09:43:03 sam 4 3
+fix from monet
+/usr/src/bin/SCCS/s.ps.c:
+5.5 86/02/12 09:44:08 sam 42 41
+fix from monet
+/usr/src/bin/SCCS/s.rm.c:
+4.18 86/02/12 09:44:43 sam 18 17
+fix from monet
+/usr/src/bin/SCCS/s.stty.c:
+5.3 86/02/12 09:45:24 sam 21 20
+add size param to get rows+cols
+/usr/src/bin/SCCS/s.su.c:
+5.4 86/02/12 09:46:13 sam 16 15
+fix from monet - insure non-null user name
+/usr/src/bin/SCCS/s.write.c:
+4.11 86/02/12 09:47:03 sam 11 10
+fixes from monet
+/usr/src/bin/csh/SCCS/s.sh.proc.c:
+5.4 86/02/12 09:48:53 sam 21 20
+fixes from monet to correct nice command
+/usr/src/bin/csh/SCCS/s.sh.sem.c:
+5.3 86/02/12 09:48:57 sam 9 8
+fixes from monet to correct nice command
+/usr/src/bin/csh/SCCS/s.sh.time.c:
+5.3 86/02/12 09:48:59 sam 9 8
+fixes from monet to correct nice command
+/usr/src/bin/csh/SCCS/s.Makefile:
+5.3 86/02/12 09:49:02 sam 12 11
+for tahoe
+/usr/src/bin/diff/SCCS/s.diffreg.c:
+4.14 86/02/12 09:49:46 sam 14 13
+fixes from monet
+/usr/src/bin/make/SCCS/s.defs:
+4.10 86/02/12 09:52:00 sam 10 9
+fixes from monet; main one is to not interpret . as a pathname separator
+/usr/src/bin/make/SCCS/s.files.c:
+4.13 86/02/12 09:52:02 sam 13 12
+fixes from monet; main one is to not interpret . as a pathname separator
+/usr/src/bin/make/SCCS/s.main.c:
+4.8 86/02/12 09:52:04 sam 8 7
+fixes from monet; main one is to not interpret . as a pathname separator
+/usr/src/etc/SCCS/s.kgmon.c:
+5.2 86/02/12 10:10:09 sam 11 10
+cleanups for portability
+/usr/src/etc/SCCS/s.arp.c:
+1.4 86/02/12 10:10:56 sam 4 3
+update from monet
+/usr/src/etc/SCCS/s.catman.c:
+5.5 86/02/12 10:11:49 sam 13 12
+update from monet for manpath
+/usr/src/etc/SCCS/s.cron.c:
+4.11 86/02/12 10:12:31 sam 14 13
+update from monet; mainly to support local crontab
+/usr/src/etc/SCCS/s.inetd.c:
+5.4 86/02/12 10:13:37 sam 9 8
+update from monet; use fd_set macros and sigmask
+/usr/src/etc/SCCS/s.mount.c:
+5.3 86/02/12 10:14:19 sam 14 13
+update from monet; avoid mounting crud entries
+/usr/src/etc/SCCS/s.ncheck.c:
+5.4 86/02/12 10:15:15 sam 17 16
+update from monet; be paranoid about directory block nums
+/usr/src/etc/SCCS/s.quotacheck.c:
+5.7 86/02/12 10:16:29 sam 18 17
+update from monet; avoid truncating quotafiles when not updating
+/usr/src/etc/SCCS/s.rlogind.c:
+5.10 86/02/12 10:18:18 sam 40 39
+update from monet; use out of band to flush data
+/usr/src/etc/SCCS/s.rmt.c:
+5.2 86/02/12 10:19:09 sam 10 9
+update from monet; set maxrecsize according to read request
+/usr/src/etc/SCCS/s.route.c:
+5.2 86/02/12 10:20:28 sam 16 15
+update from monet; retry adds/deletes, do host lookup in getaddr
+/usr/src/etc/SCCS/s.rshd.c:
+5.5 86/02/12 10:21:04 sam 28 27
+update from monet; give error more args
+/usr/src/etc/SCCS/s.savecore.c:
+5.5 86/02/12 10:28:52 sam 23 22
+update from monet; type malloc correctly, use minfree for free space 
+c check, dynamically allocate large i/o buffer for saving crashdump
+/usr/src/etc/SCCS/s.telnetd.c:
+5.5 86/02/12 10:29:48 sam 39 38
+fixes from monet; set pgrp for client; handle cr-lf properly
+/usr/src/etc/dump/SCCS/s.dumpmain.c:
+5.2 86/02/12 10:32:33 sam 21 20
+updates from monet; avoid second pass if possible 
+/usr/src/etc/dump/SCCS/s.dumprmt.c:
+5.5 86/02/12 10:32:35 sam 17 16
+updates from monet; avoid second pass if possible 
+/usr/src/etc/dump/SCCS/s.dumptraverse.c:
+5.3 86/02/12 10:32:37 sam 22 21
+updates from monet; avoid second pass if possible 
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.3 86/02/12 10:35:31 sam 16 15
+updates from monet; too numerous to list
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.2 86/02/12 10:35:34 sam 39 38
+updates from monet; too numerous to list
+/usr/src/etc/getty/SCCS/s.gettytab.h:
+5.2 86/02/12 10:37:39 sam 6 5
+update from monet; add support for decctlq
+/usr/src/etc/getty/SCCS/s.init.c:
+5.2 86/02/12 10:37:41 sam 7 6
+update from monet; add support for decctlq
+/usr/src/etc/getty/SCCS/s.main.c:
+5.5 86/02/12 10:37:42 sam 12 11
+update from monet; add support for decctlq
+/usr/src/etc/getty/SCCS/s.subr.c:
+5.4 86/02/12 10:37:45 sam 8 7
+update from monet; add support for decctlq
+/usr/src/etc/ifconfig/SCCS/s.ifconfig.c:
+4.15 86/02/12 10:38:38 sam 16 15
+update from monet
+/usr/src/etc/restore/SCCS/s.tape.c:
+5.5 86/02/12 10:39:28 sam 34 33
+update from monet; fix message
+/usr/src/etc/timed/SCCS/s.timed.c:
+2.2 86/02/12 10:40:21 sam 6 5
+update from monet; correct typo
+/usr/src/include/arpa/SCCS/s.nameser.h:
+5.8 86/02/12 10:59:35 sam 13 12
+add tahoe
+/usr/src/include/arpa/SCCS/s.nameser.h:
+5.8 86/02/12 11:02:32 sam 14 12
+update from monet; add tahoe
+/usr/src/lib/mip/SCCS/s.optim.c:
+4.7 86/02/12 11:22:02 sam 7 6
+update from monet; leave i << 1 to c2; handle <<>> by neg constant
+/usr/src/lib/mip/SCCS/s.pftn.c:
+1.11 86/02/12 11:24:06 sam 12 11
+handle undefined structures better
+/usr/src/lib/mip/SCCS/s.trees.c:
+4.11 86/02/12 11:28:02 sam 11 10
+update from monet; make econvert define'able; stuff with type coercions
+/usr/src/lib/mip/SCCS/s.allo.c:
+4.9 86/02/12 11:37:08 sam 9 8
+update from monet; must allocate register pair for special case of *=/+=
+/usr/src/lib/libc/gen/SCCS/s.ctime.c:
+5.4 86/02/12 11:42:33 sam 10 9
+update from monet; cache timezone
+/usr/src/lib/libc/gen/SCCS/s.malloc.c:
+5.3 86/02/12 11:43:27 sam 9 8
+update from monet
+/usr/src/lib/libc/gen/SCCS/s.syslog.c:
+5.5 86/02/12 11:43:35 sam 13 12
+update from monet
+/usr/src/lib/libc/stdio/SCCS/s.findiop.c:
+5.3 86/02/12 11:44:17 sam 6 5
+update from monet; return EMFILE when out of slots
+/usr/src/lib/libc/net/hosttable/SCCS/s.gethostnamadr.c:
+5.4 86/02/12 11:45:15 sam 18 17
+update from monet; set compatible errno's
+/usr/src/lib/pcc.tahoe/SCCS/s.code.c:
+1.3 86/02/12 20:44:20 sam 3 2
+purge as many printf calls as possible
+/usr/src/lib/pcc.tahoe/SCCS/s.local.c:
+1.3 86/02/12 20:44:23 sam 3 2
+purge as many printf calls as possible
+/usr/src/lib/pcc.tahoe/SCCS/s.local2.c:
+1.5 86/02/12 20:44:25 sam 5 4
+purge as many printf calls as possible
+/usr/src/lib/pcc.tahoe/SCCS/s.local2.c:
+1.6 86/02/12 20:45:24 sam 6 5
+get rid of warning, it seems like it works
+/usr/src/include/SCCS/s.Makefile:
+5.10 86/02/14 18:13:29 sam 22 21
+update from monet
+/usr/src/include/SCCS/s.fcntl.h:
+5.2 86/02/14 18:13:31 sam 5 4
+update from monet
+/usr/src/usr.bin/SCCS/s.bc.y:
+4.4 86/02/14 18:37:54 sam 4 3
+(null)
+/usr/src/usr.bin/SCCS/s.file.c:
+4.13 86/02/14 18:37:56 sam 18 17
+(null)
+/usr/src/usr.bin/SCCS/s.ranlib.c:
+5.3 86/02/14 18:37:58 sam 14 13
+(null)
+/usr/src/usr.bin/SCCS/s.spline.c:
+4.4 86/02/14 18:38:00 sam 4 3
+(null)
+/usr/src/usr.bin/find/SCCS/s.find.c:
+4.17 86/02/14 18:39:28 sam 18 17
+update from monet
+/usr/src/usr.bin/lint/SCCS/s.lint.c:
+1.8 86/02/14 18:41:50 sam 8 7
+update from monet
+/usr/src/usr.bin/lint/SCCS/s.macdefs.h:
+1.5 86/02/14 18:41:52 sam 5 4
+update from monet
+/usr/src/usr.bin/lint/SCCS/s.llib-lc:
+1.29 86/02/14 18:42:48 sam 31 30
+update from monet
+/usr/src/usr.bin/refer/SCCS/s.refer2.c:
+4.4 86/02/14 18:43:25 sam 4 3
+update from monet
+/usr/src/usr.bin/tbl/SCCS/s.t..c:
+4.4 86/02/14 18:44:38 sam 4 3
+update from monet
+/usr/src/usr.bin/tbl/SCCS/s.t5.c:
+4.4 86/02/14 18:44:39 sam 4 3
+update from monet
+/usr/src/usr.bin/tbl/SCCS/s.tb.c:
+4.4 86/02/14 18:44:41 sam 4 3
+update from monet
+/usr/src/usr.bin/tip/SCCS/s.cmds.c:
+5.3 86/02/14 18:46:31 sam 17 16
+for karels; play with uid/gid to handle lock files being owned by uucp
+/usr/src/usr.bin/tip/SCCS/s.cu.c:
+5.2 86/02/14 18:46:33 sam 8 7
+for karels; play with uid/gid to handle lock files being owned by uucp
+/usr/src/usr.bin/tip/SCCS/s.tip.c:
+5.3 86/02/14 18:46:35 sam 21 20
+for karels; play with uid/gid to handle lock files being owned by uucp
+/usr/src/usr.bin/tip/SCCS/s.tip.h:
+5.2 86/02/14 18:46:37 sam 14 13
+for karels; play with uid/gid to handle lock files being owned by uucp
+/usr/src/ucb/SCCS/s.logger.c:
+6.3 86/02/14 19:02:08 sam 3 2
+update from monet
+/usr/src/ucb/SCCS/s.man.c:
+5.8 86/02/14 19:02:09 sam 24 23
+update from monet
+/usr/src/ucb/SCCS/s.ruptime.c:
+5.3 86/02/14 19:02:12 sam 21 20
+update from monet
+/usr/src/ucb/SCCS/s.script.c:
+5.5 86/02/14 19:02:13 sam 13 12
+update from monet
+/usr/src/ucb/SCCS/s.tail.c:
+5.2 86/02/14 19:02:15 sam 8 7
+update from monet
+/usr/src/ucb/SCCS/s.xstr.c:
+5.3 86/02/14 19:02:17 sam 6 5
+update from monet
+/usr/src/ucb/SCCS/s.telnet.c:
+5.4 86/02/14 19:02:25 sam 34 33
+update from monet
+/usr/src/ucb/SCCS/s.which.csh:
+5.3 86/02/14 19:02:28 sam 7 6
+update from monet
+/usr/src/ucb/Mail/SCCS/s.Makefile:
+5.3 86/02/14 19:06:25 sam 33 32
+update from monet
+/usr/src/ucb/Mail/SCCS/s.aux.c:
+5.4 86/02/14 19:06:27 sam 23 22
+update from monet
+/usr/src/ucb/Mail/SCCS/s.cmdtab.c:
+5.4 86/02/14 19:06:30 sam 24 23
+update from monet
+/usr/src/ucb/Mail/SCCS/s.def.h:
+5.3 86/02/14 19:06:31 sam 32 31
+update from monet
+/usr/src/ucb/Mail/SCCS/s.lex.c:
+5.5 86/02/14 19:06:34 sam 45 44
+update from monet
+/usr/src/ucb/Mail/SCCS/s.list.c:
+5.5 86/02/14 19:06:36 sam 14 13
+update from monet
+/usr/src/ucb/Mail/SCCS/s.names.c:
+5.4 86/02/14 19:06:39 sam 15 14
+update from monet
+/usr/src/ucb/Mail/SCCS/s.optim.c:
+5.6 86/02/14 19:06:41 sam 19 18
+update from monet
+/usr/src/ucb/compress/SCCS/s.compress.c:
+5.8 86/02/14 19:07:46 sam 9 8
+update from monet
+/usr/src/ucb/ex/SCCS/s.Makefile:
+7.13 86/02/14 19:09:34 sam 32 31
+update from monet
+/usr/src/ucb/ex/SCCS/s.ex_tagio.c:
+7.3 86/02/14 19:09:36 sam 3 2
+update from monet
+/usr/src/ucb/ex/SCCS/s.expreserve.c:
+7.13 86/02/14 19:09:37 sam 21 20
+update from monet
+/usr/src/ucb/ftp/SCCS/s.Makefile:
+5.2 86/02/14 19:16:46 sam 9 8
+update from monet
+/usr/src/ucb/ftp/SCCS/s.cmds.c:
+5.2 86/02/14 19:16:47 sam 13 12
+update from monet
+/usr/src/ucb/ftp/SCCS/s.cmdtab.c:
+5.2 86/02/14 19:16:53 sam 10 9
+update from monet
+/usr/src/ucb/ftp/SCCS/s.ftp.c:
+5.4 86/02/14 19:16:55 sam 20 19
+update from monet
+/usr/src/ucb/ftp/SCCS/s.ftp_var.h:
+5.2 86/02/14 19:16:59 sam 8 7
+update from monet
+/usr/src/ucb/ftp/SCCS/s.getpass.c:
+5.2 86/02/14 19:17:01 sam 5 4
+update from monet
+/usr/src/ucb/ftp/SCCS/s.main.c:
+5.2 86/02/14 19:17:02 sam 12 11
+update from monet
+/usr/src/ucb/sendbug/SCCS/s.Makefile:
+5.4 86/02/14 19:22:42 sam 8 7
+update from monet
+/usr/src/ucb/sendbug/SCCS/s.bugfiler.c:
+5.4 86/02/14 19:22:43 sam 22 21
+update from monet
+/usr/src/ucb/systat/SCCS/s.vmstat.c:
+5.6 86/02/14 19:23:39 sam 10 9
+update from monet
+/usr/src/ucb/tftp/SCCS/s.main.c:
+5.2 86/02/14 19:24:22 sam 11 10
+update from monet
+/usr/src/ucb/window/SCCS/s.tt.h:
+3.16 86/02/14 19:29:46 sam 16 15
+update from monet
+/usr/src/ucb/window/SCCS/s.ttf100.c:
+3.9 86/02/14 19:29:47 sam 9 8
+update from monet
+/usr/src/ucb/window/SCCS/s.ttgeneric.c:
+3.29 86/02/14 19:29:49 sam 29 28
+update from monet
+/usr/src/ucb/window/SCCS/s.tth19.c:
+3.17 86/02/14 19:29:52 sam 17 16
+update from monet
+/usr/src/ucb/window/SCCS/s.ttoutput.c:
+3.5 86/02/14 19:29:54 sam 5 4
+update from monet
+/usr/src/ucb/window/SCCS/s.tttermcap.c:
+3.7 86/02/14 19:29:55 sam 7 6
+update from monet
+/usr/src/ucb/window/SCCS/s.wwinit.c:
+3.26 86/02/14 19:29:56 sam 36 35
+update from monet
+/usr/src/ucb/window/SCCS/s.wwiomux.c:
+3.16 86/02/14 19:29:58 sam 23 22
+update from monet
+/usr/src/usr.bin/tip/SCCS/s.tip.h:
+5.3 86/02/14 22:03:03 sam 15 14
+improve portability
+/usr/src/usr.bin/troff/SCCS/s.tdef.h:
+4.7 86/02/14 22:06:53 sam 7 6
+improve portability
+/usr/src/usr.bin/troff/SCCS/s.tdef.h:
+4.7 86/02/14 22:07:58 sam 8 6
+improve portability
+/usr/src/usr.bin/troff/SCCS/s.tdef.h:
+4.7 86/02/14 22:08:46 sam 9 6
+improve portability
+/usr/src/lib/mip/SCCS/s.trees.c:
+4.11 86/02/14 22:17:49 sam 12 10
+allow econvert to be redefined (for lint)
+/usr/src/sys/h/SCCS/s.errno.h:
+1.3 86/02/15 20:23:59 sam 3 2
+update from monet
+/usr/src/sys/h/SCCS/s.ioctl.h:
+1.4 86/02/15 20:25:14 sam 4 3
+add get/set metric ioctl's
+/usr/src/sys/h/SCCS/s.mtio.h:
+1.3 86/02/15 20:28:01 sam 3 2
+update from monet (have to move cipher -- yech)
+/usr/src/sys/h/SCCS/s.signal.h:
+1.3 86/02/15 20:29:37 sam 3 2
+add compatibility defs from monet
+/usr/src/sys/h/SCCS/s.syslog.h:
+4.10 86/02/15 20:30:17 sam 11 10
+update from monet
+/usr/src/sys/net/SCCS/s.if.c:
+1.4 86/02/15 20:32:16 sam 4 3
+add get/set interface metric
+/usr/src/sys/net/SCCS/s.if.h:
+1.5 86/02/15 20:33:23 sam 5 4
+loopback net definition, metric for routing daemon use
+/usr/src/sys/net/SCCS/s.if_loop.c:
+1.4 86/02/15 20:34:14 sam 4 3
+mark interface as loopback
+/usr/src/sys/net/SCCS/s.raw_usrreq.c:
+1.4 86/02/15 20:37:03 sam 4 3
+add one-element cache of route
+/usr/src/sys/net/SCCS/s.raw_cb.c:
+1.4 86/02/15 20:37:28 sam 4 3
+allow protocol options (for raw ip)
+/usr/src/sys/net/SCCS/s.raw_cb.h:
+1.3 86/02/15 20:37:29 sam 3 2
+allow protocol options (for raw ip)
+/usr/src/sys/netinet/SCCS/s.if_ether.c:
+1.5 86/02/15 20:40:38 sam 5 4
+insure entries are flushed with redef instead of timed out
+/usr/src/sys/netinet/SCCS/s.in.h:
+1.5 86/02/15 20:42:14 sam 5 4
+reserve hunk of port space for servers
+/usr/src/sys/netinet/SCCS/s.in_pcb.c:
+1.4 86/02/15 20:45:56 sam 4 3
+reserve hunk of port space for user; use iaonnetof so netmasks are considered
+/usr/src/sys/netinet/SCCS/s.in_proto.c:
+1.4 86/02/15 21:00:10 sam 4 3
+add raw ip output
+/usr/src/sys/netinet/SCCS/s.ip_icmp.c:
+1.5 86/02/15 21:48:20 sam 5 4
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.ip_input.c:
+1.5 86/02/15 21:48:23 sam 5 4
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.ip_output.c:
+1.4 86/02/15 21:48:27 sam 4 3
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.raw_ip.c:
+1.3 86/02/15 21:48:29 sam 3 2
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.tcp_input.c:
+1.5 86/02/15 21:48:31 sam 5 4
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.tcp_output.c:
+1.5 86/02/15 21:48:35 sam 5 4
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.tcp_timer.c:
+1.5 86/02/15 21:48:37 sam 5 4
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.udp_usrreq.c:
+1.4 86/02/15 21:48:39 sam 4 3
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/netinet/SCCS/s.udp_var.h:
+1.3 86/02/15 21:48:41 sam 3 2
+update from monet; mostly stuff for ip option handling; also lots 
+c of icmp support for source routing and such
+/usr/src/sys/sys/SCCS/s.subr_mcount.c:
+1.3 86/02/15 22:00:12 sam 3 2
+cleanup and tahoe support
+/usr/src/sys/sys/SCCS/s.init_main.c:
+1.4 86/02/15 22:01:32 sam 4 3
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.init_sysent.c:
+1.4 86/02/15 22:01:34 sam 4 3
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.quota_ufs.c:
+1.3 86/02/15 22:01:36 sam 3 2
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.sys_generic.c:
+1.4 86/02/15 22:01:38 sam 4 3
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.syscalls.c:
+1.4 86/02/15 22:01:39 sam 4 3
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.tty_conf.c:
+1.4 86/02/15 22:01:41 sam 4 3
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.uipc_socket2.c:
+1.6 86/02/15 22:01:42 sam 6 5
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+1.5 86/02/15 22:01:44 sam 5 4
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/sys/sys/SCCS/s.vm_swp.c:
+1.4 86/02/15 22:01:49 sam 4 3
+update from monet; only interesting thing is checking for swap i/o errors
+/usr/src/etc/routed/SCCS/s.Makefile:
+5.2 86/02/15 22:12:02 sam 10 9
+update from monet; use get/set metric calls
+/usr/src/etc/routed/SCCS/s.interface.h:
+5.2 86/02/15 22:12:04 sam 5 4
+update from monet; use get/set metric calls
+/usr/src/etc/routed/SCCS/s.startup.c:
+5.4 86/02/15 22:12:06 sam 13 12
+update from monet; use get/set metric calls
+/usr/src/etc/timed/SCCS/s.Makefile:
+2.2 86/02/15 22:14:24 sam 5 4
+we are tahoe
+/usr/src/ucb/talk/SCCS/s.Makefile:
+5.2 86/02/18 12:37:56 sam 6 5
+conver to new protocol; cleanups here and there
+/usr/src/ucb/talk/SCCS/s.ctl.c:
+5.2 86/02/18 12:37:58 sam 4 3
+conver to new protocol; cleanups here and there
+/usr/src/ucb/talk/SCCS/s.ctl_transact.c:
+5.2 86/02/18 12:37:59 sam 5 4
+conver to new protocol; cleanups here and there
+/usr/src/ucb/talk/SCCS/s.get_addrs.c:
+5.2 86/02/18 12:38:01 sam 4 3
+conver to new protocol; cleanups here and there
+/usr/src/ucb/talk/SCCS/s.get_names.c:
+5.2 86/02/18 12:38:03 sam 4 3
+conver to new protocol; cleanups here and there
+/usr/src/ucb/talk/SCCS/s.invite.c:
+5.2 86/02/18 12:38:04 sam 4 3
+conver to new protocol; cleanups here and there
+/usr/src/ucb/talk/SCCS/s.look_up.c:
+5.2 86/02/18 12:38:06 sam 5 4
+conver to new protocol; cleanups here and there
+/usr/src/ucb/talk/SCCS/s.talk_ctl.h:
+5.2 86/02/18 12:38:08 sam 4 3
+conver to new protocol; cleanups here and there
+/usr/src/etc/talkd/SCCS/s.print.c:
+5.2 86/02/18 12:38:45 sam 5 4
+convert to new protocol; lots of cleanups
+/usr/src/etc/talkd/SCCS/s.process.c:
+5.3 86/02/18 12:38:47 sam 6 5
+convert to new protocol; lots of cleanups
+/usr/src/etc/talkd/SCCS/s.table.c:
+5.2 86/02/18 12:38:49 sam 5 4
+convert to new protocol; lots of cleanups
+/usr/src/etc/talkd/SCCS/s.talkd.c:
+5.2 86/02/18 12:38:51 sam 6 5
+convert to new protocol; lots of cleanups
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.3 86/02/18 13:47:49 sam 40 39
+SIOCATMARK takes int parameter, not char; mucho grunginess removed
+/usr/src/sys/sys/SCCS/s.vm_swp.c:
+1.4 86/02/18 16:07:39 sam 5 3
+update from monet; check for swap i/o errors
+/usr/src/sys/sys/SCCS/s.uipc_socket.c:
+1.5 86/02/19 22:25:56 sam 5 4
+lint
+/usr/src/ucb/dbx.vax/SCCS/s.check.c:
+5.2 86/02/22 22:05:44 sam 10 9
+update from monet
+/usr/src/ucb/dbx.vax/SCCS/s.fortran.c:
+5.3 86/02/22 22:05:46 sam 10 9
+update from monet
+/usr/src/ucb/dbx.vax/SCCS/s.runtime.c:
+5.2 86/02/22 22:05:49 sam 16 15
+update from monet
+/usr/src/ucb/dbx/SCCS/s.Makefile:
+5.4 86/02/22 22:24:29 sam 16 15
+update sccsid
+/usr/src/ucb/dbx/SCCS/s.cerror.tahoe.s:
+5.1 86/02/22 22:24:32 sam 2 1
+update sccsid
+/usr/src/ucb/dbx/SCCS/s.ops.tahoe.c:
+5.1 86/02/22 22:24:32 sam 2 1
+update sccsid
+/usr/src/ucb/dbx/SCCS/s.tahoe.c:
+5.1 86/02/22 22:24:33 sam 2 1
+update sccsid
+/usr/src/ucb/dbx/SCCS/s.c.c:
+5.2 86/02/22 23:07:22 sam 12 11
+make field extraction machine dependent
+/usr/src/ucb/dbx/SCCS/s.eval.c:
+5.4 86/02/22 23:07:53 sam 19 18
+O_TYPERENAME depends on byte ordering, make it machine dependent
+/usr/src/ucb/dbx/SCCS/s.main.c:
+5.2 86/02/22 23:08:25 sam 15 14
+introduce routine for initializing op code table
+/usr/src/ucb/dbx/SCCS/s.printsym.c:
+5.3 86/02/23 16:13:25 sam 18 17
+use c as default expression printer
+/usr/src/ucb/dbx/SCCS/s.symbols.c:
+5.3 86/02/23 16:16:21 sam 21 20
+purge bitfields for tahoe (doesn't handle signed stuff well)
+/usr/src/ucb/dbx/SCCS/s.eval.c:
+5.4 86/02/23 16:16:52 sam 20 18
+turn typerename operation into a call so it can be machine-dependent
+/usr/src/ucb/dbx/SCCS/s.ops.tahoe.c:
+5.2 86/02/23 16:17:14 sam 3 2
+make pathname of instrs not depende on -I
+/usr/src/ucb/dbx/SCCS/s.process.c:
+5.2 86/02/23 16:18:21 sam 20 19
+add new signals; move rloc to machine file; add pio buffer alignment 
+c kludge for tahoe; make ARGP vax specific; move some include files to machine file
+/usr/src/ucb/dbx/SCCS/s.coredump.c:
+5.2 86/02/23 16:19:44 sam 10 9
+move machine dependent portions to machine file
+/usr/src/ucb/dbx/SCCS/s.runtime.tahoe.c:
+5.2 86/02/23 16:20:04 sam 2 1
+delete include file found in tahoe.c
+/usr/src/ucb/dbx/SCCS/s.vax.c:
+5.2 86/02/23 16:20:41 sam 16 15
+add machine-specific code from other files
+/usr/src/ucb/dbx/SCCS/s.tahoe.c:
+5.2 86/02/23 16:21:04 sam 3 2
+add machine-specific code from other files
+/usr/src/ucb/dbx/SCCS/s.Makefile:
+5.4 86/02/23 16:21:58 sam 17 15
+parameterize files for machine independence
+/usr/src/ucb/dbx/SCCS/s.Makefile:
+5.5 86/02/23 20:33:14 sam 18 17
+runtime is also machine-dependent
+/usr/src/ucb/dbx/SCCS/s.vax.c:
+5.3 86/02/23 20:59:35 sam 17 16
+fixup
+/usr/src/sys/tahoe/inline/SCCS/s.Makefile:
+1.2 86/02/24 22:27:08 sam 2 1
+update from monet: check number of arguments in pattern calls
+/usr/src/sys/tahoe/inline/SCCS/s.inline.h:
+1.2 86/02/24 22:27:10 sam 2 1
+update from monet: check number of arguments in pattern calls
+/usr/src/sys/tahoe/inline/SCCS/s.langpats.c:
+1.3 86/02/24 22:27:11 sam 3 2
+update from monet: check number of arguments in pattern calls
+/usr/src/sys/tahoe/inline/SCCS/s.libcpats.c:
+1.3 86/02/24 22:27:13 sam 3 2
+update from monet: check number of arguments in pattern calls
+/usr/src/sys/tahoe/inline/SCCS/s.machdep.c:
+1.3 86/02/24 22:27:15 sam 3 2
+update from monet: check number of arguments in pattern calls
+/usr/src/sys/tahoe/inline/SCCS/s.machpats.c:
+1.3 86/02/24 22:27:17 sam 3 2
+update from monet: check number of arguments in pattern calls
+/usr/src/sys/tahoe/inline/SCCS/s.main.c:
+1.3 86/02/24 22:27:19 sam 3 2
+update from monet: check number of arguments in pattern calls
+/usr/src/sys/tahoe/inline/SCCS/s.Makefile:
+1.3 86/02/24 22:28:05 sam 3 2
+put back sccsid
+/usr/src/lib/c2.tahoe/SCCS/s.c22.c:
+1.2 86/03/03 21:39:19 sam 2 1
+only use the current constant value if types match (avoids 
+c {tst,cmp}[bw] against long problem)
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+1.6 86/04/03 19:03:20 sam 6 5
+faster to check for stack segment than data segment; remove panic in 
+c pageout for the moment
+/usr/src/sys/h/SCCS/s.vmmac.h:
+1.3 86/04/03 19:04:11 sam 3 2
+calculate stack pte relative to p_addr; remove extraneous definition of setp0lr for vax
+/usr/src/sys/tahoe/SCCS/s.vm_machdep.c:
+1.5 86/04/03 19:04:36 sam 5 4
+calculate stack pte's relative to p_addr
+/usr/src/sys/tahoe/SCCS/s.vmparam.h:
+1.5 86/04/11 13:50:59 sam 5 4
+increase max data size to 24Mb
+/usr/src/sys/tahoe/SCCS/s.vmparam.h:
+1.6 86/04/19 11:10:33 sam 6 5
+up max data seg size to 32 meg
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.9 86/06/09 22:21:57 sam 9 8
+don't presume station address is inverted on entry to acesetaddr; 
+c don't set station address at boot until told to do so with ifconfig; add 
+c print at boot and each time station address is set; rearrange some crud and 
+c delete other cruft
+/usr/src/sys/netinet/SCCS/s.tcp.h:
+1.5 86/06/15 10:30:31 sam 5 4
+correct comments
+/usr/src/etc/talkd/SCCS/s.announce.c:
+5.2 86/06/19 00:58:38 sam 4 3
+somehow this didn't get checked in before
+/usr/src/etc/timed/SCCS/s.master.c:
+2.2 86/06/19 01:09:18 sam 7 6
+update to 4.3 release
+/usr/src/etc/timed/SCCS/s.readmsg.c:
+2.2 86/06/19 01:09:21 sam 7 6
+update to 4.3 release
+/usr/src/etc/timed/SCCS/s.slave.c:
+2.2 86/06/19 01:09:24 sam 5 4
+update to 4.3 release
+/usr/src/etc/timed/SCCS/s.timed.c:
+2.3 86/06/19 01:09:26 sam 7 6
+update to 4.3 release
+/usr/src/etc/timed/SCCS/s.timedc.c:
+2.3 86/06/19 01:09:30 sam 6 5
+update to 4.3 release
+/usr/src/lib/libc/tahoe/gen/SCCS/s.disktab.c:
+5.4 86/07/02 13:57:08 sam 6 5
+check 0 return from dgetnum as well as -1
+/usr/src/lib/libc/tahoe/fpe/SCCS/s.cmpd.s:
+1.2 86/07/02 16:27:04 sam 2 1
+add sccsid
+/usr/src/lib/libc/tahoe/net/SCCS/s.Makefile:
+1.2 86/07/02 16:34:09 sam 2 1
+add DEFS
+/usr/src/lib/libc/tahoe/fpe/SCCS/s.Makefile:
+1.2 86/07/02 16:34:47 sam 2 1
+add DEFS
+/usr/src/sys/tahoestand/SCCS/s.srt0.c:
+1.2 86/07/13 20:03:08 root 2 1
+for sam
+/usr/src/sys/h/SCCS/s.buf.h:
+1.3 86/07/16 07:50:39 sam 3 2
+parenthesize macro parameters
+/usr/src/sys/h/SCCS/s.cmap.h:
+1.3 86/07/16 07:51:02 sam 3 2
+increase cmap hash table size; 4.3 mods from monet
+/usr/src/sys/h/SCCS/s.fs.h:
+1.4 86/07/16 07:52:02 sam 4 3
+update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.ioctl.h:
+1.5 86/07/16 07:52:35 sam 5 4
+add sun window size compat stuff; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.mbuf.h:
+1.4 86/07/16 07:53:06 sam 4 3
+revise cluster macros; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.namei.h:
+1.2 86/07/16 07:53:31 sam 2 1
+rename name cache struct; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.param.h:
+1.4 86/07/16 07:53:52 sam 4 3
+fix NOGROUP for lint; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.proc.h:
+1.4 86/07/16 07:54:09 sam 4 3
+purge unused p1br copy; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.protosw.h:
+1.4 86/07/16 07:54:36 sam 4 3
+add gateway down code; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.reboot.h:
+1.3 86/07/16 07:55:11 sam 3 2
+add alternate adaptor encoding in boot code; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.socket.h:
+1.4 86/07/16 07:55:51 sam 4 3
+add option for oob inline; add appletalk af; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.socketvar.h:
+1.4 86/07/16 07:56:23 sam 4 3
+add implicit error checks; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.syslog.h:
+4.11 86/07/16 07:56:57 sam 12 11
+add LOG_NOWAIT for logging on console; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.systm.h:
+1.4 86/07/16 07:57:20 sam 4 3
+delete max/min unused; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.types.h:
+1.4 86/07/16 07:57:34 sam 4 3
+lint; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.uio.h:
+1.3 86/07/16 07:57:46 sam 3 2
+lint; update to 4.3 from monet
+/usr/src/sys/h/SCCS/s.vmmac.h:
+1.4 86/07/16 07:58:15 sam 4 3
+update to 4.3 from monet
+/usr/src/sys/sys/SCCS/s.init_main.c:
+1.5 86/07/16 07:58:40 sam 5 4
+lint
+/usr/src/sys/sys/SCCS/s.kern_clock.c:
+1.4 86/07/16 07:59:44 sam 4 3
+correct race condition in skewing time; delete unused bumptime; 
+c change dk.h to dkstat.h to avoid name clash with disk names
+/usr/src/sys/sys/SCCS/s.kern_descrip.c:
+1.4 86/07/16 08:00:53 sam 4 3
+change errno for setpgrp failure for compatibility
+/usr/src/sys/sys/SCCS/s.kern_exec.c:
+1.4 86/07/16 08:01:15 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.kern_exit.c:
+1.4 86/07/16 08:01:42 sam 4 3
+correct old mem alloc race; purge sun code
+/usr/src/sys/sys/SCCS/s.kern_fork.c:
+1.3 86/07/16 08:01:54 sam 3 2
+lint
+/usr/src/sys/sys/SCCS/s.kern_mman.c:
+1.4 86/07/16 08:02:12 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.kern_prot.c:
+1.4 86/07/16 08:02:24 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.kern_resource.c:
+1.4 86/07/16 08:03:23 sam 4 3
+correct return codes in setpriority
+/usr/src/sys/sys/SCCS/s.kern_sig.c:
+1.4 86/07/16 08:03:45 sam 4 3
+lint + cleanup
+/usr/src/sys/sys/SCCS/s.kern_subr.c:
+1.3 86/07/16 08:04:28 sam 3 2
+handle null iov's
+/usr/src/sys/sys/SCCS/s.kern_time.c:
+1.5 86/07/16 08:05:07 sam 5 4
+correct race condition; copyout previous value for adjtime
+/usr/src/sys/sys/SCCS/s.kern_xxx.c:
+1.4 86/07/16 08:05:22 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.quota_kern.c:
+1.3 86/07/16 08:05:39 sam 3 2
+lint
+/usr/src/sys/sys/SCCS/s.quota_sys.c:
+1.4 86/07/16 08:05:55 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.quota_ufs.c:
+1.4 86/07/16 08:06:08 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.subr_log.c:
+1.4 86/07/16 08:06:50 sam 4 3
+lint; handle end of buffer properly; correct select for write
+/usr/src/sys/sys/SCCS/s.subr_prf.c:
+1.4 86/07/16 08:07:14 sam 4 3
+lint; handle end of message buffer properly
+/usr/src/sys/sys/SCCS/s.subr_xxx.c:
+1.4 86/07/16 08:07:28 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.sys_generic.c:
+1.5 86/07/16 08:07:46 sam 5 4
+lint
+/usr/src/sys/sys/SCCS/s.sys_inode.c:
+1.4 86/07/16 08:07:59 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.tty.c:
+1.4 86/07/16 08:08:25 sam 4 3
+purge max; dk.h -> dkstat.h
+/usr/src/sys/sys/SCCS/s.tty_pty.c:
+1.5 86/07/16 08:08:54 sam 5 4
+missing paren's
+/usr/src/sys/sys/SCCS/s.ufs_alloc.c:
+1.4 86/07/16 08:09:09 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.ufs_inode.c:
+1.4 86/07/16 08:09:24 sam 4 3
+lint
+/usr/src/sys/sys/SCCS/s.ufs_mount.c:
+1.3 86/07/16 08:09:57 sam 3 2
+correct cache invalidation for mount/umount
+/usr/src/sys/sys/SCCS/s.ufs_namei.c:
+1.4 86/07/16 08:11:14 sam 4 3
+struct nch -> struct namecache; comment changes from monet; update 
+c directory size properly
+/usr/src/sys/sys/SCCS/s.ufs_subr.c:
+1.5 86/07/16 08:11:37 sam 5 4
+lint + uvax
+/usr/src/sys/sys/SCCS/s.ufs_syscalls.c:
+1.4 86/07/16 08:12:07 sam 4 3
+lint; correct access changes in itrunc
+/usr/src/sys/sys/SCCS/s.uipc_domain.c:
+1.5 86/07/16 08:12:27 sam 5 4
+add call to null_init
+/usr/src/sys/sys/SCCS/s.uipc_mbuf.c:
+1.4 86/07/16 08:12:49 sam 4 3
+increase number of clusters allocated
+/usr/src/sys/sys/SCCS/s.uipc_socket.c:
+1.6 86/07/16 08:14:09 sam 6 5
+use clusters for when data fills half or more of a cluster;
+c correct peeking; fix queuing bugs; add SO_OOBINLINE; lint
+/usr/src/sys/sys/SCCS/s.uipc_socket2.c:
+1.7 86/07/16 08:14:53 sam 7 6
+skew mbuf space requests; delete return values from sbdrop*
+/usr/src/sys/sys/SCCS/s.uipc_syscalls.c:
+1.4 86/07/16 08:15:23 sam 4 3
+correct race condition; lint
+/usr/src/sys/sys/SCCS/s.uipc_usrreq.c:
+1.5 86/07/16 08:16:17 sam 5 4
+provide socket name properly; change calling convention to unp_connect2
+/usr/src/sys/sys/SCCS/s.vm_drum.c:
+1.3 86/07/16 08:16:51 sam 3 2
+swap no longer returns errors -- panics instead
+/usr/src/sys/sys/SCCS/s.vm_mem.c:
+1.3 86/07/16 08:17:03 sam 3 2
+lint
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+1.7 86/07/16 08:17:36 sam 7 6
+lint; 
+/usr/src/sys/sys/SCCS/s.vm_proc.c:
+1.3 86/07/16 08:17:52 sam 3 2
+lint
+/usr/src/sys/sys/SCCS/s.vm_pt.c:
+1.4 86/07/16 08:18:26 sam 4 3
+lint; remove p_p1br use; swap no longer returns error code
+/usr/src/sys/sys/SCCS/s.vm_swap.c:
+1.5 86/07/16 08:18:47 sam 5 4
+lint
+/usr/src/sys/sys/SCCS/s.vm_text.c:
+1.5 86/07/16 08:19:02 sam 5 4
+lint
+/usr/src/sys/net/SCCS/s.af.c:
+1.3 86/07/16 08:19:43 sam 3 2
+purge PUP; add null_init() to setup afswitch table to null hash routines
+/usr/src/sys/net/SCCS/s.if.h:
+1.6 86/07/16 08:20:02 sam 6 5
+reserve flags for future use
+/usr/src/sys/net/SCCS/s.if_loop.c:
+1.5 86/07/16 08:20:14 sam 5 4
+include change
+/usr/src/sys/net/SCCS/s.raw_usrreq.c:
+1.5 86/07/16 08:20:23 sam 5 4
+lint
+/usr/src/sys/net/SCCS/s.route.c:
+1.4 86/07/16 08:20:57 sam 4 3
+be more careful in accepting routing redirects; 
+/usr/src/sys/net/SCCS/s.route.h:
+1.4 86/07/16 08:21:21 sam 4 3
+purge route reinstatement flag (for bbn?)
+/usr/src/sys/netinet/SCCS/s.if_ether.c:
+1.6 86/07/16 08:22:01 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.in.c:
+1.4 86/07/16 08:22:03 sam 4 3
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.in.h:
+1.6 86/07/16 08:22:06 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.in_pcb.c:
+1.5 86/07/16 08:22:08 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.in_proto.c:
+1.5 86/07/16 08:22:10 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.in_var.h:
+1.3 86/07/16 08:22:12 sam 3 2
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.ip_icmp.c:
+1.6 86/07/16 08:22:13 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.ip_icmp.h:
+1.4 86/07/16 08:22:16 sam 4 3
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.ip_input.c:
+1.6 86/07/16 08:22:17 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.ip_output.c:
+1.5 86/07/16 08:22:21 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.raw_ip.c:
+1.4 86/07/16 08:22:23 sam 4 3
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.tcp_input.c:
+1.6 86/07/16 08:22:25 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.tcp_output.c:
+1.6 86/07/16 08:22:29 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.tcp_subr.c:
+1.4 86/07/16 08:22:31 sam 4 3
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.tcp_timer.c:
+1.6 86/07/16 08:22:33 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.tcp_timer.h:
+1.5 86/07/16 08:22:35 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.tcp_usrreq.c:
+1.5 86/07/16 08:22:38 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.tcp_var.h:
+1.5 86/07/16 08:22:40 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.udp_usrreq.c:
+1.5 86/07/16 08:22:41 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netinet/SCCS/s.udp_var.h:
+1.4 86/07/16 08:22:43 sam 4 3
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.idp_usrreq.c:
+6.12 86/07/16 08:23:17 sam 13 12
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns.c:
+6.7 86/07/16 08:23:19 sam 7 6
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns.h:
+6.11 86/07/16 08:23:21 sam 11 10
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_error.c:
+6.7 86/07/16 08:23:22 sam 7 6
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_if.h:
+6.3 86/07/16 08:23:24 sam 3 2
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_input.c:
+6.12 86/07/16 08:23:25 sam 13 12
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_ip.c:
+6.13 86/07/16 08:23:27 sam 13 12
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_output.c:
+6.9 86/07/16 08:23:29 sam 9 8
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_pcb.c:
+6.6 86/07/16 08:23:30 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_pcb.h:
+6.5 86/07/16 08:23:32 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.ns_proto.c:
+6.5 86/07/16 08:23:33 sam 5 4
+update to 4.3 from monet
+/usr/src/sys/netns/SCCS/s.spp_debug.c:
+6.6 86/07/16 08:23:35 sam 6 5
+update to 4.3 from monet
+/usr/src/sys/conf/SCCS/s.param.c:
+1.4 86/07/16 08:24:20 sam 4 3
+correct tickadj + name cache struct name; 4.3 version
+/usr/src/sys/conf/SCCS/s.Makefile.tahoe:
+1.6 86/07/16 08:24:42 sam 6 5
+update to 4.3
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.6 86/07/16 08:25:47 sam 6 5
+add setroot stuff from vax 4.3; handle new boot stuff; change disk names
+/usr/src/sys/tahoe/SCCS/s.conf.c:
+1.5 86/07/16 08:26:21 sam 5 4
+purege nonexistent drivers; change disk names
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.8 86/07/16 08:26:43 sam 8 7
+save boot device for setroot autoconf
+/usr/src/sys/tahoe/SCCS/s.machdep.c:
+1.5 86/07/16 08:27:23 sam 5 4
+bug fix for sendsig (correct user access check); name cache name change
+/usr/src/sys/tahoe/SCCS/s.mem.c:
+1.3 86/07/16 08:27:37 sam 3 2
+purge min
+/usr/src/sys/tahoe/SCCS/s.trap.c:
+1.5 86/07/16 08:27:55 sam 5 4
+mnemon spl's
+/usr/src/sys/tahoe/SCCS/s.swapgeneric.c:
+1.3 86/07/16 08:28:34 sam 3 2
+disk name changes; accept del as erase char
+/usr/src/sys/netimp/SCCS/s.if_imp.c:
+6.9 86/07/16 08:28:53 sam 62 61
+update to 4.3 from monet
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.10 86/07/16 08:29:33 sam 10 9
+use clusters if data fills >= 1/2 cluster
+/usr/src/sys/tahoevba/SCCS/s.vd.c:
+1.9 86/07/16 08:30:19 sam 9 8
+change disk names to dk; print drive type always (needs more)
+/usr/src/sys/tahoestand/SCCS/s.boot.c:
+1.2 86/07/16 08:31:54 sam 2 1
+handle revised boot device encoding; change disk names (more work)
+/usr/src/sys/tahoestand/SCCS/s.conf.c:
+1.2 86/07/16 08:32:22 sam 2 1
+purge cruft; change disk names
+/usr/src/sys/tahoestand/SCCS/s.vd.c:
+1.3 86/07/16 08:35:04 sam 3 2
+structure renames and merges; purge cruft
+/usr/src/lib/libc/net/named/SCCS/s.gethostnamadr.c:
+6.13 86/07/16 19:13:30 sam 39 38
+correct alignment of return values; from burht@el.purdue.edu
+/usr/src/etc/config/SCCS/s.config.h:
+5.4 86/07/19 11:34:15 sam 18 17
+remove sun support (out of date); add 4.3 stuff for makefile options
+/usr/src/etc/config/SCCS/s.config.l:
+5.3 86/07/19 11:34:18 sam 17 16
+remove sun support (out of date); add 4.3 stuff for makefile options
+/usr/src/etc/config/SCCS/s.config.y:
+5.3 86/07/19 11:34:20 sam 22 21
+remove sun support (out of date); add 4.3 stuff for makefile options
+/usr/src/etc/config/SCCS/s.main.c:
+5.3 86/07/19 11:34:23 sam 13 12
+remove sun support (out of date); add 4.3 stuff for makefile options
+/usr/src/etc/config/SCCS/s.mkglue.c:
+5.6 86/07/19 11:34:25 sam 19 18
+remove sun support (out of date); add 4.3 stuff for makefile options
+/usr/src/etc/config/SCCS/s.mkioconf.c:
+5.3 86/07/19 11:34:27 sam 12 11
+remove sun support (out of date); add 4.3 stuff for makefile options
+/usr/src/etc/config/SCCS/s.mkmakefile.c:
+5.7 86/07/19 11:34:30 sam 43 42
+remove sun support (out of date); add 4.3 stuff for makefile options
+/usr/src/bin/make/SCCS/s.defs:
+4.11 86/07/19 17:03:27 sam 11 10
+up buffer sizes for kernel makefiles
+/usr/src/ucb/systat/SCCS/s.vmstat.c:
+5.7 86/07/20 10:57:49 sam 11 10
+increase column width to handle larger memories
+/usr/src/ucb/systat/SCCS/s.systat.h:
+5.2 86/07/20 10:58:09 sam 9 8
+dk.h->dkstat.h
+/usr/src/ucb/systat/SCCS/s.swap.c:
+5.4 86/07/20 10:58:22 sam 12 11
+range check number of swap devices
+/usr/src/ucb/systat/SCCS/s.pigs.c:
+5.5 86/07/20 10:58:40 sam 13 12
+purge redundant include
+/usr/src/ucb/systat/SCCS/s.Makefile:
+5.3 86/07/20 10:58:49 sam 12 11
+make depend
+/usr/src/sys/h/SCCS/s.vmmeter.h:
+1.4 86/07/20 11:07:53 sam 4 3
+count fpe and alignment emulation traps
+/usr/src/sys/tahoe/SCCS/s.genassym.c:
+1.5 86/07/20 11:08:20 sam 5 4
+add stuff for new vmmeter.h and also for alignment emulation
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.9 86/07/20 11:09:50 sam 9 8
+count stray interrupts, fpe traps; add alignment support code (must 
+c go back and correct stack offsets for extra registers saved?)
+/usr/src/ucb/more/SCCS/s.more.c:
+5.4 86/07/21 13:10:20 sam 30 29
+4.3 update from moent
+/usr/src/ucb/more/SCCS/s.more.c:
+5.5 86/07/21 13:41:23 sam 31 30
+make magic file number checking portable
+/usr/src/ucb/more/SCCS/s.more.c:
+5.5 86/07/21 13:42:04 sam 32 30
+make magic file number checking portable
+/usr/src/bin/SCCS/s.cc.c:
+4.15 86/07/24 08:41:29 sam 20 19
+add -a flag to disable cci optimizer floating point code shuffling
+/usr/src/bin/SCCS/s.chgrp.c:
+5.4 86/07/24 08:42:30 sam 12 11
+4.3 update to fix directory handling and better error messages
+/usr/src/bin/SCCS/s.chmod.c:
+5.5 86/07/24 08:42:32 sam 10 9
+4.3 update to fix directory handling and better error messages
+/usr/src/bin/SCCS/s.date.c:
+4.16 86/07/24 08:43:25 sam 18 17
+4.3 update;add -n flag to ignore time daemon; send error messages to stderr
+/usr/src/bin/SCCS/s.ed.c:
+4.4 86/07/24 08:43:41 sam 5 4
+4.3 fix
+/usr/src/bin/SCCS/s.hostid.c:
+5.4 86/07/24 08:44:11 sam 7 6
+4.3 update to allow internet addresses by name
+/usr/src/bin/SCCS/s.kill.c:
+4.4 86/07/24 08:44:27 sam 5 4
+4.3 update to allow signal 0
+/usr/src/bin/SCCS/s.ld.c:
+5.6 86/07/24 08:44:59 sam 24 22
+cci kludge for standalone programs (entry point allowed in other than text)
+/usr/src/bin/SCCS/s.login.c:
+5.12 86/07/24 08:50:57 sam 53 52
+4.3 update to set gid on tty properly;
+/usr/src/bin/SCCS/s.ls.c:
+5.6 86/07/25 20:47:55 sam 29 28
+4.3 update; remove -S flag; increase inode field printf size; check tabs correctly
+/usr/src/bin/SCCS/s.mv.c:
+5.3 86/07/25 20:48:18 sam 16 15
+4.3 update; improve rename error messages
+/usr/src/bin/SCCS/s.nm.c:
+4.7 86/07/25 20:48:51 sam 10 9
+4.3 update; correct N_FN handling
+/usr/src/bin/SCCS/s.passwd.c:
+4.23 86/07/25 20:49:31 sam 23 22
+4.3 update; take available shells from system list; correct printf
+/usr/src/bin/SCCS/s.ps.c:
+5.6 86/07/25 20:50:15 sam 43 42
+4.3 update; version stamp database; handle larger memory sizes
+/usr/src/bin/SCCS/s.rmail.c:
+4.7 86/07/25 20:50:58 sam 21 20
+4.3 update; get from address from contents of letter
+/usr/src/bin/SCCS/s.stty.c:
+5.4 86/07/25 20:51:19 sam 22 21
+4.3 update; allow cols as a synonym for columns
+/usr/src/bin/SCCS/s.tar.c:
+5.5 86/07/25 20:53:20 sam 31 30
+4.3 update
+/usr/src/bin/SCCS/s.test.c:
+4.2 86/07/25 20:54:12 sam 2 1
+4.3 update; minor reworks
+/usr/src/bin/SCCS/s.wall.c:
+5.3 86/07/25 20:54:36 sam 12 11
+4.3 update; purge bells
+/usr/src/bin/SCCS/s.write.c:
+4.12 86/07/25 20:54:57 sam 12 11
+4.3 update; check group write permissions
+/usr/src/bin/SCCS/s.Makefile:
+5.16 86/07/25 20:55:21 sam 35 34
+4.3 update
+/usr/src/bin/adb.tahoe/SCCS/s.command.c:
+1.2 86/07/25 20:56:20 sam 2 1
+1.21 release update; use -1 as invalid register, 0 potentially valid
+/usr/src/bin/adb.tahoe/SCCS/s.defs.h:
+1.2 86/07/25 20:56:22 sam 2 1
+1.21 release update; use -1 as invalid register, 0 potentially valid
+/usr/src/bin/adb.tahoe/SCCS/s.expr.c:
+1.2 86/07/25 20:56:24 sam 2 1
+1.21 release update; use -1 as invalid register, 0 potentially valid
+/usr/src/bin/adb.tahoe/SCCS/s.print.c:
+1.2 86/07/25 20:56:25 sam 2 1
+1.21 release update; use -1 as invalid register, 0 potentially valid
+/usr/src/bin/awk/SCCS/s.Makefile:
+4.3 86/07/25 20:56:55 sam 3 2
+use ex and force overwrite of tokenscript
+/usr/src/bin/awk/SCCS/s.tokenscript:
+4.3 86/07/25 20:56:57 sam 3 2
+use ex and force overwrite of tokenscript
+/usr/src/bin/csh/SCCS/s.Makefile:
+5.4 86/07/25 21:00:44 sam 13 12
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.alloc.c:
+5.3 86/07/25 21:00:46 sam 8 7
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.c:
+5.3 86/07/25 21:00:48 sam 29 28
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.char.c:
+5.3 86/07/25 21:00:52 sam 4 3
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.char.h:
+5.3 86/07/25 21:00:53 sam 4 3
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.dol.c:
+5.3 86/07/25 21:00:54 sam 8 7
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.err.c:
+5.3 86/07/25 21:00:56 sam 5 4
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.file.c:
+5.3 86/07/25 21:00:58 sam 11 10
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.func.c:
+5.3 86/07/25 21:01:01 sam 19 18
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.glob.c:
+5.3 86/07/25 21:01:04 sam 13 12
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.h:
+5.3 86/07/25 21:01:08 sam 15 14
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.lex.c:
+5.4 86/07/25 21:01:10 sam 13 12
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.misc.c:
+5.3 86/07/25 21:01:14 sam 7 6
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.parse.c:
+5.3 86/07/25 21:01:15 sam 5 4
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.proc.c:
+5.5 86/07/25 21:01:17 sam 22 21
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.sem.c:
+5.4 86/07/25 21:01:20 sam 10 9
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/csh/SCCS/s.sh.time.c:
+5.4 86/07/25 21:01:23 sam 10 9
+4.3 update; fixes to tenex mode; purge internal sort; correct 
+c nice command; use character typing array instead of routines such as letter(); 
+c probably more which ran off the top of the screen
+/usr/src/bin/diff/SCCS/s.diff.c:
+4.6 86/07/25 21:02:04 sam 6 5
+correct tempfile unlink
+/usr/src/bin/diff/SCCS/s.diffreg.c:
+4.15 86/07/25 21:02:22 sam 15 14
+correct context diffing
+/usr/src/etc/SCCS/s.arff.c:
+5.2 86/07/25 21:02:46 sam 22 21
+4.3 update
+/usr/src/etc/SCCS/s.bad144.c:
+5.4 86/07/25 21:02:50 sam 12 11
+4.3 update
+/usr/src/etc/SCCS/s.arp.c:
+1.5 86/07/25 21:03:26 sam 5 4
+allow dot address; handle nameserver errors
+/usr/src/etc/SCCS/s.catman.c:
+5.6 86/07/25 21:04:19 sam 14 13
+use symbolic links for cat directory entries
+/usr/src/etc/SCCS/s.chown.c:
+5.3 86/07/25 21:04:56 sam 8 7
+set proper gid on directories; better error handling; 4.3 update
+/usr/src/etc/SCCS/s.cron.c:
+4.12 86/07/25 21:05:26 sam 15 14
+4.3 update; add debugging stuff
+/usr/src/etc/SCCS/s.diskpart.c:
+5.5 86/07/25 22:40:48 sam 8 7
+4.3 update; mods to default fs params; don't deduct badsector table for 'c' partition
+/usr/src/etc/SCCS/s.dmesg.c:
+5.2 86/07/25 22:41:44 sam 5 4
+4.3 update; add -f for following message buffer
+/usr/src/etc/SCCS/s.gettable.c:
+5.2 86/07/25 22:42:08 sam 7 6
+4.3 update; lint
+/usr/src/etc/SCCS/s.halt.c:
+5.2 86/07/25 22:42:36 sam 11 10
+4.3 update; use syslog
+/usr/src/etc/SCCS/s.ifconfig.c:
+4.16 86/07/25 22:44:03 sam 17 16
+4.3 update; add metric setting; report status more robustly
+/usr/src/etc/SCCS/s.inetd.c:
+5.5 86/07/25 22:45:25 sam 10 9
+4.3 update; add builtin services; block other signals on SIGALRM; more
+/usr/src/etc/SCCS/s.init.c:
+5.7 86/07/25 22:45:59 sam 22 21
+4.3 update; post SIGTERM before shutdown to allow daemons to cleanup
+/usr/src/etc/SCCS/s.mount.c:
+5.4 86/07/25 22:46:36 sam 15 14
+4.3 update; only try mounting stuff with acceptable type field
+/usr/src/etc/SCCS/s.ping.c:
+4.5 86/07/25 22:47:25 sam 6 5
+4.3 update; check for short packets
+/usr/src/etc/SCCS/s.pstat.c:
+5.9 86/07/25 22:47:56 sam 42 41
+4.3 update; only count swap space for partitions swapon'd
+/usr/src/etc/SCCS/s.quotacheck.c:
+5.8 86/07/25 22:48:59 sam 19 18
+4.3 update; avoid truncation from fopen
+/usr/src/etc/SCCS/s.reboot.c:
+5.2 86/07/25 22:49:31 sam 10 9
+4.3 update; use syslog; post SIGTERM before shutdown
+/usr/src/etc/SCCS/s.repquota.c:
+5.4 86/07/25 22:50:04 sam 8 7
+4.3 update; avoid nil pointers
+/usr/src/etc/SCCS/s.rexecd.c:
+5.4 86/07/25 22:50:36 sam 17 16
+4.3 update; set groups and gid properly
+/usr/src/etc/SCCS/s.rlogind.c:
+5.11 86/07/25 22:51:11 sam 41 40
+4.3 update; avoid alignment problems with window size change info
+/usr/src/etc/SCCS/s.route.c:
+5.3 86/07/25 22:51:50 sam 17 16
+4.3 update; add -h flag for forcing host route; handle ns
+/usr/src/etc/SCCS/s.rshd.c:
+5.6 86/07/25 22:52:45 sam 29 28
+4.3 update; mostly lint
+/usr/src/etc/SCCS/s.rwhod.c:
+5.8 86/07/25 22:53:13 sam 41 40
+4.3 update; improve performance by doing cd to spool directory
+/usr/src/etc/SCCS/s.savecore.c:
+5.6 86/07/25 22:53:54 sam 24 23
+4.3 update; use syslog
+/usr/src/etc/SCCS/s.shutdown.c:
+5.4 86/07/25 22:56:38 sam 24 23
+4.3 update; use syslog; move SIGTERM to init; invoke reboot/halt 
+c with -l flag for logging
+/usr/src/etc/SCCS/s.swapon.c:
+5.2 86/07/25 22:57:21 sam 10 9
+4.3 update; use swapon library routine
+/usr/src/etc/SCCS/s.syslogd.c:
+5.11 86/07/25 22:58:27 sam 23 22
+4.3 update; pitch compatibility stuff; change marking level
+/usr/src/etc/SCCS/s.telnetd.c:
+5.6 86/07/25 22:59:38 sam 40 39
+4.3 update; major rework to support most of protocol including flush on interrupt
+/usr/src/etc/SCCS/s.Makefile:
+5.10 86/07/25 22:59:52 sam 49 48
+4.3 update
+/usr/src/etc/dump/SCCS/s.Makefile:
+5.4 86/07/25 23:01:32 sam 19 18
+4.3 update; major changes to support ring of dump proc's for performance
+/usr/src/etc/dump/SCCS/s.dump.h:
+5.3 86/07/25 23:01:33 sam 16 15
+4.3 update; major changes to support ring of dump proc's for performance
+/usr/src/etc/dump/SCCS/s.dumpitime.c:
+5.2 86/07/25 23:01:34 sam 15 14
+4.3 update; major changes to support ring of dump proc's for performance
+/usr/src/etc/dump/SCCS/s.dumpmain.c:
+5.3 86/07/25 23:01:36 sam 22 21
+4.3 update; major changes to support ring of dump proc's for performance
+/usr/src/etc/dump/SCCS/s.dumprmt.c:
+5.6 86/07/25 23:01:38 sam 18 17
+4.3 update; major changes to support ring of dump proc's for performance
+/usr/src/etc/dump/SCCS/s.dumptape.c:
+5.4 86/07/25 23:01:40 sam 15 14
+4.3 update; major changes to support ring of dump proc's for performance
+/usr/src/etc/fsck/SCCS/s.setup.c:
+5.3 86/07/25 23:02:54 sam 9 8
+4.3 update; closer analysis of superblock; check optim field
+/usr/src/etc/fsck/SCCS/s.pass1.c:
+5.2 86/07/25 23:04:05 sam 9 8
+4.3 update; handle badsect mapping better
+/usr/src/etc/fsck/SCCS/s.main.c:
+5.4 86/07/25 23:04:36 sam 76 75
+4.3 update; process inodes with zero link counts
+/usr/src/etc/fsck/SCCS/s.pass2.c:
+5.2 86/07/25 23:04:42 sam 8 7
+4.3 update; process inodes with zero link counts
+/usr/src/etc/fsck/SCCS/s.pass4.c:
+5.2 86/07/25 23:04:44 sam 6 5
+4.3 update; process inodes with zero link counts
+/usr/src/etc/fsck/SCCS/s.pass5.c:
+5.3 86/07/25 23:04:45 sam 9 8
+4.3 update; process inodes with zero link counts
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.4 86/07/25 23:07:02 sam 17 16
+4.3 update; undo many cosmetic changes I made in prior integration; 
+c check allowable shells field with getusershell(); correct protocol botches
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.4 86/07/25 23:07:05 sam 41 40
+4.3 update; undo many cosmetic changes I made in prior integration; 
+c check allowable shells field with getusershell(); correct protocol botches
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.5 86/07/25 23:07:33 sam 18 17
+put sccsid back
+/usr/src/etc/getty/SCCS/s.gettytab:
+5.7 86/07/25 23:07:56 sam 14 13
+fix comment
+/usr/src/etc/htable/SCCS/s.htable.c:
+5.5 86/07/25 23:08:40 sam 17 16
+4.3 update; allow lower case in identifiers
+/usr/src/etc/htable/SCCS/s.scan.l:
+5.3 86/07/25 23:08:42 sam 5 4
+4.3 update; allow lower case in identifiers
+/usr/src/etc/implog/SCCS/s.implog.c:
+5.4 86/07/25 23:09:33 sam 8 7
+4.3 update; major improvements in info returned
+/usr/src/etc/implog/SCCS/s.implogd.c:
+5.2 86/07/25 23:09:35 sam 10 9
+4.3 update; major improvements in info returned
+/usr/src/etc/restore/SCCS/s.dirs.c:
+5.3 86/07/25 23:11:10 sam 23 22
+4.3 update; check for dir's missing ..; do byte manip for 
+c foreign tapes; handle sockets
+/usr/src/etc/restore/SCCS/s.main.c:
+5.3 86/07/25 23:11:12 sam 54 53
+4.3 update; check for dir's missing ..; do byte manip for 
+c foreign tapes; handle sockets
+/usr/src/etc/restore/SCCS/s.restore.c:
+5.2 86/07/25 23:11:18 sam 22 21
+4.3 update; check for dir's missing ..; do byte manip for 
+c foreign tapes; handle sockets
+/usr/src/etc/restore/SCCS/s.tape.c:
+5.6 86/07/25 23:11:22 sam 35 34
+4.3 update; check for dir's missing ..; do byte manip for 
+c foreign tapes; handle sockets
+/usr/src/etc/routed/SCCS/s.af.c:
+5.3 86/07/25 23:14:07 sam 20 19
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.af.h:
+5.2 86/07/25 23:14:09 sam 4 3
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.defs.h:
+5.3 86/07/25 23:14:10 sam 20 19
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.if.c:
+5.2 86/07/25 23:14:12 sam 6 5
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.inet.c:
+5.2 86/07/25 23:14:13 sam 5 4
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.input.c:
+5.2 86/07/25 23:14:15 sam 14 13
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.interface.h:
+5.3 86/07/25 23:14:16 sam 6 5
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.main.c:
+5.6 86/07/25 23:14:18 sam 20 19
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.output.c:
+5.2 86/07/25 23:14:20 sam 7 6
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.startup.c:
+5.5 86/07/25 23:14:21 sam 14 13
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.table.h:
+5.2 86/07/25 23:14:23 sam 5 4
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.tables.c:
+5.2 86/07/25 23:14:25 sam 13 12
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.timer.c:
+5.5 86/07/25 23:14:27 sam 10 9
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.trace.c:
+5.2 86/07/25 23:14:29 sam 8 7
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/routed/SCCS/s.trace.h:
+5.2 86/07/25 23:14:31 sam 6 5
+4.3 update; handle subnets and better handle various af's
+/usr/src/etc/talkd/SCCS/s.Makefile:
+5.2 86/07/25 23:15:05 sam 2 1
+4.3 update; honor group write bit 
+/usr/src/etc/talkd/SCCS/s.announce.c:
+5.3 86/07/25 23:15:06 sam 5 4
+4.3 update; honor group write bit 
+/usr/src/etc/talkd/SCCS/s.process.c:
+5.4 86/07/25 23:15:08 sam 7 6
+4.3 update; honor group write bit 
+/usr/src/etc/termcap/SCCS/s.Makefile:
+5.2 86/07/25 23:15:20 sam 13 12
+4.3 update
+/usr/src/etc/termcap/SCCS/s.termcap.src:
+5.24 86/07/25 23:15:22 sam 74 73
+4.3 update
+/usr/src/etc/timed/SCCS/s.acksend.c:
+2.2 86/07/25 23:15:51 sam 5 4
+4.3 update
+/usr/src/etc/timed/SCCS/s.byteorder.c:
+2.2 86/07/25 23:15:53 sam 3 2
+4.3 update
+/usr/src/etc/timed/SCCS/s.candidate.c:
+2.2 86/07/25 23:15:54 sam 6 5
+4.3 update
+/usr/src/etc/timed/SCCS/s.cmds.c:
+2.2 86/07/25 23:15:55 sam 4 3
+4.3 update
+/usr/src/etc/timed/SCCS/s.cmdtab.c:
+2.3 86/07/25 23:15:57 sam 4 3
+4.3 update
+/usr/src/etc/timed/SCCS/s.correct.c:
+2.2 86/07/25 23:15:58 sam 6 5
+4.3 update
+/usr/src/etc/timed/SCCS/s.globals.h:
+2.2 86/07/25 23:16:00 sam 4 3
+4.3 update
+/usr/src/etc/timed/SCCS/s.measure.c:
+2.2 86/07/25 23:16:01 sam 4 3
+4.3 update
+/usr/src/etc/timed/SCCS/s.networkdelta.c:
+2.2 86/07/25 23:16:03 sam 3 2
+4.3 update
+/usr/src/etc/routed/tools/SCCS/s.query.c:
+5.3 86/07/25 23:16:31 sam 10 9
+4.3 update
+/usr/src/etc/routed/tools/SCCS/s.trace.c:
+5.3 86/07/25 23:16:33 sam 6 5
+4.3 update
+/usr/src/include/SCCS/s.Makefile.install:
+5.3 86/07/25 23:18:18 sam 3 2
+add tahoe
+/usr/src/include/SCCS/s.Makefile:
+5.11 86/07/25 23:18:23 sam 23 22
+4.3 update
+/usr/src/lib/SCCS/s.Makefile:
+5.5 86/07/25 23:18:41 sam 7 6
+4.3 update
+/usr/src/lib/cpp/SCCS/s.Makefile:
+1.3 86/07/25 23:19:30 sam 3 2
+4.3 update; don't put comments in macro expansions
+/usr/src/lib/cpp/SCCS/s.cpp.c:
+1.15 86/07/25 23:19:31 sam 15 14
+4.3 update; don't put comments in macro expansions
+/usr/src/ucb/SCCS/s.finger.c:
+5.8 86/07/25 23:20:59 sam 17 16
+4.3 update; honor tty group write bit
+/usr/src/ucb/SCCS/s.grep.c:
+5.2 86/07/25 23:21:20 sam 8 7
+4.3 update; check re return code
+/usr/src/ucb/SCCS/s.last.c:
+5.2 86/07/25 23:21:36 sam 10 9
+4.3 update; handle uucp logins
+/usr/src/ucb/SCCS/s.lastcomm.c:
+5.2 86/07/25 23:22:10 sam 16 15
+4.3 update; correct field width for command stirngs
+/usr/src/ucb/SCCS/s.logger.c:
+6.4 86/07/25 23:22:19 sam 4 3
+4.3 update
+/usr/src/ucb/SCCS/s.man.c:
+5.9 86/07/25 23:23:11 sam 25 24
+4.3 update; lots
+/usr/src/ucb/SCCS/s.quota.c:
+5.4 86/07/25 23:23:35 sam 9 8
+4.3 update; lint
+/usr/src/ucb/SCCS/s.rlogin.c:
+5.9 86/07/25 23:24:31 sam 30 29
+4.3 update; add error messages; sun compatibility
+/usr/src/ucb/SCCS/s.script.c:
+5.6 86/07/25 23:24:51 sam 14 13
+4.3 update; pty fixes eliminate sleep
+/usr/src/ucb/SCCS/s.telnet.c:
+5.5 86/07/25 23:25:29 sam 35 34
+4.3 update; major functional rework
+/usr/src/ucb/SCCS/s.vmstat.c:
+5.6 86/07/25 23:26:28 sam 25 24
+4.3 update; send errors to stderr; cleanup code; widen memory field
+/usr/src/ucb/SCCS/s.w.c:
+5.3 86/07/25 23:27:03 sam 19 18
+4.3 update; handle long idle times
+/usr/src/ucb/SCCS/s.which.csh:
+5.4 86/07/25 23:27:24 sam 8 7
+4.3 update; check for .cshrc existing
+/usr/src/ucb/SCCS/s.Makefile:
+5.15 86/07/25 23:27:37 sam 75 74
+4.3 update
+/usr/src/ucb/Mail/SCCS/s.cmdtab.c:
+5.5 86/07/25 23:28:33 sam 25 24
+4.3 update
+/usr/src/ucb/Mail/SCCS/s.def.h:
+5.4 86/07/25 23:28:35 sam 33 32
+4.3 update
+/usr/src/ucb/Mail/SCCS/s.lex.c:
+5.6 86/07/25 23:28:38 sam 46 45
+4.3 update
+/usr/src/ucb/Mail/SCCS/s.list.c:
+5.6 86/07/25 23:28:40 sam 15 14
+4.3 update
+/usr/src/ucb/Mail/SCCS/s.names.c:
+5.5 86/07/25 23:28:43 sam 16 15
+4.3 update
+/usr/src/ucb/Mail/SCCS/s.optim.c:
+5.7 86/07/25 23:28:45 sam 20 19
+4.3 update
+/usr/src/ucb/Mail/SCCS/s.quit.c:
+5.3 86/07/25 23:28:49 sam 17 16
+4.3 update
+/usr/src/ucb/compress/SCCS/s.compress.c:
+5.9 86/07/26 13:01:26 sam 10 9
+4.3 update
+/usr/src/ucb/dbx/SCCS/s.mappings.c:
+5.2 86/07/26 13:02:14 sam 9 8
+4.3 update; round to front of function
+/usr/src/ucb/ex/SCCS/s.ex_tune.h:
+7.9 86/07/26 13:02:42 sam 18 17
+1.21 change; increase termcap buffer
+/usr/src/ucb/ftp/SCCS/s.cmds.c:
+5.3 86/07/26 13:02:59 sam 14 13
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.domacro.c:
+5.2 86/07/26 13:03:04 sam 2 1
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.ftp.c:
+5.5 86/07/26 13:03:06 sam 21 20
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.ftp_var.h:
+5.3 86/07/26 13:03:11 sam 9 8
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.getpass.c:
+5.3 86/07/26 13:03:13 sam 6 5
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.glob.c:
+5.2 86/07/26 13:03:14 sam 5 4
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.main.c:
+5.3 86/07/26 13:03:16 sam 13 12
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.pclose.c:
+5.2 86/07/26 13:03:19 sam 2 1
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.ruserpass.c:
+5.2 86/07/26 13:03:20 sam 2 1
+4.3 update
+/usr/src/ucb/msgs/SCCS/s.msgs.c:
+5.2 86/07/26 13:03:53 sam 20 19
+4.3 update; use window size ioctl
+/usr/src/ucb/netstat/SCCS/s.Makefile:
+5.5 86/07/26 13:04:32 sam 11 10
+4.3 update
+/usr/src/ucb/netstat/SCCS/s.if.c:
+5.3 86/07/26 13:04:33 sam 11 10
+4.3 update
+/usr/src/ucb/netstat/SCCS/s.inet.c:
+5.4 86/07/26 13:04:35 sam 24 23
+4.3 update
+/usr/src/ucb/netstat/SCCS/s.main.c:
+5.5 86/07/26 13:04:36 sam 20 19
+4.3 update
+/usr/src/ucb/netstat/SCCS/s.route.c:
+5.6 86/07/26 13:04:38 sam 16 15
+4.3 update
+/usr/src/ucb/netstat/SCCS/s.unix.c:
+5.3 86/07/26 13:04:41 sam 4 3
+4.3 update
+/usr/src/ucb/rdist/SCCS/s.defs.h:
+5.2 86/07/26 13:06:06 sam 17 16
+4.3 update; handle symbolic links; remove internal sort routine; more
+/usr/src/ucb/rdist/SCCS/s.expand.c:
+5.2 86/07/26 13:06:07 sam 15 14
+4.3 update; handle symbolic links; remove internal sort routine; more
+/usr/src/ucb/rdist/SCCS/s.server.c:
+5.2 86/07/26 13:06:09 sam 25 24
+4.3 update; handle symbolic links; remove internal sort routine; more
+/usr/src/ucb/sendbug/SCCS/s.Makefile:
+5.5 86/07/26 13:07:01 sam 9 8
+4.3 update
+/usr/src/ucb/sendbug/SCCS/s.bugfiler.c:
+5.5 86/07/26 13:07:02 sam 23 22
+4.3 update
+/usr/src/ucb/sendbug/SCCS/s.sendbug.sh:
+5.6 86/07/26 13:07:04 sam 9 8
+4.3 update
+/usr/src/ucb/sysline/SCCS/s.sysline.c:
+5.6 86/07/26 13:07:23 sam 6 5
+4.3update
+/usr/src/ucb/talk/SCCS/s.Makefile:
+5.3 86/07/26 13:07:33 sam 7 6
+4.3 update
+/usr/src/ucb/tftp/SCCS/s.Makefile:
+5.2 86/07/26 13:07:45 sam 7 6
+4.3 update
+/usr/src/ucb/tftp/SCCS/s.main.c:
+5.3 86/07/26 13:07:47 sam 12 11
+4.3 update
+/usr/src/ucb/tftp/SCCS/s.tftp.c:
+5.2 86/07/26 13:07:49 sam 12 11
+4.3 update
+/usr/src/ucb/tset/SCCS/s.Makefile:
+5.4 86/07/26 13:08:20 sam 6 5
+4.3 update
+/usr/src/ucb/tset/SCCS/s.tset.c:
+5.6 86/07/26 13:08:22 sam 20 19
+4.3 update
+/usr/src/ucb/window/SCCS/s.tt.h:
+3.17 86/07/26 13:08:39 sam 17 16
+4.3 update
+/usr/src/ucb/window/SCCS/s.ttf100.c:
+3.10 86/07/26 13:08:41 sam 10 9
+4.3 update
+/usr/src/ucb/window/SCCS/s.ttgeneric.c:
+3.30 86/07/26 13:08:43 sam 30 29
+4.3 update
+/usr/src/ucb/window/SCCS/s.tth19.c:
+3.18 86/07/26 13:08:46 sam 18 17
+4.3 update
+/usr/src/ucb/window/SCCS/s.tth29.c:
+1.4 86/07/26 13:08:47 sam 4 3
+4.3 update
+/usr/src/ucb/window/SCCS/s.ttoutput.c:
+3.6 86/07/26 13:08:49 sam 6 5
+4.3 update
+/usr/src/ucb/window/SCCS/s.tttermcap.c:
+3.8 86/07/26 13:08:49 sam 8 7
+4.3 update
+/usr/src/ucb/window/SCCS/s.ww.h:
+3.38 86/07/26 13:08:51 sam 53 52
+4.3 update
+/usr/src/ucb/window/SCCS/s.wwenviron.c:
+3.14 86/07/26 13:08:53 sam 14 13
+4.3 update
+/usr/src/ucb/window/SCCS/s.wwinit.c:
+3.27 86/07/26 13:08:55 sam 37 36
+4.3 update
+/usr/src/ucb/window/SCCS/s.wwiomux.c:
+3.17 86/07/26 13:08:57 sam 24 23
+4.3 update
+/usr/src/ucb/window/SCCS/s.wwwrite.c:
+3.23 86/07/26 13:08:58 sam 30 29
+4.3 update
+/usr/src/ucb/dbx/SCCS/s.tahoe.c:
+5.3 86/07/26 13:09:43 sam 4 3
+temporarily disable call command until microcode fixed
+/usr/src/usr.bin/SCCS/s.bc.y:
+4.5 86/07/26 13:11:10 sam 5 4
+4.3 update; revert to stdin on file open error
+/usr/src/usr.bin/SCCS/s.cb.c:
+4.3 86/07/26 13:11:20 sam 3 2
+4.3 update
+/usr/src/usr.bin/SCCS/s.file.c:
+4.14 86/07/26 13:11:36 sam 19 18
+4.3 update; fix paren error
+/usr/src/usr.bin/SCCS/s.install.sh:
+4.8 86/07/26 13:12:00 sam 9 8
+4.3 update; strip before move to avoid fs fragmentation
+/usr/src/usr.bin/SCCS/s.iostat.c:
+4.15 86/07/26 13:12:13 sam 15 14
+dk.h ->dkstat.h
+/usr/src/usr.bin/SCCS/s.mesg.c:
+4.3 86/07/26 13:12:32 sam 3 2
+4.3 update; use group write mode to control write, talk, etc.
+/usr/src/usr.bin/SCCS/s.sort.c:
+4.9 86/07/26 13:13:08 sam 9 8
+4.3 update; better input handling
+/usr/src/usr.bin/SCCS/s.spline.c:
+4.5 86/07/26 13:13:23 sam 5 4
+4.3 update; purge unprintable chars in comments
+/usr/src/usr.bin/SCCS/s.Makefile:
+4.40 86/07/26 13:13:45 sam 43 42
+add machine specific stuff
+/usr/src/usr.bin/at/SCCS/s.at.c:
+5.4 86/07/26 13:13:57 sam 18 17
+4.3 update
+/usr/src/usr.bin/at/SCCS/s.atq.c:
+5.2 86/07/26 13:14:03 sam 5 4
+4.3 update
+/usr/src/usr.bin/at/SCCS/s.atrm.c:
+5.2 86/07/26 13:14:06 sam 5 4
+4.3 update
+/usr/src/usr.bin/at/SCCS/s.atrun.c:
+5.3 86/07/26 13:14:08 sam 11 10
+4.3 update
+/usr/src/usr.bin/dc/SCCS/s.dc.c:
+4.3 86/07/26 13:14:59 sam 3 2
+4.3 update; remove assumption about interworking of free+realloc
+/usr/src/usr.bin/dc/SCCS/s.dc.h:
+1.3 86/07/26 13:15:02 sam 3 2
+4.3 update; remove assumption about interworking of free+realloc
+/usr/src/usr.bin/lint/SCCS/s.Makefile:
+1.11 86/07/26 13:15:17 sam 11 10
+4.3 update
+/usr/src/usr.bin/lint/SCCS/s.lint.c:
+1.9 86/07/26 13:15:19 sam 9 8
+4.3 update
+/usr/src/usr.bin/lint/SCCS/s.llib-lc:
+1.30 86/07/26 13:15:21 sam 32 31
+4.3 update
+/usr/src/usr.bin/lint/SCCS/s.llib-lm:
+1.2 86/07/26 13:15:24 sam 2 1
+4.3 update
+/usr/src/usr.bin/lint/SCCS/s.llib-lmp:
+1.2 86/07/26 13:15:25 sam 2 1
+4.3 update
+/usr/src/usr.bin/lint/SCCS/s.lpass2.c:
+1.6 86/07/26 13:15:27 sam 6 5
+4.3 update
+/usr/src/usr.bin/spell/SCCS/s.spell.c:
+4.2 86/07/26 13:15:46 sam 2 1
+4.3 update; close file on eof
+/usr/src/usr.bin/tip/SCCS/s.cmds.c:
+5.4 86/07/26 13:16:21 sam 18 17
+add ~^Y command
+/usr/src/usr.bin/tip/SCCS/s.cmdtab.c:
+5.3 86/07/26 13:16:23 sam 9 8
+add ~^Y command
+/usr/src/usr.bin/tip/SCCS/s.Makefile:
+5.2 86/07/26 13:16:28 sam 18 17
+add new modem support
+/usr/src/usr.bin/tip/SCCS/s.acu.c:
+5.3 86/07/26 13:16:30 sam 15 14
+add new modem support
+/usr/src/usr.bin/tip/SCCS/s.acutab.c:
+5.2 86/07/26 13:16:31 sam 10 9
+add new modem support
+/usr/src/usr.bin/tip/SCCS/s.remote.c:
+5.3 86/07/26 13:16:33 sam 10 9
+add new modem support
+/usr/src/usr.bin/tip/SCCS/s.tip.c:
+5.4 86/07/26 13:16:34 sam 22 21
+add new modem support
+/usr/src/usr.bin/tip/aculib/SCCS/s.Makefile:
+5.2 86/07/26 13:16:47 sam 3 2
+more modems
+/usr/src/usr.bin/yacc/SCCS/s.dextern:
+4.2 86/07/26 13:17:07 sam 2 1
+increase sizes
+/usr/src/usr.lib/libmp/SCCS/s.gcd.c:
+5.2 86/07/26 13:18:29 sam 3 2
+4.3 update
+/usr/src/usr.lib/libmp/SCCS/s.mout.c:
+5.2 86/07/26 13:18:39 sam 4 3
+4.3 update
+/usr/src/usr.lib/libpc/SCCS/s.RESET.c:
+1.8 86/07/26 13:18:53 sam 8 7
+4.3 update; correct fseek return check
+/usr/src/usr.lib/libdbm/SCCS/s.Makefile:
+5.3 86/07/26 13:19:07 sam 3 2
+4.3 update
+/usr/src/usr.lib/libg/SCCS/s.Makefile:
+5.2 86/07/26 13:19:16 sam 2 1
+tahoe
+/usr/src/usr.lib/libI77/SCCS/s.open.c:
+5.2 86/07/26 13:19:35 sam 14 13
+4.3 update
+/usr/src/ucb/ftp/SCCS/s.ftp.c:
+5.6 86/07/26 19:10:56 sam 22 21
+param.h included in ftp_var.h
+/usr/src/ucb/SCCS/s.Makefile:
+5.16 86/07/26 19:15:15 sam 76 75
+make depend
+/usr/src/usr.bin/SCCS/s.Makefile:
+4.41 86/07/26 19:17:01 sam 44 43
+make depend
+/usr/src/etc/SCCS/s.Makefile:
+5.11 86/07/26 19:29:59 sam 50 49
+make depend + 4.3 updates
+/usr/src/lib/c2.tahoe/SCCS/s.c2.h:
+1.2 86/07/27 00:22:29 sam 2 1
+1.21 release; optimize aob inst; rearrange fp insts to overlap with integer insts
+/usr/src/lib/c2.tahoe/SCCS/s.c20.c:
+1.2 86/07/27 00:22:31 sam 2 1
+1.21 release; optimize aob inst; rearrange fp insts to overlap with integer insts
+/usr/src/lib/c2.tahoe/SCCS/s.c21.c:
+1.2 86/07/27 00:22:33 sam 2 1
+1.21 release; optimize aob inst; rearrange fp insts to overlap with integer insts
+/usr/src/lib/c2.tahoe/SCCS/s.c22.c:
+1.3 86/07/27 00:22:37 sam 3 2
+1.21 release; optimize aob inst; rearrange fp insts to overlap with integer insts
+/usr/src/lib/mip/SCCS/s.pftn.c:
+1.12 86/07/27 00:23:50 sam 13 12
+4.3 update; handle too many initializers; correct symtab walk on scope exit
+/usr/src/lib/pcc.tahoe/SCCS/s.local.c:
+1.4 86/07/27 00:24:29 sam 4 3
+1.21 release; allow register floats to get a register
+/usr/src/lib/pcc.tahoe/SCCS/s.local2.c:
+1.7 86/07/27 00:25:07 sam 7 6
+1.21 release; handle unsigned arithmetic with char and short
+/usr/src/lib/pcc.tahoe/SCCS/s.table.c:
+1.3 86/07/27 00:26:26 sam 3 2
+1.21 release; looks to be mostly related to unsigned arithmetic
+/usr/src/lib/pcc.tahoe/SCCS/s.mac2defs.h:
+1.3 86/07/27 16:06:47 sam 3 2
+float's ALWAYS have size 1
+/usr/src/lib/pcc.tahoe/SCCS/s.table.c:
+1.4 86/07/27 16:07:11 sam 4 3
+don't clobber type unless doing single precision
+/usr/src/lib/pcc.tahoe/SCCS/s.Makefile:
+1.3 86/07/27 16:08:01 sam 3 2
+add tags; table.c now dependent on SPRECC; purge some extra stuff
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+1.8 86/07/27 17:35:35 sam 8 7
+blkflush all pages to be filled on demand; correct unsigned problem
+/usr/src/usr.bin/at/SCCS/s.atrun.c:
+5.4 86/07/29 09:10:36 sam 12 11
+avoid duplicate includes
+/usr/src/sys/tahoevba/SCCS/s.vdreg.h:
+1.4 86/07/31 22:03:16 sam 4 3
+add eagle and update to 1.21 release
+/usr/src/lib/pcc.tahoe/SCCS/s.stab.c:
+1.4 86/07/31 22:56:47 sam 4 3
+handle unnamed arrays of objects (from 4.3) and ignore untagged structures
+/usr/src/lib/pcc.tahoe/SCCS/s.Makefile:
+1.4 86/07/31 22:57:32 sam 4 3
+mucho cleanups
+/usr/src/lib/c2.tahoe/SCCS/s.Makefile:
+1.2 86/07/31 22:58:08 sam 2 1
+purge -g
+/usr/src/lib/libc/tahoe/stdio/SCCS/s.doprnt.c:
+1.2 86/08/01 08:46:46 sam 2 1
+make %x give lower case hex
+/usr/src/lib/libc/tahoe/gen/SCCS/s.Makefile:
+1.2 86/08/01 09:01:26 sam 2 1
+mv DEFS.h ..
+/usr/src/lib/libc/tahoe/SCCS/s.DEFS.h:
+1.2 86/08/01 09:03:00 sam 2 1
+add XENTRY for fpe code
+/usr/src/lib/libc/tahoe/fpe/SCCS/s.Makefile:
+1.3 86/08/01 09:04:36 sam 3 2
+mv DEFS.h ..
+/usr/src/lib/libc/tahoe/fpe/SCCS/s.Makefile:
+1.4 86/08/01 09:06:12 sam 4 3
+make depend
+/usr/src/lib/libc/tahoe/SCCS/s.DEFS.h:
+1.2 86/08/01 09:08:35 sam 3 1
+add XENTRY for fpe
+/usr/src/lib/libc/tahoe/net/SCCS/s.htonl.s:
+1.2 86/08/01 09:19:21 sam 2 1
+use common ENTRY macro definition
+/usr/src/lib/libc/tahoe/net/SCCS/s.htons.s:
+1.2 86/08/01 09:19:22 sam 2 1
+use common ENTRY macro definition
+/usr/src/lib/libc/tahoe/net/SCCS/s.ntohl.s:
+1.2 86/08/01 09:19:23 sam 2 1
+use common ENTRY macro definition
+/usr/src/lib/libc/tahoe/net/SCCS/s.ntohs.s:
+1.2 86/08/01 09:19:24 sam 2 1
+use common ENTRY macro definition
+/usr/src/lib/libc/tahoe/net/SCCS/s.Makefile:
+1.3 86/08/01 09:20:01 sam 3 2
+mv DEFS.h ..
+/usr/src/lib/libc/tahoe/compat-4.1/SCCS/s.reset.c:
+1.2 86/08/01 09:22:14 sam 2 1
+use common ENTRY definition
+/usr/src/lib/libc/tahoe/compat-4.1/SCCS/s.Makefile:
+1.2 86/08/01 09:22:34 sam 2 1
+mv DEFS.h ..
+/usr/src/lib/libc/tahoe/compat-4.1/SCCS/s.Makefile:
+1.3 86/08/01 09:23:03 sam 3 2
+rm Makefile.bak on clean
+/usr/src/lib/libc/tahoe/SCCS/s.DEFS.h:
+1.3 86/08/01 09:24:00 sam 4 3
+oops, gotta push counter for mcount
+/usr/src/ucb/SCCS/s.man.c:
+5.10 86/08/01 09:40:04 sam 26 25
+missed a reference to SUBSECT
+/usr/src/bin/SCCS/s.Makefile:
+5.17 86/08/01 09:41:03 sam 36 35
+use machine to distinguish rather than built-in; add TTY programs
+/usr/src/lib/c2.tahoe/SCCS/s.c20.c:
+1.3 86/08/07 12:31:07 sam 3 2
+annotate cci derivation in sccsid
+/usr/src/lib/c2.tahoe/SCCS/s.c21.c:
+1.3 86/08/07 12:31:09 sam 3 2
+annotate cci derivation in sccsid
+/usr/src/lib/c2.tahoe/SCCS/s.c22.c:
+1.4 86/08/07 12:31:13 sam 4 3
+annotate cci derivation in sccsid
+/usr/src/lib/c2.tahoe/SCCS/s.c23.c:
+1.2 86/08/07 12:31:17 sam 2 1
+annotate cci derivation in sccsid
+/usr/src/lib/c2.tahoe/SCCS/s.c22.c:
+1.5 86/08/07 16:26:45 sam 5 4
+must check type compatiblity on constants to avoid byte ordering 
+c problems on comparisons (e.g. int i = 1; if (*(char *)&i)
+/usr/src/lib/c2.tahoe/SCCS/s.Makefile:
+1.3 86/08/14 19:13:05 sam 3 2
+make opcode an enum and cleanup a bunch of code so that 
+c dbx is more useful (i.e. can step over part of a line of code); add 
+c tempreg and has[[23]ops macros; force clr to check acc when writing dest
+/usr/src/lib/c2.tahoe/SCCS/s.c2.h:
+1.3 86/08/14 19:13:07 sam 3 2
+make opcode an enum and cleanup a bunch of code so that 
+c dbx is more useful (i.e. can step over part of a line of code); add 
+c tempreg and has[[23]ops macros; force clr to check acc when writing dest
+/usr/src/lib/c2.tahoe/SCCS/s.c20.c:
+1.4 86/08/14 19:13:09 sam 4 3
+make opcode an enum and cleanup a bunch of code so that 
+c dbx is more useful (i.e. can step over part of a line of code); add 
+c tempreg and has[[23]ops macros; force clr to check acc when writing dest
+/usr/src/lib/c2.tahoe/SCCS/s.c21.c:
+1.4 86/08/14 19:13:11 sam 4 3
+make opcode an enum and cleanup a bunch of code so that 
+c dbx is more useful (i.e. can step over part of a line of code); add 
+c tempreg and has[[23]ops macros; force clr to check acc when writing dest
+/usr/src/lib/c2.tahoe/SCCS/s.c22.c:
+1.6 86/08/14 19:13:15 sam 6 5
+make opcode an enum and cleanup a bunch of code so that 
+c dbx is more useful (i.e. can step over part of a line of code); add 
+c tempreg and has[[23]ops macros; force clr to check acc when writing dest
+/usr/src/lib/c2.tahoe/SCCS/s.c23.c:
+1.3 86/08/14 19:13:19 sam 3 2
+make opcode an enum and cleanup a bunch of code so that 
+c dbx is more useful (i.e. can step over part of a line of code); add 
+c tempreg and has[[23]ops macros; force clr to check acc when writing dest
+/usr/src/lib/SCCS/s.alist.c:
+1.2 86/08/16 15:04:07 sam 2 1
+add cci ident
+/usr/src/ucb/dbx/SCCS/s.tahoe.c:
+5.4 86/08/22 14:34:29 sam 5 4
+frame usually nil, so must fetch from core image (fixes nargs to funcion)
+/usr/src/lib/libc/tahoe/gen/SCCS/s.setjmp.s:
+1.2 86/08/22 15:54:35 sam 2 1
+fix to use sigreturn protocol
+/usr/src/sys/net/SCCS/s.af.c:
+1.4 86/09/28 15:37:07 sam 4 3
+typo
+/usr/src/monet/etc/named/SCCS/s.version.c:
+4.4 86/10/01 09:38:03 kjd 14 12
+October 1, 1986 network distribution of BIND
+/usr/src/monet/etc/named/SCCS/s.version.c:
+4.4 86/10/01 09:39:50 kjd 15 12
+October 1, 1986 network distribution
+/usr/src/monet/etc/named/SCCS/s.version.c:
+4.4 86/10/01 09:43:28 kjd 16 12
+October 1, 1986 Network distribution
+/usr/src/monet/etc/named/SCCS/s.version.c:
+4.4 86/10/01 10:04:23 kjd 17 12
+October 1, 1986 Network Distribution
+/usr/src/monet/etc/named/SCCS/s.version.c:
+4.4 86/10/01 10:06:26 kjd 18 12
+October 1, 1986 Network Distribution
+/usr/src/sys/net/SCCS/s.af.c:
+1.4 86/10/10 13:48:14 sam 5 3
+correct af initialization
+/usr/src/sys/sys/SCCS/s.subr_mcount.c:
+1.4 86/10/12 13:31:42 sam 4 3
+avoid misplacement of label for tahoe
+/usr/src/etc/config/SCCS/s.mkmakefile.c:
+5.8 86/10/12 13:49:38 sam 44 43
+optimize subr_mcount for tahoe 
+/usr/src/monet/etc/SCCS/s.Makefile:
+5.15 86/10/13 14:27:12 sam 55 54
+add slattach; make depend
+/usr/src/monet/etc/SCCS/s.init.c:
+5.7 86/10/13 15:01:53 sam 22 21
+tahoe's first register variable is r12
+/usr/src/monet/etc/SCCS/s.kgmon.c:
+5.3 86/10/13 15:03:00 sam 12 11
+tahoe support
+/usr/src/monet/etc/SCCS/s.newfs.c:
+5.3 86/10/13 15:06:15 sam 20 19
+make installboot conditional on BOOTDIR and that conditional on vax
+/usr/src/monet/etc/SCCS/s.pstat.c:
+5.9 86/10/13 15:09:00 sam 42 41
+tahoe support
+/usr/src/monet/etc/SCCS/s.savecore.c:
+5.9 86/10/13 15:12:03 sam 26 25
+add tahoe stuff; consolidate common code in log+Perror
+/usr/src/monet/etc/config/SCCS/s.Makefile:
+5.4 86/10/13 15:35:24 sam 14 13
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/config/SCCS/s.config.h:
+5.4 86/10/13 15:35:26 sam 18 17
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/config/SCCS/s.config.l:
+5.3 86/10/13 15:35:27 sam 17 16
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/config/SCCS/s.config.y:
+5.3 86/10/13 15:35:29 sam 22 21
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/config/SCCS/s.main.c:
+5.3 86/10/13 15:35:32 sam 14 13
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/config/SCCS/s.mkglue.c:
+5.2 86/10/13 15:35:34 sam 2 1
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/config/SCCS/s.mkioconf.c:
+5.2 86/10/13 15:35:35 sam 11 10
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/config/SCCS/s.mkmakefile.c:
+5.10 86/10/13 15:35:38 sam 46 45
+replace ancient sun support with tahoe support
+/usr/src/monet/etc/fsck/SCCS/s.pass5.c:
+5.3 86/10/13 15:36:25 sam 9 8
+add tahoe compiller  workaround
+/usr/src/monet/etc/talkd/SCCS/s.Makefile:
+5.5 86/10/13 15:37:53 sam 11 10
+talkd is no longer installed as ntalkd
+/usr/src/monet/etc/timed/SCCS/s.Makefile:
+2.2 86/10/13 15:52:16 sam 5 4
+eliminate machine subdirs to ease machine-independence mods to Makefile
+/usr/src/monet/bin/SCCS/s.ld.c:
+5.5 86/10/13 16:39:51 sam 22 21
+add alignment workarounds for tahoe
+/usr/src/monet/bin/SCCS/s.mt.c:
+5.2 86/10/13 16:41:11 sam 12 11
+add tahoe cipher 
+/usr/src/monet/bin/csh/SCCS/s.sh.local.h:
+5.3 86/10/13 16:44:24 sam 9 8
+tahoe has bcopy as well
+/usr/src/monet/bin/csh/SCCS/s.Makefile:
+5.4 86/10/13 16:46:33 sam 13 12
+doprnt.o is needed only on vax (need better way than this)
+/usr/src/monet/bin/make/SCCS/s.files.c:
+4.14 86/10/13 16:49:51 sam 14 13
+tahoe assembler just like vax
+/usr/src/monet/include/SCCS/s.Makefile:
+5.15 86/10/13 17:03:47 sam 27 26
+add tahoe
+/usr/src/monet/include/SCCS/s.Makefile.install:
+5.3 86/10/13 17:03:48 sam 3 2
+add tahoe
+/usr/src/monet/lib/pcc/pcc.tahoe/SCCS/s.Makefile:
+1.5 86/10/13 17:11:34 sam 5 4
+move mip one level up
+/usr/src/monet/lib/pcc/pcc.vax/SCCS/s.Makefile:
+1.14 86/10/13 17:12:17 sam 14 13
+move mip one level up
+/usr/src/monet/lib/libc/SCCS/s.Makefile:
+4.20 86/10/13 17:14:36 sam 21 20
+we are tahoe
+/usr/src/monet/lib/cpp/SCCS/s.cpp.c:
+1.15 86/10/15 21:11:54 sam 15 14
+add tahoe
+/usr/src/monet/lib/cpp/SCCS/s.yylex.c:
+1.4 86/10/15 21:11:59 sam 4 3
+add tahoe
+/usr/src/monet/lib/cpp/SCCS/s.Makefile:
+1.3 86/10/15 21:12:12 sam 3 2
+mv :yyfix
+/usr/src/monet/lib/libc/vax/gen/SCCS/s.disktab.c:
+5.4 86/10/15 21:16:47 sam 6 5
+check for 0 sector size and/or rpm's
+/usr/src/monet/lib/pcc/pcc.tahoe/SCCS/s.rel.c:
+1.2 86/10/15 21:46:30 sam 2 1
+make it look like vax one
+/usr/src/monet/lib/pcc/pcc.vax/SCCS/s.Makefile:
+1.15 86/10/15 21:47:12 sam 15 14
+add stuff for rel.o and such
+/usr/src/monet/lib/pcc/pcc.vax/SCCS/s.local2.c:
+1.15 86/10/15 22:02:08 sam 17 16
+upput calling sequence changes
+/usr/src/monet/lib/mip/SCCS/s.allo.c:
+4.9 86/10/15 22:02:55 sam 9 8
+add even register need for tahoe
+/usr/src/monet/lib/mip/SCCS/s.pass2.h:
+4.2 86/10/15 22:02:58 sam 2 1
+add even register need for tahoe
+/usr/src/monet/lib/mip/SCCS/s.fort.c:
+4.8 86/10/15 22:03:07 sam 8 7
+compress #ifdefs
+/usr/src/monet/lib/mip/SCCS/s.match.c:
+4.5 86/10/15 22:03:25 sam 5 4
+add offset specification for upput
+/usr/src/monet/lib/mip/SCCS/s.scan.c:
+2.2 86/10/15 22:03:50 sam 10 9
+move release definition to external file
+/usr/src/monet/lib/mip/SCCS/s.reader.c:
+4.5 86/10/15 22:04:08 sam 5 4
+add tahoe kludge
+/usr/src/monet/lib/mip/SCCS/s.pftn.c:
+1.13 86/10/15 22:04:39 sam 14 13
+additional check for empty stack
+/usr/src/monet/lib/mip/SCCS/s.trees.c:
+4.11 86/10/15 22:05:43 sam 11 10
+take care with unsigned constant compression (for tahoe); 
+c put back PRTDCON redefinition; ifdef asgop optimizations (tahoe can't 
+c handle them in code generation)
+/usr/src/sys/sys/SCCS/s.vm_text.c:
+1.6 86/10/16 17:21:23 sam 6 5
+invalidate code cache keys held in cached text entries and those
+c save because they're sticky
+/usr/src/monet/usr.lib/libI77/SCCS/s.fmt.c:
+5.2 86/10/22 17:07:18 mckusick 12 11
+add tahoe
+/usr/src/monet/ucb/window/SCCS/s.ww.h:
+3.38 86/10/22 21:53:04 sam 53 52
+reverse ifdef so it works on tahoe and vax, as well as 68k
+/usr/src/lib/mip/SCCS/s.pass2.h:
+4.2 86/10/29 00:19:41 sam 3 1
+add NEVEN definition for tahoe
+/usr/src/usr.lib/libF77/SCCS/s.Makefile:
+5.5 86/10/30 21:13:46 sam 12 11
+remove Usef on clean
+/usr/src/usr.lib/libF77/SCCS/s.rand_.c:
+5.3 86/10/30 21:22:17 sam 4 3
+add tahoe
+/usr/src/usr.lib/libF77/SCCS/s.random_.c:
+5.3 86/10/30 21:22:19 sam 4 3
+add tahoe
+/usr/src/usr.lib/libF77/SCCS/s.range.c:
+5.3 86/10/30 21:25:37 sam 5 4
+add tahoe
+/usr/src/usr.lib/libF77/SCCS/s.range.c:
+5.3 86/10/30 21:35:47 sam 6 4
+add tahoe (should be just like pdp11)
+/usr/src/usr.lib/libF77/SCCS/s.Makefile:
+5.5 86/10/30 21:45:27 sam 13 11
+add Usef and mkvers to clean
+/usr/src/usr.lib/libI77/SCCS/s.Makefile:
+5.6 86/10/30 21:49:23 sam 9 8
+remove mkvers on clean; use -f on mv for Version
+/usr/src/usr.lib/libF77/SCCS/s.Makefile:
+5.6 86/10/30 21:49:52 sam 14 13
+add -f on mv for Version
+/usr/src/usr.bin/SCCS/s.Makefile:
+4.40 86/10/30 23:01:01 sam 44 42
+make depend
+/usr/src/sys/tahoe/inline/SCCS/s.langpats.c:
+1.4 86/11/01 09:18:32 sam 4 3
+add movpsl for kdb
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.10 86/11/09 17:54:55 sam 10 9
+add FPE for floating point emulation code; change to ALIGN for alignment code
+/usr/src/lib/libc/net/SCCS/s.res_debug.c:
+5.15 86/11/10 15:36:11 kjd 22 21
+fixes for dynamic updates from Mike Schwartz@washington
+/usr/src/lib/libc/net/SCCS/s.res_mkquery.c:
+6.4 86/11/10 15:36:14 kjd 15 14
+fixes for dynamic updates from Mike Schwartz@washington
+/usr/dmd/4.2bsd/mpx/proto/SCCS/s.proto.h:
+1.2 86/11/10 21:14:52 karels 2 1
+add tahoe
+/usr/src/bin/SCCS/s.login.c:
+5.16 86/11/10 21:48:46 karels 58 57
+shorten hostname if local
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.8 86/11/11 14:10:56 kjd 39 37
+fixes for dynamic updates from Mark Schwartz @ washington
+/usr/src/etc/named/SCCS/s.ns_forw.c:
+4.8 86/11/11 16:46:53 kjd 41 40
+fix sloppy code
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.8 86/11/11 16:52:56 kjd 40 37
+fixes for dynamic updates from Mike Schwartz @ washington
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.8 86/11/11 17:04:32 kjd 41 37
+fixes for dynamic updates from Mike Schwartz @ washington
+/usr/src/bin/SCCS/s.ld.c:
+5.6 86/11/11 17:50:25 bostic 23 22
+bug fix to keep load of empty module from
+/usr/src/ucb/pascal/src/SCCS/s.string.c:
+5.2 86/11/11 18:32:22 mckusick 7 6
+delete unused function
+/usr/src/ucb/pascal/src/SCCS/s.objfmt.h:
+5.2 86/11/11 21:06:42 mckusick 19 17
+add tahoe support
+/usr/src/ucb/pascal/src/SCCS/s.pcwhoami.h:
+5.2 86/11/11 21:07:10 mckusick 8 7
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.piwhoami.h:
+5.2 86/11/12 09:52:05 mckusick 7 6
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.align.h:
+5.2 86/11/12 09:52:27 mckusick 6 5
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.tmps.h:
+5.2 86/11/12 09:52:47 mckusick 5 4
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.pc.h:
+5.2 86/11/12 09:53:50 mckusick 12 11
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.lab.c:
+5.2 86/11/12 09:54:32 mckusick 24 23
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.pccaseop.c:
+5.2 86/11/12 10:17:11 mckusick 23 22
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.tmps.c:
+5.2 86/11/12 10:17:50 mckusick 17 16
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.sconv.c:
+5.2 86/11/12 10:20:09 mckusick 8 7
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.p2put.c:
+5.4 86/11/12 10:20:47 mckusick 22 21
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.put.c:
+5.2 86/11/12 10:23:11 mckusick 32 31
+eliminate unnecessary evening
+/usr/src/ucb/pascal/src/SCCS/s.var.c:
+5.3 86/11/12 10:28:58 mckusick 26 25
+replace `even' and `leven' with explicit rounding
+/usr/src/ucb/pascal/src/SCCS/s.fhdr.c:
+5.3 86/11/12 10:29:00 mckusick 16 15
+replace `even' and `leven' with explicit rounding
+/usr/src/ucb/pascal/src/SCCS/s.call.c:
+5.3 86/11/12 10:29:03 mckusick 40 39
+replace `even' and `leven' with explicit rounding
+/usr/src/ucb/pascal/src/SCCS/s.fend.c:
+5.2 86/11/12 10:29:10 mckusick 33 32
+replace `even' and `leven' with explicit rounding
+/usr/src/ucb/pascal/src/SCCS/s.stkrval.c:
+5.2 86/11/12 10:29:15 mckusick 13 12
+replace `even' and `leven' with explicit rounding
+/usr/src/ucb/pascal/src/SCCS/s.var.c:
+5.4 86/11/12 10:30:02 mckusick 27 26
+add CCI (tahoe) support
+/usr/src/ucb/pascal/src/SCCS/s.fend.c:
+5.3 86/11/12 10:31:33 mckusick 34 33
+add CCI (tahoe) support
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.9 86/11/12 11:38:26 kjd 42 41
+dynamic update changes and speedups from dpk
+/usr/src/etc/named/SCCS/s.db_update.c:
+4.6 86/11/12 11:38:58 kjd 27 26
+dynamic update changes
+/usr/src/etc/named/SCCS/s.db_dump.c:
+4.9 86/11/12 11:39:24 kjd 24 23
+dynamic update changes
+/usr/src/etc/named/SCCS/s.ns_init.c:
+4.9 86/11/12 11:40:48 kjd 39 38
+dynamic update changes
+/usr/src/etc/named/SCCS/s.ns_main.c:
+4.9 86/11/12 11:45:35 kjd 53 52
+dynamic update changes
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.8 86/11/12 18:37:26 kjd 51 50
+dynamic update fixes and passing address record allong for sub domain name server
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.8 86/11/12 18:48:44 kjd 52 50
+dynamic update fixes from Mike Schwartz and 
+c pass along glue address RR's for sub-domain name servers
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.8 86/11/12 18:52:00 kjd 53 50
+dynamic update code from Makr Schwartz @ washington and 
+c pass allong glue address records in XFR's for subdomain nameserves
+/usr/src/etc/named/SCCS/s.ns_maint.c:
+4.9 86/11/12 18:52:59 kjd 29 28
+dynamic update code from Mark Schwartz @ washington
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.11 86/11/12 18:53:39 kjd 55 54
+dynamic update code from Mark Schwartz @ washington
+/usr/src/sys/h/SCCS/s.syslog.h:
+7.3 86/11/12 19:21:57 eric 16 15
+remove obsolete cruft
+/usr/src/ucb/pascal/px/SCCS/s.machdep.h:
+5.2 86/11/12 19:23:56 mckusick 6 5
+add machine specific macros for extracting inline data
+/usr/src/ucb/pascal/px/SCCS/s.interp.c:
+5.4 86/11/12 19:24:33 mckusick 37 36
+add machine specific macros for extracting inline data to support CCI (tahoe)
+/usr/src/ucb/pascal/px/SCCS/s.interp.c:
+5.5 86/11/12 19:56:45 mckusick 38 37
+disable debugging
+/usr/src/ucb/pascal/utilities/pc2/SCCS/s.langpats.c:
+5.3 86/11/13 18:08:04 mckusick 22 21
+add CCI (tahoe) support
+/usr/src/ucb/pascal/utilities/pc2/SCCS/s.Makefile:
+5.3 86/11/13 18:08:48 mckusick 4 3
+add CCI (tahoe) support
+/usr/src/sys/h/SCCS/s.syslog.h:
+7.4 86/11/13 18:15:18 eric 17 16
+add facility for UUCP
+/usr/src/ucb/SCCS/s.tail.c:
+5.3 86/11/13 19:51:39 karels 9 8
+stop following if nobody's looking
+/usr/man/man1/SCCS/s.strings.1:
+6.3 86/11/14 12:34:18 bostic 5 4
+general fixes
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.10 86/11/14 16:04:50 kjd 43 42
+format cleanup
+/usr/src/etc/named/SCCS/s.db_lookup.c:
+4.5 86/11/14 16:06:37 kjd 23 22
+dynamic update changes 
+/usr/src/usr.bin/lint/SCCS/s.Makefile:
+1.15 86/11/15 11:11:02 sam 16 15
+pcc moved again
+/usr/src/usr.bin/SCCS/s.ar11.c:
+4.4 86/11/15 11:17:45 sam 4 3
+add tahoe
+/usr/src/ucb/SCCS/s.vmstat.c:
+5.7 86/11/15 11:27:08 sam 26 25
+must include cpu.h for tahoe keystat structure
+/usr/src/sys/h/SCCS/s.syslog.h:
+7.5 86/11/15 17:19:54 sam 18 17
+put back "obsolete cruft" -- it's used
+/usr/src/sys/tahoestand/vdformat/SCCS/s.Makefile:
+1.3 86/11/16 19:13:57 sam 3 2
+add install
+/usr/src/sys/tahoestand/SCCS/s.Makefile:
+1.4 86/11/16 19:14:39 sam 4 3
+make /stand/directory
+/usr/src/sys/tahoestand/SCCS/s.Makefile:
+1.5 86/11/16 19:18:23 sam 5 4
+fix /boot installation
+/usr/src/sys/tahoe/SCCS/s.swapgeneric.c:
+1.4 86/11/16 19:23:19 sam 4 3
+missing label
+/usr/src/sys/tahoe/SCCS/s.swapgeneric.c:
+1.4 86/11/16 19:26:33 sam 5 3
+missing label; add cpu.h for uncache
+/usr/src/etc/timed/SCCS/s.Makefile:
+2.3 86/11/17 09:06:20 sam 6 5
+use kirk trick to avoid recompiles
+/usr/man/man1/SCCS/s.cmp.1:
+6.2 86/11/17 11:23:37 bostic 4 3
+undocument features
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.11 86/11/17 12:06:10 kjd 44 43
+remove dest_addr from debug statement
+/usr/src/ucb/pascal/utilities/SCCS/s.pc.c:
+5.2 86/11/17 17:22:05 mckusick 29 28
+add CCI (tahoe) support
+/usr/src/ucb/pascal/utilities/pc2/SCCS/s.langpats.c:
+5.4 86/11/17 17:36:22 mckusick 23 22
+add IN operator for tahoe
+/usr/src/games/adventure/SCCS/s.save.c:
+4.2 86/11/17 17:52:26 mckusick 3 2
+add CCI (tahoe) support
+/usr/src/games/SCCS/s.Makefile:
+5.5 86/11/17 18:45:48 mckusick 22 21
+update for VAX and CCI split
+/usr/src/games/SCCS/s.Makefile:
+5.6 86/11/17 18:47:24 mckusick 23 22
+do not forget to clean up!
+/usr/src/bin/as/as.vax/SCCS/s.asexpr.c:
+5.3 86/11/17 19:39:43 donn 8 7
+LCSYM stabs need to know about their referenced symbol even after the
+c symbol has gone through pass 1; we kluge around and hide the symbol's
+c address in 'exprisname'.
+/usr/src/bin/as/as.vax/SCCS/s.asparse.c:
+5.3 86/11/17 19:43:22 donn 23 22
+LCSYM stabs require some extra footwork because their value isn't known
+c until after the referenced symbol is given a location.  The solution is
+c to treat them as forward references.  Note ugly kluge with 'exprisname'.
+/usr/src/etc/named/SCCS/s.ns_sort.c:
+1.2 86/11/18 10:18:44 kjd 2 1
+cleanup sorting
+/usr/src/etc/named/SCCS/s.ns.h:
+4.11 86/11/18 10:20:14 kjd 23 22
+remove dest_addr from netinfo
+/usr/src/etc/named/SCCS/s.ns_maint.c:
+4.10 86/11/18 10:22:35 kjd 30 29
+clean up rick's crappy codeing style
+/usr/src/etc/named/SCCS/s.ns_main.c:
+4.10 86/11/18 10:26:12 kjd 54 53
+fixes for sorting
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.12 86/11/18 10:36:36 kjd 56 55
+clean up cod style
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.9 86/11/18 10:37:40 kjd 54 53
+clean up code and fixes for sorting
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.12 86/11/18 15:33:22 kjd 45 44
+fix reading sortlist
+/usr/src/etc/named/SCCS/s.ns.h:
+4.11.1.0 86/11/18 15:37:12 kjd 24 23
+test
+/usr/src/etc/named/SCCS/s.version.c:
+4.4.1.0 86/11/18 15:44:12 kjd 19 18
+sccs prt version.c
+/usr/src/etc/named/SCCS/s.version.c:
+4.4.1.0 86/11/18 15:45:49 kjd 20 18
+test version with sorting and dynamic updates
+/usr/src/etc/named/SCCS/s.version.c:
+4.5 86/11/18 15:46:47 kjd 21 18
+released test version with sorting and dynamic updates
+/usr/src/lib/libc/net/SCCS/s.res_send.c:
+6.15 86/11/18 16:02:47 kjd 30 28
+fix fdset for 4.2bsd sites
+/usr/src/etc/named/SCCS/s.db_lookup.c:
+4.6 86/11/19 09:32:51 kjd 24 23
+fix case where we can't prime cache because namebuf was removed
+/usr/src/sys/kdb/SCCS/s.defs.h:
+7.2 86/11/20 14:42:10 sam 2 1
+miscellaneous cleanups
+/usr/src/sys/kdb/SCCS/s.kdb_access.c:
+7.2 86/11/20 14:42:23 sam 2 1
+put check back in
+/usr/src/sys/kdb/SCCS/s.kdb_command.c:
+7.2 86/11/20 14:43:02 sam 2 1
+miscellaneous cleanups; don't print debugger name on blank line
+/usr/src/sys/kdb/SCCS/s.kdb_expr.c:
+7.2 86/11/20 14:43:17 sam 2 1
+no more TRUE|FALSE
+/usr/src/sys/kdb/SCCS/s.kdb_format.c:
+7.2 86/11/20 14:43:55 sam 2 1
+pitch floating point formats; fix expr=[cCbb1] handling
+/usr/src/sys/kdb/SCCS/s.kdb_input.c:
+7.2 86/11/20 14:44:11 sam 2 1
+no more TRUE|FALSE
+/usr/src/sys/kdb/SCCS/s.kdb_message.c:
+7.2 86/11/20 14:44:20 sam 2 1
+add BADRAD definition
+/usr/src/sys/kdb/SCCS/s.kdb_print.c:
+7.2 86/11/20 14:44:40 sam 2 1
+put back old radix handling; print current values on $s and $w
+/usr/src/sys/kdb/SCCS/s.kdb_trap.c:
+7.2 86/11/20 14:45:04 sam 2 1
+never get eof; use mnemonic for error reset
+/usr/src/sys/kdb/SCCS/s.machine.h:
+7.2 86/11/20 14:45:18 sam 2 1
+add byte->long conversion macro
+/usr/man/man1/SCCS/s.split.1:
+6.2 86/11/20 15:23:06 bostic 4 3
+bug report usr.bin/13
+/usr/src/sys/kdb/SCCS/s.kdb_print.c:
+7.3 86/11/20 15:48:58 sam 3 2
+keep trap info around as well as current proc; move printing 
+c of this stuff into machine-dependent routine
+/usr/src/sys/kdb/SCCS/s.kdb_trap.c:
+7.3 86/11/20 15:49:00 sam 3 2
+keep trap info around as well as current proc; move printing 
+c of this stuff into machine-dependent routine
+/usr/src/bin/adb/adb.tahoe/SCCS/s.defs.h:
+1.3 86/11/20 16:07:11 sam 3 2
+fix <expr>=[cCbB] (byte order problems)
+/usr/src/bin/adb/adb.tahoe/SCCS/s.format.c:
+1.2 86/11/20 16:07:13 sam 2 1
+fix <expr>=[cCbB] (byte order problems)
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.13 86/11/20 16:51:29 kjd 46 45
+fix reading sortlist and loading services
+/usr/src/etc/named/SCCS/s.ns_main.c:
+4.11 86/11/20 16:52:35 kjd 55 54
+fix sort list
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.10 86/11/20 16:53:30 kjd 55 54
+cleanup sortinf
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.10 86/11/20 16:54:19 kjd 56 54
+fix sorting
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.13 86/11/20 16:55:03 kjd 57 56
+sort responces
+/usr/src/etc/named/SCCS/s.ns_sort.c:
+1.3 86/11/20 16:56:25 kjd 3 2
+add some debugging statements
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.14 86/11/21 12:05:02 kjd 47 46
+fix debug
+/usr/src/etc/named/SCCS/s.ns_main.c:
+4.12 86/11/21 12:09:07 kjd 56 55
+merge network sort list and file sortlist and remove duplicates
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.14 86/11/21 12:10:13 kjd 58 57
+add more sorting to responces
+/usr/src/sys/tahoe/SCCS/s.kdb_machdep.c:
+7.2 86/11/21 17:56:19 sam 2 1
+don't swallow escape sequences incorrectly
+/usr/src/sys/kdb/SCCS/s.machine.h:
+7.3 86/11/23 13:15:59 sam 3 2
+create macros for walking stack frames, checking address wrap, 
+c setting and clearing single step; and more
+/usr/src/sys/tahoe/SCCS/s.kdbparam.h:
+7.4 86/11/23 13:30:06 sam 4 3
+typo
+/usr/src/sys/kdb/SCCS/s.defs.h:
+7.3 86/11/23 13:35:59 sam 3 2
+move machine dependencies to ../machine/kdbparam.h
+/usr/src/sys/kdb/SCCS/s.kdb_expr.c:
+7.3 86/11/23 13:36:00 sam 3 2
+move machine dependencies to ../machine/kdbparam.h
+/usr/src/sys/kdb/SCCS/s.kdb_format.c:
+7.3 86/11/23 13:36:02 sam 3 2
+move machine dependencies to ../machine/kdbparam.h
+/usr/src/sys/kdb/SCCS/s.kdb_print.c:
+7.4 86/11/23 13:36:04 sam 4 3
+move machine dependencies to ../machine/kdbparam.h
+/usr/src/sys/kdb/SCCS/s.kdb_runpcs.c:
+7.2 86/11/23 13:36:05 sam 2 1
+move machine dependencies to ../machine/kdbparam.h
+/usr/src/sys/kdb/SCCS/s.kdb_trap.c:
+7.4 86/11/23 13:36:07 sam 4 3
+move machine dependencies to ../machine/kdbparam.h
+/usr/src/sys/tahoe/SCCS/s.kdb_opset.c:
+7.2 86/11/23 13:36:54 sam 2 1
+move register list
+/usr/src/sys/tahoevba/SCCS/s.dr.c:
+1.2 86/11/23 18:29:35 sam 2 1
+(null)
+/usr/src/sys/tahoevba/SCCS/s.drreg.h:
+1.2 86/11/23 18:30:31 sam 2 1
+merge dr11 device ioctls into dr driver to save extra device
+/usr/src/sys/tahoevba/SCCS/s.dr.c:
+1.2 86/11/23 18:30:33 sam 3 1
+merge dr11 device ioctls into dr driver to save extra device
+/usr/src/sys/tahoevba/SCCS/s.dr.c:
+1.3 86/11/23 19:23:53 sam 4 3
+make it compile
+/usr/dmd/4.2bsd/mpx/SCCS/s.mpx.c:
+1.5 86/11/23 20:01:08 karels 7 6
+chmod tty line to 0 for syslog; add hook to kill protocol
+/usr/dmd/4.2bsd/mpx/proto/SCCS/s.packets.h:
+1.3 86/11/23 20:01:24 karels 3 2
+add hook to kill protocol
+/usr/dmd/4.2bsd/mpx/proto/SCCS/s.precv.c:
+1.3 86/11/23 20:01:26 karels 3 2
+add hook to kill protocol
+/usr/dmd/4.2bsd/mpx/proto/SCCS/s.proto.h:
+1.3 86/11/23 20:01:28 karels 3 2
+add hook to kill protocol
+/usr/src/sys/netinet/SCCS/s.in.c:
+7.2 86/11/23 20:30:52 karels 30 29
+yow
+/usr/src/etc/SCCS/s.syslogd.c:
+5.16 86/11/23 20:53:02 karels 28 27
+don't print to unwritable ttys (blits); missing untty
+/usr/src/etc/routed/SCCS/s.main.c:
+5.8 86/11/24 18:36:19 eric 22 21
+drop LOG_UPTO -- obsolete interface
+/usr/src/sys/h/SCCS/s.syslog.h:
+7.6 86/11/24 19:20:51 eric 19 18
+no it isn't.... routed was broken.  Honest!
+/usr/src/etc/fsck/SCCS/s.dir.c:
+5.2 86/11/24 20:54:40 mckusick 14 13
+get the right name
+/usr/src/etc/fsck/SCCS/s.main.c:
+5.5 86/11/24 20:58:08 mckusick 77 76
+verify that we are checking the root file system (from conrad@cgl.ucsf.edu)
+/usr/src/sys/sys/SCCS/s.kern_acct.c:
+7.2 86/11/25 13:58:30 karels 12 11
+race if unlinking acct file
+/usr/src/etc/restore/SCCS/s.tape.c:
+5.9 86/11/25 14:32:39 mckusick 38 37
+better heuristic
+/usr/src/sys/tahoe/inline/SCCS/s.langpats.c:
+1.5 86/11/25 15:40:47 sam 5 4
+add spl4 and spl5 for new device drivers
+/usr/src/sys/h/SCCS/s.reboot.h:
+7.2 86/11/25 16:40:53 sam 10 9
+kdb additions
+/usr/src/sys/h/SCCS/s.systm.h:
+7.3 86/11/25 16:40:55 sam 47 46
+kdb additions
+/usr/src/sys/h/SCCS/s.reboot.h:
+7.2 86/11/25 16:41:21 sam 11 9
+kdb additions
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.7 86/11/25 16:41:41 sam 7 6
+remove kludge for device names
+/usr/src/sys/tahoe/SCCS/s.conf.c:
+1.6 86/11/25 16:41:58 sam 6 5
+add dr, ik, and enpr devices
+/usr/src/sys/tahoe/SCCS/s.cons.c:
+1.4 86/11/25 16:42:17 sam 4 3
+kdb additions 
+/usr/src/sys/tahoe/SCCS/s.locore.s:
+1.11 86/11/25 16:42:55 sam 11 10
+kdb additions and profiling fixes (make masterpaddr aligned and put all routines in .text)
+/usr/src/sys/tahoe/SCCS/s.trap.c:
+1.6 86/11/25 16:43:13 sam 6 5
+kdb additions
+/usr/src/sys/tahoe/SCCS/s.trap.h:
+1.2 86/11/25 16:43:15 sam 2 1
+kdb additions
+/usr/src/sys/tahoe/SCCS/s.scb.s:
+1.3 86/11/25 16:43:17 sam 3 2
+kdb additions
+/usr/src/sys/tahoe/SCCS/s.machdep.c:
+1.7 86/11/25 16:44:25 sam 7 6
+kdb additions
+e for lack of r10 from CP
+/usr/src/sys/tahoe/SCCS/s.swapgeneric.c:
+1.5 86/11/25 16:44:47 sam 6 5
+getchar moved to cons.c for kdb; make rootdev initialized
+/usr/src/sys/conf/SCCS/s.files:
+7.2 86/11/25 16:49:18 sam 28 27
+kdb additions
+/usr/src/sys/conf/SCCS/s.Makefile.tahoe:
+1.7 86/11/25 16:49:30 sam 7 6
+kdb additions
+/usr/src/sys/tahoestand/SCCS/s.boot.c:
+1.4 86/11/25 17:06:28 sam 4 3
+kdb additions
+/usr/src/sys/tahoe/SCCS/s.machdep.c:
+1.8 86/11/25 18:26:53 sam 8 7
+for karels; avoid dumps during generic boot
+/a/guest/donn/SCCS/s.LOG:
+1.2 86/11/25 19:19:00 donn 2 1
+Bug report ID: 4.3BSD/etc/20
+c This is a test of a shell script which makes check-ins a little easier.
+/a/guest/donn/SCCS/s.LOG:
+1.3 86/11/25 19:20:55 donn 3 2
+Bug report ID: 4.3BSD/etc/21 [bogus]
+c Another test of the shell script for check-ins...
+/usr/man/man3/SCCS/s.getusershell.3:
+6.2 86/11/25 21:05:10 bostic 2 1
+rewrote to reflect reality
+/usr/man/man5/SCCS/s.services.5:
+6.2 86/11/25 21:29:08 bostic 4 2
+fixed BUGS section -- kjd
+/usr/man/man5/SCCS/s.shells.5:
+1.2 86/11/25 21:36:19 bostic 2 1
+added ftpd to SEE ALSO
+/usr/src/sys/tahoevba/SCCS/s.dr.c:
+1.4 86/11/25 22:43:37 sam 5 4
+probe csr address
+/usr/man/man1/SCCS/s.ln.1:
+6.3 86/11/26 12:18:44 bostic 5 4
+documented (slightly) the directory linking capability 
+c of ln
+/usr/man/man8/SCCS/s.reboot.8:
+6.5 86/11/26 14:30:21 bostic 7 6
+bug report 4.3BSD/man/8
+/usr/dmd/4.2bsd/mpx/proto/SCCS/s.proto.h:
+1.4 86/11/26 21:29:42 karels 4 3
+correct bit order on our favorite processors
+c (wonder how this was tested on mc68000?)
+/a/staff/mckusick/text/future/SCCS/s.0.t:
+1.2 86/11/29 09:22:43 mckusick 2 1
+first draft edits
+/a/staff/mckusick/text/future/SCCS/s.1.t:
+1.2 86/11/29 09:22:45 mckusick 2 1
+first draft edits
+/a/staff/mckusick/text/future/SCCS/s.2.t:
+1.2 86/11/29 09:22:47 mckusick 2 1
+first draft edits
+/a/staff/mckusick/text/future/SCCS/s.r.t:
+1.2 86/11/29 09:22:49 mckusick 2 1
+first draft edits
+/usr/src/sys/tahoevba/SCCS/s.dr.c:
+1.5 86/11/29 13:32:50 sam 6 5
+add disclaimer
+/usr/src/sys/tahoevba/SCCS/s.ik.c:
+1.2 86/11/29 13:42:07 sam 2 1
+missing include
+/usr/src/sys/tahoevba/SCCS/s.ik.c:
+1.2 86/11/29 13:43:14 sam 3 1
+cleanups
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.11 86/11/29 13:45:09 sam 11 10
+ci for karels; include cpu.h
+/usr/src/sys/tahoeif/SCCS/s.if_enp.c:
+1.2 86/11/29 13:45:34 sam 2 1
+massive rewrites; must debug when hardware shows up
+/usr/src/sys/tahoeif/SCCS/s.if_enpreg.h:
+1.2 86/11/29 13:45:39 sam 2 1
+massive rewrites; must debug when hardware shows up
+/usr/src/sys/sys/SCCS/s.vm_sched.c:
+7.2 86/11/30 18:06:39 karels 41 40
+stopped, neg. nice jobs aren't "load"
+/usr/src/sys/sys/SCCS/s.kern_synch.c:
+7.3 86/11/30 18:07:57 karels 56 55
+clear slptime after stop; don't have to updatepri at high ipl
+/usr/src/sys/netinet/SCCS/s.tcp_subr.c:
+7.2 86/11/30 22:17:22 karels 51 50
+wake up sleepers when error is detected
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.3 86/12/01 16:43:54 karels 84 83
+mark unibus mass storage devices csr addresses as used;
+c check for and warn about overlaps.
+/usr/man/man3/SCCS/s.getusershell.3:
+6.2 86/12/01 18:39:35 bostic 3 1
+added "see also"
+/usr/man/man8/SCCS/s.bugfiler.8:
+6.3 86/12/02 12:14:44 bostic 4 3
+rewrite
+/usr/man/man8/SCCS/s.bugfiler.8:
+6.3 86/12/02 12:15:57 bostic 5 3
+rewrite
+/usr/src/lib/libc/net/SCCS/s.res_debug.c:
+5.16 86/12/03 11:33:00 kjd 23 22
+add new opcodes
+/usr/man/man1/SCCS/s.strings.1:
+6.4 86/12/03 13:07:43 bostic 6 5
+correct man page; strings prints decimal offsets, not octal
+/usr/src/etc/named/SCCS/s.ns_init.c:
+4.10 86/12/03 19:36:20 kjd 40 39
+fix to findzone from mike schwartz
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.15 86/12/03 19:37:55 kjd 59 58
+fix to doupdate from mike schwartz
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.11 86/12/03 19:41:24 kjd 57 56
+fix to InitDynUpdate from mike schwartz
+/usr/src/etc/named/SCCS/s.ns_init.c:
+4.11 86/12/03 19:47:30 kjd 41 40
+remove second include of stdio.h
+/usr/src/etc/named/SCCS/s.db_dump.c:
+4.10 86/12/03 19:51:36 kjd 25 24
+fix comments
+/usr/src/etc/named/SCCS/s.Makefile:
+4.4 86/12/03 19:54:25 kjd 15 14
+add ns_sort.c
+/usr/src/etc/named/tools/SCCS/s.nstest.c:
+4.5 86/12/03 20:05:44 kjd 5 4
+add -d flag to combat the "r" file droppings
+/usr/src/sys/h/SCCS/s.mbuf.h:
+7.4 86/12/03 22:24:13 karels 38 37
+more mbufs for gateways
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.16 86/12/04 12:05:44 kjd 60 59
+add code to sort to take presidence of interface query came in on
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.12 86/12/04 12:05:50 kjd 58 57
+add code to sort to take presidence of interface query came in on
+/usr/src/etc/named/SCCS/s.ns_sort.c:
+1.4 86/12/04 12:05:56 kjd 4 3
+add code to sort to take presidence of interface query came in on
+/a/staff/mckusick/text/future/SCCS/s.0.t:
+1.3 86/12/04 15:43:27 mckusick 3 2
+new formating
+/a/staff/mckusick/text/future/SCCS/s.r.t:
+1.3 86/12/04 15:44:07 mckusick 3 2
+add new reference
+/a/staff/mckusick/text/future/SCCS/s.1.t:
+1.3 86/12/04 15:44:51 mckusick 3 2
+edits from Mark Compton
+/a/staff/mckusick/text/future/SCCS/s.2.t:
+1.3 86/12/04 15:44:52 mckusick 3 2
+edits from Mark Compton
+/usr/src/bin/diff/SCCS/s.diffdir.c:
+4.10 86/12/04 16:10:58 bostic 10 9
+bug report 4.3BSD/bin/34; not that I think I fixed the
+/a/staff/mckusick/text/future/SCCS/s.2.t:
+1.4 86/12/04 16:56:02 karels 4 3
+changes
+/a/staff/mckusick/text/future/SCCS/s.2.t:
+1.5 86/12/04 18:20:26 mckusick 5 4
+minor edits
+/a/staff/mckusick/text/future/SCCS/s.0.t:
+1.4 86/12/04 18:21:12 mckusick 4 3
+UNIX is a registered trademark of ...
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.13 86/12/04 19:17:29 kjd 59 58
+up debug lever on return printf
+/a/staff/mckusick/text/future/SCCS/s.0.t:
+1.4 86/12/05 15:20:58 mckusick 5 3
+UNIX is a footnote; add Mike to author list
+/usr/src/sys/vax/SCCS/s.clock.h:
+7.2 86/12/06 18:39:50 sam 15 14
+define enablertclock() as null
+/usr/src/sys/vax/SCCS/s.cpu.h:
+7.3 86/12/06 22:33:10 sam 18 17
+define null enablertclock
+/usr/src/sys/sys/SCCS/s.init_main.c:
+7.3 86/12/06 22:33:55 sam 87 86
+hide tahoe-ism in enablertclock(); call startrtclock so tahoe can set interval timer
+/usr/src/sys/tahoe/SCCS/s.clock.c:
+1.3 86/12/06 22:34:32 sam 3 2
+set interval timer value at boot time according to hz
+/usr/src/sys/tahoe/SCCS/s.clock.h:
+1.3 86/12/06 22:34:33 sam 3 2
+set interval timer value at boot time according to hz
+/usr/src/sys/tahoe/SCCS/s.cons.c:
+1.5 86/12/06 22:34:34 sam 5 4
+set interval timer value at boot time according to hz
+/usr/src/sys/tahoe/SCCS/s.cp.h:
+1.2 86/12/06 22:34:36 sam 2 1
+set interval timer value at boot time according to hz
+/usr/src/sys/conf/SCCS/s.param.c:
+7.3 86/12/06 22:34:53 sam 36 35
+no longer need tahoe bogosity
+/usr/src/etc/config/SCCS/s.mkioconf.c:
+5.3 86/12/07 12:05:15 sam 12 11
+some VERSAbus devices don't generate interrupts
+/usr/src/etc/named/tools/SCCS/s.nstest.c:
+4.6 86/12/07 12:25:39 kjd 6 5
+hack around not includeing db.h, we don't know where it really lives
+/usr/src/lib/libc/tahoe/sys/SCCS/s.Makefile:
+1.2 86/12/07 22:12:57 sam 2 1
+add mmap
+/usr/src/etc/named/SCCS/s.ns.h:
+4.12 86/12/08 15:08:14 kjd 25 23
+add structures for datagram queue
+/usr/src/etc/named/SCCS/s.ns_forw.c:
+4.9 86/12/08 15:09:07 kjd 42 41
+fix code for using datagram queue
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.17 86/12/08 15:09:36 kjd 61 60
+add code to handle datagram queue
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.14 86/12/08 15:09:58 kjd 60 59
+add code to handle datagram queue
+/usr/src/etc/named/SCCS/s.ns_main.c:
+4.13 86/12/08 15:10:44 kjd 57 56
+add code to handle datagram queue
+/usr/src/etc/named/SCCS/s.ns_main.c:
+4.14 86/12/08 16:40:28 kjd 58 57
+fix sorting for point to point links
+/usr/src/sys/tahoevba/SCCS/s.vbaparam.h:
+1.2 86/12/08 19:06:59 sam 2 1
+add description and macros for VERSAbus segmentation; add 
+c stuff for better autoconfiguration
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.8 86/12/08 19:08:18 sam 8 7
+support devices w/o interrupt vectors; track and check for 
+c overlapping devices in mapped region of VERSAbus; use 32-bit i/o 
+c addresses to allow devices outside mapped region to be specified in 
+c configuration files
+/usr/src/etc/config/SCCS/s.mkioconf.c:
+5.4 86/12/09 10:57:23 sam 13 12
+must output external declaration for devices w/o interrupts
+/usr/src/etc/SCCS/s.rshd.c:
+5.8 86/12/09 11:30:11 mckusick 31 30
+Rshd sets nonblocking mode on wrong file descriptor (from serge)
+/usr/man/man5/SCCS/s.utmp.5:
+6.3 86/12/09 18:52:37 bostic 5 4
+added last to "see also" list
+/usr/src/etc/named/SCCS/s.ns_sort.c:
+1.5 86/12/10 03:58:34 kjd 5 4
+cleanup code and fix returning the right address
+/usr/src/etc/named/SCCS/s.ns_main.c:
+4.14 86/12/10 03:59:13 kjd 59 57
+fix returning the right answer for point to point links
+/usr/src/etc/named/SCCS/s.ns_forw.c:
+4.9 86/12/10 04:00:55 kjd 43 41
+add code for keeping a UDP query queue.  So, responces go out the interface 
+c they cam in on.
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.17 86/12/10 04:00:57 kjd 62 60
+add code for keeping a UDP query queue.  So, responces go out the interface 
+c they cam in on.
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.14 86/12/10 04:01:00 kjd 61 59
+add code for keeping a UDP query queue.  So, responces go out the interface 
+c they cam in on.
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.18 86/12/10 04:09:32 kjd 63 62
+turn down the volume on syslog MAXQUERIES exceeded
+/usr/man/man1/SCCS/s.last.1:
+6.2 86/12/10 05:53:17 bostic 4 3
+added -f flag, hosts args, general cleanup
+/usr/man/man1/SCCS/s.users.1:
+6.2 86/12/10 07:04:24 bostic 5 4
+document the argument file
+/usr/man/man1/SCCS/s.who.1:
+6.2 86/12/10 17:00:20 bostic 4 3
+general cleanup
+/usr/src/ucb/SCCS/s.rlogin.c:
+5.12 86/12/10 17:36:42 sam 35 34
+strip parity if we're not using eight-bit stuff
+/usr/src/sys/tahoevba/SCCS/s.ikreg.h:
+1.2 86/12/11 08:28:19 sam 2 1
+put tacbs back; delete fixed interrupt vector base and address modifier definition
+/usr/src/sys/tahoevba/SCCS/s.ik.c:
+1.3 86/12/11 08:29:21 sam 4 3
+put tabs back; change address modifier since i/o buffer 
+c might be anywhere in physical memory (also avoid overlap with dumb 
+c 24-bit devices); fix backwards mtpr; autoconfig interrupt vector
+/usr/src/ucb/Mail/SCCS/s.strings.c:
+5.3 86/12/12 12:41:55 bostic 7 5
+fixed allocation alignment for Power 6.
+/usr/src/sys/h/SCCS/s.tablet.h:
+7.2 86/12/14 14:49:46 sam 3 2
+add new gtco types (from pixar!sam)
+/usr/src/sys/sys/SCCS/s.tty_tb.c:
+7.3 86/12/14 14:52:07 sam 19 18
+add new gtco types; generalize in-proximity status bit (from pixar!sam)
+/usr/src/sys/sys/SCCS/s.kern_sig.c:
+7.3 86/12/14 14:52:28 sam 50 49
+add missing MMAP code from merge
+/usr/src/sys/netinet/SCCS/s.ip.h:
+7.3 86/12/15 10:10:38 karels 22 21
+increase FRAGTTL
+/usr/src/ucb/netstat/SCCS/s.inet.c:
+5.6 86/12/15 17:10:39 sam 26 25
+all statistics are unsigned
+/usr/src/ucb/netstat/SCCS/s.ns.c:
+5.5 86/12/15 17:10:41 sam 5 4
+all statistics are unsigned
+/usr/src/ucb/netstat/SCCS/s.route.c:
+5.8 86/12/15 17:10:42 sam 18 17
+all statistics are unsigned
+/usr/src/sys/sys/SCCS/s.subr_xxx.c:
+7.3 86/12/15 20:23:26 sam 36 35
+lint
+/usr/src/sys/sys/SCCS/s.vm_mem.c:
+7.3 86/12/15 20:23:27 sam 51 50
+lint
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+7.4 86/12/15 20:23:30 sam 77 76
+lint
+/usr/src/sys/sys/SCCS/s.vm_pt.c:
+7.3 86/12/15 20:23:36 sam 45 44
+lint
+/usr/src/sys/tahoevba/SCCS/s.vbavar.h:
+1.4 86/12/15 20:24:56 sam 4 3
+lint
+/usr/src/sys/tahoevba/SCCS/s.cy.c:
+1.8 86/12/15 20:24:57 sam 8 7
+lint
+/usr/src/sys/tahoevba/SCCS/s.dr.c:
+1.6 86/12/15 20:25:03 sam 7 6
+lint
+/usr/src/sys/tahoevba/SCCS/s.vbaparam.h:
+1.3 86/12/15 20:25:10 sam 3 2
+lint
+/usr/src/sys/tahoevba/SCCS/s.ik.c:
+1.4 86/12/15 20:25:11 sam 5 4
+lint
+/usr/src/sys/tahoeif/SCCS/s.if_ace.c:
+1.12 86/12/15 20:25:59 sam 12 11
+lint
+/usr/src/sys/tahoeif/SCCS/s.if_enp.c:
+1.3 86/12/15 20:26:03 sam 3 2
+lint
+/usr/src/sys/tahoeif/SCCS/s.if_enpreg.h:
+1.3 86/12/15 20:26:07 sam 3 2
+lint
+/usr/src/sys/kdb/SCCS/s.defs.h:
+7.4 86/12/15 20:26:43 sam 4 3
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_access.c:
+7.3 86/12/15 20:26:44 sam 3 2
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_command.c:
+7.3 86/12/15 20:26:44 sam 3 2
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_ctype.c:
+7.2 86/12/15 20:26:45 sam 2 1
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_expr.c:
+7.4 86/12/15 20:26:46 sam 4 3
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_format.c:
+7.4 86/12/15 20:26:47 sam 4 3
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_input.c:
+7.3 86/12/15 20:26:48 sam 3 2
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_message.c:
+7.3 86/12/15 20:26:49 sam 3 2
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_output.c:
+7.2 86/12/15 20:26:50 sam 2 1
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_pcs.c:
+7.2 86/12/15 20:26:50 sam 2 1
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_print.c:
+7.5 86/12/15 20:26:51 sam 5 4
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_runpcs.c:
+7.3 86/12/15 20:26:52 sam 3 2
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_sym.c:
+7.2 86/12/15 20:26:53 sam 2 1
+lint
+/usr/src/sys/kdb/SCCS/s.kdb_trap.c:
+7.5 86/12/15 20:26:54 sam 5 4
+lint
+/usr/src/sys/tahoe/SCCS/s.Locore.c:
+1.3 86/12/15 20:27:43 sam 3 2
+lint
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.9 86/12/15 20:27:45 sam 9 8
+lint
+/usr/src/sys/tahoe/SCCS/s.kdb_machdep.c:
+7.3 86/12/15 20:27:46 sam 3 2
+lint
+/usr/src/sys/tahoe/SCCS/s.kdb_opset.c:
+7.3 86/12/15 20:27:48 sam 3 2
+lint
+/usr/src/sys/tahoe/SCCS/s.kdbparam.h:
+7.5 86/12/15 20:27:49 sam 5 4
+lint
+/usr/src/sys/tahoe/SCCS/s.machdep.c:
+1.9 86/12/15 20:27:49 sam 9 8
+lint
+/usr/src/sys/tahoe/SCCS/s.mem.c:
+1.4 86/12/15 20:27:51 sam 4 3
+lint
+/usr/src/sys/tahoe/SCCS/s.trap.c:
+1.7 86/12/15 20:27:52 sam 7 6
+lint
+/usr/src/sys/tahoe/SCCS/s.vm_machdep.c:
+1.7 86/12/15 20:27:54 sam 7 6
+lint
+/usr/src/sys/tahoeif/SCCS/s.if_enp.c:
+1.4 86/12/15 20:52:53 sam 4 3
+std addresses must be 32-bit
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.9 86/12/15 20:57:17 sam 10 8
+lint
+/usr/src/sys/netinet/SCCS/s.if_ether.c:
+7.2 86/12/16 16:16:14 karels 24 23
+block reentrance of arpinput/arptnew with splimp;
+c larger tables for gateway (shouldn't use 2-dimensional array!);
+c use loopback even if not up yet, for configuration at boot time
+c when primary interface doesn't hear itself talk.
+/usr/src/sys/tahoevba/SCCS/s.vba.c:
+1.4 86/12/16 22:27:42 karels 4 3
+shut up!
+/usr/src/usr.lib/sendmail/src/SCCS/s.trace.c:
+5.3 86/12/17 16:05:32 eric 5 4
+delete unneeded #include <ctype.h>
+/usr/src/usr.lib/sendmail/src/SCCS/s.usersmtp.c:
+5.8 86/12/17 16:05:35 eric 66 65
+delete unneeded #include <ctype.h>
+/usr/src/usr.lib/sendmail/src/SCCS/s.util.c:
+5.9 86/12/17 16:05:39 eric 71 70
+delete unneeded #include <ctype.h>
+/usr/src/usr.lib/sendmail/src/SCCS/s.sendmail.h:
+5.10.1.1 86/12/17 16:08:30 eric 158 157
+hack around compiler bug that gets confused on isascii
+/usr/src/usr.lib/sendmail/src/SCCS/s.version.c:
+5.57.1.1 86/12/17 16:08:34 eric 480 479
+hack around compiler bug that gets confused on isascii
+/usr/src/usr.lib/sendmail/src/SCCS/s.sendmail.h:
+5.10.1.2 86/12/17 16:19:30 eric 159 158
+fix stupid botch -- reversed condition
+/usr/src/etc/named/SCCS/s.db_load.c:
+4.15 86/12/17 21:26:20 kjd 48 47
+fix bug in findservice()
+/usr/man/man2/SCCS/s.getitimer.2:
+6.3 86/12/18 17:16:22 bostic 4 3
+added select to see also
+/usr/src/sys/tahoestand/SCCS/s.boot.c:
+1.5 86/12/18 23:51:57 karels 5 4
+eliminate magic constants
+/usr/src/sys/tahoestand/SCCS/s.saio.h:
+1.2 86/12/18 23:52:21 karels 2 1
+updates
+/usr/src/sys/tahoestand/SCCS/s.sys.c:
+1.2 86/12/18 23:52:23 karels 2 1
+updates
+/usr/src/sys/tahoestand/SCCS/s.conf.c:
+1.3 86/12/18 23:52:26 karels 3 2
+updates
+/usr/src/sys/tahoestand/SCCS/s.machdep.c:
+1.2 86/12/18 23:52:45 karels 2 1
+fix movob
+/usr/src/sys/tahoestand/SCCS/s.cyvar.h:
+1.2 86/12/18 23:53:05 karels 2 1
+rm junk
+/usr/src/sys/tahoe/SCCS/s.autoconf.c:
+1.10 86/12/18 23:53:36 karels 11 10
+consolidate printfs
+/usr/src/sys/tahoestand/SCCS/s.vd.c:
+1.5 86/12/19 08:41:21 sam 5 4
+make it look more like the system version; controller addresses 
+c are now physical addresses (were offsets from VBIOBASE before)
+/usr/src/sys/tahoestand/SCCS/s.srt0.c:
+1.4 86/12/19 08:42:17 sam 4 3
+move relocation past cypher control block; purge data cache for good 
+c measure (shouldn't be needed)
+/usr/src/sys/tahoestand/SCCS/s.cy.c:
+1.3 86/12/19 08:43:49 sam 3 2
+massive rework; fix access of files > 0
+/usr/src/sys/tahoedist/SCCS/s.MAKEDEV:
+1.2 86/12/19 10:36:50 karels 2 1
+sanity on cypher
+/usr/src/sys/tahoedist/SCCS/s.MAKEDEV:
+5.1 86/12/19 10:46:37 karels 3 2
+missed one
+/usr/src/sys/vaxuba/SCCS/s.dh.c:
+7.2 86/12/19 11:46:22 karels 98 97
+correct uba reallocation on reset
+/usr/src/sys/vaxuba/SCCS/s.dhu.c:
+7.2 86/12/19 11:46:27 karels 12 11
+correct uba reallocation on reset
+/usr/src/sys/vaxuba/SCCS/s.dmf.c:
+7.3 86/12/19 11:46:30 karels 44 43
+correct uba reallocation on reset
+/usr/src/sys/vaxuba/SCCS/s.dmz.c:
+7.2 86/12/19 11:46:35 karels 11 10
+correct uba reallocation on reset
+/usr/src/sys/tahoestand/vdformat/SCCS/s.io.c:
+1.3 86/12/19 14:27:01 karels 3 2
+move vdtimeout here
+/usr/src/sys/tahoestand/vdformat/SCCS/s.vdfmt.h:
+1.3 86/12/19 14:28:43 karels 3 2
+move vdtimeout from kernel header
+/usr/src/etc/named/SCCS/s.db_dump.c:
+4.11 86/12/19 16:14:37 kjd 26 25
+dump name server rountrip time as a comment
+/usr/src/etc/named/SCCS/s.db_save.c:
+4.6 86/12/19 16:17:46 kjd 18 17
+handle name server roundtrip time
+/usr/src/etc/named/SCCS/s.db_reload.c:
+4.6 86/12/19 16:19:20 kjd 14 13
+add include time.h
+/usr/src/etc/named/SCCS/s.ns.h:
+4.13 86/12/19 17:02:27 kjd 26 25
+change qinfo structure for keeping track of name server round trip time
+/usr/src/etc/named/SCCS/s.db.h:
+4.7 86/12/19 17:03:18 kjd 12 11
+change databuf structure to handle keeping track of name server round trip time
+/usr/src/etc/named/SCCS/s.db_update.c:
+4.7 86/12/19 17:25:44 kjd 28 27
+handle name server round trip time
+/usr/src/etc/named/SCCS/s.ns_init.c:
+4.12 86/12/19 17:26:24 kjd 42 41
+add include socket.h
+/usr/src/etc/named/SCCS/s.ns_forw.c:
+4.10 86/12/19 17:29:42 kjd 44 43
+Add support of sorting quries to name servers based on round trip times
+/usr/src/etc/named/SCCS/s.ns_req.c:
+4.15 86/12/19 17:29:45 kjd 62 61
+Add support of sorting quries to name servers based on round trip times
+/usr/src/etc/named/SCCS/s.ns_resp.c:
+4.19 86/12/19 17:29:50 kjd 64 63
+Add support of sorting quries to name servers based on round trip times
+/usr/src/etc/named/SCCS/s.ns_sort.c:
+1.6 86/12/19 17:29:56 kjd 6 5
+Add support of sorting quries to name servers based on round trip times
+/usr/src/sys/tahoedist/SCCS/s.MAKEDEV:
+5.2 86/12/21 14:55:54 karels 4 3
+update modes for std
+/usr/src/ucb/SCCS/s.w.c:
+5.4 86/12/21 16:28:36 karels 20 19
+don't make me use who too
+/usr/man/man1/SCCS/s.w.1:
+6.2 86/12/21 16:31:27 karels 4 3
+-f
+/usr/man/man1/SCCS/s.w.1:
+6.2 86/12/21 16:32:31 karels 5 3
+-f
+/usr/src/ucb/SCCS/s.w.c:
+5.4 86/12/22 09:23:54 karels 21 19
+don't make me use who too
+/usr/src/etc/getty/SCCS/s.gettytab:
+5.9 86/12/22 09:44:23 karels 16 15
+flushes on plugboard, consistency on dialup names
+/usr/src/sys/netinet/SCCS/s.in_pcb.c:
+7.3 86/12/22 10:19:31 karels 64 63
+once again, try to get local address right: this time for DONTROUTE
+c on point-to-point links (need to zero sin_port before calling ifa_ifwithdstaddr
+/usr/man/man3/SCCS/s.directory.3:
+6.3 86/12/22 11:46:52 bostic 4 3
+bug report 4.1BSD/sys/31
+/usr/src/sys/vaxuba/SCCS/s.dh.c:
+7.3 86/12/22 15:18:15 karels 99 98
+race in dmopen
+/usr/src/sys/tahoedist/SCCS/s.MAKEDEV:
+5.3 86/12/22 19:07:25 karels 5 4
+oops
+/usr/src/sys/tahoestand/vdformat/SCCS/s.vdfmt.c:
+1.3 86/12/22 19:24:39 karels 3 2
+vddcaddr now not relative
+/usr/src/sys/tahoevba/SCCS/s.ik.c:
+1.5 86/12/23 08:33:23 sam 6 5
+intermediate i/o buffer must be physically contiguous for DMA
+/usr/src/sys/tahoestand/vdformat/SCCS/s.maps.c:
+1.3 86/12/23 13:43:48 karels 3 2
+rm debugging
+/usr/src/sys/tahoe/SCCS/s.clock.c:
+1.4 86/12/23 20:44:03 sam 4 3
+must have cp command block in data segment to insure vtoph 
+c works with noproc; correct tick and tickadj when reseting hz
+/usr/src/sys/tahoe/SCCS/s.cons.c:
+1.6 86/12/23 20:51:25 sam 6 5
+CPMDCB takes physical address; had been working because CP only 
+c uses 24-bits (or maybe 30) and physical == virtual when address is in data 
+c segment (as command buffers are)
+/usr/src/sys/tahoestand/vdformat/SCCS/s.format.c:
+1.3 86/12/26 12:28:03 sam 3 2
+take out debugging printfs
+/usr/src/sys/vaxuba/SCCS/s.dh.c:
+7.4 86/12/30 12:25:37 karels 100 99
+typo
+/usr/src/etc/XNSrouted/SCCS/s.tables.c:
+5.6 86/12/30 14:36:37 karels 6 5
+don't print useless messages

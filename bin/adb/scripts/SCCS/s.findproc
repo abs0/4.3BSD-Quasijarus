@@ -1,0 +1,21 @@
+h14871
+s 00010/00000/00000
+d D 5.1 88/03/30 14:45:51 bostic 1 0
+c date and time created 88/03/30 14:45:51 by bostic
+e
+u
+U
+t
+T
+I 1
+.>4
+*nproc>l
+*proc>f
+<l="l="X
+<f="f="X
+<4="4="X
+,<l$<findproc.nxt
+,<l$<
+0>f
+<4=D"proc not found"
+E 1

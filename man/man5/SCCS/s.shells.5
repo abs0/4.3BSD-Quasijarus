@@ -1,0 +1,48 @@
+h14763
+s 00002/00002/00021
+d D 5.2 86/11/25 21:36:19 bostic 2 1
+c added ftpd to SEE ALSO
+e
+s 00023/00000/00000
+d D 5.1 86/11/25 21:32:19 bostic 1 0
+c date and time created 86/11/25 21:32:19 by bostic
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SHELLS 5  "November 25, 1986"
+E 2
+I 2
+.TH SHELLS 5  "%Q%"
+E 2
+.UC 5
+.SH NAME
+shells \- shell database
+.SH DESCRIPTION
+The \fIshells\fP file contains a list of the shells
+on the system.  For each shell a single line should be
+present consisting of the shell's path, relative to root.
+.PP
+A ``#'' indicates the beginning of a comment; subsequent
+characters up to the end of the line are not interpreted
+by the routines which search the file.  Blank lines are also
+ignored.
+.SH FILES
+/etc/shells
+.SH "SEE ALSO"
+D 2
+passwd(1), getusershell(3)
+E 2
+I 2
+passwd(1), getusershell(3), ftpd(8C)
+E 2
+E 1

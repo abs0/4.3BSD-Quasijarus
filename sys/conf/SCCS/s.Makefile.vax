@@ -1,0 +1,716 @@
+h12951
+s 00000/00003/00141
+d D 7.9 04/01/04 10:41:06 msokolov 45 44
+c move emulate.s from special handling in Makefile.vax and config to files.vax
+e
+s 00001/00001/00143
+d D 7.8 87/10/22 21:20:09 mckusick 44 43
+c assym.s depends on ../machine/vmparam.h
+e
+s 00001/00015/00143
+d D 7.7 87/08/13 13:10:36 bostic 43 42
+c use mkdep(1)
+e
+s 00001/00001/00157
+d D 7.6 87/07/28 19:24:23 bostic 42 41
+c tags in ../sys now
+e
+s 00001/00001/00157
+d D 7.5 87/05/08 10:49:41 sam 41 40
+c delete ';' in make depend for compatibility with research awk (from jim mckie)
+e
+s 00002/00002/00156
+d D 7.4 87/05/04 11:17:35 karels 40 39
+c remove (now-)redundant swapgeneric on lint
+e
+s 00004/00001/00154
+d D 7.3 87/04/02 15:58:57 karels 39 38
+c kdb (for sam)
+e
+s 00001/00001/00154
+d D 7.2 86/07/10 17:07:46 mckusick 38 37
+c uipc_domain.o depends on the network configuration
+e
+s 00001/00001/00154
+d D 7.1 86/06/05 01:46:09 mckusick 37 36
+c 4.3BSD release version
+e
+s 00001/00002/00154
+d D 6.22 86/05/22 18:03:42 karels 36 35
+c don't make null-length assym.s
+e
+s 00002/00001/00154
+d D 6.21 86/05/03 12:46:02 bloom 35 34
+c need to separate inline command from arguments in dependency list
+e
+s 00004/00001/00151
+d D 6.20 86/04/22 10:41:47 kridle 34 33
+c MicroVAX II Integration (KA630)
+e
+s 00002/00003/00150
+d D 6.19 86/02/23 23:36:31 karels 33 32
+c lint should get param.c
+e
+s 00004/00003/00149
+d D 6.18 86/02/18 18:17:30 sam 32 30
+c define inline expander in Makefile rathen than config; move 
+c offsets for fixed interrupt vectors from scb.s to config generated ubvec.s
+e
+s 00001/00000/00152
+d R 6.18 86/02/18 17:51:17 sam 31 30
+c inline expander definition moved from config
+e
+s 00001/00000/00151
+d D 6.17 85/10/11 08:24:19 karels 30 29
+c allow non-root to make param.c
+e
+s 00013/00012/00138
+d D 6.16 85/09/18 09:37:45 karels 29 28
+c rename makefile to Makefile
+e
+s 00001/00000/00149
+d D 6.15 85/09/18 02:33:04 lepreau 28 27
+c make it work for non-root
+e
+s 00001/00001/00148
+d D 6.14 85/09/17 20:28:45 sam 27 26
+c need PARAM for locore.c when linting
+e
+s 00001/00001/00148
+d D 6.13 85/08/12 09:21:36 bloom 26 24
+c add 8600 support
+e
+s 00001/00001/00148
+d R 6.13 85/08/02 18:43:09 bloom 25 24
+c add 8600 support
+e
+s 00002/00001/00147
+d D 6.12 85/07/01 08:42:38 bloom 24 23
+c cpudata.o should depend upon makefile
+e
+s 00007/00002/00141
+d D 6.11 85/06/08 12:06:41 mckusick 23 22
+c Add copyright
+e
+s 00001/00000/00142
+d D 6.10 84/09/10 16:14:50 bloom 22 21
+c assym.s didn't exist when running make depend on a clean directory
+e
+s 00014/00027/00128
+d D 6.9 84/09/08 13:45:28 bloom 21 19
+c Got rid of all ../h in the system.  Changed the include 
+c 	list and got rid of all explicit header files depending upon 
+c 	other header files
+e
+s 00008/00022/00133
+d R 6.9 84/08/28 17:49:23 bloom 20 19
+c make depend uses cc -M and change how includes are handled
+e
+s 00007/00004/00148
+d D 6.8 84/08/20 23:03:07 mckusick 19 18
+c update to use ../vax/inline/inline instead of ../vax/asm
+e
+s 00003/00003/00149
+d D 6.7 84/08/02 14:20:37 karels 18 17
+c no, includes not from /usr/include
+e
+s 00002/00001/00150
+d D 6.6 84/07/20 17:15:49 karels 17 16
+c better dependencies for assym.s
+e
+s 00003/00001/00148
+d D 6.5 84/07/08 15:35:46 sam 16 15
+c ufs_nami.c -> ufs_namei.c and nami.h -> namei.h 
+e
+s 00005/00002/00144
+d D 6.4 84/05/12 22:18:21 sam 15 14
+c convert from asm.sed script to asm program
+e
+s 00002/00000/00144
+d D 6.3 83/09/25 12:24:23 karels 14 13
+c assym.s depends on makefile (maxusers)
+e
+s 00005/00004/00139
+d D 6.2 83/07/31 17:40:40 sam 13 12
+c move rpb in front of scb for future power fail restart and 
+c so that rpb is at constant offset no matter how many UBA's are present
+e
+s 00000/00000/00143
+d D 6.1 83/07/29 07:41:21 sam 12 11
+c 4.2 distribution
+e
+s 00003/00001/00140
+d D 4.10 83/07/10 00:35:54 sam 11 10
+c add comments about global defines
+e
+s 00001/00001/00140
+d D 4.9 83/06/30 01:11:35 sam 10 9
+c need parameters now that SYSPTSIZE is sized on MAXUSERS
+e
+s 00002/00001/00139
+d D 4.8 83/05/19 18:27:09 sam 9 8
+c don't remove swap files!!!
+e
+s 00003/00003/00137
+d D 4.7 83/05/18 06:17:13 sam 8 7
+c it's time for 4.2!!
+e
+s 00003/00002/00137
+d D 4.6 83/04/24 23:55:22 mckusick 7 6
+c clean up depend entry
+e
+s 00003/00003/00136
+d D 4.5 83/03/10 22:04:27 sam 6 4
+c symbols in wrong place
+e
+s 00002/00002/00137
+d R 4.5 83/02/21 22:51:41 sam 5 4
+c change assym.s rule to reflect MAXUSERS use in calculating SYSPTSIZE
+e
+s 00006/00005/00133
+d D 4.4 82/12/17 12:12:27 sam 4 3
+c sun merge
+e
+s 00003/00003/00135
+d D 4.3 82/12/05 22:03:31 sam 3 2
+c new dependencies for tty.h and ioctl.h
+e
+s 00002/00000/00136
+d D 4.2 82/12/04 15:40:57 sam 2 1
+c show hidden ioctl.h dependencies
+e
+s 00136/00000/00000
+d D 4.1 82/12/04 15:38:18 sam 1 0
+c date and time created 82/12/04 15:38:18 by sam
+e
+u
+U
+t
+T
+I 1
+D 23
+#	%M%	%I%	%G%
+E 23
+#
+D 8
+# Makefile for 4.1c bsd
+E 8
+I 8
+D 11
+# Makefile for 4.2 bsd
+E 11
+I 11
+D 23
+# Makefile for 4.2 BSD
+E 23
+I 23
+D 37
+# Copyright (c) 1980 Regents of the University of California.
+E 37
+I 37
+# Copyright (c) 1980, 1986 Regents of the University of California.
+E 37
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	%W% (Berkeley) %G%
+#
+# Makefile for 4.3 BSD
+E 23
+E 11
+E 8
+#
+# This makefile is constructed from a machine description:
+D 29
+#	config machine
+E 29
+I 29
+#	config machineid
+E 29
+# Most changes should be made in the machine description
+D 8
+#	/usr/sys/conf/``machineid''
+E 8
+I 8
+#	/sys/conf/``machineid''
+E 8
+# after which you should do
+#	 config machineid
+# Generic makefile changes should be made in
+D 8
+#	/usr/sys/conf/makefile
+E 8
+I 8
+D 29
+#	/sys/conf/makefile
+E 29
+I 29
+#	/sys/conf/Makefile.``machinetype''
+E 29
+E 8
+# after which config should be rerun for all machines.
+#
+# N.B.: NO DEPENDENCIES ON FOLLOWING FLAGS ARE VISIBLE TO MAKEFILE
+#	IF YOU CHANGE THE DEFINITION OF ANY OF THESE RECOMPILE EVERYTHING
+#
+# -DTRACE	compile in kernel tracing hooks
+I 9
+# -DQUOTA	compile in file system quotas
+I 11
+# -DUUDMA	compile in unibus tu58 pseudo-dma code
+D 33
+# -DSWABIPS	compile in code to byte swap ip packets on 3Mb/s Ethernet
+E 33
+E 11
+E 9
+#
+C2=	/lib/c2
+LD=	/bin/ld
+I 32
+D 34
+INLINE=	../vax/inline/inline
+E 34
+I 34
+D 35
+INLINE=	../vax/inline/inline ${INLINEOPTS}
+E 35
+I 35
+INLINECMD= ../vax/inline/inline
+INLINE=	${INLINECMD} ${INLINEOPTS}
+E 35
+E 34
+E 32
+TOUCH=	touch -f -c
+
+D 21
+COPTS=	${IDENT} -DKERNEL
+E 21
+I 21
+INCLUDES= -I. -I../h
+COPTS=	${INCLUDES} ${IDENT} -DKERNEL
+E 21
+CFLAGS=	-O ${COPTS}
+
+AHEADS=	../vax/pcb.m
+
+%OBJS
+
+%CFILES
+
+%LOAD
+
+clean:
+D 9
+	rm -f eddep *vmunix* tags *.o locore.i [a-tv-z]*.s \
+E 9
+I 9
+	rm -f eddep *vmunix tags *.o locore.i [a-tv-z]*.s \
+E 9
+		errs linterrs makelinks
+
+D 33
+lint: /tmp
+E 33
+I 33
+lint: /tmp param.c
+E 33
+D 21
+	@lint -hbxn -I. -DGENERIC ${COPTS} ../vax/Locore.c \
+E 21
+I 21
+D 27
+	@lint -hbxn -DGENERIC ${COPTS} ../vax/Locore.c \
+E 27
+I 27
+D 40
+	@lint -hbxn -DGENERIC ${COPTS} ${PARAM} ../vax/Locore.c \
+E 27
+E 21
+D 33
+	  ${CFILES} ../vax/swapgeneric.c ioconf.c | \
+E 33
+I 33
+	  ${CFILES} ../vax/swapgeneric.c ioconf.c param.c | \
+E 40
+I 40
+	@lint -hbxn -DGENERIC ${COPTS} ${PARAM} \
+	  ../vax/Locore.c ${CFILES} ioconf.c param.c | \
+E 40
+E 33
+	    grep -v 'struct/union .* never defined' | \
+	    grep -v 'possible pointer alignment problem'
+
+D 6
+../conf/symbols.sort: ../conf/symbols.raw
+	grep -v '^#' ../conf/symbols.raw \
+	    | sed 's/^	//' | sort -u > ../conf/symbols.sort
+E 6
+I 6
+../vax/symbols.sort: ../vax/symbols.raw
+	grep -v '^#' ../vax/symbols.raw \
+	    | sed 's/^	//' | sort -u > ../vax/symbols.sort
+E 6
+
+I 15
+D 19
+../vax/asm: ../vax/asm.c
+	${CC} -o ../vax/asm -O ../vax/asm.c
+E 19
+I 19
+../vax/inline/inline: ../vax/inline/inline.h ../vax/inline/langpats.c
+../vax/inline/inline: ../vax/inline/libcpats.c ../vax/inline/machdep.c
+../vax/inline/inline: ../vax/inline/machpats.c ../vax/inline/main.c
+	cd ../vax/inline; make
+E 19
+
+E 15
+D 13
+locore.o: assym.s ${AHEADS} ../vax/scb.s ../vax/locore.s ubglue.s \
+D 4
+    ../vax/mtpr.h ../vax/trap.h ../h/psl.h ../h/pte.h ../vax/cpu.h mba.h
+E 4
+I 4
+    ../vax/mtpr.h ../vax/trap.h ../machine/psl.h ../machine/pte.h \
+    ../vax/cpu.h mba.h
+E 4
+	cat assym.s ../vax/scb.s ../vax/locore.s ubglue.s > locore.c
+E 13
+I 13
+D 32
+locore.o: assym.s ${AHEADS} ../vax/rpb.s ../vax/scb.s ../vax/locore.s \
+    ubglue.s ../vax/mtpr.h ../vax/trap.h ../machine/psl.h \
+E 32
+I 32
+locore.o: assym.s ${AHEADS} ../vax/rpb.s ../vax/scb.s ubvec.s \
+    ../vax/locore.s ubglue.s ../vax/mtpr.h ../vax/trap.h ../machine/psl.h \
+E 32
+    ../machine/pte.h ../vax/cpu.h mba.h
+D 32
+	cat assym.s ../vax/rpb.s ../vax/scb.s ../vax/locore.s \
+E 32
+I 32
+	cat assym.s ../vax/rpb.s ../vax/scb.s ubvec.s ../vax/locore.s \
+E 32
+	    ubglue.s > locore.c
+E 13
+D 21
+	cc -E -I. -DLOCORE ${COPTS} locore.c > locore.i
+E 21
+I 21
+	cc -E -DLOCORE -I../vax ${COPTS} locore.c > locore.i
+E 21
+	@echo 'as -o locore.o $${AHEADS} locore.i'
+	@as -o locore.o ${AHEADS} locore.i
+	@rm locore.i
+I 34
+
+D 45
+emulate.o: ../vax/emulate.s
+	/lib/cpp -I. ${COPTS} ../vax/emulate.s | ${AS} -o emulate.o
+E 34
+
+E 45
+# the following is necessary because autoconf.o depends on #if GENERIC
+D 29
+autoconf.o tu.o: makefile
+E 29
+I 29
+autoconf.o tu.o: Makefile
+E 29
+
+# the following are necessary because the files depend on the types of
+# vax cpu's included in the system configuration
+D 24
+clock.o machdep.o autoconf.o conf.o cons.o flp.o mba.o uba.o vaxcpu.o : makefile
+E 24
+I 24
+D 29
+clock.o machdep.o autoconf.o conf.o cons.o cpudata.o : makefile
+D 26
+flp.o mba.o uba.o vaxcpu.o : makefile
+E 26
+I 26
+crl.o flp.o mba.o uba.o vaxcpu.o : makefile
+E 29
+I 29
+clock.o machdep.o autoconf.o conf.o cons.o cpudata.o : Makefile
+crl.o flp.o mba.o uba.o vaxcpu.o : Makefile
+
+E 29
+E 26
+E 24
+# depend on network configuration
+D 29
+af.o : makefile
+E 29
+I 29
+D 38
+af.o uipc_proto.o locore.o: Makefile
+E 38
+I 38
+af.o uipc_proto.o uipc_domain.o locore.o: Makefile
+E 38
+
+I 39
+# depends on kdb being configured
+trap.o:	Makefile
+
+E 39
+E 29
+I 14
+# depend on maxusers
+D 29
+assym.s: makefile
+E 29
+I 29
+assym.s: Makefile
+E 29
+E 14
+
+D 4
+assym.s: ../h/param.h ../h/pte.h ../h/buf.h ../h/vmparam.h ../h/vmmeter.h \
+    ../h/dir.h ../h/cmap.h ../h/map.h ../vaxuba/ubavar.h ../h/proc.h \
+    ../h/msgbuf.h
+E 4
+I 4
+assym.s: ../h/param.h ../machine/pte.h ../h/buf.h ../h/vmparam.h \
+    ../h/vmmeter.h ../h/dir.h ../h/cmap.h ../h/map.h ../vaxuba/ubavar.h \
+D 17
+    ../h/proc.h ../h/msgbuf.h
+E 17
+I 17
+    ../vaxuba/ubareg.h ../h/proc.h ../h/msgbuf.h ../h/text.h ../h/user.h \
+D 44
+    ../vax/rpb.h
+E 44
+I 44
+    ../vax/rpb.h ../machine/vmparam.h
+E 44
+E 17
+E 4
+D 10
+	cc ${IDENT} ../vax/genassym.c; ./a.out >assym.s; rm -f a.out
+E 10
+I 10
+D 21
+	cc ${IDENT} ${PARAM} ../vax/genassym.c; ./a.out >assym.s; rm -f a.out
+E 21
+I 21
+	cc ${INCLUDES} ${IDENT} ${PARAM} ../vax/genassym.c
+	./a.out >assym.s; rm -f a.out
+E 21
+E 10
+
+D 18
+../h/param.h: /usr/include/signal.h
+E 18
+I 18
+D 21
+../h/param.h: ../h/signal.h
+E 18
+	${TOUCH} ../h/param.h
+I 2
+D 3
+../h/ioctl.h:  ../h/ttychars.h ../h/ttydev.h
+	${TOUCH} ../h/ioctl.h
+E 2
+../h/tty.h: /usr/include/sgtty.h ../h/ioctl.h
+E 3
+I 3
+../h/tty.h:  ../h/ttychars.h ../h/ttydev.h
+E 3
+	${TOUCH} ../h/tty.h
+I 3
+D 18
+../h/ioctl.h: /usr/include/sgtty.h ../h/ttychars.h ../h/ttydev.h
+E 18
+I 18
+../h/ioctl.h: ../h/ttychars.h ../h/ttydev.h
+E 18
+	${TOUCH} ../h/ioctl.h
+E 3
+D 16
+../h/user.h: ../vax/pcb.h ../h/dmap.h ../h/types.h \
+E 16
+I 16
+../h/namei.h: ../h/uio.h
+	${TOUCH} ../h/namei.h
+../h/user.h: ../vax/pcb.h ../h/dmap.h ../h/types.h ../h/namei.h \
+E 16
+D 18
+    /usr/include/errno.h
+E 18
+I 18
+    ../h/errno.h
+E 18
+	${TOUCH} ../h/user.h
+../h/vm.h: ../h/vmmac.h ../h/vmmeter.h ../h/vmparam.h ../h/vmsystm.h
+	${TOUCH} ../h/vm.h
+
+depend:
+	grep '^#include' ${CFILES} | grep -v '<' | \
+D 7
+	      sed 's/:[^"]*"\([^"]*\)".*/: \1/' | \
+	      sed 's/\.c/.o/' | sed 's,../[a-z]*/,,' | \
+E 7
+I 7
+	sed -e 's/:[^"]*"\([^"]*\)".*/: \1/' \
+	    -e 's/\.c/.o/' \
+	    -e 's,../[a-zA-Z]*/,,' | \
+E 21
+I 21
+D 36
+depend: 
+I 22
+	-if [ ! -f assym.s ]; then touch assym.s; fi
+E 36
+I 36
+depend:	assym.s
+E 36
+E 22
+D 43
+	${CC} -M ${COPTS} ${CFILES} | \
+	sed -e ':loop' \
+	    -e 's/\.\.\/[^ /]*\/\.\./../' \
+	    -e 't loop' | \
+E 21
+E 7
+	awk ' { if ($$1 != prev) { print rec; rec = $$0; prev = $$1; } \
+		else { if (length(rec $$2) > 78) { print rec; rec = $$0; } \
+D 39
+		       else rec = rec " " $$2 } } \
+E 39
+I 39
+D 41
+		       else rec = rec " " $$2 } } ; \
+E 41
+I 41
+		       else rec = rec " " $$2 } } \
+E 41
+E 39
+	      END { print rec } ' > makedep
+D 21
+	echo '$$r makedep' >>eddep
+E 21
+	echo '/^# DO NOT DELETE THIS LINE/+1,$$d' >eddep
+	echo '$$r makedep' >>eddep
+	echo 'w' >>eddep
+D 29
+	cp makefile makefile.bak
+D 21
+	ed - makefile < eddep
+E 21
+I 21
+	ex - makefile < eddep
+E 29
+I 29
+	cp Makefile Makefile.bak
+	ex - Makefile < eddep
+E 29
+E 21
+	rm eddep makedep
+
+E 43
+I 43
+	mkdep ${COPTS} ${CFILES}
+E 43
+
+links:
+	egrep '#if' ${CFILES} | sed -f ../conf/defines | \
+	  sed -e 's/:.*//' -e 's/\.c/.o/' | sort -u > dontlink
+	echo ${CFILES} | tr -s ' ' '\12' | sed 's/\.c/.o/' | \
+	  sort -u | comm -23 - dontlink | \
+	  sed 's,../.*/\(.*.o\),rm -f \1;ln -s ../GENERIC/\1 \1,' > makelinks
+	echo 'rm -f udiv.o;ln -s ../GENERIC/udiv.o udiv.o' >> makelinks
+	echo 'rm -f urem.o;ln -s ../GENERIC/urem.o urem.o' >> makelinks
+	sh makelinks && rm -f dontlink
+
+tags:
+D 42
+	/usr/ucb/ctags ${CFILES}
+E 42
+I 42
+	@echo "see ../sys/Makefile for tags"
+E 42
+
+print:
+D 29
+	@pr -f makefile ../sys/TODO linterrs
+E 29
+I 29
+	@pr -f Makefile ../sys/TODO linterrs
+E 29
+	@/usr/ucb/ctags -x ${CFILES} | pr -f -h XREF
+	@(size vmunix *.o) | pr -f -h sizes
+	@ls -ls | pr -f
+	@cd ../h; ls -ls | pr -f ; pr -f *.m *.h
+	@echo 'once upon a time ...'
+D 15
+	@cd ../sys; pr -f asm.sed Locore.c scb.s locore.s
+E 15
+I 15
+D 19
+	@cd ../vax; pr -f asm.c Locore.c scb.s locore.s
+E 19
+I 19
+	@cd ../vax; pr -f Locore.c scb.s locore.s
+	@cd ../vax/inline; make print
+E 19
+E 15
+	@pr -f ${CFILES}
+
+D 4
+ioconf.o: ioconf.c ../h/param.h ../h/pte.h ../h/buf.h ../h/map.h \
+E 4
+I 4
+ioconf.o: ioconf.c ../h/param.h ../machine/pte.h ../h/buf.h ../h/map.h \
+E 4
+    ../vaxmba/mbavar.h ../h/vm.h ../vaxuba/ubavar.h
+D 21
+	${CC} -I. -c -S ${COPTS} ioconf.c
+E 21
+I 21
+	${CC} -c -S ${COPTS} ioconf.c
+E 21
+D 15
+	${C2} ioconf.s | sed -f ../vax/asm.sed | ${AS} -o ioconf.o
+E 15
+I 15
+D 19
+	${C2} ioconf.s | ../vax/asm | ${AS} -o ioconf.o
+E 19
+I 19
+	${C2} ioconf.s | ../vax/inline/inline | ${AS} -o ioconf.o
+E 19
+E 15
+	rm -f ioconf.s
+
+param.c: ../conf/param.c
+I 30
+	-rm -f param.c
+E 30
+I 28
+D 29
+	rm -f param.c
+E 29
+E 28
+	cp ../conf/param.c .
+
+D 29
+param.o: param.c makefile
+E 29
+I 29
+param.o: param.c Makefile
+E 29
+D 21
+	${CC} -I. -c ${CFLAGS} ${PARAM} param.c
+E 21
+I 21
+	${CC} -c ${CFLAGS} ${PARAM} param.c
+E 21
+
+%RULES
+
+# DO NOT DELETE THIS LINE -- make depend uses it
+
+E 1

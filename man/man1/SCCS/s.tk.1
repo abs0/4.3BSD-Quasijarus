@@ -1,0 +1,92 @@
+h44080
+s 00001/00001/00062
+d D 6.1 85/04/29 18:02:53 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00062
+d D 5.1 85/04/29 18:02:43 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00063/00000/00000
+d D 4.1 85/04/29 18:02:35 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TK 1 
+E 2
+I 2
+D 3
+.TH TK 1  "18 January 1983"
+E 3
+I 3
+.TH TK 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+tk \- paginator for the Tektronix 4014
+.SH SYNOPSIS
+.B tk
+[
+.B \-t
+]
+[
+.B \-\c
+.I  N
+]
+[
+.B \-p\c
+.I  L
+]
+[
+file
+]
+.SH DESCRIPTION
+The output of
+.I tk
+is intended for a Tektronix 4014 terminal.
+.I Tk
+arranges for 66 lines to fit on the screen,
+divides the screen into
+.I N
+columns,
+and
+contributes an eight space page offset
+in the (default) single-column case.
+Tabs, spaces, and backspaces are collected and plotted
+when necessary.
+Teletype Model 37 half- and reverse-line sequences
+are interpreted and plotted.
+At the end of each page
+.I tk
+waits for a newline (empty line) from the keyboard before
+continuing on to the next page.
+In this wait state, the command
+.BI ! command
+will send the
+.I command
+to the shell.
+.PP
+The command line options are:
+.TP
+.B \-t
+Don't wait between pages; for directing output into a file.
+.PP
+.TP
+.BI \- N
+Divide the screen into \fIN\fR columns and
+wait after the last column.
+.TP
+.BI \-p L
+Set page length to \fIL\fR
+lines.
+.SH SEE ALSO
+pr(1)
+E 1

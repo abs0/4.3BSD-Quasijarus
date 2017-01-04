@@ -1,0 +1,515 @@
+/* Operand specifications for _EMF_operand_decode */
+arithf2_opspec:	.byte	TYPRF,SIZL,TYPM,SIZL,0
+arithf3_opspec:	.byte	TYPRF,SIZL,TYPRF,SIZL,TYPW,SIZL,0
+arithd2_opspec:	.byte	TYPRF,SIZQ,TYPM,SIZQ,0
+arithd3_opspec:	.byte	TYPRF,SIZQ,TYPRF,SIZQ,TYPW,SIZQ,0
+cmpf_opspec:	.byte	TYPRF,SIZL,TYPRF,SIZL,0
+cmpd_opspec:	.byte	TYPRF,SIZQ,TYPRF,SIZQ,0
+cvtbf_opspec:	.byte	TYPRI,SIZB,TYPW,SIZL,0
+cvtbd_opspec:	.byte	TYPRI,SIZB,TYPW,SIZQ,0
+cvtwf_opspec:	.byte	TYPRI,SIZW,TYPW,SIZL,0
+cvtwd_opspec:	.byte	TYPRI,SIZW,TYPW,SIZQ,0
+cvtlf_opspec:	.byte	TYPRI,SIZL,TYPW,SIZL,0
+cvtld_opspec:	.byte	TYPRI,SIZL,TYPW,SIZQ,0
+cvtfb_opspec:	.byte	TYPRF,SIZL,TYPW,SIZB,0
+cvtdb_opspec:	.byte	TYPRF,SIZQ,TYPW,SIZB,0
+cvtfw_opspec:	.byte	TYPRF,SIZL,TYPW,SIZW,0
+cvtdw_opspec:	.byte	TYPRF,SIZQ,TYPW,SIZW,0
+cvtfl_opspec:	.byte	TYPRF,SIZL,TYPW,SIZL,0
+cvtdl_opspec:	.byte	TYPRF,SIZQ,TYPW,SIZL,0
+cvtfd_opspec:	.byte	TYPRF,SIZL,TYPW,SIZQ,0
+cvtdf_opspec:	.byte	TYPRF,SIZQ,TYPW,SIZL,0
+emodf_opspec:	.byte	TYPRF,SIZL,TYPRI,SIZB,TYPRF,SIZL,TYPW,SIZL,TYPW,SIZL,0
+emodd_opspec:	.byte	TYPRF,SIZQ,TYPRI,SIZB,TYPRF,SIZQ,TYPW,SIZL,TYPW,SIZQ,0
+movf_opspec:	.byte	TYPRF,SIZL,TYPW,SIZL,0
+movd_opspec:	.byte	TYPRF,SIZQ,TYPW,SIZQ,0
+polyf_opspec:	.byte	TYPRF,SIZL,TYPRI,SIZW,TYPA,SIZB,0
+polyd_opspec:	.byte	TYPRF,SIZQ,TYPRI,SIZW,TYPA,SIZB,0
+tstf_opspec:	.byte	TYPRF,SIZL,0
+tstd_opspec:	.byte	TYPRF,SIZQ,0
+
+/*
+ * Actual F and D floating point instruction emulation code follows.  We start
+ * with the simple ones.  All emulation routines allocate their workspace on the
+ * stack over the frame by subtracting from SP.
+ */
+
+#define	UNPACKF(off,sexr,mr)	\
+	extzv	$7,$9,off(fp),sexr; \
+	jeql	1f; \
+	cmpw	sexr,$0x100; \
+	jeql	_EMF_reserved_operand_fault; \
+	movl	$0x80000000,mr; \
+	insv	off(fp),$24,$7,mr; \
+	insv	off+2(fp),$8,$16,mr; \
+	brb	2f; \
+1:	clrl	mr; \
+2:
+
+#define	UNPACKD(off,sexr,mrlo,mrhi)	\
+	clrl	mrlo; \
+	extzv	$7,$9,off(fp),sexr; \
+	jeql	1f; \
+	cmpw	sexr,$0x100; \
+	jeql	_EMF_reserved_operand_fault; \
+	movl	$0x80000000,mrhi; \
+	insv	off(fp),$24,$7,mrhi; \
+	insv	off+2(fp),$8,$16,mrhi; \
+	insv	off+4(fp),$24,$16,mrlo; \
+	insv	off+6(fp),$8,$16,mrlo; \
+	brb	2f; \
+1:	clrl	mrhi; \
+2:
+
+	.globl	_EMFtstf
+	.align	2
+_EMFtstf:
+	subl2	$4,sp
+	movab	tstf_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	movl	-4(fp),r0
+tstfd_common:
+	bicw2	$PSL_ALLCC,4(fp)
+	bitw	$0x7F80,r0
+	jeql	1f
+	jbbc	$15,r0,_EMF_normal_return
+	bisw2	$PSL_N,4(fp)
+	jbr	_EMF_normal_return
+1:	jbs	$15,r0,_EMF_reserved_operand_fault
+	bisw2	$PSL_Z,4(fp)
+	jbr	_EMF_normal_return
+
+	.globl	_EMFtstd
+	.align	2
+_EMFtstd:
+	subl2	$8,sp
+	movab	tstd_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	movl	-8(fp),r0
+	jbr	tstfd_common
+
+	.globl	_EMFcmpf
+	.align	2
+_EMFcmpf:
+	subl2	$8,sp
+	movab	cmpf_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	UNPACKF(-8,r0,r2)
+	UNPACKF(-4,r3,r5)
+	bicw2	$PSL_ALLCC,4(fp)
+	xorl3	r0,r3,r6
+	jbs	$8,r6,cmpfd_finish
+	cmpb	r0,r3
+	jlssu	cmpfd_lss
+	jgtru	cmpfd_finish
+	cmpl	r2,r5
+	jlssu	cmpfd_lss
+	jgtru	cmpfd_finish
+	bisw2	$PSL_Z,4(fp)
+	jbr	_EMF_normal_return
+cmpfd_lss:
+	bisw2	$PSL_N,4(fp)
+cmpfd_finish:
+	jbc	$8,r0,_EMF_normal_return
+	xorw2	$PSL_N,4(fp)
+	jbr	_EMF_normal_return
+
+	.globl	_EMFcmpd
+	.align	2
+_EMFcmpd:
+	subl2	$16,sp
+	movab	cmpd_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	UNPACKD(-16,r0,r1,r2)
+	UNPACKD(-8,r3,r4,r5)
+	bicw2	$PSL_ALLCC,4(fp)
+	xorl3	r0,r3,r6
+	jbs	$8,r6,cmpfd_finish
+	cmpb	r0,r3
+	jlssu	cmpfd_lss
+	jgtru	cmpfd_finish
+	cmpl	r2,r5
+	jlssu	cmpfd_lss
+	jgtru	cmpfd_finish
+	cmpl	r1,r4
+	jlssu	cmpfd_lss
+	jgtru	cmpfd_finish
+	bisw2	$PSL_Z,4(fp)
+	jbr	_EMF_normal_return
+
+	.globl	_EMFmovf
+	.align	2
+_EMFmovf:
+	subl2	$8,sp
+	movab	movf_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	movl	-8(fp),r0
+	bicw2	$PSL_ALLCC,4(fp)
+	bitw	$0x7F80,r0
+	jeql	1f
+	jbbc	$15,r0,2f
+	bisw2	$PSL_N,4(fp)
+	jbr	2f
+1:	jbs	$15,r0,_EMF_reserved_operand_fault
+	bisw2	$PSL_Z,4(fp)
+2:	movl	r0,*-4(fp)
+	jbr	_EMF_normal_return
+
+	.globl	_EMFmovd
+	.align	2
+_EMFmovd:
+	subl2	$12,sp
+	movab	movd_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	movl	-12(fp),r0
+	bicw2	$PSL_ALLCC,4(fp)
+	bitw	$0x7F80,r0
+	jeql	1f
+	jbbc	$15,r0,2f
+	bisw2	$PSL_N,4(fp)
+	jbr	2f
+1:	jbbs	$15,r0,_EMF_reserved_operand_fault
+	bisw2	$PSL_Z,4(fp)
+2:	movq	r0,*-4(fp)
+	jbr	_EMF_normal_return
+
+	.globl	_EMFmnegf
+	.align	2
+_EMFmnegf:
+	subl2	$8,sp
+	movab	movf_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	movl	-8(fp),r0
+	bicw2	$PSL_ALLCC,4(fp)
+	bitw	$0x7F80,r0
+	jeql	1f
+	xorw2	$0x8000,r0
+	jgeq	2f
+	bisw2	$PSL_N,4(fp)
+	jbr	2f
+1:	jbs	$15,r0,_EMF_reserved_operand_fault
+	bisw2	$PSL_Z,4(fp)
+2:	movl	r0,*-4(fp)
+	jbr	_EMF_normal_return
+
+	.globl	_EMFmnegd
+	.align	2
+_EMFmnegd:
+	subl2	$12,sp
+	movab	movd_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	movl	-12(fp),r0
+	bicw2	$PSL_ALLCC,4(fp)
+	bitw	$0x7F80,r0
+	jeql	1f
+	xorw2	$0x8000,r0
+	jgeq	2f
+	bisw2	$PSL_N,4(fp)
+	jbr	2f
+1:	jbs	$15,r0,_EMF_reserved_operand_fault
+	bisw2	$PSL_Z,4(fp)
+2:	movq	r0,*-4(fp)
+	jbr	_EMF_normal_return
+
+	.globl	_EMFaddf2
+	.align	2
+_EMFaddf2:
+	subl2	$12,sp
+	movab	arithf2_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	jbr	addf_common
+
+	.globl	_EMFaddf3
+	.align	2
+_EMFaddf3:
+	subl2	$12,sp
+	movab	arithf3_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+addf_common:
+	UNPACKF(-12,r0,r2)
+addsubf_common:
+	UNPACKF(-8,r3,r5)
+	bicw2	$PSL_ALLCC,4(fp)
+/* First equalise the exponents by shifting right the operand with lower exp */
+	cmpb	r0,r3
+	jeql	4f
+	jgtru	3f
+	subb3	r0,r3,r6
+	movzbl	r6,r6
+	subl3	r6,$32,r7
+	blequ	1f
+	extzv	r6,r7,r2,r2
+	brb	2f
+1:	clrl	r2
+2:	movb	r3,r0
+	jbr	4f
+3:	subb3	r3,r0,r6
+	movzbl	r6,r6
+	subl3	r6,$32,r7
+	blequ	1f
+	extzv	r6,r7,r5,r5
+	brb	2f
+1:	clrl	r5
+2:	movb	r0,r3
+/* Now see if we need to add or subtract */
+4:	cmpw	r0,r3	/* since exps are equalised this compares signs */
+	jneq	dosubf
+	addl2	r5,r2
+	bcc	addsubf_round
+	ashl	$-1,r2,r2
+	/* bisl2 $0x80000000,r2 don't need to set hidden bit, about to pack */
+	incb	r0
+	jcs	_EMF_floating_overflow_fault
+addsubf_round:
+	addl2	$0x80,r2
+	bcc	addsubf_finish
+	ashl	$-1,r2,r2
+	/* bisl2 $0x80000000,r2 don't need to set hidden bit, about to pack */
+	incb	r0
+	jcs	_EMF_floating_overflow_fault
+addsubf_finish:
+	movl	-4(fp),r3
+	tstw	r0
+	bneq	1f
+addsubf_zero:
+	bisw2	$PSL_Z,4(fp)
+	clrl	(r3)
+	jbr	_EMF_normal_return
+1:	bbc	8,r0,2f
+	bisw2	$PSL_N,4(fp)
+2:	extzv	$24,$7,r2,r4
+	insv	r0,$7,$9,r4
+	extzv	$8,$16,r2,r5
+	movw	r4,(r3)
+	movw	r5,2(r3)
+	jbr	_EMF_normal_return
+dosubf:
+	cmpl	r2,r5
+	jlssu	1f
+	jgtru	3f
+	movl	-4(fp),r3
+	jbr	addsubf_zero
+3:	subl2	r5,r2
+	jbr	2f
+1:	movl	r3,r0
+	subl3	r2,r5,r2
+2:	jlss	addsubf_round			/* N means high bit set */
+	decb	r0
+	jeql	3f				/* underflow */
+	ashl	$1,r2,r2
+	jbr	2b
+3:	movl	-4(fp),r3
+	bitw	$PSL_FU,4(fp)
+	jeql	addsubf_zero
+	movpsl	r6
+	tstl	$PSL_CURMOD,r6
+	jeql	addsubf_zero
+	jbr	_EMF_floating_underflow_fault
+
+	.globl	_EMFsubf2
+	.align	2
+_EMFsubf2:
+	subl2	$12,sp
+	movab	arithf2_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	jbr	subf_common
+
+	.globl	_EMFsubf3
+	.align	2
+_EMFsubf3:
+	subl2	$12,sp
+	movab	arithf3_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+subf_common:
+	UNPACKF(-12,r0,r2)
+	jeql	addsubf_common
+	xorw2	$0x100,r0
+	jbr	addsubf_common
+
+	.globl	_EMFaddd2
+	.align	2
+_EMFaddd2:
+	subl2	$20,sp
+	movab	arithd2_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	jbr	addd_common
+
+	.globl	_EMFaddd3
+	.align	2
+_EMFaddd3:
+	subl2	$20,sp
+	movab	arithd3_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+addd_common:
+	UNPACKD(-20,r0,r1,r2)
+addsubd_common:
+	bicw2	$PSL_ALLCC,4(fp)
+	UNPACKD(-12,r3,r4,r5)
+	jeql	addsubd_finish
+	tstw	r0
+	jneq	1f
+	movl	r3,r0
+	movq	r4,r1
+	jbr	addsubd_finish
+/* First equalise the exponents by shifting right the operand with lower exp */
+1:	cmpb	r0,r3
+	jeql	4f
+	jgtru	3f
+	subb3	r0,r3,r6
+	movzbl	r6,r6
+	subl3	r6,$63,r8
+	jlssu	1f
+	bicl2	$0x80000000,r2
+	mnegl	r6,r7
+	ashq	r7,r1,r1
+	cmpl	r8,$32
+	jgequ	5f
+	jbcs	r8,r1,2f
+5:	subl2	$32,r8
+	jbcs	r8,r2,2f
+1:	clrq	r1
+2:	movb	r3,r0
+	jbr	4f
+3:	subb3	r3,r0,r6
+	movzbl	r6,r6
+	subl3	r6,$63,r8
+	jlssu	1f
+	bicl2	$0x80000000,r5
+	mnegl	r6,r7
+	ashq	r7,r4,r4
+	cmpl	r8,$32
+	jgequ	5f
+	jbcs	r8,r4,2f
+5:	subl2	$32,r8
+	jbcs	r8,r5,2f
+1:	clrq	r4
+2:	movb	r0,r3
+/* Now see if we need to add or subtract */
+4:	cmpw	r0,r3	/* since exps are equalised this compares signs */
+	jneq	dosubd
+	addl2	r4,r1
+	adwc	r5,r2
+	bcc	addsubd_finish
+	ashq	$-1,r1,r1
+	/* bisl2 $0x80000000,r2 don't need to set hidden bit, about to pack */
+	incb	r0
+	jcs	_EMF_floating_overflow_fault
+addsubd_round:
+	addl2	$0x80,r1
+	adwc	$0,r2
+	bcc	addsubd_finish
+	ashq	$-1,r1,r1
+	/* bisl2 $0x80000000,r2 don't need to set hidden bit, about to pack */
+	incb	r0
+	jcs	_EMF_floating_overflow_fault
+addsubd_finish:
+	movl	-4(fp),r3
+	tstw	r0
+	bneq	1f
+addsubd_zero:
+	bisw2	$PSL_Z,4(fp)
+	clrq	(r3)
+	jbr	_EMF_normal_return
+1:	bbc	8,r0,2f
+	bisw2	$PSL_N,4(fp)
+2:	extzv	$24,$7,r2,r4
+	insv	r0,$7,$9,r4
+	extzv	$8,$16,r2,r5
+	extzv	$24,$16,r1,r6
+	extzv	$8,$16,r1,r7
+	movw	r4,(r3)
+	movw	r5,2(r3)
+	movw	r6,4(r3)
+	movw	r7,6(r3)
+	jbr	_EMF_normal_return
+dosubd:
+	cmpl	r2,r5
+	jlssu	1f
+	jgtru	3f
+	cmpl	r1,r4
+	jlssu	1f
+	jgtru	3f
+	movl	-4(fp),r3
+	jbr	addsubd_zero
+3:	subl2	r4,r1
+	sbwc	r5,r2
+	jbr	2f
+1:	movl	r3,r0
+	subl3	r1,r4,r1
+	sbwc	r2,r5
+	movl	r5,r2
+2:	jlss	addsubd_finish			/* N means high bit set */
+	decb	r0
+	jeql	3f				/* underflow */
+	ashq	$1,r1,r1
+	jbr	2b
+3:	movl	-4(fp),r3
+	bitw	$PSL_FU,4(fp)
+	jeql	addsubd_zero
+	movpsl	r6
+	tstl	$PSL_CURMOD,r6
+	jeql	addsubd_zero
+	jbr	_EMF_floating_underflow_fault
+
+	.globl	_EMFsubd2
+	.align	2
+_EMFsubd2:
+	subl2	$20,sp
+	movab	arithd2_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	jbr	subd_common
+
+	.globl	_EMFsubd3
+	.align	2
+_EMFsubd3:
+	subl2	$20,sp
+	movab	arithd3_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+subd_common:
+	UNPACKD(-20,r0,r1,r2)
+	jeql	addsubd_common
+	xorw2	$0x100,r0
+	jbr	addsubd_common
+
+	.globl	_EMFmulf2
+	.align	2
+_EMFmulf2:
+	subl2	$12,sp
+	movab	arithf2_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+	jbr	mulf_common
+
+	.globl	_EMFmulf3
+	.align	2
+_EMFmulf3:
+	subl2	$12,sp
+	movab	arithf3_opspec,r0
+	mov	sp,r1
+	jsb	_EMF_operand_decode
+mulf_common:
+	UNPACKF(-12,r0,r2)
+	jneq	1f
+	/*
+	 * Zero multiplicand.  Out with zero result, but must check the other
+	 * operand for reserved first.
+	 */
+
+1:	UNPACKF(-8,r3,r5)
+

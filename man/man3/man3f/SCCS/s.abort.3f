@@ -1,0 +1,99 @@
+h10190
+s 00033/00004/00026
+d D 6.2 85/06/07 20:36:01 kre 3 2
+c From Jerry Berkman
+e
+s 00001/00001/00029
+d D 6.1 85/05/15 16:13:32 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00030/00000/00000
+d D 5.1 85/05/15 16:13:22 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ABORT 3F "18 July 1983"
+E 2
+I 2
+.TH ABORT 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+D 3
+abort \- terminate abruptly with memory image
+E 3
+I 3
+abort \- abnormal termination
+E 3
+.SH SYNOPSIS
+.B subroutine abort (string)
+.br
+.B character*(*) string
+.SH DESCRIPTION
+.I Abort
+D 3
+cleans up the I/O buffers and then aborts producing a
+E 3
+I 3
+cleans up the I/O buffers and then terminates execution.
+If
+.I string
+is given, it is written to logical unit 0 preceded by ``abort:''.
+.PP
+If the
+.B \(mig
+flag was specified during loading,
+then execution is terminated by calling
+.I abort
+(3)
+which aborts producing a
+E 3
+.I core
+file in the current directory.
+If
+D 3
+.I string
+is given, it is written to logical unit 0 preceeded by ``abort:''.
+E 3
+I 3
+.B \-g
+was not specified while loading,
+then
+.I ***\ Execution terminated
+is written
+on logical unit 0 and execution is terminated.
+.PP
+If the
+.I f77_dump_flag
+environment variable
+has been set to a value which begins with
+.IR y , \ abort
+(3) is called whether or not
+.B \(mig
+was specified during loading.
+Similarly, if the value of
+.I f77_dump_flag
+begins with
+.IR n , \ abort
+is not called.
+E 3
+.SH FILES
+.ie \nM /usr/ucb/lib/libF77.a
+.el /usr/lib/libF77.a
+.SH "SEE ALSO"
+abort(3)
+.SH BUGS
+.I String
+is ignored on the PDP11.
+E 1

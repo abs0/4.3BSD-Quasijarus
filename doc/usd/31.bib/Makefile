@@ -3,22 +3,21 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 6/2/86
+#	@(#)Makefile	6.2 (Berkeley) 10/28/04
 #
 SRCS=	bibdoc.ms
-MACROS=	-msU
-PRINTER=Pdp
+MACROS=	-ms
 BIB=	bib
-TROFF=	ditroff -${PRINTER}
+TBL=	tbl
+TROFF=	pstroff
 
-paper:	paper.${PRINTER}
-	lpr -${PRINTER} -n paper.${PRINTER}
+all:	paper.ps
 
-paper.${PRINTER}: ${SRCS}
-	${BIB} ${SRCS} | ${TROFF} ${MACROS} -t > paper.${PRINTER}
+paper.ps: ${SRCS}
+	${BIB} ${SRCS} | ${TBL} | ${TROFF} ${MACROS} -t > $@
 
 clean:
-	rm -f paper.[PT]* *.spell errs Errs make.out
+	rm -f *.ps *.spell errs Errs make.out
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \

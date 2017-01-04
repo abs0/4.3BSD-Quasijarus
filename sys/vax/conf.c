@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)conf.c	7.13 (Berkeley) 5/26/88
+ *	@(#)conf.c	7.16 (Berkeley) 2/18/08
  */
 
 #include "param.h"
@@ -342,6 +342,20 @@ int	dzopen(),dzclose(),dzread(),dzwrite(),dzioctl(),dzstop(),dzreset();
 struct	tty dz_tty[];
 #endif
 
+#include "ss.h"
+#if NSS == 0
+#define	ssopen	nodev
+#define	ssclose	nodev
+#define	ssread	nodev
+#define	sswrite	nodev
+#define	ssioctl	nodev
+#define	ssstop	nodev
+#define	ss_tty	0
+#else
+int	ssopen(),ssclose(),ssread(),sswrite(),ssioctl(),ssstop();
+struct	tty ss_tty[];
+#endif
+
 #include "lp.h"
 #if NLP > 0
 int	lpopen(),lpclose(),lpwrite(),lpreset();
@@ -582,6 +596,30 @@ int kmcrint(), kmcload(), kmcset(), kmcdclr();
 #define kmcdclr nodev
 #endif
 
+#include "netmon.h"
+#if NNETMON > 0
+int netmon_open(),netmon_close(),netmon_read(),netmon_select(),netmon_ioctl();
+#else
+#define	netmon_open	nodev
+#define	netmon_close	nodev
+#define	netmon_read	nodev
+#define	netmon_select	seltrue
+#define	netmon_ioctl	nodev
+#endif
+
+#include "pppaux.h"
+#if NPPPAUX > 0
+int pppaux_open(),pppaux_close(),pppaux_read(),pppaux_write();
+int pppaux_select(),pppaux_ioctl();
+#else
+#define	pppaux_open	nodev
+#define	pppaux_close	nodev
+#define	pppaux_read	nodev
+#define	pppaux_write	nodev
+#define	pppaux_select	seltrue
+#define	pppaux_ioctl	nodev
+#endif
+
 int	ttselect(), seltrue();
 
 struct cdevsw	cdevsw[] =
@@ -748,6 +786,15 @@ struct cdevsw	cdevsw[] =
 	kdbopen,	nulldev/*XXX*/,	rawread,	rawwrite,	/*52*/
 	nodev,		nodev,		nulldev,	0,
 	seltrue,	nodev,		kdbstrategy,
+	netmon_open,	netmon_close,	netmon_read,	nodev,		/*53*/
+	netmon_ioctl,	nodev,		nulldev,	0,
+	netmon_select,	nodev,		NULL,
+	ssopen,		ssclose,	ssread,		sswrite,	/*54*/
+	ssioctl,	ssstop,		nulldev,	ss_tty,
+	ttselect,	nodev,		NULL,
+	pppaux_open,	pppaux_close,	pppaux_read,	pppaux_write,	/*55*/
+	pppaux_ioctl,	nodev,		nulldev,	0,
+	pppaux_select,	nodev,		NULL,
 };
 int	nchrdev = sizeof (cdevsw) / sizeof (cdevsw[0]);
 

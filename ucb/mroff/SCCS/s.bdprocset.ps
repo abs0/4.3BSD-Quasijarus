@@ -1,0 +1,31 @@
+h60867
+s 00020/00000/00000
+d D 5.1 2012/07/21 07:59:27 msokolov 1 0
+c first version, works, looks OK visually
+e
+u
+U
+t
+T
+I 1
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: %W% (Berkeley) %E%
+%%LanguageLevel: 1
+%%BeginResource: procset (troff procedures for .bd) 1.0 0
+$troff begin
+/saveMatrix matrix def
+/idMatrix matrix def
+/bd {	% <num> bd
+	dup /bdx exch def
+	0 dtransform ceiling /bdY exch def ceiling /bdX exch def
+	saveMatrix currentmatrix pop
+} bind def
+/Pbd {	% like P, but with bd applied
+	3 1 roll moveto idMatrix setmatrix currentpoint round exch round exch
+	2 copy moveto saveMatrix setmatrix bdx 0 4 index ashow
+	idMatrix setmatrix moveto bdX bdY rmoveto
+	saveMatrix setmatrix bdx 0 3 -1 roll ashow
+} bind def
+end
+%%EndResource
+E 1

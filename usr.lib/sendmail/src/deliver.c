@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)deliver.c	5.24 (Berkeley) 4/3/00";
+static char sccsid[] = "@(#)deliver.c	5.25 (Berkeley) 5/19/06";
 #endif /* not lint */
 
 #include <sendmail.h>
@@ -1459,7 +1459,7 @@ sendall(e, mode)
 				(void) strcat(obuf, "owner");
 			else
 				(void) strcat(obuf, qq->q_user);
-			if (aliaslookup(obuf) == NULL)
+			if (aliaslookup(obuf, NULL) == NULL)
 				continue;
 
 # ifdef DEBUG

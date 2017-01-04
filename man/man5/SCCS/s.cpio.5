@@ -1,0 +1,147 @@
+h09142
+s 00001/00001/00047
+d D 5.3 04/10/21 06:32:50 msokolov 3 2
+c use \- in NAME
+e
+s 00032/00051/00016
+d D 5.2 88/03/29 15:11:45 bostic 2 1
+c AT&T doesn't use the man macros...
+e
+s 00067/00000/00000
+d D 5.1 88/03/29 14:52:18 bostic 1 0
+c date and time created 88/03/29 14:52:18 by bostic
+e
+u
+U
+t
+T
+I 1
+D 2
+.ll 68
+.ce
+UNIX\(rg
+.FS "\&"
+UNIX is a registered trademark of AT&T
+.FE
+System V
+.in +5
+NAME
+.br
+.in +5
+E 2
+I 2
+.\"	%W% (Berkeley) %G%
+.\"
+.TH CPIO 5 "%Q%"
+.UC 7
+.SH NAME
+E 2
+D 3
+cpio - format of cpio archive
+E 3
+I 3
+cpio \- format of cpio archive
+E 3
+D 2
+.in -5
+.sp
+DESCRIPTION
+.br
+.in +5
+E 2
+I 2
+.SH DESCRIPTION
+E 2
+The header structure, when the -c option of cpio(1) is not used, is:
+I 2
+.sp 1
+.nf
+	struct {
+		short	h_magic,
+				h_dev;
+		ushort	h_ino,
+				h_mode,
+				h_uid,
+				h_gid;
+		short	h_nlink,
+				h_rdev,
+				h_mtime[2],
+				h_namesize,
+				h_filesize[2];
+		char	h_name[h_namesize rounded to word];
+	} Hdr;
+.sp 2
+When the -c option is used, the header information is described by:
+E 2
+.sp
+D 2
+struct {
+.TS
+center;
+l l.
+short	h_magic,
+	h_dev;
+ushort	h_ino,
+	h_mode,
+	h_uid,
+	h_gid;
+short	h_nlink,
+	h_rdev,
+	h_mtime[2],
+	h_namesize,
+	h_filesize[2];
+char	h_name[h_namesize rounded to word];
+.TE
+} Hdr;
+E 2
+I 2
+	sscanf(Chdr,"%6o%6o%6o%6o%6o%6o%6o%6o%11lo%6o%11lo%s",
+		&Hdr.h_magic, &Hdr.h_dev, &Hdr.h_ino, &Hdr.h_mode,
+		&Hdr.h_uid, &Hdr.h_gid, &Hdr.h_nlink, &Hdr.h_rdev,
+		&Longtime, &Hdr.h_namesize,&Longfile,Hdr.h_name);
+.fi
+E 2
+.sp
+D 2
+.in -5
+When the -c option is used, the header information is described by:
+.DS
+               sscanf(Chdr,"%6o%6o%6o%6o%6o%6o%6o%6o%11lo%6o%11lo%s",
+                      &Hdr.h_magic, &Hdr.h_dev, &Hdr.h_ino, &Hdr.h_mode,
+                      &Hdr.h_uid, &Hdr.h_gid, &Hdr.h_nlink, &Hdr.h_rdev,
+                      &Longtime, &Hdr.h_namesize,&Longfile,Hdr.h_name);
+.DE
+E 2
+Longtime and Longfile are equivalent to Hdr.h_mtime and
+Hdr.h_filesize, respectively.  The contents of each file are
+recorded in an element of the array of varying lenght
+structures, archive, together with other items describing
+the file.  Every instance of h_magic contains the constant
+D 2
+070707 (octal).  The itmes h_dev through h_mtime have
+E 2
+I 2
+070707 (octal).  The itimes h_dev through h_mtime have
+E 2
+meanings explained in stat(2).  The length of the null-
+terminated path name H_name, icluding the null byte, is
+given by h_namesize.
+.sp
+The last record of the archive always contains the name
+TRAILER!!!.  Special files, directories, and the trailer are
+recorded with H_filesize equal to zero.
+D 2
+.sp
+.in -5
+SEE ALSO
+.br
+.in +5
+stat(2).
+.br
+cpio(1), find(1) in the UNIX System User Reference Manual.
+E 2
+I 2
+.SH SEE ALSO
+cpio(1), find(1), stat(2)
+E 2
+E 1

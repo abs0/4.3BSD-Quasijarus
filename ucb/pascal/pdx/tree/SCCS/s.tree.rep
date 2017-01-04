@@ -1,0 +1,73 @@
+h28128
+s 00002/00004/00025
+d D 5.2 85/06/07 20:33:05 mckusick 4 3
+c fix copyright
+e
+s 00008/00002/00021
+d D 5.1 85/06/07 20:21:22 mckusick 3 2
+c Add copyright
+e
+s 00001/00001/00022
+d D 1.2 82/01/18 22:10:45 linton 2 1
+c sccsid
+e
+s 00023/00000/00000
+d D 1.1 82/01/18 19:21:34 linton 1 0
+c date and time created 82/01/18 19:21:34 by linton
+e
+u
+U
+t
+T
+I 1
+D 3
+/* Copyright (c) 1982 Regents of the University of California */
+E 3
+I 3
+/*
+ * Copyright (c) 1982 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
+I 4
+ *
+ *	%W% (Berkeley) %G%
+E 4
+ */
+E 3
+D 4
+
+D 2
+static char sccsid[] = "%Z%%M% %I% %G%";
+E 2
+I 2
+D 3
+/* static char sccsid[] = "%Z%%M% %I% %G%"; */
+E 3
+I 3
+#ifndef lint
+static char sccsid[] = "%W% (Berkeley) %G%";
+#endif not lint
+E 4
+E 3
+E 2
+
+/*
+ * representation of a parse tree
+ *
+ * This should have a union in it, but unions just don't
+ * seem to work right in C.  I don't want to have to specify an
+ * extra level of referencing, e.g. a.b.c, because there's really
+ * only one level there.
+ */
+
+struct node {
+	OP op;
+	SYM *nodetype;
+	NODE *left, *right;
+	SYM *nameval;
+	long lconval;
+	double fconval;
+	char *sconval;
+	NODE *what, *where, *cond;
+};
+E 1

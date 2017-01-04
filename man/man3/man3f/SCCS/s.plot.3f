@@ -1,0 +1,205 @@
+h15286
+s 00013/00013/00088
+d D 6.3 86/04/30 15:10:10 mckusick 3 2
+c fix syntax (from jerry@opal)
+e
+s 00013/00004/00088
+d D 6.2 85/06/07 20:52:24 kre 2 1
+c From Jerry Berkman
+e
+s 00092/00000/00000
+d D 6.1 85/05/15 16:46:27 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH PLOT 3F "%Q%"
+.UC 6
+.SH NAME
+plot: openpl et al. \- f77 library interface to \fIplot\fR (3X)
+libraries.
+.SH SYNOPSIS
+.nf
+D 3
+.B call openpl()
+E 3
+I 3
+.B subroutine openpl()
+E 3
+.PP
+D 3
+.B call erase()
+E 3
+I 3
+.B subroutine erase()
+E 3
+.PP
+D 3
+.B call label(str)
+E 3
+I 3
+.B subroutine label(str)
+E 3
+.B character str*(*)
+.PP
+D 3
+.B call line(ix1, iy1, ix2, iy2)
+E 3
+I 3
+.B subroutine line(ix1, iy1, ix2, iy2)
+E 3
+.PP
+I 2
+D 3
+.B call box(ix1, iy1, ix2, iy2)
+E 3
+I 3
+.B subroutine box(ix1, iy1, ix2, iy2)
+E 3
+.fi
+Draw a rectangle and leave the cursor at (
+.IR ix2 , iy2 ).
+.nf
+.PP
+E 2
+D 3
+.B call circle(ix, iy, ir)
+E 3
+I 3
+.B subroutine circle(ix, iy, ir)
+E 3
+.PP
+.B
+D 3
+call arc(ix, iy, ix0, iy0, ix1, iy1)
+E 3
+I 3
+subroutine arc(ix, iy, ix0, iy0, ix1, iy1)
+E 3
+.PP
+D 3
+.B call move(ix, iy)
+E 3
+I 3
+.B subroutine move(ix, iy)
+E 3
+.PP
+D 3
+.B call cont(ix, iy)
+E 3
+I 3
+.B subroutine cont(ix, iy)
+E 3
+.PP
+D 3
+.B call point(ix, iy)
+E 3
+I 3
+.B subroutine point(ix, iy)
+E 3
+.PP
+D 3
+.B call linemd(str)
+E 3
+I 3
+.B subroutine linemd(str)
+E 3
+.B character str*(*)
+.PP
+D 3
+.B call space(ix0, iy0, ix1, iy1)
+E 3
+I 3
+.B subroutine space(ix0, iy0, ix1, iy1)
+E 3
+.PP
+D 3
+.B call clospl()
+E 3
+I 3
+.B subroutine clospl()
+E 3
+.fi
+.PP
+.ft R
+.SH DESCRIPTION
+These are interface subroutines, in the library
+.IR -lf77plot ,
+allowing
+.I f77
+users to call the 
+.IR plot (3X)
+graphics routines
+which generate graphic output in a relatively
+device-independent manner.
+The
+.I f77
+subroutine names are the same as the
+.I C
+function names except that
+D 2
+.IR linemod and closepl
+E 2
+I 2
+.I linemod
+and
+.I closepl
+E 2
+have been shortened to
+D 2
+.IR linemd and clospl .
+E 2
+I 2
+.I linemd
+and
+.I clospl .
+E 2
+See
+.IR  plot (5)
+and
+.IR  plot (3X)
+for a description
+of their effect.
+.PP
+Only the first 255 character in string arguments to
+.I label
+and
+.I linemd
+are used.
+.PP
+This library must be specified in the
+.IR f77 (1)
+command before the device specific graphics library;
+for example, to compile and load a FORTRAN program in
+.I prog.f
+to run on a Tektronix 4014 terminal:
+.br
+.RS
+D 2
+.B
+E 2
+
+D 2
+f77 prog.f -lf77plot -l4014
+E 2
+I 2
+.B f77 prog.f -lf77plot -l4014
+E 2
+
+.RE
+.br
+See
+.IR plot (3X)
+for a complete list of device specific plotting libraries.
+.SH "SEE ALSO"
+plot(5), plot(1G), plot(3X), graph(1G)
+E 1

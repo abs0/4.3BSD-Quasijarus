@@ -1,0 +1,180 @@
+h22334
+s 00002/00002/00060
+d R 6.6 86/06/03 16:05:38 cuccia 8 7
+c STICKY* heading no longer bold...
+e
+s 00000/00000/00062
+d R 6.5 86/06/03 15:58:09 anne 7 6
+c 
+e
+s 00000/00000/00062
+d R 6.4 86/06/03 15:47:14 cuccia 6 5
+c no corrections made
+e
+s 00003/00025/00059
+d D 6.3 86/05/26 16:12:31 karels 5 4
+c update
+e
+s 00044/00010/00040
+d D 6.2 86/02/02 02:31:46 donn 4 3
+c Added a description of sticky directories.
+e
+s 00001/00001/00049
+d D 6.1 85/04/27 13:52:07 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00049
+d D 5.1 85/04/27 13:51:44 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00050/00000/00000
+d D 4.1 85/04/27 13:51:27 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH STICKY 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH STICKY 8 "4 February 1983"
+E 3
+I 3
+.TH STICKY 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 4
+sticky \- executable files with persistent text
+E 4
+I 4
+sticky \- persistent text and append-only directories
+E 4
+.SH DESCRIPTION
+D 4
+While the `sticky bit', mode 01000 (see
+.IR chmod (2)),
+E 4
+I 4
+The
+.I "sticky bit"
+(file mode bit 01000, see
+.IR chmod (2))
+is used to indicate special treatment
+for certain executable files and directories.
+.SH "STICKY TEXT EXECUTABLE FILES"
+While the `sticky bit'
+E 4
+is set on a sharable executable file,
+the text of that file will not be removed from the system swap area.
+Thus the file does not have to be fetched from the file system
+upon each execution.
+D 5
+As long as a copy remains in the swap area, the
+original text cannot be overwritten in the file system,
+nor can the file be deleted.
+(Directory entries can be removed so long as one link remains.)
+E 5
+I 5
+Shareable text segments are normally placed
+in a least-frequently-used cache after use,
+and thus the `sticky bit' has little effect on commonly-used text images.
+E 5
+.PP
+D 4
+Sharable files are made by the
+E 4
+I 4
+Sharable executable files are made by the
+E 4
+.B \-n
+and
+.B \-z
+options of
+.IR ld (1).
+.PP
+D 4
+To replace a sticky file that has been used do:
+E 4
+I 4
+D 5
+To replace a sticky text executable file that has been used,
+perform the following steps:
+E 4
+(1) Clear the sticky bit with
+.IR chmod (1).
+(2) Execute the old program to flush the swapped copy.
+This can be done safely even if others are using it.
+(3) Overwrite the sticky file.
+If the file is being executed by any process,
+writing will be prevented; it suffices to simply remove the file
+and then rewrite it, being careful to reset the owner and mode with
+.I chmod
+and
+.IR chown (2).
+(4) Set the sticky bit again.
+.PP
+E 5
+D 4
+Only the super-user can set the sticky bit.
+.SH BUGS
+Are self-evident.
+E 4
+I 4
+Only the super-user can set the sticky bit
+on a sharable executable file.
+.SH "STICKY DIRECTORIES"
+A directory whose `sticky bit' is set
+becomes an append-only directory, or, more accurately,
+a directory in which the deletion of files is restricted.
+A file in a sticky directory may only be removed or renamed
+by a user if the user has write permission for the directory and
+the user is the owner of the file, the owner of the directory,
+or the super-user.
+This feature is usefully applied to directories such as /tmp
+which must be publicly writable but
+should deny users the license to arbitrarily
+delete or rename each others' files.
+E 4
+.PP
+D 4
+Is largely unnecessary on the VAX; matters only for large programs that
+will page heavily to start, since text pages are normally cached incore
+E 4
+I 4
+Any user may create a sticky directory.
+See
+.IR chmod (1)
+for details about modifying file modes.
+.SH BUGS
+D 5
+Sticky text executable files are
+largely unnecessary on the VAX.
+The sticky attribute is useful only for large programs that
+will page heavily to start, since text pages are normally cached in core
+E 4
+as long as possible after all instances of a text image exit.
+I 4
+.PP
+E 5
+Since the text areas of sticky text executables are stashed in the swap area,
+abuse of the feature can cause a system to run out of swap.
+.PP
+Neither
+.IR open (2)
+nor
+.IR mkdir (2)
+will create a file with the sticky bit set.
+E 4
+E 1

@@ -1,0 +1,41 @@
+h05162
+s 00011/00005/00006
+d D 4.2 82/10/02 23:14:01 comay 2 1
+c updated for ucbvax
+e
+s 00011/00000/00000
+d D 4.1 82/09/12 17:45:41 mckusick 1 0
+c date and time created 82/09/12 17:45:41 by mckusick
+e
+u
+U
+t
+T
+I 1
+#! /bin/sh
+#
+#	%W%	(Berkeley)	%G%
+#
+cd /usr/spool/berknet
+rm -f rcv/*
+D 2
+csh /usr/net/bin/setlength 50 plogfile? logfile statallnet
+/usr/net/bin/netstart -m Cory
+/usr/net/bin/netstart -m ingVAX
+/usr/net/bin/netstart -m ARPAVAX
+/usr/net/bin/netstart -m UCBCAD
+E 2
+I 2
+csh /usr/net/bin/setlength 50 plogfile? logfile
+/usr/net/bin/netstart -m ucbarpa
+/usr/net/bin/netstart -m ucbc70
+/usr/net/bin/netstart -m ucbcfo-g
+/usr/net/bin/netstart -m ucbcoke
+/usr/net/bin/netstart -m ucbcory
+/usr/net/bin/netstart -m ucbernie
+/usr/net/bin/netstart -m ucbingres
+/usr/net/bin/netstart -m ucbkim
+/usr/net/bin/netstart -m ucbmathstat
+/usr/net/bin/netstart -m ucbonyx
+E 2
+E 1

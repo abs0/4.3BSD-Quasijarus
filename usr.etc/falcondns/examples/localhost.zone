@@ -1,0 +1,11 @@
+; Silly "zone" for the localhost. hack needed by current
+; 4.3BSD-Quasijarus stub resolvers
+
+localhost.	IN	SOA	localhost. root.localhost.  (
+					1		; Serial
+					86400		; Refresh 24 hours
+					3600		; Retry    1 hour
+					5184000		; Expire  60 days
+					86400 )		; Minimum 24 hours
+		IN	NS	localhost.
+		IN	A	127.0.0.1

@@ -1,0 +1,45 @@
+h33495
+s 00000/00000/00026
+d D 6.1 86/04/24 16:28:10 cuccia 3 2
+c Mark Seiden edits for 4.3BSD release
+e
+s 00000/00000/00026
+d D 5.1 86/04/24 16:27:56 cuccia 2 1
+c document distributed with 4.2BSD
+e
+s 00026/00000/00000
+d D 4.1 86/04/24 16:27:41 cuccia 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.de P1
+.DS
+..
+.de P2
+.DE
+..
+.de UL
+.lg 0
+.if n .ul
+\%\&\\$3\f3\\$1\fR\&\\$2
+.lg
+..
+.de UC
+\&\\$3\s-1\\$1\\s0\&\\$2
+..
+.de IT
+.lg 0
+.if n .ul
+\%\&\\$3\f2\\$1\fR\&\\$2
+.lg
+..
+.de SP
+.sp \\$1
+..
+E 1

@@ -1,0 +1,176 @@
+h11289
+s 00001/00001/00083
+d D 6.4 86/05/22 11:49:59 anne 6 5
+c spelling
+e
+s 00003/00000/00081
+d D 6.3 85/08/26 23:31:31 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00013/00011/00068
+d D 6.2 85/05/22 18:30:44 mckusick 4 3
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00078
+d D 6.1 85/05/09 16:36:31 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00045/00010/00034
+d D 5.1 85/05/09 16:36:16 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00044/00000/00000
+d D 4.1 85/05/09 16:36:01 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ACCT 2 
+E 2
+I 2
+D 3
+.TH ACCT 2 "13 February 1983"
+E 3
+I 3
+.TH ACCT 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+acct \- turn accounting on or off
+.SH SYNOPSIS
+.nf
+D 2
+.B acct(file)
+.B char *file;
+E 2
+I 2
+.ft B
+acct(file)
+char *file;
+.ft R
+E 2
+.fi
+.SH DESCRIPTION
+The system is prepared to write a record
+in an accounting
+.I file
+for each process as it terminates.
+This
+call, with a null-terminated string naming an existing file
+as argument, turns on accounting;
+records for each terminating process are appended to
+.IR file .
+An argument of 0 causes accounting to be turned off.
+.PP
+The accounting file format is given in
+.IR acct (5).
+D 2
+.SH "SEE ALSO"
+acct(5), sa(8)
+.SH DIAGNOSTICS
+E 2
+I 2
+.PP
+This call is permitted only to the super-user.
+.SH NOTES
+Accounting is automatically disabled when the file system the
+accounting file resides on runs out of space; it is enabled when
+space once again becomes available.
+.SH "RETURN VALUE
+E 2
+On error \-1 is returned.
+The file must exist and the call may be exercised only by the super-user.
+It is erroneous to try to turn on accounting when it is already on.
+I 2
+.SH ERRORS
+.I Acct
+will fail if one of the following is true:
+.TP 15
+[EPERM]
+The caller is not the super-user.
+.TP 15
+D 4
+[EPERM]
+The pathname contains a character with the high-order bit set.
+.TP 15
+E 4
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+I 4
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+.TP 15
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+.TP 15
+E 4
+[ENOENT]
+The named file does not exist.
+.TP 15
+D 4
+[EISDIR]
+The named file is a directory.
+E 4
+I 4
+[EACCES]
+Search permission is denied for a component of the path prefix,
+or the path name is not a regular file.
+E 4
+.TP 15
+I 4
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+E 4
+[EROFS]
+The named file resides on a read-only file system.
+.TP 15
+[EFAULT]
+.I File
+points outside the process's allocated address space.
+I 5
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 5
+D 4
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+[EACCES]
+The file is a character or block special file.
+E 4
+.SH "SEE ALSO"
+acct(5), sa(8)
+E 2
+.SH BUGS
+No accounting is produced for programs running
+when a crash occurs.
+D 6
+In particular nonterminating programs are never
+E 6
+I 6
+In particular non-terminating programs are never
+E 6
+accounted for.
+D 2
+.SH "ASSEMBLER (PDP-11)"
+(acct = 51.)
+.br
+.B sys acct; file
+E 2
+E 1

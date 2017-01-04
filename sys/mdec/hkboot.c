@@ -4,7 +4,7 @@
  * specifies the terms and conditions for redistribution.
  */
 
-/* @(#)hkboot.c	7.2 (Berkeley) 8/28/86 */
+/* @(#)hkboot.c	7.3 (Berkeley) 2/28/04 */
 #include <sys/disklabel.h>
 
 	.set	MAJOR,3		/* major("/dev/hk0a") */
@@ -45,8 +45,8 @@ init:
 	xorb2	$0x01,r9		/* complement bit */
 	insv	r9,$24,$8,r10		/* set UBA number */
 	insv	r3,$16,$8,r10		/* drive number */
-	extzv	$12,$4,r5,r4		/* get partition from r5 */
-	bicw2	$0xf000,r5		/* remove from r5 */
+	extzv	$28,$4,r5,r4		/* get partition from r5 */
+	bicl2	$0xf0000000,r5		/* remove from r5 */
 	insv	r4,$8,$8,r10		/* set partition */
 	movl	r5,r11			/* boot flags */
 	brw	start0

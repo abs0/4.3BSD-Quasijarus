@@ -1,0 +1,202 @@
+h15573
+s 00000/00007/00105
+d D 6.5 03/11/08 22:35:25 msokolov 7 6
+c -d124 works again!
+e
+s 00009/00006/00103
+d D 6.4 03/11/08 16:23:31 msokolov 6 5
+c document 3-way relaxation
+e
+s 00001/00001/00108
+d D 6.3 86/05/08 15:23:29 anne 5 4
+c spelling
+e
+s 00010/00000/00099
+d D 6.2 86/05/05 15:24:58 mckusick 4 3
+c add -a flag
+e
+s 00001/00001/00098
+d D 6.1 85/04/29 18:07:56 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00006/00005/00093
+d D 5.1 85/04/29 18:07:13 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00098/00000/00000
+d D 4.1 85/04/29 18:06:25 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH AS 1 "4/1/81"
+E 2
+I 2
+D 3
+.TH AS 1 "July 1, 1983"
+E 3
+I 3
+.TH AS 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+as \- assembler
+E 2
+I 2
+as \- VAX-11 assembler
+E 2
+.SH SYNOPSIS
+.B as
+[
+I 4
+.B \-a1-16
+] [
+[
+E 4
+.B \-d124
+] [
+.B \-L
+] [
+.B \-W
+] [
+.B \-V
+] [
+.B \-J
+] [
+.B \-R
+] [
+.B \-t
+directory
+] [
+.B \-o
+objfile ] [ name ... ]
+.SH DESCRIPTION
+.I As
+assembles the named files, or the standard input if no file name is specified.
+The available flags are:
+I 4
+.TP
+.B \-a
+Specifies the alignment of procedures and data blocks.
+It is given as a power of two; thus an alignment of 3
+D 5
+causes alignment on an eight byte boundry.
+E 5
+I 5
+causes alignment on an eight byte boundary.
+E 5
+The default is
+.B \-a2.
+E 4
+.TP
+.B \-d
+Specifies the number of bytes to be assembled for offsets
+which involve forward or external references, and which have sizes unspecified
+in the assembly language.
+The default is 
+.B \-d4.
+.TP
+.B \-L
+Save defined labels beginning with a `L', which are normally discarded
+to save space in the resultant symbol table.
+The compilers generate such temporary labels.
+.TP
+.B \-V
+D 2
+Use virtual memory for intermediate storage, rather than a temporary file.
+E 2
+I 2
+Use virtual memory for some intermediate storage,
+rather than a temporary file.
+E 2
+.TP
+.B \-W
+Do not complain about errors.
+.TP
+.B \-J
+D 6
+Use long branches to resolve jumps when byte-displacement branches are
+insufficient.  This must be used when a compiler-generated assembly contains
+branches of more than 32k bytes.
+E 6
+I 6
+This flag is obsolete and ignored.
+.I As
+now automatically chooses between byte branches, word branches, and long jumps.
+E 6
+.TP
+.B \-R
+Make initialized data segments read-only, by concatenating them to
+the text segments.
+This obviates the need to run editor scripts on assembly
+code to make initialized data read-only and shared.
+.TP
+.B \-t
+Specifies a directory to receive the temporary file, other than
+the default /tmp.
+.PP
+All undefined symbols in the assembly
+are treated as global.
+.PP
+The output of the assembly is left on the file
+.I objfile;
+if that is omitted,
+.I a.out
+is used.
+.SH FILES
+.ta 1.5i
+D 2
+/tmp/as\(**	default temporary file
+E 2
+I 2
+/tmp/as\(**	default temporary files
+E 2
+.br
+a.out		default resultant object file
+.SH "SEE ALSO"
+ld(1),
+nm(1),
+adb(1),
+D 2
+sdb(1),
+E 2
+I 2
+dbx(1),
+E 2
+a.out(5)
+.br
+Auxiliary documentation
+.I Assembler Reference Manual.
+.SH AUTHORS
+John F. Reiser
+.br
+Robert R. Henry
+D 7
+.SH BUGS
+D 6
+.B \-J
+should be eliminated; the assembler should automatically choose among
+byte, word and long branches.
+E 6
+I 6
+.B \-d1
+and
+.B \-d2
+do not work currently,
+.B \-d4
+(the default) is the only mode supported.
+E 7
+E 6
+E 1

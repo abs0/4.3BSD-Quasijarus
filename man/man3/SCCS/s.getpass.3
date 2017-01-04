@@ -1,0 +1,57 @@
+h06767
+s 00001/00001/00027
+d D 6.1 85/05/15 15:00:32 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00027
+d D 5.1 85/05/15 15:00:26 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00028/00000/00000
+d D 4.1 85/05/15 15:00:21 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETPASS 3 
+E 2
+I 2
+D 3
+.TH GETPASS 3  "19 January 1983"
+E 3
+I 3
+.TH GETPASS 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+getpass \- read a password
+.SH SYNOPSIS
+.nf
+.B char *getpass(prompt)
+.B char *prompt;
+.fi
+.SH DESCRIPTION
+.I Getpass
+reads a password from the file
+.IR /dev/tty ,
+or if that cannot be opened, from the standard input,
+after prompting with the null-terminated string
+.I prompt
+and disabling echoing.
+A pointer is returned to a null-terminated string
+of at most 8 characters.
+.SH FILES
+/dev/tty
+.SH "SEE ALSO"
+crypt(3)
+.SH BUGS
+The return value points to static data
+whose content is overwritten by each call.
+E 1

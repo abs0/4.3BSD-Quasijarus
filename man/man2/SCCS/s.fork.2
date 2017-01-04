@@ -1,0 +1,202 @@
+h37822
+s 00001/00001/00068
+d D 6.4 86/05/22 12:20:06 anne 6 5
+c font change
+e
+s 00004/00003/00065
+d D 6.3 86/05/13 14:52:37 karels 5 4
+c corrections
+e
+s 00003/00000/00065
+d D 6.2 85/08/26 23:30:44 mckusick 4 3
+c update error messages (mostly from sun!guy)
+e
+s 00001/00001/00064
+d D 6.1 85/05/09 16:04:20 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00053/00053/00012
+d D 5.1 85/05/09 16:04:10 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00065/00000/00000
+d D 4.1 85/05/09 16:04:03 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FORK 2 
+E 2
+I 2
+D 3
+.TH FORK 2 "12 February 1983"
+E 3
+I 3
+.TH FORK 2 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+D 2
+fork \- spawn new process
+E 2
+I 2
+fork \- create a new process
+E 2
+.SH SYNOPSIS
+D 2
+.B fork()
+E 2
+I 2
+.ft B
+pid = fork()
+.br
+int pid;
+.ft R
+E 2
+.SH DESCRIPTION
+.I Fork
+D 2
+and
+.IR vfork (2)
+are the only ways new processes are created.
+With
+.I fork ,
+the new process's core image is a copy of
+that of the caller of
+.IR fork .
+The only distinction
+is the fact
+that the value returned in the old (parent) process
+contains the process ID
+of the new (child) process,
+while the value returned in the child is 0.
+Process ID's range from 1 to 30,000.
+This process ID is used by
+.IR wait (2).
+.PP
+Files open before the fork
+are shared, and have a common read-write pointer.
+In particular,
+this is the way that standard input and output
+files are passed and also how
+pipes are set up.
+.PP
+.I Vfork
+is the most efficient way of creating a new process
+when the fork is to be followed shortly by an exec,
+but is not suitable when the fork is not to be followed
+by an exec.
+E 2
+I 2
+causes creation of a new process.
+The new process (child process) is an exact copy of the
+calling process except for the following:
+.in +5n
+.sp
+The child process has a unique process ID.
+.sp
+The child process has a different parent process ID (i.e.,
+the process ID of the parent process).
+.sp
+The child process has its own copy of the parent's descriptors.
+These descriptors reference the same underlying objects, so that,
+for instance, file pointers in file objects are shared between
+D 5
+the child and the parent, so that a
+E 5
+I 5
+the child and the parent, so that an
+E 5
+.IR lseek (2)
+on a descriptor in the child process can affect a subsequent
+.I read
+or
+.I write
+by the parent.
+This descriptor copying is also used by the shell to
+establish standard input and output for newly created processes
+as well as to set up pipes.
+.sp
+The child processes resource utilizations are set to 0;
+see
+.IR setrlimit (2).
+.SH "RETURN VALUE
+Upon successful completion, \fIfork\fP returns a value
+of 0 to the child process and returns the process ID of the child
+process to the parent process.  Otherwise, a value of \-1 is returned
+to the parent process, no child process is created, and the global
+variable \fIerrno\fP is set to indicate the error.
+.SH ERRORS
+.I Fork
+will fail and no child process will be created if one or more of the
+following are true:
+.TP 15
+[EAGAIN]
+D 5
+The system-imposed limit {PROC_MAX} on the total
+E 5
+I 5
+The system-imposed limit on the total
+E 5
+number of processes under execution would be exceeded.
+I 5
+This limit is configuration-dependent.
+E 5
+.TP 15
+[EAGAIN]
+D 5
+The system-imposed limit {KID_MAX} on the total number of
+E 5
+I 5
+D 6
+The system-imposed limit MAXUPRC (\fI<sys/param.h>) on the total number of
+E 6
+I 6
+The system-imposed limit MAXUPRC (\fI<sys/param.h>) \fRon the total number of
+E 6
+E 5
+processes under execution by a single user would be exceeded.
+I 4
+.TP 15
+[ENOMEM]
+There is insufficient swap space for the new process.
+E 4
+E 2
+.SH "SEE ALSO"
+D 2
+wait(2), exec(2), vfork(2)
+.SH DIAGNOSTICS
+Returns \-1 and fails to create a process if:
+there is inadequate swap space,
+the user is not super-user and has too many processes,
+or the system's process table is full.
+Only the super-user can take the last process-table slot.
+.SH "ASSEMBLER (PDP-11)"
+(fork = 2.)
+.br
+.B sys fork
+.br
+(new process return)
+.br
+(old process return, new process ID in r0)
+.PP
+The return locations in the old and new process
+differ by one word.
+The C-bit is set in the old process if a new
+process could not be created.
+E 2
+I 2
+execve(2), wait(2)
+E 2
+E 1

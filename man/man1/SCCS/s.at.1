@@ -1,0 +1,272 @@
+h18146
+s 00001/00001/00129
+d D 6.2 86/03/20 11:42:56 bloom 4 3
+c fix gramatical error
+e
+s 00075/00045/00055
+d D 6.1 85/04/29 14:07:27 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00099
+d D 5.1 85/04/29 14:07:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00100/00000/00000
+d D 4.1 85/04/29 14:06:23 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH AT 1 
+E 2
+I 2
+D 3
+.TH AT 1 "18 January 1983"
+E 3
+I 3
+.TH AT 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+at \- execute commands at a later time
+.SH SYNOPSIS
+D 3
+.B at
+E 3
+I 3
+.B "at [ -c ] [ -s ] [ -m ]"
+E 3
+time
+D 3
+[
+day
+]
+[
+file
+]
+E 3
+I 3
+[ day ]
+[ file ]
+E 3
+.SH DESCRIPTION
+.I At
+D 3
+squirrels away a copy of the named
+E 3
+I 3
+spools away a copy of the named
+E 3
+.I file
+D 3
+(standard input default)
+E 3
+to be used as input to
+.IR sh (1)
+D 3
+(or
+.IR csh (1)
+if you normally use it)
+at a specified later time.
+A
+E 3
+I 3
+or
+.IR csh (1).
+If the
+.B \-c
+flag (for 
+.IR (csh (1)))
+or the
+.B \-s
+flag (for
+.IR (sh (1)))
+is specified, then that shell will be used to execute the job;
+if no shell is specified, 
+the current environment shell is used.
+If no file name is specified, 
+.I at
+prompts for commands from standard input until a ^D is typed. 
+.PP
+If the 
+.B \-m
+flag is specified, mail will be sent to the user after the job
+has been run. If errors occur during execution of the job, then
+a copy of the error diagnostics will be sent to the user. If
+no errors occur, then a short message is sent informing the
+user that no errors occurred.
+.PP
+The format of the spool file is as follows:
+A four line header that includes the owner of the job, the name of the job,
+the shell used to run the job, and whether mail will be
+set after the job is executed. The header is followed by a
+E 3
+.I cd
+D 3
+command to the current directory is inserted
+at the beginning,
+followed by assignments to all environment variables (excepting the
+variable TERM, which is useless in this context.)
+E 3
+I 3
+command to the current directory and a 
+.I umask
+command to set the modes on any files created by the job.
+Then 
+.I at
+copies all relevant environment variables to the spool file.
+E 3
+When the script is run, it uses the user and group ID
+D 3
+of the creator of the copy file.
+E 3
+I 3
+of the creator of the spool file.
+E 3
+.PP
+The
+.I time
+is 1 to 4 digits, with an optional following
+`A', `P', `N' or `M' for
+AM, PM, noon or midnight.
+One and two digit numbers are taken to be hours, three and four digits
+to be hours and minutes.
+If no letters follow the digits, a 24 hour clock time is understood.
+.PP
+The optional
+.I day
+is either
+(1) a month name followed by a day number,
+or
+D 3
+(2) a day of the week; if the word `week' follows
+invocation is moved seven days further off.
+E 3
+I 3
+(2) a day of the week; 
+if the word `week' follows, invocation is moved
+seven days further off.
+E 3
+Names of months and days may be recognizably truncated.
+Examples of legitimate commands are
+.IP
+at 8am jan 24
+.br
+D 3
+at 1530 fr week
+E 3
+I 3
+at -c -m 1530 fr week
+.br
+at -s -m 1200n week
+E 3
+.PP
+.I At
+D 3
+programs are executed by periodic execution
+of the command
+.I /usr/lib/atrun
+from
+E 3
+I 3
+programs are executed by periodic execution 
+of the command 
+.IR
+/usr/lib/atrun 
+from 
+E 3
+.IR cron (8).
+The granularity of
+.I at
+D 3
+depends upon how often
+.I atrun
+is executed.
+E 3
+I 3
+depends upon the how often atrun is executed.
+E 3
+.PP
+D 3
+Standard output or error output is lost unless redirected.
+E 3
+I 3
+Error output is lost unless redirected or the
+.I \-m
+flag is requested, in which case a copy of the errors is sent to
+the user via 
+.IR mail (1).
+E 3
+.SH FILES
+D 3
+.ta 2i
+/usr/lib/atrun	executor (run by 
+.IR cron (8)).
+.sp
+in /usr/spool/at:
+.ta .5i 2i
+.br
+\&	yy.ddd.hhhh.*	activity for year yy, day dd, hour hhhh.
+.br
+\&	lasttimedone	last \fIhhhh\fR
+.br
+\&	past	activities in progress
+E 3
+I 3
+.nf
+/usr/spool/at                spooling area
+/usr/spool/at/yy.ddd.hhhh.*  job file
+/usr/spool/at/past           directory where jobs are executed from
+/usr/spool/at/lasttimedone   last time atrun was run
+/usr/lib/atrun               executor (run by cron(8))
+.fi
+E 3
+.SH "SEE ALSO"
+I 3
+atq(1),
+atrm(1),
+E 3
+calendar(1),
+D 3
+pwd(1),
+E 3
+sleep(1),
+cron(8)
+.SH DIAGNOSTICS
+Complains about various syntax errors and times out of range.
+.SH BUGS
+Due to the granularity of the execution of
+D 3
+.I /usr/lib/atrun,
+E 3
+I 3
+.IR /usr/lib/atrun,
+E 3
+there may be bugs in scheduling things almost
+exactly 24 hours into the future.
+I 3
+
+If the system crashes, mail is not sent to the user informing them that
+the job was not completed.
+
+Sometimes old spool files are not removed from the directory
+D 4
+/usr/spool/at/past. This is usually do to a system crash,
+E 4
+I 4
+/usr/spool/at/past. This is usually due to a system crash,
+E 4
+and requires that they be removed by hand.
+E 3
+E 1

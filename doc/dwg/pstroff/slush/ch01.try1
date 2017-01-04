@@ -1,0 +1,142 @@
+Because the present author does not speak, read or write
+any natural language that requires a large character set,
+the present version of troff is not designed to support
+any character sets that are significantly larger than Latin or Cyrillic.
+
+
+
+
+
+1.1.  View of PS fonts
+.LP
+.I Pstroff
+is designed to give its users direct, native access to every available
+character in every \*(PS font.
+The \*(PS language provides two ways to request the printing of
+one or more characters from a given font:
+.IP \(bu
+The basic \fBshow\fP operator, present in all PS versions, takes the
+text to be printed in the form of a \*(PS string object.
+Even though PS page descriptions are usually stored and transmitted
+in the 7-bit-clean ASCII form, the language itself is very much
+8-bit oriented internally.
+PS strings are, strictly speaking, arrays of arbitrary octets, with
+every value between 0 and 255 (inclusive) permitted in every position.
+Therefore, when accessed via the standard \fBshow\fP operator,
+\*(PS fonts are best viewed as having 256 possible character code points.
+.IP \&
+It should also be noted that because the input to the \fBshow\fP operator
+is a string, printing whole lines or at least words at once is a lot
+more efficient than printing one character at a time.
+.IP \(bu
+\*(PS LanguageLevel\ 2 has introduced a new operator called \fBglyphshow\fP.
+It is a new variant of \fBshow\fP which prints one character at a time,
+and the character to be printed is specified by its font-internal \fIname\fP,
+rather than a code point.
+Thus \fBglyphshow\fP bypasses the font's encoding vector.
+.PP
+Because printing one character at a time with \fBglyphshow\fP is very
+inefficient, and because our \*(PS output is intended to be compatible
+with the first generation of PS printers which lack the LanguageLevel\ 2
+extensions,
+.I pstroff
+does not currently use the \fBglyphshow\fP operator.
+The troff program itself doesn't know anything about font-internal
+character names or encoding vendors; instead it views each font as a
+black box that provides 256 character code points.
+The design goal has been to make each of these 256 code points in
+every font accessible to the user.
+.SH
+1.2.  Character set model
+.LP
+In the classic troff model, there are two fundamentally different
+kinds of fonts: base fonts used to set normal running text, among
+which the user switches explicitly with the \fB.ft\fP request
+and the \fB\ef\fP escape, and special fonts providing some extra
+characters.
+In the original C/A/T-driving troff there is only one special font,
+fully named the Bell Labs Special Mathematical Font;
+ditroff devices can have multiple special fonts.
+Special font characters are logically a part of every base font.
+.PP
+The general notion of regular vs. special characters, and regular
+vs. special fonts,
+has been preserved in the present \*(PS version of troff,
+but the specifics are very different, given the vast difference
+between the PS font model and what the C/A/T offered.
+.PP
+The original troff and nroff programs used an internal 8-bit
+character set, but it was not meant for 8-bit text.
+Instead, the trans-ASCII high half was used to represent
+various characters accessible only via escapes of the form
+\fB\e(\fIxx\fR.
+Most of those characters were on the Special font, but
+some were non-ASCII typographic characters in the base fonts, such as
+\e(bu, \e(em, \e(hy etc.
+Furthermore, the base fonts did not cover the full ASCII graphic
+character set, and some ASCII characters were relegated to the
+Special font.
+Hence the logical structure of the internal troff code point space
+was effectively disconnected from the division into base and special
+fonts, reinforcing the notion that all special font characters
+are logically a part of every base font which the user may select.
+.PP
+In general terms, the model just described
+still works for the Adobe fonts which are included in PS printers.
+The Times, Helvetica and Courier font families naturally fulfill
+the role of base fonts, whereas fonts like Symbol and Zapf Dingbats
+are conceptually similar to the original troff's Special font.
+But the similarity ends here, and the differences begin.
+.PP
+Unlike those of the C/A/T, Adobe's base fonts have always included
+the complete ASCII graphic character set, and the version of the
+Adobe base font character set that's been
+adopted for the present troff implementation (see Appendix\ A)
+is even richer: a superset of ISO Latin-1 (8859-1),
+a very popular ``extended ASCII'' 8-bit character set.
+Therefore, our character set model had to be expanded:
+whereas the original troff repertoire of possible characters
+was divisible into two broad categories, one being ASCII graphic
+characters and the other being various typographic and mathematical
+symbols unique to troff, with the new \*(PS troff we have a new
+``in between'' category: characters that aren't standard ASCII,
+but are standard ISO Latin-1.
+.PP
+The internal troff character code space has been expanded from 8 to 9 bits
+in the present version.
+
+
+
+The Roman font character set listed in the \*(PS Language Reference
+Manual, 2nd edition\**
+.FS
+LanguageLevel\ 2 support is \fInot\fP required:
+Type\ 1 fonts supporting this character set can be loaded
+into \fIany\fP PS printer, even the oldest ones.
+.FE
+consists of 227 characters and is shown below:
+.DS
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+a b c d e f g h i j k l m n o p q r s t u v w x y z & 0 1 2 3 4 5 6 7 8 9
+\XC6 \XC1 \XC2 \XC4 \XC0 \XC5 \XC3 \XC7 \XD0 \XC9 \XCA \XCB \XC8 \c
+\XCD \XCE \XCF \XCC \X84 \XD1 \X85 \XD3 \XD4 \XD6 \XD2 \XD5 \XD8 \X86 \XDE \XDA
+\XDB \XDC \XD9 \X83 \XDD \X87 \c
+\XE6 \XE1 \XE2 \XE4 \XE0 \XE5 \XE3 \XE7 \XE9 \XEA \XEB \XE8 \XF0 \(fi \(fl \c
+\XED \XEE \XEF \XEC \X90 \XB5 \X8C \XF1 \X8D \XF3 \XF4 \XF6 \XF2 \XF5 \XF8 \c
+\X8E \XFE \XDF
+\XFA \XFB \XFC \XF9 \XFF \XFD \X8F \c
+\XA3 \XA5 \X99 $ \XA2 \XA4 \X06 \XA9 \XAE @ \XAA \XBA \X80 \X81 \XA7 \XB6 * \c
+! \XA1 ? \XBF . , ; : ` ' \X16 \X17 \X18 \X15 \X82 \X19 "
+\X10 \X11 \XAB \XBB ( ) [ ] { } | / \e - \(en \(em _ \X9E \XB8 \c
+\X92 \X93 \X98 \X91 \X9A \X94 \X95 \X96 \X97 \X9F \X9D \X07
+# % \X14 \XBC \XBE \XBD = \- + \XD7 ~ < \XB1 > \XF7 \XAC \XB0 ^ \X9C \c
+\XB7 \XA6 \XB9 \XB2 \XB3
+.DE
+
+
+1.1.  Font model
+.LP
+
+.SH
+1.2.  Character set model
+

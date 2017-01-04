@@ -1,0 +1,26 @@
+h21147
+s 00015/00000/00000
+d D 1.1 84/01/06 14:56:09 rrh 1 0
+c date and time created 84/01/06 14:56:09 by rrh
+e
+u
+U
+t
+T
+I 1
+#
+#	"%W%	%G%";
+#
+#  standard alphabetic format, with full references
+#
+I BMACLIB/bibinc.fullnames
+SAD-2
+C2D-2
+AA
+EA
+.so \*(l]/bmac.std
+.de s[   \" start reference
+.nh
+.IP [\\*([F] 10n
+..
+E 1

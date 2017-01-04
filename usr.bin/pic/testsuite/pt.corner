@@ -1,0 +1,14 @@
+.PS 3i
+circle
+line from last circle.ne "ne"
+line from last circle.nw "nw" left
+line from last circle.sw "sw"
+line from last circle.se "se" right
+.PE
+.PS 3i
+ellipse
+line from last ellipse.ne "ne"
+line from last ellipse.nw "nw" left
+line from last ellipse.sw "sw"
+line from last ellipse.se "se" right
+.PE

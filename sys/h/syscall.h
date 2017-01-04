@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)syscall.h	5.4 (Berkeley) 4/3/86
+ *	@(#)syscall.h	5.5 (Berkeley) 1/8/04
  */
 
 #define	SYS_exit	1
@@ -156,3 +156,4 @@
 #define	SYS_setquota	148
 #define	SYS_quota	149
 #define	SYS_getsockname	150
+#define	SYS_sigemu	151

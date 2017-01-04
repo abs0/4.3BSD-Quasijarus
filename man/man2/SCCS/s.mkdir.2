@@ -1,0 +1,178 @@
+h06159
+s 00032/00003/00081
+d D 6.4 85/08/26 23:33:00 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00000/00003/00084
+d D 6.3 85/08/07 09:52:46 karels 4 3
+c don't need to be su to mkdir
+e
+s 00022/00009/00065
+d D 6.2 85/05/22 18:31:50 mckusick 3 2
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00073
+d D 6.1 85/05/15 11:57:30 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00074/00000/00000
+d D 5.1 85/05/15 11:57:22 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MKDIR 2 "27 July 1983"
+E 2
+I 2
+.TH MKDIR 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+mkdir \- make a directory file
+.SH SYNOPSIS
+.nf
+.ft B
+mkdir(path, mode)
+char *path;
+int mode;
+.fi
+.ft R
+.SH DESCRIPTION
+.I Mkdir
+creates a new directory file with name
+.IR path .
+The mode of the new file
+is initialized from
+.IR mode .
+(The protection part of the mode
+is modified by the process's mode mask; see
+.IR umask (2)).
+.PP
+The directory's owner ID is set to the process's effective user ID.
+The directory's group ID is set to that of the parent directory in
+which it is created.
+.PP
+The low-order 9 bits of mode are modified by the process's
+file mode creation mask: all bits set in the process's file mode
+creation mask are cleared.  See
+.IR umask (2).
+.SH "RETURN VALUE
+A 0 return value indicates success.  A \-1 return value
+indicates an error, and an error code is stored in
+.I errno.
+.SH "ERRORS
+.I Mkdir
+will fail and no directory will be created if:
+.TP 15
+D 3
+[EPERM]
+The process's effective user ID is not super-user.
+.TP 15
+[EPERM]
+The \fIpath\fP argument contains a byte with the high-order bit set.
+.TP 15
+E 3
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+I 3
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+.TP 15
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+.TP 15
+E 3
+[ENOENT]
+A component of the path prefix does not exist.
+.TP 15
+I 3
+[EACCES]
+Search permission is denied for a component of the path prefix.
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+[EPERM]
+D 4
+The process's effective user ID is not super-user.
+.TP 15
+[EPERM]
+E 4
+The \fIpath\fP argument contains a byte with the high-order bit set.
+.TP 15
+E 3
+[EROFS]
+The named file resides on a read-only file system.
+.TP 15
+[EEXIST]
+The named file exists.
+.TP 15
+I 5
+[ENOSPC]
+The directory in which the entry for the new directory is being placed
+cannot be extended because there is no space left on the file
+system containing the directory.
+.TP 15
+[ENOSPC]
+The new directory cannot be created because there
+there is no space left on the file
+system that will contain the directory.
+.TP 15
+[ENOSPC]
+There are no free inodes on the file system on which the
+directory is being created.
+.TP 15
+[EDQUOT]
+The directory in which the entry for the new directory
+is being placed cannot be extended because the
+user's quota of disk blocks on the file system
+containing the directory has been exhausted.
+.TP 15
+[EDQUOT]
+The new directory cannot be created because the user's
+quota of disk blocks on the file system that will
+contain the directory has been exhausted.
+.TP 15
+[EDQUOT]
+The user's quota of inodes on the file system on
+which the directory is being created has been exhausted.
+.TP 15
+E 5
+I 3
+[EIO]
+An I/O error occurred while making the directory entry or allocating the inode.
+.TP 15
+I 5
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+.TP 15
+E 5
+E 3
+[EFAULT]
+.I Path
+points outside the process's allocated address space.
+D 3
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+E 3
+D 5
+.TP 15
+[EIO]
+An I/O error occured while writing to the file system.
+E 5
+.SH "SEE ALSO"
+chmod(2), stat(2), umask(2)
+E 1

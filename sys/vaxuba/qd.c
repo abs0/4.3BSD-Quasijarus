@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)qd.c	1.11 (Berkeley) 2/7/89
+ *	@(#)qd.c	1.13 (Berkeley) 12/8/04
  */
 
 /************************************************************************
@@ -292,8 +292,8 @@ short cons_cursor[32] = {
 #define FONT_OFFSET	((MAX_SCREEN_X/CHAR_WIDTH)*CHAR_HEIGHT)
 
 extern char q_font[];		/* reference font object code */
-extern	u_short q_key[];	/* reference key xlation tables */
-extern	u_short q_shift_key[];
+extern	char q_key[];		/* reference key xlation tables */
+extern	char q_shift_key[];
 extern	char *q_special[];
 
 /*
@@ -1671,14 +1671,14 @@ blitc(unit, chr)
 				dga->x_cursor = TRANX(cursor[unit].x);
 		}
 		return;
-	case CTRL('k'):		/* cursor up */
+	case CTRL(k):		/* cursor up */
 		if (nograph && cursor[unit].y > 0) {
 			cursor[unit].y -= CHAR_HEIGHT;
 			dga->y_cursor = TRANY(cursor[unit].y);
 		}
 		return;
 
-	case CTRL('^'):		/* home cursor */
+	case CTRL(^):		/* home cursor */
 		if (nograph) {
 			cursor[unit].x = 0;
 			dga->x_cursor = TRANX(cursor[unit].x);
@@ -1687,14 +1687,14 @@ blitc(unit, chr)
 		}
 		return;
 
-	case CTRL('l'):		/* cursor right */
+	case CTRL(l):		/* cursor right */
 		if (nograph && cursor[unit].x < 1023 - CHAR_WIDTH) {
 			cursor[unit].x += CHAR_WIDTH;
 			dga->x_cursor = TRANX(cursor[unit].x);
 		}
 		return;
 
-	case CTRL('z'):		/* clear screen */
+	case CTRL(z):		/* clear screen */
 		if (nograph) {
 			setup_dragon(unit);  	
 			clear_qd_screen(unit);
@@ -2614,7 +2614,7 @@ GET_TBUTTON:
 			/*
 			* Check for special function keys */
 
-			if (chr & 0x100) {
+			if (chr & 0x80) {
 				char *string;
 				string = q_special[chr & 0x7F];
 				while(*string)

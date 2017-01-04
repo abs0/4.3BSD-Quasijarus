@@ -1,0 +1,406 @@
+h05732
+s 00121/00012/00097
+d D 6.3 04/10/21 07:10:34 msokolov 5 4
+c update for Quasijarus
+e
+s 00001/00000/00108
+d D 6.2 86/05/16 10:04:04 mckusick 4 3
+c add conversion of 3n => 3N
+e
+s 00020/00020/00088
+d D 6.1 86/05/11 00:19:40 mckusick 3 2
+c version ditributed with 4.3BSD
+e
+s 00032/00007/00076
+d D 5.1 86/05/11 00:18:57 mckusick 2 1
+c version distributed with 4.2BSD
+e
+s 00083/00000/00000
+d D 4.1 86/05/11 00:17:57 mckusick 1 0
+c version distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+#!/bin/sh -
+#
+# Copyright (c) 1980 Regents of the University of California.
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	%W% (Berkeley) %G%
+#
+tmp=/tmp/toc$$
+D 2
+troff=vtroff
+E 2
+I 2
+D 3
+troff=itroff
+E 3
+E 2
+trap "rm $tmp ; exit" 2 3 15
+D 2
+if [ $# -eq 2 ]
+E 2
+I 2
+D 5
+if [ $# -eq 2 -a $1 = "3" ]
+E 5
+I 5
+if [ $# -eq 1 -a $1 = "1" ]
+E 5
+E 2
+then
+I 2
+D 5
+	: create toc input files for section 3 only
+E 5
+I 5
+	: create toc input file for section 1 only
+E 5
+
+I 5
+	( cd ../man1 ; /usr/lib/getNAME -t `ls *.1 *.1? | sort` | sed \
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+			-e 's/.th.*	//' \
+		> ../man0/tocx1
+	)
+elif [ $# -eq 1 -a $1 = "2" ]
+then
+	: create toc input file for section 2 only
+
+	( cd ../man2 ; /usr/lib/getNAME -t *.2 | sed \
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+			-e 's/.th.*	//' \
+		> ../man0/tocx2
+	)
+elif [ $# -eq 1 -a $1 = "3" ]
+then
+	: create toc input file for section 3 only
+
+E 5
+D 3
+	( cd man3 ; for x in 3 3f 3m 3n 3s 3x 3c
+	    do
+		/usr/lib/getNAME -t *.$x |
+		sed \
+E 3
+I 3
+	( cd ../man3 ; /usr/lib/getNAME -t `ls *.3 *.3[mnsxc] | sort` | sed \
+E 3
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+D 3
+		> ../man0/tocx$x
+	    done
+E 3
+I 3
+D 5
+		> ../man0/tocx3 ;
+E 5
+I 5
+			-e 's/.th.*	//' \
+		> ../man0/tocx3
+	)
+elif [ $# -eq 1 -a $1 = "3f" ]
+then
+	: create toc input file for section 3F only
+
+	( cd ../man3/man3f ;
+E 5
+		/usr/lib/getNAME -t *.3f | sed \
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+D 5
+		> ../man0/tocx3f
+E 5
+I 5
+			-e 's/.th.*	//' \
+		> ../../man0/tocx3f
+E 5
+E 3
+	)
+D 5
+elif [ $# -eq 2 ]
+E 5
+I 5
+elif [ $# -eq 1 -a $1 = "4" ]
+E 5
+then
+E 2
+D 5
+	: create toc input file for one section only
+E 5
+I 5
+	: create toc input file for section 4 only
+E 5
+
+D 3
+	( cd man$1 ; /usr/lib/getNAME -t *.* |
+E 3
+I 3
+D 5
+	( cd ../man$1 ; /usr/lib/getNAME -t *.* |
+E 3
+		sed \
+E 5
+I 5
+	mkdir sym
+	(cd sym; for i in ../../man4/*.4; do ln -s $i .; done;
+		for i in ../../man4/*.4?; do ln -s $i .; done;
+		for i in ../../man4/vax/*.4; do ln -s $i .; done;
+		/usr/lib/getNAME -t *.* | sed \
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+			-e 's/.th.*	//' \
+		> ../tocx4
+	)
+	rm -rf sym
+elif [ $# -eq 1 -a $1 = "5" ]
+then
+	: create toc input file for section 5 only
+
+	( cd ../man5 ; /usr/lib/getNAME -t *.5 | sed \
+E 5
+I 2
+			-e 's/.s-2//g' \
+E 2
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+D 2
+			-e 's/$/./' \
+E 2
+I 2
+			-e 's/ *$/./' \
+E 2
+			-e 's/.TH.*	//' \
+D 5
+		> ../man0/tocx$1
+E 5
+I 5
+			-e 's/.th.*	//' \
+		> ../man0/tocx5
+E 5
+	)
+I 5
+elif [ $# -eq 1 -a $1 = "6" ]
+then
+	: create toc input file for section 6 only
+
+	( cd ../man6 ; /usr/lib/getNAME -t *.6 | sed \
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+			-e 's/.th.*	//' \
+		> ../man0/tocx6
+	)
+elif [ $# -eq 1 -a $1 = "7" ]
+then
+	: create toc input file for section 7 only
+
+	( cd ../man7 ; /usr/lib/getNAME -t *.7 | sed \
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+			-e 's/.th.*	//' \
+		> ../man0/tocx7
+	)
+elif [ $# -eq 1 -a $1 = "8" ]
+then
+	: create toc input file for section 8 only
+
+	mkdir sym
+	(cd sym; for i in ../../man8/*.8; do ln -s $i .; done;
+		for i in ../../man8/*.8?; do ln -s $i .; done;
+		for i in ../../man8/vax/*.8; do ln -s $i .; done;
+		for i in ../../man8/vax/*.8?; do ln -s $i .; done;
+		/usr/lib/getNAME -t *.* | sed \
+			-e 's/.s-2//g' \
+			-e 's/.s-1//g' \
+			-e 's/.s0//g' \
+			-e 's/.s+1//g' \
+			-e 's/  *.-  */: /' \
+			-e 's/ *$/./' \
+			-e 's/.TH.*	//' \
+			-e 's/.th.*	//' \
+		> ../tocx8
+	)
+	rm -rf sym
+E 5
+else case $1 in
+	all )
+		:   tocx files for all sections and everything else
+
+D 5
+		for x in 1 2 3 4 5 6 7 8
+E 5
+I 5
+		for x in 1 2 3 3f 4 5 6 7 8
+E 5
+			do
+D 5
+			./$0 $x $x
+E 5
+I 5
+			./$0 $x
+E 5
+			done
+		./$0 t
+		;;
+	t )
+		:   permuted index and toc files
+
+D 3
+		if [ ! -f man0/tocx1 ]
+E 3
+I 3
+		if [ ! -f tocx1 ]
+E 3
+		then
+D 2
+			echo "tocx? files missing; must run tocrc all first"
+E 2
+I 2
+			echo "tocx* files missing; must run tocrc all first"
+E 2
+			exit
+		fi
+		sed \
+			-e 's/(1c)/(1C)/' \
+D 2
+			-e 's/(1m)/(1M)/' \
+E 2
+			-e 's/(1g)/(1G)/' \
+			-e 's/(3c)/(3C)/' \
+			-e 's/(3m)/(3M)/' \
+I 4
+			-e 's/(3n)/(3N)/' \
+E 4
+			-e 's/(3s)/(3S)/' \
+I 2
+			-e 's/(3x)/(3X)/' \
+			-e 's/(3f)/(3F)/' \
+			-e 's/(4f)/(4F)/' \
+			-e 's/(4n)/(4N)/' \
+			-e 's/(4p)/(4P)/' \
+			-e 's/(8c)/(8C)/' \
+			-e 's/(8v)/(8V)/' \
+E 2
+			-e '/"\."/d' \
+D 2
+			man0/tocx? man0/cshcmd \
+E 2
+I 2
+D 3
+			man0/tocx* man0/cshcmd \
+E 3
+I 3
+			tocx* cshcmd \
+E 3
+E 2
+		> /tmp/cattoc
+
+D 3
+		ptx -r -t -b break -f -w 108 -i man0/ignore \
+		    /tmp/cattoc man0/ptxx
+E 3
+I 3
+		ptx -r -t -b break -f -w 108 -i ignore \
+		    /tmp/cattoc ptxx
+E 3
+
+D 2
+		for x in 1 2 3 4 5 6 7 8
+E 2
+I 2
+D 3
+		for x in 1 2 3 3f 3m 3n 3s 3x 3c 4 5 6 7 8
+E 3
+I 3
+		for x in 1 2 3 3f 4 5 6 7 8
+E 3
+E 2
+		do
+D 3
+			< man0/tocx$x grep '^intro' >$tmp
+E 3
+I 3
+			< tocx$x grep '^intro' >$tmp
+E 3
+				sed \
+				-e '2,${' \
+				-e '/^intro/d' \
+				-e '}' \
+				-e 's/ .*://' \
+				-e 's/.$//' \
+				-e 's/([^)]*) /" "/' \
+				-e 's/.*/.xx "&"/' \
+				-e '/""/d' \
+D 3
+				$tmp man0/tocx$x \
+			>man0/toc$x
+E 3
+I 3
+				$tmp tocx$x \
+			>toc$x
+E 3
+		done
+D 3
+		;;
+	tr )
+		cd man0; $troff ptx.in ; cd ..
+		cd man0 ; $troff toc.in  ; cd ..
+E 3
+		;;
+	* )
+D 5
+		./$0 $1 $1
+E 5
+I 5
+		echo "what do you want to do?"
+E 5
+		;;
+	esac
+fi
+exit
+E 1

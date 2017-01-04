@@ -1,0 +1,197 @@
+h14762
+s 00002/00002/00086
+d D 6.2 86/05/09 08:41:22 anne 4 3
+c grammar
+e
+s 00001/00001/00087
+d D 6.1 85/04/29 14:38:25 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00059/00029/00029
+d D 5.1 85/04/29 14:38:14 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00058/00000/00000
+d D 4.1 85/04/29 14:38:05 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MT 1 5/11/81
+E 2
+I 2
+D 3
+.TH MT 1 "1 April 1983"
+E 3
+I 3
+.TH MT 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+mt \- magnetic tape manipulating program
+.SH SYNOPSIS
+.B mt
+[
+D 2
+.B \-t
+E 2
+I 2
+.B \-f
+E 2
+.I tapename
+]
+.I command
+[
+.I count
+]
+.SH DESCRIPTION
+D 2
+.PP
+E 2
+.I Mt
+D 2
+is used to give commands to the tape drive.  If a tape name is not
+specified, /dev/rmt12 is used.  If a count is not specified, 1 is assumed.
+E 2
+I 2
+is used to give commands to a magnetic tape drive.
+If a tape name is not specified, the environment variable
+TAPE is used;  if TAPE does not exist,
+.I mt
+uses the device
+.IR /dev/rmt12 .
+Note
+that
+.I tapename
+must reference a raw (not block) tape device.
+By default
+.I mt
+performs the requested operation once.  Operations
+may be performed multiple times by specifying
+.IR count .
+E 2
+.PP
+D 2
+Here are the commands:
+.in +.5i
+.BR eof "	write"
+E 2
+I 2
+The available commands are listed below.  Only as many
+characters as are required to uniquely identify a command
+need be specified.
+.TP
+.BR eof , " weof"
+Write 
+E 2
+.I count
+D 2
+end-of-file marks
+.br
+.BR fsf "	space forward"
+E 2
+I 2
+end-of-file marks at the current position on the tape.
+.TP
+.B fsf
+Forward space
+E 2
+.I count
+D 2
+files
+.br
+.BR fsr "	space forward"
+E 2
+I 2
+files.
+.TP
+.B fsr
+Forward space 
+E 2
+.I count
+D 2
+records
+.br
+.BR bsf "	space backward"
+E 2
+I 2
+records.
+.TP
+.B bsf
+Back space 
+E 2
+.I count
+D 2
+files
+.br
+.BR bsr "	space backward"
+E 2
+I 2
+files.
+.TP 
+.B bsr
+Back space
+E 2
+.I count
+D 2
+records
+.br
+.BR rew "	rewind tape"
+.br
+.BR offl "	rewind tape and go offline:
+.in -.5i
+E 2
+I 2
+records.
+.TP
+.B rewind
+Rewind the tape
+.RI ( Count
+D 4
+is ignored.)
+E 4
+I 4
+is ignored). 
+E 4
+.TP
+.BR offline , " rewoffl"
+Rewind the tape and place the tape unit off-line
+.RI ( Count
+D 4
+is ignored.)
+E 4
+I 4
+is ignored).
+E 4
+.TP
+.B status
+Print status information about the tape unit.
+.PP
+.I Mt
+returns a 0 exit status when the operation(s) were successful,
+1 if the command was unrecognized, and 2 if an operation failed.
+E 2
+.SH FILES
+.DT
+/dev/rmt*	Raw magnetic tape interface
+D 2
+.SH SEE ALSO
+mt(4), dd(1)
+.SH BUGS
+E 2
+I 2
+.SH "SEE ALSO"
+mtio(4), dd(1), ioctl(2), environ(7)
+E 2
+E 1

@@ -1,0 +1,107 @@
+h60334
+s 00002/00002/00028
+d D 6.2 86/05/19 17:32:09 karels 4 3
+c trivia
+e
+s 00001/00001/00029
+d D 6.1 85/05/15 18:14:41 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00010/00011/00020
+d D 5.1 85/05/15 18:14:33 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00031/00000/00000
+d D 4.1 85/05/15 18:14:26 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ACCT 5
+E 2
+I 2
+D 3
+.TH ACCT 5 "15 January 1983"
+E 3
+I 3
+.TH ACCT 5 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+acct \- execution accounting file
+.SH SYNOPSIS
+.B #include <sys/acct.h>
+.SH DESCRIPTION
+D 2
+.IR Acct (2)
+causes entries to be made into an accounting file
+E 2
+I 2
+The
+.IR acct (2)
+D 4
+system call makes entries in an accounting file
+E 4
+I 4
+system call arranges for entries to be made in an accounting file
+E 4
+E 2
+for each process that terminates.
+The accounting file is a sequence of entries whose layout,
+D 2
+as defined by the include file
+is:
+E 2
+I 2
+as defined by the include file is:
+E 2
+.PP
+.nf
+D 2
+.ta \w'typedef 'u +\w'comp_t  'u +\w'ac_comm[10];   'u
+E 2
+I 2
+.ta \w'typedef 'u +\w'ACOMPAT  'u +\w'ac_comm[10];   'u
+E 2
+.so /usr/include/sys/acct.h
+.fi
+.PP
+D 4
+If the process does an
+E 4
+I 4
+If the process was created by an
+E 4
+D 2
+.IR exec (2),
+E 2
+I 2
+.IR execve (2),
+E 2
+the first 10 characters of the filename appear in
+.I ac_comm.
+The accounting flag contains bits indicating whether
+D 2
+.IR exec (2)
+was ever accomplished, and whether the
+process ever had super-user privileges.
+E 2
+I 2
+.IR execve (2)
+was ever accomplished, and whether the process ever had super-user privileges.
+E 2
+.SH SEE ALSO
+D 2
+acct(2), sa(1)
+E 2
+I 2
+acct(2), execve(2), sa(8)
+E 2
+E 1

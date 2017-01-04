@@ -1,0 +1,16 @@
+h23587
+s 00005/00000/00000
+d D 5.1 88/03/30 14:46:08 bostic 1 0
+c date and time created 88/03/30 14:46:08 by bostic
+e
+u
+U
+t
+T
+I 1
+./"utime"16t" "16t"stime"n4X
++/"maxrss"16t"ixrss"16t"idrss"16t"isrss"n4D
++/"minflt"16t"majflt"16t"nswap"n3D
++/"inblock"16t"oublock"16t"msgsnd"16t"msgrcv"n4D
++/"nsignals"16t"nvcsw"16t"nivcsw"n3D
+E 1

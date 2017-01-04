@@ -1,0 +1,30 @@
+MAN2=	../man2/intro.2.ps ../man2/accept.2.ps ../man2/access.2.ps \
+	../man2/acct.2.ps ../man2/adjtime.2.ps ../man2/bind.2.ps \
+	../man2/brk.2.ps ../man2/chdir.2.ps ../man2/chmod.2.ps \
+	../man2/chown.2.ps ../man2/chroot.2.ps ../man2/close.2.ps \
+	../man2/connect.2.ps ../man2/creat.2.ps ../man2/dup.2.ps \
+	../man2/execve.2.ps ../man2/exit.2.ps ../man2/fcntl.2.ps \
+	../man2/flock.2.ps ../man2/fork.2.ps ../man2/fsync.2.ps \
+	../man2/getdtablesize.2.ps ../man2/getgid.2.ps ../man2/getgroups.2.ps \
+	../man2/gethostid.2.ps ../man2/gethostname.2.ps ../man2/getitimer.2.ps \
+	../man2/getpagesize.2.ps ../man2/getpeername.2.ps ../man2/getpgrp.2.ps \
+	../man2/getpid.2.ps ../man2/getpriority.2.ps ../man2/getrlimit.2.ps \
+	../man2/getrusage.2.ps ../man2/getsockname.2.ps \
+	../man2/getsockopt.2.ps ../man2/gettimeofday.2.ps ../man2/getuid.2.ps \
+	../man2/ioctl.2.ps ../man2/kill.2.ps ../man2/killpg.2.ps \
+	../man2/link.2.ps ../man2/listen.2.ps ../man2/lseek.2.ps \
+	../man2/mkdir.2.ps ../man2/mknod.2.ps ../man2/mount.2.ps \
+	../man2/open.2.ps ../man2/pipe.2.ps ../man2/profil.2.ps \
+	../man2/ptrace.2.ps ../man2/quota.2.ps ../man2/read.2.ps \
+	../man2/readlink.2.ps ../man2/reboot.2.ps ../man2/recv.2.ps \
+	../man2/rename.2.ps ../man2/rmdir.2.ps ../man2/select.2.ps \
+	../man2/send.2.ps ../man2/setgroups.2.ps ../man2/setpgrp.2.ps \
+	../man2/setquota.2.ps ../man2/setregid.2.ps ../man2/setreuid.2.ps \
+	../man2/shutdown.2.ps ../man2/sigblock.2.ps ../man2/sigpause.2.ps \
+	../man2/sigreturn.2.ps ../man2/sigsetmask.2.ps ../man2/sigstack.2.ps \
+	../man2/sigvec.2.ps ../man2/socket.2.ps ../man2/socketpair.2.ps \
+	../man2/stat.2.ps ../man2/swapon.2.ps ../man2/symlink.2.ps \
+	../man2/sync.2.ps ../man2/syscall.2.ps ../man2/truncate.2.ps \
+	../man2/umask.2.ps ../man2/unlink.2.ps ../man2/utimes.2.ps \
+	../man2/vadvise.2.ps ../man2/vfork.2.ps ../man2/vhangup.2.ps \
+	../man2/wait.2.ps ../man2/write.2.ps

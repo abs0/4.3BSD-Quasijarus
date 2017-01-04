@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dmx.c	7.1 (Berkeley) 1/10/99
+ *	@(#)dmx.c	7.4 (Berkeley) 12/9/04
  */
 
 /*
@@ -70,7 +70,7 @@ int	ttrstrt();
 /*
  * DMF/DMZ open common code
  */
-dmxopen(tp, sc)
+dmxopen(tp, sc, flag)
 	register struct tty *tp;
 	register struct dmx_softc *sc;
 {
@@ -113,7 +113,7 @@ dmxopen(tp, sc)
 		if ((dmxmctl(tp, DMF_ON, DMSET) & DMF_CAR) ||
 		    (sc->dmx_softCAR & (1 << unit)))
 			tp->t_state |= TS_CARR_ON;
-		if (tp->t_state & TS_CARR_ON)
+		if (tp->t_state & TS_CARR_ON || flag & FNDELAY)
 			break;
 		tp->t_state |= TS_WOPEN;
 		sleep((caddr_t)&tp->t_rawq, TTIPRI);
@@ -160,6 +160,12 @@ dmxrint(sc)
 				addr->csr = DMF_IE | DMFIR_LCR | unit;
 				addr->lctms = DMF_ENA;
 			}
+			tp->t_state |= TS_MODEMCHG;
+			if (tp->t_rsel) {
+				selwakeup(tp->t_rsel, tp->t_state & TS_RCOLL);
+				tp->t_rsel = 0;
+				tp->t_state &= ~TS_RCOLL;
+			}
 			continue;
 		}
 		if ((tp->t_state&TS_ISOPEN) == 0) {
@@ -200,7 +206,7 @@ dmxioctl(tp, cmd, data, flag)
 	register struct tty *tp;
 	caddr_t data;
 {
-	int error;
+	int error, s;
 
 	error = (*linesw[tp->t_line].l_ioctl)(tp, cmd, data, flag);
 	if (error >= 0)
@@ -243,6 +249,9 @@ dmxioctl(tp, cmd, data, flag)
 		break;
 
 	case TIOCMGET:
+		s = spltty();
+		tp->t_state &= ~TS_MODEMCHG;
+		splx(s);
 		*(int *)data = dmxmctl(tp, 0, DMGET);
 		break;
 
@@ -481,7 +490,7 @@ dmxstart(tp, sc)
 	 */
 	if (tp->t_outq.c_cc == 0)
 		goto out;
-	if (tp->t_flags & (RAW|LITOUT))
+	if (tp->t_flags & (RAW|LITOUT|PASS8))
 		nch = ndqb(&tp->t_outq, 0);
 	else {
 		if ((nch = ndqb(&tp->t_outq, 0200)) == 0) {

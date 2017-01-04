@@ -1,0 +1,147 @@
+h19058
+s 00001/00003/00090
+d D 6.3 87/04/28 12:05:19 bostic 6 5
+c added -l flag to synopsis
+e
+s 00006/00002/00087
+d D 6.2 86/12/21 16:32:31 karels 5 3
+c -f
+e
+s 00006/00002/00087
+d R 6.2 86/12/21 16:31:27 karels 4 3
+c -f
+e
+s 00001/00001/00088
+d D 6.1 85/04/29 15:09:44 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00088
+d D 5.1 85/04/29 15:09:36 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00089/00000/00000
+d D 4.1 85/04/29 15:09:27 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH W 1 8/15/80
+E 2
+I 2
+D 3
+.TH W 1 "15 August 1980"
+E 3
+I 3
+.TH W 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+w \- who is on and what they are doing
+.SH SYNOPSIS
+.B w
+[
+D 6
+.B \-h
+] [
+.B \-s
+E 6
+I 6
+.B \-hls
+E 6
+] [ user ]
+.SH DESCRIPTION
+.I W
+prints a summary of the current activity on the system,
+including what each user is doing.
+The heading line shows the current time of day,
+how long the system has been up,
+the number of users logged into the system,
+and the load averages.
+The load average numbers give the number of jobs in the run queue
+averaged over 1, 5 and 15 minutes.
+.PP
+The fields output are:
+the users login name,
+the name of the tty the user is on,
+D 5
+the time of day the user logged on,
+the number of minutes since the user last typed anything,
+E 5
+I 5
+the host from which the user is logged in,
+the time the user logged on,
+the time since the user last typed anything,
+E 5
+the CPU time used by all processes and their children on that terminal,
+the CPU time used by the currently active processes,
+the name and arguments of the current process.
+.PP
+The
+.B \-h
+flag suppresses the heading.
+The
+.B \-s
+flag asks for a short form of output.
+In the short form, the tty is abbreviated, the login time and cpu times
+are left off, as are the arguments to commands.
+.B \-l
+gives the long output, which is the default.
+I 5
+The
+.B \-f
+option suppresses the ``from'' field.
+E 5
+.PP
+If a
+.I user
+name is included,
+the output will be restricted to that user.
+.SH FILES
+.ta 1i
+/etc/utmp
+.br
+/dev/kmem
+.br
+/dev/drum
+.SH "SEE ALSO"
+who(1), finger(1), ps(1)
+.SH AUTHOR
+Mark Horton
+.SH BUGS
+The notion of the ``current process'' is muddy.
+The current algorithm is ``the highest numbered process on
+the terminal that is not ignoring interrupts,
+or, if there is none, the highest numbered process on the terminal''.
+This fails, for example, in critical sections of programs
+like the shell and editor,
+or when faulty programs running in the background
+fork and fail to ignore interrupts.
+(In cases where no process can be found,
+.I w
+prints ``\-''.)
+.PP
+The CPU time is only an estimate, in particular, if someone leaves a
+background process running after logging out, the person currently
+on that terminal is ``charged'' with the time.
+.PP
+Background processes are not shown, even though they account for
+much of the load on the system.
+.PP
+Sometimes processes, typically those in the background, are
+printed with null or garbaged arguments.
+In these cases, the name of the command is printed in parentheses.
+.PP
+W does not know about the new conventions for detection of background jobs.
+It will sometimes find a background job instead of the right one.
+E 1

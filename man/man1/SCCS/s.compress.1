@@ -1,0 +1,739 @@
+h00434
+s 00090/00016/00217
+d D 6.6 02/06/02 19:08:49 msokolov 7 6
+c document strong compression
+e
+s 00020/00015/00213
+d D 6.5 86/05/11 13:35:17 lepreau 6 5
+c clean up doc of exit status and -f flag and fg/bg; too picky about filenames
+e
+s 00001/00001/00227
+d D 6.4 86/05/10 20:26:30 mckusick 5 4
+c format
+e
+s 00008/00005/00220
+d D 6.3 85/09/17 23:28:57 lepreau 4 2
+c updates from 4.0 but don't doc -V; nits
+e
+s 00007/00002/00223
+d R 6.3 85/09/17 23:12:51 lepreau 3 2
+c updates from 4.0, but don't doc -V flag
+e
+s 00085/00114/00140
+d D 6.2 85/06/06 14:48:23 mckusick 2 1
+c update (from jaw@AMES-NAS.ARPA)
+e
+s 00254/00000/00000
+d D 6.1 85/06/06 14:46:15 mckusick 1 0
+c date and time created 85/06/06 14:46:15 by mckusick
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.TH COMPRESS 1 "%Q%"
+.UC 6
+.SH NAME
+D 2
+compress, uncompress, zcat  \-  compress and uncompress files
+E 2
+I 2
+compress, uncompress, zcat \- compress and expand data
+E 2
+D 5
+.PU
+E 5
+.SH SYNOPSIS
+I 5
+.PU
+E 5
+.ll +8
+.B compress
+[
+D 2
+.B \-d
+] [
+E 2
+D 7
+.B \-f
+E 7
+I 7
+.B \-fvcs
+E 7
+] [
+D 2
+.B \-F
+E 2
+I 2
+D 7
+.B \-v
+E 2
+] [
+D 2
+.B \-q
+] [
+E 2
+.B \-c
+] [
+E 7
+.B \-b
+.I bits
+] [
+I 7
+.B \-l
+.I level
+] [
+E 7
+D 2
+.I "filename \&..."
+E 2
+I 2
+.I "name \&..."
+E 2
+]
+.ll -8
+.br
+.B uncompress
+[
+D 7
+.B \-f
+E 7
+I 7
+.B \-fvc
+E 7
+] [
+D 2
+.B \-q
+E 2
+I 2
+D 7
+.B \-v
+E 2
+] [
+.B \-c
+] [
+E 7
+D 2
+.I "filename \&..."
+E 2
+I 2
+.I "name \&..."
+E 2
+]
+.br
+.B zcat
+[
+D 2
+.I "filename \&..."
+E 2
+I 2
+.I "name \&..."
+E 2
+]
+.SH DESCRIPTION
+D 2
+Compresses the specified files or standard input.
+Each file is replaced by one with the extension
+E 2
+I 2
+.I Compress
+reduces the size of the named files using adaptive Lempel-Ziv coding.
+Whenever possible,
+each file is replaced by one with the extension
+E 2
+.B "\&.Z,"
+D 2
+but only if the file becomes smaller.
+If no files are specified,
+the compression is applied to the standard input
+and is written to standard output
+regardless of the size of the results.
+Compressed files can be restored
+to their original form by specifying the
+.B \-d
+option, or by running
+E 2
+I 2
+while keeping the same ownership modes, access and modification times.
+If no files are specified, the standard input is compressed to the
+standard output.
+Compressed files can be restored to their original form using
+E 2
+.I uncompress
+D 2
+(linked to
+.IR compress ),
+on the 
+.B "\&.Z"
+files or the standard input.
+E 2
+I 2
+or
+.I zcat.
+E 2
+.PP
+D 2
+If the output file exists, it will not be overwritten unless the
+E 2
+I 2
+The
+E 2
+.B \-f
+D 2
+flag is given.  If
+E 2
+I 2
+option will force compression of
+D 6
+.I name.
+This is useful for compressing an entire directory,
+even if some of the files do not actually shrink.
+If
+E 6
+I 6
+.IR name ,
+even if it does not actually shrink
+or the corresponding
+.IR name .Z
+file already exists.
+Except when run in the background under
+.IR /bin/sh ,
+if
+E 6
+E 2
+.B \-f
+D 2
+is not specified and
+E 2
+I 2
+D 6
+is not given and
+E 2
+.I compress
+is run in the foreground,
+D 2
+the user is prompted
+as to whether the file should be overwritten.
+E 2
+I 2
+the user is prompted as to whether an existing file should be overwritten.
+E 6
+I 6
+is not given the user is prompted as to whether an existing
+.IR name .Z
+file should be overwritten.
+E 6
+E 2
+.PP
+D 2
+If the
+.B \-F
+flag is given, all files specified are replaced with
+.B "\&.Z"
+files \- even if the files do not shrink.
+.PP
+When file names are given, the ownership (if run by root), modes, access
+and modification times are maintained between the file and its 
+.B "\&.Z"
+version.  In this respect,
+.I compress
+may be used for archival purposes, yet can still be used with
+.IR make "(1)"
+after uncompression.
+.PP
+E 2
+The
+.B \-c
+D 2
+option makes compress/uncompress write
+to stdout; no files are changed.  The
+E 2
+I 2
+D 4
+option makes
+E 4
+I 4
+(``cat'') option makes
+E 4
+.I compress/uncompress
+write to the standard output; no files are changed.
+The nondestructive behavior of
+E 2
+.I zcat
+D 2
+program is identical to
+E 2
+I 2
+is identical to that of
+E 2
+.I uncompress
+D 2
+.B \-c
+(all files are unpacked and written to stdout).
+E 2
+I 2
+D 7
+.B \-c.
+E 7
+I 7
+.BR \-c .
+E 7
+E 2
+.PP
+.I Compress
+D 2
+uses the modified Lempel-Ziv algorithm described in
+E 2
+I 2
+uses the modified Lempel-Ziv algorithm popularized in
+E 2
+"A Technique for High Performance Data Compression",
+Terry A. Welch,
+D 2
+.I "IEEE Computer"
+Vol 17, No 6 (June 1984), pp 8-19.
+E 2
+I 2
+.I "IEEE Computer,"
+vol. 17, no. 6 (June 1984), pp. 8-19.
+E 2
+Common substrings in the file are first replaced by 9-bit codes 257 and up.
+When code 512 is reached, the algorithm switches to 10-bit codes and
+continues to use more bits until the
+D 2
+.I bits
+limit as specified by the
+E 2
+I 2
+limit specified by the
+E 2
+.B \-b
+flag is reached (default 16).
+.I Bits
+must be between 9 and 16.  The default can be changed in the source to allow
+.I compress
+to be run on a smaller machine.
+.PP
+After the
+.I bits
+D 2
+limit is reached,
+E 2
+I 2
+limit is attained,
+E 2
+.I compress
+periodically checks the compression ratio.  If it is increasing,
+.I compress
+continues to use the existing code dictionary.  However,
+if the compression ratio decreases,
+.I compress
+discards the table of substrings and rebuilds it from scratch.  This allows
+the algorithm to adapt to the next "block" of the file.
+.PP
+D 2
+A two byte magic number is prepended to the file
+to ensure that neither uncompression of random text nor recompression of 
+compressed text is attempted.  In addition, the
+.I bits
+parameter specified during
+.I compress
+is written to the file so that the
+E 2
+I 2
+Note that the
+E 2
+.B \-b
+D 2
+flag can be omitted for
+.IR uncompress \.
+E 2
+I 2
+flag is omitted for
+D 7
+.I uncompress,
+E 7
+I 7
+.IR uncompress ,
+E 7
+since the 
+.I bits
+parameter specified during compression
+is encoded within the output, along with
+a magic number to ensure that neither decompression of random data nor
+recompression of compressed data is attempted. 
+E 2
+.PP
+D 7
+.ne 8
+E 7
+The amount of compression obtained depends on the size of the
+D 2
+input file, the number of
+E 2
+I 2
+input, the number of
+E 2
+.I bits
+D 2
+per code, and the distribution of character substrings.
+Typically, text files, such as C programs,
+are reduced by 50\-60%.
+E 2
+I 2
+per code, and the distribution of common substrings.
+Typically, text such as source code or English
+is reduced by 50\-60%.
+E 2
+Compression is generally much better than that achieved by
+Huffman coding (as used in
+.IR pack ),
+or adaptive Huffman coding
+.RI ( compact ),
+and takes less time to compute.
+.PP
+I 7
+If the
+.B \-s
+option is given,
+instead of using the modified Lempel-Ziv algorithm described above (also known
+as LZW for Lempel-Ziv-Welch),
+.I compress
+uses the original Lempel-Ziv algorithm (LZ77).
+Instead of assigning an
+.IR n -bit
+code to each compressed away common substring, which very quickly burns up the
+code space and causes a switch to longer less efficient codes,
+.I compress
+.B \-s
+references common substrings by a {distance, length} pointer
+in the data stream.
+All symbols emitted into the compressed data stream (literals, distances, and
+lengths) are Huffman coded.
+Compared to the original
+.I compress
+LZW algorithm, this version of Lempel-Ziv compression, known as deflation,
+is slower but generally produces a better compression ratio.
+It is therefore termed strong compression.
+.PP
+The output of
+.I compress
+.B \-s
+consists of a magic number, deflated data in the format defined in Internet
+RFC 1951, and 8 check bytes recording CRC-32 and size in bytes of the original
+file, used by
+.I uncompress
+for verification.
+.PP
+E 7
+I 2
+D 6
+Under the
+E 6
+I 6
+The
+I 7
+.B \-s
+option is not needed for
+.I uncompress
+as it detects the strong compressed format by its magic number.
+The
+.B \-s
+option does not change any other aspect of
+.I compress
+operation besides the compression algorithm,
+nor does use on strong compressed data change any of the behavior of
+.IR uncompress .
+The
+.B \-b
+option is ignored with
+.BR \-s .
+.PP
+A compression
+.I level
+may be specified with
+.BR \-l .
+It is a number between 0 and 9 telling
+.I compress
+how hard it should work to try to find and take advantage of all compression
+opportunities.
+Smaller numbers result in faster compression, but some compression
+opportunities may be missed that would have been found and used with higher
+compression levels, affecting the compression ratio.
+The compression level is meaningful only for strong compression and is ignored
+in the default LZW mode.
+0 indicates no compression, just store the data in the RFC 1951 deflate format.
+The default compression level is 6.
+.PP
+The
+.B \-l
+option is ignored by
+.IR uncompress ,
+and the compression level is not stored in the compressed file,
+as it does not affect the general format of the compressed data or the actions
+required for decompression.
+.PP
+The
+E 7
+E 6
+.B \-v
+D 6
+option,
+a message is printed yielding the percentage of
+reduction for each file compressed.
+E 6
+I 6
+option causes
+the printing of the percentage reduction of each file.
+E 6
+E 2
+.PP
+D 2
+After each file is compressed, a message is printed yielding the percentage of
+reduction.  This message is
+suppressed when the
+.B \-q
+(quiet) flag is given.
+.PP
+The exit status is normally 0;
+if the last file is larger after compression, the exit status is 2;
+if an error occurs, the exit status is 1.
+E 2
+I 2
+D 6
+Exit status is normally 0;
+if the last file is larger after (attempted) compression, the status is 2;
+if an error occurs, exit status is 1.
+E 6
+I 6
+If an error occurs, exit status is 1, else
+if the last file was not compressed because it became larger, the status
+is 2; else the status is 0.
+E 6
+E 2
+D 4
+.SH "SEE ALSO"
+D 2
+compact(1), pack(1)
+E 2
+I 2
+pack(1), compact(1)
+E 4
+E 2
+D 7
+.SH "DIAGNOSTICS"
+D 2
+Usage: compress [-dfFqc] [-b maxbits] [file ...]
+E 2
+I 2
+D 4
+Usage: compress [-fvc] [-b maxbits] [file ...]
+E 4
+I 4
+Usage: compress [\-fvc] [\-b maxbits] [file ...]
+E 7
+I 7
+.SH DIAGNOSTICS
+Usage: compress [\-fvcs] [\-b maxbits] [\-l level] [file ...]
+E 7
+E 4
+E 2
+.in +8
+Invalid options were specified on the command line.
+.in -8
+Missing maxbits
+.in +8
+Maxbits must follow
+.BR \-b \.
+.in -8
+I 7
+Missing level
+.in +8
+Level must follow
+.BR \-l \.
+.in -8
+E 7
+D 2
+Unknown flag: 
+.I "\'x\';"
+.in +8
+Invalid flags were specified on the command line.
+.in -8
+E 2
+.IR file :
+not in compressed format
+.in +8
+D 2
+The specified file has not been compressed.
+E 2
+I 2
+The file specified to
+.I uncompress
+has not been compressed.
+E 2
+.in -8
+.IR file :
+compressed with 
+.I xx
+bits, can only handle 
+.I yy
+bits
+.in +8
+D 2
+The specified file was compressed by a program that could deal with
+E 2
+I 2
+.I File
+was compressed by a program that could deal with
+E 2
+more 
+.I bits
+D 2
+than the current compress program.  Recompress the file with a smaller
+E 2
+I 2
+than the compress code on this machine.
+Recompress the file with smaller
+E 2
+.IR bits \.
+.in -8
+.IR file :
+already has .Z suffix -- no change
+.in +8
+D 2
+Cannot compress a file that has a ".Z" suffix.
+.IR mv "(1)"
+the file to a different name and try again.
+E 2
+I 2
+The file is assumed to be already compressed.
+Rename the file and try again.
+E 2
+.in -8
+.IR file :
+filename too long to tack on .Z
+.in +8
+D 2
+The specified file cannot be compressed because its filename is longer than
+E 2
+I 2
+The file cannot be compressed because its name is longer than
+E 2
+12 characters.
+D 2
+.IR mv "(1)"
+the file to a different name and try again.  This message does not occur on
+BSD systems.
+E 2
+I 2
+Rename and try again.
+This message does not occur on BSD systems.
+E 2
+.in -8
+.I file
+already exists; do you wish to overwrite (y or n)?
+.in +8
+Respond "y" if you want the output file to be replaced; "n" if not.
+.in -8
+I 4
+uncompress: corrupt input
+.in +8
+A SIGSEGV violation was detected which usually means that the input file is
+corrupted.
+.in -8
+E 4
+D 2
+.IR file :
+.in +8
+This message fragment is written during the processing of a file.
+.in -8
+E 2
+Compression: 
+.I "xx.xx%"
+.in +8
+D 2
+This message fragment gives the percentage of the input file saved
+by compression.
+E 2
+I 2
+Percentage of the input saved by compression.
+(Relevant only for
+.BR \-v \.)
+E 2
+.in -8
+-- not a regular file: unchanged
+.in +8
+D 2
+This message fragment is written when the input file is not a regular file.
+The input file is left unaltered.
+E 2
+I 2
+When the input file is not a regular file,
+(e.g. a directory), it is
+left unaltered.
+E 2
+.in -8
+-- has 
+.I xx 
+other links: unchanged
+.in +8
+D 2
+This message fragment is written when the input file has links.  The input
+file is left unchanged.  See
+E 2
+I 2
+The input file has links; it is left unchanged.  See
+E 2
+.IR ln "(1)"
+for more information.
+.in -8
+-- file unchanged
+.in +8
+D 2
+This message fragment is written when no savings are achieved by
+compression.  The input file is not touched.
+E 2
+I 2
+No savings is achieved by
+compression.  The input remains virgin.
+E 2
+.in -8
+D 2
+-- replaced with 
+.I file
+.in +8
+This message fragment is written when a file has been sucessfully
+compressed/uncompressed.
+.in -8
+E 2
+I 2
+D 7
+.SH "BUGS"
+E 7
+I 7
+.SH BUGS
+E 7
+D 4
+Although compressed files are compatible between machines with virtual memory,
+E 4
+I 4
+Although compressed files are compatible between machines with large memory,
+E 4
+.BR \-b \12
+should be used for file transfer to architectures with 
+a small process data space (64KB or less, as exhibited by the DEC PDP
+series, the Intel 80286, etc.)
+I 6
+.PP
+.I compress
+should be more flexible about the existence of the `.Z' suffix.
+I 7
+.SH SEE ALSO
+gzcompat(1)
+E 7
+E 6
+E 2
+E 1

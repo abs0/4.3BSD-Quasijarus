@@ -1,0 +1,296 @@
+h62611
+s 00003/00003/00140
+d D 6.4 87/09/14 13:02:15 bostic 6 5
+c cross reference getpass(3)
+e
+s 00043/00010/00100
+d D 6.3 87/06/27 17:34:44 karels 5 4
+c add -f, formalize -h
+e
+s 00018/00013/00092
+d D 6.2 86/05/08 15:09:35 karels 4 3
+c fix up -p, add -h
+e
+s 00004/00005/00101
+d D 6.1 85/04/29 18:55:48 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00011/00003/00095
+d D 5.1 85/04/29 18:55:27 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00098/00000/00000
+d D 4.1 85/04/29 18:55:03 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LOGIN 1 4/1/81
+E 2
+I 2
+D 3
+.TH LOGIN 1 "1 April 1983"
+E 3
+I 3
+.TH LOGIN 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+login \- sign on
+.SH SYNOPSIS
+.B login
+D 3
+[ username ]
+E 3
+I 3
+D 5
+[ \-p ] [ username ]
+E 5
+I 5
+[
+.B \-p
+] [ username ]
+.br
+.B login
+[
+.B \-p
+] [
+.B \-h
+hostname
+] [
+.B \-f
+] [
+username
+]
+E 5
+E 3
+.SH DESCRIPTION
+The
+.I login
+command
+is used when a user initially
+D 5
+signs on, or it may be used at any time to change
+E 5
+I 5
+signs on.
+It may also be used at any time to change
+E 5
+from one user to another.
+D 5
+The latter case is the one summarized above and
+described here.
+See \*(lqHow to Get Started\*(rq for how to dial up initially.
+E 5
+I 5
+This case is the one summarized first above and described here.
+See \*(lqHow to Get Started\*(rq for how to connect initially.
+The invocation of
+.I login
+for initial sign-on
+is made by a system program or server using the latter form of the command
+and is described below.
+E 5
+.PP
+If
+.I login
+is invoked without an argument,
+it asks for a user name, and, if
+appropriate, a password.
+Echoing is turned off (if possible) during the typing of the password,
+so it will not appear on the written record of the
+session.
+.PP
+After a successful login,
+accounting files are updated and
+the user is informed of the
+D 4
+existence of mail,
+and
+the message of the day is printed,
+as is the time he last logged in (unless he has a \*(lq.hushlogin\*(rq
+file in his home directory \- this
+E 4
+I 4
+existence of mail.
+The message of the day is printed,
+as is the time of his last login.
+Both are suppressed if he has a \*(lq.hushlogin\*(rq
+file in his home directory; this
+E 4
+is mostly used to make life easier for non-human users, such as
+D 4
+.IR uucp ).
+E 4
+I 4
+.IR uucp .
+E 4
+.PP
+.I Login
+initializes the user and group IDs and the working directory,
+then executes a command interpreter (usually
+D 4
+.IR  sh (1))
+E 4
+I 4
+.IR  csh (1))
+E 4
+according to specifications found in a password file.
+D 4
+Argument 0 of the command interpreter is \*(lq\-sh\*(rq, or
+more generally the name of the command interpreter with
+a leading dash (\*(lq\-\*(rq) prepended.
+E 4
+I 4
+Argument 0 of the command interpreter is
+the name of the command interpreter with
+a leading dash (\*(lq\-\*(rq).
+E 4
+.PP
+D 3
+Login also initializes the
+E 3
+I 3
+Login also modifies the
+E 3
+environment
+D 2
+.IR environ (5)
+E 2
+I 2
+.IR environ (7)
+E 2
+with information specifying home directory, command interpreter, terminal
+type (if available) and user name.
+I 3
+D 4
+The `-p' argument causes the environment to be preserved from getty.
+E 4
+I 4
+The `\-p' argument causes the remainder of the environment to be preserved,
+otherwise any previous environment is discarded.
+E 4
+E 3
+.PP
+D 4
+If the file /etc/nologin exists
+E 4
+I 4
+If the file /etc/nologin exists,
+E 4
+.I login
+prints its contents on the user's terminal and exits. This is
+used by
+.IR shutdown (8)
+to stop users logging in when the system is about to go down.
+.PP
+Login is recognized by
+.IR sh (1)
+and
+.IR csh (1)
+and executed directly (without forking).
+I 5
+.PP
+There are several additional options to
+.I login
+for use at initial login.
+With one exception, these options are available only to the superuser.
+The
+.B \-h
+option is used by
+.IR telnetd (8C)
+and other servers to list the host from which
+the connection was received.
+The
+.B \-f
+option is used with a username on the command line
+to indicate that proper authentication has already been done
+and that no password need be requested.
+This option may be used by the superuser
+or by the user specified on the command line.
+E 5
+.SH FILES
+.ta \w'/usr/spool/mail/*\ \ 'u
+/etc/utmp	accounting
+.br
+/usr/adm/wtmp	accounting
+.br
+/usr/spool/mail/*	mail
+.br
+/etc/motd	message-of-the-day
+.br
+/etc/passwd	password file
+.br
+/etc/nologin	stops logins
+.br
+\&.hushlogin	makes login quieter
+D 3
+.br
+/etc/securetty	lists ttys that root may log in on
+E 3
+.SH "SEE ALSO"
+D 2
+init(8), newgrp(1), getty(8), mail(1), passwd(1), passwd(5), environ(5),
+E 2
+I 2
+D 5
+init(8), getty(8), mail(1), passwd(1), passwd(5), environ(7),
+E 5
+I 5
+D 6
+init(8), getty(8), mail(1), passwd(1), passwd(5), utmp(5), environ(7),
+E 5
+E 2
+D 4
+shutdown(8)
+E 4
+I 4
+shutdown(8), rlogin(1c)
+E 6
+I 6
+mail(1), passwd(1), rlogin(1), getpass(3), passwd(5), utmp(5), environ(7),
+init(8), getty(8), shutdown(8),
+E 6
+E 4
+.SH DIAGNOSTICS
+\*(lqLogin incorrect,\*(rq
+if the name or the password is bad.
+.br
+\*(lqNo Shell\*(rq, \*(lqcannot open password file\*(rq,
+\*(lqno directory\*(rq:
+consult a programming counselor.
+I 2
+.SH BUGS
+An undocumented option,
+.B \-r
+is used by the remote login server,
+D 6
+.IR rlogind (8C)
+E 6
+I 6
+.IR rlogind (8)
+E 6
+to force
+.I login
+to enter into an initial connection protocol.
+I 4
+D 5
+.B \-h is used by
+.IR telnetd (8C)
+and other servers to list the host from which
+the connection was received.
+E 5
+E 4
+E 2
+E 1

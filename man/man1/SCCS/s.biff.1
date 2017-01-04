@@ -1,0 +1,84 @@
+h45645
+s 00001/00001/00048
+d D 6.1 85/04/29 14:16:29 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00003/00044
+d D 5.1 85/04/29 14:16:22 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00047/00000/00000
+d D 4.1 85/04/29 14:16:16 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BIFF 1
+E 2
+I 2
+D 3
+.TH BIFF 1 "18 July 1983"
+E 3
+I 3
+.TH BIFF 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+biff \- be notified if mail arrives and who it is from
+.SH SYNOPSIS
+.B biff
+[
+.B yn
+]
+.SH DESCRIPTION
+.I Biff
+informs the system whether you want to be notified when mail arrives
+during the current terminal session.
+The command
+.IP
+.B "biff y"
+.LP
+enables notification; the command
+.IP
+.B "biff n"
+.LP
+disables it.
+When mail notification is enabled, the header and first few lines of
+the message will be printed on your screen whenever mail arrives.
+A ``biff y'' command is often included in the file
+.I \&.login
+or
+.I \&.profile
+to be executed at each login.
+.PP
+.I Biff
+operates asynchronously.
+For synchronous notification use the MAIL variable of
+.IR sh (1)
+or the
+.I mail
+variable of
+.IR csh (1).
+.SH SEE ALSO
+D 2
+csh(1), sh(1), mail(1), mail (4)
+.SH BUGS
+E 2
+I 2
+csh(1),
+sh(1),
+mail(1),
+comsat(8C)
+E 2
+E 1

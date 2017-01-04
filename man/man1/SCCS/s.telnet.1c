@@ -1,0 +1,803 @@
+h06748
+s 00001/00003/00582
+d D 6.5 86/05/10 20:12:53 mckusick 6 5
+c format
+e
+s 00039/00033/00546
+d D 6.4 86/05/08 16:14:00 karels 5 4
+c minor touchups
+e
+s 00519/00043/00060
+d D 6.3 86/05/04 12:08:59 minshall 4 3
+c This corresponds with the new, 4.3, telnet command.
+e
+s 00001/00000/00102
+d D 6.2 86/02/05 05:03:15 lepreau 3 2
+c ^D now == quit
+e
+s 00002/00002/00100
+d D 6.1 85/04/29 21:17:54 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00102/00000/00000
+d D 5.1 85/04/29 21:17:41 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TELNET 1C "18 July 1983"
+E 2
+I 2
+.TH TELNET 1C "%Q%"
+E 2
+.UC 5
+.SH NAME
+D 4
+telnet \- user interface to the TELNET protocol
+E 4
+I 4
+D 6
+telnet \- user interface to the
+.B TELNET
+protocol
+E 6
+I 6
+telnet \- user interface to the \s-1TELNET\s0 protocol
+E 6
+E 4
+.SH SYNOPSIS
+telnet [ host [ port ] ]
+.SH DESCRIPTION
+.I Telnet
+D 4
+is used to communicate with another host using the TELNET protocol.  If 
+E 4
+I 4
+is used to communicate with another host using the
+.B TELNET
+protocol.
+If 
+E 4
+.I telnet
+is invoked without arguments, it enters command mode,
+indicated by its prompt (\*(lqtelnet>\*(rq).
+In this mode, it accepts and executes the commands listed below.
+If it is invoked with arguments, it performs an
+D 4
+.I open
+E 4
+I 4
+.B open
+E 4
+command (see below) with those arguments.
+.PP
+Once a connection has been opened,
+.I telnet
+D 4
+enters input mode.
+In this mode, text typed is sent to the remote host.  To issue
+E 4
+I 4
+enters an input mode.
+The input mode entered will be either \*(lqcharacter at a time\*(rq
+or \*(lqline by line\*(rq
+depending on what the remote system supports.
+.PP
+In \*(lqcharacter at a time\*(rq mode, most
+text typed is immediately sent to the remote host for processing.
+.PP
+In \*(lqline by line\*(rq mode, all text is echoed locally,
+and (normally) only completed lines are sent to the remote host.
+The \*(lqlocal echo character\*(rq (initially \*(lq^E\*(rq) may be used
+to turn off and on the local echo
+(this would mostly be used to enter passwords
+without the password being echoed).
+.PP
+In either mode, if the
+.I localchars
+D 5
+toggle (see below) is TRUE,
+E 5
+I 5
+toggle is TRUE (the default in line mode; see below),
+E 5
+the user's
+.IR quit ,
+.IR intr ,
+and
+.I flush
+characters are trapped locally, and sent as
+.B TELNET
+protocol sequences to the remote side.
+There are options (see
+.B toggle
+.I autoflush
+and
+.B toggle
+.I autosynch
+below)
+which cause this action to flush subsequent output to the terminal
+(until the remote host acknowledges the
+.B TELNET
+sequence) and flush previous terminal input
+(in the case of
+.I quit
+and
+.IR intr ).
+.PP
+While connected to a remote host,
+E 4
+.I telnet
+D 4
+commands when in input mode, precede them with the
+E 4
+I 4
+command mode may be entered by typing the
+E 4
+.I telnet
+D 2
+\*(lqescape character\*(rq (initially \*(lq^[\*(rq).
+E 2
+I 2
+\*(lqescape character\*(rq (initially \*(lq^]\*(rq).
+E 2
+When in command mode, the normal terminal editing conventions are available.
+.PP
+I 4
+.B COMMANDS
+.PP
+E 4
+The following commands are available.
+D 4
+Only enough of each command to uniquely identify it need be typed.
+E 4
+I 4
+Only enough of each command to uniquely identify it need be typed
+(this is also true for arguments to the
+.BR mode ,
+.BR set ,
+.BR toggle ,
+and
+.B display
+commands).
+E 4
+.PP
+.TP
+D 4
+\fBopen\fP \fIhost\fP [ \fIport\fP ]
+Open a connection to the named host.  If the no port number
+E 4
+I 4
+.B open \fIhost\fP \fR[\fP \fIport\fP \fR]\fP
+.br
+Open a connection to the named host.
+If no port number
+E 4
+is specified, 
+.I telnet
+D 4
+will attempt to contact a TELNET server at the default port.
+E 4
+I 4
+will attempt to contact a
+.B TELNET
+server at the default port.
+E 4
+The host specification may be either a host name (see 
+.IR hosts (5))
+D 4
+or an Internet address specified in the \*(lqdot notation\*(rq.
+E 4
+I 4
+or an Internet address specified in the \*(lqdot notation\*(rq (see
+.IR inet (3N)).
+E 4
+.TP
+.B close
+D 4
+Close a TELNET session and return to command mode.
+E 4
+I 4
+.br
+Close a
+.B TELNET
+session and return to command mode.
+E 4
+.TP
+.B quit
+D 4
+Close any open TELNET session and exit 
+E 4
+I 4
+.br
+Close any open
+.B TELNET
+session and exit 
+E 4
+.IR telnet .
+I 3
+An end of file (in command mode) will also close a session and exit.
+E 3
+.TP
+.B z
+I 4
+.br
+E 4
+Suspend
+.IR telnet .
+This command only works when the user is using the 
+.IR csh (1).
+.TP
+D 4
+\fBescape\fP [ \fIescape-char\fP ]
+Set the 
+.I telnet
+\*(lqescape character\*(rq.  Control characters may
+be specified as \*(lq^\*(rq followed by a single
+letter; e.g. \*(lqcontrol-X\*(rq is \*(lq^X\*(rq.
+E 4
+I 4
+.B mode \fItype\fP
+.br
+.I Type
+is either
+.I line
+(for \*(lqline by line\*(rq mode)
+or
+.I character
+(for \*(lqcharacter at a time\*(rq mode).
+The remote host is asked for permission to go into the requested mode.
+If the remote host is capable of entering that mode, the requested
+mode will be entered.
+E 4
+.TP
+.B status
+I 4
+.br
+E 4
+Show the current status of 
+.IR telnet .
+This includes the peer one is connected to, as well
+D 4
+as the state of debugging.
+E 4
+I 4
+as the current mode.
+E 4
+.TP
+D 4
+.B options
+Toggle viewing of TELNET options processing.  When
+options viewing is enabled, all TELNET option negotiations
+will be displayed.  Options sent by 
+.I telnet
+are displayed as \*(lqSENT\*(rq, while options
+received from the TELNET server are displayed as
+\*(lqRCVD\*(rq.
+E 4
+I 4
+.B display \fR[\fP \fIargument...\fP \fR]\fP
+.br
+Displays all, or some, of the
+.B set
+and
+.B toggle
+values (see below).
+E 4
+.TP
+D 4
+.B crmod
+Toggle carriage return mode.  When this mode is enabled
+any carriage return characters received from the remote
+host will be mapped into a carriage return and a line
+feed.  This mode does not affect those characters typed
+by the user, only those received.  This mode is not very
+useful, but is required for some hosts that like to ask
+the user to do local echoing.
+.TP
+\fB?\fP [ \fIcommand\fP ]
+E 4
+I 4
+.B ? \fR[\fP \fIcommand\fP \fR]\fP
+.br
+E 4
+Get help.  With no arguments,
+.I telnet
+prints a help summary.
+If a command is specified, 
+.I telnet
+D 4
+will print the help information available about the command only.
+E 4
+I 4
+will print the help information for just that command.
+.TP
+.B send \fIarguments\fP
+.br
+Sends one or more special character sequences to the remote host.
+The following are the arguments which may be specified
+(more than one argument may be specified at a time):
+.RS
+.TP
+.I escape
+.br
+Sends the current
+.I telnet
+escape character (initially \*(lq^]\*(rq).
+.TP
+.I synch
+.br
+Sends the
+.B TELNET SYNCH
+sequence.
+This sequence causes the remote system to discard all previously typed
+(but not yet read) input.
+This sequence is sent as TCP urgent
+data (and may not work if the remote system is a 4.2 BSD system -- if
+it doesn't work, a lower case \*(lqr\*(rq may be echoed on the terminal).
+.TP
+.I brk
+.br
+Sends the
+.B TELNET BRK
+(Break) sequence, which may have significance to the remote
+system.
+.TP
+.I ip
+.br
+Sends the
+.B TELNET IP
+D 5
+(Interrupt Process) sequence, which hopefully will cause the remote
+E 5
+I 5
+(Interrupt Process) sequence, which should cause the remote
+E 5
+system to abort the currently running process.
+.TP
+.I ao
+.br
+Sends the
+.B TELNET AO
+(Abort Output) sequence, which should cause the remote system to flush
+all output
+.B from
+the remote system
+.B to
+the user's terminal.
+.TP
+.I ayt
+.br
+Sends the
+.B TELNET AYT
+(Are You There)
+D 5
+sequence, which the remote system may or may not choose to respond to.
+E 5
+I 5
+sequence, to which the remote system may or may not choose to respond.
+E 5
+.TP
+.I ec
+.br
+Sends the
+.B TELNET EC
+(Erase Character)
+sequence, which should cause the remote system to erase the last character
+entered.
+.TP
+.I el
+.br
+Sends the
+.B TELNET EL
+(Erase Line)
+sequence, which should cause the remote system to erase the line currently
+being entered.
+.TP
+.I ga
+.br
+Sends the
+.B TELNET GA
+(Go Ahead)
+sequence, which likely has no significance to the remote system.
+.TP
+.I nop
+.br
+Sends the
+.B TELNET NOP
+(No OPeration)
+sequence.
+.TP
+.I ?
+.br
+Prints out help information for the
+.B send
+command.
+.RE
+.TP
+.B set \fIargument value\fP
+.br
+Set any one of a number of
+.I telnet
+variables to a specific value.
+The special value \*(lqoff\*(rq turns off the function associated with
+the variable.
+I 5
+The values of variables may be interrogated with the
+.B display
+command.
+E 5
+The variables which may be specified are:
+.RS
+.TP
+.I echo
+.br
+This is the value (initially \*(lq^E\*(rq) which, when in
+\*(lqline by line\*(rq mode, toggles between doing local echoing
+of entered characters (for normal processing), and suppressing
+echoing of entered characters (for entering, say, a password).
+.TP
+.I escape
+.br
+This is the
+.I telnet
+escape character (initially \*(lq^[\*(rq) which causes entry
+into
+.I telnet
+command mode (when connected to a remote system).
+.TP
+.I interrupt
+.br
+If
+.I telnet
+is in
+.I localchars
+mode (see
+.B toggle
+.I localchars
+below)
+and the
+.I interrupt
+character is typed, a
+.B TELNET IP
+sequence (see
+.B send
+.I ip
+above)
+is sent to the remote host.
+The initial value for the interrupt character is taken to be
+the terminal's
+.B intr
+character.
+.TP
+.I quit
+.br
+If
+.I telnet
+is in
+.I localchars
+mode (see
+.B toggle
+.I localchars
+below)
+and the
+.I quit
+character is typed, a
+.B TELNET BRK
+sequence (see
+.B send
+.I brk
+above)
+is sent to the remote host.
+The initial value for the quit character is taken to be
+the terminal's
+.B quit
+character.
+.TP
+.I flushoutput
+.br
+If
+.I telnet
+is in
+.I localchars
+mode (see
+.B toggle
+.I localchars
+below)
+and the
+.I flushoutput
+character is typed, a
+.B TELNET AO
+sequence (see
+.B send
+.I ao
+above)
+is sent to the remote host.
+The initial value for the flush character is taken to be
+the terminal's
+.B flush
+character.
+.TP
+.I erase
+.br
+If
+.I telnet
+is in
+.I localchars
+mode (see
+.B toggle
+.I localchars
+below),
+.B and
+if
+.I telnet
+is operating in \*(lqcharacter at a time\*(rq mode, then when this
+character is typed, a
+.B TELNET EC
+sequence (see
+.B send
+.I ec
+above)
+is sent to the remote system.
+The initial value for the erase character is taken to be
+the terminal's
+.B erase
+character.
+.TP
+.I kill
+.br
+If
+.I telnet
+is in
+.I localchars
+mode (see
+.B toggle
+.I localchars
+below),
+.B and
+if
+.I telnet
+is operating in \*(lqcharacter at a time\*(rq mode, then when this
+character is typed, a
+.B TELNET EL
+sequence (see
+.B send
+.I el
+above)
+is sent to the remote system.
+The initial value for the kill character is taken to be
+the terminal's
+.B kill
+character.
+.TP
+.I eof
+.br
+If
+.I telnet
+is operating in \*(lqline by line\*(rq mode, entering this character
+as the first character on a line will cause this character to be
+sent to the remote system.
+The initial value of the eof character is taken to be the terminal's
+.B eof
+character.
+.RE
+.TP
+.B toggle \fIarguments...\fP
+.br
+Toggle (between
+TRUE
+and
+FALSE)
+various flags that control how
+.I telnet
+responds to events.
+More than one argument may be specified.
+I 5
+The state of these flags may be interrogated with the
+.B display
+command.
+E 5
+Valid arguments are:
+.RS
+.TP
+.I localchars
+.br
+If this is
+TRUE,
+then the
+.IR flush ,
+.IR interrupt ,
+.IR quit ,
+.IR erase ,
+and
+.I kill
+characters (see
+.B set
+above) are recognized locally, and transformed into (hopefully) appropriate
+.B TELNET
+control sequences
+(respectively
+.IR ao ,
+.IR ip ,
+.IR brk ,
+.IR ec ,
+and
+.IR el ;
+see
+.B send
+above).
+The initial value for this toggle is TRUE in \*(lqline by line\*(rq mode,
+and FALSE in \*(lqcharacter at a time\*(rq mode.
+.TP
+D 5
+.I autosynch
+If
+.I autosynch
+and
+.I localsigs
+are both
+TRUE,
+then when either the
+.I intr
+or
+.I quit
+characters is typed (see
+.B set
+above for descriptions of the
+.I intr
+and
+.I quit
+characters), the resulting
+.B TELNET
+sequence sent is followed by the
+.B TELNET SYNCH
+sequence.
+This procedure
+.B should
+cause the remote system to begin throwing away all previously
+typed input until both of the
+.B TELNET
+sequences have been read and acted upon.
+The initial value of this toggle is FALSE.
+.TP
+E 5
+.I autoflush
+.br
+If
+.I autoflush
+and
+.I localchars
+are both
+TRUE,
+then when the
+.IR ao ,
+.IR intr ,
+or
+.I quit
+characters are recognized (and transformed into
+.B TELNET
+sequences; see
+.B set
+above for details),
+.I telnet
+refuses to display any data on the user's terminal
+until the remote system acknowledges (via a
+.B TELNET
+.I Timing Mark
+option)
+that it has processed those
+.B TELNET
+sequences.
+The initial value for this toggle is TRUE if the terminal user had not
+done an "stty noflsh", otherwise FALSE (see
+.IR stty(1)).
+I 5
+.TP
+.I autosynch
+If
+.I autosynch
+and
+.I localchars
+are both
+TRUE,
+then when either the
+.I intr
+or
+.I quit
+characters is typed (see
+.B set
+above for descriptions of the
+.I intr
+and
+.I quit
+characters), the resulting
+.B TELNET
+sequence sent is followed by the
+.B TELNET SYNCH
+sequence.
+This procedure
+.B should
+cause the remote system to begin throwing away all previously
+typed input until both of the
+.B TELNET
+sequences have been read and acted upon.
+The initial value of this toggle is FALSE.
+E 5
+.TP
+.I crmod
+.br
+Toggle carriage return mode.
+When this mode is enabled, most carriage return characters received from
+the remote host will be mapped into a carriage return followed by
+a line feed.
+This mode does not affect those characters typed by the user, only
+those received from the remote host.
+This mode is not very useful unless the remote host
+only sends carriage return, but never line feed.
+The initial value for this toggle is FALSE.
+.TP
+.I debug
+.br
+Toggles socket level debugging (useful only to the
+.IR super user ).
+The initial value for this toggle is FALSE.
+.TP
+.I options
+.br
+Toggles the display of some internal
+.I telnet
+protocol processing (having to do with
+.B TELNET
+options).
+The initial value for this toggle is FALSE.
+.TP
+.I netdata
+.br
+Toggles the display of all network data (in hexadecimal format).
+The initial value for this toggle is FALSE.
+.TP
+.I ?
+.br
+Displays the legal
+.B toggle
+commands.
+.RE
+E 4
+.SH BUGS
+D 4
+This implementation is very simple because
+.IR rlogin (1C)
+is the standard mechanism used to communicate locally 
+with hosts.
+E 4
+I 4
+.PP
+There is no adequate way for dealing with flow control.
+.PP
+On some remote systems, echo has to be turned off manually when in
+\*(lqline by line\*(rq mode.
+.PP
+There is enough settable state to justify a
+.RI . telnetrc
+file.
+.PP
+No capability for a
+.RI . telnetrc
+file is provided.
+.PP
+In \*(lqline by line\*(rq mode, the terminal's
+.I eof
+character is only recognized (and sent to the remote system)
+when it is the first character on a line.
+E 4
+E 1

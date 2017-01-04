@@ -1,0 +1,43 @@
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.20 08/04/05 08:22:08 msokolov 87 86
+ppp authentication status retrieval rethought
+/usr/src/sys/net/SCCS/s.if_ppplcp.c:
+7.6 08/04/05 08:26:23 msokolov 6 5
+authentication hooks implemented
+/usr/src/sys/net/SCCS/s.if_pppvar.h:
+7.4 08/04/05 08:26:26 msokolov 4 3
+authentication hooks implemented
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.11 08/04/05 08:26:27 msokolov 11 10
+authentication hooks implemented
+/usr/src/sys/net/SCCS/s.if_pppaux.c:
+7.2 08/04/05 08:26:29 msokolov 2 1
+authentication hooks implemented
+/usr/src/sys/net/SCCS/s.if_pppaux.h:
+7.2 08/04/05 08:26:30 msokolov 2 1
+authentication hooks implemented
+/usr/src/sys/net/SCCS/s.if_pppaux.c:
+7.3 08/04/05 17:43:35 msokolov 3 2
+pppaux_init: tiny but fatal buglet
+/usr/src/sys/vaxdist/SCCS/s.MAKEDEV:
+4.35 08/04/06 00:57:47 msokolov 36 35
+pppaux added
+/usr/src/sys/net/SCCS/s.if_ppplcp.c:
+7.7 08/04/06 17:18:07 msokolov 7 6
+typo in IFF_DEBUG output message
+/usr/src/etc/termcap/SCCS/s.termcap.src:
+5.41 08/10/29 17:45:00 msokolov 93 92
+Axed misconceived ks/ke from vt200, vt300 and xterm entries
+(not bold enough to mess with the base vt100 entry though)
+linux entry added (rlogin from a PeeCee terminal to a real computer)
+/usr/src/etc/termcap/SCCS/s.reorder:
+5.6 08/10/29 17:50:18 msokolov 13 12
+xterm added
+/usr/src/etc/termcap/SCCS/s.reorder:
+5.7 08/10/29 17:52:14 msokolov 14 13
+oops, it just needed to be moved down
+/usr/src/ucb/SCCS/s.rlogin.c:
+5.12 09/01/13 07:05:01 msokolov 36 34
+security fix: catch argc == 0
+support for tty-less mode (stdin is not a tty)
+-e with no following char disables the escape feature

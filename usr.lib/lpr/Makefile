@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.9 (Berkeley) 6/30/88
+#	@(#)Makefile	5.10 (Berkeley) 2/13/06
 #
 # Ownerships {see note at the top of lpd.c}
 # ROOT		a user that can access any and all files
@@ -50,8 +50,9 @@ SRCS=	lpd.c lpr.c lpq.c lprm.c pac.c lpd.c cmds.c cmdtab.c printjob.c \
 	lpdchar.c
 OBJS=	${L1OBJS} ${L2OBJS} ${L3OBJS} ${L4OBJS} ${L5OBJS} ${L6OBJS} ${L7OBJS}
 ALL=	lpd lpr lpq lprm lpc lptest pac
+SUBDIR=	filters psfilters psmgmt vfilters
 
-all:	${ALL} FILTERS VFILTERS
+all:	${ALL} ${SUBDIR}
 
 lpd:	${L1OBJS} ${LIBC}
 	${CC} -o $@ ${L1OBJS}
@@ -74,21 +75,16 @@ lptest: ${L6OBJS} ${LIBC}
 pac: ${L7OBJS} ${LIBC}
 	${CC} -o $@ ${L7OBJS}
 
-FILTERS:
-	cd filters; make ${MFLAGS}
-
-VFILTERS:
-	cd vfilters; make ${MFLAGS}
+${SUBDIR}: FRC
+	cd $@; make ${MFLAGS}
 
 clean: FRC
 	rm -f ${OBJS} core ${ALL}
-	cd filters; make ${MFLAGS} clean
-	cd vfilters; make ${MFLAGS} clean
+	for i in ${SUBDIR}; do (cd $$i; make ${MFLAGS} clean); done
 
 depend: FRC
 	mkdep ${CFLAGS} ${SRCS}
-	cd filters; make ${MFLAGS} depend
-	cd vfilters; make ${MFLAGS} depend
+	for i in ${SUBDIR}; do (cd $$i; make ${MFLAGS} depend); done
 
 install: FRC
 	install -s -o ${ROOT} -g ${SPGRP} -m 6711 lpd ${DESTDIR}/${LIBDIR}/lpd
@@ -101,8 +97,9 @@ install: FRC
 	/etc/chown ${DAEMON} ${DESTDIR}/${SPLDIR}
 	chgrp ${SPGRP} ${DESTDIR}/${SPLDIR}
 	chmod 775 ${DESTDIR}/${SPLDIR}
-	cd filters; make ${MFLAGS} DESTDIR=${DESTDIR} install
-	cd vfilters; make ${MFLAGS} DESTDIR=${DESTDIR} install
+	-for i in ${SUBDIR}; do \
+		(cd $$i; make ${MFLAGS} DESTDIR=${DESTDIR} install); \
+	done
 
 lint: FRC
 	lint ${CFLAGS} ${L1SRCS}

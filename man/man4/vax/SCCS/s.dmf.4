@@ -1,0 +1,229 @@
+h30123
+s 00012/00003/00085
+d D 6.4 86/05/16 15:58:40 karels 5 4
+c new silo handling
+e
+s 00030/00027/00058
+d D 6.3 86/04/27 01:01:53 donn 4 3
+c Added a description of the line printer driver.  Removed several DH-isms.
+e
+s 00001/00001/00084
+d D 6.2 85/10/14 16:55:06 mckusick 3 2
+c fix csr address
+e
+s 00004/00004/00081
+d D 6.1 85/05/15 17:42:14 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00085/00000/00000
+d D 5.1 85/05/15 17:42:08 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DMF 4 "27 July 1983"
+E 2
+I 2
+.TH DMF 4 "%Q%"
+E 2
+.UC 5
+.SH NAME
+dmf \- DMF-32, terminal multiplexor
+.SH SYNOPSIS
+D 3
+.B "device dmf0 at uba? csr 0170000"
+E 3
+I 3
+.B "device dmf0 at uba? csr 0160340"
+E 3
+.br
+.ti +0.5i
+.B "vector dmfsrint dmfsxint dmfdaint dmfdbint dmfrint dmfxint dmflint"
+.SH DESCRIPTION
+The 
+.I dmf
+D 2
+device provides 8 lines of asynchronous serial line support with full
+modem control (the DMF-32 provides other services, but these are
+not supported by the driver).
+E 2
+I 2
+D 4
+device provides 8 lines of asynchronous serial line support. The first two
+of these have full modem control
+(the DMF-32 provides other services, but these are not supported by the driver).
+E 4
+I 4
+device provides 8 lines of asynchronous serial line support.
+The first two of these have full modem control.
+The device also provides a line printer port
+similar to the LP-11.
+Other features of the DMF-32 are not supported.
+I 5
+During autoconfiguration, the driver examines the configuration of each DMF-32
+and adjusts the interrupt vectors so that fewer vector locations are used
+if possible.
+E 5
+E 4
+E 2
+.PP
+Each line attached to a DMF-32 serial line port behaves as described
+in
+.IR tty (4).
+Input and output for each line may independently be set to run at any
+of 16 speeds; see
+.IR tty (4)
+for the encoding.
+.PP
+Bit
+.I i
+of flags may be specified for a
+.I dmf
+to to say that a line is not properly connected, and that the
+line should be treated as hard-wired with carrier always present.
+D 4
+Thus specifying ``flags 0x0004'' in the specification of 
+E 4
+I 4
+Thus specifying ``flags 0x04'' in the specification of 
+E 4
+.IR dmf 0
+D 4
+would cause line ttyh2 to be treated in this way.
+E 4
+I 4
+would cause line ttyA2 to be treated in this way.
+I 5
+Flags should be set for all lines without hardware support for modem control.
+E 5
+E 4
+.PP
+D 4
+The
+E 4
+I 4
+The serial line part of the
+E 4
+.I dmf
+D 5
+driver normally uses input silos and polls for input at each clock
+tick (10 milliseconds).
+E 5
+I 5
+driver normally enables the input silos with a short timeout
+(30 milliseconds); this allows multiple characters to be received
+per interrupt during periods of high-speed input.
+E 5
+I 4
+.PP
+A line printer port on
+.I dmf\^n
+is designated by
+a minor device number of the form 128+\fIn\fP.
+Columns and lines per page may be changed from the default
+132 columns and 66 lines by encoding the number of columns
+in bits 8-15 of flags and the number of lines in bits 16-23.
+This device does not provide the fancy output canonicalization
+features of the
+.IR lp (4)
+driver.
+E 4
+.SH FILES
+D 4
+/dev/tty[hi][0-9a-f]
+E 4
+I 4
+D 5
+/dev/tty[A-I][0-7]
+E 5
+I 5
+/dev/tty[A-CE-I][0-7]
+E 5
+E 4
+.br
+D 4
+/dev/ttyd[0-9a-f]
+E 4
+I 4
+/dev/ttyd[0-7]
+.br
+/dev/lp
+E 4
+.SH SEE ALSO
+tty(4)
+.SH DIAGNOSTICS
+.BR "dmf%d: NXM line %d" .
+D 4
+No response from UNIBUS on a dma transfer
+E 4
+I 4
+No response from UNIBUS on a DMA transfer
+E 4
+within a timeout period.  This is often followed by a UNIBUS adapter
+error.  This occurs most frequently when the UNIBUS is heavily loaded
+D 4
+and when devices which hog the bus (such as rk07's) are present.
+E 4
+I 4
+and when devices which hog the bus (such as RK07s) are present.
+E 4
+It is not serious.
+.PP
+.BR "dmf%d: silo overflow" .
+The character input silo overflowed
+before it could be serviced.  This can happen if a hard error occurs
+when the CPU is running with elevated priority, as the system will
+D 4
+then print a message on the console with interrupts disabled.  If the
+Berknet
+is running on a
+.I dh
+line at high speed (e.g. 9600 baud), there is only 1/15th of a second of
+buffering capacity in the silo, and overrun is possible.  This may
+cause a few input characters to be lost to users and a network
+packet is likely to be corrupted, but the network will recover.
+E 4
+I 4
+then print a message on the console with interrupts disabled.
+E 4
+It is not serious.
+.PP
+D 4
+.BR dmfsrint .
+.br
+.BR dmfsxint .
+.br
+.BR dmfdaint .
+.br
+E 4
+I 4
+.BR dmfsrint ,
+.BR dmfsxint ,
+.BR dmfdaint ,
+E 4
+.BR dmfdbint .
+D 4
+.br
+.BR dmflint .
+.br
+E 4
+One of the unsupported parts of the dmf interrupted; something
+is amiss, check your interrupt vectors for a conflict with another
+device.
+I 5
+.SH BUGS
+It should be possible to set the silo timeout with a configuration file option,
+as the value is a trade-off between efficiency and response time for flow
+control and character echo.
+E 5
+E 1

@@ -2,12 +2,12 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)ms.diffs	6.1 (Berkeley) 6/2/86
+.\"	@(#)ms.diffs	6.3 (Berkeley) 10/28/04
 .\"
 .nr LL 6.5i
 .nr FL 6.0i
 .if t .nr PD .5v
-.if t .ds m \u\(ul\dm
+.if t .ds m \-m
 .if n .ds m -m
 .AM
 .OH 'A Revised Version of \*ms''USD:21-%'
@@ -203,9 +203,9 @@ name of accent	input   	output
 \l'3.5i'
 acute accent	e\e\(**\'	e\*'
 grave accent	e\e\(**\`	e\*`
-circumflex	o\e\(**\d^\u	o\*^
+circumflex	o\e\(**^	o\*^
 cedilla 	c\e\(**,	c\*,
-tilde   	n\e\(**\d~\u	n\*~
+tilde   	n\e\(**~	n\*~
 question	\e\(**? 	\*?
 exclamation	\e\(**! 	\*!
 umlaut  	u\e\(**:	u\*:
@@ -230,6 +230,15 @@ If you want to use these new diacritical marks,
 don't forget the .AM at the top of your file.
 Without it, some will not print at all,
 and others will be placed on the wrong letter.
+.LP
+[4.3BSD-Quasijarus note:
+If you are using \s-1PSTROFF\s0, you should use the complete accented
+letters already available in PostScript fonts (see the updated version
+of \fIN\s-2ROFF\s0/T\s-2ROFF\s0 User's Manual\fP)
+rather than construct them as shown here,
+since those letters are professionally designed as part of the font
+and will always be better than anything that \*ms can construct.
+\(em \fIMichael Sokolov, ed.\fP]
 .PP
 It is also possible to produce custom headers and footers
 that are different on even and odd pages.

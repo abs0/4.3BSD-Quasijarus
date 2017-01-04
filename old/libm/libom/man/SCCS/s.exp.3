@@ -1,0 +1,146 @@
+h27703
+s 00003/00000/00073
+d D 6.2 85/06/06 10:37:30 miriam 6 3
+c conditionalize the x**y for nroff and troff
+e
+s 00003/00000/00078
+d R 6.3 85/05/24 14:33:51 miriam 5 4
+c .if for screen verses typesetter
+e
+s 00032/00027/00046
+d R 6.2 85/05/24 12:00:59 miriam 4 3
+c From Prof. Kahan
+e
+s 00003/00003/00070
+d D 6.1 85/05/15 14:55:58 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00010/00066
+d D 5.1 85/05/15 14:55:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00076/00000/00000
+d D 4.1 85/05/15 14:55:28 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH EXP 3M 
+E 2
+I 2
+D 3
+.TH EXP 3M  "18 July 1983"
+E 3
+I 3
+.TH EXP 3M  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+exp, log, log10, pow, sqrt \- exponential, logarithm, power, square root
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double exp(x)
+.B double x;
+.PP
+.B double log(x)
+.B double x;
+.PP
+.B double log10(x)
+.B double x;
+.PP
+.B double pow(x, y)
+.B double x, y;
+.PP
+.B double sqrt(x)
+.B double x;
+.fi
+.SH DESCRIPTION
+.I Exp
+returns the exponential function of 
+.I x.
+.PP
+.I Log
+returns the natural logarithm of 
+.IR x ;
+.I log10
+returns the base 10 logarithm.
+.PP
+.I Pow
+returns
+I 6
+.if n \
+.I x**y.
+.if t \
+E 6
+.I  x\u\s8y\s10\d.
+.PP
+.I Sqrt
+returns the square root of 
+.I x.
+.SH SEE ALSO
+D 2
+hypot(3),
+sinh(3),
+intro(2)
+E 2
+I 2
+hypot(3M),
+sinh(3M),
+intro(3M)
+E 2
+.SH DIAGNOSTICS
+.I Exp
+and
+.I pow
+D 2
+return a huge value when the correct value would
+overflow;
+E 2
+I 2
+return a huge value when the correct value would overflow;
+E 2
+.I errno
+is set to ERANGE.
+.I Pow
+returns 0 and sets
+.I errno
+D 2
+to
+EDOM when the second argument is negative and non-integral and
+when
+both arguments are 0.
+E 2
+I 2
+D 3
+to EDOM when the second argument is negative and non-integral and
+when both arguments are 0.
+E 3
+I 3
+to EDOM when the first argument is negative and the second is non-integral or
+when first argument is 0 and the second is less than or equal to 0.
+E 3
+E 2
+.PP
+.I Log
+returns 0 when
+.I x
+is zero or negative;
+.I errno
+is set to EDOM.
+.PP
+.I Sqrt
+returns 0 when 
+.I x
+is negative;
+.I errno
+is set to EDOM.
+E 1

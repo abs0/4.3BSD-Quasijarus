@@ -1,0 +1,395 @@
+h35862
+s 00014/00008/00188
+d D 6.7 88/07/09 11:31:53 bostic 7 6
+c install approved copyright notice
+e
+s 00037/00013/00159
+d D 6.6 88/06/13 17:59:28 karels 6 5
+c update, describe write-protected label and kernel consistency checks
+e
+s 00017/00004/00154
+d D 6.5 88/02/22 12:05:33 bostic 5 4
+c change copyright to Berkeley specific; document N and W options
+e
+s 00028/00017/00130
+d D 6.4 88/02/20 11:55:42 karels 4 3
+c update to current prog
+e
+s 00001/00001/00146
+d D 6.3 87/09/15 09:20:48 karels 3 2
+c missing arg on -R
+e
+s 00015/00007/00132
+d D 6.2 87/06/19 14:10:30 karels 2 1
+c disklabel forces required "options"
+e
+s 00139/00000/00000
+d D 6.1 87/06/18 21:15:33 karels 1 0
+c from Symmetric, with update
+e
+u
+U
+t
+T
+I 1
+D 7
+.\" from Symmetric Computer Systems.
+D 6
+.\" Modifications Copyright (c) 1987 Regents of the University of California.
+E 6
+I 6
+.\" Modifications Copyright (c) 1987,1988
+.\" The Regents of the University of California.
+E 7
+I 7
+.\" Copyright (c) 1987, 1988 Regents of the University of California.
+E 7
+E 6
+D 5
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 5
+I 5
+.\" All rights reserved.
+E 5
+.\"
+I 7
+.\" This code is derived from software contributed to Berkeley by
+.\" Symmetric Computer Systems.
+.\"
+E 7
+I 5
+.\" Redistribution and use in source and binary forms are permitted
+D 7
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 7
+I 7
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 7
+.\"
+E 5
+.\"	%W% (Berkeley) %G%
+.\"
+.TH DISKLABEL 8 "%Q%"
+.UC 5
+.SH NAME
+disklabel \- read and write disk pack label
+.SH SYNOPSIS
+.B disklabel
+[
+.B \-r
+]
+.I disk
+.br
+.B disklabel \-w
+[
+.B \-r
+]
+.I disk
+.I disktype
+[
+.I packid
+[
+.I priboot secboot
+] ]
+.br
+.B disklabel \-e
+[
+.B \-r
+]
+.I disk
+.br
+.B disklabel \-R
+[
+.B \-r
+]
+D 3
+.I disk
+E 3
+I 3
+.I disk protofile
+E 3
+[
+.I priboot secboot
+]
+I 5
+.br
+.B disklabel
+[
+.B \-NW
+]
+.I disk
+E 5
+.SH DESCRIPTION
+.I Disklabel
+can be used to install, examine or modify the label on a disk drive or pack.
+When writing the label, it can be used
+to change the drive identification,
+the disk partitions on the drive,
+or to replace a damaged label or bootstrap.
+D 2
+The disk label and bootstrap are located on block 0 of each disk.
+E 2
+I 2
+The disk label is located on one of the first sectors
+of each disk (usually block 0).
+On machines that require a block-0 bootstrap (VAX 11/750),
+the label is inserted into the bootstrap program.
+E 2
+This information is used by the system disk driver and by the bootstrap
+program to determine how to program the drive.
+I 2
+There are several forms of the command that display, install or modify
+the label on a disk.
+Each form has an additional option,
+.BR \-r ,
+which causes the label to be read from or written to the disk directly,
+rather than going through the system's in-core copy of the label.
+When writing, the in-core copy is also updated if possible.
+I 4
+This option may allow a label to be installed on a disk
+without kernel support for a label, such as when labels are first installed
+D 6
+on a system.
+E 6
+I 6
+on a system; it must be used when first installing a label on a disk.
+E 6
+E 4
+E 2
+.PP
+The first form of the command is used to examine the label on the named
+disk drive (e.g. hp0 or /dev/rhp0c).
+It will display all of the parameters associated with the drive
+and its partition layout.
+D 6
+The kernel's in-core label is displayed;
+E 6
+I 6
+Unless the
+.B \-r
+flag is given,
+the kernel's in-core copy of the label is displayed;
+E 6
+if the disk has no label, or the partition types on the disk are incorrect,
+D 4
+the kernel may have modified the label.
+E 4
+I 4
+the kernel may have constructed or modified the label.
+E 4
+If the
+.B \-r
+flag is given, the label from the raw disk will be displayed rather
+than the in-core label.
+.PP
+The second form of the command, with the
+.B \-w
+flag, is used to write a standard label on the designated drive.
+The required arguments to
+.I disklabel
+are the drive to be labelled (e.g. hp0), and
+the drive type as described in the
+.IR disktab (5)
+file.
+The drive parameters and partitions are taken from that file.
+If different disks of the same physical type are to have different
+partitions, it will be necessary to have separate disktab entries
+D 6
+describing each or to edit the label as described below.
+The first optional argument is a pack identification, up to 16 characters.
+E 6
+I 6
+describing each, or to edit the label after installation as described below.
+The first optional argument is a pack identification string,
+up to 16 characters long.
+E 6
+The pack id must be quoted if it contains blanks.
+If the
+.B \-r
+flag is given, the disk sectors containing the label and bootstrap
+will be written directly,
+D 4
+otherwise only the label will be modified.
+In either case, the kernel's in-core label is replaced.
+D 2
+On machines that require a block-0 bootstrap (VAX 11/750),
+E 2
+I 2
+On machines that require a block-0 bootstrap,
+E 2
+the
+E 4
+I 4
+D 6
+otherwise the existing label will be modified in place without modifying
+E 6
+I 6
+otherwise the existing label will be updated in place without modifying
+E 6
+the bootstrap.
+If the disk does not already have a label, the
+E 4
+.B \-r
+D 2
+flag \fImust\fP be used when installing a label on a disk for the first time
+to install the version of the bootstrap that understands disk labels.
+E 2
+I 2
+D 4
+flag is assumed with
+.BR \-w .
+E 2
+An alternate version of the bootstrap may be specified
+E 4
+I 4
+flag must be used.
+In either case, the kernel's in-core label is replaced.
+.PP
+Alternate versions of the bootstrap files may be specified
+E 4
+after the pack identifier.
+If an alternate bootstrap is not specified, the standard bootstrap will be used.
+The bootstrap programs are located in
+D 4
+.IR /usr/mdec ,
+with names of the form
+E 4
+I 4
+.IR /usr/mdec .
+The names of the bootstrap programs may be specified in
+.IR disktab (5);
+D 6
+if not specified
+with default names of the form
+E 4
+.IR disktype boot
+E 6
+I 6
+if not specified,
+the default names are of the form
+.IR basename boot
+E 6
+for the primary (block 0) bootstrap, and
+D 6
+.RI boot disktype
+E 6
+I 6
+.RI boot basename
+E 6
+for the secondary (block 1-15) bootstrap;
+D 6
+for example, /usr/mdec/hpboot and /usr/mdec/boothp.
+E 6
+I 6
+for example, /usr/mdec/hpboot and /usr/mdec/boothp
+if the disk device is
+.BR hp0 .
+E 6
+.PP
+An existing disk label may be edited by using the
+.B \-e
+flag.
+The label is read from the in-core kernel copy,
+or directly from the disk if the
+.B \-r
+flag is also given.
+The label is formatted and then supplied to an editor for changes.
+If no editor is specified in an EDITOR environment variable,
+.IR vi (1)
+is used.
+When the editor terminates, the formatted label is reread
+and used to rewrite the disk label.
+D 2
+A bootstrap is also installed if using the
+.B \-r
+option.
+E 2
+.PP
+D 5
+Finally,
+I 4
+with the 
+E 5
+I 5
+With the
+E 5
+.B \-R
+flag,
+E 4
+.I disklabel
+is capable of restoring a disk label that was formatted
+D 4
+in a prior operation and saved in an ascii file by the use
+of the 
+.B \-R
+flag.
+The prototype file used to create the label is exactly that
+produced when reading or editing a label.
+I 2
+A block-0 bootstrap is also installed on machines that use one.
+E 4
+I 4
+in a prior operation and saved in an ascii file.
+D 6
+The prototype file used to create the label is in exactly the same format
+that is produced when reading or editing a label.
+E 6
+I 6
+The prototype file used to create the label should be in the same format
+as that produced when reading or editing a label.
+Comments are delimited by
+.B #
+and newline.
+E 6
+If the
+.B \-r
+option is also given,
+a block-0 bootstrap is installed on machines that use one;
+either the disktype or the names of the bootstrap files must be specified
+on such machines.
+I 5
+.PP
+Finally, the \fB-NW\fP flags for \fIdisklabel\fP explicitly disallow and
+allow, respectively, writing of the pack label area on the selected disk.
+E 5
+E 4
+E 2
+.SH FILES
+/etc/disktab
+.br
+/usr/mdec/\fIxx\fPboot
+.br
+/usr/mdec/boot\fIxx\fP
+.SH "SEE ALSO"
+disktab(5), disklabel(5)
+I 6
+.SH DIAGNOSTICS
+The kernel device drivers will not allow the size of a disk partition
+to be decreased or the offset of a partition to be changed while it is open.
+Some device drivers create a label containing only a single large partition
+if a disk is unlabeled; thus, the label must be written to the ``a''
+partition of the disk while it is open.
+This sometimes requires the desired label to be set in two steps,
+the first one creating at least one other partition,
+and the second setting the label on the new partition
+while shrinking the ``a'' partition.
+.SH BUGS
+When a disk name is given without a full pathname,
+the constructed device name uses the ``c'' partition on the vax
+and the ``a'' partition on the tahoe.
+E 6
+E 1

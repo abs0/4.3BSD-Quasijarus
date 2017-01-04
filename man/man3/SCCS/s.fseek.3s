@@ -1,0 +1,154 @@
+h45319
+s 00001/00001/00061
+d D 6.4 87/12/05 14:49:33 bostic 6 5
+c use L_SET define for rewind call
+e
+s 00004/00006/00058
+d D 6.3 86/02/24 23:50:15 lepreau 5 4
+c back to old fseek returning -1 and 0; document the 0 for Sys V compat.
+e
+s 00006/00004/00058
+d D 6.2 85/10/30 17:19:39 mckusick 4 3
+c describe return value for fseek (not Sys V compatible, sigh)
+e
+s 00001/00001/00061
+d D 6.1 85/05/15 14:57:53 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00006/00005/00056
+d D 5.1 85/05/15 14:57:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00061/00000/00000
+d D 4.1 85/05/15 14:57:35 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FSEEK 3S 
+E 2
+I 2
+D 3
+.TH FSEEK 3S  "19 January 1983"
+E 3
+I 3
+.TH FSEEK 3S  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+fseek, ftell, rewind \- reposition a stream
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+D 4
+.B fseek(stream, offset, ptrname)
+E 4
+I 4
+D 5
+.B long fseek(stream, offset, ptrname)
+E 5
+I 5
+.B fseek(stream, offset, ptrname)
+E 5
+E 4
+.br
+.SM
+.B FILE
+.B *stream;
+.br
+.B long offset;
+.PP
+.B long ftell(stream)
+.br
+.SM
+.B FILE
+.B *stream;
+.PP
+.B rewind(stream)
+.SH DESCRIPTION
+.I Fseek
+sets the position of the next input or output
+operation on the
+.IR stream .
+The new position is at the signed distance
+.I offset
+bytes
+from the beginning, the current position, or the end of the file,
+according as 
+.I ptrname
+has the value 0, 1, or 2.
+I 4
+D 5
+.I Fseek
+returns \-1 for improper seeks,
+otherwise it returns the new value of the offset relative
+to the beginning of the file associated with the named
+.IR stream .
+E 5
+E 4
+.PP
+.I Fseek
+undoes any effects of
+D 2
+.IR  ungetc (3).
+E 2
+I 2
+.IR  ungetc (3S).
+E 2
+.PP
+.I Ftell
+returns the current value of the offset relative to the beginning
+of the file associated with the named
+.IR stream .
+It is measured in bytes on UNIX;
+on some other systems it is a magic cookie,
+and the only foolproof way to obtain an 
+.I offset
+for
+.IR fseek .
+.PP
+D 2
+.I Rewind(stream)
+E 2
+I 2
+.IR Rewind ( stream )
+E 2
+is equivalent to
+D 2
+.I "fseek(stream, 0L, 0)."
+E 2
+I 2
+.IR fseek ( stream ,
+D 6
+0L, 0).
+E 6
+I 6
+0L, L_SET).
+E 6
+E 2
+.SH "SEE ALSO"
+lseek(2),
+D 2
+fopen(3)
+E 2
+I 2
+fopen(3S)
+I 5
+.SH DIAGNOSTICS
+.I Fseek
+returns \-1 for improper seeks, otherwise zero.
+E 5
+E 2
+D 4
+.SH DIAGNOSTICS
+.I Fseek
+returns \-1 for improper seeks.
+E 4
+E 1

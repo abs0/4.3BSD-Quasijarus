@@ -1,0 +1,536 @@
+h19827
+s 00001/00001/00496
+d D 6.3 04/10/21 06:30:25 msokolov 3 2
+c use \- in NAME
+e
+s 00012/00002/00485
+d D 6.2 03/11/09 18:26:17 msokolov 2 1
+c document -n
+c help => sccshelp
+e
+s 00487/00000/00000
+d D 6.1 99/05/14 12:55:24 msokolov 1 0
+c date and time created 99/05/14 12:55:24 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.tr ~
+.tr $%
+.if t .tr #\fB\(em\fP
+.if n .tr #-
+.if n .ds D " -- 
+.if t .ds D _
+.tr @|
+.nr f 0
+.bd S B 3
+.de SP
+.if n .ul
+\%[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+\%[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de ZZ
+.hc ^
+\fB^...\fR
+.hc
+..
+.de AR
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\\fR
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de C1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\\$1
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fR[\fI\\$2\fR]
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fI\\$2\fR
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de FI
+.PP
+.TP 30
+\\$1
+\\$2
+.i0
+..
+.ds F)  \fB\s-1FILES\s+1\fR
+.ds W)  \fB\s-1WARNINGS\s+1\fR
+.ds X)  \fB\s-1EXAMPLES\s+1\fR
+.ds T)  \fB\s-1TABLE\s+1\fR
+.ds K)  \fB\s-1DATA KEYWORDS\s+1\fR
+.ds D)  \fB\s-1DDDDD\s+1\fR
+.ds M)  \fB\s-1MR\s+1\fR
+.ds R)  \fB\s-1RELEASE NUMBER\s+1\fR
+.ds S)  \fB\s-1SCCS\s+1\fR
+.ds I)  \fB\s-1SID\s+1\fR
+.de F1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1\fI\\$2\fR
+\\$3
+.nr f 1
+..
+.de F2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1[\fI\\$2\fR]
+\\$3
+.nr f 1
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.TH PRT 1 "%Q%"
+.SH NAME
+D 3
+prt \(em print \s-1SCCS\s0 file
+E 3
+I 3
+prt \- print \s-1SCCS\s0 file
+E 3
+.SH SYNOPSIS
+.na
+.B prt
+.SF d
+.SF s
+.SF a
+.SF i
+.SF u
+.SF f
+.SF t
+.SF b
+.SF e
+.SP y [\s-1SID\s0]]
+.br
+.SP c [cutoff]]
+.SP r [rev-cutoff]]
+I 2
+.SF n
+E 2
+file
+.ZZ
+.ad
+.SH DESCRIPTION
+.RE
+.I Prt
+prints part or all of an \*(S) file in a useful format.
+If a directory is named,
+.I prt
+behaves as though each file in the directory were
+specified as a named file,
+except that non-\*(S) files
+(last component of the pathname does not begin with \fBs.\fR)
+and unreadable files
+are silently ignored.
+If a name of \fB\(em\fR is given, the standard input is read;
+each line of the standard input is taken to be the name of an \*(S) file
+to be processed.
+Again, non-\*(S) files and unreadable files are silently ignored.
+.PP
+The keyletter arguments are as follows.
+Each is explained as though only one named file is to be processed,
+but the effects of any keyletter argument
+apply independently to
+each named file.
+.AR d This
+keyletter normally causes the printing of delta table entries of the
+\s-1\fBD\s+1\fR type.
+.AR s Causes
+only the first line of the delta table entries to be printed; that is,
+only up to the statistics.
+This keyletter is effective only if the
+.B d
+keyletter is also specified (or assumed).
+.AR a Causes
+those types of deltas normally not printed by the
+.B d
+keyletter to be printed. These are types \s-1\fBR\s+1\fR (removed).
+This keyletter is effective only if the
+.B d
+keyletter is also specified (or assumed).
+.AR i Causes
+the printing of the serial numbers of those deltas included,
+excluded, and ignored.
+This keyletter is effective only if the
+.B d
+keyletter is also specified (or assumed).
+.RE
+.PP
+The following format is used to print those
+portions of the \*(S) file as specified by the above keyletters.
+The printing of each delta table entry
+is
+preceded
+by a newline character.
+.PP
+.vs 9.5p
+.RE 
+.RS 10
+.TP 4
+a)
+Type of delta (\s-1\fBD\fR\s+1 or \s-1\fBR\fR\s+1).
+.RE 
+.RS 10
+.TP 4
+b)
+Space.
+.RE 
+.RS 10
+.TP 4
+c)
+\*(S) identification string (\*(I)).
+.RE 
+.RS 10
+.TP 4
+d)
+Tab.
+.RE 
+.RS 10
+.TP 4
+e)
+Date and time of creation.
+.br
+(in the form \s-1YY/MM/DD HH:MM:SS\s+1)
+.RE 
+.RS 10
+.TP 4
+f)
+Tab.
+.RE 
+.RS 10
+.TP 4
+g)
+Creator.
+.RE 
+.RS 10
+.TP 4
+h)
+Tab.
+.RE 
+.RS 10
+.TP 4
+i)
+Serial number.
+.RE 
+.RS 10
+.TP 4
+j)
+Tab.
+.RE 
+.RS 10
+.TP 4
+k)
+Predecessor delta's serial number.
+.RE 
+.RS 10
+.TP 4
+1)
+Tab.
+.RE 
+.RS 10
+.TP 4
+m)
+Statistics.
+.br
+(in the form inserted/deleted/unchanged)
+.RE 
+.RS 10
+.TP 4
+n)
+Newline.
+.RE 
+.RS 10
+.TP 4
+o)
+``Included:\c
+.ul
+tab'',
+.ul 0
+followed by \*(I)'s of deltas included, followed by
+newline (only if there were any such deltas and if
+.B i
+keyletter was supplied).
+.RE 
+.RS 10
+.TP 4
+p)
+``Excluded:\c
+.ul
+tab'',
+.ul 0
+followed by \*(I)'s of deltas excluded, followed by
+newline (see note above).
+.RE 
+.RS 10
+.TP 4
+q)
+``Ignored:\c
+.ul
+tab'',
+.ul 0
+followed by \*(I)'s of deltas ignored, followed by
+newline (see note above).
+.RE 
+.RS 10
+.TP 4
+r)
+``\*(M)s:\c
+.ul
+tab'',
+.ul 0
+followed by \*(M) numbers related to the delta, followed by
+newline (only if any \*(M) numbers were supplied).
+.RE 
+.RS 10
+.TP 4
+s)
+Lines of comments (delta commentary), followed by newline
+(if any were supplied).
+.vs 12p
+.AR u Causes
+the printing of the login-names and/or numerical group IDs of those users
+allowed to make deltas.
+.AR f Causes
+the printing of the flags of the named file.
+.AR t Causes
+the printing of the descriptive text
+contained in the file.
+.AR b Causes
+the printing of the body of the \*(S) file.
+.AR e This
+keyletter implies the
+.B d\c
+,
+.B i\c
+,
+.B u\c
+,
+.B f\c
+,
+and
+.B t
+keyletters and is provided for convenience.
+.A1 y \s-1SID\s0 This
+keyletter will cause the printing of the delta table entries to stop
+when the delta just printed has the specified \*(I).
+If no delta in the table has the specified \*(I), the entire table is
+printed.
+If no \*(I) is specified, the first delta in the delta table is printed.
+This keyletter will cause the entire delta table entry for each delta to be
+printed as a single line (the newlines in the normal multi-line format
+of the
+.B d
+keyletter are replaced by blanks)
+preceded by the name of the \*(S) file being processed, followed by a \fB:,\fR
+followed by a tab.
+This keyletter
+is effective only if the
+.B d
+keyletter is also specified (or assumed).
+.A1 c cutoff This
+keyletter will cause the printing of the delta table entries
+to stop if the delta about to be printed is older than the
+specified cutoff date-time (see
+.IR get\^ (1)
+for the format of date-time).
+If no date-time is supplied, the
+epoch 0000 \fB\s-1GMT\s+1\fR Jan. 1, 1970 is used.
+As with the
+.B y
+keyletter, this keyletter will cause the entire delta table
+entry to be printed as a single line and
+to be preceded by the name of the \*(S) file being processed,
+followed by a \fB:,\fR followed by a tab.
+This keyletter is effective only if the
+.B d
+keyletter is also specified (or assumed).
+.A1 r rev-cutoff This
+keyletter will cause the printing of the delta table entries
+to begin when the delta about to be printed is older than or equal to the
+specified cutoff date-time (see
+.IR get\^ (1)
+for the format of date-time).
+If no date-time is supplied, the
+epoch 0000 \fB\s-1GMT\s+1\fR Jan. 1, 1970 is used.
+(In this case, nothing will be printed).
+As with the
+.B y
+keyletter, this keyletter will cause the entire delta table
+entry to be printed as a single line and
+to be preceded by the name of the \*(S) file being processed,
+followed by a \fB:\fR, followed by a tab.
+This keyletter is effective only if the
+.B d
+keyletter is also specified (or assumed).
+I 2
+.AR n This
+keyletter causes the delta table to be printed in a slightly different format
+from that described above.
+The same fields are printed in the same order, but instead of tabs they are
+separated by a judiciously chosen number of spaces in order to display nicely
+on the terminal.
+This keyletter is effective only if the
+.B d
+keyletter is also specified (or assumed).
+E 2
+.RE
+.PP
+If any keyletter but
+.B y\c
+,
+.B c\c
+,
+or
+.B r
+is supplied, the name of the file being processed (preceded by one newline
+and followed by two newlines) is printed before its contents.
+.PP
+If none of the
+.B u
+,
+.B f
+,
+.B t
+,
+or
+.B b
+keyletters is supplied, the
+.B d
+keyletter is assumed.
+.PP
+Note that the
+.B s
+and
+.B i
+keyletters, and the
+.B c
+and
+.B r
+keyletters are mutually exclusive;
+therefore, they may not be specified together on the same
+.I prt
+command.
+.PP
+The form of the delta table
+as produced by the
+.B y\c
+,
+.B c\c
+,
+and
+.B r
+keyletters makes it easy to sort multiple delta tables by time order.
+For example,
+the following will print the delta tables of all \*(S) files
+in directory
+.I sccs
+in
+.IR rev\^ erse
+chronological order:
+.PP
+.ti +4
+.if t prt  #c  sccs  @  grep  \fB.\fR  @  sort  \*()Q#rt\fItab\fP\*()Q  +2  #3
+.if n prt  -c  sccs  @  grep  .  @  sort  \*()Q-rt<tab>\*()Q  +2  #3
+.br
+.PP
+When both the
+.B y
+and
+.B c
+or the
+.B y
+and
+.B r
+keyletters are supplied,
+.I prt
+will stop printing when the first of the two conditions is met.
+.PP
+The
+.IR reform\^ (1)
+command can be used to truncate long lines.
+.PP
+See
+.IR admin\^ (1),
+.IR sccsfile\^ (5),
+and
+.I "Source Code Control System User's Guide"
+for more information about the meaning of the output of
+.I prt.
+.SH "SEE ALSO"
+admin(1),
+get(1),
+delta(1),
+what(1),
+D 2
+help(1),
+E 2
+I 2
+sccshelp(1),
+E 2
+sccsfile(5)
+.br
+.I "Source Code Control System User's Guide"
+by L. E. Bonanni and C. A. Salemi.
+.SH DIAGNOSTICS
+Use
+D 2
+.IR help\^ (1)
+E 2
+I 2
+.IR sccshelp\^ (1)
+E 2
+for explanations.
+.tr ~~
+.tr @@
+E 1

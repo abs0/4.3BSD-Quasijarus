@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)shift.c	4.3 8/11/83";
+static char sccsid[] = "@(#)shift.c	4.5 9/17/04";
 #endif
 
 # include "e.h"
@@ -24,30 +24,40 @@ bshiftb(p1, dir, p2) int p1, dir, p2; {
 	sh1 = sh2 = "";
 #endif NEQN
 	if( dir == SUB ) {	/* subscript */
-#ifndef NEQN
+#ifdef CAT
 		/* top 1/2m above bottom of main box */
 		d1 = VERT( (effps2*6)/2 );
-#else NEQN
+#endif
+#ifdef PS
+		/* top 1/2m above bottom of main box */
+		d1 = VERT( effps2*30 );
+#endif
+#ifdef NEQN
 		d1 = VERT(1);
-#endif NEQN
+#endif
 		shval = - d1 + h2 - b2;
 		if( d1+b1 > h2 ) /* move little sub down */
 			shval = b1-b2;
 		ebase[yyval] = b1 + max(0, h2-b1-d1);
 		eht[yyval] = h1 + max(0, h2-b1-d1);
-#ifndef NEQN
+#ifdef CAT
 		if (rfont[p1] == ITAL && lfont[p2] == ROM)
 			sh1 = "\\|";
 		if (rfont[p2] == ITAL)
 			sh2 = "\\|";
-#endif NEQN
+#endif
 	} else {	/* superscript */
-#ifndef NEQN
+#ifdef CAT
 		/* 4/10 up main box */
 		d1 = VERT( (effps*6*2)/10 );
-#else NEQN
+#endif
+#ifdef PS
+		/* 4/10 up main box */
+		d1 = VERT( effps*6*2 );
+#endif
+#ifdef NEQN
 		d1 = VERT(1);
-#endif NEQN
+#endif
 		ebase[yyval] = b1;
 #ifndef NEQN
 		shval = -VERT( (4 * (h1-b1)) / 10 ) - b2;
@@ -59,13 +69,15 @@ bshiftb(p1, dir, p2) int p1, dir, p2; {
 			shval = -(h1-b1) + h2-b2 - d1;
 #ifndef NEQN
 		eht[yyval] = h1 + max(0, h2-VERT((6*(h1-b1))/10));
+#else NEQN
+		eht[yyval] = h1 + max(0, h2 - VERT(1));
+#endif NEQN
+#ifdef CAT
 		if (rfont[p1] == ITAL)
 			sh1 = "\\|";
 		if (rfont[p2] == ITAL)
 			sh2 = "\\|";
-#else NEQN
-		eht[yyval] = h1 + max(0, h2 - VERT(1));
-#endif NEQN
+#endif
 	}
 	if(dbg)printf(".\tb:b shift b: S%d <- S%d vert %d S%d vert %d; b=%d, h=%d\n", 
 		yyval, p1, shval, p2, -shval, ebase[yyval], eht[yyval]);
@@ -107,13 +119,18 @@ shift2(p1, p2, p3) int p1, p2, p3; {
 #endif NEQN
 	h1 = eht[p1]; b1 = ebase[p1];
 	h2 = eht[p2]; b2 = ebase[p2];
-#ifndef NEQN
+#ifdef CAT
 	b3 = ebase[p3];
 	d1 = VERT( (effps2*6)/2 );
-#else NEQN
+#endif
+#ifdef PS
+	b3 = ebase[p3];
+	d1 = VERT( effps2*30 );
+#endif
+#ifdef NEQN
 	h3 = eht[p3]; b3 = ebase[p3];
 	d1 = VERT(1);
-#endif NEQN
+#endif
 	subsh = -d1+h2-b2;
 	if( d1+b1 > h2 ) /* move little sub down */
 		subsh = b1-b2;
@@ -133,19 +150,19 @@ shift2(p1, p2, p3) int p1, p2, p3; {
 	eht[yyval] = h1 + max(0, h3-VERT(1)) + max(0, h2-b1-d1);
 #endif NEQN
 	ebase[yyval] = b1+max(0, h2-b1-d1);
-#ifndef NEQN
+#ifdef CAT
 	if (rfont[p1] == ITAL && lfont[p2] == ROM)
 		printf(".ds %d \\|\\*(%d\n", p2, p2);
 	if (rfont[p2] == ITAL)
 		printf(".as %d \\|\n", p2);
-#endif NEQN
+#endif
 	nrwid(p2, effps, p2);
-#ifndef NEQN
+#ifdef CAT
 	if (rfont[p1] == ITAL && lfont[p3] == ROM)
 		printf(".ds %d \\|\\|\\*(%d\n", p3, p3);
 	else
 		printf(".ds %d \\|\\*(%d\n", p3, p3);
-#endif NEQN
+#endif
 	nrwid(p3, effps, p3);
 	printf(".nr %d \\n(%d\n", treg, p3);
 	printf(".if \\n(%d>\\n(%d .nr %d \\n(%d\n", p2, treg, treg, p2);

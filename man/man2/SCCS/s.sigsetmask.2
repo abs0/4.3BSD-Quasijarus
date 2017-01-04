@@ -1,0 +1,88 @@
+h45395
+s 00011/00006/00026
+d D 6.3 86/05/14 11:12:23 karels 4 3
+c sigmask
+e
+s 00001/00001/00031
+d D 6.2 85/06/30 16:52:41 sechrest 3 2
+c improved english
+e
+s 00001/00001/00031
+d D 6.1 85/05/15 12:00:48 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00032/00000/00000
+d D 5.1 85/05/15 12:00:43 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SIGSETMASK 2 "7 July 1983"
+E 2
+I 2
+.TH SIGSETMASK 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+sigsetmask \- set current signal mask
+.SH SYNOPSIS
+.nf
+I 4
+.B #include <signal.h>
+
+E 4
+.B sigsetmask(mask);
+.B int mask;
+I 4
+
+.B mask = sigmask(signum)
+E 4
+.SH DESCRIPTION
+.I Sigsetmask
+sets the current signal mask (those signals
+D 3
+which are blocked from delivery).  Signal
+E 3
+I 3
+D 4
+that are blocked from delivery).  Signal
+E 3
+.I i
+is blocked if the
+.IR i -th
+bit in 
+E 4
+I 4
+that are blocked from delivery).
+Signals are blocked if the
+corresponding bit in 
+E 4
+.I mask
+D 4
+is a 1.
+E 4
+I 4
+is a 1; the macro
+.I sigmask
+is provided to construct the mask for a given
+.IR signum .
+E 4
+.PP
+The system
+quietly disallows SIGKILL, SIGSTOP, or SIGCONT to
+be blocked.
+.SH "RETURN VALUE
+The previous set of masked signals is returned.
+.SH "SEE ALSO"
+kill(2), sigvec(2), sigblock(2), sigpause(2)
+E 1

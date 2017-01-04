@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)n10.c	4.3 4/27/88";
+static char sccsid[] = "@(#)n10.c	4.5 10/24/04";
 #endif lint
 
 #include "tdef.h"
@@ -50,18 +50,39 @@ ptinit(){
 	int x[8];
 	extern char *setbrk();
 
-	if(((i=open(termtab,0)) < 0) && (i=open("/usr/lib/term/tablpr",0)) < 0){
+	if((i=open(termtab,0)) < 0){
 		prstr("Cannot open ");
 		prstr(termtab);
 		prstr("\n");
-		exit(-1);
+		t.twrest = "";
+		done3(-1);
 	}
 	read(i,(char *)x,8*sizeof(int));
 	read(i,(char *)&t.bset,j = sizeof(int)*((int *)&t.zzz - &t.bset));
+	if ((int)t.bset == 0x6E380000) {
+		/* This is an 8-bit terminal table, exec nroff8 */
+		extern int ibf;
+		extern char *unlkp;
+		extern int saved_argc;
+		extern char **saved_argv;
+		static char nroff8[] = "/usr/ucb/nroff8";
+
+		close(i);
+		/* close and delete the temp file, nroff8 will have its own */
+		close(ibf);
+		unlink(unlkp);
+		mesg(1);	/* can't pass saved mode to nroff8 */
+		execv(nroff8, saved_argv);
+		prstr("Cannot exec ");
+		prstr(nroff8);
+		prstr("\n");
+		exit(-1);
+	}
 	x[2] -= j;
 	q = setbrk(x[2]);
 	lseek(i,(long)t.twinit+8*sizeof(int),0);
 	i = read(i,q,x[2]);
+	close(i);
 	j = q - t.twinit;
 	for(p = &t.twinit; p < &t.zzz; p++){
 		if(*p)*p += j;else *p = "";
@@ -162,7 +183,7 @@ ptout1()
 			/*
 			 * simulate bold font as overstrike if no t.bdon
 			 */
-			if (xfont == 2 && !(*t.bdon & 0377)) {
+			if (xfont == 2 && !(*t.bdon & 0377) && *codep != '\b') {
 				oput(*codep);
 				oput('\b');
 			}

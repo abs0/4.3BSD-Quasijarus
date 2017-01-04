@@ -1,0 +1,104 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/2004
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/setstrokeadjust where {pop true setstrokeadjust} if
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+currentdict end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: 1 1
+save $troff begin Sc
+end restore showpage
+%%Trailer
+%%Pages: 1
+%%EOF

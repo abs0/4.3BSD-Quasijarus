@@ -1,0 +1,112 @@
+h04152
+s 00000/00002/00060
+d D 6.2 86/05/07 13:24:58 mckusick 4 3
+c delete authors
+e
+s 00001/00001/00061
+d D 6.1 85/04/29 14:53:04 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00004/00058
+d D 5.1 85/04/29 14:52:55 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00062/00000/00000
+d D 4.1 85/04/29 14:52:48 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PIX 1 4/8/79
+E 2
+I 2
+D 3
+.TH PIX 1 "10 February 1983"
+E 3
+I 3
+.TH PIX 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+pix \- Pascal interpreter and executor
+.SH SYNOPSIS
+.B pix
+[
+.B \-blnpstuwz
+] [
+.B \-i
+name ...
+]
+name.p
+[
+argument ...
+]
+.SH DESCRIPTION
+.I Pix
+is a `load and go' version of Pascal which combines
+the functions of the interpreter code translator
+.I pi
+and the executor
+.IR px .
+It uses
+.I pi
+to translate the program in the file
+.I name.p
+and, if there were no fatal errors during translation,
+causes the resulting interpreter code
+to be executed by
+.I px
+with the specified arguments.
+A temporary file is used for the object code;
+the file
+.I obj
+is neither created nor destroyed.
+.SH FILES
+.ta 2i
+D 2
+/usr/bin/pi	Pascal translator
+E 2
+I 2
+/usr/ucb/pi	Pascal translator
+E 2
+.br
+D 2
+/usr/bin/px	Pascal executor
+E 2
+I 2
+/usr/ucb/px	Pascal executor
+E 2
+.br
+D 2
+/tmp/pix?????	temporary
+E 2
+I 2
+/tmp/pix*	temporary
+E 2
+.br
+/usr/lib/how_pix	basic explanation
+.SH SEE\ ALSO
+Berkeley Pascal User's Manual
+.br
+pi(1), px(1)
+.SH DIAGNOSTICS
+For a basic explanation do
+.PP
+.DT
+.B	pix
+D 4
+.SH AUTHORS
+Susan L. Graham and William N. Joy
+E 4
+E 1

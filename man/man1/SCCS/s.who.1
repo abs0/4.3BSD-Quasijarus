@@ -1,0 +1,124 @@
+h14022
+s 00019/00030/00017
+d D 6.2 86/12/10 17:00:20 bostic 4 3
+c general cleanup
+e
+s 00001/00001/00046
+d D 6.1 85/04/29 18:08:58 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00002/00044
+d D 5.1 85/04/29 18:08:49 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00046/00000/00000
+d D 4.1 85/04/29 18:08:41 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH WHO 1 
+E 2
+I 2
+D 3
+.TH WHO 1  "18 January 1983"
+E 3
+I 3
+.TH WHO 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+who \- who is on the system
+.SH SYNOPSIS
+.B who
+[ who-file ] [
+.B "am I"
+]
+.SH DESCRIPTION
+D 4
+.I Who,
+without an argument,
+lists the login name, terminal name, and login time
+for each current UNIX user.
+E 4
+I 4
+\fIWho,\fP without any argument, reads the /etc/utmp file,
+and lists the login name, terminal name, and login time for each
+user currently logged into the system.  If a single argument is
+given, \fIwho\fP uses that file instead of /etc/utmp.  Typically,
+that file will be /usr/adm/wtmp, which contains a record of all
+the logins, logouts, crashes, shutdowns and time changes since it
+was created.  In either case, each login will be listed with the
+user name, the terminal name (with "/dev/" suppressed), login date
+and time, and, if applicable, the host logged in from.
+E 4
+.PP
+D 4
+Without an argument,
+.I who
+D 2
+examines the /etc/utmp
+E 2
+I 2
+examines the
+.I /etc/utmp
+E 2
+file to obtain its information.
+If a file is given, that file is examined.
+Typically the given file will be /usr/adm/wtmp,
+which contains a record of all the logins since it
+was created.
+Then
+.I who
+lists
+logins, logouts, and crashes since the creation of
+the wtmp file.
+Each login is listed with user name,
+terminal name (with `/dev/'
+suppressed),
+and date and time.
+When an argument is given, logouts produce a similar line without a user name.
+Reboots produce a line with `x' in the place of the device name,
+and a fossil time indicative of when the system went down.
+E 4
+I 4
+If /usr/adm/wtmp is being used as the file, the user name may be empty
+or one of the special characters '|', '}' and '~'.  Logouts produce
+an output line without any user name.  For more information on the
+special characters, see utmp(5).
+E 4
+.PP
+D 4
+With two arguments,
+as in `who am I' (and also `who are you'),
+.I who
+tells who you are logged in as.
+E 4
+I 4
+With two arguments, as in `who am I' (and also `who are you'),
+\fIwho\fP tells you who you are logged in as.
+E 4
+.SH FILES
+I 4
+.DT
+E 4
+/etc/utmp
+I 4
+.br
+/usr/adm/wtmp
+E 4
+.SH "SEE ALSO"
+D 4
+getuid(2), utmp(5)
+E 4
+I 4
+last(1), users(1), getuid(2), utmp(5)
+E 4
+E 1

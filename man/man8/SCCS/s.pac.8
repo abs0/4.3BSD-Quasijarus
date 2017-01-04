@@ -1,0 +1,124 @@
+h15422
+s 00012/00002/00072
+d D 6.2 85/10/30 12:29:19 bloom 3 2
+c add -m flag for grouping hosts, comment about price in printcap
+e
+s 00005/00001/00069
+d D 6.1 85/04/27 15:37:42 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00070/00000/00000
+d D 5.1 85/04/27 15:37:11 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PAC 8 "21 February 1981"
+E 2
+I 2
+.TH PAC 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+D 3
+pac \- printer/ploter accounting information
+E 3
+I 3
+pac \- printer/plotter accounting information
+E 3
+.SH SYNOPSIS
+.B /etc/pac
+[
+.B \-Pprinter
+] [
+.B \-pprice
+] [
+.B \-s
+] [
+.B \-r
+] [
+.B \-c
+I 3
+] [
+.B \-m
+E 3
+] [ name ... ]
+.SH DESCRIPTION
+.I Pac
+reads the printer/plotter accounting files, accumulating the number
+of pages (the usual case) or feet (for raster devices)
+of paper consumed by each user, and printing out
+how much each user consumed in pages or feet and dollars.
+If any
+.I names
+are specified, then statistics are only printed for those users;
+usually, statistics are printed for every user who has used any paper.
+.PP
+The
+.B \-P
+flag causes accounting to be done for the named printer.
+Normally, accounting is done for the default printer (site dependent) or
+the value of the environment variable
+.B PRINTER
+is used.
+.PP
+The
+.B \-p
+flag causes the value
+.I price
+D 3
+to be used for the cost in dollars instead of the default value of 0.02.
+E 3
+I 3
+to be used for the cost in dollars instead of the default value of 0.02
+or the price specified in
+.IR /etc/printcap.
+E 3
+.PP
+The
+.B \-c
+flag causes the output to be sorted by cost; usually the
+output is sorted alphabetically by name.
+.PP
+The
+.B \-r
+flag reverses the sorting order.
+.PP
+The
+.B \-s
+flag causes the accounting information to be summarized on the
+summary accounting file; this summarization is necessary since on a
+busy system, the accounting file can grow by several lines per day.
+I 3
+.PP
+The
+.B \-m
+flag causes the host name to be ignored in the accounting file.  This
+allows for a user on multiple machines to have all of his printing
+charges grouped together.
+E 3
+.SH FILES
+.ta 2i
+/usr/adm/?acct	raw accounting files
+.br
+/usr/adm/?_sum	summary accounting files
+I 2
+.br
+/etc/printcap	printer capability data base
+.SH SEE ALSO
+printcap(5)
+E 2
+.SH BUGS
+The relationship between the computed price and reality is
+as yet unknown.
+E 1

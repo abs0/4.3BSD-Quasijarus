@@ -1,0 +1,115 @@
+h03820
+s 00001/00001/00080
+d D 6.3 04/10/21 06:30:17 msokolov 3 2
+c use \- in NAME
+e
+s 00002/00002/00079
+d D 6.2 03/11/09 19:12:25 msokolov 2 1
+c help => sccshelp
+e
+s 00081/00000/00000
+d D 6.1 99/05/14 13:13:41 msokolov 1 0
+c date and time created 99/05/14 13:13:41 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.TH WHAT 1 "%Q%"
+.tr $%
+.SH NAME
+D 3
+what \(em identify files
+E 3
+I 3
+what \- identify files
+E 3
+.SH SYNOPSIS
+.tr ##
+.B what
+file
+.ZZ
+.SH DESCRIPTION
+.ad
+.I What
+searches the given files for all occurrences
+of the pattern which
+.IR get\^ (1)
+substitutes for $Z% (this is
+\fB%Z%\fR
+at this printing)
+and prints out what follows until the
+first \fB", >,\fR newline\fB, \\,\fR or null character.
+For example, if the \fB\s-1C\fR\s+1 program in file \fBf.c\fR contains
+.PP
+.RE
+.RS 5
+char iden\(ru\(ru\(ru[] "%Z%identification information";
+.RE
+.PP
+and \fBf.c\fR is compiled to yield \fBf.o\fR and \fBa.out,\fR
+then the command
+.PP
+.RE
+.RS 5
+.I what
+f\fB.\fRc f\fB.\fRo a\fB.\fRout
+.RE
+.PP
+will print
+.PP
+.RE
+.RS 8
+f\fB.\fRc:
+.PP
+.RE
+.RS 13
+identification information
+.PP
+.RE
+.RS 8
+f\fB.\fRo:
+.PP
+.RE
+.RS 13
+identification information
+.PP
+.RE
+.RS 8
+a\fB.\fRout:
+.PP
+.RE
+.RS 13
+identification information
+.PP
+.RE
+.I What
+is intended to be used in conjunction with the \*(S) command
+.IR get\^ (1),
+which automatically inserts identifying information,
+but it can also be used where the information is inserted manually.
+.SH "SEE ALSO"
+D 2
+get(1), help(1)
+E 2
+I 2
+get(1), sccshelp(1)
+E 2
+.SH DIAGNOSTICS
+Use
+D 2
+.IR help\^ (1)
+E 2
+I 2
+.IR sccshelp\^ (1)
+E 2
+for explanations.
+.SH BUGS
+It's possible that an unintended occurrence of the pattern
+\fB%Z%\fR
+could be
+found just by chance, but this causes no harm in nearly all cases.
+.tr $$
+E 1

@@ -1,0 +1,340 @@
+h55604
+s 00001/00001/00145
+d D 6.5 86/05/15 13:12:48 anne 6 5
+c spelling
+e
+s 00034/00009/00112
+d D 6.4 86/02/04 17:30:24 karels 5 4
+c touchups and consistency (making sure to make it true elsewhere
+c before checking this in)
+e
+s 00057/00020/00064
+d D 6.3 86/02/03 21:38:09 donn 4 3
+c Add a description of descriptor sets.
+e
+s 00008/00004/00076
+d D 6.2 85/06/28 15:59:09 sechrest 3 2
+c Improved English and added error [EINVAL]
+e
+s 00008/00008/00072
+d D 6.1 85/05/15 11:59:09 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00080/00000/00000
+d D 5.1 85/05/15 11:59:00 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SELECT 2 "2 July 1983"
+E 2
+I 2
+.TH SELECT 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+D 5
+select \- synchronous i/o multiplexing
+E 5
+I 5
+select \- synchronous I/O multiplexing
+E 5
+.SH SYNOPSIS
+.nf
+.ft B
+I 4
+#include <sys/types.h>
+E 4
+#include <sys/time.h>
+.PP
+.ft B
+D 2
+nfound = select(nfds, readfds, writefds, execptfds, timeout)
+int nfound, nfds, *readfds, *writefds, *execptfds;
+E 2
+I 2
+nfound = select(nfds, readfds, writefds, exceptfds, timeout)
+D 4
+int nfound, nfds, *readfds, *writefds, *exceptfds;
+E 4
+I 4
+int nfound, nfds;
+fd_set *readfds, *writefds, *exceptfds;
+E 4
+E 2
+struct timeval *timeout;
+I 4
+.PP
+.ft B
+D 5
+int fd;
+fd_set fdset;
+E 5
+FD_SET(fd, &fdset)	
+FD_CLR(fd, &fdset)	
+FD_ISSET(fd, &fdset)	
+FD_ZERO(&fdset)	
+I 5
+int fd;
+fd_set fdset;
+E 5
+E 4
+.fi
+.SH DESCRIPTION
+.I Select
+D 4
+examines the i/o descriptors specified by the bit masks
+E 4
+I 4
+D 5
+examines the i/o descriptor sets whose addresses are passed in
+E 5
+I 5
+examines the I/O descriptor sets whose addresses are passed in
+E 5
+E 4
+.IR readfds ,
+.IR writefds ,
+and
+D 2
+.I execptfds
+E 2
+I 2
+.I exceptfds
+E 2
+D 4
+to see if they are ready for reading, writing, or have an exceptional
+E 4
+I 4
+to see if some of their descriptors
+are ready for reading, are ready for writing, or have an exceptional
+E 4
+condition pending, respectively.
+D 4
+File descriptor 
+.I f
+is represented by the bit \*(lq1<<f\*(rq in
+the mask.
+.I Nfds
+desciptors are checked,
+i.e. the bits from 0 through
+E 4
+I 4
+The first
+.I nfds
+descriptors are checked in each set;
+i.e. the descriptors from 0 through
+E 4
+.IR nfds -1
+D 4
+in the masks are examined.
+.I Select
+D 3
+returns, in place, a mask of those descriptors which are ready.
+E 3
+I 3
+returns, in place, a mask of those descriptors that are ready.
+E 3
+D 2
+The total number of ready descriptors is returned in
+E 2
+I 2
+The total number of bits set in all the masks is returned in
+E 4
+I 4
+in the descriptor sets are examined.
+On return,
+.I select
+replaces the given descriptor sets
+D 5
+with subsets consisting of those descriptors that are ready.
+E 5
+I 5
+with subsets consisting of those descriptors that are ready
+for the requested operation.
+E 5
+The total number of ready descriptors in all the sets is returned in
+E 4
+E 2
+.IR nfound .
+.PP
+I 4
+D 5
+Some macros are provided for manipulating descriptor sets.
+E 5
+I 5
+The descriptor sets are stored as bit fields in arrays of integers.
+The following macros are provided for manipulating such descriptor sets:
+E 5
+.I "FD_ZERO(&fdset)"
+initializes a descriptor set
+.I fdset
+to the null set.
+.I "FD_SET(fd, &fdset)"
+includes a particular descriptor
+.I fd
+in
+.IR fdset .
+.I "FD_CLR(fd, &fdset)"
+removes
+.I fd
+from
+.IR fdset .
+.I "FD_ISSET(fd, &fdset)"
+is nonzero if
+.I fd
+is a member of
+.IR fdset ,
+zero otherwise.
+The behavior of these macros is undefined if
+a descriptor value is less than zero or greater than or equal to
+.IR FD_SETSIZE ,
+which is normally at least equal
+to the maximum number of descriptors supported by the system.
+.PP
+E 4
+If
+.I timeout
+is a non-zero pointer, it specifies a maximum interval to wait for the
+selection to complete.  If 
+.I timeout
+is a zero pointer, the select blocks indefinitely.  To affect a poll, the
+.I timeout
+D 5
+argument should be non-zero, pointing to a zero valued timeval structure.
+E 5
+I 5
+argument should be non-zero, pointing to a zero-valued timeval structure.
+E 5
+.PP
+Any of
+.IR readfds ,
+.IR writefds ,
+and
+D 2
+.I execptfds
+E 2
+I 2
+.I exceptfds
+E 2
+D 4
+may be given as 0 if no descriptors are of interest.
+E 4
+I 4
+may be given as zero pointers if no descriptors are of interest.
+E 4
+.SH "RETURN VALUE
+.I Select
+D 2
+returns the number of descriptors which are contained in
+E 2
+I 2
+D 3
+returns the number of 'one' bits which are contained in
+E 3
+I 3
+D 4
+returns the number of 'one' bits that are contained in
+E 3
+E 2
+the bit masks,
+E 4
+I 4
+returns the number of ready descriptors that are contained in
+the descriptor sets,
+E 4
+or \-1 if an error occurred.
+If the time limit expires then
+.I select
+returns 0.
+I 5
+If
+.I select
+returns with an error,
+including one due to an interrupted call,
+the descriptor sets will be unmodified.
+E 5
+.SH "ERRORS
+An error return from \fIselect\fP indicates:
+.TP 15
+[EBADF]
+D 4
+One of the bit masks specified an invalid descriptor.
+E 4
+I 4
+One of the descriptor sets specified an invalid descriptor.
+E 4
+.TP 15
+[EINTR]
+D 3
+An signal was delivered before any of the selected for
+events occurred or the time limit expired.
+E 3
+I 3
+A signal was delivered before the time limit expired and
+before any of the selected events occurred.
+.TP 15
+[EINVAL]
+D 4
+The specified time limit is unacceptable.  One of its components is
+E 4
+I 4
+The specified time limit is invalid.  One of its components is
+E 4
+negative or too large.
+E 3
+.SH SEE ALSO
+D 2
+accept(2), connect(2), read(2), write(2), recv(2), send(2)
+E 2
+I 2
+accept(2), connect(2), read(2), write(2), recv(2), send(2), getdtablesize(2)
+E 2
+.SH BUGS
+D 4
+The descriptor masks are always modified on return, even
+E 4
+I 4
+D 5
+The descriptor sets are always modified on return, even
+E 4
+if the call returns as the result of the timeout.
+E 5
+I 5
+Although the provision of
+.IR getdtablesize (2)
+was intended to allow user programs to be written independent
+of the kernel limit on the number of open files, the dimension
+of a sufficiently large bit field for select remains a problem.
+The default size FD_SETSIZE (currently 256) is somewhat larger than
+the current kernel limit to the number of open files.
+D 6
+However, in order to accomodate programs which might potentially
+E 6
+I 6
+However, in order to accommodate programs which might potentially
+E 6
+use a larger number of open files with select, it is possible
+to increase this size within a program by providing
+a larger definition of FD_SETSIZE before the inclusion of <sys/types.h>.
+.PP
+.I Select
+should probably return the time remaining from the original timeout,
+if any, by modifying the time value in place.
+This may be implemented in future versions of the system.
+Thus, it is unwise to assume that the timeout value will be unmodified
+by the
+.I select
+call.
+E 5
+E 1

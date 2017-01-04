@@ -1,4 +1,38 @@
-h54515
+h52346
+s 00001/00000/00080
+d D 1.26 03/12/04 18:28:14 msokolov 26 25
+c dummy depend target to satisfy Sendmail global Makefile
+e
+s 00004/00002/00076
+d D 1.25 00/05/26 23:46:12 msokolov 25 24
+c add Harhan cf files
+c have all cf files listed in $(ALL), not just the ones we build by default
+e
+s 00001/00001/00077
+d D 1.24 00/03/27 10:33:35 msokolov 24 23
+c missing backslash
+e
+s 00003/00000/00075
+d D 1.23 00/03/27 10:28:28 msokolov 23 22
+c add install target installing baretcpproto.cf as /usr/lib/sendmail.cf
+e
+s 00004/00002/00071
+d D 1.22 00/03/27 10:24:10 msokolov 22 21
+c Don't built Berkeley cf files, just the protos
+c add baretcpproto to the latter
+e
+s 00003/00003/00070
+d D 1.21 00/03/27 09:36:22 msokolov 21 20
+c INTERNET_RELAY, ARPAKLUDGE, and nicregistered.m4 go away, tcp & tcpld => smtp
+e
+s 00000/00000/00073
+d D 1.20 00/03/27 09:17:16 msokolov 20 19
+c bump it up to 1.20
+e
+s 00031/00031/00042
+d D 1.19 00/03/27 09:17:02 msokolov 19 18
+c deltas 1.19-1.20 have apparently been lost, reconstructing from g-file 1.20
+e
 s 00010/00000/00063
 d D 1.18 87/11/04 16:55:34 phil 18 17
 c Added the build information.
@@ -77,13 +111,34 @@
 T
 I 1
 #
+D 19
 #  Sendmail
 #  Copyright (c) 1983  Eric P. Allman
 #  Berkeley, California
+E 19
+I 19
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
+E 19
 #
+D 19
 #  Copyright (c) 1983 Regents of the University of California.
 #  All rights reserved.  The Berkeley software License Agreement
 #  specifies the terms and conditions for redistribution.
+E 19
+I 19
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 19
 #
 D 3
 #	@(#)Makefile	5.2 (Berkeley) 6/25/85
@@ -128,7 +183,12 @@ NSSRCS	=	arpa.mc cad.mc cadgroup.mc cogsci.mc ucbvax.mc
 NSSRCS	=	cad.mc cadgroup.mc cogsci.mc ucbarpa.mc ucbvax.mc
 E 17
 I 17
+D 19
 NSSRCS	=	cad.mc cadgroup.mc cogsci.mc okeeffe.mc ucbarpa.mc ucbvax.mc
+E 19
+I 19
+HOSTS	=	cad.cf cogsci.cf ic.cf okeeffe.cf ucbarpa.cf ucbvax.cf
+E 19
 E 17
 E 16
 E 14
@@ -161,7 +221,12 @@ GENSRCS	=	ucbtcp.mc ucbuucp.mc
 GENSRCS	=	ucbproto.mc ucbuucp.mc
 E 17
 I 17
+D 19
 GENSRCS	=	ucbproto.mc
+E 19
+I 19
+GROUPS	=	cadgroup.cf cc.cf cchem.cf
+E 19
 E 17
 E 14
 E 8
@@ -191,7 +256,17 @@ NSALL	=	arpa.cf cad.cf cadgroup.cf cogsci.cf ucbvax.cf
 NSALL	=	cad.cf cadgroup.cf cogsci.cf ucbarpa.cf ucbvax.cf
 E 17
 I 17
+D 19
 NSALL	=	cad.cf cadgroup.cf cogsci.cf okeeffe.cf ucbarpa.cf ucbvax.cf
+E 19
+I 19
+D 22
+PROTOS	=	tcpproto.cf tcpuucpproto.cf uucpproto.cf ucbtcp.cf
+E 22
+I 22
+UCBTCP	=	ucbtcp.cf
+E 22
+E 19
 E 17
 E 16
 E 14
@@ -199,16 +274,39 @@ NSALL	=	cad.cf cadgroup.cf cogsci.cf okeeffe.cf ucbarpa.cf ucbvax.cf
 E 10
 E 6
 
+I 25
+HARHAN	=	harhantcp.cf
+
+E 25
 I 6
 D 16
 PROTOS	=	ucbtcp.cf
 E 16
 I 16
+D 19
 PROTOS	=	ucbtcp.cf ucbtcp_fw.cf
+E 19
+I 19
+D 22
+ALL	=	$(HOSTS) $(GROUPS) $(PROTOS)
+E 22
+I 22
+PROTOS	=	baretcpproto.cf tcpproto.cf tcpuucpproto.cf uucpproto.cf
+
+D 25
+ALL	=	$(PROTOS)
+E 25
+I 25
+ALL	=	$(HOSTS) $(GROUPS) $(UCBTCP) $(HARHAN) $(PROTOS)
+E 25
+E 22
+E 19
 E 16
 
+D 19
 ALL	=	$(NSALL) $(PROTOS)
 
+E 19
 GET	=	sccs get
 
 I 18
@@ -239,7 +337,12 @@ BLDFILE	=	buildinfo
 E 16
 E 14
 
+D 25
 all: $(ALL)
+E 25
+I 25
+all: $(PROTOS)
+E 25
 I 4
 
 D 14
@@ -250,6 +353,7 @@ arpa.cf: arpa.mc
 	sh arpa.ed
 E 14
 I 14
+D 19
 ucbtcp.cf: ucbproto.mc
 I 18
 	rm -f $(BLDFILE)
@@ -273,6 +377,7 @@ ucbtcp.cf: ucbproto.mc
 E 14
 E 2
 
+E 19
 I 4
 D 6
 
@@ -283,6 +388,11 @@ clean:
 	rm -f ,*
 I 4
 
+I 23
+install:
+	install -c -o bin -g bin -m 644 baretcpproto.cf ${DESTDIR}/usr/lib/sendmail.cf
+
+E 23
 #
 # Standard files included by all
 #
@@ -297,10 +407,36 @@ $(ALL): nsmacros.m4 nsclasses.m4 nicregistered.m4 \
 	localm.m4 nstcpm.m4 nstcpldm.m4 rule0.m4
 E 14
 I 14
+D 19
 $(ALL): ../m4/nsmacros.m4 ../m4/nsclasses.m4 ../m4/nicregistered.m4 \
 	../m4/version.m4 ../m4/boilerplate.m4 ../m4/prewriterule.m4 \
 	../m4/postwriterule.m4 ../m4/rule3.m4 ../m4/localm.m4 ../m4/nstcpm.m4 \
 	../m4/nstcpldm.m4 ../m4/rule0.m4
+E 19
+I 19
+$(ALL):	../m4/boilerplate.m4 ../m4/fake_domains.m4 ../m4/localm.m4 \
+D 21
+	../m4/nsclasses.m4 ../m4/nsmacros.m4 ../m4/nstcpldm.m4 \
+	../m4/nstcpm.m4 ../m4/postwriterule.m4 ../m4/prewriterule.m4 \
+E 21
+I 21
+	../m4/nsclasses.m4 ../m4/nsmacros.m4 ../m4/smtpm.m4 \
+	../m4/postwriterule.m4 ../m4/prewriterule.m4 \
+E 21
+	../m4/rule0.m4 ../m4/rule3.m4 ../m4/rule5.m4 ../m4/smtpuucpm.m4 \
+D 21
+	../m4/uucpm.m4 ../m4/version.m4 ../sitedep/nicregistered.m4 \
+E 21
+I 21
+D 24
+	../m4/uucpm.m4 ../m4/version.m4
+E 24
+I 24
+	../m4/uucpm.m4 ../m4/version.m4 \
+E 24
+E 21
+	proto.mc
+E 19
 E 14
 
 #
@@ -362,6 +498,7 @@ ucbuucp.mc: uucpm.m4
 ../cf/ucbvax.cf: ../m4/rule5.m4 ../m4/berkm.m4 ../m4/suucpm.m4 ../m4/uucpm.m4  \
 E 16
 I 16
+D 19
 cad.cf: ucbproto.mc ../m4/uucp.cad.m4
 cadgroup.cf: ucbproto.mc
 cogsci.cf: ucbproto.mc ../m4/uucp.cogsci.m4
@@ -373,6 +510,20 @@ ucbvax.cf: ../m4/rule5.m4 ../m4/berkm.m4 ../m4/suucpm.m4 ../m4/uucpm.m4  \
 E 16
 	../m4/uucp.cad.m4 ../m4/uucp.cogsci.m4 ../m4/uucp.ucbarpa.m4 \
 	../m4/uucp.ucbvax.m4
+E 19
+I 19
+cad.cf: ../sitedep/uucp.cad.m4
+cogsci.cf: ../sitedep/uucp.cogsci.m4
+okeeffe.cf: ../sitedep/uucp.okeeffe.m4
+ucbarpa.cf: ../sitedep/uucp.ucbarpa.m4
+ucbvax.cf: ../m4/suucpm.m4 ../sitedep/uucp.cad.m4 \
+	../sitedep/uucp.cogsci.m4 ../sitedep/uucp.ucbarpa.m4 \
+	../sitedep/uucp.ucbvax.m4
+
+I 26
+depend:
+E 26
+E 19
 E 14
 E 8
 E 4

@@ -1,0 +1,196 @@
+h60842
+s 00001/00001/00092
+d D 6.4 86/05/12 17:53:14 karels 6 5
+c gotta git grammar
+e
+s 00001/00001/00092
+d D 6.3 85/09/11 17:10:05 bloom 5 4
+c change iscntrl back to 4.2 doc.  Fix the source, don't document the bug
+e
+s 00025/00003/00068
+d D 6.2 85/09/06 17:58:23 bloom 4 3
+c add isgraph, tolower, toupper, and toascii
+c change isprint to old form
+e
+s 00009/00005/00062
+d D 6.1 85/05/15 14:54:19 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00003/00064
+d D 5.1 85/05/15 14:54:11 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00067/00000/00000
+d D 4.1 85/05/15 14:54:02 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CTYPE 3 
+E 2
+I 2
+D 3
+.TH CTYPE 3  "25 February 1983"
+E 3
+I 3
+.TH CTYPE 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+D 2
+isalpha, isupper, islower, isdigit, isalnum, isspace, ispunct, isprint, iscntrl, isascii \- character classification
+E 2
+I 2
+D 3
+isalpha, isupper, islower, isdigit, isalnum, isspace, ispunct, isprint, iscntrl, isascii \- character classification macros
+E 3
+I 3
+D 4
+isalpha, isupper, islower, isdigit, isxdigit, isalnum, isspace, ispunct, isprint, iscntrl, isascii \- character classification macros
+E 4
+I 4
+isalpha, isupper, islower, isdigit, isxdigit, isalnum, isspace, ispunct, isprint, isgraph, iscntrl, isascii, toupper, tolower, toascii \- character classification macros
+E 4
+E 3
+E 2
+.SH SYNOPSIS
+.B #include <ctype.h>
+.PP
+.B isalpha(c)
+.PP
+.B . . .
+.SH DESCRIPTION
+These macros classify ASCII-coded integer values
+by table lookup.
+Each is a predicate returning nonzero for true,
+zero for false.
+.I Isascii
+D 4
+is defined on all integer values; the rest
+E 4
+I 4
+and
+.I toascii
+are defined on all integer values; the rest
+E 4
+are defined only where 
+.I isascii
+is true and on the single non-ASCII value
+EOF (see
+D 2
+.IR stdio (3)).
+E 2
+I 2
+.IR stdio (3S)).
+E 2
+.TP 15n
+.I isalpha
+.I c
+is a letter
+.TP
+.I isupper
+.I c
+is an upper case letter
+.TP
+.I islower 
+.I c
+is a lower case letter
+.TP
+.I isdigit
+.I c
+is a digit
+.TP
+I 3
+.I isxdigit
+.I c
+is a hex digit
+.TP
+E 3
+.I isalnum
+.I c
+is an alphanumeric character
+.TP
+.I isspace
+.I c
+D 3
+is a space, tab, carriage return, newline, or formfeed
+E 3
+I 3
+is a space, tab, carriage return, newline, vertical tab, or formfeed
+E 3
+.TP
+.I ispunct
+.I c
+is a punctuation character (neither control nor alphanumeric)
+.TP
+.I isprint
+.I c
+D 3
+is a printing character, code 040(8) (space) through 0176 (tilde)
+E 3
+I 3
+D 4
+is a printing character, code 041(8) (exclamation point) through 0176 (tilde)
+E 4
+I 4
+is a printing character, code 040(8) (space) through 0176 (tilde)
+E 4
+E 3
+.TP
+I 4
+.I isgraph
+.I c
+D 6
+is a printing character, like
+E 6
+I 6
+is a printing character, similar to
+E 6
+.I isprint
+except false for space.
+.TP
+E 4
+.I iscntrl
+.I c
+is a delete character (0177) or ordinary control character
+D 3
+(less than 040).
+E 3
+I 3
+D 5
+(less than 040 and not isspace(c)).
+E 5
+I 5
+(less than 040).
+E 5
+E 3
+.TP
+.I isascii
+.I c
+is an ASCII character, code less than 0200
+I 4
+.TP
+.I tolower
+.I c
+is converted to lower case.  Return value is undefined if not 
+.I isupper(c).
+.TP
+.I toupper
+.I c
+is converted to upper case.  Return value is undefined if not 
+.I islower(c).
+.TP
+.I toascii
+.I c
+is converted to be a valid ascii character.
+E 4
+.SH "SEE ALSO"
+ascii(7)
+E 1

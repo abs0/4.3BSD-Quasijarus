@@ -1,0 +1,125 @@
+h00994
+s 00010/00005/00077
+d D 5.3 88/07/09 11:40:15 bostic 3 2
+c install approved copyright notice
+e
+s 00020/00002/00062
+d D 5.2 88/06/08 18:27:39 bostic 2 1
+c add tmpfile(), tempnam() and associate commentary
+e
+s 00064/00000/00000
+d D 5.1 88/06/03 18:38:12 bostic 1 0
+c date and time created 88/06/03 18:38:12 by bostic
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1988 Regents of the University of California.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 3
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 3
+I 3
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 3
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH COMPATS5 3 "%Q%"
+.UC 7
+.SH NAME
+memccpy, memchr, memcmp, memcpy, memset, strchr, 
+D 2
+strcspn, strpbrk, strrchr, strspn, strtok, tmpnam \- System V
+compatibility routines
+E 2
+I 2
+strcspn, strpbrk, strrchr, strspn, strtok, tempnam,
+tmpfile, tmpnam \- System V compatibility routines
+E 2
+.SH SYNOPSIS
+.nf
+.B char *memccpy(from, to, ch, count)
+.B char *from, *to;
+.B int ch, count;
+.PP
+.B char *memchr(str, ch, count)
+.B char *str;
+.B int ch, count;
+.PP
+.B int memcmp(str1, str2, count)
+.B char *str1, *str2;
+.B int count;
+.PP
+.B char *memcpy(from, to, count)
+.B char *from, to;
+.B int count;
+.PP
+.B char *memset(str, ch, count)
+.B char *str;
+.B int ch, count;
+.PP
+.B char *strchr(str, ch);
+.B char *str;
+.B int ch;
+.PP
+.B int strcspn(str, chars)
+.B char *str, *chars;
+.PP
+.B char *strpbrk(str, chars)
+.B char *str, *chars;
+.PP
+.B char *strrchr(str, ch);
+.B char *str;
+.B int ch;
+.PP
+.B int strspn(str, chars)
+.B char *str, *chars;
+.PP
+.B char *strtok(str, sep)
+.B char *str, *sep;
+.PP
+I 2
+.B char *tempnam(tmpdir, prefix)
+.B char *tmpdir, *prefix;
+.PP
+.B char *tmpfile()
+.PP
+E 2
+.B char *tmpnam(str)
+.B char *str;
+I 2
+.PP
+.SH COMMENT
+The \fI#defines\fP \fIP_tmpdir\fP and \fIL_tmpnam\fP, used by the routines
+\fItempnam\fP, \fItmpfile\fP, and \fItmpnam\fP are not available in
+\fI<stdio.h>\fP.  If the code requires them, just use:
+.PP
+#include <sys/param.h>
+.br
+#define	P_tmpdir	"/usr/tmp"
+#define	L_tmpnam	MAXPATHLEN
+.PP
+Also, note that the caveat in the System V manual page that these functions
+can start recycling previously used names is untrue in this system.
+E 2
+.SH DESCRIPTION
+The above routines are available and behave as in System V.
+E 1

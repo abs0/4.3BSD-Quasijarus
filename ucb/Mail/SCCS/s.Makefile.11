@@ -1,0 +1,272 @@
+h38882
+s 00008/00002/00132
+d D 5.2 88/02/18 17:03:21 bostic 5 4
+c written by Kurt Shoens; added Berkeley specific header
+e
+s 00006/00002/00128
+d D 5.1 85/06/06 10:50:09 dist 4 3
+c Add copyright
+e
+s 00078/00029/00052
+d D 1.3 82/10/27 03:16:34 carl 3 2
+c Added instructions on configuration for small 11s.  New rules
+c added for making an overlaid version.
+e
+s 00003/00003/00078
+d D 1.2 82/08/12 08:43:29 kurt 2 1
+c fixes per Bruce Jerrick:  s/makefile/Makefile/;
+c changed DESTDIR to /;
+c Fixed install to find Mail.help* in misc/
+e
+s 00081/00000/00000
+d D 1.1 82/07/28 16:01:44 kurt 1 0
+c date and time created 82/07/28 16:01:44 by kurt
+e
+u
+U
+f b 
+f i 
+t
+T
+I 1
+#
+D 4
+# Unix version 7.
+E 4
+I 4
+# Copyright (c) 1980 Regents of the University of California.
+D 5
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+E 5
+I 5
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms are permitted
+# provided that this notice is preserved and that due credit is given
+# to the University of California at Berkeley. The name of the University
+# may not be used to endorse or promote products derived from this
+# software without specific prior written permission. This software
+# is provided ``as is'' without express or implied warranty.
+E 5
+E 4
+#
+D 4
+# Sccs Id = "%W% %G%";
+E 4
+I 4
+#	%W% (Berkeley) %G%
+#
+# Unix version 7.
+E 4
+#
+I 3
+# If you are compiling this for a nonseparate I/D machine,
+# you must:
+#	change the definitions of LDFLAGS, CFLAGS, LIBES,
+#	SIGRETROSRC, and SIGRETROOBJ
+#	make Mail40 rather than Mail
+#
+# Mail is too large to fit on a nonseparate I/D machine without
+# text overlays.
+#
+# If you do not have a vfork system call or do not support
+# job control, you must change the definition of OPTIONS.
+#
+E 3
+
+D 3
+CFLAGS=-O -DV7
+XSTR=/usr/ucb/xstr
+D 2
+DESTDIR=/usr/src
+E 2
+I 2
+DESTDIR=/
+E 2
+CTAGS=/usr/ucb/ctags -w
+VPRINT=/usr/ucb/print
+CGRAF=/ja/rigel/rigel/bin/cgraf
+CGRAPH=/ja/rigel/rigel/bin/cgraph
+NMKINDEX=/ja/rigel/rigel/bin/nmkindex
+DIRTCLOD=/ja/rigel/rigel/bin/dirtclod
+LIBES=
+ED=-ed
+AS=-as
+RM=-rm
+OBJS=version.o aux.o cmd1.o cmd2.o cmd3.o cmdtab.o collect.o \
+	config.o edit.o fio.o \
+E 3
+I 3
+OPTIONS=	-DV7 -DVMUNIX			# vfork and job control
+#OPTIONS=	-DV7				# no vfork or no job control
+
+LDFLAGS=	-i				# for separate I/D machines
+#LDFLAGS=	-n				# for nonseparate I/D machines
+
+CFLAGS=		-O ${OPTIONS} ${INCLUDES}	# for separate I/D machines
+#CFLAGS=	-O -V ${OPTIONS} ${INCLUDES}	# for nonseparate I/D machines
+
+LIBES=		-ljobs -lc			# for separate I/D machines
+#LIBES=		-lovjobs -lovc			# for nonseparate I/D machines
+
+SIGRETROSRC=					# for those with job control
+SIGRETROOBJ=					# for those with job control
+#SIGRETROSRC=	sigretro.c			# for those without job control
+#SIGRETROOBJ=	sigretro.o			# for those without job control
+
+XSTR=		/usr/ucb/xstr
+DESTDIR=	/
+CTAGS=		/usr/ucb/ctags -w
+ED=		-ed
+AS=		-as
+RM=		-rm
+OBJS=aux.o cmd1.o cmd2.o cmd3.o cmdtab.o collect.o config.o edit.o fio.o \
+E 3
+	getname.o head.o v7.local.o lock.o lex.o list.o main.o \
+	names.o optim.o popen.o quit.o send.o strings.o temp.o tty.o \
+D 3
+	vars.o sigretro.o
+E 3
+I 3
+	vars.o version.o errlst.o str.o ${SIGRETROOBJ}
+E 3
+
+SRCS=aux.c cmd1.c cmd2.c cmd3.c cmdtab.c collect.c config.c edit.c fio.c \
+	getname.c head.c v7.local.c lock.c lex.c list.c main.c \
+	names.c optim.c popen.c quit.c send.c strings.c temp.c tty.c vars.c \
+D 3
+	version.c sigretro.c
+E 3
+I 3
+	errlst.c version.c ${SIGRETROSRC}
+E 3
+
+D 3
+HDRS=rcv.h configdefs.h def.h glob.h v7.local.h local.h sigretro.h
+E 3
+I 3
+HDRS=rcv.h configdefs.h def.h glob.h v7.local.h local.h
+E 3
+
+S = $(SRCS) $(HDRS)
+
+I 3
+#
+# Special massaging of C files for sharing of strings
+#
+.c.o:
+	${CC} -E ${CFLAGS} $*.c | ${XSTR} -c -
+	${CC} -c ${CFLAGS} x.c 
+	mv x.o $*.o
+	@$(RM) -f x.c
+
+E 3
+Mail:	$S $(OBJS)
+	$(RM) -f Mail
+	@echo Loading ...
+D 3
+	@$(CC) -i -o Mail $(OBJS) $(LIBES)
+E 3
+I 3
+	@${CC} ${LDFLAGS} -o Mail ${OBJS} ${LIBES}
+E 3
+	@size Mail
+
+D 3
+mail.g:	$(SRCS)
+	$(CGRAF) $(SRCS) > mail.g
+E 3
+I 3
+Mail40:	$S $(OBJS)
+	$(RM) -f Mail
+	@echo Loading ...
+	@ld -X /lib/crt0.o ${LDFLAGS} -o Mail \
+	-Z	getname.o names.o optim.o popen.o send.o strings.o temp.o \
+		v7.local.o vars.o \
+	-Z	edit.o head.o lex.o list.o lock.o main.o quit.o tty.o \
+	-Z	cmd1.o cmd2.o cmd3.o collect.o ${SIGRETROOBJ} \
+	-L	aux.o cmdtab.o config.o errlst.o fio.o \
+		str.o version.o ${LIBES}
+	@size Mail
+E 3
+
+install:
+	install -s Mail ${DESTDIR}/usr/ucb
+D 2
+	cp Mail.help* ${DESTDIR}/usr/lib
+E 2
+I 2
+	cp misc/Mail.help* ${DESTDIR}/usr/lib
+E 2
+	cd ${DESTDIR}/usr/ucb; rm -f mail; ln Mail mail
+
+$S:
+	sccs get $@;
+
+srcs:	$S
+
+tags:	$(SRCS)
+	${CTAGS} $(SRCS);
+
+clean:
+	$(RM) -f *.o
+D 3
+	rm -f Mail a.out fmt x.c xs.c tags core
+E 3
+I 3
+	rm -f Mail a.out fmt x.c xs.c core
+E 3
+	cp /dev/null strings
+
+lint:
+	lint $(CFLAGS) $(SRCS)
+
+fmt:	fmt.c head.c
+D 3
+	$(CC) fmt.c head.c -o fmt
+E 3
+I 3
+	$(CC) fmt.c head.c -O -o fmt
+E 3
+	$(RM) fmt.o head.o
+	size fmt
+
+D 3
+print:	$S fmt.c
+	$(CGRAPH) > mail.g;
+	$(NMKINDEX) > mail.i;
+	$(DIRTCLOD) -x mail.i -p mail.g > mail.x
+D 2
+	@$(VPRINT) makefile mail.x rcv.h def.h glob.h local.h v7.local.h \
+E 2
+I 2
+	@$(VPRINT) Makefile mail.x rcv.h def.h glob.h local.h v7.local.h \
+E 2
+	    $(SRCS) fmt.c;
+E 3
+I 3
+str.o: strings
+	$(XSTR)
+	$(CC) -c $(CFLAGS) xs.c
+	mv xs.o str.o
+	$(RM) xs.c
+
+config.o:	config.c
+	$(CC) -c $(CFLAGS) config.c
+
+cmdtab.o: cmdtab.c
+	$(CC) -c $(CFLAGS) cmdtab.c
+
+errlst.o: errlst.c
+	${CC} -E ${CFLAGS} errlst.c | ${XSTR} -c -
+	${CC} ${CFLAGS} -c x.c
+	mv x.o errlst.o
+E 3
+
+wc:
+	@wc rcv.h def.h glob.h local.h v7.local.h $(SRCS)
+
+sc:
+	@grep -c \; rcv.h def.h glob.h local.h v7.local.h $(SRCS)
+E 1

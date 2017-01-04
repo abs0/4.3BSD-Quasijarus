@@ -1,0 +1,38 @@
+but not the other 3: it is so as a result of Adobe's decision
+as to what to include and what to exclude.
+.IP \(bu
+
+
+none present, \fB\(fi\fP and \fB\(fl\fP present, or all 5 present.
+Even more specifically,
+
+Furthermore, the mere presence of ligature characters
+in a font's character repertoire does not necessarily indicate
+that their use is appropriate: for example, the Courier font family
+includes \fB\e(fi\fP and \fB\e(fl\fP ligature characters, but
+invoking them would produce text like ``\fC\(flash \(file system\fP'',
+which looks rather weird.
+.PP
+In the present troff version, the key question of ligature handling
+has been shifted from ``what ligatures are available'' to
+``which ligatures should be used'', referring to the automatic
+ligature substitution mechanism.
+
+
+.\"
+.Sc "2.6.1" ""
+
+.Sc "2.6.2" "Ligature substitution control"
+
+.PP
+The ligature handling facilities in the present version of troff
+have been tailored to the realities of the \*(PS font world:
+.IP \(bu
+The \&\fCfi\fP and \&\fCfl\fP ligature
+characters have been included in Adobe's idea of the
+base character set required for all Latin text fonts,
+hence they exist in all such fonts.
+They have been included in TroffEncoding,
+and the named characters \fB\e(fi\fP and \fB\e(fl\fP
+map to the TroffEncoding code points for
+\&\fCfi\fP and \&\fCfl\fP, respectively.

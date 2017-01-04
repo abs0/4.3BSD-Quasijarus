@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vget.c	6.10 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_vget.c	6.11 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -71,12 +71,12 @@ int	doingread = 0;
  */
 getbr()
 {
-	char ch;
+	u_char ch;
 	register int c, d;
-	register char *colp;
+	register u_char *colp;
 #define BEEHIVE
 #ifdef BEEHIVE
-	static char Peek2key;
+	static u_char Peek2key;
 #endif
 	extern short slevel, ttyindes;
 
@@ -125,12 +125,15 @@ again:
 			goto getATTN;
 		error("Input read error");
 	}
-	c = ch & TRIM;
+	c = ch;
+	if (!value(EIGHTBIT) && !isascii(c))
+		c &= TRIM7;
 #ifdef BEEHIVE
 	if (XB && slevel==0 && c == ESCAPE) {
 		if (read(0, &Peek2key, 1) != 1)
 			goto getATTN;
-		Peek2key &= TRIM;
+		if (!value(EIGHTBIT) && !isascii(Peek2key))
+			Peek2key &= TRIM7;
 		switch (Peek2key) {
 		case 'C':	/* SPOW mode sometimes sends \EC for space */
 			c = ' ';
@@ -247,9 +250,9 @@ peekkey()
  * A return value of 1 means the user blewit or blewit away.
  */
 readecho(c)
-	char c;
+	u_char c;
 {
-	register char *sc = cursor;
+	register u_char *sc = cursor;
 	register int (*OP)();
 	bool waste;
 	register int OPeek;
@@ -265,7 +268,7 @@ readecho(c)
 	vgoto(WECHO, 1);
 	cursor = linebuf; linebuf[0] = 0; genbuf[0] = c;
 	if (peekbr()) {
-		if (!INS[0] || (INS[0] & (QUOTE|TRIM)) == OVERBUF)
+		if (!INS[0] || INS[0] == OVERBUF)
 			goto blewit;
 		vglobp = INS;
 	}
@@ -313,13 +316,13 @@ setLAST()
  * the repeatability of the insert.
  */
 addtext(cp)
-	char *cp;
+	u_char *cp;
 {
 
 	if (vglobp)
 		return;
 	addto(INS, cp);
-	if ((INS[0] & (QUOTE|TRIM)) == OVERBUF)
+	if (INS[0] == OVERBUF)
 		lastcmd[0] = 0;
 }
 
@@ -333,10 +336,10 @@ setDEL()
  * Put text from cursor upto wcursor in BUF.
  */
 ex_setBUF(BUF)
-	register char *BUF;
+	register u_char *BUF;
 {
 	register int c;
-	register char *wp = wcursor;
+	register u_char *wp = wcursor;
 
 	c = *wp;
 	*wp = 0;
@@ -346,10 +349,10 @@ ex_setBUF(BUF)
 }
 
 addto(buf, str)
-	register char *buf, *str;
+	register u_char *buf, *str;
 {
 
-	if ((buf[0] & (QUOTE|TRIM)) == OVERBUF)
+	if (buf[0] == OVERBUF)
 		return;
 	if (strlen(buf) + strlen(str) + 1 >= VBSIZE) {
 		buf[0] = OVERBUF;
@@ -420,8 +423,8 @@ map(c,maps)
 	register struct maps *maps;
 {
 	register int d;
-	register char *p, *q;
-	char b[10];	/* Assumption: no keypad sends string longer than 10 */
+	register u_char *p, *q;
+	u_char b[10];	/* Assumption: no keypad sends string longer than 10 */
 
 	/*
 	 * Mapping for special keys on the terminal only.
@@ -531,10 +534,10 @@ map(c,maps)
  * since otherwise two fast escapes can clobber our undo.
  */
 macpush(st, canundo)
-char *st;
+u_char *st;
 int canundo;
 {
-	char tmpbuf[BUFSIZ];
+	u_char tmpbuf[BUFSIZ];
 
 	if (st==0 || *st==0)
 		return;
@@ -568,7 +571,7 @@ int canundo;
 
 #ifdef TRACE
 visdump(s)
-char *s;
+u_char *s;
 {
 	register int i;
 
@@ -585,10 +588,10 @@ char *s;
 }
 
 vudump(s)
-char *s;
+u_char *s;
 {
 	register line *p;
-	char savelb[1024];
+	u_char savelb[1024];
 
 	if (!trace) return;
 

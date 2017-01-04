@@ -17,14 +17,28 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)version.c	5.61.1.2 (Berkeley) 5/29/02";
+static char sccsid[] = "@(#)version.c	5.61.1.6 (Berkeley) 9/20/07";
 #endif /* not lint */
 
-char	Version[] = "5.61.1.2";
+char	Version[] = "5.61.1.6";
 
 # ifdef COMMENT
 
 SCCS/s.version.c:
+
+D 5.61.1.6	07/09/20 02:56:07	msokolov	490	489	00000/00000/00023
+change to oversize handling strategy:
+trim at limit and silently discard the rest instead of error in mid-message
+
+D 5.61.1.5	06/05/20 19:25:43	msokolov	489	488	00000/00000/00023
+alias options for uid/gid and restricted access
+
+D 5.61.1.4	06/03/31 17:33:10	msokolov	488	487	00000/00000/00023
+generate 4-digit years (RFC 1123)
+
+D 5.61.1.3	04/11/21 08:43:03	msokolov	487	486	00000/00000/00023
+added options to globally limit message size in collect phase and to
+disallow Internet relaying
 
 D 5.61.1.2	02/05/29 22:17:11	msokolov	486	485	00000/00000/00023
 minor Y2K fix
@@ -2097,21 +2111,21 @@ D 1.1	80/10/11 13:34:43	eric	1	0	00001/00000/00000
 code versions:
 
 alias.o:
-	alias.c	5.17 (Berkeley) 10/1/99 (with DBM)
+	alias.c	5.19 (Berkeley) 5/20/06 (with DBM)
 arpadate.o:
-	arpadate.c	5.9 (Berkeley) 6/30/88
+	arpadate.c	5.10 (Berkeley) 3/31/06
 clock.o:
 	clock.c	5.6 (Berkeley) 6/30/88
 collect.o:
-	collect.c	5.4 (Berkeley) 6/30/88
+	collect.c	5.6 (Berkeley) 9/19/07
 conf.o:
-	conf.c	5.17 (Berkeley) 6/30/88
+	conf.c	5.18 (Berkeley) 5/20/06
 convtime.o:
 	convtime.c	5.3 (Berkeley) 6/30/88
 daemon.o:
-	daemon.c	5.29 (Berkeley) 5/29/02 (with daemon mode)
+	daemon.c	5.30 (Berkeley) 4/23/04 (with daemon mode)
 deliver.o:
-	deliver.c	5.24 (Berkeley) 4/3/00
+	deliver.c	5.25 (Berkeley) 5/19/06
 domain.o:
 	domain.c	5.18 (Berkeley) 1/1/89 (with name server)
 envelope.o:
@@ -2124,20 +2138,20 @@ macro.o:
 	macro.c	5.5 (Berkeley) 6/30/88
 main.o:
 	 Copyright (c) 1988 Regents of the University of California.
-	main.c	5.19 (Berkeley) 9/20/88
-	sendmail.h	5.14		5/29/02
+	main.c	5.20 (Berkeley) 5/19/06
+	sendmail.h	5.17		5/19/06
 parseaddr.o:
 	parseaddr.c	5.9 (Berkeley) 6/30/88
 queue.o:
 	queue.c	5.24 (Berkeley) 6/30/88 (with queueing)
 readcf.o:
-	readcf.c	5.14 (Berkeley) 9/20/88
+	readcf.c	5.16 (Berkeley) 11/21/04
 recipient.o:
 	recipient.c	5.12 (Berkeley) 6/30/88
 savemail.o:
 	savemail.c	5.9 (Berkeley) 6/30/88
 srvrsmtp.o:
-	srvrsmtp.c	5.23 (Berkeley) 5/29/02 (with SMTP)
+	srvrsmtp.c	5.25 (Berkeley) 4/23/04 (with SMTP)
 stab.o:
 	stab.c	5.5 (Berkeley) 6/30/88
 stats.o:

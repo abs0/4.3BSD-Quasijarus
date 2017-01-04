@@ -1,0 +1,158 @@
+h58721
+s 00002/00002/00054
+d D 6.2 86/05/06 14:14:08 anne 4 3
+c grammar, spelling, diction
+e
+s 00001/00001/00055
+d D 6.1 85/05/20 17:09:35 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00012/00024/00044
+d D 5.1 85/05/20 17:09:22 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00068/00000/00000
+d D 4.1 85/05/20 17:09:11 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ARITHMETIC 6 
+E 2
+I 2
+D 3
+.TH ARITHMETIC 6  "1 February 1983"
+E 3
+I 3
+.TH ARITHMETIC 6  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+arithmetic \- provide drill in number facts
+.SH SYNOPSIS
+.B /usr/games/arithmetic
+[
+.B +\-x/
+] [ range ]
+.SH DESCRIPTION
+.I Arithmetic
+D 2
+types out simple arithmetic problems,
+and waits for an answer to be typed in.
+If the answer is correct,
+it types back \*(lqRight!\*(rq,
+and a new problem.
+If the answer is wrong,
+it replies \*(lqWhat?\*(rq,
+E 2
+I 2
+types out simple arithmetic problems, and waits for an answer to be typed in.
+If the answer is correct, it types back \*(lqRight!\*(rq, and a new problem.
+If the answer is wrong, it replies \*(lqWhat?\*(rq,
+E 2
+and waits for another answer.
+D 4
+Every twenty problems, it publishes
+E 4
+I 4
+After every twenty problems, it publishes
+E 4
+D 2
+statistics on correctness and the time required
+to answer.
+E 2
+I 2
+statistics on correctness and the time required to answer.
+E 2
+.PP
+D 2
+To quit the program,
+type an interrupt (delete).
+E 2
+I 2
+To quit the program, type an interrupt (delete).
+E 2
+.PP
+D 2
+The first optional argument determines the kind of problem
+to be generated;
+E 2
+I 2
+The first optional argument determines the kind of problem to be generated;
+E 2
+.B +\-x/
+D 2
+respectively cause
+addition, subtraction, multiplication, and division
+E 2
+I 2
+respectively cause addition, subtraction, multiplication, and division
+E 2
+problems to be generated.
+One or more characters can be given;
+if more than one is given, the different types of
+problems will be mixed in random order; default is
+D 4
+.B +\-
+E 4
+I 4
+.B +\-.
+E 4
+.PP
+.I Range
+is a decimal number;
+all addends, subtrahends, differences, multiplicands, divisors,
+and quotients will be less than or equal to the value of
+.IR range .
+Default
+.I range
+is 10.
+.PP
+At the start, all numbers less than or equal to
+.I range
+D 2
+are equally likely
+to appear.
+E 2
+I 2
+are equally likely to appear.
+E 2
+If the respondent makes a mistake,
+the numbers in the problem which was missed
+become more likely to reappear.
+.PP
+As a matter of educational philosophy, the program will
+D 2
+not give correct answers,
+since the learner should, in principle,
+E 2
+I 2
+not give correct answers, since the learner should, in principle,
+E 2
+be able to calculate them.
+Thus the program is intended to provide drill for
+D 2
+someone just past the first learning stage,
+not to teach number facts
+E 2
+I 2
+someone just past the first learning stage, not to teach number facts
+E 2
+.I de
+.IR novo .
+D 2
+For almost all users,
+the relevant statistic should be
+E 2
+I 2
+For almost all users, the relevant statistic should be
+E 2
+time per problem, not percent correct.
+E 1

@@ -1,0 +1,7271 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%DocumentNeededResources: font Times-Roman Times-Italic Times-Bold Symbol
+%%DocumentSuppliedResources: encoding TroffEncoding
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+	currentdict
+end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: USD:2-1 1
+save $troff begin Sc
+2 12 SF
+10500 40140(LEARN)P
+13260 40140<88>P
+14220 40140(Computer\255Aided)P
+19700 40140(Instruction)P
+23380 40140(on)P
+24380 40140(UNIX)P
+15760 39240(\(Second)P
+18440 39240(Edition\))P
+1 10 SF
+15868 37800(Brian)P
+17435 37800(W.)P
+18285 37800(Kernighan)P
+16369 36720(Michael)P
+18535 36720(E.)P
+19252 36720(Lesk)P
+0 10 SF
+15327 35640(AT&T)P
+17161 35640(Bell)P
+18361 35640(Laboratories)P
+14453 34920(Murray)P
+16452 34920(Hill,)P
+17736 34920(New)P
+19068 34920(Jersey)P
+20766 34920(07974)P
+1 10 SF
+16942 32760(ABSTRACT)P
+0 10 SF
+8160 31104(This)P
+9564 31104(paper)P
+11233 31104(describes)P
+13801 31104(the)P
+14871 31104(second)P
+16873 31104(version)P
+18976 31104(of)P
+19813 31104(the)P
+1 10 SF
+20883 31104(learn)P
+0 10 SF
+22486 31104(program)P
+24855 31104(for)P
+25891 31104(interpreting)P
+29027 31104(CAI)P
+6660 30384(scripts)P
+8448 30384(on)P
+9270 30384(the)P
+0 9 SF
+10205 30384(UNIX)P
+0 10 SF
+11555 30384<80>P
+12077 30384(operating)P
+14565 30384(system,)P
+16603 30384(and)P
+17691 30384(a)P
+18179 30384(set)P
+19067 30384(of)P
+19789 30384(scripts)P
+21577 30384(that)P
+22699 30384(provide)P
+24753 30384(a)P
+25240 30384(computerized)P
+28726 30384(intro\255)P
+6660 29664(duction)P
+8660 29664(to)P
+9327 29664(the)P
+10260 29664(system.)P
+8160 28728(Six)P
+9240 28728(current)P
+11218 28728(scripts)P
+13062 28728(cover)P
+14672 28728(basic)P
+16182 28728(commands)P
+19059 28728(and)P
+20203 28728(\212le)P
+21248 28728(handling,)P
+23776 28728(the)P
+24787 28728(editor,)P
+26615 28728(additional)P
+29293 28728(\212le)P
+6660 28008(handling)P
+8966 28008(commands,)P
+11921 28008(the)P
+1 10 SF
+12860 28008(eqn)P
+0 10 SF
+13932 28008(program)P
+16171 28008(for)P
+17077 28008(mathematical)P
+20515 28008(typing,)P
+22405 28008(the)P
+23343 28008(``-ms'')P
+25386 28008(package)P
+27555 28008(of)P
+28260 28008(format\255)P
+6660 27288(ting)P
+7828 27288(macros,)P
+9944 27288(and)P
+11044 27288(an)P
+11844 27288(introduction)P
+15012 27288(to)P
+15713 27288(the)P
+16680 27288(C)P
+17314 27288(programming)P
+20815 27288(language.)P
+23564 27288(These)P
+25229 27288(scripts)P
+27028 27288(now)P
+28294 27288(include)P
+6660 26568(a)P
+7126 26568(total)P
+8393 26568(of)P
+9093 26568(about)P
+10626 26568(530)P
+11726 26568(lessons.)P
+8160 25632(Many)P
+9765 25632(users)P
+11203 25632(from)P
+12576 25632(a)P
+13048 25632(wide)P
+14420 25632(variety)P
+16292 25632(of)P
+16998 25632(backgrounds)P
+20269 25632(have)P
+21607 25632(used)P
+1 10 SF
+22911 25632(learn)P
+0 10 SF
+24482 25632(to)P
+25154 25632(acquire)P
+27124 25632(basic)P
+28561 25632(UNIX)P
+6660 24912(skills.)P
+8489 24912(Most)P
+9934 24912(usage)P
+11511 24912(involves)P
+13755 24912(the)P
+14699 24912(\212rst)P
+15844 24912(two)P
+16955 24912(scripts,)P
+18882 24912(an)P
+19659 24912(introduction)P
+22804 24912(to)P
+0 9 SF
+23462 24912(UNIX)P
+0 10 SF
+25023 24912(\212les)P
+26234 24912(and)P
+27311 24912(commands,)P
+6660 24192(and)P
+7726 24192(the)P
+0 9 SF
+8639 24192(UNIX)P
+0 10 SF
+10189 24192(editor.)P
+8160 23256(The)P
+9358 23256(second)P
+11288 23256(version)P
+13319 23256(of)P
+1 10 SF
+14084 23256(learn)P
+0 10 SF
+15715 23256(is)P
+16380 23256(about)P
+17978 23256(four)P
+19243 23256(times)P
+20808 23256(faster)P
+22405 23256(than)P
+23703 23256(the)P
+24701 23256(previous)P
+27032 23256(one)P
+28162 23256(in)P
+28893 23256(CPU)P
+6660 22536(utilization,)P
+9546 22536(and)P
+10714 22536(much)P
+12349 22536(faster)P
+13983 22536(in)P
+14752 22536(perceived)P
+17385 22536(time)P
+18754 22536(because)P
+20953 22536(of)P
+21755 22536(better)P
+23423 22536(overlap)P
+25524 22536(of)P
+26326 22536(computing)P
+29194 22536(and)P
+6660 21816(printing.)P
+9127 21816(It)P
+9710 21816(also)P
+10892 21816(requires)P
+13039 21816(less)P
+14153 21816(\212le)P
+15135 21816(space)P
+16681 21816(than)P
+17929 21816(the)P
+18877 21816(\212rst)P
+20026 21816(version.)P
+22357 21816(Many)P
+23971 21816(of)P
+24686 21816(the)P
+25634 21816(lessons)P
+27581 21816(have)P
+28928 21816(been)P
+6660 21096(revised;)P
+8857 21096(new)P
+10154 21096(material)P
+12418 21096(has)P
+13515 21096(been)P
+14945 21096(added)P
+16674 21096(to)P
+17438 21096(re\213ect)P
+19234 21096(changes)P
+21462 21096(and)P
+22625 21096(enhancements)P
+26319 21096(in)P
+0 9 SF
+27063 21096(UNIX)P
+0 10 SF
+28710 21096(itself.)P
+6660 20376(Script\255writing)P
+10228 20376(is)P
+10828 20376(also)P
+11994 20376(easier)P
+13592 20376(because)P
+15689 20376(of)P
+16389 20376(revisions)P
+18755 20376(to)P
+19422 20376(the)P
+20355 20376(script)P
+21888 20376(language.)P
+2 10 SF
+4320 18216(1.)P
+5170 18216(Introduction.)P
+1 10 SF
+5820 17280(Learn)P
+0 10 SF
+7559 17280(is)P
+8165 17280(a)P
+8637 17280(driver)P
+10276 17280(for)P
+11182 17280(CAI)P
+12421 17280(scripts.)P
+14543 17280(It)P
+15116 17280(is)P
+15722 17280(intended)P
+17993 17280(to)P
+18665 17280(permit)P
+20437 17280(the)P
+21375 17280(easy)P
+22645 17280(composition)P
+25817 17280(of)P
+26522 17280(lessons)P
+28459 17280(and)P
+29530 17280(lesson)P
+31234 17280(frag\255)P
+4320 16560(ments)P
+6047 16560(to)P
+6808 16560(teach)P
+8367 16560(people)P
+10260 16560(computer)P
+12820 16560(skills.)P
+14731 16560(Since)P
+16358 16560(it)P
+16986 16560(is)P
+17680 16560(teaching)P
+20006 16560(the)P
+21033 16560(same)P
+22559 16560(system)P
+24518 16560(on)P
+25411 16560(which)P
+27170 16560(it)P
+27797 16560(is)P
+28490 16560(implemented,)P
+32066 16560(it)P
+4320 15840(makes)P
+6132 15840(direct)P
+7778 15840(use)P
+8857 15840(of)P
+0 9 SF
+9617 15840(UNIX)P
+0 10 SF
+11247 15840(facilities)P
+13593 15840(to)P
+14340 15840(create)P
+16051 15840(a)P
+16597 15840(controlled)P
+0 9 SF
+19290 15840(UNIX)P
+0 10 SF
+20920 15840(environment.)P
+24583 15840(The)P
+25796 15840(system)P
+27742 15840(includes)P
+30021 15840(two)P
+31200 15840(main)P
+4320 15120(parts:)P
+5919 15120(\(1\))P
+6885 15120(a)P
+7417 15120(driver)P
+9116 15120(that)P
+10282 15120(interprets)P
+12813 15120(the)P
+13811 15120(lesson)P
+15575 15120(scripts;)P
+17573 15120(and)P
+18704 15120(\(2\))P
+19669 15120(the)P
+20667 15120(lesson)P
+22431 15120(scripts)P
+24262 15120(themselves.)P
+27342 15120(At)P
+28207 15120(present)P
+30204 15120(there)P
+31668 15120(are)P
+4320 14400(seven)P
+5885 14400(scripts:)P
+5820 13464<88>P
+7320 13464(basic)P
+8752 13464(\212le)P
+9719 13464(handling)P
+12019 13464(commands)P
+5820 12528<88>P
+7320 12528(the)P
+0 9 SF
+8233 12528(UNIX)P
+0 10 SF
+9783 12528(text)P
+10883 12528(editors)P
+1 10 SF
+12716 12528(ed)P
+0 10 SF
+13582 12528(and)P
+1 10 SF
+14648 12528(vi)P
+0 10 SF
+5820 11592<88>P
+7320 11592(advanced)P
+9784 11592(\212le)P
+10751 11592(handling)P
+5820 10656<88>P
+7320 10656(the)P
+1 10 SF
+8253 10656(eqn)P
+0 10 SF
+9419 10656(language)P
+11784 10656(for)P
+12684 10656(typing)P
+14418 10656(mathematics)P
+5820 9720<88>P
+7320 9720(the)P
+8253 9720(``ms'')P
+9953 9720(macro)P
+11652 9720(package)P
+13816 9720(for)P
+14716 9720(document)P
+17282 9720(formatting)P
+5820 8784<88>P
+7320 8784(the)P
+8253 8784(C)P
+8853 8784(programming)P
+12320 8784(language)P
+5820 7848(The)P
+6953 7848(purported)P
+9486 7848(advantages)P
+12350 7848(of)P
+13050 7848(CAI)P
+14283 7848(scripts)P
+16049 7848(for)P
+16949 7848(training)P
+19016 7848(in)P
+19683 7848(computer)P
+22149 7848(skills)P
+23616 7848(include)P
+25582 7848(the)P
+26515 7848(following:)P
+5820 6912(\(a\))P
+7320 6912(students)P
+9486 6912(are)P
+10418 6912(forced)P
+12150 6912(to)P
+12817 6912(perform)P
+14950 6912(the)P
+15883 6912(exercises)P
+18280 6912(that)P
+19380 6912(are)P
+20312 6912(in)P
+20979 6912(fact)P
+22078 6912(the)P
+23011 6912(basis)P
+24410 6912(of)P
+25110 6912(training)P
+27177 6912(in)P
+27844 6912(any)P
+28910 6912(case;)P
+4320 5640 8 0 18 L
+0 8 SF
+4320 5040<80>P
+0 7 SF
+4700 5040(UNIX)P
+0 8 SF
+5909 5040(is)P
+6389 5040(a)P
+6762 5040(registered)P
+8814 5040(trademark)P
+10919 5040(of)P
+11479 5040(AT&T)P
+12945 5040(Bell)P
+13904 5040(Laboratories)P
+16489 5040(in)P
+17022 5040(the)P
+17768 5040(USA)P
+18889 5040(and)P
+19742 5040(other)P
+20888 5040(countries.)P
+end restore showpage
+%%Page: USD:2-2 2
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:2\2552)P
+20035 44640(LEARN)P
+22235 44640<88>P
+23035 44640(Computer\255Aided)P
+27301 44640(Instruction)P
+30101 44640(on)P
+30901 44640(UNIX)P
+5820 42480(\(b\))P
+7320 42480(students)P
+9486 42480(receive)P
+11417 42480(immediate)P
+14150 42480(feedback)P
+16514 42480(and)P
+17580 42480(con\212rmation)P
+20847 42480(of)P
+21547 42480(progress;)P
+5820 41544(\(c\))P
+7320 41544(students)P
+9486 41544(may)P
+10719 41544(progress)P
+12951 41544(at)P
+13584 41544(their)P
+14884 41544(own)P
+16117 41544(rate;)P
+5820 40608(\(d\))P
+7320 40608(no)P
+8120 40608(schedule)P
+10418 40608(requirements)P
+13750 40608(are)P
+14682 40608(imposed;)P
+17082 40608(students)P
+19248 40608(may)P
+20481 40608(study)P
+21981 40608(at)P
+22614 40608(any)P
+23680 40608(time)P
+24947 40608(convenient)P
+27779 40608(for)P
+28679 40608(them;)P
+5820 39672(\(e\))P
+7320 39672(the)P
+8317 39672(lessons)P
+10312 39672(may)P
+11608 39672(be)P
+12437 39672(improved)P
+15000 39672(individually)P
+18164 39672(and)P
+19293 39672(the)P
+20289 39672(improvements)P
+23985 39672(are)P
+24980 39672(immediately)P
+28243 39672(available)P
+30671 39672(to)P
+31401 39672(new)P
+7320 38952(users;)P
+5820 38016(\(f\))P
+7320 38016(since)P
+8752 38016(the)P
+9685 38016(student)P
+11618 38016(has)P
+12617 38016(access)P
+14347 38016(to)P
+15014 38016(a)P
+15480 38016(computer)P
+17946 38016(for)P
+18846 38016(the)P
+19779 38016(CAI)P
+21012 38016(script)P
+22545 38016(there)P
+23944 38016(is)P
+24544 38016(a)P
+25010 38016(place)P
+26475 38016(to)P
+27142 38016(do)P
+27942 38016(exercises;)P
+5820 37080(\(g\))P
+7320 37080(the)P
+8253 37080(use)P
+9252 37080(of)P
+9952 37080(high)P
+11219 37080(technology)P
+14085 37080(will)P
+15219 37080(improve)P
+17419 37080(student)P
+19352 37080(motivation)P
+22153 37080(and)P
+23219 37080(the)P
+24152 37080(interest)P
+26118 37080(of)P
+26818 37080(their)P
+28118 37080(management.)P
+5820 36144(Opposed)P
+8174 36144(to)P
+8863 36144(this,)P
+10102 36144(of)P
+10824 36144(course,)P
+12761 36144(is)P
+13383 36144(the)P
+14338 36144(absence)P
+16456 36144(of)P
+17177 36144(anyone)P
+19130 36144(to)P
+19818 36144(whom)P
+21539 36144(the)P
+22493 36144(student)P
+24447 36144(may)P
+25701 36144(direct)P
+27288 36144(questions.)P
+30125 36144(If)P
+30746 36144(CAI)P
+32000 36144(is)P
+4320 35424(used)P
+5651 35424(without)P
+7717 35424(a)P
+8215 35424(``counselor'')P
+11579 35424(or)P
+12311 35424(other)P
+13776 35424(assistance,)P
+16555 35424(it)P
+17121 35424(should)P
+18953 35424(properly)P
+21218 35424(be)P
+22016 35424(compared)P
+24613 35424(to)P
+25312 35424(a)P
+25810 35424(textbook,)P
+28291 35424(lecture)P
+30154 35424(series,)P
+31900 35424(or)P
+4320 34704(taped)P
+5862 34704(course,)P
+7820 34704(rather)P
+9462 34704(than)P
+10738 34704(to)P
+11448 34704(a)P
+11957 34704(seminar.)P
+14449 34704(CAI)P
+15725 34704(has)P
+16766 34704(been)P
+18140 34704(used)P
+19481 34704(for)P
+20423 34704(many)P
+21998 34704(years)P
+23505 34704(in)P
+24214 34704(a)P
+24722 34704(variety)P
+26630 34704(of)P
+27372 34704(educational)P
+30379 34704(areas.)P
+0 8 SF
+31760 34896(1\2553)P
+0 10 SF
+4320 33984(The)P
+5476 33984(use)P
+6498 33984(of)P
+7220 33984(a)P
+7708 33984(computer)P
+10196 33984(to)P
+10885 33984(teach)P
+12372 33984(computer)P
+14860 33984(use)P
+15881 33984(itself,)P
+17453 33984(however,)P
+19890 33984(offers)P
+21511 33984(unique)P
+23366 33984(advantages.)P
+26602 33984(The)P
+27757 33984(skills)P
+29246 33984(developed)P
+31933 33984(to)P
+4320 33264(get)P
+5253 33264(through)P
+7320 33264(the)P
+8253 33264(script)P
+9786 33264(are)P
+10718 33264(exactly)P
+12650 33264(those)P
+14116 33264(needed)P
+16014 33264(to)P
+16681 33264(use)P
+17680 33264(the)P
+18613 33264(computer;)P
+21246 33264(there)P
+22645 33264(is)P
+23245 33264(no)P
+24045 33264(waste)P
+25610 33264(effort.)P
+5820 32328(The)P
+6993 32328(scripts)P
+8799 32328(written)P
+10739 32328(so)P
+11512 32328(far)P
+12418 32328(are)P
+13390 32328(based)P
+14994 32328(on)P
+15833 32328(some)P
+17338 32328(familiar)P
+19477 32328(assumptions)P
+22682 32328(about)P
+24254 32328(education;)P
+26992 32328(these)P
+28463 32328(assumptions)P
+31668 32328(are)P
+4320 31608(outlined)P
+6502 31608(in)P
+7183 31608(the)P
+8130 31608(next)P
+9377 31608(section.)P
+11640 31608(The)P
+12787 31608(remaining)P
+15434 31608(sections)P
+17580 31608(describe)P
+19792 31608(the)P
+20739 31608(operation)P
+23219 31608(of)P
+23933 31608(the)P
+24880 31608(script)P
+26427 31608(driver)P
+28074 31608(and)P
+29154 31608(the)P
+30101 31608(particular)P
+4320 30888(scripts)P
+6104 30888(now)P
+7354 30888(available.)P
+10086 30888(The)P
+11236 30888(driver)P
+12886 30888(puts)P
+14103 30888(few)P
+15219 30888(restrictions)P
+18102 30888(on)P
+18919 30888(the)P
+19869 30888(script)P
+21419 30888(writer,)P
+23219 30888(but)P
+24203 30888(the)P
+25153 30888(current)P
+27069 30888(scripts)P
+28852 30888(are)P
+29801 30888(of)P
+30518 30888(a)P
+31001 30888(rather)P
+4320 30168(rigid)P
+5654 30168(and)P
+6720 30168(stereotyped)P
+9685 30168(form)P
+11052 30168(in)P
+11719 30168(accordance)P
+14615 30168(with)P
+15882 30168(the)P
+16815 30168(theory)P
+18548 30168(in)P
+19215 30168(the)P
+20148 30168(next)P
+21381 30168(section)P
+23280 30168(and)P
+24346 30168(practical)P
+26611 30168(limitations.)P
+2 10 SF
+4320 28728(2.)P
+5170 28728(Educational)P
+8472 28728(Assumptions)P
+11973 28728(and)P
+13141 28728(Design.)P
+0 10 SF
+5820 27792(First,)P
+7287 27792(the)P
+8236 27792(way)P
+9451 27792(to)P
+10134 27792(teach)P
+11615 27792(people)P
+13430 27792(how)P
+14679 27792(to)P
+15362 27792(do)P
+16178 27792(something)P
+18894 27792(is)P
+19510 27792(to)P
+20193 27792(have)P
+21541 27792(them)P
+22957 27792(do)P
+23773 27792(it.)P
+24673 27792(Scripts)P
+26555 27792(should)P
+28370 27792(not)P
+29352 27792(contain)P
+31333 27792(long)P
+4320 27072(pieces)P
+6045 27072(of)P
+6772 27072(explanation;)P
+9965 27072(they)P
+11225 27072(should)P
+13052 27072(instead)P
+14977 27072(frequently)P
+17669 27072(ask)P
+18694 27072(the)P
+19653 27072(student)P
+21612 27072(to)P
+22305 27072(do)P
+23131 27072(some)P
+24623 27072(task.)P
+26165 27072(So)P
+27025 27072(teaching)P
+29283 27072(is)P
+29909 27072(always)P
+31800 27072(by)P
+4320 26352(example:)P
+6760 26352(the)P
+7734 26352(typical)P
+9608 26352(script)P
+11182 26352(fragment)P
+13589 26352(shows)P
+15328 26352(a)P
+15834 26352(small)P
+17374 26352(example)P
+19646 26352(of)P
+20386 26352(some)P
+21892 26352(technique)P
+24464 26352(and)P
+25570 26352(then)P
+26843 26352(asks)P
+28115 26352(the)P
+29088 26352(user)P
+30327 26352(to)P
+31034 26352(either)P
+4320 25632(repeat)P
+6007 25632(that)P
+7129 25632(example)P
+9383 25632(or)P
+10105 25632(produce)P
+12259 25632(a)P
+12747 25632(variation)P
+15102 25632(on)P
+15924 25632(it.)P
+16830 25632(All)P
+17819 25632(are)P
+18773 25632(intended)P
+21061 25632(to)P
+21750 25632(be)P
+22538 25632(easy)P
+23825 25632(enough)P
+25813 25632(that)P
+26935 25632(most)P
+28324 25632(students)P
+30512 25632(will)P
+31667 25632(get)P
+4320 24912(most)P
+5687 24912(questions)P
+8153 24912(right,)P
+9637 24912(reinforcing)P
+12503 24912(the)P
+13436 24912(desired)P
+15368 24912(behavior.)P
+5820 23976(Most)P
+7282 23976(lessons)P
+9243 23976(fall)P
+10272 23976(into)P
+11435 23976(one)P
+12530 23976(of)P
+13259 23976(three)P
+14687 23976(types.)P
+16532 23976(The)P
+17694 23976(simplest)P
+19923 23976(presents)P
+22117 23976(a)P
+22612 23976(lesson)P
+24340 23976(and)P
+25435 23976(asks)P
+26696 23976(for)P
+27625 23976(a)P
+28119 23976(yes)P
+29146 23976(or)P
+29874 23976(no)P
+30702 23976(answer)P
+4320 23256(to)P
+5043 23256(a)P
+5565 23256(question.)P
+8203 23256(The)P
+9391 23256(student)P
+11379 23256(is)P
+12034 23256(given)P
+13622 23256(a)P
+14143 23256(chance)P
+16062 23256(to)P
+16784 23256(experiment)P
+19738 23256(before)P
+21525 23256(replying.)P
+24130 23256(The)P
+25318 23256(script)P
+26906 23256(checks)P
+28792 23256(for)P
+29747 23256(the)P
+30735 23256(correct)P
+4320 22536(reply.)P
+6103 22536(Problems)P
+8570 22536(of)P
+9270 22536(this)P
+10337 22536(form)P
+11704 22536(are)P
+12636 22536(sparingly)P
+15069 22536(used.)P
+5820 21600(The)P
+6953 21600(second)P
+8818 21600(type)P
+10051 21600(asks)P
+11283 21600(for)P
+12183 21600(a)P
+12649 21600(word)P
+14082 21600(or)P
+14782 21600(number)P
+16815 21600(as)P
+17514 21600(an)P
+18280 21600(answer.)P
+20528 21600(For)P
+21562 21600(example)P
+23794 21600(a)P
+24260 21600(lesson)P
+25959 21600(on)P
+26759 21600(\212les)P
+27959 21600(might)P
+29560 21600(say)P
+1 10 SF
+5820 20664(How)P
+7153 20664(many)P
+8652 20664(\212les)P
+9818 20664(are)P
+10817 20664(there)P
+12249 20664(in)P
+12916 20664(the)P
+13849 20664(current)P
+15814 20664(directory?)P
+18712 20664(Type)P
+20078 20664(``answer)P
+22410 20664(N'',)P
+23560 20664(where)P
+25225 20664(N)P
+25825 20664(is)P
+26425 20664(the)P
+27358 20664(number)P
+29390 20664(of)P
+30057 20664(\212les.)P
+0 10 SF
+4320 19728(The)P
+5453 19728(student)P
+7386 19728(is)P
+7986 19728(expected)P
+10317 19728(to)P
+10984 19728(respond)P
+13083 19728(\(perhaps)P
+15348 19728(after)P
+16647 19728(experimenting\))P
+20513 19728(with)P
+1 10 SF
+5820 18792(answer)P
+7752 18792(17)P
+0 10 SF
+4320 17856(or)P
+5143 17856(whatever.)P
+8014 17856(Surprisingly)P
+11304 17856(often,)P
+13009 17856(however,)P
+15546 17856(the)P
+16601 17856(idea)P
+17922 17856(of)P
+18744 17856(a)P
+19332 17856(substitutable)P
+22687 17856(argument)P
+25275 17856(\(i.e.,)P
+26680 17856(replacing)P
+1 10 SF
+29234 17856(N)P
+0 10 SF
+29956 17856(by)P
+30878 17856(17\))P
+32000 17856(is)P
+4320 17136(dif\212cult)P
+6421 17136(for)P
+7321 17136(non\255programmer)P
+11587 17136(students,)P
+13903 17136(so)P
+14636 17136(the)P
+15569 17136(\212rst)P
+16703 17136(few)P
+17802 17136(such)P
+19101 17136(lessons)P
+21033 17136(need)P
+22365 17136(real)P
+23464 17136(care.)P
+5820 16200(The)P
+6955 16200(third)P
+8291 16200(type)P
+9526 16200(of)P
+10228 16200(lesson)P
+11929 16200(is)P
+12531 16200(open\255ended)P
+15531 16200<88>P
+16333 16200(a)P
+16801 16200(task)P
+17969 16200(is)P
+18571 16200(set)P
+19439 16200(for)P
+20341 16200(the)P
+21276 16200(student,)P
+23361 16200(appropriate)P
+26295 16200(parts)P
+27662 16200(of)P
+28363 16200(the)P
+29297 16200(input)P
+30732 16200(or)P
+31433 16200(out\255)P
+4320 15480(put)P
+5294 15480(are)P
+6233 15480(monitored,)P
+9056 15480(and)P
+10128 15480(the)P
+11067 15480(student)P
+13006 15480(types)P
+1 10 SF
+14478 15480(ready)P
+0 10 SF
+16049 15480(when)P
+17554 15480(the)P
+18493 15480(task)P
+19665 15480(is)P
+20271 15480(done.)P
+21993 15480(Figure)P
+23766 15480(1)P
+24272 15480(shows)P
+25977 15480(a)P
+26449 15480(sample)P
+28354 15480(dialog)P
+30060 15480(that)P
+31166 15480(illus\255)P
+4320 14760(trates)P
+5823 14760(the)P
+6760 14760(last)P
+7797 14760(of)P
+8501 14760(these,)P
+10087 14760(using)P
+11591 14760(two)P
+12695 14760(lessons)P
+14631 14760(about)P
+16168 14760(the)P
+1 10 SF
+17105 14760(cat)P
+0 10 SF
+18142 14760(\(concatenate,)P
+21526 14760(i.e.,)P
+22613 14760(print\))P
+24151 14760(command)P
+26721 14760(taken)P
+28224 14760(from)P
+29595 14760(early)P
+30997 14760(in)P
+31667 14760(the)P
+4320 14040(script)P
+5853 14040(that)P
+6953 14040(teaches)P
+8917 14040(\212le)P
+9884 14040(handling.)P
+12534 14040(Most)P
+1 10 SF
+13967 14040(learn)P
+0 10 SF
+15533 14040(lessons)P
+17465 14040(are)P
+18397 14040(of)P
+19097 14040(this)P
+20164 14040(form.)P
+5820 13104(After)P
+7288 13104(each)P
+8588 13104(correct)P
+10455 13104(response)P
+12755 13104(the)P
+13690 13104(computer)P
+16158 13104(congratulates)P
+19558 13104(the)P
+20493 13104(student)P
+22428 13104(and)P
+23496 13104(indicates)P
+25830 13104(the)P
+26765 13104(lesson)P
+28466 13104(number)P
+30500 13104(that)P
+31601 13104(has)P
+4320 12384(just)P
+5400 12384(been)P
+6745 12384(completed,)P
+9607 12384(permitting)P
+12321 12384(the)P
+13267 12384(student)P
+15213 12384(to)P
+15893 12384(restart)P
+17605 12384(the)P
+18551 12384(script)P
+20097 12384(after)P
+21408 12384(that)P
+22520 12384(lesson.)P
+24581 12384(If)P
+25193 12384(the)P
+26138 12384(answer)P
+28048 12384(is)P
+28660 12384(wrong,)P
+30555 12384(the)P
+31500 12384(stu\255)P
+4320 11664(dent)P
+5557 11664(is)P
+6161 11664(offered)P
+8097 11664(a)P
+8567 11664(chance)P
+10435 11664(to)P
+11106 11664(repeat)P
+12775 11664(the)P
+13712 11664(lesson.)P
+15765 11664(The)P
+16902 11664(``speed'')P
+19271 11664(rating)P
+20875 11664(of)P
+21579 11664(the)P
+22516 11664(student)P
+24453 11664(\(explained)P
+27189 11664(in)P
+27859 11664(section)P
+29761 11664(5\))P
+30464 11664(is)P
+31067 11664(given)P
+4320 10944(after)P
+5636 10944(the)P
+6586 10944(lesson)P
+8302 10944(number)P
+10352 10944(when)P
+11868 10944(the)P
+12818 10944(lesson)P
+14534 10944(is)P
+15151 10944(completed)P
+17867 10944(successfully;)P
+21182 10944(it)P
+21733 10944(is)P
+22350 10944(printed)P
+24267 10944(only)P
+25551 10944(for)P
+26468 10944(the)P
+27418 10944(aid)P
+28368 10944(of)P
+29085 10944(script)P
+30634 10944(authors)P
+4320 10224(checking)P
+6685 10224(out)P
+7652 10224(possible)P
+9818 10224(errors)P
+11417 10224(in)P
+12084 10224(the)P
+13017 10224(lessons.)P
+5820 9288(It)P
+6390 9288(is)P
+6993 9288(assumed)P
+9261 9288(that)P
+10364 9288(there)P
+11766 9288(is)P
+12369 9288(no)P
+13172 9288(foolproof)P
+15642 9288(way)P
+16844 9288(to)P
+17514 9288(determine)P
+20116 9288(if)P
+20686 9288(the)P
+21622 9288(student)P
+23558 9288(truly)P
+24895 9288(``understands'')P
+28763 9288(what)P
+30131 9288(he)P
+30899 9288(or)P
+31601 9288(she)P
+4320 8568(is)P
+4932 8568(doing;)P
+6678 8568(accordingly,)P
+9872 8568(the)P
+10817 8568(current)P
+1 10 SF
+12728 8568(learn)P
+0 10 SF
+14206 8568(scripts)P
+15984 8568(only)P
+17263 8568(measure)P
+19473 8568(performance,)P
+22865 8568(not)P
+23843 8568(comprehension.)P
+28069 8568(If)P
+28680 8568(the)P
+29624 8568(student)P
+31568 8568(can)P
+4320 7848(perform)P
+6453 7848(a)P
+6919 7848(given)P
+8452 7848(task,)P
+9768 7848(that)P
+10868 7848(is)P
+11468 7848(deemed)P
+13533 7848(to)P
+14200 7848(be)P
+14966 7848(``learning.'')P
+0 8 SF
+17882 8040(4)P
+0 10 SF
+5820 6912(The)P
+6958 6912(main)P
+8363 6912(point)P
+9802 6912(of)P
+10507 6912(using)P
+12011 6912(the)P
+12948 6912(computer)P
+15418 6912(is)P
+16022 6912(that)P
+17126 6912(what)P
+18496 6912(the)P
+19433 6912(student)P
+21370 6912(does)P
+22673 6912(is)P
+23277 6912(checked)P
+25445 6912(for)P
+26349 6912(correctness)P
+29250 6912(immediately.)P
+4320 6192(Unlike)P
+6171 6192(many)P
+7722 6192(CAI)P
+8973 6192(scripts,)P
+10906 6192(however,)P
+13338 6192(these)P
+14787 6192(scripts)P
+16570 6192(provide)P
+18620 6192(few)P
+19736 6192(facilities)P
+22019 6192(for)P
+22936 6192(dealing)P
+24919 6192(with)P
+26203 6192(wrong)P
+27953 6192(answers.)P
+30451 6192(In)P
+31168 6192(prac\255)P
+4320 5472(tice,)P
+5571 5472(if)P
+6173 5472(most)P
+7575 5472(of)P
+8310 5472(the)P
+9278 5472(answers)P
+11444 5472(are)P
+12411 5472(not)P
+13413 5472(right)P
+14782 5472(the)P
+15750 5472(script)P
+17318 5472(is)P
+17953 5472(a)P
+18454 5472(failure;)P
+20422 5472(the)P
+21390 5472(universal)P
+23824 5472(solution)P
+25993 5472(to)P
+26695 5472(student)P
+28663 5472(error)P
+30064 5472(is)P
+30699 5472(to)P
+31400 5472(pro\255)P
+4320 4752(vide)P
+5557 4752(a)P
+6027 4752(new,)P
+7380 4752(easier)P
+8982 4752(script.)P
+10869 4752(Anticipating)P
+14073 4752(possible)P
+16243 4752(wrong)P
+17980 4752(answers)P
+20115 4752(is)P
+20719 4752(an)P
+21489 4752(endless)P
+23458 4752(job,)P
+24579 4752(and)P
+25649 4752(it)P
+26187 4752(is)P
+26791 4752(really)P
+28361 4752(easier)P
+29963 4752(as)P
+30665 4752(well)P
+31901 4752(as)P
+4320 4032(better)P
+5886 4032(to)P
+6553 4032(provide)P
+8586 4032(a)P
+9052 4032(simpler)P
+11052 4032(script.)P
+end restore showpage
+%%Page: USD:2-3 3
+save $troff begin Sc
+0 10 SF
+4320 44640(LEARN)P
+6520 44640<88>P
+7320 44640(Computer\255Aided)P
+11586 44640(Instruction)P
+14386 44640(on)P
+15186 44640(UNIX)P
+30233 44640(USD:2\2553)P
+11394 42720 10 -100 1 L
+11525 42720 10 -100 46 L
+11694 42000(Figure)P
+13461 42000(1:)P
+14328 42000(Sample)P
+16328 42000(dialog)P
+18028 42000(from)P
+19395 42000(basic)P
+20827 42000(\212les)P
+22027 42000(script)P
+11694 40560(\(Student)P
+13928 40560(responses)P
+16459 40560(in)P
+17126 40560(italics;)P
+18926 40560(`$')P
+19826 40560(is)P
+20426 40560(the)P
+21359 40560(prompt\))P
+11694 39120(A)P
+12327 39120(\212le)P
+13294 39120(can)P
+14326 39120(be)P
+15092 39120(printed)P
+16992 39120(on)P
+17792 39120(your)P
+19092 39120(terminal)P
+11694 38400(by)P
+12494 38400(using)P
+13994 38400(the)P
+14927 38400("cat")P
+16316 38400(command.)P
+19232 38400(Just)P
+20365 38400(say)P
+11694 37680("cat)P
+12838 37680(\212le")P
+14050 37680(where)P
+15715 37680("\212le")P
+17172 37680(is)P
+17772 37680(the)P
+18705 37680(\212le)P
+19672 37680(name.)P
+11694 36960(For)P
+12728 36960(example,)P
+15110 36960(there)P
+16509 36960(is)P
+17109 36960(a)P
+17575 36960(\212le)P
+18542 36960(named)P
+11694 36240("food")P
+13484 36240(in)P
+14151 36240(this)P
+15218 36240(directory.)P
+17934 36240(List)P
+19068 36240(it)P
+11694 35520(by)P
+12494 35520(saying)P
+14260 35520("cat)P
+15404 35520(food";)P
+17116 35520(then)P
+18349 35520(type)P
+19582 35520("ready".)P
+11694 34800($)P
+1 10 SF
+12194 34800(cat)P
+13127 34800(food)P
+0 10 SF
+12094 34080(this)P
+13161 34080(is)P
+13761 34080(the)P
+14694 34080(\212le)P
+12094 33360(named)P
+13893 33360(food.)P
+11694 32640($)P
+1 10 SF
+12194 32640(ready)P
+0 10 SF
+11694 31200(Good.)P
+13577 31200(Lesson)P
+15476 31200(3.3a)P
+16692 31200(\(1\))P
+11694 29760(Of)P
+12527 29760(course,)P
+14442 29760(you)P
+15542 29760(can)P
+16574 29760(print)P
+17908 29760(any)P
+18974 29760(\212le)P
+19941 29760(with)P
+21208 29760("cat".)P
+11694 29040(In)P
+12394 29040(particular,)P
+15043 29040(it)P
+15577 29040(is)P
+16177 29040(common)P
+18477 29040(to)P
+19144 29040(\212rst)P
+20278 29040(use)P
+11694 28320("ls")P
+12784 28320(to)P
+13451 28320(\212nd)P
+14585 28320(the)P
+15518 28320(name)P
+17017 28320(of)P
+17717 28320(a)P
+18183 28320(\212le)P
+19150 28320(and)P
+20216 28320(then)P
+21449 28320("cat")P
+11694 27600(to)P
+12361 27600(print)P
+13695 27600(it.)P
+14579 27600(Note)P
+15945 27600(the)P
+16878 27600(difference)P
+19509 27600(between)P
+11694 26880("ls",)P
+12934 26880(which)P
+14600 26880(tells)P
+15800 26880(you)P
+16900 26880(the)P
+17833 26880(name)P
+19332 26880(of)P
+20032 26880(the)P
+20965 26880(\212le,)P
+11694 26160(and)P
+12760 26160("cat",)P
+14299 26160(which)P
+15965 26160(tells)P
+17165 26160(you)P
+18265 26160(the)P
+19198 26160(contents.)P
+11694 25440(One)P
+12893 25440(\212le)P
+13860 25440(in)P
+14527 25440(the)P
+15460 25440(current)P
+17359 25440(directory)P
+19725 25440(is)P
+20325 25440(named)P
+22124 25440(for)P
+11694 24720(a)P
+12160 24720(President.)P
+14943 24720(Print)P
+16311 24720(the)P
+17244 24720(\212le,)P
+18361 24720(then)P
+19594 24720(type)P
+20827 24720("ready".)P
+11694 24000($)P
+1 10 SF
+12194 24000(cat)P
+13127 24000(President)P
+0 10 SF
+11694 23280(cat:)P
+12760 23280(can't)P
+14159 23280(open)P
+15525 23280(President)P
+11694 22560($)P
+1 10 SF
+12194 22560(ready)P
+0 10 SF
+11694 21120(Sorry,)P
+13378 21120(that's)P
+14911 21120(not)P
+15878 21120(right.)P
+17562 21120(Do)P
+18495 21120(you)P
+19595 21120(want)P
+20961 21120(to)P
+21628 21120(try)P
+22495 21120(again?)P
+1 10 SF
+24260 21120(yes)P
+0 10 SF
+11694 20400(Try)P
+12761 20400(the)P
+13694 20400(problem)P
+15894 20400(again.)P
+11694 19680($)P
+1 10 SF
+12194 19680(ls)P
+0 10 SF
+11694 18960(.ocopy)P
+11694 18240(X1)P
+11694 17520(roosevelt)P
+11694 16800($)P
+1 10 SF
+12194 16800(cat)P
+13127 16800(roosevelt)P
+0 10 SF
+12094 16080(this)P
+13161 16080(\212le)P
+14128 16080(is)P
+14728 16080(named)P
+16527 16080(roosevelt)P
+12094 15360(and)P
+13160 15360(contains)P
+15359 15360(three)P
+16758 15360(lines)P
+18091 15360(of)P
+12094 14640(text.)P
+11694 13920($)P
+1 10 SF
+12194 13920(ready)P
+0 10 SF
+11694 12480(Good.)P
+13577 12480(Lesson)P
+15476 12480(3.3b)P
+16726 12480(\(0\))P
+11694 11040(The)P
+12827 11040("cat")P
+14216 11040(command)P
+16782 11040(can)P
+17814 11040(also)P
+18980 11040(print)P
+20314 11040(several)P
+22212 11040(\212les)P
+11694 10320(at)P
+12327 10320(once.)P
+14009 10320(In)P
+14709 10320(fact,)P
+15958 10320(it)P
+16492 10320(is)P
+17092 10320(named)P
+18891 10320("cat")P
+20280 10320(as)P
+20979 10320(an)P
+21745 10320(abbreviation)P
+11694 9600(for)P
+12594 9600("concatenate"....)P
+11394 9480 10 -100 1 L
+11525 9480 10 -100 46 L
+11394 9480 10 br
+11394 9720 10 br
+11394 10320 10 br
+11394 10920 10 br
+11394 11520 10 br
+11394 12120 10 br
+11394 12720 10 br
+11394 13320 10 br
+11394 13920 10 br
+11394 14520 10 br
+11394 15120 10 br
+11394 15720 10 br
+11394 16320 10 br
+11394 16920 10 br
+11394 17520 10 br
+11394 18120 10 br
+11394 18720 10 br
+11394 19320 10 br
+11394 19920 10 br
+11394 20520 10 br
+11394 21120 10 br
+11394 21720 10 br
+11394 22320 10 br
+11394 22920 10 br
+11394 23520 10 br
+11394 24120 10 br
+11394 24720 10 br
+11394 25320 10 br
+11394 25920 10 br
+11394 26520 10 br
+11394 27120 10 br
+11394 27720 10 br
+11394 28320 10 br
+11394 28920 10 br
+11394 29520 10 br
+11394 30120 10 br
+11394 30720 10 br
+11394 31320 10 br
+11394 31920 10 br
+11394 32520 10 br
+11394 33120 10 br
+11394 33720 10 br
+11394 34320 10 br
+11394 34920 10 br
+11394 35520 10 br
+11394 36120 10 br
+11394 36720 10 br
+11394 37320 10 br
+11394 37920 10 br
+11394 38520 10 br
+11394 39120 10 br
+11394 39720 10 br
+11394 40320 10 br
+11394 40920 10 br
+11394 41520 10 br
+11394 42120 10 br
+25325 9480 10 br
+25325 9720 10 br
+25325 10320 10 br
+25325 10920 10 br
+25325 11520 10 br
+25325 12120 10 br
+25325 12720 10 br
+25325 13320 10 br
+25325 13920 10 br
+25325 14520 10 br
+25325 15120 10 br
+25325 15720 10 br
+25325 16320 10 br
+25325 16920 10 br
+25325 17520 10 br
+25325 18120 10 br
+25325 18720 10 br
+25325 19320 10 br
+25325 19920 10 br
+25325 20520 10 br
+25325 21120 10 br
+25325 21720 10 br
+25325 22320 10 br
+25325 22920 10 br
+25325 23520 10 br
+25325 24120 10 br
+25325 24720 10 br
+25325 25320 10 br
+25325 25920 10 br
+25325 26520 10 br
+25325 27120 10 br
+25325 27720 10 br
+25325 28320 10 br
+25325 28920 10 br
+25325 29520 10 br
+25325 30120 10 br
+25325 30720 10 br
+25325 31320 10 br
+25325 31920 10 br
+25325 32520 10 br
+25325 33120 10 br
+25325 33720 10 br
+25325 34320 10 br
+25325 34920 10 br
+25325 35520 10 br
+25325 36120 10 br
+25325 36720 10 br
+25325 37320 10 br
+25325 37920 10 br
+25325 38520 10 br
+25325 39120 10 br
+25325 39720 10 br
+25325 40320 10 br
+25325 40920 10 br
+25325 41520 10 br
+25325 42120 10 br
+5820 7680(Along)P
+7623 7680(with)P
+8993 7680(this)P
+10163 7680(goes)P
+11565 7680(the)P
+12601 7680(assumption)P
+15637 7680(that)P
+16840 7680(anything)P
+19243 7680(can)P
+20378 7680(be)P
+21247 7680(taught)P
+23050 7680(to)P
+23820 7680(anybody)P
+26189 7680(if)P
+26859 7680(it)P
+27496 7680(can)P
+28630 7680(be)P
+29498 7680(broken)P
+31466 7680(into)P
+4320 6960(suf\212ciently)P
+7220 6960(small)P
+8720 6960(pieces.)P
+10768 6960(Anything)P
+13235 6960(not)P
+14202 6960(absorbed)P
+16567 6960(in)P
+17234 6960(a)P
+17700 6960(single)P
+19333 6960(chunk)P
+20999 6960(is)P
+21599 6960(just)P
+22666 6960(subdivided.)P
+5820 6024(To)P
+6748 6024(avoid)P
+8342 6024(boring)P
+10170 6024(the)P
+11164 6024(faster)P
+12757 6024(students,)P
+15134 6024(however,)P
+17610 6024(an)P
+18436 6024(effort)P
+20029 6024(is)P
+20689 6024(made)P
+22248 6024(in)P
+22975 6024(the)P
+23968 6024(\212les)P
+25228 6024(and)P
+26354 6024(editor)P
+28014 6024(scripts)P
+29840 6024(to)P
+30567 6024(provide)P
+4320 5304(three)P
+5755 5304(tracks)P
+7423 5304(of)P
+8159 5304(different)P
+10461 5304(dif\212culty.)P
+13248 5304(The)P
+14417 5304(fastest)P
+16185 5304(sequence)P
+18618 5304(of)P
+19354 5304(lessons)P
+21322 5304(is)P
+21957 5304(aimed)P
+23658 5304(at)P
+24326 5304(roughly)P
+26428 5304(the)P
+27396 5304(bulk)P
+28698 5304(and)P
+29799 5304(speed)P
+31399 5304(of)P
+32134 5304(a)P
+4320 4584(typical)P
+6246 4584(tutorial)P
+8273 4584(manual)P
+10331 4584(and)P
+11489 4584(should)P
+13381 4584(be)P
+14239 4584(adequate)P
+16662 4584(for)P
+17654 4584(review)P
+19578 4584(and)P
+20736 4584(for)P
+21728 4584(well\255prepared)P
+25351 4584(students.)P
+27959 4584(The)P
+29184 4584(next)P
+30509 4584(track)P
+32000 4584(is)P
+4320 3864(intended)P
+6650 3864(for)P
+7614 3864(most)P
+9045 3864(users)P
+10541 3864(and)P
+11670 3864(is)P
+12333 3864(roughly)P
+14463 3864(twice)P
+16025 3864(as)P
+16787 3864(long.)P
+18467 3864(Typically,)P
+21180 3864(for)P
+22143 3864(example,)P
+24588 3864(the)P
+25584 3864(fast)P
+26713 3864(track)P
+28175 3864(might)P
+29839 3864(present)P
+31834 3864(an)P
+end restore showpage
+%%Page: USD:2-4 4
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:2\2554)P
+20035 44640(LEARN)P
+22235 44640<88>P
+23035 44640(Computer\255Aided)P
+27301 44640(Instruction)P
+30101 44640(on)P
+30901 44640(UNIX)P
+4320 42480(idea)P
+5524 42480(and)P
+6595 42480(ask)P
+7599 42480(for)P
+8504 42480(a)P
+8975 42480(variation)P
+11313 42480(on)P
+12117 42480(the)P
+13054 42480(example)P
+15290 42480(shown;)P
+17227 42480(the)P
+18164 42480(normal)P
+20068 42480(track)P
+21471 42480(will)P
+22609 42480(\212rst)P
+23747 42480(ask)P
+24750 42480(the)P
+25687 42480(student)P
+27624 42480(to)P
+28295 42480(repeat)P
+29964 42480(the)P
+30901 42480(exam\255)P
+4320 41760(ple)P
+5260 41760(that)P
+6367 41760(was)P
+7506 41760(shown)P
+9279 41760(before)P
+11018 41760(attempting)P
+13792 41760(a)P
+14265 41760(variation.)P
+16955 41760(The)P
+18094 41760(third)P
+19434 41760(and)P
+20506 41760(slowest)P
+22511 41760(track,)P
+24066 41760(which)P
+25738 41760(is)P
+26344 41760(often)P
+27783 41760(three)P
+29188 41760(or)P
+29894 41760(four)P
+31100 41760(times)P
+4320 41040(the)P
+5291 41040(length)P
+7029 41040(of)P
+7767 41040(the)P
+8738 41040(fast)P
+9842 41040(track,)P
+11429 41040(is)P
+12067 41040(intended)P
+14371 41040(to)P
+15076 41040(be)P
+15880 41040(adequate)P
+18249 41040(for)P
+19187 41040(anyone.)P
+21506 41040(\(The)P
+22876 41040(lessons)P
+24845 41040(of)P
+25582 41040(Figure)P
+27386 41040(1)P
+27923 41040(are)P
+28892 41040(from)P
+30296 41040(the)P
+31266 41040(third)P
+4320 40320(track.\))P
+6108 40320(The)P
+7280 40320(multiple)P
+9520 40320(tracks)P
+11191 40320(also)P
+12396 40320(mean)P
+13934 40320(that)P
+15073 40320(a)P
+15578 40320(student)P
+17550 40320(repeating)P
+20021 40320(a)P
+20526 40320(course)P
+22330 40320(is)P
+22969 40320(unlikely)P
+25175 40320(to)P
+25880 40320(hit)P
+26752 40320(the)P
+27723 40320(same)P
+29193 40320(series)P
+30796 40320(of)P
+31534 40320(les\255)P
+4320 39600(sons;)P
+5753 39600(this)P
+6820 39600(makes)P
+8552 39600(it)P
+9086 39600(pro\212table)P
+11586 39600(for)P
+12486 39600(a)P
+12952 39600(shaky)P
+14551 39600(user)P
+15750 39600(to)P
+16417 39600(back)P
+17749 39600(up)P
+18549 39600(and)P
+19615 39600(try)P
+20482 39600(again,)P
+22131 39600(and)P
+23197 39600(many)P
+24730 39600(students)P
+26896 39600(have)P
+28228 39600(done)P
+29594 39600(so.)P
+5820 38664(The)P
+6977 38664(tracks)P
+8633 38664(are)P
+9589 38664(not)P
+10580 38664(completely)P
+13470 38664(distinct,)P
+15611 38664(however.)P
+18250 38664(Depending)P
+21106 38664(on)P
+21930 38664(the)P
+22887 38664(number)P
+24944 38664(of)P
+25668 38664(correct)P
+27557 38664(answers)P
+29711 38664(the)P
+30667 38664(student)P
+4320 37944(has)P
+5323 37944(given)P
+6859 37944(for)P
+7762 37944(the)P
+8698 37944(last)P
+9734 37944(few)P
+10836 37944(lessons,)P
+12921 37944(the)P
+13857 37944(program)P
+16093 37944(may)P
+17329 37944(switch)P
+19098 37944(tracks.)P
+21083 37944(The)P
+22219 37944(driver)P
+23855 37944(is)P
+24458 37944(actually)P
+26560 37944(capable)P
+28594 37944(of)P
+29297 37944(following)P
+31834 37944(an)P
+4320 37224(arbitrary)P
+6596 37224(directed)P
+8738 37224(graph)P
+10314 37224(of)P
+11024 37224(lesson)P
+12733 37224(sequences,)P
+15523 37224(as)P
+16232 37224(discussed)P
+18740 37224(in)P
+19417 37224(section)P
+21325 37224(5.)P
+22184 37224(Some)P
+23760 37224(more)P
+25202 37224(structured)P
+27810 37224(arrangement,)P
+31167 37224(how\255)P
+4320 36504(ever,)P
+5710 36504(is)P
+6318 36504(used)P
+7625 36504(in)P
+8300 36504(all)P
+9108 36504(current)P
+11015 36504(scripts)P
+12789 36504(to)P
+13464 36504(aid)P
+14405 36504(the)P
+15346 36504(script)P
+16887 36504(writer)P
+18528 36504(in)P
+19203 36504(organizing)P
+21976 36504(the)P
+22916 36504(material)P
+25089 36504(into)P
+26230 36504(lessons.)P
+28519 36504(It)P
+29093 36504(is)P
+29700 36504(suf\212ciently)P
+4320 35784(dif\212cult)P
+6493 35784(to)P
+7232 35784(write)P
+8737 35784(lessons)P
+10741 35784(that)P
+11913 35784(the)P
+12918 35784(three\255track)P
+15788 35784(theory)P
+17593 35784(is)P
+18265 35784(not)P
+19303 35784(followed)P
+21707 35784(very)P
+23044 35784(closely)P
+25014 35784(except)P
+26850 35784(in)P
+27588 35784(the)P
+28592 35784(\212les)P
+29863 35784(and)P
+31000 35784(editor)P
+4320 35064(scripts.)P
+6444 35064(Accordingly,)P
+9801 35064(in)P
+10476 35064(some)P
+11950 35064(cases,)P
+13572 35064(the)P
+14513 35064(fast)P
+15586 35064(track)P
+16992 35064(is)P
+17599 35064(produced)P
+20038 35064(merely)P
+21911 35064(by)P
+22718 35064(skipping)P
+24992 35064(lessons)P
+26931 35064(from)P
+28305 35064(the)P
+29245 35064(slower)P
+31051 35064(track.)P
+4320 34344(In)P
+5020 34344(others,)P
+6836 34344(there)P
+8235 34344(is)P
+8835 34344(essentially)P
+11567 34344(only)P
+12834 34344(one)P
+13900 34344(track.)P
+5820 33408(The)P
+6984 33408(main)P
+8415 33408(reason)P
+10211 33408(for)P
+11142 33408(using)P
+12673 33408(the)P
+1 10 SF
+13637 33408(learn)P
+0 10 SF
+15134 33408(program)P
+17398 33408(rather)P
+19028 33408(than)P
+20292 33408(simply)P
+22157 33408(writing)P
+24121 33408(the)P
+25084 33408(same)P
+26546 33408(material)P
+28742 33408(as)P
+29471 33408(a)P
+29967 33408(workbook)P
+4320 32688(is)P
+4979 32688(not)P
+6005 32688(the)P
+6997 32688(selection)P
+9388 32688(of)P
+10147 32688(tracks,)P
+11987 32688(but)P
+13012 32688(actual)P
+14702 32688(hands\255on)P
+17159 32688(experience.)P
+20364 32688(Learning)P
+22788 32688(by)P
+23646 32688(doing)P
+25271 32688(is)P
+25929 32688(much)P
+27520 32688(more)P
+29011 32688(effective)P
+31367 32688(than)P
+4320 31968(pencil)P
+5986 31968(and)P
+7052 31968(paper)P
+8584 31968(exercises.)P
+1 10 SF
+5820 31032(Learn)P
+0 10 SF
+7597 31032(also)P
+8807 31032(provides)P
+11117 31032(a)P
+11627 31032(mechanical)P
+14602 31032(check)P
+16244 31032(on)P
+17088 31032(performance.)P
+20713 31032(The)P
+21890 31032(\212rst)P
+23067 31032(version)P
+25076 31032(in)P
+25786 31032(fact)P
+26928 31032(would)P
+28671 31032(not)P
+29681 31032(let)P
+30524 31032(the)P
+31500 31032(stu\255)P
+4320 30312(dent)P
+5610 30312(proceed)P
+7765 30312(unless)P
+9521 30312(it)P
+10111 30312(received)P
+12398 30312(correct)P
+14319 30312(answers)P
+16506 30312(to)P
+17229 30312(the)P
+18218 30312(questions)P
+20740 30312(it)P
+21330 30312(set)P
+22252 30312(and)P
+23374 30312(it)P
+23964 30312(would)P
+25720 30312(not)P
+26743 30312(tell)P
+27766 30312(a)P
+28288 30312(student)P
+30277 30312(the)P
+31266 30312(right)P
+4320 29592(answer.)P
+6649 29592(This)P
+7997 29592(somewhat)P
+10710 29592(Draconian)P
+13489 29592(approach)P
+15968 29592(has)P
+17048 29592(been)P
+18461 29592(moderated)P
+21274 29592(in)P
+22021 29592(version)P
+24067 29592(2.)P
+24997 29592(Lessons)P
+27209 29592(are)P
+28221 29592(sometimes)P
+31067 29592(badly)P
+4320 28872(worded)P
+6325 28872(or)P
+7031 28872(even)P
+8369 28872(just)P
+9442 28872(plain)P
+10848 28872(wrong;)P
+12754 28872(in)P
+13427 28872(such)P
+14732 28872(cases,)P
+16352 28872(the)P
+17291 28872(student)P
+19230 28872(has)P
+20235 28872(no)P
+21041 28872(recourse.)P
+23628 28872(But)P
+24701 28872(if)P
+25274 28872(a)P
+25746 28872(student)P
+27685 28872(is)P
+28290 28872(simply)P
+30129 28872(unable)P
+31933 28872(to)P
+4320 28152(complete)P
+6730 28152(one)P
+7807 28152(lesson,)P
+9667 28152(that)P
+10778 28152(should)P
+12589 28152(not)P
+13566 28152(prevent)P
+15575 28152(access)P
+17315 28152(to)P
+17992 28152(the)P
+18935 28152(rest.)P
+20361 28152(Accordingly,)P
+23720 28152(the)P
+24663 28152(current)P
+26572 28152(version)P
+28548 28152(of)P
+1 10 SF
+29258 28152(learn)P
+0 10 SF
+30834 28152(allows)P
+4320 27432(the)P
+5270 27432(student)P
+7220 27432(to)P
+7904 27432(skip)P
+9121 27432(a)P
+9603 27432(lesson)P
+11318 27432(that)P
+12434 27432(he)P
+13216 27432(cannot)P
+15031 27432(pass;)P
+16446 27432(a)P
+16928 27432(``no'')P
+18544 27432(answer)P
+20458 27432(to)P
+21141 27432(the)P
+22090 27432(``Do)P
+23439 27432(you)P
+24555 27432(want)P
+25937 27432(to)P
+26620 27432(try)P
+27503 27432(again?'')P
+29684 27432(question)P
+31933 27432(in)P
+4320 26712(Figure)P
+6087 26712(1)P
+6587 26712(will)P
+7721 26712(pass)P
+8953 26712(to)P
+9620 26712(the)P
+10553 26712(next)P
+11786 26712(lesson.)P
+13835 26712(It)P
+14402 26712(is)P
+15002 26712(still)P
+16103 26712(true)P
+17236 26712(that)P
+1 10 SF
+18336 26712(learn)P
+0 10 SF
+19902 26712(will)P
+21036 26712(not)P
+22003 26712(tell)P
+22970 26712(the)P
+23903 26712(student)P
+25836 26712(the)P
+26769 26712(right)P
+28103 26712(answer.)P
+5820 25776(Of)P
+6675 25776(course,)P
+8612 25776(there)P
+10033 25776(are)P
+10987 25776(valid)P
+12408 25776(objections)P
+15095 25776(to)P
+15783 25776(the)P
+16737 25776(assumptions)P
+19924 25776(above.)P
+21927 25776(In)P
+22648 25776(particular,)P
+25318 25776(some)P
+26805 25776(students)P
+28992 25776(may)P
+30246 25776(object)P
+31933 25776(to)P
+4320 25056(not)P
+5299 25056(understanding)P
+8910 25056(what)P
+10288 25056(they)P
+11533 25056(are)P
+12477 25056(doing;)P
+14223 25056(and)P
+15301 25056(the)P
+16246 25056(procedure)P
+18856 25056(of)P
+19568 25056(smashing)P
+22046 25056(everything)P
+24824 25056(into)P
+25970 25056(small)P
+27481 25056(pieces)P
+29190 25056(may)P
+30434 25056(provoke)P
+4320 24336(the)P
+5294 24336(retort)P
+6835 24336(``you)P
+8376 24336(can't)P
+9816 24336(cross)P
+11289 24336(a)P
+11796 24336(ditch)P
+13237 24336(in)P
+13945 24336(two)P
+15086 24336(jumps.'')P
+17344 24336(Since)P
+18918 24336(writing)P
+20893 24336(CAI)P
+22167 24336(scripts)P
+23974 24336(is)P
+24615 24336(considerably)P
+27921 24336(more)P
+29394 24336(tedious)P
+31367 24336(than)P
+4320 23616(ordinary)P
+6588 23616(manuals,)P
+8972 23616(however,)P
+11422 23616(it)P
+11991 23616(is)P
+12626 23616(safe)P
+13826 23616(to)P
+14528 23616(assume)P
+16528 23616(that)P
+17663 23616(there)P
+19097 23616(will)P
+20266 23616(always)P
+22166 23616(be)P
+22967 23616(alternatives)P
+25966 23616(to)P
+26667 23616(the)P
+27634 23616(scripts)P
+29434 23616(as)P
+30167 23616(a)P
+30667 23616(way)P
+31900 23616(of)P
+4320 22896(learning.)P
+6857 22896(In)P
+7578 22896(fact,)P
+8848 22896(for)P
+9769 22896(a)P
+10256 22896(reference)P
+12707 22896(manual)P
+14694 22896(of)P
+15415 22896(3)P
+15936 22896(or)P
+16657 22896(4)P
+17178 22896(pages)P
+18764 22896(it)P
+19319 22896(would)P
+21040 22896(not)P
+22028 22896(be)P
+22815 22896(surprising)P
+25435 22896(to)P
+26122 22896(have)P
+27474 22896(a)P
+27960 22896(tutorial)P
+29914 22896(manual)P
+31900 22896(of)P
+4320 22176(20)P
+5120 22176(pages)P
+6685 22176(and)P
+7751 22176(a)P
+8217 22176(\(multi\255track\))P
+11484 22176(script)P
+13017 22176(of)P
+13717 22176(100)P
+14817 22176(pages.)P
+16732 22176(Thus)P
+18132 22176(the)P
+19065 22176(reference)P
+21495 22176(manual)P
+23461 22176(will)P
+24595 22176(exist)P
+25928 22176(long)P
+27195 22176(before)P
+28927 22176(the)P
+29860 22176(scripts.)P
+2 10 SF
+4320 20736(3.)P
+5170 20736(Scripts.)P
+0 10 SF
+5820 19800(As)P
+6689 19800(mentioned)P
+9425 19800(above,)P
+11210 19800(the)P
+12146 19800(present)P
+14081 19800(scripts)P
+15850 19800(try)P
+16720 19800(at)P
+17356 19800(most)P
+18726 19800(to)P
+19396 19800(follow)P
+21166 19800(a)P
+21635 19800(three\255track)P
+24436 19800(theory.)P
+26522 19800(Thus)P
+27925 19800(little)P
+29229 19800(of)P
+29932 19800(the)P
+30867 19800(poten\255)P
+4320 19080(tial)P
+5297 19080(complexity)P
+8207 19080(of)P
+8917 19080(the)P
+9860 19080(possible)P
+12036 19080(directed)P
+14178 19080(graph)P
+15754 19080(is)P
+16364 19080(employed,)P
+19090 19080(since)P
+20532 19080(care)P
+21740 19080(must)P
+23117 19080(be)P
+23892 19080(taken)P
+25400 19080(in)P
+26076 19080(lesson)P
+27784 19080(construction)P
+30959 19080(to)P
+31635 19080(see)P
+4320 18360(that)P
+5475 18360(every)P
+7062 18360(necessary)P
+9647 18360(fact)P
+10801 18360(is)P
+11456 18360(presented)P
+14009 18360(in)P
+14731 18360(every)P
+16318 18360(possible)P
+18539 18360(path)P
+19827 18360(through)P
+21949 18360(the)P
+22937 18360(units.)P
+24709 18360(In)P
+25464 18360(addition,)P
+27836 18360(it)P
+28425 18360(is)P
+29080 18360(desirable)P
+31500 18360(that)P
+4320 17640(every)P
+5852 17640(unit)P
+6986 17640(have)P
+8318 17640(alternate)P
+10583 17640(successors)P
+13313 17640(to)P
+13980 17640(deal)P
+15179 17640(with)P
+16446 17640(student)P
+18379 17640(errors.)P
+5820 16704(In)P
+6557 16704(most)P
+7960 16704(existing)P
+10096 16704(courses,)P
+12280 16704(the)P
+13249 16704(\212rst)P
+14419 16704(few)P
+15554 16704(lessons)P
+17522 16704(are)P
+18490 16704(devoted)P
+20625 16704(to)P
+21328 16704(checking)P
+23729 16704(prerequisites.)P
+27380 16704(For)P
+28450 16704(example,)P
+30868 16704(before)P
+4320 15984(the)P
+5258 15984(student)P
+7196 15984(is)P
+7801 15984(allowed)P
+9905 15984(to)P
+10577 15984(proceed)P
+12680 15984(through)P
+14752 15984(the)P
+15690 15984(editor)P
+17295 15984(script)P
+18833 15984(the)P
+19771 15984(script)P
+21309 15984(veri\212es)P
+23280 15984(that)P
+24385 15984(the)P
+25323 15984(student)P
+27261 15984(understands)P
+30330 15984(\212les)P
+31534 15984(and)P
+4320 15264(is)P
+4952 15264(able)P
+6183 15264(to)P
+6882 15264(type.)P
+8497 15264(It)P
+9096 15264(is)P
+9728 15264(felt)P
+10760 15264(that)P
+11892 15264(the)P
+12857 15264(sooner)P
+14687 15264(lack)P
+15917 15264(of)P
+16648 15264(student)P
+18612 15264(preparation)P
+21575 15264(is)P
+22206 15264(detected,)P
+24585 15264(the)P
+25549 15264(easier)P
+27178 15264(it)P
+27743 15264(will)P
+28908 15264(be)P
+29705 15264(on)P
+30536 15264(the)P
+31500 15264(stu\255)P
+4320 14544(dent.)P
+5979 14544(Anyone)P
+8154 14544(proceeding)P
+11095 14544(through)P
+13238 14544(the)P
+14247 14544(scripts)P
+16089 14544(should)P
+17964 14544(be)P
+18805 14544(getting)P
+20747 14544(mostly)P
+22656 14544(correct)P
+24596 14544(answers;)P
+26969 14544(otherwise,)P
+29726 14544(the)P
+30734 14544(system)P
+4320 13824(will)P
+5485 13824(be)P
+6282 13824(unsatisfactory)P
+9878 13824(both)P
+11176 13824(because)P
+13304 13824(the)P
+14268 13824(wrong)P
+16032 13824(habits)P
+17696 13824(are)P
+18659 13824(being)P
+20223 13824(learned)P
+22219 13824(and)P
+23316 13824(because)P
+25444 13824(the)P
+26408 13824(scripts)P
+28205 13824(make)P
+29735 13824(little)P
+31067 13824(effort)P
+4320 13104(to)P
+4987 13104(deal)P
+6186 13104(with)P
+7453 13104(wrong)P
+9186 13104(answers.)P
+11667 13104(Unprepared)P
+14698 13104(students)P
+16864 13104(should)P
+18664 13104(not)P
+19631 13104(be)P
+20397 13104(encouraged)P
+23361 13104(to)P
+24028 13104(continue)P
+26294 13104(with)P
+27561 13104(scripts.)P
+5820 12168(There)P
+7424 12168(are)P
+8361 12168(some)P
+9832 12168(preliminary)P
+12837 12168(items)P
+14342 12168(which)P
+16012 12168(the)P
+16949 12168(student)P
+18886 12168(must)P
+20257 12168(know)P
+21794 12168(before)P
+23530 12168(any)P
+24600 12168(scripts)P
+26370 12168(can)P
+27406 12168(be)P
+28176 12168(tried.)P
+29830 12168(In)P
+30534 12168(particu\255)P
+4320 11448(lar,)P
+5321 11448(the)P
+6272 11448(student)P
+8223 11448(must)P
+9608 11448(know)P
+11159 11448(how)P
+12410 11448(to)P
+13095 11448(connect)P
+15178 11448(to)P
+15863 11448(a)P
+0 9 SF
+16327 11448(UNIX)P
+0 10 SF
+17895 11448(system,)P
+19929 11448(set)P
+20813 11448(the)P
+21764 11448(terminal)P
+23982 11448(properly,)P
+26383 11448(log)P
+27368 11448(in,)P
+28202 11448(and)P
+29285 11448(execute)P
+31333 11448(sim\255)P
+4320 10728(ple)P
+5275 10728(commands)P
+8096 10728(\(e.g.,)P
+1 10 SF
+9534 10728(learn)P
+0 10 SF
+11022 10728(itself\).)P
+12994 10728(In)P
+13716 10728(addition,)P
+16055 10728(the)P
+17010 10728(character)P
+19429 10728(erase)P
+20881 10728(and)P
+21968 10728(line)P
+23089 10728(kill)P
+24111 10728(conventions)P
+27231 10728(\(#)P
+27952 10728(and)P
+29039 10728(@\))P
+30013 10728(should)P
+31834 10728(be)P
+4320 10008(known.)P
+6512 10008(It)P
+7088 10008(is)P
+7697 10008(hard)P
+8971 10008(to)P
+9646 10008(see)P
+10619 10008(how)P
+11860 10008(this)P
+12935 10008(much)P
+14476 10008(could)P
+16017 10008(be)P
+16791 10008(taught)P
+18499 10008(by)P
+19307 10008(computer\255aided)P
+23280 10008(instruction,)P
+26205 10008(since)P
+27645 10008(a)P
+28119 10008(student)P
+30060 10008(who)P
+31301 10008(does)P
+4320 9288(not)P
+5341 9288(know)P
+6928 9288(these)P
+8414 9288(basic)P
+9900 9288(skills)P
+11421 9288(will)P
+12609 9288(not)P
+13630 9288(be)P
+14450 9288(able)P
+15703 9288(to)P
+16424 9288(run)P
+17477 9288(the)P
+18463 9288(learning)P
+20682 9288(program.)P
+23318 9288(A)P
+24004 9288(brief)P
+25390 9288(description)P
+28309 9288(on)P
+29162 9288(paper)P
+30747 9288(is)P
+31400 9288(pro\255)P
+4320 8568(vided)P
+5878 8568(\(see)P
+7068 8568(Appendix)P
+9659 8568(A\),)P
+10667 8568(although)P
+12992 8568(assistance)P
+15614 8568(will)P
+16773 8568(be)P
+17564 8568(needed)P
+19487 8568(for)P
+20411 8568(the)P
+21368 8568(\212rst)P
+22526 8568(few)P
+23649 8568(minutes.)P
+26123 8568(This)P
+27414 8568(assistance,)P
+30185 8568(however,)P
+4320 7848(need)P
+5652 7848(not)P
+6619 7848(be)P
+7385 7848(highly)P
+9119 7848(skilled.)P
+5820 6912(The)P
+6998 6912(\212rst)P
+8177 6912(script)P
+9755 6912(in)P
+10467 6912(the)P
+11445 6912(current)P
+13389 6912(set)P
+14300 6912(deals)P
+15777 6912(with)P
+17089 6912(\212les.)P
+18684 6912(It)P
+19296 6912(assumes)P
+21539 6912(the)P
+22517 6912(basic)P
+23994 6912(knowledge)P
+26871 6912(above)P
+28548 6912(and)P
+29659 6912(teaches)P
+31667 6912(the)P
+4320 6192(student)P
+6303 6192(about)P
+7886 6192(the)P
+1 10 SF
+8869 6192(ls)P
+0 10 SF
+9369 6192(,)P
+1 10 SF
+9769 6192(cat)P
+0 10 SF
+10602 6192(,)P
+1 10 SF
+11002 6192(mv)P
+0 10 SF
+11801 6192(,)P
+1 10 SF
+12201 6192(rm)P
+0 10 SF
+12967 6192(,)P
+1 10 SF
+13367 6192(cp)P
+0 10 SF
+14283 6192(and)P
+1 10 SF
+15399 6192(diff)P
+0 10 SF
+16550 6192(commands.)P
+19748 6192(It)P
+20364 6192(also)P
+21579 6192(deals)P
+23060 6192(with)P
+24376 6192(the)P
+25358 6192(abbreviation)P
+28606 6192(characters)P
+31285 6192(*,)P
+31984 6192(?,)P
+4320 5472(and)P
+5418 5472([)P
+5818 5472(])P
+6250 5472(in)P
+6949 5472(\212le)P
+7948 5472(names.)P
+10062 5472(It)P
+10660 5472(does)P
+11990 5472(not)P
+12988 5472(cover)P
+14551 5472(pipes)P
+16048 5472(or)P
+16779 5472(I/O)P
+17810 5472(redirection,)P
+20790 5472(nor)P
+21821 5472(does)P
+23151 5472(it)P
+23716 5472(present)P
+25679 5472(the)P
+26643 5472(many)P
+28207 5472(options)P
+30205 5472(on)P
+31036 5472(the)P
+1 10 SF
+32000 5472(ls)P
+0 10 SF
+4320 4752(command.)P
+end restore showpage
+%%Page: USD:2-5 5
+save $troff begin Sc
+0 10 SF
+4320 44640(LEARN)P
+6520 44640<88>P
+7320 44640(Computer\255Aided)P
+11586 44640(Instruction)P
+14386 44640(on)P
+15186 44640(UNIX)P
+30233 44640(USD:2\2555)P
+5820 42480(This)P
+7116 42480(script)P
+8678 42480(contains)P
+10905 42480(31)P
+11733 42480(lessons)P
+13693 42480(in)P
+14388 42480(the)P
+15349 42480(fast)P
+16443 42480(track;)P
+18037 42480(two)P
+19165 42480(are)P
+20125 42480(intended)P
+22419 42480(as)P
+23146 42480(prerequisite)P
+26206 42480(checks,)P
+28215 42480(seven)P
+29808 42480(are)P
+30768 42480(review)P
+4320 41760(exercises.)P
+7102 41760(There)P
+8736 41760(are)P
+9703 41760(a)P
+10204 41760(total)P
+11506 41760(of)P
+12241 41760(75)P
+13076 41760(lessons)P
+15043 41760(in)P
+15745 41760(all)P
+16580 41760(three)P
+18014 41760(tracks,)P
+19831 41760(and)P
+20932 41760(the)P
+21900 41760(instructional)P
+25135 41760(passages)P
+27466 41760(typed)P
+29033 41760(at)P
+29700 41760(the)P
+30667 41760(student)P
+4320 41040(to)P
+4993 41040(begin)P
+6532 41040(each)P
+7836 41040(lesson)P
+9540 41040(total)P
+10812 41040(4,476)P
+12367 41040(words.)P
+14388 41040(The)P
+15526 41040(average)P
+17595 41040(lesson)P
+19299 41040(thus)P
+20504 41040(begins)P
+22275 41040(with)P
+23547 41040(a)P
+24018 41040(60\255word)P
+26256 41040(message.)P
+28842 41040(In)P
+29547 41040(general,)P
+31667 41040(the)P
+4320 40320(fast)P
+5419 40320(track)P
+6851 40320(lessons)P
+8816 40320(have)P
+10181 40320(somewhat)P
+12846 40320(longer)P
+14612 40320(introductions,)P
+18162 40320(and)P
+19261 40320(the)P
+20227 40320(slow)P
+21593 40320(tracks)P
+23258 40320(somewhat)P
+25923 40320(shorter)P
+27821 40320(ones.)P
+29502 40320(The)P
+30667 40320(longest)P
+4320 39600(message)P
+6551 39600(is)P
+7151 39600(144)P
+8251 39600(words)P
+9917 39600(and)P
+10983 39600(the)P
+11916 39600(shortest)P
+13982 39600(14.)P
+5820 38664(The)P
+6944 38664(second)P
+8800 38664(script)P
+10324 38664(trains)P
+11848 38664(students)P
+14005 38664(in)P
+14663 38664(the)P
+15587 38664(use)P
+16577 38664(of)P
+17268 38664(the)P
+0 9 SF
+18172 38664(UNIX)P
+0 10 SF
+19713 38664(context)P
+21670 38664(editor)P
+1 10 SF
+23261 38664(ed)P
+0 10 SF
+23927 38664(,)P
+24268 38664(a)P
+24726 38664(sophisticated)P
+28050 38664(editor)P
+29642 38664(using)P
+31134 38664(regu\255)P
+4320 37944(lar)P
+5284 37944(expressions)P
+8413 37944(for)P
+9444 37944(searching.)P
+0 8 SF
+11892 38136(5)P
+0 10 SF
+12462 37944(All)P
+13559 37944(editor)P
+15289 37944(features)P
+17517 37944(except)P
+19412 37944(encryption,)P
+22458 37944(mark)P
+24021 37944(names)P
+25883 37944(and)P
+27079 37944(`;')P
+27976 37944(in)P
+28773 37944(addressing)P
+31668 37944(are)P
+4320 37224(covered.)P
+6811 37224(The)P
+7987 37224(fast)P
+9096 37224(track)P
+10538 37224(contains)P
+12780 37224(2)P
+13323 37224(prerequisite)P
+16398 37224(checks,)P
+18422 37224(93)P
+19265 37224(lessons,)P
+21390 37224(and)P
+22499 37224(a)P
+23008 37224(review)P
+24883 37224(lesson.)P
+26975 37224(It)P
+27584 37224(is)P
+28226 37224(supplemented)P
+31800 37224(by)P
+4320 36504(146)P
+5420 36504(additional)P
+8020 36504(lessons)P
+9952 36504(in)P
+10619 36504(other)P
+12052 36504(tracks.)P
+5820 35568(A)P
+6458 35568(comparison)P
+9462 35568(of)P
+10166 35568(sizes)P
+11535 35568(may)P
+12772 35568(be)P
+13542 35568(of)P
+14246 35568(interest.)P
+16566 35568(The)P
+1 10 SF
+17703 35568(ed)P
+0 10 SF
+18473 35568(description)P
+21343 35568(in)P
+22014 35568(the)P
+22951 35568(reference)P
+25385 35568(manual)P
+27355 35568(is)P
+27959 35568(2,572)P
+29513 35568(words)P
+31183 35568(long.)P
+4320 34848(The)P
+1 10 SF
+5515 34848(ed)P
+0 10 SF
+6343 34848(tutorial)P
+0 8 SF
+8077 35040(6)P
+0 10 SF
+8579 34848(is)P
+9241 34848(6,138)P
+10852 34848(words)P
+12579 34848(long.)P
+14057 34848(The)P
+15251 34848(fast)P
+16378 34848(track)P
+17838 34848(through)P
+19966 34848(the)P
+1 10 SF
+20960 34848(ed)P
+0 10 SF
+21787 34848(script)P
+23381 34848(is)P
+24042 34848(7,407)P
+25653 34848(words)P
+27380 34848(of)P
+28141 34848(explanatory)P
+31234 34848(mes\255)P
+4320 34128(sages,)P
+5972 34128(and)P
+7042 34128(the)P
+7979 34128(total)P
+1 10 SF
+9250 34128(ed)P
+0 10 SF
+10020 34128(script,)P
+11707 34128(242)P
+12811 34128(lessons,)P
+14897 34128(has)P
+15900 34128(15,615)P
+17754 34128(words.)P
+19774 34128(The)P
+20911 34128(average)P
+1 10 SF
+22979 34128(ed)P
+0 10 SF
+23749 34128(lesson)P
+25452 34128(is)P
+26056 34128(thus)P
+27259 34128(also)P
+28428 34128(about)P
+29964 34128(60)P
+30767 34128(words;)P
+4320 33408(the)P
+5253 33408(largest)P
+7052 33408(is)P
+7652 33408(171)P
+8752 33408(words)P
+10418 33408(and)P
+11484 33408(the)P
+12417 33408(smallest)P
+14583 33408(10.)P
+15733 33408(The)P
+16866 33408(original)P
+1 10 SF
+18933 33408(ed)P
+0 10 SF
+19699 33408(script)P
+21232 33408(represents)P
+23863 33408(about)P
+25396 33408(three)P
+26795 33408(man\255weeks)P
+29726 33408(of)P
+30426 33408(effort.)P
+5820 32472(The)P
+6978 32472(advanced)P
+9467 32472(\212le)P
+10459 32472(handling)P
+12784 32472(script)P
+14342 32472(deals)P
+15799 32472(with)P
+1 10 SF
+17091 32472(ls)P
+0 10 SF
+17716 32472(options,)P
+19858 32472(I/O)P
+20882 32472(diversion,)P
+23489 32472(pipes,)P
+25129 32472(and)P
+26219 32472(supporting)P
+29010 32472(programs)P
+31500 32472(like)P
+1 10 SF
+4320 31752(pr)P
+0 10 SF
+4953 31752(,)P
+1 10 SF
+5308 31752(wc)P
+0 10 SF
+6074 31752(,)P
+1 10 SF
+6429 31752(tail)P
+0 10 SF
+7330 31752(,)P
+1 10 SF
+7685 31752(spell)P
+0 10 SF
+9123 31752(and)P
+1 10 SF
+10194 31752(grep)P
+0 10 SF
+11393 31752(.)P
+11948 31752(\(The)P
+13286 31752(basic)P
+14723 31752(\212le)P
+15695 31752(handling)P
+18000 31752(script)P
+19538 31752(is)P
+20143 31752(a)P
+20614 31752(prerequisite.\))P
+24001 31752(It)P
+24573 31752(is)P
+25178 31752(not)P
+26149 31752(as)P
+26852 31752(re\212ned)P
+28722 31752(as)P
+29425 31752(the)P
+30362 31752(\212rst)P
+31500 31752(two)P
+4320 31032(scripts;)P
+6305 31032(this)P
+7424 31032(is)P
+8076 31032(re\213ected)P
+10393 31032(at)P
+11077 31032(least)P
+12427 31032(partly)P
+14078 31032(in)P
+14796 31032(the)P
+15780 31032(fact)P
+16930 31032(that)P
+18081 31032(it)P
+18666 31032(provides)P
+20983 31032(much)P
+22567 31032(less)P
+23717 31032(of)P
+24468 31032(a)P
+24985 31032(full)P
+26070 31032(three\255track)P
+28919 31032(sequence)P
+31367 31032(than)P
+4320 30312(they)P
+5554 30312(do.)P
+6705 30312(On)P
+7639 30312(the)P
+8573 30312(other)P
+10007 30312(hand,)P
+11524 30312(since)P
+12957 30312(it)P
+13492 30312(is)P
+14092 30312(perceived)P
+16623 30312(as)P
+17322 30312(``advanced,'')P
+20736 30312(it)P
+21270 30312(is)P
+21870 30312(hoped)P
+23536 30312(that)P
+24636 30312(the)P
+25569 30312(student)P
+27502 30312(will)P
+28636 30312(have)P
+29968 30312(somewhat)P
+4320 29592(more)P
+5753 29592(sophistication)P
+9286 29592(and)P
+10352 29592(be)P
+11118 29592(better)P
+12684 29592(able)P
+13883 29592(to)P
+14550 29592(cope)P
+15882 29592(with)P
+17149 29592(it)P
+17683 29592(at)P
+18316 29592(a)P
+18782 29592(reasonably)P
+21580 29592(high)P
+22847 29592(level)P
+24213 29592(of)P
+24913 29592(performance.)P
+5820 28656(A)P
+6524 28656(fourth)P
+8262 28656(script)P
+9866 28656(covers)P
+11702 28656(the)P
+1 10 SF
+12706 28656(eqn)P
+0 10 SF
+13843 28656(language)P
+16279 28656(for)P
+17250 28656(typing)P
+19055 28656(mathematics.)P
+22708 28656(This)P
+24046 28656(script)P
+25650 28656(must)P
+27088 28656(be)P
+27924 28656(run)P
+28994 28656(on)P
+29864 28656(a)P
+30400 28656(terminal)P
+4320 27936(capable)P
+6426 27936(of)P
+7201 27936(printing)P
+9377 27936(mathematics,)P
+12834 27936(for)P
+13809 27936(instance)P
+16049 27936(the)P
+17057 27936(DASI)P
+18732 27936(300)P
+19907 27936(and)P
+21048 27936(similar)P
+22990 27936(Diablo\255based)P
+26463 27936(terminals,)P
+29120 27936(or)P
+29894 27936(the)P
+30901 27936(nearly)P
+4320 27216(extinct)P
+6154 27216(Model)P
+7921 27216(37)P
+8722 27216(teletype.)P
+11172 27216(Again,)P
+12989 27216(this)P
+14056 27216(script)P
+15589 27216(is)P
+16189 27216(relatively)P
+18655 27216(short)P
+20055 27216(of)P
+20755 27216(tracks:)P
+22554 27216(of)P
+23254 27216(76)P
+24054 27216(lessons,)P
+26136 27216(only)P
+27403 27216(17)P
+28203 27216(are)P
+29135 27216(in)P
+29802 27216(the)P
+30735 27216(second)P
+4320 26496(track)P
+5757 26496(and)P
+6861 26496(2)P
+7398 26496(in)P
+8102 26496(the)P
+9072 26496(third)P
+10443 26496(track.)P
+12229 26496(Most)P
+13699 26496(of)P
+14436 26496(these)P
+15905 26496(provide)P
+17975 26496(additional)P
+20612 26496(practice)P
+22747 26496(for)P
+23684 26496(students)P
+25887 26496(who)P
+27157 26496(are)P
+28126 26496(having)P
+29996 26496(trouble)P
+31933 26496(in)P
+4320 25776(the)P
+5253 25776(\212rst)P
+6387 25776(track.)P
+5820 24840(The)P
+1 10 SF
+6985 24840(-ms)P
+0 10 SF
+8388 24840(script)P
+9953 24840(for)P
+10885 24840(formatting)P
+13651 24840(macros)P
+15615 24840(is)P
+16247 24840(a)P
+16745 24840(short)P
+18176 24840(one\255track)P
+20672 24840(only)P
+21970 24840(script.)P
+23884 24840(The)P
+25048 24840(macro)P
+26778 24840(package)P
+28973 24840(it)P
+29538 24840(describes)P
+32000 24840(is)P
+4320 24120(no)P
+5142 24120(longer)P
+6897 24120(the)P
+7852 24120(standard,)P
+10256 24120(so)P
+11011 24120(this)P
+12100 24120(script)P
+13655 24120(will)P
+14811 24120(undoubtedly)P
+18033 24120(be)P
+18821 24120(superseded)P
+21707 24120(in)P
+22396 24120(the)P
+23351 24120(future.)P
+25355 24120(Furthermore,)P
+28726 24120(the)P
+29680 24120(linear)P
+31267 24120(style)P
+4320 23400(of)P
+5038 23400(a)P
+5522 23400(single)P
+7173 23400(learn)P
+8590 23400(script)P
+10140 23400(is)P
+10757 23400(somewhat)P
+13406 23400(inappropriate)P
+16822 23400(for)P
+17739 23400(the)P
+18689 23400(macros,)P
+20788 23400(since)P
+22237 23400(the)P
+23187 23400(macro)P
+24903 23400(package)P
+27084 23400(is)P
+27701 23400(composed)P
+30350 23400(of)P
+31067 23400(many)P
+4320 22680(independent)P
+7533 22680(features,)P
+9862 22680(and)P
+11009 22680(few)P
+12189 22680(users)P
+13702 22680(need)P
+15115 22680(all)P
+15995 22680(of)P
+16775 22680(them.)P
+18605 22680(It)P
+19252 22680(would)P
+21032 22680(be)P
+21878 22680(better)P
+23524 22680(to)P
+24271 22680(have)P
+25683 22680(a)P
+26229 22680(selection)P
+28641 22680(of)P
+29421 22680(short)P
+30901 22680(lesson)P
+4320 21960(sequences)P
+6950 21960(dealing)P
+8916 21960(with)P
+10183 21960(the)P
+11116 21960(features)P
+13214 21960(independently.)P
+5820 21024(The)P
+7008 21024(script)P
+8596 21024(on)P
+9451 21024(C)P
+10106 21024(is)P
+10761 21024(in)P
+11483 21024(a)P
+12004 21024(state)P
+13358 21024(of)P
+14113 21024(transition.)P
+16985 21024(It)P
+17607 21024(was)P
+18794 21024(originally)P
+21383 21024(designed)P
+23770 21024(to)P
+24492 21024(follow)P
+26313 21024(a)P
+26833 21024(tutorial)P
+28821 21024(on)P
+29675 21024(C,)P
+30479 21024(but)P
+31500 21024(that)P
+4320 20304(document)P
+6979 20304(has)P
+8071 20304(since)P
+9596 20304(become)P
+11753 20304(obsolete.)P
+14394 20304(The)P
+15619 20304(current)P
+17610 20304(script)P
+19235 20304(has)P
+20326 20304(been)P
+21750 20304(partially)P
+24042 20304(converted)P
+26699 20304(to)P
+27458 20304(follow)P
+29317 20304(the)P
+30342 20304(order)P
+31900 20304(of)P
+4320 19584(presentation)P
+7455 19584(in)P
+1 10 SF
+8125 19584(The)P
+9228 19584(C)P
+9831 19584(Programming)P
+13400 19584(Language,)P
+0 8 SF
+15950 19776(7)P
+0 10 SF
+16393 19584(but)P
+17363 19584(this)P
+18433 19584(job)P
+19403 19584(is)P
+20005 19584(not)P
+20974 19584(complete.)P
+23725 19584(The)P
+24860 19584(C)P
+25462 19584(script)P
+26997 19584(was)P
+28131 19584(never)P
+29665 19584(intended)P
+31933 19584(to)P
+4320 18864(teach)P
+5778 18864(C;)P
+6538 18864(rather)P
+8130 18864(it)P
+8657 18864(is)P
+9250 18864(supposed)P
+11675 18864(to)P
+12335 18864(be)P
+13094 18864(a)P
+13553 18864(series)P
+15111 18864(of)P
+15804 18864(exercises)P
+18194 18864(for)P
+19087 18864(which)P
+20746 18864(the)P
+21672 18864(computer)P
+24131 18864(provides)P
+26390 18864(checking)P
+28748 18864(and)P
+29807 18864(\(upon)P
+31401 18864(suc\255)P
+4320 18144(cess\))P
+5718 18144(a)P
+6184 18144(suggested)P
+8749 18144(solution.)P
+5820 17208(This)P
+7113 17208(combination)P
+10339 17208(of)P
+11065 17208(scripts)P
+12857 17208(covers)P
+14648 17208(much)P
+16207 17208(of)P
+16933 17208(the)P
+17891 17208(material)P
+20082 17208(which)P
+21773 17208(any)P
+0 9 SF
+22844 17208(UNIX)P
+0 10 SF
+24419 17208(user)P
+25643 17208(will)P
+26802 17208(need)P
+28159 17208(to)P
+28851 17208(know)P
+30409 17208(to)P
+31101 17208(make)P
+4320 16488(effective)P
+6686 16488(use)P
+7753 16488(of)P
+8521 16488(the)P
+9521 16488(system.)P
+11804 16488(With)P
+13271 16488(enlargement)P
+16503 16488(of)P
+17270 16488(the)P
+18270 16488(advanced)P
+20801 16488(\212les)P
+22068 16488(course)P
+23900 16488(to)P
+24634 16488(include)P
+26667 16488(more)P
+28167 16488(on)P
+29034 16488(the)P
+30034 16488(command)P
+4320 15768(interpreter,)P
+7213 15768(there)P
+8656 15768(will)P
+9834 15768(be)P
+10643 15768(a)P
+11152 15768(relatively)P
+13661 15768(complete)P
+16103 15768(introduction)P
+19280 15768(to)P
+0 9 SF
+19970 15768(UNIX)P
+0 10 SF
+21563 15768(available)P
+23971 15768(via)P
+1 10 SF
+24947 15768(learn.)P
+0 10 SF
+26806 15768(Although)P
+29316 15768(we)P
+30258 15768(make)P
+31800 15768(no)P
+4320 15048(pretense)P
+6588 15048(that)P
+1 10 SF
+7758 15048(learn)P
+0 10 SF
+9293 15048(will)P
+10496 15048(replace)P
+12496 15048(other)P
+13998 15048(instructional)P
+17267 15048(materials,)P
+19885 15048(it)P
+20488 15048(should)P
+22357 15048(provide)P
+24459 15048(a)P
+24994 15048(useful)P
+26729 15048(supplement)P
+29764 15048(to)P
+30500 15048(existing)P
+4320 14328(tutorials)P
+6487 14328(and)P
+7553 14328(reference)P
+9983 14328(manuals.)P
+2 10 SF
+4320 12888(4.)P
+5170 12888(Experience)P
+8235 12888(with)P
+9569 12888(Students.)P
+1 10 SF
+5820 11952(Learn)P
+0 10 SF
+7462 11952(has)P
+8470 11952(been)P
+9811 11952(installed)P
+12053 11952(on)P
+12862 11952(many)P
+14404 11952(different)P
+0 9 SF
+16658 11952(UNIX)P
+0 10 SF
+18216 11952(systems.)P
+20673 11952(Most)P
+22114 11952(of)P
+22822 11952(the)P
+23763 11952(usage)P
+25336 11952(is)P
+25944 11952(on)P
+26752 11952(the)P
+27693 11952(\212rst)P
+28835 11952(two)P
+29943 11952(scripts,)P
+31867 11952(so)P
+4320 11232(these)P
+5767 11232(are)P
+6714 11232(more)P
+8161 11232(thoroughly)P
+11009 11232(debugged)P
+13555 11232(and)P
+14635 11232(polished.)P
+17232 11232(As)P
+18112 11232(a)P
+18592 11232(\(random\))P
+21039 11232(sample)P
+22952 11232(of)P
+23666 11232(user)P
+24879 11232(experience,)P
+27840 11232(the)P
+1 10 SF
+28787 11232(learn)P
+0 10 SF
+30367 11232(program)P
+4320 10512(has)P
+5333 10512(been)P
+6679 10512(used)P
+7991 10512(at)P
+8637 10512(Bell)P
+9850 10512(Labs)P
+11229 10512(at)P
+11875 10512(Indian)P
+13621 10512(Hill)P
+14768 10512(for)P
+15681 10512(10,500)P
+17544 10512(lessons)P
+19489 10512(in)P
+20169 10512(a)P
+20648 10512(four)P
+21861 10512(month)P
+23608 10512(period.)P
+25704 10512(About)P
+27417 10512(3600)P
+28830 10512(of)P
+29543 10512(these)P
+30988 10512(are)P
+31933 10512(in)P
+4320 9792(the)P
+5244 9792(\212les)P
+6435 9792(script,)P
+8109 9792(4100)P
+9500 9792(in)P
+10158 9792(the)P
+11082 9792(editor,)P
+12823 9792(and)P
+13880 9792(1400)P
+15271 9792(in)P
+15929 9792(advanced)P
+18384 9792(\212les.)P
+19925 9792(The)P
+21049 9792(passing)P
+23039 9792(rate)P
+24129 9792(is)P
+24720 9792(about)P
+26244 9792(80%,)P
+27685 9792(that)P
+28776 9792(is,)P
+29517 9792(about)P
+31042 9792(4)P
+31534 9792(les\255)P
+4320 9072(sons)P
+5617 9072(are)P
+6580 9072(passed)P
+8409 9072(for)P
+9340 9072(every)P
+10903 9072(one)P
+12000 9072(failed.)P
+13947 9072(There)P
+15577 9072(have)P
+16940 9072(been)P
+18303 9072(86)P
+19134 9072(distinct)P
+21132 9072(users)P
+22595 9072(of)P
+23325 9072(the)P
+24288 9072(\212les)P
+25518 9072(script,)P
+27231 9072(and)P
+28327 9072(58)P
+29157 9072(of)P
+29887 9072(the)P
+30850 9072(editor.)P
+4320 8352(On)P
+5289 8352(our)P
+6325 8352(system)P
+8227 8352(at)P
+8896 8352(Murray)P
+10931 8352(Hill,)P
+12251 8352(there)P
+13686 8352(have)P
+15054 8352(been)P
+16422 8352(nearly)P
+18157 8352(2000)P
+19593 8352(lessons)P
+21561 8352(over)P
+22862 8352(two)P
+23997 8352(weeks)P
+25730 8352(that)P
+26865 8352(include)P
+28866 8352(Christmas)P
+31534 8352(and)P
+4320 7632(New)P
+5652 7632(Year.)P
+7367 7632(Users)P
+8932 7632(have)P
+10264 7632(ranged)P
+12096 7632(in)P
+12763 7632(age)P
+13795 7632(from)P
+15162 7632(six)P
+16062 7632(up.)P
+5820 6696(It)P
+6431 6696(is)P
+7074 6696(dif\212cult)P
+9218 6696(to)P
+9928 6696(characterize)P
+13067 6696(typical)P
+14943 6696(sessions)P
+17151 6696(with)P
+18461 6696(the)P
+19437 6696(scripts;)P
+21413 6696(many)P
+22989 6696(instances)P
+25430 6696(exist)P
+26806 6696(of)P
+27549 6696(someone)P
+29924 6696(doing)P
+31534 6696(one)P
+4320 5976(or)P
+5037 5976(two)P
+6153 5976(lessons)P
+8101 5976(and)P
+9183 5976(then)P
+10432 5976(logging)P
+12482 5976(out,)P
+13615 5976(as)P
+14330 5976(do)P
+15146 5976(instances)P
+17560 5976(of)P
+18276 5976(someone)P
+20624 5976(pausing)P
+22706 5976(in)P
+23389 5976(a)P
+23871 5976(script)P
+25420 5976(for)P
+26336 5976(twenty)P
+28185 5976(minutes)P
+30301 5976(or)P
+31017 5976(more.)P
+4320 5256(In)P
+5064 5256(the)P
+6041 5256(earlier)P
+7817 5256(version)P
+9827 5256(of)P
+1 10 SF
+10571 5256(learn)P
+0 10 SF
+11937 5256(,)P
+12331 5256(the)P
+13308 5256(average)P
+15416 5256(session)P
+17392 5256(in)P
+18102 5256(the)P
+19078 5256(\212les)P
+20321 5256(course)P
+22129 5256(took)P
+23439 5256(32)P
+24282 5256(minutes)P
+26425 5256(and)P
+27534 5256(covered)P
+29675 5256(23)P
+30518 5256(lessons.)P
+4320 4536(The)P
+5507 4536(distribution)P
+8529 4536(is)P
+9183 4536(quite)P
+10637 4536(broad)P
+12257 4536(and)P
+13377 4536(skewed,)P
+15578 4536(however;)P
+18063 4536(the)P
+19049 4536(longest)P
+21035 4536(session)P
+23020 4536(was)P
+24205 4536(130)P
+25358 4536(minutes)P
+27511 4536(and)P
+28630 4536(there)P
+30082 4536(were)P
+31500 4536(\212ve)P
+4320 3816(sessions)P
+6594 3816(shorter)P
+8569 3816(than)P
+9911 3816(\212ve)P
+11120 3816(minutes.)P
+13679 3816(The)P
+14920 3816(average)P
+17092 3816(lesson)P
+18899 3816(took)P
+20274 3816(about)P
+21915 3816(80)P
+22823 3816(seconds.)P
+25379 3816(These)P
+27119 3816(numbers)P
+29493 3816(are)P
+30533 3816(roughly)P
+end restore showpage
+%%Page: USD:2-6 6
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:2\2556)P
+20035 44640(LEARN)P
+22235 44640<88>P
+23035 44640(Computer\255Aided)P
+27301 44640(Instruction)P
+30101 44640(on)P
+30901 44640(UNIX)P
+4320 42480(typical)P
+6187 42480(for)P
+7121 42480(non\255programmers;)P
+11821 42480(a)P
+0 9 SF
+12301 42480(UNIX)P
+0 10 SF
+13885 42480(expert)P
+15618 42480(can)P
+16684 42480(do)P
+17518 42480(the)P
+18485 42480(scripts)P
+20285 42480(at)P
+20952 42480(approximately)P
+24652 42480(30)P
+25486 42480(seconds)P
+27618 42480(per)P
+28618 42480(lesson,)P
+30500 42480(most)P
+31900 42480(of)P
+4320 41760(which)P
+5986 41760(is)P
+6586 41760(the)P
+7519 41760(system)P
+9385 41760(printing.)P
+5820 40824(At)P
+6648 40824(present)P
+8608 40824(working)P
+10836 40824(through)P
+12931 40824(a)P
+13425 40824(section)P
+15352 40824(of)P
+16080 40824(the)P
+17041 40824(middle)P
+18936 40824(of)P
+19664 40824(the)P
+20625 40824(\212les)P
+21853 40824(script)P
+23414 40824(took)P
+24709 40824(about)P
+26270 40824(1.4)P
+27248 40824(seconds)P
+29374 40824(of)P
+30102 40824(processor)P
+4320 40104(time)P
+5640 40104(per)P
+6658 40104(lesson,)P
+8559 40104(and)P
+9677 40104(a)P
+10195 40104(system)P
+12113 40104(expert)P
+13864 40104(typing)P
+15650 40104(quickly)P
+17702 40104(took)P
+19021 40104(15)P
+19873 40104(seconds)P
+22023 40104(of)P
+22775 40104(real)P
+23926 40104(time)P
+25245 40104(per)P
+26263 40104(lesson.)P
+28364 40104(A)P
+29049 40104(novice)P
+30900 40104(would)P
+4320 39384(probably)P
+6702 39384(take)P
+7950 39384(at)P
+8631 39384(least)P
+9978 39384(a)P
+10492 39384(minute.)P
+12757 39384(Thus)P
+14205 39384(a)P
+14719 39384(UNIX)P
+16466 39384(system)P
+18380 39384(could)P
+19961 39384(support)P
+22009 39384(ten)P
+22990 39384(students)P
+25204 39384(working)P
+27452 39384(simultaneously)P
+31333 39384(with)P
+4320 38664(some)P
+5786 38664(spare)P
+7251 38664(capacity.)P
+2 10 SF
+4320 37224(5.)P
+5170 37224(The)P
+6370 37224(Script)P
+8137 37224(Interpreter.)P
+0 10 SF
+5820 36288(The)P
+1 10 SF
+6970 36288(learn)P
+0 10 SF
+8453 36288(program)P
+10703 36288(itself)P
+12120 36288(merely)P
+14003 36288(interprets)P
+16486 36288(scripts.)P
+18619 36288(It)P
+19203 36288(provides)P
+21486 36288(facilities)P
+23769 36288(for)P
+24686 36288(the)P
+25636 36288(script)P
+27186 36288(writer)P
+28836 36288(to)P
+29519 36288(capture)P
+31500 36288(stu\255)P
+4320 35568(dent)P
+5570 35568(responses)P
+8118 35568(and)P
+9201 35568(their)P
+10518 35568(effects,)P
+12483 35568(and)P
+13566 35568(simpli\212es)P
+16117 35568(the)P
+17067 35568(job)P
+18051 35568(of)P
+18768 35568(passing)P
+20784 35568(control)P
+22701 35568(to)P
+23385 35568(and)P
+24468 35568(recovering)P
+27250 35568(control)P
+29167 35568(from)P
+30551 35568(the)P
+31500 35568(stu\255)P
+4320 34848(dent.)P
+5902 34848(This)P
+7168 34848(section)P
+9066 34848(describes)P
+11496 34848(the)P
+12428 34848(operation)P
+14893 34848(and)P
+15958 34848(usage)P
+17522 34848(of)P
+18221 34848(the)P
+19154 34848(driver)P
+20787 34848(program,)P
+23170 34848(and)P
+24236 34848(indicates)P
+26568 34848(what)P
+27934 34848(is)P
+28534 34848(required)P
+30733 34848(to)P
+31400 34848(pro\255)P
+4320 34128(duce)P
+5652 34128(a)P
+6118 34128(new)P
+7317 34128(script.)P
+9200 34128(Readers)P
+11331 34128(only)P
+12598 34128(interested)P
+15130 34128(in)P
+15797 34128(the)P
+16730 34128(existing)P
+18830 34128(scripts)P
+20596 34128(may)P
+21829 34128(skip)P
+23029 34128(this)P
+24096 34128(section.)P
+5820 33192(The)P
+6981 33192(\212le)P
+7975 33192(structure)P
+10301 33192(used)P
+11627 33192(by)P
+1 10 SF
+12454 33192(learn)P
+0 10 SF
+14047 33192(is)P
+14674 33192(shown)P
+16467 33192(in)P
+17161 33192(Figure)P
+18955 33192(2.)P
+19832 33192(There)P
+21458 33192(is)P
+22085 33192(one)P
+23178 33192(parent)P
+24904 33192(directory)P
+27297 33192(\(named)P
+1 10 SF
+29323 33192(lib)P
+0 10 SF
+30007 33192(\))P
+30434 33192(contain\255)P
+4320 32472(ing)P
+5316 32472(the)P
+6278 32472(script)P
+7840 32472(data.)P
+9418 32472(Within)P
+11314 32472(this)P
+12409 32472(directory)P
+14803 32472(are)P
+15763 32472(subdirectories,)P
+19506 32472(one)P
+20600 32472(for)P
+21528 32472(each)P
+22854 32472(subject)P
+24781 32472(in)P
+25476 32472(which)P
+27170 32472(a)P
+27664 32472(course)P
+29457 32472(is)P
+30085 32472(available,)P
+4320 31752(one)P
+5390 31752(for)P
+6294 31752(logging)P
+8332 31752(\(named)P
+1 10 SF
+10335 31752(log)P
+0 10 SF
+11202 31752(\),)P
+11756 31752(and)P
+12826 31752(one)P
+13896 31752(in)P
+14567 31752(which)P
+16236 31752(user)P
+17438 31752(sub\255directories)P
+21206 31752(are)P
+22141 31752(created)P
+24075 31752(\(named)P
+1 10 SF
+26077 31752(play)P
+0 10 SF
+27210 31752(\).)P
+27963 31752(The)P
+29099 31752(subject)P
+31001 31752(direc\255)P
+4320 31032(tory)P
+5505 31032(contains)P
+7722 31032(master)P
+9539 31032(copies)P
+11289 31032(of)P
+12007 31032(all)P
+12825 31032(lessons,)P
+14925 31032(plus)P
+16143 31032(any)P
+17227 31032(supporting)P
+20012 31032(material)P
+22196 31032(for)P
+23114 31032(that)P
+24232 31032(subject.)P
+26499 31032(In)P
+27217 31032(a)P
+27701 31032(given)P
+29251 31032(subdirectory,)P
+4320 30312(each)P
+5700 30312(lesson)P
+7481 30312(is)P
+8163 30312(a)P
+8711 30312(single)P
+10426 30312(text)P
+11608 30312(\212le.)P
+13007 30312(Lessons)P
+15221 30312(are)P
+16235 30312(usually)P
+18250 30312(named)P
+20131 30312(systematically;)P
+24012 30312(the)P
+25027 30312(\212le)P
+26076 30312(that)P
+27258 30312(contains)P
+29539 30312(lesson)P
+1 10 SF
+31319 30312(n)P
+0 10 SF
+32000 30312(is)P
+4320 29592(called)P
+1 10 SF
+5952 29592(Ln)P
+0 10 SF
+6686 29592(.)P
+10746 28392 10 -100 1 L
+10974 28392 10 -100 50 L
+13561 27672(Figure)P
+15328 27672(2:)P
+16195 27672(Directory)P
+18694 27672(structure)P
+20993 27672(for)P
+1 10 SF
+21893 27672(learn)P
+0 10 SF
+11046 26232(lib)P
+12580 25152(play)P
+17111 24432(student1)P
+20044 23712(\212les)P
+21244 23712(for)P
+22144 23712(student1...)P
+17111 22992(student2)P
+20044 22272(\212les)P
+21244 22272(for)P
+22144 22272(student2...)P
+12580 21192(\212les)P
+17111 20472(L0.1a)P
+20044 20472(lessons)P
+21976 20472(for)P
+22876 20472(\212les)P
+24076 20472(course)P
+17111 19752(L0.1b)P
+17111 19032(...)P
+12580 17952(editor)P
+17111 17232(...)P
+12580 16152(\(other)P
+14213 16152(courses\))P
+12580 15072(log)P
+10746 14952 10 -100 1 L
+10974 14952 10 -100 50 L
+10746 14952 10 br
+10746 15192 10 br
+10746 15792 10 br
+10746 16392 10 br
+10746 16992 10 br
+10746 17592 10 br
+10746 18192 10 br
+10746 18792 10 br
+10746 19392 10 br
+10746 19992 10 br
+10746 20592 10 br
+10746 21192 10 br
+10746 21792 10 br
+10746 22392 10 br
+10746 22992 10 br
+10746 23592 10 br
+10746 24192 10 br
+10746 24792 10 br
+10746 25392 10 br
+10746 25992 10 br
+10746 26592 10 br
+10746 27192 10 br
+10746 27792 10 br
+25974 14952 10 br
+25974 15192 10 br
+25974 15792 10 br
+25974 16392 10 br
+25974 16992 10 br
+25974 17592 10 br
+25974 18192 10 br
+25974 18792 10 br
+25974 19392 10 br
+25974 19992 10 br
+25974 20592 10 br
+25974 21192 10 br
+25974 21792 10 br
+25974 22392 10 br
+25974 22992 10 br
+25974 23592 10 br
+25974 24192 10 br
+25974 24792 10 br
+25974 25392 10 br
+25974 25992 10 br
+25974 26592 10 br
+25974 27192 10 br
+25974 27792 10 br
+5820 12936(When)P
+1 10 SF
+7501 12936(learn)P
+0 10 SF
+9016 12936(is)P
+9665 12936(executed,)P
+12195 12936(it)P
+12778 12936(makes)P
+14559 12936(a)P
+15074 12936(private)P
+16989 12936(directory)P
+19404 12936(for)P
+20352 12936(the)P
+21333 12936(user)P
+22580 12936(to)P
+23295 12936(work)P
+24776 12936(in,)P
+25641 12936(within)P
+27423 12936(the)P
+1 10 SF
+28404 12936(learn)P
+0 10 SF
+29918 12936(portion)P
+31900 12936(of)P
+4320 12216(the)P
+5269 12216(\212le)P
+6252 12216(system.)P
+8484 12216(A)P
+9133 12216(fresh)P
+10548 12216(copy)P
+11930 12216(of)P
+12646 12216(all)P
+13462 12216(the)P
+14411 12216(\212les)P
+15626 12216(used)P
+16940 12216(in)P
+17622 12216(each)P
+18935 12216(lesson)P
+20649 12216(\(mostly)P
+22698 12216(data)P
+23912 12216(for)P
+24827 12216(the)P
+25775 12216(student)P
+27723 12216(to)P
+28405 12216(operate)P
+30385 12216(upon\))P
+32000 12216(is)P
+4320 11496(made)P
+5885 11496(each)P
+7249 11496(time)P
+8582 11496(a)P
+9114 11496(student)P
+11113 11496(starts)P
+12645 11496(a)P
+13176 11496(lesson,)P
+15090 11496(so)P
+15888 11496(the)P
+16886 11496(script)P
+18484 11496(writer)P
+20182 11496(may)P
+21480 11496(assume)P
+23510 11496(that)P
+24675 11496(everything)P
+27506 11496(is)P
+28171 11496(reinitialized)P
+31302 11496(each)P
+4320 10776(time)P
+5595 10776(a)P
+6069 10776(lesson)P
+7776 10776(is)P
+8384 10776(entered.)P
+10707 10776(The)P
+11848 10776(student)P
+13789 10776(directory)P
+16163 10776(is)P
+16771 10776(deleted)P
+18711 10776(after)P
+20018 10776(each)P
+21324 10776(session;)P
+23431 10776(any)P
+24505 10776(permanent)P
+27245 10776(records)P
+29218 10776(must)P
+30593 10776(be)P
+31367 10776(kept)P
+4320 10056(elsewhere.)P
+5820 9120(The)P
+6953 9120(script)P
+8486 9120(writer)P
+10119 9120(must)P
+11486 9120(provide)P
+13519 9120(certain)P
+15351 9120(basic)P
+16783 9120(items)P
+18283 9120(in)P
+18950 9120(each)P
+20248 9120(lesson:)P
+4320 8184(\(1\))P
+5820 8184(the)P
+6753 8184(text)P
+7853 8184(of)P
+8553 8184(the)P
+9486 8184(lesson;)P
+4320 7248(\(2\))P
+5820 7248(the)P
+6753 7248(set\255up)P
+8419 7248(commands)P
+11218 7248(to)P
+11885 7248(be)P
+12651 7248(executed)P
+14982 7248(before)P
+16714 7248(the)P
+17647 7248(user)P
+18846 7248(gets)P
+20012 7248(control;)P
+4320 6312(\(3\))P
+5820 6312(the)P
+6753 6312(data,)P
+8102 6312(if)P
+8669 6312(any,)P
+9885 6312(which)P
+11551 6312(the)P
+12484 6312(user)P
+13683 6312(is)P
+14283 6312(supposed)P
+16715 6312(to)P
+17382 6312(edit,)P
+18632 6312(transform,)P
+21315 6312(or)P
+22015 6312(otherwise)P
+24547 6312(process;)P
+4320 5376(\(4\))P
+5820 5376(the)P
+6864 5376(evaluating)P
+9674 5376(commands)P
+12584 5376(to)P
+13362 5376(be)P
+14239 5376(executed)P
+16681 5376(after)P
+18091 5376(the)P
+19135 5376(user)P
+20445 5376(has)P
+21555 5376(\212nished)P
+23766 5376(the)P
+24810 5376(lesson,)P
+26770 5376(to)P
+27548 5376(decide)P
+29424 5376(whether)P
+31667 5376(the)P
+5820 4656(answer)P
+7718 4656(is)P
+8318 4656(right;)P
+9819 4656(and)P
+end restore showpage
+%%Page: USD:2-7 7
+save $troff begin Sc
+0 10 SF
+4320 44640(LEARN)P
+6520 44640<88>P
+7320 44640(Computer\255Aided)P
+11586 44640(Instruction)P
+14386 44640(on)P
+15186 44640(UNIX)P
+30233 44640(USD:2\2557)P
+4320 42480(\(5\))P
+5820 42480(a)P
+6286 42480(list)P
+7220 42480(of)P
+7920 42480(possible)P
+10086 42480(successor)P
+12583 42480(lessons.)P
+1 10 SF
+4320 41544(Learn)P
+0 10 SF
+6007 41544(tries)P
+7294 41544(to)P
+8015 41544(minimize)P
+10536 41544(the)P
+11523 41544(work)P
+13010 41544(of)P
+13764 41544(bookkeeping)P
+17117 41544(and)P
+18237 41544(installation,)P
+21308 41544(so)P
+22095 41544(that)P
+23249 41544(most)P
+24669 41544(of)P
+25422 41544(the)P
+26408 41544(effort)P
+27994 41544(involved)P
+30347 41544(in)P
+31067 41544(script)P
+4320 40824(production)P
+7120 40824(is)P
+7720 40824(in)P
+8387 40824(planning)P
+10687 40824(lessons,)P
+12769 40824(writing)P
+14703 40824(tutorial)P
+16637 40824(paragraphs,)P
+19618 40824(and)P
+20684 40824(coding)P
+22517 40824(tests)P
+23783 40824(of)P
+24483 40824(student)P
+26416 40824(performance.)P
+5820 39888(The)P
+6963 39888(basic)P
+8405 39888(sequence)P
+10812 39888(of)P
+11522 39888(events)P
+13264 39888(is)P
+13874 39888(as)P
+14583 39888(follows.)P
+16942 39888(First,)P
+1 10 SF
+18402 39888(learn)P
+0 10 SF
+19977 39888(creates)P
+21850 39888(the)P
+22792 39888(working)P
+25001 39888(directory.)P
+27726 39888(Then,)P
+29318 39888(for)P
+30227 39888(each)P
+31534 39888(les\255)P
+4320 39168(son,)P
+1 10 SF
+5532 39168(learn)P
+0 10 SF
+7127 39168(reads)P
+8621 39168(the)P
+9583 39168(script)P
+11145 39168(for)P
+12074 39168(the)P
+13036 39168(lesson)P
+14764 39168(and)P
+15859 39168(processes)P
+18385 39168(it)P
+18948 39168(a)P
+19443 39168(line)P
+20572 39168(at)P
+21234 39168(a)P
+21728 39168(time.)P
+23373 39168(The)P
+24534 39168(lines)P
+25895 39168(in)P
+26590 39168(the)P
+27551 39168(script)P
+29112 39168(are:)P
+30239 39168(\(1\))P
+31167 39168(com\255)P
+4320 38448(mands)P
+6117 38448(to)P
+6815 38448(the)P
+7779 38448(script)P
+9343 38448(interpreter)P
+12073 38448(to)P
+12771 38448(print)P
+14136 38448(something,)P
+17017 38448(to)P
+17715 38448(create)P
+19377 38448(a)P
+19874 38448(\212les,)P
+21255 38448(to)P
+21953 38448(test)P
+23017 38448(something,)P
+25898 38448(etc.;)P
+27145 38448(\(2\))P
+28076 38448(text)P
+29207 38448(to)P
+29904 38448(be)P
+30700 38448(printed)P
+4320 37728(or)P
+5040 37728(put)P
+6027 37728(in)P
+6714 37728(a)P
+7200 37728(\212le;)P
+8354 37728(\(3\))P
+9274 37728(other)P
+10727 37728(lines,)P
+12230 37728(which)P
+13916 37728(are)P
+14868 37728(sent)P
+16054 37728(to)P
+16741 37728(the)P
+17694 37728(shell)P
+19047 37728(to)P
+19734 37728(be)P
+20520 37728(executed.)P
+23221 37728(One)P
+24440 37728(line)P
+25560 37728(in)P
+26246 37728(each)P
+27563 37728(lesson)P
+29281 37728(turns)P
+30700 37728(control)P
+4320 37008(over)P
+5597 37008(to)P
+6275 37008(the)P
+7219 37008(user;)P
+8596 37008(the)P
+9540 37008(user)P
+10750 37008(can)P
+11793 37008(run)P
+12804 37008(any)P
+0 9 SF
+13861 37008(UNIX)P
+0 10 SF
+15422 37008(commands.)P
+18582 37008(The)P
+19726 37008(user)P
+20936 37008(mode)P
+22479 37008(terminates)P
+25188 37008(when)P
+26697 37008(the)P
+27640 37008(user)P
+28849 37008(types)P
+1 10 SF
+30325 37008(yes)P
+0 10 SF
+31190 37008(,)P
+1 10 SF
+31550 37008(no)P
+0 10 SF
+32250 37008(,)P
+1 10 SF
+4320 36288(ready)P
+0 10 SF
+5785 36288(,)P
+6160 36288(or)P
+1 10 SF
+6885 36288(answer)P
+0 10 SF
+8717 36288(.)P
+9292 36288(At)P
+10117 36288(this)P
+11209 36288(point,)P
+12818 36288(the)P
+13775 36288(user's)P
+15431 36288(work)P
+16888 36288(is)P
+17512 36288(tested;)P
+19302 36288(if)P
+19893 36288(the)P
+20850 36288(lesson)P
+22573 36288(is)P
+23197 36288(passed,)P
+25169 36288(a)P
+25659 36288(new)P
+26882 36288(lesson)P
+28605 36288(is)P
+29229 36288(selected,)P
+31534 36288(and)P
+4320 35568(if)P
+4887 35568(not)P
+5854 35568(the)P
+6787 35568(old)P
+7754 35568(one)P
+8820 35568(is)P
+9420 35568(repeated.)P
+5820 34632(Let)P
+6820 34632(us)P
+7553 34632(illustrate)P
+9853 34632(this)P
+10920 34632(with)P
+12187 34632(the)P
+13120 34632(script)P
+14653 34632(for)P
+15553 34632(the)P
+16486 34632(second)P
+18351 34632(lesson)P
+20050 34632(of)P
+20750 34632(Figure)P
+22517 34632(1;)P
+23184 34632(this)P
+24251 34632(is)P
+24851 34632(shown)P
+26617 34632(in)P
+27284 34632(Figure)P
+29051 34632(3.)P
+12495 33432 10 -100 1 L
+12525 33432 10 -100 39 L
+12795 32712(Figure)P
+14562 32712(3:)P
+15429 32712(Sample)P
+17429 32712(Lesson)P
+12795 31272(#print)P
+12795 30552(Of)P
+13628 30552(course,)P
+15543 30552(you)P
+16643 30552(can)P
+17675 30552(print)P
+19009 30552(any)P
+20075 30552(\212le)P
+21042 30552(with)P
+22309 30552("cat".)P
+12795 29832(In)P
+13495 29832(particular,)P
+16144 29832(it)P
+16678 29832(is)P
+17278 29832(common)P
+19578 29832(to)P
+20245 29832(\212rst)P
+21379 29832(use)P
+12795 29112("ls")P
+13885 29112(to)P
+14552 29112(\212nd)P
+15686 29112(the)P
+16619 29112(name)P
+18118 29112(of)P
+18818 29112(a)P
+19284 29112(\212le)P
+20251 29112(and)P
+21317 29112(then)P
+22550 29112("cat")P
+12795 28392(to)P
+13462 28392(print)P
+14796 28392(it.)P
+15680 28392(Note)P
+17046 28392(the)P
+17979 28392(difference)P
+20610 28392(between)P
+12795 27672("ls",)P
+14035 27672(which)P
+15701 27672(tells)P
+16901 27672(you)P
+18001 27672(the)P
+18934 27672(name)P
+20433 27672(of)P
+21133 27672(the)P
+22066 27672(\212les,)P
+12795 26952(and)P
+13861 26952("cat",)P
+15400 26952(which)P
+17066 26952(tells)P
+18266 26952(you)P
+19366 26952(the)P
+20299 26952(contents.)P
+12795 26232(One)P
+13994 26232(\212le)P
+14961 26232(in)P
+15628 26232(the)P
+16561 26232(current)P
+18460 26232(directory)P
+20826 26232(is)P
+21426 26232(named)P
+23225 26232(for)P
+12795 25512(a)P
+13261 25512(President.)P
+16044 25512(Print)P
+17412 25512(the)P
+18345 25512(\212le,)P
+19462 25512(then)P
+20695 25512(type)P
+21928 25512("ready".)P
+12795 24792(#create)P
+14726 24792(roosevelt)P
+13195 24072(this)P
+14262 24072(\212le)P
+15229 24072(is)P
+15829 24072(named)P
+17628 24072(roosevelt)P
+13195 23352(and)P
+14261 23352(contains)P
+16460 23352(three)P
+17859 23352(lines)P
+19192 23352(of)P
+13195 22632(text.)P
+12795 21912(#copyout)P
+12795 21192(#user)P
+12795 20472(#uncopyout)P
+12795 19752(tail)P
+13762 19752(-3)P
+14600 19752(.ocopy)P
+16416 19752(>X1)P
+12795 19032(#cmp)P
+14328 19032(X1)P
+15261 19032(roosevelt)P
+12795 18312(#log)P
+12795 17592(#next)P
+12795 16872(3.2b)P
+14045 16872(2)P
+12495 16752 10 -100 1 L
+12525 16752 10 -100 39 L
+12495 16752 10 br
+12495 17232 10 br
+12495 17832 10 br
+12495 18432 10 br
+12495 19032 10 br
+12495 19632 10 br
+12495 20232 10 br
+12495 20832 10 br
+12495 21432 10 br
+12495 22032 10 br
+12495 22632 10 br
+12495 23232 10 br
+12495 23832 10 br
+12495 24432 10 br
+12495 25032 10 br
+12495 25632 10 br
+12495 26232 10 br
+12495 26832 10 br
+12495 27432 10 br
+12495 28032 10 br
+12495 28632 10 br
+12495 29232 10 br
+12495 29832 10 br
+12495 30432 10 br
+12495 31032 10 br
+12495 31632 10 br
+12495 32232 10 br
+12495 32832 10 br
+24225 16752 10 br
+24225 17232 10 br
+24225 17832 10 br
+24225 18432 10 br
+24225 19032 10 br
+24225 19632 10 br
+24225 20232 10 br
+24225 20832 10 br
+24225 21432 10 br
+24225 22032 10 br
+24225 22632 10 br
+24225 23232 10 br
+24225 23832 10 br
+24225 24432 10 br
+24225 25032 10 br
+24225 25632 10 br
+24225 26232 10 br
+24225 26832 10 br
+24225 27432 10 br
+24225 28032 10 br
+24225 28632 10 br
+24225 29232 10 br
+24225 29832 10 br
+24225 30432 10 br
+24225 31032 10 br
+24225 31632 10 br
+24225 32232 10 br
+24225 32832 10 br
+4320 14736(Lines)P
+5853 14736(which)P
+7519 14736(begin)P
+9052 14736(with)P
+10319 14736(#)P
+10819 14736(are)P
+11751 14736(commands)P
+14550 14736(to)P
+15217 14736(the)P
+1 10 SF
+16150 14736(learn)P
+0 10 SF
+17716 14736(script)P
+19249 14736(interpreter.)P
+22298 14736(For)P
+23332 14736(example,)P
+1 10 SF
+5820 13800(#print)P
+0 10 SF
+4320 12864(causes)P
+6084 12864(printing)P
+8185 12864(of)P
+8885 12864(any)P
+9951 12864(text)P
+11051 12864(that)P
+12151 12864(follows,)P
+14301 12864(up)P
+15101 12864(to)P
+15768 12864(the)P
+16701 12864(next)P
+17934 12864(line)P
+19034 12864(that)P
+20134 12864(begins)P
+21900 12864(with)P
+23167 12864(a)P
+23633 12864(sharp.)P
+1 10 SF
+5820 11928(#print)P
+7487 11928(\212le)P
+0 10 SF
+4320 10992(prints)P
+5909 10992(the)P
+6864 10992(contents)P
+9085 10992(of)P
+1 10 SF
+9807 10992(\212le)P
+0 10 SF
+10640 10992(;)P
+11029 10992(it)P
+11585 10992(is)P
+12207 10992(the)P
+13162 10992(same)P
+14616 10992(as)P
+1 10 SF
+15337 10992(cat)P
+16292 10992(\212le)P
+0 10 SF
+17246 10992(but)P
+18234 10992(has)P
+19254 10992(less)P
+20374 10992(overhead.)P
+23143 10992(Both)P
+24531 10992(forms)P
+26152 10992(of)P
+1 10 SF
+26873 10992(#print)P
+0 10 SF
+28661 10992(have)P
+30014 10992(the)P
+30968 10992(added)P
+4320 10272(property)P
+6582 10272(that)P
+7711 10272(if)P
+8307 10272(a)P
+8802 10272(lesson)P
+10529 10272(is)P
+11157 10272(failed,)P
+12901 10272(the)P
+1 10 SF
+13862 10272(#print)P
+0 10 SF
+15557 10272(will)P
+16719 10272(not)P
+17714 10272(be)P
+18508 10272(executed)P
+20867 10272(the)P
+21828 10272(second)P
+23721 10272(time)P
+25016 10272(through;)P
+27278 10272(this)P
+28373 10272(avoids)P
+30167 10272(annoying)P
+4320 9552(the)P
+5253 9552(student)P
+7186 9552(by)P
+7986 9552(repeating)P
+10418 9552(the)P
+11351 9552(preamble)P
+13783 9552(to)P
+14450 9552(a)P
+14916 9552(lesson.)P
+1 10 SF
+5820 8616(#create)P
+7818 8616(\212lename)P
+0 10 SF
+4320 7680(creates)P
+6209 7680(a)P
+6700 7680(\212le)P
+7692 7680(of)P
+8417 7680(the)P
+9375 7680(speci\212ed)P
+11732 7680(name,)P
+13406 7680(and)P
+14496 7680(copies)P
+16252 7680(any)P
+17342 7680(subsequent)P
+20231 7680(text)P
+21355 7680(up)P
+22179 7680(to)P
+22870 7680(a)P
+23360 7680(#)P
+23884 7680(to)P
+24575 7680(the)P
+25532 7680(\212le.)P
+26873 7680(This)P
+28164 7680(is)P
+28788 7680(used)P
+30111 7680(for)P
+31035 7680(creat\255)P
+4320 6960(ing)P
+5287 6960(and)P
+6353 6960(initializing)P
+9154 6960(working)P
+11354 6960(\212les)P
+12554 6960(and)P
+13620 6960(reference)P
+16050 6960(data)P
+17249 6960(for)P
+18149 6960(the)P
+19082 6960(lessons.)P
+1 10 SF
+5820 6024(#user)P
+0 10 SF
+4320 5088(gives)P
+5778 5088(control)P
+7670 5088(to)P
+8329 5088(the)P
+9254 5088(student;)P
+11346 5088(each)P
+12637 5088(line)P
+13730 5088(he)P
+14489 5088(or)P
+15182 5088(she)P
+16174 5088(types)P
+17633 5088(is)P
+18226 5088(passed)P
+20017 5088(to)P
+20677 5088(the)P
+21603 5088(shell)P
+22929 5088(for)P
+23822 5088(execution.)P
+26697 5088(The)P
+1 10 SF
+27823 5088(#user)P
+0 10 SF
+29448 5088(mode)P
+30974 5088(is)P
+31567 5088(ter\255)P
+4320 4368(minated)P
+6457 4368(when)P
+7960 4368(the)P
+8897 4368(student)P
+10833 4368(types)P
+12302 4368(one)P
+13371 4368(of)P
+1 10 SF
+14074 4368(yes)P
+0 10 SF
+14939 4368(,)P
+1 10 SF
+15292 4368(no)P
+0 10 SF
+15992 4368(,)P
+1 10 SF
+16345 4368(ready)P
+0 10 SF
+18013 4368(or)P
+1 10 SF
+18716 4368(answer)P
+0 10 SF
+20548 4368(.)P
+21101 4368(At)P
+21904 4368(that)P
+23007 4368(time,)P
+24427 4368(the)P
+25363 4368(driver)P
+26999 4368(resumes)P
+29167 4368(interpretation)P
+4320 3648(of)P
+5020 3648(the)P
+5953 3648(script.)P
+end restore showpage
+%%Page: USD:2-8 8
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:2\2558)P
+20035 44640(LEARN)P
+22235 44640<88>P
+23035 44640(Computer\255Aided)P
+27301 44640(Instruction)P
+30101 44640(on)P
+30901 44640(UNIX)P
+1 10 SF
+5820 42480(#copyin)P
+5820 41760(#uncopyin)P
+0 10 SF
+4320 40824(Anything)P
+6792 40824(the)P
+7730 40824(student)P
+9668 40824(types)P
+11139 40824(between)P
+13342 40824(these)P
+14779 40824(commands)P
+17583 40824(is)P
+18188 40824(copied)P
+19992 40824(onto)P
+21264 40824(a)P
+21735 40824(\212le)P
+22707 40824(called)P
+1 10 SF
+24344 40824(.copy.)P
+0 10 SF
+26181 40824(This)P
+27453 40824(lets)P
+28491 40824(the)P
+29429 40824(script)P
+30967 40824(writer)P
+4320 40104(interrogate)P
+7119 40104(the)P
+8052 40104(student's)P
+10418 40104(responses)P
+12949 40104(upon)P
+14349 40104(regaining)P
+16815 40104(control.)P
+1 10 SF
+5820 39168(#copyout)P
+5820 38448(#uncopyout)P
+0 10 SF
+4320 37512(Between)P
+6667 37512(these)P
+8148 37512(commands,)P
+11146 37512(any)P
+12261 37512(material)P
+14476 37512(typed)P
+16058 37512(at)P
+16740 37512(the)P
+17722 37512(student)P
+19704 37512(by)P
+20552 37512(any)P
+21666 37512(program)P
+23947 37512(is)P
+24595 37512(copied)P
+26442 37512(to)P
+27157 37512(the)P
+28138 37512(\212le)P
+1 10 SF
+29153 37512(.ocopy.)P
+0 10 SF
+31333 37512(This)P
+4320 36792(lets)P
+5426 36792(the)P
+6432 36792(script)P
+8038 36792(writer)P
+9744 36792(interrogate)P
+12616 36792(the)P
+13622 36792(effect)P
+15260 36792(of)P
+16033 36792(what)P
+17472 36792(the)P
+18478 36792(student)P
+20484 36792(typed,)P
+22240 36792(which)P
+23979 36792(true)P
+25185 36792(believers)P
+27623 36792(in)P
+28363 36792(the)P
+29369 36792(performance)P
+4320 36072(theory)P
+6053 36072(of)P
+6753 36072(learning)P
+8919 36072(usually)P
+10852 36072(prefer)P
+12484 36072(to)P
+13151 36072(the)P
+14084 36072(student's)P
+16450 36072(actual)P
+18082 36072(input.)P
+1 10 SF
+5820 35136(#pipe)P
+5820 34416(#unpipe)P
+0 10 SF
+4320 33480(Normally)P
+6840 33480(the)P
+7792 33480(student)P
+9744 33480(input)P
+11197 33480(and)P
+12282 33480(the)P
+13234 33480(script)P
+14786 33480(commands)P
+17604 33480(are)P
+18555 33480(fed)P
+19540 33480(to)P
+20226 33480(the)P
+0 9 SF
+21158 33480(UNIX)P
+0 10 SF
+22727 33480(command)P
+25312 33480(interpreter)P
+28030 33480(\(the)P
+29182 33480(``shell''\))P
+31534 33480(one)P
+4320 32760(line)P
+5447 32760(at)P
+6107 32760(a)P
+6600 32760(time.)P
+8044 32760(This)P
+9338 32760(won't)P
+10965 32760(do)P
+11792 32760(if,)P
+12536 32760(for)P
+13462 32760(example,)P
+15870 32760(a)P
+16362 32760(sequence)P
+18785 32760(of)P
+19511 32760(editor)P
+21137 32760(commands)P
+23962 32760(is)P
+24588 32760(provided,)P
+27097 32760(since)P
+28555 32760(the)P
+29514 32760(input)P
+30974 32760(to)P
+31667 32760(the)P
+4320 32040(editor)P
+5932 32040(must)P
+7311 32040(be)P
+8089 32040(handed)P
+10033 32040(to)P
+10712 32040(the)P
+11657 32040(editor,)P
+13418 32040(not)P
+14396 32040(to)P
+15074 32040(the)P
+16018 32040(shell.)P
+17712 32040(Accordingly,)P
+21072 32040(the)P
+22016 32040(material)P
+24193 32040(between)P
+1 10 SF
+26402 32040(#pipe)P
+0 10 SF
+27946 32040(and)P
+1 10 SF
+29023 32040(#unpipe)P
+0 10 SF
+31167 32040(com\255)P
+4320 31320(mands)P
+6137 31320(is)P
+6788 31320(fed)P
+7805 31320(continuously)P
+11156 31320(through)P
+13274 31320(a)P
+13791 31320(pipe)P
+15075 31320(so)P
+15859 31320(that)P
+17009 31320(such)P
+18358 31320(sequences)P
+21038 31320(work.)P
+22871 31320(If)P
+1 10 SF
+23521 31320(copyout)P
+0 10 SF
+25670 31320(is)P
+26320 31320(also)P
+27536 31320(desired)P
+29518 31320(the)P
+1 10 SF
+30501 31320(copyout)P
+0 10 SF
+4320 30600(brackets)P
+6518 30600(must)P
+7885 30600(include)P
+9851 30600(the)P
+1 10 SF
+10784 30600(pipe)P
+0 10 SF
+12017 30600(brackets.)P
+5820 29664(There)P
+7419 29664(are)P
+8351 29664(several)P
+10249 29664(commands)P
+13048 29664(for)P
+13948 29664(setting)P
+15748 29664(status)P
+17314 29664(after)P
+18613 29664(the)P
+19546 29664(student)P
+21479 29664(has)P
+22478 29664(attempted)P
+25044 29664(the)P
+25977 29664(lesson.)P
+1 10 SF
+5820 28728(#cmp)P
+7319 28728(\212le1)P
+8552 28728(\212le2)P
+0 10 SF
+4320 27792(is)P
+4920 27792(an)P
+5686 27792(in\255line)P
+7453 27792(implementation)P
+11420 27792(of)P
+1 10 SF
+12120 27792(cmp)P
+0 10 SF
+13219 27792(,)P
+13569 27792(which)P
+15235 27792(compares)P
+17733 27792(two)P
+18833 27792(\212les)P
+20033 27792(for)P
+20933 27792(identity.)P
+1 10 SF
+5820 26856(#match)P
+7786 26856(stuff)P
+0 10 SF
+4320 25920(The)P
+5531 25920(last)P
+6642 25920(line)P
+7820 25920(of)P
+8598 25920(the)P
+9608 25920(student's)P
+12051 25920(input)P
+13562 25920(is)P
+14239 25920(compared)P
+16881 25920(to)P
+1 10 SF
+17625 25920(stuff)P
+0 10 SF
+18759 25920(,)P
+19186 25920(and)P
+20329 25920(the)P
+21339 25920(success)P
+23413 25920(or)P
+24190 25920(fail)P
+25267 25920(status)P
+26910 25920(is)P
+27587 25920(set)P
+28530 25920(according)P
+31172 25920(to)P
+31916 25920(it.)P
+4320 25200(Extraneous)P
+7316 25200(things)P
+9080 25200(like)P
+10277 25200(the)P
+11307 25200(word)P
+1 10 SF
+12837 25200(answer)P
+0 10 SF
+14966 25200(are)P
+15994 25200(stripped)P
+18223 25200(before)P
+20051 25200(the)P
+21080 25200(comparison)P
+24175 25200(is)P
+24871 25200(made.)P
+26816 25200(There)P
+28511 25200(may)P
+29840 25200(be)P
+30702 25200(several)P
+1 10 SF
+4320 24480(#match)P
+0 10 SF
+6408 24480(lines;)P
+7930 24480(this)P
+9019 24480(provides)P
+11307 24480(a)P
+11795 24480(convenient)P
+14649 24480(mechanism)P
+17603 24480(for)P
+18525 24480(handling)P
+20847 24480(multiple)P
+23070 24480(``right'')P
+25226 24480(answers.)P
+27729 24480(Any)P
+28983 24480(text)P
+30104 24480(up)P
+30925 24480(to)P
+31613 24480(a)P
+32100 24480(#)P
+4320 23760(on)P
+5120 23760(subsequent)P
+7985 23760(lines)P
+9318 23760(after)P
+10617 23760(a)P
+11083 23760(successful)P
+1 10 SF
+13747 23760(#match)P
+0 10 SF
+15813 23760(is)P
+16413 23760(printed;)P
+18480 23760(this)P
+19547 23760(is)P
+20147 23760(illustrated)P
+22747 23760(in)P
+23414 23760(Figure)P
+25181 23760(4,)P
+25831 23760(another)P
+27830 23760(sample)P
+29729 23760(lesson.)P
+10536 22560 10 -100 1 L
+10584 22560 10 -100 52 L
+10836 21840(Figure)P
+12603 21840(4:)P
+13470 21840(Another)P
+15636 21840(Sample)P
+17636 21840(Lesson)P
+10836 20400(#print)P
+10836 19680(What)P
+12335 19680(command)P
+14901 19680(will)P
+16035 19680(move)P
+17568 19680(the)P
+18501 19680(current)P
+20400 19680(line)P
+10836 18960(to)P
+11503 18960(the)P
+12436 18960(end)P
+13502 18960(of)P
+14202 18960(the)P
+15135 18960(\212le?)P
+16568 18960(Type)P
+10836 18240("answer)P
+12979 18240(COMMAND",)P
+16772 18240(where)P
+18437 18240(COMMAND)P
+21835 18240(is)P
+22435 18240(the)P
+23368 18240(command.)P
+10836 17520(#copyin)P
+10836 16800(#user)P
+10836 16080(#uncopyin)P
+10836 15360(#match)P
+12802 15360(m$)P
+10836 14640(#match)P
+12802 14640(.m$)P
+10836 13920("m$")P
+12293 13920(is)P
+12893 13920(easier.)P
+10836 13200(#log)P
+10836 12480(#next)P
+10836 11760(63.1d)P
+12386 11760(10)P
+10536 11640 10 -100 1 L
+10584 11640 10 -100 52 L
+10536 11640 10 br
+10536 11760 10 br
+10536 12360 10 br
+10536 12960 10 br
+10536 13560 10 br
+10536 14160 10 br
+10536 14760 10 br
+10536 15360 10 br
+10536 15960 10 br
+10536 16560 10 br
+10536 17160 10 br
+10536 17760 10 br
+10536 18360 10 br
+10536 18960 10 br
+10536 19560 10 br
+10536 20160 10 br
+10536 20760 10 br
+10536 21360 10 br
+10536 21960 10 br
+26184 11640 10 br
+26184 11760 10 br
+26184 12360 10 br
+26184 12960 10 br
+26184 13560 10 br
+26184 14160 10 br
+26184 14760 10 br
+26184 15360 10 br
+26184 15960 10 br
+26184 16560 10 br
+26184 17160 10 br
+26184 17760 10 br
+26184 18360 10 br
+26184 18960 10 br
+26184 19560 10 br
+26184 20160 10 br
+26184 20760 10 br
+26184 21360 10 br
+26184 21960 10 br
+1 10 SF
+5820 9624(#bad)P
+7220 9624(stuff)P
+0 10 SF
+4320 8688(This)P
+5591 8688(is)P
+6195 8688(similar)P
+8066 8688(to)P
+1 10 SF
+8737 8688(#match)P
+0 10 SF
+10603 8688(,)P
+10957 8688(except)P
+12726 8688(that)P
+13830 8688(it)P
+14368 8688(corresponds)P
+17470 8688(to)P
+18141 8688(speci\212c)P
+20177 8688(failure)P
+21947 8688(answers;)P
+24249 8688(this)P
+25320 8688(can)P
+26356 8688(be)P
+27126 8688(used)P
+28428 8688(to)P
+29098 8688(produce)P
+31233 8688(hints)P
+4320 7968(for)P
+5220 7968(particular)P
+7719 7968(wrong)P
+9452 7968(answers)P
+11583 7968(that)P
+12683 7968(have)P
+14015 7968(been)P
+15347 7968(anticipated)P
+18179 7968(by)P
+18979 7968(the)P
+19912 7968(script)P
+21445 7968(writer.)P
+1 10 SF
+5820 7032(#succeed)P
+5820 6312(#fail)P
+0 10 SF
+4320 5376(print)P
+5654 5376(a)P
+6120 5376(message)P
+8351 5376(upon)P
+9751 5376(success)P
+11748 5376(or)P
+12448 5376(failure)P
+14214 5376(\(as)P
+15113 5376(determined)P
+18012 5376(by)P
+18812 5376(some)P
+20278 5376(previous)P
+22544 5376(mechanism\).)P
+5820 4440(When)P
+7537 4440(the)P
+8555 4440(student)P
+10573 4440(types)P
+12124 4440(one)P
+13275 4440(of)P
+14060 4440(the)P
+15078 4440(``commands'')P
+1 10 SF
+18762 4440(yes)P
+0 10 SF
+19627 4440(,)P
+1 10 SF
+20062 4440(no)P
+0 10 SF
+20762 4440(,)P
+1 10 SF
+21197 4440(ready)P
+0 10 SF
+22662 4440(,)P
+23097 4440(or)P
+1 10 SF
+23882 4440(answer)P
+0 10 SF
+25714 4440(,)P
+26149 4440(the)P
+27167 4440(driver)P
+28884 4440(terminates)P
+31667 4440(the)P
+1 10 SF
+4320 3720(#user)P
+0 10 SF
+6077 3720(command,)P
+8918 3720(and)P
+10109 3720(evaluation)P
+12933 3720(of)P
+13758 3720(the)P
+14816 3720(student's)P
+17307 3720(work)P
+18865 3720(can)P
+20022 3720(begin.)P
+22030 3720(This)P
+23422 3720(can)P
+24579 3720(be)P
+25470 3720(done)P
+26961 3720(either)P
+28651 3720(by)P
+29575 3720(the)P
+30632 3720(built\255in)P
+end restore showpage
+%%Page: USD:2-9 9
+save $troff begin Sc
+0 10 SF
+4320 44640(LEARN)P
+6520 44640<88>P
+7320 44640(Computer\255Aided)P
+11586 44640(Instruction)P
+14386 44640(on)P
+15186 44640(UNIX)P
+30233 44640(USD:2\2559)P
+4320 42480(commands)P
+7162 42480(above,)P
+8987 42480(such)P
+10329 42480(as)P
+1 10 SF
+11071 42480(#match)P
+0 10 SF
+13180 42480(and)P
+1 10 SF
+14288 42480(#cmp)P
+0 10 SF
+15687 42480(,)P
+16079 42480(or)P
+16821 42480(by)P
+17663 42480(status)P
+19271 42480(returned)P
+21512 42480(by)P
+22354 42480(normal)P
+0 9 SF
+24276 42480(UNIX)P
+0 10 SF
+25868 42480(commands,)P
+28859 42480(typically)P
+1 10 SF
+31201 42480(grep)P
+0 10 SF
+4320 41760(and)P
+1 10 SF
+5417 41760(test)P
+0 10 SF
+6350 41760(.)P
+6931 41760(The)P
+8094 41760(last)P
+9157 41760(command)P
+11753 41760(should)P
+13583 41760(return)P
+15246 41760(status)P
+16842 41760(true)P
+18005 41760(\(0\))P
+18935 41760(if)P
+19532 41760(the)P
+20495 41760(task)P
+21691 41760(was)P
+22853 41760(done)P
+24249 41760(successfully)P
+27410 41760(and)P
+28506 41760(false)P
+29868 41760(\(non\255zero\))P
+4320 41040(otherwise;)P
+7019 41040(this)P
+8086 41040(status)P
+9652 41040(return)P
+11285 41040(tells)P
+12485 41040(the)P
+13418 41040(driver)P
+15051 41040(whether)P
+17183 41040(or)P
+17883 41040(not)P
+18850 41040(the)P
+19783 41040(student)P
+21716 41040(has)P
+22715 41040(successfully)P
+25846 41040(passed)P
+27644 41040(the)P
+28577 41040(lesson.)P
+5820 40104(Performance)P
+9085 40104(can)P
+10117 40104(be)P
+10883 40104(logged:)P
+1 10 SF
+5820 39168(#log)P
+7087 39168(\212le)P
+0 10 SF
+4320 38232(writes)P
+5986 38232(the)P
+6919 38232(date,)P
+8268 38232(lesson,)P
+10117 38232(user)P
+11316 38232(name)P
+12815 38232(and)P
+13881 38232(speed)P
+15446 38232(rating,)P
+17196 38232(and)P
+18262 38232(a)P
+18728 38232(success/failure)P
+22458 38232(indication)P
+25058 38232(on)P
+1 10 SF
+25858 38232(\212le.)P
+0 10 SF
+27141 38232(The)P
+28274 38232(command)P
+1 10 SF
+5820 37296(#log)P
+0 10 SF
+4320 36360(by)P
+5183 36360(itself)P
+6646 36360(writes)P
+8375 36360(the)P
+9371 36360(logging)P
+11468 36360(information)P
+14565 36360(in)P
+15295 36360(the)P
+16291 36360(logging)P
+18388 36360(directory)P
+20817 36360(within)P
+22614 36360(the)P
+1 10 SF
+23610 36360(learn)P
+0 10 SF
+25238 36360(hierarchy,)P
+27915 36360(and)P
+29043 36360(is)P
+29705 36360(the)P
+30700 36360(normal)P
+4320 35640(form.)P
+1 10 SF
+5820 34704(#next)P
+0 10 SF
+4320 33768(is)P
+4949 33768(followed)P
+7311 33768(by)P
+8140 33768(a)P
+8635 33768(few)P
+9763 33768(lines,)P
+11274 33768(each)P
+12600 33768(with)P
+13895 33768(a)P
+14389 33768(successor)P
+16914 33768(lesson)P
+18641 33768(name)P
+20168 33768(and)P
+21262 33768(an)P
+22056 33768(optional)P
+24251 33768(speed)P
+25844 33768(rating)P
+27472 33768(on)P
+28300 33768(it.)P
+29212 33768(A)P
+29873 33768(typical)P
+31734 33768(set)P
+4320 33048(might)P
+5921 33048(read)P
+5820 32112(25.1a)P
+7736 32112(10)P
+5820 31392(25.2a)P
+7736 31392(5)P
+5820 30672(25.3a)P
+7736 30672(2)P
+4320 29736(indicating)P
+6922 29736(that)P
+8024 29736(unit)P
+9160 29736(25.1a)P
+10678 29736(is)P
+11280 29736(a)P
+11748 29736(suitable)P
+13816 29736(follow\255on)P
+16385 29736(lesson)P
+18086 29736(for)P
+18988 29736(students)P
+21156 29736(with)P
+22425 29736(a)P
+22893 29736(speed)P
+24460 29736(rating)P
+26062 29736(of)P
+26763 29736(10)P
+27564 29736(units,)P
+29082 29736(25.2a)P
+30599 29736(for)P
+31500 29736(stu\255)P
+4320 29016(dent)P
+5601 29016(with)P
+6916 29016(speed)P
+8529 29016(near)P
+9809 29016(5,)P
+10506 29016(and)P
+11619 29016(25.3a)P
+13182 29016(for)P
+14129 29016(speed)P
+15741 29016(near)P
+17020 29016(2.)P
+17917 29016(Speed)P
+19630 29016(ratings)P
+21510 29016(are)P
+22489 29016(maintained)P
+25402 29016(for)P
+26349 29016(each)P
+27694 29016(session)P
+29673 29016(with)P
+30987 29016(a)P
+31500 29016(stu\255)P
+4320 28296(dent;)P
+5730 28296(the)P
+6673 28296(rating)P
+8283 28296(is)P
+8893 28296(increased)P
+11367 28296(by)P
+12176 28296(one)P
+13251 28296(each)P
+14558 28296(time)P
+15834 28296(the)P
+16776 28296(student)P
+18718 28296(gets)P
+19893 28296(a)P
+20368 28296(lesson)P
+22076 28296(right)P
+23419 28296(and)P
+24494 28296(decreased)P
+27066 28296(by)P
+27875 28296(four)P
+29084 28296(each)P
+30391 28296(time)P
+31667 28296(the)P
+4320 27576(student)P
+6270 27576(gets)P
+7453 27576(a)P
+7936 27576(lesson)P
+9651 27576(wrong.)P
+11750 27576(Thus)P
+13166 27576(the)P
+14115 27576(driver)P
+15764 27576(tries)P
+17013 27576(to)P
+17696 27576(maintain)P
+20012 27576(a)P
+20494 27576(level)P
+21876 27576(such)P
+23191 27576(that)P
+24307 27576(the)P
+25256 27576(users)P
+26704 27576(get)P
+27653 27576(80%)P
+28969 27576(right)P
+30319 27576(answers.)P
+4320 26856(The)P
+5567 26856(maximum)P
+8315 26856(rating)P
+10029 26856(is)P
+10743 26856(limited)P
+12758 26856(to)P
+13539 26856(10)P
+14453 26856(and)P
+15633 26856(the)P
+16680 26856(minimum)P
+19329 26856(to)P
+20110 26856(0.)P
+21074 26856(The)P
+22321 26856(initial)P
+24036 26856(rating)P
+25750 26856(is)P
+26464 26856(zero)P
+27809 26856(unless)P
+29621 26856(the)P
+30667 26856(student)P
+4320 26136(speci\212es)P
+6585 26136(a)P
+7051 26136(different)P
+9317 26136(rating)P
+10917 26136(when)P
+12416 26136(starting)P
+14416 26136(a)P
+14882 26136(session.)P
+5820 25200(If)P
+6435 25200(the)P
+7382 25200(student)P
+9329 25200(passes)P
+11074 25200(a)P
+11554 25200(lesson,)P
+13417 25200(a)P
+13897 25200(new)P
+15110 25200(lesson)P
+16823 25200(is)P
+17437 25200(selected)P
+19582 25200(and)P
+20662 25200(the)P
+21609 25200(process)P
+23621 25200(repeats.)P
+25883 25200(If)P
+26497 25200(the)P
+27444 25200(student)P
+29391 25200(fails,)P
+30788 25200(a)P
+31268 25200(false)P
+4320 24480(status)P
+5920 24480(is)P
+6554 24480(returned)P
+8787 24480(and)P
+9887 24480(the)P
+10854 24480(program)P
+13121 24480(reverts)P
+14987 24480(to)P
+15688 24480(the)P
+16655 24480(previous)P
+18955 24480(lesson)P
+20688 24480(and)P
+21788 24480(tries)P
+23054 24480(another)P
+25086 24480(alternative.)P
+28201 24480(If)P
+28834 24480(it)P
+29401 24480(can)P
+30466 24480(not)P
+31466 24480(\212nd)P
+4320 23760(another)P
+6400 23760(alternative,)P
+9363 23760(it)P
+9978 23760(skips)P
+11492 23760(forward)P
+13672 23760(a)P
+14219 23760(lesson.)P
+1 10 SF
+16349 23760(bye)P
+0 10 SF
+17281 23760(,)P
+17712 23760(bye,)P
+19009 23760(which)P
+20756 23760(causes)P
+22601 23760(a)P
+23148 23760(graceful)P
+25394 23760(exit)P
+26575 23760(from)P
+28023 23760(the)P
+1 10 SF
+29037 23760(learn)P
+0 10 SF
+30584 23760(system.)P
+4320 23040(Hanging)P
+6586 23040(up)P
+7386 23040(is)P
+7986 23040(the)P
+8919 23040(usual)P
+10385 23040(novice's)P
+12617 23040(way)P
+13816 23040(out.)P
+5820 22104(The)P
+7011 22104(lessons)P
+9001 22104(may)P
+10292 22104(form)P
+11717 22104(an)P
+12541 22104(arbitrary)P
+14865 22104(directed)P
+17055 22104(graph,)P
+18829 22104(although)P
+21187 22104(the)P
+22178 22104(present)P
+24168 22104(program)P
+26459 22104(imposes)P
+28683 22104(a)P
+29207 22104(limitation)P
+31800 22104(on)P
+4320 21384(cycles)P
+6025 21384(in)P
+6699 21384(that)P
+7806 21384(it)P
+8346 21384(will)P
+9486 21384(not)P
+10459 21384(present)P
+12397 21384(a)P
+12869 21384(lesson)P
+14574 21384(twice)P
+16079 21384(in)P
+16752 21384(the)P
+17691 21384(same)P
+19129 21384(session.)P
+21417 21384(If)P
+22023 21384(the)P
+22962 21384(student)P
+24901 21384(is)P
+25507 21384(unable)P
+27312 21384(to)P
+27985 21384(answer)P
+29889 21384(one)P
+30961 21384(of)P
+31667 21384(the)P
+4320 20664(exercises)P
+6770 20664(correctly,)P
+9305 20664(the)P
+10291 20664(driver)P
+11977 20664(searches)P
+14260 20664(for)P
+15213 20664(a)P
+15732 20664(previous)P
+18051 20664(lesson)P
+19803 20664(with)P
+21123 20664(a)P
+21642 20664(set)P
+22561 20664(of)P
+23314 20664(alternatives)P
+26332 20664(as)P
+27084 20664(successors)P
+29866 20664(\(following)P
+4320 19944(the)P
+1 10 SF
+5266 19944(#next)P
+0 10 SF
+6877 19944(line\).)P
+8539 19944(From)P
+10052 19944(the)P
+10997 19944(previous)P
+13275 19944(lesson)P
+14986 19944(with)P
+16265 19944(alternatives)P
+19242 19944(one)P
+20320 19944(route)P
+21765 19944(was)P
+22909 19944(taken)P
+24420 19944(earlier;)P
+26331 19944(the)P
+27276 19944(program)P
+29521 19944(simply)P
+31367 19944(tries)P
+4320 19224(a)P
+4786 19224(different)P
+7052 19224(one.)P
+5820 18288(It)P
+6409 18288(is)P
+7031 18288(perfectly)P
+9385 18288(possible)P
+11573 18288(to)P
+12262 18288(write)P
+13717 18288(sophisticated)P
+17071 18288(scripts)P
+18859 18288(that)P
+19981 18288(evaluate)P
+22201 18288(the)P
+23156 18288(student's)P
+25544 18288(speed)P
+27131 18288(of)P
+27853 18288(response,)P
+30323 18288(or)P
+31045 18288(try)P
+31933 18288(to)P
+4320 17568(estimate)P
+6531 17568(the)P
+7476 17568(elegance)P
+9785 17568(of)P
+10497 17568(the)P
+11442 17568(answer,)P
+13502 17568(or)P
+14213 17568(provide)P
+16257 17568(detailed)P
+18367 17568(analysis)P
+20510 17568(of)P
+21221 17568(wrong)P
+22965 17568(answers.)P
+25457 17568(Lesson)P
+27367 17568(writing)P
+29312 17568(is)P
+29923 17568(so)P
+30667 17568(tedious)P
+4320 16848(already,)P
+6435 16848(however,)P
+8850 16848(that)P
+9950 16848(most)P
+11317 16848(of)P
+12017 16848(these)P
+13449 16848(abilities)P
+15549 16848(are)P
+16481 16848(likely)P
+18048 16848(to)P
+18715 16848(go)P
+19515 16848(unused.)P
+5820 15912(The)P
+7011 15912(driver)P
+8702 15912(program)P
+10993 15912(depends)P
+13216 15912(heavily)P
+15240 15912(on)P
+16098 15912(features)P
+18254 15912(of)P
+0 9 SF
+18992 15912(UNIX)P
+0 10 SF
+20600 15912(that)P
+21758 15912(are)P
+22748 15912(not)P
+23773 15912(available)P
+26196 15912(on)P
+27054 15912(many)P
+28644 15912(other)P
+30134 15912(operating)P
+4320 15192(systems.)P
+6784 15192(These)P
+8430 15192(include)P
+10410 15192(the)P
+11357 15192(ease)P
+12602 15192(of)P
+13316 15192(manipulating)P
+16697 15192(\212les)P
+17911 15192(and)P
+18991 15192(directories,)P
+21887 15192(\212le)P
+22868 15192(redirection,)P
+25831 15192(the)P
+26778 15192(ability)P
+28526 15192(to)P
+29207 15192(use)P
+30220 15192(the)P
+31167 15192(com\255)P
+4320 14472(mand)P
+5884 14472(interpreter)P
+8614 14472(as)P
+9344 14472(just)P
+10442 14472(another)P
+12472 14472(program)P
+14736 14472(\(even)P
+16299 14472(in)P
+16997 14472(a)P
+17493 14472(pipeline\),)P
+20006 14472(command)P
+22602 14472(status)P
+24198 14472(testing)P
+26028 14472(and)P
+27124 14472(branching,)P
+29903 14472(the)P
+30866 14472(ability)P
+4320 13752(to)P
+4998 13752(catch)P
+6474 13752(signals)P
+8351 13752(like)P
+9462 13752(interrupts,)P
+12123 13752(and)P
+13200 13752(of)P
+13911 13752(course)P
+15687 13752(the)P
+16631 13752(pipeline)P
+18775 13752(mechanism)P
+21718 13752(itself.)P
+23479 13752(Although)P
+25957 13752(some)P
+27434 13752(parts)P
+28811 13752(of)P
+1 10 SF
+29522 13752(learn)P
+0 10 SF
+30999 13752(might)P
+4320 13032(be)P
+5086 13032(transferable)P
+8117 13032(to)P
+8784 13032(other)P
+10217 13032(systems,)P
+12466 13032(some)P
+13932 13032(generality)P
+16531 13032(will)P
+17665 13032(probably)P
+19998 13032(be)P
+20764 13032(lost.)P
+5820 12096(A)P
+6464 12096(bit)P
+7309 12096(of)P
+8020 12096(history:)P
+10065 12096(The)P
+11209 12096(\212rst)P
+12354 12096(version)P
+14331 12096(of)P
+1 10 SF
+15042 12096(learn)P
+0 10 SF
+16619 12096(had)P
+17696 12096(fewer)P
+19272 12096(built\255in)P
+21250 12096(words)P
+22926 12096(in)P
+23603 12096(the)P
+24546 12096(driver)P
+26189 12096(program,)P
+28582 12096(and)P
+29658 12096(made)P
+31167 12096(more)P
+4320 11376(use)P
+5309 11376(of)P
+5999 11376(the)P
+6922 11376(facilities)P
+9178 11376(of)P
+0 9 SF
+9848 11376(UNIX)P
+0 10 SF
+11198 11376(.)P
+11738 11376(For)P
+12762 11376(example,)P
+15134 11376(\212le)P
+16091 11376(comparison)P
+19080 11376(was)P
+20202 11376(done)P
+21558 11376(by)P
+22348 11376(creating)P
+24470 11376(a)P
+1 10 SF
+24926 11376(cmp)P
+0 10 SF
+26215 11376(process,)P
+28353 11376(rather)P
+29943 11376(than)P
+31167 11376(com\255)P
+4320 10656(paring)P
+6084 10656(the)P
+7048 10656(two)P
+8179 10656(\212les)P
+9410 10656(within)P
+1 10 SF
+11175 10656(learn)P
+0 10 SF
+12541 10656(.)P
+13121 10656(Lessons)P
+15283 10656(were)P
+16678 10656(not)P
+17675 10656(stored)P
+19371 10656(as)P
+20100 10656(text)P
+21230 10656(\212les,)P
+22610 10656(but)P
+23607 10656(as)P
+24336 10656(archives.)P
+26914 10656(There)P
+28543 10656(was)P
+29705 10656(no)P
+30535 10656(concept)P
+4320 9936(of)P
+5056 9936(the)P
+6025 9936(in\255line)P
+7828 9936(document;)P
+10597 9936(even)P
+1 10 SF
+11965 9936(#print)P
+0 10 SF
+13767 9936(had)P
+14868 9936(to)P
+15570 9936(be)P
+16371 9936(followed)P
+18739 9936(by)P
+19574 9936(a)P
+20075 9936(\212le)P
+21077 9936(name.)P
+22961 9936(Thus)P
+24396 9936(the)P
+25364 9936(initialization)P
+28633 9936(for)P
+29568 9936(each)P
+30901 9936(lesson)P
+4320 9216(was)P
+5452 9216(to)P
+6119 9216(extract)P
+7951 9216(the)P
+8884 9216(archive)P
+10849 9216(into)P
+11983 9216(the)P
+12916 9216(working)P
+15116 9216(directory)P
+17482 9216(\(typically)P
+19982 9216(4\2558)P
+20982 9216(\212les\),)P
+22532 9216(then)P
+1 10 SF
+23765 9216(#print)P
+0 10 SF
+25532 9216(the)P
+26465 9216(lesson)P
+28164 9216(text.)P
+5820 8280(The)P
+6946 8280(combination)P
+10139 8280(of)P
+10832 8280(such)P
+12124 8280(things)P
+13784 8280(made)P
+1 10 SF
+15277 8280(learn)P
+0 10 SF
+16837 8280(slower.)P
+18980 8280(The)P
+20107 8280(new)P
+21300 8280(version)P
+23260 8280(is)P
+23854 8280(about)P
+25381 8280(4)P
+25875 8280(or)P
+26569 8280(5)P
+27063 8280(times)P
+28557 8280(faster.)P
+30433 8280(Further\255)P
+4320 7560(more,)P
+5932 7560(it)P
+6495 7560(appears)P
+8555 7560(even)P
+9916 7560(faster)P
+11477 7560(to)P
+12173 7560(the)P
+13135 7560(user)P
+14363 7560(because)P
+16489 7560(in)P
+17185 7560(a)P
+17680 7560(typical)P
+19542 7560(lesson,)P
+21420 7560(the)P
+22382 7560(printing)P
+24512 7560(of)P
+25241 7560(the)P
+26203 7560(message)P
+28462 7560(comes)P
+30222 7560(\212rst,)P
+31534 7560(and)P
+4320 6840(\212le)P
+5290 6840(setup)P
+6759 6840(with)P
+1 10 SF
+8029 6840(#create)P
+0 10 SF
+10130 6840(can)P
+11165 6840(be)P
+11934 6840(overlapped)P
+14802 6840(with)P
+16072 6840(the)P
+17008 6840(printng,)P
+19095 6840(so)P
+19831 6840(that)P
+20934 6840(when)P
+22436 6840(the)P
+23372 6840(program)P
+25608 6840(\212nishes)P
+27643 6840(printing,)P
+29896 6840(it)P
+30432 6840(is)P
+31034 6840(really)P
+4320 6120(ready)P
+5852 6120(for)P
+6752 6120(the)P
+7685 6120(user)P
+8884 6120(to)P
+9551 6120(type)P
+10784 6120(at)P
+11417 6120(it.)P
+5820 5184(It)P
+6411 5184(is)P
+7035 5184(also)P
+8225 5184(a)P
+8714 5184(great)P
+10136 5184(advantage)P
+12790 5184(to)P
+13480 5184(the)P
+14436 5184(script)P
+15992 5184(maintainer)P
+18781 5184(that)P
+19904 5184(lessons)P
+21859 5184(are)P
+22814 5184(now)P
+24070 5184(just)P
+25160 5184(ordinary)P
+27416 5184(text)P
+28539 5184(\212les.)P
+30112 5184(They)P
+31568 5184(can)P
+4320 4464(be)P
+5119 4464(edited)P
+6818 4464(without)P
+8885 4464(any)P
+9984 4464(dif\212culty,)P
+12568 4464(and)P
+0 9 SF
+13647 4464(UNIX)P
+0 10 SF
+15230 4464(text)P
+16363 4464(manipulation)P
+19763 4464(tools)P
+21163 4464(can)P
+22228 4464(be)P
+23027 4464(applied)P
+25026 4464(to)P
+25725 4464(them.)P
+27507 4464(The)P
+28672 4464(result)P
+30237 4464(has)P
+31268 4464(been)P
+4320 3744(that)P
+5420 3744(there)P
+6819 3744(is)P
+7419 3744(much)P
+8952 3744(less)P
+10051 3744(resistance)P
+12615 3744(to)P
+13282 3744(going)P
+14849 3744(in)P
+15516 3744(and)P
+16582 3744(\212xing)P
+18183 3744(substandard)P
+21248 3744(lessons.)P
+end restore showpage
+%%Page: USD:2-10 10
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:2\25510)P
+20035 44640(LEARN)P
+22235 44640<88>P
+23035 44640(Computer\255Aided)P
+27301 44640(Instruction)P
+30101 44640(on)P
+30901 44640(UNIX)P
+2 10 SF
+4320 42480(6.)P
+5170 42480(Conclusions)P
+0 10 SF
+5820 41544(The)P
+7007 41544(following)P
+9595 41544(observations)P
+12880 41544(can)P
+13965 41544(be)P
+14784 41544(made)P
+16336 41544(about)P
+17922 41544(secretaries,)P
+20855 41544(typists,)P
+22825 41544(and)P
+23944 41544(other)P
+25430 41544(non\255programmers)P
+29982 41544(who)P
+31268 41544(have)P
+4320 40824(used)P
+1 10 SF
+5619 40824(learn)P
+0 10 SF
+6985 40824(:)P
+4320 39888(\(a\))P
+5820 39888(A)P
+6484 39888(novice)P
+8314 39888(must)P
+9712 39888(have)P
+11075 39888(assistance)P
+13703 39888(with)P
+15001 39888(the)P
+15965 39888(mechanics)P
+18727 39888(of)P
+19457 39888(communicating)P
+23420 39888(with)P
+24717 39888(the)P
+25680 39888(computer)P
+28176 39888(to)P
+28873 39888(get)P
+29836 39888(through)P
+31933 39888(to)P
+5820 39168(the)P
+6753 39168(\212rst)P
+7887 39168(lesson)P
+9586 39168(or)P
+10286 39168(two;)P
+11553 39168(once)P
+12885 39168(the)P
+13818 39168(\212rst)P
+14952 39168(few)P
+16051 39168(lessons)P
+17983 39168(are)P
+18915 39168(passed)P
+20713 39168(people)P
+22512 39168(can)P
+23544 39168(proceed)P
+25642 39168(on)P
+26442 39168(their)P
+27742 39168(own.)P
+4320 38232(\(b\))P
+5820 38232(The)P
+6985 38232(terminology)P
+10151 38232(used)P
+11482 38232(in)P
+12181 38232(the)P
+13146 38232(\212rst)P
+14312 38232(few)P
+15443 38232(lessons)P
+17407 38232(is)P
+18038 38232(obscure)P
+20134 38232(to)P
+20832 38232(those)P
+22329 38232(inexperienced)P
+25924 38232(with)P
+27222 38232(computers.)P
+30302 38232(It)P
+30900 38232(would)P
+5820 37512(help)P
+7128 37512(if)P
+7770 37512(there)P
+9244 37512(were)P
+10684 37512(a)P
+11225 37512(low)P
+12400 37512(level)P
+13841 37512(reference)P
+16346 37512(card)P
+17653 37512(for)P
+0 9 SF
+18608 37512(UNIX)P
+0 10 SF
+20232 37512(to)P
+20973 37512(supplement)P
+24013 37512(the)P
+25020 37512(existing)P
+27194 37512(programmer)P
+30434 37512(oriented)P
+5820 36792(bulky)P
+7387 36792(manual)P
+9353 36792(and)P
+10419 36792(bulky)P
+11986 36792(reference)P
+14416 36792(card.)P
+4320 35856(\(c\))P
+5820 35856(The)P
+6953 35856(concept)P
+9018 35856(of)P
+9718 35856(``substitutable)P
+13351 35856(argument'')P
+16217 35856(is)P
+16817 35856(hard)P
+18083 35856(to)P
+18750 35856(grasp,)P
+20399 35856(and)P
+21465 35856(requires)P
+23597 35856(help.)P
+4320 34920(\(d\))P
+5820 34920(They)P
+7253 34920(enjoy)P
+8786 34920(the)P
+9719 34920(system)P
+11585 34920(for)P
+12485 34920(the)P
+13418 34920(most)P
+14785 34920(part.)P
+16268 34920(Motivation)P
+19135 34920(matters)P
+21101 34920(a)P
+21567 34920(great)P
+22966 34920(deal,)P
+24315 34920(however.)P
+4320 33984(It)P
+4927 33984(takes)P
+6399 33984(an)P
+7205 33984(hour)P
+8545 33984(or)P
+9285 33984(two)P
+10425 33984(for)P
+11365 33984(a)P
+11871 33984(novice)P
+13710 33984(to)P
+14417 33984(get)P
+15390 33984(through)P
+17496 33984(the)P
+18468 33984(script)P
+20040 33984(on)P
+20879 33984(\212le)P
+21885 33984(handling.)P
+24574 33984(The)P
+25746 33984(total)P
+27052 33984(time)P
+28358 33984(for)P
+29297 33984(a)P
+29802 33984(reasonably)P
+4320 33264(intelligent)P
+6947 33264(and)P
+8006 33264(motivated)P
+10599 33264(novice)P
+12391 33264(to)P
+13051 33264(proceed)P
+15142 33264(from)P
+16502 33264(ignorance)P
+19060 33264(to)P
+19721 33264(a)P
+20181 33264(reasonable)P
+22939 33264(ability)P
+24667 33264(to)P
+25328 33264(create)P
+26953 33264(new)P
+28146 33264(\212les)P
+29340 33264(and)P
+30400 33264(manipu\255)P
+4320 32544(late)P
+5386 32544(old)P
+6353 32544(ones)P
+7652 32544(seems)P
+9317 32544(to)P
+9984 32544(be)P
+10750 32544(a)P
+11216 32544(few)P
+12315 32544(days,)P
+13764 32544(with)P
+15031 32544(perhaps)P
+17096 32544(half)P
+18229 32544(of)P
+18929 32544(each)P
+20227 32544(day)P
+21293 32544(spent)P
+22759 32544(on)P
+23559 32544(the)P
+24492 32544(machine.)P
+5820 31608(The)P
+7035 31608(normal)P
+9017 31608(way)P
+10298 31608(of)P
+11080 31608(proceeding)P
+14027 31608(has)P
+15108 31608(been)P
+16522 31608(to)P
+17271 31608(have)P
+18685 31608(students)P
+20933 31608(in)P
+21682 31608(the)P
+22697 31608(same)P
+24211 31608(room)P
+25759 31608(with)P
+27107 31608(someone)P
+29520 31608(who)P
+30834 31608(knows)P
+0 9 SF
+4320 30888(UNIX)P
+0 10 SF
+5894 30888(and)P
+6984 30888(the)P
+7941 30888(scripts.)P
+10081 30888(Thus)P
+11505 30888(the)P
+12462 30888(student)P
+14419 30888(is)P
+15042 30888(not)P
+16032 30888(brought)P
+18122 30888(to)P
+18812 30888(a)P
+19301 30888(halt)P
+20424 30888(by)P
+21247 30888(dif\212cult)P
+23371 30888(questions.)P
+26210 30888(The)P
+27366 30888(burden)P
+29255 30888(on)P
+30078 30888(the)P
+31034 30888(coun\255)P
+4320 30168(selor,)P
+5864 30168(however,)P
+8307 30168(is)P
+8935 30168(much)P
+10496 30168(lower)P
+12090 30168(than)P
+13351 30168(that)P
+14479 30168(on)P
+15307 30168(a)P
+15801 30168(teacher)P
+17760 30168(of)P
+18488 30168(a)P
+18982 30168(course.)P
+21125 30168(Ideally,)P
+23169 30168(the)P
+24129 30168(students)P
+26322 30168(should)P
+28149 30168(be)P
+28942 30168(encouraged)P
+31933 30168(to)P
+4320 29448(proceed)P
+6446 29448(with)P
+7741 29448(instruction)P
+10536 29448(immediately)P
+13764 29448(prior)P
+15159 29448(to)P
+15854 29448(their)P
+17181 29448(actual)P
+18840 29448(use)P
+19866 29448(of)P
+20593 29448(the)P
+21553 29448(computer.)P
+24396 29448(They)P
+25856 29448(should)P
+27683 29448(exercise)P
+29874 29448(the)P
+30834 29448(scripts)P
+4320 28728(on)P
+5165 28728(the)P
+6143 28728(same)P
+7620 28728(computer)P
+10131 28728(and)P
+11242 28728(the)P
+12220 28728(same)P
+13697 28728(kind)P
+15009 28728(of)P
+15754 28728(terminal)P
+17999 28728(that)P
+19144 28728(they)P
+20422 28728(will)P
+21601 28728(later)P
+22911 28728(use)P
+23954 28728(for)P
+24898 28728(their)P
+26242 28728(real)P
+27385 28728(work,)P
+29012 28728(and)P
+30122 28728(their)P
+31466 28728(\212rst)P
+4320 28008(few)P
+5439 28008(jobs)P
+6659 28008(for)P
+7579 28008(the)P
+8532 28008(computer)P
+11018 28008(should)P
+12838 28008(be)P
+13624 28008(relatively)P
+16110 28008(easy)P
+17395 28008(ones.)P
+19064 28008(Also,)P
+20567 28008(both)P
+21854 28008(training)P
+23941 28008(and)P
+25026 28008(initial)P
+26646 28008(work)P
+28098 28008(should)P
+29917 28008(take)P
+31135 28008(place)P
+4320 27288(on)P
+5127 27288(days)P
+6433 27288(when)P
+7939 27288(the)P
+0 9 SF
+8859 27288(UNIX)P
+0 10 SF
+10416 27288(hardware)P
+12854 27288(and)P
+13927 27288(software)P
+16199 27288(are)P
+17138 27288(working)P
+19345 27288(reliably.)P
+21735 27288(Rarely)P
+23541 27288(is)P
+24148 27288(all)P
+24955 27288(of)P
+25661 27288(this)P
+26734 27288(possible,)P
+29056 27288(but)P
+30029 27288(the)P
+30968 27288(closer)P
+4320 26568(one)P
+5428 26568(comes)P
+7202 26568(the)P
+8177 26568(better)P
+9784 26568(the)P
+10758 26568(result.)P
+12682 26568(For)P
+13757 26568(example,)P
+16180 26568(if)P
+16788 26568(it)P
+17363 26568(is)P
+18004 26568(known)P
+19878 26568(that)P
+21019 26568(the)P
+21993 26568(hardware)P
+24465 26568(is)P
+25106 26568(shaky)P
+26746 26568(one)P
+27853 26568(day,)P
+29110 26568(it)P
+29685 26568(is)P
+30326 26568(better)P
+31933 26568(to)P
+4320 25848(attempt)P
+6332 25848(to)P
+7011 25848(reschedule)P
+9787 25848(training)P
+11866 25848(for)P
+12778 25848(another)P
+14789 25848(one.)P
+16216 25848(Students)P
+18494 25848(are)P
+19437 25848(very)P
+20714 25848(frustrated)P
+23224 25848(by)P
+24035 25848(machine)P
+26278 25848(downtime;)P
+29056 25848(when)P
+30566 25848(nothing)P
+4320 25128(is)P
+4963 25128(happening,)P
+7855 25128(it)P
+8432 25128(takes)P
+9907 25128(some)P
+11416 25128(sophistication)P
+14992 25128(and)P
+16101 25128(experience)P
+18941 25128(to)P
+19651 25128(distinguish)P
+22528 25128(an)P
+23337 25128(in\212nite)P
+25281 25128(loop,)P
+26741 25128(a)P
+27249 25128(slow)P
+28624 25128(but)P
+29633 25128(functioning)P
+4320 24408(program,)P
+6703 24408(a)P
+7169 24408(program)P
+9402 24408(waiting)P
+11402 24408(for)P
+12302 24408(the)P
+13235 24408(user,)P
+14584 24408(and)P
+15650 24408(a)P
+16116 24408(broken)P
+17982 24408(machine.*)P
+5820 23472(One)P
+7078 23472(disadvantage)P
+10468 23472(of)P
+11227 23472(training)P
+13353 23472(with)P
+1 10 SF
+14679 23472(learn)P
+0 10 SF
+16204 23472(is)P
+16863 23472(that)P
+18022 23472(students)P
+20247 23472(come)P
+21805 23472(to)P
+22530 23472(depend)P
+24520 23472(completely)P
+27444 23472(on)P
+28302 23472(the)P
+29293 23472(CAI)P
+30584 23472(system,)P
+4320 22752(and)P
+5399 22752(do)P
+6212 22752(not)P
+7192 22752(try)P
+8072 22752(to)P
+8752 22752(read)P
+9997 22752(manuals)P
+12209 22752(or)P
+12922 22752(use)P
+13934 22752(other)P
+15380 22752(learning)P
+17559 22752(aids.)P
+19088 22752(This)P
+20368 22752(is)P
+20981 22752(unfortunate,)P
+24110 22752(not)P
+25090 22752(only)P
+26370 22752(because)P
+28479 22752(of)P
+29191 22752(the)P
+30136 22752(increased)P
+4320 22032(demands)P
+6678 22032(for)P
+7604 22032(completeness)P
+11061 22032(and)P
+12153 22032(accuracy)P
+14509 22032(of)P
+15235 22032(the)P
+16193 22032(scripts,)P
+18134 22032(but)P
+19126 22032(because)P
+21248 22032(the)P
+22206 22032(scripts)P
+23997 22032(do)P
+24822 22032(not)P
+25814 22032(cover)P
+27371 22032(all)P
+28196 22032(of)P
+28921 22032(the)P
+0 9 SF
+29859 22032(UNIX)P
+0 10 SF
+31434 22032(sys\255)P
+4320 21312(tem.)P
+5795 21312(New)P
+7152 21312(users)P
+8609 21312(should)P
+10434 21312(have)P
+11791 21312(manuals)P
+14015 21312(\(appropriate)P
+17172 21312(for)P
+18097 21312(their)P
+19422 21312(level\))P
+21012 21312(and)P
+22102 21312(read)P
+23358 21312(them;)P
+24949 21312(the)P
+25906 21312(scripts)P
+27696 21312(ought)P
+29287 21312(to)P
+29978 21312(be)P
+30768 21312(altered)P
+4320 20592(to)P
+4987 20592(recommend)P
+8019 20592(suitable)P
+10085 20592(documents)P
+12884 20592(and)P
+13950 20592(urge)P
+15216 20592(students)P
+17382 20592(to)P
+18049 20592(read)P
+19281 20592(them.)P
+5820 19656(There)P
+7439 19656(are)P
+8391 19656(several)P
+10309 19656(other)P
+11762 19656(dif\212culties)P
+14548 19656(which)P
+16233 19656(are)P
+17184 19656(clearly)P
+19035 19656(evident.)P
+21370 19656(From)P
+22890 19656(the)P
+23842 19656(student's)P
+26227 19656(viewpoint,)P
+28996 19656(the)P
+29948 19656(most)P
+31334 19656(seri\255)P
+4320 18936(ous)P
+5391 18936(is)P
+6029 18936(that)P
+7167 18936(lessons)P
+9137 18936(still)P
+10276 18936(crop)P
+11580 18936(up)P
+12418 18936(which)P
+14122 18936(simply)P
+15994 18936(can't)P
+17431 18936(be)P
+18235 18936(passed.)P
+20421 18936(Sometimes)P
+23326 18936(this)P
+24431 18936(is)P
+25069 18936(due)P
+26173 18936(to)P
+26877 18936(poor)P
+28214 18936(explanations,)P
+31633 18936(but)P
+4320 18216(just)P
+5395 18216(as)P
+6102 18216(often)P
+7543 18216(it)P
+8085 18216(is)P
+8693 18216(some)P
+10167 18216(error)P
+11541 18216(in)P
+12216 18216(the)P
+13157 18216(lesson)P
+14864 18216(itself)P
+16272 18216<88>P
+17080 18216(a)P
+17554 18216(botched)P
+19661 18216(setup,)P
+21285 18216(a)P
+21759 18216(missing)P
+23834 18216(\212le,)P
+24959 18216(an)P
+25732 18216(invalid)P
+27606 18216(test)P
+28646 18216(for)P
+29553 18216(correctness,)P
+4320 17496(or)P
+5026 17496(some)P
+6498 17496(system)P
+8370 17496(facility)P
+10276 17496(that)P
+11381 17496(doesn't)P
+13352 17496(work)P
+14790 17496(on)P
+15595 17496(the)P
+16533 17496(local)P
+17904 17496(system)P
+19775 17496(in)P
+20447 17496(the)P
+21385 17496(same)P
+22822 17496(way)P
+24026 17496(it)P
+24565 17496(did)P
+25537 17496(on)P
+26342 17496(the)P
+27280 17496(development)P
+30584 17496(system.)P
+4320 16776(It)P
+4895 16776(takes)P
+6335 16776(knowledge)P
+9175 16776(and)P
+10249 16776(a)P
+10723 16776(certain)P
+12562 16776(healthy)P
+14535 16776(arrogance)P
+17106 16776(on)P
+17913 16776(the)P
+18853 16776(part)P
+19993 16776(of)P
+20700 16776(the)P
+21640 16776(user)P
+22846 16776(to)P
+23520 16776(recognize)P
+26058 16776(that)P
+27165 16776(the)P
+28105 16776(fault)P
+29412 16776(is)P
+30019 16776(not)P
+30993 16776(his)P
+31900 16776(or)P
+4320 16056(hers,)P
+5709 16056(but)P
+6716 16056(the)P
+7689 16056(script)P
+9262 16056(writer's.)P
+11718 16056(Permitting)P
+14493 16056(the)P
+15466 16056(student)P
+17439 16056(to)P
+18146 16056(get)P
+19119 16056(on)P
+19959 16056(with)P
+21266 16056(the)P
+22239 16056(next)P
+23512 16056(lesson)P
+25251 16056(regardless)P
+27922 16056(does)P
+29261 16056(alleviate)P
+31533 16056(this)P
+4320 15336(somewhat,)P
+7113 15336(and)P
+8190 15336(the)P
+9133 15336(logging)P
+11177 15336(facilities)P
+13453 15336(make)P
+14962 15336(it)P
+15506 15336(easy)P
+16781 15336(to)P
+17458 15336(watch)P
+19100 15336(for)P
+20010 15336(lessons)P
+21952 15336(that)P
+23062 15336(no)P
+23872 15336(one)P
+24948 15336(can)P
+25990 15336(pass,)P
+27382 15336(but)P
+28359 15336(it)P
+28903 15336(is)P
+29513 15336(still)P
+30624 15336(a)P
+31100 15336(prob\255)P
+4320 14616(lem.)P
+5820 13680(The)P
+7019 13680(biggest)P
+9018 13680(problem)P
+11284 13680(with)P
+12617 13680(the)P
+13616 13680(previous)P
+1 10 SF
+15948 13680(learn)P
+0 10 SF
+17580 13680(was)P
+18778 13680(speed)P
+20409 13680(\(or)P
+21375 13680(lack)P
+22640 13680(thereof\))P
+24805 13680<88>P
+25671 13680(it)P
+26271 13680(was)P
+27469 13680(often)P
+28968 13680(excruciatingly)P
+4320 12960(slow)P
+5782 12960(and)P
+6977 12960(made)P
+8605 12960(a)P
+9200 12960(signi\212cant)P
+12029 12960(drain)P
+13591 12960(on)P
+14520 12960(the)P
+15582 12960(system.)P
+17926 12960(The)P
+19187 12960(current)P
+21214 12960(version)P
+23308 12960(so)P
+24169 12960(far)P
+25163 12960(does)P
+26590 12960(not)P
+27685 12960(seem)P
+29245 12960(to)P
+30040 12960(have)P
+31500 12960(that)P
+4320 12240(dif\212culty,)P
+6922 12240(although)P
+9272 12240(some)P
+10788 12240(scripts,)P
+12754 12240(notably)P
+1 10 SF
+14804 12240(eqn)P
+0 10 SF
+15770 12240(,)P
+16170 12240(are)P
+17152 12240(intrinsically)P
+20269 12240(slow.)P
+1 10 SF
+22002 12240(eqn)P
+0 10 SF
+22968 12240(,)P
+23368 12240(for)P
+24318 12240(example,)P
+26750 12240(must)P
+28167 12240(do)P
+29017 12240(a)P
+29533 12240(lot)P
+30417 12240(of)P
+31167 12240(work)P
+4320 11520(even)P
+5691 11520(to)P
+6397 11520(print)P
+7770 11520(its)P
+8576 11520(introductions,)P
+12131 11520(let)P
+12969 11520(alone)P
+14506 11520(check)P
+16142 11520(the)P
+17113 11520(student)P
+19084 11520(responses,)P
+21803 11520(but)P
+22808 11520(delay)P
+24345 11520(is)P
+24983 11520(perceptible)P
+27886 11520(in)P
+28591 11520(all)P
+29429 11520(scripts)P
+31233 11520(from)P
+4320 10800(time)P
+5587 10800(to)P
+6254 10800(time.)P
+5820 9864(Another)P
+8061 9864(potential)P
+10436 9864(problem)P
+12711 9864(is)P
+13386 9864(that)P
+14561 9864(it)P
+15170 9864(is)P
+15845 9864(possible)P
+18086 9864(to)P
+18828 9864(break)P
+1 10 SF
+20435 9864(learn)P
+0 10 SF
+21976 9864(inadvertently,)P
+25567 9864(by)P
+26442 9864(pushing)P
+28617 9864(interrupt)P
+30959 9864(at)P
+31667 9864(the)P
+4320 9144(wrong)P
+6105 9144(time,)P
+7574 9144(or)P
+8326 9144(by)P
+9177 9144(removing)P
+11728 9144(critical)P
+13645 9144(\212les,)P
+15046 9144(or)P
+15797 9144(any)P
+16914 9144(number)P
+18998 9144(of)P
+19749 9144(similar)P
+21667 9144(slips.)P
+23368 9144(The)P
+24552 9144(defenses)P
+26867 9144(against)P
+28817 9144(such)P
+30167 9144(problems)P
+4320 8424(have)P
+5694 8424(steadily)P
+7802 8424(been)P
+9176 8424(improved,)P
+11868 8424(to)P
+12577 8424(the)P
+13551 8424(point)P
+15026 8424(where)P
+16732 8424(most)P
+18140 8424(students)P
+20347 8424(should)P
+22188 8424(not)P
+23196 8424(notice)P
+24903 8424(dif\212culties.)P
+28061 8424(Of)P
+28935 8424(course,)P
+30891 8424(it)P
+31466 8424(will)P
+4320 7704(always)P
+6185 7704(be)P
+6951 7704(possible)P
+9117 7704(to)P
+9784 7704(break)P
+1 10 SF
+11316 7704(learn)P
+0 10 SF
+12782 7704(maliciously,)P
+15932 7704(but)P
+16899 7704(this)P
+17966 7704(is)P
+18566 7704(not)P
+19533 7704(likely)P
+21100 7704(to)P
+21767 7704(be)P
+22533 7704(a)P
+22999 7704(problem.)P
+4320 6240 8 0 18 L
+0 8 SF
+4320 5640(*)P
+4726 5640(We)P
+5558 5640(have)P
+6630 5640(even)P
+7702 5640(known)P
+9175 5640(an)P
+9794 5640(expert)P
+11159 5640(programmer)P
+13697 5640(to)P
+14236 5640(decide)P
+15654 5640(the)P
+16406 5640(computer)P
+18384 5640(was)P
+19297 5640(broken)P
+20796 5640(when)P
+22002 5640(he)P
+22621 5640(had)P
+23480 5640(simply)P
+24952 5640(left)P
+25757 5640(his)P
+26482 5640(terminal)P
+4320 5040(in)P
+4853 5040(local)P
+5945 5040(mode.)P
+7451 5040(Novices)P
+9184 5040(have)P
+10250 5040(great)P
+11369 5040(dif\212culties)P
+13581 5040(with)P
+14594 5040(such)P
+15634 5040(problems.)P
+end restore showpage
+%%Page: USD:2-11 11
+save $troff begin Sc
+0 10 SF
+4320 44640(LEARN)P
+6520 44640<88>P
+7320 44640(Computer\255Aided)P
+11586 44640(Instruction)P
+14386 44640(on)P
+15186 44640(UNIX)P
+29933 44640(USD:2\25511)P
+5820 42480(One)P
+7077 42480(area)P
+8333 42480(is)P
+8991 42480(more)P
+10482 42480(fundamental)P
+13739 42480<88>P
+14597 42480(some)P
+0 9 SF
+16101 42480(UNIX)P
+0 10 SF
+17709 42480(commands)P
+20566 42480(are)P
+21556 42480(suf\212ciently)P
+24514 42480(global)P
+26272 42480(in)P
+26997 42480(their)P
+28355 42480(effect)P
+29977 42480(that)P
+1 10 SF
+31134 42480(learn)P
+0 10 SF
+4320 41760(currently)P
+6733 41760(does)P
+8079 41760(not)P
+9093 41760(allow)P
+10673 41760(them)P
+12120 41760(to)P
+12834 41760(be)P
+13647 41760(executed)P
+16025 41760(at)P
+16705 41760(all.)P
+17902 41760(The)P
+19082 41760(most)P
+20496 41760(obvious)P
+22643 41760(is)P
+1 10 SF
+23290 41760(cd)P
+0 10 SF
+23956 41760(,)P
+24353 41760(which)P
+26066 41760(changes)P
+28243 41760(to)P
+28956 41760(another)P
+31001 41760(direc\255)P
+4320 41040(tory.)P
+5844 41040(The)P
+6984 41040(prospect)P
+9223 41040(of)P
+9930 41040(a)P
+10403 41040(student)P
+12343 41040(who)P
+13583 41040(is)P
+14189 41040(learning)P
+16361 41040(about)P
+17900 41040(directories)P
+20638 41040(inadvertently)P
+24010 41040(moving)P
+26050 41040(to)P
+26723 41040(some)P
+28195 41040(random)P
+30234 41040(directory)P
+4320 40320(and)P
+5413 40320(removing)P
+7940 40320(\212les)P
+9167 40320(has)P
+10192 40320(deterred)P
+12383 40320(us)P
+13142 40320(from)P
+14535 40320(even)P
+15893 40320(writing)P
+17853 40320(lessons)P
+19811 40320(on)P
+1 10 SF
+20637 40320(cd)P
+0 10 SF
+21303 40320(,)P
+21679 40320(but)P
+22672 40320(ultimately)P
+25332 40320(lessons)P
+27290 40320(on)P
+28116 40320(such)P
+29441 40320(topics)P
+31100 40320(prob\255)P
+4320 39600(ably)P
+5553 39600(should)P
+7353 39600(be)P
+8119 39600(added.)P
+2 10 SF
+4320 38160(7.)P
+5170 38160(Acknowledgments)P
+0 10 SF
+5820 37224(We)P
+6864 37224(are)P
+7808 37224(grateful)P
+9886 37224(to)P
+10565 37224(all)P
+11377 37224(those)P
+12855 37224(who)P
+14100 37224(have)P
+15444 37224(tried)P
+1 10 SF
+16756 37224(learn,)P
+0 10 SF
+18384 37224(for)P
+19295 37224(we)P
+20205 37224(have)P
+21548 37224(bene\212ted)P
+23958 37224(greatly)P
+25835 37224(from)P
+27213 37224(their)P
+28524 37224(suggestions)P
+31534 37224(and)P
+4320 36504(criticisms.)P
+7228 36504(In)P
+7953 36504(particular,)P
+10627 36504(M.)P
+11534 36504(E.)P
+12275 36504(Bittrich,)P
+14483 36504(J.)P
+15090 36504(L.)P
+15831 36504(Blue,)P
+17338 36504(S.)P
+18046 36504(I.)P
+18620 36504(Feldman,)P
+21094 36504(P.)P
+21802 36504(A.)P
+22609 36504(Fox,)P
+23917 36504(and)P
+25007 36504(M.)P
+25914 36504(J.)P
+26521 36504(McAlpin)P
+28911 36504(have)P
+30267 36504(provided)P
+4320 35784(substantial)P
+7094 35784(feedback.)P
+9816 35784(Conversations)P
+13456 35784(with)P
+14731 35784(E.)P
+15455 35784(Z.)P
+16179 35784(Rothkopf)P
+18653 35784(also)P
+19826 35784(provided)P
+22166 35784(many)P
+23706 35784(of)P
+24413 35784(the)P
+25353 35784(ideas)P
+26792 35784(in)P
+27466 35784(the)P
+28406 35784(system.)P
+30629 35784(We)P
+31668 35784(are)P
+4320 35064(also)P
+5552 35064(indebted)P
+7884 35064(to)P
+8617 35064(Don)P
+9916 35064(Jackowski)P
+12679 35064(for)P
+13644 35064(serving)P
+15675 35064(as)P
+16439 35064(a)P
+16970 35064(guinea)P
+18834 35064(pig)P
+19866 35064(for)P
+20831 35064(the)P
+21829 35064(second)P
+23759 35064(version,)P
+25940 35064(and)P
+27071 35064(to)P
+27803 35064(Tom)P
+29202 35064(Plum)P
+30735 35064(for)P
+31700 35064(his)P
+4320 34344(efforts)P
+6086 34344(to)P
+6753 34344(improve)P
+8953 34344(the)P
+9886 34344(C)P
+10486 34344(script.)P
+2 10 SF
+4320 32904(References)P
+0 10 SF
+4320 31752(1.)P
+5820 31752(D.L.)P
+7193 31752(Bitzer)P
+8932 31752(and)P
+10071 31752(D.)P
+10927 31752(Skaperdas,)P
+13815 31752(``The)P
+15421 31752(Economics)P
+18360 31752(of)P
+19133 31752(a)P
+19672 31752(Large)P
+21344 31752(Scale)P
+22916 31752(Computer)P
+25589 31752(Based)P
+27327 31752(Educational)P
+30466 31752(System:)P
+5820 31032(Plato)P
+7375 31032(IV,'')P
+8879 31032(in)P
+1 10 SF
+9667 31032(Computer)P
+12387 31032(Assisted)P
+14674 31032(Instruction,)P
+17778 31032(Testing)P
+19866 31032(and)P
+21087 31032(Guidance)P
+0 10 SF
+23419 31032(,)P
+23890 31032(ed.)P
+24926 31032(Wayne)P
+26944 31032(Holtzman,)P
+29780 31032(pp.)P
+30850 31032(17\25529,)P
+5820 30312(Harper)P
+7685 30312(and)P
+8751 30312(Row,)P
+10234 30312(New)P
+11566 30312(York,)P
+13149 30312(1970.)P
+4320 29376(2.)P
+5820 29376(D.C.)P
+7217 29376(Gray,)P
+8829 29376(J.P.)P
+9959 29376(Hulskamp,)P
+12838 29376(J.H.)P
+14067 29376(Kumm,)P
+16147 29376(S.)P
+16894 29376(Lichtenstein,)P
+20273 29376(and)P
+21402 29376(N.E.)P
+22765 29376(Nimmervoll,)P
+26112 29376(``COALA)P
+28841 29376<AD>P
+29304 29376(A)P
+30000 29376(Minicom\255)P
+5820 28656(puter)P
+7253 28656(CAI)P
+8486 28656(System,'')P
+1 10 SF
+11003 28656(IEEE)P
+12504 28656(Trans.)P
+14254 28656(Education)P
+0 10 SF
+16721 28656(,)P
+17071 28656(vol.)P
+18188 28656(E\25520\(1\),)P
+20405 28656(pp.)P
+21355 28656(73\25577,)P
+23105 28656(Feb.)P
+24355 28656(1977.)P
+4320 27720(3.)P
+5820 27720(P.)P
+6539 27720(Suppes,)P
+8657 27720(``On)P
+10025 27720(Using)P
+11693 27720(Computers)P
+14561 27720(to)P
+15263 27720(Individualize)P
+18664 27720(Instruction,'')P
+22048 27720(in)P
+1 10 SF
+22749 27720(The)P
+23883 27720(Computer)P
+26516 27720(in)P
+27217 27720(American)P
+29783 27720(Education)P
+0 10 SF
+32250 27720(,)P
+5820 27000(ed.)P
+6736 27000(D.D.)P
+8102 27000(Bushnell)P
+10435 27000(and)P
+11501 27000(D.W.)P
+13000 27000(Allen,)P
+14683 27000(pp.)P
+15633 27000(11\25524,)P
+17383 27000(John)P
+18716 27000(Wiley,)P
+20532 27000(New)P
+21864 27000(York,)P
+23447 27000(1967.)P
+4320 26064(4.)P
+5820 26064(B.F.)P
+7154 26064(Skinner,)P
+9471 26064(``Why)P
+11337 26064(We)P
+12468 26064(Need)P
+14032 26064(Teaching)P
+16563 26064(Machines,'')P
+1 10 SF
+19743 26064(Harv.)P
+21424 26064(Educ.)P
+23106 26064(Review)P
+0 10 SF
+24838 26064(,)P
+25287 26064(vol.)P
+26503 26064(31,)P
+27552 26064(pp.)P
+28601 26064(377\255398,)P
+31050 26064(1961.)P
+5820 25344(Reprinted)P
+8386 25344(in)P
+1 10 SF
+9053 25344(Educational)P
+12187 25344(Technology,)P
+0 10 SF
+15336 25344(ed.)P
+16252 25344(J.P.)P
+17319 25344(DeCecco,)P
+19866 25344(Holt)P
+21133 25344(Rinehart)P
+23399 25344(&)P
+24066 25344(Winston)P
+26299 25344(\(New)P
+27831 25344(York,)P
+29414 25344(1964\))P
+4320 24408(5.)P
+5820 24408(K.)P
+6675 24408(Thompson)P
+9514 24408(and)P
+10652 24408(D.)P
+11507 24408(M.)P
+12461 24408(Ritchie,)P
+1 10 SF
+14615 24408(U)P
+1 8 SF
+15048 24408(NIX)P
+1 10 SF
+16092 24408(Programmer's)P
+19894 24408(Manual,)P
+0 10 SF
+22182 24408(Bell)P
+23453 24408(Laboratories,)P
+26906 24408(1978.)P
+28727 24408(See)P
+29864 24408(section)P
+1 10 SF
+31834 24408(ed)P
+0 10 SF
+5820 23688(\(1\).)P
+4320 22752(6.)P
+5820 22752(B.W.)P
+7458 22752(Kernighan,)P
+1 10 SF
+10512 22752(A)P
+11251 22752(Tutorial)P
+13591 22752(Introduction)P
+16963 22752(to)P
+17802 22752(the)P
+18907 22752(UNIX)P
+20679 22752(text)P
+21917 22752(editor)P
+0 10 SF
+23350 22752(,)P
+23872 22752(1974.)P
+25793 22752(Bell)P
+27164 22752(Laboratories)P
+30567 22752(internal)P
+5820 22032(memorandum)P
+4320 21096(7.)P
+5820 21096(B.)P
+6572 21096(W.)P
+7490 21096(Kernighan)P
+10224 21096(and)P
+11292 21096(D.)P
+12077 21096(M.)P
+12962 21096(Ritchie,)P
+1 10 SF
+15046 21096(The)P
+16147 21096(C)P
+16748 21096(Programming)P
+20315 21096(Language,)P
+0 10 SF
+23066 21096(Prentice\255Hall,)P
+26616 21096(Englewood)P
+29550 21096(Cliffs,)P
+31268 21096(New)P
+5820 20376(Jersey,)P
+7668 20376(1978.)P
+end restore showpage
+%%Trailer
+%%Pages: 11
+%%EOF

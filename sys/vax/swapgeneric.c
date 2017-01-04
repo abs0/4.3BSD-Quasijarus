@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)swapgeneric.c	7.9 (Berkeley) 12/1/90
+ *	@(#)swapgeneric.c	7.10 (Berkeley) 3/6/04
  */
 
 #include "mba.h"
@@ -112,6 +112,16 @@ gotit:
 		}
 #endif
 		for (ui = ubdinit; ui->ui_driver; ui++) {
+			if (ui->ui_alive == 0)
+				continue;
+			if (ui->ui_unit == unit && ui->ui_driver ==
+			    (struct uba_driver *)gc->gc_driver) {
+				printf("root on %s%d\n",
+				    ui->ui_driver->ud_dname, unit);
+				goto found;
+			}
+		}
+		for (ui = pnexdinit; ui->ui_driver; ui++) {
 			if (ui->ui_alive == 0)
 				continue;
 			if (ui->ui_unit == unit && ui->ui_driver ==

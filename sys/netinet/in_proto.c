@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)in_proto.c	7.3 (Berkeley) 6/29/88
+ *	@(#)in_proto.c	7.4 (Berkeley) 5/18/07
  */
 
 #include "param.h"
@@ -54,6 +54,10 @@ int	rimp_output(), hostslowtimo();
 int	idpip_input(), nsip_ctlinput();
 #endif
 
+#ifdef GRETERM
+int	gre_input();
+#endif
+
 extern	struct domain inetdomain;
 
 struct protosw inetsw[] = {
@@ -85,6 +89,13 @@ struct protosw inetsw[] = {
 #ifdef NSIP
 { SOCK_RAW,	&inetdomain,	IPPROTO_IDP,	PR_ATOMIC|PR_ADDR,
   idpip_input,	rip_output,	nsip_ctlinput,	0,
+  raw_usrreq,
+  0,		0,		0,		0,
+},
+#endif
+#ifdef GRETERM
+{ SOCK_RAW,	&inetdomain,	IPPROTO_GRE,	PR_ATOMIC|PR_ADDR,
+  gre_input,	rip_output,	0,		0,
   raw_usrreq,
   0,		0,		0,		0,
 },

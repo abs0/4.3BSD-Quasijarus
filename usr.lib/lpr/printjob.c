@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)printjob.c	5.6 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)printjob.c	5.15 (Berkeley) 2/13/06";
 #endif /* not lint */
 
 /*
@@ -60,6 +60,7 @@ char	fromhost[32];		/* user's host machine */
 char	logname[32];		/* user's login name */
 char	jobname[100];		/* job or file name */
 char	class[32];		/* classification field */
+char	options[64];		/* processing options */
 char	width[10] = "-w";	/* page width in characters */
 char	length[10] = "-l";	/* page length in lines */
 char	pxwidth[10] = "-x";	/* page width in pixels */
@@ -235,6 +236,7 @@ printit(file)
 	register int i;
 	char *cp;
 	int bombed = OK;
+	int jp_run = 0;
 
 	/*
 	 * open control file; ignore if no longer there.
@@ -250,6 +252,7 @@ printit(file)
 		strcpy(fonts[i], ifonts[i]);
 	strcpy(width+2, "0");
 	strcpy(indent+2, "0");
+	options[0] = '\0';
 
 	/*
 	 *      read the control file for work to do
@@ -283,6 +286,7 @@ printit(file)
 	 *              U -- "unlink" name of file to remove
 	 *                    (after we print it. (Pass 2 only)).
 	 *		M -- "mail" to user when done printing
+	 *		O -- "options" for advanced printers
 	 *
 	 *      getline reads a line and expands tabs to blanks
 	 */
@@ -335,11 +339,19 @@ printit(file)
 				gethostname(class, sizeof(class));
 			continue;
 
+		case 'O':	/* processing options for advanced printers */
+			strncpy(options, line+1, sizeof(options)-1);
+			continue;
+
 		case 'T':	/* header title for pr */
 			strncpy(title, line+1, sizeof(title)-1);
 			continue;
 
 		case 'L':	/* identification line */
+			if (JP && !jp_run) {
+				run_job_prep();
+				jp_run = 1;
+			}
 			if (!SH && !HL)
 				banner(line+1, jobname);
 			continue;
@@ -361,6 +373,10 @@ printit(file)
 			continue;
 
 		default:	/* some file to print */
+			if (JP && !jp_run) {
+				run_job_prep();
+				jp_run = 1;
+			}
 			switch (i = print(line[0], line+1)) {
 			case ERROR:
 				if (bombed == OK)
@@ -390,6 +406,10 @@ pass2:
 	while (getline(cfp))
 		switch (line[0]) {
 		case 'L':	/* identification line */
+			if (JP && !jp_run) {
+				run_job_prep();
+				jp_run = 1;
+			}
 			if (!SH && HL)
 				banner(line+1, jobname);
 			continue;
@@ -427,7 +447,7 @@ print(format, file)
 	register int n;
 	register char *prog;
 	int fi, fo;
-	char *av[15], buf[BUFSIZ];
+	char *av[20], buf[BUFSIZ];
 	int pid, p[2], stopped = 0;
 	union wait status;
 	struct stat stb;
@@ -469,6 +489,12 @@ print(format, file)
 			fo = ofd;
 			goto start;
 		}
+		if (PI) {		/* if incorporates pr function */
+			av[1] = "-p";
+			av[2] = *title ? title : " ";
+			n = 3;
+			goto ifilter;
+		}
 		pipe(p);
 		if ((prchild = dofork(DORETURN)) == 0) {	/* child */
 			dup2(fi, 0);		/* file is stdin */
@@ -488,25 +514,30 @@ print(format, file)
 		}
 		fi = p[0];			/* use pipe for input */
 	case 'f':	/* print plain text file */
+		n = 1;
+	ifilter:
 		prog = IF;
-		av[1] = width;
-		av[2] = length;
-		av[3] = indent;
-		n = 4;
+		av[n++] = width;
+		av[n++] = length;
+		av[n++] = indent;
+		if (EA) {
+			av[n++] = pxwidth;
+			av[n++] = pxlength;
+		}
 		break;
 	case 'l':	/* like 'f' but pass control characters */
-		prog = IF;
 		av[1] = "-c";
-		av[2] = width;
-		av[3] = length;
-		av[4] = indent;
-		n = 5;
-		break;
+		n = 2;
+		goto ifilter;
 	case 'r':	/* print a fortran text file */
 		prog = RF;
 		av[1] = width;
 		av[2] = length;
 		n = 3;
+		if (EA) {
+			av[n++] = pxwidth;
+			av[n++] = pxlength;
+		}
 		break;
 	case 't':	/* print troff output */
 	case 'n':	/* print ditroff output */
@@ -553,6 +584,13 @@ print(format, file)
 			printer, format);
 		return(ERROR);
 	}
+	if (prog == NULL) {
+		(void) close(fi);
+		syslog(LOG_ERR,
+		   "%s: no filter found in printcap for format character '%c'",
+		   printer, format);
+		return(ERROR);
+	}
 	if ((av[0] = rindex(prog, '/')) != NULL)
 		av[0]++;
 	else
@@ -561,6 +599,14 @@ print(format, file)
 	av[n++] = logname;
 	av[n++] = "-h";
 	av[n++] = fromhost;
+	if (EA) {
+		av[n++] = "-P";
+		av[n++] = printer;
+		if (options[0]) {
+			av[n++] = "-O";
+			av[n++] = options;
+		}
+	}
 	av[n++] = AF;
 	av[n] = 0;
 	fo = pfd;
@@ -615,11 +661,12 @@ start:
 		return(OK);
 	case 1:
 		return(REPRINT);
+	case 2:
+		return(ERROR);
 	default:
 		syslog(LOG_WARNING, "%s: Daemon filter '%c' exited (%d)",
 			printer, format, status.w_retcode);
-	case 2:
-		return(ERROR);
+		return(FILTERERR);
 	}
 }
 
@@ -797,8 +844,13 @@ banner(name1, name2)
 {
 	time_t tvec;
 	extern char *ctime();
+	char *date;
 
 	time(&tvec);
+	date = ctime(&tvec);
+	date[24] = '\0';
+	if (BF)
+		return(banner_filter(name1, name2, date));
 	if (!SF && !tof)
 		(void) write(ofd, FF, strlen(FF));
 	if (SB) {	/* short banner only */
@@ -810,7 +862,7 @@ banner(name1, name2)
 		(void) write(ofd, "  Job: ", 7);
 		(void) write(ofd, name2, strlen(name2));
 		(void) write(ofd, "  Date: ", 8);
-		(void) write(ofd, ctime(&tvec), 24);
+		(void) write(ofd, date, 24);
 		(void) write(ofd, "\n", 1);
 	} else {	/* normal banner */
 		(void) write(ofd, "\n\n\n", 3);
@@ -824,7 +876,7 @@ banner(name1, name2)
 		(void) write(ofd, "\n\n\n\n\t\t\t\t\tJob:  ", 15);
 		(void) write(ofd, name2, strlen(name2));
 		(void) write(ofd, "\n\t\t\t\t\tDate: ", 12);
-		(void) write(ofd, ctime(&tvec), 24);
+		(void) write(ofd, date, 24);
 		(void) write(ofd, "\n", 1);
 	}
 	if (!SF)
@@ -902,6 +954,123 @@ dropit(c)
 }
 
 /*
+ * print the banner using a filter
+ */
+banner_filter(name1, name2, date)
+	char *name1, *name2, *date;
+{
+	register int n;
+	char *av[15];
+	int pid, p[2];
+	register FILE *f;
+	union wait status;
+
+	if ((av[0] = rindex(BF, '/')) != NULL)
+		av[0]++;
+	else
+		av[0] = BF;
+	n = 1;
+	av[n++] = "-P";
+	av[n++] = printer;
+	if (options[0]) {
+		av[n++] = "-O";
+		av[n++] = options;
+	}
+	av[n++] = pxwidth;
+	av[n++] = pxlength;
+	av[n] = NULL;
+	pipe(p);
+	if ((child = dofork(DORETURN)) == 0) {	/* child */
+		dup2(p[0], 0);
+		dup2(pfd, 1);
+		for (n = 3; n < NOFILE; n++)
+			(void) close(n);
+		execv(BF, av);
+		syslog(LOG_ERR, "cannot execv %s", BF);
+		exit(2);
+	}
+	close(p[0]);
+	if (child < 0) {
+		child = 0;
+		close(p[1]);
+		return(ERROR);
+	}
+	f = fdopen(p[1], "w");
+	fprintf(f, "L %s\n", name1);
+	fprintf(f, "J %s\n", name2);
+	fprintf(f, "D %s\n", date);
+	if (class[0])
+		fprintf(f, "C %s\n", class);
+	fclose(f);
+	while ((pid = wait(&status)) > 0 && pid != child)
+		;
+	child = 0;
+	if (!WIFEXITED(status)) {
+		syslog(LOG_WARNING, "%s: banner filter terminated (%d)",
+			printer, status.w_termsig);
+		return(ERROR);
+	}
+	if (status.w_retcode == 0)
+		return(OK);
+	else {
+		syslog(LOG_WARNING, "%s: banner filter exited (%d)", printer,
+			status.w_retcode);
+		return(ERROR);
+	}
+}
+
+/*
+ * run the job prep program
+ */
+run_job_prep()
+{
+	register int n;
+	char *av[15];
+	int pid, p[2];
+	union wait status;
+
+	if ((av[0] = rindex(JP, '/')) != NULL)
+		av[0]++;
+	else
+		av[0] = JP;
+	n = 1;
+	av[n++] = "-P";
+	av[n++] = printer;
+	if (options[0]) {
+		av[n++] = "-O";
+		av[n++] = options;
+	}
+	av[n] = NULL;
+	if ((child = dofork(DORETURN)) == 0) {	/* child */
+		dup2(pfd, 1);
+		for (n = 3; n < NOFILE; n++)
+			(void) close(n);
+		execv(JP, av);
+		syslog(LOG_ERR, "cannot execv %s", JP);
+		exit(2);
+	}
+	if (child < 0) {
+		child = 0;
+		return(ERROR);
+	}
+	while ((pid = wait(&status)) > 0 && pid != child)
+		;
+	child = 0;
+	if (!WIFEXITED(status)) {
+		syslog(LOG_WARNING, "%s: job prep program terminated (%d)",
+			printer, status.w_termsig);
+		return(ERROR);
+	}
+	if (status.w_retcode == 0)
+		return(OK);
+	else {
+		syslog(LOG_WARNING, "%s: job prep program exited (%d)", printer,
+			status.w_retcode);
+		return(ERROR);
+	}
+}
+
+/*
  * sendmail ---
  *   tell people about job completion
  */
@@ -931,7 +1100,11 @@ sendmail(user, bombed)
 	} else if (s > 0) {				/* parent */
 		dup2(p[1], 1);
 		printf("To: %s@%s\n", user, fromhost);
-		printf("Subject: printer job\n\n");
+		if (*jobname)
+			printf("Subject: %s printer job \"%s\"\n\n", printer,
+				jobname);
+		else
+			printf("Subject: %s printer job\n\n", printer);
 		printf("Your printer job ");
 		if (*jobname)
 			printf("(%s) ", jobname);
@@ -949,10 +1122,10 @@ sendmail(user, bombed)
 		case FILTERERR:
 			if (stat(tmpfile, &stb) < 0 || stb.st_size == 0 ||
 			    (fp = fopen(tmpfile, "r")) == NULL) {
-				printf("\nwas printed but had some errors\n");
+				printf("\nhad some errors and may not have printed\n");
 				break;
 			}
-			printf("\nwas printed but had the following errors:\n");
+			printf("\nhad the following errors and may not have printed:\n");
 			while ((i = getc(fp)) != EOF)
 				putchar(i);
 			(void) fclose(fp);
@@ -1099,6 +1272,9 @@ localcheck_done:
 	GF = pgetstr("gf", &bp);
 	VF = pgetstr("vf", &bp);
 	CF = pgetstr("cf", &bp);
+	BF = pgetstr("bf", &bp);
+	PP = pgetstr("pp", &bp);
+	JP = pgetstr("jp", &bp);
 	TR = pgetstr("tr", &bp);
 	RS = pgetflag("rs");
 	SF = pgetflag("sf");
@@ -1106,6 +1282,9 @@ localcheck_done:
 	SB = pgetflag("sb");
 	HL = pgetflag("hl");
 	RW = pgetflag("rw");
+	CT = pgetflag("ct");
+	EA = pgetflag("ea");
+	PI = pgetflag("pi");
 	BR = pgetnum("br");
 	if ((FC = pgetnum("fc")) < 0)
 		FC = 0;
@@ -1125,27 +1304,17 @@ openpr()
 {
 	register int i, n;
 	int resp;
+	char *cp;
 
 	if (*LP) {
-		for (i = 1; ; i = i < 32 ? i << 1 : i) {
-			pfd = open(LP, RW ? O_RDWR : O_WRONLY);
-			if (pfd >= 0)
-				break;
-			if (errno == ENOENT) {
-				syslog(LOG_ERR, "%s: %m", LP);
-				exit(1);
-			}
-			if (i == 1)
-				status("waiting for %s to become ready (offline ?)", printer);
-			sleep(i);
-		}
-		if (isatty(pfd))
-			setty();
-		status("%s is ready and printing", printer);
+		if (cp = index(LP, '@'))
+			opennet(cp);
+		else
+			opentty();
 	} else if (RM != NULL) {
 		for (i = 1; ; i = i < 256 ? i << 1 : i) {
 			resp = -1;
-			pfd = getport(RM);
+			pfd = getport(RM, 0);
 			if (pfd >= 0) {
 				(void) sprintf(line, "\2%s\n", RP);
 				n = strlen(line);
@@ -1176,7 +1345,6 @@ openpr()
 	 */
 	if (OF) {
 		int p[2];
-		char *cp;
 
 		pipe(p);
 		if ((ofilter = dofork(DOABORT)) == 0) {	/* child */
@@ -1198,6 +1366,69 @@ openpr()
 		ofd = pfd;
 		ofilter = 0;
 	}
+}
+
+/*
+ * Printer is connected to an EIA port on this host
+ */
+opentty()
+{
+	register int i;
+
+	status("waiting for %s to become ready (offline ?)", printer);
+	for (i = 1; ; i = i < 32 ? i << 1 : i) {
+		pfd = open(LP, RW ? O_RDWR : O_WRONLY);
+		if (pfd >= 0)
+			break;
+		if (errno == ENOENT) {
+			syslog(LOG_ERR, "%s: %m", LP);
+			exit(1);
+		}
+		sleep(i);
+	}
+	if (isatty(pfd))
+		setty();
+	if (CT)
+		ctrlt_response_check();
+	status("%s is ready and printing", printer);
+}
+
+/*
+ * Printer connected directly to the network
+ * or to a terminal server on the net
+ */
+opennet(cp)
+	char *cp;
+{
+	register int i;
+	int resp, port;
+	char save_ch;
+
+	save_ch = *cp;
+	*cp = '\0';
+	port = atoi(LP);
+	if (port <= 0) {
+		syslog(LOG_ERR, "%s: bad port number: %s", printer, LP);
+		exit(1);
+	}
+	*cp++ = save_ch;
+
+	for (i = 1; ; i = i < 256 ? i << 1 : i) {
+		resp = -1;
+		pfd = getport(cp, port);
+		if (pfd < 0 && errno == ECONNREFUSED)
+			resp = 1;
+		else if (pfd >= 0)
+			break;
+		if (i == 1) {
+		   if (resp < 0)
+			status("waiting for %s to come up", LP);
+		   else
+			status("waiting for access to printer on %s", LP);
+		}
+		sleep(i);
+	}
+	status("sending to %s port %d", cp, port);
 }
 
 struct bauds {
@@ -1273,6 +1504,35 @@ setty()
 			syslog(LOG_ERR, "%s: ioctl(TIOCLBIS): %m", printer);
 			exit(1);
 		}
+	}
+}
+
+/*
+ * Some printers have screwed serial interfaces with unusable
+ * DTR lines.  Since we cannot use the DTR line to tell if the printer
+ * is online, we would like to have some other way of telling,
+ * rather than just assuming it's online and sending print jobs
+ * into the bit bucket.
+ *
+ * Bidirectional PostScript printers respond with a status message
+ * when sent a ^T.  This routine implements a mechanism for ensuring
+ * that the printer is online based on this feature.
+ */
+ctrlt_response_check()
+{
+	register int i, cc;
+	static int zero = 0;
+	static char ctrlt = 0x14;
+	char buf[BUFSIZ];
+
+	for (i = 1; ; i = i < 32 ? i << 1 : i) {
+		ioctl(pfd, TIOCFLUSH, &zero);	/* flush everything */
+		write(pfd, &ctrlt, 1);
+		usleep(500000);		/* give printer time to respond */
+		cc = read(pfd, buf, BUFSIZ);
+		if (cc >= 20 && !strncmp(buf, "%%[ status: idle ]%%", 20))
+			break;
+		sleep(i);
 	}
 }
 

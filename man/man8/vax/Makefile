@@ -14,28 +14,20 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.3 (Berkeley) 6/2/99
+#	@(#)Makefile	5.4 (Berkeley) 10/20/04
 #
-MDIR=	/usr/man/cat8/vax
-SRCS=	arff.8 bad144.8 crash.8 drtest.8 format.8 rxformat.8 \
-	reboot.8
-OBJS=	arff.0 bad144.0 crash.0 drtest.0 format.0 rxformat.0 \
-	reboot.0
-LINKS=	flcopy.0
+MDIR=	/usr/man/man8
 
-.SUFFIXES: .8 .0
+all:
 
-.8.0:
-	${DESTDIR}/usr/man/manroff $*.8 > $*.0
-
-all: ${OBJS}
+psman: FRC
+	for i in *.8 *.8v; do echo $$i; pstroff -man $$i > $$i.ps; done
 
 clean: FRC
-	rm -f ${OBJS}
+	rm -f *.ps
 
 install: FRC
-	cd ${DESTDIR}${MDIR}; rm -f *.0
-	install -c -o bin -g bin -m 444 ${OBJS} ${DESTDIR}${MDIR}
-	ln ${DESTDIR}${MDIR}/arff.0 ${DESTDIR}${MDIR}/flcopy.0
+	install -c -o bin -g bin -m 444 *.8 *.8v ${DESTDIR}${MDIR}
+	install -c -o bin -g bin -m 444 links/*.8v ${DESTDIR}${MDIR}
 
 FRC:

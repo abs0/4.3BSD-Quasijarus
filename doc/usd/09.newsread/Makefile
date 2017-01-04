@@ -1,16 +1,17 @@
-#	@(#)Makefile	6.1 (Berkeley) 5/26/86
+#	@(#)Makefile	6.3 (Berkeley) 2012/02/19
 #
 # make the various documents
 
-FMT=ditroff
-PRINTER=-Pdp
+FMT=pstroff
 FMTOPTS=
-LPR=
 
-howto: howto.mn tmac.n
-	$(FMT) $(PRINTER) $(FMTOPTS) tmac.n howto.mn
-howto.aps: howto.mn tmac.n
-	$(FMT) $(PRINTER) $(FMTOPTS) tmac.n howto.mn | $(LPR)
+all:	howto.ps
 
-copyright: copyright.mn tmac.n
-	$(FMT) $(PRINTER) $(FMTOPTS) tmac.n copyright.mn
+howto.ps: howto.mn tmac.n
+	$(FMT) $(FMTOPTS) tmac.n howto.mn | pstfinish -l USD:9-%l > $@
+
+copyright.ps: copyright.mn tmac.n
+	$(FMT) $(FMTOPTS) tmac.n copyright.mn > $@
+
+clean:
+	rm -f *.ps errs

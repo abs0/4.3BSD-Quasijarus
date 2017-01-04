@@ -1,0 +1,197 @@
+h48899
+s 00001/00001/00082
+d D 6.3 86/05/12 18:18:37 karels 5 4
+c fmt
+e
+s 00001/00001/00082
+d D 6.2 86/05/12 17:40:50 karels 4 3
+c move from 3X to 3
+e
+s 00001/00001/00082
+d D 6.1 85/05/15 15:28:59 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00024/00026/00059
+d D 5.1 85/05/15 15:28:16 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00085/00000/00000
+d D 4.1 85/05/15 15:27:21 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETFSENT 3 
+E 2
+I 2
+D 3
+.TH GETFSENT 3X  "19 January 1983"
+E 3
+I 3
+D 4
+.TH GETFSENT 3X  "%Q%"
+E 4
+I 4
+.TH GETFSENT 3  "%Q%"
+E 4
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+getfsent, getfsspec, getfsfile, setfsent, endfsent \- get file system descriptor file entry
+E 2
+I 2
+getfsent, getfsspec, getfsfile, getfstype, setfsent, endfsent \- get file system descriptor file entry
+E 2
+.SH SYNOPSIS
+.nf
+.B #include <fstab.h>
+.PP
+.B struct fstab *getfsent()
+.PP
+D 2
+.B struct fstab *getfsspec(name)
+.B char *name;
+E 2
+I 2
+.B struct fstab *getfsspec(spec)
+.B char *spec;
+E 2
+.PP
+D 2
+.B struct fstab *getfsfile(name)
+.B char *name;
+E 2
+I 2
+.B struct fstab *getfsfile(file)
+.B char *file;
+E 2
+.PP
+D 2
+.B int setfsend()
+E 2
+I 2
+.B struct fstab *getfstype(type)
+.B char *type;
+E 2
+.PP
+I 2
+.B int setfsent()
+.PP
+E 2
+.B int endfsent()
+.fi
+.SH DESCRIPTION
+D 2
+.I Getfsent,
+.I getfsspec
+E 2
+I 2
+.IR Getfsent ,
+.IR getfsspec ,
+.IR getfstype ,
+E 2
+and
+.I getfsfile
+D 2
+each return a pointer to an object with the
+following structure
+containing the broken-out
+fields of a line in the file system description file,
+.I /usr/include/fstab.h.
+E 2
+I 2
+each return a pointer to an object with the following structure
+containing the broken-out fields of a line in the file system description file,
+.IR < fstab.h >.
+E 2
+.RS
+.PP
+.nf
+D 2
+#define	FSNMLG	16
+
+E 2
+D 5
+struct fstab{
+E 5
+I 5
+struct fstab {
+E 5
+D 2
+	char	fs_spec[FSNMLG];
+	char	fs_file[FSNMLG];
+	char	fs_type[3];
+E 2
+I 2
+	char	*fs_spec;
+	char	*fs_file;
+	char	*fs_type;
+E 2
+	int	fs_freq;
+	int	fs_passno;
+};
+.ft R
+.ad
+.fi
+.RE
+.PP
+The fields have meanings described in
+.IR fstab (5).
+.PP
+.I Getfsent
+reads the next line of the file, opening the file if necessary.
+.PP
+.I Setfsent
+opens and rewinds the file.
+.PP
+.I Endfsent
+closes the file.
+.PP
+.I Getfsspec
+and
+.I getfsfile
+D 2
+sequentially search from the beginning
+of the file until a matching
+special file name or
+file system file name is found,
+E 2
+I 2
+sequentially search from the beginning of the file until a matching
+special file name or file system file name is found,
+E 2
+or until EOF is encountered.
+I 2
+.I Getfstype
+does likewise, matching on the file system type field.
+E 2
+.SH FILES
+/etc/fstab
+.SH "SEE ALSO"
+fstab(5)
+.SH DIAGNOSTICS
+Null pointer
+(0) returned on EOF or error.
+.SH BUGS
+D 2
+All information
+is contained in a static area
+so it must be copied if it is
+E 2
+I 2
+All information is contained in a static area so it must be copied if it is
+E 2
+to be saved.
+E 1

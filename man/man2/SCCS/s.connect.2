@@ -1,0 +1,218 @@
+h28871
+s 00002/00002/00123
+d D 6.6 86/05/22 11:58:00 anne 7 6
+c grammar
+e
+s 00003/00003/00122
+d D 6.5 86/05/14 14:58:37 karels 6 5
+c make them agree
+e
+s 00020/00005/00105
+d D 6.4 86/05/13 11:36:47 karels 5 4
+c update
+e
+s 00001/00001/00109
+d D 6.3 85/06/28 16:27:15 sechrest 4 3
+c Added comma
+e
+s 00023/00000/00087
+d D 6.2 85/05/22 18:31:47 mckusick 3 2
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00086
+d D 6.1 85/05/15 11:53:20 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00087/00000/00000
+d D 5.1 85/05/15 11:53:13 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CONNECT 2 "7 July 1983"
+E 2
+I 2
+.TH CONNECT 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+connect \- initiate a connection on a socket
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/types.h>
+#include <sys/socket.h>
+.PP
+.ft B
+connect(s, name, namelen)
+int s;
+struct sockaddr *name;
+int namelen;
+.fi
+.SH DESCRIPTION
+The parameter
+.I s
+is a socket.
+If it is of type SOCK_DGRAM,
+D 5
+then this call permanently specifies the peer to which
+datagrams are to be sent;
+if it is of type SOCK_STREAM,
+E 5
+I 5
+then this call specifies the peer with which the socket is to be associated;
+this address is that to which datagrams are to be sent,
+and the only address from which datagrams are to be received.
+If the socket is of type SOCK_STREAM,
+E 5
+then this call attempts to make a connection to
+another socket.
+The other socket is specified by
+D 4
+.I name
+E 4
+I 4
+.I name,
+E 4
+which is an address in the communications space of the socket.
+Each communications space interprets the
+.I name
+parameter in its own way.
+I 5
+Generally, stream sockets may successfully
+.I connect
+only once; datagram sockets may use
+.I connect
+multiple times to change their association.
+Datagram sockets may dissolve the association
+by connecting to an invalid address, such as a null address.
+E 5
+.SH "RETURN VALUE
+If the connection or binding succeeds, then 0 is returned.
+Otherwise a \-1 is returned, and a more specific error
+code is stored in \fIerrno\fP.
+.SH "ERRORS
+The call fails if:
+.TP 20
+[EBADF]
+.I S
+is not a valid descriptor.
+.TP 20
+[ENOTSOCK]
+.I S
+is a descriptor for a file, not a socket.
+.TP 20
+[EADDRNOTAVAIL]
+The specified address is not available on this machine.
+.TP 20
+[EAFNOSUPPORT]
+Addresses in the specified address family cannot be used with this socket.
+.TP 20
+[EISCONN]
+The socket is already connected.
+.TP 20
+[ETIMEDOUT]
+Connection establishment timed out without establishing a connection.
+.TP 20
+[ECONNREFUSED]
+The attempt to connect was forcefully rejected.
+.TP 20
+[ENETUNREACH]
+The network isn't reachable from this host.
+.TP 20
+[EADDRINUSE]
+The address is already in use.
+.TP 20
+[EFAULT]
+The \fIname\fP parameter specifies an area outside
+the process address space.
+.TP 20
+D 6
+[EWOULDBLOCK]
+E 6
+I 6
+[EINPROGRESS]
+E 6
+D 7
+The socket is non-blocking and the
+E 7
+I 7
+The socket is non-blocking 
+E 7
+and the connection cannot
+be completed immediately.
+It is possible to
+.IR select (2)
+D 6
+the socket while it is connecting by selecting it for writing.
+E 6
+I 6
+for completion by selecting the socket for writing.
+E 6
+I 5
+.TP 20
+D 6
+[EINPROGRESS]
+E 6
+I 6
+[EALREADY]
+E 6
+The socket is non-blocking
+and a previous connection attempt
+D 7
+has not yet completed.
+E 7
+I 7
+has not yet been completed.
+E 7
+E 5
+I 3
+.PP
+D 5
+.PP
+E 5
+The following errors are specific to connecting names in the UNIX domain.
+D 5
+These errors may not apply in future versions of the UNIX ipc domain.
+E 5
+I 5
+These errors may not apply in future versions of the UNIX IPC domain.
+E 5
+.TP 15
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+.TP 15
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+.TP 15
+[ENOENT]
+The named socket does not exist.
+.TP 15
+[EACCES]
+Search permission is denied for a component of the path prefix.
+I 5
+.TP 15
+[EACCES]
+Write access to the named socket is denied.
+E 5
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+E 3
+.SH SEE ALSO
+accept(2), select(2), socket(2), getsockname(2)
+E 1

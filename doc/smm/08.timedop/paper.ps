@@ -1,0 +1,1821 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%DocumentSuppliedResources: encoding TroffEncoding
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/04
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+	currentdict
+end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: 1 1
+save $troff begin Sc
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+2 12 SF
+12020 40320 (Timed) P
+14260 40320 (Installation) P
+18020 40320 (and) P
+19420 40320 (Operation) P
+22820 40320 (Guide) P
+1 10 SF
+12252 38880 (Riccardo) P
+14651 38880 (Gusella,) P
+16867 38880 (Stefano) P
+18867 38880 (Zatti,) P
+20352 38880 (James) P
+22050 38880 (M.) P
+22900 38880 (Bloom) P
+0 10 SF
+13995 37800 (Computer) P
+16595 37800 (Systems) P
+18795 37800 (Research) P
+21192 37800 (Group) P
+14994 37080 (Computer) P
+17594 37080 (Science) P
+19659 37080 (Division) P
+10912 36360 (Department) P
+13944 36360 (of) P
+14644 36360 (Electrical) P
+17143 36360 (Engineering) P
+20276 36360 (and) P
+21342 36360 (Computer) P
+23942 36360 (Science) P
+14169 35640 (University) P
+16902 35640 (of) P
+17602 35640 (California,) P
+20385 35640 (Berkeley) P
+15836 34920 (Berkeley,) P
+18351 34920 (CA) P
+19384 34920 (94720) P
+1 10 SF
+17043 33480 (Kirk) P
+18309 33480 (Smith) P
+0 10 SF
+14444 32400 (Engineering) P
+17577 32400 (Computer) P
+20177 32400 (Network) P
+13778 31680 (Department) P
+16810 31680 (of) P
+17510 31680 (Electrical) P
+20009 31680 (Engineering) P
+16143 30960 (Purdue) P
+18043 30960 (University) P
+15170 30240 (West) P
+16602 30240 (Lafayette,) P
+19217 30240 (IN) P
+20050 30240 (47906) P
+2 10 SF
+4320 26424 (Introduction) P
+0 10 SF
+5820 25488 (The) P
+6992 25488 (clock) P
+8530 25488 (synchronization) P
+12601 25488 (service) P
+14537 25488 (for) P
+15475 25488 (the) P
+16446 25488 (UNIX) P
+18183 25488 (4.3BSD) P
+20338 25488 (operating) P
+22842 25488 (system) P
+24746 25488 (is) P
+25384 25488 (composed) P
+28054 25488 (of) P
+28792 25488 (a) P
+29296 25488 (collection) P
+31900 25488 (of) P
+4320 24768 (time) P
+5600 24768 (daemons) P
+7944 24768 (\() P
+1 10 SF
+8144 24768 (timed) P
+0 10 SF
+9477 24768 (\)) P
+9889 24768 (running) P
+11968 24768 (on) P
+12780 24768 (the) P
+13725 24768 (machines) P
+16202 24768 (in) P
+16881 24768 (a) P
+17359 24768 (local) P
+18737 24768 (area) P
+19947 24768 (network.) P
+22475 24768 (The) P
+23620 24768 (algorithms) P
+26399 24768 (implemented) P
+29744 24768 (by) P
+30556 24768 (the) P
+31501 24768 (ser\255) P
+4320 24048 (vice) P
+5567 24048 (is) P
+6215 24048 (based) P
+7828 24048 (on) P
+8676 24048 (a) P
+9190 24048 (master\255slave) P
+12469 24048 (scheme.) P
+14865 24048 (The) P
+16046 24048 (time) P
+17361 24048 (daemons) P
+19741 24048 (communicate) P
+23221 24048 (with) P
+24535 24048 (each) P
+25880 24048 (other) P
+27360 24048 (using) P
+28907 24048 (the) P
+1 10 SF
+29887 24048 (Time) P
+31334 24048 (Syn\255) P
+4320 23328 (chronization) P
+7553 23328 (Protocol) P
+0 10 SF
+9853 23328 (\(TSP\)) P
+11488 23328 (which) P
+13154 23328 (is) P
+13754 23328 (built) P
+15055 23328 (on) P
+15855 23328 (the) P
+16788 23328 (DARPA) P
+19021 23328 (UDP) P
+20421 23328 (protocol) P
+22621 23328 (and) P
+23687 23328 (described) P
+26185 23328 (in) P
+26852 23328 (detail) P
+28385 23328 (in) P
+29052 23328 ([4].) P
+5820 22392 (A) P
+6486 22392 (time) P
+7786 22392 (daemon) P
+9918 22392 (has) P
+10950 22392 (a) P
+11449 22392 (twofold) P
+13549 22392 (function.) P
+16132 22392 (First,) P
+17616 22392 (it) P
+18182 22392 (supports) P
+20447 22392 (the) P
+21412 22392 (synchronization) P
+25476 22392 (of) P
+26208 22392 (the) P
+27173 22392 (clocks) P
+28937 22392 (of) P
+29669 22392 (the) P
+30634 22392 (various) P
+4320 21672 (hosts) P
+5780 21672 (in) P
+6474 21672 (a) P
+6967 21672 (local) P
+8360 21672 (area) P
+9585 21672 (network.) P
+12127 21672 (Second,) P
+14269 21672 (it) P
+14829 21672 (starts) P
+16321 21672 (\(or) P
+17247 21672 (takes) P
+18705 21672 (part) P
+19864 21672 (in\)) P
+20757 21672 (the) P
+21716 21672 (election) P
+23841 21672 (that) P
+24967 21672 (occurs) P
+26758 21672 (among) P
+28617 21672 (slave) P
+30075 21672 (time) P
+31368 21672 (dae\255) P
+4320 20952 (mons) P
+5866 20952 (when,) P
+7561 20952 (for) P
+8507 20952 (any) P
+9619 20952 (reason,) P
+11580 20952 (the) P
+12559 20952 (master) P
+14404 20952 (disappears.) P
+17531 20952 (The) P
+18710 20952 (synchronization) P
+22788 20952 (mechanism) P
+25766 20952 (and) P
+26878 20952 (the) P
+27857 20952 (election) P
+30002 20952 (procedure) P
+4320 20232 (employed) P
+6907 20232 (by) P
+7728 20232 (the) P
+8681 20232 (program) P
+1 10 SF
+10934 20232 (timed) P
+0 10 SF
+12487 20232 (are) P
+13439 20232 (described) P
+15957 20232 (in) P
+16644 20232 (other) P
+18097 20232 (documents) P
+20916 20232 ([1,2,3].) P
+23086 20232 (The) P
+24239 20232 (next) P
+25492 20232 (paragraphs) P
+28343 20232 (are) P
+29295 20232 (a) P
+29781 20232 (brief) P
+31134 20232 (over\255) P
+4320 19512 (view) P
+5714 19512 (of) P
+6442 19512 (how) P
+7703 19512 (the) P
+8664 19512 (time) P
+9959 19512 (daemon) P
+12086 19512 (works.) P
+14129 19512 (This) P
+15423 19512 (document) P
+18016 19512 (is) P
+18643 19512 (mainly) P
+20537 19512 (concerned) P
+23228 19512 (with) P
+24522 19512 (the) P
+25482 19512 (administrative) P
+29142 19512 (and) P
+30235 19512 (technical) P
+4320 18792 (issues) P
+5952 18792 (of) P
+6652 18792 (running) P
+1 10 SF
+8719 18792 (timed) P
+0 10 SF
+10252 18792 (at) P
+10885 18792 (a) P
+11351 18792 (particular) P
+13850 18792 (site.) P
+5820 17856 (A) P
+1 10 SF
+6464 17856 (master) P
+8307 17856 (time) P
+9551 17856 (daemon) P
+0 10 SF
+11661 17856 (measures) P
+14103 17856 (the) P
+15047 17856 (time) P
+16325 17856 (differences) P
+19200 17856 (between) P
+21409 17856 (the) P
+22353 17856 (clock) P
+23863 17856 (of) P
+24574 17856 (the) P
+25518 17856 (machine) P
+27760 17856 (on) P
+28570 17856 (which) P
+30246 17856 (it) P
+30790 17856 (is) P
+31400 17856 (run\255) P
+4320 17136 (ning) P
+5639 17136 (and) P
+6757 17136 (those) P
+8275 17136 (of) P
+9027 17136 (all) P
+9879 17136 (other) P
+11364 17136 (machines.) P
+14230 17136 (The) P
+15414 17136 (master) P
+17264 17136 (computes) P
+19814 17136 (the) P
+1 10 SF
+20798 17136 (network) P
+22981 17136 (time) P
+0 10 SF
+24265 17136 (as) P
+25015 17136 (the) P
+25999 17136 (average) P
+28114 17136 (of) P
+28865 17136 (the) P
+29849 17136 (times) P
+31400 17136 (pro\255) P
+4320 16416 (vided) P
+5883 16416 (by) P
+6713 16416 (nonfaulty) P
+9243 16416 (clocks.) P
+0 8 SF
+10925 16608 (1) P
+0 10 SF
+11395 16416 (It) P
+11992 16416 (then) P
+13255 16416 (sends) P
+14817 16416 (to) P
+15514 16416 (each) P
+1 10 SF
+16842 16416 (slave) P
+18304 16416 (time) P
+19567 16416 (daemon) P
+0 10 SF
+21696 16416 (the) P
+22658 16416 (correction) P
+25319 16416 (that) P
+26448 16416 (should) P
+28277 16416 (be) P
+29072 16416 (performed) P
+31800 16416 (on) P
+4320 15696 (the) P
+5245 15696 (clock) P
+6736 15696 (of) P
+7428 15696 (its) P
+8187 15696 (machine.) P
+10761 15696 (This) P
+12020 15696 (process) P
+14010 15696 (is) P
+14602 15696 (repeated) P
+16825 15696 (periodically.) P
+20233 15696 (Since) P
+21758 15696 (the) P
+22683 15696 (correction) P
+25307 15696 (is) P
+25899 15696 (expressed) P
+28456 15696 (as) P
+29148 15696 (a) P
+29607 15696 (time) P
+30867 15696 (differ\255) P
+4320 14976 (ence) P
+5647 14976 (rather) P
+7275 14976 (than) P
+8537 14976 (an) P
+9332 14976 (absolute) P
+11560 14976 (time,) P
+13006 14976 (transmission) P
+16268 14976 (delays) P
+18029 14976 (do) P
+18858 14976 (not) P
+19854 14976 (interfere) P
+22115 14976 (with) P
+23410 14976 (the) P
+24371 14976 (accuracy) P
+26729 14976 (of) P
+27457 14976 (the) P
+28418 14976 (synchronization.) P
+4320 14256 (When) P
+5958 14256 (a) P
+6430 14256 (machine) P
+8668 14256 (comes) P
+10405 14256 (up) P
+11210 14256 (and) P
+12281 14256 (joins) P
+13653 14256 (the) P
+14591 14256 (network,) P
+16912 14256 (it) P
+17451 14256 (starts) P
+18922 14256 (a) P
+19393 14256 (slave) P
+20830 14256 (time) P
+22102 14256 (daemon) P
+24206 14256 (which) P
+25877 14256 (will) P
+27016 14256 (ask) P
+28020 14256 (the) P
+28958 14256 (master) P
+30762 14256 (for) P
+31667 14256 (the) P
+4320 13536 (correct) P
+6190 13536 (time) P
+7461 13536 (and) P
+8531 13536 (will) P
+9669 13536 (reset) P
+11005 13536 (the) P
+11942 13536 (machine's) P
+14611 13536 (clock) P
+16114 13536 (before) P
+17850 13536 (any) P
+18920 13536 (user) P
+20123 13536 (activity) P
+22127 13536 (can) P
+23163 13536 (begin.) P
+25050 13536 (The) P
+26187 13536 (time) P
+27458 13536 (daemons) P
+29794 13536 (are) P
+30730 13536 (able) P
+31933 13536 (to) P
+4320 12816 (maintain) P
+6643 12816 (a) P
+7132 12816 (single) P
+8788 12816 (network) P
+10977 12816 (time) P
+12267 12816 (in) P
+12957 12816 (spite) P
+14313 12816 (of) P
+15036 12816 (the) P
+15991 12816 (drift) P
+17247 12816 (of) P
+17969 12816 (clocks) P
+19723 12816 (away) P
+21210 12816 (from) P
+22599 12816 (each) P
+23919 12816 (other.) P
+25524 12816 (The) P
+26679 12816 (present) P
+28633 12816 (implementation) P
+4320 12096 (keeps) P
+5885 12096 (processor) P
+8383 12096 (clocks) P
+10115 12096 (synchronized) P
+13513 12096 (within) P
+15247 12096 (20) P
+16047 12096 (milliseconds.) P
+5820 11160 (To) P
+6677 11160 (ensure) P
+8432 11160 (that) P
+9522 11160 (the) P
+10445 11160 (service) P
+12333 11160 (provided) P
+14656 11160 (is) P
+15246 11160 (continuous) P
+18070 11160 (and) P
+19127 11160 (reliable,) P
+21267 11160 (it) P
+21792 11160 (is) P
+22383 11160 (necessary) P
+24904 11160 (to) P
+25562 11160 (implement) P
+28320 11160 (an) P
+29077 11160 (election) P
+31167 11160 (algo\255) P
+4320 10440 (rithm) P
+5824 10440 (to) P
+6494 10440 (elect) P
+7829 10440 (a) P
+8298 10440 (new) P
+9500 10440 (master) P
+11301 10440 (should) P
+13103 10440 (the) P
+14038 10440 (machine) P
+16272 10440 (running) P
+18341 10440 (the) P
+19276 10440 (current) P
+21177 10440 (master) P
+22978 10440 (crash,) P
+24595 10440 (the) P
+25530 10440 (master) P
+27331 10440 (terminate) P
+29799 10440 (\(for) P
+30901 10440 (exam\255) P
+4320 9720 (ple,) P
+5436 9720 (because) P
+7566 9720 (of) P
+8299 9720 (a) P
+8798 9720 (run\255time) P
+11098 9720 (error\),) P
+12847 9720 (or) P
+13580 9720 (the) P
+14546 9720 (network) P
+16745 9720 (be) P
+17544 9720 (partitioned.) P
+20727 9720 (Under) P
+22459 9720 (our) P
+23492 9720 (algorithm,) P
+26209 9720 (slaves) P
+27907 9720 (are) P
+28872 9720 (able) P
+30103 9720 (to) P
+30802 9720 (realize) P
+4320 9000 (when) P
+5859 9000 (the) P
+6832 9000 (master) P
+8671 9000 (has) P
+9709 9000 (stopped) P
+11814 9000 (functioning) P
+14820 9000 (and) P
+15925 9000 (to) P
+16631 9000 (elect) P
+18002 9000 (a) P
+18507 9000 (new) P
+19745 9000 (master) P
+21583 9000 (from) P
+22989 9000 (among) P
+24861 9000 (themselves.) P
+28115 9000 (It) P
+28721 9000 (is) P
+29360 9000 (important) P
+31933 9000 (to) P
+4320 8400 8 0 18 L
+0 8 SF
+4320 7800 (This) P
+5329 7800 (work) P
+6472 7800 (was) P
+7375 7800 (sponsored) P
+9478 7800 (by) P
+10114 7800 (the) P
+10856 7800 (Defense) P
+12585 7800 (Advanced) P
+14687 7800 (Research) P
+16602 7800 (Projects) P
+18304 7800 (Agency) P
+19953 7800 (\(DoD\),) P
+21483 7800 (monitored) P
+23612 7800 (by) P
+24249 7800 (the) P
+24992 7800 (Naval) P
+26295 7800 (Electron\255) P
+4320 7200 (ics) P
+5023 7200 (Systems) P
+6793 7200 (Command) P
+8962 7200 (under) P
+10225 7200 (contract) P
+11940 7200 (No.) P
+12817 7200 (N00039\25584\255C\2550089,) P
+16894 7200 (and) P
+17757 7200 (by) P
+18407 7200 (the) P
+19163 7200 (CSELT) P
+20798 7200 (Corporation) P
+23286 7200 (of) P
+23855 7200 (Italy.) P
+25183 7200 (The) P
+26098 7200 (views) P
+27387 7200 (and) P
+4320 6600 (conclusions) P
+6788 6600 (contained) P
+8855 6600 (in) P
+9430 6600 (this) P
+10325 6600 (document) P
+12419 6600 (are) P
+13207 6600 (those) P
+14422 6600 (of) P
+15024 6600 (the) P
+15811 6600 (authors) P
+17425 6600 (and) P
+18319 6600 (should) P
+19800 6600 (not) P
+20614 6600 (be) P
+21268 6600 (interpreted) P
+23547 6600 (as) P
+24148 6600 (representing) P
+26721 6600 (of\212cial) P
+4320 6000 (policies,) P
+6092 6000 (either) P
+7344 6000 (expressed) P
+9397 6000 (or) P
+9957 6000 (implied,) P
+11702 6000 (of) P
+12262 6000 (the) P
+13008 6000 (Defense) P
+14741 6000 (Research) P
+16660 6000 (Projects) P
+18366 6000 (Agency,) P
+20139 6000 (of) P
+20699 6000 (the) P
+21445 6000 (US) P
+22219 6000 (Government,) P
+24898 6000 (or) P
+25458 6000 (of) P
+26018 6000 (CSELT.) P
+0 6 SF
+4920 5436 (1) P
+0 8 SF
+5340 5292 (A) P
+5850 5292 (clock) P
+7052 5292 (is) P
+7535 5292 (considered) P
+9777 5292 (to) P
+10313 5292 (be) P
+10929 5292 (faulty) P
+12211 5292 (when) P
+13414 5292 (its) P
+14030 5292 (value) P
+15232 5292 (is) P
+15715 5292 (more) P
+16864 5292 (than) P
+17853 5292 (a) P
+18229 5292 (small) P
+19431 5292 (speci\212ed) P
+21300 5292 (interval) P
+22928 5292 (apart) P
+24050 5292 (from) P
+25145 5292 (the) P
+25893 5292 (majority) P
+27680 5292 (of) P
+4320 4692 (the) P
+5066 4692 (clocks) P
+6452 4692 (of) P
+7012 4692 (the) P
+7758 4692 (other) P
+8904 4692 (machines) P
+10876 4692 ([1,2].) P
+end restore showpage
+%%Page: 2 2
+save $troff begin Sc
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+4320 44400 (SMM:8\2552) P
+24268 44400 (Timed) P
+26035 44400 (Installation) P
+28935 44400 (and) P
+30001 44400 (Operation) P
+4320 42480 (note) P
+5595 42480 (that,) P
+6887 42480 (since) P
+8361 42480 (the) P
+9336 42480 (failure) P
+11144 42480 (of) P
+11886 42480 (the) P
+12861 42480 (master) P
+14702 42480 (results) P
+16510 42480 (only) P
+17819 42480 (in) P
+18528 42480 (a) P
+19036 42480 (gradual) P
+21077 42480 (divergence) P
+23950 42480 (of) P
+24691 42480 (clock) P
+26231 42480 (values,) P
+28154 42480 (the) P
+29128 42480 (election) P
+31268 42480 (need) P
+4320 41760 (not) P
+5287 41760 (occur) P
+6819 41760 (immediately.) P
+5820 40824 (The) P
+6988 40824 (machines) P
+9488 40824 (that) P
+10623 40824 (are) P
+11589 40824 (gateways) P
+14054 40824 (between) P
+16286 40824 (distinct) P
+18287 40824 (local) P
+19687 40824 (area) P
+20919 40824 (networks) P
+23352 40824 (require) P
+25285 40824 (particular) P
+27818 40824 (care.) P
+29400 40824 (A) P
+30067 40824 (time) P
+31368 40824 (dae\255) P
+4320 40104 (mon) P
+5578 40104 (on) P
+6369 40104 (such) P
+7659 40104 (machines) P
+10115 40104 (may) P
+11339 40104 (act) P
+12229 40104 (as) P
+12919 40104 (a) P
+1 10 SF
+13376 40104 (submaster) P
+0 10 SF
+15841 40104 (.) P
+16382 40104 (This) P
+17640 40104 (artifact) P
+19530 40104 (depends) P
+21686 40104 (on) P
+22477 40104 (the) P
+23401 40104 (current) P
+25291 40104 (inability) P
+27483 40104 (of) P
+28175 40104 (transmission) P
+31400 40104 (pro\255) P
+4320 39384 (tocols) P
+5984 39384 (to) P
+6682 39384 (broadcast) P
+9211 39384 (a) P
+9708 39384 (message) P
+11969 39384 (on) P
+12799 39384 (a) P
+13295 39384 (network) P
+15491 39384 (other) P
+16954 39384 (than) P
+18217 39384 (the) P
+19180 39384 (one) P
+20276 39384 (to) P
+20973 39384 (which) P
+22669 39384 (the) P
+23632 39384 (broadcasting) P
+26927 39384 (machine) P
+29189 39384 (is) P
+29819 39384 (connected.) P
+4320 38664 (The) P
+5527 38664 (submaster) P
+8233 38664 (appears) P
+10338 38664 (as) P
+11111 38664 (a) P
+11651 38664 (slave) P
+13157 38664 (on) P
+14031 38664 (one) P
+15171 38664 (network,) P
+17561 38664 (and) P
+18701 38664 (as) P
+19474 38664 (a) P
+20013 38664 (master) P
+21885 38664 (on) P
+22758 38664 (one) P
+23897 38664 (or) P
+24670 38664 (more) P
+26176 38664 (of) P
+26949 38664 (the) P
+27955 38664 (other) P
+29461 38664 (networks) P
+31933 38664 (to) P
+4320 37944 (which) P
+5986 37944 (it) P
+6520 37944 (is) P
+7120 37944 (connected.) P
+5820 37008 (A) P
+6450 37008 (submaster) P
+9079 37008 (classi\212es) P
+11441 37008 (each) P
+12736 37008 (network) P
+14899 37008 (as) P
+15595 37008 (one) P
+16658 37008 (of) P
+17355 37008 (three) P
+18751 37008 (types.) P
+20564 37008 (A) P
+1 10 SF
+21194 37008 (slave) P
+22623 37008 (network) P
+0 10 SF
+24752 37008 (is) P
+25349 37008 (a) P
+25812 37008 (network) P
+27975 37008 (on) P
+28772 37008 (which) P
+30436 37008 (the) P
+31367 37008 (sub\255) P
+4320 36288 (master) P
+6132 36288 (acts) P
+7277 36288 (as) P
+7989 36288 (a) P
+8468 36288 (slave.) P
+10263 36288 (There) P
+11875 36288 (can) P
+12920 36288 (only) P
+14200 36288 (be) P
+14979 36288 (one) P
+16058 36288 (slave) P
+17503 36288 (network.) P
+20031 36288 (A) P
+1 10 SF
+20676 36288 (master) P
+22520 36288 (network) P
+0 10 SF
+24664 36288 (is) P
+25276 36288 (a) P
+25754 36288 (network) P
+27932 36288 (on) P
+28744 36288 (which) P
+30422 36288 (the) P
+31367 36288 (sub\255) P
+4320 35568 (master) P
+6153 35568 (acts) P
+7318 35568 (as) P
+8050 35568 (a) P
+8549 35568 (master.) P
+10731 35568 (An) P
+1 10 SF
+11697 35568 (ignored) P
+13796 35568 (network) P
+0 10 SF
+15961 35568 (is) P
+16594 35568 (any) P
+17693 35568 (other) P
+19159 35568 (network) P
+21358 35568 (which) P
+23057 35568 (already) P
+25055 35568 (has) P
+26087 35568 (a) P
+26586 35568 (valid) P
+28019 35568 (master.) P
+30201 35568 (The) P
+31367 35568 (sub\255) P
+4320 34848 (master) P
+6149 34848 (tries) P
+7412 34848 (periodically) P
+10508 34848 (to) P
+11205 34848 (become) P
+13300 34848 (master) P
+15129 34848 (on) P
+15959 34848 (an) P
+16755 34848 (ignored) P
+18818 34848 (network,) P
+21164 34848 (but) P
+22161 34848 (gives) P
+23657 34848 (up) P
+24487 34848 (immediately) P
+27716 34848 (if) P
+28312 34848 (a) P
+28807 34848 (master) P
+30635 34848 (already) P
+4320 34128 (exists.) P
+2 10 SF
+4320 32688 (Guidelines) P
+0 10 SF
+5820 31752 (While) P
+7548 31752 (the) P
+8543 31752 (synchronization) P
+12637 31752 (algorithm) P
+15233 31752 (is) P
+15895 31752 (quite) P
+17357 31752 (general,) P
+19534 31752 (the) P
+20529 31752 (election) P
+22690 31752 (one,) P
+23968 31752 (requiring) P
+26430 31752 (a) P
+26958 31752 (broadcast) P
+29518 31752 (mechanism,) P
+4320 31032 (puts) P
+5564 31032 (constraints) P
+8407 31032 (on) P
+9251 31032 (the) P
+10228 31032 (kind) P
+11539 31032 (of) P
+12283 31032 (network) P
+14493 31032 (on) P
+15337 31032 (which) P
+17047 31032 (time) P
+18358 31032 (daemons) P
+20734 31032 (can) P
+21810 31032 (run.) P
+23204 31032 (The) P
+24381 31032 (time) P
+25692 31032 (daemon) P
+27835 31032 (will) P
+29013 31032 (only) P
+30324 31032 (work) P
+31800 31032 (on) P
+4320 30312 (networks) P
+6802 30312 (with) P
+8152 30312 (broadcast) P
+10733 30312 (capability) P
+13382 30312 (augmented) P
+16297 30312 (with) P
+17646 30312 (point\255to\255point) P
+21263 30312 (links.) P
+23062 30312 (Machines) P
+25675 30312 (that) P
+26857 30312 (are) P
+27871 30312 (only) P
+29220 30312 (connected) P
+31933 30312 (to) P
+4320 29592 (point\255to\255point,) P
+8005 29592 (non\255broadcast) P
+11603 29592 (networks) P
+14002 29592 (may) P
+15235 29592 (not) P
+16202 29592 (use) P
+17201 29592 (the) P
+18134 29592 (time) P
+19401 29592 (daemon.) P
+5820 28656 (If) P
+6425 28656 (we) P
+7329 28656 (exclude) P
+9398 28656 (submasters,) P
+12417 28656 (there) P
+13820 28656 (will) P
+14958 28656 (normally) P
+17329 28656 (be,) P
+18249 28656 (at) P
+18886 28656 (most,) P
+20407 28656 (one) P
+21477 28656 (master) P
+23280 28656 (time) P
+24551 28656 (daemon) P
+26654 28656 (in) P
+27325 28656 (a) P
+27795 28656 (local) P
+29165 28656 (area) P
+30367 28656 (internet\255) P
+4320 27936 (work.) P
+6131 27936 (During) P
+8058 27936 (an) P
+8851 27936 (election,) P
+11127 27936 (only) P
+12421 27936 (one) P
+13514 27936 (of) P
+14241 27936 (the) P
+15201 27936 (slave) P
+16660 27936 (time) P
+17954 27936 (daemons) P
+20313 27936 (will) P
+21474 27936 (become) P
+23566 27936 (the) P
+24526 27936 (new) P
+25752 27936 (master.) P
+27928 27936 (However,) P
+30503 27936 (because) P
+4320 27216 (of) P
+5038 27216 (the) P
+5989 27216 (characteristics) P
+9637 27216 (of) P
+10355 27216 (its) P
+11140 27216 (machine,) P
+13540 27216 (a) P
+14023 27216 (slave) P
+15472 27216 (can) P
+16521 27216 (be) P
+17304 27216 (prevented) P
+19886 27216 (from) P
+21270 27216 (becoming) P
+23853 27216 (the) P
+24803 27216 (master.) P
+26969 27216 (Therefore,) P
+29701 27216 (a) P
+30184 27216 (subset) P
+31900 27216 (of) P
+4320 26496 (machines) P
+6917 26496 (must) P
+8416 26496 (be) P
+9314 26496 (designated) P
+12211 26496 (as) P
+13042 26496 (potential) P
+15474 26496 (master) P
+17405 26496 (time) P
+18803 26496 (daemons.) P
+21616 26496 (A) P
+22380 26496 (master) P
+24310 26496 (time) P
+25708 26496 (daemon) P
+27938 26496 (will) P
+29203 26496 (require) P
+31233 26496 (CPU) P
+4320 25776 (resources) P
+6822 25776 (proportional) P
+10027 25776 (to) P
+10732 25776 (the) P
+11703 25776 (number) P
+13773 25776 (of) P
+14510 25776 (slaves,) P
+16362 25776 (in) P
+17066 25776 (general,) P
+19218 25776 (more) P
+20688 25776 (than) P
+21958 25776 (a) P
+22461 25776 (slave) P
+23930 25776 (time) P
+25234 25776 (daemon,) P
+27520 25776 (so) P
+28290 25776 (it) P
+28861 25776 (may) P
+30131 25776 (be) P
+30934 25776 (advis\255) P
+4320 25056 (able) P
+5552 25056 (to) P
+6252 25056 (limit) P
+7620 25056 (master) P
+9452 25056 (time) P
+10752 25056 (daemons) P
+13117 25056 (to) P
+13817 25056 (machines) P
+16315 25056 (with) P
+17615 25056 (more) P
+19080 25056 (powerful) P
+21478 25056 (processors) P
+24241 25056 (or) P
+24973 25056 (lighter) P
+26772 25056 (loads.) P
+28620 25056 (Also,) P
+30135 25056 (machines) P
+4320 24336 (with) P
+5630 24336 (inaccurate) P
+8337 24336 (clocks) P
+10111 24336 (should) P
+11953 24336 (not) P
+12962 24336 (be) P
+13770 24336 (used) P
+15111 24336 (as) P
+15852 24336 (masters.) P
+18276 24336 (This) P
+19585 24336 (is) P
+20227 24336 (a) P
+20735 24336 (purely) P
+22510 24336 (administrative) P
+26185 24336 (decision:) P
+28593 24336 (an) P
+29401 24336 (organization) P
+4320 23616 (may) P
+5553 23616 (well) P
+6786 23616 (allow) P
+8319 23616 (all) P
+9119 23616 (of) P
+9819 23616 (its) P
+10586 23616 (machines) P
+13051 23616 (to) P
+13718 23616 (run) P
+14718 23616 (master) P
+16517 23616 (time) P
+17784 23616 (daemons.) P
+5820 22680 (At) P
+6647 22680 (the) P
+7607 22680 (administrative) P
+11267 22680 (level,) P
+12810 22680 (a) P
+13303 22680 (time) P
+14597 22680 (daemon) P
+16723 22680 (on) P
+17550 22680 (a) P
+18043 22680 (machine) P
+20302 22680 (with) P
+21596 22680 (multiple) P
+23823 22680 (network) P
+26015 22680 (interfaces,) P
+28722 22680 (may) P
+29981 22680 (be) P
+30773 22680 (told) P
+31933 22680 (to) P
+4320 21960 (ignore) P
+6076 21960 (all) P
+6899 21960 (but) P
+7889 21960 (one) P
+8978 21960 (network) P
+11167 21960 (or) P
+11890 21960 (to) P
+12580 21960 (ignore) P
+14336 21960 (one) P
+15425 21960 (network.) P
+17964 21960 (This) P
+19254 21960 (is) P
+19877 21960 (done) P
+21266 21960 (with) P
+22556 21960 (the) P
+1 10 SF
+23512 21960 (-n) P
+24440 21960 (network) P
+0 10 SF
+26595 21960 (and) P
+1 10 SF
+27684 21960 (-i) P
+28479 21960 (network) P
+0 10 SF
+30633 21960 (options) P
+4320 21240 (respectively) P
+7507 21240 (at) P
+8229 21240 (start\255up) P
+10351 21240 (time.) P
+12057 21240 (Typically,) P
+14796 21240 (the) P
+15818 21240 (time) P
+17174 21240 (daemon) P
+19362 21240 (would) P
+21151 21240 (be) P
+22006 21240 (instructed) P
+24661 21240 (to) P
+25416 21240 (ignore) P
+27237 21240 (all) P
+28125 21240 (but) P
+29180 21240 (the) P
+30201 21240 (networks) P
+4320 20520 (belonging) P
+6920 20520 (to) P
+7587 20520 (the) P
+8520 20520 (local) P
+9886 20520 (administrative) P
+13519 20520 (control.) P
+5820 19584 (There) P
+7407 19584 (are) P
+8327 19584 (some) P
+9781 19584 (limitations) P
+12537 19584 (to) P
+13192 19584 (the) P
+14113 19584 (current) P
+16000 19584 (implementation) P
+19955 19584 (of) P
+20643 19584 (the) P
+21564 19584 (time) P
+22819 19584 (daemon.) P
+25257 19584 (It) P
+25813 19584 (is) P
+26402 19584 (expected) P
+28722 19584 (that) P
+29811 19584 (these) P
+31232 19584 (limi\255) P
+4320 18864 (tations) P
+6146 18864 (will) P
+7305 18864 (be) P
+8096 18864 (removed) P
+10420 18864 (in) P
+11112 18864 (future) P
+12770 18864 (releases.) P
+15242 18864 (The) P
+16400 18864 (constant) P
+18624 18864 (NHOSTS) P
+21183 18864 (in) P
+21875 18864 (/usr/src/etc/timed/globals.h) P
+28616 18864 (limits) P
+30209 18864 (the) P
+31167 18864 (max\255) P
+4320 18144 (imum) P
+5926 18144 (number) P
+7963 18144 (of) P
+8667 18144 (machines) P
+11136 18144 (that) P
+12240 18144 (may) P
+13477 18144 (be) P
+14247 18144 (directly) P
+16284 18144 (controlled) P
+18921 18144 (by) P
+19725 18144 (one) P
+20795 18144 (master) P
+22598 18144 (time) P
+23869 18144 (daemon.) P
+26322 18144 (The) P
+27459 18144 (current) P
+29362 18144 (maximum) P
+32000 18144 (is) P
+4320 17424 (29) P
+5134 17424 (\(NHOSTS) P
+7882 17424 (-) P
+8434 17424 (1\).) P
+9498 17424 (The) P
+10645 17424 (constant) P
+13058 17424 (must) P
+14438 17424 (be) P
+15217 17424 (changed) P
+17428 17424 (and) P
+18507 17424 (the) P
+19453 17424 (program) P
+21699 17424 (recompiled) P
+24611 17424 (if) P
+25191 17424 (a) P
+25670 17424 (site) P
+26716 17424 (wishes) P
+28561 17424 (to) P
+29241 17424 (run) P
+1 10 SF
+30254 17424 (timed) P
+0 10 SF
+31800 17424 (on) P
+4320 16704 (a) P
+4786 16704 (larger) P
+6385 16704 (\(inter\)network.) P
+5820 15768 (In) P
+6577 15768 (addition,) P
+8951 15768 (there) P
+10407 15768 (is) P
+11064 15768 (a) P
+1 10 SF
+11587 15768 (pathological) P
+14878 15768 (situation) P
+0 10 SF
+17236 15768 (to) P
+17960 15768 (be) P
+18783 15768 (avoided) P
+20939 15768 (at) P
+21628 15768 (all) P
+22484 15768 (costs,) P
+24089 15768 (that) P
+25245 15768 (might) P
+26902 15768 (occur) P
+28490 15768 (when) P
+30045 15768 (time) P
+31368 15768 (dae\255) P
+4320 15048 (mons) P
+5870 15048 (run) P
+6920 15048 (on) P
+7770 15048 (multiply\255connected) P
+12686 15048 (local) P
+14102 15048 (area) P
+15350 15048 (networks.) P
+18149 15048 (In) P
+18899 15048 (this) P
+20016 15048 (case,) P
+21446 15048 (as) P
+22194 15048 (we) P
+23142 15048 (have) P
+24523 15048 (seen,) P
+25987 15048 (time) P
+27303 15048 (daemons) P
+29684 15048 (running) P
+31800 15048 (on) P
+4320 14328 (gateway) P
+6509 14328 (machines) P
+8965 14328 (will) P
+10090 14328 (be) P
+10847 14328 (submasters) P
+13703 14328 (and) P
+14760 14328 (they) P
+15984 14328 (will) P
+17109 14328 (act) P
+17999 14328 (on) P
+18790 14328 (some) P
+20247 14328 (of) P
+20938 14328 (those) P
+22395 14328 (networks) P
+24785 14328 (as) P
+25476 14328 (master) P
+27267 14328 (time) P
+28526 14328 (daemons.) P
+31200 14328 (Con\255) P
+4320 13608 (sider) P
+5738 13608 (machines) P
+8255 13608 (A) P
+8940 13608 (and) P
+10058 13608 (B) P
+10710 13608 (that) P
+11862 13608 (are) P
+12846 13608 (both) P
+14165 13608 (gateways) P
+16648 13608 (between) P
+18897 13608 (networks) P
+21347 13608 (X) P
+22031 13608 (and) P
+23148 13608 (Y.) P
+24182 13608 (If) P
+24833 13608 (time) P
+26151 13608 (daemons) P
+28534 13608 (were) P
+29950 13608 (started) P
+31800 13608 (on) P
+4320 12888 (both) P
+5592 12888 (A) P
+6230 12888 (and) P
+7301 12888 (B) P
+7906 12888 (without) P
+9945 12888 (constraints,) P
+12899 12888 (it) P
+13438 12888 (would) P
+15143 12888 (be) P
+15914 12888 (possible) P
+18085 12888 (for) P
+18990 12888 (submaster) P
+21627 12888 (time) P
+22899 12888 (daemon) P
+25003 12888 (A) P
+25641 12888 (to) P
+26313 12888 (be) P
+27084 12888 (a) P
+27555 12888 (slave) P
+28992 12888 (on) P
+29797 12888 (network) P
+31967 12888 (X) P
+4320 12168 (and) P
+5423 12168 (the) P
+6393 12168 (master) P
+8229 12168 (on) P
+9066 12168 (network) P
+11269 12168 (Y,) P
+12089 12168 (while) P
+13659 12168 (submaster) P
+16328 12168 (time) P
+17632 12168 (daemon) P
+19768 12168 (B) P
+20405 12168 (is) P
+21042 12168 (a) P
+21545 12168 (slave) P
+23014 12168 (on) P
+23851 12168 (network) P
+26054 12168 (Y) P
+26724 12168 (and) P
+27827 12168 (the) P
+28796 12168 (master) P
+30631 12168 (on) P
+31467 12168 (net\255) P
+4320 11448 (work) P
+5790 11448 (X.) P
+6810 11448 (This) P
+1 10 SF
+8114 11448 (loop) P
+0 10 SF
+9418 11448 (of) P
+10155 11448 (master) P
+11991 11448 (time) P
+13295 11448 (daemons) P
+15664 11448 (will) P
+16835 11448 (not) P
+17839 11448 (function) P
+20076 11448 (properly) P
+22346 11448 (or) P
+23083 11448 (guarantee) P
+25651 11448 (a) P
+26154 11448 (unique) P
+28024 11448 (time) P
+29328 11448 (on) P
+30164 11448 (both) P
+31467 11448 (net\255) P
+4320 10728 (works,) P
+6139 10728 (and) P
+7208 10728 (will) P
+8345 10728 (cause) P
+9879 10728 (the) P
+10815 10728 (submasters) P
+13682 10728 (to) P
+14351 10728 (use) P
+15352 10728 (large) P
+16753 10728 (amounts) P
+18988 10728 (of) P
+19690 10728 (system) P
+21558 10728 (resources) P
+24024 10728 (in) P
+24693 10728 (the) P
+25628 10728 (form) P
+26997 10728 (of) P
+27699 10728 (network) P
+29867 10728 (bandwidth) P
+4320 10008 (and) P
+5407 10008 (CPU) P
+6795 10008 (time.) P
+8433 10008 (In) P
+9154 10008 (fact,) P
+10424 10008 (this) P
+11511 10008 (kind) P
+12798 10008 (of) P
+1 10 SF
+13518 10008 (loop) P
+0 10 SF
+14805 10008 (can) P
+15857 10008 (also) P
+17043 10008 (be) P
+17829 10008 (generated) P
+20380 10008 (with) P
+21667 10008 (more) P
+23120 10008 (than) P
+24373 10008 (two) P
+25493 10008 (master) P
+27312 10008 (time) P
+28599 10008 (daemons,) P
+31101 10008 (when) P
+4320 9288 (several) P
+6218 9288 (local) P
+7584 9288 (area) P
+8782 9288 (networks) P
+11181 9288 (are) P
+12113 9288 (interconnected.) P
+2 10 SF
+4320 7848 (Installation) P
+0 10 SF
+5820 6912 (In) P
+6518 6912 (order) P
+7982 6912 (to) P
+8647 6912 (start) P
+9878 6912 (the) P
+10809 6912 (time) P
+12074 6912 (daemon) P
+14171 6912 (on) P
+14969 6912 (a) P
+15433 6912 (given) P
+16964 6912 (machine,) P
+19345 6912 (the) P
+20277 6912 (following) P
+22810 6912 (lines) P
+24142 6912 (should) P
+25941 6912 (be) P
+26706 6912 (added) P
+28337 6912 (to) P
+29003 6912 (the) P
+1 10 SF
+29935 6912 (local) P
+31334 6912 (dae\255) P
+4320 6192 (mons) P
+0 10 SF
+5786 6192 (section) P
+7685 6192 (in) P
+8352 6192 (the) P
+9285 6192 (\212le) P
+1 10 SF
+10252 6192 (/etc/rc.local) P
+0 10 SF
+13134 6192 (:) P
+8640 4032 (if) P
+9207 4032 ([) P
+9607 4032 (\255f) P
+10207 4032 (/etc/timed) P
+12807 4032 (];) P
+13374 4032 (then) P
+end restore showpage
+%%Page: 3 3
+save $troff begin Sc
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+4320 44400 (Timed) P
+6087 44400 (Installation) P
+8987 44400 (and) P
+10053 44400 (Operation) P
+30033 44400 (SMM:8\2553) P
+10140 42480 (/etc/timed) P
+1 10 SF
+12740 42480 (\213ags) P
+0 10 SF
+14073 42480 (&) P
+14740 42480 (echo) P
+16072 42480 (\255n) P
+16772 42480 (') P
+17172 42480 (timed') P
+18939 42480 (>/dev/console) P
+8640 41760 (\212) P
+4320 40104 (In) P
+5020 40104 (any) P
+6086 40104 (case,) P
+7467 40104 (they) P
+8700 40104 (must) P
+10067 40104 (appear) P
+11865 40104 (after) P
+13164 40104 (the) P
+14097 40104 (network) P
+16263 40104 (is) P
+16863 40104 (con\212gured) P
+19629 40104 (via) P
+20562 40104 (ifcon\212g\(8\).) P
+5820 39168 (Also,) P
+7303 39168 (the) P
+8236 39168 (\212le) P
+1 10 SF
+9203 39168 (/etc/services) P
+0 10 SF
+12366 39168 (should) P
+14166 39168 (contain) P
+16132 39168 (the) P
+17065 39168 (following) P
+19599 39168 (line:) P
+8640 37008 (timed) P
+11640 37008 (525/udp) P
+16140 37008 (timeserver) P
+4320 35352 (The) P
+1 10 SF
+5453 35352 (\213ags) P
+0 10 SF
+6786 35352 (are:) P
+4320 34416 (\255n) P
+5020 34416 (network) P
+8220 34416 (to) P
+8887 34416 (consider) P
+11119 34416 (the) P
+12052 34416 (named) P
+13851 34416 (network.) P
+4320 33480 (\255i) P
+4887 33480 (network) P
+8220 33480 (to) P
+8887 33480 (ignore) P
+10620 33480 (the) P
+11553 33480 (named) P
+13352 33480 (network.) P
+4320 32544 (\255t) P
+8220 32544 (to) P
+8887 32544 (place) P
+10352 32544 (tracing) P
+12218 32544 (information) P
+15252 32544 (in) P
+1 10 SF
+15919 32544 (/usr/adm/timed.log) P
+0 10 SF
+20469 32544 (.) P
+4320 31608 (\255M) P
+8220 31608 (to) P
+8927 31608 (allow) P
+10500 31608 (this) P
+11607 31608 (time) P
+12913 31608 (daemon) P
+15051 31608 (to) P
+15757 31608 (become) P
+17861 31608 (a) P
+18366 31608 (master.) P
+20554 31608 (A) P
+21226 31608 (time) P
+22532 31608 (daemon) P
+24670 31608 (run) P
+25709 31608 (without) P
+27782 31608 (this) P
+28888 31608 (option) P
+30661 31608 (will) P
+31834 31608 (be) P
+8220 30888 (forced) P
+9952 30888 (in) P
+10619 30888 (the) P
+11552 30888 (state) P
+12851 30888 (of) P
+13551 30888 (slave) P
+14983 30888 (during) P
+16750 30888 (an) P
+17516 30888 (election.) P
+2 10 SF
+4320 29448 (Daily) P
+5887 29448 (Operation) P
+1 10 SF
+5820 28512 (Timedc\(8\)) P
+0 10 SF
+8486 28512 (is) P
+9086 28512 (used) P
+10385 28512 (to) P
+11052 28512 (control) P
+12952 28512 (the) P
+13885 28512 (operation) P
+16351 28512 (of) P
+17051 28512 (the) P
+17984 28512 (time) P
+19251 28512 (daemon.) P
+21700 28512 (It) P
+22267 28512 (may) P
+23500 28512 (be) P
+24266 28512 (used) P
+25565 28512 (to:) P
+4320 27576 (\007) P
+5820 27576 (measure) P
+8018 27576 (the) P
+8951 27576 (differences) P
+11815 27576 (between) P
+14013 27576 (machines') P
+16678 27576 (clocks,) P
+4320 26640 (\007) P
+5820 26640 (\212nd) P
+6954 26640 (the) P
+7887 26640 (location) P
+10020 26640 (where) P
+11685 26640 (the) P
+12618 26640 (master) P
+1 10 SF
+14417 26640 (timed) P
+0 10 SF
+15950 26640 (is) P
+16550 26640 (running,) P
+4320 25704 (\007) P
+5820 25704 (cause) P
+7351 25704 (election) P
+9450 25704 (timers) P
+11150 25704 (on) P
+11950 25704 (several) P
+13848 25704 (machines) P
+16313 25704 (to) P
+16980 25704 (expire) P
+18679 25704 (at) P
+19312 25704 (the) P
+20245 25704 (same) P
+21677 25704 (time,) P
+4320 24768 (\007) P
+5820 24768 (enable) P
+7585 24768 (or) P
+8485 24768 (disable) P
+10584 24768 (tracing) P
+12650 24768 (of) P
+13550 24768 (messages) P
+16214 24768 (received) P
+18645 24768 (by) P
+1 10 SF
+19445 24768 (timed) P
+0 10 SF
+20778 24768 (.) P
+4320 23832 (See) P
+5386 23832 (the) P
+6319 23832 (manual) P
+8285 23832 (page) P
+9617 23832 (on) P
+1 10 SF
+10417 23832 (timed) P
+0 10 SF
+11850 23832 (\(8\)) P
+12750 23832 (and) P
+1 10 SF
+13816 23832 (timedc) P
+0 10 SF
+15515 23832 (\(8\)) P
+16415 23832 (for) P
+17315 23832 (more) P
+18748 23832 (detailed) P
+20847 23832 (information.) P
+5820 22896 (The) P
+1 10 SF
+6988 22896 (date\(1\)) P
+0 10 SF
+8956 22896 (command) P
+11557 22896 (can) P
+12624 22896 (be) P
+13425 22896 (used) P
+14759 22896 (to) P
+15461 22896 (set) P
+16362 22896 (the) P
+17330 22896 (network) P
+19531 22896 (date.) P
+21114 22896 (In) P
+21848 22896 (order) P
+23348 22896 (to) P
+24049 22896 (set) P
+24949 22896 (the) P
+25916 22896 (time) P
+27217 22896 (on) P
+28051 22896 (a) P
+28551 22896 (single) P
+30218 22896 (machine,) P
+4320 22176 (the) P
+1 10 SF
+5253 22176 (\255n) P
+0 10 SF
+5953 22176 (\213ag) P
+7053 22176 (can) P
+8085 22176 (be) P
+8851 22176 (given) P
+10384 22176 (to) P
+11051 22176 (date\(1\).) P
+end restore showpage
+%%Page: 4 4
+save $troff begin Sc
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+4320 44400 (SMM:8\2554) P
+24268 44400 (Timed) P
+26035 44400 (Installation) P
+28935 44400 (and) P
+30001 44400 (Operation) P
+2 10 SF
+4320 42480 (References) P
+0 10 SF
+4320 41544 (1.) P
+5820 41544 (R.) P
+6691 41544 (Gusella) P
+8844 41544 (and) P
+10031 41544 (S.) P
+10836 41544 (Zatti,) P
+1 10 SF
+12441 41544 (TEMPO:) P
+14963 41544 (A) P
+15650 41544 (Network) P
+18002 41544 (Time) P
+19522 41544 (Controller) P
+22375 41544 (for) P
+23395 41544 (Distributed) P
+26448 41544 (Berkeley) P
+28865 41544 (UNIX) P
+30585 41544 (System) P
+0 10 SF
+32250 41544 (,) P
+5820 40824 (USENIX) P
+8220 40824 (Summer) P
+10454 40824 (Conference) P
+13418 40824 (Proceedings,) P
+16700 40824 (Salt) P
+17834 40824 (Lake) P
+19233 40824 (City,) P
+20617 40824 (June) P
+21916 40824 (1984.) P
+4320 39888 (2.) P
+5820 39888 (R.) P
+6606 39888 (Gusella) P
+8674 39888 (and) P
+9776 39888 (S.) P
+10496 39888 (Zatti,) P
+1 10 SF
+12016 39888 (Clock) P
+13651 39888 (Synchronization) P
+17786 39888 (in) P
+18489 39888 (a) P
+19025 39888 (Local) P
+20628 39888 (Area) P
+22030 39888 (Network) P
+0 10 SF
+24062 39888 (,) P
+24447 39888 (University) P
+27215 39888 (of) P
+27950 39888 (California,) P
+30768 39888 (Berke\255) P
+5820 39168 (ley,) P
+6903 39168 (Technical) P
+9468 39168 (Report,) P
+1 10 SF
+11451 39168 (to) P
+12118 39168 (appear) P
+0 10 SF
+13817 39168 (.) P
+4320 38232 (3.) P
+5820 38232 (R.) P
+6603 38232 (Gusella) P
+8668 38232 (and) P
+9766 38232 (S.) P
+10482 38232 (Zatti,) P
+1 10 SF
+11998 38232 (An) P
+12897 38232 (Election) P
+15129 38232 (Algorithm) P
+17795 38232 (for) P
+18727 38232 (a) P
+19259 38232 (Distributed) P
+22224 38232 (Clock) P
+23855 38232 (Synchronization) P
+27986 38232 (Program) P
+0 10 SF
+30152 38232 (,) P
+30534 38232 (Univer\255) P
+5820 37512 (sity) P
+6887 37512 (of) P
+7587 37512 (California,) P
+10370 37512 (Berkeley,) P
+12885 37512 (CS) P
+13819 37512 (Technical) P
+16384 37512 (Report) P
+18217 37512 (#275,) P
+19767 37512 (Dec.) P
+21082 37512 (1985.) P
+4320 36576 (4.) P
+5820 36576 (R.) P
+6604 36576 (Gusella) P
+8670 36576 (and) P
+9770 36576 (S.) P
+10488 36576 (Zatti,) P
+1 10 SF
+12006 36576 (The) P
+13140 36576 (Berkeley) P
+15471 36576 (UNIX) P
+17104 36576 (4.3BSD) P
+19187 36576 (Time) P
+20620 36576 (Synchronization) P
+24752 36576 (Protocol) P
+0 10 SF
+26852 36576 (,) P
+27235 36576 (UNIX) P
+28967 36576 (Programmer's) P
+5820 35856 (Manual,) P
+8002 35856 (4.3) P
+8952 35856 (Berkeley) P
+11317 35856 (Software) P
+13683 35856 (Distribution,) P
+16934 35856 (Volume) P
+19067 35856 (2c.) P
+0 -180 (\255\255) P
+32432 -180 (\255\255) P
+end restore showpage
+%%Trailer
+%%Pages: 4
+%%EOF

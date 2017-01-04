@@ -1,0 +1,528 @@
+h00523
+s 00003/00000/00193
+d D 6.6 88/05/23 19:39:10 bostic 9 8
+c add 's' flag, to strip off leading slashes
+e
+s 00001/00001/00192
+d D 6.5 86/05/12 09:18:47 anne 8 7
+c grammar
+e
+s 00011/00003/00182
+d D 6.4 86/05/11 06:02:51 lepreau 7 5
+c caveat about dir mtimes with r or u options
+e
+s 00001/00001/00184
+d R 6.4 86/01/12 14:34:30 bloom 6 5
+c fix typo
+e
+s 00002/00001/00183
+d D 6.3 86/01/07 12:43:08 mckusick 5 4
+c format fix
+e
+s 00007/00007/00177
+d D 6.2 85/06/07 22:16:22 lepreau 4 3
+c modifiers and function codes were confused
+e
+s 00001/00001/00183
+d D 6.1 85/04/29 20:16:24 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00102/00098/00082
+d D 5.1 85/04/29 20:15:12 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00180/00000/00000
+d D 4.1 85/04/29 20:14:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TAR 1 4/1/81
+E 2
+I 2
+D 3
+.TH TAR 1 "13 January 1983"
+E 3
+I 3
+.TH TAR 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+tar \- tape archiver
+.SH SYNOPSIS
+.B tar
+[ key ] [ name ... ]
+.SH DESCRIPTION
+.PP
+.I Tar
+D 2
+saves and restores files
+on magtape.
+Its actions are controlled by the
+E 2
+I 2
+saves and restores multiple files on a single file (usually a magnetic
+tape, but it can be any file).  
+.IR Tar 's
+actions are controlled by the
+E 2
+.I key
+D 2
+argument.
+The
+E 2
+I 2
+argument.  The
+E 2
+.I key
+D 2
+is a string of characters containing
+at most one function letter and possibly
+one or more function modifiers.
+Other arguments to the command are file or directory
+names specifying which files are to be dumped or restored.
+E 2
+I 2
+is a string of characters containing at most one function letter and possibly
+one or more function modifiers.  Other arguments to 
+.I tar
+are file or directory names specifying which files to dump or restore.
+E 2
+In all cases, appearance of a directory name refers to
+the files and (recursively) subdirectories of that directory.
+.PP
+D 2
+The function portion of
+the key is specified by one of the following letters:
+E 2
+I 2
+The function portion of the key is specified by one of the following letters:
+E 2
+.TP 8
+D 2
+.B  r
+The named files
+are written
+on the end of the tape.
+The
+E 2
+I 2
+.B r
+The named files are written on the end of the tape.  The
+E 2
+.B c
+function implies this.
+.TP 8
+D 2
+.B  x
+The named files are extracted from the tape.
+If the named file matches a directory whose contents 
+had been written onto the tape, this directory is (recursively) extracted.
+The owner, modification time, and mode are restored (if possible).
+If no file argument is given, the entire content of the
+tape is extracted.
+Note that if multiple entries specifying the same file
+are on the tape, the last one overwrites
+all earlier.
+E 2
+I 2
+.B x
+The named files are extracted from the tape.  If the named file
+matches a directory whose contents had been written onto the tape, this
+directory is (recursively) extracted.  The owner, modification time, and mode
+are restored (if possible).  If no file argument is given, the entire content
+of the tape is extracted.  Note that if multiple entries specifying the same
+file are on the tape, the last one overwrites all earlier.
+E 2
+.TP 8
+D 2
+.B  t
+The names of the specified files are listed each time they occur
+on the tape.
+If no file argument is given,
+all of the names on the tape are listed.
+E 2
+I 2
+.B t
+The names of the specified files are listed each time they occur on
+the tape.  If no file argument is given, all of the names on the tape
+are listed.
+E 2
+.TP 8
+D 2
+.B  u
+The named files are added to the tape if either they
+are not already there or have
+been modified since last put on the tape.
+E 2
+I 2
+.B u
+The named files are added to the tape if either they are not
+already there or have been modified since last put on the tape.
+E 2
+.TP 8
+D 2
+.B  c
+Create a new tape; writing begins on the beginning
+of the tape instead of after the last file.
+This command implies
+.B  r.
+E 2
+I 2
+.B c
+Create a new tape; writing begins on the beginning of the tape
+instead of after the last file.  This command implies
+.BR r .
+E 2
+D 4
+.TP 8
+E 4
+I 4
+.PP
+The following characters may be used in addition to the letter
+which selects the function desired.
+.TP 10
+E 4
+D 2
+.B  o
+E 2
+I 2
+.B o
+E 2
+On output, tar normally places information specifying owner and modes
+D 2
+of directories in the archive.
+Former versions of tar, when encountering
+E 2
+I 2
+of directories in the archive.  Former versions of tar, when encountering
+E 2
+this information will give error message of the form
+.br
+	"<name>/: cannot create".
+.br
+D 4
+This option will suppress the directory information.
+.TP 8
+E 4
+I 4
+This modifier will suppress the directory information.
+.TP 10
+E 4
+D 2
+.B  p
+E 2
+I 2
+.B p
+E 2
+D 4
+This option says to restore files to their original modes,
+E 4
+I 4
+This modifier says to restore files to their original modes,
+E 4
+D 2
+ignoring the present umask(2).  Setuid and sticky information
+E 2
+I 2
+ignoring the present
+.IR umask (2).
+Setuid and sticky information
+E 2
+will also be restored to the super-user.
+D 4
+.PP
+The following characters may be used in addition to the letter
+which selects the function desired.
+E 4
+.TP 10
+D 2
+.B  0,...,7
+This
+modifier selects an alternate drive on which the tape is mounted.
+(The default is drive 0 at 1600 bpi, which is normally /dev/rmt8.)
+E 2
+I 2
+.B 0, ..., 9
+This modifier selects an alternate drive on which the tape is mounted.
+The default is drive 0 at 1600 bpi, which is normally /dev/rmt8.
+E 2
+.TP 10
+D 2
+.B  v
+E 2
+I 2
+.B v
+E 2
+Normally
+.I tar
+D 2
+does its work silently.
+The
+E 2
+I 2
+does its work silently.  The
+E 2
+.B v
+D 2
+(verbose)
+option causes it to type the name of each file it treats
+preceded by the function letter.
+With the
+E 2
+I 2
+D 8
+(verbose) option make
+E 8
+I 8
+(verbose) option makes
+E 8
+.I tar
+D 7
+type the name of each file it treats preceded by the function
+E 7
+I 7
+print the name of each file it treats preceded by the function
+E 7
+letter.  With the
+E 2
+.B t
+D 2
+function,
+.B v
+gives more information about the
+tape entries than just the name.
+E 2
+I 2
+function, the verbose option
+gives more information about the tape entries than just their names.
+E 2
+.TP 10
+D 2
+.B  w
+causes
+.I tar
+to print the action to be taken followed by file name, then
+E 2
+I 2
+.B w
+.I Tar
+prints the action to be taken followed by file name, then
+E 2
+wait for user confirmation. If a word beginning with `y'
+D 2
+is given, the action is performed. Any other input means
+don't do it.
+E 2
+I 2
+is given, the action is done. Any other input means don't do it.
+E 2
+.TP 10
+.B f
+D 2
+causes 
+E 2
+I 2
+.I Tar
+uses the next argument as the name of the archive instead of
+/dev/rmt?. If the name of the file is `\-', tar writes to standard output or
+reads from standard input, whichever is appropriate. Thus,
+E 2
+.I tar
+D 2
+to use the next argument as the name of the archive instead
+of /dev/rmt?. 
+If the name of the file is `\-', tar writes to
+standard output or reads from standard input, whichever is
+appropriate. Thus,
+.I tar
+can be used as the head or tail of a filter chain
+E 2
+I 2
+can be used as the head or tail of a filter chain.
+E 2
+.I Tar
+can also be used to move hierarchies with the command
+.ce 1
+cd fromdir; tar cf - . | (cd todir; tar xf -)
+.TP 10
+.B b
+D 2
+causes
+.I tar
+to use the next argument as the blocking factor for tape
+records. The default is 20 (the maximum). This option
+should only be used with raw magnetic tape archives (See
+E 2
+I 2
+.I Tar
+uses the next argument as the blocking factor for tape records. The
+default is 20 (the maximum). This option should only be used with raw magnetic
+tape archives (See 
+E 2
+.B f
+D 2
+above).
+The block size is determined automatically when reading
+tapes (key letters `x' and `t').
+E 2
+I 2
+above).  The block size is determined automatically
+when reading tapes (key letters `x' and `t').
+E 2
+.TP 10
+I 9
+.B s
+tells tar to strip off any leading slashes from pathnames.
+.TP 10
+E 9
+.B l
+D 2
+tells
+E 2
+I 2
+tells 
+E 2
+.I tar
+D 2
+to complain if it cannot resolve all of the links
+to the files dumped. If this is not specified, no
+error messages are printed.
+E 2
+I 2
+to complain if it cannot resolve all of the links to the
+D 7
+files dumped. If this is not specified, no error messages are printed.
+E 7
+I 7
+files dumped.  If this is not specified, no error messages are printed.
+E 7
+E 2
+.TP 10
+.B m
+D 2
+tells
+E 2
+I 2
+tells 
+E 2
+.I tar
+D 2
+to not restore the modification times.
+The mod time
+E 2
+I 2
+not to restore the modification times.  The modification time
+E 2
+will be the time of extraction.
+I 2
+.TP 10
+.B h
+Force 
+.I tar
+to follow symbolic links as if they were normal files or
+directories.  Normally, 
+.I tar
+does not follow symbolic links.
+.TP 10
+.B B
+Forces input and output blocking to 20 blocks per record.  This option
+was added so that 
+.I tar
+can work across a communications channel where the blocking may not
+be maintained.
+E 2
+D 5
+.PP
+E 5
+I 5
+.TP 10
+.B C
+E 5
+I 2
+If a file name is preceded by 
+.BR \-C ,
+then 
+.I tar
+will perform a
+.IR chdir (2)
+to that file name.  This allows multiple directories not
+related by a close common parent to be archived using short
+relative path names.  For example, to archive files from /usr/include
+and from /etc, one might use
+.ti +0.5i
+tar c -C /usr include -C / etc
+.PP
+E 2
+Previous restrictions dealing with
+.IR tar 's
+D 2
+inability to properly handle blocked archives
+have been lifted.
+E 2
+I 2
+inability to properly handle blocked archives have been lifted.
+E 2
+.PP
+.SH FILES
+/dev/rmt?
+.br
+/tmp/tar*
+I 7
+.SH "SEE ALSO"
+tar(5)
+E 7
+.SH DIAGNOSTICS
+Complaints about bad key characters and tape read/write errors.
+.br
+D 2
+Complaints if enough memory is not available to hold
+the link tables.
+E 2
+I 2
+Complaints if enough memory is not available to hold the link tables.
+E 2
+.SH BUGS
+There is no way to ask for the
+.IR n -th
+occurrence of a file.
+.br
+Tape errors are handled ungracefully.
+.br
+D 2
+The
+E 2
+I 2
+The 
+E 2
+.B u
+option can be slow.
+.br
+D 2
+The current limit on file name length is
+100 characters.
+E 2
+I 2
+The current limit on file name length is 100 characters.
+.br
+D 7
+There is no way to selectively follow symbolic links.
+E 7
+I 7
+There is no way selectively to follow symbolic links.
+.br
+When extracting tapes created with the
+.B r
+or
+.B u
+options, directory modification times may not be set correctly.
+E 7
+E 2
+E 1

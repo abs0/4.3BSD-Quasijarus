@@ -1,0 +1,61 @@
+.\"	@(#)binzone.5	1.2 (IFCTF) 2011/12/28
+.\"
+.TH BINZONE 5 "December 28, 2011" MSDNS "MSDNS Internals Manual"
+.SH NAME
+binzone \- MSDNS binary zone files
+.SH DESCRIPTION
+An MSDNS binary zone file carries exactly the same semantics as a
+standard RFC\ 1035 master file: a linear sequential list of arbitrary DNS
+resource records (RRs) and nothing more.
+However, having zone files stored in binary form instead of text
+greatly reduces the amount of parsing work the
+.IR msdns (8)
+core daemon has to do when loading a zone, and allows it to treat
+many more RR types as uninterpreted binary blobs.
+.PP
+Each binary zone file consists of a fixed 8-byte \%\fB"BINZONE\e200"\fP
+identifying header followed by a directly abutted sequence of binary RRs.
+Each RR appears in the same standard form as in DNS protocol messages,
+consisting of a variable-length owner field followed by the fixed part
+of 10 bytes followed by the
+.B RDATA
+field whose length is indicated in the
+fixed part exactly as in the standard DNS protocol messages.
+The 2-byte
+.BR TYPE ,
+.B CLASS
+and
+.B RDLENGTH
+fields and the 4-byte
+.B TTL
+field appear in the standard network byte order, i.e., most significant
+byte first.
+All domain names (RR owner names and any domain names appearing in
+.BR RDATA )
+are strings of binary labels (label length octets followed by label body
+octets, ending in a null label) and must be uncompressed.
+Domain name compression is disallowed both for robustness and because
+there is no message structure to which pointers could be made relative.
+.PP
+Encountering an end-of-file
+.RB ( EOF )
+where one would otherwise expect the first label length octet of an
+RR owner name is normal, and indicates the end of the sequence of RRs
+represented by the binary zone file.
+An
+.B EOF
+encountered anywhere else (in the middle of an RR) is an error.
+.PP
+The \%\fB"BINZONE\e200"\fP identifying header has been added to provide
+more helpful diagnostics when a user has mistakenly supplied an ASCII master
+file or some other file type where a binary zone file is expected;
+otherwise attempting to parse text files as if they contained
+binary RRs would result in very cryptic and unhelpful error messages.
+.PP
+Standard RFC\ 1035 master files are compiled into MSDNS binary zone files with
+.IR zonecomp (8);
+a binary zone file can be ``disassembled'' back into the standard RFC\ 1035
+ASCII form with
+.IR zonedump (8).
+.SH "SEE ALSO"
+zonecomp(8), zonedump(8), RFC 1035

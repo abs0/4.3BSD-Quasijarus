@@ -1,0 +1,12 @@
+.PS
+circle at .25,.25
+circle at .5,1.
+line from 1st circle to last circle chop
+.PE
+.PS
+circle at 0,0
+circle at -1i,-2i
+line from 1st circle to last circle chop
+circle at 1i,-2i
+line from 1st circle to last circle chop
+.PE

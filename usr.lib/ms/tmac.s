@@ -1,8 +1,6 @@
-.\"	@(#)tmac.s	1.7 (Berkeley) 5/28/02
+.\"	@(#)tmac.s	1.10 (Berkeley) 4/29/09
 .\" ancillary files reside in \*(//,
-.\" except local which are in \*(L/,
 .ds // /usr/lib/ms/
-.ds L/ /usr/local/lib/tmac/
 .	\" IZ - initialize (before text begins)
 .de IZ
 .nr FM 1i
@@ -26,9 +24,9 @@
 .nr TB 0
 .nr SJ \\n(.j
 .nr PO \\n(.o
-.nr LL 6i
+.nr LL 6.5i
 .ll \\n(LLu
-.lt 6i
+.lt 6.5i
 .ev 1
 .nr FL 5.5i
 .ll \\n(FLu
@@ -659,12 +657,9 @@
 .if \\n(IP<=0 .in -\\n(I\\n(IRu
 ..
 .	\" CM - cut mark
-.	\" only in troff when register v isn't one
-.	\" if string .T is set (ditroff), only if .T is "vp"
-.	\" may be forced if register v is two
+.	\" we now do it only in troff and only when register v equals 2
 .if n .ig
-.if \nv=1 .ig
-.if !\nv=2 .if !"\*(.T"" .if !"\*(.T"vp" .ig
+.if !\nv=2 .ig
 .de CM
 .po 0
 .lt 7.6i
@@ -911,21 +906,6 @@
 .]-
 .rm @T
 ..
-.if !"\*(.T"" \{\
-.	\" LT and HE - source for letter head
-.de LT
-.rn LT @T
-.so \*(L/hed.ms
-.LT
-.rm @T
-..
-.de HE
-.rn HE @T
-.so \*(L/hed.ms
-.HE
-.rm @T
-..
-.\}
 .	\" [< - for refer -s or -e
 .de ]<
 .rn ]< @T
@@ -957,10 +937,12 @@
 .if t .ds - \(em
 .ds ' \h'\w'e'u/5'\z\'\h'-\w'e'u/5'
 .ds ` \h'\w'e'u/5'\z\`\h'-\w'e'u/5'
-.ds ^ \h'\w'o'u/10'\z^\h'-\w'o'u/10'
+.ie \n(.C .ds ^ \h'\w'o'u/10'\z\X93\h'-\w'o'u/10'
+.el .ds ^ \h'\w'o'u/10'\z^\h'-\w'o'u/10'
 .ds , \h'\w'c'u/5'\z,\h'-\w'c'u/5'
 .ds : \h'\w'u'u/5'\u\z.\h'\w'u'u*2/5'\z.\d\h'-\w'u'u*3/5'
-.ds ~ \h'\w'n'u/10'\z~\h'-\w'n'u/10'
+.ie \n(.C .ds ~ \h'\w'n'u/10'\z\X94\h'-\w'n'u/10'
+.el .ds ~ \h'\w'n'u/10'\z~\h'-\w'n'u/10'
 .ds C \h'\w'c'u/5'\v'-.6m'\s-4\zv\s+4\v'.6m'\h'-\w'c'u/5'
 .	\" AM - better accent marks
 .de AM
@@ -1023,3 +1005,7 @@ in the USA and other countries.
 .IZ
 .em EM
 .rm IZ RA //
+.de MH
+AT&T Bell Laboratories
+Murray Hill, New Jersey 07974
+..

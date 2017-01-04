@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)login.c	5.20 (Berkeley) 10/1/87";
+static char sccsid[] = "@(#)login.c	5.21 (Berkeley) 3/22/03";
 #endif not lint
 
 /*
@@ -173,7 +173,6 @@ main(argc, argv)
 		}
 		break;
 	}
-	ioctl(0, TIOCLSET, &zero);
 	ioctl(0, TIOCNXCL, 0);
 	ioctl(0, FIONBIO, &zero);
 	ioctl(0, FIOASYNC, &zero);

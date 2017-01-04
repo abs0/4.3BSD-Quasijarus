@@ -1,0 +1,59 @@
+h29663
+s 00048/00000/00000
+d D 1.1 2012/06/20 07:19:54 msokolov 1 0
+c date and time created 2012/06/20 07:19:54 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (IFCTF) %E%
+.\"
+.TH MJD2WEEKDAY 3 "%Q%"
+.UC 8
+.SH NAME
+mjd2weekday \- find day-of-week from MJD
+.SH SYNOPSIS
+.nf
+.ft B
+int mjd2weekday(mjd)
+long mjd;
+.fi
+.SH DESCRIPTION
+.I Mjd2weekday
+takes a Modified Julian Day number
+and returns the corresponding day of the week.
+.PP
+The \fImjd\fP argument is signed; \fImjd2weekday\fP returns
+the correct day of the week for every possible signed 32-bit input value,
+which is a range of many millions of years.
+.SH RETURN VALUE
+.I Mjd2weekday
+returns one of 7 possible integer values
+denoting days of the week as follows:
+.PP
+.nf
+.RS
+.DT
+0 = Sunday
+1 = Monday
+2 = Tuesday
+3 = Wednesday
+4 = Thursday
+5 = Friday
+6 = Saturday
+.RE
+.fi
+.SH NOTES
+MJD 0 (Gregorian 1858-11-17)
+was a Wednesday, not a Sunday, hence \fImjd2weekday\fP is not the same
+as \fImjd\fP % 7.
+.PP
+The implementation of \fImjd2weekday\fP consists of a few bit shifts
+and table look-ups, and involves no division operation.
+It is expected to be much more efficient than using the modulo (\fB%\fP)
+operator.
+.SH SEE ALSO
+mjdtime(3)
+E 1

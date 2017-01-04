@@ -1,0 +1,912 @@
+h23740
+s 00016/00009/00418
+d D 6.3 88/09/20 18:20:09 bostic 5 4
+c Berkeley copyright
+e
+s 00078/00043/00349
+d D 6.2 86/05/22 13:48:07 eric 4 3
+c cleanup for 4.3bsd
+e
+s 00001/00001/00391
+d D 6.1 85/04/27 13:18:32 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00300/00162/00092
+d D 5.1 85/04/27 13:17:26 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00254/00000/00000
+d D 4.1 85/04/27 13:15:52 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+D 5
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 5
+I 5
+.\" Copyright (c) 1988 The Regents of the University of California.
+.\" All rights reserved.
+E 5
+.\"
+I 5
+.\" Redistribution and use in source and binary forms are permitted
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+.\"
+E 5
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DELIVERMAIL 8 "4/1/81"
+E 2
+I 2
+D 5
+.\"	@(#)sendmail.8	4.2		7/28/83
+E 5
+D 3
+.TH SENDMAIL 8 "7/28/83"
+E 3
+I 3
+.TH SENDMAIL 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+delivermail \- deliver mail to arbitrary people
+E 2
+I 2
+sendmail \- send mail over the internet
+E 2
+.SH SYNOPSIS
+D 2
+.B /etc/delivermail
+E 2
+I 2
+.B /usr/lib/sendmail
+E 2
+[
+D 2
+.BR \- [ fr ]
+.I address
+E 2
+I 2
+flags
+E 2
+] [
+D 2
+.B \-a
+] [
+.BI \-e x
+] [
+.B \-n
+] [
+.B \-m
+] [
+.B \-s
+] [
+.B \-i
+] [
+.B \-h
+.I N
+] address ...
+E 2
+I 2
+address ...
+]
+.PP
+.B newaliases
+.PP
+.B mailq
+I 4
+[
+.B \-v
+]
+E 4
+E 2
+.SH DESCRIPTION
+D 2
+.I Delivermail
+delivers a letter to one or more people,
+routing the letter over whatever networks
+E 2
+I 2
+.I Sendmail
+D 4
+sends a message to one or more people,
+E 4
+I 4
+sends a message to one or more
+.IR recipients ,
+E 4
+routing the message over whatever networks
+E 2
+are necessary.
+D 2
+.I Delivermail
+will do inter-net forwarding as necessary
+to deliver the mail to the correct place.
+E 2
+I 2
+.I Sendmail
+does internetwork forwarding as necessary
+to deliver the message to the correct place.
+E 2
+.PP
+D 2
+.I Delivermail
+E 2
+I 2
+.I Sendmail
+E 2
+is not intended as a user interface routine;
+D 2
+it is expected that other programs will provide user-friendly
+front ends,
+and
+.I delivermail
+will be used only to deliver pre-formatted messages.
+E 2
+I 2
+other programs provide user-friendly
+front ends;
+.I sendmail
+is used only to deliver pre-formatted messages.
+E 2
+.PP
+D 2
+.I Delivermail
+E 2
+I 2
+With no flags,
+.I sendmail
+E 2
+reads its standard input
+D 4
+up to a control-D
+or a line with a single dot
+and sends a copy of the letter found there
+E 4
+I 4
+up to an end-of-file
+or a line consisting only of a single dot
+and sends a copy of the message found there
+E 4
+to all of the addresses listed.
+D 2
+If the
+.B \-i
+flag is given,
+single dots are ignored.
+E 2
+D 4
+It determines the network to use
+E 4
+I 4
+It determines the network(s) to use
+E 4
+D 2
+based on the syntax of the addresses.
+Addresses containing the character `@'
+or the word \*(lqat\*(rq
+are sent to the
+.SM ARPANET;
+addresses containing `!'
+are sent to the
+.SM UUCP
+net,
+and addresses containing `:' or `.'
+are sent to the Berkeley network.
+Other addresses are assumed to be local.
+E 2
+I 2
+based on the syntax and contents of the addresses.
+E 2
+.PP
+Local addresses are looked up in a file
+D 2
+constructed by
+.IR newaliases (1)
+from the data file
+.I /usr/lib/aliases
+E 2
+and aliased appropriately.
+Aliasing can be prevented by preceding the address
+D 2
+with a backslash or using the
+.B \-n
+flag.
+E 2
+I 2
+with a backslash.
+E 2
+Normally the sender is not included in any alias
+expansions, e.g.,
+if `john' sends to `group',
+and `group' includes `john' in the expansion,
+then the letter will not be delivered to `john'.
+D 2
+The
+.B \-m
+flag disables this suppression.
+E 2
+.PP
+D 2
+.I Delivermail
+computes the person sending the mail
+by looking at your login name.
+The \*(lqfrom\*(rq person
+can be explicitly specified by using the
+E 2
+I 2
+Flags are:
+.TP 1.2i
+.B \-ba
+Go into \s-1ARPANET\s0 mode.
+All input lines must end with a CR-LF,
+and all messages will be generated with a CR-LF at the end.
+Also,
+the ``From:'' and ``Sender:''
+fields are examined for the name of the sender.
+.TP 1.2i
+.B \-bd
+Run as a daemon.  This requires Berkeley IPC.
+I 4
+.I Sendmail
+will fork and run in background
+listening on socket 25 for incoming SMTP connections.
+This is normally run from
+.IR /etc/rc .
+E 4
+.TP 1.2i
+.B \-bi
+Initialize the alias database.
+.TP 1.2i
+.B \-bm
+Deliver mail in the usual way (default).
+.TP 1.2i
+.B \-bp
+Print a listing of the queue.
+.TP 1.2i
+.B \-bs
+D 4
+Use the \s-2SMTP\s0 protocol as described in RFC821.
+E 4
+I 4
+Use the \s-2SMTP\s0 protocol as described in RFC821
+on standard input and output.
+E 4
+This flag implies all the operations of the
+.B \-ba
+flag that are compatible with \s-2SMTP\s0.
+.TP 1.2i
+.B \-bt
+Run in address test mode.
+This mode reads addresses and shows the steps in parsing;
+it is used for debugging configuration tables.
+.TP 1.2i
+.B \-bv
+Verify names only \- do not try to collect or deliver a message.
+Verify mode is normally used for validating
+users or mailing lists.
+.TP 1.2i
+.B \-bz
+Create the configuration freeze file.
+.TP 1.2i
+.BI \-C file
+Use alternate configuration file.
+I 4
+.I Sendmail
+refuses to run as root if an alternate configuration file is specified.
+The frozen configuration file is bypassed.
+E 4
+.TP 1.2i
+.BI \-d X
+Set debugging value to
+.I X.
+.TP 1.2i
+.BI \-F fullname
+Set the full name of the sender.
+.TP 1.2i
+.BI \-f name
+Sets the name of the ``from'' person
+(i.e., the sender of the mail).
+E 2
+.B \-f
+D 2
+flag;
+or, if the
+.B \-a
+flag is given,
+delivermail looks in the body of the message
+for a \*(lqFrom:\*(rq or \*(lqSender:\*(rq
+field in
+.SM ARPANET
+format.
+The
+.B \-f
+E 2
+I 2
+can only be used
+D 4
+by the special users
+E 4
+I 4
+by ``trusted'' users
+(normally
+E 4
+.I root,
+.I daemon,
+E 2
+and
+D 2
+.B \-a
+flags can be used
+only by the special users
+.I root
+and
+E 2
+D 4
+.I network,
+E 4
+I 4
+.I network)
+E 4
+or if the person you are trying to become
+is the same as the person you are.
+D 2
+The
+.B \-r
+flag is entirely equivalent to the
+E 2
+I 2
+.TP 1.2i
+.BI \-h N
+Set the hop count to
+.I N.
+The hop count is incremented every time the mail is
+processed.
+When it reaches a limit,
+the mail is returned with an error message,
+the victim of an aliasing loop.
+I 4
+If not specified,
+``Received:'' lines in the message are counted.
+E 4
+.TP 1.2i
+.B \-n
+Don't do aliasing.
+.TP 1.2i
+.BI \-o x\|value
+Set option
+.I x
+to the specified
+.I value.
+Options are described below.
+.TP 1.2i
+.BI \-q[ time ]
+Processed saved messages in the queue at given intervals.
+If
+D 4
+.IT time
+E 4
+I 4
+.I time
+E 4
+is omitted,
+process the queue once.
+D 4
+.IT Time
+E 4
+I 4
+.I Time
+E 4
+is given as a tagged number,
+with `s' being seconds,
+`m' being minutes,
+`h' being hours,
+`d' being days,
+and
+`w' being weeks.
+For example,
+``\-q1h30m'' or ``\-q90m''
+would both set the timeout to one hour thirty minutes.
+I 4
+If
+.I time
+is specified,
+.I sendmail
+will run in background.
+This option can be used safely with
+.BR \-bd .
+E 4
+.TP 1.2i
+.BI \-r name
+An alternate and obsolete form of the
+E 2
+.B \-f
+D 2
+flag; it is provided for ease of interface only.
+E 2
+I 2
+flag.
+.TP 1.2i
+.B \-t
+Read message for recipients.
+D 4
+To:, Cc:, and Bcc: lines will be scanned for people to send to.
+E 4
+I 4
+To:, Cc:, and Bcc: lines will be scanned for recipient addresses.
+E 4
+The Bcc: line will be deleted before transmission.
+D 4
+Any addresses in the argument list will be suppressed.
+E 4
+I 4
+Any addresses in the argument list will be suppressed,
+that is,
+they will
+.I not
+receive copies even if listed in the message header.
+E 4
+.TP 1.2i
+.B \-v
+Go into verbose mode.
+Alias expansions will be announced, etc.
+E 2
+.PP
+D 2
+The
+.BI \-e x
+flag controls the disposition of error output,
+as follows:
+.TP 3n
+.B e
+Print errors on the standard output,
+and echo a copy of the message when done.
+It is assumed that a network server will
+return the message back to the user.
+.TP
+.B m
+Mail errors back to the user.
+.TP
+.B p
+Print errors on the standard output.
+.TP
+.B q
+Throw errors away;
+only exit status is returned.
+.TP
+.B w
+Write errors back to the user's terminal,
+but only if the user is still logged in
+and write permission is enabled;
+otherwise errors are mailed back.
+.LP
+If the error is not mailed back,
+and if the mail originated on the machine where the error occurred,
+the letter is appended to the file
+.I dead.letter
+E 2
+I 2
+There are also a number of processing options that may be set.
+Normally these will only be used by a system administrator.
+Options may be set either on the command line
+using the
+.B \-o
+flag
+or in the configuration file.
+These are described in detail in the
+.ul
+D 4
+Installation and Operation Guide.
+E 4
+I 4
+Sendmail Installation and Operation Guide.
+E 4
+The options are:
+.TP 1.2i
+.RI A file
+Use alternate alias file.
+.TP 1.2i
+c
+On mailers that are considered ``expensive'' to connect to,
+don't initiate immediate connection.
+This requires queueing.
+.TP 1.2i
+.RI d x
+Set the delivery mode to
+.I x.
+Delivery modes are
+`i' for interactive (synchronous) delivery,
+`b' for background (asynchronous) delivery,
+and
+`q' for queue only \- i.e.,
+actual delivery is done the next time the queue is run.
+.TP 1.2i
+D
+Try to automatically rebuild the alias database
+if necessary.
+.TP 1.2i
+.RI e x
+Set error processing to mode
+.I x.
+Valid modes are
+`m' to mail back the error message,
+`w' to ``write'' back the error message
+(or mail it back if the sender is not logged in),
+`p' to print the errors on the terminal
+(default),
+`q' to throw away error messages
+(only exit status is returned),
+and `e'
+to do special processing for the BerkNet.
+If the text of the message is not mailed back
+by
+modes `m' or `w'
+and if the sender is local to this machine,
+a copy of the message is appended to the file
+``dead.letter''
+E 2
+in the sender's home directory.
+I 2
+.TP 1.2i
+.RI F mode
+The mode to use when creating temporary files.
+.TP 1.2i
+f
+Save UNIX-style From lines at the front of messages.
+.TP 1.2i
+.RI g N
+The default group id to use when calling mailers.
+.TP 1.2i
+.RI H file
+The SMTP help file.
+.TP 1.2i
+i
+Do not take dots on a line by themselves
+as a message terminator.
+.TP 1.2i
+.RI L n
+The log level.
+.TP 1.2i
+m
+Send to ``me'' (the sender) also if I am in an alias expansion.
+.TP 1.2i
+o
+If set, this message may have
+old style headers.
+If not set,
+this message is guaranteed to have new style headers
+(i.e., commas instead of spaces between addresses).
+If set, an adaptive algorithm is used that will correctly
+determine the header format in most cases.
+.TP 1.2i
+.RI Q queuedir
+Select the directory in which to queue messages.
+.TP 1.2i
+.RI r timeout
+The timeout on reads;
+if none is set,
+.I sendmail
+will wait forever for a mailer.
+I 4
+This option violates the word (if not the intent) of the SMTP specification,
+show the timeout should probably be fairly large.
+E 4
+.TP 1.2i
+.RI S file
+Save statistics in the named file.
+.TP 1.2i
+s
+Always instantiate the queue file,
+even under circumstances where it is not strictly necessary.
+I 4
+This provides safety against system crashes during delivery.
+E 4
+.TP 1.2i
+.RI T time
+D 4
+Set the timeout on messages in the queue to the specified time.
+After sitting in the queue for this amount of time,
+they will be returned to the sender.
+E 4
+I 4
+Set the timeout on undelivered messages in the queue to the specified time.
+After delivery has failed
+(e.g., because of a host being down)
+for this amount of time,
+failed messages will be returned to the sender.
+E 4
+The default is three days.
+.TP 1.2i
+.RI t stz,dtz
+Set the name of the time zone.
+.TP 1.2i
+.RI u N
+Set the default user id for mailers.
+E 2
+.PP
+D 4
+If the first character of the user name
+is a vertical bar,
+the rest of the user name is used as the name of a program
+E 4
+I 4
+In aliases,
+the first character of a name may be
+a vertical bar to cause interpretation of
+the rest of the name as a command
+E 4
+to pipe the mail to.
+D 4
+It may be necessary to quote the name of the user
+E 4
+I 4
+It may be necessary to quote the name
+E 4
+to keep
+D 2
+.I delivermail
+E 2
+I 2
+.I sendmail
+E 2
+from suppressing the blanks from between arguments.
+I 4
+For example, a common alias is:
+E 4
+.PP
+I 4
+	msgs: "|/usr/ucb/msgs -s"
+.PP
+Aliases may also have the syntax ``:include:\c
+.IR filename ''
+to ask
+.I sendmail
+to read the named file for a list of recipients.
+For example, an alias such as:
+.PP
+	poets: ":include:/usr/local/lib/poets.list"
+.PP
+would read
+.I /usr/local/lib/poets.list
+for the list of addresses making up the group.
+.PP
+E 4
+D 2
+The message is normally edited to eliminate \*(lqFrom\*(rq
+lines that might confuse other mailers.
+In particular,
+\*(lqFrom\*(rq lines in the header are deleted,
+and \*(lqFrom\*(rq lines in the body are prepended by `>'.
+The
+.B \-s
+flag saves \*(lqFrom\*(rq lines in the header.
+.PP
+The
+.B \-h
+flag gives a \*(lqhop-count\*(rq, i.e.,
+a measure of how many times this message
+has been processed by
+.I delivermail
+(presumably on different machines).
+Each time
+.I delivermail
+processes a message,
+it increases the hop-count by one;
+if it exceeds 30
+.I delivermail
+assumes that an alias loop has occurred
+and it aborts the message.
+The hop-count defaults to zero.
+.PP
+.I Delivermail
+E 2
+I 2
+.I Sendmail
+E 2
+returns an exit status
+describing what it did.
+D 2
+The codes are defined in <sysexits.h>
+E 2
+I 2
+The codes are defined in
+.RI < sysexits.h >
+E 2
+.ta 3n +\w'EX_UNAVAILABLE'u+3n
+.de XX
+.ti \n(.iu
+..
+.in +\w'EX_UNAVAILABLE'u+6n
+.XX
+ 	EX_OK	Successful completion on all addresses.
+.XX
+ 	EX_NOUSER	User name not recognized.
+.XX
+ 	EX_UNAVAILABLE	Catchall meaning necessary resources
+were not available.
+.XX
+ 	EX_SYNTAX	Syntax error in address.
+.XX
+ 	EX_SOFTWARE	Internal software error,
+including bad arguments.
+.XX
+ 	EX_OSERR	Temporary operating system error,
+such as \*(lqcannot fork\*(rq.
+.XX
+ 	EX_NOHOST	Host name not recognized.
+I 2
+.XX
+	EX_TEMPFAIL	Message could not be sent immediately,
+but was queued.
+.PP
+If invoked as
+.I newaliases,
+.I sendmail
+will rebuild the alias database.
+If invoked as
+.I mailq,
+.I sendmail
+will print the contents of the mail queue.
+E 2
+.SH FILES
+I 2
+Except for
+/usr/lib/sendmail.cf,
+these pathnames are all specified in
+/usr/lib/sendmail.cf.
+Thus,
+these values are only approximations.
+.PP
+E 2
+.if t .ta 2i
+.if n .ta 3i
+/usr/lib/aliases	raw data for alias names
+.br
+I 2
+/usr/lib/aliases.pag
+.br
+E 2
+/usr/lib/aliases.dir	data base of alias names
+.br
+D 2
+/usr/lib/aliases.pag
+E 2
+I 2
+/usr/lib/sendmail.cf	configuration file
+E 2
+.br
+D 2
+/bin/mail	to deliver uucp mail
+E 2
+I 2
+/usr/lib/sendmail.fc	frozen configuration
+E 2
+.br
+I 2
+/usr/lib/sendmail.hf	help file
+.br
+/usr/lib/sendmail.st	collected statistics
+.br
+D 4
+/usr/bin/uux	to deliver uucp mail
+.br
+E 2
+/usr/net/bin/v6mail	to deliver local mail
+.br
+D 2
+/usr/net/bin/sendmail	to deliver Berknet mail
+E 2
+I 2
+/usr/net/bin/sendberkmail	to deliver Berknet mail
+E 2
+.br
+/usr/lib/mailers/arpa	to deliver ARPANET mail
+.br
+E 4
+D 2
+/tmp/mail*	temp file
+E 2
+I 2
+/usr/spool/mqueue/*	temp files
+E 2
+D 4
+.br
+E 4
+D 2
+/tmp/xscript*	saved transcript
+E 2
+.SH SEE\ ALSO
+D 2
+biff(1), binmail(1), mail(1), newaliases(1), aliases(5)
+E 2
+I 2
+D 4
+biff(1), binmail(1), mail(1), aliases(5), sendmail.cf(5),
+rmail(1), mailaddr(7);
+E 4
+I 4
+D 5
+binmail(1), mail(1), rmail(1),
+syslog(3),
+aliases(5), sendmail.cf(5),
+mailaddr(7),
+rc(8);
+E 5
+I 5
+binmail(1), mail(1), rmail(1), syslog(3),
+aliases(5), mailaddr(7), rc(8);
+E 5
+E 4
+.br
+DARPA Internet Request For Comments
+RFC819, RFC821, RFC822;
+.br
+.ul
+D 4
+Sendmail \- An Internetwork Mail Router;
+E 4
+I 4
+Sendmail \- An Internetwork Mail Router
+(SMM:16);
+E 4
+.br
+.ul
+D 4
+Sendmail Installation and Operation Guide.
+E 2
+.SH BUGS
+D 2
+.I Delivermail
+sends one copy of the letter
+to each user;
+it should send one copy
+of the letter to each host
+and distribute to multiple users there
+whenever possible.
+.PP
+.I Delivermail
+assumes the addresses can be represented as one word.
+E 2
+I 2
+.I Sendmail
+converts blanks in addresses to dots.
+E 2
+This is incorrect according to the
+I 2
+old
+E 2
+.SM ARPANET
+D 2
+mail protocol RFC 733 (NIC 41952),
+but is consistent with the real world.
+E 2
+I 2
+mail protocol RFC733 (NIC 41952),
+but is consistent with the
+new protocols
+(RFC822).
+E 4
+I 4
+Sendmail Installation and Operation Guide
+(SMM:7)
+E 4
+E 2
+E 1

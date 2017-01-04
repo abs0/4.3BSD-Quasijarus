@@ -1,0 +1,178 @@
+h15009
+s 00001/00001/00092
+d D 6.1 85/05/15 18:25:09 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00072/00025/00021
+d D 5.1 85/05/15 18:24:53 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00046/00000/00000
+d D 4.1 85/05/15 18:23:52 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 2
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+E 2
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DIR 5 
+.AT 3
+E 2
+I 2
+D 3
+.TH DIR 5  "15 January 1983"
+E 3
+I 3
+.TH DIR 5  "%Q%"
+E 3
+.UC 5
+E 2
+.SH NAME
+dir \- format of directories
+.SH SYNOPSIS
+.B #include <sys/types.h>
+.br
+.B #include <sys/dir.h>
+.SH DESCRIPTION
+D 2
+A directory
+behaves exactly like an ordinary file, save that no
+E 2
+I 2
+A directory behaves exactly like an ordinary file, save that no
+E 2
+user may write into a directory.
+The fact that a file is a directory is indicated by
+D 2
+a bit in the flag word of its i-node entry;
+see
+.IR filsys (5).
+The structure of a directory entry as given in the
+include file is:
+E 2
+I 2
+a bit in the flag word of its i-node entry; see
+.IR fs (5).
+The structure of a directory entry as given in the include file is:
+E 2
+.RS
+D 2
+.ta 8n +10n
+E 2
+I 2
+.ta 8n +10n +10n
+E 2
+.PP
+.nf
+D 2
+#ifndef	DIRSIZ
+#define	DIRSIZ	14
+E 2
+I 2
+/*
+ * A directory consists of some number of blocks of DIRBLKSIZ
+ * bytes, where DIRBLKSIZ is chosen such that it can be transferred
+ * to disk in a single atomic operation (e.g. 512 bytes on most machines).
+ *
+ * Each DIRBLKSIZ byte block contains some number of directory entry
+ * structures, which are of variable length.  Each directory entry has
+ * a struct direct at the front of it, containing its inode number,
+ * the length of the entry, and the length of the name contained in
+ * the entry.  These are followed by the name padded to a 4 byte boundary
+ * with null bytes.  All names are guaranteed null terminated.
+ * The maximum length of a name in a directory is MAXNAMLEN.
+ *
+ * The macro DIRSIZ(dp) gives the amount of space required to represent
+ * a directory entry.  Free space in a directory is represented by
+ * entries which have dp->d_reclen > DIRSIZ(dp).  All DIRBLKSIZ bytes
+ * in a directory block are claimed by the directory entries.  This
+ * usually results in the last entry in a directory having a large
+ * dp->d_reclen.  When entries are deleted from a directory, the
+ * space is returned to the previous entry in the same directory
+ * block by increasing its dp->d_reclen.  If the first entry of
+ * a directory block is free, then its dp->d_ino is set to 0.
+ * Entries other than the first in a directory do not normally have
+ * dp->d_ino set to 0.
+ */
+#ifdef KERNEL
+#define DIRBLKSIZ DEV_BSIZE
+#else
+#define	DIRBLKSIZ 512
+E 2
+#endif
+D 2
+struct	direct
+{
+	ino_t	d_ino;
+	char	d_name[DIRSIZ];
+E 2
+I 2
+
+#define MAXNAMLEN 255
+
+/*
+ * The DIRSIZ macro gives the minimum record length which will hold
+ * the directory entry.  This requires the amount of space in struct direct
+ * without the d_name field, plus enough space for the name with a terminating
+ * null byte (dp->d_namlen+1), rounded up to a 4 byte boundary.
+ */
+#undef DIRSIZ
+#define DIRSIZ(dp) \e
+    ((sizeof (struct direct) - (MAXNAMLEN+1)) + (((dp)->d_namlen+1 + 3) &~ 3))
+
+struct	direct {
+	u_long	d_ino;
+	short	d_reclen;
+	short	d_namlen;
+	char	d_name[MAXNAMLEN + 1];
+	/* typically shorter */
+E 2
+};
+I 2
+
+struct _dirdesc {
+	int	dd_fd;
+	long	dd_loc;
+	long	dd_size;
+	char	dd_buf[DIRBLKSIZ];
+};
+E 2
+.fi
+.RE
+.PP
+By convention, the first two entries in each directory
+D 2
+are for `\fB.\fR' and `\fB..\fR'.  The first is an entry for the
+directory itself.  The second is for the parent
+directory.
+The meaning of `\fB..\fR' is modified for the root directory
+of the master file system
+.RB (\*(lq / \*(rq),
+where `\fB..\fR' has the
+same meaning as `\fB.\fR'.
+E 2
+I 2
+are for `.' and `..'.  The first is an entry for the
+directory itself.  The second is for the parent directory.
+The meaning of `..' is modified for the root directory
+of the master file system (\*(lq/\*(rq),
+where `..' has the same meaning as `.'.
+E 2
+.SH "SEE ALSO"
+D 2
+filsys(5)
+E 2
+I 2
+fs(5)
+E 2
+E 1

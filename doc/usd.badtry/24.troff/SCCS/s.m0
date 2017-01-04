@@ -1,0 +1,541 @@
+h33315
+s 00001/00001/00274
+d D 6.3 04/10/24 18:29:19 msokolov 5 4
+c "device-independent" doesn't need to be capitalized
+e
+s 00055/00023/00220
+d D 6.2 04/10/24 05:56:44 msokolov 4 3
+c elucidate the differences between DITROFF and PSTROFF
+e
+s 00052/00055/00191
+d D 6.1 86/04/17 13:05:48 mckusick 3 2
+c Mark Seiden edits for 4.3BSD release
+e
+s 00000/00000/00246
+d D 5.1 86/04/17 13:05:39 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00246/00000/00000
+d D 4.1 86/04/17 13:05:33 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.br
+.rs
+D 3
+.sp |1.50i
+E 3
+I 3
+.sp |1.0i
+E 3
+.ce1000
+.ps12
+.ftB
+\*(Nr\(sl\*(Tr User's Manual
+.sp .2i
+.ftI
+.ps10
+Joseph F. Ossanna
+I 3
+(updated for 4.3BSD by Mark Seiden)
+I 4
+(updated for 4.3BSD-Quasijarus by Michael Sokolov)
+E 4
+E 3
+.ftR
+.sp
+Bell Laboratories
+Murray Hill, New Jersey 07974
+.ce0
+.sp2
+.ps \n(PS
+.fi
+.ftB
+Introduction
+.pg
+\*(NR and \*(TR are text processors under
+D 3
+the \s-1PDP\s+1-11 \s-1UNIX\s+1 Time-Sharing System\*u1\*d
+E 3
+I 3
+the \s-1UNIX\s+1 Time-Sharing System
+E 3
+that format text for typewriter-like terminals and
+D 4
+for a \%Graphic Systems phototypesetter, respectively.
+I 3
+(Device-independent \*(TR, part of the Documenter's Workbench,
+supports additional output devices.)
+E 4
+I 4
+for typesetters (see below), respectively.
+E 4
+E 3
+They accept lines of text interspersed with lines of
+format control information and
+format the text into a printable, paginated document
+having a user-designed style.
+\*(NR and \*(TR offer
+unusual freedom in document styling,
+including:
+arbitrary style headers and footers;
+arbitrary style footnotes;
+multiple automatic sequence numbering for paragraphs, sections, etc;
+multiple column output;
+dynamic font and point-size control;
+arbitrary horizontal and vertical local motions at any point;
+and
+a family of automatic overstriking, bracket construction, and
+line drawing functions.
+.pg
+\*(NR and \*(TR are highly compatible with each other and it is almost always
+possible to prepare input acceptable to both.
+Conditional input is provided that enables
+the user to embed input expressly destined for either program.
+\*(NR can prepare output directly for a variety of terminal types and
+is capable of utilizing the full resolution of each terminal.
+.pg
+I 4
+.tr &&
+\*(TR has evolved over the years; several different versions exist for
+producing output on different kinds of typesetters, printers, plotters
+and other devices that can produce output of traditional typographic quality.
+The original \*(TR drove a \%Graphic Systems CAT phototypesetter.
+Many post-processors have been written that take \*(TR output and convert
+it into other formats suitable for other devices.
+In particular, UC Berkeley developed filters and scripts for printing
+to Benson-Varian and Versatec printers/plotters with the classic \*(TR.
+However, since \*(TR was
+designed around the idiosyncrasies of the CAT phototypesetter, such
+post-processors serve poorly as a general solution.
+In response to the need for a better general solution, two newer versions
+of the \*(TR program itself have been developed.
+D 5
+AT&T developed \*(DI, which stands for Device-independent \*(TR.
+E 5
+I 5
+AT&T developed \*(DI, which stands for device-independent \*(TR.
+E 5
+\*(DI is designed to support any typesetter or output device as long as
+the user provides a description and an output driver for it, but it was
+still written when typesetters were highly specialized equipment with
+wildly diverse ad hoc interfaces and is designed for that paradigm.
+Independent of that development, Michael\ Sokolov developed \*(PS,
+a version of \*(TR that is completely independent of any physical hardware
+and formats text
+into the world standard PostScript page description language.
+PostScript is an extremely powerful device-independent page description
+language that has reached worldwide acceptance and is supported by today's
+most innovative printers, typesetters, film recorders, and computer display
+environments.
+.pg
+\*(NR, \*(TR and \*(PS are included in the 4.3BSD-Quasijarus distribution.
+For compatibility with previous Berkeley releases,
+\*(TR filters and scripts for Varian and Versatec are also included.
+(\*(TR was used at Berkeley with those plotters much more than with the
+real CAT phototypesetter.)
+This document is formatted with \*(PS and describes all three formatters.
+.pg
+E 4
+.ftB
+Usage
+.pg
+The general form of invoking \*(NR (or \*(TR) at \s-1UNIX\s+1 command level is
+.x1
+\fBnroff  \fIoptions  files\fR\
+\h'|2i'(or  \fBtroff  \fIoptions  files\fR)
+.x2
+where \fIoptions\fR represents any of a number of option arguments
+and \fIfiles\fR represents the list of files containing the document
+to be formatted.
+An argument consisting of a single minus (\fB\-\fR) is taken to be
+a file name corresponding to the standard input.
+If no file names are given input is taken from the standard input.
+The options, which may appear in any order so long as they appear
+before the files, are:
+D 4
+.sp
+E 4
+I 4
+.bp
+E 4
+.ta .2i 1.0i
+D 4
+.ftI
+.bd I 3
+E 4
+I 4
+.ftBI
+E 4
+	Option	Effect
+.br
+D 4
+.bd I
+E 4
+.ftR
+.ta .3i 1.0i
+.in 1.0i
+.ll-.3i
+.bt
+I 3
+	\fB\-i\fP	Read standard input after the input files are exhausted.
+.bt
+	\fB\-m\fIname\fR	Prepends the macro file
+\fB\(slusr\(sllib\(sltmac.\fIname\fR
+to the input \fIfiles\fR.
+.bt
+	\fB\-n\fIN\fR	Number first generated page \fIN\fR.
+.bt
+E 3
+	\fB\-o\fIlist\fR	\
+Print only pages whose page numbers appear in \fIlist\fR,
+which consists of comma-separated numbers and number ranges.
+A number range has the form \fIN\-M\fR
+and means pages \fIN\fR through \fIM;\fR
+a initial \fI\-N\fR means
+from the beginning to page \fIN;\fR and a final \fIN\-\fR means
+from \fIN\fR to the end.
+.bt
+D 3
+	\fB\-n\fIN\fR	Number first generated page \fIN\fR.
+E 3
+I 3
+	\fB\-q\fR	\
+Invoke the simultaneous input-output mode of the \fBrd\fR request.
+E 3
+.bt
+I 3
+	\fB\-r\fIaN\fR	Number register \fIa\fR (one-character) is set to \fIN\fR.
+.bt
+E 3
+	\fB\-s\fIN\fR	Stop every \fIN\fR pages.
+\*(NR will halt prior to every \fIN\fR pages (default \fIN\fR=1)
+to allow paper loading or
+changing, and will resume upon receipt of a newline.
+\*(TR will stop the phototypesetter every \fIN\fR pages,
+produce a trailer to allow changing cassettes,
+and will resume after the phototypesetter \s-1START\s+1 button is pressed.
+.bt
+D 3
+	\fB\-m\fIname\fR	Prepends the macro file
+\fB\(slusr\(sllib\(sltmac.\fIname\fR
+to the input \fIfiles\fR.
+.bt
+	\fB\-r\fIaN\fR	Register \fIa\fR (one-character) is set to \fIN\fR.
+.bt
+	\fB\-i\fP	Read standard input after the input files are exhausted.
+.bt
+	\fB\-q\fR	\
+Invoke the simultaneous input-output mode of the \fBrd\fR request.
+E 3
+I 3
+	\fB\-z\fR	Efficiently suppress formatted output.
+Only produce output to standard error (from \fBtm\fP requests or
+diagnostics).
+E 3
+.sp
+.ne 3
+D 4
+.ftI
+.bd I 3
+E 4
+I 4
+.ftBI
+E 4
+		\*(NR Only
+.br
+D 4
+.bd I
+E 4
+.ft
+.bt
+	\fB\-T\fIname\fR	Specifies
+the name of the output terminal type.
+D 4
+Currently defined names are \fB37\fR for the (default) Model 37 Teletype\(rg,
+E 4
+I 4
+Currently defined names are \fB37\fR for the (old default) Model 37 Teletype\(rg,
+\fBlpr\fR for generic line printers (current default),
+E 4
+\fBtn300\fR for the GE TermiNet\ 300 (or any terminal without half-line
+capabilities),
+\fB300S\fR for the \s-1DASI\s+1-300S,
+\fB300\fR for the \s-1DASI\s+1-300,
+D 4
+and
+\fB450\fR for the \s-1DASI\s+1-450 (Diablo Hyterm).
+E 4
+I 4
+\fB450\fR for the \s-1DASI\s+1-450 (Diablo Hyterm),
+and \fBlpr8\fR for 8-bit line printers.
+E 4
+.bt
+	\fB\-e\fR	\
+Produce equally-spaced words in adjusted
+lines, using full terminal resolution.
+I 3
+.bt
+	\fB\-h\fR	\
+On output, use tabs during horizontal spacing to increase speed.
+Device tabs setting are assumed to be (and input tabs are initially 
+set to) every 8 character widths.
+E 3
+.sp
+.ne 3
+D 4
+.ftI
+.bd I 3
+E 4
+I 4
+.ftBI
+E 4
+		\*(TR Only
+.br
+D 4
+.bd I
+E 4
+.ft
+.bt
+D 3
+	\fB\-t\fP	Direct output to the standard output instead
+of the phototypesetter.
+E 3
+I 3
+	\fB\-a\fP	Send a printable \s-1(ASCII)\s+1 approximation
+of the results to the standard output.
+E 3
+.bt
+D 3
+	\fB\-f\fP	Refrain from feeding out paper and stopping
+phototypesetter at the end of the run.
+.bt
+	\fB\-w\fP	Wait until phototypesetter is available, if
+currently busy.
+.bt
+E 3
+	\fB\-b\fR	\*(TR will report whether the phototypesetter
+is busy or available.
+No text processing is done.
+.bt
+D 3
+	\fB\-a\fP	Send a printable \s-1(ASCII)\s+1 approximation
+of the results to the standard output.
+E 3
+I 3
+	\fB\-f\fP	Refrain from feeding out paper and stopping
+phototypesetter at the end of the run.
+E 3
+.bt
+D 3
+	\fB\-p\fIN\fR	Print all characters in point size \fIN\fR
+while retaining all prescribed spacings and motions,
+to reduce phototypesetter elasped time.
+E 3
+I 3
+	\fB\-t\fP	Direct output to the standard output instead
+of the phototypesetter.
+E 3
+.bt
+D 3
+	\fB\-g\fR	Prepare output for the Murray Hill
+Computation Center phototypesetter and direct it to the standard output.
+E 3
+I 3
+	\fB\-w\fP	Wait until phototypesetter is available, if
+currently busy.
+E 3
+.ll
+.in0
+.xx
+.pg
+I 4
+\*(PS options are described in its manual page \fIpstroff\fP(1).
+.pg
+E 4
+Each option is invoked as a separate argument;
+for example,
+.x1
+\fBnroff  \-o\fI4,8\-10  \fB\-T\fI300S  \fB\-m\fIabc  file1  file2\fR
+.x2
+requests formatting of pages 4, 8, 9, and 10 of a document contained in the files
+named \fIfile1\fR and \fIfile2\fR,
+specifies the output terminal as a \s-1DASI\s+1-300S,
+and invokes the macro package \fIabc\fR.
+.pg
+Various pre- and post-processors are available for use with \*(NR and \*(TR.
+D 3
+These include the equation preprocessors \s-1NEQN\s+1 and \s-1EQN\s+1\*u2\*d
+E 3
+I 3
+D 4
+These include the equation preprocessors \s-1NEQN\s+1 and \s-1EQN\s+1\*u1\*d
+E 3
+(for \*(NR and \*(TR respectively),
+E 4
+I 4
+These include the equation preprocessors
+\s-1NEQN\s+1, \s-1EQN\s+1 and \s-1PSEQN\s+1\*u1\*d
+(for \*(NR, \*(TR and \*(PS respectively),
+E 4
+D 3
+and the table-construction preprocessor \s-1TBL\s+1\*u3\*d.
+A reverse-line postprocessor \s-1COL\s+1\*u4\*d
+E 3
+I 3
+and the table-construction preprocessor \s-1TBL\s+1\*u2\*d.
+A reverse-line postprocessor \s-1COL\s+1\*u3\*d
+E 3
+is available for multiple-column \*(NR output on terminals without reverse-line ability;
+\s-1COL\s+1 expects the Model 37 Teletype
+escape sequences that \*(NR produces by default.
+D 3
+\s-1TK\s+1\*u4\*d
+E 3
+I 3
+D 4
+\s-1TK\s+1\*u3\*d
+E 4
+I 4
+\s-1TK\s+1\*u4\*d
+E 4
+E 3
+is a 37 Teletype simulator postprocessor for printing \*(NR output on a Tektronix 4014.
+D 3
+\s-1TCAT\s+1\*u4\*d
+is phototypesetter-simulator postprocessor
+E 3
+I 3
+D 4
+\s-1TC\s+1\*u5\*d
+E 4
+I 4
+\s-1TC\s+1\*u4\*d
+E 4
+is a phototypesetter-simulator postprocessor
+E 3
+for \*(TR that produces an approximation of phototypesetter output
+on a Tektronix 4014.
+For example, in
+.x1
+D 3
+\fBtbl  \fIfiles  \fB|  eqn  |  troff  \-t \fIoptions  \fB|  tcat\fR
+E 3
+I 3
+\fBtbl  \fIfiles  \fB|  eqn  |  troff  \-t \fIoptions  \fB|  tc\fR
+E 3
+.x2
+the first \|\fB|\fR\| indicates the piping of \s-1TBL\s+1's output to \s-1EQN\s+1's input;
+the second the piping of \s-1EQN\s+1's output to \*(TR's input;
+D 3
+and the third indicates the piping of \*(TR's output to \s-1TCAT\s+1.
+\s-1GCAT\s+1\*u4\*d can be used to send \*(TR (\fB\-g\fR) output to
+the Murray Hill Computation Center.
+E 3
+I 3
+and the third indicates the piping of \*(TR's output to \s-1TC\s+1.
+E 3
+.br
+.pg
+The remainder of this manual consists of:
+D 3
+a Summary and Index;
+a Reference Manual keyed to the index;
+E 3
+I 3
+a Summary and outline;
+a Reference Manual keyed to the outline;
+E 3
+and
+a set of Tutorial Examples.
+Another tutorial is [5].
+D 3
+.sp.4i
+.ta 4i
+	Joseph F. Ossanna
+E 3
+.sp.4
+.ps -1
+.vs -1p
+.pg
+.ftB
+References
+.pg
+.ta .3i
+.in .3i
+.ti0
+D 3
+[1]	K. Thompson, D. M. Ritchie,
+E 3
+I 3
+[1]	B. W. Kernighan, L. L. Cherry,
+E 3
+.ul
+D 3
+UNIX Programmer's Manual,
+Sixth Edition (May 1975).
+.sp.4
+.ti0
+[2]	B. W. Kernighan, L. L. Cherry,
+.ul
+E 3
+Typesetting Mathematics \(em User's Guide (Second Edition),
+D 3
+Bell Laboratories internal memorandum.
+E 3
+I 3
+Bell Laboratories.
+E 3
+.sp.4
+.ti0
+D 3
+[3]	M. E. Lesk,
+E 3
+I 3
+[2]	M. E. Lesk,
+E 3
+.ul
+Tbl \(em A Program to Format Tables,
+Bell Laboratories internal memorandum.
+.sp.4
+.ti0
+D 3
+[4]	Internal on-line documentation, on \s-1UNIX\s+1.
+E 3
+I 3
+[3]	Internal on-line documentation (\fIman\fP pages) on \s-1UNIX\s+1.
+E 3
+.sp.4
+.ti0
+D 3
+[5]	B. W. Kernighan, \fIA TROFF Tutorial\fR,
+Bell Laboratories internal memorandum.
+E 3
+I 3
+D 4
+[4]	B. W. Kernighan, \fIA TROFF Tutorial\fR,
+Bell Laboratories.
+E 4
+I 4
+[4]	Your site may have similar programs for more modern displays.
+E 4
+.sp.4
+.ti0
+D 4
+[5]	Your site may have similar programs for more modern displays.
+E 4
+I 4
+[5]	B. W. Kernighan, \fIA TROFF Tutorial\fR,
+Bell Laboratories.
+E 4
+E 3
+.in0
+.ps
+.vs
+E 1

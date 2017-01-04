@@ -1,0 +1,83 @@
+h50723
+s 00006/00001/00031
+d D 6.2 86/05/12 20:17:19 karels 4 3
+c it's going away!
+e
+s 00001/00001/00031
+d D 6.1 85/05/15 15:56:58 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00003/00030
+d D 5.1 85/05/15 15:56:41 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00033/00000/00000
+d D 4.1 85/05/15 15:56:10 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH VALLOC 3
+E 2
+I 2
+D 3
+.TH VALLOC 3 "19 January 1983"
+E 3
+I 3
+D 4
+.TH VALLOC 3 "%Q%"
+E 4
+I 4
+.TH VALLOC 3C "%Q%"
+E 4
+E 3
+E 2
+.UC 3
+.SH NAME
+valloc \- aligned memory allocator
+.SH SYNOPSIS
+.nf
+.B char *valloc(size)
+.B unsigned size;
+.fi
+.SH DESCRIPTION
+I 4
+.ft B
+Valloc is obsoleted by the current version of malloc,
+which aligns page-sized and larger allocations.
+.ft R
+.PP
+E 4
+.I Valloc
+allocates
+.I size
+D 2
+bytes aligned on a boundary adequate for
+.IR vread (2)).
+E 2
+I 2
+bytes aligned on a page boundary.
+E 2
+It is implemented by calling
+.IR malloc (3)
+with a slightly larger request, saving the true beginning of the block
+allocated, and returning a properly aligned pointer.
+.SH DIAGNOSTICS
+.I Valloc
+returns a null pointer (0) if there is no available memory
+or if the arena has been detectably corrupted by storing outside the bounds
+of a block.
+.SH BUGS
+.I Vfree
+isn't implemented.
+E 1

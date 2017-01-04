@@ -1,0 +1,76 @@
+h11114
+s 00001/00001/00046
+d D 6.1 85/04/29 17:49:11 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00046
+d D 5.1 85/04/29 17:49:03 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00047/00000/00000
+d D 4.1 85/04/29 17:48:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LOOK 1 
+E 2
+I 2
+D 3
+.TH LOOK 1 "18 January 1983"
+E 3
+I 3
+.TH LOOK 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+look \- find lines in a sorted list
+.SH SYNOPSIS
+.B look
+[
+.B \-df
+]
+string
+[ file ]
+.SH DESCRIPTION
+.I Look
+consults a sorted
+.I file
+and prints all lines that begin with
+.IR string .
+It uses binary search.
+.PP
+The options 
+.B d
+and
+.B f
+affect comparisons as in
+.IR  sort (1):
+.TP 4
+.B  d
+`Dictionary' order:
+only letters, digits,
+tabs and blanks participate in comparisons.
+.TP 4
+.B  f
+Fold.
+Upper case letters compare equal to lower case.
+.PP
+If no
+.I file
+is specified,
+.I /usr/dict/words
+is assumed with collating sequence
+.B \-df.
+.SH FILES
+/usr/dict/words
+.SH "SEE ALSO"
+sort(1), grep(1)
+E 1

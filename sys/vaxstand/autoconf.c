@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)autoconf.c	7.13 (Berkeley) 9/5/99
+ *	@(#)autoconf.c	7.14 (Berkeley) 2/7/04
  */
 
 #include "param.h"
@@ -66,21 +66,6 @@ caddr_t	uioaddr730[] = { UMA };
 struct	uba_regs *ubaddr630[] =
 	{ (struct uba_regs *)((caddr_t)QBAMAP630 - 0x800) };
 caddr_t	uioaddr630[] = { (caddr_t)QIOPAGE630 };
-
-int (*v_getc)(), (*v_putc)();
-
-#ifndef SMALL
-/*
- * Virtual console configuration tables.
- */
-extern qv_init(),qd_init();
-
-int (*vcons_init[])() = {
-	qd_init,
-	qv_init,
-	0
-};
-#endif
 #endif
 
 #ifndef SMALL
@@ -91,15 +76,12 @@ int cpuspeed = 1;
 
 configure()
 {
-	union cpusid cpusid;
 	register int i;
 
 #ifndef SMALL
 	if (boothowto & RB_KDB)		/* XXX */
 		debug = 1;
 #endif
-	cpusid.cpusid = mfpr(SID);
-	cpu = cpusid.cpuany.cp_type;
 	switch (cpu) {
 
 #if VAX8600
@@ -257,13 +239,6 @@ configure()
 	case VAX_650:
 		mtpr(IUR, 0);
 		*((char *)QIOPAGE630 + QIPCR) = Q_LMEAE;
-#if !defined(SMALL)
-		/*
-		 * configure the console
-		 */
-		for(i = 0; vcons_init[i] && !(*vcons_init[i])(); i++)
-			;
-#endif
 		break;
 #endif
 	}

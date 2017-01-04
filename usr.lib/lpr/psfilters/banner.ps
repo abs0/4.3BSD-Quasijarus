@@ -1,0 +1,29 @@
+%	@(#)banner.ps	5.2 (Berkeley) 8/22/04
+%
+% This is our banner page for PostScript printers.
+% The banner page drawing code below expects the following names to be defined:
+%
+% /L (username) def
+% /J (job name) def
+% /C (class) def
+% /D (date) def
+%
+% lppsbf generates these definitions and then sends this file.
+
+/Helvetica-Bold findfont 30 scalefont setfont
+72 height 102 sub moveto (BSD UNIX Print Spooler) show
+72 height 117 sub width 72 sub height 121 sub
+3 index 3 index moveto 1 index 3 index lineto
+1 index 1 index lineto 3 index 1 index lineto closepath fill
+pop pop pop pop
+/Courier findfont 12 scalefont setfont
+144 height 205 sub moveto (User: ) show L show
+144 height 217 sub moveto (Job:  ) show J show
+144 height 229 sub moveto (Date: ) show D show
+/Helvetica-Bold findfont 60 scalefont setfont
+72 211 moveto L show
+/Helvetica-Bold findfont 40 scalefont setfont
+72 131 moveto J show
+72 91 moveto C show
+72 76 moveto width 72 sub 76 lineto 0 -4 rlineto 72 72 lineto closepath fill
+showpage

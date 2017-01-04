@@ -1,0 +1,65 @@
+h23714
+s 00001/00001/00024
+d D 6.2 85/06/28 16:54:31 sechrest 3 2
+c added comma
+e
+s 00004/00004/00021
+d D 6.1 85/05/15 11:54:36 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00025/00000/00000
+d D 5.1 85/05/15 11:54:28 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETDTABLESIZE 2 "12 February 1983"
+E 2
+I 2
+.TH GETDTABLESIZE 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+getdtablesize \- get descriptor table size
+.SH SYNOPSIS
+.nf
+.ft B
+D 2
+nds = getdtablesize()
+int nds;
+E 2
+I 2
+nfds = getdtablesize()
+int nfds;
+E 2
+.fi
+.SH DESCRIPTION
+D 3
+Each process has a fixed size descriptor table
+E 3
+I 3
+Each process has a fixed size descriptor table,
+E 3
+which is guaranteed to have at least 20 slots.  The entries in
+the descriptor table are numbered with small integers starting at 0.
+The call
+.I getdtablesize
+returns the size of this table.
+.SH "SEE ALSO"
+D 2
+close(2), dup(2), open(2)
+E 2
+I 2
+close(2), dup(2), open(2), select(2)
+E 2
+E 1

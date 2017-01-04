@@ -1,0 +1,122 @@
+h36128
+s 00010/00004/00027
+d D 5.4 88/06/08 13:56:56 bostic 7 6
+c written by Ken Arnold; add Berkeley specific header
+e
+s 00002/00002/00029
+d D 5.3 86/01/30 13:43:11 arnold 6 5
+c ttytype should have it's sive defined properly
+e
+s 00002/00004/00029
+d D 5.2 85/06/19 16:55:36 mckusick 5 4
+c copyright botch
+e
+s 00009/00001/00024
+d D 5.1 85/06/07 11:46:48 dist 4 3
+c Add copyright
+e
+s 00003/00004/00022
+d D 1.3 83/07/02 22:00:07 sam 3 2
+c no more unctrl.h
+e
+s 00006/00000/00020
+d D 1.2 81/03/05 18:57:15 arnold 2 1
+c define *outf for debugging, and #define it to be _outf so there
+c are no problems with interference with user programs
+e
+s 00020/00000/00000
+d D 1.1 81/02/09 17:48:21 arnold 1 0
+c date and time created 81/02/09 17:48:21 by arnold
+e
+u
+U
+t
+T
+I 3
+D 4
+/*	%M%	%I%	%E%	*/
+E 4
+I 4
+/*
+D 7
+ * Copyright (c) 1980 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
+E 7
+I 7
+ * Copyright (c) 1981 Regents of the University of California.
+ * All rights reserved.
+E 7
+I 5
+ *
+D 6
+ *	%W% (Berkeley) %G%
+E 6
+I 6
+D 7
+ *	@(#)curses.ext	5.2 (Berkeley) 6/19/85
+E 7
+I 7
+ * Redistribution and use in source and binary forms are permitted
+ * provided that this notice is preserved and that due credit is given
+ * to the University of California at Berkeley. The name of the University
+ * may not be used to endorse or promote products derived from this
+ * software without specific prior written permission. This software
+ * is provided ``as is'' without express or implied warranty.
+ *
+ *	%W% (Berkeley) %G%
+E 7
+E 6
+E 5
+ */
+D 5
+
+#ifndef lint
+static char sccsid[] = "%W% (Berkeley) %G%";
+#endif not lint
+E 5
+E 4
+
+E 3
+I 1
+/*
+D 3
+ * External variables for the library
+ *
+ * %W% (Berkeley) %G%
+E 3
+I 3
+ * External variables for the curses library
+E 3
+ */
+
+/* LINTLIBRARY */
+
+# include	"curses.h"
+D 3
+# include	"unctrl.h"
+E 3
+
+extern bool	_echoit, _rawmode, My_term, _endwin;
+
+D 6
+extern char	ttytype[], *_unctrl[];
+E 6
+I 6
+extern char	ttytype[50], *_unctrl[];
+E 6
+
+extern int	_tty_ch, LINES, COLS;
+
+extern SGTTY	_tty;
+
+char		_putchar();
+I 2
+
+#ifdef DEBUG
+# define	outf	_outf
+
+FILE		*outf;
+#endif
+E 2
+E 1

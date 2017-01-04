@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)4.t	6.4 (Berkeley) 4/28/86
+.\"	@(#)4.t	6.5 (Berkeley) 8/24/04
 .\"
 .NH 1
 Setting up
@@ -148,6 +148,41 @@ va|varian|Benson-Varian:\e
 	:if=/usr/lib/vpf:tf=/usr/lib/rvcat:af=/usr/adm/vaacct:\e
 	:mx#2000:pl#58:px=2112:py=1700:tr=\ef:
 .DE
+See Appendix A for how to configure the filters for PostScript printers.
+.NH 2
+Banner pages
+.PP
+By default
+.I lpd
+generates banner pages between print jobs to help users find
+their printouts in the stack.
+Banner pages are normally generated directly by
+.I lpd
+in plain text, either filling the whole page (default) or
+consisting of a single line (if the
+.B sb
+capability is specified).
+It is also possible to direct
+.I lpd
+to invoke an external program to generate banner pages instead of
+doing it directly.
+See the description of the
+.B bf
+capability in
+.IR printcap (5).
+This mechanism is used for PostScript printers.
+.PP
+The banner page is normally printed before the job itself.
+However, if the
+.B hl
+capability is specified, the banner page is printed last.
+Banner pages may be completely disabled by specifying the
+.B sh
+capability.
+A user may also individually suppress the banner page for a print job
+by invoking
+.I lpr
+with \fB\-h\fP.
 .NH 2
 Access Control
 .PP

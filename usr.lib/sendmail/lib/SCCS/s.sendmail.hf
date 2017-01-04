@@ -1,0 +1,138 @@
+h23930
+s 00011/00000/00045
+d D 4.2 85/06/07 21:08:17 miriam 6 5
+m 
+c Add copyright
+e
+s 00000/00000/00045
+d D 4.1 83/07/25 19:07:06 eric 5 4
+m 
+c 4.2 release version
+e
+s 00000/00001/00045
+d D 3.4 83/07/17 20:45:50 eric 4 3
+m 
+c fix botch in default help message
+e
+s 00012/00003/00034
+d D 3.3 83/01/05 16:55:25 eric 3 2
+m 
+c add bug contact info
+e
+s 00017/00005/00020
+d D 3.2 81/11/21 09:58:09 eric 2 1
+c convert to SMTP draft 3
+e
+s 00025/00000/00000
+d D 3.1 81/10/22 09:22:30 eric 1 0
+c date and time created 81/10/22 09:22:30 by eric
+e
+u
+U
+f b 
+f i 
+t
+T
+I 1
+%Z%	%M%	%I%	%G%
+I 6
+cpyr	
+cpyr	Sendmail
+cpyr	Copyright (c) 1983  Eric P. Allman
+cpyr	Berkeley, California
+cpyr	
+cpyr	Copyright (c) 1983 Regents of the University of California.
+cpyr	All rights reserved.  The Berkeley software License Agreement
+cpyr	specifies the terms and conditions for redistribution.
+cpyr	
+cpyr	%W% (Berkeley) %G%
+cpyr	
+E 6
+smtp	Commands:
+D 2
+smtp		MAIL	MRCP	DATA	DOIT	RSET
+E 2
+I 2
+smtp		HELO	MAIL	RCPT	DATA	RSET
+E 2
+D 3
+smtp		NOOP	QUIT	HELP	VRFY
+E 3
+I 3
+smtp		NOOP	QUIT	HELP	VRFY	EXPN
+E 3
+smtp	For more info use "HELP <topic>".
+I 3
+D 4
+smtp
+E 4
+smtp	To report bugs in the implementation contact eric@Berkeley.ARPA
+smtp	or eric@UCB-ARPA.ARPA.
+smtp	For local information contact postmaster at this site.
+E 3
+help	HELP [ <topic> ]
+help		The HELP command gives help info.
+I 2
+helo	HELO <hostname>
+helo		Introduce yourself.  I am a boor, so I really don't
+helo		care if you do.
+E 2
+mail	MAIL FROM: <sender>
+mail		Specifies the sender.
+D 2
+mrcp	MRCP TO: <recipient>
+mrcp		Specifies the recipient.  Can be used any number of times.
+E 2
+I 2
+rcpt	RCPT TO: <recipient>
+rcpt		Specifies the recipient.  Can be used any number of times.
+E 2
+data	DATA
+data		Following text is collected as the message.
+data		End with a single dot.
+D 2
+doit	DOIT
+doit		Causes the message to be sent.
+E 2
+rset	RSET
+D 3
+rset		Resets the system -- same as QUIT in this implementation.
+E 3
+I 3
+rset		Resets the system.
+E 3
+quit	QUIT
+D 3
+quit		Exit sendmail
+E 3
+I 3
+quit		Exit sendmail (SMTP).
+E 3
+vrfy	VRFY <recipient>
+vrfy		Not implemented to protocol.  Gives some sexy
+vrfy		information.
+I 3
+expn	EXPN <recipient>
+expn		Same as VRFY in this implementation.
+E 3
+noop	NOOP
+noop		Do nothing.
+I 2
+send	SEND FROM: <sender>
+send		replaces the MAIL command, and can be used to send
+send		directly to a users terminal.  Not supported in this
+send		implementation.
+soml	SOML FROM: <sender>
+soml		Send or mail.  If the user is logged in, send directly,
+soml		otherwise mail.  Not supported in this implementation.
+saml	SAML FROM: <sender>
+saml		Send and mail.  Send directly to the user's terminal,
+saml		and also mail a letter.  Not supported in this
+saml		implementation.
+I 3
+turn	TURN
+turn		Reverses the direction of the connection.  Not currently
+turn		implemented.
+E 3
+E 2
+E 1

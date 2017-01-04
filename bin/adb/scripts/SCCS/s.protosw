@@ -1,0 +1,12 @@
+h22043
+s 00001/00000/00000
+d D 5.1 88/03/30 14:46:06 bostic 1 0
+c date and time created 88/03/30 14:46:06 by bostic
+e
+u
+U
+t
+T
+I 1
+./"type"16t"domain"16t"protocol"8t"flags"nd++8tpd8txnn"input"16t"output"16t"ctlinput"16t"ctloutput"n4pn"usrreq"16t"init"16t"fasttimo"16t"slowtimo"n4pn"drain"np
+E 1

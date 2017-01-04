@@ -1,0 +1,172 @@
+h14683
+s 00000/00000/00108
+d D 6.1 85/04/27 12:45:53 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00006/00021/00102
+d D 5.1 85/04/27 12:45:37 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00123/00000/00000
+d D 4.1 85/04/27 12:45:00 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH ANALYZE 8 "%Q%"
+.UC 4
+.lg 0
+.SH NAME
+analyze \- Virtual UNIX postmortem crash analyzer
+.SH SYNOPSIS
+.B /etc/analyze
+[
+.B \-s
+swapfile
+] [
+.B \-f
+] [
+.B \-m
+] [
+.B \-d
+] [
+.B \-D
+] [
+.B \-v
+]
+corefile
+[ system ]
+.SH DESCRIPTION
+.I Analyze
+is the post-mortem analyzer for the state of the paging system.
+In order to use
+.I analyze
+you must arrange to get a image of the memory (and possibly the
+paging area) of the system after it crashes (see
+D 2
+.IR crash (8)).
+E 2
+I 2
+.IR crash (8V)).
+E 2
+.PP
+The
+.I analyze
+program reads the relevant system data structures from the core
+image file and indexing information from 
+.B /vmunix
+D 2
+(or the specified file).
+E 2
+I 2
+(or the specified file)
+E 2
+to determine the state of the paging subsystem at the point of crash.
+It looks at each process in the system, and the resources each is
+using in an attempt to determine inconsistencies in the paging system
+state.  Normally, the output consists of a sequence of lines showing
+each active process, its state (whether swapped in or not), its
+D 2
+.I p0br,
+E 2
+I 2
+.IR p0br ,
+E 2
+and the number and location of its page table pages.
+Any pages which are locked while raw i/o is in progress, or which
+are locked because they are
+.I intransit
+are also printed.  (Intransit text pages often diagnose as duplicated;
+you will have to weed these out by hand.)
+.PP
+The program checks that any pages in core which are marked as not
+modified are, in fact, identical to the swap space copies.
+It also checks for non-overlap of the swap space, and that the core
+map entries correspond to the page tables.
+The state of the free list is also checked.
+.PP
+Options to
+D 2
+.I analyze:
+E 2
+I 2
+.IR analyze :
+E 2
+.TP
+.B \-D
+causes the diskmap for each process to be printed.
+.TP
+.B \-d
+causes the (sorted) paging area usage to be printed.
+.TP
+.B \-f
+which causes the free list to be dumped.
+.TP
+.B \-m
+causes the entire coremap state to be dumped.
+.TP
+.B \-v
+(long unused) which causes a hugely verbose output format to be used.
+.PP
+In general, the output from this program can be confused by processes
+which were forking, swapping, or exiting or
+happened to be in unusual states when the
+crash occurred.  You should examine the flags fields of relevant processes
+in the output of a
+.IR pstat (8)
+to weed out such processes.
+.PP
+It is possible to look at the core dump with
+.I adb
+if you do
+.IP
+D 2
+adb /vmunix /vmcore
+.br
+.lg 0
+/m 80000000 #ffffffff
+.LP
+which fixes the map of
+.I vmcore
+so that symbols in data space will work.
+Note that the debugger is looking at the physical memory at the point
+of crash; you will have to determine which pages of physical memory
+virtual pages are in if you wish to look at them.
+If
+.I analyze
+says that a processes page tables are in page 218 (hex of course), then
+you can look at them by looking at address 0x80043000 in the dump, i.e.
+\*(lq80043000,80/X\*(rq will print the page of page tables.
+E 2
+I 2
+adb \-k /vmunix /vmcore
+E 2
+.SH FILES
+/vmunix	default system namelist
+.SH SEE ALSO
+D 2
+ps(1), crash(8), pstat(8)
+E 2
+I 2
+adb(1), ps(1), crash(8V), pstat(8)
+E 2
+.SH AUTHORS
+Ozalp Babaoglu and William Joy
+.SH DIAGNOSTICS
+Various diagnostics about overlaps in swap mappings, missing swap mappings,
+page table entries inconsistent with the core map, incore pages which
+are marked clean but differ from disk-image copies, pages which are
+locked or intransit, and inconsistencies in the free list.
+.PP
+It would be nice if this program analyzed the system in general, rather
+than just the paging system in particular.
+E 1

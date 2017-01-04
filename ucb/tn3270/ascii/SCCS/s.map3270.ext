@@ -1,0 +1,35 @@
+h29657
+s 00001/00001/00014
+d D 1.2 99/09/12 20:00:03 msokolov 2 1
+c fix SCCS ID keywords
+e
+s 00015/00000/00000
+d D 1.1 87/05/10 11:35:16 minshall 1 0
+c date and time created 87/05/10 11:35:16 by minshall
+e
+u
+U
+t
+T
+I 1
+/*
+D 2
+ *	@(#)map3270.ext	3.1  10/29/86
+E 2
+I 2
+ *	%W%  %G%
+E 2
+ */
+
+/*
+ * External routines from map3270.c.
+ */
+
+extern char
+	*strsave();
+
+#if	defined(INCLUDED_STATE)
+extern state
+	*InitControl();
+#endif	/* defined(INCLUDED_STATE) */
+E 1

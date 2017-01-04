@@ -1,0 +1,192 @@
+h39205
+s 00001/00001/00135
+d D 6.5 04/10/21 06:34:50 msokolov 5 4
+c "super-server" should be spelled with a hyphen, not a minus
+e
+s 00005/00000/00131
+d D 6.4 86/05/26 13:23:13 karels 4 3
+c sighup restarts
+e
+s 00010/00003/00121
+d D 6.3 86/05/22 20:42:22 karels 3 2
+c update
+e
+s 00000/00003/00124
+d D 6.2 86/05/13 19:35:51 karels 2 1
+c I disagree
+e
+s 00127/00000/00000
+d D 6.1 85/04/27 16:15:03 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH INETD 8 "%Q%"
+.UC 6
+.SH NAME
+D 5
+inetd \- internet ``super\-server''
+E 5
+I 5
+inetd \- internet ``super-server''
+E 5
+.SH SYNOPSIS
+.B /etc/inetd
+[
+.B \-d
+] [ configuration file ]
+.SH DESCRIPTION
+.I Inetd
+should be run at boot time by
+.IR /etc/rc.local .
+It then listens for connections on certain
+internet sockets.  When a connection is found on one
+of its sockets, it decides what service the socket
+corresponds to, and invokes a program to service the request.
+After the program is
+finished, it continues to listen on the socket (except in some cases which
+will be described below).  Essentially,
+.I inetd
+allows running one daemon to invoke several others,
+reducing load on the system.
+.PP
+Upon execution,
+.I inetd
+reads its configuration information from a configuration
+file which, by default, is
+.IR /etc/inetd.conf .
+There must be an entry for each field of the configuration
+file, with entries for each field separated by a tab or
+a space.  Comments are denoted by a ``#'' at the beginning
+of a line.  There must be an entry for each field.  The
+fields of the configuration file are as follows:
+.br
+	service name
+.br
+	socket type
+.br
+	protocol
+.br
+	wait/nowait
+.br
+	user
+.br
+	server program
+.br
+	server program arguments
+.PP
+The
+.I service name
+entry is the name of a valid service in
+the file
+.IR /etc/services/ .
+For ``internal'' services (discussed below), the service
+name
+.I must
+D 3
+be the official name of the service (that is, the left-most entry in
+E 3
+I 3
+be the official name of the service (that is, the first entry in
+E 3
+.IR /etc/services ).
+.PP
+The
+.I socket type
+should be one of ``stream'', ``dgram'', ``raw'', ``rdm'', or ``seqpacket'',
+depending on whether the socket is a stream, datagram, raw,
+reliably delivered message, or sequenced packet socket.
+.PP
+The
+.I protocol
+must be a valid protocol as given in
+.IR /etc/protocols .
+Examples might be ``tcp'' or ``udp''.
+.PP
+The
+.I wait/nowait
+entry is applicable to datagram sockets only (other sockets should
+have a ``nowait'' entry in this space).  If a datagram server connects
+to its peer, freeing the socket so
+.I inetd
+can received further messages on the socket, it is said to be
+a ``multi-threaded'' server, and should use the ``nowait''
+entry.  For datagram servers which process all incoming datagrams
+on a socket and eventually time out, the server is said to be
+D 3
+``single-threaded'' and should use a ``wait'' entry.  ``Rwho''
+E 3
+I 3
+``single-threaded'' and should use a ``wait'' entry.  ``Comsat'' (``biff'')
+E 3
+and ``talk'' are both examples of the latter type of
+datagram server.
+I 3
+.I Tftpd
+is an exception; it is a datagram server that establishes pseudo-connections.
+It must be listed as ``wait'' in order to avoid a race;
+the server reads the first packet, creates a new socket,
+and then forks and exits to allow
+.I inetd
+to check for new service requests to spawn new servers.
+E 3
+.PP
+The
+.I user
+entry should contain the user name of the user as whom the server
+should run.  This allows for servers to be given less permission
+than root.
+The
+.I server program
+entry should contain the pathname of the program which is to be
+executed by
+.I inetd
+when a request is found on its socket.  If
+.I inetd
+provides this service internally, this entry should
+be ``internal''.
+.PP
+The arguments to the server program should be just as they
+normally are, starting with argv[0], which is the name of
+the program.  If the service is provided internally, the
+word ``internal'' should take the place of this entry.
+.PP
+.I Inetd
+provides several ``trivial'' services internally by use of
+routines within itself.  These services are ``echo'',
+``discard'', ``chargen'' (character generator), ``daytime''
+(human readable time), and ``time'' (machine readable time,
+in the form of the number of seconds since midnight, January
+1, 1900).  All of these services are tcp based.  For
+details of these services, consult the appropriate RFC
+from the Network Information Center.
+I 4
+.PP
+.I Inetd
+rereads its configuration file when it receives a hangup signal, SIGHUP.
+Services may be added, deleted or modified when the configuration file
+is reread.
+E 4
+.SH "SEE ALSO"
+comsat(8C), ftpd(8C), rexecd(8C), rlogind(8C), rshd(8C),
+D 3
+rwhod(8C), telnetd(8C), tftpd(8C)
+E 3
+I 3
+telnetd(8C), tftpd(8C)
+E 3
+D 2
+.SH BUGS
+Internal services should not have to have their official
+name in the configuration file.
+E 2
+E 1

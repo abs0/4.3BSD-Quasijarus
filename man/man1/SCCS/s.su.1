@@ -1,0 +1,120 @@
+h23760
+s 00004/00007/00051
+d D 6.2 86/05/05 16:55:18 mckusick 4 3
+c only those in wheel group can su to root
+e
+s 00017/00003/00041
+d D 6.1 85/04/29 15:03:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00042
+d D 5.1 85/04/29 15:03:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00044/00000/00000
+d D 4.1 85/04/29 15:03:31 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SU 1 11/16/79
+E 2
+I 2
+D 3
+.TH SU 1 "16 November 1979"
+E 3
+I 3
+.TH SU 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+su \- substitute user id temporarily
+.SH SYNOPSIS
+.B su
+D 3
+[ userid ]
+E 3
+I 3
+[ \-f ] [ \- ] [ userid ]
+E 3
+.SH DESCRIPTION
+.I Su
+demands the password of the specified
+.I userid,
+and if it is given,
+changes to that 
+.I userid
+and invokes the Shell
+.IR sh (1)
+I 3
+or
+.IR csh (1)
+E 3
+without changing the current directory.
+The user environment
+is unchanged except for HOME and SHELL,
+which are taken from the password file
+for the user being substituted
+(see
+D 2
+.IR environ (5)).
+E 2
+I 2
+.IR environ (7)).
+E 2
+The new user ID stays in force until the Shell exits.
+.PP
+If no 
+.I userid
+D 4
+is specified, `root' is assumed.
+E 4
+I 4
+is specified, ``root'' is assumed.
+Only users in the ``wheel'' group (group 0) can
+.I su
+to ``root'', even with the root password.
+E 4
+To remind the super-user of his responsibilities,
+the Shell substitutes `#' for its usual prompt.
+I 3
+.PP
+The
+.B \-f
+option prevents
+.IR csh (1)
+from executing the .cshrc file; thus making
+.I su
+start up faster.
+.PP
+The
+.B \-
+option simulates a full login.
+E 3
+.SH "SEE ALSO"
+D 3
+sh(1)
+E 3
+I 3
+sh(1), csh(1)
+E 3
+D 4
+.SH BUGS
+Local administrative rules cause restrictions to
+be placed on who can
+.I su
+to `root', even with the root password.
+These rules vary from site to site.
+E 4
+E 1

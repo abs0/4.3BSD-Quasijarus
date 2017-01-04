@@ -1,0 +1,34 @@
+h43242
+s 00002/00000/00012
+d D 1.2 2012/07/15 23:22:54 msokolov 2 1
+c encoding TroffEncoding line added
+c set nolig for the Courier and Helvetica families
+e
+s 00012/00000/00000
+d D 1.1 2012/03/05 23:57:19 msokolov 1 0
+c date and time created 2012/03/05 23:57:19 by msokolov
+e
+u
+U
+t
+T
+I 1
+# %W% (Berkeley) %E%
+
+psname Courier
+I 2
+encoding TroffEncoding
+E 2
+fixedwidth 600
+I 2
+nolig
+E 2
+
+setup:
+/Courier findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Courier-troff exch definefont
+E 1

@@ -1,0 +1,3779 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%DocumentSuppliedResources: encoding TroffEncoding
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/04
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+	currentdict
+end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: 1 1
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 14 SF
+11117 32280 (Chapter) P
+14383 32280 (3) P
+2 9 SF
+11190 30480 (C) P
+11760 30480 (LIBRARIES) P
+11625 27480 (GENERAL) P
+0 10 SF
+3240 26340 (This) P
+4600 26340 (chapter) P
+6658 26340 (and) P
+7817 26340 (Chapter) P
+10009 26340 (4) P
+10602 26340 (describe) P
+12893 26340 (the) P
+13919 26340 (libraries) P
+16178 26340 (that) P
+17371 26340 (are) P
+18396 26340 (supported) P
+21055 26340 (on) P
+21947 26340 (the) P
+3240 25620 (UNIX) P
+4985 25620 (operating) P
+7496 25620 (system.) P
+9757 25620 (A) P
+10435 25620 (library) P
+12280 25620 (is) P
+12925 25620 (a) P
+13436 25620 (collection) P
+16047 25620 (of) P
+16792 25620 (related) P
+18669 25620 (functions) P
+21147 25620 (and/or) P
+3240 24900 (declarations) P
+6364 24900 (that) P
+7490 24900 (simplify) P
+9717 24900 (programming) P
+13210 24900 (effort) P
+14769 24900 (by) P
+15595 24900 (linking) P
+17522 24900 (only) P
+18815 24900 (what) P
+20207 24900 (is) P
+20832 24900 (needed,) P
+3240 24180 (allowing) P
+5542 24180 (use) P
+6543 24180 (of) P
+7244 24180 (locally) P
+9078 24180 (produced) P
+11511 24180 (functions,) P
+14095 24180 (etc.) P
+15345 24180 (All) P
+16313 24180 (of) P
+17014 24180 (the) P
+17948 24180 (functions) P
+20382 24180 (described) P
+3240 23460 (are) P
+4329 23460 (also) P
+5651 23460 (described) P
+8305 23460 (in) P
+9128 23460 (Part) P
+10451 23460 (3) P
+11107 23460 (of) P
+11963 23460 (the) P
+1 10 SF
+13052 23460 (UNIX) P
+14808 23460 (System) P
+16829 23460 (Programmer) P
+20283 23460 (Reference) P
+3240 22740 (Manual) P
+0 10 SF
+5107 22740 (.) P
+5673 22740 (Most) P
+7122 22740 (of) P
+7837 22740 (the) P
+8785 22740 (declarations) P
+11898 22740 (described) P
+14411 22740 (are) P
+15358 22740 (in) P
+16040 22740 (Part) P
+17222 22740 (5) P
+17737 22740 (of) P
+18452 22740 (the) P
+1 10 SF
+19400 22740 (UNIX) P
+21015 22740 (System) P
+3240 22020 (Programmer) P
+6602 22020 (Reference) P
+9263 22020 (Manual) P
+0 10 SF
+11130 22020 (.) P
+11743 22020 (The) P
+12939 22020 (three) P
+14401 22020 (main) P
+15864 22020 (libraries) P
+18093 22020 (on) P
+18956 22020 (the) P
+19952 22020 (UNIX) P
+21714 22020 (sys\255) P
+3240 21300 (tem) P
+4340 21300 (are:) P
+2 10 SF
+3440 20580 (C) P
+4073 20580 (library) P
+0 10 SF
+9240 20580 (This) P
+10623 20580 (is) P
+11339 20580 (the) P
+12388 20580 (basic) P
+14136 20580 (library) P
+16052 20580 (for) P
+17068 20580 (C) P
+17784 20580 (language) P
+20264 20580 (programs.) P
+9240 19860 (The) P
+10442 19860 (C) P
+11110 19860 (library) P
+12978 19860 (is) P
+13646 19860 (composed) P
+16346 19860 (of) P
+17114 19860 (functions) P
+19615 19860 (and) P
+20749 19860 (declara\255) P
+9240 19140 (tions) P
+10628 19140 (used) P
+11947 19140 (for) P
+12867 19140 (\212le) P
+13854 19140 (access,) P
+15754 19140 (string) P
+17341 19140 (testing) P
+19161 19140 (and) P
+20247 19140 (manipula\255) P
+9240 18420 (tion,) P
+10537 18420 (character) P
+12947 18420 (testing) P
+14760 18420 (and) P
+15839 18420 (manipulation,) P
+19368 18420 (memory) P
+21580 18420 (allo\255) P
+9240 17700 (cation,) P
+11110 17700 (and) P
+12230 17700 (other) P
+13717 17700 (functions.) P
+16554 17700 (This) P
+17875 17700 (library) P
+19729 17700 (is) P
+20382 17700 (described) P
+9240 16980 (later) P
+10506 16980 (in) P
+11173 16980 (this) P
+12240 16980 (chapter.) P
+2 10 SF
+3440 16260 (Object) P
+5373 16260 (\212le) P
+0 10 SF
+9207 16260 (This) P
+10657 16260 (library) P
+12640 16260 (provides) P
+15089 16260 (functions) P
+17705 16260 (for) P
+18787 16260 (the) P
+19902 16260 (access) P
+21814 16260 (and) P
+9240 15540 (manipulation) P
+12635 15540 (of) P
+13363 15540 (object) P
+15057 15540 (\212les.) P
+16634 15540 (This) P
+17928 15540 (library) P
+19755 15540 (is) P
+20382 15540 (described) P
+9240 14820 (in) P
+9907 14820 (Chapter) P
+12006 14820 (4.) P
+2 10 SF
+3440 14100 (Math) P
+5040 14100 (library) P
+0 10 SF
+9240 14100 (This) P
+10689 14100 (library) P
+12671 14100 (provides) P
+15119 14100 (exponential,) P
+18450 14100 (bessel) P
+20297 14100 (functions,) P
+9240 13380 (logarithmic,) P
+12480 13380 (hyperbolic,) P
+15519 13380 (and) P
+16708 13380 (trigonometric) P
+20297 13380 (functions.) P
+9240 12660 (This) P
+10507 12660 (library) P
+12307 12660 (is) P
+12907 12660 (described) P
+15405 12660 (in) P
+16072 12660 (Chapter) P
+18171 12660 (4.) P
+3240 11580 (Some) P
+4858 11580 (libraries) P
+7075 11580 (consist) P
+8992 11580 (of) P
+9743 11580 (two) P
+10894 11580 (portions) P
+13112 11580 (\255) P
+13563 11580 (functions) P
+16047 11580 (and) P
+17164 11580 (declarations.) P
+20663 11580 (In) P
+21414 11580 (some) P
+3240 10860 (cases,) P
+5012 10860 (the) P
+6103 10860 (user) P
+7460 10860 (must) P
+8985 10860 (request) P
+11075 10860 (that) P
+12332 10860 (the) P
+13422 10860 (functions) P
+16012 10860 (\(and/or) P
+18102 10860 (declarations\)) P
+21557 10860 (of) P
+22414 10860 (a) P
+3240 10140 (speci\212c) P
+5307 10140 (library) P
+7142 10140 (be) P
+7943 10140 (included) P
+10244 10140 (in) P
+10946 10140 (a) P
+11447 10140 (program) P
+13714 10140 (being) P
+15281 10140 (compiled.) P
+18098 10140 (In) P
+18832 10140 (other) P
+20299 10140 (cases,) P
+21947 10140 (the) P
+3240 9420 (functions) P
+5673 9420 (\(and/or) P
+7606 9420 (declarations\)) P
+10904 9420 (are) P
+11836 9420 (included) P
+14102 9420 (automatically.) P
+2 9 SF
+3240 7260 (Including) P
+5640 7260 (Functions) P
+0 10 SF
+3240 6180 (When) P
+4878 6180 (a) P
+5350 6180 (program) P
+7589 6180 (is) P
+8195 6180 (being) P
+9734 6180 (compiled,) P
+12323 6180 (the) P
+13262 6180 (compiler) P
+15601 6180 (will) P
+16740 6180 (automatically) P
+20211 6180 (search) P
+21947 6180 (the) P
+3240 5460 (C) P
+3916 5460 (language) P
+6357 5460 (library) P
+8233 5460 (to) P
+8976 5460 (locate) P
+10684 5460 (and) P
+11825 5460 (include) P
+13866 5460 (functions) P
+16374 5460 (that) P
+17549 5460 (are) P
+18556 5460 (used) P
+19930 5460 (in) P
+20672 5460 (the) P
+21680 5460 (pro\255) P
+3240 4740 (gram.) P
+5058 4740 (This) P
+6359 4740 (is) P
+6993 4740 (the) P
+7960 4740 (case) P
+9225 4740 (only) P
+10526 4740 (for) P
+11460 4740 (the) P
+12427 4740 (C) P
+13261 4740 (library) P
+15095 4740 (and) P
+16195 4740 (no) P
+17029 4740 (other) P
+18496 4740 (library.) P
+20680 4740 (In) P
+21414 4740 (order) P
+3240 4020 (for) P
+4179 4020 (the) P
+5151 4020 (compiler) P
+7523 4020 (to) P
+8229 4020 (locate) P
+9900 4020 (and) P
+11005 4020 (include) P
+13009 4020 (functions) P
+15480 4020 (from) P
+16885 4020 (other) P
+18356 4020 (libraries,) P
+20710 4020 (the) P
+21681 4020 (user) P
+3240 3300 (must) P
+4771 3300 (specify) P
+6866 3300 (these) P
+8461 3300 (libraries) P
+10790 3300 (on) P
+11753 3300 (the) P
+12849 3300 (command) P
+15578 3300 (line) P
+16841 3300 (for) P
+17904 3300 (the) P
+19000 3300 (compiler.) P
+21846 3300 (For) P
+2 10 SF
+21880 1872 (3\2551) P
+end restore showpage
+%%Page: 2 2
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+0 10 SF
+3240 32400 (example,) P
+5648 32400 (when) P
+7173 32400 (using) P
+8699 32400 (functions) P
+11158 32400 (of) P
+11884 32400 (the) P
+12843 32400 (math) P
+14269 32400 (library,) P
+16245 32400 (the) P
+17204 32400 (user) P
+18429 32400 (must) P
+19822 32400 (request) P
+21780 32400 (that) P
+3240 31680 (the) P
+4208 31680 (math) P
+5643 31680 (library) P
+7478 31680 (be) P
+8279 31680 (searched) P
+10610 31680 (by) P
+11444 31680 (including) P
+13945 31680 (the) P
+14912 31680 (argument) P
+2 10 SF
+17412 31680 (\255lm) P
+0 10 SF
+18513 31680 (on) P
+19347 31680 (the) P
+20314 31680 (command) P
+3240 30960 (line,) P
+4490 30960 (such) P
+5789 30960 (as:) P
+3240 29160 (cc) P
+3972 29160 (\212le.c) P
+5355 29160 (\255lm) P
+3240 27360 (The) P
+4373 27360 (argument) P
+2 10 SF
+6839 27360 (\255lm) P
+0 10 SF
+7906 27360 (must) P
+9273 27360 (come) P
+10772 27360 (after) P
+12071 27360 (all) P
+12871 27360 (\212les) P
+14071 27360 (that) P
+3240 26640 (reference) P
+5670 26640 (functions) P
+8103 26640 (in) P
+8770 26640 (the) P
+9703 26640 (math) P
+11103 26640 (library) P
+12903 26640 (in) P
+13570 26640 (order) P
+15036 26640 (for) P
+3240 25920 (the) P
+4173 25920 (link) P
+5307 25920 (editor) P
+6907 25920 (to) P
+7574 25920 (know) P
+9107 25920 (which) P
+10773 25920 (functions) P
+13206 25920 (to) P
+13873 25920 (include) P
+15839 25920 (in) P
+3240 25200 (the) P
+4173 25200 (a.out) P
+5556 25200 (\212le.) P
+3240 24120 (This) P
+4507 24120 (method) P
+6507 24120 (should) P
+8307 24120 (be) P
+9073 24120 (used) P
+10372 24120 (for) P
+11272 24120 (all) P
+12072 24120 (functions) P
+14505 24120 (that) P
+15605 24120 (are) P
+16537 24120 (not) P
+17504 24120 (part) P
+18637 24120 (of) P
+19337 24120 (the) P
+20270 24120 (C) P
+20870 24120 (language) P
+23235 24120 (library.) P
+2 9 SF
+3240 21960 (Including) P
+5640 21960 (Declarations) P
+0 10 SF
+3240 20880 (Some) P
+4860 20880 (functions) P
+7346 20880 (require) P
+9298 20880 (a) P
+9817 20880 (set) P
+10736 20880 (of) P
+11489 20880 (declarations) P
+14639 20880 (in) P
+15358 20880 (order) P
+16876 20880 (to) P
+17595 20880 (operate) P
+19612 20880 (properly.) P
+22247 20880 (A) P
+3240 20160 (set) P
+4165 20160 (of) P
+4923 20160 (declarations) P
+8079 20160 (is) P
+8737 20160 (stored) P
+10461 20160 (in) P
+11186 20160 (a) P
+11710 20160 (\212le) P
+12735 20160 (under) P
+14359 20160 (the) P
+1 10 SF
+15350 20160 (/usr/include) P
+0 10 SF
+18474 20160 (directory.) P
+21248 20160 (These) P
+3240 19440 (\212les) P
+4487 19440 (are) P
+5466 19440 (referred) P
+7611 19440 (to) P
+8325 19440 (as) P
+1 10 SF
+9071 19440 (header) P
+10983 19440 (\212les) P
+0 10 SF
+11949 19440 (.) P
+12546 19440 (In) P
+13292 19440 (order) P
+14804 19440 (to) P
+15517 19440 (include) P
+17529 19440 (a) P
+18041 19440 (certain) P
+19919 19440 (header) P
+21763 19440 (\212le,) P
+3240 18720 (the) P
+4343 18720 (user) P
+5712 18720 (must) P
+7249 18720 (specify) P
+9350 18720 (this) P
+10586 18720 (request) P
+12687 18720 (within) P
+14590 18720 (the) P
+15692 18720 (C) P
+16461 18720 (language) P
+18995 18720 (program.) P
+21747 18720 (The) P
+3240 18000 (request) P
+5172 18000 (is) P
+5772 18000 (in) P
+6439 18000 (the) P
+7372 18000 (form:) P
+3240 16200 (#include) P
+5506 16200 (<\212le.h>) P
+3240 14400 (where) P
+1 10 SF
+4905 14400 (\212le.h) P
+0 10 SF
+6288 14400 (is) P
+6888 14400 (the) P
+7821 14400 (name) P
+9320 14400 (of) P
+10020 14400 (the) P
+10953 14400 (\212le.) P
+3240 13680 (Since) P
+4773 13680 (the) P
+5706 13680 (header) P
+7504 13680 (\212les) P
+8704 13680 (de\212ne) P
+10370 13680 (the) P
+11303 13680 (type) P
+12536 13680 (of) P
+13236 13680 (the) P
+14169 13680 (functions) P
+16602 13680 (and) P
+3240 12960 (various) P
+5206 12960 (preprocessor) P
+8470 12960 (constants,) P
+11052 12960 (they) P
+12285 12960 (must) P
+13652 12960 (be) P
+14418 12960 (included) P
+3240 12240 (before) P
+4972 12240 (invoking) P
+7306 12240 (the) P
+8239 12240 (functions) P
+10672 12240 (they) P
+11905 12240 (declare.) P
+3240 11160 (The) P
+4373 11160 (remainder) P
+7005 11160 (of) P
+7705 11160 (this) P
+8772 11160 (chapter) P
+10737 11160 (describes) P
+13168 11160 (the) P
+14101 11160 (functions) P
+16534 11160 (and) P
+3240 10440 (header) P
+5038 10440 (\212les) P
+6238 10440 (of) P
+6938 10440 (the) P
+7871 10440 (C) P
+8471 10440 (Library.) P
+3240 9720 (The) P
+4373 9720 (description) P
+7239 9720 (of) P
+7939 9720 (the) P
+8872 9720 (library) P
+10672 9720 (begins) P
+12438 9720 (with) P
+13705 9720 (the) P
+14638 9720 (actions) P
+16537 9720 (required) P
+18736 9720 (by) P
+19536 9720 (the) P
+20469 9720 (user) P
+21668 9720 (to) P
+22335 9720 (include) P
+24301 9720 (the) P
+25234 9720 (functions) P
+3240 9000 (and/or) P
+4973 9000 (header) P
+6771 9000 (\212les) P
+7971 9000 (in) P
+8638 9000 (a) P
+9104 9000 (program) P
+11337 9000 (being) P
+12870 9000 (compiled) P
+15303 9000 (\(if) P
+16070 9000 (any\).) P
+3240 8280 (Following) P
+5908 8280 (the) P
+6841 8280 (description) P
+9707 8280 (of) P
+10407 8280 (the) P
+11340 8280 (actions) P
+13239 8280 (required) P
+15438 8280 (is) P
+16038 8280 (information) P
+3240 7560 (in) P
+3907 7560 (three\255column) P
+7306 7560 (format) P
+9106 7560 (of) P
+9806 7560 (the) P
+10739 7560 (form:) P
+2 10 SF
+3240 5760 (function) P
+7560 5760 (reference) P
+0 10 SF
+10006 5760 (\(N\)) P
+14040 5760 (Brief) P
+15473 5760 (description.) P
+2 10 SF
+3240 1872 (3\2552) P
+end restore showpage
+%%Page: 3 3
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+0 10 SF
+3240 32400 (The) P
+4373 32400 (functions) P
+6806 32400 (are) P
+7738 32400 (grouped) P
+9904 32400 (by) P
+10704 32400 (type) P
+11937 32400 (while) P
+13470 32400 (the) P
+3240 31680 (reference) P
+5670 31680 (refers) P
+7235 31680 (to) P
+7902 31680 (section) P
+9801 31680 (`N') P
+10834 31680 (in) P
+11501 31680 (the) P
+1 10 SF
+3240 30960 (UNIX) P
+4840 30960 (System) P
+6705 30960 (Programmer) P
+10003 30960 (Reference) P
+12600 30960 (Manual) P
+0 10 SF
+14467 30960 (.) P
+3240 30240 (Following) P
+5908 30240 (this,) P
+7125 30240 (are) P
+8057 30240 (descriptions) P
+11156 30240 (of) P
+11856 30240 (the) P
+12789 30240 (header) P
+14587 30240 (\212les) P
+15787 30240 (associated) P
+18451 30240 (with) P
+19718 30240 (these) P
+3240 29520 (functions) P
+5673 29520 (\(if) P
+6440 29520 (any\).) P
+2 9 SF
+10770 26520 (THE) P
+12090 26520 (C) P
+12660 26520 (LIBRARY) P
+0 10 SF
+3240 25380 (The) P
+4396 25380 (C) P
+5019 25380 (library) P
+7042 25380 (consists) P
+9164 25380 (of) P
+9887 25380 (several) P
+11808 25380 (types) P
+13297 25380 (of) P
+14020 25380 (functions.) P
+16826 25380 (All) P
+17815 25380 (the) P
+18770 25380 (functions) P
+21225 25380 (of) P
+21947 25380 (the) P
+3240 24660 (C) P
+3847 24660 (library) P
+5654 24660 (are) P
+6593 24660 (loaded) P
+8398 24660 (automatically) P
+11870 24660 (by) P
+12676 24660 (the) P
+13615 24660 (compiler.) P
+16304 24660 (Various) P
+18409 24660 (declarations) P
+21513 24660 (must) P
+3240 23940 (sometimes) P
+6011 23940 (be) P
+6782 23940 (included) P
+9053 23940 (by) P
+9858 23940 (the) P
+10796 23940 (user) P
+12000 23940 (as) P
+12704 23940 (required.) P
+15258 23940 (The) P
+16396 23940 (functions) P
+18834 23940 (of) P
+19539 23940 (the) P
+20476 23940 (C) P
+21080 23940 (library) P
+3240 23220 (are) P
+4172 23220 (divided) P
+6172 23220 (into) P
+7306 23220 (the) P
+8239 23220 (following) P
+10773 23220 (types:) P
+0 9 SF
+12386 23220 (\007) P
+12755 23220 (.ds) P
+13550 23220 (]g) P
+4740 22500 (Input/output) P
+7590 22500 (control) P
+4740 21780 (String) P
+6240 21780 (manipulation) P
+4740 21060 (Character) P
+7020 21060 (manipulation) P
+4740 20340 (Time) P
+6060 20340 (functions) P
+4740 19620 (Miscellaneous) P
+8040 19620 (functions.) P
+2 9 SF
+3240 17460 (Input/Output) P
+6540 17460 (Control) P
+0 10 SF
+3240 16380 (These) P
+4919 16380 (functions) P
+7399 16380 (of) P
+8146 16380 (the) P
+9126 16380 (C) P
+9773 16380 (library) P
+11620 16380 (are) P
+12599 16380 (automatically) P
+16112 16380 (included) P
+18424 16380 (as) P
+19169 16380 (needed) P
+21113 16380 (during) P
+3240 15660 (the) P
+4173 15660 (compiling) P
+6807 15660 (of) P
+7507 15660 (a) P
+7973 15660 (C) P
+8573 15660 (language) P
+10938 15660 (program.) P
+13521 15660 (No) P
+14454 15660 (command) P
+17020 15660 (line) P
+18120 15660 (request) P
+20052 15660 (is) P
+20652 15660 (needed.) P
+3240 14580 (The) P
+4441 14580 (header) P
+6307 14580 (\212le) P
+7342 14580 (required) P
+9609 14580 (by) P
+10477 14580 (the) P
+11478 14580 (input/output) P
+14680 14580 (functions) P
+17180 14580 (should) P
+19047 14580 (be) P
+19880 14580 (included) P
+22213 14580 (in) P
+3240 13860 (the) P
+4173 13860 (program) P
+6406 13860 (being) P
+7939 13860 (compiled.) P
+10722 13860 (This) P
+11989 13860 (is) P
+12589 13860 (accomplished) P
+16087 13860 (by) P
+16887 13860 (including) P
+19354 13860 (the) P
+20287 13860 (line:) P
+3240 12060 (#include) P
+5506 12060 (<stdio.h>) P
+3240 10260 (near) P
+4472 10260 (the) P
+5405 10260 (beginning) P
+8005 10260 (of) P
+8705 10260 (each) P
+10003 10260 (\212le) P
+10970 10260 (that) P
+12070 10260 (references) P
+3240 9540 (an) P
+4006 9540 (input) P
+5440 9540 (or) P
+6140 9540 (output) P
+7874 9540 (function.) P
+3240 8460 (The) P
+4373 8460 (input/output) P
+7508 8460 (functions) P
+9941 8460 (are) P
+10873 8460 (grouped) P
+13039 8460 (into) P
+14173 8460 (the) P
+15106 8460 (following) P
+3240 7740 (categories:) P
+3240 7020 (\007) P
+3650 7020 (.ds) P
+4533 7020 (]g) P
+4740 6300 (File) P
+5874 6300 (access) P
+4740 5580 (File) P
+5874 5580 (status) P
+4740 4860 (Input) P
+4740 4140 (Output) P
+4740 3420 (Miscellaneous.) P
+2 10 SF
+21880 1872 (3\2553) P
+end restore showpage
+%%Page: 4 4
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+2 9 SF
+3240 32400 (File) P
+4290 32400 (Access) P
+6000 32400 (Functions) P
+0 10 SF
+3240 30240 (FUNCTION) P
+9660 30240 (REFERENCE) P
+16482 30240 (BRIEF) P
+18383 30240 (DESCRIPTION) P
+2 10 SF
+3240 28800 (fclose) P
+9660 28800 (fclose) P
+0 10 SF
+11142 28800 (\(3S\)) P
+16482 28800 (Close) P
+18048 28800 (an) P
+18814 28800 (open) P
+20180 28800 (stream.) P
+2 10 SF
+3240 27360 (fdopen) P
+9660 27360 (fopen) P
+0 10 SF
+11144 27360 (\(3S\)) P
+16482 27360 (Associate) P
+19013 27360 (stream) P
+20812 27360 (with) P
+16482 26640 (an) P
+2 10 SF
+17248 26640 (open) P
+0 10 SF
+18482 26640 (\(2\)) P
+19382 26640 (ed) P
+20148 26640 (\212le.) P
+2 10 SF
+3240 25200 (\212leno) P
+9660 25200 (ferror) P
+0 10 SF
+11274 25200 (\(3S\)) P
+16482 25200 (File) P
+17616 25200 (descriptor) P
+20215 25200 (associated) P
+16482 24480 (with) P
+17749 24480 (an) P
+18515 24480 (open) P
+19881 24480 (stream.) P
+2 10 SF
+3240 23040 (fopen) P
+9660 23040 (fopen) P
+0 10 SF
+11144 23040 (\(3S\)) P
+16482 23040 (Open) P
+17981 23040 (a) P
+18447 23040 (\212le) P
+19414 23040 (with) P
+16482 22320 (speci\212ed) P
+18814 22320 (permissions.) P
+2 10 SF
+16482 21600 (Fopen) P
+0 10 SF
+18283 21600 (returns) P
+20149 21600 (a) P
+20615 21600 (pointer) P
+16482 20880 (to) P
+17149 20880 (a) P
+17615 20880 (stream) P
+19414 20880 (which) P
+21080 20880 (is) P
+16482 20160 (used) P
+17781 20160 (in) P
+18448 20160 (subsequent) P
+16482 19440 (references) P
+19145 19440 (to) P
+19812 19440 (the) P
+20745 19440 (\212le.) P
+2 10 SF
+3240 18000 (freopen) P
+9660 18000 (fopen) P
+0 10 SF
+11144 18000 (\(3S\)) P
+16482 18000 (Substitute) P
+19083 18000 (named) P
+20882 18000 (\212le) P
+16482 17280 (in) P
+17149 17280 (place) P
+18614 17280 (of) P
+19314 17280 (open) P
+16482 16560 (stream.) P
+2 10 SF
+3240 15120 (fseek) P
+9660 15120 (fseek) P
+0 10 SF
+11009 15120 (\(3S\)) P
+16482 15120 (Reposition) P
+19282 15120 (the) P
+20215 15120 (\212le) P
+16482 14400 (pointer.) P
+2 10 SF
+3240 12960 (pclose) P
+9660 12960 (popen) P
+0 10 SF
+11278 12960 (\(3S\)) P
+16482 12960 (Close) P
+18048 12960 (a) P
+18514 12960 (stream) P
+20313 12960 (opened) P
+16482 12240 (by) P
+2 10 SF
+17282 12240 (popen) P
+0 10 SF
+18850 12240 (.) P
+2 10 SF
+3240 10800 (popen) P
+9660 10800 (popen) P
+0 10 SF
+11278 10800 (\(3S\)) P
+16482 10800 (Create) P
+18247 10800 (pipe) P
+19480 10800 (as) P
+20179 10800 (a) P
+20645 10800 (stream) P
+16482 10080 (between) P
+18680 10080 (calling) P
+20513 10080 (process) P
+16482 9360 (and) P
+17548 9360 (command.) P
+2 10 SF
+3240 7920 (rewind) P
+9660 7920 (fseek) P
+0 10 SF
+11009 7920 (\(3S\)) P
+16482 7920 (Reposition) P
+19282 7920 (\212le) P
+16482 7200 (pointer) P
+18382 7200 (at) P
+19015 7200 (beginning) P
+16482 6480 (of) P
+17182 6480 (\212le.) P
+2 10 SF
+3240 5040 (setbuf) P
+9660 5040 (setbuf) P
+0 10 SF
+11277 5040 (\(3S\)) P
+16482 5040 (Assign) P
+18348 5040 (buffering) P
+20781 5040 (to) P
+16482 4320 (stream.) P
+2 10 SF
+3240 2880 (vsetbuf) P
+9660 2880 (setbuf) P
+0 10 SF
+11227 2880 (\(3S\)) P
+16482 2880 (Similar) P
+18450 2880 (to) P
+2 10 SF
+19117 2880 (setbuf) P
+0 10 SF
+20684 2880 (,) P
+21034 2880 (but) P
+2 10 SF
+3240 1872 (3\2554) P
+end restore showpage
+%%Page: 5 5
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+0 10 SF
+16482 32400 (allowing) P
+18782 32400 (\212ner) P
+20082 32400 (control.) P
+2 9 SF
+3240 30240 (File) P
+4290 30240 (Status) P
+5910 30240 (Functions) P
+0 10 SF
+3240 28080 (FUNCTION) P
+9774 28080 (REFERENCE) P
+16710 28080 (BRIEF) P
+18611 28080 (DESCRIPTION) P
+2 10 SF
+3240 26640 (clearerr) P
+9774 26640 (ferror) P
+0 10 SF
+11388 26640 (\(3S\)) P
+16710 26640 (Reset) P
+18242 26640 (error) P
+19608 26640 (condition) P
+22075 26640 (on) P
+16710 25920 (stream.) P
+2 10 SF
+3240 24480 (feof) P
+9774 24480 (ferror) P
+0 10 SF
+11338 24480 (\(3S\)) P
+16710 24480 (Test) P
+17943 24480 (for) P
+18843 24480 (``end) P
+20309 24480 (of) P
+21009 24480 (\212le'') P
+16710 23760 (on) P
+17510 23760 (stream.) P
+2 10 SF
+3240 22320 (ferror) P
+9774 22320 (ferror) P
+0 10 SF
+11388 22320 (\(3S\)) P
+16710 22320 (Test) P
+17943 22320 (for) P
+18843 22320 (error) P
+20209 22320 (condition) P
+16710 21600 (on) P
+17510 21600 (stream.) P
+2 10 SF
+3240 20160 (ftell) P
+9774 20160 (fseek) P
+0 10 SF
+11123 20160 (\(3S\)) P
+16710 20160 (Return) P
+18543 20160 (current) P
+20442 20160 (position) P
+16710 19440 (in) P
+17377 19440 (the) P
+18310 19440 (\212le.) P
+2 9 SF
+3240 17280 (Input) P
+4710 17280 (Functions) P
+0 10 SF
+3240 15120 (FUNCTION) P
+8766 15120 (REFERENCE) P
+14694 15120 (BRIEF) P
+16595 15120 (DESCRIPTION) P
+2 10 SF
+3240 13680 (fgetc) P
+8766 13680 (getc) P
+0 10 SF
+9848 13680 (\(3S\)) P
+14694 13680 (True) P
+16027 13680 (function) P
+18227 13680 (for) P
+2 10 SF
+19127 13680 (getc) P
+0 10 SF
+14694 12960 (\(3S\).) P
+2 10 SF
+3240 11520 (fgets) P
+8766 11520 (gets) P
+0 10 SF
+9815 11520 (\(3S\)) P
+14694 11520 (Read) P
+16126 11520 (string) P
+17693 11520 (from) P
+19060 11520 (stream.) P
+2 10 SF
+3240 10080 (fread) P
+8766 10080 (fread) P
+0 10 SF
+10182 10080 (\(3S\)) P
+14694 10080 (General) P
+16792 10080 (buffered) P
+19024 10080 (read) P
+14694 9360 (from) P
+16061 9360 (stream.) P
+2 10 SF
+3240 7920 (fscanf) P
+8766 7920 (scanf) P
+0 10 SF
+10149 7920 (\(3S\)) P
+14694 7920 (Formatted) P
+17361 7920 (read) P
+18593 7920 (from) P
+14694 7200 (stream.) P
+2 10 SF
+3240 5760 (getc) P
+8766 5760 (getc) P
+0 10 SF
+9848 5760 (\(3S\)) P
+14694 5760 (Read) P
+16126 5760 (character) P
+18523 5760 (from) P
+14694 5040 (stream.) P
+2 10 SF
+3240 3600 (getchar) P
+8766 3600 (getc) P
+0 10 SF
+9848 3600 (\(3S\)) P
+14694 3600 (Read) P
+16126 3600 (character) P
+18523 3600 (from) P
+14694 2880 (standard) P
+16926 2880 (input.) P
+2 10 SF
+21880 1872 (3\2555) P
+end restore showpage
+%%Page: 6 6
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+3240 32400 (gets) P
+8766 32400 (gets) P
+0 10 SF
+9815 32400 (\(3S\)) P
+14694 32400 (Read) P
+16126 32400 (string) P
+17693 32400 (from) P
+19060 32400 (standard) P
+21292 32400 (input.) P
+2 10 SF
+3240 30960 (getw) P
+8766 30960 (getc) P
+0 10 SF
+9848 30960 (\(3S\)) P
+14694 30960 (Read) P
+16126 30960 (word) P
+17559 30960 (from) P
+18926 30960 (stream.) P
+2 10 SF
+3240 29520 (scanf) P
+8766 29520 (scanf) P
+0 10 SF
+10149 29520 (\(3S\)) P
+14694 29520 (Read) P
+16126 29520 (using) P
+17626 29520 (format) P
+19426 29520 (from) P
+14694 28800 (standard) P
+16926 28800 (input.) P
+2 10 SF
+3240 27360 (sscanf) P
+8766 27360 (scanf) P
+0 10 SF
+10149 27360 (\(3S\)) P
+14694 27360 (Formatted) P
+17361 27360 (from) P
+14694 26640 (string.) P
+2 10 SF
+3240 25200 (ungetc) P
+8766 25200 (ungetc) P
+0 10 SF
+10516 25200 (\(3S\)) P
+14694 25200 (Put) P
+15695 25200 (back) P
+17027 25200 (one) P
+18093 25200 (character) P
+20490 25200 (on) P
+14694 24480 (stream.) P
+2 9 SF
+3240 22320 (Output) P
+5100 22320 (Functions) P
+0 10 SF
+3240 20160 (FUNCTION) P
+9375 20160 (REFERENCE) P
+15912 20160 (BRIEF) P
+17813 20160 (DESCRIPTION) P
+2 10 SF
+3240 18720 (f\213ush) P
+9375 18720 (fclose) P
+0 10 SF
+10857 18720 (\(3S\)) P
+15912 18720 (Write) P
+17478 18720 (all) P
+18278 18720 (currently) P
+20644 18720 (buffered) P
+15912 18000 (characters) P
+18542 18000 (from) P
+19909 18000 (stream.) P
+2 10 SF
+3240 16560 (fprintf) P
+9375 16560 (printf) P
+0 10 SF
+10926 16560 (\(3S\)) P
+15912 16560 (Formatted) P
+18579 16560 (write) P
+20012 16560 (to) P
+15912 15840 (stream.) P
+2 10 SF
+3240 14400 (fputc) P
+9375 14400 (putc) P
+0 10 SF
+10559 14400 (\(3S\)) P
+15912 14400 (True) P
+17245 14400 (function) P
+19445 14400 (for) P
+2 10 SF
+20345 14400 (putc) P
+0 10 SF
+15912 13680 (\(3S\).) P
+2 10 SF
+3240 12240 (fputs) P
+9375 12240 (puts) P
+0 10 SF
+10526 12240 (\(3S\)) P
+15912 12240 (Write) P
+17478 12240 (string) P
+19045 12240 (to) P
+19712 12240 (stream.) P
+2 10 SF
+3240 10800 (fwrite) P
+9375 10800 (fread) P
+0 10 SF
+10791 10800 (\(3S\)) P
+15912 10800 (General) P
+18010 10800 (buffered) P
+20242 10800 (write) P
+21675 10800 (to) P
+15912 10080 (stream.) P
+2 10 SF
+3240 8640 (printf) P
+9375 8640 (printf) P
+0 10 SF
+10926 8640 (\(3S\)) P
+15912 8640 (Print) P
+17280 8640 (using) P
+18780 8640 (format) P
+20580 8640 (to) P
+15912 7920 (standard) P
+18144 7920 (output.) P
+2 10 SF
+3240 6480 (putc) P
+9375 6480 (putc) P
+0 10 SF
+10559 6480 (\(3S\)) P
+15912 6480 (Write) P
+17478 6480 (character) P
+19875 6480 (to) P
+15912 5760 (standard) P
+18144 5760 (output.) P
+2 10 SF
+3240 4320 (putchar) P
+9375 4320 (putc) P
+0 10 SF
+10559 4320 (\(3S\)) P
+15912 4320 (Write) P
+17478 4320 (character) P
+19875 4320 (to) P
+15912 3600 (standard) P
+18144 3600 (output.) P
+2 10 SF
+3240 1872 (3\2556) P
+end restore showpage
+%%Page: 7 7
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+3240 32400 (puts) P
+9375 32400 (puts) P
+0 10 SF
+10526 32400 (\(3S\)) P
+15912 32400 (Write) P
+17478 32400 (string) P
+19045 32400 (to) P
+15912 31680 (standard) P
+18144 31680 (output.) P
+2 10 SF
+3240 30240 (putw) P
+9375 30240 (putc) P
+0 10 SF
+10559 30240 (\(3S\)) P
+15912 30240 (Write) P
+17478 30240 (word) P
+18911 30240 (to) P
+19578 30240 (stream.) P
+2 10 SF
+3240 28800 (sprintf) P
+9375 28800 (printf) P
+0 10 SF
+10926 28800 (\(3S\)) P
+15912 28800 (Formatted) P
+18579 28800 (write) P
+20012 28800 (to) P
+15912 28080 (string.) P
+2 10 SF
+3240 26640 (vfprintf) P
+9375 26640 (vprint) P
+0 10 SF
+10976 26640 (\(3C\)) P
+15912 26640 (Print) P
+17280 26640 (using) P
+18780 26640 (format) P
+20580 26640 (to) P
+15912 25920 (stream) P
+17711 25920 (by) P
+2 10 SF
+18511 25920 (varargs) P
+0 10 SF
+20476 25920 (\(5\)) P
+15912 25200 (argument) P
+18378 25200 (list.) P
+2 10 SF
+3240 23760 (vprintf) P
+9375 23760 (vprint) P
+0 10 SF
+10976 23760 (\(3C\)) P
+15912 23760 (Print) P
+17280 23760 (using) P
+18780 23760 (format) P
+20580 23760 (to) P
+15912 23040 (standard) P
+18144 23040 (output) P
+19878 23040 (by) P
+2 10 SF
+15912 22320 (varargs) P
+0 10 SF
+17877 22320 (\(5\)) P
+18777 22320 (argument) P
+21243 22320 (list.) P
+2 10 SF
+3240 20880 (vsprintf) P
+9375 20880 (vprintf) P
+0 10 SF
+11176 20880 (\(3C\)) P
+15912 20880 (Print) P
+17280 20880 (using) P
+18780 20880 (format) P
+20580 20880 (to) P
+15912 20160 (stream) P
+17711 20160 (string) P
+19278 20160 (by) P
+2 10 SF
+15912 19440 (varargs) P
+0 10 SF
+17877 19440 (\(5\)) P
+18777 19440 (argument) P
+21243 19440 (list.) P
+2 9 SF
+3240 17280 (Miscellaneous) P
+6660 17280 (Functions) P
+0 10 SF
+3240 15120 (FUNCTION) P
+9594 15120 (REFERENCE) P
+16433 15120 (BRIEF) P
+18334 15120 (DESCRIPTION) P
+2 10 SF
+3240 13680 (ctermid) P
+9594 13680 (ctermid) P
+0 10 SF
+11643 13680 (\(3S\)) P
+16433 13680 (Return) P
+18266 13680 (\212le) P
+19233 13680 (name) P
+20732 13680 (for) P
+16433 12960 (controlling) P
+19267 12960 (terminal.) P
+2 10 SF
+3240 11520 (cuserid) P
+9594 11520 (cuserid) P
+0 10 SF
+11510 11520 (\(3S\)) P
+16433 11520 (Return) P
+18266 11520 (login) P
+19700 11520 (name) P
+21199 11520 (for) P
+16433 10800 (owner) P
+18132 10800 (of) P
+18832 10800 (current) P
+20731 10800 (process.) P
+2 10 SF
+3240 9360 (system) P
+9594 9360 (system) P
+0 10 SF
+11376 9360 (\(3S\)) P
+16433 9360 (Execute) P
+18565 9360 (shell) P
+19898 9360 (command.) P
+2 10 SF
+3240 7920 (tempnam) P
+9594 7920 (tempnam) P
+0 10 SF
+12078 7920 (\(3S\)) P
+16433 7920 (Create) P
+18198 7920 (temporary) P
+20864 7920 (\212le) P
+16433 7200 (name) P
+17932 7200 (using) P
+19432 7200 (directory) P
+21798 7200 (and) P
+16433 6480 (pre\212x.) P
+2 10 SF
+3240 5040 (tmpnam) P
+9594 5040 (tmpnam) P
+0 10 SF
+11812 5040 (\(3S\)) P
+16433 5040 (Create) P
+18198 5040 (temporary) P
+20864 5040 (\212le) P
+16433 4320 (name.) P
+2 10 SF
+3240 2880 (tmp\212le) P
+9594 2880 (tmp\212le) P
+0 10 SF
+11445 2880 (\(3S\)) P
+16433 2880 (Create) P
+18198 2880 (temporary) P
+20864 2880 (\212le.) P
+2 10 SF
+21880 1872 (3\2557) P
+end restore showpage
+%%Page: 8 8
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+2 9 SF
+3240 32400 (String) P
+4860 32400 (Manipulation) P
+8190 32400 (Functions) P
+0 10 SF
+3240 31320 (These) P
+4913 31320 (functions) P
+7387 31320 (are) P
+8360 31320 (used) P
+9700 31320 (to) P
+10408 31320 (locate) P
+12081 31320 (characters) P
+14752 31320 (within) P
+16527 31320 (a) P
+17034 31320 (string,) P
+18792 31320 (copy,) P
+20349 31320 (concaten\255) P
+3240 30600 (ate,) P
+4473 30600 (and) P
+5723 30600 (compare) P
+8171 30600 (strings.) P
+10504 30600 (These) P
+12319 30600 (functions) P
+14935 30600 (are) P
+16050 30600 (automatically) P
+19699 30600 (located) P
+21814 30600 (and) P
+3240 29880 (loaded) P
+5148 29880 (during) P
+7024 29880 (the) P
+8066 29880 (compiling) P
+10809 29880 (of) P
+11618 29880 (a) P
+12193 29880 (C) P
+12901 29880 (language) P
+15374 29880 (program.) P
+18065 29880 (No) P
+19106 29880 (command) P
+21780 29880 (line) P
+3240 29160 (request) P
+5231 29160 (is) P
+5890 29160 (needed) P
+7847 29160 (since) P
+9338 29160 (these) P
+10829 29160 (functions) P
+13321 29160 (are) P
+14312 29160 (part) P
+15504 29160 (of) P
+16263 29160 (the) P
+17255 29160 (C) P
+17914 29160 (library.) P
+20122 29160 (The) P
+21313 29160 (string) P
+3240 28440 (manipulation) P
+6670 28440 (functions) P
+9166 28440 (are) P
+10161 28440 (declared) P
+12454 28440 (in) P
+13183 28440 (a) P
+13711 28440 (header) P
+15571 28440 (\212le) P
+16600 28440 (that) P
+17762 28440 (may) P
+19057 28440 (be) P
+19885 28440 (included) P
+22213 28440 (in) P
+3240 27720 (the) P
+4173 27720 (program) P
+6406 27720 (being) P
+7939 27720 (compiled.) P
+10722 27720 (This) P
+11989 27720 (is) P
+12589 27720 (accomplished) P
+16087 27720 (by) P
+16887 27720 (including) P
+19354 27720 (the) P
+20287 27720 (line:) P
+3240 25920 (#include) P
+5506 25920 (<string.h>) P
+3240 24120 (near) P
+4472 24120 (the) P
+5405 24120 (beginning) P
+8005 24120 (of) P
+8705 24120 (each) P
+10003 24120 (\212le) P
+10970 24120 (that) P
+12070 24120 (uses) P
+13302 24120 (one) P
+3240 23400 (of) P
+3940 23400 (these) P
+5372 23400 (functions.) P
+3240 20520 (FUNCTION) P
+9750 20520 (REFERENCE) P
+16662 20520 (BRIEF) P
+18563 20520 (DESCRIPTION) P
+2 10 SF
+3240 19080 (strcat) P
+9750 19080 (string) P
+0 10 SF
+11300 19080 (\(3C\)) P
+16662 19080 (Concatenate) P
+19826 19080 (two) P
+20926 19080 (strings.) P
+2 10 SF
+3240 17640 (strchr) P
+9750 17640 (string) P
+0 10 SF
+11300 17640 (\(3C\)) P
+16662 17640 (Search) P
+18494 17640 (string) P
+20061 17640 (for) P
+16662 16920 (character.) P
+2 10 SF
+3240 15480 (strcmp) P
+9750 15480 (string) P
+0 10 SF
+11300 15480 (\(3C\)) P
+16662 15480 (Compares) P
+19294 15480 (two) P
+20394 15480 (strings.) P
+2 10 SF
+3240 14040 (strcpy) P
+9750 14040 (string) P
+0 10 SF
+11300 14040 (\(3C\)) P
+16662 14040 (Copy) P
+18162 14040 (string.) P
+2 10 SF
+3240 12600 (strcspn) P
+9750 12600 (string) P
+0 10 SF
+11300 12600 (\(3C\)) P
+16662 12600 (Length) P
+18562 12600 (of) P
+19262 12600 (initial) P
+20863 12600 (string) P
+16662 11880 (not) P
+17629 11880 (containing) P
+20362 11880 (set) P
+21228 11880 (of) P
+16662 11160 (characters.) P
+2 10 SF
+3240 9720 (strlen) P
+9750 9720 (string) P
+0 10 SF
+11300 9720 (\(3C\)) P
+16662 9720 (Length) P
+18562 9720 (of) P
+19262 9720 (string.) P
+2 10 SF
+3240 8280 (strncat) P
+9750 8280 (string) P
+0 10 SF
+11300 8280 (\(3C\)) P
+16662 8280 (Concatenate) P
+19826 8280 (two) P
+20926 8280 (strings) P
+16662 7560 (with) P
+17929 7560 (a) P
+18395 7560 (maximum) P
+21029 7560 (length.) P
+2 10 SF
+3240 6120 (strncmp) P
+9750 6120 (string) P
+0 10 SF
+11300 6120 (\(3C\)) P
+16662 6120 (Compares) P
+19294 6120 (two) P
+20394 6120 (strings) P
+16662 5400 (with) P
+17929 5400 (a) P
+18395 5400 (maximum) P
+21029 5400 (length.) P
+2 10 SF
+3240 3960 (strncpy) P
+9750 3960 (string) P
+0 10 SF
+11300 3960 (\(3C\)) P
+16662 3960 (Copy) P
+18162 3960 (string) P
+19729 3960 (over) P
+20995 3960 (string) P
+16662 3240 (with) P
+17929 3240 (a) P
+18395 3240 (maximum) P
+21029 3240 (length.) P
+2 10 SF
+3240 1872 (3\2558) P
+end restore showpage
+%%Page: 9 9
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+3240 32400 (strpbrk) P
+9750 32400 (string) P
+0 10 SF
+11300 32400 (\(3C\)) P
+16662 32400 (Search) P
+18494 32400 (string) P
+20061 32400 (for) P
+20961 32400 (any) P
+16662 31680 (set) P
+17528 31680 (of) P
+18228 31680 (characters.) P
+2 10 SF
+3240 30240 (strrchr) P
+9750 30240 (string) P
+0 10 SF
+11300 30240 (\(3C\)) P
+16662 30240 (Search) P
+18494 30240 (string) P
+20061 30240 (backwards) P
+16662 29520 (for) P
+17562 29520 (character.) P
+2 10 SF
+3240 28080 (strspn) P
+9750 28080 (string) P
+0 10 SF
+11300 28080 (\(3C\)) P
+16662 28080 (Length) P
+18562 28080 (of) P
+19262 28080 (initial) P
+20863 28080 (string) P
+16662 27360 (containing) P
+19395 27360 (set) P
+20261 27360 (of) P
+16662 26640 (characters.) P
+2 10 SF
+3240 25200 (strtok) P
+9750 25200 (string) P
+0 10 SF
+11300 25200 (\(3C\)) P
+16662 25200 (Search) P
+18494 25200 (string) P
+20061 25200 (for) P
+20961 25200 (token) P
+16662 24480 (separated) P
+19126 24480 (by) P
+19926 24480 (any) P
+20992 24480 (of) P
+21692 24480 (a) P
+16662 23760 (set) P
+17528 23760 (of) P
+18228 23760 (characters.) P
+2 9 SF
+3240 21600 (Character) P
+5790 21600 (Manipulation) P
+0 10 SF
+3240 20520 (The) P
+4438 20520 (following) P
+7037 20520 (functions) P
+9535 20520 (and) P
+10666 20520 (declarations) P
+13829 20520 (are) P
+14826 20520 (used) P
+16189 20520 (for) P
+17153 20520 (testing) P
+19017 20520 (and) P
+20147 20520 (translating) P
+3240 19800 (ASCII) P
+5056 19800 (characters.) P
+8084 19800 (These) P
+9764 19800 (functions) P
+12245 19800 (are) P
+13225 19800 (located) P
+15205 19800 (and) P
+16319 19800 (loaded) P
+18166 19800 (automatically) P
+21680 19800 (dur\255) P
+3240 19080 (ing) P
+4313 19080 (the) P
+5351 19080 (compiling) P
+8090 19080 (of) P
+8895 19080 (a) P
+9466 19080 (C) P
+10171 19080 (language) P
+12641 19080 (program.) P
+15329 19080 (No) P
+16367 19080 (command) P
+19038 19080 (line) P
+20243 19080 (request) P
+22280 19080 (is) P
+3240 18360 (needed) P
+5138 18360 (since) P
+6570 18360 (these) P
+8002 18360 (functions) P
+10435 18360 (are) P
+11367 18360 (part) P
+12500 18360 (of) P
+13200 18360 (the) P
+14133 18360 (C) P
+14733 18360 (library.) P
+3240 17280 (The) P
+4371 17280 (declarations) P
+7467 17280 (associated) P
+10129 17280 (with) P
+11394 17280 (these) P
+12824 17280 (functions) P
+15255 17280 (should) P
+17053 17280 (be) P
+17817 17280 (included) P
+20082 17280 (in) P
+20748 17280 (the) P
+21680 17280 (pro\255) P
+3240 16560 (gram) P
+4673 16560 (being) P
+6206 16560 (compiled.) P
+8989 16560 (This) P
+10256 16560 (is) P
+10856 16560 (accomplished) P
+14354 16560 (by) P
+15154 16560 (including) P
+17621 16560 (the) P
+18554 16560 (line:) P
+3240 14760 (#include) P
+5506 14760 (<ctype.h>) P
+3240 12960 (near) P
+4472 12960 (the) P
+5405 12960 (beginning) P
+8005 12960 (of) P
+8705 12960 (the) P
+9638 12960 (\212le) P
+10605 12960 (being) P
+12138 12960 (compiled.) P
+2 9 SF
+3240 10800 (Character) P
+5790 10800 (Testing) P
+7680 10800 (Functions) P
+0 10 SF
+3240 9720 (These) P
+4920 9720 (functions) P
+7401 9720 (can) P
+8481 9720 (be) P
+9295 9720 (used) P
+10641 9720 (to) P
+11355 9720 (identify) P
+13469 9720 (characters) P
+16146 9720 (as) P
+16892 9720 (uppercase) P
+19536 9720 (or) P
+20283 9720 (lowercase) P
+3240 9000 (letters,) P
+5056 9000 (digits,) P
+6740 9000 (punctuation,) P
+9923 9000 (etc.) P
+3240 6840 (FUNCTION) P
+9660 6840 (REFERENCE) P
+16482 6840 (BRIEF) P
+18383 6840 (DESCRIPTION) P
+2 10 SF
+3240 5400 (isalnum) P
+9660 5400 (ctype) P
+0 10 SF
+11076 5400 (\(3C\)) P
+16482 5400 (Is) P
+17115 5400 (character) P
+16482 4680 (alphanumeric?) P
+2 10 SF
+3240 3240 (isalpha) P
+9660 3240 (ctype) P
+0 10 SF
+11076 3240 (\(3C\)) P
+16482 3240 (Is) P
+17115 3240 (character) P
+19512 3240 (alphabetic?) P
+2 10 SF
+21880 1872 (3\2559) P
+end restore showpage
+%%Page: 10 10
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+3240 32400 (isascii) P
+9660 32400 (ctype) P
+0 10 SF
+11076 32400 (\(3C\)) P
+16482 32400 (Is) P
+17115 32400 (integer) P
+18981 32400 (ASCII) P
+16482 31680 (character?) P
+2 10 SF
+3240 30240 (iscntrl) P
+9660 30240 (ctype) P
+0 10 SF
+11076 30240 (\(3C\)) P
+16482 30240 (Is) P
+17115 30240 (character) P
+19512 30240 (a) P
+19978 30240 (control) P
+16482 29520 (character?) P
+2 10 SF
+3240 28080 (isdigit) P
+9660 28080 (ctype) P
+0 10 SF
+11076 28080 (\(3C\)) P
+16482 28080 (Is) P
+17115 28080 (character) P
+19512 28080 (a) P
+19978 28080 (digit?) P
+2 10 SF
+3240 26640 (isgraph) P
+9660 26640 (ctype) P
+0 10 SF
+11076 26640 (\(3C\)) P
+16482 26640 (Is) P
+17115 26640 (character) P
+19512 26640 (a) P
+19978 26640 (printable) P
+16482 25920 (character?) P
+2 10 SF
+3240 24480 (islower) P
+9660 24480 (ctype) P
+0 10 SF
+11076 24480 (\(3C\)) P
+16482 24480 (Is) P
+17115 24480 (character) P
+19512 24480 (a) P
+16482 23760 (lowercase) P
+19079 23760 (letter?) P
+2 10 SF
+3240 22320 (isprint) P
+9660 22320 (ctype) P
+0 10 SF
+11076 22320 (\(3C\)) P
+16482 22320 (Is) P
+17115 22320 (character) P
+19512 22320 (a) P
+19978 22320 (printing) P
+16482 21600 (character) P
+18879 21600 (including) P
+16482 20880 (space?) P
+2 10 SF
+3240 19440 (ispunct) P
+9660 19440 (ctype) P
+0 10 SF
+11076 19440 (\(3C\)) P
+16482 19440 (Is) P
+17115 19440 (character) P
+19512 19440 (a) P
+16482 18720 (punctuation) P
+19515 18720 (character?) P
+2 10 SF
+3240 17280 (isspace) P
+9660 17280 (ctype) P
+0 10 SF
+11076 17280 (\(3C\)) P
+16482 17280 (Is) P
+17115 17280 (character) P
+19512 17280 (a) P
+19978 17280 (white) P
+16482 16560 (space) P
+18013 16560 (character?) P
+2 10 SF
+3240 15120 (isupper) P
+9660 15120 (ctype) P
+0 10 SF
+11076 15120 (\(3C\)) P
+16482 15120 (Is) P
+17115 15120 (character) P
+19512 15120 (an) P
+20278 15120 (uppercase) P
+16482 14400 (letter?) P
+2 10 SF
+3240 12960 (isxdigit) P
+9660 12960 (ctype) P
+0 10 SF
+11076 12960 (\(3C\)) P
+16482 12960 (Is) P
+17115 12960 (character) P
+19512 12960 (a) P
+19978 12960 (hex) P
+21044 12960 (digit?) P
+2 9 SF
+3240 10800 (Character) P
+5790 10800 (Translation) P
+8670 10800 (Functions) P
+0 10 SF
+3240 9720 (These) P
+4965 9720 (functions) P
+7491 9720 (provide) P
+9617 9720 (translation) P
+12443 9720 (of) P
+13236 9720 (uppercase) P
+15926 9720 (to) P
+16685 9720 (lowercase,) P
+19524 9720 (lowercase) P
+22213 9720 (to) P
+3240 9000 (uppercase,) P
+5987 9000 (and) P
+7053 9000 (integer) P
+8919 9000 (to) P
+9586 9000 (ASCII.) P
+3240 6840 (FUNCTION) P
+9858 6840 (REFERENCE) P
+16878 6840 (BRIEF) P
+18779 6840 (DESCRIPTION) P
+2 10 SF
+3240 5400 (toascii) P
+9858 5400 (conv) P
+0 10 SF
+11108 5400 (\(3C\)) P
+16878 5400 (Convert) P
+19011 5400 (integer) P
+20877 5400 (to) P
+16878 4680 (ASCII) P
+18645 4680 (character.) P
+2 10 SF
+3240 3240 (tolower) P
+9858 3240 (conv) P
+0 10 SF
+11108 3240 (\(3C\)) P
+16878 3240 (Convert) P
+19011 3240 (character) P
+21408 3240 (to) P
+2 10 SF
+3240 1872 (3\25510) P
+end restore showpage
+%%Page: 11 11
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+0 10 SF
+16878 32400 (lowercase.) P
+2 10 SF
+3240 30960 (toupper) P
+9858 30960 (conv) P
+0 10 SF
+11108 30960 (\(3C\)) P
+16878 30960 (Convert) P
+19011 30960 (character) P
+21408 30960 (to) P
+16878 30240 (uppercase.) P
+2 9 SF
+3240 28080 (Time) P
+4620 28080 (Functions) P
+0 10 SF
+3240 27000 (These) P
+4922 27000 (functions) P
+7605 27000 (are) P
+8587 27000 (used) P
+9936 27000 (for) P
+10886 27000 (accessing) P
+13433 27000 (and) P
+14549 27000 (reformatting) P
+17799 27000 (the) P
+18782 27000 (systems) P
+20931 27000 (idea) P
+22180 27000 (of) P
+3240 26280 (the) P
+4231 26280 (current) P
+6188 26280 (date) P
+7445 26280 (and) P
+8569 26280 (time.) P
+10244 26280 (These) P
+11933 26280 (functions) P
+14423 26280 (are) P
+15412 26280 (located) P
+17401 26280 (and) P
+18524 26280 (loaded) P
+20380 26280 (automati\255) P
+3240 25560 (cally) P
+4754 25560 (during) P
+6669 25560 (the) P
+7750 25560 (compiling) P
+10532 25560 (of) P
+11380 25560 (a) P
+11994 25560 (C) P
+12742 25560 (language) P
+15255 25560 (program.) P
+17986 25560 (No) P
+19067 25560 (command) P
+21780 25560 (line) P
+3240 24840 (request) P
+5172 24840 (is) P
+5772 24840 (needed) P
+7670 24840 (since) P
+9102 24840 (these) P
+10534 24840 (functions) P
+12967 24840 (are) P
+13899 24840 (part) P
+15032 24840 (of) P
+15732 24840 (the) P
+16665 24840 (C) P
+17265 24840 (library.) P
+3240 23760 (The) P
+4400 23760 (header) P
+6225 23760 (\212le) P
+7218 23760 (associated) P
+9908 23760 (with) P
+11201 23760 (these) P
+12659 23760 (functions) P
+15118 23760 (should) P
+16944 23760 (be) P
+17736 23760 (included) P
+20028 23760 (in) P
+20721 23760 (the) P
+21680 23760 (pro\255) P
+3240 23040 (gram) P
+4673 23040 (being) P
+6206 23040 (compiled.) P
+8989 23040 (This) P
+10256 23040 (is) P
+10856 23040 (accomplished) P
+14354 23040 (by) P
+15154 23040 (including) P
+17621 23040 (the) P
+18554 23040 (line:) P
+3240 21240 (#include) P
+5506 21240 (<time.h>) P
+3240 19440 (near) P
+4472 19440 (the) P
+5405 19440 (beginning) P
+8005 19440 (of) P
+8705 19440 (any) P
+9771 19440 (\212le) P
+10738 19440 (using) P
+12238 19440 (the) P
+13171 19440 (time) P
+14438 19440 (functions.) P
+3240 18360 (These) P
+4872 18360 (functions) P
+7305 18360 (\(except) P
+2 10 SF
+9270 18360 (tzset) P
+0 10 SF
+10435 18360 (\)) P
+10835 18360 (convert) P
+12834 18360 (a) P
+13300 18360 (time) P
+14567 18360 (such) P
+15866 18360 (as) P
+16565 18360 (returned) P
+3240 17640 (by) P
+2 10 SF
+4040 17640 (time) P
+0 10 SF
+5173 17640 (\(2\).) P
+3240 15480 (FUNCTION) P
+9858 15480 (REFERENCE) P
+16878 15480 (BRIEF) P
+18779 15480 (DESCRIPTION) P
+2 10 SF
+3240 14040 (asctime) P
+9858 14040 (ctime) P
+0 10 SF
+11307 14040 (\(3C\)) P
+16878 14040 (Return) P
+18711 14040 (string) P
+16878 13320 (representation) P
+16878 12600 (of) P
+17578 12600 (date) P
+18777 12600 (and) P
+19843 12600 (time.) P
+2 10 SF
+3240 11160 (ctime) P
+9858 11160 (ctime) P
+0 10 SF
+11307 11160 (\(3C\)) P
+16878 11160 (Return) P
+18711 11160 (string) P
+16878 10440 (representation) P
+20476 10440 (of) P
+16878 9720 (date) P
+18077 9720 (and) P
+19143 9720 (time,) P
+20560 9720 (given) P
+16878 9000 (integer) P
+18744 9000 (form.) P
+2 10 SF
+3240 7560 (gmtime) P
+9858 7560 (ctime) P
+0 10 SF
+11307 7560 (\(3C\)) P
+16878 7560 (Return) P
+18711 7560 (Greenwich) P
+16878 6840 (Mean) P
+18443 6840 (Time.) P
+2 10 SF
+21580 1872 (3\25511) P
+end restore showpage
+%%Page: 12 12
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+3240 32400 (localtime) P
+9858 32400 (ctime) P
+0 10 SF
+11307 32400 (\(3C\)) P
+16878 32400 (Return) P
+18711 32400 (local) P
+20077 32400 (time.) P
+2 10 SF
+3240 30960 (tzset) P
+9858 30960 (ctime) P
+0 10 SF
+11307 30960 (\(3C\)) P
+16878 30960 (Set) P
+17845 30960 (time) P
+19112 30960 (zone) P
+20444 30960 (\212eld) P
+16878 30240 (from) P
+18245 30240 (environment) P
+16878 29520 (variable.) P
+2 9 SF
+3240 27360 (Miscellaneous) P
+6660 27360 (Functions) P
+0 10 SF
+3240 26280 (These) P
+5009 26280 (functions) P
+7578 26280 (support) P
+9714 26280 (a) P
+10316 26280 (wide) P
+11818 26280 (variety) P
+13820 26280 (of) P
+14656 26280 (operations.) P
+17841 26280 (Some) P
+19544 26280 (of) P
+20380 26280 (these) P
+21948 26280 (are) P
+3240 25560 (numerical) P
+5861 25560 (conversion,) P
+8865 25560 (password) P
+11352 25560 (\212le) P
+12341 25560 (and) P
+13429 25560 (group) P
+15051 25560 (\212le) P
+16040 25560 (access,) P
+17942 25560 (memory) P
+20164 25560 (allocation,) P
+3240 24840 (random) P
+5479 24840 (number) P
+7718 24840 (generation,) P
+10806 24840 (and) P
+12078 24840 (table) P
+13650 24840 (management.) P
+17471 24840 (These) P
+19309 24840 (functions) P
+21948 24840 (are) P
+3240 24120 (automatically) P
+6793 24120 (located) P
+8812 24120 (and) P
+9964 24120 (included) P
+12316 24120 (in) P
+13069 24120 (a) P
+13621 24120 (program) P
+15940 24120 (being) P
+17559 24120 (compiled.) P
+20428 24120 (No) P
+21447 24120 (com\255) P
+3240 23400 (mand) P
+4773 23400 (line) P
+5873 23400 (request) P
+7805 23400 (is) P
+8405 23400 (needed) P
+10303 23400 (since) P
+11735 23400 (these) P
+13167 23400 (functions) P
+15600 23400 (are) P
+16532 23400 (part) P
+17665 23400 (of) P
+18365 23400 (the) P
+19298 23400 (C) P
+19898 23400 (library.) P
+3240 22320 (Some) P
+4997 22320 (of) P
+5887 22320 (these) P
+7509 22320 (functions) P
+10132 22320 (require) P
+12221 22320 (declarations) P
+15509 22320 (to) P
+16366 22320 (be) P
+17322 22320 (included.) P
+20127 22320 (These) P
+21948 22320 (are) P
+3240 21600 (described) P
+5738 21600 (following) P
+8272 21600 (the) P
+9205 21600 (descriptions) P
+12304 21600 (of) P
+13004 21600 (the) P
+13937 21600 (functions.) P
+2 9 SF
+3240 19440 (Numerical) P
+5850 19440 (Conversion) P
+0 10 SF
+3240 18360 (The) P
+4373 18360 (following) P
+6907 18360 (functions) P
+9340 18360 (perform) P
+11473 18360 (numerical) P
+14072 18360 (conversion.) P
+3240 16200 (FUNCTION) P
+9858 16200 (REFERENCE) P
+16878 16200 (BRIEF) P
+18779 16200 (DESCRIPTION) P
+2 10 SF
+3240 14760 (a64l) P
+9858 14760 (a64l) P
+0 10 SF
+10975 14760 (\(3C\)) P
+16878 14760 (Convert) P
+19011 14760 (string) P
+20578 14760 (to) P
+16878 14040 (base) P
+18143 14040 (64) P
+18943 14040 (ASCII.) P
+2 10 SF
+3240 12600 (atof) P
+9858 12600 (atof) P
+0 10 SF
+10908 12600 (\(3C\)) P
+16878 12600 (Convert) P
+19011 12600 (string) P
+20578 12600 (to) P
+16878 11880 (\213oating.) P
+2 10 SF
+3240 10440 (atoi) P
+9858 10440 (atof) P
+0 10 SF
+10908 10440 (\(3C\)) P
+16878 10440 (Convert) P
+19011 10440 (string) P
+20578 10440 (to) P
+16878 9720 (integer.) P
+2 10 SF
+3240 8280 (atol) P
+9858 8280 (atof) P
+0 10 SF
+10908 8280 (\(3C\)) P
+16878 8280 (Convert) P
+19011 8280 (string) P
+20578 8280 (to) P
+21245 8280 (long.) P
+2 10 SF
+3240 6840 (frexp) P
+9858 6840 (frexp) P
+0 10 SF
+11274 6840 (\(3C\)) P
+16878 6840 (Split) P
+18213 6840 (\213oating) P
+20247 6840 (into) P
+16878 6120 (mantissa) P
+19177 6120 (and) P
+20243 6120 (exponent.) P
+2 10 SF
+3240 1872 (3\25512) P
+end restore showpage
+%%Page: 13 13
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+3240 32400 (l3tol) P
+9858 32400 (l3tol) P
+0 10 SF
+11042 32400 (\(3C\)) P
+16878 32400 (Convert) P
+19011 32400 (3\255byte) P
+20744 32400 (integer) P
+16878 31680 (to) P
+17545 31680 (long.) P
+2 10 SF
+3240 30240 (ltol3) P
+9858 30240 (l3tol) P
+0 10 SF
+11042 30240 (\(3C\)) P
+16878 30240 (Convert) P
+19011 30240 (long) P
+20278 30240 (to) P
+20945 30240 (3\255byte) P
+16878 29520 (integer.) P
+2 10 SF
+3240 28080 (ldexp) P
+9858 28080 (frexp) P
+0 10 SF
+11274 28080 (\(3C\)) P
+16878 28080 (Combine) P
+19278 28080 (mantissa) P
+21577 28080 (and) P
+16878 27360 (exponent.) P
+2 10 SF
+3240 25920 (l64a) P
+9858 25920 (a64l) P
+0 10 SF
+10975 25920 (\(3C\)) P
+16878 25920 (Convert) P
+19011 25920 (base) P
+20276 25920 (64) P
+21076 25920 (ASCII) P
+16878 25200 (to) P
+17545 25200 (string.) P
+2 10 SF
+3240 23760 (modf) P
+9858 23760 (frexp) P
+0 10 SF
+11274 23760 (\(3C\)) P
+16878 23760 (Split) P
+18213 23760 (mantissa) P
+20512 23760 (into) P
+16878 23040 (integer) P
+18744 23040 (and) P
+19810 23040 (fraction.) P
+2 9 SF
+3240 20880 (DES) P
+4470 20880 (Algorithm) P
+7050 20880 (Access) P
+0 10 SF
+3240 19800 (The) P
+4415 19800 (following) P
+6990 19800 (functions) P
+9464 19800 (allow) P
+11038 19800 (access) P
+12809 19800 (to) P
+13517 19800 (the) P
+14491 19800 (Data) P
+15864 19800 (Encryption) P
+18772 19800 (Standard) P
+21146 19800 (\(DES\)) P
+3240 19080 (algorithm) P
+5804 19080 (used) P
+7133 19080 (on) P
+7963 19080 (the) P
+8926 19080 (UNIX) P
+10655 19080 (operating) P
+13151 19080 (system.) P
+15396 19080 (The) P
+16558 19080 (DES) P
+17921 19080 (algorithm) P
+20484 19080 (is) P
+21113 19080 (imple\255) P
+3240 18360 (mented) P
+5308 18360 (with) P
+6677 18360 (variations) P
+9344 18360 (to) P
+10112 18360 (frustrate) P
+12412 18360 (use) P
+13512 18360 (of) P
+14313 18360 (hardware) P
+16845 18360 (implementations) P
+21146 18360 (of) P
+21947 18360 (the) P
+3240 17640 (DES) P
+4574 17640 (for) P
+5474 17640 (key) P
+6540 17640 (search.) P
+3240 15480 (FUNCTION) P
+9792 15480 (REFERENCE) P
+16746 15480 (BRIEF) P
+18647 15480 (DESCRIPTION) P
+2 10 SF
+3240 14040 (crypt) P
+9792 14040 (crypt) P
+0 10 SF
+11208 14040 (\(3C\)) P
+16746 14040 (Encode) P
+18745 14040 (string.) P
+2 10 SF
+3240 12600 (encrypt) P
+9792 12600 (crypt) P
+0 10 SF
+11208 12600 (\(3C\)) P
+16746 12600 (Encode/decode) P
+20610 12600 (string) P
+22177 12600 (of) P
+16746 11880 (0s) P
+17479 11880 (and) P
+18545 11880 (1s.) P
+2 10 SF
+3240 10440 (setkey) P
+9792 10440 (crypt) P
+0 10 SF
+11208 10440 (\(3C\)) P
+16746 10440 (Initialize) P
+19079 10440 (for) P
+19979 10440 (subsequent) P
+16746 9720 (use) P
+17745 9720 (of) P
+2 10 SF
+18445 9720 (encrypt) P
+0 10 SF
+20411 9720 (.) P
+2 9 SF
+3240 7560 (Group) P
+4950 7560 (File) P
+6000 7560 (Access) P
+0 10 SF
+3240 6480 (The) P
+4567 6480 (following) P
+7295 6480 (functions) P
+9922 6480 (are) P
+11047 6480 (used) P
+12539 6480 (to) P
+13399 6480 (obtain) P
+15292 6480 (entries) P
+17284 6480 (from) P
+18844 6480 (the) P
+19970 6480 (group) P
+21763 6480 (\212le.) P
+3240 5760 (Declarations) P
+6512 5760 (for) P
+7453 5760 (these) P
+8926 5760 (functions) P
+11400 5760 (must) P
+12808 5760 (be) P
+13615 5760 (included) P
+15921 5760 (in) P
+16628 5760 (the) P
+17601 5760 (program) P
+19874 5760 (being) P
+21447 5760 (com\255) P
+3240 5040 (piled) P
+4640 5040 (with) P
+5907 5040 (the) P
+6840 5040 (line:) P
+2 10 SF
+21580 1872 (3\25513) P
+end restore showpage
+%%Page: 14 14
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+0 10 SF
+3240 32400 (#include) P
+5506 32400 (<grp.h>) P
+3240 30240 (FUNCTION) P
+9693 30240 (REFERENCE) P
+16548 30240 (BRIEF) P
+18449 30240 (DESCRIPTION) P
+2 10 SF
+3240 28800 (endgrent) P
+9693 28800 (getgrent) P
+0 10 SF
+11875 28800 (\(3C\)) P
+16548 28800 (Close) P
+18114 28800 (group) P
+19714 28800 (\212le) P
+20681 28800 (being) P
+16548 28080 (processed.) P
+2 10 SF
+3240 26640 (getgrent) P
+9693 26640 (getgrent) P
+0 10 SF
+11875 26640 (\(3C\)) P
+16548 26640 (Get) P
+17614 26640 (next) P
+18847 26640 (group) P
+20447 26640 (\212le) P
+16548 25920 (entry.) P
+2 10 SF
+3240 24480 (getgrgid) P
+9693 24480 (getgrent) P
+0 10 SF
+11875 24480 (\(3C\)) P
+16548 24480 (Return) P
+18381 24480 (next) P
+19614 24480 (group) P
+21214 24480 (with) P
+16548 23760 (matching) P
+18981 23760 (gid.) P
+2 10 SF
+3240 22320 (getgrnam) P
+9693 22320 (getgrent) P
+0 10 SF
+11875 22320 (\(3C\)) P
+16548 22320 (Return) P
+18381 22320 (next) P
+19614 22320 (group) P
+21214 22320 (with) P
+16548 21600 (matching) P
+18981 21600 (name.) P
+2 10 SF
+3240 20160 (setgrent) P
+9693 20160 (getgrent) P
+0 10 SF
+11875 20160 (\(3C\)) P
+16548 20160 (Rewind) P
+18614 20160 (group) P
+20214 20160 (\212le) P
+21181 20160 (being) P
+16548 19440 (processed.) P
+2 10 SF
+3240 18000 (fgetgrent) P
+9693 18000 (getgrent) P
+0 10 SF
+11825 18000 (\(3C\)) P
+16548 18000 (Get) P
+17614 18000 (next) P
+18847 18000 (group) P
+20447 18000 (\212le) P
+21414 18000 (entry) P
+16548 17280 (from) P
+17915 17280 (a) P
+18381 17280 (speci\212ed) P
+20713 17280 (\212le.) P
+2 9 SF
+3240 15120 (Password) P
+5640 15120 (File) P
+6690 15120 (Access) P
+0 10 SF
+3240 14040 (These) P
+4907 14040 (functions) P
+7375 14040 (are) P
+8342 14040 (used) P
+9676 14040 (to) P
+10378 14040 (search) P
+12144 14040 (and) P
+13245 14040 (access) P
+15010 14040 (information) P
+18079 14040 (stored) P
+19780 14040 (in) P
+20481 14040 (the) P
+21448 14040 (pass\255) P
+3240 13320 (word) P
+4851 13320 (\212le) P
+5996 13320 (\(/etc/passwd\).) P
+9922 13320 (Some) P
+11667 13320 (functions) P
+14277 13320 (require) P
+16353 13320 (declarations) P
+19628 13320 (that) P
+20905 13320 (can) P
+22114 13320 (be) P
+3240 12600 (included) P
+5506 12600 (in) P
+6173 12600 (the) P
+7106 12600 (program) P
+9339 12600 (being) P
+10872 12600 (compiled) P
+13305 12600 (by) P
+14105 12600 (adding) P
+15938 12600 (the) P
+16871 12600 (line:) P
+3240 10800 (#include) P
+5506 10800 (<pwd.h>) P
+3240 8640 (FUNCTION) P
+9783 8640 (REFERENCE) P
+16878 8640 (BRIEF) P
+18779 8640 (DESCRIPTION) P
+2 10 SF
+3240 7200 (endpwent) P
+9783 7200 (getpwent) P
+0 10 SF
+12166 7200 (\(3C\)) P
+16878 7200 (Close) P
+18444 7200 (password) P
+20909 7200 (\212le) P
+16878 6480 (being) P
+18411 6480 (processed.) P
+2 10 SF
+3240 1872 (3\25514) P
+end restore showpage
+%%Page: 15 15
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+3240 32400 (getpw) P
+9783 32400 (getpw) P
+0 10 SF
+11366 32400 (\(3C\)) P
+16878 32400 (Search) P
+18710 32400 (password) P
+21175 32400 (\212le) P
+16878 31680 (for) P
+17778 31680 (uid.) P
+2 10 SF
+3240 30240 (getpwent) P
+9783 30240 (getpwent) P
+0 10 SF
+12166 30240 (\(3C\)) P
+16878 30240 (Get) P
+17944 30240 (next) P
+19177 30240 (password) P
+21642 30240 (\212le) P
+16878 29520 (entry.) P
+2 10 SF
+3240 28080 (getpwnam) P
+9783 28080 (getpwent) P
+0 10 SF
+12166 28080 (\(3C\)) P
+16878 28080 (Return) P
+18711 28080 (next) P
+19944 28080 (entry) P
+21377 28080 (with) P
+16878 27360 (matching) P
+19311 27360 (name.) P
+2 10 SF
+3240 25920 (getpwuid) P
+9783 25920 (getpwent) P
+0 10 SF
+12166 25920 (\(3C\)) P
+16878 25920 (Return) P
+18711 25920 (next) P
+19944 25920 (entry) P
+21377 25920 (with) P
+16878 25200 (matching) P
+19311 25200 (uid.) P
+2 10 SF
+3240 23760 (putpwent) P
+9783 23760 (putpwent) P
+0 10 SF
+12268 23760 (\(3C\)) P
+16878 23760 (Write) P
+18444 23760 (entry) P
+19877 23760 (on) P
+20677 23760 (stream.) P
+2 10 SF
+3240 22320 (setpwent) P
+9783 22320 (getpwent) P
+0 10 SF
+12166 22320 (\(3C\)) P
+16878 22320 (Rewind) P
+18944 22320 (password) P
+21409 22320 (\212le) P
+16878 21600 (being) P
+18411 21600 (accessed.) P
+2 10 SF
+3240 20160 (fgetpwent) P
+9783 20160 (getpwent) P
+0 10 SF
+12116 20160 (\(3C\)) P
+16878 20160 (Get) P
+17944 20160 (next) P
+19177 20160 (password) P
+21642 20160 (\212le) P
+16878 19440 (entry) P
+18311 19440 (from) P
+19678 19440 (a) P
+20144 19440 (speci\212ed) P
+16878 18720 (\212le.) P
+2 9 SF
+3240 16560 (Parameter) P
+5880 16560 (Access) P
+0 10 SF
+3240 15480 (The) P
+4508 15480 (following) P
+7177 15480 (functions) P
+9745 15480 (provide) P
+11913 15480 (access) P
+13778 15480 (to) P
+14580 15480 (several) P
+16613 15480 (different) P
+19014 15480 (types) P
+20614 15480 (of) P
+21448 15480 (para\255) P
+3240 14760 (menters.) P
+5689 14760 (None) P
+7188 14760 (require) P
+9087 14760 (any) P
+10153 14760 (declarations.) P
+3240 12600 (FUNCTION) P
+9549 12600 (REFERENCE) P
+16260 12600 (BRIEF) P
+18161 12600 (DESCRIPTION) P
+2 10 SF
+3240 11160 (getopt) P
+9549 11160 (getopt) P
+0 10 SF
+11199 11160 (\(3C\)) P
+16260 11160 (Get) P
+17326 11160 (next) P
+18559 11160 (option) P
+20293 11160 (from) P
+16260 10440 (option) P
+17994 10440 (list.) P
+2 10 SF
+3240 9000 (getcwd) P
+9549 9000 (getcwd) P
+0 10 SF
+11398 9000 (\(3C\)) P
+16260 9000 (Return) P
+18093 9000 (string) P
+16260 8280 (representation) P
+19858 8280 (of) P
+16260 7560 (current) P
+18159 7560 (working) P
+20359 7560 (directory.) P
+2 10 SF
+3240 6120 (getenv) P
+9549 6120 (getenv) P
+0 10 SF
+11265 6120 (\(3C\)) P
+16260 6120 (Return) P
+18093 6120 (string) P
+19660 6120 (value) P
+16260 5400 (associated) P
+18924 5400 (with) P
+16260 4680 (environment) P
+19493 4680 (variable.) P
+2 10 SF
+21580 1872 (3\25515) P
+end restore showpage
+%%Page: 16 16
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+3240 32400 (getpass) P
+9549 32400 (getpass) P
+0 10 SF
+11465 32400 (\(3C\)) P
+16260 32400 (Read) P
+17692 32400 (string) P
+19259 32400 (from) P
+20626 32400 (terminal) P
+16260 31680 (without) P
+18294 31680 (echoing.) P
+2 10 SF
+3240 30240 (putenv) P
+9549 30240 (putenv) P
+0 10 SF
+11317 30240 (\(3C\)) P
+16260 30240 (Change) P
+18292 30240 (or) P
+18992 30240 (add) P
+20058 30240 (value) P
+16260 29520 (of) P
+16960 29520 (an) P
+17726 29520 (environment) P
+16260 28800 (variable.) P
+2 9 SF
+3240 26640 (Hash) P
+4620 26640 (Table) P
+6120 26640 (Management) P
+0 10 SF
+3240 25560 (The) P
+4434 25560 (following) P
+7029 25560 (functions) P
+9523 25560 (are) P
+10516 25560 (used) P
+11876 25560 (to) P
+12604 25560 (manage) P
+14730 25560 (hash) P
+16089 25560 (search) P
+17880 25560 (tables.) P
+19889 25560 (The) P
+21082 25560 (header) P
+3240 24840 (\212le) P
+4269 24840 (associated) P
+6995 24840 (with) P
+8324 24840 (these) P
+9818 24840 (functions) P
+12313 24840 (should) P
+14175 24840 (be) P
+15003 24840 (included) P
+17331 24840 (in) P
+18059 24840 (the) P
+19053 24840 (program) P
+21347 24840 (being) P
+3240 24120 (compiled.) P
+6023 24120 (This) P
+7290 24120 (is) P
+7890 24120 (accomplished) P
+11388 24120 (by) P
+12188 24120 (including) P
+14655 24120 (the) P
+15588 24120 (line:) P
+3240 22320 (#include) P
+5506 22320 (<search.h>) P
+3240 20520 (near) P
+4472 20520 (the) P
+5405 20520 (beginning) P
+8005 20520 (of) P
+8705 20520 (any) P
+9771 20520 (\212le) P
+10738 20520 (using) P
+12238 20520 (the) P
+13171 20520 (search) P
+14902 20520 (functions.) P
+3240 18360 (FUNCTION) P
+9858 18360 (REFERENCE) P
+16878 18360 (BRIEF) P
+18779 18360 (DESCRIPTION) P
+2 10 SF
+3240 16920 (hcreate) P
+9858 16920 (hsearch) P
+0 10 SF
+11907 16920 (\(3C\)) P
+16878 16920 (Create) P
+18643 16920 (hash) P
+19942 16920 (table.) P
+2 10 SF
+3240 15480 (hdestroy) P
+9858 15480 (hsearch) P
+0 10 SF
+11907 15480 (\(3C\)) P
+16878 15480 (Destroy) P
+18977 15480 (hash) P
+20276 15480 (table.) P
+2 10 SF
+3240 14040 (hsearch) P
+9858 14040 (hsearch) P
+0 10 SF
+11907 14040 (\(3C\)) P
+16878 14040 (Search) P
+18710 14040 (hash) P
+20009 14040 (table) P
+21375 14040 (for) P
+16878 13320 (entry.) P
+2 9 SF
+3240 11160 (Binary) P
+5010 11160 (Tree) P
+6270 11160 (Management) P
+0 10 SF
+3240 10080 (The) P
+4459 10080 (following) P
+7079 10080 (functions) P
+9598 10080 (are) P
+10616 10080 (used) P
+12001 10080 (to) P
+12754 10080 (manage) P
+14905 10080 (a) P
+15457 10080 (binary) P
+17276 10080 (tree.) P
+18811 10080 (The) P
+20030 10080 (header) P
+21913 10080 (\212le) P
+3240 9360 (associated) P
+5924 9360 (with) P
+7211 9360 (these) P
+8663 9360 (functions) P
+11116 9360 (should) P
+12935 9360 (be) P
+13720 9360 (included) P
+16005 9360 (in) P
+16691 9360 (the) P
+17643 9360 (program) P
+19895 9360 (being) P
+21447 9360 (com\255) P
+3240 8640 (piled.) P
+4990 8640 (This) P
+6257 8640 (is) P
+6857 8640 (accomplished) P
+10355 8640 (by) P
+11155 8640 (including) P
+13622 8640 (the) P
+14555 8640 (line:) P
+3240 6840 (#include) P
+5506 6840 (<search.h>) P
+3240 5040 (near) P
+4472 5040 (the) P
+5405 5040 (beginning) P
+8005 5040 (of) P
+8705 5040 (any) P
+9771 5040 (\212le) P
+10738 5040 (using) P
+12238 5040 (the) P
+13171 5040 (search) P
+14902 5040 (functions.) P
+2 10 SF
+3240 1872 (3\25516) P
+end restore showpage
+%%Page: 17 17
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+0 10 SF
+3240 32400 (FUNCTION) P
+9858 32400 (REFERENCE) P
+16878 32400 (BRIEF) P
+18779 32400 (DESCRIPTION) P
+2 10 SF
+3240 30960 (tdelete) P
+9858 30960 (tsearch) P
+0 10 SF
+11773 30960 (\(3C\)) P
+16878 30960 (Deletes) P
+18876 30960 (nodes) P
+20475 30960 (from) P
+16878 30240 (binary) P
+18611 30240 (tree.) P
+2 10 SF
+3240 28800 (t\212nd) P
+9858 28800 (tsearch) P
+0 10 SF
+11723 28800 (\(3C\)) P
+16878 28800 (Find) P
+18179 28800 (element) P
+20278 28800 (in) P
+16878 28080 (binary) P
+18611 28080 (tree.) P
+2 10 SF
+3240 26640 (tsearch) P
+9858 26640 (tsearch) P
+0 10 SF
+11773 26640 (\(3C\)) P
+16878 26640 (Look) P
+18345 26640 (for) P
+19245 26640 (and) P
+20311 26640 (add) P
+16878 25920 (element) P
+18977 25920 (to) P
+19644 25920 (binary) P
+16878 25200 (tree.) P
+2 10 SF
+3240 23760 (twalk) P
+9858 23760 (tsearch) P
+0 10 SF
+11773 23760 (\(3C\)) P
+16878 23760 (Walk) P
+18377 23760 (binary) P
+20110 23760 (tree.) P
+2 9 SF
+3240 21600 (Table) P
+4740 21600 (Management) P
+0 10 SF
+3240 20520 (The) P
+4365 20520 (following) P
+6891 20520 (functions) P
+9316 20520 (are) P
+10240 20520 (used) P
+11531 20520 (to) P
+12190 20520 (manage) P
+14247 20520 (a) P
+14705 20520 (table.) P
+16413 20520 (Since) P
+17938 20520 (none) P
+19296 20520 (of) P
+19989 20520 (these) P
+21414 20520 (func\255) P
+3240 19800 (tions) P
+4641 19800 (allocate) P
+6739 19800 (storage,) P
+8854 19800 (suf\212cient) P
+11320 19800 (memory) P
+13553 19800 (must) P
+14953 19800 (be) P
+15752 19800 (allocated) P
+18150 19800 (before) P
+19915 19800 (using) P
+21448 19800 (these) P
+3240 19080 (functions.) P
+6057 19080 (The) P
+7223 19080 (header) P
+9054 19080 (\212le) P
+10054 19080 (associated) P
+12751 19080 (with) P
+14051 19080 (these) P
+15516 19080 (functions) P
+17982 19080 (should) P
+19815 19080 (be) P
+20614 19080 (included) P
+3240 18360 (in) P
+3907 18360 (the) P
+4840 18360 (program) P
+7073 18360 (being) P
+8606 18360 (compiled.) P
+11389 18360 (This) P
+12656 18360 (is) P
+13256 18360 (accomplished) P
+16754 18360 (by) P
+17554 18360 (including) P
+20021 18360 (the) P
+20954 18360 (line:) P
+3240 16560 (#include) P
+5506 16560 (<search.h>) P
+3240 14760 (near) P
+4472 14760 (the) P
+5405 14760 (beginning) P
+8005 14760 (of) P
+8705 14760 (any) P
+9771 14760 (\212le) P
+10738 14760 (using) P
+12238 14760 (the) P
+13171 14760 (search) P
+14902 14760 (functions.) P
+3240 12600 (FUNCTION) P
+9858 12600 (REFERENCE) P
+16878 12600 (BRIEF) P
+18779 12600 (DESCRIPTION) P
+2 10 SF
+3240 11160 (bsearch) P
+9858 11160 (bsearch) P
+0 10 SF
+11907 11160 (\(3C\)) P
+16878 11160 (Search) P
+18710 11160 (table) P
+20076 11160 (using) P
+16878 10440 (binary) P
+18611 10440 (search.) P
+2 10 SF
+3240 9000 (l\212nd) P
+9858 9000 (lsearch) P
+0 10 SF
+11690 9000 (\(3C\)) P
+16878 9000 (Find) P
+18179 9000 (element) P
+20278 9000 (in) P
+16878 8280 (library) P
+18678 8280 (tree.) P
+2 10 SF
+3240 6840 (lsearch) P
+9858 6840 (lsearch) P
+0 10 SF
+11740 6840 (\(3C\)) P
+16878 6840 (Look) P
+18345 6840 (for) P
+19245 6840 (and) P
+20311 6840 (add) P
+16878 6120 (element) P
+18977 6120 (in) P
+19644 6120 (binary) P
+16878 5400 (tree.) P
+2 10 SF
+21580 1872 (3\25517) P
+end restore showpage
+%%Page: 18 18
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+3240 32400 (qsort) P
+9858 32400 (qsort) P
+0 10 SF
+11241 32400 (\(3C\)) P
+16878 32400 (Sort) P
+18079 32400 (table) P
+19445 32400 (using) P
+16878 31680 (quick\255sort) P
+19511 31680 (algorithm.) P
+2 9 SF
+3240 29520 (Memory) P
+5400 29520 (Allocation) P
+0 10 SF
+3240 28440 (The) P
+4432 28440 (following) P
+7025 28440 (functions) P
+9517 28440 (provide) P
+11609 28440 (a) P
+12134 28440 (means) P
+13925 28440 (by) P
+14784 28440 (which) P
+16508 28440 (memory) P
+18766 28440 (can) P
+19856 28440 (be) P
+20680 28440 (dynami\255) P
+3240 27720 (cally) P
+4606 27720 (allocated) P
+6971 27720 (or) P
+7671 27720 (freed.) P
+3240 25560 (FUNCTION) P
+9675 25560 (REFERENCE) P
+16512 25560 (BRIEF) P
+18413 25560 (DESCRIPTION) P
+2 10 SF
+3240 24120 (calloc) P
+9675 24120 (malloc) P
+0 10 SF
+11425 24120 (\(3C\)) P
+16512 24120 (Allocate) P
+18744 24120 (zeroed) P
+20542 24120 (storage.) P
+2 10 SF
+3240 22680 (free) P
+9675 22680 (malloc) P
+0 10 SF
+11425 22680 (\(3C\)) P
+16512 22680 (Free) P
+17778 22680 (previously) P
+20511 22680 (allocated) P
+16512 21960 (storage.) P
+2 10 SF
+3240 20520 (malloc) P
+9675 20520 (malloc) P
+0 10 SF
+11425 20520 (\(3C\)) P
+16512 20520 (Allocate) P
+18744 20520 (storage.) P
+2 10 SF
+3240 19080 (realloc) P
+9675 19080 (malloc) P
+0 10 SF
+11425 19080 (\(3C\)) P
+16512 19080 (Change) P
+18544 19080 (size) P
+19676 19080 (of) P
+20376 19080 (allocated) P
+16512 18360 (storage.) P
+3240 17640 (The) P
+4373 17640 (following) P
+6907 17640 (is) P
+7507 17640 (another) P
+9506 17640 (set) P
+10372 17640 (of) P
+11072 17640 (memory) P
+13272 17640 (allocation) P
+15838 17640 (functions) P
+18271 17640 (available.) P
+3240 15480 (FUNCTION) P
+9675 15480 (REFERENCE) P
+16512 15480 (BRIEF) P
+18413 15480 (DESCRIPTION) P
+2 10 SF
+3240 14040 (calloc) P
+9675 14040 (malloc) P
+0 10 SF
+11375 14040 (\(3X\)) P
+16512 14040 (Allocate) P
+18744 14040 (zeroed) P
+20542 14040 (storage.) P
+2 10 SF
+3240 12600 (free) P
+9675 12600 (malloc) P
+0 10 SF
+11375 12600 (\(3X\)) P
+16512 12600 (Free) P
+17778 12600 (previously) P
+20511 12600 (allocated) P
+16512 11880 (storage.) P
+2 10 SF
+3240 10440 (malloc) P
+9675 10440 (malloc) P
+0 10 SF
+11375 10440 (\(3X\)) P
+16512 10440 (Allocate) P
+18744 10440 (storage.) P
+2 10 SF
+3240 9000 (mallopt) P
+9675 9000 (malloc) P
+0 10 SF
+11375 9000 (\(3X\)) P
+16512 9000 (Control) P
+18546 9000 (allocation) P
+16512 8280 (algorithm.) P
+2 10 SF
+3240 6840 (mallinfo) P
+9675 6840 (malloc) P
+0 10 SF
+11375 6840 (\(3X\)) P
+16512 6840 (Space) P
+18144 6840 (usage.) P
+2 10 SF
+3240 1872 (3\25518) P
+end restore showpage
+%%Page: 19 19
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+3240 32400 (realoc) P
+9675 32400 (malloc) P
+0 10 SF
+11375 32400 (\(3X\)) P
+16512 32400 (Change) P
+18544 32400 (size) P
+19676 32400 (of) P
+16512 31680 (allocated) P
+18877 31680 (storage.) P
+2 9 SF
+3240 29520 (Pseudorandom) P
+6900 29520 (Number) P
+9000 29520 (Generation) P
+0 10 SF
+3240 28440 (The) P
+4477 28440 (following) P
+7115 28440 (functions) P
+9652 28440 (are) P
+10687 28440 (used) P
+12089 28440 (to) P
+12859 28440 (generate) P
+15193 28440 (pseudorandom) P
+19028 28440 (numbers.) P
+21747 28440 (The) P
+3240 27720 (functions) P
+5816 27720 (that) P
+7059 27720 (end) P
+8268 27720 (with) P
+2 10 SF
+9678 27720 (48) P
+0 10 SF
+10621 27720 (are) P
+11696 27720 (a) P
+12305 27720 (family) P
+14215 27720 (of) P
+15058 27720 (interfaces) P
+17731 27720 (to) P
+18540 27720 (a) P
+19148 27720 (pseudorandom) P
+3240 27000 (number) P
+5478 27000 (generator) P
+8148 27000 (based) P
+9918 27000 (upon) P
+11523 27000 (the) P
+12661 27000 (linear) P
+14432 27000 (congruent) P
+17236 27000 (algorithm) P
+19975 27000 (and) P
+21246 27000 (48\255bit) P
+3240 26280 (integer) P
+5173 26280 (arithmetic.) P
+8223 26280 (The) P
+2 10 SF
+9422 26280 (rand) P
+0 10 SF
+10972 26280 (and) P
+2 10 SF
+12104 26280 (srand) P
+0 10 SF
+13887 26280 (functions) P
+16386 26280 (provide) P
+18485 26280 (an) P
+19317 26280 (interface) P
+21681 26280 (to) P
+22414 26280 (a) P
+3240 25560 (multiplicative) P
+6774 25560 (congruential) P
+9973 25560 (random) P
+12006 25560 (number) P
+14039 25560 (generator) P
+16504 25560 (with) P
+17771 25560 (period) P
+19504 25560 (of) P
+20204 25560 (232.) P
+3240 23400 (FUNCTION) P
+9708 23400 (REFERENCE) P
+16578 23400 (BRIEF) P
+18479 23400 (DESCRIPTION) P
+2 10 SF
+3240 21960 (drand48) P
+9708 21960 (drand48) P
+0 10 SF
+11926 21960 (\(3C\)) P
+16578 21960 (Random) P
+18811 21960 (double) P
+20644 21960 (over) P
+16578 21240 (the) P
+17511 21240 (interval) P
+19544 21240 ([0) P
+20244 21240 (to) P
+20911 21240 (1\).) P
+2 10 SF
+3240 19800 (lcong48) P
+9708 19800 (drand48) P
+0 10 SF
+11926 19800 (\(3C\)) P
+16578 19800 (Set) P
+17545 19800 (parameters) P
+20376 19800 (for) P
+2 10 SF
+16578 19080 (drand48) P
+0 10 SF
+18796 19080 (,) P
+2 10 SF
+19146 19080 (lrand48) P
+0 10 SF
+21197 19080 (,) P
+16578 18360 (and) P
+2 10 SF
+17644 18360 (mrand48) P
+0 10 SF
+19978 18360 (.) P
+2 10 SF
+3240 16920 (lrand48) P
+9708 16920 (drand48) P
+0 10 SF
+11926 16920 (\(3C\)) P
+16578 16920 (Random) P
+18811 16920 (long) P
+20078 16920 (over) P
+21344 16920 (the) P
+16578 16200 (interval) P
+18611 16200 ([0) P
+19311 16200 (to) P
+19978 16200 (2) P
+20278 16416 (31) P
+20878 16200 (\).) P
+2 10 SF
+3240 14760 (mrand48) P
+9708 14760 (drand48) P
+0 10 SF
+11926 14760 (\(3C\)) P
+16578 14760 (Random) P
+18811 14760 (long) P
+20078 14760 (over) P
+21344 14760 (the) P
+16578 14040 (interval) P
+18611 14040 ([\2552) P
+19311 14256 (31) P
+20111 14040 (to) P
+20778 14040 (2) P
+21078 14256 (31) P
+21678 14040 (\).) P
+2 10 SF
+3240 12600 (rand) P
+9708 12600 (rand) P
+0 10 SF
+10992 12600 (\(3C\)) P
+16578 12600 (Random) P
+18811 12600 (integer) P
+20677 12600 (over) P
+21943 12600 (the) P
+16578 11880 (interval) P
+18611 11880 ([0) P
+19311 11880 (to) P
+19978 11880 (32767\).) P
+2 10 SF
+3240 10440 (seed48) P
+9708 10440 (drand48) P
+0 10 SF
+11926 10440 (\(3C\)) P
+16578 10440 (Seed) P
+17944 10440 (the) P
+18877 10440 (generator) P
+21342 10440 (for) P
+2 10 SF
+16578 9720 (drand48) P
+0 10 SF
+18796 9720 (,) P
+2 10 SF
+19146 9720 (lrand48) P
+0 10 SF
+21197 9720 (,) P
+21547 9720 (and) P
+2 10 SF
+16578 9000 (mrand48) P
+0 10 SF
+18912 9000 (.) P
+2 10 SF
+3240 7560 (srand) P
+9708 7560 (rand) P
+0 10 SF
+10992 7560 (\(3C\)) P
+16578 7560 (Seed) P
+17944 7560 (the) P
+18877 7560 (generator) P
+16578 6840 (for) P
+2 10 SF
+17478 6840 (rand) P
+0 10 SF
+18712 6840 (.) P
+2 10 SF
+21580 1872 (3\25519) P
+end restore showpage
+%%Page: 20 20
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+3240 34560 (C) P
+3873 34560 (LIBRARIES) P
+3240 32400 (srand48) P
+9708 32400 (drand48) P
+0 10 SF
+11926 32400 (\(3C\)) P
+16578 32400 (Seed) P
+17944 32400 (the) P
+18877 32400 (generator) P
+21342 32400 (for) P
+2 10 SF
+16578 31680 (drand48) P
+0 10 SF
+18796 31680 (,) P
+2 10 SF
+19146 31680 (lrand48) P
+0 10 SF
+21197 31680 (,) P
+21547 31680 (and) P
+2 10 SF
+16578 30960 (mrand48) P
+0 10 SF
+19112 30960 (using) P
+20612 30960 (a) P
+21078 30960 (long.) P
+2 9 SF
+3240 24480 (Signal) P
+4860 24480 (Handling) P
+7200 24480 (Functions) P
+0 10 SF
+3240 23400 (The) P
+4367 23400 (functions) P
+2 10 SF
+6794 23400 (gsignal) P
+0 10 SF
+8839 23400 (and) P
+2 10 SF
+9899 23400 (ssignal) P
+0 10 SF
+11878 23400 (implement) P
+14640 23400 (a) P
+15101 23400 (software) P
+17361 23400 (facility) P
+19256 23400 (similar) P
+21118 23400 (to) P
+2 10 SF
+21780 23400 (sig\255) P
+3240 22680 (nal) P
+0 10 SF
+4041 22680 (\(2\)) P
+5096 22680 (in) P
+5918 22680 (the) P
+1 10 SF
+7006 22680 (UNIX) P
+8761 22680 (System) P
+10781 22680 (Programmer) P
+14234 22680 (Reference) P
+16986 22680 (Manual) P
+0 10 SF
+18853 22680 (.) P
+19558 22680 (This) P
+20980 22680 (facility) P
+3240 21960 (enables) P
+5297 21960 (users) P
+6788 21960 (to) P
+7514 21960 (indicate) P
+9672 21960 (the) P
+10664 21960 (disposition) P
+13557 21960 (of) P
+14316 21960 (error) P
+15741 21960 (conditions) P
+18500 21960 (and) P
+19624 21960 (allows) P
+21448 21960 (users) P
+3240 21240 (to) P
+4011 21240 (handle) P
+5913 21240 (signals) P
+7882 21240 (for) P
+8885 21240 (their) P
+10288 21240 (own) P
+11624 21240 (purposes.) P
+14409 21240 (The) P
+15645 21240 (declarations) P
+18846 21240 (associated) P
+21613 21240 (with) P
+3240 20520 (these) P
+4672 20520 (functions) P
+7105 20520 (can) P
+8137 20520 (be) P
+8903 20520 (included) P
+11169 20520 (in) P
+11836 20520 (the) P
+12769 20520 (program) P
+15002 20520 (being) P
+16535 20520 (complied) P
+18968 20520 (by) P
+19768 20520 (the) P
+20701 20520 (line) P
+3240 18720 (#include) P
+5506 18720 (<signal.h>) P
+3240 16920 (These) P
+4872 16920 (declarations) P
+7970 16920 (de\212ne) P
+9636 16920 (ASCII) P
+11403 16920 (names) P
+13135 16920 (for) P
+14035 16920 (the) P
+14968 16920 (15) P
+15768 16920 (software) P
+18033 16920 (signals.) P
+3240 14760 (FUNCTION) P
+9858 14760 (REFERENCE) P
+16878 14760 (BRIEF) P
+18779 14760 (DESCRIPTION) P
+2 10 SF
+3240 13320 (gsignal) P
+9858 13320 (ssignal) P
+0 10 SF
+11642 13320 (\(3C\)) P
+16878 13320 (Send) P
+18278 13320 (a) P
+18744 13320 (software) P
+21009 13320 (signal.) P
+2 10 SF
+3240 11880 (ssignal) P
+9858 11880 (ssignal) P
+0 10 SF
+11642 11880 (\(3C\)) P
+16878 11880 (Arrange) P
+19043 11880 (for) P
+19943 11880 (handling) P
+16878 11160 (of) P
+17578 11160 (software) P
+19843 11160 (signals.) P
+2 9 SF
+3240 9000 (Miscellaneous) P
+0 10 SF
+3240 7920 (The) P
+4373 7920 (following) P
+6907 7920 (functions) P
+9340 7920 (do) P
+10140 7920 (not) P
+11107 7920 (fall) P
+12107 7920 (into) P
+13241 7920 (any) P
+14307 7920 (previously) P
+17040 7920 (described) P
+19538 7920 (category.) P
+3240 5760 (FUNCTION) P
+9792 5760 (REFERENCE) P
+16746 5760 (BRIEF) P
+18647 5760 (DESCRIPTION) P
+2 10 SF
+3240 1872 (3\25520) P
+end restore showpage
+%%Page: 21 21
+save $troff begin Sc
+0 8 SF
+0 38160 (_) P
+32160 38160 (_) P
+2 10 SF
+18748 34560 (C) P
+19381 34560 (LIBRARIES) P
+3240 32400 (abort) P
+9792 32400 (abort) P
+0 10 SF
+11242 32400 (\(3C\)) P
+16746 32400 (Cause) P
+18411 32400 (an) P
+19177 32400 (IOT) P
+20377 32400 (signal) P
+16746 31680 (to) P
+17413 31680 (be) P
+18179 31680 (sent) P
+19345 31680 (to) P
+20012 31680 (the) P
+16746 30960 (process.) P
+2 10 SF
+3240 29520 (abs) P
+9792 29520 (abs) P
+0 10 SF
+10709 29520 (\(3C\)) P
+16746 29520 (Return) P
+18579 29520 (the) P
+19512 29520 (absolute) P
+16746 28800 (integer) P
+18612 28800 (value.) P
+2 10 SF
+3240 27360 (ecvt) P
+9792 27360 (ecvt) P
+0 10 SF
+10874 27360 (\(3C\)) P
+16746 27360 (Convert) P
+18879 27360 (double) P
+20712 27360 (to) P
+16746 26640 (string.) P
+2 10 SF
+3240 25200 (fcvt) P
+9792 25200 (ecvt) P
+0 10 SF
+10874 25200 (\(3C\)) P
+16746 25200 (Convert) P
+18879 25200 (double) P
+20712 25200 (to) P
+16746 24480 (string) P
+18313 24480 (using) P
+19813 24480 (Fortran) P
+16746 23760 (Format.) P
+2 10 SF
+3240 22320 (gcvt) P
+9792 22320 (ecvt) P
+0 10 SF
+10874 22320 (\(3C\)) P
+16746 22320 (Convert) P
+18879 22320 (double) P
+20712 22320 (to) P
+16746 21600 (string) P
+18313 21600 (using) P
+19813 21600 (Fortran) P
+16746 20880 (F) P
+17280 20880 (or) P
+17980 20880 (E) P
+18547 20880 (format.) P
+2 10 SF
+3240 19440 (isatty) P
+9792 19440 (ttyname) P
+0 10 SF
+11942 19440 (\(3C\)) P
+16746 19440 (Test) P
+17979 19440 (whether) P
+20111 19440 (integer) P
+16746 18720 (\212le) P
+17713 18720 (descriptor) P
+20312 18720 (is) P
+16746 18000 (associated) P
+19410 18000 (with) P
+20677 18000 (a) P
+16746 17280 (terminal.) P
+2 10 SF
+3240 15840 (mktemp) P
+9792 15840 (mktemp) P
+0 10 SF
+11976 15840 (\(3C\)) P
+16746 15840 (Create) P
+18511 15840 (\212le) P
+19478 15840 (name) P
+16746 15120 (using) P
+18246 15120 (template.) P
+2 10 SF
+3240 13680 (monitor) P
+9792 13680 (monitor) P
+0 10 SF
+11909 13680 (\(3C\)) P
+16746 13680 (Cause) P
+18411 13680 (process) P
+20409 13680 (to) P
+21076 13680 (record) P
+16746 12960 (a) P
+17212 12960 (histogram) P
+19812 12960 (of) P
+20512 12960 (program) P
+16746 12240 (counter) P
+18745 12240 (location.) P
+2 10 SF
+3240 10800 (swab) P
+9792 10800 (swab) P
+0 10 SF
+11142 10800 (\(3C\)) P
+16746 10800 (Swap) P
+18279 10800 (and) P
+19345 10800 (copy) P
+20711 10800 (bytes.) P
+2 10 SF
+3240 9360 (ttyname) P
+9792 9360 (ttyname) P
+0 10 SF
+11942 9360 (\(3C\)) P
+16746 9360 (Return) P
+18579 9360 (pathname) P
+21111 9360 (of) P
+16746 8640 (terminal) P
+18946 8640 (associated) P
+21610 8640 (with) P
+16746 7920 (integer) P
+18612 7920 (\212le) P
+19579 7920 (descriptor.) P
+2 10 SF
+21580 1872 (3\25521) P
+0 8 SF
+0 -690 (_) P
+32160 -690 (_) P
+end restore showpage
+%%Trailer
+%%Pages: 21
+%%EOF

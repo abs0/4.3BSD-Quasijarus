@@ -3,24 +3,28 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.2 (Berkeley) 5/4/86
+#	@(#)Makefile	6.3 (Berkeley) 11/17/04
 #
 SRCS=	porttour1.ms porttour2.ms
-MACROS=	-msU
-PRINTER=Pdp
-REFER=	refer -p /usr/doc/run/Ind
-TBL=	dtbl -${PRINTER}
-TROFF=	ditroff -${PRINTER}
+MACROS=	-ms
+REFER=	refer
+TBL=	tbl
+TROFF=	pstroff
+NROFF=	nroff8 -Tcol8
+COL=	col8 -b
 
-paper:	paper.${PRINTER}
-	lpr -${PRINTER} -n paper.${PRINTER}
+all:	paper.ps paper.txt
 
-paper.${PRINTER}: ${SRCS}
+paper.ps: ${SRCS}
 	${REFER} -e ${SRCS} | ${TBL} | \
-	${TROFF} ${MACROS} -t > paper.${PRINTER}
+	${TROFF} ${MACROS} -t > $@
+
+paper.txt: ${SRCS}
+	${REFER} -e ${SRCS} | ${TBL} | \
+	${NROFF} ${MACROS} | ${COL} > $@
 
 clean:
-	rm -f paper.[PT]* *.spell errs Errs make.out
+	rm -f *.ps *.txt *.spell errs Errs make.out
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \

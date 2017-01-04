@@ -1,0 +1,111 @@
+h43431
+s 00021/00016/00013
+d D 4.4 87/09/17 16:21:17 bostic 4 3
+c change default, sort, add minor info
+e
+s 00001/00000/00028
+d D 4.3 86/04/03 18:58:34 mckusick 3 2
+c addition of nec25-t (from muller@nprdc.arpa (Keith Muller))
+e
+s 00001/00000/00027
+d D 4.2 85/05/21 11:59:44 miriam 2 1
+c add epson
+e
+s 00027/00000/00000
+d D 4.1 83/08/05 13:34:31 sam 1 0
+c date and time created 83/08/05 13:34:31 by sam
+e
+u
+U
+t
+T
+I 1
+	%M%	%I%	%E%
+
+Here are the currently supported types of printers:
+
+D 4
+37		default Model 37 TeleType
+lpr		printer with no halfline/upline (link to crt and tn300)
+300		old DTC 300
+E 4
+I 4
+37		Model 37 TeleType
+300		old DTC 300, 10 pitch
+E 4
+300-12		old DTC 300, 12 pitch
+D 4
+302		DTC 302 or DTC 300s (link to 300s and dtc)
+E 4
+I 4
+302		DTC 302 or DTC 300s, 10 pitch (link to 300s and dtc)
+E 4
+302-12		DTC 302 or DTC 300s, 12 pitch (link to 300s-12 and dtc12)
+D 4
+382		fancy DTC 382
+E 4
+I 4
+382		fancy DTC 382, 10 pitch
+E 4
+382-12		fancy DTC 382, 12 pitch
+D 4
+450		DASI 450 or IPSI 1622 (link to ipsi)
+E 4
+I 4
+450		DASI 450 or IPSI 1622, 10 pitch (link to ipsi)
+E 4
+450-12		DASI 450 or IPSI 1622, 12 pitch (link to ipsi12)
+D 4
+833		AJ 833 or AJ 832
+E 4
+I 4
+833		AJ 833 or AJ 832, 10 pitch
+E 4
+833-12		AJ 833 or AJ 832, 12 pitch
+I 2
+epson		Epson FX80
+E 2
+D 4
+itoh		C:ITOH Prowriter
+E 4
+I 4
+itoh		C:ITOH Prowriter, 10 pitch
+E 4
+itoh12		C:ITOH Prowriter, 12 pitch
+D 4
+nec		NEC 55?0 or NEC 77?0 Spinwriter
+nec12		NEC 55?0 or NEC 77?0 Spinwriter, 12 pitch
+nec-t		NEC 55?0/77?0 Spinwriter, Tech-Math/Times-Roman thimble
+I 3
+nec25-t		NEC 5525/7725 Spinwriter, Tech-Math/Times-Roman thimble
+E 3
+qume		Qume Sprint 5 or 9
+E 4
+I 4
+lpr (default)	printer with no halfline/upline, 10 pitch
+			(link to crt and tn300)
+nec		NEC 55?0 or NEC 77?0 Spinwriter, 10 pitch,
+			Courier-72/Manifold thimble
+nec-t		NEC 55?0/77?0 Spinwriter, 12 pitch,
+			Tech-Math/Times-Roman thimble
+nec12		NEC 55?0 or NEC 77?0 Spinwriter, 12 pitch,
+			Courier - 72/Manifold thimble
+nec25-t		NEC 5525/7725 Spinwriter, 12 pitch,
+			Tech-Math/Times-Roman thimble
+qume		Qume Sprint 5 or 9, 10 pitch
+E 4
+qume12		Qume Sprint 5 or 9, 12 pitch
+D 4
+xerox		Xerox 17?0 or Diablo 16?0
+xerox12		Xerox 17?0 or Diablo 16?0, 12 pitch
+x-ecs		Xerox/Diablo 1730/630, Extended Character Set
+E 4
+I 4
+x-ecs		Xerox/Diablo 1730/630, Extended Character Set, 10 pitch
+E 4
+x-ecs12		Xerox/Diablo 1730/630, Extended Character Set, 12 pitch
+I 4
+xerox		Xerox 17?0 or Diablo 16?0, 10 pitch
+xerox12		Xerox 17?0 or Diablo 16?0, 12 pitch
+E 4
+E 1

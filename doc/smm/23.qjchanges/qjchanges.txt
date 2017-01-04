@@ -1,0 +1,198 @@
+
+
+
+
+
+
+
+
+
+         Bug Fixes and Changes in 4.3BSD-Quasijarus
+
+                      December 4, 2003
+
+
+                      Michael Sokolov
+
+                     Quasijarus Project
+          International Free Computing Task Force
+           http://ifctfvax.Harhan.ORG/Quasijarus/
+
+
+                          ABSTRACT
+
+          This document briefly describes  the  changes
+     to the Berkeley version of UNIX- for the VAX= made
+     by  Quasijarus  Project in each successive 4.3BSD-
+     Quasijarus release up to the present.  It attempts
+     only to summarize the major changes that have been
+     made.  There are many more minor changes.
+
+
+
+                4.3BSD-Quasijarus0a changes
+
+
++    SCCS commands are now part of the standard system.
+
++    The MicroVAX bootblock has been added to  the  standard
+     distribution  tape.  Since it must reside at the begin-
+     ning of the tape,  the  original  toggle-in  bootstraps
+     have been moved two blocks down.
+
++    Franz Lisp has been separated from the main system.
+
++    Jean-loup Gailly's zlib compression library  (-lz)  has
+     been included in the standard system.
+
++    -s option has been added to compress(1) to  use  strong
+     compression  instead of the standard compress algorithm
+     (also known as LZW).
+
++    Several new MSCP disks have been added to  the  distri-
+     buted  /etc/disktab  and to the compiled-in disk tables
+     in the uda(4) driver.
+_________________________
+-  UNIX  is a registered trademark of AT&T Bell Labora-
+tories in the USA and other countries.
+= DEC, VAX, PDP, MASSBUS, UNIBUS, Q-bus and ULTRIX  are
+trademarks of Digital Equipment Corporation.
+
+
+
+
+                     September 13, 2004
+
+
+
+
+
+SMM:23-2          Bug Fixes and Changes in 4.3BSD-Quasijarus
+
+
++    Kdb(4) driver now uses the same partitions as uda(4) on
+     the same disks.
+
++    The kernel and the standalone system have  been  taught
+     that VAXBI KLESI (TU81 controller) is actually a UNIBUS
+     adapter with a UNIBUS KLESI sitting  behind  it,  which
+     DEC  apparently  doesn't  want  you  to know, instantly
+     gaining full support for this device.
+
++    Added Makefile support for building a distribution con-
+     sole  RL02 pack for VAX 8600 and 8650 machines, so that
+     one can be supplied to sites cold-bootstrapping UNIX on
+     such a machine.
+
++    The protocol used by dmc(4) and dmv(4) drivers has been
+     standardized  to  MTU  of  1284  bytes, 8 garbage bytes
+     present.  This is the protocol used 4.3BSD  dmc(4)  and
+     Ultrix  dmc(4) and dmv(4), i.e., by all existing stable
+     releases.
+
++    The  ``mini  root''  file  system  used  in  the   full
+     bootstrap  procedure  has  been  increased  from 2 to 3
+     megabytes.
+
++    The troff(1) sources for  the  supplementary  documents
+     have been moved from /usr/doc to /usr/src/doc.
+
++    The system headers are now copied rather than symlinked
+     from  /sys to /usr/include by default, so that the sys-
+     tem can still be used operationally, including  compil-
+     ing user programs when the sources are not installed.
+
+
+                4.3BSD-Quasijarus0b changes
+
+
++    Y2K fixes throughout the system.
+
++    Fix for a critical bug in c2, the  peephole  optimiser,
+     which  caused  it  under certain circumstances to throw
+     out instructions loading  registers  which  were  later
+     used  in  deferred  or  indexed  addressing modes.  The
+     resulting misoptimised  code  thus  dereferenced  bogus
+     addresses,   dumping   core  or  even  worse,  behaving
+     unpredictably.  Many other minor bugs  have  also  been
+     fixed  in  c2.   Since all system binaries are compiled
+     with -O this potentially affects every  binary  in  the
+     system.
+
++    As(1) now automatically chooses between byte  branches,
+     word  branches,  and  long  jumps,  and  ignores the -J
+     option.  It now also provides  relaxed  forms  of  SOB,
+     AOB, and ACB instructions, which are now used by c2.
+
+
+
+
+                     September 13, 2004
+
+
+
+
+
+Bug Fixes and Changes in 4.3BSD-Quasijarus          SMM:23-3
+
+
++    Cc(1) -J option causes switch tables to be generated in
+     long form like on Sun3.
+
++    A number of tables have been enlarged in the C compiler
+     and preprocessor.
+
++    When emulating CRC, MATCHC, and MOVTUC instructions  on
+     uVAXen the registers and condition codes were being set
+     incorrectly in some corner cases.  This has been fixed.
+
++    A security hole in kernel affecting  VAX  CPUs  without
+     PDP-11 compatibility mode support (uVAXen and VAX 8200)
+     has  been  plugged.   The  hole  allowed  any  ordinary
+     unprivileged  user  who  is able to run programs on the
+     machine to cause a kernel panic by giving PSL<CM>=1  to
+     the sigreturn(2) system call.
+
++    A kernel panic-causing bug in TCP has been fixed.   The
+     kernel  could panic if a setsockopt(2) was attempted on
+     a TCP socket that had its connection reset.   Fix  from
+     4.4BSD.
+
++    Support for DEC DSV11 point-to-point links using  Cisco
+     HDLC protocol.
+
++    Sendmail  cf  files:  the  prophecy  has   come   true.
+     HOSTS.TXT  is gone, everyone uses DNS, and there are no
+     more NIC-registered hosts to worry about.
+
++    Several new MSCP disks have been added to  the  distri-
+     buted  /etc/disktab  and to the compiled-in disk tables
+     in the uda(4) and kdb(4) drivers.
+
++    The MicroVAX boot code no longer requires the boot disk
+     to  be unit 0.  It must still be on the first MSCP con-
+     troller, though.
+
++    An RX50 console floppy is now available for  the  stan-
+     dard system to bootstrap on a VAX 8200.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     September 13, 2004
+
+

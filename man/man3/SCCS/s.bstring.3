@@ -1,0 +1,146 @@
+h47957
+s 00004/00000/00071
+d D 6.3 87/11/18 19:24:45 bostic 4 3
+c bcmp of 0 bytes returns 0 bytes
+e
+s 00003/00005/00068
+d D 6.2 87/04/10 09:20:32 bostic 3 2
+c ffs returns 0 if passed 0; bug report 4.2BSD/lib/16
+e
+s 00007/00011/00066
+d D 6.1 85/05/15 16:14:57 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00077/00000/00000
+d D 5.1 85/05/15 16:14:46 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BSTRING 3  "4 March 1983"
+E 2
+I 2
+.TH BSTRING 3  "%Q%"
+E 2
+.UC 5
+.SH NAME
+bcopy, bcmp, bzero, ffs \- bit and byte string operations
+.SH SYNOPSIS
+.nf
+D 2
+.B bcopy(b1, b2, length)
+.B char *b1, *b2;
+E 2
+I 2
+.B bcopy(src, dst, length)
+.B char *src, *dst;
+E 2
+.B int length;
+.PP
+.B bcmp(b1, b2, length)
+.B char *b1, *b2;
+.B int length;
+.PP
+.B bzero(b, length)
+.B char *b;
+.B int length;
+.PP
+.B ffs(i)
+.B int i;
+.fi
+.SH DESCRIPTION
+The functions
+.IR bcopy ,
+.IR bcmp ,
+and
+.I bzero
+operate on variable length strings of bytes.
+They do not check for null bytes as the routines in
+.IR string (3)
+do.
+.PP
+.I Bcopy
+copies 
+.I length
+bytes from string
+D 2
+.I b1
+E 2
+I 2
+.I src
+E 2
+to the string
+D 2
+.IR b2 .
+E 2
+I 2
+.IR dst .
+E 2
+.PP
+.I Bcmp
+compares byte string
+.I b1
+against byte string
+.IR b2 ,
+returning zero if they are identical,
+non-zero otherwise.  Both strings are
+assumed to be
+.I length
+bytes long.
+I 4
+.B Bcmp
+of
+.I length
+zero bytes always returns zero.
+E 4
+.PP
+.I Bzero
+places
+.I length
+0 bytes in the string
+.IR b1 .
+.PP
+D 3
+.I Ffs
+find the first bit set in the argument passed it and
+returns the index of that bit.  Bits are numbered
+D 2
+starting at 1.  A return value of \-1 indicates the
+E 2
+I 2
+starting at 1.  A return value of 0 indicates the
+E 2
+value passed is zero.
+E 3
+I 3
+\fIFfs\fP finds the first bit set in the argument passed it and returns
+the index of that bit.  Bits are numbered starting at 1, from the right.
+A return value of 0 indicates the value passed is zero.
+E 3
+.SH BUGS
+The
+D 2
+.I bcmp
+and 
+E 2
+.I bcopy
+D 2
+routines take parameters backwards from
+.I strcmp
+and
+E 2
+I 2
+routine take parameters backwards from
+E 2
+.IR strcpy .
+E 1

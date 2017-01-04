@@ -1,0 +1,83 @@
+h33073
+s 00003/00003/00052
+d D 1.2 2013/08/05 07:52:10 msokolov 2 1
+c listing font name CW => C
+e
+s 00055/00000/00000
+d D 1.1 10/08/30 20:50:48 msokolov 1 0
+c placed under SCCS
+e
+u
+U
+t
+T
+I 1
+.\"	Miscellaneous macros for some of the documents
+.\"	Mostly to set off program text
+.\"
+.\"	%W% (Berkeley) %E%
+.\"
+.if n .nr DV 0
+.\"		set up Printout font
+D 2
+.if "\*(pf"" .ds pf CW
+E 2
+I 2
+.if "\*(pf"" .ds pf C
+E 2
+.nr dP 1	\" delta point size for program
+.nr dV 1	\" delta vertical for programs
+.ps \n(PS
+.vs \n(VS
+.if n .nr DV 0	\" extra space before diverted text
+.if n .nr NH 1	\" space after NH or SH heading
+.if t .nr NH .5v
+.if n .ls 2
+.de UC
+\&\\$3\s-1\\$1\\s0\&\\$2
+..
+.de IT
+.if n .ul
+\&\\$3\f2\\$1\f1\^\&\\$2
+..
+.de UL
+.lg 0
+.if n .ul
+D 2
+\%\&\\$3\f(\\*(pf\\$1\f1\&\\$2
+E 2
+I 2
+.\" was \%\&\\$3\f(\\*(pf\\$1\f1\&\\$2 for 2-char font name
+\%\&\\$3\f\\*(pf\\$1\f1\&\\$2
+E 2
+.lg
+..
+.nr ds .5i	\" default indent for programs
+.de P1
+.ie \\n(.$ .DS I \\$1
+.el .DS I \\n(dsu
+.nf
+.lg 0
+.if n .ls 1
+.if n .ta 5 10 15 20 25 30 35 40 45 50 55 60
+.if t .ps -\\n(dP
+.if t .vs -\\n(dV
+.ft \\*(pf
+.nr t 5*\\w'x'u
+.if t .ta 1u*\\ntu 2u*\\ntu 3u*\\ntu 4u*\\ntu 5u*\\ntu 6u*\\ntu 7u*\\ntu 8u*\\ntu 9u*\\ntu 10u*\\ntu 11u*\\ntu 12u*\\ntu 13u*\\ntu 14u*\\ntu
+D 2
+.lg 0
+E 2
+..
+.de P2
+.ps \\n(PS
+.vs \\n(VSp
+.ft 1
+.if n .ls 2
+.fi
+.DE
+.lg
+.if n .sp
+..
+.hy 14	\"2=not last lines; 4= no -xx; 8=no xx-
+E 1

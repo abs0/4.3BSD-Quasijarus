@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.26 (Berkeley) 6/27/88
+#	@(#)Makefile	5.28 (Berkeley) 2012/06/21
 #
 # Many of these routines have been rewritten in assembly.  The assembly
 # source can be found in the directory gen.${MACHINE}.  The macro
@@ -26,7 +26,7 @@
 VPATH=	regexp
 DEFS=	-DLIBC_SCCS
 CFLAGS=	-O ${DEFS}
-STDSRC=	abort.c alarm.c atoi.c atol.c calloc.c closedir.c crypt.c ctime.c \
+STDSRC=	abort.c alarm.c atoi.c atol.c calloc.c closedir.c crypt.c \
 	ctype_.c disklabel.c errlst.c execvp.c fakcu.c fstab.c \
 	getenv.c getgrent.c getgrgid.c getgrnam.c getlogin.c getpass.c \
 	getpwent.c getpwnamuid.c getttyent.c getttynam.c getusershell.c \
@@ -37,7 +37,7 @@ STDSRC=	abort.c alarm.c atoi.c atol.c calloc.c closedir.c crypt.c ctime.c \
 	siginterrupt.c siglist.c signal.c sleep.c strcasecmp.c swab.c \
 	syslog.c system.c telldir.c time.c timezone.c ttyname.c ttyslot.c \
 	ualarm.c usleep.c valloc.c
-STDOBJ=	abort.o alarm.o atoi.o atol.o calloc.o closedir.o crypt.o ctime.o \
+STDOBJ=	abort.o alarm.o atoi.o atol.o calloc.o closedir.o crypt.o \
 	ctype_.o disklabel.o errlst.o execvp.o fakcu.o fstab.o \
 	getenv.o getgrent.o getgrgid.o getgrnam.o getlogin.o getpass.o \
 	getpwent.o getpwnamuid.o getttyent.o getttynam.o getusershell.o \
@@ -87,12 +87,13 @@ lib.vax: ${STDOBJ} ${VAXOBJ}
 
 lib.tahoe: ${STDOBJ} ${TAHOEOBJ}
 
+ctype_.o: ctype_.c
+	${CC} ${DEFS} -R -c ctype_.c
+	cp ctype_.o profiled/ctype_.o
+
 errlst.o: errlst.c
-	${CC} -S ${DEFS} errlst.c
-	ed - <:errfix errlst.s
-	as -o errlst.o errlst.s
+	${CC} ${DEFS} -R -c errlst.c
 	cp errlst.o profiled/errlst.o
-	rm -f errlst.s
 
 tags: tags.${MACHINE}
 
@@ -132,10 +133,6 @@ closedir.o: /usr/include/signal.h /usr/include/machine/trap.h
 closedir.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
 closedir.o: /usr/include/sys/dir.h
 crypt.o: crypt.c
-ctime.o: ctime.c /usr/include/sys/param.h /usr/include/sys/types.h
-ctime.o: /usr/include/signal.h /usr/include/machine/trap.h
-ctime.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-ctime.o: /usr/include/sys/time.h /usr/include/time.h /usr/include/tzfile.h
 ctype_.o: ctype_.c /usr/include/ctype.h
 disklabel.o: disklabel.c /usr/include/sys/param.h /usr/include/sys/types.h
 disklabel.o: /usr/include/signal.h /usr/include/machine/trap.h

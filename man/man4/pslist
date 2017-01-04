@@ -1,0 +1,24 @@
+MAN4=	../man4/vax/intro.4.ps ../man4/intro.4n.ps ../man4/vax/acc.4.ps \
+	../man4/vax/ad.4.ps ../man4/arp.4p.ps ../man4/vax/autoconf.4.ps \
+	../man4/bk.4.ps ../man4/vax/cons.4.ps ../man4/vax/crl.4.ps \
+	../man4/vax/css.4.ps ../man4/vax/ct.4.ps ../man4/vax/ddn.4.ps \
+	../man4/vax/de.4.ps ../man4/vax/dh.4.ps ../man4/vax/dhu.4.ps \
+	../man4/vax/dmc.4.ps ../man4/vax/dmf.4.ps ../man4/vax/dmv.4.ps \
+	../man4/vax/dmz.4.ps ../man4/vax/dn.4.ps ../man4/drum.4.ps \
+	../man4/vax/dz.4.ps ../man4/vax/ec.4.ps ../man4/vax/en.4.ps \
+	../man4/vax/ex.4.ps ../man4/vax/fl.4.ps ../man4/vax/hdh.4.ps \
+	../man4/vax/hk.4.ps ../man4/vax/hp.4.ps ../man4/vax/ht.4.ps \
+	../man4/vax/hy.4.ps ../man4/icmp.4p.ps ../man4/idp.4p.ps \
+	../man4/vax/ik.4.ps ../man4/vax/il.4.ps ../man4/vax/imp.4.ps \
+	../man4/imp.4p.ps ../man4/inet.4f.ps ../man4/ip.4p.ps \
+	../man4/vax/ix.4.ps ../man4/kdb.4.ps ../man4/vax/kg.4.ps \
+	../man4/lo.4.ps ../man4/vax/lp.4.ps ../man4/vax/mem.4.ps \
+	../man4/vax/mt.4.ps ../man4/vax/mtio.4.ps ../man4/vax/np.4.ps \
+	../man4/ns.4f.ps ../man4/nsip.4.ps ../man4/null.4.ps \
+	../man4/vax/pcl.4.ps ../man4/vax/ps.4.ps ../man4/pty.4.ps \
+	../man4/vax/qe.4.ps ../man4/vax/rx.4.ps ../man4/spp.4p.ps \
+	../man4/vax/tb.4.ps ../man4/tcp.4p.ps ../man4/vax/tm.4.ps \
+	../man4/vax/tmscp.4.ps ../man4/vax/ts.4.ps ../man4/tty.4.ps \
+	../man4/vax/tu.4.ps ../man4/vax/uda.4.ps ../man4/udp.4p.ps \
+	../man4/vax/up.4.ps ../man4/vax/ut.4.ps ../man4/vax/uu.4.ps \
+	../man4/vax/va.4.ps ../man4/vax/vp.4.ps ../man4/vax/vv.4.ps

@@ -1,0 +1,12 @@
+%!
+%%IncludeFile: TroffEmu-Symbol.ps
+/TroffEmu-Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/PaintType 2 def
+	/StrokeWidth 1 def
+currentdict end
+/TroffEmu-Symbol-outline exch definefont
+255 scalefont setfont
+200 400 moveto <F0> show
+showpage

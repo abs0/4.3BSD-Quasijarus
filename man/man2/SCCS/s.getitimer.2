@@ -1,0 +1,182 @@
+h04732
+s 00001/00001/00121
+d D 6.3 86/12/18 17:16:22 bostic 4 3
+c added select to see also
+e
+s 00002/00002/00120
+d D 6.2 85/08/26 23:32:49 mckusick 3 2
+c update error messages (mostly from sun!guy)
+e
+s 00011/00006/00111
+d D 6.1 85/05/15 11:55:45 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00117/00000/00000
+d D 5.1 85/05/15 11:55:38 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETITIMER 2 "27 July 1983"
+E 2
+I 2
+.TH GETITIMER 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+getitimer, setitimer \- get/set value of interval timer
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/time.h>
+.PP
+.ft B
+#define ITIMER_REAL   	0	/* real time intervals */
+#define ITIMER_VIRTUAL	1	/* virtual time intervals */
+#define ITIMER_PROF   	2	/* user and system virtual time */
+.sp
+.ft B
+getitimer(which, value)
+int which;
+struct itimerval *value;
+.PP
+.ft B
+setitimer(which, value, ovalue)
+int which;
+struct itimerval *value, *ovalue;
+.fi
+.SH DESCRIPTION
+The system provides each process with three interval timers,
+defined in
+.RI < sys/time.h >.
+The
+.I getitimer
+call returns the current value for the timer specified in
+D 2
+.IR which ,
+while the
+E 2
+I 2
+.I which
+in the structure at
+.IR value .
+The
+E 2
+.I setitimer
+D 2
+call sets the value of a timer (optionally returning the previous
+value of the timer).
+E 2
+I 2
+call sets a timer to the specified
+.I value
+(returning the previous value of the timer if
+.I ovalue
+is nonzero).
+E 2
+.PP
+A timer value is defined by the 
+.I itimerval
+structure:
+.PP
+.nf
+.RS
+.DT
+struct itimerval {
+	struct	timeval it_interval;	/* timer interval */
+	struct	timeval it_value;	/* current value */
+};
+.RE
+.fi
+.PP
+If
+.I it_value
+is non-zero, it indicates the time to the next timer expiration. 
+If
+.I it_interval
+is non-zero, it specifies a value to be used in reloading 
+.I it_value
+when the timer expires.
+Setting 
+.I it_value
+to 0 disables a timer.  Setting 
+.I it_interval
+to 0 causes a timer to be disabled after its next expiration (assuming
+.I it_value
+is non-zero).
+.PP
+Time values smaller than the resolution of the
+system clock are rounded up to this resolution
+D 2
+(on the VAX, 10 microseconds).
+E 2
+I 2
+(on the VAX, 10 milliseconds).
+E 2
+.PP
+The ITIMER_REAL timer decrements in real time.  A SIGALRM signal is
+delivered when this timer expires.
+.PP
+The ITIMER_VIRTUAL timer decrements in process virtual time.
+It runs only when the process is executing.  A SIGVTALRM signal
+is delivered when it expires.
+.PP
+The ITIMER_PROF timer decrements both in process virtual time and
+when the system is running on behalf of the process.  It is designed
+to be used by interpreters in statistically profiling the execution
+of interpreted programs.
+Each time the ITIMER_PROF timer expires, the SIGPROF signal is
+delivered.  Because this signal may interrupt in-progress
+system calls, programs using this timer must be prepared to
+restart interrupted system calls.
+.SH NOTES
+Three macros for manipulating time values are defined in
+.RI < sys/time.h >.
+.I Timerclear
+sets a time value to zero,
+.I timerisset
+tests if a time value is non-zero, and
+.I timercmp
+compares two time values (beware that >= and <= do not
+work with this macro).
+.SH "RETURN VALUE
+If the calls succeed, a value of 0 is returned.  If an error occurs,
+the value \-1 is returned, and a more precise error code is placed
+in the global variable \fIerrno\fP.
+.SH "ERRORS
+The possible errors are:
+.TP 15
+[EFAULT]
+D 3
+The \fIvalue\fP structure specified a bad address.
+E 3
+I 3
+The \fIvalue\fP parameter specified a bad address.
+E 3
+.TP 15
+[EINVAL]
+D 3
+A \fIvalue\fP structure specified a time was too large
+E 3
+I 3
+A \fIvalue\fP parameter specified a time was too large
+E 3
+to be handled.
+.SH "SEE ALSO"
+D 4
+sigvec(2), gettimeofday(2)
+E 4
+I 4
+select(2), sigvec(2), gettimeofday(2)
+E 4
+E 1

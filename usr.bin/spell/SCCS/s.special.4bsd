@@ -1,0 +1,1723 @@
+h23860
+s 00722/00129/00319
+d D 4.2 87/03/12 11:43:08 mckusick 2 1
+c update from George Bergman (gbergman@cartan.berkeley.edu)
+e
+s 00448/00000/00000
+d D 4.1 87/03/12 11:42:20 mckusick 1 0
+c from 4.0BSD distribution, also on 4.1, 4.2, and 4.3
+e
+u
+U
+t
+T
+I 1
+D 2
+aardvark
+E 2
+abort
+abs
+ac
+I 2
+accept
+E 2
+access
+acct
+accton
+I 2
+acos
+acosh
+E 2
+adb
+I 2
+addbib
+addr
+E 2
+adduser
+D 2
+adventure
+E 2
+I 2
+adjtime
+E 2
+alarm
+D 2
+analyze
+E 2
+I 2
+ali
+alias
+alloc
+alloca
+alphasort
+always
+and
+anno
+ansitape
+anywhere
+ap
+E 2
+apl
+I 2
+aplcvt
+apply
+E 2
+apropos
+ar
+D 2
+arcv
+E 2
+I 2
+arc
+E 2
+arff
+D 2
+arithmetic
+E 2
+I 2
+argv
+arp
+E 2
+as
+D 2
+ascii
+E 2
+I 2
+asctime
+asin
+asinh
+E 2
+assert
+at
+I 2
+atan
+atan2
+atanh
+E 2
+atof
+I 2
+atoi
+atol
+atq
+atrm
+E 2
+awk
+D 2
+backgammon
+banner
+E 2
+I 2
+bad144
+badsect
+E 2
+basename
+bc
+D 2
+bcd
+E 2
+I 2
+bcmp
+bcopy
+besj0
+besj1
+besjn
+bessel
+besy0
+besy1
+besyn
+bg
+bib
+biff
+bin
+bind
+E 2
+binmail
+D 2
+bk
+boggle
+bproc
+E 2
+I 2
+bit
+bitmap
+box
+break
+breaksw
+E 2
+brk
+I 2
+bstring
+bugfiler
+burst
+byteorder
+bzero
+cabs
+E 2
+cal
+calendar
+D 2
+call
+E 2
+I 2
+calloc
+case
+E 2
+cat
+catman
+cb
+I 2
+cbrt
+E 2
+cc
+D 2
+ccat
+E 2
+cd
+D 2
+changes
+char
+E 2
+I 2
+cdpath
+ceil
+chart
+E 2
+chdir
+D 2
+checklist
+E 2
+I 2
+checkeq
+E 2
+checknr
+D 2
+chess
+E 2
+chfn
+chgrp
+D 2
+ching
+E 2
+chmod
+chown
+I 2
+chproject
+chroot
+E 2
+chsh
+I 2
+ci
+circle
+E 2
+clear
+I 2
+clearerr
+clearinghouse
+E 2
+close
+I 2
+closedir
+closelog
+E 2
+clri
+cmp
+I 2
+co
+E 2
+col
+colcrt
+colrm
+comm
+D 2
+compact
+cons
+core
+E 2
+I 2
+comp
+compress
+comsat
+config
+conflict
+connect
+cont
+continue
+copysign
+cos
+cosh
+courier
+E 2
+cp
+I 2
+cpm
+E 2
+crash
+creat
+D 2
+cribbage
+E 2
+cron
+crypt
+csh
+ctags
+ctime
+ctype
+cu
+curses
+D 2
+cxref
+E 2
+I 2
+cwd
+E 2
+date
+I 2
+dbesj0
+dbesj1
+dbesjn
+dbesy0
+dbesy1
+dbesyn
+E 2
+dbm
+I 2
+dbminit
+dbx
+E 2
+dc
+dcheck
+dd
+D 2
+ddate
+delivermail
+E 2
+I 2
+default
+delete
+E 2
+deroff
+df
+D 2
+dh
+E 2
+I 2
+dffrac
+dflmax
+dflmin
+E 2
+diction
+diff
+diff3
+D 2
+diffdir
+E 2
+diffh
+D 2
+dir
+E 2
+I 2
+directory
+dirs
+diskpart
+dist
+E 2
+dmesg
+D 2
+drum
+E 2
+I 2
+do
+dp
+drand
+drandm
+drem
+drtest
+dsh
+dtime
+E 2
+du
+dump
+D 2
+dumpdir
+E 2
+I 2
+dumpfs
+E 2
+dup
+D 2
+dz
+E 2
+I 2
+dup2
+dviselect
+E 2
+echo
+ecvt
+ed
+I 2
+edata
+E 2
+edit
+I 2
+edquota
+E 2
+efl
+egrep
+I 2
+else
+emacs
+encrypt
+E 2
+end
+I 2
+endfsent
+endgrent
+endhostent
+endif
+endnetent
+endprotoent
+endpwent
+endservent
+endsw
+endttyent
+endusershell
+E 2
+enroll
+I 2
+enscript
+E 2
+environ
+eqn
+D 2
+eqnchar
+E 2
+I 2
+erase
+erf
+erfc
+errlist
+E 2
+error
+I 2
+etext
+etime
+eval
+E 2
+ex
+I 2
+except
+E 2
+exec
+execl
+execle
+execlp
+I 2
+exect
+E 2
+execv
+execve
+execvp
+exit
+exp
+expand
+explain
+I 2
+expm1
+E 2
+expr
+D 2
+eyacc
+f77
+E 2
+I 2
+fabs
+falloc
+E 2
+false
+I 2
+fastboot
+fasthalt
+fchmod
+fchown
+E 2
+fclose
+I 2
+fcntl
+fcvt
+fdate
+fdopen
+feof
+E 2
+ferror
+I 2
+fetch
+fflush
+ffrac
+ffs
+fg
+fgetc
+fgets
+E 2
+fgrep
+file
+D 2
+filsys
+E 2
+I 2
+filec
+fileno
+E 2
+find
+finger
+D 2
+fish
+fl
+E 2
+I 2
+fingerd
+finite
+firstkey
+E 2
+flcopy
+I 2
+flmax
+flmin
+flock
+E 2
+floor
+D 2
+flushnote
+E 2
+I 2
+flush
+E 2
+fmt
+fold
+I 2
+folder
+E 2
+fopen
+I 2
+for
+foreach
+E 2
+fork
+I 2
+format
+fortran
+forw
+found
+fp
+fpecnt
+fpr
+fprintf
+fputc
+fputs
+E 2
+fread
+I 2
+free
+freopen
+E 2
+frexp
+from
+I 2
+fscanf
+E 2
+fsck
+fseek
+I 2
+fsplit
+fstat
+fsync
+ftell
+ftime
+ftp
+ftpd
+ftruncate
+fwrite
+E 2
+gamma
+I 2
+gcore
+gcvt
+gerror
+E 2
+getarg
+getc
+I 2
+getchar
+getcwd
+getdisk
+getdiskbyname
+getdtablesize
+getegid
+E 2
+getenv
+I 2
+geteuid
+getfsent
+getfsfile
+getfsspec
+getfstype
+getgid
+E 2
+getgrent
+I 2
+getgrgid
+getgrnam
+getgroups
+gethostbyaddr
+gethostbyname
+gethostent
+gethostid
+gethostname
+getitimer
+getlog
+E 2
+getlogin
+I 2
+getnetbyaddr
+getnetbyname
+getnetent
+getopt
+getpagesize
+E 2
+getpass
+I 2
+getpeername
+E 2
+getpgrp
+getpid
+I 2
+getppid
+getpriority
+getprotobyname
+getprotobynumber
+getprotoent
+E 2
+getpw
+getpwent
+I 2
+getpwnam
+getpwuid
+getrlimit
+getrusage
+E 2
+gets
+I 2
+getservbyname
+getservbyport
+getservent
+getsockname
+getsockopt
+gettable
+gettimeofday
+getttyent
+getttynam
+getty
+E 2
+getuid
+I 2
+getusershell
+getw
+getwd
+glob
+gmtime
+goto
+gprof
+E 2
+graph
+D 2
+greek
+E 2
+grep
+D 2
+group
+hangman
+E 2
+I 2
+groups
+gtty
+halt
+hashstat
+E 2
+head
+D 2
+hier
+hp
+ht
+E 2
+I 2
+help
+histchars
+history
+home
+hostid
+hostname
+hostnm
+htable
+htonl
+htons
+E 2
+hypot
+I 2
+hyroute
+iargc
+E 2
+icheck
+D 2
+id
+indir
+int
+E 2
+I 2
+icon
+icont
+idate
+ident
+ieee
+ierrno
+if
+ifconfig
+ignoreeof
+implog
+implogd
+inc
+indent
+index
+indxbib
+inet
+inetd
+infnan
+init
+initgroups
+initstate
+inmax
+insque
+install
+installboot
+E 2
+intro
+I 2
+invert
+E 2
+ioctl
+I 2
+ioinit
+E 2
+iostat
+D 2
+iul
+j0
+E 2
+I 2
+irand
+irandm
+isalnum
+isalpha
+isascii
+isatty
+iscntrl
+isdigit
+islower
+isprint
+ispunct
+isspace
+isupper
+isxdigit
+itime
+jn
+E 2
+jobs
+join
+I 2
+jot
+jove
+kermit
+keycomp
+kgmon
+E 2
+kill
+killpg
+D 2
+kl
+kmem
+l3tol
+E 2
+I 2
+label
+lam
+E 2
+last
+lastcomm
+ld
+I 2
+ldexp
+E 2
+learn
+leave
+I 2
+len
+E 2
+lex
+I 2
+lgamma
+lib2648
+line
+linemod
+E 2
+link
+lint
+lisp
+I 2
+listen
+E 2
+liszt
+ln
+I 2
+lnaof
+lnblnk
+loc
+localtime
+E 2
+lock
+I 2
+log
+log10
+log1p
+logb
+logger
+E 2
+login
+I 2
+logout
+long
+longjmp
+E 2
+look
+lookbib
+lorder
+D 2
+lp
+E 2
+I 2
+lpc
+lpd
+E 2
+lpq
+lpr
+lprm
+I 2
+lptest
+E 2
+ls
+lseek
+I 2
+lshift
+lstat
+ltime
+E 2
+lxref
+D 2
+m4
+E 2
+mail
+D 2
+mailaliases
+E 2
+make
+I 2
+makeaddr
+makedev
+E 2
+makekey
+malloc
+man
+D 2
+me
+mem
+E 2
+I 2
+man1
+man2
+man3
+man8
+mann
+map3270
+mark
+math
+merge
+E 2
+mesg
+D 2
+mille
+E 2
+I 2
+mh
+mhl
+mhmail
+mhook
+mhpath
+E 2
+mkdir
+mkfs
+I 2
+mkhosts
+mklost
+mkmf
+E 2
+mknod
+I 2
+mkpasswd
+mkproject
+mkproto
+mkstemp
+E 2
+mkstr
+mktemp
+D 2
+mm
+E 2
+I 2
+modf
+moncontrol
+E 2
+monitor
+D 2
+monop
+E 2
+I 2
+monstartup
+E 2
+more
+mount
+D 2
+mpu
+mpx
+mpxio
+ms
+E 2
+I 2
+move
+mp
+mset
+msgchk
+E 2
+msgs
+D 2
+mtab
+E 2
+I 2
+msh
+mt
+E 2
+mv
+I 2
+named
+E 2
+ncheck
+I 2
+ndbm
+E 2
+neqn
+D 2
+net
+netcp
+netlog
+netlogin
+netlpr
+netmail
+netq
+netrm
+nettroff
+newcsh
+newgrp
+newtty
+E 2
+I 2
+nerr
+netof
+netstat
+network
+never
+newaliases
+newfs
+next
+nextkey
+E 2
+nice
+nlist
+nm
+I 2
+noclobber
+noglob
+nohup
+nonomatch
+not
+notify
+E 2
+nroff
+D 2
+null
+num
+number
+E 2
+I 2
+ns
+ntoa
+ntohl
+ntohs
+E 2
+od
+D 2
+old
+E 2
+I 2
+onintr
+E 2
+open
+I 2
+opendir
+openlog
+openpl
+or
+pac
+packf
+E 2
+page
+I 2
+pagesize
+E 2
+passwd
+I 2
+patch
+path
+E 2
+pause
+pc
+I 2
+pclose
+pcp
+pd
+pdiff
+pdx
+E 2
+perror
+I 2
+pexec
+pfind
+pgrep
+phelp
+E 2
+pi
+I 2
+pick
+pikapix
+ping
+E 2
+pipe
+pix
+I 2
+plog
+E 2
+plot
+I 2
+pman
+pmerge
+pmkdir
+pmv
+point
+popd
+E 2
+popen
+I 2
+portmap
+post
+pow
+ppd
+E 2
+pr
+D 2
+print
+E 2
+I 2
+prev
+E 2
+printenv
+printf
+D 2
+prmail
+E 2
+I 2
+prmdir
+E 2
+prof
+profil
+I 2
+profile
+prompt
+prompter
+E 2
+ps
+I 2
+ps630
+pscat
+psdit
+psignal
+psplot
+psrev
+psroff
+pssun
+E 2
+pstat
+D 2
+pti
+E 2
+I 2
+ptest
+E 2
+ptrace
+I 2
+ptroff
+E 2
+ptx
+I 2
+pushd
+E 2
+putc
+I 2
+putchar
+E 2
+puts
+I 2
+putw
+E 2
+pwd
+I 2
+pwp
+E 2
+px
+pxp
+pxref
+qsort
+D 2
+quiz
+E 2
+quot
+I 2
+quota
+quotacheck
+quotaoff
+quotaon
+E 2
+rand
+I 2
+random
+E 2
+ranlib
+ratfor
+I 2
+rc
+rcmd
+rcp
+rcs
+rcsdiff
+rcsfile
+rcsintro
+rcsmerge
+rdist
+rdump
+re
+E 2
+read
+I 2
+readdir
+readlink
+readv
+realloc
+reboot
+recover
+recv
+recvfrom
+recvmsg
+E 2
+refer
+I 2
+refile
+E 2
+regex
+I 2
+rehash
+remque
+rename
+E 2
+renice
+I 2
+repeat
+repl
+repquota
+E 2
+reset
+D 2
+restor
+E 2
+I 2
+resize
+resolver
+restore
+E 2
+rev
+rewind
+D 2
+rk
+E 2
+I 2
+rewinddir
+rexec
+rexecd
+rindex
+rint
+rlog
+rlogin
+rlogind
+E 2
+rm
+I 2
+rmail
+E 2
+rmdir
+I 2
+rmf
+rmm
+rmproject
+rmt
+roffbib
+route
+routed
+rpcinfo
+rrestore
+rresvport
+rs
+rsh
+rshd
+rshift
+ruptime
+ruserok
+rwho
+rwhod
+rxformat
+E 2
+sa
+I 2
+savecore
+savehist
+sbrk
+scalb
+scan
+scandir
+E 2
+scanf
+I 2
+sccs
+sccstorcs
+E 2
+script
+D 2
+sdb
+E 2
+sed
+D 2
+see
+E 2
+I 2
+seekdir
+select
+send
+sendbug
+sendmail
+sendmsg
+sendto
+set
+E 2
+setbuf
+I 2
+setbuffer
+setegid
+setenv
+seteuid
+setfsent
+setgid
+setgrent
+setgroups
+sethostent
+sethostfile
+sethostid
+sethostname
+setitimer
+E 2
+setjmp
+I 2
+setkey
+setlinebuf
+setlogmask
+setnetent
+E 2
+setpgrp
+I 2
+setpriority
+setprotoent
+setpwent
+setpwfile
+setquota
+setregid
+setreuid
+setrgid
+setrlimit
+setruid
+setservent
+setsockopt
+setstate
+settimeofday
+setttyent
+E 2
+setuid
+I 2
+setusershell
+E 2
+sh
+I 2
+shell
+shift
+short
+show
+shutdown
+sigblock
+siginterrupt
+siglist
+E 2
+signal
+D 2
+sigset
+sigsys
+E 2
+I 2
+sigpause
+sigreturn
+sigsetmask
+sigstack
+sigvec
+E 2
+sin
+sinh
+size
+I 2
+slattach
+E 2
+sleep
+D 2
+snake
+E 2
+I 2
+socket
+socketpair
+E 2
+soelim
+sort
+I 2
+sortbib
+sortm
+source
+space
+E 2
+spell
+I 2
+spellin
+spellout
+E 2
+spline
+split
+D 2
+ssp
+stab
+E 2
+I 2
+spmsintro
+sprintf
+sqrt
+srand
+srandom
+sscanf
+E 2
+stat
+I 2
+status
+E 2
+stdio
+sticky
+D 2
+stime
+E 2
+I 2
+stop
+store
+strcat
+strcmp
+strcpy
+E 2
+string
+strings
+strip
+I 2
+strlen
+strncat
+strncmp
+strncpy
+E 2
+struct
+stty
+style
+su
+sum
+I 2
+suspend
+E 2
+swab
+swapon
+I 2
+switch
+symlink
+symlnk
+E 2
+symorder
+sync
+sys
+D 2
+sysgen
+E 2
+I 2
+syscall
+sysline
+syslog
+syslogd
+systat
+E 2
+system
+tabs
+I 2
+tac
+E 2
+tail
+I 2
+talk
+talkd
+tan
+tanh
+E 2
+tar
+tbl
+tc
+I 2
+tclose
+tcopy
+teachjove
+E 2
+tee
+D 2
+term
+E 2
+I 2
+telldir
+telnet
+telnetd
+E 2
+termcap
+D 2
+termlib
+E 2
+test
+I 2
+tftp
+tftpd
+tgetent
+tgetflag
+tgetnum
+tgetstr
+tgoto
+E 2
+time
+I 2
+timed
+timedc
+E 2
+times
+I 2
+timezone
+tip
+E 2
+tk
+D 2
+tm
+E 2
+I 2
+tmail
+tn3270
+toascii
+tolower
+topen
+E 2
+touch
+I 2
+toupper
+E 2
+tp
+I 2
+tputs
+E 2
+tr
+D 2
+tra
+trek
+trman
+E 2
+I 2
+traper
+trapov
+tread
+trewin
+E 2
+troff
+I 2
+trpfpe
+trpt
+trsp
+E 2
+true
+I 2
+truncate
+E 2
+tset
+I 2
+tskipf
+E 2
+tsort
+I 2
+tstate
+E 2
+tty
+I 2
+ttynam
+E 2
+ttyname
+D 2
+ttys
+ttytype
+types
+E 2
+I 2
+ttyslot
+tunefs
+twrite
+ualarm
+E 2
+ul
+umask
+D 2
+uncompact
+E 2
+I 2
+umodem
+umount
+unalias
+uncompress
+unexpand
+E 2
+ungetc
+I 2
+unhash
+unifdef
+E 2
+uniq
+units
+unlink
+D 2
+up
+E 2
+I 2
+unset
+unsetenv
+E 2
+update
+uptime
+users
+I 2
+usleep
+E 2
+usr
+utime
+D 2
+utmp
+E 2
+I 2
+utimes
+uucico
+E 2
+uuclean
+uucp
+D 2
+uudiff
+E 2
+I 2
+uucpd
+uudecode
+E 2
+uuencode
+uulog
+uuname
+I 2
+uupoll
+uuq
+E 2
+uusend
+D 2
+uustat
+E 2
+I 2
+uusnap
+E 2
+uux
+D 2
+va
+vadvise
+E 2
+I 2
+uuxqt
+uwm
+vacation
+E 2
+valloc
+D 2
+vfont
+vfontinfo
+E 2
+I 2
+varargs
+verbose
+E 2
+vfork
+vgrind
+vhangup
+vi
+I 2
+vipw
+E 2
+vlimit
+I 2
+vlp
+vmh
+vmsprep
+E 2
+vmstat
+D 2
+vp
+vpac
+vpq
+vpr
+vprint
+vprm
+vread
+vswapon
+E 2
+vtimes
+D 2
+vtroff
+vwrite
+w
+E 2
+I 2
+vwidth
+E 2
+wait
+wait3
+wall
+wc
+I 2
+what
+E 2
+whatis
+I 2
+whatnow
+E 2
+whereis
+which
+I 2
+while
+E 2
+who
+whoami
+I 2
+whois
+whom
+window
+E 2
+write
+D 2
+wtmp
+wump
+E 2
+I 2
+writev
+xclock
+xdemo
+xdpr
+xdvi
+xed
+xfax
+xfd
+E 2
+xget
+I 2
+xhost
+ximpv
+xinit
+Xlib
+xload
+XMenu
+Xnest
+xnscourier
+xnsftp
+xnsprint
+XNSrouted
+xnwm
+xor
+xpr
+Xqvss
+xrefresh
+E 2
+xsend
+I 2
+xset
+xshell
+E 2
+xstr
+I 2
+Xsun
+xterm
+xtext
+xtty
+Xvs100
+xwd
+xwininfo
+xwm
+xwud
+E 2
+yacc
+yes
+D 2
+zork
+E 2
+I 2
+yn
+zcat
+E 2
+E 1

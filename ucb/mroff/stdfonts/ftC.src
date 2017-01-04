@@ -1,0 +1,14 @@
+# @(#)ftC.src	1.2 (Berkeley) 2012/07/15
+
+psname Courier
+encoding TroffEncoding
+fixedwidth 600
+nolig
+
+setup:
+/Courier findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Courier-troff exch definefont

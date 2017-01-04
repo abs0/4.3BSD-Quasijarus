@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_voper.c	7.6 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_voper.c	7.7 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -15,7 +15,7 @@ static char *sccsid = "@(#)ex_voper.c	7.6 (Berkeley) 1/2/88";
 #define	blank()		isspace(wcursor[0])
 #define	forbid(a)	if (a) goto errlab;
 
-char	vscandir[2] =	{ '/', 0 };
+u_char	vscandir[2] =	{ '/', 0 };
 
 /*
  * Decode an operator/operand type command.
@@ -34,10 +34,10 @@ operate(c, cnt)
 	int (*moveop)(), (*deleteop)();
 	register int (*opf)();
 	bool subop = 0;
-	char *oglobp, *ocurs;
+	u_char *oglobp, *ocurs;
 	register line *addr;
 	line *odot;
-	static char lastFKND, lastFCHR;
+	static u_char lastFKND, lastFCHR;
 	short d;
 
 	moveop = vmove, deleteop = vdelete;
@@ -723,7 +723,7 @@ flusho();
  * Find single character c, in direction dir from cursor.
  */
 find(c)
-	char c;
+	u_char c;
 {
 
 	for(;;) {
@@ -744,7 +744,7 @@ word(op, cnt)
 	int cnt;
 {
 	register int which;
-	register char *iwc;
+	register u_char *iwc;
 	register line *iwdot = wdot;
 
 	if (dir == 1) {
@@ -818,8 +818,8 @@ eend(op)
  * kind which (blank/nonblank words are 0, conservative words 1).
  */
 wordof(which, wc)
-	char which;
-	register char *wc;
+	u_char which;
+	register u_char *wc;
 {
 
 	if (isspace(*wc))
@@ -832,7 +832,7 @@ wordof(which, wc)
  * i.e. an alfa, digit, or underscore.
  */
 wordch(wc)
-	char *wc;
+	u_char *wc;
 {
 	register int c;
 

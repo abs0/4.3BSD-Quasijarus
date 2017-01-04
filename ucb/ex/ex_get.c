@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_get.c	7.8 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_get.c	7.9 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -42,7 +42,6 @@ again:
 	c = getach();
 	if (c == EOF)
 		return (c);
-	c &= TRIM;
 	if (!inopen)
 		if (!globp && c == CTRL('d'))
 			setlastchar('\n');
@@ -71,7 +70,7 @@ peekcd()
 getach()
 {
 	register int c;
-	static char inline[BUFSIZ];
+	static u_char inline[BUFSIZ];
 
 	c = peekc;
 	if (c != 0) {
@@ -87,7 +86,9 @@ getach()
 top:
 	if (input) {
 		if (c = *input++) {
-			if (c &= TRIM)
+			if (!value(EIGHTBIT) && !isascii(c))
+				c &= TRIM7;
+			if (c)
 				return (lastc = c);
 			goto top;
 		}
@@ -105,7 +106,7 @@ top:
 		inline[c] = 0;
 		for (c--; c >= 0; c--)
 			if (inline[c] == 0)
-				inline[c] = QUOTE;
+				inline[c] = 0200;
 		input = inline;
 		goto top;
 	}
@@ -126,8 +127,8 @@ static	short	lastin;
 gettty()
 {
 	register int c = 0;
-	register char *cp = genbuf;
-	char hadup = 0;
+	register u_char *cp = genbuf;
+	u_char hadup = 0;
 	int numbline();
 	extern int (*Pline)();
 	int offset = Pline == numbline ? 8 : 0;
@@ -229,9 +230,9 @@ gettty()
  */
 smunch(col, ocp)
 	register int col;
-	char *ocp;
+	u_char *ocp;
 {
-	register char *cp;
+	register u_char *cp;
 
 	cp = ocp;
 	for (;;)
@@ -252,10 +253,10 @@ smunch(col, ocp)
 		}
 }
 
-char	*cntrlhm =	"^H discarded\n";
+u_char	*cntrlhm =	"^H discarded\n";
 
 checkjunk(c)
-	char c;
+	u_char c;
 {
 
 	if (junkbs == 0 && c == '\b') {

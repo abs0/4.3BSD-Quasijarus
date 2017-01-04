@@ -1,0 +1,113 @@
+h44599
+s 00005/00003/00078
+d D 6.1 86/04/23 23:50:52 mckusick 3 2
+c Ken Arnold edits for document distributed with 4.3BSD
+e
+s 00000/00000/00081
+d D 5.1 86/04/23 23:50:48 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00081/00000/00000
+d D 4.1 86/04/23 23:50:44 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.\" this is the uncommented version.  The commented one is in "macros.coms"
+.ie t .ds _ \d\(mi\u
+.el .ds _ _
+.ds , ,\ 
+.ds y (y\*,x) co-ordinates
+.ds db database
+.ie n .ds f \fI
+.el .ds f \fB
+D 3
+.ds tc \*f/etc/termcap\fP
+E 3
+I 3
+.ds tc \*ftermcap\fP(5)
+E 3
+.ds Es This returns ERR if it would cause the screen to scroll illegally.
+.ds Nm This has no associated \*(lq\fBmv\fP\*(rq command.
+.ie t .ds m \fB\s-2\(dg\s+2\fP
+.el .ds m [*]
+.hy WINDOW
+D 3
+.he ''\*(Ln''
+.fo ''\- % \-''
+E 3
+I 3
+.\".he ''\*(Ln''
+.\".fo ''\- % \-''
+.oh '\*(Ln''PS1:18-%'
+.eh 'PS1:18-%''\*(Ln'
+E 3
+.de Un
+.b
+\s-2\\$2UNIX\\$1\s+2
+.ft
+..
+.de Ds
+.sp
+.lp
+.ev 1
+.nf
+.ft I
+.in 0
+.di Df
+..
+.de De
+.di
+.ne \n(dn+2
+.Df
+.ev
+.ip
+..
+.de Fd
+.br
+\&\\$4
+.fi
+.b
+\&\\$1(\\$2)
+.ft
+\&\\$3
+.br
+.nf
+..
+.de Vn
+\&\\$3\c
+.i "\\$1" \\$2
+..
+.de Fn
+\&\\$3\c
+.i "\\$1(\\$4)" \\$2
+..
+.de Bq
+.ie t \&\*(lq\fB\\$1\fP\*(rq
+.el \&\*(lq\fI\\$1\fP\*(rq
+..
+.de $0
+.(x
+.in \\n(Xs
+\\*($n \\$1
+.)x
+..
+.de $1
+.nr Xs 0
+..
+.de $2
+.nr Xs 3
+..
+.de $3
+.nr Xs 6
+..
+E 1

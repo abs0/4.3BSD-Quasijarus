@@ -1,0 +1,223 @@
+h11277
+s 00013/00007/00094
+d D 6.2 86/05/15 17:55:53 karels 4 3
+c update choice of root fs
+e
+s 00001/00001/00100
+d D 6.1 85/05/15 17:17:04 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00013/00019/00088
+d D 5.1 85/05/15 17:16:53 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00107/00000/00000
+d D 4.1 85/05/15 17:16:46 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH AUTOCONF 4 10/8/81
+E 2
+I 2
+D 3
+.TH AUTOCONF 4 "27 July 1983"
+E 3
+I 3
+.TH AUTOCONF 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+autoconf \- diagnostics from autoconfiguration code
+E 2
+I 2
+autoconf \- diagnostics from the autoconfiguration code
+E 2
+.SH DESCRIPTION
+D 4
+When UNIX bootstraps it probes the innards of the machine it is running
+on and locates controllers, drives, and other devices, printing out
+E 4
+I 4
+When UNIX bootstraps it probes the innards of the machine
+on which it is running
+and locates controllers, drives, and other devices, printing out
+E 4
+what it finds on the console.  This procedure is driven by a system
+configuration table which is processed by
+.IR config (8)
+and compiled into each kernel.
+.PP
+D 4
+Devices in NEXUS slots are normally noted, thus memory controllers,
+E 4
+I 4
+On the VAX,
+devices in NEXUS slots are normally noted, thus memory controllers,
+E 4
+UNIBUS and MASSBUS adaptors.  Devices which are not supported which
+are found in NEXUS slots are noted also.
+I 4
+The Q-bus on the MICROVAX is configured in the same way as the UNIBUS.
+E 4
+.PP
+MASSBUS devices are located by a very deterministic procedure since
+D 2
+MASSBUS space is completely probable very easily.  If devices exist which
+E 2
+I 2
+MASSBUS space is completely probe-able.  If devices exist which
+E 2
+are not configured they will be silently ignored; if devices exist of
+unsupported type they will be noted.
+.PP
+UNIBUS devices are located by probing to see if their control-status
+registers respond.  If not, they are silently ignored.  If the control
+status register responds but the device cannot be made to interrupt,
+a diagnostic warning will be printed on the console and the device
+D 2
+will not be available to the system.  (A command
+.IR attach (8)
+is planned to cause the device to be attached irregardless of its
+failure to interrupt, after the system is bootstrapped, for irksome
+devices.  This is not in as of this writing, however.)
+E 2
+I 2
+will not be available to the system. 
+E 2
+.PP
+D 4
+A generic system may be built which picks its root device at boot time
+E 4
+I 4
+Normally, the system uses the disk from which it was loaded as the root
+filesystem.
+If that is not possible,
+a generic system will pick its root device
+E 4
+as the ``best'' available device (MASSBUS disks are better than
+SMD UNIBUS disks are better than RK07's; the device must be drive 0
+D 4
+to be considered.)
+If such a system is booted with the RB_ASKNAME option of (see
+E 4
+I 4
+to be considered).
+If such a system is booted with the RB_ASKNAME option (see
+E 4
+D 2
+.IR reboot (2V)),
+E 2
+I 2
+.IR reboot (2)),
+E 2
+then the name of the root device is read from the console terminal at boot
+time, and any available device may be used.
+.SH SEE ALSO
+D 2
+config(8)
+E 2
+I 2
+D 4
+intro(4), config(8)
+E 4
+I 4
+intro(4), boot(8), config(8)
+E 4
+E 2
+.SH DIAGNOSTICS
+\fBcpu type %d not configured\fR.  You tried to boot UNIX on a cpu
+type which it doesn't (or at least this compiled version of UNIX doesn't)
+understand.
+.PP
+\fBmba%d at tr%d\fR.  A MASSBUS adapter was found in tr%d (the NEXUS
+slot number).  UNIX will call it mba%d.
+.PP
+\fB%d mba's not configured\fR.  More MASSBUS adapters were found on
+the machine than were declared in the machine configuration; the excess
+MASSBUS adapters will not be accessible.
+.PP
+\fBuba%d at tr%d\fR.  A UNIBUS adapter was found in tr%d (the NEXUS
+slot number).  UNIX will call it uba%d.
+.PP
+\fBdr32 unsupported (at tr %d)\fR.  A DR32 interface was found in
+a NEXUS, for which UNIX does not have a driver.
+.PP
+I 2
+\fBci unsupported (at tr %d)\fR.  A CI interface was found in
+a NEXUS, for which UNIX does not have a driver.
+.PP
+E 2
+\fBmcr%d at tr%d\fR.  A memory controller was found in tr%d (the NEXUS
+slot number).  UNIX will call it mcr%d.
+.PP
+\fB5 mcr's unsupported\fR.  UNIX supports only 4 memory controllers
+per cpu.
+.PP
+\fBmpm unsupported (at tr%d)\fR.  Multi-port memory is unsupported
+in the sense that UNIX does not know how to poll it for ECC errors.
+.PP
+\fB%s%d at mba%d drive %d\fR.  A tape formatter or a disk was found
+on the MASSBUS; for disks %s%d will look like ``hp0'', for tape formatters
+D 2
+like ``ht1'' or ``mt1''.  The drive number comes from the unit plug on the drive
+E 2
+I 2
+like ``ht1''.  The drive number comes from the unit plug on the drive
+E 2
+or in the TM formatter (\fBnot\fR on the tape drive; see below).
+.PP
+\fB%s%d at %s%d slave %d\fR.  (For MASSBUS devices).
+D 2
+Which would look like ``tu0 at ht0 slave 0'' or ``mu0 at mt0 slave 0'',
+where \fBtu0\fR or \fBmu0\fR is the name for the tape device
+and \fBht0\fR or \fBmt0\fR is the name
+E 2
+I 2
+Which would look like ``tu0 at ht0 slave 0'',
+where \fBtu0\fR is the name for the tape device and \fBht0\fR is the name
+E 2
+for the formatter.  A tape slave was found on the tape formatter at the
+indicated drive number (on the front of the tape drive).
+D 2
+UNIX will call the device, e.g., \fBtu0\fR or \fBmu0\fR.
+E 2
+I 2
+UNIX will call the device, e.g., \fBtu0\fR.
+E 2
+.PP
+\fB%s%d at uba%d csr %o vec %o ipl %x\fR.  The device %s%d, e.g. dz0
+was found on uba%d at control-status register address %o and with
+device vector %o.  The device interrupted at priority level %x.
+.PP
+\fB%s%d at uba%d csr %o zero vector\fR.  The device did not present
+a valid interrupt vector, rather presented 0 (a passive release condition)
+to the adapter.
+.PP
+\fB%s%d at uba%d csr %o didn't interrupt\fR.  The device did not interrupt,
+likely because it is broken, hung, or not the kind of device it is advertised
+to be.
+.PP
+\fB%s%d at %s%d slave %d\fR.  (For UNIBUS devices).
+Which would look like ``up0 at sc0 slave 0'',
+where \fBup0\fR is the name of a disk drive and \fBsc0\fR is the name
+of the controller.  Analogous to MASSBUS case.
+D 2
+.SH BUGS
+Should write
+.IR attach (8)
+and system call it needs to work.
+E 2
+E 1

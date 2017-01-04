@@ -1,0 +1,164 @@
+Folks,
+
+Here is a summary of the gateway mods needed for BOOTP (to allow
+cross gateway booting), and some pseudo-code.  First the
+BOOTP packet (which is enclosed in an IP/UDP):
+
+====
+
+/*
+ * Bootstrap Protocol (BOOTP).  RFC 951.
+ */
+
+struct bootp {
+	u_char	bp_op;		/* packet opcode type */
+#define	BOOTREQUEST	1
+#define	BOOTREPLY	2
+	u_char	bp_htype;	/* hardware addr type */
+	u_char	bp_hlen;	/* hardware addr length */
+	u_char	bp_hops;	/* gateway hops */
+	u_long	bp_xid;		/* transaction ID */
+	u_short	bp_secs;	/* seconds since boot began */	
+	u_short	bp_unused;
+	iaddr_t	bp_ciaddr;	/* client IP address */
+	iaddr_t	bp_yiaddr;	/* 'your' IP address */
+	iaddr_t	bp_siaddr;	/* server IP address */
+	iaddr_t	bp_giaddr;	/* gateway IP address */
+	u_char	bp_chaddr[16];	/* client hardware address */
+	u_char	bp_sname[64];	/* server host name */
+	u_char	bp_file[128];	/* boot file name */
+	u_char	bp_vend[64];	/* vendor-specific area */
+};
+
+#define	IPPORT_BOOTPS		67
+#define	IPPORT_BOOTPC		68
+
+====
+
+Next, here is the section from [sri-nic]<rfc>rfc951.txt that has
+most to do with gateway issues.  However you will probably want to
+hardcopy the entire document.
+
+====
+
+
+RFC 951                                                   September 1985
+Bootstrap Protocol						[Page 9]
+
+
+8. Booting Through Gateways
+
+   This part of the protocol is optional and requires some additional
+   code in cooperating gateways and servers, but it allows cross-gateway
+   booting.  This is mainly useful when gateways are diskless machines.
+   Gateways containing disks (e.g. a UNIX machine acting as a gateway),
+   might as well run their own BOOTP/TFTP servers.
+
+   Gateways listening to broadcast BOOTREQUESTs may decide to forward or
+   rebroadcast these requests 'when appropriate'.  For example, the
+   gateway could have, as part of his configuration tables, a list of
+   other networks or hosts to receive a copy of any broadcast
+   BOOTREQUESTs.  Even though a 'hops' field exists, it is a poor idea
+   to simply globally rebroadcast the requests, since broadcast loops
+   will almost certainly occur.
+
+   The forwarding could begin immediately, or wait until the 'secs'
+   (seconds client has been trying) field passes a certain threshold.
+
+   If a gateway does decide to forward the request, it should look at
+   the 'giaddr' (gateway IP address) field.  If zero, it should plug its
+   own IP address (on the receiving cable) into this field.  It may also
+   use the 'hops' field to optionally control how far the packet is
+   reforwarded. Hops should be incremented on each forwarding.  For
+   example, if hops passes '3', the packet should probably be discarded.
+
+====
+
+And here is some pseudo-code:
+
+
+/*
+ * Each gateway will probably have a locally configured table
+ * that lists the addresses of hosts (or gateways)
+ * (or net numbers) to which BOOTP's can be
+ * forwarded.  Assume this table is called 'bootplist'.  It
+ * can be initialized at compile time, or via a config file.
+ *
+ * The easiest case will be to use specific host (or gateway)
+ * addresses; if net addresses (e.g. 36.45.0.0) 
+ * are used, that will probably require implementing IP directed
+ * broadcasts.  It is probably best to start with the simple case
+ * of a host list.
+ */
+xxxxxxx	bootplist[] = { , , , };
+
+
+/*
+ * "ipreceive" is called with each incoming IP datagram.
+ *
+ * Packet headers for the respective layers are in: ether,ip,udp,bootp.
+ */
+ipreceive()
+{
+	if (ether.dst == broadcast && ether.src == from_our_interfaces)
+		goto discard;
+	if (ipchecksum == bad || --ip.ttl <= 0)
+		goto discard;
+	if (ip.proto != UDP || udp.port != IPPORT_BOOTPS) 
+		goto forward;
+	if (ip.dst != broadcast && ip.dst != one_of_my_interfaces)
+		goto forward;
+	/*
+	 * We now have a UDP for the BOOTP Server port.
+	 */
+	switch (bootp.bp_op) {
+	case BOOTREQUEST:
+		if (bootp.bp_secs <= 5 || ++bootp.bp_hops > 5)
+			goto discard;
+		if (bootp.bp_giaddr == 0)
+			ip.src = bootp.bp_giaddr = my IP address;
+			/* of incoming interface, if possible */
+		for (each host in bootplist) {
+			copy_packet_into_new_buffer;
+			ip.dst = host address;
+			send_ip;
+		}
+		goto discard;	/* discard original packet */
+
+	case BOOTREPLY:
+		if (bootp.bp_yiaddr != directly_accessable)
+			goto discard;	/* if not 0 hops from me */
+		/*
+		 * At this point, we need to use one of the methods
+		 * described in RFC951, section 4, to send the reply
+		 * to the client.  Usually this will be: setup a
+		 * temporary arp cache entry for bp_yiaddr at
+		 * hardware address bp_chaddr.
+		 */
+		set_arp_cache(bootp.bp_yiaddr, bootp.bp_chaddr);
+		ip.dst = bootp.bp_yiaddr;
+		udp.port = IPPORT_BOOTPC;	/* for client only now */
+		goto forward;
+
+	default:
+		goto discard;	/* bad opcode */
+	}
+
+forward:
+	if (ether.dst == broadcast || ip.dst == broadcast)
+		goto discard;
+	forward_ip;	/* recomputes ip checksum if needed */
+	return;
+discard:
+	discard_packet;
+	return;
+}
+
+
+====
+
+Notes:
+
+The "if (xxx == broadcast)" tests can use 4 or 6 bytes of all ones
+(currently).  However if directed broadcasts are eventually implemented,
+the test would be a little different.

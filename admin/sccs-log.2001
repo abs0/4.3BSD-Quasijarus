@@ -1,0 +1,60 @@
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.12 01/01/07 17:28:36 msokolov 25 24
+Added /etc/anonftp.allow support.
+While at it, removed support for changing users, which never worked right,
+and cleaned up / fixed / brought up to spec the handling of LIST/NLST and
+STOR/APPE/STOU. (STOU still not per RFC 959, sigh.)
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.16 01/01/07 17:28:38 msokolov 54 53
+Added /etc/anonftp.allow support.
+While at it, removed support for changing users, which never worked right,
+and cleaned up / fixed / brought up to spec the handling of LIST/NLST and
+STOR/APPE/STOU. (STOU still not per RFC 959, sigh.)
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.24 01/02/10 21:48:02 msokolov 26 25
+add RF30, RF31, RF71, and RF72
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.31 01/02/10 22:16:25 msokolov 84 83
+add RF30, RF31, RF71, and RF72
+/usr/src/sys/vaxstand/SCCS/s.uda.c:
+7.13 01/02/10 22:33:44 msokolov 28 27
+add RF30, RF31, RF71, and RF72
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.25 01/02/13 08:15:52 msokolov 27 26
+add RA73 and RF73
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.32 01/02/13 08:19:24 msokolov 85 84
+add RA73 and RF73
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.23 01/02/14 13:08:12 msokolov 81 80
+build small bootblocks without -DCOMPAT_42
+/usr/src/sys/vaxstand/SCCS/s.uda.c:
+7.14 01/02/14 13:19:57 msokolov 29 28
+add RA73 and RF73
+/usr/src/sys/vaxbi/SCCS/s.kdb.c:
+7.10 01/02/14 13:49:11 msokolov 10 9
+add RA73
+/usr/src/sys/vaxstand/SCCS/s.kdb.c:
+7.6 01/02/14 13:50:23 msokolov 6 5
+add RA73
+/usr/src/etc/tzone/SCCS/s.Makefile:
+5.5 01/05/23 21:48:03 msokolov 5 4
+BSD development is back in California, change the default timezone to
+US/Pacific
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.prs.c:
+4.5 01/05/27 20:16:26 msokolov 7 6
+replace the nonfunctional preliminary version of prs with a real one,
+taken from Ultrix-32 V4.20
+/usr/src/usr.bin/sccscmds/util/SCCS/s.Makefile:
+1.8 01/05/27 20:25:13 msokolov 8 7
+add index to libPW
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.prt.c:
+4.4 01/05/27 20:41:28 msokolov 4 3
+add -n option for "nice" delta table format
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.makefile:
+4.7 01/05/27 20:47:32 msokolov 7 6
+help => sccshelp
+/usr/src/ucb/SCCS/s.sccs.c:
+5.9 01/05/27 20:52:38 msokolov 86 85
+help => sccshelp
+add nprt ("nice prt") macro for prt -n -a -i

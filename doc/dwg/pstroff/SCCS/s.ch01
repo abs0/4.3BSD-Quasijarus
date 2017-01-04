@@ -1,0 +1,505 @@
+h06611
+s 00494/00000/00000
+d D 1.1 2012/08/03 19:54:03 msokolov 1 0
+c date and time created 2012/08/03 19:54:03 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Falcon) %E%
+.\"
+.\" The following tps instructions are used only when
+.\" troffing this chapter separately (editing drafts).
+.\"
+.\" Fonts: R,I,B,S,S1,Lr,Lb,C,ZD
+.\" Macros: -ms defs
+.\" Preproc: tbl
+.\" Pstfinish: full
+.\"
+.Ch "Chapter 1" "Basic usage"
+.PP
+The present version of troff normally works as a drop-in replacement
+for various old troff setups: the original C/A/T, APS-5 ditroff,
+Varian/Versatec (either original troff + post-processor or ditroff),
+early electrophotographic printers driven by ditroff with a
+rasterizing post-processor, etc.
+Because various ditroff setups of the early 1980s were so
+un-dependable in terms of their feature set (the documentation
+generally revolved around weasel phrases to the effect of
+``it\(n's all typesetter-dependent''), the feature set of the original
+C/A/T troff has remained the only real standard for troff functionality.
+.PP
+Joe Ossanna's original \fIN\s-2ROFF\s0/\*(Tr User's Manual\fP,
+the one describing the original C/A/T troff, remains the only document
+that can truly lay a rightful claim to being the ``specification''
+for troff, a kind of ``interface control document'' between
+troff users and troff implementations.
+This chapter gives a concise description of exactly how the present version
+of troff implements that specification, and the ways in which it differs
+from the original C/A/T version.
+Ossanna's original manual should be read first, before the present document
+which effectively revises and updates the former.
+.Sc "1.1" "Size of ``goobies''"
+.PP
+All versions of troff use internal units, informally called ``goobies'',
+for representing the quantitative measures of all text widths, spacings
+and motions.
+\*(Mn explains how numerical parameter input may be given in several
+different units, all of which are internally converted to goobies.
+However, different versions of troff and ditroff have differently-sized
+goobies.
+One goobie (1u) of the original C/A/T troff equals 1/432 of an inch,
+corresponding to the horizontal resolution of that typesetter, but
+various ditroff setups have been using goobies of many different sizes:
+1/576 of an inch, 1/720, 1/972 and likely many others.
+The choice was typically dictated by the hardware resolution
+of the physical device being driven.
+.PP
+The argument based on physical device properties does not apply to
+\*(PS, which is totally device-independent and has logically infinite
+resolution.
+Hence the choice of goobie size, which is needed at all only to
+keep troff's integer math architecture, is completely arbitrary
+in the present version.
+The choice that's been implemented is 1/4320 of an inch.
+This goobie size is fine enough to avoid needless dehancing of
+the printout quality on the typical PS output devices with physical pixel
+resolutions on the order between 300 and 1200 DPI,
+and has been chosen to make the conversion from C/A/T troff goobies
+a simple factor of 10.
+.\"
+.Sc "1.2" "Text point sizes"
+.PP
+The original C/A/T troff had a finite selection of point sizes,
+because it was designed to drive an opto-mechanical typesetter
+in which each point size was produced by shining the character
+images through a different lens.
+Ditroff made the list of available point sizes configurable
+for each device, but it still maintained the assumption
+that the set of possible point sizes is finite.
+.PP
+\*(PS is fundamentally different in that the text point size
+can be any real number, hence the number of different possible
+point sizes is logically infinite.
+However, troff still works in integers, hence no fractional point sizes,
+and uses a finite number of bits to encode the point size in its
+internal character representation, hence the need for an (artificial)
+upper limit.
+Thus the present version of troff supports text point sizes
+from 1 to 255, inclusive, in one point increments.
+.PP
+For compatibility with existing document sources, macro packages and
+preprocessors, the traditional form of the \fB\es\fIN\fR escape is
+restricted to point sizes between 4 and 39, inclusive.
+Allowing other point sizes would break existing usage:
+for example, an existing source may use \fB\es80A\es0\fR to print `0A'
+in point size 8, and it would be broken if the construct were suddenly
+reinterpreted to mean ``set `A' in point size 80''.
+For new documents using point sizes outside of this restriced range
+(which aren't possible with the original troff),
+this version of troff provides an alternative
+(though unfortunately non-standard) \fB\es\fI\'N\'\fR escape.
+.PP
+The \fB.ps\fP request can set every supported point size, from 1 point
+up to 255 points.
+.\"
+.Sc "1.3" "Character set"
+.PP
+The thorniest aspect of the original troff, when it comes to
+emulations and new troff implementations, is its character set.
+The fundamental problem is that one man's bug is another man's feature,
+and the dilemma faced by a troff reimplementor is whether one should
+provide a bug-for-bug emulation of the original C/A/T character set
+(or that of some other historical troff setup, e.g., APS-5 ditroff),
+or if it is better to make more native use of whatever character set
+is offered by the new platform.
+.PP
+As explained in the introduction,
+the present version of troff has been designed to be more forward-
+than backward-looking.
+Rather than expend a ton of sweat emulating the C/A/T character set
+bug-for-bug, only to be told that I should have emulated that of
+the APS-5 instead, or vice-versa, I have chosen to set the old
+implementations aside and use the standard Adobe fonts, the ones that are
+available ``for free'' in all PS printers.
+Hence the new troff's default character set is that of these
+standard Adobe fonts.
+I believe that this choice is fully in accord with the general
+philosophy of \s-1UNIX\s0, which has always emphasized the meaningful
+information content over minute differences in graphic appearance.
+.\"
+.Sc "1.3.1" "Default font set"
+.PP
+The set of fonts included in a \*(PS printer's ROM depends on the
+printer's age: newer ones include more built-in fonts.
+The most basic (minimal) set is the original 13:
+.TS
+center box;
+l|l
+l|a.
+\*(PS font name	\*(Tr font name
+_
+Times-Roman	R
+Times-Italic	I
+Times-Bold	B
+Times-BoldItalic	BI
+Helvetica	H
+Helvetica-Oblique	HO
+Helvetica-Bold	HB
+Helvetica-BoldOblique	HQ
+Courier	C
+Courier-Oblique	CO
+Courier-Bold	CB
+Courier-BoldOblique	CQ
+Symbol	S
+.TE
+.PP
+Printers of the late LanguageLevel\ 1 \(em early LanguageLevel\ 2 era
+typically include 35 ``free'' fonts, but the only addition
+that's been deemed to be of value for troff is the ITC Zapf Dingbats font,
+\*(PS font name ZapfDingbats, troff font name ZD.
+.PP
+Of the 13 minimum-standard fonts, only 4 are used in the default
+troff configuration, which aims to provide a set of characters and fonts
+that is on par with what the original troff offered.
+These 4 fonts are: Times-Roman (\fBR\fP), Times-Italic (\fBI\fP),
+Times-Bold (\fBB\fP) and Symbol (\fBS\fP).
+Using these 4 fonts, one can produce a satisfactory rendition
+(in terms of graphic appearance and/or symbolic meaning)
+of almost every font/character combination that was possible
+on the original C/A/T troff, with only a few exceptions
+which will be elaborated soon.
+The task of implementing (or emulating) the original troff character set
+thus consists of mapping it to the character set of these 4 fonts.
+.\"
+.Sc "1.3.2" "Character implementation philosophy"
+.PP
+The present version of troff has been designed with the philosophy
+that every troff character should correspond one-to-one
+to a \*(PS character, i.e., a character drawn from a PS font.
+Only one exception has been made: the 4 line drawing characters
+\fB\e(ru\fP, \fB\e(ul\fP, \fB\e(rn\fP and \fB\e(br\fP are recognized
+by the troff program itself as special and are \fInot\fP drawn from
+any font;
+instead they are converted into procset calls which then draw
+the lines with the \fBmoveto\fP, \fBlineto\fP and \fBstroke\fP
+elementary graphics operators.
+This exception is justified on the basis that elementary horizontal and
+vertical lines ought to be drawn as lines, not characters, and
+having them made up of pseudo-characters is merely a troff quirk.
+.PP
+Aside from the four special line drawing elements,
+\fIevery\fP non-space character is drawn as a regular character
+from some \*(PS font: a procset command similar to the \fBselectfont\fP
+operator selects the requisite font in the requisite point size,
+if it wasn't selected already,
+a \fBmoveto\fP command is executed, and a string of characters
+from the selected font is printed with the \fBshow\fP operator.
+.PP
+Unlike other once-popular \*(PS-generating troff implementations,
+the present version does not contain any C-level or procset-level
+hacks which give special treatment to \fIany\fP character,
+with the single exception of the 4 line drawing ones.
+Instead, any hacks that need to be done in order to produce
+the desired character set, have to be done at the \*(PS font level,
+which may mean recoding a standard font to a different encoding vector,
+altering character metrics via the \fBMetrics\fP mechanism,
+or building and using special-purpose Type\ 1 or Type\ 3 fonts.
+.PP
+The default troff configuration, which uses only the 4 standard
+fonts listed in the previous section and no special fonts, applies
+only very simple and lightweight ``hacks'' to the standard fonts:
+.IP \(bu
+The text fonts such as the standard Times, Helvetica and Courier
+families are recoded from Adobe's StandardEncoding to TroffEncoding.
+The latter encoding vector provides access to more characters in
+the font (some of the characters thus gained are used to fulfill
+the character set made standard by the original troff), and is
+laid out as a superset of the ISO Latin-1 8-bit text character set.
+(The encoding vector and the full character set are shown in
+Appendix\ A.)
+.IP \(bu
+The square root (\fCradical\fP) and square root extender (\fCradicalex\fP)
+characters in the Symbol font get their metrics altered to make them
+directly usable in the naturally intuitive manner.
+.\"
+.Sc "1.3.3" "Basic character mappings"
+.PP
+The mapping of most characters from the old troff character set
+to the new \*(PS fonts is fairly straightforward:
+.IP \(bu
+Standard Adobe Roman text fonts like the Times family include
+all 94 graphic characters of ASCII, unlike the ``base'' text fonts
+on the C/A/T which only had a subset.
+Therefore, the old troff's quirk of relegating some of the ASCII
+characters to the Special font is totally gone in the present version \(em
+all ASCII characters are always drawn from whichever font has been
+explicitly selected by the \fB.ft\fP request or the \fB\ef\fP escape,
+no ``special'' substitution behind the scenes.
+.IP \(bu
+The original troff character set includes a bunch of named characters
+(accessible only via \fB\e(\fIxx\fR escapes) depicting various
+non-ASCII typographical and mathematical symbols.
+Some of these characters were part of the ``base'' fonts and hence
+potentially affected by the roman/italic/bold switching, others were
+on the Special font and therefore invariant.
+Most of these characters are available with Adobe fonts as well:
+as a general rule, the typographic characters exist in the Roman text
+fonts (the new ``base'' fonts), whereas the mathematical ones
+live in the Symbol font.
+.IP \(bu
+Whenever possible, the ``base'' vs. ``special'' font ``affiliation''
+of each named \fB\e(\fIxx\fR character has been preserved, such that
+those characters which used to be in the base fonts on the C/A/T
+are drawn from the base fonts in \*(PS (the Times family by default),
+while those that used to be on the Special Mathematical Font are
+drawn from Symbol.
+In particular, whenever a character was available in both fonts,
+I've made the assignment based on that character's ``affiliation''
+in the original troff character set.
+For example, the degree (\fB\e(de\fP \(de) and plus-minus (\fB\e(+\-\fP \(+-)
+characters are available both in the base fonts and in Symbol;
+the present version of troff draws \fB\e(de\fP from the base font,
+but \fB\e(+\-\fP is drawn from Symbol, matching the division that
+existed in the original troff character set.
+.IP \(bu
+Of the characters which lived in the ``base'' fonts in the original
+C/A/T troff, only \fB\e(fm\fP and \fB\e(ru\fP have been converted
+to the ``special'' status, as detailed in the next section.
+All others remain base font characters in the \*(PS version.
+.IP \(bu
+The characters section \(sc (\fB\e(sc\fP),
+acute accent \(aa (\fB\e(aa\fP or \fB\e\'\fP),
+grave accent \(ga (\fB\e(ga\fP or \fB\e\`\fP) and
+double dagger \(dd (\fB\e(dd\fP)
+were Special Font characters in the original troff,
+but in the standard \*(PS font set they are base font characters.
+They are \fInot\fP forced to remain ``plain'' when the current
+font is italic or bold \(em the previous lack of these characters
+in different fonts is viewed as a bug, rather than a feature.
+.IP \(bu
+All Greek letters are drawn properly, using their native forms
+on the Symbol font.
+The old troff's quirk of replacing some of the uppercase Greek letters
+with their ASCII graphic equivalents is gone.
+.\"
+.Sc "1.3.4" "Difficult characters"
+.PP
+A number of characters in the original troff character set
+don't have a straightforward mapping to that of the standard Adobe fonts,
+hence their implementation required a judgment call:
+.IP \(bu
+\*(Mn describes the \fB\e(em\fP character as ``3/4 Em dash'',
+yet it has a spacing width of 1 em.
+In the original implementation, it was a \(34 em dash glyph
+centered within the 1 em spacing width,
+like this: \h'.125m'\f(Lr=\fP\h'.125m'.
+Adobe's standard fonts provide a full 1 em dash character instead: \(em.
+In the default configuration, this troff maps \fB\e(em\fP
+to Adobe's version;
+see Chapter\ 3 for an extended backward compatibility mode.
+.IP \(bu
+The baseline rule character \fB\e(ru\fP (\(ru) was a base font character
+in the original C/A/T character set.
+In the present version it is a special line drawing character
+that does not come from any font \(em see \(sc1.3.2.
+It is drawn as a 1n long horizontal stroke of thickness .05m,
+with the centerline of the stroke coinciding with the text baseline.
+.IP \(bu
+The \fB\e(fm\fP character stands for ``foot mark'', but it was not
+a drawing of a human or animal footprint.
+Instead it was a tick mark, which the American culture uses
+to denote spatial dimensions in its archaic ``foot'' (30.48\ cm) units,
+as in ``this room is 10\(fm by 20\(fm''.
+Existing historical troff document sources use this character
+not only for its officially-designated meaning, but also as a generic
+tick mark glyph: as a representation of the \s-1ASCII\s0 apostrophe
+character as it appears on many classic terminals, as a ``prime''
+or derivative symbol, etc.
+.IP \&
+In the present version of troff I have mapped \fB\e(fm\fP
+to the \&\fCminute\fP character on the Symbol font,
+which looks like this: \(Mi.
+It seems to match the graphic appearance of the original ``foot mark''
+to the best of my visual discernment ability.
+However, because it lives on Symbol, it is unaffected by the base font
+switching between roman, italic and bold,
+whereas the original C/A/T troff's \fB\e(fm\fP was a base font character.
+.IP \(bu
+The characters \fB+\fP, \fB\-\fP, \fB=\fP and \fB*\fP
+exist in two versions in the original troff character set:
+one in the base fonts, the other on the Special Mathematical Font.
+As it happens, Adobe has made them available in two places as well:
+once in the \s-1ASCII\s0-based text fonts like Times,
+and also on Symbol.
+The present troff draws the ASCII versions of these characters
+from the base font (the current font selected by \fB.ft\fP or \fB\ef\fP),
+whereas the names \fB\e(pl\fP, \fB\e(mi\fP, \fB\e(eq\fP and \fB\e(**\fP
+pull the Symbol font versions.
+It is difficult to tell, however, how well or not-so-well
+this rendition matches the original intent of those who lived
+all those decades ago.
+.IP \(bu
+The C/A/T's ASCII-challenged base fonts included the forward slash
+character /, but not the backslash character \e.
+Bell Labs drew the latter on their Special Mathematical Font
+along with the other missing \s-1ASCII\s0 characters.
+Troff drew the \s-1ASCII\s0 character `/' from the base font,
+and `\e' from the Special Font.
+But the two didn't match.
+To remedy the problem, the Special Font provided its own version
+of the forward slash, matching the backslash, which was made accessible
+in troff as \fB\e(sl\fP.
+.IP \&
+In the new troff `\e' is a regular \s-1ASCII\s0 character, hence it is
+drawn from the base font.
+The regular \s-1ASCII\s0 forward slash `/' is also drawn from the base font.
+Furthermore, the graphic renditions of these two characters in
+the standard Times-Roman font are perfectly matched mirror images.
+Thus the original defect that prompted the creation of \fB\e(sl\fP
+is gone.
+But how should we render the existing instances of \fB\e(sl\fP
+in the historical troff document sources?
+.IP \&
+The solution that's been implemented in the present version
+maps \fB\e(sl\fP to the slash character on Times-Roman, even if
+the current font is \fBI\fP or \fBB\fP, emulating the semantics
+of the character in question being ``special'' in the original troff.
+This solution is not ideal for every possible way in which the
+character may have been used in historical document sources,
+but there can be no perfect solutions in a world in which one man's
+bug is another man's feature.
+.IP \(bu
+In the original C/A/T troff, the \s-1ASCII\s0 underscore (_)
+and the named character \fB\e(ul\fP (``underline'' or ``underrule'')
+had different internal codes within the troff core (hence were treated
+as two different characters by the \fB.tr\fP mechanism),
+but became the same character in the C/A/T binary code output,
+one that lived on the Special Font.
+.IP \&
+In the new troff, the two characters in question are entirely unrelated:
+the \s-1ASCII\s0 underscore is a regular \s-1ASCII\s0
+character, drawn from the base font like all others,
+whereas \fB\e(ul\fP is a special line drawing character per \(sc1.3.2.
+The latter is drawn as a 1n long horizontal stroke of thickness .05m,
+with the centerline of the stroke located at .1m below the text baseline.
+.IP \(bu
+The character \fB\e(rn\fP (``root en'') served a dual purpose in the
+original troff character set: one, as a square root extender, and two,
+as a box drawing element that works together with \fB\e(br\fP and \fB\e(ul\fP.
+These two functions are different and had to be split.
+Reasoning that square roots are normally drawn via \fIeqn\fP, which
+had to be retuned for the new troff anyway (see Chapter\ 4),
+the name \fB\e(rn\fP has been given to the ``overrule'' character,
+which is drawn just like the baseline rule and the underrule,
+but with the centerline of the stroke at .9m above the text baseline.
+The square root extender character in the Symbol font
+has been given the name \fB\e(sx\fP.
+.IP \(bu
+The box vertical rule \fB\e(br\fP has zero spacing width as in the
+original troff, and is drawn as a 1m long vertical stroke of
+thickness .05m, extending from .1m below the text baseline
+to .9m above it.
+It makes seamless corners with \fB\e(ul\fP and \fB\e(rn\fP.
+.IP \(bu
+The large bracket and brace construction pieces
+\(lt \(lb \(rt \(rb \(lk \(rk \(bv \(lf \(rf \(lc \(rc
+in the original troff character set exhibited certain features
+which don't map well to anything that's available in the standard
+Adobe fonts:
+.RS
+.IP \(bu
+The \fIx\fP position of the vertical stem relative to the character origin
+was the same for both bracket and brace pieces, allowing \fB\e(bv\fP (\(bv)
+to serve as an extender for both.
+Adobe's Symbol font has bracket and brace construction pieces as well,
+shown in Appendix\ A, but the Symbol version requires 3 different
+vertical extender characters: one for braces, one for left brackets,
+and one for right brackets.
+Hence there is no character to which \fB\e(bv\fP can be mapped reliably.
+.IP \(bu
+The Adobe Symbol versions of the bracket and brace constuction pieces
+don't look bold at all (.055m thick stems in the version of the Symbol
+font used to print this manual), hence mapping the ``bold vertical''
+character to one of them is dishonest.
+As usual with the historical troff character set, the \fB\e(bv\fP
+character has been (ab)used a lot as a general-purpose thick vertical bar,
+not part of a constructed bracket or brace.
+.RE
+.IP \&
+The only possible ``right'' solution is to draw all 11 characters in
+question from a special font, recreating their intended shapes and metrics
+from the old troff character set.
+However, that approach goes counter to this troff version's design policy
+of using no special fonts in the default configuration,
+only the standard ones which already exist in all PS printers.
+Thus the following compromise solution has been implemented:
+.RS
+.IP \(bu
+In the default configuration, \fB\e(lt\fP, \fB\e(lb\fP,
+\fB\e(rt\fP, \fB\e(rb\fP, \fB\e(lk\fP, \fB\e(rk\fP,
+\fB\e(lf\fP, \fB\e(rf\fP, \fB\e(lc\fP and \fB\e(rc\fP
+are mapped to the corresponding bracket and brace
+construction pieces on the Symbol font.
+\fB\e(bv\fP is mapped to the brace extender character,
+hence an old document source will format OK if the character was
+used as part of a constructed brace, but not if it was used
+in a constructed square bracket.
+.IP \(bu
+In the extended troff compatibility mode described in Chapter\ 3,
+all 11 characters in question are drawn from a special font,
+which has been designed to fulfill the original troff character set.
+.RE
+.IP \(bu
+The \fB\e(or\fP character has been mapped to the \s-1ASCII\s0
+vertical bar (`|') code point on Symbol, which prints like this: \(or.
+I have no way of telling how well it matches what the people at Bell Labs
+had in mind 40 years ago when they designed their Special Mathematical Font,
+but the graphic rendition seems satisfactory, and the mapping preserves
+the semantics of \fB\e(or\fP being different from the regular \s-1ASCII\s0
+`|' character (which lived on the base fonts on the C/A/T, and is
+obviously a base font character in the present version as well),
+and of it being ``special'', i.e., remaining invariant with base font
+changes.
+.IP \(bu
+The character \fB\e(~=\fP has the logical meaning ``approximately equal'',
+and in the historical troff character set it looked like this: \*(~=.
+Adobe's Symbol font also has a character intended to denote
+approximate equality, but it is drawn differently: \(~~.
+The present troff version renders \fB\e(~=\fP as \(~~ in the default
+configuration, but is also capable of rendering it as \*(~= when
+using a special font, as explained in Chapter\ 3.
+.IP \&
+The Symbol font version of the \&\fCapproxequal\fP character \(~~
+is always available as \fB\e(~~\fP.
+.\"
+.Sc "1.3.5" "Missing characters"
+.PP
+The following 8 characters from the original C/A/T troff character set
+have no counterparts in the default Adobe font set of
+{Times-Roman, Times-Italic, Times-Bold, Symbol}, and are thus
+unavailable in the default configuration which uses only these 4 fonts:
+\fB\e(sq\fP, \fB\e(ff\fP, \fB\e(Fi\fP, \fB\e(Fl\fP,
+\fB\e(rh\fP, \fB\e(lh\fP, \fB\e(bs\fP and \fB\e(ci\fP.
+.PP
+A right-pointing hand symbol exists in the ITC Zapf Dingbats font,
+hence adding \fBZD\fP to the font list causes the \fB\e(rh\fP character
+to become available, rendered as follows: \(rh.
+Regaining the rest of the missing characters requires using
+a set of special fonts which have been created specifically for the
+present version of troff \(em see Chapter\ 3.
+.\"
+.Sc "1.3.6" "Reduced set of ligatures"
+.PP
+The original C/A/T Roman text fonts included 5 typographic ligatures:
+\f(LbV\fP, \f(LbW\fP, \f(LbX\fP, \f(LbY\fP and \f(LbZ\fP.
+However, whoever drafted the standard character set for Adobe's
+Type\ 1 fonts made a different choice, and included only two
+ligatures: \fB\(fi\fP and \fB\(fl\fP.
+Thus when using the standard Adobe fonts, troff's automatic
+ligature substitution mechanism is limited to just these two.
+Regaining the full set of 5 ligatures requires using special fonts
+and special tricks, as explained in a later section of this manual.
+E 1

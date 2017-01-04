@@ -1,0 +1,569 @@
+h56685
+s 00061/00190/00063
+d D 6.4 87/07/27 15:58:00 bostic 5 4
+c update address styles
+e
+s 00003/00003/00250
+d D 6.3 86/05/06 15:07:57 anne 4 3
+c spelling, grammar, diction
+e
+s 00051/00063/00202
+d D 6.2 85/06/16 17:49:04 eric 3 2
+c update for new domains & to purge obsolete junk
+e
+s 00007/00002/00258
+d D 6.1 85/05/20 20:45:25 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00260/00000/00000
+d D 5.1 85/05/20 20:44:49 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+D 5
+.\" Copyright (c) 1983 Regents of the University of California.
+E 5
+I 5
+.\" Copyright (c) 1983, 1987 Regents of the University of California.
+E 5
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.\"	@(#)mailaddr.7	4.1		7/28/83
+.TH MAILADDR 7
+E 2
+I 2
+.TH MAILADDR 7 "%Q%"
+E 2
+.UC 5
+.SH NAME
+mailaddr \- mail addressing description
+.SH DESCRIPTION
+D 5
+Mail addresses are based on the ARPANET protocol
+listed at the end of this manual page.
+These addresses are in the general format
+E 5
+I 5
+Mail addresses are based on the ARPANET protocol listed at the end of this
+manual page.  These addresses are in the general format
+E 5
+.PP
+		user@domain
+.PP
+D 5
+where a domain is a hierarchical dot separated list of subdomains.
+For example,
+the address
+E 5
+I 5
+where a domain is a hierarchical dot separated list of subdomains.  For
+example, the address
+E 5
+.PP
+D 5
+		eric@monet.Berkeley.ARPA
+E 5
+I 5
+		eric@monet.berkeley.edu
+E 5
+.PP
+D 5
+is normally interpreted from right to left:
+the message should go to the ARPA name tables
+(which do not correspond exactly to the physical ARPANET),
+then to the Berkeley gateway,
+after which it should go to the local host monet.
+When the message reaches monet it is delivered to the user ``eric''.
+E 5
+I 5
+is normally interpreted from right to left: the message should go to the
+ARPA name tables (which do not correspond exactly to the physical ARPANET),
+then to the Berkeley gateway, after which it should go to the local host
+monet.  When the message reaches monet it is delivered to the user ``eric''.
+E 5
+.PP
+D 5
+Unlike some other forms of addressing,
+this does not imply any routing.
+Thus,
+although this address is specified as an ARPA address,
+it might travel by an alternate route
+D 4
+if that was more convenient or efficient.
+E 4
+I 4
+if that were more convenient or efficient.
+E 4
+For example,
+at Berkeley the associated message
+would probably go directly to monet over the Ethernet
+rather than going via the Berkeley ARPANET gateway.
+E 5
+I 5
+Unlike some other forms of addressing, this does not imply any routing.
+Thus, although this address is specified as an ARPA address, it might
+travel by an alternate route if that were more convenient or efficient.
+For example, at Berkeley, the associated message would probably go directly
+to monet over the Ethernet rather than going via the Berkeley ARPANET
+gateway.
+E 5
+I 3
+.SS Abbreviation.
+E 3
+.PP
+D 3
+.I Abbreviation.
+E 3
+D 5
+Under certain circumstances
+it may not be necessary to type the entire domain name.
+In general anything following the first dot
+may be omitted
+E 5
+I 5
+Under certain circumstances it may not be necessary to type the entire
+domain name.  In general, anything following the first dot may be omitted
+E 5
+if it is the same as the domain from which you are sending the message.
+D 5
+For example,
+a user on
+``calder.Berkeley.ARPA''
+could send to
+``eric@monet''
+without adding the
+``.Berkeley.ARPA''
+since it is the same on both sending and receiving hosts.
+E 5
+I 5
+For example, a user on ``calder.berkeley.edu'' could send to ``eric@monet''
+without adding the ``berkeley.edu'' since it is the same on both sending
+and receiving hosts.
+E 5
+.PP
+D 5
+Certain other abbreviations may be permitted
+as special cases.
+For example,
+at Berkeley ARPANET hosts can be referenced
+without adding the
+``.ARPA''
+as long as their names do not conflict
+with a local host name.
+E 5
+I 5
+Certain other abbreviations may be permitted as special cases.  For
+example, at Berkeley, ARPANET hosts may be referenced without adding
+the ``berkeley.edu'' as long as their names do not conflict with a local
+host name.
+E 5
+I 3
+.SS Compatibility.
+E 3
+.PP
+D 3
+.I Compatibility.
+E 3
+D 5
+Certain old address formats
+are converted to the new format
+to provide compatibility with the previous mail system.
+In particular,
+E 5
+I 5
+Certain old address formats are converted to the new format to provide
+compatibility with the previous mail system.  In particular,
+E 5
+.PP
+I 5
+		user@host.ARPA
+.PP
+is allowed and
+.PP
+E 5
+		host:user
+.PP
+is converted to
+.PP
+		user@host
+.PP
+D 5
+to be consistent with the
+.IR rcp (1C)
+command.
+E 5
+I 5
+to be consistent with the \fIrcp\fP(1) command.
+E 5
+.PP
+D 5
+Also, the syntax:
+E 5
+I 5
+Also, the syntax
+E 5
+.PP
+		host!user
+.PP
+is converted to:
+.PP
+		user@host.UUCP
+.PP
+D 5
+This is normally converted back to the
+``host!user''
+form
+before being sent on for compatibility with older UUCP hosts.
+E 5
+I 5
+This is normally converted back to the ``host!user'' form before being sent
+on for compatibility with older UUCP hosts.
+E 5
+.PP
+D 5
+The current implementation is not able to route messages
+automatically through the UUCP network.
+Until that time you must explicitly tell the mail system
+which hosts to send your message through
+to get to your final destination.
+E 5
+I 5
+The current implementation is not able to route messages automatically through
+the UUCP network.  Until that time you must explicitly tell the mail system
+which hosts to send your message through to get to your final destination.
+E 5
+I 3
+.SS Case Distinctions.
+E 3
+.PP
+D 3
+.I Case Distinctions.
+E 3
+D 5
+Domain names (i.e., anything after the ``@'' sign)
+may be given in any mixture of upper and lower case
+with the exception of UUCP hostnames.
+D 4
+Most hosts accept any mixture of case in user names,
+E 4
+I 4
+Most hosts accept any combination of case in user names,
+E 4
+with the notable exception of MULTICS sites.
+I 3
+.SS Differences with ARPA Protocols.
+E 3
+.PP
+D 3
+.I Differences with ARPA Protocols.
+E 3
+Although the UNIX addressing scheme
+is based on the ARPA mail addressing protocols,
+there are some significant differences.
+.PP
+At the time of this writing
+D 3
+the only
+``top level''
+domain defined by ARPA is the
+``.ARPA''
+domain itself.
+This is further restricted to having only one level of host specifier.
+That is,
+the only addresses that ARPA accepts at this time must be in the format
+E 3
+I 3
+DARPA is converting to real domains.
+The following rules may be useful:
+.PP
+\(bu The syntax
+E 3
+``user@host.ARPA''
+D 3
+(where ``host'' is one word).
+In particular,
+addresses such as:
+E 3
+I 3
+is being split up into
+``user@host.COM'',
+``user@host.GOV'',
+and
+``user@host.EDU''
+for commercial, government, and educational institutions respectively.
+E 3
+.PP
+D 3
+		eric@monet.Berkeley.ARPA
+E 3
+I 3
+\(bu The syntax
+``user@host''
+(with no dots)
+has traditionally referred to the ARPANET.
+In the future this semantic will not be continued \(em
+instead, the host will be assumed to be in your organization.
+You should start using one of the syntaxes above.
+E 3
+.PP
+D 3
+are not currently legal
+under the ARPA protocols.
+For this reason,
+these addresses are converted to a different format on output
+to the ARPANET,
+typically:
+E 3
+I 3
+\(bu Host names of the form ``ORG-NAME''
+(e.g., MIT-MC or CMU-CS-A)
+will be changing to ``NAME.ORG.XXX''
+(where `XXX' is COM, GOV, or EDU).
+For example,
+MIT-MC will change to MC.MIT.EDU.
+In some cases names will be split apart even if they do not have dashes.
+For example,
+USC-ISIF will probably change to F.ISI.USC.EDU.
+E 5
+I 5
+Domain names (i.e., anything after the ``@'' sign) may be given in any mixture
+of upper and lower case with the exception of UUCP hostnames.  Most hosts
+accept any combination of case in user names, with the notable exception of
+MULTICS sites.
+E 5
+.SS Route-addrs.
+E 3
+.PP
+D 3
+		eric%monet@Berkeley.ARPA
+.PP
+.I Route-addrs.
+E 3
+D 5
+Under some circumstances
+it may be necessary to route a message
+through several hosts
+to get it to the final destination.
+Normally this routing is done automatically,
+but sometimes it is desirable to route the message manually.
+D 4
+An address that shows these relays are termed
+E 4
+I 4
+Addresses which show these relays are termed
+E 4
+``route-addrs.''
+E 5
+I 5
+Under some circumstances it may be necessary to route a message through
+several hosts to get it to the final destination.  Normally this routing
+is done automatically, but sometimes it is desirable to route the message
+manually.  Addresses which show these relays are termed ``route-addrs.''
+E 5
+These use the syntax:
+.PP
+		<@hosta,@hostb:user@hostc>
+.PP
+D 5
+This specifies that the message should be sent to hosta,
+from there to hostb,
+and finally to hostc.
+This path is forced
+even if there is a more efficient path
+to hostc.
+E 5
+I 5
+This specifies that the message should be sent to hosta, from there to hostb,
+and finally to hostc.  This path is forced even if there is a more efficient
+path to hostc.
+E 5
+.PP
+D 5
+Route-addrs
+occur frequently on return addresses,
+since these are generally augmented by the software
+at each host.
+It is generally possible to ignore all but the
+``user@host''
+part of the address to determine the actual sender.
+E 5
+I 5
+Route-addrs occur frequently on return addresses, since these are generally
+augmented by the software at each host.  It is generally possible to ignore
+all but the ``user@domain'' part of the address to determine the actual
+sender.
+E 5
+I 3
+.SS Postmaster.
+E 3
+.PP
+D 3
+.I Postmaster.
+E 3
+D 5
+Every site is required to have a user or user alias
+designated
+``postmaster''
+E 5
+I 5
+Every site is required to have a user or user alias designated ``postmaster''
+E 5
+to which problems with the mail system may be addressed.
+I 3
+.SS Other Networks.
+E 3
+.PP
+D 3
+.I CSNET.
+Messages to CSNET sites can be sent to
+``user.host@UDel-Relay''.
+E 3
+I 3
+D 5
+Some other networks can be reached
+by giving the name of the network as the last component
+of the domain.
+.I "This is not a standard feature"
+and may not be supported at all sites.
+For example,
+messages to CSNET or BITNET sites can often be sent to
+``user@host.CSNET''
+or
+``user@host.BITNET''
+respectively.
+E 3
+.SH BERKELEY
+The following comments apply only to the Berkeley environment.
+I 3
+.SS What's My Address?
+E 3
+.PP
+D 3
+.I Host Names.
+Many of the old familiar host names
+are being phased out.
+In particular,
+single character names as used in Berknet
+are incompatible with the larger world
+of which Berkeley is now a member.
+For this reason
+the following names
+are being obsoleted.
+You should notify any correspondents
+of your new address
+as soon as possible.
+.PP
+.ta 1i 1.2i 2.5i
+	OLD	NEW
+	j	ingvax	ucbingres
+	p		ucbcad
+	r	arpavax	ucbarpa
+	v	csvax	ucbernie
+	n		ucbkim
+	y		ucbcory
+.PP
+The old addresses will be rejected as unknown hosts
+sometime in the near future.
+.PP
+.I What's My Address?
+E 3
+If you are on a local machine,
+say monet,
+your address is
+.PP
+		yourname@monet.Berkeley.ARPA
+.PP
+However, since most of the world does not have the new software
+in place yet,
+you will have to give correspondents slightly different addresses.
+From the ARPANET,
+your address would be:
+.PP
+		yourname%monet@Berkeley.ARPA
+.PP
+From UUCP, your address would be:
+.PP
+		ucbvax!yourname%monet
+.PP
+D 3
+.I Computer Center.
+E 3
+I 3
+.SS Computer Center.
+.PP
+E 3
+The Berkeley Computer Center
+is in a subdomain of Berkeley.
+Messages to the computer center
+should be addressed to:
+.PP
+		user%host.CC@Berkeley.ARPA
+.PP
+The alternate syntax:
+.PP
+		user@host.CC
+.PP
+may be used if the message is sent from inside Berkeley.
+.PP
+For the time being
+Computer Center hosts
+are known within the Berkeley domain,
+i.e.,
+the
+``.CC''
+is optional.
+However,
+it is likely that this situation will change
+with time as both the Computer Science department
+and the Computer Center grow.
+E 5
+I 5
+Some other networks can be reached by giving the name of the network as the
+last component of the domain.  \fIThis is not a standard feature\fP and may
+not be supported at all sites.  For example, messages to CSNET or BITNET sites
+can often be sent to ``user@host.CSNET'' or ``user@host.BITNET'' respectively.
+E 5
+D 3
+.PP
+.I Bitnet.
+Hosts on bitnet may be accessed using:
+.PP
+		user@host.BITNET
+.PP
+E 3
+I 2
+.SH BUGS
+D 5
+The RFC822 group syntax
+(``group:user1,user2,user3;'')
+is not supported except in the special case of
+``group:;''
+because of a conflict with old berknet-style addresses.
+E 5
+I 5
+The RFC822 group syntax (``group:user1,user2,user3;'') is not supported
+except in the special case of ``group:;'' because of a conflict with old
+berknet-style addresses.
+E 5
+I 3
+.PP
+Route-Address syntax is grotty.
+.PP
+UUCP- and ARPANET-style addresses do not coexist politely.
+E 3
+E 2
+.SH SEE ALSO
+mail(1), sendmail(8);
+Crocker, D. H.,
+.ul
+Standard for the Format of Arpa Internet Text Messages,
+RFC822.
+E 1

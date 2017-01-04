@@ -1,0 +1,54 @@
+.PS 5.5i
+circlerad = 0.05i
+define pin | "\(bu" at end of last line |
+define node |circle|
+define chip |
+[  	N1: node
+	N2: node at N1 + (-.15i,-.2i);  line from N1.c to last circle chop
+	N3: node at N1 + (.15i,-.2i);  line from N1.c to last circle chop
+	N4: node at N2.c + (-.075i,-.2i);  line from N2.c to last circle chop
+	N5: node at N2.c + (.075i,-.2i);  line from N2.c to last circle chop
+	N6: node at N3 + (-.075i,-.2i);  line from N3.c to last circle chop
+	N7: node at N3 + (.075i,-.2i);  line from N3.c to last circle chop
+	N0: node at N1 + (.4i,0)
+	Bll: (N4.w,N4.s) - (.1i,.1i)
+	Bul: (Bll, N1.n) + (0,.1i)
+	Bur: (N0.e,Bul) + (.1i,0)
+	Blr: (Bur, Bll)	
+	line from Bll to Bul to Bur to Blr to Bll
+	line from N1.n up .1i;  SP: pin
+	line from N0.n up .1i; P: pin
+	line from N0.sw to N0.s - (.1i,0); line up .2i; L: pin
+	line from N0.se to N0.s + (.1i,0); line up .2i; R: pin
+] |
+
+define twochips |
+[	A: chip
+	BLL: A.Bll - (.1i,.1i)
+	BUL: BLL + (0,1i)
+	B: chip with .w at A.e + (.15i,0)
+	BLR: B.Blr + (.1i,-.1i); 
+	BUR: (BLR,BUL);
+	arc cw from A.SP to A.L
+	arc from B.SP to A.R
+ 	line dashed from BLL to BUL to BUR to BLR to BLL
+	line from A.P to (A.P,BUL); SP: pin
+	line from B.L to (B.L,BUL); L: pin
+	line from B.R to (B.R,BUL); R: pin
+	line from B.P to (B.P,BUL); P: pin
+] |
+
+C: twochips
+OBLL: C.BLL - (.1i,.1i)
+OBUL: OBLL + (0,1.5i)
+D: twochips with .w at C.e + (.25i,0)
+OBLR: D.BLR + (.1i,-.1i)
+OBUR: (OBLR, OBUL)
+arc cw from C.SP to C.L
+arc from D.SP to C.R
+line dotted from OBLL to OBUL to OBUR to OBLR to OBLL
+line from C.P to (C.P,OBUL); SP: pin
+line from D.L to (D.L,OBUL); L: pin
+line from D.R to (D.R,OBUL); R: pin
+line from D.P to (D.P,OBUL); P: pin
+.PE

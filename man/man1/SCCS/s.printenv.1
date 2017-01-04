@@ -1,0 +1,73 @@
+h27506
+s 00001/00001/00025
+d D 6.1 85/04/29 14:54:41 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00007/00022
+d D 5.1 85/04/29 14:54:29 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00029/00000/00000
+d D 4.1 85/04/29 14:54:20 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PRINTENV 1 2/24/79
+E 2
+I 2
+D 3
+.TH PRINTENV 1 "24 February 1979"
+E 3
+I 3
+.TH PRINTENV 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+printenv \- print out the environment
+.SH SYNOPSIS
+.B printenv
+[ name ]
+.SH DESCRIPTION
+.I Printenv
+D 2
+prints out the values of the variables in the environment.
+If a
+E 2
+I 2
+prints out the values of the variables in the environment.  If a
+E 2
+.I name
+D 2
+is specified, only its
+value is printed.
+E 2
+I 2
+is specified, only its value is printed.
+E 2
+.PP
+If a
+.I name
+is specified and it is not defined in the environment,
+.I printenv
+returns exit status 1, else it returns status 0.
+.SH SEE ALSO
+D 2
+sh(1), environ(5), csh(1)
+.SH BUGS
+E 2
+I 2
+sh(1), environ(7), csh(1)
+E 2
+E 1

@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if_hy.h	7.3 (Berkeley) 8/4/88
+ *	@(#)if_hy.h	7.4 (Berkeley) 12/8/04
  */
 
 /*
@@ -185,8 +185,8 @@ struct hyrsetget {
 
 #define HYRHASH(x) (((x) ^ ((x) >> 16)) % HYRSIZE)
 
-#define HYSETROUTE	_IOW('i', 0x80, struct hyrsetget)
-#define HYGETROUTE	_IOW('i', 0x81, struct hyrsetget)
+#define HYSETROUTE	_IOW(i, 0x80, struct hyrsetget)
+#define HYGETROUTE	_IOW(i, 0x81, struct hyrsetget)
 
 struct	hylsetget {
 	char	hylsg_name[IFNAMSIZ];	/* if name, e.g. "hy0" */
@@ -195,9 +195,9 @@ struct	hylsetget {
 	u_long	hylsg_len;		/* size of table provided */
 };	
 
-#define HYSETLOG	_IOW('i', 0x82, struct hylsetget)
-#define HYGETLOG	_IOW('i', 0x83, struct hylsetget)
-#define HYGETELOG	_IOW('i', 0x84, struct hylsetget)
+#define HYSETLOG	_IOW(i, 0x82, struct hylsetget)
+#define HYGETLOG	_IOW(i, 0x83, struct hylsetget)
+#define HYGETELOG	_IOW(i, 0x84, struct hylsetget)
 
 /*
  * Structure of Statistics Record (counters)

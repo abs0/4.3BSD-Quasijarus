@@ -1,0 +1,70 @@
+h16349
+s 00008/00005/00020
+d R 6.2 85/05/24 12:12:12 miriam 4 3
+c From Prof. Kahan
+e
+s 00001/00001/00024
+d D 6.1 85/05/15 15:05:01 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00005/00022
+d D 5.1 85/05/15 15:04:55 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00027/00000/00000
+d D 4.1 85/05/15 15:04:49 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SINH 3M
+E 2
+I 2
+D 3
+.TH SINH 3M "19 January 1983"
+E 3
+I 3
+.TH SINH 3M "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+sinh, cosh, tanh \- hyperbolic functions
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double sinh(x)
+.PP
+.B double cosh(x)
+.B double x;
+.PP
+.B double tanh(x)
+.B double x;
+.fi
+.SH DESCRIPTION
+D 2
+These functions compute the designated hyperbolic functions
+for real arguments.
+E 2
+I 2
+These functions compute the designated hyperbolic functions for real arguments.
+E 2
+.SH DIAGNOSTICS
+.I Sinh
+and
+.I cosh
+D 2
+return a huge value of appropriate sign
+when the correct value would overflow.
+E 2
+I 2
+return a huge value of appropriate sign when the correct value would overflow.
+E 2
+E 1

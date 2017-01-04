@@ -1,0 +1,150 @@
+h28015
+s 00010/00005/00046
+d D 5.6 88/07/09 11:31:55 bostic 7 6
+c install approved copyright notice
+e
+s 00004/00001/00047
+d D 5.5 88/03/26 10:59:48 bostic 6 5
+c add per machine configuration file
+e
+s 00008/00002/00040
+d D 5.4 87/12/29 17:04:15 bostic 5 4
+c put on Berkeley header
+e
+s 00009/00007/00033
+d D 5.3 87/12/29 17:03:26 bostic 4 2
+c note that games that never ran setuid may have to be modified
+e
+s 00010/00007/00033
+d R 5.3 87/12/29 17:01:48 bostic 3 2
+c note that games that previously didn't run setuid may have to be modified.
+e
+s 00008/00008/00032
+d D 5.2 87/09/21 10:15:46 bostic 2 1
+c cleanup
+e
+s 00040/00000/00000
+d D 5.1 87/09/21 10:09:47 bostic 1 0
+c date and time created 87/09/21 10:09:47 by bostic
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1987 Regents of the University of California.
+D 5
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 5
+I 5
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 7
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 7
+I 7
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 7
+E 5
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH DM 8 "%Q%"
+.UC 8
+.SH NAME
+dm \- dungeon master
+.SH SYNOPSIS
+.B ln -s dm game
+.SH DESCRIPTION
+\fIDm\fP is a program used to regulate game playing.  \fIDm\fP expects to
+be invoked with the name of a game that a user wishes to play.  This is
+done by creating symbolic links to \fIdm\fP, in \fI/usr/games\fP, for all
+D 2
+of the regulated games.  The actual binaries for these games are located
+in a ``hidden'' directory, \fI/usr/games/hide\fP, that may only be accessed
+by the \fIdm\fP program.  \fIDm\fP determines if the requested game is
+available and, if so, runs it.  The file \fI/usr/games/game.control\fP
+E 2
+I 2
+of the regulated games.  The actual binaries for these games should be
+placed in a ``hidden'' directory, \fI/usr/games/hide\fP, that may only be
+accessed by the \fIdm\fP program.  \fIDm\fP determines if the requested
+game is available and, if so, runs it.  The file \fI/usr/games/dm.config\fP
+E 2
+D 4
+controls the times when games may be run.
+E 4
+I 4
+D 6
+controls the conditions under which games may be run.
+E 6
+I 6
+controls the conditions under which games may be run.  For remotely mounted
+file systems, a machine name may be appended to the config file name,
+i.e. the machine ``rip.berkeley.edu'' will use the file \fIdm.config.rip\fP
+if it is present, otherwise it will use \fIdm.config\fP.
+E 6
+E 4
+.PP
+The file \fI/usr/games/nogames\fP may be used to ``turn off'' game
+playing.  If the file exists, no game playing is allowed; the contents
+of the file will be displayed to any user requesting a game.
+.SH FILES
+.nf
+D 2
+.ta \w'/usr/games/lib/game.conf 'u
+/usr/games/lib/game.conf	- configuration file
+E 2
+I 2
+.ta \w'/usr/games/dm.config 'u
+/usr/games/dm.config	- configuration file
+E 2
+/usr/games/hide		- directory of ``real'' binaries
+/usr/games/nogames	- turns off game playing
+.SH SEE ALSO
+D 2
+game.control(5)
+E 2
+I 2
+dm.config(5)
+E 2
+.SH BUGS
+D 4
+Since \fIdm\fP must run the games setuid ``games'', it is very important
+D 2
+that all games that allow users to run UNIX commands carefully set both
+E 2
+I 2
+that all games allowing users to run UNIX commands carefully set both
+E 2
+the real and effective user id's immediately before executing those commands.
+It is possibly more important that \fIdm\fP never be setuid anything
+except ``games'' so that compromising a game will result only in the user's
+ability to play games at will.
+E 4
+I 4
+Two problems result from \fIdm\fP running the games setuid ``games''.
+First, all games that allow users to run UNIX commands should carefully
+set both the real and effective user id's immediately before executing
+those commands.  Probably more important is that \fIdm\fP never be setuid
+anything but ``games'' so that compromising a game will result only in
+the user's ability to play games at will.  Secondly, games which previously
+had no reason to run setuid and which accessed user files may have to
+be modified.
+E 4
+E 1

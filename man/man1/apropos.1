@@ -2,10 +2,10 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)apropos.1	6.5 (Berkeley) 6/30/87
+.\"	@(#)apropos.1	6.7 (Berkeley) 10/20/04
 .\"
-.TH APROPOS 1 "June 30, 1987"
-.AT 3
+.TH APROPOS 1 "October 20, 2004"
+.UC 3
 .SH NAME
 apropos \- locate commands by keyword lookup
 .SH SYNOPSIS
@@ -21,9 +21,19 @@ keyword ...
 and case of letters is ignored.  Words which are part of other words are
 considered; when looking for compile, \fIapropos\fP will also find all
 instances of ``compiler''.
+Try
+.IP
+apropos password
+.PP
+and
+.IP
+apropos editor
 .PP
 If the line output by \fIapropos\fP starts ``name(section) ...'' you can
 enter ``man section name'' to get its documentation.
+Try `apropos format' and then `man 3s printf' to get the manual
+on the subroutine
+.I printf.
 .PP
 Normally \fIapropos\fP checks in a standard location (/usr/man) for its
 database ``whatis''.  This can be changed by supplying a \fIpath\fP (a
@@ -31,8 +41,17 @@ la the Bourne shell) with the \fB-M\fP flag.  This search path must be
 a colon (``:'') separated list of directories which \fIapropos\fP will
 search for files named ``whatis''.  The path can also be set with the
 environmental variable \fIMANPATH\fP.
+.PP
+.I Apropos
+is actually just the
+.B \-k
+option to the
+.IR man (1)
+command.
 .SH FILES
 .DT
 /usr/man/whatis		data base
 .SH "SEE ALSO"
 man(1), whatis(1)
+.SH AUTHOR
+William Joy

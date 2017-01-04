@@ -1,0 +1,107 @@
+h43194
+s 00001/00001/00063
+d D 6.2 86/05/05 15:59:57 bloom 4 3
+c fix message string to correspond to reality
+e
+s 00001/00001/00063
+d D 6.1 85/04/29 18:09:27 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00062
+d D 5.1 85/04/29 18:09:18 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00064/00000/00000
+d D 4.1 85/04/29 18:09:07 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH WRITE 1 
+E 2
+I 2
+D 3
+.TH WRITE 1  "18 January 1983"
+E 3
+I 3
+.TH WRITE 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+write \- write to another user
+.SH SYNOPSIS
+.B write
+user [ ttyname ]
+.SH DESCRIPTION
+.I Write
+copies lines from your terminal to that of
+another user.
+When first called,
+it sends the message
+.PP
+D 2
+     Message from yourname yourttyname...
+E 2
+I 2
+D 4
+     Message from yoursystem!yourname yourttyname...
+E 4
+I 4
+     Message from yourname@yoursystem on yourttyname at time...
+E 4
+E 2
+.PP
+The recipient of the message should write back at this point.
+Communication continues until an end of file is
+read from the terminal or an interrupt is sent.
+At that point
+.I write
+writes `EOT' on the other terminal and exits.
+.PP
+If you want to write to a user who is logged in more than once,
+the
+.I ttyname
+argument may be used to indicate the
+appropriate terminal name.
+.PP
+Permission to write may be denied or granted by use of the
+.I mesg
+command.
+At the outset writing is allowed.
+Certain commands, in particular
+.I nroff
+and
+.IR  pr (1)
+disallow
+messages in order to prevent messy output.
+.PP
+If the character `!' is found at the beginning of a line,
+.I write
+calls the shell
+to execute the rest of the
+line as a command.
+.PP
+The following protocol is suggested for using
+.IR write :
+when you first write to another user, wait for him to
+write back before starting to send.
+Each party should end each message with a distinctive
+signal\(em\fB(o)\fR
+for `over' is conventional\(emthat the other may reply.
+.B (oo)
+for `over and out' is suggested when conversation
+is about to be terminated.
+.SH FILES
+/etc/utmp	to find user
+.br
+/bin/sh		to execute `!'
+.SH "SEE ALSO"
+mesg(1), who(1), mail(1)
+E 1

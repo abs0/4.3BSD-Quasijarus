@@ -1,0 +1,787 @@
+h25233
+s 00001/00001/00318
+d D 2.6 03/11/09 19:44:11 msokolov 31 30
+c help => sccshelp
+e
+s 00001/00001/00318
+d D 2.5 86/05/12 09:07:13 anne 30 29
+c grammar
+e
+s 00008/00002/00311
+d D 2.4 86/05/10 20:11:06 mckusick 29 28
+c add header
+e
+s 00001/00003/00312
+d D 2.3 86/05/10 20:09:16 mckusick 28 27
+c format
+e
+s 00000/00008/00315
+d D 2.2 86/04/01 10:56:56 eric 27 26
+c drop DISCLAIMER section
+e
+s 00001/00001/00322
+d D 2.1 86/04/01 10:54:39 eric 26 25
+c move from manl to man1
+e
+s 00012/00000/00311
+d D 1.24 81/05/27 00:22:36 eric 25 24
+c add ``create'' command
+e
+s 00013/00001/00298
+d D 1.23 81/01/14 23:05:00 eric 24 23
+c add PROJECT stuff
+e
+s 00003/00000/00296
+d D 1.22 81/01/14 23:01:32 eric 23 22
+c add "print" command
+e
+s 00025/00002/00271
+d D 1.21 80/12/05 12:46:23 eric 22 21
+c add info about flags to "diff"
+e
+s 00018/00001/00255
+d D 1.20 80/12/02 09:59:24 eric 21 20
+c add -u[user] option to info/check/tell (not clean!)
+e
+s 00016/00001/00240
+d D 1.19 80/11/20 19:00:43 eric 20 19
+c add -b flag to info/clean/tell/check
+e
+s 00004/00000/00237
+d D 1.18 80/11/06 00:09:37 eric 19 18
+c add "tell" command
+e
+s 00005/00000/00232
+d D 1.17 80/10/15 02:40:52 eric 18 17
+c added bugs section
+e
+s 00008/00000/00224
+d D 1.16 80/10/15 02:08:18 eric 17 16
+c added sccsdiff & diffs
+e
+s 00009/00000/00215
+d D 1.15 80/10/09 22:25:48 eric 16 15
+c documented flag capabilities
+e
+s 00001/00000/00214
+d D 1.14 80/10/08 10:18:24 eric 15 14
+c added copyright notice
+e
+s 00007/00007/00207
+d D 1.13 80/10/04 01:02:47 eric 14 13
+c fixed for man command; added reference
+e
+s 00022/00026/00192
+d D 1.12 80/10/04 00:44:48 eric 13 12
+c clarify some parts from jkf comments; fix spelling
+e
+s 00012/00001/00206
+d D 1.11 80/08/30 18:17:30 eric 12 11
+c added "check" command; changed from man1 to manl
+e
+s 00028/00003/00179
+d D 1.10 80/08/09 19:51:23 eric 11 10
+c added -d flag & misc related changes
+e
+s 00001/00001/00181
+d D 1.9 80/07/25 19:28:44 eric 10 9
+c changed "deled" to "deledit" for wnj
+e
+s 00006/00000/00176
+d D 1.8 80/07/24 13:30:06 eric 9 8
+c added "unedit" command
+e
+s 00010/00001/00166
+d D 1.7 80/07/24 10:11:35 eric 8 7
+c added "info", "delget", "deled", "edit"
+e
+s 00026/00000/00141
+d D 1.6 80/06/09 23:16:20 eric 7 6
+c add pseudo-commands
+e
+s 00012/00011/00129
+d D 1.5 80/05/23 12:50:05 eric 6 4
+c general cleanup
+e
+s 00005/00003/00137
+d R 1.5 80/05/23 12:36:51 eric 5 4
+c clean up some gliches
+e
+s 00009/00034/00131
+d D 1.4 80/05/19 20:10:17 eric 4 3
+c drop ADMINFILE junk & suid to sccs
+e
+s 00034/00005/00131
+d D 1.3 80/05/13 13:10:17 eric 3 2
+c added ADMINFILE info
+e
+s 00002/00002/00134
+d D 1.2 80/05/13 00:30:50 eric 2 1
+c changed sccs path from sccs/s. to SCCS/s.
+e
+s 00136/00000/00000
+d D 1.1 80/05/13 00:24:44 eric 1 0
+e
+u
+U
+t
+T
+I 1
+D 12
+.TH SCCS 1
+E 12
+I 12
+D 26
+.TH SCCS LOCAL
+E 26
+I 26
+D 29
+.TH SCCS 1
+E 26
+I 15
+.UC
+E 29
+I 29
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH SCCS 1 "%Q%"
+.UC 5
+E 29
+E 15
+E 12
+D 6
+.UC
+E 6
+.SH NAME
+D 28
+sccs \- front end for the
+.SM SCCS
+subsystem
+E 28
+I 28
+sccs \- front end for the \s-1SCCS\s0 subsystem
+E 28
+.SH SYNOPSIS
+.B sccs
+[
+.B \-r
+] [
+D 13
+.BI \-p path
+I 11
+] [
+E 13
+.BI \-d path
+I 13
+] [
+.BI \-p path
+E 13
+E 11
+] command [ flags ] [ args ]
+.SH DESCRIPTION
+.I Sccs
+is a front end
+D 6
+to csvax:eric.
+that make them mesh more cleanly
+E 6
+I 6
+to the
+.SM SCCS
+programs
+D 30
+that help them mesh more cleanly
+E 30
+I 30
+that helps them mesh more cleanly
+E 30
+E 6
+with the rest of UNIX.
+D 4
+It also runs as a special user
+.B sccs
+so that the
+.SM SCCS
+file protection
+can be used to advantage.
+E 4
+I 4
+It also includes the capability to run
+``set user id'' to another user
+to provide additional protection.
+E 4
+.PP
+Basically,
+.I sccs
+runs the
+.I command
+with the specified
+.I flags
+and
+.I args.
+Each
+argument
+D 13
+is modified to be prepended
+D 2
+with ``sccs/s.''
+E 2
+I 2
+with ``SCCS/s.''
+E 2
+D 11
+unless it begins with ``s.'',
+contains a `\|/\|' character,
+or specifies a directory.
+E 11
+I 11
+unless
+it specifies a directory
+or the final component
+of the pathname
+begins with ``s.''.
+E 13
+I 13
+is normally modified to be prepended
+with ``SCCS/s.''.
+E 13
+E 11
+.PP
+Flags to be interpreted by the
+.I sccs
+program must be before the
+.I command
+argument.
+Flags to be passed to the actual
+.SM SCCS
+program
+must come after the
+.I command
+argument.
+These flags are specific to the command
+and are discussed in the documentation for that command.
+.PP
+I 7
+Besides the usual
+.SM SCCS
+commands,
+several ``pseudo-commands'' can be issued.
+These are:
+D 8
+.IP del 1i
+E 8
+I 8
+.IP edit 1i
+Equivalent to ``get \-e''.
+.IP delget
+E 8
+Perform a delta on the named files
+and then get new versions.
+The new versions will have id keywords expanded,
+and will not be editable.
+I 16
+The \-m, \-p, \-r, \-s, and \-y flags
+will be passed to delta,
+and the \-b, \-c, \-e, \-i, \-k, \-l, \-s, and \-x flags
+will be passed to get.
+E 16
+I 8
+D 10
+.IP deled
+E 10
+I 10
+.IP deledit
+E 10
+Equivalent to ``delget'' except that the
+``get'' phase includes the ``\-e'' flag.
+This option is useful for making a ``checkpoint''
+D 13
+of your current editting phase.
+E 13
+I 13
+of your current editing phase.
+I 16
+The same flags will be passed to delta
+as described above,
+and all the flags listed for ``get''
+above except \-e and \-k
+are passed to ``edit''.
+I 25
+.IP create
+Creates an
+.SM SCCS
+file,
+taking the initial contents from the file of the same name.
+Any flags to ``admin'' are accepted.
+If the creation is successful,
+the files are renamed with a comma on the front.
+These should be removed when you are convinced that
+the
+.SM SCCS
+files have been created successfully.
+E 25
+E 16
+E 13
+E 8
+.IP fix
+Must be followed by a
+.B \-r
+flag.
+This command essentially removes the named delta,
+but leaves you with a copy of the delta
+with the changes that were in it.
+It is useful for fixing small compiler bugs, etc.
+Since it doesn't leave audit trails,
+it should be used carefully.
+.IP clean
+D 20
+Takes no arguments.
+E 20
+This routine removes everything from the current directory
+that can be recreated from SCCS files.
+D 13
+It will not remove any files being editted.
+E 13
+I 13
+It will not remove any files being edited.
+I 20
+If the
+.B \-b
+flag is given, branches are ignored in the determination
+of whether they are being edited;
+this is dangerous if you are keeping the branches in the
+same directory.
+E 20
+E 13
+I 9
+.IP unedit
+This is the opposite of an ``edit''
+or a ``get \-e''.
+It should be used with extreme caution,
+since any changes you made since the get
+will be irretrievably lost.
+E 9
+I 8
+.IP info
+D 13
+Gives a listing of all files being editted.
+E 13
+I 13
+Gives a listing of all files being edited.
+I 20
+If the
+.B \-b
+flag is given,
+branches (i.e.,
+\s-1SID\s0's with two or fewer components)
+are ignored.
+I 21
+If the
+.B \-u
+flag is given
+(with an optional argument)
+then only files being edited by you
+(or the named user)
+are listed.
+E 21
+E 20
+E 13
+I 12
+.IP check
+Like ``info''
+except that nothing is printed if nothing is being edited,
+and a non-zero exit status is returned if anything
+is being edited.
+The intent is to have this included in an ``install''
+entry in a makefile
+to insure that everything is included into the
+.SM SCCS
+file
+before a version is installed.
+I 19
+.IP tell
+Gives a newline-separated list
+of the files being edited
+on the standard output.
+I 20
+Takes the
+.B \-b
+D 21
+flag like 
+E 21
+I 21
+and
+.B \-u
+flags like 
+E 21
+``info'' and ``check''.
+E 20
+E 19
+I 17
+.IP diffs
+Gives a ``diff'' listing between the current version of the
+program(s) you have out for editing and the versions
+in
+.SM SCCS
+format.
+D 22
+The arguments look exactly like the arguments to a get,
+which specify the version to diff against.
+E 22
+I 22
+The
+.B \-r,
+.B \-c,
+.B \-i,
+.B \-x,
+and
+.B \-t
+flags are passed to
+.I get\c
+; the
+.B \-l,
+.B \-s,
+.B \-e,
+.B \-f,
+.B \-h,
+and
+.B \-b
+options are passed to
+.I diff.
+The
+.B \-C
+flag is passed to
+.I diff
+as
+.B \-c.
+I 23
+.IP print
+This command prints out verbose information
+about the named files.
+E 23
+E 22
+E 17
+E 12
+E 8
+.PP
+E 7
+The
+.B \-r
+flag runs
+.I sccs
+as the real user
+D 4
+rather than as the pseudo-user
+.B sccs.
+E 4
+I 4
+rather than as whatever effective user
+.I sccs
+is ``set user id'' to.
+E 4
+The
+I 13
+.B \-d
+flag gives a root directory for the
+.SM SCCS
+files.
+The default is the current directory.
+The
+E 13
+.B \-p
+D 3
+flag defines the path to prepend to
+E 3
+I 3
+flag defines the pathname of the directory
+D 13
+in which
+E 13
+I 13
+in which the
+E 13
+E 3
+.SM SCCS
+D 3
+file names;
+D 2
+``sccs/s.'' is the default.
+E 2
+I 2
+``SCCS/s.'' is the default.
+E 3
+I 3
+D 13
+will be found;
+E 13
+I 13
+files will be found;
+E 13
+``SCCS'' is the default.
+I 11
+The
+D 13
+.B \-d
+flag gives a base directory
+for the pathname search;
+it differs from
+E 13
+.B \-p
+D 13
+in that the
+E 13
+I 13
+flag differs from the
+E 13
+.B \-d
+I 13
+flag in that the
+.B \-d
+E 13
+argument is prepended to the entire pathname
+and the
+.B \-p
+argument is inserted before the final component of the
+pathname.
+For example,
+D 24
+``sccs -d/x -py get a/b''
+E 24
+I 24
+``sccs \-d/x \-py get a/b''
+E 24
+will convert to
+``get /x/a/y/s.b''.
+The intent here is to create aliases such as
+``alias syssccs sccs -d/usr/src''
+which will be used as
+``syssccs get cmd/who.c''.
+I 24
+Also, if the environment variable
+PROJECT
+is set,
+its value is used to determine the
+.B \-d flag.
+If it begins with a slash,
+it is taken directly;
+otherwise,
+the home directory of a user of that name
+is examined for a subdirectory ``src'' or ``source''.
+If such a directory is found,
+it is used.
+E 24
+E 11
+.PP
+Certain commands (such as
+.IR admin )
+D 4
+cannot be run by all users,
+since it would allow anyone to change the authorizations.
+If the file
+.I ADMINFILE
+exists in the
+.SM SCCS
+directory,
+lines of the form
+.sp 0.3
+.in +0.5i
+.B A
+.I uid
+.in
+.sp 0.3
+in this file
+authorize the user with
+the numerical
+user id
+.I uid
+to run protected commands.
+If the file is not present,
+anyone can run all commands.
+This file can be expected to expand
+to contain more information
+in the future.
+E 4
+I 4
+cannot be run ``set user id'' by all users,
+since this would allow anyone to change the authorizations.
+These commands are always run as the real user.
+E 4
+E 3
+E 2
+.SH EXAMPLES
+.de BX
+I 14
+.PP
+E 14
+.nf
+.in +0.5i
+D 14
+.sp 0.3
+E 14
+..
+.de EX
+.fi
+D 14
+.in -0.5i
+.sp 0.3
+E 14
+I 14
+.PP
+E 14
+..
+D 13
+To get a file for editting,
+E 13
+I 13
+To get a file for editing,
+E 13
+edit it,
+and produce a new delta:
+.BX
+D 6
+% sccs get \-e file.c
+% ex file.c
+% sccs delta file.c
+E 6
+I 6
+sccs get \-e file.c
+ex file.c
+sccs delta file.c
+E 6
+.EX
+To get a file from another directory:
+.BX
+D 6
+% sccs \-p/usr/src/sccs/s. get cc.c
+E 6
+I 6
+sccs \-p/usr/src/sccs/s. get cc.c
+E 6
+.EX
+or
+.BX
+D 6
+% sccs get /usr/src/sccs/s.cc.c
+E 6
+I 6
+sccs get /usr/src/sccs/s.cc.c
+E 6
+.EX
+To make a delta of a large number of files
+in the current directory:
+.BX
+D 6
+% sccs delta *.c
+E 6
+I 6
+sccs delta *.c
+I 21
+.EX
+To get a list of files being edited that are not on branches:
+.BX
+sccs info \-b
+.EX
+To delta everything being edited by you:
+.BX
+sccs delta \`sccs tell \-u\`
+E 21
+E 6
+.EX
+In a makefile, to get source files
+from an
+.SM SCCS
+file if it does not already exist:
+.BX
+SRCS = <list of source files>
+D 13
+OBJS = <list of object files>
+E 13
+D 14
+.sp 0.4
+E 14
+D 13
+$(OBJS): $(SRCS)
+.sp 0.4
+E 13
+D 3
+\&.DEFAULT:
+	sccs get $(REL) $<
+E 3
+I 3
+$(SRCS):
+	sccs get $(REL) $@
+E 3
+.EX
+.SH "SEE ALSO"
+admin(SCCS),
+chghist(SCCS),
+comb(SCCS),
+delta(SCCS),
+get(SCCS),
+D 31
+help(SCCS),
+E 31
+I 31
+sccshelp(SCCS),
+E 31
+prt(SCCS),
+rmdel(SCCS),
+sccsdiff(SCCS),
+D 14
+what(SCCS),
+D 4
+sccsdir(UCB)
+E 4
+.SH AUTHOR
+D 6
+Eric Allman (csvax:eric)
+E 6
+I 6
+D 13
+Eric Allman (ingres:eric)
+E 13
+I 13
+Eric Allman
+E 14
+I 14
+what(SCCS)
+.br
+Eric Allman,
+.ul
+An Introduction to the Source Code Control System
+I 18
+.SH BUGS
+It should be able to take directory arguments on pseudo-commands
+like the
+.SM SCCS
+commands do.
+E 18
+E 14
+E 13
+E 6
+D 27
+.SH DISCLAIMER
+Since it is not yet clear
+what this program should do,
+it should not be considered
+a stable program product.
+Please send any
+D 13
+constructive suggestions
+D 6
+to csvax:eric.
+E 6
+I 6
+to ingres:eric.
+E 13
+I 13
+comments & suggestions
+to csvax:eric.
+E 27
+E 13
+E 6
+E 1

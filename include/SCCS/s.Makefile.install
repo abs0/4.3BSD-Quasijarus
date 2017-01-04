@@ -1,0 +1,223 @@
+h35588
+s 00006/00007/00105
+d D 5.5 99/10/09 22:46:03 msokolov 5 4
+c Always have all include files for all machines
+c Also make /usr/include/sys mode 755
+e
+s 00061/00012/00051
+d D 5.4 88/01/17 21:32:08 karels 4 3
+c vax, tahoe self-configuration
+e
+s 00006/00002/00057
+d D 5.3 86/10/13 17:03:48 sam 3 2
+c add tahoe
+e
+s 00003/00007/00056
+d D 5.2 86/05/11 15:55:01 karels 2 1
+c fix up for distribution (let's keep it)
+e
+s 00063/00000/00000
+d D 5.1 86/05/11 15:35:41 karels 1 0
+c date and time created 86/05/11 15:35:41 by karels
+e
+u
+U
+t
+T
+I 1
+#
+# Copyright (c) 1983,1986 Regents of the University of California.
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	%W% (Berkeley) %G%
+#
+D 2
+# Doing a make install builds /usr/include
+#
+# Define SHARED to indicate whether you want
+# symbolic links to the system source (``symlinks''),
+# or a separate copy (``copies'').
+# (latter useful in environments where it's
+# not possible to keep /sys publicly readable)
+E 2
+I 2
+# Makefile for /usr/include, used to convert system include subdirectories
+# between symbolic links and copies of kernel headers.
+# May also be used to update copies from kernel header files.
+E 2
+#
+# The ``rm -rf''s used below are safe because rm doesn't
+# follow symbolic links.
+#
+DESTDIR=
+D 3
+MACHINE=vax
+MACHDEP=${MACHINE} vaxif vaxmba vaxuba
+E 3
+I 3
+D 4
+#ifdef vax
+#MACHINE=vax
+#MACHDEP=${MACHINE} vaxif vaxmba vaxuba
+#endif
+MACHINE=tahoe
+MACHDEP=${MACHINE} tahoeif tahoevba
+E 3
+NETDIRS=net netimp netinet netns
+SYSDIRS=${NETDIRS} stand ${MACHDEP}
+E 4
+I 4
+D 5
+MACHDEP.vax=	vaxif vaxmba vaxuba
+MACHDEP.tahoe=	tahoeif tahoevba
+E 5
+I 5
+MACHDEP.vax=	vax vaxif vaxmba vaxuba
+MACHDEP.tahoe=	tahoe tahoeif tahoevba
+E 5
+NETDIRS=	net netimp netinet netns
+D 5
+SYSDIRS=	${NETDIRS} ${MACHINE}
+E 5
+E 4
+SYS=/sys
+
+all:
+	@echo "\"make symlinks\", \"make copies\", or \"make update\" only"
+	@false
+
+D 4
+symlinks:
+E 4
+I 4
+symlinks: symlinks.${MACHINE}
+E 4
+D 5
+	for i in ${SYSDIRS}; do \
+E 5
+I 5
+	for i in ${NETDIRS}; do \
+E 5
+		rm -rf $$i; \
+		ln -s ${SYS}/$$i $$i; \
+	done
+D 4
+	rm -rf sys
+E 4
+I 4
+	rm -rf sys machine
+E 4
+	ln -s ${SYS}/h sys
+I 4
+	ln -s ${MACHINE} machine
+E 4
+
+D 4
+copies:
+E 4
+I 4
+symlinks.vax:
+	for i in ${MACHDEP.vax}; do \
+		rm -rf $$i; \
+		ln -s ${SYS}/$$i $$i; \
+	done
+
+symlinks.tahoe:
+	for i in ${MACHDEP.tahoe}; do \
+		rm -rf $$i; \
+		ln -s ${SYS}/$$i $$i; \
+	done
+
+copies: copies.${MACHINE}
+E 4
+D 5
+	-for i in ${SYSDIRS}; do \
+E 5
+I 5
+	-for i in ${NETDIRS}; do \
+E 5
+		rm -rf $$i; \
+		(cd ${SYS}; tar cf - $$i/*.h) | tar xpfB -; \
+	done
+	rm -rf sys;
+	mkdir sys; 
+D 5
+	chmod 775 sys;
+E 5
+I 5
+	chmod 755 sys;
+E 5
+	-(cd ${SYS}/h; tar cf - *.h) | (cd sys; tar xpfB -)
+I 4
+	rm -f machine
+	ln -s ${MACHINE} machine
+E 4
+
+D 4
+update:
+E 4
+I 4
+copies.vax:
+	-for i in ${MACHDEP.vax}; do \
+		rm -rf $$i; \
+		(cd ${SYS}; tar cf - $$i/*.h) | tar xpfB -; \
+	done
+
+copies.tahoe:
+	-for i in ${MACHDEP.tahoe}; do \
+		rm -rf $$i; \
+		(cd ${SYS}; tar cf - $$i/*.h) | tar xpfB -; \
+	done
+
+update: update.${MACHINE}
+E 4
+D 5
+	-for i in ${SYSDIRS}; do \
+E 5
+I 5
+	-for i in ${NETDIRS}; do \
+E 5
+		if [ ! -d $$i ]; \
+		then \
+			mkdir $$i; \
+		fi; \
+		for j in `cd ${SYS}/$$i; echo *.[ih]`; do \
+			cmp -s ${SYS}/$$i/$$j $$i/$$j || \
+			install -c -m 444 ${SYS}/$$i/$$j $$i/$$j; \
+		done; \
+	done
+	for j in `cd ${SYS}/h; echo *.[ih]`; do \
+		cmp -s ${SYS}/h/$$j sys/$$j || \
+		{ echo "install -c -m 444 ${SYS}/h/$$j sys/$$j"; \
+		install -c -m 444 ${SYS}/h/$$j sys/$$j; } \
+	done;
+I 4
+	rm -f machine
+	ln -s ${MACHINE} machine
+
+update.vax:
+	-for i in ${MACHDEP.vax}; do \
+		if [ ! -d $$i ]; \
+		then \
+			mkdir $$i; \
+		fi; \
+		for j in `cd ${SYS}/$$i; echo *.[ih]`; do \
+			cmp -s ${SYS}/$$i/$$j $$i/$$j || \
+			install -c -m 444 ${SYS}/$$i/$$j $$i/$$j; \
+		done; \
+	done
+
+update.tahoe:
+	-for i in ${MACHDEP.tahoe}; do \
+		if [ ! -d $$i ]; \
+		then \
+			mkdir $$i; \
+		fi; \
+		for j in `cd ${SYS}/$$i; echo *.[ih]`; do \
+			cmp -s ${SYS}/$$i/$$j $$i/$$j || \
+			install -c -m 444 ${SYS}/$$i/$$j $$i/$$j; \
+		done; \
+	done
+E 4
+E 1

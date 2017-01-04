@@ -1,0 +1,278 @@
+h15575
+s 00022/00017/00156
+d D 4.2 83/07/28 10:56:23 eric 4 3
+c Updates to delete "DRAFT" etc. and make more accurate for 4.2
+e
+s 00000/00000/00173
+d D 4.1 83/07/25 20:15:12 eric 3 2
+c 4.2 release version
+e
+s 00027/00004/00146
+d D 1.2 82/11/14 20:12:45 eric 2 1
+c basic cleanup for 4.2
+e
+s 00150/00000/00000
+d D 1.1 82/11/14 20:06:48 eric 1 0
+c date and time created 82/11/14 20:06:48 by eric
+e
+u
+U
+f b 
+f i 
+t
+T
+I 1
+.TH SYSLOG 8
+.\"	%W%	%Y%	%G%
+.SH NAME
+syslog \- log systems messages
+.SH SYNOPSIS
+/etc/syslog [
+.BI \-m N
+] [
+.BI \-f name
+I 2
+] [
+.B \-d
+E 2
+]
+.SH DESCRIPTION
+.I Syslog
+D 2
+creates and reads the mpx file
+.I /dev/log
+E 2
+I 2
+reads a datagram socket
+E 2
+and logs each line it reads into a set of files
+described by the configuration file
+/etc/syslog.conf.
+.I Syslog
+configures when it starts up
+and whenever it receives a hangup signal.
+.PP
+Each message is one line.
+A message can contain a priority code,
+marked by a digit in angle braces
+at the beginning of the line.
+D 4
+Priorities are defined in <syslog.h>, as follows:
+E 4
+I 4
+Priorities are defined in
+.RI < syslog.h >,
+as follows:
+E 4
+.IP LOG_ALERT \w'LOG_WARNING'u+2n
+this priority should essentially never
+be used.  It applies only to messages that
+are so important that every user should be
+aware of them, e.g., a serious hardware failure.
+.IP LOG_SALERT
+messages of this priority should be
+issued only when immediate attention is needed
+by a qualified system person, e.g., when some
+valuable system resource dissappears.  They get
+sent to a list of system people.
+.IP LOG_EMERG
+Emergency messages are not sent to users,
+but represent major conditions.  An example
+might be hard disk failures.  These could be
+logged in a separate file so that critical
+conditions could be easily scanned.
+.IP LOG_ERR
+these represent error conditions, such as soft
+disk failures, etc.
+.IP LOG_CRIT
+such messages contain critical information,
+but which can not be classed as errors, for example,
+D 4
+'su' attempts.
+E 4
+I 4
+`su' attempts.
+E 4
+Messages of this priority and higher
+are typically logged on the system console.
+.IP LOG_WARNING
+issued when an abnormal condition has been
+detected, but recovery can take place.
+.IP LOG_NOTICE
+something that falls in the class of
+D 4
+"important information"; this class is informational
+E 4
+I 4
+``important information''; this class is informational
+E 4
+but important enough that you don't want to throw
+it away casually.
+Messages without any priority assigned to them
+are typically mapped into this priority.
+.IP LOG_INFO
+information level messages.  These messages
+could be thrown away without problems, but should
+be included if you want to keep a close watch on
+your system.
+.IP LOG_DEBUG
+it may be useful to log certain debugging
+information.  Normally this will be thrown away.
+.PP
+It is expected that the kernel will not log anything below
+LOG_ERR priority.
+.PP
+The configuration file is in two sections
+D 2
+seperated by a blank line.
+E 2
+I 2
+separated by a blank line.
+E 2
+The first section defines files that
+.I syslog
+will log into.
+Each line contains
+a single digit which defines the lowest priority
+(highest numbered priority)
+that this file will receive,
+an optional asterisk
+which guarantees that something gets output
+at least every 20 minutes,
+and a pathname.
+The second part of the file
+contains a list of users that will be
+informed on SALERT level messages.
+For example, the configuration file:
+.nf
+
+D 4
+	5*/dev/tty8
+E 4
+I 4
+	5*/dev/console
+E 4
+	8/usr/spool/adm/syslog
+	3/usr/adm/critical
+
+	eric
+	kridle
+	kalash
+
+.fi
+logs all messages of priority 5 or higher
+onto the system console,
+including timing marks every 20 minutes;
+all messages of priority 8 or higher
+into the file /usr/spool/adm/syslog;
+and all messages of priority 3 or higher
+into /usr/adm/critical.
+The users ``eric'', ``kridle'', and ``kalash''
+will be informed on any subalert messages.
+.PP
+The flags are:
+D 4
+.IP \-m 0.5i
+E 4
+I 4
+.TP 0.5i
+.B \-m
+E 4
+Set the mark interval to
+.I N
+(default 20 minutes).
+D 4
+.IP \-f
+E 4
+I 4
+.TP
+.B \-f
+E 4
+Specify an alternate configuration file.
+D 4
+.IP \-d
+E 4
+I 4
+.TP
+.B \-d
+E 4
+Turn on debugging (if compiled in).
+.PP
+To bring
+.I syslog
+down,
+it should be sent a terminate signal.
+It logs that it is going down
+and then waits approximately 30 seconds
+for any additional messages to come in.
+.PP
+There are some special messages that cause control functions.
+``<*>N'' sets the default message priority to
+.I N.
+``<$>'' causes
+.I syslog
+to reconfigure
+(equivalent to a hangup signal).
+This can be used in a shell file run automatically
+early in the morning to truncate the log.
+I 2
+.PP
+.I Syslog
+creates the file
+/etc/syslog.pid
+if possible
+containing a single line
+with its process id.
+This can be used to kill or reconfigure
+.I syslog.
+D 4
+.PP
+.I Syslog
+can also be compiled to use
+.IR mpx (2)
+files instead of datagrams
+if you are running V7.
+In this case it creates and reads the file
+/dev/log.
+E 4
+I 4
+.\".PP
+.\".I Syslog
+.\"can also be compiled to use
+.\".IR mpx (2)
+.\"files instead of datagrams
+.\"if you are running V7.
+.\"In this case it creates and reads the file
+.\"/dev/log.
+E 4
+E 2
+.SH FILES
+/etc/syslog.conf \- the configuration file
+I 2
+.br
+/etc/syslog.pid \- the process id
+D 4
+.br
+/dev/log \- under V7, the mpx file
+E 4
+I 4
+.\".br
+.\"/dev/log \- under V7, the mpx file
+E 4
+E 2
+.SH BUGS
+LOG_ALERT and LOG_SUBALERT messages
+should only be allowed to privileged programs.
+.PP
+Actually,
+.I syslog
+D 2
+is not clever enough to deal with kernel error messages.
+E 2
+I 2
+is not clever enough to deal with kernel error messages
+in the current implementation.
+E 2
+.SH SEE\ ALSO
+syslog(3)
+E 1

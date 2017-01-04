@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)pile.c	4.3 8/11/83";
+static char sccsid[] = "@(#)pile.c	4.4 9/15/04";
 #endif
 
 # include "e.h"
@@ -7,11 +7,15 @@ static char sccsid[] = "@(#)pile.c	4.3 8/11/83";
 lpile(type, p1, p2) int type, p1, p2; {
 	int bi, hi, i, gap, h, b, nlist, nlist2, mid;
 	yyval = oalloc();
-#ifndef NEQN
-	gap = VERT( (ps*6*4)/10 ); /* 4/10 m between blocks */
-#else NEQN
+#ifdef CAT
+	gap = VERT( (ps*6*4)/10 );	/* 4/10 m between blocks */
+#endif
+#ifdef PS
+	gap = ps*6*4;			/* 4/10 m between blocks */
+#endif
+#ifdef NEQN
 	gap = VERT(1);
-#endif NEQN
+#endif
 	if( type=='-' ) gap = 0;
 	nlist = p2 - p1;
 	nlist2 = (nlist+1)/2;
@@ -24,11 +28,15 @@ lpile(type, p1, p2) int type, p1, p2; {
 	for( i=p2-1; i>mid; i-- )
 		b += eht[lp[i]] + gap;
 	ebase[yyval] = (nlist%2) ? b + ebase[lp[mid]]
-#ifndef NEQN
+#ifdef CAT
 			: b - VERT( (ps*6*5)/10 ) - gap;
-#else NEQN
+#endif
+#ifdef PS
+			: b - (ps*6*5) - gap;
+#endif
+#ifdef NEQN
 			: b - VERT(1) - gap;
-#endif NEQN
+#endif
 	if(dbg) {
 		printf(".\tS%d <- %c pile of:", yyval, type);
 		for( i=p1; i<p2; i++)

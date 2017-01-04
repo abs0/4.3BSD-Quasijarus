@@ -1,0 +1,44 @@
+h33088
+s 00001/00001/00010
+d D 4.3 86/05/15 07:17:52 lepreau 3 2
+c make sure get ex; temp may not be writable wither
+e
+s 00001/00003/00010
+d D 4.2 83/02/09 14:08:15 sam 2 1
+c in case file unwritabl
+e
+s 00013/00000/00000
+d D 4.1 82/05/07 19:25:10 mckusick 1 0
+c date and time created 82/05/07 19:25:10 by mckusick
+e
+u
+U
+t
+T
+I 1
+e y.tab.h
+1,$s/# *define *//
+1,$s/^/"/
+1,$s/ /", /
+1,$s/$/,/
+D 3
+w temp
+E 3
+I 3
+w! temp
+E 3
+e token.c
+/= *{$/+1,/^};$/-1d
+-r temp
+D 2
+w token.c
+E 2
+I 2
+w! token.c
+E 2
+q
+D 2
+s/%M%	%I%	%E%//
+
+E 2
+E 1

@@ -1,0 +1,11 @@
+MAN6=	../man6/aardvark.6.ps ../man6/adventure.6.ps ../man6/arithmetic.6.ps \
+	../man6/atc.6.ps ../man6/backgammon.6.ps ../man6/banner.6.ps \
+	../man6/battlestar.6.ps ../man6/bcd.6.ps ../man6/boggle.6.ps \
+	../man6/canfield.6.ps ../man6/chess.6.ps ../man6/ching.6.ps \
+	../man6/cribbage.6.ps ../man6/fish.6.ps ../man6/fortune.6.ps \
+	../man6/hack.6.ps ../man6/hangman.6.ps ../man6/hunt.6.ps \
+	../man6/mille.6.ps ../man6/monop.6.ps ../man6/number.6.ps \
+	../man6/phantasia.6.ps ../man6/quiz.6.ps ../man6/rain.6.ps \
+	../man6/robots.6.ps ../man6/rogue.6.ps ../man6/sail.6.ps \
+	../man6/snake.6.ps ../man6/trek.6.ps ../man6/worm.6.ps \
+	../man6/worms.6.ps ../man6/wump.6.ps ../man6/zork.6.ps

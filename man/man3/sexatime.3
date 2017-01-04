@@ -1,0 +1,96 @@
+.\"	@(#)sexatime.3	1.2 (IFCTF) 2013/01/20
+.\"
+.TH SEXATIME 3 "January 20, 2013"
+.UC 8
+.SH NAME
+sexatime \- break time-of-day into sexagesimal HH:MM:SS
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/types.h>
+#include <mjdtime.h>
+.PP
+.ft B
+sexatime(tod, hms)
+long tod;
+struct sexatime *hms;
+.fi
+.SH DESCRIPTION
+.I Sexatime
+takes a time-of-day in seconds between 0 and 86399, inclusive,
+denoting a fraction of a day (see
+.IR mjdtime (3)),
+and converts it into the corresponding sexagesimal time between
+00:00:00 and 23:59:59, respectively.
+The result is stored in a \fIsexatime\fP structure, which is defined in
+.RI < mjdtime.h >
+as follows:
+.PP
+.nf
+.RS
+.DT
+struct sexatime {
+	int	ss;
+	int	mm;
+	int	hh;
+};
+.RE
+.fi
+.PP
+The layout of this structure has been chosen such that
+it matches the beginning of \fIstruct tm\fP produced by the
+.IR localtime (3)
+and
+.IR gmtime (3)
+functions, thus allowing \fIsexatime\fP to be used efficiently
+as part of the implementation of those legacy interfaces.
+.PP
+Breaking a time-of-day sexagesimally into hours, minutes and seconds
+requires two division operations, with both the quotient and the
+remainder needed from each.
+Of all basic integer arithmetic operations, division and modulo
+are the most computationally expensive when implemented on a typical
+digital computer.
+The exact way in which these operations are coded can have a
+significant impact on the efficiency with which the entire operation
+executes on a given machine.
+The \fIsexatime\fP operation has been made into a standard C library function
+so that its implementation can be optimized for specific platforms
+while the higher-level user code remains portable.
+.PP
+No library function is provided for the opposite conversion:
+the most straightforward way to perform that conversion with an
+inline expression of the form
+.PP
+.nf
+.RS
+.DT
+.ft B
+tod = hms\->hh * 3600L + hms\->mm * 60 + hms\->ss;
+.ft
+.RE
+.fi
+.PP
+is believed to be the most efficient way as well;
+any efficiency gain from a fully optimized assembly implementation
+will likely be less than the overhead of a function call.
+.SH "PORTABILITY NOTES"
+The multiply-add inline expression shown above is valid for
+16-bit and 32-bit platforms, such as \%PDP-11 and VAX.
+(The \fBL\fP suffix after 3600 makes no difference on a 32-bit
+machine such as the VAX, but if the basic \fBint\fP type is
+only 16 bits, at least one operand of the hour multiplication
+must be promoted to \fBlong\fP in order to produce correct code.)
+.PP
+If you are writing code that may potentially need to run on
+everything from a \%PDP-11 (where a \fBlong\fP must be used) to a
+\*(lqmodern\*(rq 64-bit system (where an \fBint\fP should be used),
+use the \fIsexatime_mult\fP macro provided in the
+.B <mjdtime.h>
+header file.
+That macro is implemented using the \fIcalend_long\fP trick
+explained in the
+.IR mjdtime (3)
+manual page.
+.SH SEE ALSO
+ctime(3), mjdtime(3)

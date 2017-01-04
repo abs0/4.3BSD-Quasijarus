@@ -1,0 +1,49 @@
+%!PS-Adobe-3.0 Resource-Font
+%%Title: @(#)TroffEmu-Supplement.ps	2.1 (Berkeley) 2012/03/10
+%%DocumentNeededResources: font ZapfDingbats
+%%BeginResource: font TroffEmu-Supplement
+12 dict begin
+/FontName /TroffEmu-Supplement def
+/FontType 3 def
+/FontMatrix [.001 0 0 .001 0 0] readonly def
+/FontBBox [0 0 904 680] readonly def
+/Encoding 256 array
+0 1 255 {1 index exch /.notdef put} for
+dup 67 /circle put
+dup 76 /lefthand put
+readonly def
+/BuildChar {
+	1 index /Encoding get exch get
+	1 index /BuildGlyph get exec
+} bind def
+/BuildGlyph {
+	exch begin
+	CharProcs 1 index known {
+		CharProcs 1 index get
+	} {
+		CharProcs /.notdef get
+	} ifelse
+	exec
+	end
+} bind def
+3 dict begin
+	/.notdef {
+		pop 0 0 0 0 0 0 setcachedevice
+	} bind def
+	/circle {
+		pop 750 0 0 0 680 680 setcachedevice
+		newpath 340 dup 315 0 360 arc closepath
+		0 setlinejoin 50 setlinewidth {} 0 setdash stroke
+	} bind def
+	/lefthand {
+		pop 939 0 35 134 904 559 setcachedevice
+		ZDF setfont FlipMatrix concat -939 0 moveto c2B show
+	} bind def
+currentdict end
+readonly /CharProcs exch def
+/ZDF /ZapfDingbats findfont 1000 scalefont def
+/FlipMatrix [-1 0 0 1 0 0] readonly def
+/c2B (+) readonly def
+FontName currentdict end
+definefont pop
+%%EndResource

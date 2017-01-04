@@ -1,0 +1,92 @@
+h61604
+s 00001/00001/00046
+d D 6.1 85/05/15 18:47:20 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00017/00007/00030
+d D 5.1 85/05/15 18:46:59 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00037/00000/00000
+d D 4.1 85/05/15 18:46:33 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MTAB 5 
+E 2
+I 2
+D 3
+.TH MTAB 5  "26 June 1983"
+E 3
+I 3
+.TH MTAB 5  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+mtab \- mounted file system table
+I 2
+.SH SYNOPSIS
+.B "#include <fstab.h>
+.br
+.B "#include <mtab.h>"
+E 2
+.SH DESCRIPTION
+.I Mtab
+resides in directory
+.I /etc
+and contains a table of devices mounted by the
+.I mount
+command.
+.I Umount
+removes entries.
+.PP
+D 2
+Each entry is 64 bytes long;
+the first 32 are the null-padded name of the
+place where the special file is mounted;
+the second 32 are the null-padded name of the special
+file.
+E 2
+I 2
+The table is a series of
+.I mtab
+structures, as defined in
+.IR < mtab.h >.
+Each entry contains the null-padded name of
+the place where the special file is mounted,
+the null-padded name of the special file, and
+a type field, one of those defined in
+.RI < fstab.h >.
+E 2
+The special file has all its directories
+stripped away;
+that is, everything through the last `/' is thrown
+D 2
+away.
+E 2
+I 2
+away.  The type field indicates if the file system
+is mounted read-only, read-write, or read-write with
+disk quotas enabled.
+E 2
+.PP
+This table is present only so people can look at it.
+It does not matter to
+.I mount
+if there are duplicated entries nor
+to
+.I umount
+if a name cannot be found.
+.SH FILES
+/etc/mtab
+.SH "SEE ALSO"
+mount(8)
+E 1

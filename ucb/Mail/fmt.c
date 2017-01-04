@@ -17,7 +17,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)fmt.c	5.5 (Berkeley) 2/18/88";
+static char sccsid[] = "@(#)fmt.c	5.6 (Berkeley) 3/31/04";
 #endif /* not lint */
 
 #include <stdio.h>
@@ -126,7 +126,7 @@ fmt(fi)
 				c = getc(fi);
 				continue;
 			}
-			if ((c < ' ' || c >= 0177) && c != '\t') {
+			if ((c < ' ' || c >= 0177 && c < 0240) && c != '\t') {
 				c = getc(fi);
 				continue;
 			}

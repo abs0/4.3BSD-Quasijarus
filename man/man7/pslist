@@ -1,0 +1,4 @@
+MAN7=	../man7/intro.7.ps ../man7/ascii.7.ps ../man7/environ.7.ps \
+	../man7/eqnchar.7.ps ../man7/hier.7.ps ../man7/hostname.7.ps \
+	../man7/koi.7.ps ../man7/mailaddr.7.ps ../man7/man.7.ps \
+	../man7/me.7.ps ../man7/ms.7.ps ../man7/term.7.ps

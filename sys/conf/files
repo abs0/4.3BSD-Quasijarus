@@ -13,8 +13,16 @@ kdb/kdb_sym.c		optional kadb
 kdb/kdb_trap.c		optional kadb
 net/af.c		standard
 net/if.c		standard
+net/if_fcs16.c		optional ppp
+net/if_fcs16.c		optional sl
 net/if_loop.c		optional loop
+net/if_ppp.c		optional ppp
+net/if_pppasync.c	optional ppp
+net/if_pppaux.c		optional pppaux
+net/if_ppplcp.c		optional ppp
+net/if_pppipcp.c	optional ppp inet
 net/if_sl.c		optional sl
+net/netmon.c		optional netmon
 net/raw_cb.c		standard
 net/raw_usrreq.c	standard
 net/route.c		standard
@@ -25,6 +33,7 @@ netinet/if_ether.c	optional ether
 netinet/in.c		optional inet
 netinet/in_pcb.c	optional inet
 netinet/in_proto.c	optional inet
+netinet/ip_gre.c	optional inet
 netinet/ip_icmp.c	optional inet
 netinet/ip_input.c	optional inet
 netinet/ip_output.c	optional inet
@@ -80,6 +89,8 @@ sys/sys_socket.c	standard
 sys/tty.c		standard
 sys/tty_bk.c		optional bk
 sys/tty_conf.c		standard
+sys/tty_kbhacks.c	standard
+sys/tty_lk201.c		optional lk
 sys/tty_pty.c		optional pty
 sys/tty_subr.c		standard
 sys/tty_tb.c		optional tb

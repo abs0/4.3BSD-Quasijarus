@@ -1,0 +1,179 @@
+h55626
+s 00001/00001/00086
+d D 6.1 85/04/27 12:59:08 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00033/00024/00054
+d D 5.1 85/04/27 12:58:40 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00078/00000/00000
+d D 4.1 85/04/27 12:58:17 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BADSECT 8 4/10/81
+E 2
+I 2
+D 3
+.TH BADSECT 8 "25 February 1983"
+E 3
+I 3
+.TH BADSECT 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+badsect \- create files to contain bad sectors
+.SH SYNOPSIS
+.B /etc/badsect
+D 2
+sector ...
+E 2
+I 2
+bbdir sector ...
+E 2
+.SH DESCRIPTION
+.I Badsect
+makes a file to contain a bad sector.  Normally, bad sectors
+are made inaccessible by the standard formatter, which provides
+a forwarding table for bad sectors to the driver; see
+.IR bad144 (8)
+for details.
+If a driver supports the bad blocking standard it is much preferable to
+use that method to isolate bad blocks, since the bad block forwarding
+makes the pack appear perfect, and such packs can then be copied with
+D 2
+.IR dd (8).
+E 2
+I 2
+.IR dd (1).
+E 2
+The technique used by this program is also less general than
+bad block forwarding, as
+.I badsect
+can't make amends for
+bad blocks in the i-list of file systems or in swap areas.
+.PP
+D 2
+Adding a sector which is suddenly bad to the bad sector table
+currently requires the running of the standard DEC formatter, as
+UNIX does not supply formatters.  Thus to deal with a newly bad block
+E 2
+I 2
+On some disks,
+adding a sector which is suddenly bad to the bad sector table
+currently requires the running of the standard DEC formatter.
+Thus to deal with a newly bad block
+E 2
+or on disks where the drivers
+do not support the bad-blocking standard 
+.I badsect
+D 2
+may be used to good
+effect.
+E 2
+I 2
+may be used to good effect.
+E 2
+.PP
+.I Badsect
+is used on a quiet file system in the following way:
+First mount the file system, and change to its root directory.
+D 2
+Make a directory BAD there and change into it.  Run badsect
+giving as argument all the bad sectors you wish to add.
+(The sector numbers should be relative to the beginning of
+the file system, but this is not hard to do as
+the system reports relative sector numbers in its console error messages.)
+E 2
+I 2
+Make a directory BAD there.  Run
+.I badsect
+giving as argument the BAD directory followed by
+all the bad sectors you wish to add.
+(The sector numbers must be relative to the beginning of
+the file system, but this is not hard as the system reports
+relative sector numbers in its console error messages.)
+E 2
+Then change back to the root directory, unmount the file system
+and run
+.IR fsck (8)
+on the file system.  The bad sectors should show up in two files
+or in the bad sector files and the free list.  Have
+.I fsck
+remove files containing the offending bad sectors, but 
+.B "do not"
+have it remove the BAD/\fInnnnn\fR files.
+This will leave the bad sectors in only the BAD files.
+.PP
+.I Badsect
+works by giving the specified sector numbers in a
+.IR mknod (2)
+system call,
+D 2
+creating a regular file whose first block address is the block containing
+E 2
+I 2
+creating an illegal file whose first block address is the block containing
+E 2
+bad sector and whose name is the bad sector number.
+D 2
+The file has 0 length, but the check programs
+will still consider it to contain the block containing the sector.
+This has the pleasant effect that the sector is completely inaccessible
+to the containing file system
+since it is not available by accessing the file.
+.PP
+E 2
+I 2
+When it is discovered by 
+.I fsck
+it will ask ``HOLD BAD BLOCK''?
+A positive response will cause 
+.I fsck
+to convert the inode to a regular file containing the bad block.
+E 2
+.SH SEE ALSO
+D 2
+bad144(8), fsck (8)
+E 2
+I 2
+bad144(8),
+fsck(8),
+format(8V)
+.SH DIAGNOSTICS
+.I Badsect
+refuses to attach a block that
+resides in a critical area or is out of range of the file system.
+A warning is issued if the block is already in use.
+E 2
+.SH BUGS
+D 2
+If both sectors which comprise a (1024 byte) disk block are bad,
+E 2
+I 2
+If more than one sector which comprise a file system fragment are bad,
+E 2
+you should specify only one of them to
+.I badsect,
+D 2
+as the blocks in the bad sector files actually cover both (bad)
+disk sectors.
+E 2
+I 2
+as the blocks in the bad sector files actually cover all the sectors in a
+file system fragment.
+E 2
+E 1

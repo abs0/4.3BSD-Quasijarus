@@ -1,0 +1,3 @@
+.PS
+arc cw from 145,218 to 0,0 rad 270
+.PE

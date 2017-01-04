@@ -1,0 +1,25 @@
+.sp 3i
+.PS
+line
+.PE
+.PS
+line right
+.PE
+.PS
+line right up
+.PE
+.PS
+line up then right then down right
+.PE
+.PS
+line
+line dotted
+line dashed
+line
+.PE
+.PS
+line right 6i dashed 1i
+.PE
+.PS
+line right 6i dashed 2i
+.PE

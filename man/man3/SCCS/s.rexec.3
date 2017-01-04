@@ -1,0 +1,164 @@
+h14813
+s 00002/00001/00076
+d D 6.5 86/05/14 18:14:45 karels 6 5
+c cleanups
+e
+s 00002/00009/00075
+d D 6.4 86/05/12 17:41:37 karels 5 4
+c move from 3X to 3
+e
+s 00002/00004/00082
+d D 6.3 86/05/09 21:56:40 lepreau 4 3
+c port is int not u_short
+e
+s 00003/00000/00083
+d D 6.2 86/03/14 04:09:18 donn 3 2
+c documented include file
+e
+s 00009/00005/00074
+d D 6.1 85/05/15 16:28:34 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00079/00000/00000
+d D 5.1 85/05/15 16:28:27 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH REXEC 3X "17 March 1982"
+E 2
+I 2
+D 5
+.TH REXEC 3X "%Q%"
+E 5
+I 5
+.TH REXEC 3 "%Q%"
+E 5
+E 2
+.UC 5
+.SH NAME
+rexec \- return stream to a remote command
+.SH SYNOPSIS
+.nf
+I 3
+.PP
+D 4
+.B "#include <sys/types.h>"
+.PP
+E 4
+E 3
+.B "rem = rexec(ahost, inport, user, passwd, cmd, fd2p);"
+.B char **ahost;
+D 4
+.B u_short inport;
+E 4
+I 4
+.B int inport;
+E 4
+.B "char *user, *passwd, *cmd;"
+.B int *fd2p;
+.fi
+.SH DESCRIPTION
+.I Rexec
+looks up the host
+.I *ahost
+using
+.IR gethostbyname (3N),
+returning \-1 if the host does not exist.
+Otherwise
+.I *ahost
+is set to the standard name of the host.
+If a username and password are both specified, then these
+are used to authenticate to the foreign host; otherwise
+the environment and then the user's
+.I .netrc
+file in his
+home directory are searched for appropriate information.
+If all this fails, the user is prompted for the information.
+.PP
+The port
+.I inport
+specifies which well-known DARPA Internet port to use for
+D 2
+the connection; it will normally be the value returned from
+the call ``getservbyname("exec", "tcp")'' (see 
+.IR getservent (3N)).
+E 2
+I 2
+the connection; the call ``getservbyname("exec", "tcp")'' (see 
+.IR getservent (3N))
+will return a pointer to a structure, which contains the
+necessary port.
+E 2
+The protocol for connection is described in detail in
+.IR rexecd (8C).
+.PP
+D 6
+If the call succeeds, a socket of type SOCK_STREAM is returned to
+E 6
+I 6
+If the connection succeeds,
+a socket in the Internet domain of type SOCK_STREAM is returned to
+E 6
+the caller, and given to the remote command as
+.B stdin
+and
+.BR stdout .
+If
+.I fd2p
+D 4
+is non-zero, then a auxiliary channel to a control
+E 4
+I 4
+is non-zero, then an auxiliary channel to a control
+E 4
+process will be setup, and a descriptor for it will be placed
+in
+.IR *fd2p .
+The control process will return diagnostic
+output from the command (unit 2) on this channel, and will also
+accept bytes on this channel as being UNIX signal numbers, to be
+D 2
+forwarded to the process group of the command.
+E 2
+I 2
+forwarded to the process group of the command.  The diagnostic
+information returned does not include remote authorization failure,
+as the secondary connection is set up after authorization has been
+verified.
+E 2
+If
+.I fd2p
+is 0, then the 
+.B stderr
+(unit 2 of the remote
+command) will be made the same as the 
+.B stdout
+and no
+provision is made for sending arbitrary signals to the remote process,
+although you may be able to get its attention by using out-of-band data.
+.SH SEE ALSO
+D 5
+rcmd(3X), rexecd(8C)
+.SH BUGS
+There is no way to specify options to the
+.I socket
+call
+which
+.I rexec
+makes.
+E 5
+I 5
+rcmd(3), rexecd(8C)
+E 5
+E 1

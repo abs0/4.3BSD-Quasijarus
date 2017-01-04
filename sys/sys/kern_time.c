@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)kern_time.c	7.5 (Berkeley) 7/21/87
+ *	@(#)kern_time.c	7.6 (Berkeley) 2011/10/09
  */
 
 #include "param.h"
@@ -83,9 +83,7 @@ setthetime(tv)
 }
 
 extern	int tickadj;			/* "standard" clock skew, us./tick */
-int	tickdelta;			/* current clock skew, us. per tick */
 long	timedelta;			/* unapplied time correction, us. */
-long	bigadj = 1000000;		/* use 10x skew above bigadj us. */
 
 adjtime()
 {
@@ -104,12 +102,7 @@ adjtime()
 	if (u.u_error)
 		return;
 	ndelta = atv.tv_sec * 1000000 + atv.tv_usec;
-	if (timedelta == 0)
-		if (ndelta > bigadj)
-			tickdelta = 10 * tickadj;
-		else
-			tickdelta = tickadj;
-	if (ndelta % tickdelta)
+	if (ndelta % tickadj)
 		ndelta = ndelta / tickadj * tickadj;
 
 	s = splclock();

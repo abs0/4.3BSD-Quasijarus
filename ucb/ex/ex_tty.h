@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ex_tty.h	7.7 (Berkeley) 3/9/87
+ *	@(#)ex_tty.h	7.8 (Berkeley) 4/13/03
  */
 
 /*
@@ -32,60 +32,60 @@
  * before the capability to say 12 milliseconds per affected whatever
  * (currently always line).  Capabilities where this makes sense say P*.
  */
-var	char	tspace[1024];	/* Space for capability strings */
-var	char	*aoftspace;	/* Address of tspace for relocation */
+var	u_char	tspace[1024];	/* Space for capability strings */
+var	u_char	*aoftspace;	/* Address of tspace for relocation */
 
-var	char	*AL;		/* P* Add new blank line */
-var	char	*AL_PARM;	/* P* Add n new blank lines */
-extern	char	*BC;		/*    Back cursor */
-var	char	*BT;		/* P  Back tab */
-var	char	*CD;		/* P* Clear to end of display */
-var	char	*CE;		/* P  Clear to end of line */
-var	char	*CL;		/* P* Clear screen */
-var	char	*CM;		/* PG Cursor motion */
-var	char	*CS;		/* PG Change scrolling region (vt100) */
-var	char	*xCR;		/* P  Carriage return */
-var	char	*DC;		/* P* Delete character */
-var	char	*DL;		/* P* Delete line sequence */
-var	char	*DL_PARM;	/* P* Delete n lines */
-var	char	*DM;		/*    Delete mode (enter)  */
-var	char	*DO;		/*    Down line sequence */
-var	char	*DOWN_PARM;	/*    Down n lines */
-var	char	*ED;		/*    End delete mode */
-var	char	*EI;		/*    End insert mode */
-var	char	*F0,*F1,*F2,*F3,*F4,*F5,*F6,*F7,*F8,*F9;
+var	u_char	*AL;		/* P* Add new blank line */
+var	u_char	*AL_PARM;	/* P* Add n new blank lines */
+extern	u_char	*BC;		/*    Back cursor */
+var	u_char	*BT;		/* P  Back tab */
+var	u_char	*CD;		/* P* Clear to end of display */
+var	u_char	*CE;		/* P  Clear to end of line */
+var	u_char	*CL;		/* P* Clear screen */
+var	u_char	*CM;		/* PG Cursor motion */
+var	u_char	*CS;		/* PG Change scrolling region (vt100) */
+var	u_char	*xCR;		/* P  Carriage return */
+var	u_char	*DC;		/* P* Delete character */
+var	u_char	*DL;		/* P* Delete line sequence */
+var	u_char	*DL_PARM;	/* P* Delete n lines */
+var	u_char	*DM;		/*    Delete mode (enter)  */
+var	u_char	*DO;		/*    Down line sequence */
+var	u_char	*DOWN_PARM;	/*    Down n lines */
+var	u_char	*ED;		/*    End delete mode */
+var	u_char	*EI;		/*    End insert mode */
+var	u_char	*F0,*F1,*F2,*F3,*F4,*F5,*F6,*F7,*F8,*F9;
 				/*    Strings sent by various function keys */
-var	char	*HO;		/*    Home cursor */
-var	char	*IC;		/* P  Insert character */
-var	char	*IM;		/*    Insert mode (give as ':im=:' if 'ic' */
-var	char	*IP;		/* P* Insert pad after char ins'd using IM+IE */
-var	char	*KD;		/*    Keypad down arrow */
-var	char	*KE;		/*    Keypad don't xmit */
-var	char	*KH;		/*    Keypad home key */
-var	char	*KL;		/*    Keypad left arrow */
-var	char	*KR;		/*    Keypad right arrow */
-var	char	*KS;		/*    Keypad start xmitting */
-var	char	*KU;		/*    Keypad up arrow */
-var	char	*LEFT_PARM;	/*    Left n chars */
-var	char	*LL;		/*    Quick to last line, column 0 */
-var	char	*ND;		/*    Non-destructive space */
-var	char	*RIGHT_PARM;	/*    Right n spaces */
-var	char	*xNL;		/*    Line feed (new line) */
-extern	char	PC;		/*    Pad character */
-var	char	*RC;		/*    Restore cursor from last SC */
-var	char	*SC;		/*    Save cursor */
-var	char	*SE;		/*    Standout end (may leave space) */
-var	char	*SF;		/* P  Scroll forwards */
-var	char	*SO;		/*    Stand out begin (may leave space) */
-var	char	*SR;		/* P  Scroll backwards */
-var	char	*TA;		/* P  Tab (other than ^I or with padding) */
-var	char	*TE;		/*    Terminal end sequence */
-var	char	*TI;		/*    Terminal initial sequence */
-extern	char	*UP;		/*    Upline */
-var	char	*UP_PARM;	/*    Up n lines */
-var	char	*VB;		/*    Visible bell */
-var	char	*VE;		/*    Visual end sequence */
-var	char	*VS;		/*    Visual start sequence */
+var	u_char	*HO;		/*    Home cursor */
+var	u_char	*IC;		/* P  Insert character */
+var	u_char	*IM;		/*    Insert mode (give as ':im=:' if 'ic' */
+var	u_char	*IP;		/* P* Insert pad after char ins'd using IM+IE */
+var	u_char	*KD;		/*    Keypad down arrow */
+var	u_char	*KE;		/*    Keypad don't xmit */
+var	u_char	*KH;		/*    Keypad home key */
+var	u_char	*KL;		/*    Keypad left arrow */
+var	u_char	*KR;		/*    Keypad right arrow */
+var	u_char	*KS;		/*    Keypad start xmitting */
+var	u_char	*KU;		/*    Keypad up arrow */
+var	u_char	*LEFT_PARM;	/*    Left n chars */
+var	u_char	*LL;		/*    Quick to last line, column 0 */
+var	u_char	*ND;		/*    Non-destructive space */
+var	u_char	*RIGHT_PARM;	/*    Right n spaces */
+var	u_char	*xNL;		/*    Line feed (new line) */
+extern	u_char	PC;		/*    Pad character */
+var	u_char	*RC;		/*    Restore cursor from last SC */
+var	u_char	*SC;		/*    Save cursor */
+var	u_char	*SE;		/*    Standout end (may leave space) */
+var	u_char	*SF;		/* P  Scroll forwards */
+var	u_char	*SO;		/*    Stand out begin (may leave space) */
+var	u_char	*SR;		/* P  Scroll backwards */
+var	u_char	*TA;		/* P  Tab (other than ^I or with padding) */
+var	u_char	*TE;		/*    Terminal end sequence */
+var	u_char	*TI;		/*    Terminal initial sequence */
+extern	u_char	*UP;		/*    Upline */
+var	u_char	*UP_PARM;	/*    Up n lines */
+var	u_char	*VB;		/*    Visible bell */
+var	u_char	*VE;		/*    Visual end sequence */
+var	u_char	*VS;		/*    Visual start sequence */
 var	bool	AM;		/* Automatic margins */
 var	bool	BS;		/* Backspace works */
 var	bool	CA;		/* Cursor addressible */
@@ -178,17 +178,17 @@ var	short	costRP;	/* likewise for RIGHT_PARM */
 # define MAXCHARMACS	512	/* max # of chars total in macros */
 #endif
 struct maps {
-	char *cap;	/* pressing button that sends this.. */
-	char *mapto;	/* .. maps to this string */
-	char *descr;	/* legible description of key */
+	u_char *cap;	/* pressing button that sends this.. */
+	u_char *mapto;	/* .. maps to this string */
+	u_char *descr;	/* legible description of key */
 };
 var	struct maps arrows[MAXNOMACS];	/* macro defs - 1st 5 built in */
 var	struct maps immacs[MAXNOMACS];	/* for while in insert mode */
 var	struct maps abbrevs[MAXNOMACS];	/* for word abbreviations */
 var	int	ldisc;			/* line discipline for ucb tty driver */
-var	char	mapspace[MAXCHARMACS];
-var	char	*msnext;	/* next free location in mapspace */
+var	u_char	mapspace[MAXCHARMACS];
+var	u_char	*msnext;	/* next free location in mapspace */
 var	int	maphopcnt;	/* check for infinite mapping loops */
 var	bool	anyabbrs;	/* true if abbr or unabbr has been done */
-var	char	ttynbuf[20];	/* result of ttyname() */
+var	u_char	ttynbuf[20];	/* result of ttyname() */
 var	int	ttymesg;	/* original mode of users tty */

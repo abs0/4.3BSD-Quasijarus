@@ -1,0 +1,37 @@
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)CatemuProcset.ps	5.1 (Berkeley) 9/10/04
+%%LanguageLevel: 2
+%%BeginResource: procset (catemu procedures) 0 0
+/extendroman {
+	3 dict begin
+		gsave nulldevice Recurse setfont
+		/ff 0 0 moveto /f glyphshow /f glyphshow [currentpoint] def
+		/ffi 0 0 moveto /f glyphshow /fi glyphshow [currentpoint] def
+		/ffl 0 0 moveto /f glyphshow /fl glyphshow [currentpoint] def
+		grestore currentdict
+	end
+	/CharWidths exch def
+	CharStrings dup length 3 add dict begin
+		{def} forall
+		/ff {
+			pop CharWidths /ff get aload pop setcharwidth
+			Recurse setfont
+			0 0 moveto /f glyphshow /f glyphshow
+		} bind def
+		/ffi {
+			pop CharWidths /ffi get aload pop setcharwidth
+			Recurse setfont
+			0 0 moveto /f glyphshow /fi glyphshow
+		} bind def
+		/ffl {
+			pop CharWidths /ffl get aload pop setcharwidth
+			Recurse setfont
+			0 0 moveto /f glyphshow /fl glyphshow
+		} bind def
+		currentdict
+	end
+	/CharStrings exch def
+} bind def
+/SF {exch railmag exch get exch 6 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+%%EndResource

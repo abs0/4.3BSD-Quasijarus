@@ -26,9 +26,9 @@
 
 #ifndef lint
 #ifdef DBM
-static char sccsid[] = "@(#)alias.c	5.17 (Berkeley) 10/1/99 (with DBM)";
+static char sccsid[] = "@(#)alias.c	5.19 (Berkeley) 5/20/06 (with DBM)";
 #else
-static char sccsid[] = "@(#)alias.c	5.17 (Berkeley) 10/1/99 (without DBM)";
+static char sccsid[] = "@(#)alias.c	5.19 (Berkeley) 5/20/06 (without DBM)";
 #endif
 #endif /* not lint */
 
@@ -75,6 +75,8 @@ alias(a, sendq)
 {
 	register char *p;
 	extern char *aliaslookup();
+	struct aliasattrs attrs;
+	extern char *username();
 
 # ifdef DEBUG
 	if (tTd(27, 1))
@@ -94,14 +96,22 @@ alias(a, sendq)
 	if (NoAlias)
 		p = NULL;
 	else
-		p = aliaslookup(a->q_user);
+		p = aliaslookup(a->q_user, &attrs);
 	if (p == NULL)
 		return;
 
 	/*
 	**  Match on Alias.
 	**	Deliver to the target list.
+	**	Enforce restrictions first.
 	*/
+	if (attrs.aa_flags & AA_RESTRICTED && (OrigOpMode == MD_DAEMON ||
+	    !trusteduser(username())))
+	{
+		a->q_flags |= QDONTSEND|QBADADDR;
+		usrerr("Alias %s is restricted", a->q_user);
+		return;
+	}
 
 # ifdef DEBUG
 	if (tTd(27, 1))
@@ -109,6 +119,12 @@ alias(a, sendq)
 		    a->q_paddr, a->q_host, a->q_user, p);
 # endif
 	message(Arpa_Info, "aliased to %s", p);
+	if (attrs.aa_flags & AA_HASUID)
+	{
+		a->q_flags |= QGOODUID;
+		a->q_uid = attrs.aa_uid;
+		a->q_gid = attrs.aa_gid;
+	}
 	AliasLevel++;
 	sendtolist(p, a, sendq);
 	AliasLevel--;
@@ -118,6 +134,8 @@ alias(a, sendq)
 **
 **	Parameters:
 **		name -- the name to look up.
+**		attrs -- pointer, if not NULL, alias attributes
+**			(struct aliasattrs) will be stored there.
 **
 **	Returns:
 **		the value of name.
@@ -131,16 +149,30 @@ alias(a, sendq)
 */
 
 char *
-aliaslookup(name)
+aliaslookup(name, attrs)
 	char *name;
+	struct aliasattrs *attrs;
 {
 # ifdef DBM
 	DATUM rhs, lhs;
+	register u_char *dp;
 
 	/* create a key for fetch */
 	lhs.dptr = name;
 	lhs.dsize = strlen(name) + 1;
 	rhs = fetch(lhs);
+	if (attrs != NULL && rhs.dptr != NULL)
+	{
+		if (rhs.dsize == strlen(rhs.dptr) + 6)
+		{
+			dp = (u_char *)rhs.dptr + strlen(rhs.dptr) + 1;
+			attrs->aa_flags = dp[0];
+			bcopy(dp + 1, &attrs->aa_uid, 2);
+			bcopy(dp + 3, &attrs->aa_gid, 2);
+		}
+		else
+			bzero(attrs, sizeof(struct aliasattrs));
+	}
 	return (rhs.dptr);
 # else DBM
 	register STAB *s;
@@ -209,7 +241,7 @@ initaliases(aliasfile, init)
 	atcnt = SafeAlias * 2;
 	if (atcnt > 0)
 	{
-		while (!init && atcnt-- >= 0 && aliaslookup("@") == NULL)
+		while (!init && atcnt-- >= 0 && aliaslookup("@", NULL) == NULL)
 		{
 			/*
 			**  Reinitialize alias file in case the new
@@ -291,6 +323,73 @@ initaliases(aliasfile, init)
 # endif DBM
 }
 /*
+**  PARSEALIASATTRS -- parse alias attributes in parentheses.
+**
+**	This routine is called by readaliases when an opening parenthesis
+**	has been encountered before the colon.  It is supposed to parse the
+**	attributes specified in parentheses and advance the parse char
+**	pointer past the closing parenthesis.
+**
+**	Parameters:
+**		cp -- parse char pointer, points just past '('.
+**		attrs -- points to struct aliasattrs.
+**
+**	Returns:
+**		parse char pointer advanced past ')'.
+**		NULL on errors (err msg has been printed).
+**
+**	Side Effects:
+**		none.
+*/
+
+static char *
+parsealiasattrs(cp, attrs)
+	register char *cp;
+	struct aliasattrs *attrs;
+{
+	register char *np;
+	register struct passwd *pw;
+	char savech;
+
+	for (;;)
+	{
+		while (isspace(*cp) || *cp == ',')
+			cp++;
+		if (*cp == '\0')
+		{
+			syserr("unterminated alias attribute specification");
+			return (NULL);
+		}
+		if (*cp == ')')
+			break;
+		for (np = cp; *cp && !isspace(*cp) && *cp != ',' && *cp != ')';
+		     cp++)
+			;
+		savech = *cp;
+		*cp = '\0';
+		if (!strncmp(np, "user=", 5))
+		{
+			pw = getpwnam(np+5);
+			if (pw != NULL)
+			{
+				attrs->aa_flags |= AA_HASUID;
+				attrs->aa_uid = pw->pw_uid;
+				attrs->aa_gid = pw->pw_gid;
+			}
+			else
+				syserr("user %s unknown", np+5);
+		}
+		else if (!strcmp(np, "R"))
+			attrs->aa_flags |= AA_RESTRICTED;
+		else if (!strcmp(np, "noexpn"))
+			attrs->aa_flags |= AA_NOEXPN;
+		else
+			syserr("unknown alias attribute \'%s\'", np);
+		*cp = savech;
+	}
+	return (cp+1);
+}
+/*
 **  READALIASES -- read and process the alias file.
 **
 **	This routine implements the part of initaliases that occurs
@@ -322,6 +421,7 @@ readaliases(aliasfile, init)
 	ADDRESS al, bl;
 	register STAB *s;
 	char line[BUFSIZ];
+	struct aliasattrs attrs;
 
 	if ((af = fopen(aliasfile, "r")) == NULL)
 	{
@@ -418,8 +518,17 @@ readaliases(aliasfile, init)
 		**	detection).
 		*/
 
-		for (p = line; *p != '\0' && *p != ':' && *p != '\n'; p++)
+		for (p = line; *p && *p != ':' && *p != '(' && *p != '\n'; p++)
 			continue;
+		bzero(&attrs, sizeof attrs);
+		if (*p == '(')
+		{
+			p = parsealiasattrs(p+1, &attrs);
+			if (p == NULL)	/* parsealiasattrs caught an error */
+				continue;
+			while (isspace(*p))
+				p++;
+		}
 		if (*p++ != ':')
 		{
 			syserr("missing colon");
@@ -496,6 +605,13 @@ readaliases(aliasfile, init)
 		{
 			DATUM key, content;
 
+			if (attrs.aa_flags)
+			{
+				rhs[rhssize] = attrs.aa_flags;
+				bcopy(&attrs.aa_uid, rhs+rhssize+1, 2);
+				bcopy(&attrs.aa_gid, rhs+rhssize+3, 2);
+				rhssize += 5;
+			}
 			key.dsize = lhssize;
 			key.dptr = al.q_user;
 			content.dsize = rhssize;

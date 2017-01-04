@@ -1,0 +1,128 @@
+h49295
+s 00001/00001/00036
+d D 6.3 86/05/27 10:10:23 kjd 5 4
+c clean up english
+e
+s 00002/00002/00035
+d D 6.2 86/05/12 18:25:42 karels 4 3
+c add see-alsos
+e
+s 00001/00001/00036
+d D 6.1 85/05/09 17:14:59 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00010/00018/00027
+d D 5.1 85/05/09 17:14:31 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00045/00000/00000
+d D 4.1 85/05/09 17:13:59 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ALARM 2 
+E 2
+I 2
+D 3
+.TH ALARM 3C  "18 July 1983"
+E 3
+I 3
+.TH ALARM 3C  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+alarm \- schedule signal after specified time
+.SH SYNOPSIS
+.nf
+.B alarm(seconds)
+.B unsigned seconds;
+.fi
+.SH DESCRIPTION
+I 2
+.ft B
+D 5
+This interface is obsoleted by setitimer(2).
+E 5
+I 5
+This interface is made obsolete by setitimer(2).
+E 5
+.ft R
+.PP
+E 2
+.I Alarm
+causes signal SIGALRM, see
+D 2
+.IR signal (2),
+E 2
+I 2
+D 4
+.IR signal (3C),
+E 4
+I 4
+.IR sigvec (2),
+E 4
+E 2
+to be sent to the invoking process
+in a number of seconds given by the argument.
+Unless caught or ignored, the signal terminates the process.
+.PP
+D 2
+Alarm requests are not stacked;
+successive calls reset the alarm clock.
+E 2
+I 2
+Alarm requests are not stacked; successive calls reset the alarm clock.
+E 2
+If the argument is 0, any alarm request is canceled.
+D 2
+Because the clock has a 1-second resolution,
+the signal may occur up to one second early;
+because of scheduling delays,
+E 2
+I 2
+Because of scheduling delays,
+E 2
+resumption of execution of when the signal is
+caught may be delayed an arbitrary amount.
+The longest specifiable delay time is 2147483647 seconds.
+.PP
+D 2
+The return value is the amount of time
+previously remaining in the alarm clock.
+E 2
+I 2
+The return value is the amount of time previously remaining in the alarm clock.
+E 2
+.SH "SEE ALSO"
+D 2
+pause(2), signal(2), sigsys(2), sigset(3), sleep(3)
+.SH "ASSEMBLER (PDP-11)"
+(alarm = 27.)
+.br
+(seconds in r0)
+.br
+.B sys alarm
+.br
+(previous amount in r0)
+E 2
+I 2
+D 4
+sigpause(2), sigvec(2), signal(3C), sleep(3)
+E 4
+I 4
+sigpause(2), sigvec(2), signal(3C), sleep(3), ualarm(3), usleep(3)
+E 4
+E 2
+E 1

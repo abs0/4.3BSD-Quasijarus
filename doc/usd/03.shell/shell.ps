@@ -1,0 +1,10153 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%DocumentNeededResources: font Times-Roman Times-Italic Times-Bold Symbol
+%%DocumentSuppliedResources: encoding TroffEncoding
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+	currentdict
+end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: USD:3-1 1
+save $troff begin Sc
+2 12 SF
+12880 40140(An)P
+14040 40140(Introduction)P
+18200 40140(to)P
+19040 40140(the)P
+20240 40140(UNIX)P
+22320 40140(Shell)P
+1 10 SF
+16793 38700(S.)P
+17443 38700(R.)P
+18160 38700(Bourne)P
+0 10 SF
+15327 37620(AT&T)P
+17161 37620(Bell)P
+18361 37620(Laboratories)P
+14453 36900(Murray)P
+16452 36900(Hill,)P
+17736 36900(New)P
+19068 36900(Jersey)P
+20766 36900(07974)P
+1 10 SF
+13620 35460(\(Updated)P
+16086 35460(for)P
+16986 35460(4.3BSD)P
+19036 35460(by)P
+19802 35460(Mark)P
+21301 35460(Seiden\))P
+16942 32940(ABSTRACT)P
+0 10 SF
+6660 31284(The)P
+1 10 SF
+7910 31284(shell\201)P
+0 10 SF
+9660 31284(is)P
+10376 31284(a)P
+10958 31284(command)P
+13640 31284(programming)P
+17223 31284(language)P
+19704 31284(that)P
+20920 31284(provides)P
+23302 31284(an)P
+24184 31284(interface)P
+26598 31284(to)P
+27381 31284(the)P
+0 9 SF
+28410 31284(UNIX)P
+0 10 SF
+29760 31284<80>P
+6660 30564(operating)P
+9237 30564(system.)P
+11563 30564(Its)P
+12473 30564(features)P
+14681 30564(include)P
+16757 30564(control\255\213ow)P
+20034 30564(primitives,)P
+22928 30564(parameter)P
+25636 30564(passing,)P
+27895 30564(variables)P
+6660 29844(and)P
+7832 29844(string)P
+9505 29844(substitution.)P
+12962 29844(Constructs)P
+15834 29844(such)P
+17239 29844(as)P
+1 10 SF
+18043 29844(while,)P
+19798 29844(if)P
+20437 29844(then)P
+21775 29844(else,)P
+23162 29844(case)P
+0 10 SF
+24532 29844(and)P
+1 10 SF
+25703 29844(for)P
+0 10 SF
+26708 29844(are)P
+27745 29844(available.)P
+6660 29124(Two\255way)P
+9169 29124(communication)P
+13111 29124(is)P
+13720 29124(possible)P
+15895 29124(between)P
+18102 29124(the)P
+1 10 SF
+19044 29124(shell)P
+0 10 SF
+20386 29124(and)P
+21461 29124(commands.)P
+24619 29124(String\255valued)P
+28095 29124(parame\255)P
+6660 28404(ters,)P
+7880 28404(typically)P
+10184 28404(\212le)P
+11155 28404(names)P
+12891 28404(or)P
+13595 28404(\213ags,)P
+15081 28404(may)P
+16317 28404(be)P
+17086 28404(passed)P
+18887 28404(to)P
+19557 28404(a)P
+20026 28404(command.)P
+22945 28404(A)P
+23581 28404(return)P
+25217 28404(code)P
+26552 28404(is)P
+27155 28404(set)P
+28024 28404(by)P
+28827 28404(com\255)P
+6660 27684(mands)P
+8461 27684(that)P
+9596 27684(may)P
+10864 27684(be)P
+11665 27684(used)P
+12999 27684(to)P
+13701 27684(determine)P
+16335 27684(control\255\213ow,)P
+19687 27684(and)P
+20788 27684(the)P
+21756 27684(standard)P
+24023 27684(output)P
+25792 27684(from)P
+27194 27684(a)P
+27694 27684(command)P
+6660 26964(may)P
+7893 26964(be)P
+8659 26964(used)P
+9958 26964(as)P
+10657 26964(shell)P
+11990 26964(input.)P
+6660 26028(The)P
+1 10 SF
+7897 26028(shell)P
+0 10 SF
+9334 26028(can)P
+10470 26028(modify)P
+12508 26028(the)P
+13545 26028(environment)P
+16882 26028(in)P
+17653 26028(which)P
+19423 26028(commands)P
+22326 26028(run.)P
+23780 26028(Input)P
+25351 26028(and)P
+26521 26028(output)P
+28359 26028(can)P
+29494 26028(be)P
+6660 25308(redirected)P
+9351 25308(to)P
+10111 25308(\212les,)P
+11554 25308(and)P
+12713 25308(processes)P
+15303 25308(that)P
+16495 25308(communicate)P
+20019 25308(through)P
+22178 25308(`pipes')P
+24136 25308(can)P
+25260 25308(be)P
+26118 25308(invoked.)P
+28693 25308(Com\255)P
+6660 24588(mands)P
+8454 24588(are)P
+9414 24588(found)P
+11042 24588(by)P
+11870 24588(searching)P
+14396 24588(directories)P
+17156 24588(in)P
+17851 24588(the)P
+18812 24588(\212le)P
+19807 24588(system)P
+21701 24588(in)P
+22396 24588(a)P
+22890 24588(sequence)P
+25315 24588(that)P
+26442 24588(can)P
+27501 24588(be)P
+28294 24588(de\212ned)P
+6660 23868(by)P
+7536 23868(the)P
+8545 23868(user.)P
+10170 23868(Commands)P
+13179 23868(can)P
+14287 23868(be)P
+15129 23868(read)P
+16437 23868(either)P
+18078 23868(from)P
+19520 23868(the)P
+20528 23868(terminal)P
+22803 23868(or)P
+23578 23868(from)P
+25020 23868(a)P
+25561 23868(\212le,)P
+26753 23868(which)P
+28494 23868(allows)P
+6660 23148(command)P
+9226 23148(procedures)P
+12057 23148(to)P
+12724 23148(be)P
+13490 23148(stored)P
+15156 23148(for)P
+16056 23148(later)P
+17322 23148(use.)P
+2 10 SF
+4320 20988(1.0)P
+5270 20988(Introduction)P
+0 10 SF
+4320 20052(The)P
+5539 20052(shell)P
+6958 20052(is)P
+7644 20052(both)P
+8997 20052(a)P
+9549 20052(command)P
+12201 20052(language)P
+14652 20052(and)P
+15804 20052(a)P
+16356 20052(programming)P
+19909 20052(language)P
+22360 20052(that)P
+23546 20052(provides)P
+25897 20052(an)P
+26748 20052(interface)P
+29131 20052(to)P
+29883 20052(the)P
+30901 20052(UNIX)P
+4320 19332(operating)P
+6788 19332(system.)P
+9006 19332(This)P
+10275 19332(memorandum)P
+13810 19332(describes,)P
+16393 19332(with)P
+17662 19332(examples,)P
+20279 19332(the)P
+21213 19332(UNIX)P
+22913 19332(shell.)P
+24597 19332(The)P
+25731 19332(\212rst)P
+26866 19332(section)P
+28766 19332(covers)P
+30532 19332(most)P
+31900 19332(of)P
+4320 18612(the)P
+5249 18612(everyday)P
+7643 18612(requirements)P
+10971 18612(of)P
+11667 18612(terminal)P
+13863 18612(users.)P
+15641 18612(Some)P
+17204 18612(familiarity)P
+19934 18612(with)P
+21197 18612(UNIX)P
+22892 18612(is)P
+23488 18612(an)P
+24251 18612(advantage)P
+26879 18612(when)P
+28375 18612(reading)P
+30371 18612(this)P
+31435 18612(sec\255)P
+4320 17892(tion;)P
+5647 17892(see,)P
+6788 17892(for)P
+7714 17892(example,)P
+10122 17892("UNIX)P
+12092 17892(for)P
+13018 17892(beginners".)P
+0 8 SF
+15745 18084(1)P
+0 10 SF
+16211 17892(Section)P
+18237 17892(2)P
+18763 17892(describes)P
+21220 17892(those)P
+22711 17892(features)P
+24834 17892(of)P
+25559 17892(the)P
+26517 17892(shell)P
+27875 17892(primarily)P
+30334 17892(intended)P
+4320 17172(for)P
+5272 17172(use)P
+6323 17172(within)P
+8109 17172(shell)P
+9494 17172(procedures.)P
+12727 17172(These)P
+14411 17172(include)P
+16429 17172(the)P
+17414 17172(control\255\213ow)P
+20632 17172(primitives)P
+23317 17172(and)P
+24434 17172(string\255valued)P
+27851 17172(variables)P
+30267 17172(provided)P
+4320 16452(by)P
+5125 16452(the)P
+6063 16452(shell.)P
+7751 16452(A)P
+8389 16452(knowledge)P
+11226 16452(of)P
+11931 16452(a)P
+12402 16452(programming)P
+15874 16452(language)P
+18244 16452(would)P
+19949 16452(be)P
+20720 16452(a)P
+21191 16452(help)P
+22429 16452(when)P
+23933 16452(reading)P
+25937 16452(this)P
+27008 16452(section.)P
+29261 16452(The)P
+30398 16452(last)P
+31435 16452(sec\255)P
+4320 15732(tion)P
+5472 15732(describes)P
+7921 15732(the)P
+8872 15732(more)P
+10323 15732(advanced)P
+12805 15732(features)P
+14921 15732(of)P
+15639 15732(the)P
+16590 15732(shell.)P
+18291 15732(References)P
+21172 15732(of)P
+21890 15732(the)P
+22841 15732(form)P
+24226 15732("see)P
+1 10 SF
+25454 15732(pipe)P
+0 10 SF
+26705 15732(\(2\)")P
+27868 15732(are)P
+28817 15732(to)P
+29501 15732(a)P
+29984 15732(section)P
+31900 15732(of)P
+4320 15012(the)P
+5253 15012(UNIX)P
+6952 15012(manual.)P
+0 8 SF
+8868 15204(2)P
+2 10 SF
+4320 13572(1.1)P
+5270 13572(Simple)P
+7238 13572(commands)P
+0 10 SF
+4320 12636(Simple)P
+6273 12636(commands)P
+9124 12636(consist)P
+11041 12636(of)P
+11792 12636(one)P
+12909 12636(or)P
+13660 12636(more)P
+15144 12636(words)P
+16861 12636(separated)P
+19376 12636(by)P
+20227 12636(blanks.)P
+22394 12636(The)P
+23578 12636(\212rst)P
+24763 12636(word)P
+26247 12636(is)P
+26898 12636(the)P
+27882 12636(name)P
+29432 12636(of)P
+30183 12636(the)P
+31167 12636(com\255)P
+4320 11916(mand)P
+5853 11916(to)P
+6520 11916(be)P
+7286 11916(executed;)P
+9784 11916(any)P
+10850 11916(remaining)P
+13483 11916(words)P
+15149 11916(are)P
+16081 11916(passed)P
+17879 11916(as)P
+18578 11916(arguments)P
+21277 11916(to)P
+21944 11916(the)P
+22877 11916(command.)P
+25793 11916(For)P
+26827 11916(example,)P
+7980 10836(who)P
+4320 9756(is)P
+4920 9756(a)P
+5386 9756(command)P
+7952 9756(that)P
+9052 9756(prints)P
+10619 9756(the)P
+11552 9756(names)P
+13284 9756(of)P
+13984 9756(users)P
+15416 9756(logged)P
+17249 9756(in.)P
+18266 9756(The)P
+19399 9756(command)P
+4320 8256 8 0 18 L
+0 8 SF
+4320 7656<81>P
+4738 7656(This)P
+5769 7656(paper)P
+7013 7656(describes)P
+8977 7656(sh\(1\).)P
+10262 7656(If)P
+10760 7656(it's)P
+11551 7656(the)P
+12315 7656(c)P
+12706 7656(shell)P
+13790 7656(\(csh\))P
+14927 7656(you're)P
+16357 7656(interested)P
+18399 7656(in,)P
+19069 7656(a)P
+19459 7656(good)P
+20596 7656(place)P
+21785 7656(to)P
+22335 7656(begin)P
+23578 7656(is)P
+24075 7656(William)P
+25823 7656(Joy's)P
+27014 7656(paper)P
+4320 7056("An)P
+5263 7056(Introduction)P
+7795 7056(to)P
+8328 7056(the)P
+9074 7056(C)P
+9554 7056(shell")P
+10816 7056(\(USD:4\).)P
+4320 6456<80>P
+0 7 SF
+4700 6456(UNIX)P
+0 8 SF
+5909 6456(is)P
+6389 6456(a)P
+6762 6456(registered)P
+8814 6456(trademark)P
+10919 6456(of)P
+11479 6456(AT&T)P
+12945 6456(Bell)P
+13904 6456(Laboratories)P
+16489 6456(in)P
+17022 6456(the)P
+17768 6456(USA)P
+18889 6456(and)P
+19742 6456(other)P
+20888 6456(countries.)P
+0 6 SF
+4920 5892(1)P
+0 8 SF
+5340 5748(B.)P
+5940 5748(W.)P
+6673 5748(Kernighan,)P
+1 8 SF
+8979 5748(UNIX)P
+10259 5748(for)P
+10979 5748(Beginners)P
+0 8 SF
+12925 5748(,)P
+13205 5748(1978.)P
+0 6 SF
+4920 5184(2)P
+0 8 SF
+5340 5040(K.)P
+5967 5040(Thompson)P
+8180 5040(and)P
+9033 5040(D.)P
+9660 5040(M.)P
+10367 5040(Ritchie,)P
+1 8 SF
+12032 5040(U)P
+1 6 SF
+12379 5040(NIX)P
+1 8 SF
+13119 5040(Programmer's)P
+16107 5040(Manual,)P
+0 8 SF
+17880 5040(Bell)P
+18839 5040(Laboratories,)P
+21544 5040(1978.)P
+22944 5040(Seventh)P
+24650 5040(Edition.)P
+end restore showpage
+%%Page: USD:3-2 2
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\2552)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+7980 42120(ls)P
+3 10 SF
+8580 42120(-)P
+0 10 SF
+8909 42120(l)P
+4320 41040(prints)P
+5878 41040(a)P
+6335 41040(list)P
+7260 41040(of)P
+7951 41040(\212les)P
+9142 41040(in)P
+9800 41040(the)P
+10724 41040(current)P
+12614 41040(directory.)P
+15321 41040(The)P
+16446 41040(argument)P
+3 10 SF
+18904 41040(-)P
+1 10 SF
+19233 41040(l)P
+0 10 SF
+19592 41040(tells)P
+1 10 SF
+20784 41040(ls)P
+0 10 SF
+21376 41040(to)P
+22035 41040(print)P
+23361 41040(status)P
+24919 41040(information,)P
+28095 41040(size)P
+29219 41040(and)P
+30277 41040(the)P
+31202 41040(crea\255)P
+4320 40320(tion)P
+5454 40320(date)P
+6653 40320(for)P
+7553 40320(each)P
+8851 40320(\212le.)P
+2 10 SF
+4320 38880(1.2)P
+5270 38880(Background)P
+8638 38880(commands)P
+0 10 SF
+4320 37944(To)P
+5210 37944(execute)P
+7264 37944(a)P
+7752 37944(command)P
+10340 37944(the)P
+11295 37944(shell)P
+12650 37944(normally)P
+15039 37944(creates)P
+16925 37944(a)P
+17413 37944(new)P
+1 10 SF
+18634 37944(process)P
+0 10 SF
+20687 37944(and)P
+21775 37944(waits)P
+23263 37944(for)P
+24185 37944(it)P
+24741 37944(to)P
+25430 37944(\212nish.)P
+27336 37944(A)P
+27991 37944(command)P
+30579 37944(may)P
+31834 37944(be)P
+4320 37224(run)P
+5320 37224(without)P
+7354 37224(waiting)P
+9354 37224(for)P
+10254 37224(it)P
+10788 37224(to)P
+11455 37224(\212nish.)P
+13339 37224(For)P
+14373 37224(example,)P
+7980 36144(cc)P
+8712 36144(pgm.c)P
+10395 36144(&)P
+4320 35064(calls)P
+5644 35064(the)P
+6602 35064(C)P
+7227 35064(compiler)P
+9585 35064(to)P
+10277 35064(compile)P
+12435 35064(the)P
+13393 35064(\212le)P
+1 10 SF
+14385 35064(pgm.c)P
+15934 35064(.)P
+0 10 SF
+16509 35064(The)P
+17667 35064(trailing)P
+2 10 SF
+19626 35064(&)P
+0 10 SF
+20351 35064(is)P
+20976 35064(an)P
+21767 35064(operator)P
+23990 35064(that)P
+25114 35064(instructs)P
+27371 35064(the)P
+28328 35064(shell)P
+29685 35064(not)P
+30676 35064(to)P
+31367 35064(wait)P
+4320 34344(for)P
+5251 34344(the)P
+6215 34344(command)P
+8811 34344(to)P
+9508 34344(\212nish.)P
+11422 34344(To)P
+12319 34344(help)P
+13582 34344(keep)P
+14944 34344(track)P
+16373 34344(of)P
+17103 34344(such)P
+18432 34344(a)P
+18928 34344(process)P
+20956 34344(the)P
+21919 34344(shell)P
+23282 34344(reports)P
+25178 34344(its)P
+25975 34344(process)P
+28003 34344(number)P
+30066 34344(following)P
+4320 33624(its)P
+5087 33624(creation.)P
+7569 33624(A)P
+8202 33624(list)P
+9136 33624(of)P
+9836 33624(currently)P
+12202 33624(active)P
+13834 33624(processes)P
+16331 33624(may)P
+17564 33624(be)P
+18330 33624(obtained)P
+20596 33624(using)P
+22096 33624(the)P
+1 10 SF
+23029 33624(ps)P
+0 10 SF
+23762 33624(command.)P
+2 10 SF
+4320 32184(1.3)P
+5270 32184(Input)P
+6905 32184(output)P
+8807 32184(redirection)P
+0 10 SF
+4320 31248(Most)P
+5812 31248(commands)P
+8670 31248(produce)P
+10861 31248(output)P
+12654 31248(on)P
+13513 31248(the)P
+14504 31248(standard)P
+16794 31248(output)P
+18586 31248(that)P
+19744 31248(is)P
+20402 31248(initially)P
+22528 31248(connected)P
+25217 31248(to)P
+25942 31248(the)P
+26933 31248(terminal.)P
+29541 31248(This)P
+30866 31248(output)P
+4320 30528(may)P
+5553 30528(be)P
+6319 30528(sent)P
+7485 30528(to)P
+8152 30528(a)P
+8618 30528(\212le)P
+9585 30528(by)P
+10385 30528(writing,)P
+12469 30528(for)P
+13369 30528(example,)P
+7980 29448(ls)P
+3 10 SF
+8580 29448(-)P
+0 10 SF
+8909 29448(l)P
+9276 29448(>\212le)P
+4320 28368(The)P
+5491 28368(notation)P
+1 10 SF
+7696 28368(>\212le)P
+0 10 SF
+9072 28368(is)P
+9710 28368(interpreted)P
+12547 28368(by)P
+13385 28368(the)P
+14356 28368(shell)P
+15727 28368(and)P
+16831 28368(is)P
+17469 28368(not)P
+18474 28368(passed)P
+20310 28368(as)P
+21047 28368(an)P
+21851 28368(argument)P
+24355 28368(to)P
+1 10 SF
+25060 28368(ls.)P
+0 10 SF
+26048 28368(If)P
+1 10 SF
+26686 28368(\212le)P
+0 10 SF
+27657 28368(does)P
+28993 28368(not)P
+29997 28368(exist)P
+31367 28368(then)P
+4320 27648(the)P
+5296 27648(shell)P
+6672 27648(creates)P
+8579 27648(it;)P
+9323 27648(otherwise)P
+11898 27648(the)P
+12874 27648(original)P
+14984 27648(contents)P
+17225 27648(of)P
+1 10 SF
+17967 27648(\212le)P
+0 10 SF
+18942 27648(are)P
+19916 27648(replaced)P
+22189 27648(with)P
+23498 27648(the)P
+24473 27648(output)P
+26249 27648(from)P
+1 10 SF
+27658 27648(ls.)P
+0 10 SF
+28650 27648(Output)P
+30559 27648(may)P
+31834 27648(be)P
+4320 26928(appended)P
+6818 26928(to)P
+7485 26928(a)P
+7951 26928(\212le)P
+8918 26928(using)P
+10418 26928(the)P
+11351 26928(notation)P
+7980 25848(ls)P
+3 10 SF
+8580 25848(-)P
+0 10 SF
+8909 25848(l)P
+9276 25848(>)P
+9494 25848(>\212le)P
+4320 24768(In)P
+5020 24768(this)P
+6087 24768(case)P
+1 10 SF
+7318 24768(\212le)P
+0 10 SF
+8251 24768(is)P
+8851 24768(also)P
+10017 24768(created)P
+11948 24768(if)P
+12515 24768(it)P
+13049 24768(does)P
+14348 24768(not)P
+15315 24768(already)P
+17280 24768(exist.)P
+4320 23832(The)P
+5453 23832(standard)P
+7685 23832(input)P
+9119 23832(of)P
+9819 23832(a)P
+10285 23832(command)P
+12851 23832(may)P
+14084 23832(be)P
+14850 23832(taken)P
+16349 23832(from)P
+17716 23832(a)P
+18182 23832(\212le)P
+19149 23832(instead)P
+21048 23832(of)P
+21748 23832(the)P
+22681 23832(terminal)P
+24881 23832(by)P
+25681 23832(writing,)P
+27765 23832(for)P
+28665 23832(example,)P
+7980 22752(wc)P
+8879 22752(<\212le)P
+4320 21672(The)P
+5480 21672(command)P
+1 10 SF
+8073 21672(wc)P
+0 10 SF
+8966 21672(reads)P
+10458 21672(its)P
+11252 21672(standard)P
+13511 21672(input)P
+14972 21672(\(in)P
+15865 21672(this)P
+16958 21672(case)P
+18215 21672(redirected)P
+20839 21672(from)P
+1 10 SF
+22232 21672(\212le)P
+0 10 SF
+22965 21672(\))P
+23391 21672(and)P
+24483 21672(prints)P
+26076 21672(the)P
+27035 21672(number)P
+29094 21672(of)P
+29820 21672(characters,)P
+4320 20952(words)P
+5986 20952(and)P
+7052 20952(lines)P
+8385 20952(found.)P
+10335 20952(If)P
+10935 20952(only)P
+12202 20952(the)P
+13135 20952(number)P
+15168 20952(of)P
+15868 20952(lines)P
+17201 20952(is)P
+17801 20952(required)P
+20000 20952(then)P
+7980 19872(wc)P
+3 10 SF
+8879 19872(-)P
+0 10 SF
+9208 19872(l)P
+9575 19872(<\212le)P
+4320 18792(could)P
+5853 18792(be)P
+6619 18792(used.)P
+2 10 SF
+4320 17352(1.4)P
+5270 17352(Pipelines)P
+7771 17352(and)P
+8939 17352(\212lters)P
+0 10 SF
+4320 16416(The)P
+5506 16416(standard)P
+7791 16416(output)P
+9578 16416(of)P
+10331 16416(one)P
+11450 16416(command)P
+14069 16416(may)P
+15355 16416(be)P
+16174 16416(connected)P
+18858 16416(to)P
+19578 16416(the)P
+20564 16416(standard)P
+22849 16416(input)P
+24336 16416(of)P
+25089 16416(another)P
+27141 16416(by)P
+27994 16416(writing)P
+29981 16416(the)P
+30967 16416(`pipe')P
+4320 15696(operator,)P
+6669 15696(indicated)P
+9068 15696(by)P
+3 10 SF
+9968 15696(|)P
+0 10 SF
+10188 15696(,)P
+10538 15696(as)P
+11237 15696(in,)P
+7980 14616(ls)P
+3 10 SF
+8580 14616(-)P
+0 10 SF
+8909 14616(l)P
+3 10 SF
+9376 14616(|)P
+0 10 SF
+9796 14616(wc)P
+4320 13536(Two)P
+5620 13536(commands)P
+8419 13536(connected)P
+11050 13536(in)P
+11717 13536(this)P
+12784 13536(way)P
+13983 13536(constitute)P
+16516 13536(a)P
+1 10 SF
+16982 13536(pipeline)P
+0 10 SF
+19115 13536(and)P
+20181 13536(the)P
+21114 13536(overall)P
+22980 13536(effect)P
+24545 13536(is)P
+25145 13536(the)P
+26078 13536(same)P
+27510 13536(as)P
+7980 12456(ls)P
+3 10 SF
+8580 12456(-)P
+0 10 SF
+8909 12456(l)P
+9276 12456(>\212le;)P
+10748 12456(wc)P
+11647 12456(<\212le)P
+4320 11376(except)P
+6092 11376(that)P
+7199 11376(no)P
+1 10 SF
+8006 11376(\212le)P
+0 10 SF
+8946 11376(is)P
+9553 11376(used.)P
+11209 11376(Instead)P
+13148 11376(the)P
+14088 11376(two)P
+15195 11376(processes)P
+17699 11376(are)P
+18638 11376(connected)P
+21276 11376(by)P
+22083 11376(a)P
+22556 11376(pipe)P
+23796 11376(\(see)P
+1 10 SF
+24967 11376(pipe)P
+0 10 SF
+26206 11376(\(2\)\))P
+27312 11376(and)P
+28384 11376(are)P
+29322 11376(run)P
+30328 11376(in)P
+31001 11376(paral\255)P
+4320 10656(lel.)P
+5459 10656(Pipes)P
+6948 10656(are)P
+7869 10656(unidirectional)P
+11391 10656(and)P
+12446 10656(synchronization)P
+16467 10656(is)P
+17056 10656(achieved)P
+19376 10656(by)P
+20165 10656(halting)P
+1 10 SF
+22021 10656(wc)P
+0 10 SF
+22876 10656(when)P
+24364 10656(there)P
+25752 10656(is)P
+26341 10656(nothing)P
+28365 10656(to)P
+29022 10656(read)P
+30244 10656(and)P
+31300 10656(halt\255)P
+4320 9936(ing)P
+1 10 SF
+5287 9936(ls)P
+0 10 SF
+5887 9936(when)P
+7386 9936(the)P
+8319 9936(pipe)P
+9552 9936(is)P
+10152 9936(full.)P
+4320 9000(A)P
+1 10 SF
+5007 9000(\212lter)P
+0 10 SF
+6394 9000(is)P
+7048 9000(a)P
+7568 9000(command)P
+10188 9000(that)P
+11342 9000(reads)P
+12861 9000(its)P
+13682 9000(standard)P
+15968 9000(input,)P
+17606 9000(transforms)P
+20425 9000(it)P
+21012 9000(in)P
+21732 9000(some)P
+23251 9000(way,)P
+24653 9000(and)P
+25772 9000(prints)P
+27392 9000(the)P
+28378 9000(result)P
+29964 9000(as)P
+30716 9000(output.)P
+4320 8280(One)P
+5519 8280(such)P
+6818 8280(\212lter,)P
+1 10 SF
+8302 8280(grep,)P
+0 10 SF
+9751 8280(selects)P
+11549 8280(from)P
+12916 8280(its)P
+13683 8280(input)P
+15117 8280(those)P
+16583 8280(lines)P
+17916 8280(that)P
+19016 8280(contain)P
+20982 8280(some)P
+22448 8280(speci\212ed)P
+24780 8280(string.)P
+26697 8280(For)P
+27731 8280(example,)P
+7980 7200(ls)P
+3 10 SF
+8680 7200(|)P
+0 10 SF
+9100 7200(grep)P
+10366 7200(old)P
+4320 6120(prints)P
+5962 6120(those)P
+7502 6120(lines,)P
+9059 6120(if)P
+9700 6120(any,)P
+10990 6120(of)P
+11764 6120(the)P
+12771 6120(output)P
+14579 6120(from)P
+1 10 SF
+16020 6120(ls)P
+0 10 SF
+16694 6120(that)P
+17868 6120(contain)P
+19908 6120(the)P
+20915 6120(string)P
+1 10 SF
+22556 6120(old.)P
+0 10 SF
+23947 6120(Another)P
+26187 6120(useful)P
+27927 6120(\212lter)P
+29335 6120(is)P
+1 10 SF
+30009 6120(sort)P
+0 10 SF
+30942 6120(.)P
+31566 6120(For)P
+4320 5400(example,)P
+7980 4320(who)P
+3 10 SF
+9313 4320(|)P
+0 10 SF
+9733 4320(sort)P
+end restore showpage
+%%Page: USD:3-3 3
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+30233 44640(USD:3\2553)P
+4320 42480(will)P
+5454 42480(print)P
+6788 42480(an)P
+7554 42480(alphabetically)P
+11119 42480(sorted)P
+12785 42480(list)P
+13719 42480(of)P
+14419 42480(logged)P
+16252 42480(in)P
+16919 42480(users.)P
+4320 41544(A)P
+4953 41544(pipeline)P
+7086 41544(may)P
+8319 41544(consist)P
+10185 41544(of)P
+10885 41544(more)P
+12318 41544(than)P
+13551 41544(two)P
+14651 41544(commands,)P
+17600 41544(for)P
+18500 41544(example,)P
+7980 40464(ls)P
+3 10 SF
+8680 40464(|)P
+0 10 SF
+9100 40464(grep)P
+10366 40464(old)P
+3 10 SF
+11433 40464(|)P
+0 10 SF
+11853 40464(wc)P
+3 10 SF
+12752 40464(-)P
+0 10 SF
+13081 40464(l)P
+4320 39384(prints)P
+5887 39384(the)P
+6820 39384(number)P
+8853 39384(of)P
+9553 39384(\212le)P
+10520 39384(names)P
+12252 39384(in)P
+12919 39384(the)P
+13852 39384(current)P
+15751 39384(directory)P
+18117 39384(containing)P
+20850 39384(the)P
+21783 39384(string)P
+1 10 SF
+23350 39384(old.)P
+2 10 SF
+4320 37944(1.5)P
+5270 37944(File)P
+6437 37944(name)P
+8037 37944(generation)P
+0 10 SF
+4320 37008(Many)P
+5919 37008(commands)P
+8718 37008(accept)P
+10449 37008(arguments)P
+13148 37008(which)P
+14814 37008(are)P
+15746 37008(\212le)P
+16713 37008(names.)P
+18795 37008(For)P
+19829 37008(example,)P
+7980 35928(ls)P
+3 10 SF
+8580 35928(-)P
+0 10 SF
+8909 35928(l)P
+9276 35928(main.c)P
+4320 34848(prints)P
+5887 34848(information)P
+8921 34848(relating)P
+10954 34848(to)P
+11621 34848(the)P
+12554 34848(\212le)P
+1 10 SF
+13521 34848(main.c)P
+0 10 SF
+15237 34848(.)P
+4320 33912(The)P
+5453 33912(shell)P
+6786 33912(provides)P
+9052 33912(a)P
+9518 33912(mechanism)P
+12450 33912(for)P
+13350 33912(generating)P
+16082 33912(a)P
+16548 33912(list)P
+17482 33912(of)P
+18182 33912(\212le)P
+19149 33912(names)P
+20881 33912(that)P
+21981 33912(match)P
+23647 33912(a)P
+24113 33912(pattern.)P
+26329 33912(For)P
+27363 33912(example,)P
+7980 32832(ls)P
+3 10 SF
+8580 32832(-)P
+0 10 SF
+8909 32832(l)P
+0 12 SF
+9276 32652(*)P
+0 10 SF
+9636 32832(.c)P
+4320 31752(generates,)P
+6961 31752(as)P
+7687 31752(arguments)P
+10413 31752(to)P
+1 10 SF
+11107 31752(ls,)P
+0 10 SF
+11884 31752(all)P
+12711 31752(\212le)P
+13705 31752(names)P
+15464 31752(in)P
+16158 31752(the)P
+17118 31752(current)P
+19044 31752(directory)P
+21437 31752(that)P
+22564 31752(end)P
+23657 31752(in)P
+1 10 SF
+24351 31752(.c)P
+24867 31752(.)P
+0 10 SF
+25444 31752(The)P
+26604 31752(character)P
+0 12 SF
+29028 31572(*)P
+0 10 SF
+29615 31752(is)P
+30242 31752(a)P
+30734 31752(pattern)P
+4320 31032(that)P
+5420 31032(will)P
+6554 31032(match)P
+8220 31032(any)P
+9286 31032(string)P
+10853 31032(including)P
+13320 31032(the)P
+14253 31032(null)P
+15387 31032(string.)P
+17304 31032(In)P
+18004 31032(general)P
+1 10 SF
+19969 31032(patterns)P
+0 10 SF
+22135 31032(are)P
+23067 31032(speci\212ed)P
+25399 31032(as)P
+26098 31032(follows.)P
+2 12 SF
+5820 29916(*)P
+0 10 SF
+8220 30096(Matches)P
+10451 30096(any)P
+11517 30096(string)P
+13084 30096(of)P
+13784 30096(characters)P
+16414 30096(including)P
+18881 30096(the)P
+19814 30096(null)P
+20948 30096(string.)P
+2 10 SF
+5820 29160(?)P
+0 10 SF
+8220 29160(Matches)P
+10451 29160(any)P
+11517 29160(single)P
+13150 29160(character.)P
+2 10 SF
+5820 28224([.)P
+6270 28224(.)P
+6520 28224(.])P
+0 10 SF
+8220 28224(Matches)P
+10550 28224(any)P
+11715 28224(one)P
+12880 28224(of)P
+13679 28224(the)P
+14711 28224(characters)P
+17440 28224(enclosed.)P
+20187 28224(A)P
+20919 28224(pair)P
+22151 28224(of)P
+22949 28224(characters)P
+25677 28224(separated)P
+28239 28224(by)P
+29137 28224(a)P
+29701 28224(minus)P
+31466 28224(will)P
+8220 27504(match)P
+9886 27504(any)P
+10952 27504(character)P
+13349 27504(lexically)P
+15615 27504(between)P
+17813 27504(the)P
+18746 27504(pair.)P
+4320 26568(For)P
+5354 26568(example,)P
+7980 25488([a)P
+3 10 SF
+8446 25488(-)P
+0 10 SF
+8775 25488(z])P
+0 12 SF
+9241 25308(*)P
+0 10 SF
+4320 24408(matches)P
+6485 24408(all)P
+7285 24408(names)P
+9017 24408(in)P
+9684 24408(the)P
+10617 24408(current)P
+12516 24408(directory)P
+14882 24408(beginning)P
+17482 24408(with)P
+18749 24408(one)P
+19815 24408(of)P
+20515 24408(the)P
+21448 24408(letters)P
+1 10 SF
+23114 24408(a)P
+0 10 SF
+23614 24408(through)P
+1 10 SF
+25681 24408(z.)P
+0 10 SF
+7980 23328(/usr/fred/test/?)P
+4320 22248(matches)P
+6509 22248(all)P
+7333 22248(names)P
+9089 22248(in)P
+9779 22248(the)P
+10735 22248(directory)P
+2 10 SF
+13124 22248(/usr/fred/test)P
+0 10 SF
+16646 22248(that)P
+17769 22248(consist)P
+19658 22248(of)P
+20381 22248(a)P
+20870 22248(single)P
+22526 22248(character.)P
+25296 22248(If)P
+25919 22248(no)P
+26742 22248(\212le)P
+27732 22248(name)P
+29254 22248(is)P
+29877 22248(found)P
+31500 22248(that)P
+4320 21528(matches)P
+6485 21528(the)P
+7418 21528(pattern)P
+9284 21528(then)P
+10517 21528(the)P
+11450 21528(pattern)P
+13316 21528(is)P
+13916 21528(passed,)P
+15864 21528(unchanged,)P
+18812 21528(as)P
+19511 21528(an)P
+20277 21528(argument.)P
+4320 20592(This)P
+5651 20592(mechanism)P
+8647 20592(is)P
+9311 20592(useful)P
+11041 20592(both)P
+12372 20592(to)P
+13103 20592(save)P
+14432 20592(typing)P
+16230 20592(and)P
+17360 20592(to)P
+18090 20592(select)P
+19718 20592(names)P
+21513 20592(according)P
+24141 20592(to)P
+24871 20592(some)P
+26400 20592(pattern.)P
+28679 20592(It)P
+29309 20592(may)P
+30605 20592(also)P
+31834 20592(be)P
+4320 19872(used)P
+5619 19872(to)P
+6286 19872(\212nd)P
+7420 19872(\212les.)P
+8970 19872(For)P
+10004 19872(example,)P
+7980 18792(echo)P
+9312 18792(/usr/fred/)P
+0 12 SF
+11512 18612(*)P
+0 10 SF
+11872 18792(/core)P
+4320 17712(\212nds)P
+5717 17712(and)P
+6813 17712(prints)P
+8410 17712(the)P
+9373 17712(names)P
+11135 17712(of)P
+11865 17712(all)P
+1 10 SF
+12695 17712(core)P
+0 10 SF
+13990 17712(\212les)P
+15220 17712(in)P
+15917 17712(sub\255directories)P
+19712 17712(of)P
+2 10 SF
+20442 17712(/usr/fred)P
+22775 17712(.)P
+0 10 SF
+23355 17712(\()P
+1 10 SF
+23555 17712(echo)P
+0 10 SF
+24917 17712(is)P
+25547 17712(a)P
+26043 17712(standard)P
+28305 17712(UNIX)P
+30034 17712(command)P
+4320 16992(that)P
+5478 16992(prints)P
+7103 16992(its)P
+7928 16992(arguments,)P
+10835 16992(separated)P
+13357 16992(by)P
+14215 16992(blanks.\))P
+16389 16992(This)P
+17714 16992(last)P
+18805 16992(feature)P
+20728 16992(can)P
+21818 16992(be)P
+22642 16992(expensive,)P
+25448 16992(requiring)P
+27906 16992(a)P
+28430 16992(scan)P
+29753 16992(of)P
+30510 16992(all)P
+31367 16992(sub\255)P
+4320 16272(directories)P
+7052 16272(of)P
+2 10 SF
+7752 16272(/usr/fred)P
+10085 16272(.)P
+0 10 SF
+4320 15336(There)P
+5948 15336(is)P
+6577 15336(one)P
+7672 15336(exception)P
+10233 15336(to)P
+10928 15336(the)P
+11889 15336(general)P
+13882 15336(rules)P
+15276 15336(given)P
+16837 15336(for)P
+17765 15336(patterns.)P
+20242 15336(The)P
+21403 15336(character)P
+23828 15336(`)P
+2 10 SF
+24028 15336(.)P
+0 10 SF
+24178 15336(')P
+24606 15336(at)P
+25267 15336(the)P
+26228 15336(start)P
+27489 15336(of)P
+28217 15336(a)P
+28711 15336(\212le)P
+29706 15336(name)P
+31233 15336(must)P
+4320 14616(be)P
+5086 14616(explicitly)P
+7553 14616(matched.)P
+7980 13536(echo)P
+0 12 SF
+9312 13356(*)P
+0 10 SF
+4320 12456(will)P
+5454 12456(therefore)P
+7819 12456(echo)P
+9151 12456(all)P
+9951 12456(\212le)P
+10918 12456(names)P
+12650 12456(in)P
+13317 12456(the)P
+14250 12456(current)P
+16149 12456(directory)P
+18515 12456(not)P
+19482 12456(beginning)P
+22082 12456(with)P
+23349 12456(`)P
+2 10 SF
+23549 12456(.)P
+0 10 SF
+23699 12456(')P
+23999 12456(.)P
+7980 11376(echo)P
+2 10 SF
+9312 11376(.)P
+0 12 SF
+9462 11196(*)P
+0 10 SF
+4320 10296(will)P
+5523 10296(echo)P
+6924 10296(all)P
+7793 10296(those)P
+9328 10296(\212le)P
+10364 10296(names)P
+12165 10296(that)P
+13334 10296(begin)P
+14936 10296(with)P
+16272 10296(`)P
+2 10 SF
+16472 10296(.)P
+0 10 SF
+16622 10296(')P
+16922 10296(.)P
+17541 10296(This)P
+18877 10296(avoids)P
+20711 10296(inadvertent)P
+23678 10296(matching)P
+26179 10296(of)P
+26947 10296(the)P
+27948 10296(names)P
+29748 10296(`)P
+2 10 SF
+29948 10296(.)P
+0 10 SF
+30098 10296(')P
+30566 10296(and)P
+31700 10296(`)P
+2 10 SF
+31900 10296(..)P
+0 10 SF
+32200 10296(')P
+4320 9576(which)P
+5994 9576(mean)P
+7501 9576(`the)P
+8642 9576(current)P
+10549 9576(directory')P
+13123 9576(and)P
+14197 9576(`the)P
+15338 9576(parent)P
+17045 9576(directory')P
+19619 9576(respectively.)P
+23075 9576(\(Notice)P
+25081 9576(that)P
+1 10 SF
+26188 9576(ls)P
+0 10 SF
+26795 9576(suppresses)P
+29566 9576(information)P
+4320 8856(for)P
+5220 8856(the)P
+6153 8856(\212les)P
+7353 8856(`)P
+2 10 SF
+7553 8856(.)P
+0 10 SF
+7703 8856(')P
+8103 8856(and)P
+9169 8856(`)P
+2 10 SF
+9369 8856(..)P
+0 10 SF
+9669 8856(')P
+9969 8856(.\))P
+2 10 SF
+4320 7416(1.6)P
+5270 7416(Quoting)P
+0 10 SF
+4320 6480(Characters)P
+7087 6480(that)P
+8190 6480(have)P
+9525 6480(a)P
+9994 6480(special)P
+11862 6480(meaning)P
+14131 6480(to)P
+14801 6480(the)P
+15737 6480(shell,)P
+17222 6480(such)P
+18523 6480(as)P
+2 10 SF
+19224 6480(<)P
+19768 6480(>)P
+2 12 SF
+20312 6300(*)P
+2 10 SF
+20874 6480(?)P
+3 10 SF
+21476 6480(|)P
+2 10 SF
+21898 6480(&)P
+22498 6480(,)P
+0 10 SF
+22850 6480(are)P
+23784 6480(called)P
+25418 6480(metacharacters.)P
+29566 6480(A)P
+30201 6480(complete)P
+4320 5760(list)P
+5246 5760(of)P
+5938 5760(metacharacters)P
+9726 5760(is)P
+10318 5760(given)P
+11843 5760(in)P
+12502 5760(appendix)P
+14893 5760(B.)P
+15835 5760(Any)P
+17060 5760(character)P
+19449 5760(preceded)P
+21805 5760(by)P
+22597 5760(a)P
+2 10 SF
+23055 5760(\\)P
+0 10 SF
+23414 5760(is)P
+1 10 SF
+24006 5760(quoted)P
+0 10 SF
+25832 5760(and)P
+26891 5760(loses)P
+28283 5760(its)P
+29043 5760(special)P
+30901 5760(mean\255)P
+4320 5040(ing,)P
+5437 5040(if)P
+6004 5040(any.)P
+7420 5040(The)P
+2 10 SF
+8553 5040(\\)P
+0 10 SF
+8920 5040(is)P
+9520 5040(elided)P
+11186 5040(so)P
+11919 5040(that)P
+end restore showpage
+%%Page: USD:3-4 4
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\2554)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+7980 42120(echo)P
+9312 42120(\\?)P
+4320 41040(will)P
+5454 41040(echo)P
+6786 41040(a)P
+7252 41040(single)P
+2 10 SF
+8885 41040(?)P
+9285 41040(,)P
+0 10 SF
+9635 41040(and)P
+7980 39960(echo)P
+9312 39960(\\\\)P
+4320 38880(will)P
+5508 38880(echo)P
+6894 38880(a)P
+7414 38880(single)P
+2 10 SF
+9101 38880(\\)P
+9368 38880(.)P
+0 10 SF
+9972 38880(To)P
+10893 38880(allow)P
+12480 38880(long)P
+13801 38880(strings)P
+15655 38880(to)P
+16376 38880(be)P
+17195 38880(continued)P
+19814 38880(over)P
+21133 38880(more)P
+22619 38880(than)P
+23905 38880(one)P
+25024 38880(line)P
+26177 38880(the)P
+27163 38880(sequence)P
+2 10 SF
+29613 38880(\\newline)P
+0 10 SF
+32000 38880(is)P
+4320 38160(ignored.)P
+2 10 SF
+4320 37224(\\)P
+0 10 SF
+4692 37224(is)P
+5297 37224(convenient)P
+8134 37224(for)P
+9039 37224(quoting)P
+11078 37224(single)P
+12716 37224(characters.)P
+15701 37224(When)P
+17338 37224(more)P
+18776 37224(than)P
+20014 37224(one)P
+21085 37224(character)P
+23487 37224(needs)P
+25057 37224(quoting)P
+27095 37224(the)P
+28032 37224(above)P
+29668 37224(mechanism)P
+4320 36504(is)P
+4948 36504(clumsy)P
+6909 36504(and)P
+8003 36504(error)P
+9397 36504(prone.)P
+11341 36504(A)P
+12001 36504(string)P
+13595 36504(of)P
+14322 36504(characters)P
+16979 36504(may)P
+18239 36504(be)P
+19032 36504(quoted)P
+20892 36504(by)P
+21719 36504(enclosing)P
+24245 36504(the)P
+25205 36504(string)P
+26799 36504(between)P
+29024 36504(single)P
+30684 36504(quotes.)P
+4320 35784(For)P
+5354 35784(example,)P
+7980 34704(echo)P
+9312 34704(xx\222)P
+0 12 SF
+10112 34524(****)P
+0 10 SF
+11552 34704(\222xx)P
+4320 33624(will)P
+5454 33624(echo)P
+7980 32544(xx)P
+0 12 SF
+8580 32364(****)P
+0 10 SF
+10020 32544(xx)P
+4320 31464(The)P
+5484 31464(quoted)P
+7348 31464(string)P
+8946 31464(may)P
+10210 31464(not)P
+11208 31464(contain)P
+13205 31464(a)P
+13702 31464(single)P
+15366 31464(quote)P
+16930 31464(but)P
+17928 31464(may)P
+19192 31464(contain)P
+21188 31464(newlines,)P
+23700 31464(which)P
+25396 31464(are)P
+26358 31464(preserved.)P
+29269 31464(This)P
+30566 31464(quoting)P
+4320 30744(mechanism)P
+7252 30744(is)P
+7852 30744(the)P
+8785 30744(most)P
+10152 30744(simple)P
+11952 30744(and)P
+13018 30744(is)P
+13618 30744(recommended)P
+17216 30744(for)P
+18116 30744(casual)P
+19814 30744(use.)P
+4320 29808(A)P
+4980 29808(third)P
+6341 29808(quoting)P
+8402 29808(mechanism)P
+11361 29808(using)P
+12888 29808(double)P
+14748 29808(quotes)P
+16541 29808(is)P
+17168 29808(also)P
+18361 29808(available)P
+20753 29808(that)P
+21879 29808(prevents)P
+24137 29808(interpretation)P
+27596 29808(of)P
+28322 29808(some)P
+29814 29808(but)P
+30807 29808(not)P
+31800 29808(all)P
+4320 29088(metacharacters.)P
+8466 29088(Discussion)P
+11298 29088(of)P
+11998 29088(the)P
+12931 29088(details)P
+14697 29088(is)P
+15297 29088(deferred)P
+17495 29088(to)P
+18162 29088(section)P
+20061 29088(3.4)P
+20911 29088(.)P
+2 10 SF
+4320 27648(1.7)P
+5270 27648(Prompting)P
+0 10 SF
+4320 26712(When)P
+5958 26712(the)P
+6897 26712(shell)P
+8236 26712(is)P
+8841 26712(used)P
+10145 26712(from)P
+11517 26712(a)P
+11988 26712(terminal)P
+14193 26712(it)P
+14732 26712(will)P
+15871 26712(issue)P
+17275 26712(a)P
+17746 26712(prompt)P
+19685 26712(before)P
+21422 26712(reading)P
+23426 26712(a)P
+23897 26712(command.)P
+26818 26712(By)P
+27723 26712(default)P
+29594 26712(this)P
+30666 26712(prompt)P
+4320 25992(is)P
+4920 25992(`)P
+2 10 SF
+5120 25992($)P
+0 10 SF
+5620 25992(')P
+5920 25992(.)P
+6470 25992(It)P
+7037 25992(may)P
+8270 25992(be)P
+9036 25992(changed)P
+11234 25992(by)P
+12034 25992(saying,)P
+13950 25992(for)P
+14850 25992(example,)P
+0 9 SF
+7980 24912(PS1)P
+0 10 SF
+8850 24912(=yesdear)P
+4320 23832(that)P
+5421 23832(sets)P
+6521 23832(the)P
+7455 23832(prompt)P
+9390 23832(to)P
+10058 23832(be)P
+10824 23832(the)P
+11757 23832(string)P
+1 10 SF
+13324 23832(yesdear)P
+15288 23832(.)P
+0 10 SF
+15838 23832(If)P
+16438 23832(a)P
+16904 23832(newline)P
+19003 23832(is)P
+19603 23832(typed)P
+21136 23832(and)P
+22202 23832(further)P
+24035 23832(input)P
+25469 23832(is)P
+26069 23832(needed)P
+27967 23832(then)P
+29200 23832(the)P
+30133 23832(shell)P
+31466 23832(will)P
+4320 23112(issue)P
+5773 23112(the)P
+6760 23112(prompt)P
+8748 23112(`)P
+2 10 SF
+8948 23112(>)P
+0 10 SF
+9490 23112(')P
+9790 23112(.)P
+10394 23112(Sometimes)P
+13315 23112(this)P
+14435 23112(can)P
+15520 23112(be)P
+16339 23112(caused)P
+18223 23112(by)P
+19076 23112(mistyping)P
+21730 23112(a)P
+22249 23112(quote)P
+23835 23112(mark.)P
+25671 23112(If)P
+26324 23112(it)P
+26911 23112(is)P
+27564 23112(unexpected)P
+30548 23112(then)P
+31834 23112(an)P
+4320 22392(interrupt)P
+6576 22392(\()P
+0 9 SF
+6776 22392(DEL)P
+0 10 SF
+7826 22392(\))P
+8215 22392(will)P
+9338 22392(return)P
+10960 22392(the)P
+11882 22392(shell)P
+13204 22392(to)P
+13860 22392(read)P
+15081 22392(another)P
+17069 22392(command.)P
+19974 22392(This)P
+21230 22392(prompt)P
+23153 22392(may)P
+24375 22392(be)P
+25130 22392(changed)P
+27317 22392(by)P
+28106 22392(saying,)P
+30011 22392(for)P
+30901 22392(exam\255)P
+4320 21672(ple,)P
+0 9 SF
+7980 20592(PS2)P
+0 10 SF
+8850 20592(=more)P
+2 10 SF
+4320 18792(1.8)P
+5270 18792(The)P
+6470 18792(shell)P
+7837 18792(and)P
+9005 18792(login)P
+0 10 SF
+4320 17856(Following)P
+1 10 SF
+7027 17856(login)P
+0 10 SF
+8500 17856(\(1\))P
+9439 17856(the)P
+10411 17856(shell)P
+11783 17856(is)P
+12422 17856(called)P
+14093 17856(to)P
+14799 17856(read)P
+16070 17856(and)P
+17175 17856(execute)P
+19245 17856(commands)P
+22083 17856(typed)P
+23655 17856(at)P
+24327 17856(the)P
+25299 17856(terminal.)P
+27887 17856(If)P
+28525 17856(the)P
+29496 17856(user's)P
+31166 17856(login)P
+4320 17136(directory)P
+6689 17136(contains)P
+8890 17136(the)P
+9825 17136(\212le)P
+2 10 SF
+10794 17136(.pro\212le)P
+0 10 SF
+12813 17136(then)P
+14048 17136(it)P
+14584 17136(is)P
+15186 17136(assumed)P
+17453 17136(to)P
+18122 17136(contain)P
+20090 17136(commands)P
+22891 17136(and)P
+23959 17136(is)P
+24561 17136(read)P
+25795 17136(by)P
+26597 17136(the)P
+27532 17136(shell)P
+28867 17136(before)P
+30601 17136(reading)P
+4320 16416(any)P
+5386 16416(commands)P
+8185 16416(from)P
+9552 16416(the)P
+10485 16416(terminal.)P
+2 10 SF
+4320 14976(1.9)P
+5270 14976(Summary)P
+0 10 SF
+5820 13320<07>P
+2 10 SF
+7320 13320(ls)P
+0 10 SF
+7320 12600(Print)P
+8688 12600(the)P
+9621 12600(names)P
+11353 12600(of)P
+12053 12600(\212les)P
+13253 12600(in)P
+13920 12600(the)P
+14853 12600(current)P
+16752 12600(directory.)P
+5820 11664<07>P
+2 10 SF
+7320 11664(ls)P
+7920 11664(>\212le)P
+0 10 SF
+7320 10944(Put)P
+8321 10944(the)P
+9254 10944(output)P
+10988 10944(from)P
+1 10 SF
+12355 10944(ls)P
+0 10 SF
+12955 10944(into)P
+1 10 SF
+14089 10944(\212le.)P
+0 10 SF
+5820 10008<07>P
+2 10 SF
+7320 10008(ls)P
+3 10 SF
+8020 10008(|)P
+2 10 SF
+8440 10008(wc)P
+3 10 SF
+9339 10008(-)P
+2 10 SF
+9668 10008(l)P
+0 10 SF
+7320 9288(Print)P
+8688 9288(the)P
+9621 9288(number)P
+11654 9288(of)P
+12354 9288(\212les)P
+13554 9288(in)P
+14221 9288(the)P
+15154 9288(current)P
+17053 9288(directory.)P
+5820 8352<07>P
+2 10 SF
+7320 8352(ls)P
+3 10 SF
+8020 8352(|)P
+2 10 SF
+8440 8352(grep)P
+9806 8352(old)P
+0 10 SF
+7320 7632(Print)P
+8688 7632(those)P
+10154 7632(\212le)P
+11121 7632(names)P
+12853 7632(containing)P
+15586 7632(the)P
+16519 7632(string)P
+1 10 SF
+18086 7632(old.)P
+0 10 SF
+5820 6696<07>P
+2 10 SF
+7320 6696(ls)P
+3 10 SF
+8020 6696(|)P
+2 10 SF
+8440 6696(grep)P
+9806 6696(old)P
+3 10 SF
+10907 6696(|)P
+2 10 SF
+11327 6696(wc)P
+3 10 SF
+12226 6696(-)P
+2 10 SF
+12555 6696(l)P
+0 10 SF
+7320 5976(Print)P
+8688 5976(the)P
+9621 5976(number)P
+11654 5976(of)P
+12354 5976(\212les)P
+13554 5976(whose)P
+15286 5976(name)P
+16785 5976(contains)P
+18984 5976(the)P
+19917 5976(string)P
+1 10 SF
+21484 5976(old.)P
+0 10 SF
+5820 5040<07>P
+2 10 SF
+7320 5040(cc)P
+8052 5040(pgm.c)P
+9802 5040(&)P
+0 10 SF
+7320 4320(Run)P
+1 10 SF
+8520 4320(cc)P
+0 10 SF
+9252 4320(in)P
+9919 4320(the)P
+10852 4320(background.)P
+end restore showpage
+%%Page: USD:3-5 5
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+30233 44640(USD:3\2555)P
+2 10 SF
+4320 42480(2.0)P
+5270 42480(Shell)P
+6738 42480(procedures)P
+0 10 SF
+4320 41544(The)P
+5453 41544(shell)P
+6786 41544(may)P
+8019 41544(be)P
+8785 41544(used)P
+10084 41544(to)P
+10751 41544(read)P
+11983 41544(and)P
+13049 41544(execute)P
+15080 41544(commands)P
+17879 41544(contained)P
+20411 41544(in)P
+21078 41544(a)P
+21544 41544(\212le.)P
+22861 41544(For)P
+23895 41544(example,)P
+7980 40464(sh)P
+8713 40464(\212le)P
+9680 40464([)P
+10080 40464(args)P
+2 10 SF
+11279 40464(.)P
+11529 40464(.)P
+11779 40464(.)P
+0 10 SF
+12129 40464(])P
+4320 39384(calls)P
+5616 39384(the)P
+6546 39384(shell)P
+7877 39384(to)P
+8542 39384(read)P
+9772 39384(commands)P
+12569 39384(from)P
+1 10 SF
+13934 39384(\212le.)P
+0 10 SF
+15215 39384(Such)P
+16613 39384(a)P
+17077 39384(\212le)P
+18042 39384(is)P
+18640 39384(called)P
+20270 39384(a)P
+1 10 SF
+20734 39384(command)P
+23264 39384(procedure)P
+0 10 SF
+25926 39384(or)P
+1 10 SF
+26624 39384(shell)P
+27955 39384(procedure.)P
+0 10 SF
+30967 39384(Argu\255)P
+4320 38664(ments)P
+5990 38664(may)P
+7259 38664(be)P
+8061 38664(supplied)P
+10330 38664(with)P
+11633 38664(the)P
+12602 38664(call)P
+13704 38664(and)P
+14806 38664(are)P
+15774 38664(referred)P
+17908 38664(to)P
+18611 38664(in)P
+1 10 SF
+19314 38664(\212le)P
+0 10 SF
+20283 38664(using)P
+21819 38664(the)P
+22788 38664(positional)P
+25391 38664(parameters)P
+2 10 SF
+28258 38664($1,)P
+29244 38664($2,)P
+30230 38664(.)P
+30480 38664(.)P
+30730 38664(.)P
+30980 38664(.)P
+0 10 SF
+31566 38664(For)P
+4320 37944(example,)P
+6702 37944(if)P
+7269 37944(the)P
+8202 37944(\212le)P
+1 10 SF
+9169 37944(wg)P
+0 10 SF
+10069 37944(contains)P
+7980 36864(who)P
+3 10 SF
+9313 36864(|)P
+0 10 SF
+9733 36864(grep)P
+10999 36864($1)P
+4320 35784(then)P
+7980 34704(sh)P
+8713 34704(wg)P
+9646 34704(fred)P
+4320 33624(is)P
+4920 33624(equivalent)P
+7619 33624(to)P
+7980 32544(who)P
+3 10 SF
+9313 32544(|)P
+0 10 SF
+9733 32544(grep)P
+10999 32544(fred)P
+4320 31248(UNIX)P
+6053 31248(\212les)P
+7287 31248(have)P
+8653 31248(three)P
+10086 31248(independent)P
+13252 31248(attributes,)P
+1 10 SF
+15869 31248(read,)P
+17352 31248(write)P
+0 10 SF
+18819 31248(and)P
+1 10 SF
+19919 31248(execute.)P
+0 10 SF
+22300 31248(The)P
+23467 31248(UNIX)P
+25200 31248(command)P
+1 10 SF
+27800 31248(chmod)P
+0 10 SF
+29633 31248(\(1\))P
+30567 31248(may)P
+31834 31248(be)P
+4320 30528(used)P
+5619 30528(to)P
+6286 30528(make)P
+7785 30528(a)P
+8251 30528(\212le)P
+9218 30528(executable.)P
+12332 30528(For)P
+13366 30528(example,)P
+7980 29448(chmod)P
+9813 29448(+x)P
+10651 29448(wg)P
+4320 28368(will)P
+5454 28368(ensure)P
+7219 28368(that)P
+8319 28368(the)P
+9252 28368(\212le)P
+1 10 SF
+10219 28368(wg)P
+0 10 SF
+11119 28368(has)P
+12118 28368(execute)P
+14149 28368(status.)P
+16065 28368(Following)P
+18733 28368(this,)P
+19950 28368(the)P
+20883 28368(command)P
+7980 27288(wg)P
+8913 27288(fred)P
+4320 26208(is)P
+4920 26208(equivalent)P
+7619 26208(to)P
+7980 25128(sh)P
+8713 25128(wg)P
+9646 25128(fred)P
+4320 24048(This)P
+5592 24048(allows)P
+7363 24048(shell)P
+8701 24048(procedures)P
+11537 24048(and)P
+12608 24048(programs)P
+15079 24048(to)P
+15751 24048(be)P
+16522 24048(used)P
+17825 24048(interchangeably.)P
+22210 24048(In)P
+22914 24048(either)P
+24484 24048(case)P
+25719 24048(a)P
+26189 24048(new)P
+27392 24048(process)P
+29394 24048(is)P
+29998 24048(created)P
+31933 24048(to)P
+4320 23328(run)P
+5320 23328(the)P
+6253 23328(command.)P
+4320 22392(As)P
+5182 22392(well)P
+6411 22392(as)P
+7106 22392(providing)P
+9636 22392(names)P
+11364 22392(for)P
+12260 22392(the)P
+13189 22392(positional)P
+15753 22392(parameters,)P
+18731 22392(the)P
+19661 22392(number)P
+21691 22392(of)P
+22388 22392(positional)P
+24952 22392(parameters)P
+27780 22392(in)P
+28444 22392(the)P
+29374 22392(call)P
+30437 22392(is)P
+31034 22392(avail\255)P
+4320 21672(able)P
+5519 21672(as)P
+2 10 SF
+6218 21672($#)P
+6918 21672(.)P
+0 10 SF
+7468 21672(The)P
+8601 21672(name)P
+10100 21672(of)P
+10800 21672(the)P
+11733 21672(\212le)P
+12700 21672(being)P
+14233 21672(executed)P
+16564 21672(is)P
+17164 21672(available)P
+19529 21672(as)P
+2 10 SF
+20228 21672($0)P
+20928 21672(.)P
+0 10 SF
+4320 20736(A)P
+4984 20736(special)P
+6880 20736(shell)P
+8244 20736(parameter)P
+2 10 SF
+10873 20736($)P
+2 12 SF
+11173 20556(*)P
+0 10 SF
+11764 20736(is)P
+12395 20736(used)P
+13725 20736(to)P
+14423 20736(substitute)P
+16954 20736(for)P
+17885 20736(all)P
+18715 20736(positional)P
+21312 20736(parameters)P
+24173 20736(except)P
+2 10 SF
+25968 20736($0)P
+26668 20736(.)P
+0 10 SF
+27248 20736(A)P
+27911 20736(typical)P
+29774 20736(use)P
+30803 20736(of)P
+31533 20736(this)P
+4320 20016(is)P
+4920 20016(to)P
+5587 20016(provide)P
+7620 20016(some)P
+9086 20016(default)P
+10952 20016(arguments,)P
+13801 20016(as)P
+14500 20016(in,)P
+7980 18936(nroff)P
+3 10 SF
+9380 18936(-)P
+0 10 SF
+9709 18936(T450)P
+3 10 SF
+11176 18936(-)P
+0 10 SF
+11505 18936(ms)P
+12405 18936($)P
+0 12 SF
+12705 18756(*)P
+0 10 SF
+4320 17856(which)P
+5986 17856(simply)P
+7820 17856(prepends)P
+10185 17856(some)P
+11651 17856(arguments)P
+14350 17856(to)P
+15017 17856(those)P
+16483 17856(already)P
+18448 17856(given.)P
+2 10 SF
+4320 16416(2.1)P
+5270 16416(Control)P
+7470 16416(\213ow)P
+8737 16416<AD>P
+9137 16416(for)P
+0 10 SF
+4320 15480(A)P
+4989 15480(frequent)P
+7224 15480(use)P
+8259 15480(of)P
+8995 15480(shell)P
+10364 15480(procedures)P
+13231 15480(is)P
+13867 15480(to)P
+14570 15480(loop)P
+15873 15480(through)P
+17975 15480(the)P
+18943 15480(arguments)P
+21677 15480(\()P
+2 10 SF
+21877 15480($1,)P
+22862 15480($2,)P
+23847 15480(.)P
+24097 15480(.)P
+24347 15480(.)P
+0 10 SF
+24497 15480(\))P
+24932 15480(executing)P
+27499 15480(commands)P
+30333 15480(once)P
+31700 15480(for)P
+4320 14760(each)P
+5634 14760(argument.)P
+8466 14760(An)P
+9415 14760(example)P
+11663 14760(of)P
+12378 14760(such)P
+13692 14760(a)P
+14173 14760(procedure)P
+16786 14760(is)P
+1 10 SF
+17401 14760(tel)P
+0 10 SF
+18216 14760(that)P
+19331 14760(searches)P
+21576 14760(the)P
+22524 14760(\212le)P
+2 10 SF
+23506 14760(/usr/lib/telnos)P
+0 10 SF
+27223 14760(that)P
+28338 14760(contains)P
+30552 14760(lines)P
+31900 14760(of)P
+4320 14040(the)P
+5253 14040(form)P
+2 10 SF
+7980 12960(.)P
+8230 12960(.)P
+8480 12960(.)P
+0 10 SF
+7980 12240(fred)P
+9146 12240(mh0123)P
+7980 11520(bert)P
+9113 11520(mh0789)P
+2 10 SF
+7980 10800(.)P
+8230 10800(.)P
+8480 10800(.)P
+0 10 SF
+4320 9720(The)P
+5453 9720(text)P
+6553 9720(of)P
+1 10 SF
+7253 9720(tel)P
+0 10 SF
+8053 9720(is)P
+7980 8640(for)P
+8880 8640(i)P
+7980 7920(do)P
+8780 7920(grep)P
+10046 7920($i)P
+10713 7920(/usr/lib/telnos;)P
+14381 7920(done)P
+4320 6840(The)P
+5453 6840(command)P
+7980 5760(tel)P
+8780 5760(fred)P
+4320 4680(prints)P
+5887 4680(those)P
+7353 4680(lines)P
+8686 4680(in)P
+2 10 SF
+9353 4680(/usr/lib/telnos)P
+0 10 SF
+13055 4680(that)P
+14155 4680(contain)P
+16121 4680(the)P
+17054 4680(string)P
+1 10 SF
+18621 4680(fred)P
+19687 4680(.)P
+end restore showpage
+%%Page: USD:3-6 6
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\2556)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+7980 42120(tel)P
+8780 42120(fred)P
+9946 42120(bert)P
+4320 41040(prints)P
+5887 41040(those)P
+7353 41040(lines)P
+8686 41040(containing)P
+1 10 SF
+11419 41040(fred)P
+0 10 SF
+12585 41040(followed)P
+14918 41040(by)P
+15718 41040(those)P
+17184 41040(for)P
+1 10 SF
+18084 41040(bert.)P
+0 10 SF
+4320 40104(The)P
+2 10 SF
+5453 40104(for)P
+0 10 SF
+6419 40104(loop)P
+7686 40104(notation)P
+9853 40104(is)P
+10453 40104(recognized)P
+13284 40104(by)P
+14084 40104(the)P
+15017 40104(shell)P
+16350 40104(and)P
+17416 40104(has)P
+18415 40104(the)P
+19348 40104(general)P
+21313 40104(form)P
+2 10 SF
+7980 39024(for)P
+1 10 SF
+8946 39024(name)P
+2 10 SF
+10445 39024(in)P
+1 10 SF
+11146 39024(w1)P
+12046 39024(w2)P
+2 10 SF
+12946 39024(.)P
+13196 39024(.)P
+13446 39024(.)P
+7980 38304(do)P
+1 10 SF
+8814 38304(command\255list)P
+2 10 SF
+7980 37584(done)P
+0 10 SF
+4320 36504(A)P
+1 10 SF
+4992 36504(command\255list)P
+0 10 SF
+8497 36504(is)P
+9136 36504(a)P
+9641 36504(sequence)P
+12077 36504(of)P
+12816 36504(one)P
+13921 36504(or)P
+14660 36504(more)P
+16131 36504(simple)P
+17969 36504(commands)P
+20806 36504(separated)P
+23308 36504(or)P
+24046 36504(terminated)P
+26850 36504(by)P
+27688 36504(a)P
+28192 36504(newline)P
+30329 36504(or)P
+31067 36504(semi\255)P
+4320 35784(colon.)P
+6275 35784(Furthermore,)P
+9697 35784(reserved)P
+12000 35784(words)P
+13738 35784(like)P
+2 10 SF
+14910 35784(do)P
+0 10 SF
+15816 35784(and)P
+2 10 SF
+16953 35784(done)P
+0 10 SF
+18458 35784(are)P
+19461 35784(only)P
+20799 35784(recognized)P
+23701 35784(following)P
+26306 35784(a)P
+26843 35784(newline)P
+29013 35784(or)P
+29784 35784(semicolon.)P
+1 10 SF
+4320 35064(name)P
+0 10 SF
+5865 35064(is)P
+6511 35064(a)P
+7023 35064(shell)P
+8402 35064(variable)P
+10580 35064(that)P
+11726 35064(is)P
+12372 35064(set)P
+13284 35064(to)P
+13997 35064(the)P
+14976 35064(words)P
+1 10 SF
+16688 35064(w1)P
+17634 35064(w2)P
+2 10 SF
+18579 35064(.)P
+18829 35064(.)P
+19079 35064(.)P
+0 10 SF
+19474 35064(in)P
+20186 35064(turn)P
+21398 35064(each)P
+22741 35064(time)P
+24053 35064(the)P
+1 10 SF
+25031 35064(command\255list)P
+0 10 SF
+28542 35064(following)P
+2 10 SF
+31121 35064(do)P
+0 10 SF
+32000 35064(is)P
+4320 34344(executed.)P
+7010 34344(If)P
+2 10 SF
+7619 34344(in)P
+1 10 SF
+8329 34344(w1)P
+9238 34344(w2)P
+2 10 SF
+10147 34344(.)P
+10397 34344(.)P
+10647 34344(.)P
+0 10 SF
+11206 34344(is)P
+11815 34344(omitted)P
+13858 34344(then)P
+15100 34344(the)P
+16041 34344(loop)P
+17316 34344(is)P
+17924 34344(executed)P
+20263 34344(once)P
+21603 34344(for)P
+22511 34344(each)P
+23817 34344(positional)P
+26392 34344(parameter;)P
+29165 34344(that)P
+30273 34344(is,)P
+2 10 SF
+31031 34344(in)P
+1 10 SF
+31740 34344($)P
+1 12 SF
+32040 34164(*)P
+0 10 SF
+4320 33624(is)P
+4920 33624(assumed.)P
+4320 32688(Another)P
+6486 32688(example)P
+8718 32688(of)P
+9418 32688(the)P
+10351 32688(use)P
+11350 32688(of)P
+12050 32688(the)P
+2 10 SF
+12983 32688(for)P
+0 10 SF
+13949 32688(loop)P
+15216 32688(is)P
+15816 32688(the)P
+1 10 SF
+16749 32688(create)P
+0 10 SF
+18447 32688(command)P
+21013 32688(whose)P
+22745 32688(text)P
+23845 32688(is)P
+7980 31608(for)P
+8880 31608(i)P
+9247 31608(do)P
+10047 31608(>$i;)P
+11219 31608(done)P
+4320 30528(The)P
+5453 30528(command)P
+7980 29448(create)P
+9611 29448(alpha)P
+11110 29448(beta)P
+4320 28368(ensures)P
+6344 28368(that)P
+7470 28368(two)P
+8596 28368(empty)P
+10322 28368(\212les)P
+1 10 SF
+11548 28368(alpha)P
+0 10 SF
+13141 28368(and)P
+1 10 SF
+14233 28368(beta)P
+0 10 SF
+15491 28368(exist)P
+16849 28368(and)P
+17940 28368(are)P
+18897 28368(empty.)P
+20972 28368(The)P
+22130 28368(notation)P
+1 10 SF
+24322 28368(>\212le)P
+0 10 SF
+25685 28368(may)P
+26943 28368(be)P
+27734 28368(used)P
+29058 28368(on)P
+29883 28368(its)P
+30675 28368(own)P
+31933 28368(to)P
+4320 27648(create)P
+5951 27648(or)P
+6651 27648(clear)P
+8016 27648(the)P
+8949 27648(contents)P
+11148 27648(of)P
+11848 27648(a)P
+12314 27648(\212le.)P
+13631 27648(Notice)P
+15430 27648(also)P
+16596 27648(that)P
+17696 27648(a)P
+18162 27648(semicolon)P
+20828 27648(\(or)P
+21728 27648(newline\))P
+24027 27648(is)P
+24627 27648(required)P
+26826 27648(before)P
+2 10 SF
+28558 27648(done.)P
+4320 26208(2.2)P
+5270 26208(Control)P
+7470 26208(\213ow)P
+8737 26208<AD>P
+9137 26208(case)P
+0 10 SF
+4320 25272(A)P
+4953 25272(multiple)P
+7154 25272(way)P
+8353 25272(branch)P
+10185 25272(is)P
+10785 25272(provided)P
+13118 25272(for)P
+14018 25272(by)P
+14818 25272(the)P
+2 10 SF
+15751 25272(case)P
+0 10 SF
+17016 25272(notation.)P
+19533 25272(For)P
+20567 25272(example,)P
+7980 24192(case)P
+9211 24192($#)P
+10011 24192(in)P
+9211 23472(1\))P
+10980 23472(cat)P
+11879 23472(>)P
+12097 23472(>$1)P
+13235 23472(;;)P
+9211 22752(2\))P
+10980 22752(cat)P
+11879 22752(>)P
+12097 22752(>$2)P
+13235 22752(<$1)P
+14373 22752(;;)P
+0 12 SF
+9211 21852(*)P
+0 10 SF
+9571 22032(\))P
+10980 22032(echo)P
+12312 22032(\222usage:)P
+14244 22032(append)P
+16176 22032([)P
+16576 22032(from)P
+17943 22032(])P
+18343 22032(to\222)P
+19210 22032(;;)P
+7980 21312(esac)P
+4320 20232(is)P
+4920 20232(an)P
+1 10 SF
+5686 20232(append)P
+0 10 SF
+7652 20232(command.)P
+10568 20232(When)P
+12200 20232(called)P
+13832 20232(with)P
+15099 20232(one)P
+16165 20232(argument)P
+18631 20232(as)P
+7980 19152(append)P
+9912 19152(\212le)P
+2 10 SF
+4320 18072($#)P
+0 10 SF
+5120 18072(is)P
+5720 18072(the)P
+6653 18072(string)P
+1 10 SF
+8220 18072(1)P
+0 10 SF
+8720 18072(and)P
+9786 18072(the)P
+10719 18072(standard)P
+12951 18072(input)P
+14385 18072(is)P
+14985 18072(copied)P
+16784 18072(onto)P
+18051 18072(the)P
+18984 18072(end)P
+20050 18072(of)P
+1 10 SF
+20750 18072(\212le)P
+0 10 SF
+21683 18072(using)P
+23183 18072(the)P
+1 10 SF
+24116 18072(cat)P
+0 10 SF
+25049 18072(command.)P
+7980 16992(append)P
+9912 16992(\212le1)P
+11179 16992(\212le2)P
+4320 15912(appends)P
+6494 15912(the)P
+7436 15912(contents)P
+9643 15912(of)P
+1 10 SF
+10351 15912(\212le1)P
+0 10 SF
+11592 15912(onto)P
+1 10 SF
+12867 15912(\212le2.)P
+0 10 SF
+14458 15912(If)P
+15066 15912(the)P
+16007 15912(number)P
+18048 15912(of)P
+18756 15912(arguments)P
+21463 15912(supplied)P
+23704 15912(to)P
+1 10 SF
+24379 15912(append)P
+0 10 SF
+26353 15912(is)P
+26961 15912(other)P
+28402 15912(than)P
+29643 15912(1)P
+30151 15912(or)P
+30859 15912(2)P
+31367 15912(then)P
+4320 15192(a)P
+4786 15192(message)P
+7017 15192(is)P
+7617 15192(printed)P
+9517 15192(indicating)P
+12117 15192(proper)P
+13883 15192(usage.)P
+4320 14256(The)P
+5453 14256(general)P
+7418 14256(form)P
+8785 14256(of)P
+9485 14256(the)P
+2 10 SF
+10418 14256(case)P
+0 10 SF
+11683 14256(command)P
+14249 14256(is)P
+2 10 SF
+7980 13176(case)P
+1 10 SF
+9245 13176(word)P
+2 10 SF
+10678 13176(in)P
+1 10 SF
+9245 12456(pattern)P
+2 10 SF
+11078 12456(\))P
+1 10 SF
+11478 12456(command\255list)P
+2 10 SF
+14844 12456(;;)P
+9245 11736(.)P
+9495 11736(.)P
+9745 11736(.)P
+7980 11016(esac)P
+0 10 SF
+4320 9936(The)P
+5516 9936(shell)P
+6912 9936(attempts)P
+9208 9936(to)P
+9938 9936(match)P
+1 10 SF
+11667 9936(word)P
+0 10 SF
+13163 9936(with)P
+14493 9936(each)P
+1 10 SF
+15854 9936(pattern,)P
+0 10 SF
+18000 9936(in)P
+18730 9936(the)P
+19726 9936(order)P
+21255 9936(in)P
+21985 9936(which)P
+23714 9936(the)P
+24710 9936(patterns)P
+26872 9936(appear.)P
+29082 9936(If)P
+29744 9936(a)P
+30272 9936(match)P
+32000 9936(is)P
+4320 9216(found)P
+5934 9216(the)P
+6881 9216(associated)P
+1 10 SF
+9559 9216(command\255list)P
+0 10 SF
+13039 9216(is)P
+13653 9216(executed)P
+15998 9216(and)P
+17078 9216(execution)P
+19624 9216(of)P
+20338 9216(the)P
+2 10 SF
+21285 9216(case)P
+0 10 SF
+22564 9216(is)P
+23178 9216(complete.)P
+25941 9216(Since)P
+0 12 SF
+27488 9036(*)P
+0 10 SF
+28062 9216(is)P
+28675 9216(the)P
+29621 9216(pattern)P
+31500 9216(that)P
+4320 8496(matches)P
+6485 8496(any)P
+7551 8496(string)P
+9118 8496(it)P
+9652 8496(can)P
+10684 8496(be)P
+11450 8496(used)P
+12749 8496(for)P
+13649 8496(the)P
+14582 8496(default)P
+16448 8496(case.)P
+4320 7560(A)P
+4957 7560(word)P
+6394 7560(of)P
+7098 7560(caution:)P
+9235 7560(no)P
+10039 7560(check)P
+11641 7560(is)P
+12245 7560(made)P
+13748 7560(to)P
+14419 7560(ensure)P
+16188 7560(that)P
+17292 7560(only)P
+18563 7560(one)P
+19633 7560(pattern)P
+21503 7560(matches)P
+23672 7560(the)P
+24608 7560(case)P
+25842 7560(argument.)P
+28661 7560(The)P
+29797 7560(\212rst)P
+30934 7560(match)P
+4320 6840(found)P
+5932 6840(de\212nes)P
+7843 6840(the)P
+8788 6840(set)P
+9666 6840(of)P
+10378 6840(commands)P
+13189 6840(to)P
+13868 6840(be)P
+14646 6840(executed.)P
+17339 6840(In)P
+18051 6840(the)P
+18996 6840(example)P
+21240 6840(below)P
+22918 6840(the)P
+23863 6840(commands)P
+26674 6840(following)P
+29220 6840(the)P
+30164 6840(second)P
+0 12 SF
+32040 6660(*)P
+0 10 SF
+4320 6120(will)P
+5454 6120(never)P
+6986 6120(be)P
+7752 6120(executed.)P
+end restore showpage
+%%Page: USD:3-7 7
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+30233 44640(USD:3\2557)P
+7980 42120(case)P
+9211 42120($#)P
+10011 42120(in)P
+0 12 SF
+9211 41220(*)P
+0 10 SF
+9571 41400(\))P
+2 10 SF
+9971 41400(.)P
+10221 41400(.)P
+10471 41400(.)P
+0 10 SF
+10821 41400(;;)P
+0 12 SF
+9211 40500(*)P
+0 10 SF
+9571 40680(\))P
+2 10 SF
+9971 40680(.)P
+10221 40680(.)P
+10471 40680(.)P
+0 10 SF
+10821 40680(;;)P
+7980 39960(esac)P
+4320 38664(Another)P
+6542 38664(example)P
+8830 38664(of)P
+9586 38664(the)P
+10575 38664(use)P
+11629 38664(of)P
+12384 38664(the)P
+2 10 SF
+13372 38664(case)P
+0 10 SF
+14692 38664(construction)P
+17913 38664(is)P
+18568 38664(to)P
+19290 38664(distinguish)P
+22179 38664(between)P
+24432 38664(different)P
+26753 38664(forms)P
+28408 38664(of)P
+29163 38664(an)P
+29984 38664(argument.)P
+4320 37944(The)P
+5453 37944(following)P
+7987 37944(example)P
+10219 37944(is)P
+10819 37944(a)P
+11285 37944(fragment)P
+13651 37944(of)P
+14351 37944(a)P
+1 10 SF
+14817 37944(cc)P
+0 10 SF
+15549 37944(command.)P
+7980 36864(for)P
+8880 36864(i)P
+7980 36144(do)P
+8780 36144(case)P
+10011 36144($i)P
+10678 36144(in)P
+3 10 SF
+8780 35424(-)P
+0 10 SF
+9109 35424([ocs]\))P
+2 10 SF
+10980 35424(.)P
+11230 35424(.)P
+11480 35424(.)P
+0 10 SF
+11830 35424(;;)P
+3 10 SF
+8780 34704(-)P
+0 12 SF
+9109 34524(*)P
+0 10 SF
+9469 34704(\))P
+10980 34704(echo)P
+12312 34704(\222unknown)P
+14945 34704(\213ag)P
+16045 34704($i\222)P
+16912 34704(;;)P
+0 12 SF
+8780 33804(*)P
+0 10 SF
+9140 33984(.c\))P
+10980 33984(/lib/c0)P
+12714 33984($i)P
+2 10 SF
+13381 33984(.)P
+13631 33984(.)P
+13881 33984(.)P
+0 10 SF
+14231 33984(;;)P
+0 12 SF
+8780 33084(*)P
+0 10 SF
+9140 33264(\))P
+9480 33264(echo)P
+10812 33264(\222unexpected)P
+13943 33264(argument)P
+16409 33264($i\222)P
+17276 33264(;;)P
+8780 32544(esac)P
+7980 31824(done)P
+4320 30528(To)P
+5207 30528(allow)P
+6760 30528(the)P
+7713 30528(same)P
+9165 30528(commands)P
+11984 30528(to)P
+12671 30528(be)P
+13457 30528(associated)P
+16141 30528(with)P
+17428 30528(more)P
+18881 30528(than)P
+20134 30528(one)P
+21220 30528(pattern)P
+23106 30528(the)P
+2 10 SF
+24059 30528(case)P
+0 10 SF
+25344 30528(command)P
+27930 30528(provides)P
+30215 30528(for)P
+31134 30528(alter\255)P
+4320 29808(native)P
+5986 29808(patterns)P
+8085 29808(separated)P
+10549 29808(by)P
+11349 29808(a)P
+3 10 SF
+11915 29808(|)P
+0 10 SF
+12235 29808(.)P
+12785 29808(For)P
+13819 29808(example,)P
+7980 28728(case)P
+9211 28728($i)P
+9878 28728(in)P
+3 10 SF
+9211 28008(-)P
+0 10 SF
+9540 28008(x)P
+3 10 SF
+9940 28008(|)P
+10160 28008(-)P
+0 10 SF
+10489 28008(y\))P
+2 10 SF
+12480 28008(.)P
+12730 28008(.)P
+12980 28008(.)P
+0 10 SF
+7980 27288(esac)P
+4320 26208(is)P
+4920 26208(equivalent)P
+7619 26208(to)P
+7980 25128(case)P
+9211 25128($i)P
+9878 25128(in)P
+3 10 SF
+9211 24408(-)P
+0 10 SF
+9540 24408([xy]\))P
+2 10 SF
+10980 24408(.)P
+11230 24408(.)P
+11480 24408(.)P
+0 10 SF
+7980 23688(esac)P
+4320 22392(The)P
+5453 22392(usual)P
+6919 22392(quoting)P
+8953 22392(conventions)P
+12052 22392(apply)P
+13585 22392(so)P
+14318 22392(that)P
+7980 21312(case)P
+9211 21312($i)P
+9878 21312(in)P
+9211 20592(\\?\))P
+2 10 SF
+10813 20592(.)P
+11063 20592(.)P
+11313 20592(.)P
+0 10 SF
+4320 19512(will)P
+5454 19512(match)P
+7120 19512(the)P
+8053 19512(character)P
+2 10 SF
+10450 19512(?)P
+10850 19512(.)P
+4320 18072(2.3)P
+5270 18072(Here)P
+6735 18072(documents)P
+0 10 SF
+4320 17136(The)P
+5488 17136(shell)P
+6856 17136(procedure)P
+1 10 SF
+9489 17136(tel)P
+0 10 SF
+10324 17136(in)P
+11026 17136(section)P
+12960 17136(2.1)P
+13945 17136(uses)P
+15211 17136(the)P
+16178 17136(\212le)P
+2 10 SF
+17179 17136(/usr/lib/telnos)P
+0 10 SF
+20915 17136(to)P
+21616 17136(supply)P
+23450 17136(the)P
+24417 17136(data)P
+25650 17136(for)P
+1 10 SF
+26584 17136(grep.)P
+0 10 SF
+28267 17136(An)P
+29234 17136(alternative)P
+32000 17136(is)P
+4320 16416(to)P
+4987 16416(include)P
+6953 16416(this)P
+8020 16416(data)P
+9219 16416(within)P
+10953 16416(the)P
+11886 16416(shell)P
+13219 16416(procedure)P
+15817 16416(as)P
+16516 16416(a)P
+1 10 SF
+16982 16416(here)P
+0 10 SF
+18247 16416(document,)P
+20963 16416(as)P
+21662 16416(in,)P
+7980 15336(for)P
+8880 15336(i)P
+7980 14616(do)P
+8780 14616(grep)P
+10046 14616($i)P
+10713 14616(<)P
+10931 14616(<!)P
+2 10 SF
+8780 13896(.)P
+9030 13896(.)P
+9280 13896(.)P
+0 10 SF
+8780 13176(fred)P
+9946 13176(mh0123)P
+8780 12456(bert)P
+9913 12456(mh0789)P
+2 10 SF
+8780 11736(.)P
+9030 11736(.)P
+9280 11736(.)P
+0 10 SF
+7980 11016(!)P
+7980 10296(done)P
+4320 9216(In)P
+5048 9216(this)P
+6143 9216(example)P
+8403 9216(the)P
+9364 9216(shell)P
+10725 9216(takes)P
+12185 9216(the)P
+13146 9216(lines)P
+14507 9216(between)P
+2 10 SF
+16733 9216(<)P
+16955 9216(<!)P
+0 10 SF
+17725 9216(and)P
+2 10 SF
+18819 9216(!)P
+0 10 SF
+19447 9216(as)P
+20174 9216(the)P
+21135 9216(standard)P
+23395 9216(input)P
+24856 9216(for)P
+1 10 SF
+25783 9216(grep.)P
+0 10 SF
+27459 9216(The)P
+28619 9216(string)P
+2 10 SF
+30213 9216(!)P
+0 10 SF
+30640 9216(is)P
+31267 9216(arbi\255)P
+4320 8496(trary,)P
+5803 8496(the)P
+6736 8496(document)P
+9302 8496(being)P
+10835 8496(terminated)P
+13601 8496(by)P
+14401 8496(a)P
+14867 8496(line)P
+15967 8496(that)P
+17067 8496(consists)P
+19166 8496(of)P
+19866 8496(the)P
+20799 8496(string)P
+22366 8496(following)P
+24900 8496(<)P
+25118 8496(<)P
+25556 8496(.)P
+4320 7560(Parameters)P
+7189 7560(are)P
+8124 7560(substituted)P
+10927 7560(in)P
+11597 7560(the)P
+12533 7560(document)P
+15102 7560(before)P
+16837 7560(it)P
+17374 7560(is)P
+17977 7560(made)P
+19479 7560(available)P
+21847 7560(to)P
+1 10 SF
+22517 7560(grep)P
+0 10 SF
+23819 7560(as)P
+24521 7560(illustrated)P
+27124 7560(by)P
+27927 7560(the)P
+28863 7560(following)P
+31400 7560(pro\255)P
+4320 6840(cedure)P
+6118 6840(called)P
+1 10 SF
+7750 6840(edg)P
+8716 6840(.)P
+end restore showpage
+%%Page: USD:3-8 8
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\2558)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+7980 42120(ed)P
+8746 42120($3)P
+9546 42120(<)P
+9764 42120(<%)P
+7980 41400(g/$1/s//$2/g)P
+7980 40680(w)P
+7980 39960(%)P
+4320 38880(The)P
+5453 38880(call)P
+7980 37800(edg)P
+9046 37800(string1)P
+10913 37800(string2)P
+12780 37800(\212le)P
+4320 36720(is)P
+4920 36720(then)P
+6153 36720(equivalent)P
+8852 36720(to)P
+9519 36720(the)P
+10452 36720(command)P
+7980 35640(ed)P
+8746 35640(\212le)P
+9713 35640(<)P
+9931 35640(<%)P
+7980 34920(g/string1/s//string2/g)P
+7980 34200(w)P
+7980 33480(%)P
+4320 32400(and)P
+5404 32400(changes)P
+7553 32400(all)P
+8371 32400(occurrences)P
+11452 32400(of)P
+1 10 SF
+12170 32400(string1)P
+0 10 SF
+14088 32400(in)P
+1 10 SF
+14773 32400(\212le)P
+0 10 SF
+15724 32400(to)P
+1 10 SF
+16409 32400(string2)P
+18209 32400(.)P
+0 10 SF
+18777 32400(Substitution)P
+21897 32400(can)P
+22947 32400(be)P
+23731 32400(prevented)P
+26314 32400(using)P
+27832 32400(\\)P
+28217 32400(to)P
+28901 32400(quote)P
+30451 32400(the)P
+31401 32400(spe\255)P
+4320 31680(cial)P
+5386 31680(character)P
+2 10 SF
+7783 31680($)P
+0 10 SF
+8283 31680(as)P
+8982 31680(in)P
+7980 30600(ed)P
+8746 30600($3)P
+9546 30600(<)P
+9764 30600(<+)P
+7980 29880(1,\\$s/$1/$2/g)P
+7980 29160(w)P
+7980 28440(+)P
+4320 27360(\(This)P
+5788 27360(version)P
+7755 27360(of)P
+1 10 SF
+8456 27360(edg)P
+0 10 SF
+9523 27360(is)P
+10124 27360(equivalent)P
+12824 27360(to)P
+13492 27360(the)P
+14426 27360(\212rst)P
+15561 27360(except)P
+17327 27360(that)P
+1 10 SF
+18428 27360(ed)P
+0 10 SF
+19195 27360(will)P
+20330 27360(print)P
+21665 27360(a)P
+2 10 SF
+22132 27360(?)P
+0 10 SF
+22633 27360(if)P
+23201 27360(there)P
+24601 27360(are)P
+25534 27360(no)P
+26335 27360(occurrences)P
+29399 27360(of)P
+30100 27360(the)P
+31033 27360(string)P
+2 10 SF
+4320 26640($1)P
+5020 26640(.)P
+0 10 SF
+5170 26640(\))P
+5586 26640(Substitution)P
+8704 26640(within)P
+10454 26640(a)P
+1 10 SF
+10936 26640(here)P
+0 10 SF
+12217 26640(document)P
+14799 26640(may)P
+16048 26640(be)P
+16830 26640(prevented)P
+19411 26640(entirely)P
+21460 26640(by)P
+22275 26640(quoting)P
+24324 26640(the)P
+25272 26640(terminating)P
+28254 26640(string,)P
+29986 26640(for)P
+30901 26640(exam\255)P
+4320 25920(ple,)P
+7980 24840(grep)P
+9246 24840($i)P
+9913 24840(<)P
+10131 24840(<\\#)P
+2 10 SF
+7980 24120(.)P
+8230 24120(.)P
+8480 24120(.)P
+0 10 SF
+7980 23400(#)P
+4320 22320(The)P
+5451 22320(document)P
+8015 22320(is)P
+8613 22320(presented)P
+11109 22320(without)P
+13141 22320(modi\212cation)P
+16373 22320(to)P
+1 10 SF
+17038 22320(grep.)P
+0 10 SF
+18685 22320(If)P
+19283 22320(parameter)P
+21879 22320(substitution)P
+24878 22320(is)P
+25476 22320(not)P
+26441 22320(required)P
+28639 22320(in)P
+29305 22320(a)P
+1 10 SF
+29770 22320(here)P
+0 10 SF
+31034 22320(docu\255)P
+4320 21600(ment)P
+5720 21600(this)P
+6787 21600(latter)P
+8220 21600(form)P
+9587 21600(is)P
+10187 21600(more)P
+11620 21600(ef\212cient.)P
+2 10 SF
+4320 20160(2.4)P
+5270 20160(Shell)P
+6738 20160(variables)P
+0 10 SF
+4320 19224(The)P
+5499 19224(shell)P
+6878 19224(provides)P
+9190 19224(string\255valued)P
+12601 19224(variables.)P
+15361 19224(Variable)P
+17671 19224(names)P
+19448 19224(begin)P
+21026 19224(with)P
+22338 19224(a)P
+22849 19224(letter)P
+24327 19224(and)P
+25438 19224(consist)P
+27349 19224(of)P
+28094 19224(letters,)P
+29955 19224(digits)P
+31534 19224(and)P
+4320 18504(underscores.)P
+7734 18504(Variables)P
+10232 18504(may)P
+11465 18504(be)P
+12231 18504(given)P
+13764 18504(values)P
+15496 18504(by)P
+16296 18504(writing,)P
+18380 18504(for)P
+19280 18504(example,)P
+7980 17424(user=fred)P
+10483 17424(box=m000)P
+13288 17424(acct=mh0000)P
+4320 16344(which)P
+5996 16344(assigns)P
+7938 16344(values)P
+9680 16344(to)P
+10357 16344(the)P
+11300 16344(variables)P
+2 10 SF
+13675 16344(user,)P
+15134 16344(box)P
+0 10 SF
+16278 16344(and)P
+2 10 SF
+17354 16344(acct.)P
+0 10 SF
+18946 16344(A)P
+19589 16344(variable)P
+21731 16344(may)P
+22974 16344(be)P
+23750 16344(set)P
+24626 16344(to)P
+25303 16344(the)P
+26246 16344(null)P
+27390 16344(string)P
+28966 16344(by)P
+29775 16344(saying,)P
+31700 16344(for)P
+4320 15624(example,)P
+7980 14544(null=)P
+4320 13464(The)P
+5453 13464(value)P
+6952 13464(of)P
+7652 13464(a)P
+8118 13464(variable)P
+10250 13464(is)P
+10850 13464(substituted)P
+13650 13464(by)P
+14450 13464(preceding)P
+17015 13464(its)P
+17782 13464(name)P
+19281 13464(with)P
+2 10 SF
+20548 13464($)P
+20948 13464(;)P
+0 10 SF
+21348 13464(for)P
+22248 13464(example,)P
+7980 12384(echo)P
+9312 12384($user)P
+4320 11304(will)P
+5454 11304(echo)P
+1 10 SF
+6786 11304(fred.)P
+0 10 SF
+4320 10368(Variables)P
+6818 10368(may)P
+8051 10368(be)P
+8817 10368(used)P
+10116 10368(interactively)P
+13315 10368(to)P
+13982 10368(provide)P
+16015 10368(abbreviations)P
+19447 10368(for)P
+20347 10368(frequently)P
+23013 10368(used)P
+24312 10368(strings.)P
+26462 10368(For)P
+27496 10368(example,)P
+7980 9288(b=/usr/fred/bin)P
+7980 8568(mv)P
+8947 8568(pgm)P
+10214 8568($b)P
+4320 7488(will)P
+5529 7488(move)P
+7137 7488(the)P
+8145 7488(\212le)P
+1 10 SF
+9187 7488(pgm)P
+0 10 SF
+10495 7488(from)P
+11937 7488(the)P
+12945 7488(current)P
+14919 7488(directory)P
+17359 7488(to)P
+18100 7488(the)P
+19107 7488(directory)P
+2 10 SF
+21547 7488(/usr/fred/bin)P
+24882 7488(.)P
+0 10 SF
+25506 7488(A)P
+26213 7488(more)P
+27720 7488(general)P
+29759 7488(notation)P
+32000 7488(is)P
+4320 6768(available)P
+6685 6768(for)P
+7585 6768(parameter)P
+10183 6768(\(or)P
+11083 6768(variable\))P
+13415 6768(substitution,)P
+16566 6768(as)P
+17265 6768(in,)P
+7980 5688(echo)P
+9312 5688(${user})P
+4320 4608(which)P
+5986 4608(is)P
+6586 4608(equivalent)P
+9285 4608(to)P
+end restore showpage
+%%Page: USD:3-9 9
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+30233 44640(USD:3\2559)P
+7980 42120(echo)P
+9312 42120($user)P
+4320 41040(and)P
+5386 41040(is)P
+5986 41040(used)P
+7285 41040(when)P
+8784 41040(the)P
+9717 41040(parameter)P
+12315 41040(name)P
+13814 41040(is)P
+14414 41040(followed)P
+16747 41040(by)P
+17547 41040(a)P
+18013 41040(letter)P
+19446 41040(or)P
+20146 41040(digit.)P
+21797 41040(For)P
+22831 41040(example,)P
+7980 39960(tmp=/tmp/ps)P
+7980 39240(ps)P
+8713 39240(a)P
+9179 39240(>${tmp}a)P
+4320 38160(will)P
+5454 38160(direct)P
+7020 38160(the)P
+7953 38160(output)P
+9687 38160(of)P
+1 10 SF
+10387 38160(ps)P
+0 10 SF
+11120 38160(to)P
+11787 38160(the)P
+12720 38160(\212le)P
+2 10 SF
+13687 38160(/tmp/psa,)P
+0 10 SF
+16272 38160(whereas,)P
+7980 37080(ps)P
+8713 37080(a)P
+9179 37080(>$tmpa)P
+4320 36000(would)P
+6020 36000(cause)P
+7551 36000(the)P
+8484 36000(value)P
+9983 36000(of)P
+10683 36000(the)P
+11616 36000(variable)P
+2 10 SF
+13748 36000(tmpa)P
+0 10 SF
+15282 36000(to)P
+15949 36000(be)P
+16715 36000(substituted.)P
+4320 35064(Except)P
+6186 35064(for)P
+2 10 SF
+7086 35064($?)P
+0 10 SF
+7886 35064(the)P
+8819 35064(following)P
+11353 35064(are)P
+12285 35064(set)P
+13151 35064(initially)P
+15219 35064(by)P
+16019 35064(the)P
+16952 35064(shell.)P
+2 10 SF
+18635 35064($?)P
+0 10 SF
+19435 35064(is)P
+20035 35064(set)P
+20901 35064(after)P
+22200 35064(executing)P
+24732 35064(each)P
+26030 35064(command.)P
+2 10 SF
+5820 34128($?)P
+0 10 SF
+8220 34128(The)P
+9369 34128(exit)P
+10485 34128(status)P
+12067 34128(\(return)P
+13916 34128(code\))P
+15464 34128(of)P
+16180 34128(the)P
+17129 34128(last)P
+18178 34128(command)P
+20760 34128(executed)P
+23107 34128(as)P
+23822 34128(a)P
+24304 34128(decimal)P
+26419 34128(string.)P
+28352 34128(Most)P
+29801 34128(commands)P
+8220 33408(return)P
+10018 33408(a)P
+10649 33408(zero)P
+12046 33408(exit)P
+13311 33408(status)P
+15042 33408(if)P
+15774 33408(they)P
+17172 33408(complete)P
+19736 33408(successfully,)P
+23182 33408(otherwise)P
+25879 33408(a)P
+26510 33408(non\255zero)P
+29006 33408(exit)P
+30270 33408(status)P
+32000 33408(is)P
+8220 32688(returned.)P
+10769 32688(Testing)P
+12769 32688(the)P
+13702 32688(value)P
+15201 32688(of)P
+15901 32688(return)P
+17534 32688(codes)P
+19099 32688(is)P
+19699 32688(dealt)P
+21065 32688(with)P
+22332 32688(later)P
+23598 32688(under)P
+2 10 SF
+25164 32688(if)P
+0 10 SF
+25731 32688(and)P
+2 10 SF
+26797 32688(while)P
+0 10 SF
+28364 32688(commands.)P
+2 10 SF
+5820 31752($#)P
+0 10 SF
+8220 31752(The)P
+9400 31752(number)P
+11480 31752(of)P
+12227 31752(positional)P
+14841 31752(parameters)P
+17719 31752(\(in)P
+18633 31752(decimal\).)P
+21328 31752(Used,)P
+22956 31752(for)P
+23902 31752(example,)P
+26330 31752(in)P
+27043 31752(the)P
+1 10 SF
+28022 31752(append)P
+0 10 SF
+30034 31752(command)P
+8220 31032(to)P
+8887 31032(check)P
+10485 31032(the)P
+11418 31032(number)P
+13451 31032(of)P
+14151 31032(parameters.)P
+2 10 SF
+5820 30096($$)P
+0 10 SF
+8220 30096(The)P
+9344 30096(process)P
+11333 30096(number)P
+13357 30096(of)P
+14048 30096(this)P
+15106 30096(shell)P
+16430 30096(\(in)P
+17288 30096(decimal\).)P
+19928 30096(Since)P
+21453 30096(process)P
+23443 30096(numbers)P
+25701 30096(are)P
+26625 30096(unique)P
+28450 30096(among)P
+30275 30096(all)P
+31067 30096(exist\255)P
+8220 29376(ing)P
+9215 29376(processes,)P
+11890 29376(this)P
+12985 29376(string)P
+14580 29376(is)P
+15208 29376(frequently)P
+17902 29376(used)P
+19229 29376(to)P
+19924 29376(generate)P
+22183 29376(unique)P
+24044 29376(temporary)P
+26737 29376(\212le)P
+27731 29376(names.)P
+29840 29376(For)P
+30901 29376(exam\255)P
+8220 28656(ple,)P
+11880 27576(ps)P
+12613 27576(a)P
+13079 27576(>/tmp/ps$$)P
+2 10 SF
+11880 26856(.)P
+12130 26856(.)P
+12380 26856(.)P
+0 10 SF
+11880 26136(rm)P
+12747 26136(/tmp/ps$$)P
+2 10 SF
+5820 24840($)P
+6220 24840(!)P
+0 10 SF
+8220 24840(The)P
+9353 24840(process)P
+11351 24840(number)P
+13384 24840(of)P
+14084 24840(the)P
+15017 24840(last)P
+16050 24840(process)P
+18048 24840(run)P
+19048 24840(in)P
+19715 24840(the)P
+20648 24840(background)P
+23680 24840(\(in)P
+24547 24840(decimal\).)P
+2 10 SF
+5820 23904($)P
+3 10 SF
+6120 23904(-)P
+0 10 SF
+8220 23904(The)P
+9353 23904(current)P
+11252 23904(shell)P
+12585 23904(\213ags,)P
+14068 23904(such)P
+15367 23904(as)P
+3 10 SF
+16066 23904(-)P
+2 10 SF
+16395 23904(x)P
+0 10 SF
+16895 23904(and)P
+3 10 SF
+17961 23904(-)P
+2 10 SF
+18290 23904(v)P
+18690 23904(.)P
+0 10 SF
+4320 22968(Some)P
+5887 22968(variables)P
+8252 22968(have)P
+9584 22968(a)P
+10050 22968(special)P
+11915 22968(meaning)P
+14181 22968(to)P
+14848 22968(the)P
+15781 22968(shell)P
+17114 22968(and)P
+18180 22968(should)P
+19980 22968(be)P
+20746 22968(avoided)P
+22845 22968(for)P
+23745 22968(general)P
+25710 22968(use.)P
+2 10 SF
+5820 22032($)P
+2 9 SF
+6120 22032(MAIL)P
+0 10 SF
+8220 22032(When)P
+9931 22032(used)P
+11309 22032(interactively)P
+14587 22032(the)P
+15599 22032(shell)P
+17011 22032(looks)P
+18590 22032(at)P
+19302 22032(the)P
+20314 22032(\212le)P
+21359 22032(speci\212ed)P
+23769 22032(by)P
+24647 22032(this)P
+25792 22032(variable)P
+28002 22032(before)P
+29812 22032(it)P
+30424 22032(issues)P
+32134 22032(a)P
+8220 21312(prompt.)P
+10496 21312(If)P
+11088 21312(the)P
+12013 21312(speci\212ed)P
+14337 21312(\212le)P
+15297 21312(has)P
+16289 21312(been)P
+17614 21312(modi\212ed)P
+19941 21312(since)P
+21366 21312(it)P
+21893 21312(was)P
+23018 21312(last)P
+24044 21312(looked)P
+25870 21312(at)P
+26496 21312(the)P
+27422 21312(shell)P
+28748 21312(prints)P
+30308 21312(the)P
+31234 21312(mes\255)P
+8220 20592(sage)P
+1 10 SF
+9502 20592(you)P
+10585 20592(have)P
+11934 20592(mail)P
+0 10 SF
+13218 20592(before)P
+14967 20592(prompting)P
+17685 20592(for)P
+18602 20592(the)P
+19552 20592(next)P
+20802 20592(command.)P
+23735 20592(This)P
+25019 20592(variable)P
+27168 20592(is)P
+27785 20592(typically)P
+30102 20592(set)P
+30984 20592(in)P
+31667 20592(the)P
+8220 19872(\212le)P
+2 10 SF
+9187 19872(.pro\212le,)P
+0 10 SF
+11354 19872(in)P
+12021 19872(the)P
+12954 19872(user's)P
+14586 19872(login)P
+16020 19872(directory.)P
+18736 19872(For)P
+19770 19872(example,)P
+0 9 SF
+11880 18792(MAIL)P
+0 10 SF
+13260 18792(=/usr/spool/mail/fred)P
+2 10 SF
+5820 17496($)P
+2 9 SF
+6120 17496(HOME)P
+0 10 SF
+8220 17496(The)P
+9423 17496(default)P
+11359 17496(argument)P
+13895 17496(for)P
+14864 17496(the)P
+1 10 SF
+15866 17496(cd)P
+0 10 SF
+16701 17496(command.)P
+19686 17496(The)P
+20888 17496(current)P
+22856 17496(directory)P
+25291 17496(is)P
+25960 17496(used)P
+27328 17496(to)P
+28064 17496(resolve)P
+30065 17496(\212le)P
+31101 17496(name)P
+8220 16776(references)P
+10883 16776(that)P
+11983 16776(do)P
+12783 16776(not)P
+13750 16776(begin)P
+15283 16776(with)P
+16550 16776(a)P
+2 10 SF
+17016 16776(/)P
+17283 16776(,)P
+0 10 SF
+17633 16776(and)P
+18699 16776(is)P
+19299 16776(changed)P
+21497 16776(using)P
+22997 16776(the)P
+1 10 SF
+23930 16776(cd)P
+0 10 SF
+24696 16776(command.)P
+27612 16776(For)P
+28646 16776(example,)P
+11880 15696(cd)P
+12646 15696(/usr/fred/bin)P
+8220 14616(makes)P
+9952 14616(the)P
+10885 14616(current)P
+12784 14616(directory)P
+2 10 SF
+15150 14616(/usr/fred/bin)P
+18485 14616(.)P
+0 10 SF
+11880 13536(cat)P
+12779 13536(wn)P
+8220 12456(will)P
+9421 12456(print)P
+10822 12456(on)P
+11689 12456(the)P
+12689 12456(terminal)P
+14956 12456(the)P
+15956 12456(\212le)P
+1 10 SF
+16990 12456(wn)P
+0 10 SF
+17957 12456(in)P
+18691 12456(this)P
+19824 12456(directory.)P
+22606 12456(The)P
+23805 12456(command)P
+1 10 SF
+26437 12456(cd)P
+0 10 SF
+27269 12456(with)P
+28602 12456(no)P
+29468 12456(argument)P
+32000 12456(is)P
+8220 11736(equivalent)P
+10919 11736(to)P
+11880 10656(cd)P
+12646 10656($)P
+0 9 SF
+12946 10656(HOME)P
+0 10 SF
+8220 9576(This)P
+9487 9576(variable)P
+11619 9576(is)P
+12219 9576(also)P
+13385 9576(typically)P
+15685 9576(set)P
+16551 9576(in)P
+17218 9576(the)P
+18151 9576(the)P
+19084 9576(user's)P
+20716 9576(login)P
+22150 9576(pro\212le.)P
+2 10 SF
+5820 8640($)P
+2 9 SF
+6120 8640(PATH)P
+0 10 SF
+8220 8640(A)P
+8856 8640(list)P
+9793 8640(of)P
+10496 8640(directories)P
+13231 8640(that)P
+14334 8640(contain)P
+16303 8640(commands)P
+19105 8640(\(the)P
+1 10 SF
+20241 8640(search)P
+22042 8640(path)P
+0 10 SF
+23209 8640(\).)P
+23961 8640(Each)P
+25362 8640(time)P
+26631 8640(a)P
+27099 8640(command)P
+29667 8640(is)P
+30269 8640(executed)P
+8220 7920(by)P
+9054 7920(the)P
+10021 7920(shell)P
+11388 7920(a)P
+11888 7920(list)P
+12856 7920(of)P
+13590 7920(directories)P
+16356 7920(is)P
+16990 7920(searched)P
+19321 7920(for)P
+20255 7920(an)P
+21055 7920(executable)P
+23853 7920(\212le.)P
+25203 7920(If)P
+2 10 SF
+25836 7920($)P
+2 9 SF
+26136 7920(PATH)P
+0 10 SF
+27869 7920(is)P
+28502 7920(not)P
+29502 7920(set)P
+30401 7920(then)P
+31667 7920(the)P
+8220 7200(current)P
+10122 7200(directory,)P
+2 10 SF
+12641 7200(/bin)P
+0 10 SF
+13643 7200(,)P
+13996 7200(and)P
+2 10 SF
+15065 7200(/usr/bin)P
+0 10 SF
+17270 7200(are)P
+18205 7200(searched)P
+20505 7200(by)P
+21308 7200(default.)P
+23527 7200(Otherwise)P
+2 10 SF
+26195 7200($)P
+2 9 SF
+26495 7200(PATH)P
+0 10 SF
+28198 7200(consists)P
+30299 7200(of)P
+31001 7200(direc\255)P
+8220 6480(tory)P
+9387 6480(names)P
+11119 6480(separated)P
+13583 6480(by)P
+2 10 SF
+14383 6480(:)P
+14683 6480(.)P
+0 10 SF
+15233 6480(For)P
+16267 6480(example,)P
+0 9 SF
+11880 5400(PATH)P
+0 10 SF
+13290 5400(=)P
+2 10 SF
+13628 5400(:)P
+0 10 SF
+13828 5400(/usr/fred/bin)P
+2 10 SF
+16795 5400(:)P
+0 10 SF
+16995 5400(/bin)P
+2 10 SF
+17929 5400(:)P
+0 10 SF
+18129 5400(/usr/bin)P
+8220 4320(speci\212es)P
+10591 4320(that)P
+11797 4320(the)P
+12836 4320(current)P
+14841 4320(directory)P
+17313 4320(\(the)P
+18552 4320(null)P
+19792 4320(string)P
+21465 4320(before)P
+23303 4320(the)P
+24342 4320(\212rst)P
+2 10 SF
+25582 4320(:)P
+0 10 SF
+25882 4320(\),)P
+2 10 SF
+26537 4320(/usr/fred/bin,)P
+30227 4320(/bin)P
+0 10 SF
+31534 4320(and)P
+end restore showpage
+%%Page: USD:3-10 10
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\25510)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+2 10 SF
+8220 42480(/usr/bin)P
+0 10 SF
+10548 42480(are)P
+11606 42480(to)P
+12399 42480(be)P
+13291 42480(searched)P
+15713 42480(in)P
+16505 42480(that)P
+17730 42480(order.)P
+19671 42480(In)P
+20496 42480(this)P
+21688 42480(way)P
+23012 42480(individual)P
+25771 42480(users)P
+27328 42480(can)P
+28485 42480(have)P
+29942 42480(their)P
+31367 42480(own)P
+8220 41760(`private')P
+10545 41760(commands)P
+13403 41760(that)P
+14562 41760(are)P
+15553 41760(accessible)P
+18242 41760(independently)P
+21900 41760(of)P
+22659 41760(the)P
+23651 41760(current)P
+25609 41760(directory.)P
+28384 41760(If)P
+29043 41760(the)P
+30034 41760(command)P
+8220 41040(name)P
+9752 41040(contains)P
+11984 41040(a)P
+2 10 SF
+12483 41040(/)P
+0 10 SF
+12883 41040(then)P
+14149 41040(this)P
+15249 41040(directory)P
+17648 41040(search)P
+19412 41040(is)P
+20045 41040(not)P
+21045 41040(used;)P
+22544 41040(a)P
+23043 41040(single)P
+24709 41040(attempt)P
+26742 41040(is)P
+27374 41040(made)P
+28905 41040(to)P
+29604 41040(execute)P
+31667 41040(the)P
+8220 40320(command.)P
+2 10 SF
+5820 39384($)P
+2 9 SF
+6120 39384(PS1)P
+0 10 SF
+8220 39384(The)P
+9353 39384(primary)P
+11453 39384(shell)P
+12786 39384(prompt)P
+14720 39384(string,)P
+16437 39384(by)P
+17237 39384(default,)P
+19253 39384(`)P
+2 10 SF
+19453 39384($)P
+0 10 SF
+19953 39384('.)P
+2 10 SF
+5820 38448($)P
+2 9 SF
+6120 38448(PS2)P
+0 10 SF
+8220 38448(The)P
+9353 38448(shell)P
+10686 38448(prompt)P
+12620 38448(when)P
+14119 38448(further)P
+15952 38448(input)P
+17386 38448(is)P
+17986 38448(needed,)P
+20034 38448(by)P
+20834 38448(default,)P
+22850 38448(`)P
+2 10 SF
+23050 38448(>)P
+0 10 SF
+23592 38448('.)P
+2 10 SF
+5820 37512($)P
+2 9 SF
+6120 37512(IFS)P
+0 10 SF
+8220 37512(The)P
+9353 37512(set)P
+10219 37512(of)P
+10919 37512(characters)P
+13549 37512(used)P
+14848 37512(by)P
+1 10 SF
+15648 37512(blank)P
+17181 37512(interpretation)P
+0 10 SF
+20714 37512(\(see)P
+21879 37512(section)P
+23778 37512(3.4\).)P
+2 10 SF
+4320 36072(2.5)P
+5270 36072(The)P
+6470 36072(test)P
+7569 36072(command)P
+0 10 SF
+4320 35136(The)P
+1 10 SF
+5453 35136(test)P
+0 10 SF
+6486 35136(command,)P
+9202 35136(although)P
+11502 35136(not)P
+12469 35136(part)P
+13602 35136(of)P
+14302 35136(the)P
+15235 35136(shell,)P
+16718 35136(is)P
+17318 35136(intended)P
+19584 35136(for)P
+20484 35136(use)P
+21483 35136(by)P
+22283 35136(shell)P
+23616 35136(programs.)P
+26432 35136(For)P
+27466 35136(example,)P
+7980 34056(test)P
+3 10 SF
+9013 34056(-)P
+0 10 SF
+9342 34056(f)P
+9742 34056(\212le)P
+4320 32976(returns)P
+6211 32976(zero)P
+7468 32976(exit)P
+8593 32976(status)P
+10184 32976(if)P
+1 10 SF
+10776 32976(\212le)P
+0 10 SF
+11734 32976(exists)P
+13325 32976(and)P
+14416 32976(non\255zero)P
+16773 32976(exit)P
+17898 32976(status)P
+19489 32976(otherwise.)P
+22396 32976(In)P
+23121 32976(general)P
+1 10 SF
+25110 32976(test)P
+0 10 SF
+26167 32976(evaluates)P
+28622 32976(a)P
+29112 32976(predicate)P
+31534 32976(and)P
+4320 32256(returns)P
+6206 32256(the)P
+7159 32256(result)P
+8712 32256(as)P
+9431 32256(its)P
+10218 32256(exit)P
+11338 32256(status.)P
+13274 32256(Some)P
+14861 32256(of)P
+15581 32256(the)P
+16534 32256(more)P
+17987 32256(frequently)P
+20672 32256(used)P
+1 10 SF
+21990 32256(test)P
+0 10 SF
+23042 32256(arguments)P
+25760 32256(are)P
+26711 32256(given)P
+28263 32256(here,)P
+29664 32256(see)P
+1 10 SF
+30648 32256(test)P
+0 10 SF
+31700 32256(\(1\))P
+4320 31536(for)P
+5220 31536(a)P
+5686 31536(complete)P
+8085 31536(speci\212cation.)P
+7980 30456(test)P
+9013 30456(s)P
+10980 30456(true)P
+12113 30456(if)P
+12680 30456(the)P
+13613 30456(argument)P
+1 10 SF
+16079 30456(s)P
+0 10 SF
+16512 30456(is)P
+17112 30456(not)P
+18079 30456(the)P
+19012 30456(null)P
+20146 30456(string)P
+7980 29736(test)P
+3 10 SF
+9013 29736(-)P
+0 10 SF
+9342 29736(f)P
+9742 29736(\212le)P
+10980 29736(true)P
+12113 29736(if)P
+1 10 SF
+12680 29736(\212le)P
+0 10 SF
+13613 29736(exists)P
+7980 29016(test)P
+3 10 SF
+9013 29016(-)P
+0 10 SF
+9342 29016(r)P
+9742 29016(\212le)P
+10980 29016(true)P
+12113 29016(if)P
+1 10 SF
+12680 29016(\212le)P
+0 10 SF
+13613 29016(is)P
+14213 29016(readable)P
+7980 28296(test)P
+3 10 SF
+9013 28296(-)P
+0 10 SF
+9342 28296(w)P
+9975 28296(\212le)P
+10980 28296(true)P
+12113 28296(if)P
+1 10 SF
+12680 28296(\212le)P
+0 10 SF
+13613 28296(is)P
+14213 28296(writable)P
+7980 27576(test)P
+3 10 SF
+9013 27576(-)P
+0 10 SF
+9342 27576(d)P
+9842 27576(\212le)P
+10980 27576(true)P
+12113 27576(if)P
+1 10 SF
+12680 27576(\212le)P
+0 10 SF
+13613 27576(is)P
+14213 27576(a)P
+14679 27576(directory)P
+2 10 SF
+4320 25776(2.6)P
+5270 25776(Control)P
+7470 25776(\213ow)P
+8737 25776<AD>P
+9137 25776(while)P
+0 10 SF
+4320 24840(The)P
+5478 24840(actions)P
+7402 24840(of)P
+8126 24840(the)P
+2 10 SF
+9083 24840(for)P
+0 10 SF
+10073 24840(loop)P
+11364 24840(and)P
+12454 24840(the)P
+2 10 SF
+13411 24840(case)P
+0 10 SF
+14700 24840(branch)P
+16556 24840(are)P
+17512 24840(determined)P
+20435 24840(by)P
+21259 24840(data)P
+22482 24840(available)P
+24871 24840(to)P
+25562 24840(the)P
+26519 24840(shell.)P
+28226 24840(A)P
+2 10 SF
+28883 24840(while)P
+0 10 SF
+30474 24840(or)P
+2 10 SF
+31198 24840(until)P
+0 10 SF
+4320 24120(loop)P
+5641 24120(and)P
+6761 24120(an)P
+2 10 SF
+7581 24120(if)P
+8202 24120(then)P
+9590 24120(else)P
+0 10 SF
+10776 24120(branch)P
+12662 24120(are)P
+13648 24120(also)P
+14868 24120(provided)P
+17255 24120(whose)P
+19041 24120(actions)P
+20994 24120(are)P
+21980 24120(determined)P
+24933 24120(by)P
+25787 24120(the)P
+26774 24120(exit)P
+27928 24120(status)P
+29548 24120(returned)P
+31800 24120(by)P
+4320 23400(commands.)P
+7469 23400(A)P
+2 10 SF
+8102 23400(while)P
+0 10 SF
+9669 23400(loop)P
+10936 23400(has)P
+11935 23400(the)P
+12868 23400(general)P
+14833 23400(form)P
+2 10 SF
+7980 22320(while)P
+1 10 SF
+9547 22320(command\255list)P
+1 6 SF
+12813 22170(1)P
+2 10 SF
+7980 21600(do)P
+1 10 SF
+8814 21600(command\255list)P
+1 6 SF
+12080 21450(2)P
+2 10 SF
+7980 20880(done)P
+0 10 SF
+4320 19584(The)P
+5515 19584(value)P
+7076 19584(tested)P
+8737 19584(by)P
+9599 19584(the)P
+2 10 SF
+10593 19584(while)P
+0 10 SF
+12221 19584(command)P
+14848 19584(is)P
+15509 19584(the)P
+16503 19584(exit)P
+17664 19584(status)P
+19291 19584(of)P
+20052 19584(the)P
+21046 19584(last)P
+22140 19584(simple)P
+24001 19584(command)P
+26628 19584(following)P
+2 10 SF
+29223 19584(while.)P
+0 10 SF
+31201 19584(Each)P
+4320 18864(time)P
+5632 18864(round)P
+7277 18864(the)P
+8255 18864(loop)P
+1 10 SF
+9567 18864(command\255list)P
+1 6 SF
+12833 18714(1)P
+0 10 SF
+13258 18864(is)P
+13903 18864(executed;)P
+16446 18864(if)P
+17058 18864(a)P
+17569 18864(zero)P
+18846 18864(exit)P
+19991 18864(status)P
+21602 18864(is)P
+22247 18864(returned)P
+24491 18864(then)P
+1 10 SF
+25768 18864(command\255list)P
+1 6 SF
+29034 18714(2)P
+0 10 SF
+29458 18864(is)P
+30102 18864(executed;)P
+4320 18144(otherwise,)P
+7002 18144(the)P
+7935 18144(loop)P
+9202 18144(terminates.)P
+12251 18144(For)P
+13285 18144(example,)P
+7980 17064(while)P
+9513 17064(test)P
+10546 17064($1)P
+7980 16344(do)P
+2 10 SF
+8780 16344(.)P
+9030 16344(.)P
+9280 16344(.)P
+0 10 SF
+8780 15624(shift)P
+7980 14904(done)P
+4320 13824(is)P
+4920 13824(equivalent)P
+7619 13824(to)P
+7980 12744(for)P
+8880 12744(i)P
+7980 12024(do)P
+2 10 SF
+8780 12024(.)P
+9030 12024(.)P
+9280 12024(.)P
+0 10 SF
+7980 11304(done)P
+1 10 SF
+4320 10224(shift)P
+0 10 SF
+5554 10224(is)P
+6154 10224(a)P
+6620 10224(shell)P
+7953 10224(command)P
+10519 10224(that)P
+11619 10224(renames)P
+13817 10224(the)P
+14750 10224(positional)P
+17317 10224(parameters)P
+2 10 SF
+20148 10224($2,)P
+21098 10224($3,)P
+22048 10224(.)P
+22298 10224(.)P
+22548 10224(.)P
+0 10 SF
+22898 10224(as)P
+2 10 SF
+23597 10224($1,)P
+24547 10224($2,)P
+25497 10224(.)P
+25747 10224(.)P
+25997 10224(.)P
+0 10 SF
+26547 10224(and)P
+27613 10224(loses)P
+2 10 SF
+29012 10224($1)P
+29712 10224(.)P
+0 10 SF
+4320 9288(Another)P
+6499 9288(kind)P
+7779 9288(of)P
+8492 9288(use)P
+9504 9288(for)P
+10417 9288(the)P
+2 10 SF
+11363 9288(while/until)P
+0 10 SF
+14312 9288(loop)P
+15592 9288(is)P
+16205 9288(to)P
+16885 9288(wait)P
+18131 9288(until)P
+19444 9288(some)P
+20922 9288(external)P
+23066 9288(event)P
+24577 9288(occurs)P
+26354 9288(and)P
+27432 9288(then)P
+28677 9288(run)P
+29689 9288(some)P
+31167 9288(com\255)P
+4320 8568(mands.)P
+6436 8568(In)P
+7136 8568(an)P
+2 10 SF
+7902 8568(until)P
+0 10 SF
+9304 8568(loop)P
+10571 8568(the)P
+11504 8568(termination)P
+14471 8568(condition)P
+16938 8568(is)P
+17538 8568(reversed.)P
+20119 8568(For)P
+21153 8568(example,)P
+7980 7488(until)P
+9281 7488(test)P
+3 10 SF
+10314 7488(-)P
+0 10 SF
+10643 7488(f)P
+11043 7488(\212le)P
+7980 6768(do)P
+8780 6768(sleep)P
+10212 6768(300;)P
+11479 6768(done)P
+1 10 SF
+7980 6048(commands)P
+0 10 SF
+4320 4968(will)P
+5528 4968(loop)P
+6868 4968(until)P
+1 10 SF
+8242 4968(\212le)P
+0 10 SF
+9248 4968(exists.)P
+11237 4968(Each)P
+12709 4968(time)P
+14049 4968(round)P
+15722 4968(the)P
+16728 4968(loop)P
+18068 4968(it)P
+18675 4968(waits)P
+20214 4968(for)P
+21187 4968(5)P
+21760 4968(minutes)P
+23933 4968(before)P
+25738 4968(trying)P
+27445 4968(again.)P
+29367 4968(\(Presumably)P
+4320 4248(another)P
+6319 4248(process)P
+8317 4248(will)P
+9451 4248(eventually)P
+12150 4248(create)P
+13781 4248(the)P
+14714 4248(\212le.\))P
+end restore showpage
+%%Page: USD:3-11 11
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+29933 44640(USD:3\25511)P
+2 10 SF
+4320 42480(2.7)P
+5270 42480(Control)P
+7470 42480(\213ow)P
+8737 42480<AD>P
+9137 42480(if)P
+0 10 SF
+4320 41544(Also)P
+5653 41544(available)P
+8018 41544(is)P
+8618 41544(a)P
+9084 41544(general)P
+11049 41544(conditional)P
+13949 41544(branch)P
+15781 41544(of)P
+16481 41544(the)P
+17414 41544(form,)P
+2 10 SF
+7980 40464(if)P
+1 10 SF
+8547 40464(command\255list)P
+2 10 SF
+7980 39744(then)P
+1 10 SF
+9480 39744(command\255list)P
+2 10 SF
+7980 39024(else)P
+1 10 SF
+9480 39024(command\255list)P
+2 10 SF
+7980 38304<8A>P
+0 10 SF
+4320 37224(that)P
+5420 37224(tests)P
+6686 37224(the)P
+7619 37224(value)P
+9118 37224(returned)P
+11317 37224(by)P
+12117 37224(the)P
+13050 37224(last)P
+14083 37224(simple)P
+15883 37224(command)P
+18449 37224(following)P
+2 10 SF
+20983 37224(if.)P
+0 10 SF
+4320 36288(The)P
+2 10 SF
+5453 36288(if)P
+0 10 SF
+6020 36288(command)P
+8586 36288(may)P
+9819 36288(be)P
+10585 36288(used)P
+11884 36288(in)P
+12551 36288(conjunction)P
+15584 36288(with)P
+16851 36288(the)P
+1 10 SF
+17784 36288(test)P
+0 10 SF
+18817 36288(command)P
+21383 36288(to)P
+22050 36288(test)P
+23083 36288(for)P
+23983 36288(the)P
+24916 36288(existence)P
+27347 36288(of)P
+28047 36288(a)P
+28513 36288(\212le)P
+29480 36288(as)P
+30179 36288(in)P
+7980 35208(if)P
+8547 35208(test)P
+3 10 SF
+9580 35208(-)P
+0 10 SF
+9909 35208(f)P
+10309 35208(\212le)P
+7980 34488(then)P
+1 10 SF
+9480 34488(process)P
+11511 34488(\212le)P
+0 10 SF
+7980 33768(else)P
+1 10 SF
+9480 33768(do)P
+10280 33768(something)P
+12946 33768(else)P
+0 10 SF
+7980 33048<8A>P
+4320 31752(An)P
+5253 31752(example)P
+7485 31752(of)P
+8185 31752(the)P
+9118 31752(use)P
+10117 31752(of)P
+2 10 SF
+10817 31752(if,)P
+11534 31752(case)P
+0 10 SF
+12799 31752(and)P
+2 10 SF
+13865 31752(for)P
+0 10 SF
+14831 31752(constructions)P
+18230 31752(is)P
+18830 31752(given)P
+20363 31752(in)P
+21030 31752(section)P
+22929 31752(2.10)P
+24079 31752(.)P
+4320 30816(A)P
+4953 30816(multiple)P
+7154 30816(test)P
+2 10 SF
+8187 30816(if)P
+0 10 SF
+8754 30816(command)P
+11320 30816(of)P
+12020 30816(the)P
+12953 30816(form)P
+7980 29736(if)P
+2 10 SF
+8547 29736(.)P
+8797 29736(.)P
+9047 29736(.)P
+0 10 SF
+7980 29016(then)P
+2 10 SF
+9480 29016(.)P
+9730 29016(.)P
+9980 29016(.)P
+0 10 SF
+7980 28296(else)P
+9480 28296(if)P
+2 10 SF
+10047 28296(.)P
+10297 28296(.)P
+10547 28296(.)P
+0 10 SF
+9480 27576(then)P
+2 10 SF
+10980 27576(.)P
+11230 27576(.)P
+11480 27576(.)P
+0 10 SF
+9480 26856(else)P
+10980 26856(if)P
+2 10 SF
+11547 26856(.)P
+11797 26856(.)P
+12047 26856(.)P
+10980 26136(.)P
+11230 26136(.)P
+11480 26136(.)P
+0 10 SF
+10980 25416<8A>P
+9480 24696<8A>P
+7980 23976<8A>P
+4320 22896(may)P
+5553 22896(be)P
+6319 22896(written)P
+8219 22896(using)P
+9719 22896(an)P
+10485 22896(extension)P
+12984 22896(of)P
+13684 22896(the)P
+2 10 SF
+14617 22896(if)P
+0 10 SF
+15184 22896(notation)P
+17351 22896(as,)P
+7980 21816(if)P
+2 10 SF
+8547 21816(.)P
+8797 21816(.)P
+9047 21816(.)P
+0 10 SF
+7980 21096(then)P
+2 10 SF
+9480 21096(.)P
+9730 21096(.)P
+9980 21096(.)P
+0 10 SF
+7980 20376(elif)P
+2 10 SF
+9480 20376(.)P
+9730 20376(.)P
+9980 20376(.)P
+0 10 SF
+7980 19656(then)P
+2 10 SF
+9480 19656(.)P
+9730 19656(.)P
+9980 19656(.)P
+0 10 SF
+7980 18936(elif)P
+2 10 SF
+9480 18936(.)P
+9730 18936(.)P
+9980 18936(.)P
+7980 18216(.)P
+8230 18216(.)P
+8480 18216(.)P
+0 10 SF
+7980 17496<8A>P
+4320 16200(The)P
+5446 16200(following)P
+7973 16200(example)P
+10198 16200(is)P
+10791 16200(the)P
+1 10 SF
+11717 16200(touch)P
+0 10 SF
+13243 16200(command)P
+15802 16200(which)P
+17461 16200(changes)P
+19585 16200(the)P
+20511 16200(`last)P
+21737 16200(modi\212ed')P
+24264 16200(time)P
+25524 16200(for)P
+26417 16200(a)P
+26876 16200(list)P
+27803 16200(of)P
+28496 16200(\212les.)P
+30040 16200(The)P
+31167 16200(com\255)P
+4320 15480(mand)P
+5853 15480(may)P
+7086 15480(be)P
+7852 15480(used)P
+9151 15480(in)P
+9818 15480(conjunction)P
+12851 15480(with)P
+1 10 SF
+14118 15480(make)P
+0 10 SF
+15583 15480(\(1\))P
+16483 15480(to)P
+17150 15480(force)P
+18582 15480(recompilation)P
+22115 15480(of)P
+22815 15480(a)P
+23281 15480(list)P
+24215 15480(of)P
+24915 15480(\212les.)P
+7980 14400(\213ag=)P
+7980 13680(for)P
+8880 13680(i)P
+7980 12960(do)P
+8780 12960(case)P
+10011 12960($i)P
+10678 12960(in)P
+3 10 SF
+8780 12240(-)P
+0 10 SF
+9109 12240(c\))P
+10980 12240(\213ag=N)P
+12851 12240(;;)P
+0 12 SF
+8780 11340(*)P
+0 10 SF
+9140 11520(\))P
+9480 11520(if)P
+10047 11520(test)P
+3 10 SF
+11080 11520(-)P
+0 10 SF
+11409 11520(f)P
+11809 11520($i)P
+9480 10800(then)P
+10980 10800(ln)P
+11647 10800($i)P
+12314 10800(junk$$;)P
+14348 10800(rm)P
+15215 10800(junk$$)P
+9480 10080(elif)P
+10480 10080(test)P
+11513 10080($\213ag)P
+9480 9360(then)P
+10980 9360(echo)P
+12312 9360(\212le)P
+13279 9360<5C9224695C92>P
+14680 9360(does)P
+15979 9360(not)P
+16946 9360(exist)P
+9480 8640(else)P
+10980 8640(>$i)P
+9480 7920<8A>P
+8980 7200(esac)P
+7980 6480(done)P
+4320 5400(The)P
+3 10 SF
+5479 5400(-)P
+2 10 SF
+5808 5400(c)P
+0 10 SF
+6300 5400(\213ag)P
+7426 5400(is)P
+8052 5400(used)P
+9377 5400(in)P
+10070 5400(this)P
+11163 5400(command)P
+13755 5400(to)P
+14448 5400(force)P
+15906 5400(subsequent)P
+18797 5400(\212les)P
+20023 5400(to)P
+20716 5400(be)P
+21508 5400(created)P
+23465 5400(if)P
+24058 5400(they)P
+25317 5400(do)P
+26143 5400(not)P
+27136 5400(already)P
+29126 5400(exist.)P
+30834 5400(Other\255)P
+4320 4680(wise,)P
+5784 4680(if)P
+6366 4680(the)P
+7314 4680(\212le)P
+8296 4680(does)P
+9610 4680(not)P
+10592 4680(exist,)P
+12090 4680(an)P
+12871 4680(error)P
+14252 4680(message)P
+16498 4680(is)P
+17112 4680(printed.)P
+19376 4680(The)P
+20523 4680(shell)P
+21870 4680(variable)P
+1 10 SF
+24016 4680(\213ag)P
+0 10 SF
+25130 4680(is)P
+25744 4680(set)P
+26624 4680(to)P
+27305 4680(some)P
+28785 4680(non\255null)P
+31033 4680(string)P
+4320 3960(if)P
+4887 3960(the)P
+3 10 SF
+5820 3960(-)P
+2 10 SF
+6149 3960(c)P
+0 10 SF
+6615 3960(argument)P
+9081 3960(is)P
+9681 3960(encountered.)P
+13162 3960(The)P
+14295 3960(commands)P
+end restore showpage
+%%Page: USD:3-12 12
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\25512)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+7980 42120(ln)P
+2 10 SF
+8647 42120(.)P
+8897 42120(.)P
+9147 42120(.)P
+0 10 SF
+9297 42120(;)P
+9664 42120(rm)P
+2 10 SF
+10531 42120(.)P
+10781 42120(.)P
+11031 42120(.)P
+0 10 SF
+4320 41040(make)P
+5819 41040(a)P
+6285 41040(link)P
+7419 41040(to)P
+8086 41040(the)P
+9019 41040(\212le)P
+9986 41040(and)P
+11052 41040(then)P
+12285 41040(remove)P
+14284 41040(it)P
+14818 41040(thus)P
+16018 41040(causing)P
+18050 41040(the)P
+18983 41040(last)P
+20016 41040(modi\212ed)P
+22350 41040(date)P
+23549 41040(to)P
+24216 41040(be)P
+24982 41040(updated.)P
+4320 40104(The)P
+5453 40104(sequence)P
+7980 39024(if)P
+8547 39024(command1)P
+7980 38304(then)P
+9480 38304(command2)P
+7980 37584<8A>P
+4320 36504(may)P
+5553 36504(be)P
+6319 36504(written)P
+7980 35424(command1)P
+10846 35424(&&)P
+11980 35424(command2)P
+4320 34344(Conversely,)P
+7980 33264(command1)P
+3 10 SF
+10946 33264(|)P
+11266 33264(|)P
+0 10 SF
+11686 33264(command2)P
+4320 32184(executes)P
+1 10 SF
+6604 32184(command2)P
+0 10 SF
+9455 32184(only)P
+10741 32184(if)P
+1 10 SF
+11327 32184(command1)P
+0 10 SF
+14178 32184(fails.)P
+15780 32184(In)P
+16499 32184(each)P
+17816 32184(case)P
+19066 32184(the)P
+20018 32184(value)P
+21536 32184(returned)P
+23754 32184(is)P
+24373 32184(that)P
+25492 32184(of)P
+26211 32184(the)P
+27163 32184(last)P
+28215 32184(simple)P
+30034 32184(command)P
+4320 31464(executed.)P
+2 10 SF
+4320 30024(2.8)P
+5270 30024(Command)P
+8171 30024(grouping)P
+0 10 SF
+4320 29088(Commands)P
+7253 29088(may)P
+8486 29088(be)P
+9252 29088(grouped)P
+11418 29088(in)P
+12085 29088(two)P
+13185 29088(ways,)P
+2 10 SF
+7980 28008({)P
+1 10 SF
+8416 28008(command\255list)P
+2 10 SF
+11882 28008(;)P
+12282 28008(})P
+0 10 SF
+4320 26928(and)P
+2 10 SF
+7980 25848(\()P
+1 10 SF
+8380 25848(command\255list)P
+2 10 SF
+11846 25848(\))P
+0 10 SF
+4320 24552(In)P
+5028 24552(the)P
+5969 24552(\212rst)P
+1 10 SF
+7111 24552(command\255list)P
+0 10 SF
+10585 24552(is)P
+11193 24552(simply)P
+13035 24552(executed.)P
+15724 24552(The)P
+16865 24552(second)P
+18738 24552(form)P
+20113 24552(executes)P
+1 10 SF
+22385 24552(command\255list)P
+0 10 SF
+25859 24552(as)P
+26566 24552(a)P
+27040 24552(separate)P
+29211 24552(process.)P
+31566 24552(For)P
+4320 23832(example,)P
+7980 22752(\(cd)P
+8946 22752(x;)P
+9613 22752(rm)P
+10480 22752(junk)P
+11747 22752(\))P
+4320 21672(executes)P
+1 10 SF
+6584 21672(rm)P
+7450 21672(junk)P
+0 10 SF
+8683 21672(in)P
+9350 21672(the)P
+10283 21672(directory)P
+2 10 SF
+12649 21672(x)P
+0 10 SF
+13149 21672(without)P
+15183 21672(changing)P
+17582 21672(the)P
+18515 21672(current)P
+20414 21672(directory)P
+22780 21672(of)P
+23480 21672(the)P
+24413 21672(invoking)P
+26747 21672(shell.)P
+4320 20736(The)P
+5453 20736(commands)P
+7980 19656(cd)P
+8746 19656(x;)P
+9413 19656(rm)P
+10280 19656(junk)P
+4320 18576(have)P
+5652 18576(the)P
+6585 18576(same)P
+8017 18576(effect)P
+9582 18576(but)P
+10549 18576(leave)P
+12014 18576(the)P
+12947 18576(invoking)P
+15281 18576(shell)P
+16614 18576(in)P
+17281 18576(the)P
+18214 18576(directory)P
+2 10 SF
+20580 18576(x.)P
+4320 17136(2.9)P
+5270 17136(Debugging)P
+8238 17136(shell)P
+9605 17136(procedures)P
+0 10 SF
+4320 16200(The)P
+5456 16200(shell)P
+6792 16200(provides)P
+9061 16200(two)P
+10164 16200(tracing)P
+12033 16200(mechanisms)P
+15200 16200(to)P
+15869 16200(help)P
+17104 16200(when)P
+18605 16200(debugging)P
+21340 16200(shell)P
+22675 16200(procedures.)P
+25858 16200(The)P
+26993 16200(\212rst)P
+28129 16200(is)P
+28731 16200(invoked)P
+30866 16200(within)P
+4320 15480(the)P
+5253 15480(procedure)P
+7851 15480(as)P
+7980 14400(set)P
+3 10 SF
+8846 14400(-)P
+0 10 SF
+9175 14400(v)P
+4320 13320(\()P
+2 10 SF
+4520 13320(v)P
+0 10 SF
+5044 13320(for)P
+5968 13320(verbose\))P
+8257 13320(and)P
+9347 13320(causes)P
+11134 13320(lines)P
+12490 13320(of)P
+13213 13320(the)P
+14169 13320(procedure)P
+16790 13320(to)P
+17480 13320(be)P
+18269 13320(printed)P
+20192 13320(as)P
+20914 13320(they)P
+22170 13320(are)P
+23125 13320(read.)P
+24730 13320(It)P
+25320 13320(is)P
+25943 13320(useful)P
+27632 13320(to)P
+28322 13320(help)P
+29578 13320(isolate)P
+31367 13320(syn\255)P
+4320 12600(tax)P
+5253 12600(errors.)P
+7202 12600(It)P
+7769 12600(may)P
+9002 12600(be)P
+9768 12600(invoked)P
+11901 12600(without)P
+13935 12600(modifying)P
+16636 12600(the)P
+17569 12600(procedure)P
+20167 12600(by)P
+20967 12600(saying)P
+7980 11520(sh)P
+3 10 SF
+8713 11520(-)P
+0 10 SF
+9042 11520(v)P
+9542 11520(proc)P
+2 10 SF
+10808 11520(.)P
+11058 11520(.)P
+11308 11520(.)P
+0 10 SF
+4320 10440(where)P
+1 10 SF
+6044 10440(proc)P
+0 10 SF
+7402 10440(is)P
+8061 10440(the)P
+9053 10440(name)P
+10611 10440(of)P
+11370 10440(the)P
+12362 10440(shell)P
+13754 10440(procedure.)P
+16761 10440(This)P
+18087 10440(\213ag)P
+19246 10440(may)P
+20538 10440(be)P
+21363 10440(used)P
+22721 10440(in)P
+23447 10440(conjunction)P
+26539 10440(with)P
+27864 10440(the)P
+3 10 SF
+28855 10440(-)P
+2 10 SF
+29184 10440(n)P
+0 10 SF
+29776 10440(\213ag)P
+30934 10440(which)P
+4320 9720(prevents)P
+6563 9720(execution)P
+9106 9720(of)P
+9817 9720(subsequent)P
+12693 9720(commands.)P
+15853 9720(\(Note)P
+17430 9720(that)P
+18541 9720(saying)P
+1 10 SF
+20318 9720(set)P
+3 10 SF
+21194 9720(-)P
+1 10 SF
+21523 9720(n)P
+0 10 SF
+22033 9720(at)P
+22676 9720(a)P
+23152 9720(terminal)P
+25362 9720(will)P
+26506 9720(render)P
+28248 9720(the)P
+29191 9720(terminal)P
+31401 9720(use\255)P
+4320 9000(less)P
+5419 9000(until)P
+6720 9000(an)P
+7486 9000(end\255of\255\212le)P
+10219 9000(is)P
+10819 9000(typed.\))P
+4320 8064(The)P
+5453 8064(command)P
+7980 6984(set)P
+3 10 SF
+8846 6984(-)P
+0 10 SF
+9175 6984(x)P
+4320 5904(will)P
+5525 5904(produce)P
+7728 5904(an)P
+8565 5904(execution)P
+11168 5904(trace.)P
+12954 5904(Following)P
+15693 5904(parameter)P
+18361 5904(substitution)P
+21432 5904(each)P
+22800 5904(command)P
+25436 5904(is)P
+26106 5904(printed)P
+28076 5904(as)P
+28845 5904(it)P
+29449 5904(is)P
+30119 5904(executed.)P
+4320 5184(\(Try)P
+5587 5184(these)P
+7019 5184(at)P
+7652 5184(the)P
+8585 5184(terminal)P
+10785 5184(to)P
+11452 5184(see)P
+12417 5184(what)P
+13783 5184(effect)P
+15348 5184(they)P
+16581 5184(have.\))P
+18263 5184(Both)P
+19630 5184(\213ags)P
+20963 5184(may)P
+22196 5184(be)P
+22962 5184(turned)P
+24695 5184(off)P
+25595 5184(by)P
+26395 5184(saying)P
+end restore showpage
+%%Page: USD:3-13 13
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+29933 44640(USD:3\25513)P
+7980 42120(set)P
+3 10 SF
+8846 42120(-)P
+0 10 SF
+4320 41040(and)P
+5386 41040(the)P
+6319 41040(current)P
+8218 41040(setting)P
+10018 41040(of)P
+10718 41040(the)P
+11651 41040(shell)P
+12984 41040(\213ags)P
+14317 41040(is)P
+14917 41040(available)P
+17282 41040(as)P
+2 10 SF
+17981 41040($)P
+3 10 SF
+18281 41040(-)P
+2 10 SF
+18710 41040(.)P
+4320 39600(2.10)P
+5570 39600(The)P
+6770 39600(man)P
+8104 39600(command)P
+0 10 SF
+4320 38664(The)P
+5459 38664(following)P
+7999 38664(is)P
+8604 38664(the)P
+1 10 SF
+9542 38664(man)P
+0 10 SF
+10780 38664(command)P
+13351 38664(which)P
+15022 38664(is)P
+15627 38664(used)P
+16931 38664(to)P
+17603 38664(diplay)P
+19308 38664(sections)P
+21445 38664(of)P
+22150 38664(the)P
+23088 38664(UNIX)P
+24792 38664(manual)P
+26763 38664(on)P
+27568 38664(your)P
+28873 38664(terminal.)P
+31428 38664(It)P
+32000 38664(is)P
+4320 37944(called,)P
+6102 37944(for)P
+7002 37944(example,)P
+9384 37944(as)P
+9480 36864(man)P
+10713 36864(sh)P
+9480 36144(man)P
+3 10 SF
+10713 36144(-)P
+0 10 SF
+11042 36144(t)P
+11409 36144(ed)P
+9480 35424(man)P
+10713 35424(2)P
+11213 35424(fork)P
+4320 34344(In)P
+5047 34344(the)P
+6007 34344(\212rst)P
+7168 34344(the)P
+8127 34344(manual)P
+10119 34344(section)P
+12044 34344(for)P
+1 10 SF
+12970 34344(sh)P
+0 10 SF
+13729 34344(is)P
+14355 34344(displayed..)P
+17380 34344(Since)P
+18939 34344(no)P
+19765 34344(section)P
+21690 34344(is)P
+22316 34344(speci\212ed,)P
+24824 34344(section)P
+26749 34344(1)P
+27275 34344(is)P
+27901 34344(used.)P
+29576 34344(The)P
+30735 34344(second)P
+4320 33624(example)P
+6568 33624(will)P
+7718 33624(typeset)P
+9633 33624(\()P
+3 10 SF
+9833 33624(-)P
+2 10 SF
+10162 33624(t)P
+0 10 SF
+10578 33624(option\))P
+12528 33624(the)P
+13477 33624(manual)P
+15459 33624(section)P
+17373 33624(for)P
+1 10 SF
+18288 33624(ed.)P
+0 10 SF
+19419 33624(The)P
+20567 33624(last)P
+21615 33624(prints)P
+23197 33624(the)P
+1 10 SF
+24145 33624(fork)P
+0 10 SF
+25326 33624(manual)P
+27307 33624(page)P
+28654 33624(from)P
+30036 33624(section)P
+31950 33624(2,)P
+4320 32904(which)P
+5986 32904(covers)P
+7751 32904(system)P
+9617 32904(calls.)P
+7980 30384(cd)P
+8746 30384(/usr/man)P
+7980 28944(:)P
+8347 28944(\222colon)P
+10080 28944(is)P
+10680 28944(the)P
+11613 28944(comment)P
+14046 28944(command\222)P
+7980 28224(:)P
+8347 28224(\222default)P
+10413 28224(is)P
+11013 28224(nroff)P
+12413 28224(\($N\),)P
+13896 28224(section)P
+15795 28224(1)P
+16295 28224(\($s\)\222)P
+7980 27504(N=n)P
+9251 27504(s=1)P
+7980 26064(for)P
+8880 26064(i)P
+7980 25344(do)P
+8780 25344(case)P
+10011 25344($i)P
+10678 25344(in)P
+8780 24264([1)P
+3 10 SF
+9280 24264(-)P
+0 10 SF
+9609 24264(9])P
+0 12 SF
+10109 24084(*)P
+0 10 SF
+10469 24264(\))P
+10980 24264(s=$i)P
+12218 24264(;;)P
+3 10 SF
+8780 23184(-)P
+0 10 SF
+9109 23184(t\))P
+9480 23184(N=t)P
+10618 23184(;;)P
+3 10 SF
+8780 22104(-)P
+0 10 SF
+9109 22104(n\))P
+10980 22104(N=n)P
+12251 22104(;;)P
+3 10 SF
+8780 21024(-)P
+0 12 SF
+9109 20844(*)P
+0 10 SF
+9469 21024(\))P
+10980 21024(echo)P
+12312 21024(unknown)P
+14745 21024(\213ag)P
+15845 21024<5C9224695C92>P
+17246 21024(;;)P
+0 12 SF
+8780 19764(*)P
+0 10 SF
+9140 19944(\))P
+9480 19944(if)P
+10047 19944(test)P
+3 10 SF
+11080 19944(-)P
+0 10 SF
+11409 19944(f)P
+11809 19944(man$s/$i.$s)P
+9480 19224(then)P
+10980 19224(${N}roff)P
+13389 19224(man0/${N}aa)P
+16930 19224(man$s/$i.$s)P
+9480 18504(else)P
+10980 18504(:)P
+11347 18504(\222look)P
+12814 18504(through)P
+14881 18504(all)P
+15681 18504(manual)P
+17647 18504(sections\222)P
+10980 17784(found=no)P
+10980 17064(for)P
+11880 17064(j)P
+12247 17064(in)P
+12914 17064(1)P
+13414 17064(2)P
+13914 17064(3)P
+14414 17064(4)P
+14914 17064(5)P
+15414 17064(6)P
+15914 17064(7)P
+16414 17064(8)P
+16914 17064(9)P
+10980 16344(do)P
+11780 16344(if)P
+12347 16344(test)P
+3 10 SF
+13380 16344(-)P
+0 10 SF
+13709 16344(f)P
+14109 16344(man$j/$i.$j)P
+11780 15624(then)P
+13013 15624(man)P
+14246 15624($j)P
+14913 15624($i)P
+13013 14904(found=yes)P
+11780 14184<8A>P
+10980 13464(done)P
+10980 12744(case)P
+12211 12744($found)P
+14111 12744(in)P
+12211 12024(no\))P
+13211 12024(echo)P
+14543 12024(\222$i:)P
+15577 12024(manual)P
+17543 12024(page)P
+18875 12024(not)P
+19842 12024(found\222)P
+10980 11304(esac)P
+9480 10584<8A>P
+8780 9864(esac)P
+7980 9144(done)P
+2 10 SF
+12951 8064(Figure)P
+14851 8064(1.)P
+15501 8064(A)P
+16134 8064(version)P
+18200 8064(of)P
+18900 8064(the)P
+19900 8064(man)P
+21234 8064(command)P
+4320 6624(3.0)P
+5270 6624(Keyword)P
+7836 6624(parameters)P
+0 10 SF
+4320 5688(Shell)P
+5827 5688(variables)P
+8265 5688(may)P
+9571 5688(be)P
+10410 5688(given)P
+12016 5688(values)P
+13821 5688(by)P
+14694 5688(assignment)P
+17666 5688(or)P
+18439 5688(when)P
+20011 5688(a)P
+20550 5688(shell)P
+21955 5688(procedure)P
+24625 5688(is)P
+25297 5688(invoked.)P
+27852 5688(An)P
+28857 5688(argument)P
+31395 5688(to)P
+32134 5688(a)P
+4320 4968(shell)P
+5690 4968(procedure)P
+8325 4968(of)P
+9062 4968(the)P
+10032 4968(form)P
+1 10 SF
+11436 4968(name=value)P
+0 10 SF
+14676 4968(that)P
+15813 4968(precedes)P
+18147 4968(the)P
+19117 4968(command)P
+21720 4968(name)P
+23256 4968(causes)P
+1 10 SF
+25057 4968(value)P
+0 10 SF
+26592 4968(to)P
+27295 4968(be)P
+28097 4968(assigned)P
+30398 4968(to)P
+1 10 SF
+31101 4968(name)P
+0 10 SF
+4320 4248(before)P
+6052 4248(execution)P
+8584 4248(of)P
+9284 4248(the)P
+10217 4248(procedure)P
+12815 4248(begins.)P
+14931 4248(The)P
+16064 4248(value)P
+17563 4248(of)P
+1 10 SF
+18263 4248(name)P
+0 10 SF
+19762 4248(in)P
+20429 4248(the)P
+21362 4248(invoking)P
+23696 4248(shell)P
+25029 4248(is)P
+25629 4248(not)P
+26596 4248(affected.)P
+29077 4248(For)P
+30111 4248(example,)P
+end restore showpage
+%%Page: USD:3-14 14
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\25514)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+7980 42120(user=fred)P
+10483 42120(command)P
+4320 41040(will)P
+5469 41040(execute)P
+1 10 SF
+7515 41040(command)P
+0 10 SF
+10062 41040(with)P
+2 10 SF
+11344 41040(user)P
+0 10 SF
+12658 41040(set)P
+13539 41040(to)P
+1 10 SF
+14221 41040(fred)P
+0 10 SF
+15187 41040(.)P
+15751 41040(The)P
+3 10 SF
+16898 41040(-)P
+2 10 SF
+17227 41040(k)P
+0 10 SF
+17775 41040(\213ag)P
+18889 41040(causes)P
+20667 41040(arguments)P
+23380 41040(of)P
+24094 41040(the)P
+25041 41040(form)P
+1 10 SF
+26422 41040(name=value)P
+0 10 SF
+29639 41040(to)P
+30320 41040(be)P
+31100 41040(inter\255)P
+4320 40320(preted)P
+6029 40320(in)P
+6706 40320(this)P
+7783 40320(way)P
+8992 40320(anywhere)P
+11533 40320(in)P
+12210 40320(the)P
+13152 40320(argument)P
+15627 40320(list.)P
+16920 40320(Such)P
+1 10 SF
+18329 40320(names)P
+0 10 SF
+20070 40320(are)P
+21011 40320(sometimes)P
+23786 40320(called)P
+25427 40320(keyword)P
+27735 40320(parameters.)P
+30925 40320(If)P
+31534 40320(any)P
+4320 39600(arguments)P
+7019 39600(remain)P
+8885 39600(they)P
+10118 39600(are)P
+11050 39600(available)P
+13415 39600(as)P
+14114 39600(positional)P
+16681 39600(parameters)P
+2 10 SF
+19512 39600($1,)P
+20462 39600($2,)P
+21412 39600(.)P
+21662 39600(.)P
+21912 39600(.)P
+22162 39600(.)P
+0 10 SF
+4320 38664(The)P
+1 10 SF
+5453 38664(set)P
+0 10 SF
+6319 38664(command)P
+8885 38664(may)P
+10118 38664(also)P
+11284 38664(be)P
+12050 38664(used)P
+13349 38664(to)P
+14016 38664(set)P
+14882 38664(positional)P
+17449 38664(parameters)P
+20280 38664(from)P
+21647 38664(within)P
+23381 38664(a)P
+23847 38664(procedure.)P
+26795 38664(For)P
+27829 38664(example,)P
+7980 37584(set)P
+3 10 SF
+8846 37584(-)P
+0 12 SF
+9375 37404(*)P
+0 10 SF
+4320 36504(will)P
+5471 36504(set)P
+2 10 SF
+6354 36504($1)P
+0 10 SF
+7171 36504(to)P
+7855 36504(the)P
+8805 36504(\212rst)P
+9956 36504(\212le)P
+10940 36504(name)P
+12456 36504(in)P
+13140 36504(the)P
+14090 36504(current)P
+16006 36504(directory,)P
+2 10 SF
+18539 36504($2)P
+0 10 SF
+19356 36504(to)P
+20040 36504(the)P
+20990 36504(next,)P
+22390 36504(and)P
+23472 36504(so)P
+24221 36504(on.)P
+25387 36504(Note)P
+26769 36504(that)P
+27885 36504(the)P
+28834 36504(\212rst)P
+29984 36504(argument,)P
+3 10 SF
+4320 35784(-)P
+0 10 SF
+4649 35784(,)P
+4999 35784(ensures)P
+6997 35784(correct)P
+8862 35784(treatment)P
+11328 35784(when)P
+12827 35784(the)P
+13760 35784(\212rst)P
+14894 35784(\212le)P
+15861 35784(name)P
+17360 35784(begins)P
+19126 35784(with)P
+20393 35784(a)P
+3 10 SF
+20859 35784(-)P
+0 10 SF
+21288 35784(.)P
+2 10 SF
+4320 34128(3.1)P
+5270 34128(Parameter)P
+8201 34128(transmission)P
+0 10 SF
+4320 33192(When)P
+5967 33192(a)P
+6448 33192(shell)P
+7796 33192(procedure)P
+10408 33192(is)P
+11022 33192(invoked)P
+13169 33192(both)P
+14450 33192(positional)P
+17031 33192(and)P
+18111 33192(keyword)P
+20424 33192(parameters)P
+23269 33192(may)P
+24516 33192(be)P
+25296 33192(supplied)P
+27543 33192(with)P
+28824 33192(the)P
+29771 33192(call.)P
+31201 33192(Key\255)P
+4320 32472(word)P
+5742 32472(parameters)P
+8562 32472(are)P
+9483 32472(also)P
+10639 32472(made)P
+12128 32472(available)P
+14483 32472(implicitly)P
+17008 32472(to)P
+17665 32472(a)P
+18121 32472(shell)P
+19444 32472(procedure)P
+22032 32472(by)P
+22822 32472(specifying)P
+25511 32472(in)P
+26168 32472(advance)P
+28322 32472(that)P
+29412 32472(such)P
+30701 32472(param\255)P
+4320 31752(eters)P
+5652 31752(are)P
+6584 31752(to)P
+7251 31752(be)P
+8017 31752(exported.)P
+10666 31752(For)P
+11700 31752(example,)P
+7980 30672(export)P
+9713 30672(user)P
+10912 30672(box)P
+4320 29592(marks)P
+6012 29592(the)P
+6970 29592(variables)P
+2 10 SF
+9360 29592(user)P
+0 10 SF
+10684 29592(and)P
+2 10 SF
+11775 29592(box)P
+0 10 SF
+12934 29592(for)P
+13859 29592(export.)P
+15967 29592(When)P
+17624 29592(a)P
+18115 29592(shell)P
+19473 29592(procedure)P
+22096 29592(is)P
+22721 29592(invoked)P
+24879 29592(copies)P
+26636 29592(are)P
+27593 29592(made)P
+29117 29592(of)P
+29842 29592(all)P
+30667 29592(export\255)P
+4320 28872(able)P
+5576 28872(variables)P
+7997 28872(for)P
+8953 28872(use)P
+10008 28872(within)P
+11798 28872(the)P
+12787 28872(invoked)P
+14976 28872(procedure.)P
+17980 28872(Modi\212cation)P
+21336 28872(of)P
+22092 28872(such)P
+23447 28872(variables)P
+25868 28872(within)P
+27658 28872(the)P
+28647 28872(procedure)P
+31301 28872(does)P
+4320 28152(not)P
+5332 28152(affect)P
+6942 28152(the)P
+7920 28152(values)P
+9697 28152(in)P
+10409 28152(the)P
+11387 28152(invoking)P
+13766 28152(shell.)P
+15494 28152(It)P
+16106 28152(is)P
+16751 28152(generally)P
+19228 28152(true)P
+20406 28152(of)P
+21150 28152(a)P
+21660 28152(shell)P
+23037 28152(procedure)P
+25679 28152(that)P
+26823 28152(it)P
+27401 28152(may)P
+28678 28152(not)P
+29689 28152(modify)P
+31667 28152(the)P
+4320 27432(state)P
+5665 27432(of)P
+6411 27432(its)P
+7224 27432(caller)P
+8802 27432(without)P
+10882 27432(explicit)P
+12928 27432(request)P
+14906 27432(on)P
+15752 27432(the)P
+16731 27432(part)P
+17910 27432(of)P
+18656 27432(the)P
+19635 27432(caller.)P
+21563 27432(\(Shared)P
+23675 27432(\212le)P
+24688 27432(descriptors)P
+27566 27432(are)P
+28544 27432(an)P
+29356 27432(exception)P
+31933 27432(to)P
+4320 26712(this)P
+5387 26712(rule.\))P
+4320 25776(Names)P
+6197 25776(whose)P
+7941 25776(value)P
+9452 25776(is)P
+10064 25776(intended)P
+12342 25776(to)P
+13021 25776(remain)P
+14899 25776(constant)P
+17110 25776(may)P
+18355 25776(be)P
+19133 25776(declared)P
+1 10 SF
+21375 25776(readonly)P
+23607 25776(.)P
+0 10 SF
+24168 25776(The)P
+25312 25776(form)P
+26690 25776(of)P
+27401 25776(this)P
+28479 25776(command)P
+31056 25776(is)P
+31667 25776(the)P
+4320 25056(same)P
+5752 25056(as)P
+6451 25056(that)P
+7551 25056(of)P
+8251 25056(the)P
+1 10 SF
+9184 25056(export)P
+0 10 SF
+10916 25056(command,)P
+7980 23976(readonly)P
+10279 23976(name)P
+2 10 SF
+11778 23976(.)P
+12028 23976(.)P
+12278 23976(.)P
+0 10 SF
+4320 22896(Subsequent)P
+7286 22896(attempts)P
+9519 22896(to)P
+10186 22896(set)P
+11052 22896(readonly)P
+13351 22896(variables)P
+15716 22896(are)P
+16648 22896(illegal.)P
+2 10 SF
+4320 21456(3.2)P
+5270 21456(Parameter)P
+8201 21456(substitution)P
+0 10 SF
+4320 20520(If)P
+4920 20520(a)P
+5386 20520(shell)P
+6719 20520(parameter)P
+9317 20520(is)P
+9917 20520(not)P
+10884 20520(set)P
+11750 20520(then)P
+12983 20520(the)P
+13916 20520(null)P
+15050 20520(string)P
+16617 20520(is)P
+17217 20520(substituted)P
+20017 20520(for)P
+20917 20520(it.)P
+21801 20520(For)P
+22835 20520(example,)P
+25217 20520(if)P
+25784 20520(the)P
+26717 20520(variable)P
+2 10 SF
+28849 20520(d)P
+0 10 SF
+29383 20520(is)P
+29983 20520(not)P
+30950 20520(set)P
+7980 19440(echo)P
+9312 19440($d)P
+4320 18360(or)P
+7980 17280(echo)P
+9312 17280(${d})P
+4320 16200(will)P
+5454 16200(echo)P
+6786 16200(nothing.)P
+9170 16200(A)P
+9803 16200(default)P
+11669 16200(string)P
+13236 16200(may)P
+14469 16200(be)P
+15235 16200(given)P
+16768 16200(as)P
+17467 16200(in)P
+7980 15120(echo)P
+9312 15120(${d)P
+3 10 SF
+10200 15120(-)P
+2 10 SF
+10529 15120(.)P
+0 10 SF
+10679 15120(})P
+4320 14040(which)P
+5989 14040(will)P
+7126 14040(echo)P
+8461 14040(the)P
+9397 14040(value)P
+10899 14040(of)P
+11602 14040(the)P
+12538 14040(variable)P
+2 10 SF
+14673 14040(d)P
+0 10 SF
+15210 14040(if)P
+15780 14040(it)P
+16317 14040(is)P
+16919 14040(set)P
+17787 14040(and)P
+18855 14040(`)P
+2 10 SF
+19055 14040(.)P
+0 10 SF
+19205 14040(')P
+19607 14040(otherwise.)P
+22491 14040(The)P
+23626 14040(default)P
+25494 14040(string)P
+27063 14040(is)P
+27665 14040(evaluated)P
+30165 14040(using)P
+31667 14040(the)P
+4320 13320(usual)P
+5786 13320(quoting)P
+7820 13320(conventions)P
+10919 13320(so)P
+11652 13320(that)P
+7980 12240(echo)P
+9312 12240(${d)P
+3 10 SF
+10200 12240(-)P
+0 10 SF
+10529 12240<92>P
+0 12 SF
+10729 12060(*)P
+0 10 SF
+11089 12240<927D>P
+4320 11160(will)P
+5454 11160(echo)P
+2 12 SF
+6786 10980(*)P
+0 10 SF
+7346 11160(if)P
+7913 11160(the)P
+8846 11160(variable)P
+2 10 SF
+10978 11160(d)P
+0 10 SF
+11512 11160(is)P
+12112 11160(not)P
+13079 11160(set.)P
+14295 11160(Similarly)P
+7980 10080(echo)P
+9312 10080(${d)P
+3 10 SF
+10200 10080(-)P
+0 10 SF
+10529 10080($1})P
+4320 9000(will)P
+5467 9000(echo)P
+6812 9000(the)P
+7758 9000(value)P
+9270 9000(of)P
+2 10 SF
+9983 9000(d)P
+0 10 SF
+10530 9000(if)P
+11110 9000(it)P
+11657 9000(is)P
+12270 9000(set)P
+13149 9000(and)P
+14228 9000(the)P
+15174 9000(value)P
+16686 9000(\(if)P
+17466 9000(any\))P
+18745 9000(of)P
+2 10 SF
+19458 9000($1)P
+0 10 SF
+20271 9000(otherwise.)P
+23166 9000(A)P
+23812 9000(variable)P
+25956 9000(may)P
+27201 9000(be)P
+27979 9000(assigned)P
+30256 9000(a)P
+30734 9000(default)P
+4320 8280(value)P
+5819 8280(using)P
+7319 8280(the)P
+8252 8280(notation)P
+7980 7200(echo)P
+9312 7200(${d=)P
+2 10 SF
+10538 7200(.)P
+0 10 SF
+10688 7200(})P
+4320 6120(which)P
+5986 6120(substitutes)P
+8719 6120(the)P
+9652 6120(same)P
+11084 6120(string)P
+12651 6120(as)P
+7980 5040(echo)P
+9312 5040(${d)P
+3 10 SF
+10200 5040(-)P
+2 10 SF
+10529 5040(.)P
+0 10 SF
+10679 5040(})P
+4320 3960(and)P
+5397 3960(if)P
+2 10 SF
+5975 3960(d)P
+0 10 SF
+6520 3960(were)P
+7896 3960(not)P
+8874 3960(previously)P
+11618 3960(set)P
+12495 3960(then)P
+13739 3960(it)P
+14284 3960(will)P
+15429 3960(be)P
+16206 3960(set)P
+17083 3960(to)P
+17761 3960(the)P
+18705 3960(string)P
+20283 3960(`)P
+2 10 SF
+20483 3960(.)P
+0 10 SF
+20633 3960(')P
+20933 3960(.)P
+21494 3960(\(The)P
+22837 3960(notation)P
+25014 3960(${)P
+2 10 SF
+25602 3960(.)P
+25852 3960(.)P
+26102 3960(.)P
+0 10 SF
+26252 3960(=)P
+2 10 SF
+26590 3960(.)P
+26840 3960(.)P
+27090 3960(.)P
+0 10 SF
+27240 3960(})P
+27738 3960(is)P
+28348 3960(not)P
+29325 3960(available)P
+31700 3960(for)P
+end restore showpage
+%%Page: USD:3-15 15
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+29933 44640(USD:3\25515)P
+4320 42480(positional)P
+6887 42480(parameters.\))P
+4320 41544(If)P
+4920 41544(there)P
+6319 41544(is)P
+6919 41544(no)P
+7719 41544(sensible)P
+9851 41544(default)P
+11717 41544(then)P
+12950 41544(the)P
+13883 41544(notation)P
+7980 40464(echo)P
+9312 40464(${d?message})P
+4320 39384(will)P
+5464 39384(echo)P
+6806 39384(the)P
+7749 39384(value)P
+9258 39384(of)P
+9968 39384(the)P
+10911 39384(variable)P
+2 10 SF
+13053 39384(d)P
+0 10 SF
+13597 39384(if)P
+14174 39384(it)P
+14717 39384(has)P
+15725 39384(one,)P
+16950 39384(otherwise)P
+1 10 SF
+19491 39384(message)P
+0 10 SF
+21731 39384(is)P
+22340 39384(printed)P
+24249 39384(by)P
+25058 39384(the)P
+26000 39384(shell)P
+27342 39384(and)P
+28417 39384(execution)P
+30958 39384(of)P
+31667 39384(the)P
+4320 38664(shell)P
+5698 38664(procedure)P
+8341 38664(is)P
+8986 38664(abandoned.)P
+12179 38664(If)P
+1 10 SF
+12824 38664(message)P
+0 10 SF
+15100 38664(is)P
+15745 38664(absent)P
+17522 38664(then)P
+18800 38664(a)P
+19311 38664(standard)P
+21588 38664(message)P
+23864 38664(is)P
+24509 38664(printed.)P
+26804 38664(A)P
+27481 38664(shell)P
+28858 38664(procedure)P
+31500 38664(that)P
+4320 37944(requires)P
+6452 37944(some)P
+7918 37944(parameters)P
+10749 37944(to)P
+11416 37944(be)P
+12182 37944(set)P
+13048 37944(might)P
+14649 37944(start)P
+15882 37944(as)P
+16581 37944(follows.)P
+7980 36864(:)P
+8347 36864(${user?})P
+10688 36864(${acct?})P
+12995 36864(${bin?})P
+2 10 SF
+7980 36144(.)P
+8230 36144(.)P
+8480 36144(.)P
+0 10 SF
+4320 35064(Colon)P
+6000 35064(\()P
+2 10 SF
+6200 35064(:)P
+0 10 SF
+6400 35064(\))P
+6813 35064(is)P
+7426 35064(a)P
+7905 35064(command)P
+10484 35064(that)P
+11597 35064(is)P
+12210 35064(built)P
+13524 35064(in)P
+14204 35064(to)P
+14884 35064(the)P
+15830 35064(shell)P
+17176 35064(and)P
+18255 35064(does)P
+19567 35064(nothing)P
+21614 35064(once)P
+22959 35064(its)P
+23739 35064(arguments)P
+26451 35064(have)P
+27796 35064(been)P
+29140 35064(evaluated.)P
+32000 35064(If)P
+4320 34344(any)P
+5386 34344(of)P
+6086 34344(the)P
+7019 34344(variables)P
+2 10 SF
+9384 34344(user,)P
+10833 34344(acct)P
+0 10 SF
+12065 34344(or)P
+2 10 SF
+12765 34344(bin)P
+0 10 SF
+13800 34344(are)P
+14732 34344(not)P
+15699 34344(set)P
+16565 34344(then)P
+17798 34344(the)P
+18731 34344(shell)P
+20064 34344(will)P
+21198 34344(abandon)P
+23430 34344(execution)P
+25962 34344(of)P
+26662 34344(the)P
+27595 34344(procedure.)P
+2 10 SF
+4320 32904(3.3)P
+5270 32904(Command)P
+8171 32904(substitution)P
+0 10 SF
+4320 31968(The)P
+5526 31968(standard)P
+7831 31968(output)P
+9638 31968(from)P
+11078 31968(a)P
+11617 31968(command)P
+14256 31968(can)P
+15361 31968(be)P
+16200 31968(substituted)P
+19073 31968(in)P
+19813 31968(a)P
+20352 31968(similar)P
+22292 31968(way)P
+23564 31968(to)P
+24304 31968(parameters.)P
+27557 31968(The)P
+28762 31968(command)P
+1 10 SF
+31400 31968(pwd)P
+0 10 SF
+4320 31248(prints)P
+6047 31248(on)P
+7007 31248(its)P
+7934 31248(standard)P
+10326 31248(output)P
+12220 31248(the)P
+13313 31248(name)P
+14972 31248(of)P
+15832 31248(the)P
+16925 31248(current)P
+18984 31248(directory.)P
+21860 31248(For)P
+23054 31248(example,)P
+25596 31248(if)P
+26323 31248(the)P
+27416 31248(current)P
+29475 31248(directory)P
+32000 31248(is)P
+2 10 SF
+4320 30528(/usr/fred/bin)P
+0 10 SF
+7755 30528(then)P
+8988 30528(the)P
+9921 30528(command)P
+7980 29448(d=\221pwd\221)P
+4320 28368(is)P
+4920 28368(equivalent)P
+7619 28368(to)P
+7980 27288(d=/usr/fred/bin)P
+4320 25992(The)P
+5480 25992(entire)P
+7073 25992(string)P
+8667 25992(between)P
+10892 25992(grave)P
+12451 25992(accents)P
+14442 25992<2891>P
+2 10 SF
+14842 25992(.)P
+15092 25992(.)P
+15342 25992(.)P
+0 10 SF
+15492 25992<9129>P
+16119 25992(is)P
+16746 25992(taken)P
+18272 25992(as)P
+18998 25992(the)P
+19958 25992(command)P
+22551 25992(to)P
+23245 25992(be)P
+24038 25992(executed)P
+26396 25992(and)P
+27489 25992(is)P
+28116 25992(replaced)P
+30374 25992(with)P
+31667 25992(the)P
+4320 25272(output)P
+6068 25272(from)P
+7448 25272(the)P
+8394 25272(command.)P
+11323 25272(The)P
+12469 25272(command)P
+15048 25272(is)P
+15661 25272(written)P
+17574 25272(using)P
+19087 25272(the)P
+20033 25272(usual)P
+21512 25272(quoting)P
+23559 25272(conventions)P
+26671 25272(except)P
+28449 25272(that)P
+29562 25272(a)P
+2 10 SF
+30041 25272<91>P
+0 10 SF
+30454 25272(must)P
+31834 25272(be)P
+4320 24552(escaped)P
+6417 24552(using)P
+7917 24552(a)P
+2 10 SF
+8383 24552(\\)P
+8650 24552(.)P
+0 10 SF
+9200 24552(For)P
+10234 24552(example,)P
+7980 23472(ls)P
+8580 23472(\221echo)P
+10112 23472("$1"\221)P
+4320 22392(is)P
+4920 22392(equivalent)P
+7619 22392(to)P
+7980 21312(ls)P
+8580 21312($1)P
+4320 20232(Command)P
+7030 20232(substitution)P
+10041 20232(occurs)P
+11816 20232(in)P
+12493 20232(all)P
+13303 20232(contexts)P
+15511 20232(where)P
+17185 20232(parameter)P
+19792 20232(substitution)P
+22802 20232(occurs)P
+24576 20232(\(including)P
+1 10 SF
+27252 20232(here)P
+0 10 SF
+28526 20232(documents\))P
+31534 20232(and)P
+4320 19512(the)P
+5256 19512(treatment)P
+7725 19512(of)P
+8428 19512(the)P
+9364 19512(resulting)P
+11667 19512(text)P
+12769 19512(is)P
+13371 19512(the)P
+14306 19512(same)P
+15740 19512(in)P
+16409 19512(both)P
+17678 19512(cases.)P
+19494 19512(This)P
+20763 19512(mechanism)P
+23697 19512(allows)P
+25465 19512(string)P
+27034 19512(processing)P
+29801 19512(commands)P
+4320 18792(to)P
+5059 18792(be)P
+5897 18792(used)P
+7268 18792(within)P
+9073 18792(shell)P
+10477 18792(procedures.)P
+13729 18792(An)P
+14733 18792(example)P
+17036 18792(of)P
+17807 18792(such)P
+19177 18792(a)P
+19714 18792(command)P
+22351 18792(is)P
+1 10 SF
+23022 18792(basename)P
+0 10 SF
+25691 18792(which)P
+27428 18792(removes)P
+29731 18792(a)P
+30268 18792(speci\212ed)P
+4320 18072(suf\212x)P
+5887 18072(from)P
+7254 18072(a)P
+7720 18072(string.)P
+9637 18072(For)P
+10671 18072(example,)P
+7980 16992(basename)P
+10544 16992(main)P
+2 10 SF
+11744 16992(.)P
+0 10 SF
+11894 16992(c)P
+2 10 SF
+12360 16992(.)P
+0 10 SF
+12510 16992(c)P
+4320 15912(will)P
+5454 15912(print)P
+6788 15912(the)P
+7721 15912(string)P
+1 10 SF
+9288 15912(main)P
+10588 15912(.)P
+0 10 SF
+11138 15912(Its)P
+11938 15912(use)P
+12937 15912(is)P
+13537 15912(illustrated)P
+16137 15912(by)P
+16937 15912(the)P
+17870 15912(following)P
+20404 15912(fragment)P
+22770 15912(from)P
+24137 15912(a)P
+1 10 SF
+24603 15912(cc)P
+0 10 SF
+25335 15912(command.)P
+7980 14832(case)P
+9211 14832($A)P
+10144 14832(in)P
+2 10 SF
+9211 14112(.)P
+9461 14112(.)P
+9711 14112(.)P
+0 12 SF
+9211 13212(*)P
+2 10 SF
+9571 13392(.)P
+0 10 SF
+9721 13392(c\))P
+10980 13392(B=\221basename)P
+14482 13392($A)P
+2 10 SF
+15415 13392(.)P
+0 10 SF
+15565 13392<6391>P
+2 10 SF
+9211 12672(.)P
+9461 12672(.)P
+9711 12672(.)P
+0 10 SF
+7980 11952(esac)P
+4320 10872(that)P
+5420 10872(sets)P
+2 10 SF
+6519 10872(B)P
+0 10 SF
+7119 10872(to)P
+7786 10872(the)P
+8719 10872(part)P
+9852 10872(of)P
+2 10 SF
+10552 10872($A)P
+0 10 SF
+11485 10872(with)P
+12752 10872(the)P
+13685 10872(suf\212x)P
+2 10 SF
+15252 10872(.c)P
+0 10 SF
+15868 10872(stripped.)P
+4320 9936(Here)P
+5685 9936(are)P
+6617 9936(some)P
+8083 9936(composite)P
+10749 9936(examples.)P
+5820 9000<07>P
+2 10 SF
+7320 9000(for)P
+8286 9000(i)P
+8653 9000(in)P
+9354 9000(\221ls)P
+3 10 SF
+10154 9000(-)P
+2 10 SF
+10483 9000(t\221;)P
+11283 9000(do)P
+12117 9000(.)P
+12367 9000(.)P
+12617 9000(.)P
+0 10 SF
+7320 8280(The)P
+8453 8280(variable)P
+2 10 SF
+10585 8280(i)P
+0 10 SF
+10952 8280(is)P
+11552 8280(set)P
+12418 8280(to)P
+13085 8280(the)P
+14018 8280(names)P
+15750 8280(of)P
+16450 8280(\212les)P
+17650 8280(in)P
+18317 8280(time)P
+19584 8280(order,)P
+21200 8280(most)P
+22567 8280(recent)P
+24232 8280(\212rst.)P
+5820 7344<07>P
+2 10 SF
+7320 7344(set)P
+8219 7344(\221date\221;)P
+10119 7344(echo)P
+11485 7344($6)P
+12285 7344($2)P
+13085 7344($3,)P
+14035 7344($4)P
+0 10 SF
+7320 6624(will)P
+8454 6624(print,)P
+9938 6624(e.g.,)P
+1 10 SF
+11154 6624(1977)P
+12554 6624(Nov)P
+13720 6624(1,)P
+14370 6624(23:59:59)P
+end restore showpage
+%%Page: USD:3-16 16
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\25516)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+2 10 SF
+4320 42480(3.4)P
+5270 42480(Evaluation)P
+8272 42480(and)P
+9440 42480(quoting)P
+0 10 SF
+4320 41544(The)P
+5476 41544(shell)P
+6832 41544(is)P
+7455 41544(a)P
+7944 41544(macro)P
+9666 41544(processor)P
+12187 41544(that)P
+13310 41544(provides)P
+15599 41544(parameter)P
+18220 41544(substitution,)P
+21393 41544(command)P
+23981 41544(substitution)P
+27004 41544(and)P
+28092 41544(\212le)P
+29081 41544(name)P
+30602 41544(genera\255)P
+4320 40824(tion)P
+5488 40824(for)P
+6422 40824(the)P
+7389 40824(arguments)P
+10122 40824(to)P
+10823 40824(commands.)P
+14006 40824(This)P
+15307 40824(section)P
+17240 40824(discusses)P
+19705 40824(the)P
+20672 40824(order)P
+22172 40824(in)P
+22873 40824(which)P
+24573 40824(these)P
+26038 40824(evaluations)P
+29003 40824(occur)P
+30568 40824(and)P
+31667 40824(the)P
+4320 40104(effects)P
+6118 40104(of)P
+6818 40104(the)P
+7751 40104(various)P
+9717 40104(quoting)P
+11751 40104(mechanisms.)P
+4320 39168(Commands)P
+7296 39168(are)P
+8271 39168(parsed)P
+10078 39168(initially)P
+12188 39168(according)P
+14795 39168(to)P
+15504 39168(the)P
+16479 39168(grammar)P
+18887 39168(given)P
+20462 39168(in)P
+21171 39168(appendix)P
+23612 39168(A.)P
+24637 39168(Before)P
+26511 39168(a)P
+27019 39168(command)P
+29627 39168(is)P
+30269 39168(executed)P
+4320 38448(the)P
+5253 38448(following)P
+7787 38448(substitutions)P
+11021 38448(occur.)P
+5820 37512<07>P
+7320 37512(parameter)P
+9918 37512(substitution,)P
+13069 37512(e.g.)P
+2 10 SF
+14135 37512($user)P
+0 10 SF
+5820 36576<07>P
+7320 36576(command)P
+9886 36576(substitution,)P
+13037 36576(e.g.)P
+2 10 SF
+14103 36576<9170776491>P
+0 10 SF
+7320 35640(Only)P
+8720 35640(one)P
+9786 35640(evaluation)P
+12485 35640(occurs)P
+14250 35640(so)P
+14983 35640(that)P
+16083 35640(if,)P
+16800 35640(for)P
+17700 35640(example,)P
+20082 35640(the)P
+21015 35640(value)P
+22514 35640(of)P
+23214 35640(the)P
+24147 35640(variable)P
+2 10 SF
+26279 35640(X)P
+0 10 SF
+26912 35640(is)P
+27512 35640(the)P
+28445 35640(string)P
+1 10 SF
+30012 35640($y)P
+0 10 SF
+30778 35640(then)P
+10980 34560(echo)P
+12312 34560($X)P
+7320 33480(will)P
+8454 33480(echo)P
+1 10 SF
+9786 33480($y)P
+10452 33480(.)P
+0 10 SF
+5820 32544<07>P
+7320 32544(blank)P
+8853 32544(interpretation)P
+7320 31608(Following)P
+10071 31608(the)P
+11087 31608(above)P
+12801 31608(substitutions)P
+16117 31608(the)P
+17132 31608(resulting)P
+19514 31608(characters)P
+22226 31608(are)P
+23240 31608(broken)P
+25188 31608(into)P
+26404 31608(non\255blank)P
+29119 31608(words)P
+30867 31608(\()P
+1 10 SF
+31067 31608(blank)P
+7320 30888(interpretation)P
+0 10 SF
+10653 30888(\).)P
+11508 30888(For)P
+12647 30888(this)P
+13819 30888(purpose)P
+16023 30888(`blanks')P
+18294 30888(are)P
+19331 30888(the)P
+20369 30888(characters)P
+23103 30888(of)P
+23907 30888(the)P
+24944 30888(string)P
+2 10 SF
+26615 30888($)P
+2 9 SF
+26915 30888(IFS)P
+0 10 SF
+27755 30888(.)P
+28409 30888(By)P
+29413 30888(default,)P
+31533 30888(this)P
+7320 30168(string)P
+8979 30168(consists)P
+11170 30168(of)P
+11962 30168(blank,)P
+13737 30168(tab)P
+14762 30168(and)P
+15920 30168(newline.)P
+18461 30168(The)P
+19686 30168(null)P
+20912 30168(string)P
+22571 30168(is)P
+23263 30168(not)P
+24322 30168(regarded)P
+26712 30168(as)P
+27503 30168(a)P
+28061 30168(word)P
+29585 30168(unless)P
+31375 30168(it)P
+32000 30168(is)P
+7320 29448(quoted.)P
+9503 29448(For)P
+10537 29448(example,)P
+10980 28368(echo)P
+12312 28368<9292>P
+7320 27288(will)P
+8454 27288(pass)P
+9686 27288(on)P
+10486 27288(the)P
+11419 27288(null)P
+12553 27288(string)P
+14120 27288(as)P
+14819 27288(the)P
+15752 27288(\212rst)P
+16886 27288(argument)P
+19352 27288(to)P
+1 10 SF
+20019 27288(echo)P
+0 10 SF
+21151 27288(,)P
+21501 27288(whereas)P
+10980 26208(echo)P
+12312 26208($null)P
+7320 25128(will)P
+8454 25128(call)P
+1 10 SF
+9520 25128(echo)P
+0 10 SF
+10852 25128(with)P
+12119 25128(no)P
+12919 25128(arguments)P
+15618 25128(if)P
+16185 25128(the)P
+17118 25128(variable)P
+2 10 SF
+19250 25128(null)P
+0 10 SF
+20452 25128(is)P
+21052 25128(not)P
+22019 25128(set)P
+22885 25128(or)P
+23585 25128(set)P
+24451 25128(to)P
+25118 25128(the)P
+26051 25128(null)P
+27185 25128(string.)P
+5820 24192<07>P
+7320 24192(\212le)P
+8287 24192(name)P
+9786 24192(generation)P
+7320 23256(Each)P
+8726 23256(word)P
+10166 23256(is)P
+10773 23256(then)P
+12013 23256(scanned)P
+14151 23256(for)P
+15058 23256(the)P
+15998 23256(\212le)P
+16972 23256(pattern)P
+18845 23256(characters)P
+2 12 SF
+21482 23076(*)P
+2 10 SF
+21842 23256(,)P
+22199 23256(?)P
+0 10 SF
+22706 23256(and)P
+2 10 SF
+23779 23256([.)P
+24229 23256(.)P
+24479 23256(.])P
+0 10 SF
+25036 23256(and)P
+26109 23256(an)P
+26882 23256(alphabetical)P
+29987 23256(list)P
+30927 23256(of)P
+31633 23256(\212le)P
+7320 22536(names)P
+9052 22536(is)P
+9652 22536(generated)P
+12183 22536(to)P
+12850 22536(replace)P
+14781 22536(the)P
+15714 22536(word.)P
+17497 22536(Each)P
+18896 22536(such)P
+20195 22536(\212le)P
+21162 22536(name)P
+22661 22536(is)P
+23261 22536(a)P
+23727 22536(separate)P
+25891 22536(argument.)P
+4320 21600(The)P
+5552 21600(evaluations)P
+8583 21600(just)P
+9749 21600(described)P
+12346 21600(also)P
+13611 21600(occur)P
+15241 21600(in)P
+16006 21600(the)P
+17037 21600(list)P
+18069 21600(of)P
+18867 21600(words)P
+20631 21600(associated)P
+23393 21600(with)P
+24758 21600(a)P
+2 10 SF
+25322 21600(for)P
+0 10 SF
+26386 21600(loop.)P
+28101 21600(Only)P
+29599 21600(substitution)P
+4320 20880(occurs)P
+6085 20880(in)P
+6752 20880(the)P
+1 10 SF
+7685 20880(word)P
+0 10 SF
+9118 20880(used)P
+10417 20880(for)P
+11317 20880(a)P
+2 10 SF
+11783 20880(case)P
+0 10 SF
+13048 20880(branch.)P
+4320 19944(As)P
+5259 19944(well)P
+6565 19944(as)P
+7337 19944(the)P
+8343 19944(quoting)P
+10450 19944(mechanisms)P
+13688 19944(described)P
+16259 19944(earlier)P
+18064 19944(using)P
+2 10 SF
+19637 19944(\\)P
+0 10 SF
+20077 19944(and)P
+2 10 SF
+21216 19944<922E>P
+21666 19944(.)P
+21916 19944<2E92>P
+0 10 SF
+22539 19944(a)P
+23078 19944(third)P
+24485 19944(quoting)P
+26591 19944(mechanism)P
+29595 19944(is)P
+30267 19944(provided)P
+4320 19224(using)P
+5835 19224(double)P
+7683 19224(quotes.)P
+9814 19224(Within)P
+11696 19224(double)P
+13544 19224(quotes)P
+15325 19224(parameter)P
+17938 19224(and)P
+19019 19224(command)P
+21599 19224(substitution)P
+24614 19224(occurs)P
+26393 19224(but)P
+27374 19224(\212le)P
+28355 19224(name)P
+29868 19224(generation)P
+4320 18504(and)P
+5399 18504(the)P
+6345 18504(interpretation)P
+9791 18504(of)P
+10504 18504(blanks)P
+12283 18504(does)P
+13595 18504(not.)P
+14925 18504(The)P
+16071 18504(following)P
+18618 18504(characters)P
+21261 18504(have)P
+22606 18504(a)P
+23085 18504(special)P
+24963 18504(meaning)P
+27242 18504(within)P
+28989 18504(double)P
+30834 18504(quotes)P
+4320 17784(and)P
+5386 17784(may)P
+6619 17784(be)P
+7385 17784(quoted)P
+9218 17784(using)P
+2 10 SF
+10718 17784(\\)P
+10985 17784(.)P
+7980 16704($)P
+0 10 SF
+9480 16704(parameter)P
+12078 16704(substitution)P
+2 10 SF
+7980 15984<91>P
+0 10 SF
+9480 15984(command)P
+12046 15984(substitution)P
+2 10 SF
+7980 15264(")P
+0 10 SF
+9480 15264(ends)P
+10779 15264(the)P
+11712 15264(quoted)P
+13545 15264(string)P
+2 10 SF
+7980 14544(\\)P
+0 10 SF
+9480 14544(quotes)P
+11246 14544(the)P
+12179 14544(special)P
+14044 14544(characters)P
+2 10 SF
+16674 14544($)P
+17174 14544<91>P
+17574 14544(")P
+18107 14544(\\)P
+0 10 SF
+4320 13464(For)P
+5354 13464(example,)P
+7980 12384(echo)P
+9312 12384("$x")P
+4320 11304(will)P
+5454 11304(pass)P
+6686 11304(the)P
+7619 11304(value)P
+9118 11304(of)P
+9818 11304(the)P
+10751 11304(variable)P
+2 10 SF
+12883 11304(x)P
+0 10 SF
+13383 11304(as)P
+14082 11304(a)P
+14548 11304(single)P
+16181 11304(argument)P
+18647 11304(to)P
+1 10 SF
+19314 11304(echo.)P
+0 10 SF
+20996 11304(Similarly,)P
+7980 10224(echo)P
+9312 10224("$)P
+0 12 SF
+9857 10044(*)P
+0 10 SF
+10217 10224(")P
+4320 9144(will)P
+5454 9144(pass)P
+6686 9144(the)P
+7619 9144(positional)P
+10186 9144(parameters)P
+13017 9144(as)P
+13716 9144(a)P
+14182 9144(single)P
+15815 9144(argument)P
+18281 9144(and)P
+19347 9144(is)P
+19947 9144(equivalent)P
+22646 9144(to)P
+7980 8064(echo)P
+9312 8064("$1)P
+10357 8064($2)P
+2 10 SF
+11157 8064(.)P
+11407 8064(.)P
+11657 8064(.)P
+0 10 SF
+11807 8064(")P
+4320 6984(The)P
+5453 6984(notation)P
+2 10 SF
+7620 6984($@)P
+0 10 SF
+8678 6984(is)P
+9278 6984(the)P
+10211 6984(same)P
+11643 6984(as)P
+2 10 SF
+12342 6984($)P
+2 12 SF
+12642 6804(*)P
+0 10 SF
+13202 6984(except)P
+14967 6984(when)P
+16466 6984(it)P
+17000 6984(is)P
+17600 6984(quoted.)P
+7980 5904(echo)P
+9312 5904("$@")P
+4320 4824(will)P
+5454 4824(pass)P
+6686 4824(the)P
+7619 4824(positional)P
+10186 4824(parameters,)P
+13167 4824(unevaluated,)P
+16415 4824(to)P
+1 10 SF
+17082 4824(echo)P
+0 10 SF
+18414 4824(and)P
+19480 4824(is)P
+20080 4824(equivalent)P
+22779 4824(to)P
+end restore showpage
+%%Page: USD:3-17 17
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+29933 44640(USD:3\25517)P
+7980 42120(echo)P
+9312 42120("$1")P
+10602 42120("$2")P
+2 10 SF
+11892 42120(.)P
+12142 42120(.)P
+12392 42120(.)P
+0 10 SF
+4320 40824(The)P
+5453 40824(following)P
+7987 40824(table)P
+9353 40824(gives,)P
+10969 40824(for)P
+11869 40824(each)P
+13167 40824(quoting)P
+15201 40824(mechanism,)P
+18283 40824(the)P
+19216 40824(shell)P
+20549 40824(metacharacters)P
+24345 40824(that)P
+25445 40824(are)P
+26377 40824(evaluated.)P
+1 10 SF
+17691 39744(metacharacter)P
+0 10 SF
+12300 39024(\\)P
+13800 39024($)P
+15300 39024(*)P
+16800 39024<91>P
+18300 39024(")P
+19800 39024<92>P
+10800 38304<92>P
+12300 38304(n)P
+13800 38304(n)P
+15300 38304(n)P
+16800 38304(n)P
+18300 38304(n)P
+19800 38304(t)P
+10800 37584<91>P
+12300 37584(y)P
+13800 37584(n)P
+15300 37584(n)P
+16800 37584(t)P
+18300 37584(n)P
+19800 37584(n)P
+10800 36864(")P
+12300 36864(y)P
+13800 36864(y)P
+15300 36864(n)P
+16800 36864(y)P
+18300 36864(t)P
+19800 36864(n)P
+12300 35424(t)P
+13800 35424(terminator)P
+12300 34704(y)P
+13800 34704(interpreted)P
+12300 33984(n)P
+13800 33984(not)P
+14767 33984(interpreted)P
+2 10 SF
+15447 32544(Figure)P
+17347 32544(2.)P
+17997 32544(Quoting)P
+20299 32544(mechanisms)P
+0 10 SF
+4320 31248(In)P
+5080 31248(cases)P
+6604 31248(where)P
+8329 31248(more)P
+9822 31248(than)P
+11115 31248(one)P
+12241 31248(evaluation)P
+15000 31248(of)P
+15760 31248(a)P
+16286 31248(string)P
+17913 31248(is)P
+18573 31248(required)P
+20832 31248(the)P
+21825 31248(built\255in)P
+23853 31248(command)P
+1 10 SF
+26479 31248(eval)P
+0 10 SF
+27738 31248(may)P
+29031 31248(be)P
+29857 31248(used.)P
+31566 31248(For)P
+4320 30528(example,)P
+6702 30528(if)P
+7269 30528(the)P
+8202 30528(variable)P
+2 10 SF
+10334 30528(X)P
+0 10 SF
+10967 30528(has)P
+11966 30528(the)P
+12899 30528(value)P
+1 10 SF
+14398 30528($y)P
+0 10 SF
+14964 30528(,)P
+15314 30528(and)P
+16380 30528(if)P
+2 10 SF
+16947 30528(y)P
+0 10 SF
+17447 30528(has)P
+18446 30528(the)P
+19379 30528(value)P
+1 10 SF
+20878 30528(pqr)P
+0 10 SF
+21911 30528(then)P
+7980 29448(eval)P
+9179 29448(echo)P
+10511 29448($X)P
+4320 28368(will)P
+5454 28368(echo)P
+6786 28368(the)P
+7719 28368(string)P
+1 10 SF
+9286 28368(pqr)P
+10219 28368(.)P
+0 10 SF
+4320 27432(In)P
+5060 27432(general)P
+7065 27432(the)P
+1 10 SF
+8038 27432(eval)P
+0 10 SF
+9277 27432(command)P
+11883 27432(evaluates)P
+14354 27432(its)P
+15161 27432(arguments)P
+17900 27432(\(as)P
+18839 27432(do)P
+19679 27432(all)P
+20519 27432(commands\))P
+23558 27432(and)P
+24664 27432(treats)P
+26203 27432(the)P
+27176 27432(result)P
+28749 27432(as)P
+29488 27432(input)P
+30961 27432(to)P
+31667 27432(the)P
+4320 26712(shell.)P
+6003 26712(The)P
+7136 26712(input)P
+8570 26712(is)P
+9170 26712(read)P
+10402 26712(and)P
+11468 26712(the)P
+12401 26712(resulting)P
+14701 26712(command\(s\))P
+17900 26712(executed.)P
+20581 26712(For)P
+21615 26712(example,)P
+7980 25632(wg=\222eval)P
+10450 25632(who)P
+3 10 SF
+11583 25632(|)P
+0 10 SF
+11803 25632(grep\222)P
+7980 24912($wg)P
+9213 24912(fred)P
+4320 23832(is)P
+4920 23832(equivalent)P
+7619 23832(to)P
+7980 22752(who)P
+3 10 SF
+9113 22752(|)P
+0 10 SF
+9333 22752(grep)P
+10599 22752(fred)P
+4320 21672(In)P
+5024 21672(this)P
+6094 21672(example,)P
+1 10 SF
+8479 21672(eval)P
+0 10 SF
+9681 21672(is)P
+10284 21672(required)P
+12486 21672(since)P
+13921 21672(there)P
+15323 21672(is)P
+15926 21672(no)P
+16729 21672(interpretation)P
+20165 21672(of)P
+20868 21672(metacharacters,)P
+24817 21672(such)P
+26119 21672(as)P
+3 10 SF
+26921 21672(|)P
+2 10 SF
+27241 21672(,)P
+27594 21672(following)P
+30165 21672(substitu\255)P
+4320 20952(tion.)P
+4320 19512(3.5)P
+5270 19512(Error)P
+6968 19512(handling)P
+0 10 SF
+4320 18576(The)P
+5464 18576(treatment)P
+7941 18576(of)P
+8652 18576(errors)P
+10262 18576(detected)P
+12471 18576(by)P
+13282 18576(the)P
+14226 18576(shell)P
+15570 18576(depends)P
+17746 18576(on)P
+18557 18576(the)P
+19501 18576(type)P
+20745 18576(of)P
+21456 18576(error)P
+22833 18576(and)P
+23910 18576(on)P
+24720 18576(whether)P
+26862 18576(the)P
+27805 18576(shell)P
+29148 18576(is)P
+29758 18576(being)P
+31301 18576(used)P
+4320 17856(interactively.)P
+7905 17856(An)P
+8874 17856(interactive)P
+11642 17856(shell)P
+13011 17856(is)P
+13647 17856(one)P
+14749 17856(whose)P
+16517 17856(input)P
+17987 17856(and)P
+19089 17856(output)P
+20859 17856(are)P
+21827 17856(connected)P
+24494 17856(to)P
+25196 17856(a)P
+25697 17856(terminal)P
+27932 17856(\(as)P
+28866 17856(determined)P
+31800 17856(by)P
+1 10 SF
+4320 17136(gtty)P
+0 10 SF
+5420 17136(\(2\)\).)P
+6870 17136(A)P
+7503 17136(shell)P
+8836 17136(invoked)P
+10969 17136(with)P
+12236 17136(the)P
+3 10 SF
+13169 17136(-)P
+2 10 SF
+13498 17136(i)P
+0 10 SF
+13865 17136(\213ag)P
+14965 17136(is)P
+15565 17136(also)P
+16731 17136(interactive.)P
+4320 16200(Execution)P
+6953 16200(of)P
+7653 16200(a)P
+8119 16200(command)P
+10685 16200(\(see)P
+11850 16200(also)P
+13016 16200(3.7\))P
+14166 16200(may)P
+15399 16200(fail)P
+16399 16200(for)P
+17299 16200(any)P
+18365 16200(of)P
+19065 16200(the)P
+19998 16200(following)P
+22532 16200(reasons.)P
+4320 15264<07>P
+5820 15264(Input)P
+7287 15264(output)P
+9021 15264(redirection)P
+11820 15264(may)P
+13053 15264(fail.)P
+14403 15264(For)P
+15437 15264(example,)P
+17819 15264(if)P
+18386 15264(a)P
+18852 15264(\212le)P
+19819 15264(does)P
+21118 15264(not)P
+22085 15264(exist)P
+23418 15264(or)P
+24118 15264(cannot)P
+25917 15264(be)P
+26683 15264(created.)P
+4320 14328<07>P
+5820 14328(The)P
+6953 14328(command)P
+9519 14328(itself)P
+10919 14328(does)P
+12218 14328(not)P
+13185 14328(exist)P
+14518 14328(or)P
+15218 14328(cannot)P
+17017 14328(be)P
+17783 14328(executed.)P
+4320 13392<07>P
+5820 13392(The)P
+7022 13392(command)P
+9657 13392(terminates)P
+12424 13392(abnormally,)P
+15575 13392(for)P
+16543 13392(example,)P
+18993 13392(with)P
+20328 13392(a)P
+20862 13392("bus)P
+22208 13392(error")P
+23887 13392(or)P
+24655 13392("memory)P
+27168 13392(fault".)P
+29131 13392(See)P
+30265 13392(Figure)P
+32100 13392(2)P
+5820 12672(below)P
+7486 12672(for)P
+8386 12672(a)P
+8852 12672(complete)P
+11251 12672(list)P
+12185 12672(of)P
+12885 12672(UNIX)P
+14584 12672(signals.)P
+4320 11736<07>P
+5820 11736(The)P
+6953 11736(command)P
+9519 11736(terminates)P
+12218 11736(normally)P
+14585 11736(but)P
+15552 11736(returns)P
+17418 11736(a)P
+17884 11736(non\255zero)P
+20216 11736(exit)P
+21316 11736(status.)P
+4320 10800(In)P
+5024 10800(all)P
+5828 10800(of)P
+6532 10800(these)P
+7968 10800(cases)P
+9436 10800(the)P
+10373 10800(shell)P
+11710 10800(will)P
+12848 10800(go)P
+13652 10800(on)P
+14456 10800(to)P
+15127 10800(execute)P
+17162 10800(the)P
+18098 10800(next)P
+19334 10800(command.)P
+22253 10800(Except)P
+24122 10800(for)P
+25025 10800(the)P
+25961 10800(last)P
+26997 10800(case)P
+28231 10800(an)P
+29000 10800(error)P
+30369 10800(message)P
+4320 10080(will)P
+5453 10080(be)P
+6218 10080(printed)P
+8117 10080(by)P
+8916 10080(the)P
+9848 10080(shell.)P
+11530 10080(All)P
+12496 10080(remaining)P
+15128 10080(errors)P
+16726 10080(cause)P
+18256 10080(the)P
+19188 10080(shell)P
+20521 10080(to)P
+21188 10080(exit)P
+22288 10080(from)P
+23655 10080(a)P
+24121 10080(command)P
+26687 10080(procedure.)P
+29635 10080(An)P
+30568 10080(interac\255)P
+4320 9360(tive)P
+5420 9360(shell)P
+6753 9360(will)P
+7887 9360(return)P
+9520 9360(to)P
+10187 9360(read)P
+11419 9360(another)P
+13418 9360(command)P
+15984 9360(from)P
+17351 9360(the)P
+18284 9360(terminal.)P
+20834 9360(Such)P
+22234 9360(errors)P
+23833 9360(include)P
+25799 9360(the)P
+26732 9360(following.)P
+4320 8424<07>P
+5820 8424(Syntax)P
+7687 8424(errors.)P
+9636 8424(e.g.,)P
+10852 8424(if)P
+2 10 SF
+11419 8424(.)P
+11669 8424(.)P
+11919 8424(.)P
+0 10 SF
+12269 8424(then)P
+2 10 SF
+13502 8424(.)P
+13752 8424(.)P
+14002 8424(.)P
+0 10 SF
+14352 8424(done)P
+4320 7488<07>P
+5820 7488(A)P
+6493 7488(signal)P
+8166 7488(such)P
+9504 7488(as)P
+10242 7488(interrupt.)P
+12898 7488(The)P
+14070 7488(shell)P
+15442 7488(waits)P
+16947 7488(for)P
+17886 7488(the)P
+18858 7488(current)P
+20796 7488(command,)P
+23551 7488(if)P
+24157 7488(any,)P
+25412 7488(to)P
+26118 7488(\212nish)P
+27691 7488(execution)P
+30262 7488(and)P
+31367 7488(then)P
+5820 6768(either)P
+7386 6768(exits)P
+8719 6768(or)P
+9419 6768(returns)P
+11285 6768(to)P
+11952 6768(the)P
+12885 6768(terminal.)P
+4320 5832<07>P
+5820 5832(Failure)P
+7720 5832(of)P
+8420 5832(any)P
+9486 5832(of)P
+10186 5832(the)P
+11119 5832(built\255in)P
+13087 5832(commands)P
+15886 5832(such)P
+17185 5832(as)P
+1 10 SF
+17884 5832(cd.)P
+0 10 SF
+4320 4896(The)P
+5453 4896(shell)P
+6786 4896(\213ag)P
+3 10 SF
+7886 4896(-)P
+2 10 SF
+8215 4896(e)P
+0 10 SF
+8681 4896(causes)P
+10445 4896(the)P
+11378 4896(shell)P
+12711 4896(to)P
+13378 4896(terminate)P
+15844 4896(if)P
+16411 4896(any)P
+17477 4896(error)P
+18843 4896(is)P
+19443 4896(detected.)P
+end restore showpage
+%%Page: USD:3-18 18
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\25518)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+6480 42120(1)P
+7980 42120(hangup)P
+6480 41400(2)P
+7980 41400(interrupt)P
+6480 40680(3*)P
+7980 40680(quit)P
+6480 39960(4*)P
+7980 39960(illegal)P
+9680 39960(instruction)P
+6480 39240(5*)P
+7980 39240(trace)P
+9345 39240(trap)P
+6480 38520(6*)P
+7980 38520(IOT)P
+9180 38520(instruction)P
+6480 37800(7*)P
+7980 37800(EMT)P
+9447 37800(instruction)P
+6480 37080(8*)P
+7980 37080(\213oating)P
+10014 37080(point)P
+11448 37080(exception)P
+6480 36360(9)P
+7980 36360(kill)P
+8981 36360(\(cannot)P
+10980 36360(be)P
+11746 36360(caught)P
+13545 36360(or)P
+14245 36360(ignored\))P
+6480 35640(10*)P
+7980 35640(bus)P
+9013 35640(error)P
+6480 34920(11*)P
+7980 34920(segmentation)P
+11379 34920(violation)P
+6480 34200(12*)P
+7980 34200(bad)P
+9046 34200(argument)P
+11512 34200(to)P
+12179 34200(system)P
+14045 34200(call)P
+6480 33480(13)P
+7980 33480(write)P
+9413 33480(on)P
+10213 33480(a)P
+10679 33480(pipe)P
+11912 33480(with)P
+13179 33480(no)P
+13979 33480(one)P
+15045 33480(to)P
+15712 33480(read)P
+16944 33480(it)P
+6480 32760(14)P
+7980 32760(alarm)P
+9546 32760(clock)P
+6480 32040(15)P
+7980 32040(software)P
+10245 32040(termination)P
+13212 32040(\(from)P
+1 10 SF
+14779 32040(kill)P
+0 10 SF
+15746 32040(\(1\)\))P
+2 10 SF
+15202 30240(Figure)P
+17102 30240(3.)P
+17752 30240(UNIX)P
+19484 30240(signals\200)P
+0 10 SF
+4320 29520(Those)P
+6003 29520(signals)P
+7886 29520(marked)P
+9901 29520(with)P
+11184 29520(an)P
+11966 29520(asterisk)P
+14014 29520(produce)P
+16162 29520(a)P
+16644 29520(core)P
+17892 29520(dump)P
+19475 29520(if)P
+20058 29520(not)P
+21041 29520(caught.)P
+23206 29520(However,)P
+25770 29520(the)P
+26719 29520(shell)P
+28068 29520(itself)P
+29484 29520(ignores)P
+31466 29520(quit)P
+4320 28800(which)P
+5995 28800(is)P
+6604 28800(the)P
+7545 28800(only)P
+8820 28800(external)P
+10960 28800(signal)P
+12601 28800(that)P
+13709 28800(can)P
+14749 28800(cause)P
+16288 28800(a)P
+16762 28800(dump.)P
+18687 28800(The)P
+19828 28800(signals)P
+21702 28800(in)P
+22377 28800(this)P
+23452 28800(list)P
+24394 28800(of)P
+25102 28800(potential)P
+27410 28800(interest)P
+29384 28800(to)P
+30059 28800(shell)P
+31400 28800(pro\255)P
+4320 28080(grams)P
+5986 28080(are)P
+6918 28080(1,)P
+7568 28080(2,)P
+8218 28080(3,)P
+8868 28080(14)P
+9668 28080(and)P
+10734 28080(15.)P
+2 10 SF
+4320 26640(3.6)P
+5270 26640(Fault)P
+6838 26640(handling)P
+0 10 SF
+4320 25704(Shell)P
+5765 25704(procedures)P
+8607 25704(normally)P
+10985 25704(terminate)P
+13462 25704(when)P
+14972 25704(an)P
+15749 25704(interrupt)P
+18027 25704(is)P
+18638 25704(received)P
+20880 25704(from)P
+22258 25704(the)P
+23202 25704(terminal.)P
+25762 25704(The)P
+1 10 SF
+26905 25704(trap)P
+0 10 SF
+28115 25704(command)P
+30691 25704(is)P
+31301 25704(used)P
+4320 24984(if)P
+4887 24984(some)P
+6353 24984(cleaning)P
+8585 24984(up)P
+9385 24984(is)P
+9985 24984(required,)P
+12334 24984(such)P
+13633 24984(as)P
+14332 24984(removing)P
+16832 24984(temporary)P
+19498 24984(\212les.)P
+21048 24984(For)P
+22082 24984(example,)P
+7980 23904(trap)P
+9113 23904(\222rm)P
+10180 23904(/tmp/ps$$;)P
+12948 23904(exit\222)P
+14248 23904(2)P
+4320 22824(sets)P
+5419 22824(a)P
+5885 22824(trap)P
+7018 22824(for)P
+7918 22824(signal)P
+9551 22824(2)P
+10051 22824(\(terminal)P
+12451 22824(interrupt\),)P
+15068 22824(and)P
+16134 22824(if)P
+16701 22824(this)P
+17768 22824(signal)P
+19401 22824(is)P
+20001 22824(received)P
+22232 22824(will)P
+23366 22824(execute)P
+25397 22824(the)P
+26330 22824(commands)P
+7980 21744(rm)P
+8847 21744(/tmp/ps$$;)P
+11615 21744(exit)P
+1 10 SF
+4320 20664(exit)P
+0 10 SF
+5415 20664(is)P
+6044 20664(another)P
+8072 20664(built\255in)P
+10069 20664(command)P
+12664 20664(that)P
+13793 20664(terminates)P
+16521 20664(execution)P
+19082 20664(of)P
+19810 20664(a)P
+20304 20664(shell)P
+21665 20664(procedure.)P
+24641 20664(The)P
+1 10 SF
+25802 20664(exit)P
+0 10 SF
+26896 20664(is)P
+27524 20664(required;)P
+29918 20664(otherwise,)P
+4320 19944(after)P
+5619 19944(the)P
+6552 19944(trap)P
+7685 19944(has)P
+8684 19944(been)P
+10016 19944(taken,)P
+11665 19944(the)P
+12598 19944(shell)P
+13931 19944(will)P
+15065 19944(resume)P
+16997 19944(executing)P
+19529 19944(the)P
+20462 19944(procedure)P
+23060 19944(at)P
+23693 19944(the)P
+24626 19944(place)P
+26091 19944(where)P
+27756 19944(it)P
+28290 19944(was)P
+29422 19944(interrupted.)P
+4320 19008(UNIX)P
+6037 19008(signals)P
+7921 19008(can)P
+8971 19008(be)P
+9755 19008(handled)P
+11872 19008(in)P
+12556 19008(one)P
+13639 19008(of)P
+14356 19008(three)P
+15772 19008(ways.)P
+17571 19008(They)P
+19021 19008(can)P
+20070 19008(be)P
+20853 19008(ignored,)P
+23053 19008(in)P
+23737 19008(which)P
+25420 19008(case)P
+26668 19008(the)P
+27618 19008(signal)P
+29268 19008(is)P
+29885 19008(never)P
+31434 19008(sent)P
+4320 18288(to)P
+5016 18288(the)P
+5978 18288(process.)P
+8354 18288(They)P
+9815 18288(can)P
+10875 18288(be)P
+11669 18288(caught,)P
+13646 18288(in)P
+14341 18288(which)P
+16035 18288(case)P
+17294 18288(the)P
+18255 18288(process)P
+20281 18288(must)P
+21676 18288(decide)P
+23469 18288(what)P
+24863 18288(action)P
+26557 18288(to)P
+27252 18288(take)P
+28479 18288(when)P
+30006 18288(the)P
+30967 18288(signal)P
+4320 17568(is)P
+4987 17568(received.)P
+7635 17568(Lastly,)P
+9551 17568(they)P
+10850 17568(can)P
+11948 17568(be)P
+12780 17568(left)P
+13846 17568(to)P
+14579 17568(cause)P
+16176 17568(termination)P
+19209 17568(of)P
+19975 17568(the)P
+20974 17568(process)P
+23038 17568(without)P
+25138 17568(it)P
+25738 17568(having)P
+27637 17568(to)P
+28370 17568(take)P
+29635 17568(any)P
+30767 17568(further)P
+4320 16848(action.)P
+6407 16848(If)P
+7078 16848(a)P
+7615 16848(signal)P
+9318 16848(is)P
+9988 16848(being)P
+11591 16848(ignored)P
+13694 16848(on)P
+14564 16848(entry)P
+16067 16848(to)P
+16804 16848(the)P
+17807 16848(shell)P
+19210 16848(procedure,)P
+22028 16848(for)P
+22998 16848(example,)P
+25450 16848(by)P
+26320 16848(invoking)P
+28724 16848(it)P
+29328 16848(in)P
+30065 16848(the)P
+31068 16848(back\255)P
+4320 16128(ground)P
+6220 16128(\(see)P
+7385 16128(3.7\))P
+8535 16128(then)P
+1 10 SF
+9768 16128(trap)P
+0 10 SF
+10968 16128(commands)P
+13767 16128(\(and)P
+15033 16128(the)P
+15966 16128(signal\))P
+17799 16128(are)P
+18731 16128(ignored.)P
+4320 15192(The)P
+5454 15192(use)P
+6453 15192(of)P
+1 10 SF
+7153 15192(trap)P
+0 10 SF
+8353 15192(is)P
+8953 15192(illustrated)P
+11553 15192(by)P
+12353 15192(this)P
+13420 15192(modi\212ed)P
+15754 15192(version)P
+17720 15192(of)P
+18420 15192(the)P
+1 10 SF
+19353 15192(touch)P
+0 10 SF
+20886 15192(command)P
+23452 15192(\(Figure)P
+25419 15192(4\).)P
+26469 15192(The)P
+27602 15192(cleanup)P
+29667 15192(action)P
+31333 15192(is)P
+31933 15192(to)P
+4320 14472(remove)P
+6319 14472(the)P
+7252 14472(\212le)P
+2 10 SF
+8219 14472(junk$$)P
+0 10 SF
+10121 14472(.)P
+4320 5640 8 0 18 L
+0 8 SF
+4320 5040<80>P
+4720 5040(Additional)P
+6932 5040(signals)P
+8425 5040(have)P
+9491 5040(been)P
+10557 5040(added)P
+11863 5040(in)P
+12396 5040(Berkeley)P
+14288 5040(Unix.)P
+15688 5040(See)P
+16541 5040(sigvec\(2\))P
+18487 5040(or)P
+19047 5040(signal\(3C\))P
+21233 5040(for)P
+21953 5040(an)P
+22566 5040(up\255to\255date)P
+24698 5040(list.)P
+end restore showpage
+%%Page: USD:3-19 19
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+29933 44640(USD:3\25519)P
+7980 42120(\213ag=)P
+7980 41400(trap)P
+9113 41400(\222rm)P
+3 10 SF
+10180 41400(-)P
+0 10 SF
+10509 41400(f)P
+10909 41400(junk$$;)P
+12943 41400(exit\222)P
+14243 41400(1)P
+14743 41400(2)P
+15243 41400(3)P
+15743 41400(15)P
+7980 40680(for)P
+8880 40680(i)P
+7980 39960(do)P
+8780 39960(case)P
+10011 39960($i)P
+10678 39960(in)P
+3 10 SF
+8780 39240(-)P
+0 10 SF
+9109 39240(c\))P
+10980 39240(\213ag=N)P
+12851 39240(;;)P
+0 12 SF
+8780 38340(*)P
+0 10 SF
+9140 38520(\))P
+9480 38520(if)P
+10047 38520(test)P
+3 10 SF
+11080 38520(-)P
+0 10 SF
+11409 38520(f)P
+11809 38520($i)P
+9480 37800(then)P
+10980 37800(ln)P
+11647 37800($i)P
+12314 37800(junk$$;)P
+14348 37800(rm)P
+15215 37800(junk$$)P
+9480 37080(elif)P
+10480 37080(test)P
+11513 37080($\213ag)P
+9480 36360(then)P
+10980 36360(echo)P
+12312 36360(\212le)P
+13279 36360<5C9224695C92>P
+14680 36360(does)P
+15979 36360(not)P
+16946 36360(exist)P
+9480 35640(else)P
+10980 35640(>$i)P
+9480 34920<8A>P
+8780 34200(esac)P
+7980 33480(done)P
+2 10 SF
+14401 31680(Figure)P
+16301 31680(4.)P
+16951 31680(The)P
+18151 31680(touch)P
+19785 31680(command)P
+0 10 SF
+4320 30240(The)P
+1 10 SF
+5475 30240(trap)P
+0 10 SF
+6697 30240(command)P
+9285 30240(appears)P
+11338 30240(before)P
+13092 30240(the)P
+14047 30240(creation)P
+16201 30240(of)P
+16923 30240(the)P
+17878 30240(temporary)P
+20566 30240(\212le;)P
+21722 30240(otherwise)P
+24275 30240(it)P
+24830 30240(would)P
+26551 30240(be)P
+27338 30240(possible)P
+29525 30240(for)P
+30446 30240(the)P
+31400 30240(pro\255)P
+4320 29520(cess)P
+5518 29520(to)P
+6185 29520(die)P
+7118 29520(without)P
+9152 29520(removing)P
+11652 29520(the)P
+12585 29520(\212le.)P
+4320 28584(Since)P
+5872 28584(there)P
+7290 28584(is)P
+7909 28584(no)P
+8728 28584(signal)P
+10380 28584(0)P
+10899 28584(in)P
+11585 28584(UNIX)P
+13302 28584(it)P
+13854 28584(is)P
+14472 28584(used)P
+15789 28584(by)P
+16607 28584(the)P
+17558 28584(shell)P
+18909 28584(to)P
+19594 28584(indicate)P
+21711 28584(the)P
+22662 28584(commands)P
+25479 28584(to)P
+26164 28584(be)P
+26948 28584(executed)P
+29297 28584(on)P
+30115 28584(exit)P
+31233 28584(from)P
+4320 27864(the)P
+5253 27864(shell)P
+6586 27864(procedure.)P
+4320 26928(A)P
+4955 26928(procedure)P
+7555 26928(may,)P
+8940 26928(itself,)P
+10492 26928(elect)P
+11826 26928(to)P
+12495 26928(ignore)P
+14230 26928(signals)P
+16098 26928(by)P
+16900 26928(specifying)P
+19601 26928(the)P
+20536 26928(null)P
+21672 26928(string)P
+23241 26928(as)P
+23942 26928(the)P
+24877 26928(argument)P
+27345 26928(to)P
+28014 26928(trap.)P
+29499 26928(The)P
+30633 26928(follow\255)P
+4320 26208(ing)P
+5287 26208(fragment)P
+7653 26208(is)P
+8253 26208(taken)P
+9752 26208(from)P
+11119 26208(the)P
+1 10 SF
+12052 26208(nohup)P
+0 10 SF
+13752 26208(command.)P
+7980 25128(trap)P
+9113 25128<9292>P
+9713 25128(1)P
+10213 25128(2)P
+10713 25128(3)P
+11213 25128(15)P
+4320 24048(which)P
+5986 24048(causes)P
+1 10 SF
+7750 24048(hangup,)P
+9900 24048(interrupt,)P
+12383 24048(quit)P
+0 10 SF
+13517 24048(and)P
+1 10 SF
+14583 24048(kill)P
+0 10 SF
+15550 24048(to)P
+16217 24048(be)P
+16983 24048(ignored)P
+19016 24048(both)P
+20283 24048(by)P
+21083 24048(the)P
+22016 24048(procedure)P
+24614 24048(and)P
+25680 24048(by)P
+26480 24048(invoked)P
+28613 24048(commands.)P
+4320 23112(Traps)P
+5886 23112(may)P
+7119 23112(be)P
+7885 23112(reset)P
+9217 23112(by)P
+10017 23112(saying)P
+7980 22032(trap)P
+9113 22032(2)P
+9613 22032(3)P
+4320 20952(which)P
+6037 20952(resets)P
+7653 20952(the)P
+8637 20952(traps)P
+10054 20952(for)P
+11005 20952(signals)P
+12922 20952(2)P
+13473 20952(and)P
+14589 20952(3)P
+15139 20952(to)P
+15856 20952(their)P
+17206 20952(default)P
+19122 20952(values.)P
+21254 20952(A)P
+21937 20952(list)P
+22921 20952(of)P
+23671 20952(the)P
+24654 20952(current)P
+26603 20952(values)P
+28385 20952(of)P
+29135 20952(traps)P
+30551 20952(may)P
+31834 20952(be)P
+4320 20232(obtained)P
+6586 20232(by)P
+7386 20232(writing)P
+7980 19152(trap)P
+4320 17856(The)P
+5522 17856(procedure)P
+1 10 SF
+8189 17856(scan)P
+0 10 SF
+9557 17856(\(Figure)P
+11593 17856(5\))P
+12362 17856(is)P
+13031 17856(an)P
+13866 17856(example)P
+16167 17856(of)P
+16936 17856(the)P
+17938 17856(use)P
+19006 17856(of)P
+1 10 SF
+19775 17856(trap)P
+0 10 SF
+21043 17856(where)P
+22776 17856(there)P
+24243 17856(is)P
+24911 17856(no)P
+25779 17856(exit)P
+26947 17856(in)P
+27682 17856(the)P
+28683 17856(trap)P
+29884 17856(command.)P
+1 10 SF
+4320 17136(scan)P
+0 10 SF
+5648 17136(takes)P
+7109 17136(each)P
+8436 17136(directory)P
+10831 17136(in)P
+11527 17136(the)P
+12489 17136(current)P
+14417 17136(directory,)P
+16962 17136(prompts)P
+19158 17136(with)P
+20454 17136(its)P
+21250 17136(name,)P
+22928 17136(and)P
+24023 17136(then)P
+25285 17136(executes)P
+27578 17136(commands)P
+30406 17136(typed)P
+31967 17136(at)P
+4320 16416(the)P
+5278 16416(terminal)P
+7503 16416(until)P
+8829 16416(an)P
+9620 16416(end)P
+10711 16416(of)P
+11436 16416(\212le)P
+12428 16416(or)P
+13152 16416(an)P
+13942 16416(interrupt)P
+16233 16416(is)P
+16857 16416(received.)P
+19462 16416(Interrupts)P
+22019 16416(are)P
+22975 16416(ignored)P
+25032 16416(while)P
+26589 16416(executing)P
+29145 16416(the)P
+30102 16416(requested)P
+4320 15696(commands)P
+7119 15696(but)P
+8086 15696(cause)P
+9617 15696(termination)P
+12584 15696(when)P
+1 10 SF
+14083 15696(scan)P
+0 10 SF
+15382 15696(is)P
+15982 15696(waiting)P
+17982 15696(for)P
+18882 15696(input.)P
+7980 14616(d=\221pwd\221)P
+7980 13896(for)P
+8880 13896(i)P
+9247 13896(in)P
+0 12 SF
+9914 13716(*)P
+0 10 SF
+7980 13176(do)P
+8780 13176(if)P
+9347 13176(test)P
+3 10 SF
+10380 13176(-)P
+0 10 SF
+10709 13176(d)P
+11209 13176($d/$i)P
+8780 12456(then)P
+10013 12456(cd)P
+10779 12456($d/$i)P
+10013 11736(while)P
+11546 11736(echo)P
+12878 11736("$i:")P
+11546 11016(trap)P
+12679 11016(exit)P
+13779 11016(2)P
+11546 10296(read)P
+12778 10296(x)P
+10013 9576(do)P
+10813 9576(trap)P
+11946 9576(:)P
+12313 9576(2;)P
+12980 9576(eval)P
+14179 9576($x;)P
+15146 9576(done)P
+8780 8856<8A>P
+7980 8136(done)P
+2 10 SF
+14551 6336(Figure)P
+16451 6336(5.)P
+17101 6336(The)P
+18301 6336(scan)P
+19634 6336(command)P
+1 10 SF
+4320 4896(read)P
+5644 4896(x)P
+0 10 SF
+6135 4896(is)P
+6759 4896(a)P
+7249 4896(built\255in)P
+9241 4896(command)P
+11831 4896(that)P
+12955 4896(reads)P
+14444 4896(one)P
+15534 4896(line)P
+16658 4896(from)P
+18049 4896(the)P
+19006 4896(standard)P
+21262 4896(input)P
+22720 4896(and)P
+23810 4896(places)P
+25532 4896(the)P
+26489 4896(result)P
+28046 4896(in)P
+28737 4896(the)P
+29694 4896(variable)P
+2 10 SF
+31850 4896(x)P
+32250 4896(.)P
+0 10 SF
+4320 4176(It)P
+4887 4176(returns)P
+6753 4176(a)P
+7219 4176(non\255zero)P
+9551 4176(exit)P
+10651 4176(status)P
+12217 4176(if)P
+12784 4176(either)P
+14350 4176(an)P
+15116 4176(end\255of\255\212le)P
+17849 4176(is)P
+18449 4176(read)P
+19681 4176(or)P
+20381 4176(an)P
+21147 4176(interrupt)P
+23414 4176(is)P
+24014 4176(received.)P
+end restore showpage
+%%Page: USD:3-20 20
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\25520)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+2 10 SF
+4320 42480(3.7)P
+5270 42480(Command)P
+8171 42480(execution)P
+0 10 SF
+4320 41544(To)P
+5234 41544(run)P
+6281 41544(a)P
+6794 41544(command)P
+9407 41544(\(other)P
+11087 41544(than)P
+12367 41544(a)P
+12880 41544(built\255in\))P
+15095 41544(the)P
+16075 41544(shell)P
+17455 41544(\212rst)P
+18636 41544(creates)P
+20547 41544(a)P
+21060 41544(new)P
+22306 41544(process)P
+24351 41544(using)P
+25898 41544(the)P
+26878 41544(system)P
+28791 41544(call)P
+1 10 SF
+29904 41544(fork.)P
+0 10 SF
+31467 41544(The)P
+4320 40824(execution)P
+6865 40824(environment)P
+10111 40824(for)P
+11024 40824(the)P
+11970 40824(command)P
+14549 40824(includes)P
+16761 40824(input,)P
+18358 40824(output)P
+20105 40824(and)P
+21184 40824(the)P
+22130 40824(states)P
+23675 40824(of)P
+24388 40824(signals,)P
+26417 40824(and)P
+27496 40824(is)P
+28109 40824(established)P
+30987 40824(in)P
+31667 40824(the)P
+4320 40104(child)P
+5779 40104(process)P
+7835 40104(before)P
+9625 40104(the)P
+10616 40104(command)P
+13240 40104(is)P
+13898 40104(executed.)P
+16637 40104(The)P
+17828 40104(built\255in)P
+19854 40104(command)P
+1 10 SF
+22478 40104(exec)P
+0 10 SF
+23800 40104(is)P
+24458 40104(used)P
+25815 40104(in)P
+26540 40104(the)P
+27531 40104(rare)P
+28721 40104(cases)P
+30243 40104(when)P
+31800 40104(no)P
+4320 39384(fork)P
+5527 39384(is)P
+6134 39384(required)P
+8340 39384(and)P
+9413 39384(simply)P
+11254 39384(replaces)P
+13425 39384(the)P
+14365 39384(shell)P
+15705 39384(with)P
+16978 39384(a)P
+17450 39384(new)P
+18655 39384(command.)P
+21577 39384(For)P
+22617 39384(example,)P
+25005 39384(a)P
+25477 39384(simple)P
+27283 39384(version)P
+29255 39384(of)P
+29961 39384(the)P
+1 10 SF
+30900 39384(nohup)P
+0 10 SF
+4320 38664(command)P
+6886 38664(looks)P
+8386 38664(like)P
+7980 37584(trap)P
+9113 37584<9292>P
+9713 37584(1)P
+10213 37584(2)P
+10713 37584(3)P
+11213 37584(15)P
+7980 36864(exec)P
+9278 36864($)P
+0 12 SF
+9578 36684(*)P
+0 10 SF
+4320 35784(The)P
+1 10 SF
+5530 35784(trap)P
+0 10 SF
+6806 35784(turns)P
+8282 35784(off)P
+9258 35784(the)P
+10267 35784(signals)P
+12209 35784(speci\212ed)P
+14617 35784(so)P
+15426 35784(that)P
+16602 35784(they)P
+17911 35784(are)P
+18919 35784(ignored)P
+21028 35784(by)P
+21904 35784(subsequently)P
+25312 35784(created)P
+27319 35784(commands)P
+30194 35784(and)P
+1 10 SF
+31336 35784(exec)P
+0 10 SF
+4320 35064(replaces)P
+6484 35064(the)P
+7417 35064(shell)P
+8750 35064(by)P
+9550 35064(the)P
+10483 35064(command)P
+13049 35064(speci\212ed.)P
+4320 34128(Most)P
+5816 34128(forms)P
+7479 34128(of)P
+8242 34128(input)P
+9739 34128(output)P
+11536 34128(redirection)P
+14398 34128(have)P
+15793 34128(already)P
+17821 34128(been)P
+19216 34128(described.)P
+22127 34128(In)P
+22890 34128(the)P
+23886 34128(following)P
+1 10 SF
+26483 34128(word)P
+0 10 SF
+27979 34128(is)P
+28642 34128(only)P
+29972 34128(subject)P
+31933 34128(to)P
+4320 33408(parameter)P
+6993 33408(and)P
+8134 33408(command)P
+10775 33408(substitution.)P
+14201 33408(No)P
+15209 33408(\212le)P
+16251 33408(name)P
+17825 33408(generation)P
+20632 33408(or)P
+21407 33408(blank)P
+23015 33408(interpretation)P
+26523 33408(takes)P
+28030 33408(place)P
+29569 33408(so)P
+30376 33408(that,)P
+31700 33408(for)P
+4320 32688(example,)P
+9480 31608(echo)P
+2 10 SF
+10812 31608(.)P
+11062 31608(.)P
+11312 31608(.)P
+0 10 SF
+11662 31608(>)P
+0 12 SF
+12000 31428(*)P
+0 10 SF
+12360 31608(.c)P
+4320 30528(will)P
+5472 30528(write)P
+6923 30528(its)P
+7708 30528(output)P
+9460 30528(into)P
+10612 30528(a)P
+11096 30528(\212le)P
+12081 30528(whose)P
+13831 30528(name)P
+15348 30528(is)P
+2 12 SF
+15966 30348(*)P
+2 10 SF
+16326 30528(.c)P
+16842 30528(.)P
+0 10 SF
+17410 30528(Input)P
+18895 30528(output)P
+20647 30528(speci\212cations)P
+24130 30528(are)P
+25080 30528(evaluated)P
+27596 30528(left)P
+28614 30528(to)P
+29299 30528(right)P
+30651 30528(as)P
+31367 30528(they)P
+4320 29808(appear)P
+6118 29808(in)P
+6785 29808(the)P
+7718 29808(command.)P
+4320 28872(>)P
+1 10 SF
+4858 28872(word)P
+0 10 SF
+7920 28872(The)P
+9153 28872(standard)P
+11485 28872(output)P
+13319 28872(\(\212le)P
+14585 28872(descriptor)P
+17283 28872(1\))P
+18082 28872(is)P
+18781 28872(sent)P
+20046 28872(to)P
+20812 28872(the)P
+21844 28872(\212le)P
+1 10 SF
+22910 28872(word)P
+0 10 SF
+24442 28872(which)P
+26207 28872(is)P
+26906 28872(created)P
+28936 28872(if)P
+29602 28872(it)P
+30235 28872(does)P
+31633 28872(not)P
+7920 28152(already)P
+9885 28152(exist.)P
+4320 27216(>)P
+4538 27216(>)P
+1 10 SF
+5076 27216(word)P
+0 10 SF
+7920 27216(The)P
+9085 27216(standard)P
+11349 27216(output)P
+13115 27216(is)P
+13747 27216(sent)P
+14945 27216(to)P
+15644 27216(\212le)P
+1 10 SF
+16643 27216(word.)P
+0 10 SF
+18458 27216(If)P
+19090 27216(the)P
+20055 27216(\212le)P
+21053 27216(exists)P
+22650 27216(then)P
+23914 27216(output)P
+25679 27216(is)P
+26310 27216(appended)P
+28839 27216(\(by)P
+29870 27216(seeking)P
+31933 27216(to)P
+7920 26496(the)P
+8853 26496(end\);)P
+10286 26496(otherwise)P
+12818 26496(the)P
+13751 26496(\212le)P
+14718 26496(is)P
+15318 26496(created.)P
+4320 25560(<)P
+1 10 SF
+4858 25560(word)P
+0 10 SF
+7920 25560(The)P
+9053 25560(standard)P
+11285 25560(input)P
+12719 25560(\(\212le)P
+13886 25560(descriptor)P
+16485 25560(0\))P
+17185 25560(is)P
+17785 25560(taken)P
+19284 25560(from)P
+20651 25560(the)P
+21584 25560(\212le)P
+1 10 SF
+22551 25560(word.)P
+0 10 SF
+4320 24624(<)P
+4538 24624(<)P
+1 10 SF
+5076 24624(word)P
+0 10 SF
+7920 24624(The)P
+9074 24624(standard)P
+11326 24624(input)P
+12780 24624(is)P
+13400 24624(taken)P
+14919 24624(from)P
+16306 24624(the)P
+17259 24624(lines)P
+18612 24624(of)P
+19332 24624(shell)P
+20685 24624(input)P
+22139 24624(that)P
+23259 24624(follow)P
+25046 24624(up)P
+25866 24624(to)P
+26553 24624(but)P
+27540 24624(not)P
+28527 24624(including)P
+31014 24624(a)P
+31500 24624(line)P
+7920 23904(consisting)P
+10555 23904(only)P
+11824 23904(of)P
+1 10 SF
+12525 23904(word.)P
+0 10 SF
+14309 23904(If)P
+1 10 SF
+14910 23904(word)P
+0 10 SF
+16344 23904(is)P
+16945 23904(quoted)P
+18779 23904(then)P
+20013 23904(no)P
+20814 23904(interpretation)P
+24248 23904(of)P
+24949 23904(the)P
+25883 23904(document)P
+28450 23904(occurs.)P
+30566 23904(If)P
+1 10 SF
+31167 23904(word)P
+0 10 SF
+7920 23184(is)P
+8532 23184(not)P
+9511 23184(quoted)P
+11356 23184(then)P
+12601 23184(parameter)P
+15211 23184(and)P
+16289 23184(command)P
+18867 23184(substitution)P
+21880 23184(occur)P
+23424 23184(and)P
+2 10 SF
+24502 23184(\\)P
+0 10 SF
+24881 23184(is)P
+25493 23184(used)P
+26804 23184(to)P
+27482 23184(quote)P
+29026 23184(the)P
+29970 23184(characters)P
+2 10 SF
+7920 22464(\\)P
+8287 22464($)P
+8787 22464<91>P
+0 10 SF
+9187 22464(and)P
+10253 22464(the)P
+11186 22464(\212rst)P
+12320 22464(character)P
+14717 22464(of)P
+1 10 SF
+15417 22464(word.)P
+0 10 SF
+17200 22464(In)P
+17900 22464(the)P
+18833 22464(latter)P
+20266 22464(case)P
+2 10 SF
+21497 22464(\\newline)P
+0 10 SF
+23831 22464(is)P
+24431 22464(ignored)P
+26464 22464(\(c.f.)P
+27630 22464(quoted)P
+29463 22464(strings\).)P
+4320 21528(>&)P
+1 10 SF
+5325 21528(digit)P
+0 10 SF
+7920 21528(The)P
+9106 21528(\212le)P
+10126 21528(descriptor)P
+1 10 SF
+12778 21528(digit)P
+0 10 SF
+14132 21528(is)P
+14785 21528(duplicated)P
+17537 21528(using)P
+19090 21528(the)P
+20076 21528(system)P
+21995 21528(call)P
+1 10 SF
+23114 21528(dup)P
+0 10 SF
+24267 21528(\(2\))P
+25220 21528(and)P
+26339 21528(the)P
+27325 21528(result)P
+28911 21528(is)P
+29564 21528(used)P
+30916 21528(as)P
+31667 21528(the)P
+7920 20808(standard)P
+10152 20808(output.)P
+4320 19872(<&)P
+1 10 SF
+5325 19872(digit)P
+0 10 SF
+7920 19872(The)P
+9053 19872(standard)P
+11285 19872(input)P
+12719 19872(is)P
+13319 19872(duplicated)P
+16018 19872(from)P
+17385 19872(\212le)P
+18352 19872(descriptor)P
+1 10 SF
+20951 19872(digit.)P
+0 10 SF
+4320 18936(<&)P
+3 10 SF
+5125 18936(-)P
+0 10 SF
+7920 18936(The)P
+9053 18936(standard)P
+11285 18936(input)P
+12719 18936(is)P
+13319 18936(closed.)P
+4320 18000(>&)P
+3 10 SF
+5125 18000(-)P
+0 10 SF
+7920 18000(The)P
+9053 18000(standard)P
+11285 18000(output)P
+13019 18000(is)P
+13619 18000(closed.)P
+4320 17064(Any)P
+5606 17064(of)P
+6358 17064(the)P
+7343 17064(above)P
+9027 17064(may)P
+10312 17064(be)P
+11130 17064(preceded)P
+13546 17064(by)P
+14398 17064(a)P
+14916 17064(digit)P
+16269 17064(in)P
+16988 17064(which)P
+18706 17064(case)P
+19989 17064(the)P
+20974 17064(\212le)P
+21993 17064(descriptor)P
+24644 17064(created)P
+26627 17064(is)P
+27279 17064(that)P
+28431 17064(speci\212ed)P
+30815 17064(by)P
+31667 17064(the)P
+4320 16344(digit)P
+5621 16344(instead)P
+7520 16344(of)P
+8220 16344(the)P
+9153 16344(default)P
+11019 16344(0)P
+11519 16344(or)P
+12219 16344(1.)P
+13069 16344(For)P
+14103 16344(example,)P
+2 10 SF
+7980 15264(.)P
+8230 15264(.)P
+8480 15264(.)P
+0 10 SF
+8830 15264(2>\212le)P
+4320 14184(runs)P
+5553 14184(a)P
+6019 14184(command)P
+8585 14184(with)P
+9852 14184(message)P
+12083 14184(output)P
+13817 14184(\(\212le)P
+14984 14184(descriptor)P
+17583 14184(2\))P
+18283 14184(directed)P
+20415 14184(to)P
+1 10 SF
+21082 14184(\212le.)P
+2 10 SF
+7980 13104(.)P
+8230 13104(.)P
+8480 13104(.)P
+0 10 SF
+8830 13104(2>&1)P
+4320 12024(runs)P
+5645 12024(a)P
+6203 12024(command)P
+8861 12024(with)P
+10220 12024(its)P
+11079 12024(standard)P
+13403 12024(output)P
+15229 12024(and)P
+16387 12024(message)P
+18710 12024(output)P
+20536 12024(merged.)P
+22977 12024(\(Strictly)P
+25237 12024(speaking)P
+27661 12024(\212le)P
+28719 12024(descriptor)P
+31409 12024(2)P
+32000 12024(is)P
+4320 11304(created)P
+6251 11304(by)P
+7051 11304(duplicating)P
+9951 11304(\212le)P
+10918 11304(descriptor)P
+13517 11304(1)P
+14017 11304(but)P
+14984 11304(the)P
+15917 11304(effect)P
+17482 11304(is)P
+18082 11304(usually)P
+20015 11304(to)P
+20682 11304(merge)P
+22381 11304(the)P
+23314 11304(two)P
+24414 11304(streams.\))P
+4320 10368(The)P
+5453 10368(environment)P
+8686 10368(for)P
+9586 10368(a)P
+10052 10368(command)P
+12618 10368(run)P
+13618 10368(in)P
+14285 10368(the)P
+15218 10368(background)P
+18250 10368(such)P
+19549 10368(as)P
+7980 9288(list)P
+0 12 SF
+8914 9108(*)P
+0 10 SF
+9274 9288(.c)P
+3 10 SF
+9990 9288(|)P
+0 10 SF
+10410 9288(lpr)P
+11277 9288(&)P
+4320 8208(is)P
+4993 8208(modi\212ed)P
+7399 8208(in)P
+8138 8208(two)P
+9310 8208(ways.)P
+11164 8208(Firstly,)P
+13154 8208(the)P
+14159 8208(default)P
+16097 8208(standard)P
+18401 8208(input)P
+19907 8208(for)P
+20879 8208(such)P
+22250 8208(a)P
+22788 8208(command)P
+25426 8208(is)P
+26098 8208(the)P
+27103 8208(empty)P
+28875 8208(\212le)P
+2 10 SF
+29914 8208(/dev/null)P
+32250 8208(.)P
+0 10 SF
+4320 7488(This)P
+5615 7488(prevents)P
+7875 7488(two)P
+9003 7488(processes)P
+11527 7488(\(the)P
+12687 7488(shell)P
+14047 7488(and)P
+15140 7488(the)P
+16100 7488(command\),)P
+19043 7488(which)P
+20736 7488(are)P
+21695 7488(running)P
+23789 7488(in)P
+24483 7488(parallel,)P
+26659 7488(from)P
+28053 7488(trying)P
+29714 7488(to)P
+30408 7488(read)P
+31667 7488(the)P
+4320 6768(same)P
+5752 6768(input.)P
+7536 6768(Chaos)P
+9235 6768(would)P
+10935 6768(ensue)P
+12500 6768(if)P
+13067 6768(this)P
+14134 6768(were)P
+15499 6768(not)P
+16466 6768(the)P
+17399 6768(case.)P
+18980 6768(For)P
+20014 6768(example,)P
+7980 5688(ed)P
+8746 5688(\212le)P
+9713 5688(&)P
+4320 4608(would)P
+6020 4608(allow)P
+7553 4608(both)P
+8820 4608(the)P
+9753 4608(editor)P
+11353 4608(and)P
+12419 4608(the)P
+13352 4608(shell)P
+14685 4608(to)P
+15352 4608(read)P
+16584 4608(from)P
+17951 4608(the)P
+18884 4608(same)P
+20316 4608(input)P
+21750 4608(at)P
+22383 4608(the)P
+23316 4608(same)P
+24748 4608(time.)P
+end restore showpage
+%%Page: USD:3-21 21
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+29933 44640(USD:3\25521)P
+4320 42480(The)P
+5478 42480(other)P
+6936 42480(modi\212cation)P
+10195 42480(to)P
+10887 42480(the)P
+11845 42480(environment)P
+15103 42480(of)P
+15828 42480(a)P
+16319 42480(background)P
+19375 42480(command)P
+21965 42480(is)P
+22589 42480(to)P
+23280 42480(turn)P
+24471 42480(off)P
+25395 42480(the)P
+26352 42480(QUIT)P
+28009 42480(and)P
+29099 42480(INTERRUPT)P
+4320 41760(signals)P
+6232 41760(so)P
+7011 41760(that)P
+8157 41760(they)P
+9436 41760(are)P
+10414 41760(ignored)P
+12493 41760(by)P
+13339 41760(the)P
+14318 41760(command.)P
+17280 41760(This)P
+18593 41760(allows)P
+20405 41760(these)P
+21883 41760(signals)P
+23795 41760(to)P
+24508 41760(be)P
+25320 41760(used)P
+26665 41760(at)P
+27343 41760(the)P
+28321 41760(terminal)P
+30566 41760(without)P
+4320 41040(causing)P
+6368 41040(background)P
+9416 41040(commands)P
+12231 41040(to)P
+12914 41040(terminate.)P
+15746 41040(For)P
+16796 41040(this)P
+17879 41040(reason)P
+19660 41040(the)P
+20609 41040(UNIX)P
+22324 41040(convention)P
+25206 41040(for)P
+26122 41040(a)P
+26604 41040(signal)P
+28253 41040(is)P
+28869 41040(that)P
+29985 41040(if)P
+30568 41040(it)P
+31118 41040(is)P
+31734 41040(set)P
+4320 40320(to)P
+4992 40320(1)P
+5497 40320(\(ignored\))P
+7935 40320(then)P
+9173 40320(it)P
+9712 40320(is)P
+10317 40320(never)P
+11854 40320(changed)P
+14057 40320(even)P
+15394 40320(for)P
+16299 40320(a)P
+16770 40320(short)P
+18175 40320(time.)P
+19797 40320(Note)P
+21168 40320(that)P
+22273 40320(the)P
+23211 40320(shell)P
+24549 40320(command)P
+1 10 SF
+27120 40320(trap)P
+0 10 SF
+28324 40320(has)P
+29327 40320(no)P
+30131 40320(effect)P
+31700 40320(for)P
+4320 39600(an)P
+5086 39600(ignored)P
+7119 39600(signal.)P
+2 10 SF
+4320 38160(3.8)P
+5270 38160(Invoking)P
+7772 38160(the)P
+8772 38160(shell)P
+0 10 SF
+4320 37224(The)P
+5495 37224(following)P
+8071 37224(\213ags)P
+9446 37224(are)P
+10420 37224(interpreted)P
+13261 37224(by)P
+14103 37224(the)P
+15078 37224(shell)P
+16453 37224(when)P
+17994 37224(it)P
+18570 37224(is)P
+19212 37224(invoked.)P
+21737 37224(If)P
+22379 37224(the)P
+23354 37224(\212rst)P
+24530 37224(character)P
+26969 37224(of)P
+27711 37224(argument)P
+30219 37224(zero)P
+31493 37224(is)P
+32134 37224(a)P
+4320 36504(minus,)P
+6137 36504(then)P
+7370 36504(commands)P
+10169 36504(are)P
+11101 36504(read)P
+12333 36504(from)P
+13700 36504(the)P
+14633 36504(\212le)P
+2 10 SF
+15600 36504(.pro\212le)P
+17517 36504(.)P
+3 10 SF
+4320 35568(-)P
+2 10 SF
+4649 35568(c)P
+1 10 SF
+5115 35568(string)P
+0 10 SF
+5820 34848(If)P
+6420 34848(the)P
+3 10 SF
+7353 34848(-)P
+2 10 SF
+7682 34848(c)P
+0 10 SF
+8148 34848(\213ag)P
+9248 34848(is)P
+9848 34848(present)P
+11780 34848(then)P
+13013 34848(commands)P
+15812 34848(are)P
+16744 34848(read)P
+17976 34848(from)P
+1 10 SF
+19343 34848(string)P
+20843 34848(.)P
+3 10 SF
+4320 33912(-)P
+2 10 SF
+4649 33912(s)P
+0 10 SF
+5820 33912(If)P
+6435 33912(the)P
+3 10 SF
+7383 33912(-)P
+2 10 SF
+7712 33912(s)P
+0 10 SF
+8160 33912(\213ag)P
+9275 33912(is)P
+9890 33912(present)P
+11837 33912(or)P
+12552 33912(if)P
+13134 33912(no)P
+13949 33912(arguments)P
+16662 33912(remain)P
+18542 33912(then)P
+19789 33912(commands)P
+22602 33912(are)P
+23548 33912(read)P
+24794 33912(from)P
+26175 33912(the)P
+27122 33912(standard)P
+29368 33912(input.)P
+31166 33912(Shell)P
+5820 33192(output)P
+7554 33192(is)P
+8154 33192(written)P
+10054 33192(to)P
+10721 33192(\212le)P
+11688 33192(descriptor)P
+14287 33192(2.)P
+3 10 SF
+4320 32256(-)P
+2 10 SF
+4649 32256(i)P
+0 10 SF
+5820 32256(If)P
+6432 32256(the)P
+3 10 SF
+7377 32256(-)P
+2 10 SF
+7706 32256(i)P
+0 10 SF
+8085 32256(\213ag)P
+9196 32256(is)P
+9807 32256(present)P
+11750 32256(or)P
+12461 32256(if)P
+13039 32256(the)P
+13983 32256(shell)P
+15327 32256(input)P
+16772 32256(and)P
+17849 32256(output)P
+19594 32256(are)P
+20537 32256(attached)P
+22746 32256(to)P
+23424 32256(a)P
+23901 32256(terminal)P
+26112 32256(\(as)P
+27022 32256(told)P
+28167 32256(by)P
+1 10 SF
+28978 32256(gtty)P
+0 10 SF
+29878 32256(\))P
+30289 32256(then)P
+31533 32256(this)P
+5820 31536(shell)P
+7185 31536(is)P
+1 10 SF
+7817 31536(interactive.)P
+0 10 SF
+10964 31536(In)P
+11696 31536(this)P
+12795 31536(case)P
+14058 31536(TERMINATE)P
+17757 31536(is)P
+18389 31536(ignored)P
+20454 31536(\(so)P
+21419 31536(that)P
+2 10 SF
+22550 31536(kill)P
+23616 31536(0)P
+0 10 SF
+24147 31536(does)P
+25477 31536(not)P
+26475 31536(kill)P
+27507 31536(an)P
+28304 31536(interactive)P
+31067 31536(shell\))P
+5820 30816(and)P
+6887 30816(INTERRUPT)P
+10389 30816(is)P
+10990 30816(caught)P
+12789 30816(and)P
+13855 30816(ignored)P
+15888 30816(\(so)P
+16821 30816(that)P
+2 10 SF
+17921 30816(wait)P
+0 10 SF
+19221 30816(is)P
+19821 30816(interruptable\).)P
+23637 30816(In)P
+24337 30816(all)P
+25137 30816(cases)P
+26601 30816(QUIT)P
+28234 30816(is)P
+28834 30816(ignored)P
+30867 30816(by)P
+31667 30816(the)P
+5820 30096(shell.)P
+2 10 SF
+4320 28656(Acknowledgements)P
+0 10 SF
+4320 27720(The)P
+5502 27720(design)P
+7317 27720(of)P
+8066 27720(the)P
+9048 27720(shell)P
+10430 27720(is)P
+11079 27720(based)P
+12693 27720(in)P
+13409 27720(part)P
+14591 27720(on)P
+15440 27720(the)P
+16422 27720(original)P
+18538 27720(UNIX)P
+20286 27720(shell)P
+0 8 SF
+21419 27912(3)P
+0 10 SF
+21908 27720(and)P
+23022 27720(the)P
+24003 27720(PWB/UNIX)P
+27217 27720(shell,)P
+0 8 SF
+28500 27912(4)P
+0 10 SF
+28988 27720(some)P
+30502 27720(features)P
+4320 27000(having)P
+6200 27000(been)P
+7579 27000(taken)P
+9125 27000(from)P
+10539 27000(both.)P
+12203 27000(Similarities)P
+15218 27000(also)P
+16431 27000(exist)P
+17811 27000(with)P
+19125 27000(the)P
+20105 27000(command)P
+22718 27000(interpreters)P
+25696 27000(of)P
+26442 27000(the)P
+27421 27000(Cambridge)P
+30333 27000(Multiple)P
+4320 26280(Access)P
+6217 26280(System)P
+0 8 SF
+7984 26472(5)P
+0 10 SF
+8424 26280(and)P
+9490 26280(of)P
+10190 26280(CTSS.)P
+0 8 SF
+11775 26472(6)P
+0 10 SF
+4320 25344(I)P
+4724 25344(would)P
+6428 25344(like)P
+7532 25344(to)P
+8203 25344(thank)P
+9740 25344(Dennis)P
+11643 25344(Ritchie)P
+13580 25344(and)P
+14650 25344(John)P
+15987 25344(Mashey)P
+18089 25344(for)P
+18993 25344(many)P
+20529 25344(discussions)P
+23464 25344(during)P
+25234 25344(the)P
+26170 25344(design)P
+27939 25344(of)P
+28642 25344(the)P
+29578 25344(shell.)P
+31264 25344(I)P
+31667 25344(am)P
+4320 24624(also)P
+5545 24624(grateful)P
+7670 24624(to)P
+8396 24624(the)P
+9388 24624(members)P
+11846 24624(of)P
+12605 24624(the)P
+13596 24624(Computing)P
+16555 24624(Science)P
+18678 24624(Research)P
+21133 24624(Center)P
+22990 24624(and)P
+24114 24624(to)P
+24839 24624(Joe)P
+25896 24624(Maranzano)P
+28851 24624(for)P
+29809 24624(their)P
+31167 24624(com\255)P
+4320 23904(ments)P
+5953 23904(on)P
+6753 23904(drafts)P
+8319 23904(of)P
+9019 23904(this)P
+10086 23904(document.)P
+4320 9072 8 0 18 L
+0 6 SF
+4920 8508(3)P
+0 8 SF
+5340 8364(K.)P
+6013 8364(Thompson,)P
+8392 8364(``The)P
+9663 8364(U)P
+0 6 SF
+10010 8364(NIX)P
+0 8 SF
+10855 8364(Command)P
+13059 8364(Language,'')P
+15596 8364(in)P
+1 8 SF
+16174 8364(Structured)P
+18405 8364(Programming\210Infotech)P
+23303 8364(State)P
+24467 8364(of)P
+25045 8364(the)P
+25836 8364(Art)P
+26654 8364(Report)P
+0 8 SF
+27960 8364(,)P
+4320 7764(pp.)P
+5080 7764(375\255384,)P
+6960 7764(Infotech)P
+8719 7764(International)P
+11330 7764(Ltd.,)P
+12396 7764(Nicholson)P
+14529 7764(House,)P
+16036 7764(Maidenhead,)P
+18688 7764(Berkshire,)P
+20834 7764(England,)P
+22713 7764(March)P
+24126 7764(1975.)P
+0 6 SF
+4920 7200(4)P
+0 8 SF
+5340 7056(J.)P
+5807 7056(R.)P
+6407 7056(Mashey,)P
+1 8 SF
+8207 7056(PWB/UNIX)P
+10606 7056(Shell)P
+11725 7056(Tutorial)P
+0 8 SF
+13298 7056(,)P
+13578 7056(September)P
+15790 7056(30,)P
+16550 7056(1977.)P
+0 6 SF
+4920 6492(5)P
+0 8 SF
+5340 6348(D.)P
+5991 6348(F.)P
+6562 6348(Hartley)P
+8185 6348(\(Ed.\),)P
+1 8 SF
+9462 6348(The)P
+10366 6348(Cambridge)P
+12710 6348(Multiple)P
+14519 6348(Access)P
+16009 6348(System)P
+17526 6348(-)P
+18033 6348(Users)P
+19337 6348(Reference)P
+21438 6348(Manual,)P
+0 8 SF
+23234 6348(University)P
+25443 6348(Mathematical)P
+4320 5748(Laboratory,)P
+6732 5748(Cambridge,)P
+9144 5748(England,)P
+11023 5748(1968.)P
+0 6 SF
+4920 5184(6)P
+0 8 SF
+5340 5040(P.)P
+5887 5040(A.)P
+6514 5040(Crisman)P
+8300 5040(\(Ed.\),)P
+1 8 SF
+9553 5040(The)P
+10433 5040(Compatible)P
+12832 5040(Time\255Sharing)P
+15632 5040(System,)P
+0 8 SF
+17245 5040(M.I.T.)P
+18645 5040(Press,)P
+19939 5040(Cambridge,)P
+22351 5040(Mass.,)P
+23765 5040(1965.)P
+end restore showpage
+%%Page: USD:3-22 22
+save $troff begin Sc
+0 10 SF
+4320 44640(USD:3\25522)P
+23767 44640(An)P
+24700 44640(Introduction)P
+27867 44640(to)P
+28534 44640(the)P
+29467 44640(UNIX)P
+31166 44640(Shell)P
+2 10 SF
+4320 42480(Appendix)P
+7022 42480(A)P
+7655 42480<AD>P
+8055 42480(Grammar)P
+1 10 SF
+6480 41184(item:)P
+9480 41184(word)P
+9480 40464(input\255output)P
+9480 39744(name)P
+10979 39744(=)P
+11584 39744(value)P
+6480 38448(simple\255command:)P
+10978 38448(item)P
+9480 37728(simple\255command)P
+13778 37728(item)P
+6480 36432(command:)P
+9480 36432(simple\255command)P
+2 10 SF
+9480 35712(\()P
+1 10 SF
+9880 35712(command\255list)P
+2 10 SF
+13346 35712(\))P
+9480 34992({)P
+1 10 SF
+9916 34992(command\255list)P
+2 10 SF
+13382 34992(})P
+9480 34272(for)P
+1 10 SF
+10446 34272(name)P
+2 10 SF
+11945 34272(do)P
+1 10 SF
+12779 34272(command\255list)P
+2 10 SF
+16245 34272(done)P
+9480 33552(for)P
+1 10 SF
+10446 33552(name)P
+2 10 SF
+11945 33552(in)P
+1 10 SF
+12646 33552(word)P
+2 10 SF
+14079 33552(.)P
+14329 33552(.)P
+14579 33552(.)P
+14929 33552(do)P
+1 10 SF
+15763 33552(command\255list)P
+2 10 SF
+19229 33552(done)P
+9480 32832(while)P
+1 10 SF
+11047 32832(command\255list)P
+2 10 SF
+14513 32832(do)P
+1 10 SF
+15347 32832(command\255list)P
+2 10 SF
+18813 32832(done)P
+9480 32112(until)P
+1 10 SF
+10882 32112(command\255list)P
+2 10 SF
+14348 32112(do)P
+1 10 SF
+15182 32112(command\255list)P
+2 10 SF
+18648 32112(done)P
+9480 31392(case)P
+1 10 SF
+10745 31392(word)P
+2 10 SF
+12178 31392(in)P
+1 10 SF
+12879 31392(case\255part)P
+2 10 SF
+15344 31392(.)P
+15594 31392(.)P
+15844 31392(.)P
+16194 31392(esac)P
+9480 30672(if)P
+1 10 SF
+10047 30672(command\255list)P
+2 10 SF
+13513 30672(then)P
+1 10 SF
+14847 30672(command\255list)P
+18313 30672(else\255part)P
+2 10 SF
+20645 30672<8A>P
+1 10 SF
+6480 29376(pipeline:)P
+10980 29376(command)P
+9480 28656(pipeline)P
+3 10 SF
+11713 28656(|)P
+1 10 SF
+12133 28656(command)P
+6480 27360(andor:)P
+10980 27360(pipeline)P
+9480 26640(andor)P
+2 10 SF
+11113 26640(&&)P
+1 10 SF
+12313 26640(pipeline)P
+9480 25920(andor)P
+3 10 SF
+11213 25920(|)P
+11533 25920(|)P
+1 10 SF
+11953 25920(pipeline)P
+6480 24624(command\255list:)P
+10980 24624(andor)P
+9480 23904(command\255list)P
+2 10 SF
+12946 23904(;)P
+1 10 SF
+9480 23184(command\255list)P
+2 10 SF
+12946 23184(&)P
+1 10 SF
+9480 22464(command\255list)P
+2 10 SF
+12946 22464(;)P
+1 10 SF
+13346 22464(andor)P
+9480 21744(command\255list)P
+2 10 SF
+12946 21744(&)P
+1 10 SF
+13646 21744(andor)P
+6480 20448(input\255output:)P
+2 10 SF
+10980 20448(>)P
+1 10 SF
+11522 20448(\212le)P
+2 10 SF
+9480 19728(<)P
+1 10 SF
+10022 19728(\212le)P
+2 10 SF
+9480 19008(>)P
+9702 19008(>)P
+1 10 SF
+10244 19008(word)P
+2 10 SF
+9480 18288(<)P
+9702 18288(<)P
+1 10 SF
+10244 18288(word)P
+6480 16992(\212le:)P
+9480 16992(word)P
+2 10 SF
+9480 16272(&)P
+1 10 SF
+10180 16272(digit)P
+2 10 SF
+9480 15552(&)P
+3 10 SF
+10180 15552(-)P
+1 10 SF
+6480 14256(case\255part:)P
+9480 14256(pattern)P
+2 10 SF
+11413 14256(\))P
+1 10 SF
+11813 14256(command\255list)P
+2 10 SF
+15279 14256(;;)P
+1 10 SF
+6480 12960(pattern:)P
+10980 12960(word)P
+9480 12240(pattern)P
+3 10 SF
+11513 12240(|)P
+1 10 SF
+11933 12240(word)P
+6480 10944(else\255part:)P
+2 10 SF
+9480 10944(elif)P
+1 10 SF
+10480 10944(command\255list)P
+2 10 SF
+13946 10944(then)P
+1 10 SF
+15280 10944(command\255list)P
+18746 10944(else\255part)P
+2 10 SF
+9480 10224(else)P
+1 10 SF
+10612 10224(command\255list)P
+9480 9504(empty)P
+6480 8208(empty:)P
+6480 6912(word:)P
+0 10 SF
+9480 6912(a)P
+9946 6912(sequence)P
+12343 6912(of)P
+13043 6912(non\255blank)P
+15676 6912(characters)P
+1 10 SF
+6480 5616(name:)P
+0 10 SF
+9480 5616(a)P
+9946 5616(sequence)P
+12343 5616(of)P
+13043 5616(letters,)P
+14859 5616(digits)P
+16393 5616(or)P
+17093 5616(underscores)P
+20157 5616(starting)P
+22157 5616(with)P
+23424 5616(a)P
+23890 5616(letter)P
+1 10 SF
+6480 4320(digit:)P
+2 10 SF
+9480 4320(0)P
+9980 4320(1)P
+10480 4320(2)P
+10980 4320(3)P
+11480 4320(4)P
+11980 4320(5)P
+12480 4320(6)P
+12980 4320(7)P
+13480 4320(8)P
+13980 4320(9)P
+end restore showpage
+%%Page: USD:3-23 23
+save $troff begin Sc
+0 10 SF
+4320 44640(An)P
+5253 44640(Introduction)P
+8420 44640(to)P
+9087 44640(the)P
+10020 44640(UNIX)P
+11719 44640(Shell)P
+29933 44640(USD:3\25523)P
+2 10 SF
+4320 42480(Appendix)P
+7022 42480(B)P
+7622 42480<AD>P
+8022 42480(Meta\255characters)P
+12451 42480(and)P
+13619 42480(Reserved)P
+16183 42480(Words)P
+0 10 SF
+4320 41544(a\))P
+4986 41544(syntactic)P
+3 10 SF
+5920 40608(|)P
+0 10 SF
+7620 40608(pipe)P
+8853 40608(symbol)P
+2 10 SF
+5820 39672(&&)P
+0 10 SF
+7620 39672(`andf')P
+9286 39672(symbol)P
+3 10 SF
+5920 38736(|)P
+6240 38736(|)P
+0 10 SF
+7620 38736(`orf')P
+8920 38736(symbol)P
+2 10 SF
+5820 37800(;)P
+0 10 SF
+7620 37800(command)P
+10186 37800(separator)P
+2 10 SF
+5820 36864(;;)P
+0 10 SF
+7620 36864(case)P
+8851 36864(delimiter)P
+2 10 SF
+5820 35928(&)P
+0 10 SF
+7620 35928(background)P
+10652 35928(commands)P
+2 10 SF
+5820 34992(\()P
+6220 34992(\))P
+0 10 SF
+7620 34992(command)P
+10186 34992(grouping)P
+2 10 SF
+5820 34056(<)P
+0 10 SF
+7620 34056(input)P
+9054 34056(redirection)P
+2 10 SF
+5820 33120(<)P
+6042 33120(<)P
+0 10 SF
+7620 33120(input)P
+9054 33120(from)P
+10421 33120(a)P
+10887 33120(here)P
+12119 33120(document)P
+2 10 SF
+5820 32184(>)P
+0 10 SF
+7620 32184(output)P
+9354 32184(creation)P
+2 10 SF
+5820 31248(>)P
+6042 31248(>)P
+0 10 SF
+7620 31248(output)P
+9354 31248(append)P
+4320 28872(b\))P
+5020 28872(patterns)P
+2 12 SF
+5820 27756(*)P
+0 10 SF
+7620 27936(match)P
+9286 27936(any)P
+10352 27936(character\(s\))P
+13382 27936(including)P
+15849 27936(none)P
+2 10 SF
+5820 27000(?)P
+0 10 SF
+7620 27000(match)P
+9286 27000(any)P
+10352 27000(single)P
+11985 27000(character)P
+2 10 SF
+5820 26064([...])P
+0 10 SF
+7620 26064(match)P
+9286 26064(any)P
+10352 26064(of)P
+11052 26064(the)P
+11985 26064(enclosed)P
+14283 26064(characters)P
+4320 23688(c\))P
+4986 23688(substitution)P
+2 10 SF
+5820 22752(${...})P
+0 10 SF
+7620 22752(substitute)P
+10120 22752(shell)P
+11453 22752(variable)P
+2 10 SF
+5820 21816<912E2E2E91>P
+0 10 SF
+7620 21816(substitute)P
+10120 21816(command)P
+12686 21816(output)P
+4320 19440(d\))P
+5020 19440(quoting)P
+2 10 SF
+5820 18504(\\)P
+0 10 SF
+7620 18504(quote)P
+9153 18504(the)P
+10086 18504(next)P
+11319 18504(character)P
+2 10 SF
+5820 17568<922E2E2E92>P
+0 10 SF
+7620 17568(quote)P
+9153 17568(the)P
+10086 17568(enclosed)P
+12384 17568(characters)P
+15014 17568(except)P
+16779 17568(for)P
+17679 17568<92>P
+2 10 SF
+5820 16632("...")P
+0 10 SF
+7620 16632(quote)P
+9153 16632(the)P
+10086 16632(enclosed)P
+12384 16632(characters)P
+15014 16632(except)P
+16779 16632(for)P
+2 10 SF
+17679 16632($)P
+18179 16632<91>P
+18579 16632(\\)P
+18946 16632(")P
+0 10 SF
+4320 14256(e\))P
+4986 14256(reserved)P
+7217 14256(words)P
+2 10 SF
+6480 13176(if)P
+7047 13176(then)P
+8381 13176(else)P
+9513 13176(elif)P
+10513 13176<8A>P
+6480 12456(case)P
+7745 12456(in)P
+8446 12456(esac)P
+6480 11736(for)P
+7446 11736(while)P
+9013 11736(until)P
+10415 11736(do)P
+11249 11736(done)P
+6480 11016({)P
+7116 11016(})P
+end restore showpage
+%%Trailer
+%%Pages: 23
+%%EOF

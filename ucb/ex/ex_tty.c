@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_tty.c	7.12 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_tty.c	7.13 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -32,7 +32,7 @@ gettmode()
 	GT = (tty.sg_flags & XTABS) != XTABS && !XT;
 	NONL = (tty.sg_flags & CRMOD) == 0;
 #else
-	if (ioctl(1, TCGETA, (char *) &tty) < 0)
+	if (ioctl(1, TCGETA, (u_char *) &tty) < 0)
 		return;
 	if (ospeed != (tty.c_cflag & CBAUD))	/* mjm */
 		value(SLOWOPEN) = (tty.c_cflag & CBAUD) < B1200;
@@ -44,8 +44,8 @@ gettmode()
 #endif
 }
 
-char *xPC;
-char **sstrs[] = {
+u_char *xPC;
+u_char **sstrs[] = {
 	&AL, &BC, &BT, &CD, &CE, &CL, &CM, &xCR, &CS, &DC, &DL, &DM, &DO,
 	&ED, &EI, &F0, &F1, &F2, &F3, &F4, &F5, &F6, &F7, &F8, &F9,
 	&HO, &IC, &IM, &IP, &KD, &KE, &KH, &KL, &KR, &KS, &KU, &LL, &ND, &xNL,
@@ -56,15 +56,15 @@ bool *sflags[] = {
 	&AM, &BS, &DA, &DB, &EO, &HC, &HZ, &IN, &MI, &NC, &NS, &OS, &UL,
 	&XB, &XN, &XT, &XX
 };
-char **fkeys[10] = {
+u_char **fkeys[10] = {
 	&F0, &F1, &F2, &F3, &F4, &F5, &F6, &F7, &F8, &F9
 };
 setterm(type)
-	char *type;
+	u_char *type;
 {
 	char *tgoto();
 	register int unknown;
-	char ltcbuf[TCBUFSIZE];
+	u_char ltcbuf[TCBUFSIZE];
 
 	if (type[0] == 0)
 		type = "xx";
@@ -105,10 +105,10 @@ setterm(type)
 	 * overrides any arrow key, but only for hackers (=new tty driver).
 	 */
 	{
-		static char sc[2];
+		static u_char sc[2];
 		int i;
 
-		ioctl(0, TIOCGETD, (char *) &ldisc);
+		ioctl(0, TIOCGETD, (u_char *) &ldisc);
 		if (ldisc == NTTYDISC) {
 			sc[0] = olttyc.t_suspc;
 			sc[1] = 0;
@@ -116,8 +116,8 @@ setterm(type)
 				for (i=0; i<=4; i++)
 					if (arrows[i].cap &&
 					    arrows[i].cap[0] == CTRL('z'))
-						addmac(sc, (char *) NULL,
-							(char *) NULL, arrows);
+						addmac(sc, (u_char *) NULL,
+							(u_char *) NULL, arrows);
 			} else
 				addmac(sc, "\32", "susp", arrows);
 		}
@@ -153,7 +153,7 @@ setsize()
 #ifdef	TIOCGWINSZ
 	struct winsize win;
 
-	if (ioctl(0, TIOCGWINSZ, (char *) &win) < 0) {
+	if (ioctl(0, TIOCGWINSZ, (u_char *) &win) < 0) {
 #endif
 		i = LINES = tgetnum("li");
 		COLUMNS = tgetnum("co");
@@ -188,9 +188,9 @@ setsize()
 
 zap()
 {
-	register char *namp;
+	register u_char *namp;
 	register bool **fp;
-	register char ***sp;
+	register u_char ***sp;
 
 	namp = "ambsdadbeohchzinmincnsosulxbxnxtxx";
 	fp = sflags;
@@ -206,12 +206,12 @@ zap()
 	} while (*namp);
 }
 
-char *
+u_char *
 longname(bp, def)
-	register char *bp;
-	char *def;
+	register u_char *bp;
+	u_char *def;
 {
-	register char *cp;
+	register u_char *cp;
 
 	while (*bp && *bp != ':' && *bp != '|')
 		bp++;
@@ -226,7 +226,7 @@ longname(bp, def)
 	return (def);
 }
 
-char *
+u_char *
 fkey(i)
 	int i;
 {
@@ -248,7 +248,7 @@ fkey(i)
  */
 static int costnum;
 cost(str)
-char *str;
+u_char *str;
 {
 	int countnum();
 
@@ -261,7 +261,7 @@ char *str;
 
 /* ARGSUSED */
 countnum(ch)
-char ch;
+u_char ch;
 {
 	costnum++;
 }

@@ -1,0 +1,345 @@
+h50155
+s 00002/00002/00209
+d D 6.2 85/06/18 22:09:30 mckusick 4 3
+c dumprestor.h moves to /usr/include/protocols/dumprestore.h
+e
+s 00001/00001/00210
+d D 6.1 85/05/15 18:11:50 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00022/00028/00189
+d D 5.1 85/05/15 18:11:40 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00217/00000/00000
+d D 4.1 85/05/15 18:11:32 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DUMP 5 
+E 2
+I 2
+D 3
+.TH DUMP 5  "18 July 1983"
+E 3
+I 3
+.TH DUMP 5  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+dump, ddate \- incremental dump format
+E 2
+I 2
+dump, dumpdates \- incremental dump format
+E 2
+.SH SYNOPSIS
+.B #include <sys/types.h>
+.br
+D 2
+.B #include <sys/ino.h>
+E 2
+I 2
+.B #include <sys/inode.h>
+E 2
+.br
+D 4
+.B #include <dumprestor.h>
+E 4
+I 4
+.B #include <protocols/dumprestore.h>
+E 4
+.SH DESCRIPTION
+Tapes used by
+.I dump
+and
+D 2
+.IR restor (1)
+E 2
+I 2
+.IR restore (8)
+E 2
+contain:
+.nf
+.IP ""
+a header record
+two groups of bit map records
+a group of records describing directories
+a group of records describing files
+.fi
+.PP
+The format of the header record and of the first
+record of each description as given in the
+include file
+D 4
+.I <dumprestor.h>
+E 4
+I 4
+.I <protocols/dumprestore.h>
+E 4
+is:
+.PP
+.nf
+#define NTREC   	10
+#define MLEN    	16
+#define MSIZ    	4096
+
+#define TS_TAPE 	1
+#define TS_INODE	2
+#define TS_BITS 	3
+#define TS_ADDR 	4
+#define TS_END  	5
+#define TS_CLRI 	6
+#define MAGIC   	(int) 60011
+#define CHECKSUM	(int) 84446
+
+struct	spcl {
+	int		c_type;
+	time_t		c_date;
+	time_t		c_ddate;
+	int		c_volume;
+	daddr_t		c_tapea;
+	ino_t		c_inumber;
+	int		c_magic;
+	int		c_checksum;
+	struct		dinode		c_dinode;
+	int		c_count;
+	char		c_addr[BSIZE];
+} spcl;
+
+struct	idates {
+	char		id_name[16];
+	char		id_incno;
+	time_t		id_ddate;
+};
+
+#define	DUMPOUTFMT	"%-16s %c %s"		/* for printf */
+						/* name, incno, ctime(date) */
+#define	DUMPINFMT	"%16s %c %[^\en]\en"	/* inverse for scanf */
+.fi
+.PP
+D 2
+.I NTREC
+is the number of 1024 byte records in a physical
+E 2
+I 2
+NTREC is the number of 1024 byte records in a physical
+E 2
+tape block.
+D 2
+.I MLEN
+is the number of bits in a bit map word.
+.I MSIZ 
+is the number of bit map words.
+E 2
+I 2
+MLEN is the number of bits in a bit map word.
+MSIZ is the number of bit map words.
+E 2
+.PP
+The
+D 2
+.I TS_
+entries are used in the
+E 2
+I 2
+TS_ entries are used in the
+E 2
+.I c_type
+field to indicate what sort of header
+this is.
+The types and their meanings are as follows:
+.TP 13
+TS_TAPE
+Tape volume label
+.PD 0
+.TP
+TS_INODE
+A file or directory follows.
+The
+.I c_dinode
+field is a copy of the disk inode and contains
+bits telling what sort of file this is.
+.TP
+TS_BITS
+A bit map follows.
+This bit map has a one bit
+for each inode that was dumped.
+.TP
+TS_ADDR
+A subrecord of a file description.
+See
+.I c_addr
+below.
+.TP
+TS_END
+End of tape record.
+.TP
+TS_CLRI
+A bit map follows.
+This bit map contains a zero bit for
+all inodes that were empty on the file system when dumped.
+.TP
+MAGIC
+All header records have this number in
+.I c_magic.
+.TP
+CHECKSUM
+Header records checksum to this value.
+.PD
+.PP
+The fields of the header structure are as follows:
+.TP 13
+c_type
+The type of the header.
+.PD 0
+.TP
+c_date
+The date the dump was taken.
+.TP
+c_ddate
+The date the file system was dumped from.
+.TP
+c_volume
+The current volume number of the dump.
+.TP
+c_tapea
+The current number of this (1024-byte) record.
+.TP
+c_inumber
+The number of the inode being dumped if this
+D 2
+is of type
+.I TS_INODE.
+E 2
+I 2
+is of type TS_INODE.
+E 2
+.TP
+c_magic
+D 2
+This contains the value
+.I MAGIC
+E 2
+I 2
+This contains the value MAGIC
+E 2
+above, truncated as needed.
+.TP
+c_checksum
+This contains whatever value is needed to
+D 2
+make the record sum to 
+.I CHECKSUM.
+E 2
+I 2
+make the record sum to CHECKSUM.
+E 2
+.TP
+c_dinode
+This is a copy of the inode as it appears on the
+file system; see
+D 2
+.IR filsys (5).
+E 2
+I 2
+.IR fs (5).
+E 2
+.TP
+c_count
+The count of characters in
+.I c_addr.
+.TP
+c_addr
+An array of characters describing the blocks of the
+dumped file.
+A character is zero if the block associated with that character was not
+present on the file system, otherwise the character is non-zero.
+If the block was not present on the file system, no block was dumped;
+the block will be restored as a hole in the file.
+If there is not sufficient space in this record to describe
+D 2
+all of the blocks in a file,
+.I TS_ADDR
+E 2
+I 2
+all of the blocks in a file, TS_ADDR
+E 2
+records will be scattered through the file, each one
+picking up where the last left off.
+.PD
+.PP
+Each volume except the last ends with a tapemark (read as an end
+of file).
+D 2
+The last volume ends with a
+.I TS_END
+E 2
+I 2
+The last volume ends with a TS_END
+E 2
+record and then the tapemark.
+.PP
+The structure
+.I idates
+D 2
+describes an entry of the file
+.I /etc/ddate
+E 2
+I 2
+describes an entry in the file
+.I /etc/dumpdates
+E 2
+where dump history is kept.
+The fields of the structure are:
+.TP \w'TS_INODE\ 'u
+id_name
+The dumped filesystem is
+.RI `/dev/ id_nam'.
+.PD 0
+.TP
+id_incno
+The level number of the dump tape;
+see
+D 2
+.IR dump (1).
+E 2
+I 2
+.IR dump (8).
+E 2
+.TP
+id_ddate
+The date of the incremental dump in system format
+see
+.IR types (5).
+.PD
+.SH FILES
+D 2
+/etc/ddate
+E 2
+I 2
+/etc/dumpdates
+E 2
+.SH "SEE ALSO"
+D 2
+dump(8), dumpdir(8), restor(8), filsys(5), types(5)
+E 2
+I 2
+dump(8),
+restore(8),
+fs(5),
+types(5)
+E 2
+E 1

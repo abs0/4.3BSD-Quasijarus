@@ -1,0 +1,344 @@
+h08527
+s 00010/00005/00077
+d D 6.6 88/07/09 11:45:08 bostic 8 7
+c install approved copyright notice
+e
+s 00035/00027/00047
+d D 6.5 87/12/26 15:26:26 bostic 7 6
+c vacation now checks the To: and Cc: lines; rearrange a bit, 
+c remove mention of vacation.ignore files
+e
+s 00001/00001/00073
+d D 6.4 87/09/17 15:28:36 bostic 6 5
+c stupid typo
+e
+s 00043/00060/00031
+d D 6.3 87/07/03 15:28:54 bostic 5 2
+c add FILES, logging, list of ignored addresses, other stuff
+e
+s 00043/00060/00031
+d R 6.3 87/07/03 15:13:04 bostic 4 2
+c added logging, FILES
+e
+s 00043/00060/00031
+d R 6.3 87/07/03 15:10:24 bostic 3 2
+c added logging, FILES
+e
+s 00015/00011/00076
+d D 6.2 85/06/16 17:14:52 eric 2 1
+c drop -t flag; clarify that .vacation.msg must include header; mention
+c that Precedence: bulk/junk or From *-REQUEST@* will suppress message
+e
+s 00087/00000/00000
+d D 6.1 85/05/20 20:56:18 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+D 5
+.\" Copyright (c) 1985 Regents of the University of California.
+E 5
+I 5
+.\" Copyright (c) 1985, 1987 Regents of the University of California.
+E 5
+D 7
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 7
+I 7
+.\" All rights reserved.
+E 7
+.\"
+I 7
+.\" Redistribution and use in source and binary forms are permitted
+D 8
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 8
+I 8
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 8
+.\"
+E 7
+.\"	%W% (Berkeley) %G%
+.\"
+D 5
+.TH VACATION 1 "%Q%"
+E 5
+I 5
+D 7
+.TH VACATION 1 "June 16, 1985"
+E 7
+I 7
+.TH VACATION 1 "%Q%"
+E 7
+E 5
+.UC 6
+.SH NAME
+D 7
+vacation \- return ``I am on vacation'' indication
+E 7
+I 7
+vacation \- return ``I am not here'' indication
+E 7
+.SH SYNOPSIS
+.B vacation
+D 5
+.B \-I
+E 5
+I 5
+.B -i
+E 5
+.br
+D 5
+.B vacation
+D 2
+[
+.BI \-t N
+]
+E 2
+user
+E 5
+I 5
+D 7
+.B vacation login
+E 7
+I 7
+.B vacation
+[
+.B -a
+alias ] login
+E 7
+E 5
+.SH DESCRIPTION
+D 5
+.I Vacation
+returns a message to the sender of a message
+telling that you are on vacation.
+The intended use is in a
+.I \&.forward
+file.
+For example,
+your
+.I \&.forward
+file might have:
+E 5
+I 5
+\fIVacation\fP returns a message to the sender of a message telling
+D 7
+them that you are not currently reading your mail.  The intended use
+is in a \fI.forward\fP file.  For example, your \fI.forward\fP file might
+have:
+E 7
+I 7
+them that you are currently not reading your mail.  The intended use
+is in a \fI.forward\fP file.  For example, your \fI.forward\fP file
+might have:
+E 7
+E 5
+.PP
+.ti +5
+D 5
+\eeric, "|vacation eric"
+E 5
+I 5
+D 7
+\eeric, "|/usr/ucb/vacation eric"
+E 7
+I 7
+\eeric, "|/usr/ucb/vacation -a allman eric"
+E 7
+E 5
+.PP
+D 5
+which would send messages to you
+(assuming your login name was eric)
+and send a message back to the sender.
+E 5
+I 5
+which would send messages to you (assuming your login name was eric) and
+D 7
+send a message back to the sender.
+E 7
+I 7
+reply to any messages for ``eric'' or ``allman''.
+E 7
+E 5
+.PP
+I 7
+No message will be sent unless \fIlogin\fP or an \fIalias\fP supplied
+using the \fB-a\fP option is a substring of either the ``To:'' or ``Cc:''
+headers of the mail.  No messages from ``???-REQUEST'', ``Postmaster'',
+``UUCP'', ``MAILER'', or ``MAILER-DAEMON'' will be replied to, nor is a
+notification sent if a ``Precedence: bulk'' or ``Precedence: junk'' line
+is included in the mail headers.  Only one message per week will be sent
+to each unique sender.  The people who have sent you messages are
+maintained as an \fIndbm\fP(3) database in the files \fI.vacation.pag\fP
+and \fI.vacation.dir\fP in your home directory.
+.PP
+The \fB-i\fP flag initializes the vacation database files.  It should be
+used before you modify your \fI.forward\fP file.
+.PP
+E 7
+D 5
+.I Vacation
+expects a file
+.I \&.vacation.msg
+in your home directory containing a message to be sent back
+to each sender.
+I 2
+It should be an entire message
+(including headers).
+E 2
+For example, it might say:
+E 5
+I 5
+\fIVacation\fP expects a file \fI.vacation.msg\fP, in your home directory,
+containing a message to be sent back to each sender.  It should be an entire
+message (including headers).  For example, it might say:
+E 5
+.PP
+.in +5
+.nf
+I 2
+From: eric@ucbmonet.Berkeley.EDU (Eric Allman)
+Subject: I am on vacation
+D 7
+Delivered-By-The-Graces-Of: the Vacation program
+E 7
+I 7
+Delivered-By-The-Graces-Of: The Vacation program
+Precedence: bulk
+E 7
+
+E 2
+I am on vacation until July 22.  If you have something urgent,
+D 2
+please contact Joe Kalash (IngVAX:kalash).
+E 2
+I 2
+please contact Joe Kalash <kalash@ucbingres.Berkeley.EDU>.
+E 2
+	--eric
+.fi
+.in -5
+.PP
+D 5
+This message will only be sent once a week to each unique
+sender.
+D 2
+This timeout can be reset using the
+.B \-t
+flag;
+a trailing `s', `m', `h', `d', or `w'
+scales the number to seconds, minutes, hours, days, or weeks
+respectively.
+E 2
+The people who have sent you messages are kept in the files
+.I \&.vacation.pag
+and
+.I \&.vacation.dir
+in your home directory.
+The
+.B \-I
+option initializes these files,
+and should be executed before you modify your
+.I \&.forward
+file.
+E 5
+I 5
+\fIVacation\fP reads the first line from the standard input for
+a \s-1UNIX\s0-style ``From'' line to determine the sender.
+\fISendmail\fP(8) includes this ``From'' line automatically.
+E 5
+.PP
+D 5
+If the
+.B \-I
+flag is not specified,
+.I vacation
+reads the first line from the standard input
+for a \s-1UNIX\s0-style
+``From'' line
+to determine the sender.
+If this is not present,
+a nasty diagnostic is produced.
+.IR Sendmail (8)
+D 2
+includes this automatically.
+E 2
+I 2
+includes the ``From'' line automatically.
+E 5
+I 5
+D 7
+This message will only be sent once a week to each unique sender.  The
+people who have sent you messages are maintained as an \fIndbm\fP(3)
+database in the files \fI.vacation.pag\fP and \fI.vacation.dir\fP in
+your home directory.  To avoid notifying various mailing lists of your
+absence, any addresses listed in \fI.vacation.ignore\fP will never be
+replied to.  Also, no messages from ``-REQUEST'', ``Postmaster'',
+``UUCP'', ``MAILER'', or ``MAILER-DAEMON'' will be replied to.  Nor is
+a notification sent if a ``Precedence: bulk'' or ``Precedence: junk'' line
+is included in the mail header.
+E 5
+.PP
+D 5
+No message is sent
+if the initial
+``From'' line includes the string
+``-REQUEST@''
+or if a ``Precedence: bulk'' or ``Precedence: junk'' line
+is included in the header.
+E 2
+.SH SEE\ ALSO
+sendmail(8)
+E 5
+I 5
+D 6
+The \fB-i\fP flag initializes the vacation database files.  It should
+E 6
+I 6
+The \fB-i\fP flag initializes the vacation database files.  It should be
+E 6
+used before you modify your \fI.forward\fP file as well as when you
+update your \fI.vacation.ignore\fP file.
+.PP
+E 7
+Fatal errors, such as calling \fIvacation\fP with incorrect arguments,
+or with non-existent \fIlogin\fPs, are logged in the system log file,
+using \fIsyslog\fP(8).
+.SH FILES
+.nf
+D 7
+.ta \w'~/.vacation.ignore    'u
+E 7
+I 7
+.ta \w'~/.vacation.msg    'u
+E 7
+~/.vacation.dir	database file
+D 7
+~/.vacation.ignore	list of addresses to ignore
+E 7
+~/.vacation.msg	message to send
+~/.vacation.pag	database file
+.fi
+.SH "SEE ALSO"
+sendmail(8), syslog(8)
+E 5
+E 1

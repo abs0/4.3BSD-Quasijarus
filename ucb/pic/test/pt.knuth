@@ -1,0 +1,22 @@
+.PS
+define ur "then up right"
+define ul "then up left"
+define dr "then down right"
+define dl "then down left"
+
+Center: 0,0
+move down down left left
+Start: spline  down right dr ur ur ur ur ul ul ul ul dl dl dl dl dr dr
+move down right
+line down down
+move left left
+line right right right right right right
+move left left
+line up up
+
+move to Start up up up up  right
+.ps 36
+[ spline right right right down \
+then left left left left left down down \
+then right right right down ] at Center
+.PE

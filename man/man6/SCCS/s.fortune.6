@@ -1,0 +1,115 @@
+h24408
+s 00001/00001/00053
+d D 6.1 85/05/20 17:33:38 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00011/00047
+d D 5.1 85/05/20 17:33:13 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00058/00000/00000
+d D 4.1 85/05/20 17:32:50 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FORTUNE 6
+E 2
+I 2
+D 3
+.TH FORTUNE 6 "1 February 1983"
+E 3
+I 3
+.TH FORTUNE 6 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+fortune \- print a random, hopefully interesting, adage
+.SH SYNOPSIS
+D 2
+.B fortune
+E 2
+I 2
+.B /usr/games/fortune
+E 2
+[
+.B \-
+] [
+.B \-wslao
+]
+..[ file ]
+.SH DESCRIPTION
+.I Fortune
+D 2
+with no arguments
+prints out a random adage. The flags mean:
+.sp
+E 2
+I 2
+with no arguments prints out a random adage. The flags mean:
+.PP
+E 2
+.TP 5
+.B \-w
+Waits before termination
+for an amount of time calculated from the number of characters in the message.
+This is useful if it is executed as part of the logout procedure
+D 2
+to guarantee that the message can be read
+before the screen is cleared.
+E 2
+I 2
+to guarantee that the message can be read before the screen is cleared.
+E 2
+.TP 5
+.B \-s
+Short messages only.
+.TP 5
+.B \-l
+Long messages only.
+.TP
+.B \-o
+Choose from an alternate list of adages,
+D 2
+often used for portentially offensive ones.
+E 2
+I 2
+often used for potentially offensive ones.
+E 2
+.TP
+.B \-a
+Choose from either list of adages.
+.PP
+..The user may specify a file of adages.
+..This file must be created by strfile(6),
+..and be given by the user as
+...it file.
+..Only one such file may be named,
+..subsequent ones are ignored.
+D 2
+.sp
+Mail suggestions for new fortunes to "fortune".
+E 2
+.SH FILES
+D 2
+/usr/lib/fortunes.dat
+E 2
+I 2
+/usr/games/lib/fortunes.dat
+E 2
+.SH AUTHOR
+Ken Arnold
+...SH SEE\ ALSO
+..strfile(6)
+E 1

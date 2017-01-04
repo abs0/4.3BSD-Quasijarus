@@ -1,0 +1,52 @@
+h43314
+s 00002/00001/00026
+d D 2.3 84/05/17 14:05:43 ralph 3 2
+c fix sccs comment at top.
+e
+s 00000/00000/00027
+d D 2.2 83/09/09 21:14:12 garrison 2 1
+c Incorporate changes from Arizona
+e
+s 00027/00000/00000
+d D 2.1 83/09/09 19:51:26 garrison 1 0
+c date and time created 83/09/09 19:51:26 by garrison
+e
+u
+U
+t
+T
+I 1
+D 3
+.\"	"%W%	%G%";
+E 3
+I 3
+#
+#	"%W%	%G%";
+E 3
+#
+#  footnoted format
+#
+I BMACLIB/bibinc.shortnames
+C1
+T AT
+H
+.so \*(l]/bmac.std
+.\" redefine string for citations
+.ds [[ \s-2\u
+.ds ]] \d\s+2
+.ds [.
+.ds .] .
+.ds [<
+.ds >] \ \&
+.ds [,
+.ds ,] ,
+.de s[   \" start reference
+.FS
+.IP \\*([F. 5n
+..
+.de e[  \" end reference
+.FE
+..
+.de []
+..
+E 1

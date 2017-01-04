@@ -11,7 +11,7 @@
  */
 
 #ifdef notdef
-static char sccsid[] = "@(#)collect.c	5.6 (Berkeley) 2/18/88";
+static char sccsid[] = "@(#)collect.c	5.7 (Berkeley) 4/15/03";
 #endif /* notdef */
 
 /*
@@ -620,6 +620,11 @@ err:
  * the message, or -1 if an error is encountered writing
  * the message temporary.  The flag argument is 'm' if we
  * should shift over and 'f' if not.
+ *
+ * We can automatically convert interpolated messages to KOI-8:
+ * they are used in composing new messages and composing/editing
+ * is much more convenient and reliable in KOI-8. Of course
+ * when the new message is sent it'll be converted back to KOI-7.
  */
 forward(ms, fp, f)
 	char ms[];
@@ -645,16 +650,10 @@ forward(ms, fp, f)
 	for (ip = msgvec; *ip != NULL; ip++) {
 		touch(*ip);
 		printf(" %d", *ip);
-		if (f == 'm') {
-			if (transmit(&message[*ip-1], fp) < 0L) {
-				perror(tempMail);
-				return(-1);
-			}
-		} else
-			if (send(&message[*ip-1], fp, 0) < 0) {
-				perror(tempMail);
-				return(-1);
-			}
+		if (transmit(&message[*ip-1], fp, f == 'm') < 0L) {
+			perror(tempMail);
+			return(-1);
+		}
 	}
 	printf("\n");
 	return(0);
@@ -668,29 +667,46 @@ forward(ms, fp, f)
  */
 
 long
-transmit(mailp, fp)
+transmit(mailp, fp, instab)
 	struct message *mailp;
-	FILE *fp;
+	register FILE *fp;
+	register int instab;
 {
-	register struct message *mp;
+	struct message *mp;
 	register int ch;
 	long c, n;
-	int bol;
-	FILE *ibuf;
+	register int bol, rus;
+	register FILE *ibuf;
+	int koi8;
 
 	mp = mailp;
 	ibuf = setinput(mp);
 	c = mp->m_size;
 	n = c;
-	bol = 1;
+	bol = 1, rus = 0;
+	koi8 = value("koi8edit") != NOSTR;
 	while (c-- > 0L) {
 		ch = getc(ibuf);
+		if (ch == '\016' && koi8) {
+			rus = 1;
+			n--;
+			continue;
+		}
+		if (ch == '\017' && koi8) {
+			rus = 0;
+			n--;
+			continue;
+		}
+		if (ch >= 0100 && ch <= 0177 && rus)
+			ch |= 0200;
 		if (ch == '\n')
 			bol = 1;
 		else if (bol) {
 			bol = 0;
-			putc('\t', fp);
-			n++;
+			if (instab) {
+				putc('\t', fp);
+				n++;
+			}
 		}
 		putc(ch, fp);
 		if (ferror(fp)) {

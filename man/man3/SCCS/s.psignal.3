@@ -1,0 +1,69 @@
+h57097
+s 00001/00001/00048
+d D 6.1 85/05/15 16:26:40 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00049/00000/00000
+d D 5.1 85/05/15 16:26:34 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PSIGNAL 3 "25 February 1983"
+E 2
+I 2
+.TH PSIGNAL 3 "%Q%"
+E 2
+.UC 5
+.SH NAME
+psignal, sys_siglist \- system signal messages
+.SH SYNOPSIS
+.nf
+.B psignal(sig, s)
+.B unsigned sig;
+.B char *s;
+.PP
+.B char *sys_siglist[];
+.fi
+.SH DESCRIPTION
+.I Psignal
+produces a short message
+on the standard error file
+describing the indicated signal.
+First the argument string
+.I s
+is printed, then a colon, then the name of the signal
+and a new-line.
+Most usefully, the argument string is the name
+of the program which incurred the signal.
+The signal number should be from among those found
+in
+.IR <signal.h> .
+.PP
+To simplify variant formatting
+of signal names, the vector of message strings
+.I sys_siglist
+is provided;
+the signal number
+can be used as an index in this table to get the
+signal name without the newline.
+The define NSIG defined in
+.RI < signal.h >
+is the number of messages provided for in the table;
+it should be checked because new
+signals may be added to the system before
+they are added to the table.
+.SH "SEE ALSO"
+sigvec(2),
+perror(3)
+E 1

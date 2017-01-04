@@ -1,7 +1,7 @@
-#	makefile	4.7	01/05/27
+#	makefile	4.8	2011/07/13
 #
 CFLAGS=	-O -w
-LIBS=	../libpw.a ../libPW.a ../libwrt.a
+LIBS=	../libpw.a ../libPW.a ../libwrt.a -lctsl
 
 all:	admin bdiff chghist comb delta get help prt rmdel sccsdiff.sh \
 	what val snull cmt prs stree

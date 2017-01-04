@@ -11,7 +11,7 @@
  */
 
 #ifdef notdef
-static char sccsid[] = "@(#)send.c	5.5 (Berkeley) 2/18/88";
+static char sccsid[] = "@(#)send.c	5.8 (Berkeley) 12/31/03";
 #endif /* notdef */
 
 #include "rcv.h"
@@ -423,18 +423,31 @@ fixhead(hp, tolist)
 }
 
 /*
- * Prepend a header in front of the collected stuff
- * and return the new file.
+ * Prepend a header in front of the collected stuff and return the new file.
+ *
+ * Also if the collected message body has any 8-bit characters in it (illegal
+ * in RFC 822), convert it to KOI-7. We use a slick algorithm (see the code) to
+ * ensure that this is an identity transformation when there are no 8-bit chars
+ * in the input and to handle the case of input already being in KOI-7 (or a
+ * mixture of KOI-7 and KOI-8).
+ *
+ * We also have to do the same to the Subject: line (RFC 822 allows control
+ * chars there, so we are OK with SO/SI). The extra trick here is that the line
+ * must end in LAT mode, otherwise when the whole message is simply dumped on a
+ * terminal without RFC 822 parsing the subsequent header lines will print
+ * wrong. Again we do nothing if there are no 8-bit chars in the input, but we
+ * use a different algorithm because the Subject: line resides entirely in
+ * core.
  */
 
 FILE *
 infix(hp, fi)
 	struct header *hp;
-	FILE *fi;
+	register FILE *fi;
 {
 	extern char tempMail[];
 	register FILE *nfo, *nfi;
-	register int c;
+	register int c, state;
 
 	rewind(fi);
 	if ((nfo = fopen(tempMail, "w")) == NULL) {
@@ -447,11 +460,24 @@ infix(hp, fi)
 		return(fi);
 	}
 	(void) remove(tempMail);
+	(void) koi7subj(hp);
 	(void) puthead(hp, nfo, GTO|GSUBJECT|GCC|GNL);
-	c = getc(fi);
-	while (c != EOF) {
+	state = 0;
+	while ((c = getc(fi)) != EOF) {
+		if (c == '\016')
+			state = 1;
+		else if (c == '\017')
+			state = 0;
+		else if (c >= 0300) {
+			if (state == 0)
+				(void) putc('\016', nfo);
+			state = 2;
+		} else if (c >= 0100 && c <= 0177 && state == 2) {
+			(void) putc('\017', nfo);
+			state = 0;
+		}
+		c &= 0177;
 		(void) putc(c, nfo);
-		c = getc(fi);
 	}
 	if (ferror(fi)) {
 		perror("read");
@@ -468,6 +494,66 @@ infix(hp, fi)
 	(void) fclose(fi);
 	rewind(nfi);
 	return(nfi);
+}
+
+koi7subj(hp)
+	struct header *hp;
+{
+	register int newlen;
+	register char *newsubj;
+
+	if (hp->h_subject == NOSTR)
+		return;
+	newlen = koi7line(hp->h_subject, NOSTR);
+	if (!newlen)
+		return;
+	newsubj = salloc(newlen);
+	(void) koi7line(hp->h_subject, newsubj);
+	hp->h_subject = newsubj;
+}
+
+koi7line(src, dst)
+	char *src, *dst;
+{
+	register u_char *cp, *dp;
+	register int c, inso, outso, cnt;
+	int found8;
+
+	inso = outso = found8 = 0;
+	for (cp = (u_char*)src, dp = (u_char*)dst, cnt = 0; c = *cp++; ) {
+		if (c == '\016') {
+			inso = 1;
+			continue;
+		}
+		if (c == '\017') {
+			inso = 0;
+			continue;
+		}
+		if (c >= 0100 && c <= 0177 && inso)
+			c |= 0200;
+		if (c >= 0100 && c <= 0177 && outso) {
+			if (dp) *dp++ = '\017';
+			cnt++;
+			outso = 0;
+		}
+		if (c >= 0300 && !outso) {
+			if (dp) *dp++ = '\016';
+			cnt++;
+			outso = 1;
+			found8 = 1;
+		}
+		if (dp) *dp++ = toascii(c);
+		cnt++;
+	}
+	if (outso) {
+		if (dp) *dp++ = '\017';
+		cnt++;
+	}
+	if (dp) *dp = '\0';
+	cnt++;
+	if (!found8)
+		cnt = 0;
+	return(cnt);
 }
 
 /*

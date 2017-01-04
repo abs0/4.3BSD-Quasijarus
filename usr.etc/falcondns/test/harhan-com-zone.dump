@@ -1,0 +1,7 @@
+harhan.com. IN SOA ivan.Harhan.ORG. hostmaster.ivan.Harhan.ORG. 2005000003 10800 1200 5184000 86400
+harhan.com. IN NS ivan.Harhan.ORG.
+harhan.com. IN NS ifctfvax.Harhan.ORG.
+harhan.com. IN MX 10 hec1.harhan.com.
+hec1.harhan.com. IN A 208.221.139.13
+hec1.harhan.com. IN HINFO "ULTRA-5" "LINUX"
+www.harhan.com. IN CNAME hec1.harhan.com.

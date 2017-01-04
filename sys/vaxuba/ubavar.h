@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)ubavar.h	7.6 (Berkeley) 2/15/89
+ *	@(#)ubavar.h	7.7 (Berkeley) 3/6/04
  */
 
 /*
@@ -142,6 +142,26 @@ struct uba_device {
 };
 
 /*
+ * uba_ctlr and uba_device structures are now being overloaded beyond UNIBUS
+ * for VAXBI and other peripheral-nexus devices.  They are kept in lists
+ * separate from the regular UNIBUS ones and are picked up by VAXBI/XMI/etc.
+ * autoconf code.  The um_ubanum/ui_ubanum field is overloaded for matching
+ * specific VAXBI or XMI nodes.  It's set to -1 if the device was configured
+ * "at nexus?", in which case it'll match the first actual device found on the
+ * machine, but the user can also tie it down as e.g. "at vaxbi0 node 5".  The
+ * tie-down information is encoded in the um_ubanum/ui_ubanum field as follows:
+ *
+ *	 (4)  (6)  (6)
+ *	----------------
+ *	| C | BUS |NODE|
+ *	----------------
+ *
+ * C is the nexus class (defined in vax/nexus.h), BUS is the number of the
+ * VAXBI or XMI bus, NODE is the node number on the latter.
+ */
+#define	PNEXUS_TIE(c,b,n)	((c) << 12 | (b) << 6 | (n))
+
+/*
  * Per-driver structure.
  *
  * Each unibus driver defines entries for a set of routines
@@ -213,6 +233,12 @@ struct	uba_hd uba_hd[];
  */
 extern	struct	uba_ctlr ubminit[];
 extern	struct	uba_device ubdinit[];
+
+/*
+ * Similar structures are used for VAXBI and other peripheral-nexus devices.
+ */
+extern	struct	uba_ctlr pnexminit[];
+extern	struct	uba_device pnexdinit[];
 
 /*
  * UNIBUS device address space is mapped by UMEMmap

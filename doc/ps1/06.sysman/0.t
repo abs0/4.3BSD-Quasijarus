@@ -2,13 +2,13 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)0.t	6.6 (Berkeley) 5/13/86
+.\"	@(#)0.t	6.7 (Berkeley) 11/28/04
 .\"
 .if n .ND
 .TL
 Berkeley Software Architecture Manual
 .br
-4.3BSD Edition
+4.3BSD-Quasijarus Working Draft
 .AU
 William Joy, Robert Fabry,
 .AU
@@ -21,6 +21,12 @@ Computer Science Division
 Department of Electrical Engineering and Computer Science
 University of California, Berkeley
 Berkeley, CA  94720
+.AU
+Michael Sokolov
+.AI
+Quasijarus Project
+International Free Computing Task Force
+http://ifctfvax.Harhan.ORG/Quasijarus/
 .EH 'PS1:6-%''4.3BSD Architecture Manual'
 .OH '4.3BSD Architecture Manual''PS1:6-%'
 .AB
@@ -54,6 +60,16 @@ These facilities are implemented by the operating system or by
 network server processes.
 .AE
 .LP
+.LG
+WARNING: This document is a working draft!
+It will change several times as work on 4.3BSD-Quasijarus progresses
+and will be finalized only when approved by Quasijarus Project
+principal maintainer Michael Sokolov.
+Working draft copies should not be distributed except to Quasijarus
+developers.
+.LN
+.LP
+Printed on \n(cn\n(yr-\n(mo-\n(dy
 .bp
 .ft B
 .br

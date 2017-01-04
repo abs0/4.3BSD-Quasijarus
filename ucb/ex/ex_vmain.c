@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vmain.c	7.9 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_vmain.c	7.10 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -25,8 +25,8 @@ static char *sccsid = "@(#)ex_vmain.c	7.9 (Berkeley) 1/2/88";
 vmain()
 {
 	register int c, cnt, i;
-	char esave[TUBECOLS];
-	char *oglobp;
+	u_char esave[TUBECOLS];
+	u_char *oglobp;
 	short d;
 	line *addr;
 	int ind, nlput;
@@ -247,7 +247,7 @@ reread:
 			lastmac = c;
 			vsave();
 			CATCH
-				char tmpbuf[BUFSIZ];
+				u_char tmpbuf[BUFSIZ];
 
 				regbuf(c,tmpbuf,sizeof(vmacbuf));
 				macpush(tmpbuf, 1);
@@ -536,7 +536,7 @@ reread:
 		 */
 		case '~':
 			{
-				char mbuf[4];
+				u_char mbuf[4];
 				setLAST();
 				mbuf[0] = 'r';
 				mbuf[1] = *cursor;
@@ -724,7 +724,7 @@ insrt:
 			 * use insert mode on intelligent terminals.
 			 */
 			if (!vreg && DEL[0]) {
-				forbid ((DEL[0] & (QUOTE|TRIM)) == OVERBUF);
+				forbid (DEL[0] == OVERBUF);
 				vglobp = DEL;
 				ungetkey(c == 'p' ? 'a' : 'i');
 				goto reread;
@@ -1037,7 +1037,7 @@ fixup:
 					vup1();
 				if (vcnt > 0)
 					vcnt = 0;
-				vjumpto(dot, (char *) 0, '.');
+				vjumpto(dot, (u_char *) 0, '.');
 			} else {
 				/*
 				 * Current line IS on screen.
@@ -1121,7 +1121,7 @@ fonfon:
  */
 grabtag()
 {
-	register char *cp, *dp;
+	register u_char *cp, *dp;
 
 	cp = vpastwh(cursor);
 	if (*cp) {
@@ -1178,7 +1178,7 @@ vremote(cnt, f, arg)
  */
 vsave()
 {
-	char temp[LBSIZE];
+	u_char temp[LBSIZE];
 
 	CP(temp, linebuf);
 	if (FIXUNDO && vundkind == VCHNG || vundkind == VCAPU) {

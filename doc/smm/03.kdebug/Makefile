@@ -3,22 +3,20 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 5/25/86
+#	@(#)Makefile	6.2 (Berkeley) 9/13/04
 #
 SRCS=	kdebug.ms
-MACROS=	-msU
-PRINTER=Pdp
-TBL=	dtbl -${PRINTER}
-TROFF=	ditroff -${PRINTER}
+MACROS=	-ms
+TBL=	tbl
+TROFF=	pstroff
 
-paper:	paper.${PRINTER}
-	lpr -${PRINTER} -n paper.${PRINTER}
+all:	paper.ps
 
-paper.${PRINTER}: ${SRCS}
-	${TBL} ${SRCS} | ${TROFF} ${MACROS} -t > paper.${PRINTER}
+paper.ps: ${SRCS}
+	${TBL} ${SRCS} | ${TROFF} ${MACROS} > paper.ps
 
 clean:
-	rm -f paper.[PT]* *.spell errs Errs make.out
+	rm -f paper.ps *.spell errs Errs make.out
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \

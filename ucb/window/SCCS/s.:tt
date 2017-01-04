@@ -1,0 +1,50 @@
+h02602
+s 00004/00001/00007
+d D 1.3 88/05/22 02:02:17 edward 3 2
+c updated to match current struct tt
+e
+s 00004/00003/00004
+d D 1.2 83/09/15 12:23:06 edward 2 1
+c reworked tt stuff
+e
+s 00007/00000/00000
+d D 1.1 83/08/22 15:19:40 edward 1 0
+c date and time created 83/08/22 15:19:40 by edward
+e
+u
+U
+t
+T
+I 1
+D 2
+./"init"16t"end"16t"setinsert"16t"setmodes"n4p
+E 2
+I 2
+./"init"16t"end"n2p
+E 2
++/"move"16t"insline"16t"delline"16t"delchar"n4p
+D 2
++/"write"16t"putc"16t"blank"n3p
+E 2
+I 2
++/"write"16t"putc"16tn2p
+E 2
++/"clreol"16t"clreos"16t"clear"n3p
+D 2
++/"nrow"16t"ncol"16t"availmodes"16t"wrap"n2pb16tb++
+E 2
+I 2
+D 3
++/"modes"8t"nmodes"8t"insert"8t"ninsert"8t"row"16t"col"n4b2D
+E 3
+I 3
++/"scroll_down"16t"scroll_up"16t"setscroll"n3p
++/"setinsert"16t"setmodes"n2p
++/"modes"8t"nmodes"8t"insert"8t"ninsert"n4b
++/"row"16t"col"16t"scrtop"16t"sclbot"n4D
+E 3
++/"nrow"16t"ncol"16t"hasins"8t"avlmods"8t"wrap"8t"retain"n2D4b
+E 2
++/"frame"
+*./16b
+E 1

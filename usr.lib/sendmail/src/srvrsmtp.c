@@ -20,9 +20,9 @@
 
 #ifndef lint
 #ifdef SMTP
-static char sccsid[] = "@(#)srvrsmtp.c	5.23 (Berkeley) 5/29/02 (with SMTP)";
+static char sccsid[] = "@(#)srvrsmtp.c	5.25 (Berkeley) 4/23/04 (with SMTP)";
 #else
-static char sccsid[] = "@(#)srvrsmtp.c	5.23 (Berkeley) 5/29/02 (without SMTP)";
+static char sccsid[] = "@(#)srvrsmtp.c	5.25 (Berkeley) 4/23/04 (without SMTP)";
 #endif
 #endif /* not lint */
 
@@ -235,7 +235,8 @@ smtp()
 				c = strlen(RealHostName) + 1;
 				if (hellohost != NULL)
 					c += strlen(hellohost) + 8;
-				if (RealHostAddr != NULL)
+				if (RealHostAddr != NULL &&
+				    RealHostName[0] != '[')
 					c += strlen(RealHostAddr) + 3;
 				sendinghost = xalloc(c);
 				strcpy(sendinghost, RealHostName);
@@ -245,7 +246,8 @@ smtp()
 					strcat(sendinghost, hellohost);
 					strcat(sendinghost, ")");
 				}
-				if (RealHostAddr != NULL)
+				if (RealHostAddr != NULL &&
+				    RealHostName[0] != '[')
 				{
 					strcat(sendinghost, " (");
 					strcat(sendinghost, RealHostAddr);
@@ -308,6 +310,12 @@ smtp()
 			if (a == NULL)
 				break;
 			a->q_flags |= QPRIMARY;
+			if (FromInet && NoInetRelay &&
+			    !bitnset(M_LOCAL, a->q_mailer->m_flags)) {
+				message("551",
+					"No relaying for Internet senders");
+				break;
+			}
 			a = recipient(a, &CurEnv->e_sendqueue);
 			if (Errors != 0)
 				break;

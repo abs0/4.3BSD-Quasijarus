@@ -1,0 +1,107 @@
+h53677
+s 00001/00001/00042
+d D 6.1 85/04/29 17:44:17 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00011/00016/00032
+d D 5.1 85/04/29 17:44:09 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00048/00000/00000
+d D 4.1 85/04/29 17:44:02 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DEROFF 1 
+E 2
+I 2
+D 3
+.TH DEROFF 1  "18 January 1983"
+E 3
+I 3
+.TH DEROFF 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+deroff \- remove nroff, troff, tbl and eqn constructs
+.SH SYNOPSIS
+.B deroff
+[
+.B \-w
+]
+file ...
+.SH DESCRIPTION
+.I Deroff
+D 2
+reads each file in sequence
+and removes all
+E 2
+I 2
+reads each file in sequence and removes all
+E 2
+.I nroff
+and
+.I troff
+command lines, backslash constructions, macro definitions,
+.I eqn
+D 2
+constructs
+(between `.EQ' and `.EN' lines or between 
+delimiters),
+and table descriptions
+and writes the remainder on the standard output.
+E 2
+I 2
+constructs (between `.EQ' and `.EN' lines or between delimiters),
+and table descriptions and writes the remainder on the standard output.
+E 2
+.I Deroff
+D 2
+follows chains of included files
+(`.so' and `.nx' commands);
+if a file has already been included, a `.so' is ignored and a `.nx' terminates execution.
+If no input file is given,
+E 2
+I 2
+follows chains of included files (`.so' and `.nx' commands);
+if a file has already been included, a `.so' is ignored and a `.nx'
+terminates execution.  If no input file is given,
+E 2
+.I deroff
+reads from the standard input.
+.PP
+If the
+.B \-w
+D 2
+flag is given, the output is a word list, one `word' (string of letters, digits, and apostrophes,
+beginning with a letter; apostrophes are removed) per line, and all other characters ignored.
+E 2
+I 2
+flag is given, the output is a word list, one `word' (string of letters,
+digits, and apostrophes, beginning with a letter; apostrophes are removed)
+per line, and all other characters ignored.
+E 2
+Otherwise, the output follows the original, with the deletions mentioned above.
+.SH "SEE ALSO"
+troff(1), eqn(1), tbl(1)
+.SH BUGS
+.I Deroff
+is not a complete
+.I troff
+D 2
+interpreter,
+so it can be confused by subtle constructs.
+E 2
+I 2
+interpreter, so it can be confused by subtle constructs.
+E 2
+Most errors result in too much rather than too little output.
+E 1

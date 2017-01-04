@@ -1,0 +1,105 @@
+h42653
+s 00010/00009/00026
+d D 5.2 86/01/08 22:51:48 donn 6 5
+c Repair problems with sccs ids and copyrights
+e
+s 00010/00000/00025
+d D 5.1 85/05/29 11:43:52 dist 5 4
+c Add copyright
+e
+s 00004/00004/00021
+d D 4.3 83/09/26 21:37:21 karels 4 3
+c massage correct line
+e
+s 00002/00001/00023
+d D 4.2 83/09/25 15:10:12 sam 3 2
+c avoid read-only files
+e
+s 00000/00000/00024
+d D 4.1 82/05/11 15:01:22 rrh 2 1
+c bringing to release 4.1
+e
+s 00024/00000/00000
+d D 1.1 82/05/11 14:55:09 rrh 1 0
+c date and time created 82/05/11 14:55:09 by rrh
+e
+u
+U
+t
+T
+I 6
+1,5c
+E 6
+I 5
+/*
+ * Copyright (c) 1980 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
+ */
+D 6
+
+#ifndef lint
+static char sccsid[] = "%W% (Berkeley) %G%";
+#endif not lint
+
+E 5
+I 1
+D 4
+2!date
+E 4
+I 4
+4!date
+E 6
+I 6
+.
+/Msccsid/c
+static char Msccsid[] = "%W% (Berkeley) %G%";
+.
+/Last update/!date
+mark a
+E 6
+E 4
+g/Sun /s//Sunday, /
+g/Mon /s//Monday, /
+g/Tue /s//Tuesday, /
+g/Wed /s//Wednesday, /
+g/Thu /s//Thursday, /
+g/Fri /s//Friday, /
+g/Sat /s//Saturday, /
+g/Jan /s//January /
+g/Feb /s//February /
+g/Mar /s//March /
+g/Apr /s//April /
+g/Jun /s//June /
+g/Jul /s//July /
+g/Aug /s//August /
+g/Sep /s//September /
+g/Oct /s//October /
+g/Nov /s//November /
+g/Dec /s//December /
+g/  /s// /
+D 4
+2s/ ..:..:.. .../,/
+2s/^/	"Last update on /
+2s/$/.",/
+E 4
+I 4
+D 6
+4s/ ..:..:.. .../,/
+4s/^/	"Last update on /
+4s/$/.",/
+E 6
+I 6
+'as/ ..:..:.. .../,/
+'as/^/	"Last update on /
+'as/$/.",/
+E 6
+E 4
+D 3
+wq
+E 3
+I 3
+w!
+q
+E 3
+E 1

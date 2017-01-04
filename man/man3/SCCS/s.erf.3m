@@ -1,0 +1,117 @@
+h06385
+s 00001/00001/00036
+d D 6.2 86/05/12 17:10:39 karels 4 3
+c intro(3M) => math(3M), move see also's to end
+e
+s 00008/00001/00029
+d D 6.1 85/09/11 18:53:12 mckusick 3 2
+c new from Kahan
+e
+s 00011/00022/00019
+d D 1.2 85/08/21 14:56:49 miriam 2 1
+c Revision by Prof. Kahan.
+e
+s 00041/00000/00000
+d D 1.1 85/05/24 11:55:05 miriam 1 0
+c date and time created 85/05/24 11:55:05 by miriam
+e
+u
+U
+t
+From Prof. Kahan at UC at Berkeley
+T
+I 1
+D 2
+.EQ
+delim $$
+.EN
+.TH ERF 3M  "9 May 1985"
+E 2
+I 2
+D 3
+.TH ERF 3M  "4 August 1985"
+E 3
+I 3
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH ERF 3M  "%Q%"
+.UC 6
+E 3
+E 2
+.SH NAME
+erf, erfc \- error functions
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double erf(x)
+.B double x;
+.PP
+.B double erfc(x)
+.B double x;
+.fi
+.SH DESCRIPTION
+D 2
+.I Erf(x)
+returns the error function of 
+.I x.
+E 2
+I 2
+Erf\|(x) returns the error function of x; where
+.if n \{\
+E 2
+.PP
+D 2
+.I Erfc(x)
+returns
+.I 1.0\-erf(x).
+E 2
+I 2
+erf(x) = 2/sqrt(pi)\(**\|integral from 0 to x of exp(\-t\(**t) dt. \}
+.if t \{\
+erf\|(x) := 
+(2/\(sr\(*p)\|\(is\d\s8\z0\s10\u\u\s8x\s10\d\|exp(\-t\u\s82\s10\d)\|dt. \}
+E 2
+.PP
+D 2
+.I Erf(x)
+is defined by
+${2 over sqrt {pi}} int from 0 to x e sup {-t sup 2} dt$.
+E 2
+I 2
+Erfc\|(x) returns 1.0\-erf\|(x).
+E 2
+.PP
+D 2
+The entry for
+.I erfc
+is provided because of the extreme loss of relative accuracy if
+.I erf(x)
+is called for large
+.I x
+E 2
+I 2
+The entry for erfc is provided because of the extreme loss
+of relative accuracy if erf\|(x) is called for large x
+E 2
+and the result subtracted from 1.
+D 2
+(e.g. for
+.I x
+= 10, 12 places are lost).
+E 2
+I 2
+(e.g. for x = 10, 12 places are lost).
+E 2
+.SH SEE ALSO
+D 4
+intro(3M)
+E 4
+I 4
+math(3M)
+E 4
+E 1

@@ -1,0 +1,351 @@
+h59912
+s 00003/00003/00151
+d D 6.6 86/05/23 09:57:37 kjd 8 7
+c clean up for 4.3
+e
+s 00007/00003/00147
+d D 6.5 86/05/14 11:11:15 karels 7 6
+c nonblocking I/O, fcntl, select
+e
+s 00007/00002/00143
+d D 6.4 86/02/24 03:33:15 lepreau 6 5
+c lseek doesn't mind negative offsets, read & write do;
+c bring write.2 up to read.2 stds.
+e
+s 00006/00000/00139
+d D 6.3 85/08/26 23:31:13 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00001/00001/00138
+d D 6.2 85/06/30 16:42:53 sechrest 4 3
+c improved english
+e
+s 00002/00002/00137
+d D 6.1 85/05/09 16:07:44 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00120/00062/00019
+d D 5.1 85/05/09 16:07:35 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00081/00000/00000
+d D 4.1 85/05/09 16:07:27 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH READ 2 
+E 2
+I 2
+D 3
+.TH READ 2 "27 July 1983"
+E 3
+I 3
+.TH READ 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+read \- read from file
+E 2
+I 2
+read, readv \- read input
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B read(fildes, buffer, nbytes)
+.B char *buffer;
+E 2
+I 2
+.ft B
+cc = read(d, buf, nbytes)
+int cc, d;
+char *buf;
+int nbytes;
+.PP
+.ft B
+#include <sys/types.h>
+#include <sys/uio.h>
+.PP
+.ft B
+cc = readv(d, iov, iovcnt)
+int cc, d;
+struct iovec *iov;
+int iovcnt;
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+A file descriptor is a word
+returned from a successful
+.I "open, creat, dup,"
+or
+.I pipe
+call.
+.I Buffer
+is the location of
+E 2
+I 2
+.I Read
+attempts to read
+E 2
+.I nbytes
+D 2
+contiguous
+bytes into which the input will be placed.
+It is not guaranteed
+that all
+.I nbytes
+bytes will be read; for example
+if the file refers to a typewriter at most one line
+will be returned.
+In any event the number of characters read is returned.
+E 2
+I 2
+of data from the object referenced by the descriptor
+.I d
+into the buffer pointed to by
+.IR buf .
+.I Readv
+performs the same action, but scatters the input data
+into the 
+.I iovcnt
+buffers specified by the members of the
+D 6
+.I iovec
+E 6
+I 6
+.I iov
+E 6
+array: iov[0], iov[1], ..., iov[iovcnt\|\-\|1].
+E 2
+.PP
+D 2
+If the returned value is 0, then
+end-of-file has been reached.
+E 2
+I 2
+For 
+.IR readv ,
+the 
+.I iovec
+structure is defined as
+E 2
+.PP
+D 2
+Unless the reader is ignoring or holding SIGTTIN signals,
+reads from the control typewriter while not in its process group
+cause a SIGTTIN signal to be sent to the reader's process group;
+in the former case an end-of-file is returned.
+E 2
+I 2
+.nf
+.RS
+.DT
+struct iovec {
+	caddr_t	iov_base;
+	int	iov_len;
+};
+.RE
+.fi
+E 2
+.PP
+D 2
+.SH "SEE ALSO"
+open(2), creat(2), dup(2), pipe(2), vread(2)
+.SH DIAGNOSTICS
+As mentioned,
+0 is returned when the end of the file has been reached.
+If the read was otherwise unsuccessful
+the return value is \-1.
+Many conditions
+can generate an error:
+physical I/O errors, bad buffer address,
+preposterous
+.I nbytes,
+file descriptor not that of
+an input file.
+.SH "ASSEMBLER (PDP-11)"
+(read = 3.)
+.br
+(file descriptor in r0)
+.br
+.B sys read; buffer; nbytes
+.br
+(byte count in r0)
+.SH BUGS
+It should be possible to call
+E 2
+I 2
+Each 
+.I iovec
+entry specifies the base address and length of an area
+in memory where data should be placed. 
+.I Readv
+will always fill an area completely before proceeding
+to the next.
+.PP
+On objects capable of seeking, the
+E 2
+.I read
+D 2
+and have it return immediately without blocking if there is no input available.
+As a single special case, this is currently done on control terminals
+when the reading process has requested SIGTINT signals when input arrives
+(see
+.IR tty (4)).
+E 2
+I 2
+starts at a position
+given by the pointer associated with
+D 8
+.IR d ,
+see
+.IR lseek (2).
+E 8
+I 8
+.IR d 
+(see
+.IR lseek (2)).
+E 8
+Upon return from
+.IR read ,
+the pointer is incremented by the number of bytes actually read.
+E 2
+.PP
+D 2
+Processes which have been orphaned by their parents
+and have been inherited by
+.IR init (8)
+never receive SIGTTIN signals.
+Instead
+E 2
+I 2
+Objects that are not capable of seeking always read from the current
+D 6
+position.  The value of the pointer associated with such a 
+E 6
+I 6
+position.  The value of the pointer associated with such an
+E 6
+object is undefined.
+.PP
+Upon successful completion,
+E 2
+.I read
+D 2
+returns with an end-of-file indication.
+E 2
+I 2
+and
+.I readv
+return the number of bytes actually read and placed in the buffer.
+The system guarantees to read the number of bytes requested if
+D 4
+the descriptor references a file which has that many bytes left
+E 4
+I 4
+D 7
+the descriptor references a file that has that many bytes left
+E 4
+before the end-of-file, but in no other cases.
+E 7
+I 7
+the descriptor references a normal file that has that many bytes left
+before the end-of-file, but in no other case.
+E 7
+.PP
+If the returned value is 0, then
+end-of-file has been reached.
+.SH "RETURN VALUE
+If successful, the
+number of bytes actually read is returned.
+Otherwise, a \-1 is returned and the global variable
+.I errno
+is set to indicate the error.
+.SH "ERRORS
+.I Read
+and
+.I readv
+will fail if one or more of the following are true:
+.TP 15
+[EBADF]
+D 3
+\fIFildes\fP is not a valid file descriptor open for reading.
+E 3
+I 3
+\fID\fP is not a valid file or socket descriptor open for reading.
+E 3
+.TP 15
+[EFAULT]
+\fIBuf\fP points outside the allocated address space.
+.TP 15
+I 5
+[EIO]
+An I/O error occurred while reading from the file system.
+.TP 15
+E 5
+[EINTR]
+A read from a slow device was interrupted before
+any data arrived by the delivery of a signal.
+I 6
+.TP 15
+[EINVAL]
+The pointer associated with
+.I d
+was negative.
+I 7
+.TP 15
+[EWOULDBLOCK]
+The file was marked for non-blocking I/O,
+and no data were ready to be read.
+E 7
+E 6
+.PP
+In addition, 
+.I readv
+may return one of the following errors:
+.TP 15
+[EINVAL]
+.I Iovcnt
+was less than or equal to 0, or greater than 16.
+.TP 15
+[EINVAL]
+One of the
+.I iov_len
+values in the
+.I iov
+array was negative.
+.TP 15
+[EINVAL]
+The sum of the
+.I iov_len
+values in the
+.I iov
+array overflowed a 32-bit integer.
+I 5
+.TP 15
+[EFAULT]
+Part of the \fIiov\fP points outside the process's allocated address space.
+E 5
+.SH "SEE ALSO"
+D 7
+dup(2), open(2), pipe(2), socket(2), socketpair(2)
+E 7
+I 7
+dup(2), fcntl(2), open(2), pipe(2), select(2), socket(2), socketpair(2)
+E 7
+E 2
+E 1

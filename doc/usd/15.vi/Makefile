@@ -3,30 +3,26 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 5/30/86
+#	@(#)Makefile	6.2 (Berkeley) 10/23/04
 #
 SRCS=	vi.in vi.chars
-MACROS=	-msU
-PRINTER=Pdp
-TBL=	dtbl -${PRINTER}
-TROFF=	ditroff -${PRINTER}
+MACROS=	-ms
+TBL=	tbl
+TROFF=	pstroff
 
-paper:	paper.${PRINTER} summary.${PRINTER} viapwh.${PRINTER}
-	lpr -${PRINTER} -n paper.${PRINTER}
-	lpr -${PRINTER} -n summary.${PRINTER}
-	lpr -${PRINTER} -n viapwh.${PRINTER}
+all:	paper.ps summary.ps viapwh.ps
 
-paper.${PRINTER}: ${SRCS}
-	${TBL} ${SRCS} | ${TROFF} ${MACROS} -t > paper.${PRINTER}
+paper.ps: ${SRCS}
+	${TBL} ${SRCS} | ${TROFF} ${MACROS} -t > $@
 
-summary.${PRINTER}: vi.summary
-	${TBL} vi.summary | ${TROFF} ${MACROS} -t > summary.${PRINTER}
+summary.ps: vi.summary
+	${TBL} vi.summary | ${TROFF} ${MACROS} -t > $@
 
-viapwh.${PRINTER}: vi.apwh.ms
-	${TROFF} ${MACROS} -t vi.viapwh > viapwh.${PRINTER}
+viapwh.ps: vi.apwh.ms
+	${TROFF} ${MACROS} -t vi.apwh.ms > $@
 
 clean:
-	rm -f paper.[PT]* summary.[PT]* viapwh.[PT]* *.spell errs Errs make.out
+	rm -f *.ps *.spell errs Errs make.out
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \

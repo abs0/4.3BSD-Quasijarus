@@ -1,0 +1,262 @@
+h64641
+s 00013/00005/00106
+d D 6.3 85/09/21 16:57:58 sam 5 4
+c correct argument documentation; add -r flag
+e
+s 00005/00000/00106
+d D 6.2 85/09/21 15:25:05 sam 4 3
+c add imagen
+e
+s 00051/00017/00055
+d D 6.1 85/04/29 17:51:19 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00008/00064
+d D 5.1 85/04/29 17:51:07 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00072/00000/00000
+d D 4.1 85/04/29 17:50:53 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PLOT 1G 
+E 2
+I 2
+D 3
+.TH PLOT 1G  "18 January 1983"
+E 3
+I 3
+.TH PLOT 1G "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+plot \- graphics filters
+.SH SYNOPSIS
+.B plot
+[
+.BR \-T terminal
+D 5
+[ raster ] ]
+E 5
+I 5
+] [
+.BR \-r resolution
+]
+[ files... ]
+E 5
+.SH DESCRIPTION
+These commands read plotting instructions (see
+.IR  plot (5))
+D 5
+from the standard input,
+E 5
+I 5
+from the standard input or the specified
+.IR files ,
+E 5
+and in general
+produce plotting instructions suitable for
+a particular
+.I terminal
+on the standard output.
+I 5
+The
+.B \-r
+flag may be used to specify the device's output resolution
+(currently only the Imagen laser printer understands this option).
+E 5
+.PP
+If no
+.I terminal
+type is specified, the environment parameter $TERM
+(see
+D 2
+.IR environ (5))
+E 2
+I 2
+.IR environ (7))
+E 2
+is used.
+Known
+.I terminals
+are:
+.TP
+D 2
+4014
+E 2
+I 2
+D 3
+.B 4014
+E 2
+Tektronix 4014 storage scope.
+E 3
+I 3
+.B 4013
+Tektronix 4013 storage scope.
+E 3
+.TP
+I 3
+.BR 4014\  or\  tek
+Tektronix 4014 or 4015 storage scope with Enhanced Graphics Module.
+(Use 4013 for Tektronix 4014 or 4015 without the Enhanced Graphics Module).
+.TP
+E 3
+D 2
+450
+E 2
+I 2
+.B 450
+E 2
+DASI Hyterm 450 terminal (Diablo mechanism).
+.TP
+D 2
+300
+E 2
+I 2
+.B 300
+E 2
+DASI 300 or GSI terminal (Diablo mechanism).
+.TP
+D 2
+300S
+E 2
+I 2
+.B 300S
+E 2
+DASI 300S terminal (Diablo mechanism).
+.TP
+I 3
+.B aed
+AED 512 color graphics terminal.
+.TP
+.BR bitgraph\  or\  bg
+BBN bitgraph graphics terminal.
+.TP
+I 5
+.B imagen\ or\ ip
+Imagen laser printer (default 240 dots-per-inch resolution).
+.TP
+E 5
+.B crt
+Any crt terminal capable of running
+.IR vi (1).
+.TP
+.B dumb
+Dumb terminals without cursor addressing or line printers.
+.TP
+.B vt125
+DEC vt125 terminal.
+.TP
+.BR hp2648\  or\  hp\  or\  hp8
+Hewlett Packard 2648 graphics terminal.
+D 5
+.TP
+I 4
+.B imagen\ or\ ip
+Imagen LBP-10 200 dots-per-inch laser printer.
+E 5
+.TP
+E 4
+E 3
+D 2
+ver
+E 2
+I 2
+.B ver
+E 2
+Versatec D1200A printer-plotter.
+D 3
+This version of
+E 3
+I 3
+.TP
+.B var
+Benson Varian printer-plotter.
+.IP
+These versions of
+E 3
+.I plot
+D 3
+places a scan-converted
+image in `/usr/tmp/raster' and sends the
+result directly to the plotter device rather than to
+E 3
+I 3
+use the
+.B \-g
+option of
+.IR lpr (1)
+to send the result directly to the plotter device rather than to
+E 3
+the standard output.
+D 3
+The optional argument causes a previously
+scan-converted file
+.I raster
+to be sent to the plotter.
+E 3
+.SH FILES
+I 3
+/usr/bin/t4013
+.br
+E 3
+/usr/bin/tek
+.br
+/usr/bin/t450
+.br
+/usr/bin/t300
+.br
+/usr/bin/t300s
+.br
+D 3
+/usr/bin/vplot
+E 3
+I 3
+/usr/bin/aedplot
+E 3
+.br
+D 3
+/usr/tmp/raster 
+E 3
+I 3
+/usr/bin/bgplot
+.br
+/usr/bin/crtplot
+.br
+/usr/bin/dumbplot
+.br
+/usr/bin/gigiplot
+.br
+/usr/bin/hpplot
+I 4
+.br
+/usr/bin/implot
+E 4
+.br
+/usr/ucb/lpr
+E 3
+.SH "SEE ALSO"
+D 2
+plot(3), plot(5)
+E 2
+I 2
+D 3
+plot(3X), plot(5)
+E 2
+.SH BUGS
+There is no lockout protection
+for /usr/tmp/raster.
+E 3
+I 3
+plot(3X), plot(3F), plot(5), lpr(1)
+E 3
+E 1

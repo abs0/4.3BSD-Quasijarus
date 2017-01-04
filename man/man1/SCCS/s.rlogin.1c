@@ -1,0 +1,205 @@
+h29710
+s 00000/00000/00092
+d D 6.8 86/05/12 09:05:01 anne 9 8
+c 
+e
+s 00006/00003/00086
+d D 6.7 86/05/12 01:38:12 karels 8 7
+c mention window sizes
+e
+s 00003/00002/00086
+d D 6.6 86/05/11 06:00:02 lepreau 7 6
+c partity bits aren't always stripped w/o -8
+e
+s 00001/00001/00087
+d D 6.5 86/05/05 15:57:01 bloom 6 5
+c fix bugs section
+e
+s 00001/00001/00087
+d D 6.4 86/01/09 13:20:31 mckusick 5 4
+c .rhosts file make be a symbolic link
+e
+s 00000/00008/00088
+d D 6.3 85/10/30 16:14:00 bloom 4 3
+c -w flag no longer needed
+e
+s 00015/00000/00081
+d D 6.2 85/10/08 19:10:34 bloom 3 2
+c add -w and -L
+e
+s 00016/00002/00065
+d D 6.1 85/04/29 21:14:35 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00067/00000/00000
+d D 5.1 85/04/29 21:14:26 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+f b 
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RLOGIN 1C "10 February 1983"
+E 2
+I 2
+.TH RLOGIN 1C "%Q%"
+E 2
+.UC 5
+.SH NAME
+rlogin \- remote login
+.SH SYNOPSIS
+.B rlogin
+rhost [
+\fB\-e\fR\fI\|c\fR
+] [
+I 2
+.B \-8
+] [
+I 3
+.B \-L
+] [
+D 4
+.B \-w
+] [
+E 4
+E 3
+E 2
+.B \-l
+username ]
+.br
+rhost [
+\fB\-e\fR\fIc\fR
+] [
+I 2
+.B \-8
+] [
+I 3
+.B \-L
+] [
+D 4
+.B \-w
+] [
+E 4
+E 3
+E 2
+.B \-l
+username ]
+.SH DESCRIPTION
+.I Rlogin
+connects your terminal on the current local host system
+.I lhost
+to the remote host system
+.I rhost.
+.PP
+Each host has a file
+.I /etc/hosts.equiv
+which contains a list of \fIrhost\fR's with which it shares account names.
+(The host names must be the standard names as described in
+.IR rsh (1C).)
+When you
+.I rlogin
+as the same user on an equivalent host, you don't need
+to give a password.
+Each user may also have a private equivalence list in a file \&.rhosts
+D 8
+in his login directory.  Each line in this file should contain a \fIrhost\fP
+E 8
+I 8
+in his login directory.  Each line in this file should contain an \fIrhost\fP
+E 8
+and a \fIusername\fP separated by a space, giving additional cases
+where logins without passwords are to be permitted.
+If the originating user is not equivalent to the remote user, then
+a login and password will be prompted for on the remote machine as in
+.IR login (1).
+To avoid some security problems, the \&.rhosts file must be owned by
+D 5
+either the remote user or root and may not be a symbolic link.
+E 5
+I 5
+either the remote user or root.
+E 5
+.PP
+D 8
+Your remote terminal type is the same as your local
+E 8
+I 8
+The remote terminal type is the same as your local
+E 8
+terminal type (as given in your environment TERM variable).
+I 8
+The terminal or window size is also copied to the remote system
+if the server supports the option,
+and changes in size are reflected as well.
+E 8
+All echoing takes place at the remote site, so that (except for
+delays) the rlogin is transparent.  Flow control via ^S and ^Q and
+flushing of input and output on interrupts are handled properly.
+I 2
+The optional argument
+.B \-8
+D 7
+allows an eight-bit data path,
+otherwise parity bits are stripped.
+E 7
+I 7
+D 8
+allows an eight-bit data path at all times;
+E 8
+I 8
+allows an eight-bit input data path at all times;
+E 8
+otherwise parity bits are stripped except when the remote side's
+stop and start characters are other than ^S/^Q.
+E 7
+I 3
+The argument
+.B \-L
+allows the rlogin session to be run in litout mode.
+D 4
+The argument
+.B \-w
+if used, says to not do window size propagation.  This is for talking to
+hosts still running 4.2BSD software.
+E 4
+E 3
+E 2
+A line of the form ``~.'' disconnects from the remote host, where
+D 2
+``~'' is the escape character.  A different escape character may
+E 2
+I 2
+``~'' is the escape character.
+Similarly, the line ``~^Z'' (where ^Z, control-Z, is the suspend character)
+will suspend the rlogin session.
+Substitution of the delayed-suspend character (normally ^Y)
+for the suspend character suspends the send portion of the rlogin,
+but allows output from the remote system.
+A different escape character may
+E 2
+be specified by the
+.B \-e
+option.
+There is no space separating this option flag and the argument
+character.
+.SH SEE ALSO
+rsh(1C)
+.SH FILES
+/usr/hosts/*		for \fIrhost\fP version of the command
+.SH BUGS
+D 6
+More terminal characteristics should be propagated.
+E 6
+I 6
+More of the environment should be propagated.
+E 6
+E 1

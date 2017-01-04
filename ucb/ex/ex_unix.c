@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_unix.c	7.7 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_unix.c	7.8 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -24,9 +24,9 @@ static char *sccsid = "@(#)ex_unix.c	7.7 (Berkeley) 3/9/87";
 unix0(warn)
 	bool warn;
 {
-	register char *up, *fp;
+	register u_char *up, *fp;
 	register short c;
-	char printub, puxb[UXBSIZE + sizeof (int)];
+	u_char printub, puxb[UXBSIZE + sizeof (int)];
 
 	printub = 0;
 	CP(puxb, uxb);
@@ -82,7 +82,7 @@ uexp:
 			while (*fp) {
 				if (up >= &uxb[UXBSIZE])
 					goto tunix;
-				*up++ = *fp++ | QUOTE;
+				*up++ = *fp++;
 			}
 			break;
 		}
@@ -132,7 +132,7 @@ uexp:
  */
 ttymode
 unixex(opt, up, newstdin, mode)
-	char *opt, *up;
+	u_char *opt, *up;
 	int newstdin, mode;
 {
 	int pvec[2];
@@ -191,7 +191,7 @@ unixex(opt, up, newstdin, mode)
 		signal(SIGQUIT, oldquit);
 		if (ruptible)
 			signal(SIGINT, SIG_DFL);
-		execl(svalue(SHELL), "sh", opt, up, (char *) 0);
+		execl(svalue(SHELL), "sh", opt, up, (u_char *) 0);
 		ex_printf("No %s!\n", svalue(SHELL));
 		error(NOSTR);
 	}
@@ -316,7 +316,7 @@ recover()
 		close(1);
 		dup(pvec[1]);
 	        close(pvec[1]);
-		execl(EXRECOVER, "exrecover", svalue(DIRECTORY), file, (char *) 0);
+		execl(EXRECOVER, "exrecover", svalue(DIRECTORY), file, (u_char *) 0);
 		close(1);
 		dup(2);
 		error(" No recovery routine");

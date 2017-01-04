@@ -1,0 +1,1146 @@
+.\"	@(#)ch02	1.9 (Falcon) 2012/09/05
+.\"
+.\" The following tps instructions are used only when
+.\" troffing this chapter separately (editing drafts).
+.\"
+.\" Fonts: R,I,B,BI,S,C,H,ZD
+.\" Macros: -ms defs
+.\" Preproc: tbl
+.\"
+.Ch "Chapter 2" "All about fonts and characters"
+.PP
+In the previous chapter we have looked at how we render most of the original
+troff character set using standard Adobe fonts.
+In this chapter we are going to examine how the present version of troff
+handles fonts and characters in general, with the default configuration
+of Chapter\ 1 being just one special case.
+.\"
+.Sc "2.1" "What \fIpstroff\fP knows about fonts"
+.PP
+The present version of troff is designed to be able to make use
+of \fIany\fP \*(PS font, or more precisely, any PS font which
+may be used in the manner of LanguageLevel\ 1.\**
+.FS
+That means no composite or CID-keyed fonts, no Unicode or UTF-8,
+just conventional 8-bit encoding vectors.
+.FE
+In order to use a particular \*(PS font with troff, one must perform
+the following steps:
+.IP 1.
+Choose (invent) a one- or two-character name by which the font will
+be known in the troff world.
+A one-character name has to be a letter; the first character of a
+two-character name also has to be a letter, the second character
+can be either a letter or a digit.
+Both upper and lowercase letters are allowed, and are distinct.
+These rules allow a total of 3276 distinct valid font names,
+which is a lot of fonts, but
+trying to assign a one- or two-character name to every \*(PS font
+in the world on a ``once and for all'' basis ought to drive any sane
+person insane.
+.IP \&
+The font search path feature, described in \(sc2.3, alleviates
+the need to make these assignments on a ``once and for all'' basis:
+there are a few fonts which have been defined in the base \fIpstroff\fP
+distribution, a site administrator may choose to define some more fonts
+on a system-wide basis, an unprivileged user can define some fonts
+of his or her own liking, and one can even define fonts on a
+per-document source basis.
+.IP 2.
+Choose which encoding vector should be used to access the characters
+in the font.
+The present version of troff doesn't know how to use the LanguageLevel\ 2
+\fBglyphshow\fP operator\**,
+.FS
+Not only for LanguageLevel\ 1 compatibility, but also
+for the sake of plain old simplicity.
+.FE
+hence every character of interest must be covered by the encoding vector
+in order to be accessible.
+For some fonts, the default encoding vector that comes with the
+``official'' version of the font is sufficient;
+other fonts need to be recoded.
+The ordinary Roman text fonts are normally recoded to TroffEncoding;
+the set of \fB\e(\fIxx\fR character names compiled into the troff binary
+and some of the basic text processing functions
+have been designed for this encoding, and won't work with a Roman font
+that hasn't been recoded.
+.IP 3.
+Create a font information file which troff can locate and read
+in order to acquire the knowledge of how to use the font described therein.
+.PP
+Troff font information files are stored in a binary format,
+designed such that the troff program can read these files and
+integrate the data into its internal structures very efficiently \(em
+these operations have to happen on every troff run for every font
+declared in the font list for that run (see below).
+The \fImkfont\fP utility, described at the end of this chapter, compiles these
+binary files from a textual source form.
+.PP
+The first vital piece of information contained in each troff font
+information file is a snippet of literal \*(PS code that
+fetches the font with the \fBfindfont\fP operator, applies
+any necessary recoding or other modifications, and leaves
+the usable font dictionary on the operand stack.
+This PS code snippet is called the font setup code.
+Here is the setup code for the default \fBR\fP font (Times-Roman):
+.DS L
+.ft C
+/Times\-Roman findfont
+dup length dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Encoding TroffEncoding def
+currentdict end
+/Times\-Roman\-troff exch definefont
+.ft
+.DE
+.PP
+The same template (taken directly from the \*(PL, 2nd ed.)
+is used for all other fonts which need to be recoded.
+The Symbol (\fBS\fP) font, however, is modified in a different way:
+.DS L
+.ft C
+/Symbol findfont
+dup length 1 add dict begin
+        {1 index /FID ne {def} {pop pop} ifelse} forall
+        /Metrics 2 dict
+        dup /radical 515 put
+        dup /radicalex [0 610] put
+        def
+currentdict end
+/Symbol\-troff exch definefont
+.ft
+.DE
+.PP
+Some fonts don't need any modifications at all.
+The setup code for the \fBZD\fP font is simply:
+.DS L
+.ft C
+/ZapfDingbats findfont
+.ft
+.DE
+.PP
+The \fItroff\fP program itself has no knowledge of what ``stands behind''
+the font dictionary returned (left on the operand stack)
+by each included font's setup code.
+Instead, each font becomes a black box presenting a set of up to 256
+characters, corresponding to the 256 possible values of each element
+of the \*(PS string object passed to the \fBshow\fP operator.
+.PP
+The other essential piece of information contained in each troff font
+information file is a table of character widths.
+This table has 256 entries, each entry indicating the spacing width
+of the character at that code point, corresponding to the encoding vector
+in effect in the font dictionary returned by the setup code.
+.PP
+Other optional information that may be found in a troff font
+information file includes a number of flags and lists of named characters,
+described later in this chapter.
+.\"
+.Sc "2.2" "Document font lists"
+.PP
+The design of the present version of troff has one rather inconvenient
+shortcoming: the full list of fonts that are going to be used in a
+troff session must be known at the beginning of that session.
+It would have been nice if the font list could be learned dynamically:
+if one could name a previously-unseen font in a \fB.ft\fP request
+or a \fB\ef\fP escape in the middle of a long document and have that
+font become available there and then,
+and conversely, if a font is never used, have it automatically excluded
+from the set pulled into the \*(PS interpreter's VM
+by the document setup code.
+But unfortunately, implementing such smarts is much easier said than done,
+and for now we are stuck with the requirement of specifying
+the font list upfront.
+.PP
+The default font list is ``R,I,B,S'', providing the basic troff
+functionality described in Chapter\ 1.
+If a document requires any font(s) outside of these 4, or if one
+of the default fonts needs to be excluded (for example, if a document
+doesn't need any characters from Symbol, the \fBS\fP font could be
+excluded), the user needs to specify a custom font list on the \fIpstroff\fP
+command line with the \fB\-f\fP option.
+The one- or two-character names of the fonts to be included
+need to be listed in the desired order, separated by commas.
+For example, if one wishes to run a troff session with all 4 of the
+default fonts, plus Times-BoldItalic and ZapfDingbats, the font list
+could be specified as \fB\-fR,I,B,BI,S,ZD\fP.
+.PP
+The order in which the fonts are listed matters only insofar as
+compatibility with classic troff preprocessors and macro packages.
+The \fB.ft\fP request, the \fB\ef\fP escape and other elements of
+the troff input language which take the one- or two-character font names
+also accept numeric font positions;
+in the present version the ``physical font position''
+means the position of a font in the declared font list.
+Some preprocessors and macro packages expect the ``base'' roman,
+italic and bold fonts to reside on ``physical positions'' 1, 2 and 3,
+respectively, hence these 3 ``base'' fonts should be listed first
+in that order.
+But the order in which the rest of the fonts are listed
+generally doesn't matter, and is left up to the user's taste.
+.PP
+The declared font list should include only those fonts which are
+actually needed by the document: every listed font will be requested
+with the \fBfindfont\fP operator, pulled into the PS interpreter's VM,
+and possibly subjected to other VM and print time-consuming
+transformations in the document setup section, persisting for the
+remainder of the print job.
+Including unnecessary fonts will needlessly inflate the resulting
+\*(PS page description, in terms of both its transmission size
+and the VM requirements,
+and will produce superfluous warnings at print time if a ``required''
+but actually unused font happens to be unavailable.
+.PP
+The \fB\-f\fP command line option takes the place of the original
+C/A/T troff's \fB.fp\fP request.
+The latter has also been implemented in ditroff, but not in the
+present version \(em use the \fB\-f\fP option instead.
+Use the \fItps\fP front-end to avoid typing the option
+manually on the command line.
+.\"
+.Sc "2.3" "Font search paths"
+.PP
+For every font listed in the font list (default or user-specified),
+\fItroff\fP needs to be able to locate and read
+the font information file described in \(sc2.1.
+If the font name is \fIxx\fP, the font information file must be named
+\fBft\fIxx\fR, and it must be found in one of the directories
+in the font search path.
+.PP
+By default, all font information files are sought in only one directory:
+\fI/usr/lib/pstroff\fP on \*(4B-Quasijarus systems.
+This directory contains fontinfo files for those fonts
+whose definitions are part of the base \fIpstroff\fP distribution,
+as well as any fonts added by the local site administrator
+on a system-wide basis.
+.PP
+A user-specified font search path may be given with the \fB\-F\fP command
+line option to \fItroff\fP.
+The argument is a list of directory pathnames separated by colons (`:'),
+just like the standard \s-1UNIX\s0 \fBPATH\fP environment variable.
+The default font directory \fI/usr/lib/pstroff\fP is implicitly
+appended at the end (doesn't need to be listed explicitly), so that
+all standard fonts remain available in addition to the user-defined ones.
+To suppress the default font directory,
+end the custom font path with two colons (`::').
+.\"
+.Sc "2.4" "Character set model"
+.PP
+Now that we've covered the font list and the font information
+files used to fulfull it, we can revisit the fundamental character set
+model used by the present version of troff.
+.PP
+At the lowest level, every printable character (with the exception
+of the 4 line drawing characters covered in \(sc1.3.2) is a code point
+between 0 and 255, inclusive, that goes into a \*(PS string object
+and gets printed with the \fBshow\fP operator, with the current font
+set to one of the font dictionaries from the declared font list,
+after an application of \fBscalefont\fP to bring it to the desired point size.
+Thus troff's ultimate job is to map every character to a
+{font index, code point} tuple.
+This is the level of abstraction at which \fItroff\fP looks in the
+table in the font information file to determine whether or not
+the requested character exists (see \(sc2.4.3) and what its spacing width is.
+.PP
+A power user needs to be able to access every code point of every font
+explicitly, thus a new (though unfortunately non-standard) escape
+has been added for this purpose: \fB\eX\fIhh\fR, where \fIhh\fP
+is a pair of hexadecimal digits.
+This escape stands for the specified code point in the current font,
+selected by the \fB.ft\fP request or the \fB\ef\fP escape.
+A user making use of this escape must know the font's encoding vector,
+which is TroffEncoding for the standard Roman text fonts,
+shown in Appendix\ A.
+.PP
+All character processing in the guts of troff happens in an internal
+representation whose fundamental nature has remained unchanged from
+the original C/A/T troff: in simplified terms, it is a tuple of the
+form {font index, point size, code point}.
+However, in order to preserve the concept of ``special'' characters
+which are always drawn from their own font (e.g., \fB\e(if\fP\ \(if
+always comes from Symbol) no matter which font is selected by the
+\&\fB.ft\fP request or the \fB\ef\fP escape, and in order to avoid
+breaking the \fB.tr\fP mechanism (whose users, namely some
+historical troff document sources, expect those ``special'' characters
+to be tr-able code points in their own right, like they were
+in the original troff),
+the space of code points for the internal character representation
+(the space on which the \fB.tr\fP mechanism operates)
+has been made 9 bits wide, rather than just 8.
+.PP
+The lower half of this internal 512-character space corresponds
+directly to the 256 code points of the explicitly-selected font
+(\fB.ft\fP or \fB\ef\fP).
+Normal \s-1ASCII\s0 characters, directly-entered 8-bit characters
+(see Chapter\ 6), \fB\e(\fIxx\fR characters which map to the current base font,
+and the non-standard \fB\eX\fIhh\fR escape
+are the different possible ways of entering characters
+in this code subspace.
+The upper half of the 9-bit internal code space is used to represent
+those characters which always come from their own font, regardless
+of which font is explicitly selected by the user \(em
+like the Special Font in the original C/A/T troff, except that
+it doesn't hijack any of the regular \s-1ASCII\s0 characters.
+.PP
+Special characters can be defined for any font (see the next section),
+but the Symbol font, which supplies most of them, is treated specially
+in the way the internal 9-bit code space is structured.
+Specifically, 192 of the internal 9-bit code points are
+hard-allocated for the 192 code points of Symbol
+(the C0 and C1 control character columns aren't used in the latter font),
+and only 32 internal code points are available for dynamic allocation
+to special characters from other fonts.
+In hindsight, this design decision probably wasn't very good
+(it certainly isn't fair), but we are stuck with it, because
+the \fIpstroff\fP input language contains another new non-standard
+escape which provides explicit access to these 192 Symbol code points:
+\fB\eS\fIhh\fR, which is like \fB\eX\fIhh\fR,
+but stands for the specified code point on Symbol, rather than
+on the current explicitly-selected font.
+This escape has already been worked into the retuned versions of
+\fIeqn\fP and the macro packages, as well as some \*(Qj
+document sources, so it is too late to get rid of it.
+.\"
+.Sc "2.4.1" "How named characters work"
+.PP
+The table of named characters for the \fB\e(\fIxx\fR escape
+can map each two-character mnemonic name to the following 4 possibilities:
+.IP 1.
+Some named characters act as mnemonic names for ISO Latin-1 code points:
+for example, the degree symbol \(de has been included in ISO Latin-1
+at code point \fBB0\fP hexadecimal, hence \fB\e(de\fP is equivalent
+to \fB\eXB0\fP in the present version of troff.
+The same arrangement holds for base font characters which are neither
+\s-1ASCII\s0 nor Latin-1, but are part of Adobe's standard character set
+for Roman text fonts, and therefore have been included in TroffEncoding.
+For example, the \&\fCemdash\fP character has been placed at code point
+\fB88\fP hex in TroffEncoding, hence \fB\e(em\fP is equivalent
+to \fB\eX88\fP.
+.IP 2.
+Some named characters act as mnemonic names for \fB\eS\fIhh\fR code points.
+Most of the mathematical symbol characters from the original troff
+character set, such as \fB\e(if\fP or \fB\e(pl\fP, are in this category.
+A few other (non-C/A/T) Symbol characters have had mnemonic names
+assigned to them as well; see Appendix\ A for the complete list.
+.IP 3.
+A named special character on a font other than Symbol may be defined
+by including an instruction in the input to \fImkfont\fP
+(described in \(sc2.7) that maps the desired name to a code point
+in the font being described.
+Each such named character is mapped
+first to a dynamically-allocated code point
+in the internal 9-bit character set (this code point is not
+accessible in any way except through the \fB\e(\fIxx\fR mnemonic name
+for which it's been allocated), and then ultimately to the real code
+point (in the normal octet range) in the \*(PS font to which the
+character belongs.
+.IP 4.
+The 4 line drawing characters \fB\e(ru\fP, \fB\e(ul\fP, \fB\e(rn\fP
+and \fB\e(br\fP are very special:
+they are mapped into an internal code space reserved for
+functions internal to troff itself (the same code space where
+functions like \fB\e{\fP, \fB\e}\fP, \fB\e!\fP etc live),
+the C code recognizes these codes, and turns them into special
+line drawing procset calls, bypassing the normal
+character-from-a-font output path.
+.LP
+The table compiled into the \fItroff\fP binary has characters
+in categories 1, 2 and 4 only.
+However, it resides in the writable data segment and is structured
+in a way that allows efficient additions and redefinitions
+without degrading the performance of subsequent lookups.
+Entries belonging to category 3 appear
+as a result of loading font information files for every font
+in the declared font list in order,
+either as new characters or replacing a previous definition.
+.PP
+A font information file may declare named characters for that font
+as either local or special.
+A named character declared as special will be entered into the global
+named character table as described under ``category 3'' above:
+an occurence of that named character anywhere in the input will always
+invoke the corresponding code point from the font in which the special
+character was declared, regardless of which font is currently
+selected by the \fB.ft\fP request or the \fB\ef\fP escape.
+This ``special'' effect is achieved by going through a dynamically-assigned
+intermediate code point in the internal 9-bit character set.
+.PP
+A named character declared as non-special, however, gets listed in a
+different section of the binary font information file, and works
+quite differently:
+a ``local'' named character definition has any effect only if the
+font to which the definition belongs has already been selected
+explicitly with \fB.ft\fP or \fB\ef\fP.
+If a different font is selected, the definition has no effect,
+and the named character retains its previous meaning, if any.\**
+.FS
+No such local named characters are currently declared
+by any of the fonts included in the \fIpstroff\fP distribution.
+.FE
+.PP
+Whether special or not, a named character definition in a font
+information file always maps that character name to a code point
+in the font being described by that file.
+Adding new character names mapping to code points in \fIwhichever\fP
+font is currently selected (mnemonic names equivalent to \fB\eX\fIhh\fR),
+or new mnemonic names for Symbol characters (\fB\eS\fIhh\fR)
+requires editing the source code (\fCchtab.c\fP)
+and recompiling the \fItroff\fP binary.
+.\"
+.Sc "2.4.2" "Interaction with the .tr mechanism"
+.PP
+The original C/A/T troff used an 8-bit internal character set
+(purely internal, bearing no relation whatsoever to any of the
+standardized 8-bit character sets which appeared much later),
+in which the lower half was \s-1ASCII\s0, while the upper half
+provided intermediate encoding for all of the original
+\fB\e(\fIxx\fR non-\s-1ASCII\s0 characters:
+intermediate in the sense that it carried no direct indication
+as to whether the character lived on the base font or on the
+Special one, and was destined to be turned into C/A/T hardware
+codes through another look-up table.
+.PP
+The \fB.tr\fP mechanism operated on this internal code space,
+i.e., any 8-bit internal character code could be turned into
+any other 8-bit internal character code.
+In other words, the mechanism was \fInot\fP limited to
+just \s-1ASCII\s0 characters, and many historical
+troff document sources rely on being able to turn
+ASCII characters into non-ASCII ones, like this:
+.DS
+.ft B
+\&.tr _\e(em
+\&.tr *\e(**
+\&.tr |\e(bv
+\&.tr \-\e\-
+.ft
+.DE
+.PP
+Maintaining compatibility with usage like the above
+is the reason for the 9-bit internal character set
+in the present version of troff.
+If it weren't for this \fB.tr\fP mechanism, the notion
+of special characters remaining invariant with base font changes
+could have been implemented by having the \fB\e(\fIxx\fR handling
+code set the font index in the internal character representation
+to the special font, rather than the explicitly selected one,
+and the character code part of the internal representation
+could have been just the actual code point in the underlying PS font.
+.PP
+But having \fB\e(**\fP immediately turn into an equivalent of
+\fB\efS*\efP\fP would have made requests like \fB.tr\ *\e(**\fP
+meaningless;
+therefore, preserving compatibility with such usage requires
+an intermediate representation in which \fB\e(**\fP is a code point
+of its own, like it was in the original troff,
+even though it is ultimately destined to become an equivalent
+of \fB\efS*\efP\fP in the final \*(PS output.
+.\"
+.Sc "2.4.3" "Missing character guard"
+.PP
+Regardless of how a character was input (literally,
+as \fB\eX\fIhh\fR or \fB\eS\fIhh\fR, or via a \fB\e(\fIxx\fR mnemonic name
+that maps to \fB\eX\fIhh\fR or \fB\eS\fIhh\fR),
+once it has been resolved to a code point (in the range from 0 to 255,
+inclusive) on one of the fonts in the declared font list,
+troff performs a check to ensure that this code point is valid
+in that font before printing it.
+.PP
+A {font index, code point} tuple is considered to be a valid character
+if a spacing width has been specified for the code point in question
+in the font information file for the font in question.
+The current implementation also requires this spacing width to be nonzero.
+If the spacing width table in the font information file contains a hole
+at the requested code point (a zero is currently interpreted as a hole),
+troff refuses to print the character in question, and skips it instead:
+the effect is the same as if the character were omitted from the input.
+.PP
+The rationale behind this guard is that in order to make use of any
+character coming from a font, troff needs to know its spacing width.
+Having troff print the character as if it had a spacing width of zero,
+which is what would happen if the guard weren't in place,
+when the \*(PS interpreter's idea of the character's spacing width
+is most definitely \fInot\fP zero\**,
+.FS
+If the font actually used at print time
+has a new character at that code point which wasn't known to the
+generator of the font information file for troff,
+that character almost certainly has a non-zero spacing width.
+If there really is no character at that code point, the
+PS interpreter renders the \&\fC.notdef\fP character;
+the standard fonts define the latter to be a space,
+which makes no marks but has a non-zero spacing width.
+.FE
+doesn't sound like a good idea to this author.
+.PP
+The \fB\e(\fIxx\fR named character table compiled into the troff
+binary contains 5 entries for which the missing character guard
+is relevant:
+.TS
+center box;
+cfBI | cfI | cfR
+cfBI | cfI | cfR
+cfB | cfB | afC
+cfB | cfB | afC
+cfB | cfB | afC
+cfB | cfB | afC
+cfB | cfB | cfR .
+Named	Compiled-in	TroffEncoding
+Character	table mapping	maps to
+_
+\e(ff	\eX1C	ff
+\e(Fi	\eX1D	ffi
+\e(Fl	\eX1E	ffl
+\e(sq	\eX1F	square
+\e(bs	\eSF0	N/A
+.TE
+.PP
+These named character table entries exist to provide support
+for the special fonts described in the next chapter.
+If a troff session runs with the standard Adobe fonts, all 5
+characters in question will be caught and blocked by the
+missing character guard:
+.IP \(bu
+Standard Adobe Roman text fonts do not contain characters named
+\&\fCff\fP, \&\fCffi\fP, \&\fCffl\fP or \&\fCsquare\fP.
+When \fIgrokafm\fP runs with the \fB\-r\fP option, indicating
+a Roman font which needs to be recoded to TroffEncoding (see \(sc2.7.2),
+it reads that encoding vector, and knows that code points 28 through 31
+(1C through 1F in hexadecimal) map to these character names.
+Upon not finding those character names in the AFM file,
+it leaves holes in the character width table in the troff
+font information file at these code points, causing
+troff sessions using those fonts to treat those code points
+as invalid.
+.IP \&
+However, when one uses a special font which defines the characters
+at the code points in question, the corresponding \fB\e(\fIxx\fR
+mnemonic names become available automagically.
+.IP \(bu
+Code point 240 decimal (F0 hex) on Symbol is reserved for
+computer platform company logo characters.
+Some versions of the Symbol font have placed the Apple logo there,
+but the standard font information file for \fBS\fP included
+in the present \fIpstroff\fP distribution leaves that code point
+as an undefined hole.
+The missing character guard ensures that no Apple logos will
+suddenly appear in place of the Bell System logo \fB\e(bs\fP
+when the resulting \*(PS page description is printed on a
+Xerox DocuTech, for example.
+.IP \&
+The real Bell System logo appears when one uses the special
+modified version of the Symbol font described in the next chapter:
+a different troff font information file is used in that case,
+and the latter version defines the spacing width of the Bell logo
+glyph at code point 240,
+thereby enabling \fB\e(bs\fP to resolve to that code point
+in the \*(PS output.
+.\"
+.Sc "2.5" "Space width control and fixed-width fonts"
+.PP
+The present version of troff follows the tradition set by the
+original C/A/T version in that the width of the space character
+in no-fill text is controlled by the \fB.ss\fP request, in units
+of 1/36 of an em, and the width specified in the font itself
+is ignored.\**
+.FS
+Space characters are converted to motions and aren't ``printed''
+via \fBshow\fP strings, hence
+no conflict with the PS interpreter over the spacing width of
+a space occurs.
+.FE
+This approach works fine for the regular variable-width fonts,
+but creates a difficulty for the use of fixed-width fonts like Courier
+to print program listings, examples of terminal output, etc.
+The latter use case requires that spaces
+have exactly the same width as all other characters,
+and this requirement conflicts with the classic troff definition
+of space width:
+.IP \(bu
+Adobe has set their Courier font family's fixed character width
+to .600m, hence the space width needs to be set to the same value.
+A horizontal motion of .600m can be expressed exactly in \fIpstroff\fP
+goobies at every point size, but it cannot be expressed in 1/36\ em
+units of the classic \fB.ss\fP request.
+Other fixed-width fonts in the \fIAdobe Type Library\fP
+have copied the .600m width as well.
+.IP \(bu
+Even if the required width were expressible exactly in the units
+required by the \fB.ss\fP request (which must have been the case
+for whatever constant-width font was available for the original C/A/T),
+having to switch \fB.ss\fP explicitly at the beginning and end
+of constant-width tabular listings is a hassle.
+Most ditroff setups are able to produce the right space width
+in the constant-width font ``automagically'', without any \fB.ss\fP
+requests, hence the same ability was deemed desirable
+for the present version of troff.
+.LP
+The solution that's been implemented is a kludgy compromise, as usual.
+The \fB.ss\fP request has been extended to support 3 different modes:
+.IP \(bu
+The default mode: if a classic \fB.ss\ \fIN\fR request has been given,
+or if no \fB.ss\fP requests have been seen at all,
+defaulting to \fB.ss\ 12\fP like in the olden days,
+the specified space width in 1/36\ em units is effective
+only when the current font (\fB.ft\fP or \fB\ef\fP)
+is of the normal variable-width kind.
+If a fixed-width font (as indicated by a flag in the font information file)
+is selected, the space width temporarily switches from the \fB.ss\fP
+setting to the width indicated in the font information file
+for code point 32 decimal (\s-1ASCII\s0 space).
+.IP \(bu
+Specifying \fB.ss\ 0\fP causes the space width to be taken from
+the font information file for all fonts, even variable-width ones.
+For example, with the default \fBR\fP font it would be equal to .250m,
+as that's the spacing width set by Adobe for the \&\fCspace\fP character.
+.IP \(bu
+If the argument to the \fB.ss\fP request is a number \fIN\fP followed by an
+\fBo\fP character (which stands for ``override''), the space width
+is set to \fIN\fP/36\ em for all fonts, including fixed-width ones.
+.LP
+A bare \fB.ss\fP with no argument (which was ignored by the original
+troff) is equivalent to \fB.ss\ 12\fP, i.e., restores the default of
+12/36\ em for variable-width fonts and the width from the font information
+file for fixed-width ones.
+.\"
+.Sc "2.6" "Ligature handling"
+.PP
+In Brian Kernighan's \fIditroff\fP implementation,
+the description of each font contains an individual flag bit
+for each of the possible 5 f-ligatures, indicating the availability
+of that ligature, and the automatic ligature substitution
+mechanism was controlled by these flag bits.
+In the world of \*(PS fonts, however, only 3 possibilities
+exist with respect to the availability of these ligatures:
+none present, \fB\(fi\fP and \fB\(fl\fP present, or all 5 present.
+Specifically:
+.IP \(bu
+All standard Adobe Latin text fonts include the two basic ligatures
+\fBfi\fP and \fBfl\fP,
+or more precisely, two characters named \&\fCfi\fP and \&\fCfl\fP,
+intended to pass as ``acceptable''
+renditions of ``fi'' and ``fl'', whatever the actual graphic shape is.
+Therefore, \fB\e(fi\fP and \fB\e(fl\fP, which map to these characters
+by way of TroffEncoding code points, will produce \fIsome\fP glyph
+(a true ligature or otherwise) with every standard Latin text font.
+.IP \&
+However, these characters are invalid (will either get caught
+by the missing character guard or print some totally unrelated character
+reusing that code point) for fonts which \fIdon't\fP use TroffEncoding:
+Cyrillic fonts using CyrTroffEncoding (see Chapter\ 6), non-text
+special character fonts like Zapf Dingbats, etc.
+.IP \(bu
+The remaining 3 f-ligatures have unfortunately been deemed
+unnecessary by Adobe, hence they aren't present in most fonts.\**
+.FS
+This author has yet to see a standard Latin text font,
+not expert, that includes these extended ligatures.
+.FE
+They do, however, exist in some special ``expert'' fonts,
+and their \*(PS names are straightforward: \&\fCff\fP,
+\&\fCffi\fP and \&\fCffl\fP.
+.IP \&
+TroffEncoding assigns code points to these 3 extended ligature
+characters, and the named characters \fB\e(ff\fP, \fB\e(Fi\fP
+and \fB\e(Fl\fP map to these code points.
+However, because the characters don't actually appear in most fonts
+and hence in their corresponding AFM files,
+attempts to print these characters will usually be caught
+by the missing character guard described earlier (\(sc2.4.3).
+See the next chapter regarding some special fonts which
+define these characters.
+.LP
+However, just because a given set of f-ligature characters is
+available, does not always imply that it would be appropriate to use them.
+For example, if we enabled the use of fi and fl ligatures with Courier,
+words like ``\fCflash file system\fP'' would turn into
+``\fC\(flash \(file system\fP'', which you'll probably agree
+looks rather weird, and would disrupt a tabular printout listing.
+A similar situation exists with the 3 extended ligatures:
+the next chapter describes a special set of ``old troff emulation''
+fonts in which each of the base Times family fonts is extended with ligatures
+from a not-strictly-matching expert font.
+In the latter case all 5 ligatures are available for explicit invokation
+(so that one can format a historical document like \*(Mn
+which exhibits them),
+but substituting the extended ones automatically
+probably wouldn't be a good idea.
+.\"
+.Sc "2.6.1" "Automatic ligature substitution control"
+.PP
+The present version of troff uses the following logic
+to decide whether or not f-ligatures should be substituted automatically:
+.IP \(bu
+The two basic ligatures (\fB\(fi\fP and \fB\(fl\fP)
+are auto-invoked whenever all 3 of the following conditions are met:
+the current font uses TroffEncoding, the \&\fCnolig\fP flag has
+\fBnot\fP been set in the font information file, and the user hasn't
+disabled ligatures with the \fB.lg\fP request.
+.IP \&
+The TroffEncoding requirement is justified because the code points
+assigned to the ligature characters are valid only with this encoding
+vector
+(they haven't been included in CyrTroffEncoding, as explained
+in Chapter\ 6, and f-ligature substitution is clearly undesirable
+for non-text special character fonts),
+and the \&\fCnolig\fP flag in the font information file
+allows ligature substitution to be disabled for fonts like Courier
+without making the user remember to turn them off explicitly with
+\&\fB.lg\ 0\fP and then turn them back on.
+.IP \(bu
+Setting \fB.lg\ 5\fP extends the set of auto-substituted ligatures
+from just fi and fl to all 5.
+The current font requirements (TroffEncoding and no \&\fCnolig\fP)
+still remain.
+.IP \(bu
+The present division between basic and extended f-ligatures
+differs from the original C/A/T troff's setting of \fB.lg\ 2\fP.
+In words like ``efficient'' and ``effluent'', the old troff's
+``two-letter ligature'' mode would have made a ligature between
+the two `f's, rather than between the second `f' and the `i' or `l',
+as the present version does.
+The old troff's ``two-letter ligature'' mode was an arbitrary choice
+made atop of a font set with all 5 f-ligatures present,
+whereas our present division is dictated by Adobe's choice to
+provide only fi and fl ligatures, while making `ff' a non-ligature
+in the standard fonts.
+.IP \&
+Setting the \fB.lg\fP control value to 1, 2 or any other number
+besides 0 and 5 has the same effect in the present version of troff:
+restores the default of auto-invoking \fB\(fi\fP and \fB\(fl\fP,
+but no others.
+.\"
+.Sc "2.7" "Creating font information files: \fImkfont\fP and \fIgrokafm\fP"
+.PP
+All mechanisms described earlier in this chapter make some use
+of various pieces of information contained in troff font information
+files.
+Now that we've covered all of the existing functionality,
+we can delve into the details of exactly how these essential font information
+files are created, and where the information comes from.
+.PP
+The present \fIpstroff\fP software distribution includes two utilities
+which serve this purpose: \fImkfont\fP and \fIgrokafm\fP.
+As already mentioned in the beginning of this chapter, the font
+information files that are actually read by the \fItroff\fP program
+use a binary format for efficiency.
+These binary files are generated by the \fImkfont\fP utility,
+which compiles them from an editable \s-1ASCII\s0 text source form.
+\fIMkfont\fP is a low-level utility: its input ``language'' describes
+fonts in terms of exactly what the main \fItroff\fP program needs
+to know, and nothing more.
+\fIGrokafm\fP is a higher-level front-end to \fImkfont\fP for the
+most common use case in which a troff font information file needs
+to be created for some standard (not troff-specific) font
+using its standard AFM file as the source of the necessary information.
+.PP
+The minimum required information that must be included in a font
+information file to make that font usable is the table of
+character spacing widths and the \*(PS font setup code.
+For standard fonts (those that haven't been created specifically
+for troff), the character width information is normally available
+in an AFM file.
+For such fonts the \fIgrokafm\fP utility is most convenient:
+it parses the given AFM file, extracts the information of interest
+to troff, and emits it in the form that serves as input to \fImkfont\fP.
+It also takes care of recoding regular text fonts to TroffEncoding
+or CyrTroffEncoding: constructs the necessary
+font setup code, and reshuffles the character widths to their new
+code points.
+\fIGrokafm\fP can call \fImkfont\fP directly, passing the intermediate
+language through a pipe, such that the user never has to see it,
+or one can feed an AFM file to \fIgrokafm\fP, take the output of
+the latter, edit it to taste, then feed it to \fImkfont\fP.
+.PP
+On the other hand, if a font is being created specifically for troff,
+it will usually make more sense to write its description directly
+in the \fImkfont\fP language, skipping AFM as an unnecessary middleman.
+.\"
+.Sc "2.7.1" "Using \fImkfont\fP"
+.PP
+The input to \fImkfont\fP consists of a set of instructions,
+one per line, each adding a piece of information to the
+font information file.
+With the exception of the \&\fCsetup:\fP instruction
+which, if given, must appear at the very end, all other
+instructions can appear in any order: they are acted upon
+in the order in which they are given, but if the font description
+is well-formed in that there are no contradictory instructions,
+reordering the instructions in the input to \fImkfont\fP ought
+to have no visible effect on troff operation with the resulting
+binary font information file.
+Blank lines and other extraneous white space is ignored;
+comments are introduced by the `#' character and continue
+to the end of the line.
+.PP
+The following instructions are recognized:
+.sp
+.in 0
+.nf
+.ss 36
+\fCcharwidth\fP \fIcodept\fP \fIwidth\fP
+.ss
+.IP
+Tells troff that the spacing width of the character
+at code point \fIcodept\fP is \fIwidth\fP, given in .001m units
+customary in the \*(PS font world.
+The code point can be specified in one of 4 ways:
+.RS
+.IP \(bu
+A decimal number between 0 and 255, inclusive, with no leading zeros.
+.IP \(bu
+An octal number between 000 and 0377, entered with a leading zero
+to make 3 or 4 digits in total.
+.IP \(bu
+A hexadecimal number entered as \fB0x\fIhh\fR, where \fIhh\fP are
+two hexadecimal digits.
+.IP \(bu
+An ASCII literal of the form \&\fC'x'\fP.
+.RE
+.IP
+The \fIwidth\fP argument, which usually comes directly from AFM files
+by way of \fIgrokafm\fP, can be either an integer or a number with
+a decimal fractional part.
+However, troff understands character spacing widths only as integers
+in .001m units, hence any fractional part is rounded to the nearest integer.
+The widths must be positive.
+.sp
+.in 0
+.nf
+.ss 36
+\fCfixedwidth\fP \fIwidth\fP
+.ss
+.IP
+Sets the same spacing width for all 256 character code points,
+and also sets a ``fixed-width font'' flag which is used by the
+space width control logic described in \(sc2.5.
+.IP
+Every valid font information file must contain either a single
+\&\fCfixedwidth\fP instruction, or a set of \&\fCcharwidth\fP instructions,
+one for every defined code point.
+Those code points for which no \&\fCcharwidth\fP instruction
+has been given (in the absence of \&\fCfixedwidth\fP)
+are considered invalid and blocked as described in \(sc2.4.3.
+.sp
+.in 0
+.nf
+.ft C
+isFixedWidth
+.IP
+Sets the ``fixed-width font'' flag for the space width control logic
+of \(sc2.5,
+but does not enter anything into the character width table.
+.IP
+This instruction is counter-intuitive; when one is writing a font description
+for \fImkfont\fP by hand, it would be much more sensible to use the
+\&\fCfixedwidth\fP instruction.
+However, a description of a fixed-width font in the ``silly'' form
+of \&\fCisFixedWidth\fP followed by a long series of \&\fCcharwidth\fP
+instructions, all specifying the same width, is what comes out of
+\fIgrokafm\fP (see the next section) when the AFM file says
+``\fCIsFixedPitch\ true\fP'' rather than ``\fCCharWidth\ \fIxxx\fC\ 0\fR''.
+.sp
+.in 0
+.nf
+.ss 36
+\fCnamedchar\fP \fIxy\fP \fIcodept\fP [\fCspecial\fP]
+.ss
+.IP
+Tells troff to map \fB\e(\fIxy\fR to code point
+\fIcodept\fP, as described in \(sc2.4.1.
+If the \&\fCspecial\fP keyword is specified,
+the named character mapping is global in that the new \fB\e(\fIxy\fR
+named character will map to \fIcodept\fP on this font
+regardless of which font is currently selected with \fB.ft\fP or \fB\ef\fP.
+Otherwise, a local named character mapping is created, which is
+effective only when the font to which it belongs has been selected
+explicitly with \fB.ft\fP or \fB\ef\fP.
+.IP
+The \fIxy\fP argument is given simply as two ASCII characters:
+no quoting, and no \fB\e(\fP.
+The \fIcodept\fP argument may be given in any of the forms
+listed for \&\fCcharwidth\fP.
+.sp
+.in 0
+.nf
+.ss 36
+\fCpsname\fP \fIname\fP
+.ss
+.IP
+Indicates that the \*(PS name of the font being described
+(the name to be passed to the \fBfindfont\fP operator)
+is \fIname\fP.
+.IP
+This instruction has an effect only when the font setup code snippet
+is \fInot\fP given explicitly with the \&\fCsetup:\fP instruction,
+in which case the font setup code defaults to the minimal
+``\fC/\fIpsname\fC\ findfont\fR''.
+If the \&\fCsetup:\fP instruction \fIis\fP given,
+the \&\fCpsname\fP instruction effectively becomes a comment.
+.sp
+.in 0
+.nf
+.ft C
+encoding  TroffEncoding
+encoding  CyrTroffEncoding
+.IP
+Sets a flag in the font information file,
+indicating that the font being described uses the specified encoding vector.
+No arbitrary encoding vectors may be named, only
+TroffEncoding or CyrTroffEncoding.
+.IP
+The \&\fCencoding\fP instruction does \fBnot\fP
+auto-generate any \*(PS font setup code for the recoding,
+hence any necessary recoding code must still be given explicitly
+in the \&\fCsetup:\fP section.
+Instead, the flags set by this instruction serve the following purposes:
+.RS
+.IP \(bu
+They tell troff which encoding vectors are used by the active font set
+(see \(sc2.2), and hence need to be included in the prolog section
+of the generated PS page description.
+The common recoding code (shown in \(sc2.1) contains \fBTroffEncoding\fP
+(or \fBCyrTroffEncoding\fP) as an executable name, hence
+whichever encoding vectors are used by the active font set
+must be present in the \*(PS interpreter's VM,
+otherwise the print job will fail with an error.
+.IP \(bu
+The flag set by ``\&\fCencoding\ TroffEncoding\fP''
+is one of the required conditions for the automatic substitution
+of f-ligatures, as explained in \(sc2.6.1.
+.IP \(bu
+The flag set by ``\&\fCencoding\ CyrTroffEncoding\fP''
+remaps some of the \fB\e(\fIxx\fR named characters
+as explained in Chapter\ 6.
+.RE
+.sp
+.in 0
+.nf
+.ft C
+nolig
+.IP
+Suppresses all automatic ligature substitution
+when the font being described is active.
+.sp
+.in 0
+.nf
+.ft C
+SymbolSpecial
+.IP
+Marks the font as being Adobe Symbol or a compatible derivative thereof.
+This flag causes the font on which it is set
+to become the destination to which the internal \fB\eS\fIhh\fR
+code points (and many standard \fB\e(\fIxx\fR named characters
+which map to these code points) are ultimately resolved.
+.sp
+.in 0
+.nf
+.ft C
+setup:
+.IP
+The \&\fCsetup:\fP keyword, appearing on a line by itself,
+serves as a delimiter, marking the end of the part that is
+interpreted by \fImkfont\fP and the beginning of the literal
+\*(PS font setup code.
+All characters following the newline at the end of the delimiter line
+until the end-of-file are taken to be the PS code snippet which is
+to be emitted literally into the generated page descriptions
+at the appropriate point in the document setup section,
+as explained in \(sc2.1 and in Appendix\ B.
+.IP
+The setup code is required for every font; you can either specify
+it explicitly as \&\fCsetup:\fP, or let \fImkfont\fP default it to the
+minimum as shown above under \&\fCpsname\fP.
+Neither \fImkfont\fP nor \fItroff\fP validates this \*(PS code
+in any way; if you use \fImkfont\fP directly, rather than via
+\fIgrokafm\fP, it is your responsibility to ensure that the PS code
+is valid (won't cause any errors), does what it's supposed to
+(leaves the ready-to-use font dictionary on the operand stack),
+and does not unintentionally degrade the portability of the
+\*(PS page description.
+.sp
+.ns
+.LP
+Run the \fImkfont\fP utility as follows:
+.DS C
+\fBmkfont\fP [\fIsrcfile\fP] \fIftxx\fP
+.DE
+.LP
+The last argument (\fIftxx\fP) is mandatory, and names the binary
+font information file to be created.
+If two arguments are given, the first is taken to be the name of the
+\s-1ASCII\s0 text file containing the input instructions.
+If reading from a pipe (more precisely, from standard input) is
+desired, specify \fB\-\fP as the first argument.
+If only one argument is given, it is taken to be the name of the
+binary file to be produced (\fIftxx\fP), and the source is sought
+in \fIftxx\fC.src\fR.
+.\"
+.Sc "2.7.2" "Using \fIgrokafm\fP"
+.PP
+.I Grokafm
+reads and parses an AFM (Adobe Font Metrics) file, extracts the
+information of interest to troff (detailed below), and turns it into
+\fImkfont\fP instructions.
+The usage is:
+.DS C
+\fBgrokafm\fP [\fB\-o\fP \fIftxx\fP] [\fB\-r\fP\(or\fB\-k\fP] \fIafmfile\fP
+.DE
+.LP
+If the \fB\-o\fP option is specified, \fIgrokafm\fP invokes \fImkfont\fP
+and writes the binary troff font information file to the specified filename;
+the \fImkfont\fP intermediate language is passed via a pipe invisibly
+to the user.
+Otherwise, the \fImkfont\fP instructions are emitted to the standard output.
+These instructions are exactly the same as what gets passed via the pipe
+with \fB\-o\fP.
+.PP
+The \fB\-r\fP option indicates that the font in question is a standard
+Roman text font, and hence needs to be recoded to TroffEncoding.
+The \fIgrokafm\fP utility is where the recoding happens: setup code
+following the recoding template shown in \(sc2.1 is generated,
+and the set of \&\fCcharwidth\fP instructions passed to \fImkfont\fP
+describes the recoded font.
+The \fB\-k\fP option requests application of the same recoding algorithm,
+but with CyrTroffEncoding instead of regular TroffEncoding,
+used for Cyrillic fonts \(em see Chapter\ 6.\**
+.FS
+\fB\-k\fP stands for KOI, the USSR standard character encoding
+that's been adopted as the basis for CyrTroffEncoding.
+.FE
+The two options are mutually exclusive.
+If neither option is specified, no recoding is applied.
+.PP
+The AFM properties of interest to the present version of troff
+(and thus to \fIgrokafm\fP) are \fBFontName\fP,
+\fBCharWidth\fP and \fBIsFixedPitch\fP (if present),
+and the individual character metrics lines:
+.IP \(bu
+The \fBFontName\fP property is required: in order to use a font,
+with or without recoding, one must know the name to be passed to the
+\fBfindfont\fP operator;
+when one uses \fIgrokafm\fP, this name comes from the \fBFontName\fP
+AFM property.
+.I Grokafm
+uses it to construct the appropriate font setup code,
+with or without recoding.
+If the \fBFontName\fP is missing, \fIgrokafm\fP
+produces an error message and no troff font information file is written.
+.IP \(bu
+When parsing the individual character metrics, \fIgrokafm\fP looks for
+three keys in each line: \fBC\fP, \fBN\fP and \fBWX\fP.
+It then determines whether or not the character being described
+will be visible to troff:
+.RS
+.IP \(bu
+If the font is being recoded to TroffEncoding or CyrTroffEncoding,
+the ``\fBC\fP'' listed in the AFM file (code point or lack thereof)
+is ignored, and instead the listed character name \fBN\fP is used
+as the deciding factor: the name is looked up in the encoding vector
+to which the font is being recoded,
+and if a TroffEncoding code point maps to the name given as \fBN\fP,
+a \&\fCcharwidth\fP instruction is emitted for that code point.
+If there are multiple code points which map to the same name,
+which is the case for a few characters in TroffEncoding,
+the \&\fCcharwidth\fP instruction is replicated for each of those
+code points.
+.IP
+If the character being described is not covered by TroffEncoding,
+it is inaccessible
+to troff, whether or not it was encoded in the original font,
+hence no \&\fCcharwidth\fP can be emitted for it.
+.IP \(bu
+If the font is not being recoded, the listed ``\fBN\fP'' is effectively
+a comment, and the listed original code point ``\fBC\fP'' goes into
+the \&\fCcharwidth\fP instruction.
+If \fBC\fP is given as \fB\-1\fP, indicating that the character
+is not covered by the font's original encoding vector, that character
+is not accessible to troff without recoding,
+hence no \&\fCcharwidth\fP can be emitted for it.
+.RE
+.IP
+In both cases, the width given by \fBWX\fP goes into the \&\fCcharwidth\fP
+instruction(s), to be parsed by \fImkfont\fP.
+.IP \(bu
+If the AFM file contains a \fBCharWidth\fP property,
+\fIgrokafm\fP turns it into a \&\fCfixedwidth\fP instruction
+to \fImkfont\fP.
+.IP \(bu
+If the AFM file says ``\fCIsFixedPitch\ true\fP'',
+\fIgrokafm\fP emits an \&\fCisFixedWidth\fP instruction.
+The current version also emits a \&\fCnolig\fP instruction,
+which indicates that f-ligatures shouldn't be auto-substituted with this font
+even though they are available: the reasoning is that the
+\&\fCnolig\fP behaviour is what one normally wants with fixed-width
+fonts, matching what most \fIditroff\fP versions did.
+.\"
+.Sc "2.8" "The standard font set"
+.PP
+The current \fIpstroff\fP distribution includes font information files
+for 14 standard Adobe fonts listed in \(sc1.3.1.
+The binary font information files for these fonts are compiled
+from sources in the \fImkfont\fP ``intermediate language''
+which are maintained as part of the \fIpstroff\fP source distribution.
+The latter have been ``bootstrapped'' initially from standard AFM files
+with \fIgrokafm\fP, but are now maintained as bona fide sources,
+under source control.
+.PP
+For the most part,
+the ``production'' versions of the font information files built
+from these maintained sources are functionally equivalent
+to what one would get by re-running \fIgrokafm\fP on the original
+AFMs from Adobe.
+The exceptions are:
+.IP \(bu
+The font information file for \fBR\fP (Times-Roman) includes
+this definition for the \fB\e(sl\fP character:
+.DS I
+.ft C
+namedchar       sl      '/'     special
+.ft
+.DE
+.IP
+See \(sc1.3.4 for the explanation.
+.IP \(bu
+The \&\fCnolig\fP flag is set not only for the Courier family,
+but for the Helvetica family as well.
+The \(fi and \(fl characters in Helvetica look like this:
+\fH\(fi \(fl\fP.
+As you can see, they aren't real ligatures, and a close look
+at the metrics reveals that Helvetica's \fH\(fi\fP character
+is strictly equivalent to \fHfi\fP printed normally,
+ditto for \fHfl\fP.
+Nothing bad happens if one invokes the ``ligature'' characters,
+as they are graphically identical to the normal ``one letter at a time''
+form, but it's probably cleaner to tell troff not to auto-invoke them
+for this font family.
+.IP \(bu
+The Symbol (\fBS\fP) font is quite special: \fIgrokafm\fP
+doesn't set the \&\fCSymbolSpecial\fP flag, nor does it apply
+the metrics hacks to the \&\fCradical\fP and \&\fCradicalex\fP
+characters.
+.IP \(bu
+The font information file for \fBZD\fP (Zapf Dingbats) includes
+this definition for the \fB\e(rh\fP character:
+.DS I
+.ft C
+namedchar       rh      43      special
+.ft
+.DE
+.LP
+The Zapf Dingbats font is a good example of how one can use
+various non-text special symbol fonts with the present version of troff.
+The ``dingbat'' characters may be used in two ways:
+.IP 1.
+One can switch to the \fBZD\fP font explicitly and print any
+of its characters by its ASCII or hexadecimal code point:
+for example, \fB\ef(ZD%\efP\fP and \fB\ef(ZD\eXF5\efP\fP
+will produce \f(ZD%\fP and \f(ZD\XF5\fP, respectively.
+.IP 2.
+One can assign mnemonic two-characters names for the \fB\e(\fIxx\fR
+escape to one or more characters of the special symbol font
+via custom \&\fCnamedchar\fP instructions in its font information file.
+In the case of Zapf Dingbats, the right-pointing hand symbol
+\(rh is the only one for which such a mnemonic name has been
+assigned: \fB\e(rh\fP.

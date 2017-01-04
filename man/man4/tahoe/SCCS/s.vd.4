@@ -1,0 +1,620 @@
+h20747
+s 00081/00093/00095
+d D 6.3 88/06/13 18:00:26 karels 3 2
+c disklabel xref'sa; new error formats with diskerr
+e
+s 00080/00221/00108
+d D 6.2 87/06/30 21:22:25 sam 2 1
+c update addresses to reflect change form 24 to 32 bit addresses 
+c in config file; rewrite cy.4 and vd.4 as well as vx.4
+e
+s 00329/00000/00000
+d D 6.1 86/11/24 18:23:40 mckusick 1 0
+c from CCI
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH VD 4 "%Q%"
+.UC 7
+.SH NAME
+D 2
+vd / (fsd, smd, xfd, fuj, xsd) \- versabus storage module controller/drives
+E 2
+I 2
+vd \- VERSAbus storage module controller/drives
+E 2
+.SH SYNOPSIS
+D 2
+.B "VD controller at vba addresses 0xf2[0-7]00"
+E 2
+I 2
+.B "controller vd0 at vba? csr 0xffff2000 vector vdintr"
+E 2
+.br
+D 2
+.B "160 Mb FSD "
+.br
+.B "300 Mb SMD "
+.br
+.B "340 Mb XFD "
+.br
+.B "360 Mb FUJ "
+.br
+.B "515 Mb XSD "
+E 2
+I 2
+.B "disk dk0 at vd0 drive 0"
+E 2
+.SH DESCRIPTION
+D 2
+This is a generic VERSABUS storage module disk driver for CCI's VD
+controller.
+E 2
+I 2
+This is a generic VERSAbus storage module disk driver for the
+D 3
+Computer Consoles smd and smd-e disk controllers.
+E 3
+I 3
+Computer Consoles SMD (VDDC) and SMD-E disk controllers.
+E 3
+E 2
+.PP
+Files with minor device numbers 0 through 7 refer to various portions
+of drive 0;
+minor devices 8 through 15 refer to drive 1, etc.
+D 2
+The standard device names begin with `fsd, `smd', `fuj', `xfd',
+or `xfd' followed by
+E 2
+I 2
+The standard device names begin with ``dk'' followed by
+E 2
+the drive number and then a letter a-h for partitions 0-7 respectively.
+D 2
+The character ? stands here for a drive number in the range 0 - 1f (hex).
+E 2
+I 2
+The character ? stands here for a drive number in the range 0-7.
+E 2
+.PP
+The block files access the disk via the system's normal
+buffering mechanism and may be read and written without regard to
+physical disk records.  There is also a `raw' interface
+which provides for direct transmission between the disk
+and the user's read or write buffer.
+D 2
+A single read or write call results in exactly one I/O operation
+and therefore raw I/O is considerably more efficient when
+E 2
+I 2
+D 3
+A single read or write call results in exactly one i/o operation
+and therefore raw i/o is considerably more efficient when
+E 3
+I 3
+A single read or write call results in exactly one I/O operation,
+and therefore raw I/O is considerably more efficient when
+E 3
+E 2
+many words are transmitted.  The names of the raw files
+conventionally begin with an extra `r.'
+.PP
+D 2
+In raw I/O counts should be a multiple of 1024 bytes (a disk block).
+E 2
+I 2
+D 3
+In raw i/o counts should be a multiple of 1024 bytes (a disk block).
+E 2
+Likewise
+E 3
+I 3
+In raw I/O counts should be a multiple of 1024 bytes,
+whether the actual sector size is 512 or 1024 bytes.
+Likewise,
+E 3
+.I seek
+calls should specify a multiple of 1024 bytes.
+I 3
+.PP
+The first sector of each disk contains a disk label
+containing geometry information and partition layouts (see
+.IR disklabel (5).
+This sector is normally write-protected, and disk-to-disk copies should
+avoid copying this sector.
+The label may be updated with
+.IR disklabel (8),
+which can also be used to write-enable and write-disable the sector.
+E 3
+.SH "DISK SUPPORT"
+D 3
+The driver tries to access the last track on each drive
+to determine the type of drive attached.  The driver recognizes
+D 2
+five different drives: CDC FSD (160 Mb), CDC 9766 (300 Mb),
+CDC XFSD (340 Mb), CDC 515Mb, and Fujitsu 360 Mb.
+E 2
+I 2
+six different drives: CDC FSD (160 MB), CDC 9766 (300 MB),
+CDC XFSD (340 MB), CDC 515MB, Fujitsu 360 MB, and Fujitsu
+Eagle (440 MB).
+E 2
+The origin and size of the pseudo-disks on each drive are
+as follows:
+E 3
+I 3
+During autoconfiguration,
+as well as when a drive is opened after all partitions are closed,
+the first sector of the drive is examined for a disk label.
+If a label is found, the geometry of the drive and the partition tables
+are taken from it.
+If no label is found,
+The driver checks for a disk label on sector 0 of each drive
+during autoconfiguration.
+If no label is found,
+the driver tries to access the last track on each drive
+to determine the type of drive attached.
+The driver has default partition tables for
+seven different drives: CDC FSD (160 MB), CDC 9766 (300 MB),
+CDC XFSD (340 MB), CDC 515MB, Fujitsu 360 MB, Fujitsu Eagle (440 MB),
+and Maxtor 340Mb.
+If the drive is not recognized, a single small partition is created
+to allow a label to be written.
+E 3
+.PP
+D 3
+.nf
+.ta .5i +\w'000000    'u +\w'000000    'u +\w'000000    'u
+FSD 160Mb drive partitions:
+	disk	start	length	   cyl
+	fsd?a	0	9600	  0 - 59
+	fsd?b	9600	12000	 60 - 134
+	fsd?c	21600	109280	135 - 817
+	fsd?d	39840	91040	249 - 817
+	fsd?e	58080	72800	363 - 817
+	fsd?f	76320	54560	477 - 817
+	fsd?g	94560	36320	591 - 817
+	fsd?h	112800	18080	705 - 817
+.PP
+SMD (CDC 9766) 300Mb drive partitions:
+	disk	start	length	   cyl
+	smd?a	0	20064	  0 - 65
+	smd?b	20064	13680	 66 - 110
+	smd?c	33744	214928	111 - 817
+	smd?d	69616	179056	229 - 817
+	smd?e	105488	143184	347 - 817
+	smd?f	141360	107312	465 - 817
+	smd?g	177232	71440	583 - 817
+	smd?h	213104	35568	701 - 817
+.PP
+XFD 340Mb drive partitions:
+	disk	start	length	   cyl
+	xfd?a	0	20352	  0 - 52
+	xfd?b	20352	20352	 53 - 105
+	xfd?c	40704	230400	106 - 705
+	xfd?d	79104	192000	206 - 705
+	xfd?e	117504	153600	306 - 705
+	xfd?f	155904	115200	406 - 705
+	xfd?g	194304	76800	506 - 705
+	xfd?h	232704	38400	606 - 705
+.PP
+FUJ 360Mb drive partitions:
+	disk	start	length	   cyl
+	fuj?a	0	19200	  0 - 59
+	fuj?b	19200	24000	 60 - 134
+	fuj?c	43200	218560	135 - 817
+	fuj?d	79680	182080 	249 - 817
+	fuj?e	116160	145600	363 - 817
+	fuj?f	152640	109120 	477 - 817
+	fuj?g	189120	72640	591 - 817
+	fuj?h	225600	36160	705 - 817
+.PP
+XSD 515Mb drive partitions:
+	disk	start	length	   cyl
+	xsd?a	0	30528	  0 - 52
+	xsd?b	30528	30528	 53 - 105
+	xsd?c	61056	345600	106 - 705
+	xsd?d	118656	288000 	206 - 705
+	xsd?e	176256	230400	306 - 705
+	xsd?f	233856	172800 	406 - 705
+	xsd?g	291456	115200	506 - 705
+	xsd?h	349056	57600	606 - 705
+.fi
+.PP
+It is unwise for all of these partitions to be present in one installation,
+since there is overlap in addresses and protection becomes
+a sticky matter.
+The ?a partition is normally used for the root file system,
+and the ?b partition as a paging area.
+E 3
+I 3
+The partition tables in the disk label and the
+.I disktab
+file specify partition offsets and sizes in sectors, which are 512 bytes
+on SMD drives and 1024 bytes on 5 1/4" ESDI drives.
+By convention,
+the ?a partition is normally used for the root file system or other small
+file system,
+and the ?b partition is used as a paging area.
+E 3
+The ?c partition maps the rest of the pack,
+except the last 5 cylinders which are reserved for bad sector forwarding,
+and diagnostic use.
+.SH FILES
+D 2
+/dev/fsd[0-7][a-f]	fsd block files
+E 2
+I 2
+/dev/dk[0-7][a-f]	dk block files
+E 2
+.br
+D 2
+/dev/rfsd[0-7][a-f]	fsd raw files
+.br
+/dev/smd[0-7][a-f]	smd block files
+.br
+/dev/rsmd[0-7][a-f]	smd raw files
+.br
+/dev/xfd[0-7][a-f]	xfd block files
+.br
+/dev/rxfd[0-7][a-f]	xfd raw files
+.br
+/dev/fuj[0-7][a-f]	fuj block files
+.br
+/dev/rfuj[0-7][a-f]	fuj raw files
+.br
+/dev/xsd[0-7][a-f]	xsd block files
+.br
+/dev/rxsd[0-7][a-f]	xsd raw files
+.br
+E 2
+I 2
+/dev/rdk[0-7][a-f]	dk raw files
+E 2
+.SH SEE ALSO
+D 3
+disktab(5)
+E 3
+I 3
+disklabel(5), disklabel(8)
+E 3
+.SH DIAGNOSTICS
+D 2
+The driver prints out a number of error messages, indicating that
+the error bit in the DCB'c op error status register was set.
+The contents of the register are printed, as well as an indication
+of the operation attempted and drive number.
+The status word is displayed in hexadecimal, so
+conversion to binary is up to the operator.
+The meaning of the status word's bit fields are:
+.sp 1
+.in +3m
+.nf
+31                              0
++--------------------------------+
+||||||||||||||||||||||||||||||||||
++--------------------------------+
+ ^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ ||||| |||||||||||||||||||||||||+-- Header CRC error detected.
+ ||||| ||||||||||||||||||||||||+--- Header compare error.
+ ||||| |||||||||||||||||||||||+---- Disk write protected.
+ ||||| ||||||||||||||||||||||+----- Controller fault.
+ ||||| |||||||||||||||||||||+------ Disk seek error.
+ ||||| ||||||||||||||||||||+------- Uncorrectable data error.
+ ||||| |||||||||||||||||||+-------- Disk not on cylinder.
+ ||||| ||||||||||||||||||+--------- Disk drive not ready.
+ ||||| |||||||||||||||||+---------- Alternate track accessed.
+ ||||| ||||||||||||||||+----------- Seek started.
+ ||||| |||||||||||||||+------------ Invalid disk address issued.
+ ||||| ||||||||||||||+------------- Non-existent memory error.
+ ||||| |||||||||||||+-------------- Main memory parity error.
+ ||||| ||||||||||||+--------------- Data compare error.
+ ||||| |||||||||||+---------------- Drive is ready.
+ ||||| ||||||||||+----------------- Operation aborted.
+ ||||| |||||||||+------------------ Tried data strobe early.
+ ||||| ||||||||+------------------- Tried data strobe late.
+ ||||| |||||||+-------------------- Tried track offset plus.
+ ||||| ||||||+--------------------- Tried track offset minus.
+ ||||| |||||+---------------------- Controller performed data correction.
+ ||||| ||||+----------------------- Uncorrected error happened (hard).
+ ||||| |||+------------------------ Corrected error happened (soft).
+ ||||| ||+------------------------- An error happened (hard or soft).
+ ||||| |+-------------------------- Invalid command.
+ ||||+-+--------------------------- unused.
+ |||+------------------------------ DCB aborted by system.
+ ||+------------------------------- Unsuccessful completion.
+ |+-------------------------------- DCB completed.
+ +--------------------------------- DCB started.
+.fi
+.in -3m
+E 2
+I 2
+\fBvd%d: %s controller\fP.
+This message is printed during autoconfiguration to identify
+D 3
+the type of controller, either ``smd'' or ``smde''.
+E 3
+I 3
+the type of controller, either ``VDDC'' or ``SMDE''.
+E 3
+E 2
+.PP
+D 2
+In addition, if the controller is an SMD-E controller then an error code
+will also be printed.  The error codes are:
+.sp 1
+.in +3m
+.nf
+\fICode\fP		\fIMeaning\fP
+
+\fICommand related errors\fP:
+
+01		Bad MDCB pointer
+02		Bad DCB pointer
+03		Invalid command
+04		Invalid disk address
+05		Invalid sector in command
+06		Gap specification error
+07		sector per track error
+08		bytes per sector error
+09		Interleave error
+0A		Invalid head address
+0B		Invalid DMA burst count
+0C		Invalid sector count
+0D		Drive number out of range
+0E		Too many total sectors
+
+
+\fIHard errors\fP:
+
+10		Disk not ready
+11		Seek error
+12		Disk write protected
+13		Unit not selected (command sent to non-existent drive)
+14		Seek error timeout
+15		Fault timeout
+16		Drive faulted
+17		Ready timeout
+18		Data Overrun
+19		No index pulse on write format
+1A		Sector not found
+1B		Retry performed - Soft error
+1C		Invalid sync in data field
+1D		seek timeout error
+1E		Busy timeout
+1F		Not on cylinder
+20		RTZ timeout
+21		Unit not initialized
+22		Seek error
+23		Mapped header error
+24		Header error - Sync word bad
+25		Header error - Wrong cylinder address
+26		Header error - Wrong head address
+27		Header error - Pad word bad
+28		Sector write protected
+2A		Header check sum error
+2B		Alternate track accessed
+2C		Read time-out error
+2D		On-cylinder timeout during offset adjust
+2E		Good header found on defective track
+
+
+\fIDMA transfer errors\fP
+
+30		DMA bus error
+31		DMA parity error
+32		DMA timeout
+
+
+\fIMiscellaneous errors\fP:
+
+40		Track offset minus
+41		Track offset plus
+42		Data strobe early
+43		Data strobe late
+44		Drive ready
+45		Data compare error
+47		Alternate track accessed
+48		Header CRC error
+49		Uncorrectable error
+4A		ECC code error - data field code
+4B		Abort
+4C		Out of buffer space
+4D		Controller performed data correction
+4E		Alternate track accessed
+
+
+\fIPOC related errors\fP
+
+50 - 53		Buffer RAM error (banks 0 - 3)
+54 - 57		Buffer RAM clear error (banks 0 - 3)
+58 - 5B		Event RAM Error (banks 0 - 3)
+5C - 5F		Event RAM clear error (banks 0 - 3)
+60		ROM CRC error
+61		Timer short error
+62		Shared RAM error
+63		Shared RAM clear error
+64		Illegal interupt or exception
+65		Disk sequencer did not initialize
+66		Restart FF did not initialize
+67		Data parity error FF did not initialize
+68		Versabus error FF did not initialize
+69		Unit select panel did not clear
+6A		Versabus interupt pending FF did not clear
+6B		Restart interupt FF did not init
+6C		Timer long error
+
+70		DMA gate array init started
+71		ROM CRC test started
+72		Local RAM test started
+73		Buffer RAM test started
+74		Event RAM test started
+75		SERDES gate array init started
+
+
+\fIIllegal interupts or exceptions\fP
+
+80		Bus error
+81		Address error
+82		Illegal instruction
+83		Divide by zero
+84		CHK instruction
+85		TRAPV instruction
+86		Privileged instruction
+87		Trace trap
+88		Line 1010 emulator
+89		Line 1111 emulator
+8A - 8C		Reserved (1 - 3)
+8D		Uninitialized interupt
+8E		Reserved 4
+8F		Spurious interupt
+91 - 97		"Hot" interupts on lines 1 - 7
+
+.fi
+.in -3m
+E 2
+I 2
+\fBvd%d: init error\fP.
+During autoconfiguration the controller failed to respond to
+an initialize command.
+.PP
+\fBvd%d: diagnostic error\fP.
+During autoconfiguration the controller failed  to respond to
+a diagnostic command.
+.PP
+\fBdk%d: unknown drive type\fP.
+The system was unable to identify the specified drive as
+one of the drives described above; the drive will not be
+configured.
+.PP
+\fBvd%d: drive %d: config error\fP.
+The system encountered a hard error when it tried to configure
+a drive during autoconfiguration.
+.PP
+\fBvd%d: starting drives, wait ... \fP.
+This message indicates the system is about to tell the
+controller to ``start'' the drives attached to  it.
+.PP
+\fBdk%d: %s <ntrak %d, ncyl %d, nsec %d>\fP.
+For each drive recognized during autoconfiguration the system
+prints a message of this form.  The drive type is displayed
+as well as the geometry: tracks/cylinder, cylinders, and sectors/track.
+.PP
+D 3
+\fBvd%d: lost interrupt, status %b, error code %x\fP.
+E 3
+I 3
+\fBvd%d: lost interrupt\fP.
+E 3
+The system failed to receive an interrupt from the controller after
+D 3
+submitting a request.  The error status field of the device control
+block is printed in hexadecimal followed by a symbolic description.
+If this is an smde controller, the error code is also displayed.
+E 3
+I 3
+submitting a request.
+E 3
+The system attempts to abort the current request and simulate an
+interrupt to unwedge the controller.
+I 3
+During processing of the simulated interrupt, a controller error
+will be reported as described below.
+E 3
+.PP
+\fBvd%d: stray interrupt\fP.
+The system received an unexpected interrupt; it is ignored.
+.PP
+D 3
+\fBdk%d%c: hard error sn%d status %b ecode %x\fP.
+An unrecoverable error was encountered.  The sector number reported
+is a physical sector number on the drive.  The error status and code
+are displayed as described previously.  If the drive is write protected,
+``status %b ecode %x'' will not be shown.
+E 3
+I 3
+\fBdk%d%c: write locked\fP.
+An attempt was made to write to a drive that is physically write-protected.
+E 3
+.PP
+D 3
+\fBdk%d%c: soft error sn%d status %b ecode %x\fP.
+A recoverable error was detected by the controller.  The status and
+error code information will not be shown if the controller indicated
+it corrected the error itself.
+E 3
+I 3
+\fBdk%d%c: controller err %sing fsbn %d [of %d-%d] (dk%d bn %d cn %d tn %d sn %d) status %b ecode %x; resetting controller... retrying\fP.
+.br
+\fBdk%d%c: drive err %sing fsbn %d [of %d-%d] (dk%d bn %d cn %d tn %d sn %d) status %b ecode %x; resetting drive... retrying\fP.
+An attempted transfer resulted in a controller or drive error.
+The controller or drive is reset, and the transfer is attempted
+a second time.
+E 3
+.PP
+I 3
+\fBdk%d%c: hard error %sing fsbn %d [of %d-%d] (dk%d bn %d cn %d tn %d sn %d)
+status %b ecode %x\fP.
+An unrecoverable error was encountered.  The filesystem block number reported
+is a logical sector number on the indicated partition;
+it is expressed using 1024-byte sectors.
+If the transfer involved multiple blocks, the block range is printed as well.
+The parenthesized fields list the actual disk sector number
+relative to the beginning of the drive
+(in 512- or 1024-byte blocks, as appropriate),
+as well as the cylinder, track and sector number of the block.
+The error status field of the device control
+block is printed in hexadecimal followed by a symbolic description.
+If this is an SMDE controller, the error code is also displayed.
+.PP
+\fBdk%d%c: soft error %sing fsbn %d [of %d-%d] (dk%d bn %d cn %d tn %d sn %d)
+status %b ecode %x\fP.
+A recoverable error was detected by the controller.
+The fields are interpreted in the same way as those for hard errors.
+.PP
+\fBdk%d%c: soft ecc %sing fsbn %d [of %d-%d] (dk%d bn %d cn %d tn %d sn %d)\fP.
+A recoverable ECC error was detected and corrected by the controller
+during the indicated transfer.
+.PP
+E 3
+\fBvd%d: drive %d: couldn't reset\fP.
+The system was unable to reconfigure a drive during a controller reset.
+.PP
+\fBvd%d: controller timeout\fP.
+The controller failed to complete an operation within a reasonable
+time.  This message is usually followed by another message indicating
+what operation timed out; e.g. ``during config'' for a configuration
+command.
+E 2
+.SH BUGS
+D 2
+.I write
+scribbles on the tail of incomplete blocks.
+E 2
+I 2
+Writes
+scribble on the tail of incomplete blocks.
+.PP
+D 3
+The partition tables for the file systems should be read off of each
+pack, as they are never quite what any single installation would prefer,
+and this would make packs more portable.
+E 3
+I 3
+The system should use real disk sector numbers internally,
+instead of assuming 1024-byte sectors;
+errors should report filesystem block numbers using the actual sector size.
+Raw I/O should be permitted on any sector boundary.
+E 3
+E 2
+E 1

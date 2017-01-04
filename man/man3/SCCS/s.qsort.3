@@ -1,0 +1,85 @@
+h01371
+s 00002/00000/00030
+d D 6.2 87/04/10 11:59:03 bostic 4 3
+c bug report 4.2BSD/lib/51
+e
+s 00001/00001/00029
+d D 6.1 85/05/15 15:44:29 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00007/00026
+d D 5.1 85/05/15 15:44:12 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00033/00000/00000
+d D 4.1 85/05/15 15:43:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH QSORT 3 
+E 2
+I 2
+D 3
+.TH QSORT 3  "19 January 1983"
+E 3
+I 3
+.TH QSORT 3  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+qsort \- quicker sort
+.SH SYNOPSIS
+.nf
+.B qsort(base, nel, width, compar)
+.B char *base;
+.B int (*compar)();
+.fi
+.SH DESCRIPTION
+.I Qsort
+D 2
+is an implementation
+of the quicker-sort algorithm.
+E 2
+I 2
+is an implementation of the quicker-sort algorithm.
+E 2
+The first argument is a pointer to the base of the data;
+the second is the number of elements;
+D 2
+the third is the width of an element
+in bytes;
+E 2
+I 2
+the third is the width of an element in bytes;
+E 2
+the last is the name of the comparison routine
+to be called with two arguments which are pointers
+to the elements being compared.
+D 2
+The routine must return
+an integer less than, equal to, or greater than 0
+E 2
+I 2
+The routine must return an integer less than, equal to, or greater than 0
+E 2
+according as the first argument is to be considered
+less than, equal to, or greater than the second.
+.SH "SEE ALSO"
+sort(1)
+I 4
+.SH BUGS
+The comparison routine may not itself call \fIqsort\fP.
+E 4
+E 1

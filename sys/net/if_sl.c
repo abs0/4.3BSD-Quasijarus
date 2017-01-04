@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if_sl.c	7.9 (Berkeley) 6/27/88
+ *	@(#)if_sl.c	7.15 (Berkeley) 8/5/02
  */
 
 /*
@@ -44,6 +44,7 @@
 #if NSL > 0
 
 #include "param.h"
+#include "conf.h"
 #include "mbuf.h"
 #include "buf.h"
 #include "dkstat.h"
@@ -52,10 +53,12 @@
 #include "file.h"
 #include "tty.h"
 #include "errno.h"
+#include "malloc.h"
 
 #include "if.h"
 #include "netisr.h"
 #include "route.h"
+#include "if_fcs16.h"
 #if INET
 #include "../netinet/in.h"
 #include "../netinet/in_systm.h"
@@ -63,13 +66,15 @@
 #include "../netinet/ip.h"
 #endif
 
+#include "../machine/pte.h"
 #include "../machine/mtpr.h"
 
-/*
- * N.B.: SLMTU is now a hard limit on input packet size.
- * SLMTU must be <= MCLBYTES - sizeof(struct ifnet *).
- */
-#define	SLMTU	1006
+#include "netmon.h"
+
+#define	SLRBUF		2048	/* receive buffer where we accumulate bytes */
+#define	SLMRU		(SLRBUF-2)	/* maximum receive unit */
+#define	SLMAXMTU	SLMRU	/* largest MTU settable with SIOCSIFMTU */
+#define	SLDEFMTU	1500	/* de facto Internet standard */
 #define	SLIP_HIWAT	1000	/* don't start a new packet if HIWAT on queue */
 #define	CLISTRESERVE	1000	/* Can't let clists get too low */
 
@@ -84,6 +89,7 @@ struct sl_softc {
 
 /* flags */
 #define	SC_ESCAPED	0x0001	/* saw a FRAME_ESCAPE */
+#define	SC_OVFLO	0x0002	/* receive buffer overflow */
 
 #define FRAME_END	 	0300		/* Frame End */
 #define FRAME_ESCAPE		0333		/* Frame Esc */
@@ -105,8 +111,8 @@ slattach()
 	for (sc = sl_softc; i < NSL; sc++) {
 		sc->sc_if.if_name = "sl";
 		sc->sc_if.if_unit = i++;
-		sc->sc_if.if_mtu = SLMTU;
-		sc->sc_if.if_flags = IFF_POINTOPOINT;
+		sc->sc_if.if_mtu = SLDEFMTU;
+		sc->sc_if.if_flags = IFF_POINTOPOINT | IFF_NOFCS;
 		sc->sc_if.if_ioctl = slioctl;
 		sc->sc_if.if_output = sloutput;
 		sc->sc_if.if_snd.ifq_maxlen = IFQ_MAXLEN;
@@ -116,34 +122,55 @@ slattach()
 
 /*
  * Line specific open routine.
- * Attach the given tty to the first available sl unit.
+ * The SLIP line discipline cannot be opened this way.
  */
 /* ARGSUSED */
 slopen(dev, tp)
 	dev_t dev;
 	register struct tty *tp;
 {
-	register struct sl_softc *sc;
+	/* Are we called by open or by TIOCSETD? */
+	if (tp->t_line == SLIPDISC)	/* by open (must be already in use) */
+		return (EBUSY);		/* tell them we are busy */
+	else				/* by TIOCSETD */
+		return (ENOTTY);	/* tell them they can't do this */
+}
+
+/*
+ * Attach the given tty to the specified sl unit.
+ */
+/* ARGSUSED */
+sltattach(dev, tp, nsl)
+	dev_t dev;
+	register struct tty *tp;
 	register int nsl;
+{
+	register struct sl_softc *sc;
+	int s;
 
 	if (!suser())
 		return (EPERM);
-	if (tp->t_line == SLIPDISC)
+	if (nsl >= NSL)
+		return (ENXIO);
+	sc = &sl_softc[nsl];
+	if (tp->t_line == SLIPDISC && tp->t_sc &&
+	    (struct sl_softc*) tp->t_sc != sc)
 		return (EBUSY);
+	if (sc->sc_ttyp && sc->sc_ttyp != tp)
+		return (EBUSY);
+	sc->sc_flags = 0;
+	sc->sc_ilen = 0;
+	if (slinit(sc) == 0)
+		return (ENOBUFS);
+	sc->sc_ttyp = tp;
 
-	for (nsl = 0, sc = sl_softc; nsl < NSL; nsl++, sc++)
-		if (sc->sc_ttyp == NULL) {
-			sc->sc_flags = 0;
-			sc->sc_ilen = 0;
-			if (slinit(sc) == 0)
-				return (ENOBUFS);
-			tp->t_sc = (caddr_t)sc;
-			sc->sc_ttyp = tp;
-			ttyflush(tp, FREAD | FWRITE);
-			return (0);
-		}
+	s = spltty();
+	ttyflush(tp, FREAD | FWRITE);
+	tp->t_line = SLIPDISC;
+	tp->t_sc = (caddr_t)sc;
+	splx(s);
 
-	return (ENXIO);
+	return (0);
 }
 
 /*
@@ -157,18 +184,18 @@ slclose(tp)
 	register struct sl_softc *sc;
 	int s;
 
-	ttywflush(tp);
-	tp->t_line = 0;
 	s = splimp();		/* paranoid; splnet probably ok */
 	sc = (struct sl_softc *)tp->t_sc;
 	if (sc != NULL) {
 		if_down(&sc->sc_if);
 		sc->sc_ttyp = NULL;
 		tp->t_sc = NULL;
-		MCLFREE((struct mbuf *)sc->sc_buf);
+		free(sc->sc_buf, M_DEVBUF);
 		sc->sc_buf = 0;
 	}
 	splx(s);
+	tp->t_line = 0;
+	ttywflush(tp);
 }
 
 /*
@@ -180,8 +207,7 @@ sltioctl(tp, cmd, data, flag)
 	struct tty *tp;
 	caddr_t data;
 {
-
-	if (cmd == TIOCGETD) {
+	if (cmd == TIOCGETIF) {
 		*(int *)data = ((struct sl_softc *)tp->t_sc)->sc_if.if_unit;
 		return (0);
 	}
@@ -211,14 +237,17 @@ sloutput(ifp, m, dst)
 	}
 
 	sc = &sl_softc[ifp->if_unit];
-	if (sc->sc_ttyp == NULL) {
+	if (!(ifp->if_flags & IFF_UP) || sc->sc_ttyp == NULL ||
+	    !(sc->sc_ttyp->t_state & TS_CARR_ON)) {
 		m_freem(m);
-		return (ENETDOWN);	/* sort of */
+		return (ENETDOWN);
 	}
-	if ((sc->sc_ttyp->t_state & TS_CARR_ON) == 0) {
+
+	if (!(ifp->if_flags & IFF_NOFCS) && ccitt_addfcs16(m)) {
 		m_freem(m);
-		return (EHOSTUNREACH);
+		return (ENOBUFS);
 	}
+
 	s = splimp();
 	if (IF_QFULL(&ifp->if_snd)) {
 		IF_DROP(&ifp->if_snd);
@@ -273,7 +302,8 @@ slstart(tp)
 		 * If system is getting low on clists
 		 * and we have something running already, stop here.
 		 */
-		if (cfreecount < CLISTRESERVE + SLMTU && tp->t_outq.c_cc)
+		if (cfreecount < CLISTRESERVE + sc->sc_if.if_mtu &&
+		    tp->t_outq.c_cc)
 			return;
 
 		/*
@@ -355,14 +385,13 @@ slstart(tp)
 slinit(sc)
 	register struct sl_softc *sc;
 {
-	struct mbuf *p;
+	caddr_t p;
 
 	if (sc->sc_buf == (char *) 0) {
-		MCLALLOC(p, 1);
-		if (p) {
-			sc->sc_buf = (char *)p;
-			sc->sc_mp = sc->sc_buf + sizeof(struct ifnet *);
-		} else {
+		p = (caddr_t) malloc(SLRBUF, M_DEVBUF, M_NOWAIT);
+		if (p)
+			sc->sc_buf = sc->sc_mp = p;
+		else {
 			printf("sl%d: can't allocate buffer\n", sc - sl_softc);
 			sc->sc_if.if_flags &= ~IFF_UP;
 			return (0);
@@ -373,67 +402,94 @@ slinit(sc)
 
 /*
  * Copy data buffer to mbuf chain; add ifnet pointer ifp.
+ * Meticulously stolen from if_ubaget.
  */
 struct mbuf *
-sl_btom(sc, len, ifp)
+sl_btom(sc, totlen, ifp)
 	struct sl_softc *sc;
-	register int len;
+	register int totlen;
 	struct ifnet *ifp;
 {
-	register caddr_t cp;
-	register struct mbuf *m, **mp;
-	register unsigned count;
-	struct mbuf *top = NULL;
+	struct mbuf *top, **mp;
+	register struct mbuf *m;
+	int len;
+	register caddr_t cp = sc->sc_buf, pp;
 
-	cp = sc->sc_buf + sizeof(struct ifnet *);
+	top = 0;
 	mp = &top;
-	while (len > 0) {
+	while (totlen > 0) {
 		MGET(m, M_DONTWAIT, MT_DATA);
-		if ((*mp = m) == NULL) {
+		if (m == 0) {
 			m_freem(top);
-			return (NULL);
+			top = 0;
+			goto out;
 		}
-		if (ifp)
-			m->m_off += sizeof(ifp);
-		/*
-		 * If we have at least NBPG bytes,
-		 * allocate a new page.  Swap the current buffer page
-		 * with the new one.  We depend on having a space
-		 * left at the beginning of the buffer
-		 * for the interface pointer.
-		 */
-		if (len >= NBPG) {
-			MCLGET(m);
-			if (m->m_len == MCLBYTES) {
-				cp = mtod(m, char *);
-				m->m_off = (int)sc->sc_buf - (int)m;
-				sc->sc_buf = cp;
-				if (ifp) {
-					m->m_off += sizeof(ifp);
-					count = MIN(len,
-					    MCLBYTES - sizeof(struct ifnet *));
-				} else
-					count = MIN(len, MCLBYTES);
-				goto nocopy;
+		len = totlen;
+		if (len >= CLBYTES/2) {
+			struct pte *cpte, *ppte;
+			int i;
+
+			/*
+			 * If doing the first mbuf and
+			 * the interface pointer hasn't been put in,
+			 * put it in a separate mbuf to preserve alignment.
+			 */
+			if (ifp) {
+				len = 0;
+				goto nopage;
 			}
+			MCLGET(m);
+			if (m->m_len != CLBYTES)
+				goto nopage;
+			m->m_len = MIN(len, CLBYTES);
+			if (!claligned(cp))
+				goto copy;
+
+			/*
+			 * Switch pages mapped to the receive buffer with new
+			 * page pp, as quick form of copy.
+			 */
+			pp = mtod(m, char *);
+			cpte = kvtopte(cp);
+			ppte = kvtopte(pp);
+			for (i = 0; i < CLSIZE; i++) {
+				struct pte t;
+				t = *ppte; *ppte++ = *cpte; *cpte++ = t;
+				mtpr(TBIS, cp);
+				cp += NBPG;
+				mtpr(TBIS, (caddr_t)pp);
+				pp += NBPG;
+			}
+			goto nocopy;
 		}
-		if (ifp)
-			count = MIN(len, MLEN - sizeof(ifp));
-		else
-			count = MIN(len, MLEN);
-		bcopy(cp, mtod(m, caddr_t), count);
-nocopy:
-		m->m_len = count;
+nopage:
+		m->m_off = MMINOFF;
 		if (ifp) {
-			m->m_off -= sizeof(ifp);
-			m->m_len += sizeof(ifp);
-			*mtod(m, struct ifnet **) = ifp;
-			ifp = NULL;
-		}
-		cp += count;
-		len -= count;
+			/*
+			 * Leave room for ifp.
+			 */
+			m->m_len = MIN(MLEN - sizeof(ifp), len);
+			m->m_off += sizeof(ifp);
+		} else 
+			m->m_len = MIN(MLEN, len);
+copy:
+		bcopy(cp, mtod(m, caddr_t), (unsigned)m->m_len);
+		cp += m->m_len;
+nocopy:
+		*mp = m;
 		mp = &m->m_next;
+		totlen -= m->m_len;
+		if (ifp) {
+			/*
+			 * Prepend interface pointer to first mbuf.
+			 */
+			m->m_len += sizeof(ifp);
+			m->m_off -= sizeof(ifp);
+			*(mtod(m, struct ifnet **)) = ifp;
+			ifp = (struct ifnet *)0;
+		}
 	}
+out:
 	return (top);
 }
 
@@ -468,7 +524,7 @@ slinput(c, tp)
 
 		default:
 			sc->sc_if.if_ierrors++;
-			sc->sc_mp = sc->sc_buf + sizeof(struct ifnet *);
+			sc->sc_mp = sc->sc_buf;
 			sc->sc_ilen = 0;
 			return;
 		}
@@ -478,13 +534,30 @@ slinput(c, tp)
 		case FRAME_END:
 			if (sc->sc_ilen == 0)	/* ignore */
 				return;
+			if (sc->sc_flags & SC_OVFLO) {
+				sc->sc_flags &= ~SC_OVFLO;
+				sc->sc_if.if_ierrors++;
+				sc->sc_mp = sc->sc_buf;
+				sc->sc_ilen = 0;
+				return;
+			}
+			if (!(sc->sc_if.if_flags & IFF_NOFCS)) {
+				if (sc->sc_ilen < 3 ||
+				    ccitt_fcs16check(sc->sc_buf, sc->sc_ilen)) {
+					sc->sc_if.if_ierrors++;
+					sc->sc_mp = sc->sc_buf;
+					sc->sc_ilen = 0;
+					return;
+				}
+				sc->sc_ilen -= 2;
+			}
 			m = sl_btom(sc, sc->sc_ilen, &sc->sc_if);
+			sc->sc_mp = sc->sc_buf;
+			sc->sc_ilen = 0;
 			if (m == NULL) {
 				sc->sc_if.if_ierrors++;
 				return;
 			}
-			sc->sc_mp = sc->sc_buf + sizeof(struct ifnet *);
-			sc->sc_ilen = 0;
 			sc->sc_if.if_ipackets++;
 			s = splimp();
 			if (IF_QFULL(&ipintrq)) {
@@ -503,13 +576,42 @@ slinput(c, tp)
 			return;
 		}
 	}
-	if (++sc->sc_ilen > SLMTU) {
-		sc->sc_if.if_ierrors++;
-		sc->sc_mp = sc->sc_buf + sizeof(struct ifnet *);
-		sc->sc_ilen = 0;
+	if (sc->sc_ilen >= SLRBUF) {
+		sc->sc_flags |= SC_OVFLO;
 		return;
 	}
 	*sc->sc_mp++ = c;
+	sc->sc_ilen++;
+}
+
+/*
+ * Handle modem control transition on a tty.
+ * Flag indicates new state of carrier.
+ * Returns 0 if the line should be turned off, otherwise 1.
+ *
+ * Supposed to be called at spltty, but we just need splnet or above.
+ */
+slmodem(tp, flag)
+	register struct tty *tp;
+	int flag;
+{
+	register struct sl_softc *sc;
+
+	sc = (struct sl_softc *) tp->t_sc;
+	if (flag) {
+		tp->t_state |= TS_CARR_ON;
+		if (sc) {
+			sc->sc_if.if_flags |= IFF_UP;
+#if NNETMON > 0
+			netmon_ifevent(&sc->sc_if);
+#endif
+		}
+	} else {
+		tp->t_state &= ~TS_CARR_ON;
+		if (sc)
+			if_down((struct ifnet *) sc);
+	}
+	return(flag);
 }
 
 /*
@@ -521,20 +623,50 @@ slioctl(ifp, cmd, data)
 	caddr_t data;
 {
 	register struct ifaddr *ifa = (struct ifaddr *)data;
+	struct ifreq *ifr;
+	register struct tty *tp;
 	int s = splimp(), error = 0;
 
 	switch (cmd) {
 
 	case SIOCSIFADDR:
-		if (ifa->ifa_addr.sa_family == AF_INET)
+		if (ifa->ifa_addr.sa_family == AF_INET) {
 			ifp->if_flags |= IFF_UP;
-		else
+			if (tp = ((struct sl_softc *) ifp)->sc_ttyp)
+				(*cdevsw[major(tp->t_dev)].d_ioctl)
+					(tp->t_dev, TIOCSDTR);
+		} else
 			error = EAFNOSUPPORT;
 		break;
 
 	case SIOCSIFDSTADDR:
 		if (ifa->ifa_addr.sa_family != AF_INET)
 			error = EAFNOSUPPORT;
+		break;
+
+	case SIOCSIFFLAGS:
+		if (ifp->if_flags & IFF_UP) {
+			if (tp = ((struct sl_softc *) ifp)->sc_ttyp)
+				(*cdevsw[major(tp->t_dev)].d_ioctl)
+					(tp->t_dev, TIOCSDTR);
+		} else {
+			if (tp = ((struct sl_softc *) ifp)->sc_ttyp)
+				(*cdevsw[major(tp->t_dev)].d_ioctl)
+					(tp->t_dev, TIOCCDTR);
+		}
+		break;
+
+	case SIOCSIFMTU:
+		ifr = (struct ifreq *) data;
+		if (ifr->ifr_mtu < IF_MINMTU) {
+			error = EINVAL;
+			break;
+		}
+		if (ifr->ifr_mtu > SLMAXMTU) {
+			error = EINVAL;
+			break;
+		}
+		ifp->if_mtu = ifr->ifr_mtu;
 		break;
 
 	default:

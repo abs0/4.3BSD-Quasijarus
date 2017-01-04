@@ -1,0 +1,45 @@
+h02025
+s 00001/00001/00024
+d D 6.1 85/05/15 16:29:35 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00025/00000/00000
+d D 5.1 85/05/15 16:29:28 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SLEEP 3F "13 June 1983"
+E 2
+I 2
+.TH SLEEP 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+sleep \- suspend execution for an interval
+.SH SYNOPSIS
+.B subroutine sleep (itime)
+.SH DESCRIPTION
+.I Sleep
+causes the calling process to be suspended for
+.I itime
+seconds.
+The actual time can be up to 1 second less than
+.I itime
+due to granularity in system timekeeping.
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.SH "SEE ALSO"
+sleep(3)
+E 1

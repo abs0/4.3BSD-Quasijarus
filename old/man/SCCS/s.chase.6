@@ -1,0 +1,65 @@
+h31555
+s 00001/00001/00032
+d D 6.1 85/05/20 17:24:36 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00002/00032
+d D 5.1 85/05/20 17:23:12 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00034/00000/00000
+d D 4.1 85/05/20 17:22:27 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHASE 6 4/1/81
+E 2
+I 2
+D 3
+.TH CHASE 6 "1 April 1981"
+E 3
+I 3
+.TH CHASE 6 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+chase \- Try to escape to killer robots
+.SH SYNOPSIS
+.B /usr/games/chase
+[
+.I nrobots
+] [
+.I nfences
+]
+.SH DESCRIPTION
+.PP
+The object of the game chase is to move around inside of the box on the
+screen without getting eaten by the robots chasing and without running
+into anything.
+.PP
+If a robot runs into another robot while chasing you, they crash and leave
+a junk heap.  If a robot runs into a fence, it is destroyed.
+.PP
+If you can survive until all the robots are destroyed, you have won!
+.PP
+If you do not specify either
+.I nrobots
+or
+.I nfences,
+chase will prompt you for them.
+D 2
+.SH BUGS
+E 2
+E 1

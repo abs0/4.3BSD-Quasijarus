@@ -3,22 +3,20 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 5/27/86
+#	@(#)Makefile	6.2 (Berkeley) 10/23/04
 #
 SRCS=	edittut.ms
-MACROS=	-msU
-PRINTER=Pdp
-TBL=	dtbl -${PRINTER}
-TROFF=	ditroff -${PRINTER}
+MACROS=	-ms
+TBL=	tbl
+TROFF=	pstroff
 
-paper:	paper.${PRINTER}
-	lpr -${PRINTER} -n paper.${PRINTER}
+all:	paper.ps
 
-paper.${PRINTER}: ${SRCS}
-	${TBL} ${SRCS} | ${TROFF} ${MACROS} -t > paper.${PRINTER}
+paper.ps: ${SRCS}
+	${TROFF} ${MACROS} ${SRCS} > $@
 
 clean:
-	rm -f paper.[PT]* *.spell errs Errs make.out
+	rm -f *.ps *.spell errs Errs make.out
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \
@@ -30,5 +28,5 @@ spell:	${SRCS}
 # rather than section numbers.  if you have a typesetter
 # you should just use the index in edit.tut, and ignore editvindex.
 
-editvindex:
-	${TROFF} ${MACROS} -n22 edit.vindex
+#editvindex:
+#	${TROFF} ${MACROS} -n22 edit.vindex

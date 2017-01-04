@@ -1,0 +1,52 @@
+h62372
+s 00001/00001/00022
+d D 6.1 85/04/29 20:08:34 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00022
+d D 5.1 85/04/29 20:07:57 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00023/00000/00000
+d D 4.1 85/04/29 20:07:38 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FILE 1 
+E 2
+I 2
+D 3
+.TH FILE 1  "18 January 1983"
+E 3
+I 3
+.TH FILE 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+file \- determine file type
+.SH SYNOPSIS
+.B file
+file ...
+.SH DESCRIPTION
+.I File
+performs a series of tests on each argument
+in an attempt to classify it.
+If an argument appears to be ascii,
+.I file
+examines the first 512 bytes
+and tries to guess its language.
+.SH BUGS
+It often makes mistakes.
+In particular it often suggests that
+command files are C programs.
+.PP
+Does not recognize Pascal or LISP.
+E 1

@@ -1,0 +1,143 @@
+h33418
+s 00002/00002/00033
+d D 6.5 86/05/12 17:11:56 karels 7 6
+c intro(3M) => math(3M), move see also's to end
+e
+s 00007/00001/00028
+d D 6.4 85/09/11 18:52:50 mckusick 6 5
+c new from Kahan
+e
+s 00008/00007/00021
+d D 6.3 85/08/21 15:26:22 miriam 5 4
+c Revision by Prof. Kahan.
+e
+s 00008/00005/00020
+d D 6.2 85/05/24 12:12:12 miriam 4 3
+c From Prof. Kahan
+e
+s 00001/00001/00024
+d D 6.1 85/05/15 15:05:01 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00005/00022
+d D 5.1 85/05/15 15:04:55 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00027/00000/00000
+d D 4.1 85/05/15 15:04:49 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+D 4
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SINH 3M
+E 2
+I 2
+D 3
+.TH SINH 3M "19 January 1983"
+E 3
+I 3
+.TH SINH 3M "%Q%"
+E 3
+E 2
+.AT 3
+E 4
+I 4
+D 5
+.TH SINH 3M "8 May 1985"
+E 5
+I 5
+D 6
+.TH SINH 3M "7 August 1985"
+E 6
+I 6
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH SINH 3M  "%Q%"
+E 6
+E 5
+.UC 4
+E 4
+.SH NAME
+sinh, cosh, tanh \- hyperbolic functions
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double sinh(x)
+I 4
+.B double x;
+E 4
+.PP
+.B double cosh(x)
+.B double x;
+.PP
+.B double tanh(x)
+.B double x;
+.fi
+.SH DESCRIPTION
+D 2
+These functions compute the designated hyperbolic functions
+for real arguments.
+E 2
+I 2
+These functions compute the designated hyperbolic functions for real arguments.
+I 4
+D 7
+.SH SEE ALSO
+D 5
+intro(3M)
+E 5
+I 5
+intro(3M), infnan(3M)
+E 7
+.SH ERROR (due to Roundoff etc.)
+Below 2.4 \fIulp\fRs; an \fIulp\fR is one \fIU\fRnit in the \fIL\fRast
+\fIP\fRlace.
+E 5
+E 4
+E 2
+.SH DIAGNOSTICS
+D 5
+.I Sinh
+and
+.I cosh
+D 2
+return a huge value of appropriate sign
+when the correct value would overflow.
+E 2
+I 2
+D 4
+return a huge value of appropriate sign when the correct value would overflow.
+E 4
+I 4
+return the reserved operand on the VAX if the correct value would overflow.
+E 5
+I 5
+Sinh and cosh return the reserved operand on a VAX if
+the correct value would overflow.
+I 7
+.SH SEE ALSO
+math(3M), infnan(3M)
+E 7
+E 5
+.SH AUTHOR
+D 5
+W. Kahan, Kwok-Choi Ng
+E 5
+I 5
+W. Kahan, Kwok\-Choi Ng
+E 5
+E 4
+E 2
+E 1

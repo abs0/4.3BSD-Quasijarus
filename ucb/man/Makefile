@@ -14,54 +14,45 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.5 (Berkeley) 6/29/88
+#	@(#)Makefile	5.6 (Berkeley) 10/20/04
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
-ASRCS=	apropos.c
-MSRCS=	man.c
+SRCS=	man.c
 
-all: man apropos
+all: man
 
-apropos: ${LIBC}
-	${CC} -o $@ ${CFLAGS} ${ASRCS}
-
-man: ${LIBC}
-	${CC} -o $@ ${CFLAGS} ${MSRCS}
+man: ${SRCS} ${LIBC}
+	${CC} -o $@ ${CFLAGS} ${SRCS}
 
 clean: FRC
-	rm -f core apropos man
+	rm -f core a.out errs man
 
 depend: FRC
-	mkdep -p ${CFLAGS} ${ASRCS} ${MSRCS}
+	mkdep -p ${CFLAGS} ${SRCS}
 
 install: FRC
 	rm -f ${DESTDIR}/usr/ucb/whatis ${DESTDIR}/usr/ucb/apropos
-	install -s -o bin -g bin -m 755 apropos ${DESTDIR}/usr/ucb/apropos
 	install -s -o bin -g bin -m 755 man ${DESTDIR}/usr/ucb/man
-	ln ${DESTDIR}/usr/ucb/apropos ${DESTDIR}/usr/ucb/whatis
+	ln ${DESTDIR}/usr/ucb/man ${DESTDIR}/usr/ucb/whatis
+	ln ${DESTDIR}/usr/ucb/man ${DESTDIR}/usr/ucb/apropos
 
 lint: FRC
-	lint ${CFLAGS} ${ASRCS}
-	lint ${CFLAGS} ${MSRCS}
+	lint ${CFLAGS} ${SRCS}
 
 tags: FRC
-	ctags ${ASRCS}
-	ctags ${MSRCS}
-	sort -o tags tags
+	ctags ${SRCS}
 
 FRC:
 
 # DO NOT DELETE THIS LINE -- mkdep uses it.
 # DO NOT PUT ANYTHING AFTER THIS LINE, IT WILL GO AWAY.
 
-apropos: apropos.c /usr/include/sys/param.h /usr/include/sys/types.h
-apropos: /usr/include/signal.h /usr/include/machine/trap.h
-apropos: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-apropos: /usr/include/stdio.h /usr/include/ctype.h /usr/include/strings.h
-man: man.c /usr/include/sys/param.h /usr/include/sys/types.h
-man: /usr/include/signal.h /usr/include/machine/trap.h
+man: man.c /usr/include/stdio.h /usr/include/ctype.h /usr/include/sgtty.h
+man: /usr/include/sys/ioctl.h /usr/include/sys/ttychars.h
+man: /usr/include/sys/ttydev.h /usr/include/sys/param.h
+man: /usr/include/sys/types.h /usr/include/signal.h /usr/include/machine/trap.h
 man: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-man: /usr/include/sys/file.h /usr/include/stdio.h /usr/include/ctype.h
+man: /usr/include/sys/stat.h /usr/include/signal.h /usr/include/strings.h
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

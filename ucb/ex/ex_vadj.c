@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vadj.c	7.10 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_vadj.c	7.11 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -348,7 +348,7 @@ vopenup(cnt, could, l)
 vadjAL(p, cnt)
 	int p, cnt;
 {
-	char *tlines[TUBELINES];
+	u_char *tlines[TUBELINES];
 	register int from, to;
 
 #ifdef ADEBUG
@@ -439,7 +439,7 @@ vscroll(cnt)
 	register int cnt;
 {
 	register int from, to;
-	char *tlines[TUBELINES];
+	u_char *tlines[TUBELINES];
 
 #ifdef ADEBUG
 	if (trace)
@@ -514,7 +514,7 @@ vscrap()
  * Handle notification on large changes.
  */
 vrepaint(curs)
-	char *curs;
+	u_char *curs;
 {
 
 	wdot = NOLINE;
@@ -608,7 +608,7 @@ vredraw(p)
 {
 	register int l;
 	register line *tp;
-	char temp[LBSIZE];
+	u_char temp[LBSIZE];
 	bool anydl = 0;
 	short oldhold = hold;
 
@@ -773,7 +773,7 @@ vdellin(p, cnt, l)
 vadjDL(p, cnt)
 	int p, cnt;
 {
-	char *tlines[TUBELINES];
+	u_char *tlines[TUBELINES];
 	register int from, to;
 
 #ifdef ADEBUG
@@ -823,7 +823,7 @@ vsync1(p)
 	register int p;
 {
 	register int l;
-	char temp[LBSIZE];
+	u_char temp[LBSIZE];
 	register struct vlinfo *vp = &vlinfo[0];
 	short oldhold = hold;
 

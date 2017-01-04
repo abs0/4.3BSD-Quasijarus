@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_addr.c	7.4 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_addr.c	7.5 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -133,7 +133,7 @@ setnoaddr()
  */
 line *
 address(inline)
-	char *inline;
+	u_char *inline;
 {
 	register line *addr;
 	register int offset, c;
@@ -209,7 +209,7 @@ address(inline)
 					}
 					break;
 				} else if (loc1 < inline) {
-					char *last;
+					u_char *last;
 doques:
 
 					do {

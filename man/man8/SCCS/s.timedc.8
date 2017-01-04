@@ -1,0 +1,173 @@
+h29779
+s 00010/00005/00084
+d D 6.3 88/07/09 11:32:10 bostic 5 4
+c install approved copyright notice
+e
+s 00008/00003/00081
+d D 6.2 87/12/23 14:31:46 bostic 4 3
+c add Berkeley header; NASA wants it
+e
+s 00000/00000/00084
+d D 6.1 86/05/28 11:42:42 karels 3 2
+c out
+e
+s 00011/00010/00073
+d D 1.2 86/05/28 10:31:00 karels 2 1
+c updates and cleanups
+e
+s 00083/00000/00000
+d D 1.1 85/06/24 13:27:26 gusella 1 0
+c date and time created 85/06/24 13:27:26 by gusella
+e
+u
+U
+t
+T
+I 1
+D 4
+
+E 4
+.\" Copyright (c) 1980 Regents of the University of California.
+D 4
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 4
+I 4
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 5
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 5
+I 5
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 5
+E 4
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH TIMEDC 8 "%Q%"
+.UC 6
+.ad
+.SH NAME
+timedc \- timed control program
+.SH SYNOPSIS
+.B /etc/timedc
+[ command [ argument ... ] ]
+.SH DESCRIPTION
+.I Timedc
+is used to control the operation of the \fItimed\fP program.
+It may be used to:
+.IP \(bu
+measure the differences between machines' clocks,
+.IP \(bu
+D 2
+find the location where the master timed is running,
+E 2
+I 2
+find the location where the master time server is running,
+E 2
+.IP \(bu
+D 2
+cause election timers on several machines to expire at the same time,
+E 2
+I 2
+enable or disable tracing of messages received by \fItimed\fP, and
+E 2
+.IP \(bu
+D 2
+enable or disable tracing of messages received by \fItimed\fP.
+E 2
+I 2
+perform various debugging actions.
+E 2
+.PP
+Without any arguments,
+.I timedc
+will prompt for commands from the standard input.
+If arguments are supplied,
+.IR timedc
+interprets the first argument as a command and the remaining
+arguments as parameters to the command.  The standard input
+may be redirected causing
+.I timedc
+to read commands from a file.
+Commands may be abbreviated;
+recognized commands are:
+.TP
+? [ command ... ]
+.TP
+help [ command ... ]
+.br
+Print a short description of each command specified in the argument list,
+or, if no arguments are given, a list of the recognized commands.
+.TP
+clockdiff host ...
+.br
+Compute the differences between the clock of the host machine
+and the clocks of the machines given as arguments.
+.TP
+D 2
+testing host ...
+E 2
+I 2
+trace { on | off }
+E 2
+.br
+D 2
+Cause timed election timers to expire in the specified
+hosts. It is used to test the election algorithm.
+.TP
+tracing { on | off }
+.br
+E 2
+Enable or disable the tracing of incoming messages to \fItimed\fP
+in the file /usr/adm/timed.log.
+.TP
+quit
+.br
+Exit from timedc.
+I 2
+.PP
+Other commands may be included for use in testing and debugging
+.IR timed ;
+the help command and
+the program source may be consulted for details.
+E 2
+.SH FILES
+.nf
+.ta \w'/usr/adm/masterlog       'u
+/usr/adm/timed.log		tracing file for timed
+/usr/adm/timed.masterlog	log file for master timed
+.fi
+.SH "SEE ALSO"
+D 2
+date(1), adjtime(2), timed(8), 
+E 2
+I 2
+date(1), adjtime(2), icmp(4P), timed(8), 
+.br
+E 2
+\fITSP: The Time Synchronization Protocol for UNIX 4.3BSD\fP, 
+R. Gusella and S. Zatti
+.SH DIAGNOSTICS
+.nf
+.ta \w'?Ambiguous command      'u
+?Ambiguous command	abbreviation matches more than one command
+?Invalid command	no match found
+?Privileged command	command can be executed by root only
+.fi
+E 1

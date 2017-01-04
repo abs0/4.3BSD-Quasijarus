@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)ftpcmd.y	5.11 (Berkeley) 6/18/88
+ *	@(#)ftpcmd.y	5.17 (Berkeley) 4/16/11
  */
 
 /*
@@ -25,10 +25,11 @@
 %{
 
 #ifndef lint
-static char sccsid[] = "@(#)ftpcmd.y	5.11 (Berkeley) 6/18/88";
+static char sccsid[] = "@(#)ftpcmd.y	5.17 (Berkeley) 4/16/11";
 #endif /* not lint */
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/socket.h>
 
 #include <netinet/in.h>
@@ -37,15 +38,18 @@ static char sccsid[] = "@(#)ftpcmd.y	5.11 (Berkeley) 6/18/88";
 
 #include <stdio.h>
 #include <signal.h>
+#include <errno.h>
 #include <ctype.h>
 #include <pwd.h>
 #include <setjmp.h>
 #include <syslog.h>
 
+extern	int errno;
+extern	char *sys_errlist[];
+
 extern	struct sockaddr_in data_dest;
 extern	int logged_in;
 extern	struct passwd *pw;
-extern	int guest;
 extern	int logging;
 extern	int type;
 extern	int form;
@@ -53,12 +57,13 @@ extern	int debug;
 extern	int timeout;
 extern  int pdata;
 extern	char hostname[];
-extern	char *globerr;
 extern	int usedefault;
-extern	int unique;
 extern  int transflag;
 extern  char tmpline[];
-char	**glob();
+extern  char **guestdirs;
+extern  int nguestdirs;
+extern	int longlist;
+extern	int chrooted;
 
 static	int cmd_type;
 static	int cmd_form;
@@ -99,31 +104,7 @@ cmd_list:	/* empty */
 
 cmd:		USER SP username CRLF
 		= {
-			extern struct passwd *getpwnam();
-
-			logged_in = 0;
-			if (strcmp((char *) $3, "ftp") == 0 ||
-			  strcmp((char *) $3, "anonymous") == 0) {
-				if ((pw = getpwnam("ftp")) != NULL) {
-					guest = 1;
-					reply(331,
-				  "Guest login ok, send ident as password.");
-				}
-				else {
-					reply(530, "User %s unknown.", $3);
-				}
-			} else if (checkuser((char *) $3)) {
-				guest = 0;
-				pw = getpwnam((char *) $3);
-				if (pw == NULL) {
-					reply(530, "User %s unknown.", $3);
-				}
-				else {
-				    reply(331, "Password required for %s.", $3);
-				}
-			} else {
-				reply(530, "User %s access denied.", $3);
-			}
+			user((char *) $3);
 			free((char *) $3);
 		}
 	|	PASS SP password CRLF
@@ -226,25 +207,33 @@ cmd:		USER SP username CRLF
 		}
 	|	NLST check_login CRLF
 		= {
+			longlist = 0;
 			if ($2)
-				retrieve("/bin/ls", "");
+				list(NULL, 0);
 		}
 	|	NLST check_login SP pathname CRLF
 		= {
+			struct stat st;
+
+			longlist = 0;
 			if ($2 && $4 != NULL)
-				retrieve("/bin/ls %s", (char *) $4);
+				list($4, 0);
 			if ($4 != NULL)
 				free((char *) $4);
 		}
 	|	LIST check_login CRLF
 		= {
+			longlist = 1;
 			if ($2)
-				retrieve("/bin/ls -lg", "");
+				list(NULL, 1);
 		}
 	|	LIST check_login SP pathname CRLF
 		= {
+			struct stat st;
+
+			longlist = 1;
 			if ($2 && $4 != NULL)
-				retrieve("/bin/ls -lg %s", (char *) $4);
+				list($4, 1);
 			if ($4 != NULL)
 				free((char *) $4);
 		}
@@ -321,9 +310,7 @@ cmd:		USER SP username CRLF
 	|	STOU check_login SP pathname CRLF
 		= {
 			if ($2 && $4 != NULL) {
-				unique++;
-				store((char *) $4, "w");
-				unique = 0;
+				store((char *) $4, "u");
 			}
 			if ($4 != NULL)
 				free((char *) $4);
@@ -460,18 +447,30 @@ mode_code:	S
 
 pathname:	pathstring
 	= {
-		/*
-		 * Problem: this production is used for all pathname
-		 * processing, but only gives a 550 error reply.
-		 * This is a valid reply in some cases but not in others.
-		 */
-		if ($1 && strncmp((char *) $1, "~", 1) == 0) {
-			$$ = (int)*glob((char *) $1);
-			if (globerr != NULL) {
-				reply(550, globerr);
-				$$ = NULL;
-			}
-			free((char *) $1);
+		if ($1 && *((char *) $1) == '~' && !chrooted) {
+			char *user, *tail, *buf;
+			struct passwd *upw;
+			extern char *malloc(), *index();
+
+			user = ((char *) $1) + 1;
+			tail = index(user, '/');
+			if (tail)
+				*tail = '\0';
+			upw = *user ? getpwnam(user) : pw;
+			if (tail)
+				*tail = '/';
+			if (upw) {
+				buf = malloc(strlen(upw->pw_dir) +
+						(tail ? strlen(tail) : 0) + 1);
+				if (buf == NULL)
+					fatal("Ran out of memory.");
+				strcpy(buf, upw->pw_dir);
+				if (tail)
+					strcat(buf, tail);
+				free((char *) $1);
+				$$ = (int) buf;
+			} else
+				$$ = $1;
 		} else
 			$$ = $1;
 	}

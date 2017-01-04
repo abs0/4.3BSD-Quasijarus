@@ -1,0 +1,406 @@
+h21681
+s 00022/00008/00162
+d D 6.6 86/05/15 13:41:03 karels 7 6
+c new stuff
+e
+s 00001/00001/00169
+d D 6.5 85/11/29 17:44:50 mckusick 6 5
+c lpd is no longer an example of a DAEMON facility
+e
+s 00006/00000/00164
+d D 6.4 85/11/17 14:11:42 eric 5 4
+c document LOG_LPR facility
+e
+s 00004/00002/00160
+d D 6.3 85/10/13 15:23:25 eric 4 3
+c old LOG_ODELAY is now the default; use LOG_NDELAY to get the old semantics
+e
+s 00074/00018/00088
+d D 6.2 85/09/17 20:19:20 eric 3 2
+c facilities in syslog
+e
+s 00057/00024/00049
+d D 6.1 85/05/15 16:12:55 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00073/00000/00000
+d D 5.1 85/05/15 16:11:54 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.\"	@(#)syslog.3	1.2		11/14/82
+.TH SYSLOG 3 "14 November 1982"
+E 2
+I 2
+.TH SYSLOG 3 "%Q%"
+E 2
+.UC 5
+.SH NAME
+D 2
+syslog, openlog, closelog \- control system log
+E 2
+I 2
+syslog, openlog, closelog, setlogmask \- control system log
+E 2
+.SH SYNOPSIS
+.B "#include <syslog.h>
+.PP
+D 2
+.B "openlog(ident, logstat)
+E 2
+I 2
+D 3
+.B "openlog(ident, logopt, maskpri)
+E 3
+I 3
+.B "openlog(ident, logopt, facility)
+E 3
+E 2
+.br
+.B "char *ident;
+.PP
+.B "syslog(priority, message, parameters ... )
+.br
+.B "char *message;
+.PP
+.B "closelog()
+I 2
+.PP
+.B "setlogmask(maskpri)
+E 2
+.SH DESCRIPTION
+.I Syslog
+D 2
+arranges to write the
+E 2
+I 2
+arranges to write
+E 2
+.I message
+onto the system log maintained by
+D 2
+.IR syslog (8).
+E 2
+I 2
+.IR syslogd (8).
+E 2
+The message is tagged with
+.IR priority .
+The message looks like a
+.IR printf (3)
+string except that
+.B %m
+is replaced by the current error message (collected from
+.IR errno ).
+A trailing newline is added if needed.
+This message will be read by
+D 2
+.IR syslog (8)
+and output to the system console or files as appropriate.
+E 2
+I 2
+.IR syslogd (8)
+and written to the system console, log files, or forwarded to
+.I syslogd
+on another host as appropriate.
+I 3
+.PP
+Priorities are encoded as a
+.I facility
+and a
+.IR level .
+The facility describes the part of the system
+generating the message.
+The level is selected from an ordered list:
+.IP LOG_EMERG \w'LOG_WARNING'u+3
+A panic condition.
+This is normally broadcast to all users.
+.IP LOG_ALERT \w'LOG_WARNING'u+3
+A condition that should be corrected immediately,
+such as a corrupted system database.
+.IP LOG_CRIT \w'LOG_WARNING'u+3
+Critical conditions,
+e.g., hard device errors.
+.IP LOG_ERR \w'LOG_WARNING'u+3
+Errors.
+.IP LOG_WARNING \w'LOG_WARNING'u+3
+Warning messages.
+.IP LOG_NOTICE \w'LOG_WARNING'u+3
+Conditions that are not error conditions,
+but should possibly be handled specially.
+.IP LOG_INFO \w'LOG_WARNING'u+3
+Informational messages.
+.IP LOG_DEBUG \w'LOG_WARNING'u+3
+Messages that contain information
+normally of use only when debugging a program.
+.PP
+E 3
+If
+.I syslog
+cannot pass the message to
+D 7
+.I syslogd
+D 3
+and the message is priority LOG_FAIL or higher,
+E 3
+I 3
+and the message is priority LOG_ERR or higher,
+E 3
+it attempts to write the message on
+.IR /dev/console.
+E 7
+I 7
+.IR syslogd ,
+it will attempt to write the message on
+.I /dev/console
+if the LOG_CONS option is set (see below).
+E 7
+E 2
+.PP
+If special processing is needed,
+.I openlog
+can be called to initialize the log file.
+D 2
+Parameters are
+E 2
+I 2
+The parameter
+E 2
+.I ident
+D 2
+which is prepended to every message, and
+.I logstat
+which is a bit field indicating special status; current values are:
+.IP LOG_PID \w'LOG_PID'u+3
+E 2
+I 2
+is a string that is prepended to every message.
+.I Logopt
+is a bit field indicating logging options.
+Current values for
+.I logopt
+are:
+D 3
+.IP LOG_PID \w'LOG_ODELAY'u+3
+E 3
+I 3
+.IP LOG_PID \w'LOG_WARNING'u+3
+E 3
+E 2
+log the process id with each message:
+useful for identifying instantiations of daemons.
+D 2
+.LP
+.I Openlog
+returns zero on success.
+If it cannot open the file
+.I /dev/log,
+it writes on
+.I /dev/console
+instead and returns \-1.
+E 2
+I 2
+D 3
+.IP LOG_CONS \w'LOG_ODELAY'u+3
+Force writing error messages to the console if unable to send it to
+E 3
+I 3
+.IP LOG_CONS \w'LOG_WARNING'u+3
+Force writing messages to the console if unable to send it to
+E 3
+.I syslogd.
+This option is safe to use in daemon processes that have no controlling
+terminal since
+.I syslog
+will fork before opening the console.
+D 3
+.IP LOG_ODELAY \w'LOG_ODELAY'u+3
+E 3
+I 3
+D 4
+.IP LOG_ODELAY \w'LOG_WARNING'u+3
+E 3
+Delay opening the connection to
+E 4
+I 4
+.IP LOG_NDELAY \w'LOG_WARNING'u+3
+D 7
+Opening the connection to
+E 7
+I 7
+Open the connection to
+E 7
+E 4
+.I syslogd
+I 4
+immediately.
+Normally the open is delayed
+E 4
+D 3
+until the first error occurs. Useful for programs that need to manage the
+E 3
+I 3
+until the first message is logged.
+Useful for programs that need to manage the
+E 3
+order in which file descriptors are allocated.
+I 7
+.IP LOG_NOWAIT \w'LOG_WARNING'u+3
+Don't wait for children forked to log messages on the console.
+This option should be used by processes that enable notification
+of child termination via SIGCHLD, as
+.I syslog
+may otherwise block waiting for a child whose exit status has already
+been collected.
+E 7
+E 2
+.PP
+I 2
+The
+D 3
+.I maskpri
+parameter is a mask for screening out low priority messages.
+Calls to
+.I syslog
+with a priority whose corresponding bit in
+.I maskpri
+is not set are ignored.
+The default allows all priorities to be logged.
+E 3
+I 3
+.I facility
+D 7
+parameter is encodes a default facility to be assigned to all messages
+E 7
+I 7
+parameter encodes a default facility to be assigned to all messages
+E 7
+that do not have an explicit facility encoded:
+.IP LOG_KERN \w'LOG_WARNING'u+3
+Messages generated by the kernel.
+These cannot be generated by any user processes.
+.IP LOG_USER \w'LOG_WARNING'u+3
+Messages generated by random user processes.
+D 7
+This is the default if none is specified.
+E 7
+I 7
+This is the default facility identifier if none is specified.
+E 7
+.IP LOG_MAIL \w'LOG_WARNING'u+3
+The mail system.
+.IP LOG_DAEMON \w'LOG_WARNING'u+3
+System daemons, such as
+D 6
+.IR lpd (8),
+E 6
+I 6
+.IR ftpd (8),
+E 6
+.IR routed (8),
+etc.
+.IP LOG_AUTH \w'LOG_WARNING'u+3
+The authorization system:
+.IR login (1),
+.IR su (1),
+.IR getty (8),
+etc.
+I 5
+.IP LOG_LPR \w'LOG_WARNING'u+3
+The line printer spooling system:
+.IR lpr (1),
+.IR lpc (8),
+.IR lpd (8),
+etc.
+E 5
+.IP LOG_LOCAL0 \w'LOG_WARNING'u+3
+Reserved for local use.
+Similarly for LOG_LOCAL1 through LOG_LOCAL7.
+E 3
+.PP
+E 2
+.I Closelog
+can be used to close the log file.
+I 2
+.PP
+.I Setlogmask
+sets the log priority mask to
+.I maskpri
+and returns the previous mask.
+D 3
+Priorities and masks of 0 are ignored.
+E 3
+I 3
+Calls to
+.I syslog
+D 7
+with a priority lower than
+E 7
+I 7
+with a priority not set in
+E 7
+.I maskpri
+are rejected.
+I 7
+The mask for an individual priority
+.I pri
+is calculated by the macro LOG_MASK(\fIpri\fP);
+the mask for all priorities up to and including
+.I toppri
+is given by the macro LOG_UPTO(\fItoppri\fP).
+E 7
+The default allows all priorities to be logged.
+E 3
+E 2
+.SH EXAMPLES
+.nf
+D 3
+syslog(LOG_SALERT, "who: internal error 23");
+E 3
+I 3
+syslog(LOG_ALERT, "who: internal error 23");
+E 3
+
+D 2
+openlog("serverftp", LOG_PID);
+E 2
+I 2
+D 3
+openlog("serverftp", LOG_PID, 0);
+E 3
+I 3
+openlog("ftpd", LOG_PID, LOG_DAEMON);
+I 7
+setlogmask(LOG_UPTO(LOG_ERR));
+E 7
+E 3
+E 2
+syslog(LOG_INFO, "Connection from host %d", CallingHost);
+I 3
+
+syslog(LOG_INFO|LOG_LOCAL2, "foobar error: %m");
+E 3
+.fi
+D 2
+.SH "SEE ALSO
+syslog(8)
+E 2
+I 2
+.SH "SEE ALSO"
+I 3
+logger(1),
+E 3
+syslogd(8)
+E 2
+E 1

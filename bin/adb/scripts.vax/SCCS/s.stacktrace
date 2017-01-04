@@ -1,0 +1,13 @@
+h10800
+s 00002/00000/00000
+d D 5.1 88/03/30 14:46:09 bostic 1 0
+c date and time created 88/03/30 14:46:09 by bostic
+e
+u
+U
+t
+T
+I 1
+1000$s
+rpb+8,(intstack-rpb)%4/aX^^pn
+E 1

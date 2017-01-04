@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)arpadate.c	5.9 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)arpadate.c	5.10 (Berkeley) 3/31/06";
 #endif /* not lint */
 
 # include "conf.h"
@@ -125,7 +125,9 @@ arpadate(ud)
 	*q++ = *p++;
 	*q++ = ' ';
 
-	p = &ud[22];		/* 79 */
+	p = &ud[20];		/* 1979 */
+	*q++ = *p++;
+	*q++ = *p++;
 	*q++ = *p++;
 	*q++ = *p++;
 	*q++ = ' ';

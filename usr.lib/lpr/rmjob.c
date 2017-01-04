@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)rmjob.c	5.3 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)rmjob.c	5.4 (Berkeley) 2/13/06";
 #endif /* not lint */
 
 /*
@@ -276,7 +276,7 @@ chkremote()
 		(void) sprintf(cp, " %d", requ[i]);
 	}
 	strcat(cp, "\n");
-	rem = getport(RM);
+	rem = getport(RM, 0);
 	if (rem < 0) {
 		if (from != host)
 			printf("%s: ", host);

@@ -1,0 +1,1045 @@
+h36703
+s 00007/00000/00195
+d D 7.3 85/05/31 16:29:42 dist 24 23
+c Add copyright
+e
+s 00022/00012/00173
+d D 7.2 81/12/08 02:50:05 carl 23 22
+c Merged 2.8BSD fixes to support machines without floating point
+c processors and improve overlay structures.
+e
+s 00005/00005/00180
+d D 7.1 81/09/08 08:43:20 mark 22 21
+c fixes involving ex_extern.o for 3.7
+e
+s 00002/00002/00183
+d D 6.2 81/09/03 11:46:10 mark 21 20
+c updates for Unix/370 and ins/del line on vt100
+e
+s 00004/00002/00181
+d D 6.1 80/10/29 21:47:54 mark 20 19
+c updated for 3.6
+e
+s 00001/00006/00182
+d D 5.8 80/09/14 23:32:38 mark 19 18
+c fixed dependencies
+e
+s 00003/00003/00185
+d D 5.7 80/08/28 22:17:08 root 18 17
+c placed OBJS further down so a.out would be default make
+e
+s 00001/00001/00187
+d D 5.6 80/08/28 22:11:59 root 17 16
+c fixed SRCS.  Also, previous delta renamed ex_voperate.c to ex_voper.c
+e
+s 00020/00008/00168
+d D 5.5 80/08/28 22:08:24 root 16 15
+c put in sccs dependencies (again)
+e
+s 00006/00005/00170
+d D 5.4 80/08/27 22:52:49 root 15 14
+c minor changes to library paths
+e
+s 00040/00082/00135
+d D 5.3 80/08/26 16:10:53 root 14 13
+c converted to 11/70 and 11/40 from vax
+e
+s 00004/00004/00213
+d D 5.2 80/08/21 11:18:21 mark 13 12
+c un-commented out pieces of make vgrind
+e
+s 00003/00002/00214
+d D 5.1 80/08/20 16:17:23 mark 12 11
+c Release 3.5, August 20, 1980
+e
+s 00004/00007/00212
+d D 4.8 80/08/20 15:45:25 mark 11 10
+c defined CRYPT in CFLAGS
+e
+s 00004/00013/00215
+d D 4.7 80/08/03 20:22:48 bill 10 9
+c use ${CC}, ${AS}; don't delete source on sccs clean
+e
+s 00011/00002/00217
+d D 4.6 80/08/02 00:03:18 mark 9 8
+c made make clean get rid of sources too
+e
+s 00002/00002/00217
+d D 4.5 80/08/01 23:54:09 mark 8 7
+c commented out ex_vars.h since you manually do makeoptions
+e
+s 00036/00035/00183
+d D 4.4 80/08/01 23:52:34 mark 7 6
+c added dependencies on headers, kludged on ex.c
+e
+s 00039/00000/00179
+d D 4.3 80/08/01 23:12:27 mark 6 5
+c added sccs since make doesn't know about it
+e
+s 00074/00034/00105
+d D 4.2 80/08/01 20:44:55 mark 5 4
+c Bill added more buffers, and I put in sccs.
+e
+s 00006/00003/00133
+d D 4.1 80/08/01 00:21:03 mark 4 3
+c release 3.4, June 24, 1980
+e
+s 00001/00001/00135
+d D 3.1 80/07/31 23:46:21 mark 3 2
+c release 3.3, Feb 2, 1980
+e
+s 00084/00052/00052
+d D 2.1 80/07/31 23:22:36 mark 2 1
+c release 3.2, Jan 4, 1980
+e
+s 00104/00000/00000
+d D 1.1 80/07/31 23:01:12 mark 1 0
+c date and time created 80/07/31 23:01:12 by mark
+e
+u
+U
+t
+T
+I 24
+#
+# Copyright (c) 1980 Regents of the University of California.
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	%W% (Berkeley) %G%
+#
+E 24
+I 1
+D 2
+VERSION=3.1
+E 2
+I 2
+D 3
+VERSION=3.2
+E 3
+I 3
+D 4
+VERSION=3.3
+E 4
+I 4
+D 12
+VERSION=3.4
+E 12
+I 12
+D 20
+VERSION=3.5
+E 20
+I 20
+D 21
+VERSION=3.6
+E 21
+I 21
+VERSION=3.7
+E 21
+E 20
+E 12
+E 4
+E 3
+E 2
+#
+D 2
+# Ex skeletal makefile for Version 7
+E 2
+I 2
+D 5
+# Ex skeletal makefile for version 7
+E 5
+I 5
+D 14
+# Ex skeletal makefile for VAX VM/Unix version 7
+E 14
+I 14
+# Ex skeletal makefile for version 7, USGS Overlay 11/70 system
+E 14
+E 5
+E 2
+#
+# NB: This makefile doesn't indicate any dependencies on header files.
+#
+D 2
+# Compiles in the LISPCODE code within the editor;
+# take this out of CFLAGS to make some
+# breathing room in the text space if necessary.  If you take out -DLISPCODE
+# you should move ex_vars.nolisp to ex_vars.h
+E 2
+I 2
+D 5
+# Ex is very large - it may not fit on PDP-11's depending on the operating
+# system and the cflags you turn on. Things that can be turned off to save
+E 5
+I 5
+# Ex is very large - this version will not fit on PDP-11's without overlay
+# software.  Things that can be turned off to save
+E 5
+# space include LISPCODE (-l flag, showmatch and lisp options), UCVISUAL
+# (visual \ nonsense on upper case only terminals), CHDIR (the undocumented
+D 5
+# chdir command.)
+E 5
+I 5
+D 12
+# chdir command.)  VMUNIX makes ex considerably larger, raising many limits
+E 12
+I 12
+D 14
+# chdir command.)  CRYPT includes the code to edit encrypted files (the -x
+# option, like ed.)  VMUNIX makes ex considerably larger, raising many limits
+E 14
+I 14
+# chdir command.)  CRYPT includes code to handle the -x option to allow
+D 20
+# encrypted files.  VMUNIX makes ex considerably larger, raising many limits
+E 20
+I 20
+# encrypted files.  Defining CRYPT drags in most of stdio (from the call
+# to getpass) and makes vi about 4k text and 4k data bigger).
+# VMUNIX makes ex considerably larger, raising many limits
+E 20
+E 14
+E 12
+# and improving speed and simplicity of maintenance.  It is suitable only
+# for a VAX or other large machine, and then probably only in a paged system.
+E 5
+E 2
+#
+I 2
+# Don't define VFORK unless your system has the VFORK system call,
+# which is like fork but the two processes have only one data space until the
+# child execs. This speeds up ex by saving the memory copy.
+D 5
+# -DVMUNIX makes an ex which can edit very large files (eg the w2a dictionary)
+# this allows 200000 lines and about 16M byte temp files.
+E 5
+#
+E 2
+# If your system expands tabs to 4 spaces you should -DTABS=4 below
+#
+I 23
+# If your system has no floating point unit, you should use FP= -f
+# and change the the appropriate invocation of ${LD}.
+#
+E 23
+D 2
+# Ex wants stdio only to get the doprnt.o routine; if other stdio stuff
+# gets dragged in that is a mistake.
+E 2
+I 2
+D 5
+# Ex is likely to overflow the symbol table in your C compiler.
+# It can use -t0 which is (purportedly) a C compiler with a larger
+# symbol table.  The -t1 flag to the C compiler is for a C compiler
+# which puts switch code in I space, increasing the text space size
+# to the benefit of per-user data space.  If you don't have this it
+# doesn't matter much. Another method, which works on v7 pdp-11's,
+# is to use pcc for ex_io.c instead of cc.
+E 2
+#
+E 5
+D 2
+.c.o:
+	${MKSTR} - ex${VERSION}strings x $*.c
+	${CC} -E ${CFLAGS} x$*.c | ${XSTR} -c -
+	rm -f x$*.c
+	${CC} ${CFLAGS} -O -c x.c 
+	mv x.o $*.o
+BINDIR=	/usr/bin
+E 2
+I 2
+D 14
+BINDIR=	/usr/ucb
+NBINDIR=/usr/new
+E 14
+I 14
+BINDIR=	/usr/ucb/bin
+NBINDIR=/usr/new/bin
+E 14
+E 2
+D 15
+LIBDIR=	/usr/lib
+E 15
+I 15
+LIBDIR=	/usr/ucb/lib
+E 15
+D 2
+FOLD=	/usr/bin/fold
+CTAGS=	/usr/ucb/ctags
+AS=	-as
+XSTR=	/usr/ucb/xstr
+CFLAGS=	-DTABS=8 -DLISPCODE
+MKSTR=	/usr/ucb/mkstr
+CXREF=	/usr/ucb/cxref
+E 2
+I 2
+FOLD=	${BINDIR}/fold
+CTAGS=	${BINDIR}/ctags
+XSTR=	${BINDIR}/xstr
+D 5
+DEBUGFLAGS=	-DTRACE
+NONDEBUGFLAGS=	-O
+CFLAGS=	-DTABS=8 -DLISPCODE -DCHDIR -DUCVISUAL -DMACROS -DVFORK -DVMUNIX ${NONDEBUGFLAGS}
+E 5
+I 5
+D 14
+DEBUGFLAGS=	-DTRACE -g
+E 14
+I 14
+D 15
+CC=	ovcc
+E 15
+I 15
+D 16
+CC=	ovcc -V -B/usr/new/lib/ -t012 # kludge for /usr/new
+E 16
+I 16
+D 19
+CC=	cc -V -B/usr/new/lib/ -t012 # kludge for /usr/new
+E 19
+I 19
+CC=	cc -V
+E 19
+E 16
+AS=	ovas
+E 15
+LD=	ovld
+DEBUGFLAGS=	-DTRACE
+E 14
+D 11
+#
+# D O   N O T   D I S T R I B U T E   E X    W I T H   H O R S E   I N   I T!!!
+NONDEBUGFLAGS=	-O -DHORSE
+E 11
+I 11
+NONDEBUGFLAGS=	-O
+E 11
+DEB=	${NONDEBUGFLAGS}	# or ${DEBUGFLAGS} to to debug
+D 11
+CFLAGS=	-DTABS=8 -DLISPCODE -DCHDIR -DUCVISUAL -DVFORK -DVMUNIX ${DEB}
+E 11
+I 11
+D 14
+CFLAGS=	-DTABS=8 -DCRYPT -DLISPCODE -DCHDIR -DUCVISUAL -DVFORK -DVMUNIX ${DEB}
+E 11
+LDFLAGS=	-z		# or -i or -n
+E 5
+TERMLIB=	-ltermlib
+E 14
+I 14
+CFLAGS=	-DTABS=8 -DLISPCODE -DCHDIR -DUCVISUAL ${DEB}
+I 23
+FP=
+E 23
+TERMLIB=	-lovtermlib
+E 14
+MKSTR=	${BINDIR}/mkstr
+CXREF=	${BINDIR}/cxref
+I 14
+D 16
+# PRINTF=	printf.o
+E 16
+I 16
+# PRINTF=	printf.o; PRINTFS=printf.c
+E 16
+PRINTF=	ovprintf.o ovdoprnt.o
+I 16
+PRINTFS=ovprintf.c ovdoprnt.s
+E 16
+FMT=	-i	# 11/45, 70
+# FMT=	-n	# 11/23, 34, 40
+E 14
+E 2
+INCLUDE=/usr/include
+PR=	pr
+I 16
+GET=	sccs get 
+E 16
+D 5
+OBJS=	ex.o ex_addr.o ex_cmds.o ex_cmds2.o ex_cmdsub.o ex_data.o ex_get.o \
+D 4
+	ex_io.o ex_put.o ex_re.o ex_set.o ex_subr.o ex_temp.o ex_tty.o \
+E 4
+I 4
+	ex_io.o ex_put.o ex_re.o ex_set.o ex_subr.o ex_temp.o ex_tty.o ex_unix.o \
+E 5
+I 5
+OBJS=	ex.o ex_addr.o ex_cmds.o ex_cmds2.o ex_cmdsub.o \
+	ex_data.o ex_get.o ex_io.o ex_put.o ex_re.o \
+	ex_set.o ex_subr.o ex_temp.o ex_tty.o ex_unix.o \
+E 5
+E 4
+D 16
+	ex_v.o ex_vadj.o ex_vget.o ex_vmain.o ex_voperate.o \
+E 16
+I 16
+	ex_v.o ex_vadj.o ex_vget.o ex_vmain.o ex_voper.o \
+E 16
+	ex_vops.o ex_vops2.o ex_vops3.o ex_vput.o ex_vwind.o \
+D 5
+	printf.o strings.o
+E 5
+I 5
+D 11
+	printf.o bcopy.o horse.o strings.o
+E 11
+I 11
+D 14
+	printf.o bcopy.o strings.o
+E 11
+HDRS=	ex.h ex_argv.h ex_re.h ex_temp.h ex_tty.h ex_tune.h ex_vars.h ex_vis.h
+SRC1=	ex.c ex_addr.c ex_cmds.c ex_cmds2.c ex_cmdsub.c
+SRC2=	ex_data.c ex_get.c ex_io.c ex_put.c ex_re.c
+SRC3=	ex_set.c ex_subr.c ex_temp.c ex_tty.c ex_unix.c
+SRC4=	ex_v.c ex_vadj.c ex_vget.c ex_vmain.c ex_voperate.c
+SRC5=	ex_vops.c ex_vops2.c ex_vops3.c ex_vput.c ex_vwind.c
+D 9
+SRC6=	printf.c bcopy.c expreserve.c exrecover.c
+E 9
+I 9
+D 11
+SRC6=	printf.c horse.c bcopy.c expreserve.c exrecover.c
+E 11
+I 11
+SRC6=	printf.c bcopy.c expreserve.c exrecover.c
+E 11
+E 9
+MISC=	makefile READ_ME :rofix
+VGRIND=	csh /usr/ucb/vgrind
+VHDR=	"Ex Version ${VERSION}"
+E 14
+I 14
+D 22
+	${PRINTF} bcopy.o strings.o
+E 22
+I 22
+	${PRINTF} bcopy.o ex_extern.o strings.o
+E 22
+I 16
+SRCS=	ex.h ex_argv.h ex_re.h ex_temp.h ex_tty.h ex_tune.h ex_vars.h ex_vis.h\
+	ex.c ex_addr.c ex_cmds.c ex_cmds2.c ex_cmdsub.c \
+	ex_data.c ex_get.c ex_io.c ex_put.c ex_re.c \
+	ex_set.c ex_subr.c ex_temp.c ex_tty.c ex_unix.c \
+	ex_v.c ex_vadj.c ex_vget.c ex_vmain.c ex_voper.c \
+	ex_vops.c ex_vops2.c ex_vops3.c ex_vput.c ex_vwind.c \
+D 17
+	${PRINTFS} bcopy.c strings.c
+E 17
+I 17
+	${PRINTFS} bcopy.c
+E 17
+E 16
+E 14
+E 5
+
+D 2
+all: a.out expreserve exrecover
+E 2
+I 2
+D 5
+all:	a.out exrecover expreserve tags
+E 2
+
+E 5
+D 2
+a.out: ${OBJS} tags
+	${CC} -i ${OBJS} -ltermlib
+E 2
+I 2
+.c.o:
+D 14
+#	${MKSTR} - ex${VERSION}strings x $*.c
+	${CC} -E ${CFLAGS} $*.c | ${XSTR} -c -
+#	rm -f x$*.c
+E 14
+I 14
+	${MKSTR} - ex${VERSION}strings x $*.c
+	${CC} -E ${CFLAGS} x$*.c | ${XSTR} -c -
+	rm -f x$*.c
+E 14
+	${CC} ${CFLAGS} -c x.c 
+	mv x.o $*.o
+E 2
+
+I 16
+D 18
+${OBJS}:	${SRCS}
+
+E 18
+E 16
+I 14
+# 11/23, 34, 40 and other non split I/D machines
+D 23
+# each of the 5 overlays must stay less than 16K.
+E 23
+I 23
+# each of the 6 overlays must stay less than 16K.
+E 23
+# a.out: ${OBJS}
+D 23
+# 	${LD} -X /lib/crt0.o ${FMT}\
+# 	    -Z ex_cmds.o ex_cmds2.o ex_cmdsub.o ex_re.o \
+D 16
+# 	    -Z ex_vadj.o ex_vmain.o ex_voperate.o ex_vwind.o ex_vops3.o\
+E 16
+I 16
+# 	    -Z ex_vadj.o ex_vmain.o ex_voper.o ex_vwind.o ex_vops3.o\
+E 16
+# 	    -Z ex_v.o ex_vget.o ex_vops.o ex_vops2.o ex_vput.o\
+# 	    -Z ex_get.o ex_io.o ex_temp.o ex_tty.o ex_unix.o ex_addr.o ex.o ex_set.o \
+# 	    -L ex_put.o ex_subr.o ${PRINTF} strings.o \
+D 22
+# 	       ex_data.o ${TERMLIB} -lovc 
+E 22
+I 22
+# 	       ex_data.o ex_extern.o ${TERMLIB} -lovc 
+E 23
+I 23
+# if no floating point unit
+#	${LD} -X /lib/fcrt0.o ${FMT} \
+# end no floating point unit
+	${LD} -X /lib/crt0.o ${FMT} \
+	    -Z ex_cmds.o ex_cmds2.o ex_cmdsub.o ex_re.o \
+	    -Z ex_vadj.o ex_vmain.o ex_voper.o ex_vwind.o ex_vops3.o\
+	    -Z ex_v.o ex_vget.o ex_vops.o ex_vops2.o ex_vput.o\
+	    -Z ex_get.o ex_io.o ex_temp.o ex_tty.o ex_unix.o ex_addr.o ex.o ex_set.o \
+	    -Z ex_put.o ex_subr.o ${TERMLIB} \
+	    -L ex_data.o ex_extern.o ${PRINTF} strings.o -lovc
+E 23
+E 22
+
+E 14
+I 2
+a.out: ${OBJS}
+I 23
+# if no floating point unit
+#	${LD} -X /lib/fcrt0.o -i \
+# end no floating point unit
+E 23
+D 5
+	cc -i ${OBJS} ${TERMLIB}
+E 5
+I 5
+D 10
+	cc ${LDFLAGS} ${OBJS} ${TERMLIB}
+E 10
+I 10
+D 14
+	${CC} ${LDFLAGS} ${OBJS} ${TERMLIB}
+E 14
+I 14
+	${LD} -X /lib/crt0.o ${FMT}\
+D 16
+	    -Z ex_voperate.o ex_vget.o ex_vops.o ex_vops2.o ex_vops3.o \
+E 16
+I 16
+	    -Z ex_voper.o ex_vget.o ex_vops.o ex_vops2.o ex_vops3.o \
+E 16
+D 15
+	    -Z ex_set.o ex_re.o ex_v.o ex_io.o ex_tty.o ex_unix.o ex.o\
+E 15
+I 15
+D 23
+	    -Z ex_set.o ex_re.o ex_io.o ex_tty.o ex_unix.o ex.o\
+E 23
+I 23
+	    -Z ex_set.o ex_re.o ex_io.o ex_tty.o ex_unix.o ex.o ex_v.o \
+E 23
+E 15
+	    -L ex_addr.o ex_cmds.o ex_cmds2.o ex_cmdsub.o ex_get.o ex_temp.o\
+D 15
+	       ex_vadj.o ex_vmain.o ex_vwind.o\
+E 15
+I 15
+D 23
+	       ex_v.o ex_vadj.o ex_vmain.o ex_vwind.o\
+E 23
+I 23
+	       ex_vadj.o ex_vmain.o ex_vwind.o\
+E 23
+E 15
+	       ex_vput.o ex_put.o ex_subr.o ${PRINTF} strings.o \
+D 22
+	       ex_data.o ${TERMLIB} -lovc 
+E 22
+I 22
+	       ex_data.o ex_extern.o ${TERMLIB} -lovc 
+E 22
+E 14
+E 10
+E 5
+
+E 2
+D 5
+tags:
+D 2
+	../bin/csh ${CTAGS} ex.c ex_*.c
+E 2
+I 2
+	${CTAGS} -w *.h *.c
+E 5
+I 5
+D 18
+all:	a.out exrecover expreserve tags
+E 18
+I 18
+all:	a.out exrecover expreserve
+
+D 19
+${OBJS}:	${SRCS}
+E 18
+E 5
+E 2
+
+E 19
+I 5
+tags:	/tmp
+	${CTAGS} -w ex.[hc] ex_*.[hc]
+D 19
+
+E 5
+I 2
+D 16
+${OBJS}: ex_vars.h
+E 16
+I 16
+${SRCS}:
+	${GET}$@
+E 19
+E 16
+
+D 8
+ex_vars.h:
+	csh makeoptions ${CFLAGS}
+E 8
+I 8
+D 14
+# ex_vars.h:
+# 	csh makeoptions ${CFLAGS}
+E 14
+I 14
+D 16
+ex_vars.h:
+	csh makeoptions ${CFLAGS}
+E 16
+I 16
+# ex_vars.h:
+# 	csh makeoptions ${CFLAGS}
+E 16
+E 14
+E 8
+
+I 5
+D 14
+bcopy.o:	bcopy.c
+D 10
+	cc -c ${CFLAGS} bcopy.c
+E 10
+I 10
+	${CC} -c ${CFLAGS} bcopy.c
+E 10
+
+# xstr: hands off!
+E 14
+E 5
+E 2
+strings.o: strings
+	${XSTR}
+D 2
+	${CC} -c xs.c
+	mv xs.o strings.o
+E 2
+I 2
+	${CC} -c -S xs.c
+D 14
+	ed - <:rofix xs.s
+D 10
+	as -o strings.o xs.s
+E 10
+I 10
+	${AS} -o strings.o xs.s
+E 14
+I 14
+D 21
+#	ed - <:rofix xs.s
+E 21
+I 21
+#	ed - <rofix xs.s
+E 21
+D 15
+	as -o strings.o xs.s
+E 15
+I 15
+	${AS} -o strings.o xs.s
+E 15
+E 14
+E 10
+	rm xs.s
+E 2
+	
+exrecover: exrecover.o
+D 2
+	${CC} -o exrecover exrecover.o
+E 2
+I 2
+D 22
+	${CC} ${CFLAGS} exrecover.o -o exrecover
+E 22
+I 22
+D 23
+	${CC} ${CFLAGS} exrecover.o ex_extern.o -o exrecover
+E 23
+I 23
+	${CC} ${FP} ${CFLAGS} exrecover.o ex_extern.o -o exrecover
+E 23
+E 22
+E 2
+
+D 2
+exrecover.o:
+E 2
+I 2
+exrecover.o: exrecover.c
+E 2
+	${CC} ${CFLAGS} -c -O exrecover.c
+
+D 2
+expreserve: expreserve.o popen.c
+	${CC} -o expreserve expreserve.o
+E 2
+I 2
+expreserve: expreserve.o
+D 22
+	${CC} expreserve.o -o expreserve
+E 22
+I 22
+D 23
+	${CC} expreserve.o ex_extern.o -o expreserve
+E 23
+I 23
+	${CC} ${FP} expreserve.o ex_extern.o -o expreserve
+E 23
+E 22
+E 2
+
+expreserve.o:
+D 2
+	${CC} ${CFLAGS} -c expreserve.c
+E 2
+I 2
+	${CC} ${CFLAGS} -c -O expreserve.c
+E 2
+
+D 9
+clean:
+E 9
+I 9
+D 10
+simpclean:
+E 10
+I 10
+clean:
+E 10
+E 9
+D 2
+	-rm a.out exrecover expreserve ex${VERSION}strings strings errs core trace
+	-rm *.o x*.[cs]
+E 2
+I 2
+#	If we dont have ex we cant make it so dont rm ex_vars.h
+D 5
+	-rm -f a.out exrecover expreserve ex${VERSION}strings strings core trace tags
+E 5
+I 5
+	-rm -f a.out exrecover expreserve strings core errs trace
+E 5
+	-rm -f *.o x*.[cs]
+I 9
+D 10
+
+clean:	simpclean
+	-rm -f ${HDRS}
+	-rm -f ${SRC1}
+	-rm -f ${SRC2}
+	-rm -f ${SRC3}
+	-rm -f ${SRC4}
+	-rm -f ${SRC5}
+	-rm -f ${SRC6}
+E 10
+E 9
+E 2
+
+I 5
+# install a new version for testing in /usr/new
+E 5
+D 2
+install: a.out installutil
+	-chmod 755 ${BINDIR}/ex
+	-${BINDIR}/ex </dev/null
+	-rm -f ${BINDIR}/ex ${BINDIR}/edit /${BINDIR}/vi
+	cp a.out ${BINDIR}/ex
+	ln ${BINDIR}/ex ${BINDIR}/edit
+	ln ${BINDIR}/ex ${BINDIR}/vi
+	cp ex${VERSION}strings ${LIBDIR}/ex${VERSION}strings
+	chmod 1755 ${BINDIR}/ex
+E 2
+I 2
+ninstall: a.out
+D 4
+	-rm -f ${NBINDIR}/ex ${NBINDIR}/vi
+E 4
+I 4
+D 5
+	-rm -f ${NBINDIR}/ex ${NBINDIR}/vi ${DESTDIR}${NBINDIR}/view
+E 4
+	cp a.out ${NBINDIR}/ex
+E 5
+I 5
+	-rm -f ${DESTDIR}${NBINDIR}/ex ${DESTDIR}${NBINDIR}/vi ${DESTDIR}${NBINDIR}/view
+	cp a.out ${DESTDIR}${NBINDIR}/ex
+E 5
+#	-cp ex${VERSION}strings ${LIBDIR}/ex${VERSION}strings
+D 5
+	ln ${NBINDIR}/ex ${NBINDIR}/vi
+E 5
+I 5
+	ln ${DESTDIR}${NBINDIR}/ex ${DESTDIR}${NBINDIR}/vi
+E 5
+I 4
+	ln ${DESTDIR}${NBINDIR}/ex ${DESTDIR}${NBINDIR}/view
+E 4
+D 5
+	chmod 1755 ${NBINDIR}/ex
+E 5
+I 5
+	chmod 1755 ${DESTDIR}${NBINDIR}/ex
+E 5
+E 2
+
+I 5
+# install in standard place (/usr/ucb)
+E 5
+D 2
+installutil: exrecover expreserve
+	cp exrecover ${LIBDIR}/ex${VERSION}recover
+	cp expreserve ${LIBDIR}/ex${VERSION}preserve
+E 2
+I 2
+install: a.out exrecover expreserve
+	-rm -f ${DESTDIR}${BINDIR}/ex
+	-rm -f ${DESTDIR}${BINDIR}/vi
+I 4
+	-rm -f ${DESTDIR}${BINDIR}/view
+E 4
+	-rm -f ${DESTDIR}${BINDIR}/edit
+	-rm -f ${DESTDIR}${BINDIR}/e
+	-rm -f ${DESTDIR}/usr/bin/ex
+	cp a.out ${DESTDIR}${BINDIR}/ex
+#	cp ex${VERSION}strings ${DESTDIR}/${LIBDIR}/ex${VERSION}strings
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}${BINDIR}/edit
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}${BINDIR}/e
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}${BINDIR}/vi
+I 4
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}${BINDIR}/view
+E 4
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}/usr/bin/ex
+	chmod 1755 ${DESTDIR}${BINDIR}/ex
+	cp exrecover ${DESTDIR}${LIBDIR}/ex${VERSION}recover
+D 5
+	cp expreserve ${DESTDIR}/${LIBDIR}/ex${VERSION}preserve
+E 5
+I 5
+	cp expreserve ${DESTDIR}${LIBDIR}/ex${VERSION}preserve
+E 5
+	chmod 4755 ${DESTDIR}${LIBDIR}/ex${VERSION}recover ${DESTDIR}${LIBDIR}/ex${VERSION}preserve
+I 5
+# The following line normally fails.  This is OK.
+E 5
+	mkdir ${DESTDIR}/usr/preserve
+E 2
+
+I 5
+# move from /usr/new to /usr/ucb
+newucb: a.out
+	-rm -f ${DESTDIR}${BINDIR}/ex
+	-rm -f ${DESTDIR}${BINDIR}/vi
+	-rm -f ${DESTDIR}${BINDIR}/edit
+	-rm -f ${DESTDIR}${BINDIR}/e
+	-rm -f ${DESTDIR}/usr/bin/ex
+	mv ${DESTDIR}${NBINDIR}/ex ${DESTDIR}${NBINDIR}/ex
+	-rm -f ${DESTDIR}${NBINDIR}/vi
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}${BINDIR}/edit
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}${BINDIR}/e
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}${BINDIR}/vi
+	ln ${DESTDIR}${BINDIR}/ex ${DESTDIR}/usr/bin/ex
+	chmod 1755 ${DESTDIR}${BINDIR}/ex
+
+E 5
+lint:
+D 5
+	lint ex.c ex_?*.c
+	lint -u exrecover.c
+	lint expreserve.c
+E 5
+I 5
+	lint ${CFLAGS} ex.c ex_?*.c
+	lint ${CFLAGS} -u exrecover.c
+	lint ${CFLAGS} expreserve.c
+E 5
+
+print:
+D 2
+	@-rm x.c xs.c >/dev/null
+E 2
+	@${PR} READ* BUGS
+D 2
+	@${PR} make*
+E 2
+I 2
+	@${PR} makefile*
+	@${PR} /etc/termcap
+E 2
+	@(size -l a.out ; size *.o) | ${PR} -h sizes
+D 2
+	@${PR} termcap
+E 2
+	@${PR} -h errno.h ${INCLUDE}/errno.h
+D 2
+	@${PR} -h pwd.h ${INCLUDE}/pwd.h
+E 2
+	@${PR} -h setjmp.h ${INCLUDE}/setjmp.h
+	@${PR} -h sgtty.h ${INCLUDE}/sgtty.h
+	@${PR} -h signal.h ${INCLUDE}/signal.h
+D 2
+	@${PR} -h sys/dir.h ${INCLUDE}/sys/dir.h
+E 2
+	@${PR} -h sys/stat.h ${INCLUDE}/sys/stat.h
+	@${PR} -h sys/types.h ${INCLUDE}/sys/types.h
+	@ls -ls | ${PR}
+	@${CXREF} *.c | ${PR} -h XREF
+	@${PR} *.h *.c
+I 5
+D 14
+vgrind:
+	tee index < /dev/null
+D 13
+#	${VGRIND} -h ${VHDR} ${HDRS}
+#	${VGRIND} -h ${VHDR} ${SRC1}
+#	${VGRIND} -h ${VHDR} ${SRC2}
+E 13
+I 13
+	${VGRIND} -h ${VHDR} ${HDRS}
+	${VGRIND} -h ${VHDR} ${SRC1}
+	${VGRIND} -h ${VHDR} ${SRC2}
+E 13
+	${VGRIND} -h ${VHDR} ${SRC3}
+	${VGRIND} -h ${VHDR} ${SRC4}
+	${VGRIND} -h ${VHDR} ${SRC5}
+	${VGRIND} -h ${VHDR} ${SRC6}
+D 13
+#	${VGRIND} -n -h ${VHDR} ${MISC}
+E 13
+I 13
+	${VGRIND} -n -h ${VHDR} ${MISC}
+E 13
+	${VGRIND} -i -h ${VHDR} index
+I 6
+
+D 7
+ex.c : SCCS/s.ex.c ; rm -f ex.c ; sccs get ex.c 
+ex.h : SCCS/s.ex.h ; rm -f ex.h ; sccs get ex.h 
+ex_addr.c : SCCS/s.ex_addr.c ; rm -f ex_addr.c ; sccs get ex_addr.c 
+ex_argv.h : SCCS/s.ex_argv.h ; rm -f ex_argv.h ; sccs get ex_argv.h 
+ex_cmds.c : SCCS/s.ex_cmds.c ; rm -f ex_cmds.c ; sccs get ex_cmds.c 
+ex_cmds2.c : SCCS/s.ex_cmds2.c ; rm -f ex_cmds2.c ; sccs get ex_cmds2.c 
+ex_cmdsub.c : SCCS/s.ex_cmdsub.c ; rm -f ex_cmdsub.c ; sccs get ex_cmdsub.c 
+ex_data.c : SCCS/s.ex_data.c ; rm -f ex_data.c ; sccs get ex_data.c 
+ex_get.c : SCCS/s.ex_get.c ; rm -f ex_get.c ; sccs get ex_get.c 
+ex_io.c : SCCS/s.ex_io.c ; rm -f ex_io.c ; sccs get ex_io.c 
+ex_put.c : SCCS/s.ex_put.c ; rm -f ex_put.c ; sccs get ex_put.c 
+ex_re.c : SCCS/s.ex_re.c ; rm -f ex_re.c ; sccs get ex_re.c 
+ex_re.h : SCCS/s.ex_re.h ; rm -f ex_re.h ; sccs get ex_re.h 
+ex_set.c : SCCS/s.ex_set.c ; rm -f ex_set.c ; sccs get ex_set.c 
+ex_subr.c : SCCS/s.ex_subr.c ; rm -f ex_subr.c ; sccs get ex_subr.c 
+ex_temp.c : SCCS/s.ex_temp.c ; rm -f ex_temp.c ; sccs get ex_temp.c 
+ex_temp.h : SCCS/s.ex_temp.h ; rm -f ex_temp.h ; sccs get ex_temp.h 
+ex_tty.c : SCCS/s.ex_tty.c ; rm -f ex_tty.c ; sccs get ex_tty.c 
+ex_tty.h : SCCS/s.ex_tty.h ; rm -f ex_tty.h ; sccs get ex_tty.h 
+ex_tune.h : SCCS/s.ex_tune.h ; rm -f ex_tune.h ; sccs get ex_tune.h 
+E 7
+I 7
+ex.c: SCCS/s.ex.c ${HDRS}; rm -f ex.c; sccs get ex.c 
+ex.h: SCCS/s.ex.h; rm -f ex.h; sccs get ex.h 
+ex_addr.c: SCCS/s.ex_addr.c; rm -f ex_addr.c; sccs get ex_addr.c 
+ex_argv.h: SCCS/s.ex_argv.h; rm -f ex_argv.h; sccs get ex_argv.h 
+ex_cmds.c: SCCS/s.ex_cmds.c; rm -f ex_cmds.c; sccs get ex_cmds.c 
+ex_cmds2.c: SCCS/s.ex_cmds2.c; rm -f ex_cmds2.c; sccs get ex_cmds2.c 
+ex_cmdsub.c: SCCS/s.ex_cmdsub.c; rm -f ex_cmdsub.c; sccs get ex_cmdsub.c 
+ex_data.c: SCCS/s.ex_data.c; rm -f ex_data.c; sccs get ex_data.c 
+ex_get.c: SCCS/s.ex_get.c; rm -f ex_get.c; sccs get ex_get.c 
+ex_io.c: SCCS/s.ex_io.c; rm -f ex_io.c; sccs get ex_io.c 
+ex_put.c: SCCS/s.ex_put.c; rm -f ex_put.c; sccs get ex_put.c 
+ex_re.c: SCCS/s.ex_re.c; rm -f ex_re.c; sccs get ex_re.c 
+ex_re.h: SCCS/s.ex_re.h; rm -f ex_re.h; sccs get ex_re.h 
+ex_set.c: SCCS/s.ex_set.c; rm -f ex_set.c; sccs get ex_set.c 
+ex_subr.c: SCCS/s.ex_subr.c; rm -f ex_subr.c; sccs get ex_subr.c 
+ex_temp.c: SCCS/s.ex_temp.c; rm -f ex_temp.c; sccs get ex_temp.c 
+ex_temp.h: SCCS/s.ex_temp.h; rm -f ex_temp.h; sccs get ex_temp.h 
+ex_tty.c: SCCS/s.ex_tty.c; rm -f ex_tty.c; sccs get ex_tty.c 
+ex_tty.h: SCCS/s.ex_tty.h; rm -f ex_tty.h; sccs get ex_tty.h 
+ex_tune.h: SCCS/s.ex_tune.h; rm -f ex_tune.h; sccs get ex_tune.h 
+E 7
+ex_unix.c: SCCS/s.ex_unix.c; rm -f ex_unix.c; sccs get ex_unix.c
+D 7
+ex_v.c : SCCS/s.ex_v.c ; rm -f ex_v.c ; sccs get ex_v.c 
+ex_vadj.c : SCCS/s.ex_vadj.c ; rm -f ex_vadj.c ; sccs get ex_vadj.c 
+ex_vars.h : SCCS/s.ex_vars.h ; rm -f ex_vars.h ; sccs get ex_vars.h 
+ex_vget.c : SCCS/s.ex_vget.c ; rm -f ex_vget.c ; sccs get ex_vget.c 
+ex_vis.h : SCCS/s.ex_vis.h ; rm -f ex_vis.h ; sccs get ex_vis.h 
+ex_vmain.c : SCCS/s.ex_vmain.c ; rm -f ex_vmain.c ; sccs get ex_vmain.c 
+E 7
+I 7
+ex_v.c: SCCS/s.ex_v.c; rm -f ex_v.c; sccs get ex_v.c 
+ex_vadj.c: SCCS/s.ex_vadj.c; rm -f ex_vadj.c; sccs get ex_vadj.c 
+ex_vars.h: SCCS/s.ex_vars.h; rm -f ex_vars.h; sccs get ex_vars.h 
+ex_vget.c: SCCS/s.ex_vget.c; rm -f ex_vget.c; sccs get ex_vget.c 
+ex_vis.h: SCCS/s.ex_vis.h; rm -f ex_vis.h; sccs get ex_vis.h 
+ex_vmain.c: SCCS/s.ex_vmain.c; rm -f ex_vmain.c; sccs get ex_vmain.c 
+E 7
+ex_voperate.c: SCCS/s.ex_voperate.c; rm -f ex_voperate.c; sccs get ex_voperate.c
+D 7
+ex_vops.c : SCCS/s.ex_vops.c ; rm -f ex_vops.c ; sccs get ex_vops.c 
+ex_vops2.c : SCCS/s.ex_vops2.c ; rm -f ex_vops2.c ; sccs get ex_vops2.c 
+ex_vops3.c : SCCS/s.ex_vops3.c ; rm -f ex_vops3.c ; sccs get ex_vops3.c 
+ex_vput.c : SCCS/s.ex_vput.c ; rm -f ex_vput.c ; sccs get ex_vput.c 
+ex_vwind.c : SCCS/s.ex_vwind.c ; rm -f ex_vwind.c ; sccs get ex_vwind.c 
+expreserve.c : SCCS/s.expreserve.c ; rm -f expreserve.c ; sccs get expreserve.c 
+exrecover.c : SCCS/s.exrecover.c ; rm -f exrecover.c ; sccs get exrecover.c 
+makeoptions : SCCS/s.makeoptions ; rm -f makeoptions ; sccs get makeoptions 
+E 7
+I 7
+ex_vops.c: SCCS/s.ex_vops.c; rm -f ex_vops.c; sccs get ex_vops.c 
+ex_vops2.c: SCCS/s.ex_vops2.c; rm -f ex_vops2.c; sccs get ex_vops2.c 
+ex_vops3.c: SCCS/s.ex_vops3.c; rm -f ex_vops3.c; sccs get ex_vops3.c 
+ex_vput.c: SCCS/s.ex_vput.c; rm -f ex_vput.c; sccs get ex_vput.c 
+ex_vwind.c: SCCS/s.ex_vwind.c; rm -f ex_vwind.c; sccs get ex_vwind.c 
+expreserve.c: SCCS/s.expreserve.c; rm -f expreserve.c; sccs get expreserve.c 
+exrecover.c: SCCS/s.exrecover.c; rm -f exrecover.c; sccs get exrecover.c 
+makeoptions: SCCS/s.makeoptions; rm -f makeoptions; sccs get makeoptions 
+E 7
+bcopy.c: SCCS/s.bcopy.c; rm -f bcopy.c; sccs get bcopy.c
+D 7
+printf.c : SCCS/s.printf.c ; rm -f printf.c ; sccs get printf.c 
+E 7
+I 7
+D 11
+horse.c: SCCS/s.horse.c; rm -f horse.c; sccs get horse.c
+E 11
+printf.c: SCCS/s.printf.c; rm -f printf.c; sccs get printf.c 
+E 14
+E 7
+E 6
+E 5
+E 1

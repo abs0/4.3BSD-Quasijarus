@@ -1,0 +1,16 @@
+%!
+%%IncludeFile: TroffEmu-Symbol.ps
+%%IncludeFile: TroffEmu-SymbolBV.ps
+/TroffEmu-SymbolBV findfont 16 scalefont setfont
+72 72 translate
+/s ( ) def
+0 1 15 {
+	0 1 15 {
+		1 index 30 mul 15 2 index sub 30 mul moveto
+		s 0 3 index 16 mul 3 index add put
+		s show
+		pop
+	} for
+	pop
+} for
+showpage

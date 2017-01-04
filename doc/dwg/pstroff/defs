@@ -1,0 +1,24 @@
+.\" When troffing the entire doc, list this file first on the tps line,
+.\" then the chapters in order, then the appendices.
+.\" Fonts: R,I,B,St,S1,ZD,C,Lb
+.\" Macros: -ms
+.\" Preproc: tbl
+.\" Pstfinish: full
+.ds 4B \s-14.3BSD\s0
+.ds Qj Quasijarus
+.ds PS PostScript
+.ds Tr "T\s-2ROFF\s0
+.ds Mn "\fIN\s-2ROFF\s0/\*(Tr User's Manual\fP
+.ds PL "\fI\*(PS Language Reference Manual\fP
+.ds ~= "\v'.098m'\z\(mi\v'-.098m'\v'-.087m'\(ap\v'.087m'
+.de Ch
+.SH
+.LG
+\\$1:  \\$2
+..
+.de Sc
+.SH
+\\$1.  \\$2
+..
+.hw di-troff
+.hw Troff-Emu

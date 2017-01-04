@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)2.4.t	6.2 (Berkeley) 5/12/86
+.\"	@(#)2.4.t	6.3 (Berkeley) 11/28/04
 .\"
 .sh "Terminals and Devices
 .NH 3
@@ -80,42 +80,7 @@ When a terminal is first opened it is initialized to a standard
 state and configured with a set of standard control, editing,
 and interrupt characters.  A process
 may alter this configuration with certain
-control operations, specifying parameters in a standard structure:\(dg
-.FS
-\(dg The control interface described here is an internal interface only
-in 4.3BSD.  Future releases will probably use a modified interface
-based on currently-proposed standards.
-.FE
-.DS
-._f
-struct ttymode {
-	short	tt_ispeed;	/* input speed */
-	int	tt_iflags;	/* input flags */
-	short	tt_ospeed;	/* output speed */
-	int	tt_oflags;	/* output flags */
-};
-.DE
-and ``special characters'' are specified with the 
-\fIttychars\fP structure,
-.DS
-._f
-struct ttychars {
-	char	tc_erasec;	/* erase char */
-	char	tc_killc;	/* erase line */
-	char	tc_intrc;	/* interrupt */
-	char	tc_quitc;	/* quit */
-	char	tc_startc;	/* start output */
-	char	tc_stopc;	/* stop output */
-	char	tc_eofc;	/* end-of-file */
-	char	tc_brkc;	/* input delimiter (like nl) */
-	char	tc_suspc;	/* stop process signal */
-	char	tc_dsuspc;	/* delayed stop process signal */
-	char	tc_rprntc;	/* reprint line */
-	char	tc_flushc;	/* flush output (toggles) */
-	char	tc_werasc;	/* word erase */
-	char	tc_lnextc;	/* literal next character */
-};
-.DE
+control operations described in \fItty\fR(4).
 .NH 4
 Terminal hardware support
 .PP

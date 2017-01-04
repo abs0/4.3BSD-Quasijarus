@@ -1,0 +1,276 @@
+h12574
+s 00004/00001/00158
+d D 6.4 86/05/28 15:28:27 mckusick 5 4
+c add restriction that user must have a standard shell
+e
+s 00004/00005/00155
+d D 6.3 86/03/07 11:40:23 minshall 4 3
+c minor changes from Steve Jacobson.
+e
+s 00018/00015/00142
+d D 6.2 86/02/03 15:20:07 minshall 3 2
+c Steve Jacoson's changes (from <csvsj@ucbopal>).
+e
+s 00001/00001/00156
+d D 6.1 85/04/27 14:56:57 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00157/00000/00000
+d D 5.1 85/04/27 14:56:40 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+f b 
+t
+T
+I 1
+D 3
+.\" Copyright (c) 1983 Regents of the University of California.
+E 3
+I 3
+.\" Copyright (c) 1985 Regents of the University of California.
+E 3
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FTPD 8C "4 March 1983"
+E 2
+I 2
+D 3
+.TH FTPD 8C "%Q%"
+E 3
+I 3
+.TH FTPD 8C "April 27, 1985"
+E 3
+E 2
+.UC 5
+.SH NAME
+ftpd \- DARPA Internet File Transfer Protocol server
+.SH SYNOPSIS
+.B /etc/ftpd
+[
+.B \-d
+] [
+.B \-l
+] [
+.BR \-t timeout
+]
+.SH DESCRIPTION
+.I Ftpd
+is the DARPA Internet File Transfer Prototocol
+server process.  The server uses the TCP protocol
+and listens at the port specified in the ``ftp''
+service specification; see
+.IR services (5).
+.PP
+If the 
+.B \-d
+option is specified,
+D 3
+each socket created will have debugging turned
+on (SO_DEBUG).  With debugging enabled, the system
+will trace all TCP packets sent and received on a
+socket.  The program
+.IR trpt (8C)
+may then be used to interpret the packet traces.
+E 3
+I 3
+D 4
+debugging information is included in the "/tmp/ftplog" file when the -l
+option is also specified.
+E 4
+I 4
+debugging information is written to the syslog.
+E 4
+E 3
+.PP
+If the
+.B \-l
+option is specified,
+D 3
+each ftp session is logged on the standard output.
+This allows a line of the form 
+`/etc/ftpd -l > /tmp/ftplog''
+to be used to conveniently maintain a log of ftp sessions.
+E 3
+I 3
+D 4
+each ftp session is logged in a file named "/tmp/ftplog".
+E 4
+I 4
+each ftp session is logged in the syslog.
+E 4
+E 3
+.PP
+The ftp server
+D 4
+will timeout an inactive session after 60 seconds.
+E 4
+I 4
+will timeout an inactive session after 15 minutes.
+E 4
+If the
+.B \-t
+option is specified,
+the inactivity timeout period will be set to
+.IR timeout .
+.PP
+The ftp server currently supports the following ftp
+requests;  case is not distinguished.
+.PP
+.nf
+.ta \w'Request        'u
+\fBRequest	Description\fP
+I 3
+ABOR	abort previous command
+E 3
+ACCT	specify account (ignored)
+ALLO	allocate storage (vacuously)
+APPE	append to a file
+I 3
+CDUP	change to parent of current working directory
+E 3
+CWD	change working directory
+DELE	delete a file
+HELP	give help information
+LIST	give list files in a directory (``ls -lg'')
+I 3
+MKD	make a directory
+E 3
+MODE	specify data transfer \fImode\fP
+NLST	give name list of files in directory (``ls'')
+NOOP	do nothing
+PASS	specify password
+I 3
+PASV	prepare for server-to-server transfer
+E 3
+PORT	specify data connection port
+I 3
+PWD	print the current working directory
+E 3
+QUIT	terminate session
+RETR	retrieve a file
+I 3
+RMD	remove a directory
+E 3
+RNFR	specify rename-from file name
+RNTO	specify rename-to file name
+STOR	store a file
+I 3
+STOU	store a file with a unique name
+E 3
+STRU	specify data transfer \fIstructure\fP
+TYPE	specify data transfer \fItype\fP
+USER	specify user name
+XCUP	change to parent of current working directory
+XCWD	change working directory
+XMKD	make a directory
+XPWD	print the current working directory
+XRMD	remove a directory
+.fi
+.PP
+D 3
+The remaining ftp requests specified in Internet RFC 765 are
+E 3
+I 3
+The remaining ftp requests specified in Internet RFC 959 are
+E 3
+recognized, but not implemented.
+.PP
+I 3
+The ftp server will abort an active file transfer only when the
+ABOR command is preceded by a Telnet "Interrupt Process" (IP)
+signal and a Telnet "Synch" signal in the command Telnet stream,
+as described in Internet RFC 959.
+.PP
+E 3
+.I Ftpd
+interprets file names according to the ``globbing''
+conventions used by
+.IR csh (1).
+This allows users to utilize the metacharacters ``*?[]{}~''.
+.PP
+.I Ftpd
+authenticates users according to three rules. 
+.IP 1)
+The user name must be in the password data base,
+.IR /etc/passwd ,
+and not have a null password.  In this case a password
+must be provided by the client before any file operations
+may be performed.
+.IP 2)
+The user name must not appear in the file
+.IR /etc/ftpusers .
+.IP 3)
+I 5
+The user must have a standard shell returned by 
+.IR getusershell (3).
+.IP 4)
+E 5
+If the user name is ``anonymous'' or ``ftp'', an
+anonymous ftp account must be present in the password
+file (user ``ftp'').  In this case the user is allowed
+to log in by specifying any password (by convention this
+is given as the client host's name).
+.PP
+In the last case, 
+.I ftpd
+takes special measures to restrict the client's access privileges.
+The server performs a 
+.IR chroot (2)
+command to the home directory of the ``ftp'' user.
+In order that system security is not breached, it is recommended
+that the ``ftp'' subtree be constructed with care;  the following
+rules are recommended.
+.IP ~ftp)
+Make the home directory owned by ``ftp'' and unwritable by anyone.
+.IP ~ftp/bin)
+Make this directory owned by the super-user and unwritable by
+anyone.  The program
+.IR ls (1)
+must be present to support the list commands.  This
+program should have mode 111.
+.IP ~ftp/etc)
+Make this directory owned by the super-user and unwritable by
+anyone.  The files
+.IR passwd (5)
+and
+.IR group (5)
+must be present for the 
+.I ls
+command to work properly.  These files should be mode 444.
+.IP ~ftp/pub)
+Make this directory mode 777 and owned by ``ftp''.  Users
+should then place files which are to be accessible via the
+anonymous account in this directory.
+.SH "SEE ALSO"
+D 4
+ftp(1C),
+E 4
+I 4
+D 5
+ftp(1C), syslogd(8)
+E 5
+I 5
+ftp(1C), getusershell(3), syslogd(8)
+E 5
+E 4
+.SH BUGS
+D 3
+There is no support for aborting commands.
+.PP
+E 3
+The anonymous account is inherently dangerous and should
+avoided when possible.
+.PP
+The server must run as the super-user
+to create sockets with privileged port numbers.  It maintains
+an effective user id of the logged in user, reverting to
+the super-user only when binding addresses to sockets.  The
+possible security holes have been extensively
+scrutinized, but are possibly incomplete.
+E 1

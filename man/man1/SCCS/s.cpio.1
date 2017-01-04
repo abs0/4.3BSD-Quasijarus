@@ -1,0 +1,311 @@
+h11683
+s 00001/00001/00117
+d D 5.4 04/10/21 06:30:16 msokolov 4 3
+c use \- in NAME
+e
+s 00001/00003/00117
+d D 5.3 88/03/29 15:13:17 bostic 3 2
+c we don't have un32(7) in the Berkeley manual
+e
+s 00034/00058/00086
+d D 5.2 88/03/29 15:04:18 bostic 2 1
+c AT&T doesn't use the man macros...
+e
+s 00144/00000/00000
+d D 5.1 88/03/29 14:52:27 bostic 1 0
+c date and time created 88/03/29 14:52:27 by bostic
+e
+u
+U
+t
+T
+I 1
+D 2
+.ll 68
+.ce
+UNIX\(rg
+.FS "\&"
+UNIX is a registered trademark of AT&T
+.FE
+System V
+.sp 2
+.in +1
+NAME
+.br
+.in +5
+E 2
+I 2
+.\"	%W% (Berkeley) %G%
+.\"
+.TH CPIO 1 "%Q%"
+.UC 7
+.SH NAME
+E 2
+D 4
+cpio - copy file archives in and out
+E 4
+I 4
+cpio \- copy file archives in and out
+E 4
+D 2
+.in -5
+.sp
+SYNOPSIS
+.br
+.in +5
+E 2
+I 2
+.SH SYNOPSIS
+E 2
+cpio -o [ acBv ]
+D 2
+.sp
+E 2
+I 2
+.br
+E 2
+cpio -i [ BcdmrtuvfsSb6 ] [ patterns ]
+D 2
+.sp
+cpio -p [ adlmruv ] directory
+.sp
+.in -5
+DESCRIPTION
+E 2
+.br
+D 2
+.in +5
+E 2
+I 2
+cpio -p [ adlmruv ] directory
+.SH DESCRIPTION
+E 2
+Cpio -o (copy out) reads the standard input to obtain a list
+of path names and copies those files onto the standard
+output together with path name and status information.
+Output is padded to a 512-byte boundary.
+.sp
+Cpio -i (copy in) extracts files from the standard input,
+which is assumed to be the product of a previous cpio -o.
+Only files with names that match patterns are selected.
+Patterns are given in the name-generating notation of sh(1).
+In patterns, meta-characters ?, *, and [...] match the
+slash / character.  Multiple patterns may be specified and
+if no patterns are specified, the default for patterns is *
+(i.e., select all files).  The extracted files are
+conditionally created and copied into the current directory
+tree based upon the options described below.  The
+permissions of the files will be those of the previous cpio
+-o.  The owner and group of the files will be that of the
+current user unless the user is super-user, which causes
+cpio to retain the owner and group of the files of the
+previous cpio -o.
+.sp
+Cpio -p (pass) reads the standard input to obtain a list of
+path names of files that are conditionally created and
+copied into the destination directory tree based upon the
+options described below.
+.sp
+The meanings of the available options are:
+D 2
+.VL 6 0 1
+.LI a
+E 2
+I 2
+.IP a
+E 2
+Reset access times of input files after they have been
+copied.
+D 2
+.LI B
+E 2
+I 2
+.IP B
+E 2
+Input/output is to be blocked 5,120 bytes to the record  
+(does not apply to the pass options; meaningful only 
+with data directed to or from /dev/rmt/??).
+D 2
+.LI d
+E 2
+I 2
+.IP d
+E 2
+Directories are to be created as needed.
+D 2
+.LI c
+E 2
+I 2
+.IP c
+E 2
+Write header information in ASCII character form for
+portability.
+D 2
+.LI r
+E 2
+I 2
+.IP r
+E 2
+Interactively rename files.  If the user types a null
+line, the files is skipped.
+D 2
+.LI t
+E 2
+I 2
+.IP t
+E 2
+Print a table of contents of the input.  No files are
+created.
+D 2
+.LI u
+E 2
+I 2
+.IP u
+E 2
+Copy unconditionally (normally, an older file will not
+replace a newer file with the same name).
+D 2
+.LI v
+E 2
+I 2
+.IP v
+E 2
+Verbose: causes a list of file names to be printed.  
+When used with the t option, the table of contents
+looks like the output of an ls -l command (see ls(1)).
+D 2
+.LI l
+E 2
+I 2
+.IP l
+E 2
+Whenever possible, link files rather than copying them.
+Usable only with the -p option.
+D 2
+.LI m
+E 2
+I 2
+.IP m
+E 2
+Retain previous file modification time.  This option is
+ineffective on directories that are being copied.
+D 2
+.LI f
+E 2
+I 2
+.IP f
+E 2
+Copy in all files except those in patterns.
+D 2
+.LI s
+E 2
+I 2
+.IP s
+E 2
+Swap bytes.  Use only with the -i option.
+D 2
+.LI S
+E 2
+I 2
+.IP S
+E 2
+Swap halfwords.  Use only with the -i option.
+D 2
+.LI b
+E 2
+I 2
+.IP b
+E 2
+Swap both bytes and halfwords.  Use only with the -i
+option.
+D 2
+.LI 6 
+E 2
+I 2
+.IP 6
+E 2
+Process an old (i.e., UNIX System Sixth Edition format)
+file.  Only useful with -i (copy in).
+D 2
+.LE
+.sp
+.in -5
+EXAMPLES
+.br
+.in +5
+E 2
+I 2
+.SH EXAMPLES
+E 2
+The first example below copies the contents of a directory
+into an archive; the second duplicates a directory
+hierarchy:
+.sp
+.in +5
+ls | cpio -o >/dev/rmt/0m
+.sp
+cd olddir
+.br
+find . -depth -print | cpio -pdl newdir
+.br
+.sp
+.in -5
+D 2
+The trivial case ``find . -depth -print | cpio -oB >/dev/fmt/0m''
+E 2
+I 2
+The trivial case
+.nf
+.in +5
+``find . -depth -print | cpio -oB >/dev/fmt/0m''
+.in -5
+.fi
+E 2
+can be handled more efficiently by:
+D 2
+.sp
+E 2
+.in +5
+find . -cpio /dev/rmt/0m
+I 2
+.in -5
+E 2
+.sp
+D 2
+.in -10
+SEE ALSO
+.br
+.in +5
+E 2
+I 2
+.SH SEE ALSO
+E 2
+ar(1), find(1), ls(1).
+.br
+cpio(4) in the UNIX System User Reference Manual.
+D 2
+.sp
+.in -5
+BUGS
+.br
+.in +5
+E 2
+I 2
+.SH BUGS
+E 2
+Path names are restricted to 128 characters.  If there are
+too many unique linked files, the program runs out of memory
+to keep track of them and, thereafter, linking information
+is lost.  Only the super-user can copy special files.  The
+D 3
+-B option does not work with certain magnetic tape drives
+(see un32(7) in the UNIX System Administrator Reference 
+Manual).
+E 3
+I 3
+-B option does not work with certain magnetic tape drives.
+E 3
+D 2
+.sp
+E 2
+E 1

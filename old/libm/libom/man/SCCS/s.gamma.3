@@ -1,0 +1,81 @@
+h28836
+s 00003/00004/00028
+d R 6.2 85/05/24 12:04:49 miriam 4 3
+c From Prof. Kahan
+e
+s 00001/00001/00031
+d D 6.1 85/05/15 14:58:25 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00009/00028
+d D 5.1 85/05/15 14:58:16 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00037/00000/00000
+d D 4.1 85/05/15 14:58:09 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GAMMA 3M 
+E 2
+I 2
+D 3
+.TH GAMMA 3M  "19 January 1983"
+E 3
+I 3
+.TH GAMMA 3M  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+gamma \- log gamma function
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double gamma(x)
+.B double x;
+.fi
+.SH DESCRIPTION
+.I Gamma
+D 2
+returns
+ln \||\|\(*G(\||\|\fIx\fR\||\|)\||\|.
+The sign of
+\(*G(\||\|\fIx\fR\||\|)
+is returned in the external integer
+E 2
+I 2
+returns ln \||\|\(*G(\||\|\fIx\fR\||\|)\||\|.
+The sign of \(*G(\||\|\fIx\fR\||\|) is returned in the external integer
+E 2
+.IR signgam .
+D 2
+The following C program might be
+used to calculate
+\(*G:
+E 2
+I 2
+The following C program might be used to calculate \(*G:
+E 2
+.PP
+.nf
+	y = gamma(x);
+	if (y > 88.0)
+		error();
+	y = exp(y);
+	if(signgam)
+		y = \-y;
+.fi
+.SH DIAGNOSTICS
+A huge value is returned for negative integer arguments.
+.SH BUGS
+There should be a positive indication of error.
+E 1

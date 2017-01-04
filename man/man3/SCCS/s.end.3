@@ -1,0 +1,102 @@
+h55180
+s 00001/00001/00038
+d D 6.2 86/05/12 18:07:35 karels 4 3
+c 3 => 3S
+e
+s 00001/00001/00038
+d D 6.1 85/05/15 14:55:12 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00006/00010/00033
+d D 5.1 85/05/15 14:54:59 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00043/00000/00000
+d D 4.1 85/05/15 14:54:51 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH END 3 
+E 2
+I 2
+D 3
+.TH END 3  "19 January 1983"
+E 3
+I 3
+.TH END 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+end, etext, edata \- last locations in program
+.SH SYNOPSIS
+.nf
+.B extern end;
+.B extern etext;
+.B extern edata;
+.fi
+.SH DESCRIPTION
+D 2
+These names refer neither to routines
+nor to locations with interesting contents.
+The address of
+E 2
+I 2
+These names refer neither to routines nor to locations with interesting
+contents.  The address of
+E 2
+.I etext
+is the first address above the program text,
+.I edata
+above the initialized data region, and
+.I end
+above the uninitialized data region.
+.PP
+D 2
+When execution begins, the program break
+coincides with
+E 2
+I 2
+When execution begins, the program break coincides with
+E 2
+.I end,
+D 2
+but it is reset by
+the routines
+E 2
+I 2
+but it is reset by the routines
+E 2
+.IR brk (2),
+.IR malloc (3), 
+standard input/output
+D 4
+.RI ( stdio (3)),
+E 4
+I 4
+.RI ( stdio (3S)),
+E 4
+the profile
+.RB ( \-p )
+option of 
+.IR cc (1),
+etc.
+D 2
+The current value of the program break
+is reliably returned by `sbrk(0)',
+E 2
+I 2
+The current value of the program break is reliably returned by `sbrk(0)',
+E 2
+see
+.IR brk (2).
+.SH "SEE ALSO"
+brk(2), malloc(3)
+E 1

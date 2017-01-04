@@ -1,0 +1,72 @@
+h15863
+s 00001/00001/00042
+d D 6.1 85/04/29 17:42:56 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00042
+d D 5.1 85/04/29 17:42:48 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00043/00000/00000
+d D 4.1 85/04/29 17:42:41 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH COMM 1 
+E 2
+I 2
+D 3
+.TH COMM 1  "18 January 1983"
+E 3
+I 3
+.TH COMM 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+comm \- select or reject lines common to two sorted files
+.SH SYNOPSIS
+.B comm
+[
+.B \-
+[
+.B 123
+]
+] file1 file2
+.SH DESCRIPTION
+.I Comm
+reads
+.I file1
+and
+.I file2,
+which should be ordered in ASCII collating sequence,
+and produces a three column output: lines only in
+.I file1;
+lines only in
+.I file2;
+and lines in both files.
+The filename `\-' means the standard input.
+.PP
+Flags 1, 2, or 3 suppress printing of the corresponding
+column.
+Thus
+.B comm
+.B \-12
+prints only the lines common to the two files;
+.B comm
+.B \-23
+prints only lines in the first file but not in the second;
+.B comm
+.B \-123
+is a no-op.
+.PP
+.SH "SEE ALSO"
+cmp(1), diff(1), uniq(1)
+E 1

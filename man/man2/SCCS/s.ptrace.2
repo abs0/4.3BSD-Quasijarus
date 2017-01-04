@@ -1,0 +1,489 @@
+h07213
+s 00002/00002/00222
+d D 6.4 86/05/23 09:56:24 kjd 6 5
+c clean up for 4.3
+e
+s 00004/00004/00220
+d D 6.3 85/08/26 23:31:05 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00005/00005/00219
+d D 6.2 85/06/28 17:23:13 sechrest 4 3
+c Noted even restriction is machine specific
+e
+s 00019/00018/00205
+d D 6.1 85/05/09 16:07:17 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00044/00045/00179
+d D 5.1 85/05/09 16:07:05 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00224/00000/00000
+d D 4.1 85/05/09 16:06:56 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PTRACE 2 
+E 2
+I 2
+D 3
+.TH PTRACE 2 "2 July 1983"
+E 3
+I 3
+.TH PTRACE 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+ptrace \- process trace
+.SH SYNOPSIS
+.nf
+D 2
+.B #include <signal.h>
+E 2
+I 2
+.ft B
+D 3
+#include <signal.h>
+E 3
+I 3
+#include <sys/signal.h>
+#include <sys/ptrace.h>
+E 3
+E 2
+.PP
+D 2
+.B ptrace(request, pid, addr, data)
+.B int *addr;
+E 2
+I 2
+.ft B
+ptrace(request, pid, addr, data)
+int request, pid, *addr, data;
+E 2
+.fi
+.SH DESCRIPTION
+.I Ptrace
+provides a means by which a parent process
+may control the execution of a child process,
+and examine and change its core image.
+Its primary use is for the implementation of breakpoint debugging.
+There are four arguments whose interpretation
+depends on a
+.I request
+argument.
+Generally,
+.I pid
+is the process ID of the traced process,
+which must be a child (no more distant descendant)
+of the tracing process.
+A process being traced
+D 2
+behaves normally until it encounters some signal whether internally generated
+like `illegal instruction' or externally generated like `interrupt.'
+E 2
+I 2
+behaves normally until it encounters some signal
+whether internally generated
+like \*(lqillegal instruction\*(rq or externally
+generated like \*(lqinterrupt\*(rq.
+E 2
+See
+D 2
+.IR signal (2)
+E 2
+I 2
+.IR sigvec (2)
+E 2
+for the list.
+Then the traced process enters a stopped state
+and its parent is notified via
+.IR  wait (2).
+When the child is in the stopped state,
+its core image can be examined and modified
+using
+.IR ptrace .
+If desired, another
+.I ptrace
+request can then cause the child either to terminate
+or to continue, possibly ignoring the signal.
+.PP
+The value of the
+.I request
+argument determines the precise
+action of the call:
+.TP 4
+D 3
+0
+E 3
+I 3
+PT_TRACE_ME
+E 3
+This request is the only one used by the child process;
+it declares that the process is to be traced by its parent.
+All the other arguments are ignored.
+Peculiar results will ensue
+if the parent does not expect to trace the child.
+.TP 4
+D 3
+1,2
+E 3
+I 3
+PT_READ_I, PT_READ_D
+E 3
+The
+word in the child process's address space
+at
+.I addr
+is returned.
+D 2
+If I and D space are separated, request 1 indicates I space,
+E 2
+I 2
+If I and D space are separated (e.g. historically
+D 3
+on a pdp-11), request 1 indicates I space,
+E 2
+2 D space.
+E 3
+I 3
+on a pdp-11), request PT_READ_I indicates I space,
+PT_READ_D D space.
+E 3
+.I Addr
+D 4
+must be even.
+E 4
+I 4
+must be even on some machines.
+E 4
+The child must be stopped.
+The input
+.I data
+is ignored.
+.TP 4
+D 3
+3
+E 3
+I 3
+PT_READ_U
+E 3
+The word
+of the system's per-process data area corresponding to
+.I addr
+is returned.
+.I Addr
+D 4
+must be even and less than 512.
+E 4
+I 4
+must be even on some machines and less than 512.
+E 4
+This space contains the registers and other information about
+the process;
+its layout corresponds to the
+.I user
+structure in the system.
+.TP 4
+D 3
+4,5
+E 3
+I 3
+PT_WRITE_I, PT_WRITE_D
+E 3
+The
+given
+.I data
+is written at the word in the process's address space corresponding to
+.I addr,
+D 4
+which must be even.
+E 4
+I 4
+which must be even on some machines.
+E 4
+No useful value is returned.
+D 3
+If I and D space are separated, request 4 indicates I space, 
+5 D space.
+E 3
+I 3
+If I and D space are separated, request PT_WRITE_I indicates I space, 
+PT_WRITE_D D space.
+E 3
+Attempts to write in pure procedure
+fail if another process is executing the same file.
+.TP 4
+D 3
+6
+E 3
+I 3
+PT_WRITE_U
+E 3
+The process's system data is written,
+D 3
+as it is read with request 3.
+E 3
+I 3
+as it is read with request PT_READ_U.
+E 3
+Only a few locations can be written in this way:
+the general registers,
+the floating point status and registers,
+and certain bits of the processor status word.
+.TP 4
+D 3
+7
+E 3
+I 3
+PT_CONTINUE
+E 3
+The
+.I data
+argument is taken as a signal number
+and the child's execution continues
+at location
+.I addr
+as if it had incurred that signal.
+Normally the signal number will be
+either 0 to indicate that the signal that caused the stop
+should be ignored,
+or that value fetched out of the
+process's image indicating which signal caused
+the stop.
+If
+.I addr
+is (int *)1 then execution continues from where it stopped.
+.TP 4
+D 3
+8
+E 3
+I 3
+PT_KILL
+E 3
+The traced process terminates.
+.TP 4
+D 3
+9
+Execution continues as in request 7;
+E 3
+I 3
+PT_STEP
+Execution continues as in request PT_CONTINUE;
+E 3
+however, as soon as possible after execution of at least one instruction,
+execution stops again.
+The signal number from the stop is
+SIGTRAP.
+D 2
+(On the PDP-11 and VAX-11 the T-bit is used and just one instruction
+is executed;
+on the Interdata the stop does not take place
+until a store instruction is executed.)
+E 2
+I 2
+(On the VAX-11 the T-bit is used and just one instruction
+is executed.)
+E 2
+This is part of the mechanism for implementing breakpoints.
+.PP
+As indicated,
+these calls
+D 3
+(except for request 0)
+E 3
+I 3
+(except for request PT_TRACE_ME)
+E 3
+can be used only when the subject process has stopped.
+The
+.I wait
+call is used to determine
+when a process stops;
+D 2
+in such a case the `termination' status
+E 2
+I 2
+in such a case the \*(lqtermination\*(rq status
+E 2
+returned by
+.I wait
+has the value 0177 to indicate stoppage rather
+than genuine termination.
+.PP
+To forestall possible fraud,
+.I ptrace
+D 2
+inhibits the set-user-id facility
+E 2
+I 2
+inhibits the set-user-id and set-group-id facilities
+E 2
+on subsequent
+D 2
+.IR  exec (2)
+E 2
+I 2
+.IR  execve (2)
+E 2
+calls.
+If a traced process calls
+D 2
+.I exec,
+E 2
+I 2
+.IR execve ,
+E 2
+it will stop before executing the first instruction of the new image
+showing signal SIGTRAP.
+.PP
+D 2
+On the Interdata 8/32,
+`word' means a 32-bit word and `even' means 0 mod 4.
+On a VAX-11, `word' also means a 32-bit integer, but the `even' restriction
+does not apply.
+E 2
+I 2
+On a VAX-11, \*(lqword\*(rq also means a 32-bit integer,
+but the \*(lqeven\*(rq
+restriction does not apply.
+.SH "RETURN VALUE
+A 0 value is returned if the call succeeds.  If the call fails
+then a \-1 is returned and the global variable \fIerrno\fP is
+set to indicate the error.
+.SH "ERRORS
+.TP 15
+D 5
+[EINVAL]
+E 5
+I 5
+[EIO]
+E 5
+The request code is invalid.
+.TP 15
+D 5
+[EINVAL]
+E 5
+I 5
+[ESRCH]
+E 5
+The specified process does not exist.
+.TP 15
+D 5
+[EINVAL]
+E 5
+I 5
+[EIO]
+E 5
+The given signal number is invalid.
+.TP 15
+D 5
+[EFAULT]
+E 5
+I 5
+[EIO]
+E 5
+The specified address is out of bounds.
+.TP 15
+[EPERM]
+The specified process cannot be traced.
+E 2
+.SH "SEE ALSO"
+D 2
+wait(2), signal(2), adb(1)
+.SH DIAGNOSTICS
+The value \-1 is returned if
+.I request 
+is invalid,
+.I pid
+is not a traceable process,
+.I addr
+is out of bounds,
+or
+.I data
+specifies an illegal signal number.
+E 2
+I 2
+wait(2), sigvec(2), adb(1)
+E 2
+.SH BUGS
+.I Ptrace
+D 4
+is unique and arcane; it should be replaced with a special file which
+E 4
+I 4
+is unique and arcane; it should be replaced with a special file that
+E 4
+can be opened and read and written.  The control functions could then
+be implemented with
+.IR ioctl (2)
+calls on this file.  This would be simpler to understand and have much
+higher performance.
+.PP
+D 2
+On the Interdata 8/32,
+`as soon as possible' (request 7)
+means `as soon as a store instruction has been executed.'
+.PP
+E 2
+D 3
+The request 0 call should be able to specify
+E 3
+I 3
+The request PT_TRACE_ME call should be able to specify
+E 3
+D 4
+signals which are to be treated normally and not cause a stop.
+E 4
+I 4
+signals that are to be treated normally and not cause a stop.
+E 4
+In this way, for example,
+programs with simulated floating point (which
+D 2
+use `illegal instruction' signals at a very high rate)
+E 2
+I 2
+use \*(lqillegal instruction\*(rq signals at a very high rate)
+E 2
+could be efficiently debugged.
+.PP
+The error indication, \-1, is a legitimate function value;
+.I errno,
+D 6
+see
+.IR intro (2),
+E 6
+I 6
+(see
+.IR intro (2)),
+E 6
+can be used to disambiguate.
+.PP
+It should be possible to stop a process on occurrence of a system
+call;
+in this way a completely controlled environment could
+be provided.
+D 2
+.SH ASSEMBLER
+(ptrace = 26.)
+.br
+(data in r0)
+.br
+.B sys ptrace; pid; addr; request
+.br
+(value in r0)
+E 2
+E 1

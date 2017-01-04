@@ -1,0 +1,77 @@
+h48992
+s 00001/00003/00043
+d D 6.2 86/05/12 17:41:04 karels 3 2
+c move from 3X to 3
+e
+s 00001/00001/00045
+d D 6.1 85/05/15 16:22:45 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00046/00000/00000
+d D 5.1 85/05/15 16:22:38 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH INITGROUPS 3X "25 February 1983"
+E 2
+I 2
+D 3
+.TH INITGROUPS 3X "%Q%"
+E 3
+I 3
+.TH INITGROUPS 3 "%Q%"
+E 3
+E 2
+.UC 5
+.SH NAME
+initgroups \- initialize group access list
+.SH SYNOPSIS
+.B initgroups(name, basegid)
+.br
+.B char *name;
+.br
+.B int basegid;
+.SH DESCRIPTION
+.I Initgroups
+reads through the group file and sets up,
+using the
+.IR setgroups (2)
+call, the group access list for the user
+specified in
+.IR name .
+The
+.I basegid
+is automatically included in the groups list.
+Typically this value is given as
+the group number from the password file.
+.SH FILES
+/etc/group
+.SH SEE ALSO
+setgroups(2)
+.SH DIAGNOSTICS
+.I Initgroups
+returns \-1 if it was not invoked by the super-user.
+.SH BUGS
+.I Initgroups
+uses the routines based on
+.IR getgrent (3).
+If the invoking program uses any of these routines,
+the group structure will
+be overwritten in the call to
+.IR initgroups .
+D 3
+.PP
+Noone seems to keep /etc/group up to date.
+E 3
+E 1

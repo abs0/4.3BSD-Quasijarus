@@ -1,0 +1,8029 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/2004
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/setstrokeadjust where {pop true setstrokeadjust} if
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+currentdict end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: 1 1
+save $troff begin Sc
+2 14 SF
+11026 39060(Writing)P
+14154 39060(Papers)P
+16907 39060(with)P
+18774 39060(NROFF)P
+21946 39060(using)P
+24141 39060(-me)P
+1 10 SF
+16368 36900(Eric)P
+17601 36900(P.)P
+18318 36900(Allman*)P
+0 10 SF
+16326 35460(Project)P
+18226 35460(INGRES)P
+14379 34740(Electronics)P
+17278 34740(Research)P
+19675 34740(Laboratory)P
+14169 34020(University)P
+16902 34020(of)P
+17602 34020(California,)P
+20385 34020(Berkeley)P
+14936 33300(Berkeley,)P
+17451 33300(California)P
+20284 33300(94720)P
+5820 29196(This)P
+7090 29196(document)P
+9659 29196(describes)P
+12093 29196(the)P
+13029 29196(text)P
+14132 29196(processing)P
+16900 29196(facilities)P
+19169 29196(available)P
+21537 29196(on)P
+22340 29196(the)P
+0 9 SF
+23256 29196(UNIX)P
+0 10 SF
+24606 29196(\200)P
+25109 29196(operating)P
+27577 29196(system)P
+29445 29196(via)P
+0 9 SF
+30360 29196(NROFF)P
+0 10 SF
+32100 29196(\200)P
+4320 28476(and)P
+5405 28476(the)P
+6357 28476(-me)P
+7647 28476(macro)P
+9365 28476(package.)P
+11898 28476(It)P
+12484 28476(is)P
+13103 28476(assumed)P
+15387 28476(that)P
+16506 28476(the)P
+17458 28476(reader)P
+19175 28476(already)P
+21159 28476(is)P
+21778 28476(generally)P
+24229 28476(familiar)P
+26348 28476(with)P
+27634 28476(the)P
+0 9 SF
+28566 28476(UNIX)P
+0 10 SF
+30134 28476(operating)P
+4320 27756(system)P
+6207 27756(and)P
+7294 27756(a)P
+7781 27756(text)P
+8902 27756(editor)P
+10523 27756(such)P
+11843 27756(as)P
+2 10 SF
+12563 27756(ex)P
+0 10 SF
+13129 27756(.)P
+13700 27756(This)P
+14988 27756(is)P
+15609 27756(intended)P
+17896 27756(to)P
+18584 27756(be)P
+19371 27756(a)P
+19858 27756(casual)P
+21577 27756(introduction,)P
+24882 27756(and)P
+25969 27756(as)P
+26688 27756(such)P
+28007 27756(not)P
+28994 27756(all)P
+29814 27756(material)P
+32000 27756(is)P
+4320 27036(covered.)P
+6771 27036(In)P
+7474 27036(particular,)P
+10126 27036(many)P
+11662 27036(variations)P
+14231 27036(and)P
+15300 27036(additional)P
+17902 27036(features)P
+20002 27036(of)P
+20704 27036(the)P
+21639 27036(-me)P
+22912 27036(macro)P
+24613 27036(package)P
+26779 27036(are)P
+27713 27036(not)P
+28682 27036(explained.)P
+31566 27036(For)P
+4320 26316(a)P
+4793 26316(complete)P
+7199 26316(discussion)P
+9905 26316(of)P
+10612 26316(this)P
+11686 26316(and)P
+12759 26316(other)P
+14199 26316(issues,)P
+15988 26316(see)P
+1 10 SF
+16960 26316(The)P
+18066 26316(-me)P
+19376 26316(Reference)P
+21979 26316(Manual)P
+0 10 SF
+24052 26316(and)P
+1 10 SF
+25124 26316(The)P
+1 9 SF
+26210 26316(NROFF)P
+1 10 SF
+27950 26316(/)P
+1 9 SF
+28117 26316(TROFF)P
+1 10 SF
+30003 26316(Reference)P
+4320 25596(Manual.)P
+0 9 SF
+5820 24624(NROFF)P
+0 10 SF
+7560 24624(,)P
+7957 24624(a)P
+8470 24624(computer)P
+10982 24624(program)P
+13261 24624(that)P
+14407 24624(runs)P
+15686 24624(on)P
+16532 24624(the)P
+0 9 SF
+17491 24624(UNIX)P
+0 10 SF
+19087 24624(operating)P
+21599 24624(system,)P
+23661 24624(reads)P
+25172 24624(an)P
+25984 24624(input)P
+27464 24624(\212le)P
+28477 24624(prepared)P
+30821 24624(by)P
+31667 24624(the)P
+4320 23904(user)P
+5526 23904(and)P
+6599 23904(outputs)P
+8573 23904(a)P
+9046 23904(formatted)P
+11586 23904(paper)P
+13125 23904(suitable)P
+15197 23904(for)P
+16103 23904(publication)P
+19009 23904(or)P
+19715 23904(framing.)P
+22171 23904(The)P
+23310 23904(input)P
+24750 23904(consists)P
+26855 23904(of)P
+1 10 SF
+27561 23904(text)P
+0 10 SF
+28427 23904(,)P
+28783 23904(or)P
+29489 23904(words)P
+31161 23904(to)P
+31834 23904(be)P
+4320 23184(printed,)P
+6370 23184(and)P
+1 10 SF
+7436 23184(requests)P
+0 10 SF
+9434 23184(,)P
+9784 23184(which)P
+11450 23184(give)P
+12683 23184(instructions)P
+15683 23184(to)P
+16350 23184(the)P
+0 9 SF
+17263 23184(NROFF)P
+0 10 SF
+19203 23184(program)P
+21436 23184(telling)P
+23170 23184(how)P
+24403 23184(to)P
+25070 23184(format)P
+26870 23184(the)P
+27803 23184(printed)P
+29703 23184(copy.)P
+5820 22212(Section)P
+7851 22212(1)P
+8382 22212(describes)P
+10844 22212(the)P
+11808 22212(basics)P
+13504 22212(of)P
+14235 22212(text)P
+15366 22212(processing.)P
+18512 22212(Section)P
+20543 22212(2)P
+21074 22212(describes)P
+23536 22212(the)P
+24499 22212(basic)P
+25961 22212(requests.)P
+28506 22212(Section)P
+30536 22212(3)P
+31066 22212(intro\255)P
+4320 21492(duces)P
+5904 21492(displays.)P
+8439 21492(Annotations,)P
+11741 21492(such)P
+13059 21492(as)P
+13777 21492(footnotes,)P
+16378 21492(are)P
+17328 21492(handled)P
+19445 21492(in)P
+20130 21492(section)P
+22047 21492(4.)P
+22915 21492(The)P
+24066 21492(more)P
+25517 21492(complex)P
+27801 21492(requests)P
+29984 21492(which)P
+31668 21492(are)P
+4320 20772(not)P
+5309 20772(discussed)P
+7829 20772(in)P
+8517 20772(section)P
+10437 20772(2)P
+10958 20772(are)P
+11911 20772(covered)P
+14030 20772(in)P
+14718 20772(section)P
+16638 20772(5.)P
+17509 20772(Finally,)P
+19581 20772(section)P
+21501 20772(6)P
+22022 20772(discusses)P
+24474 20772(things)P
+26162 20772(you)P
+27283 20772(will)P
+28438 20772(need)P
+29791 20772(to)P
+30479 20772(know)P
+32033 20772(if)P
+4320 20052(you)P
+5478 20052(want)P
+6902 20052(to)P
+7627 20052(typeset)P
+9584 20052(documents.)P
+12791 20052(If)P
+13448 20052(you)P
+14605 20052(are)P
+15594 20052(a)P
+16117 20052(novice,)P
+18123 20052(you)P
+19280 20052(probably)P
+21670 20052(won't)P
+23327 20052(want)P
+24750 20052(to)P
+25474 20052(read)P
+26763 20052(beyond)P
+28786 20052(section)P
+30742 20052(4)P
+31299 20052(until)P
+4320 19332(you)P
+5420 19332(have)P
+6752 19332(tried)P
+8052 19332(some)P
+9518 19332(of)P
+10218 19332(the)P
+11151 19332(basic)P
+12583 19332(features)P
+14681 19332(out.)P
+5820 18360(When)P
+7452 18360(you)P
+8552 18360(have)P
+9884 18360(your)P
+11184 18360(raw)P
+12283 18360(text)P
+13383 18360(ready,)P
+15065 18360(call)P
+16131 18360(the)P
+0 9 SF
+17044 18360(NROFF)P
+0 10 SF
+18984 18360(formatter)P
+21417 18360(by)P
+22217 18360(typing)P
+23951 18360(as)P
+24650 18360(a)P
+25116 18360(request)P
+27048 18360(to)P
+27715 18360(the)P
+0 9 SF
+28628 18360(UNIX)P
+0 10 SF
+30178 18360(shell:)P
+6720 17388(nroff)P
+8120 17388(-me)P
+9391 17388(-T)P
+1 10 SF
+10096 17388(type)P
+11295 17388(\212les)P
+0 10 SF
+4320 16416(where)P
+1 10 SF
+5993 16416(type)P
+0 10 SF
+7200 16416(describes)P
+9639 16416(the)P
+10580 16416(type)P
+11821 16416(of)P
+12529 16416(terminal)P
+14736 16416(you)P
+15843 16416(are)P
+16782 16416(outputting)P
+19457 16416(to.)P
+20481 16416(Common)P
+22922 16416(values)P
+24661 16416(are)P
+2 10 SF
+25600 16416(dtc)P
+0 10 SF
+26607 16416(for)P
+27514 16416(a)P
+27987 16416(DTC)P
+29394 16416(300s)P
+30734 16416(\(daisy\255)P
+4320 15696(wheel)P
+5970 15696(type\))P
+7421 15696(printer)P
+9239 15696(and)P
+2 10 SF
+10323 15696(lpr)P
+0 10 SF
+11308 15696(for)P
+12226 15696(the)P
+13177 15696(line)P
+14295 15696(printer.)P
+16463 15696(If)P
+17081 15696(the)P
+2 10 SF
+18032 15696(-T)P
+0 10 SF
+18992 15696(\213ag)P
+20110 15696(is)P
+20728 15696(omitted,)P
+22930 15696(a)P
+23414 15696(``lowest)P
+25598 15696(common)P
+27916 15696(denominator'')P
+31567 15696(ter\255)P
+4320 14976(minal)P
+5940 14976(is)P
+6593 14976(assumed;)P
+9078 14976(this)P
+10198 14976(is)P
+10851 14976(good)P
+12304 14976(for)P
+13257 14976(previewing)P
+16209 14976(output)P
+17996 14976(on)P
+18849 14976(most)P
+20269 14976(terminals.)P
+23105 14976(A)P
+23791 14976(complete)P
+26243 14976(description)P
+29162 14976(of)P
+29914 14976(options)P
+31933 14976(to)P
+4320 14256(the)P
+0 9 SF
+5233 14256(NROFF)P
+0 10 SF
+7173 14256(command)P
+9739 14256(can)P
+10771 14256(be)P
+11537 14256(found)P
+13137 14256(in)P
+1 10 SF
+13804 14256(The)P
+1 9 SF
+14884 14256(NROFF)P
+1 10 SF
+16624 14256(/)P
+1 9 SF
+16791 14256(TROFF)P
+1 10 SF
+18671 14256(Reference)P
+21268 14256(Manual.)P
+0 10 SF
+5820 13284(The)P
+6963 13284(word)P
+1 10 SF
+8406 13284(argument)P
+0 10 SF
+10914 13284(is)P
+11523 13284(used)P
+12831 13284(in)P
+13507 13284(this)P
+14583 13284(manual)P
+16558 13284(to)P
+17234 13284(mean)P
+18742 13284(a)P
+19217 13284(word)P
+20659 13284(or)P
+21368 13284(number)P
+23410 13284(which)P
+25085 13284(appears)P
+27125 13284(on)P
+27934 13284(the)P
+28876 13284(same)P
+30317 13284(line)P
+31426 13284(as)P
+32134 13284(a)P
+4320 12564(request)P
+6252 12564(which)P
+7918 12564(modi\212es)P
+10185 12564(the)P
+11118 12564(meaning)P
+13384 12564(of)P
+14084 12564(that)P
+15184 12564(request.)P
+17466 12564(For)P
+18500 12564(example,)P
+20882 12564(the)P
+21815 12564(request)P
+6720 11592(.sp)P
+4320 10620(spaces)P
+6084 10620(one)P
+7150 10620(line,)P
+8400 10620(but)P
+6720 9648(.sp)P
+7603 9648(4)P
+4320 8676(spaces)P
+6094 8676(four)P
+7304 8676(lines.)P
+8997 8676(The)P
+10140 8676(number)P
+2 10 SF
+12183 8676(4)P
+0 10 SF
+12693 8676(is)P
+13303 8676(an)P
+1 10 SF
+14079 8676(argument)P
+0 10 SF
+16588 8676(to)P
+17265 8676(the)P
+2 10 SF
+18208 8676(.sp)P
+0 10 SF
+19135 8676(request)P
+21077 8676(which)P
+22753 8676(says)P
+23995 8676(to)P
+24672 8676(space)P
+26213 8676(four)P
+27423 8676(lines)P
+28766 8676(instead)P
+30675 8676(of)P
+31384 8676(one.)P
+4320 7956(Arguments)P
+7186 7956(are)P
+8118 7956(separated)P
+10582 7956(from)P
+11949 7956(the)P
+12882 7956(request)P
+14814 7956(and)P
+15880 7956(from)P
+17247 7956(each)P
+18545 7956(other)P
+19978 7956(by)P
+20778 7956(spaces.)P
+4320 7380 8 0 36 L
+0 8 SF
+5616 6660(*Author's)P
+7723 6660(current)P
+9242 6660(address:)P
+10975 6660(Britton)P
+12494 6660(Lee,)P
+13493 6660(Inc.,)P
+14506 6660(1919)P
+15626 6660(Addison)P
+17413 6660(Suite)P
+18559 6660(105,)P
+19559 6660(Berkeley,)P
+21571 6660(California)P
+23676 6660(94704.)P
+5616 5940(\200)P
+0 7 SF
+5856 5940(UNIX)P
+0 8 SF
+7065 5940(is)P
+7545 5940(a)P
+7918 5940(trademark)P
+10023 5940(of)P
+10583 5940(AT&T)P
+12049 5940(Bell)P
+13008 5940(Laboratories)P
+2 10 SF
+4320 2160(Writing)P
+6554 2160(Papers)P
+8520 2160(with)P
+9854 2160(NROFF)P
+12121 2160(using)P
+13689 2160(-me)P
+29900 2160(USD:22\2551)P
+end restore showpage
+%%Page: 2 2
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\2552)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+4320 41760(1.)P
+5170 41760(Basics)P
+6969 41760(of)P
+7669 41760(Text)P
+9035 41760(Processing)P
+0 10 SF
+6720 40788(The)P
+7875 40788(primary)P
+9997 40788(function)P
+12219 40788(of)P
+0 9 SF
+12921 40788(NROFF)P
+0 10 SF
+14882 40788(is)P
+15503 40788(to)P
+1 10 SF
+16191 40788(collect)P
+0 10 SF
+18011 40788(words)P
+19698 40788(from)P
+21086 40788(input)P
+22541 40788(lines,)P
+1 10 SF
+24045 40788(\212ll)P
+0 10 SF
+24900 40788(output)P
+26655 40788(lines)P
+28009 40788(with)P
+29297 40788(those)P
+30784 40788(words,)P
+1 10 SF
+5220 40068(justify)P
+0 10 SF
+6949 40068(the)P
+7944 40068(right)P
+9340 40068(hand)P
+10768 40068(margin)P
+12729 40068(by)P
+13590 40068(inserting)P
+15951 40068(extra)P
+17411 40068(spaces)P
+19236 40068(in)P
+19964 40068(the)P
+20958 40068(line,)P
+22269 40068(and)P
+23396 40068(output)P
+25191 40068(the)P
+26185 40068(result.)P
+28129 40068(For)P
+29224 40068(example,)P
+31667 40068(the)P
+5220 39348(input:)P
+7620 38376(Now)P
+8986 38376(is)P
+9586 38376(the)P
+10519 38376(time)P
+7620 37656(for)P
+8520 37656(all)P
+9320 37656(good)P
+10720 37656(men)P
+7620 36936(to)P
+8287 36936(come)P
+9786 36936(to)P
+10453 36936(the)P
+11386 36936(aid)P
+7620 36216(of)P
+8320 36216(their)P
+9620 36216(party.)P
+7620 35496(Four)P
+8954 35496(score)P
+10419 35496(and)P
+11485 35496(seven)P
+7620 34776(years)P
+9085 34776(ago,...)P
+5220 33804(will)P
+6354 33804(be)P
+7120 33804(read,)P
+8502 33804(packed)P
+10400 33804(onto)P
+11667 33804(output)P
+13401 33804(lines,)P
+14884 33804(and)P
+15950 33804(justi\212ed)P
+18084 33804(to)P
+18751 33804(produce:)P
+7620 32832(Now)P
+8995 32832(is)P
+9604 32832(the)P
+10546 32832(time)P
+11822 32832(for)P
+12731 32832(all)P
+13540 32832(good)P
+14949 32832(men)P
+16191 32832(to)P
+16867 32832(come)P
+18375 32832(to)P
+19051 32832(the)P
+19993 32832(aid)P
+20935 32832(of)P
+21644 32832(their)P
+22953 32832(party.)P
+24745 32832(Four)P
+26088 32832(score)P
+27561 32832(and)P
+28635 32832(seven)P
+7620 32112(years)P
+9085 32112(ago,...)P
+5220 31140(Sometimes)P
+8090 31140(you)P
+9193 31140(may)P
+10429 31140(want)P
+11798 31140(to)P
+12468 31140(start)P
+13704 31140(a)P
+14173 31140(new)P
+15374 31140(output)P
+17110 31140(line)P
+18212 31140(even)P
+19546 31140(though)P
+21415 31140(the)P
+22350 31140(line)P
+23452 31140(you)P
+24554 31140(are)P
+25488 31140(on)P
+26290 31140(is)P
+26892 31140(not)P
+27861 31140(yet)P
+28796 31140(full;)P
+29999 31140(for)P
+30901 31140(exam\255)P
+5220 30420(ple,)P
+6371 30420(at)P
+7072 30420(the)P
+8073 30420(end)P
+9207 30420(of)P
+9975 30420(a)P
+10509 30420(paragraph.)P
+13525 30420(To)P
+14460 30420(do)P
+15328 30420(this)P
+16463 30420(you)P
+17631 30420(can)P
+18731 30420(cause)P
+20330 30420(a)P
+1 10 SF
+20864 30420(break)P
+0 10 SF
+22229 30420(,)P
+22647 30420(which)P
+24381 30420(starts)P
+25915 30420(a)P
+26449 30420(new)P
+27715 30420(output)P
+29516 30420(line.)P
+31033 30420(Some)P
+5220 29700(requests)P
+7385 29700(cause)P
+8916 29700(a)P
+9382 29700(break)P
+10914 29700(automatically,)P
+14530 29700(as)P
+15229 29700(do)P
+16029 29700(blank)P
+17562 29700(input)P
+18996 29700(lines)P
+20329 29700(and)P
+21395 29700(input)P
+22829 29700(lines)P
+24162 29700(beginning)P
+26762 29700(with)P
+28029 29700(a)P
+28495 29700(space.)P
+6720 28728(Not)P
+7821 28728(all)P
+8622 28728(input)P
+10057 28728(lines)P
+11391 28728(are)P
+12323 28728(text)P
+13423 28728(to)P
+14090 28728(be)P
+14856 28728(formatted.)P
+17739 28728(Some)P
+19306 28728(of)P
+20006 28728(the)P
+20939 28728(input)P
+22373 28728(lines)P
+23706 28728(are)P
+1 10 SF
+24638 28728(requests)P
+0 10 SF
+26836 28728(which)P
+28502 28728(describe)P
+30700 28728(how)P
+31933 28728(to)P
+5220 28008(format)P
+7082 28008(the)P
+8077 28008(text.)P
+9589 28008(Requests)P
+12016 28008(always)P
+13943 28008(have)P
+15337 28008(a)P
+15865 28008(period)P
+17660 28008(or)P
+18422 28008(an)P
+19250 28008(apostrophe)P
+22143 28008(\(``)P
+22843 28008(\222)P
+23143 28008(''\))P
+24004 28008(as)P
+24764 28008(the)P
+25758 28008(\212rst)P
+26953 28008(character)P
+29411 28008(of)P
+30172 28008(the)P
+31166 28008(input)P
+5220 27288(line.)P
+6720 26316(The)P
+7929 26316(text)P
+9105 26316(formatter)P
+11614 26316(also)P
+12856 26316(does)P
+14231 26316(more)P
+15740 26316(complex)P
+18082 26316(things,)P
+19975 26316(such)P
+21350 26316(as)P
+22125 26316(automatically)P
+25667 26316(numbering)P
+28543 26316(pages,)P
+30333 26316(skipping)P
+5220 25596(over)P
+6486 25596(page)P
+7818 25596(folds,)P
+9368 25596(putting)P
+11269 25596(footnotes)P
+13702 25596(in)P
+14369 25596(the)P
+15302 25596(correct)P
+17167 25596(place,)P
+18782 25596(and)P
+19848 25596(so)P
+20581 25596(forth.)P
+6720 24624(I)P
+7186 24624(can)P
+8284 24624(offer)P
+9716 24624(you)P
+10882 24624(a)P
+11414 24624(few)P
+12579 24624(hints)P
+14012 24624(for)P
+14978 24624(preparing)P
+17543 24624(text)P
+18709 24624(for)P
+19675 24624(input)P
+21175 24624(to)P
+0 9 SF
+21887 24624(NROFF)P
+0 10 SF
+23627 24624(.)P
+24242 24624(First,)P
+25758 24624(keep)P
+27155 24624(the)P
+28153 24624(input)P
+29652 24624(lines)P
+31050 24624(short.)P
+5220 23904(Short)P
+6750 23904(input)P
+8212 23904(lines)P
+9573 23904(are)P
+10533 23904(easier)P
+12159 23904(to)P
+12854 23904(edit,)P
+14132 23904(and)P
+0 9 SF
+15206 23904(NROFF)P
+0 10 SF
+17174 23904(will)P
+18336 23904(pack)P
+19696 23904(words)P
+21390 23904(onto)P
+22685 23904(longer)P
+24446 23904(lines)P
+25807 23904(for)P
+26735 23904(you)P
+27863 23904(anyhow.)P
+30340 23904(In)P
+31068 23904(keep\255)P
+5220 23184(ing)P
+6232 23184(with)P
+7544 23184(this,)P
+8806 23184(it)P
+9385 23184(is)P
+10030 23184(helpful)P
+11975 23184(to)P
+12687 23184(begin)P
+14265 23184(a)P
+14776 23184(new)P
+16020 23184(line)P
+17165 23184(after)P
+18509 23184(every)P
+20086 23184(period,)P
+22014 23184(comma,)P
+24175 23184(or)P
+24920 23184(phrase,)P
+26880 23184(since)P
+28357 23184(common)P
+30702 23184(correc\255)P
+5220 22464(tions)P
+6612 22464(are)P
+7569 22464(to)P
+8261 22464(add)P
+9352 22464(or)P
+10077 22464(delete)P
+11734 22464(sentences)P
+14256 22464(or)P
+14980 22464(phrases.)P
+17352 22464(Second,)P
+19492 22464(do)P
+20316 22464(not)P
+21307 22464(put)P
+22298 22464(spaces)P
+24086 22464(at)P
+24743 22464(the)P
+25700 22464(end)P
+26790 22464(of)P
+27514 22464(lines,)P
+29021 22464(since)P
+30477 22464(this)P
+31568 22464(can)P
+5220 21744(sometimes)P
+8035 21744(confuse)P
+10149 21744(the)P
+0 9 SF
+11110 21744(NROFF)P
+0 10 SF
+13098 21744(processor.)P
+15994 21744(Third,)P
+17726 21744(do)P
+18574 21744(not)P
+19589 21744(hyphenate)P
+22302 21744(words)P
+24016 21744(at)P
+24697 21744(the)P
+25678 21744(end)P
+26792 21744(of)P
+27540 21744(lines)P
+28921 21744(\(except)P
+30934 21744(words)P
+5220 21024(that)P
+6322 21024(should)P
+8123 21024(have)P
+9456 21024(hyphens)P
+11656 21024(in)P
+12324 21024(them,)P
+13875 21024(such)P
+15175 21024(as)P
+15875 21024(``mother\255in\255law''\);)P
+0 9 SF
+20656 21024(NROFF)P
+0 10 SF
+22597 21024(is)P
+23198 21024(smart)P
+24732 21024(enough)P
+26699 21024(to)P
+27367 21024(hyphenate)P
+30033 21024(words)P
+31700 21024(for)P
+5220 20304(you)P
+6324 20304(as)P
+7027 20304(needed,)P
+9079 20304(but)P
+10050 20304(is)P
+10654 20304(not)P
+11625 20304(smart)P
+13162 20304(enough)P
+15132 20304(to)P
+15803 20304(take)P
+17006 20304(hyphens)P
+19209 20304(out)P
+20180 20304(and)P
+21250 20304(join)P
+22387 20304(a)P
+22856 20304(word)P
+24292 20304(back)P
+25627 20304(together.)P
+28146 20304(Also,)P
+29632 20304(words)P
+31301 20304(such)P
+5220 19584(as)P
+5921 19584(``mother\255in\255law'')P
+10356 19584(should)P
+12158 19584(not)P
+13127 19584(be)P
+13895 19584(broken)P
+15763 19584(over)P
+17030 19584(a)P
+17497 19584(line,)P
+18748 19584(since)P
+20181 19584(then)P
+21415 19584(you)P
+22516 19584(will)P
+23651 19584(get)P
+24585 19584(a)P
+25052 19584(space)P
+26584 19584(where)P
+28250 19584(not)P
+29218 19584(wanted,)P
+31301 19584(such)P
+5220 18864(as)P
+5919 18864(``mother\255)P
+8419 18864(in\255law''.)P
+2 10 SF
+4320 17424(2.)P
+5170 17424(Basic)P
+6736 17424(Requests)P
+5220 15984(2.1.)P
+6520 15984(Paragraphs)P
+0 10 SF
+7620 15012(Paragraphs)P
+10485 15012(are)P
+11417 15012(begun)P
+13083 15012(by)P
+13883 15012(using)P
+15383 15012(the)P
+2 10 SF
+16316 15012(.pp)P
+0 10 SF
+17334 15012(request.)P
+19616 15012(For)P
+20650 15012(example,)P
+23032 15012(the)P
+23965 15012(input:)P
+8520 14040(.pp)P
+8520 13320(Now)P
+9886 13320(is)P
+10486 13320(the)P
+11419 13320(time)P
+12686 13320(for)P
+13586 13320(all)P
+14386 13320(good)P
+15786 13320(men)P
+8520 12600(to)P
+9187 12600(come)P
+10686 12600(to)P
+11353 12600(the)P
+12286 12600(aid)P
+13219 12600(of)P
+13919 12600(their)P
+15219 12600(party.)P
+8520 11880(Four)P
+9854 11880(score)P
+11319 11880(and)P
+12385 11880(seven)P
+13950 11880(years)P
+15415 11880(ago,...)P
+6120 10908(produces)P
+8485 10908(a)P
+8951 10908(blank)P
+10484 10908(line)P
+11584 10908(followed)P
+13917 10908(by)P
+14717 10908(an)P
+15483 10908(indented)P
+17749 10908(\212rst)P
+18883 10908(line.)P
+20333 10908(The)P
+21466 10908(result)P
+22999 10908(is:)P
+10020 9936(Now)P
+11410 9936(is)P
+12034 9936(the)P
+12991 9936(time)P
+14282 9936(for)P
+15206 9936(all)P
+16030 9936(good)P
+17454 9936(men)P
+18711 9936(to)P
+19402 9936(come)P
+20924 9936(to)P
+21614 9936(the)P
+22570 9936(aid)P
+23526 9936(of)P
+24249 9936(their)P
+25572 9936(party.)P
+27378 9936(Four)P
+28735 9936(score)P
+8520 9216(and)P
+9586 9216(seven)P
+11151 9216(years)P
+12616 9216(ago,...)P
+7620 7992(Notice)P
+9434 7992(that)P
+10549 7992(the)P
+11497 7992(sentences)P
+14009 7992(of)P
+14724 7992(the)P
+15671 7992(paragraphs)P
+1 10 SF
+18516 7992(must)P
+19863 7992(not)P
+0 10 SF
+20844 7992(begin)P
+22391 7992(with)P
+23672 7992(a)P
+24152 7992(space,)P
+25847 7992(since)P
+27293 7992(blank)P
+28840 7992(lines)P
+30187 7992(and)P
+31267 7992(lines)P
+6120 7272(beginning)P
+8720 7272(with)P
+9987 7272(spaces)P
+11751 7272(cause)P
+13282 7272(a)P
+13748 7272(break.)P
+15630 7272(For)P
+16664 7272(example,)P
+19046 7272(if)P
+19613 7272(I)P
+20013 7272(had)P
+21079 7272(typed:)P
+end restore showpage
+%%Page: 3 3
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29900 43920(USD:22\2553)P
+0 10 SF
+8520 41760(.pp)P
+8520 41040(Now)P
+9886 41040(is)P
+10486 41040(the)P
+11419 41040(time)P
+12686 41040(for)P
+13586 41040(all)P
+14386 41040(good)P
+15786 41040(men)P
+9720 40320(to)P
+10387 40320(come)P
+11886 40320(to)P
+12553 40320(the)P
+13486 40320(aid)P
+14419 40320(of)P
+15119 40320(their)P
+16419 40320(party.)P
+8520 39600(Four)P
+9854 39600(score)P
+11319 39600(and)P
+12385 39600(seven)P
+13950 39600(years)P
+15415 39600(ago,...)P
+6120 38628(The)P
+7253 38628(output)P
+8987 38628(would)P
+10687 38628(be:)P
+10020 37656(Now)P
+11386 37656(is)P
+11986 37656(the)P
+12919 37656(time)P
+14186 37656(for)P
+15086 37656(all)P
+15886 37656(good)P
+17286 37656(men)P
+9720 36936(to)P
+10387 36936(come)P
+11886 36936(to)P
+12553 36936(the)P
+13486 36936(aid)P
+14419 36936(of)P
+15119 36936(their)P
+16419 36936(party.)P
+18202 36936(Four)P
+19536 36936(score)P
+21001 36936(and)P
+22067 36936(seven)P
+23632 36936(years)P
+25097 36936(ago,...)P
+6120 35964(A)P
+6753 35964(new)P
+7952 35964(line)P
+9052 35964(begins)P
+10818 35964(after)P
+12117 35964(the)P
+13050 35964(word)P
+14483 35964(``men'')P
+16516 35964(because)P
+18613 35964(the)P
+19546 35964(second)P
+21411 35964(line)P
+22511 35964(began)P
+24143 35964(with)P
+25410 35964(a)P
+25876 35964(space)P
+27407 35964(character.)P
+7620 34992(There)P
+9219 34992(are)P
+10151 34992(many)P
+11684 34992(fancier)P
+13549 34992(types)P
+15015 34992(of)P
+15715 34992(paragraphs,)P
+18696 34992(which)P
+20362 34992(will)P
+21496 34992(be)P
+22262 34992(described)P
+24760 34992(later.)P
+2 10 SF
+5220 33552(2.2.)P
+6520 33552(Headers)P
+8852 33552(and)P
+10020 33552(Footers)P
+0 10 SF
+7620 32580(Arbitrary)P
+10071 32580(headers)P
+12119 32580(and)P
+13202 32580(footers)P
+15085 32580(can)P
+16134 32580(be)P
+16917 32580(put)P
+17901 32580(at)P
+18551 32580(the)P
+19501 32580(top)P
+20485 32580(and)P
+21568 32580(bottom)P
+23486 32580(of)P
+24203 32580(every)P
+25752 32580(page.)P
+27451 32580(Two)P
+28768 32580(requests)P
+30950 32580(of)P
+31667 32580(the)P
+6120 31860(form)P
+2 10 SF
+7489 31860(.he)P
+1 10 SF
+8439 31860(title)P
+0 10 SF
+9574 31860(and)P
+2 10 SF
+10641 31860(.fo)P
+1 10 SF
+11491 31860(title)P
+0 10 SF
+12626 31860(de\212ne)P
+14293 31860(the)P
+15227 31860(titles)P
+16595 31860(to)P
+17263 31860(put)P
+18231 31860(at)P
+18865 31860(the)P
+19799 31860(head)P
+21132 31860(and)P
+22199 31860(the)P
+23133 31860(foot)P
+24301 31860(of)P
+25002 31860(every)P
+26535 31860(page,)P
+28018 31860(respectively.)P
+31467 31860(The)P
+6120 31140(titles)P
+7528 31140(are)P
+8501 31140(called)P
+1 10 SF
+10174 31140(three\255part)P
+0 10 SF
+12847 31140(titles,)P
+14405 31140(that)P
+15546 31140(is,)P
+16337 31140(there)P
+17777 31140(is)P
+18417 31140(a)P
+18923 31140(left\255justi\212ed)P
+22097 31140(part,)P
+23420 31140(a)P
+23926 31140(centered)P
+26197 31140(part,)P
+27520 31140(and)P
+28626 31140(a)P
+29132 31140(right\255justi\212ed)P
+6120 30420(part.)P
+7633 30420(To)P
+8530 30420(separate)P
+10724 30420(these)P
+12186 30420(three)P
+13615 30420(parts)P
+15011 30420(the)P
+15974 30420(\212rst)P
+17138 30420(character)P
+19564 30420(of)P
+1 10 SF
+20293 30420(title)P
+0 10 SF
+21456 30420(\(whatever)P
+24083 30420(it)P
+24646 30420(may)P
+25908 30420(be\))P
+26903 30420(is)P
+27532 30420(used)P
+28860 30420(as)P
+29588 30420(a)P
+30083 30420(delimiter.)P
+6120 29700(Any)P
+7384 29700(character)P
+9812 29700(may)P
+11076 29700(be)P
+11873 29700(used,)P
+13353 29700(but)P
+14351 29700(backslash)P
+16913 29700(and)P
+18010 29700(double)P
+19874 29700(quote)P
+21438 29700(marks)P
+23135 29700(should)P
+24966 29700(be)P
+25763 29700(avoided.)P
+28242 29700(The)P
+29405 29700(percent)P
+31400 29700(sign)P
+6120 28980(is)P
+6720 28980(replaced)P
+8951 28980(by)P
+9751 28980(the)P
+10684 28980(current)P
+12583 28980(page)P
+13915 28980(number)P
+15948 28980(whenever)P
+18479 28980(found)P
+20079 28980(in)P
+20746 28980(the)P
+21679 28980(title.)P
+23163 28980(For)P
+24197 28980(example,)P
+26579 28980(the)P
+27512 28980(input:)P
+8520 28008(.he)P
+9436 28008(\222\222%\222\222)P
+8520 27288(.fo)P
+9370 27288(\222Jane)P
+10835 27288(Jones\222\222My)P
+13600 27288(Book\222)P
+6120 26316(results)P
+7928 26316(in)P
+8637 26316(the)P
+9612 26316(page)P
+10986 26316(number)P
+13061 26316(centered)P
+15334 26316(at)P
+16009 26316(the)P
+16984 26316(top)P
+17993 26316(of)P
+18735 26316(each)P
+20075 26316(page,)P
+21599 26316(``Jane)P
+23306 26316(Jones'')P
+25280 26316(in)P
+25989 26316(the)P
+26963 26316(lower)P
+28570 26316(left)P
+29611 26316(corner,)P
+31534 26316(and)P
+6120 25596(``My)P
+7553 25596(Book'')P
+9453 25596(in)P
+10120 25596(the)P
+11053 25596(lower)P
+12619 25596(right)P
+13953 25596(corner.)P
+2 10 SF
+5220 24156(2.3.)P
+6520 24156(Double)P
+8554 24156(Spacing)P
+0 9 SF
+7620 23184(NROFF)P
+0 10 SF
+9614 23184(will)P
+10802 23184(double)P
+12689 23184(space)P
+14274 23184(output)P
+16062 23184(text)P
+17216 23184(automatically)P
+20736 23184(if)P
+21357 23184(you)P
+22511 23184(use)P
+23564 23184(the)P
+24551 23184(request)P
+2 10 SF
+26536 23184(.ls)P
+27286 23184(2)P
+0 10 SF
+27586 23184(,)P
+27989 23184(as)P
+28741 23184(is)P
+29394 23184(done)P
+30813 23184(in)P
+31533 23184(this)P
+6120 21744(section.)P
+8369 21744(You)P
+9602 21744(can)P
+10634 21744(revert)P
+12233 21744(to)P
+12900 21744(single)P
+14533 21744(spaced)P
+16364 21744(mode)P
+17897 21744(by)P
+18697 21744(typing)P
+2 10 SF
+20431 21744(.ls)P
+21181 21744(1)P
+0 10 SF
+21481 21744(.)P
+2 10 SF
+5220 20304(2.4.)P
+6520 20304(Page)P
+7953 20304(Layout)P
+0 10 SF
+7620 19332(A)P
+8241 19332(number)P
+10262 19332(of)P
+10950 19332(requests)P
+13103 19332(allow)P
+14624 19332(you)P
+15712 19332(to)P
+16367 19332(change)P
+18254 19332(the)P
+19176 19332(way)P
+20364 19332(the)P
+21286 19332(printed)P
+23175 19332(copy)P
+24530 19332(looks,)P
+26169 19332(sometimes)P
+28924 19332(called)P
+30545 19332(the)P
+1 10 SF
+31467 19332(lay\255)P
+6120 18612(out)P
+0 10 SF
+7198 18612(of)P
+8009 18612(the)P
+9052 18612(output)P
+10896 18612(page.)P
+12688 18612(Most)P
+14231 18612(of)P
+15041 18612(these)P
+16583 18612(requests)P
+18858 18612(adjust)P
+20601 18612(the)P
+21644 18612(placing)P
+23720 18612(of)P
+24530 18612(``white)P
+26573 18612(space'')P
+28614 18612(\(blank)P
+30457 18612(lines)P
+31900 18612(or)P
+6120 17892(spaces\).)P
+8459 17892(In)P
+9184 17892(these)P
+10641 17892(explanations,)P
+14048 17892(characters)P
+16703 17892(in)P
+17395 17892(italics)P
+19053 17892(should)P
+20878 17892(be)P
+21669 17892(replaced)P
+23924 17892(with)P
+25215 17892(values)P
+26971 17892(you)P
+28095 17892(wish)P
+29452 17892(to)P
+30143 17892(use;)P
+31333 17892(bold)P
+6120 17172(characters)P
+8750 17172(represent)P
+11148 17172(characters)P
+13778 17172(which)P
+15444 17172(should)P
+17244 17172(actually)P
+19343 17172(be)P
+20109 17172(typed.)P
+7620 16200(The)P
+2 10 SF
+8753 16200(.bp)P
+0 10 SF
+9771 16200(request)P
+11703 16200(starts)P
+13169 16200(a)P
+13635 16200(new)P
+14834 16200(page.)P
+7620 15228(The)P
+8779 15228(request)P
+2 10 SF
+10737 15228(.sp)P
+1 10 SF
+11654 15228(N)P
+0 10 SF
+12280 15228(leaves)P
+1 10 SF
+14004 15228(N)P
+0 10 SF
+14630 15228(lines)P
+15989 15228(of)P
+16714 15228(blank)P
+18272 15228(space.)P
+1 10 SF
+20178 15228(N)P
+0 10 SF
+20803 15228(can)P
+21860 15228(be)P
+22651 15228(omitted)P
+24710 15228(\(meaning)P
+27201 15228(skip)P
+28426 15228(a)P
+28917 15228(single)P
+30575 15228(line\))P
+31900 15228(or)P
+6120 14508(can)P
+7152 14508(be)P
+7918 14508(of)P
+8618 14508(the)P
+9551 14508(form)P
+1 10 SF
+10918 14508(N)P
+2 10 SF
+11368 14508(i)P
+0 10 SF
+11735 14508(\(for)P
+1 10 SF
+12835 14508(N)P
+0 10 SF
+13435 14508(inches\))P
+15367 14508(or)P
+1 10 SF
+16067 14508(N)P
+2 10 SF
+16517 14508(c)P
+0 10 SF
+16983 14508(\(for)P
+1 10 SF
+18083 14508(N)P
+0 10 SF
+18683 14508(centimeters\).)P
+22198 14508(For)P
+23232 14508(example,)P
+25614 14508(the)P
+26547 14508(input:)P
+8520 13536(.sp)P
+9403 13536(1.5i)P
+8520 12816(My)P
+9553 12816(thoughts)P
+11820 12816(on)P
+12620 12816(the)P
+13553 12816(subject)P
+8520 12096(.sp)P
+6120 11124(leaves)P
+7834 11124(one)P
+8916 11124(and)P
+9998 11124(a)P
+10480 11124(half)P
+11629 11124(inches)P
+13377 11124(of)P
+14092 11124(space,)P
+15788 11124(followed)P
+18136 11124(by)P
+18951 11124(the)P
+19899 11124(line)P
+21014 11124(``My)P
+22462 11124(thoughts)P
+24744 11124(on)P
+25559 11124(the)P
+26507 11124(subject'',)P
+28971 11124(followed)P
+31319 11124(by)P
+32134 11124(a)P
+6120 10404(single)P
+7753 10404(blank)P
+9286 10404(line.)P
+7620 9432(The)P
+2 10 SF
+8813 9432(.in)P
+1 10 SF
+9664 9432(+N)P
+0 10 SF
+10729 9432(request)P
+12721 9432(changes)P
+14912 9432(the)P
+15905 9432(amount)P
+17965 9432(of)P
+18725 9432(white)P
+20318 9432(space)P
+21909 9432(on)P
+22769 9432(the)P
+23762 9432(left)P
+24822 9432(of)P
+25582 9432(the)P
+26575 9432(page)P
+27966 9432(\(the)P
+1 10 SF
+29158 9432(indent)P
+0 10 SF
+30658 9432(\).)P
+31467 9432(The)P
+6120 8712(argument)P
+1 10 SF
+8667 8712(N)P
+0 10 SF
+9348 8712(can)P
+10461 8712(be)P
+11308 8712(of)P
+12089 8712(the)P
+13103 8712(form)P
+2 10 SF
+14551 8712(+)P
+1 10 SF
+14893 8712(N)P
+0 10 SF
+15574 8712(\(meaning)P
+18121 8712(leave)P
+1 10 SF
+19667 8712(N)P
+0 10 SF
+20348 8712(spaces)P
+22193 8712(more)P
+23707 8712(than)P
+25021 8712(you)P
+26202 8712(are)P
+27215 8712(already)P
+29261 8712(leaving\),)P
+2 10 SF
+31658 8712(-)P
+1 10 SF
+32000 8712(N)P
+0 10 SF
+6120 7992(\(meaning)P
+8596 7992(leave)P
+10071 7992(less)P
+11180 7992(than)P
+12423 7992(you)P
+13533 7992(do)P
+14343 7992(now\),)P
+15936 7992(or)P
+16646 7992(just)P
+1 10 SF
+17723 7992(N)P
+0 10 SF
+18333 7992(\(meaning)P
+20809 7992(leave)P
+22284 7992(exactly)P
+1 10 SF
+24225 7992(N)P
+0 10 SF
+24834 7992(spaces\).)P
+1 10 SF
+27157 7992(N)P
+0 10 SF
+27766 7992(can)P
+28807 7992(be)P
+29582 7992(of)P
+30291 7992(the)P
+31233 7992(form)P
+1 10 SF
+6120 7272(N)P
+2 10 SF
+6570 7272(i)P
+0 10 SF
+6937 7272(or)P
+1 10 SF
+7637 7272(N)P
+2 10 SF
+8087 7272(c)P
+0 10 SF
+8553 7272(also.)P
+10069 7272(For)P
+11103 7272(example,)P
+13485 7272(the)P
+14418 7272(input:)P
+end restore showpage
+%%Page: 4 4
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\2554)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+0 10 SF
+8520 41760(initial)P
+10121 41760(text)P
+8520 41040(.in)P
+9337 41040(5)P
+8520 40320(some)P
+9986 40320(text)P
+8520 39600(.in)P
+9337 39600(+1i)P
+8520 38880(more)P
+9953 38880(text)P
+8520 38160(.in)P
+9337 38160(-2c)P
+8520 37440(\212nal)P
+9787 37440(text)P
+6120 36468(produces)P
+8602 36468(``some)P
+10585 36468(text'')P
+12202 36468(indented)P
+14585 36468(exactly)P
+16634 36468(\212ve)P
+17851 36468(spaces)P
+19732 36468(from)P
+21216 36468(the)P
+22266 36468(left)P
+23383 36468(margin,)P
+25550 36468(``more)P
+27500 36468(text'')P
+29117 36468(indented)P
+31500 36468(\212ve)P
+6120 35748(spaces)P
+7904 35748(plus)P
+9124 35748(one)P
+10210 35748(inch)P
+11463 35748(from)P
+12850 35748(the)P
+13803 35748(left)P
+14823 35748(margin)P
+16743 35748(\(\212fteen)P
+18696 35748(spaces)P
+20480 35748(on)P
+21300 35748(a)P
+21786 35748(pica)P
+23005 35748(typewriter\),)P
+26041 35748(and)P
+27127 35748(``\212nal)P
+28814 35748(text'')P
+30334 35748(indented)P
+6120 35028(\212ve)P
+7220 35028(spaces)P
+8984 35028(plus)P
+10184 35028(one)P
+11250 35028(inch)P
+12483 35028(minus)P
+14150 35028(two)P
+15250 35028(centimeters)P
+18215 35028(from)P
+19582 35028(the)P
+20515 35028(margin.)P
+22765 35028(That)P
+24065 35028(is,)P
+24815 35028(the)P
+25748 35028(output)P
+27482 35028(is:)P
+8520 34056(initial)P
+10121 34056(text)P
+11520 33336(some)P
+12986 33336(text)P
+15840 32616(more)P
+17273 32616(text)P
+12439 31896(\212nal)P
+13706 31896(text)P
+7620 30672(The)P
+2 10 SF
+8771 30672(.ti)P
+1 10 SF
+9488 30672(+N)P
+0 10 SF
+10511 30672(\(temporary)P
+13394 30672(indent\))P
+15311 30672(request)P
+17260 30672(is)P
+17877 30672(used)P
+19193 30672(like)P
+2 10 SF
+20310 30672(.in)P
+1 10 SF
+21161 30672(+N)P
+0 10 SF
+22183 30672(when)P
+23699 30672(the)P
+24649 30672(indent)P
+26366 30672(should)P
+28183 30672(apply)P
+29733 30672(to)P
+30417 30672(one)P
+31500 30672(line)P
+6120 29952(only,)P
+7537 29952(after)P
+8836 29952(which)P
+10502 29952(it)P
+11036 29952(should)P
+12836 29952(revert)P
+14435 29952(to)P
+15102 29952(the)P
+16035 29952(previous)P
+18301 29952(indent.)P
+20351 29952(For)P
+21385 29952(example,)P
+23767 29952(the)P
+24700 29952(input:)P
+8520 28980(.in)P
+9337 28980(1i)P
+8520 28260(.ti)P
+9204 28260(0)P
+8520 27540(Ware,)P
+10168 27540(James)P
+11833 27540(R.)P
+12783 27540(The)P
+13916 27540(Best)P
+15182 27540(of)P
+15882 27540(Confucius,)P
+8520 26820(Halcyon)P
+10752 26820(House,)P
+12634 26820(1950.)P
+8520 26100(An)P
+9453 26100(excellent)P
+11818 26100(book)P
+13218 26100(containing)P
+15951 26100(translations)P
+18917 26100(of)P
+8520 25380(most)P
+9887 25380(of)P
+10587 25380(Confucius\222)P
+13453 25380(most)P
+14820 25380(delightful)P
+17354 25380(sayings.)P
+8520 24660(A)P
+9153 24660(de\212nite)P
+11153 24660(must)P
+12520 24660(for)P
+13420 24660(anyone)P
+15352 24660(interested)P
+17884 24660(in)P
+18551 24660(the)P
+19484 24660(early)P
+20883 24660(foundations)P
+8520 23940(of)P
+9220 23940(Chinese)P
+11352 23940(philosophy.)P
+6120 22968(produces:)P
+6120 22248(Ware,)P
+7771 22248(James)P
+9439 22248(R.)P
+10392 22248(The)P
+11528 22248(Best)P
+12797 22248(of)P
+13500 22248(Confucius,)P
+16319 22248(Halcyon)P
+18554 22248(House,)P
+20439 22248(1950.)P
+22192 22248(An)P
+23128 22248(excellent)P
+25496 22248(book)P
+26899 22248(containing)P
+29634 22248(translations)P
+10440 21528(of)P
+11159 21528(most)P
+12545 21528(of)P
+13264 21528(Confucius')P
+16149 21528(most)P
+17535 21528(delightful)P
+20088 21528(sayings.)P
+22456 21528(A)P
+23108 21528(de\212nite)P
+25127 21528(must)P
+26513 21528(for)P
+27432 21528(anyone)P
+29383 21528(interested)P
+31933 21528(in)P
+10440 20808(the)P
+11373 20808(early)P
+12772 20808(foundations)P
+15805 20808(of)P
+16505 20808(Chinese)P
+18637 20808(philosophy.)P
+7620 19836(Text)P
+8935 19836(lines)P
+10283 19836(can)P
+11330 19836(be)P
+12111 19836(centered)P
+14357 19836(by)P
+15171 19836(using)P
+16685 19836(the)P
+2 10 SF
+17632 19836(.ce)P
+0 10 SF
+18528 19836(request.)P
+20824 19836(The)P
+21971 19836(line)P
+23085 19836(after)P
+24398 19836(the)P
+2 10 SF
+25345 19836(.ce)P
+0 10 SF
+26241 19836(is)P
+26855 19836(centered)P
+29100 19836(\(horizontally\))P
+6120 19116(on)P
+6983 19116(the)P
+7979 19116(page.)P
+9724 19116(To)P
+10654 19116(center)P
+12382 19116(more)P
+13878 19116(than)P
+15174 19116(one)P
+16303 19116(line,)P
+17616 19116(use)P
+2 10 SF
+18678 19116(.ce)P
+1 10 SF
+19560 19116(N)P
+0 10 SF
+20223 19116(\(where)P
+1 10 SF
+22151 19116(N)P
+0 10 SF
+22814 19116(is)P
+23477 19116(the)P
+24473 19116(number)P
+26569 19116(of)P
+27332 19116(lines)P
+28727 19116(to)P
+29456 19116(center\),)P
+31533 19116(fol\255)P
+6120 18396(lowed)P
+7786 18396(by)P
+8586 18396(the)P
+1 10 SF
+9519 18396(N)P
+0 10 SF
+10119 18396(lines.)P
+11802 18396(If)P
+12402 18396(you)P
+13502 18396(want)P
+14868 18396(to)P
+15535 18396(center)P
+17200 18396(many)P
+18733 18396(lines)P
+20066 18396(but)P
+21033 18396(don't)P
+22500 18396(want)P
+23866 18396(to)P
+24533 18396(count)P
+26066 18396(them,)P
+27616 18396(type:)P
+8520 17424(.ce)P
+9402 17424(1000)P
+8520 16704(lines)P
+9853 16704(to)P
+10520 16704(center)P
+8520 15984(.ce)P
+9402 15984(0)P
+6120 15012(The)P
+2 10 SF
+7253 15012(.ce)P
+8135 15012(0)P
+0 10 SF
+8635 15012(request)P
+10567 15012(tells)P
+0 9 SF
+11747 15012(NROFF)P
+0 10 SF
+13687 15012(to)P
+14354 15012(center)P
+16019 15012(zero)P
+17251 15012(more)P
+18684 15012(lines,)P
+20167 15012(in)P
+20834 15012(other)P
+22267 15012(words,)P
+24083 15012(stop)P
+25283 15012(centering.)P
+7620 14040(All)P
+8592 14040(of)P
+9297 14040(these)P
+10734 14040(requests)P
+12904 14040(cause)P
+14440 14040(a)P
+14911 14040(break;)P
+16615 14040(that)P
+17720 14040(is,)P
+18475 14040(they)P
+19712 14040(always)P
+21581 14040(start)P
+22818 14040(a)P
+23288 14040(new)P
+24491 14040(line.)P
+25945 14040(If)P
+26549 14040(you)P
+27653 14040(want)P
+29023 14040(to)P
+29694 14040(start)P
+30931 14040(a)P
+31401 14040(new)P
+6120 13320(line)P
+7220 13320(without)P
+9254 13320(performing)P
+12154 13320(any)P
+13220 13320(other)P
+14653 13320(action,)P
+16469 13320(use)P
+2 10 SF
+17468 13320(.br)P
+0 10 SF
+18218 13320(.)P
+2 10 SF
+5220 11880(2.5.)P
+6520 11880(Underlining)P
+0 10 SF
+7620 10908(Text)P
+8918 10908(can)P
+9948 10908(be)P
+10712 10908(underlined)P
+13476 10908(using)P
+14974 10908(the)P
+2 10 SF
+15905 10908(.ul)P
+0 10 SF
+16754 10908(request.)P
+19034 10908(The)P
+2 10 SF
+20165 10908(.ul)P
+0 10 SF
+21014 10908(request)P
+22944 10908(causes)P
+24707 10908(the)P
+25639 10908(next)P
+26871 10908(input)P
+28304 10908(line)P
+29403 10908(to)P
+30069 10908(be)P
+30834 10908(under\255)P
+6120 10188(lined)P
+7568 10188(when)P
+9115 10188(output.)P
+11247 10188(You)P
+12528 10188(can)P
+13608 10188(underline)P
+16122 10188(multiple)P
+18371 10188(lines)P
+19752 10188(by)P
+20600 10188(stating)P
+22448 10188(a)P
+22962 10188(count)P
+24543 10188(of)P
+1 10 SF
+25291 10188(input)P
+0 10 SF
+26773 10188(lines)P
+28154 10188(to)P
+28869 10188(underline,)P
+31533 10188(fol\255)P
+6120 9468(lowed)P
+7786 9468(by)P
+8586 9468(those)P
+10052 9468(lines)P
+11385 9468(\(as)P
+12284 9468(with)P
+13551 9468(the)P
+2 10 SF
+14484 9468(.ce)P
+0 10 SF
+15366 9468(request\).)P
+17848 9468(For)P
+18882 9468(example,)P
+21264 9468(the)P
+22197 9468(input:)P
+8520 8496(.ul)P
+9337 8496(2)P
+8520 7776(Notice)P
+10319 7776(that)P
+11419 7776(these)P
+12851 7776(two)P
+13951 7776(input)P
+15385 7776(lines)P
+8520 7056(are)P
+9452 7056(underlined.)P
+6120 6084(will)P
+7254 6084(underline)P
+9720 6084(those)P
+11186 6084(eight)P
+12586 6084(words)P
+14252 6084(in)P
+0 9 SF
+14899 6084(NROFF)P
+0 10 SF
+16639 6084(.)P
+17189 6084(\(In)P
+0 9 SF
+18069 6084(TROFF)P
+0 10 SF
+19949 6084(they)P
+21182 6084(will)P
+22316 6084(be)P
+23082 6084(set)P
+23948 6084(in)P
+24615 6084(italics.\))P
+end restore showpage
+%%Page: 5 5
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29900 43920(USD:22\2555)P
+4320 41760(3.)P
+5170 41760(Displays)P
+0 10 SF
+6720 40788(Displays)P
+9023 40788(are)P
+9959 40788(sections)P
+12095 40788(of)P
+12799 40788(text)P
+13903 40788(to)P
+14574 40788(be)P
+15344 40788(set)P
+16214 40788(off)P
+17118 40788(from)P
+18489 40788(the)P
+19426 40788(body)P
+20830 40788(of)P
+21534 40788(the)P
+22471 40788(paper.)P
+24357 40788(Major)P
+26027 40788(quotes,)P
+27946 40788(tables,)P
+29698 40788(and)P
+30767 40788(\212gures)P
+5220 40068(are)P
+6173 40068(types)P
+7659 40068(of)P
+8379 40068(displays,)P
+10715 40068(as)P
+11434 40068(are)P
+12386 40068(all)P
+13206 40068(the)P
+14159 40068(examples)P
+16644 40068(used)P
+17963 40068(in)P
+18650 40068(this)P
+19737 40068(document.)P
+22673 40068(All)P
+23660 40068(displays)P
+25846 40068(except)P
+27631 40068(centered)P
+29882 40068(blocks)P
+31668 40068(are)P
+5220 39348(output)P
+6954 39348(single)P
+8587 39348(spaced.)P
+2 10 SF
+5220 37908(3.1.)P
+6520 37908(Major)P
+8352 37908(Quotes)P
+0 10 SF
+7620 36936(Major)P
+9306 36936(quotes)P
+11092 36936(are)P
+12044 36936(quotes)P
+13830 36936(which)P
+15516 36936(are)P
+16468 36936(several)P
+18386 36936(lines)P
+19739 36936(long,)P
+21176 36936(and)P
+22262 36936(hence)P
+23880 36936(are)P
+24832 36936(set)P
+25718 36936(in)P
+26405 36936(from)P
+27792 36936(the)P
+28744 36936(rest)P
+29829 36936(of)P
+30548 36936(the)P
+31500 36936(text)P
+6120 36216(without)P
+8192 36216(quote)P
+9763 36216(marks)P
+11467 36216(around)P
+13371 36216(them.)P
+15159 36216(These)P
+16829 36216(can)P
+17899 36216(be)P
+18703 36216(generated)P
+21272 36216(using)P
+22810 36216(the)P
+23781 36216(commands)P
+2 10 SF
+26618 36216(.\(q)P
+0 10 SF
+27539 36216(and)P
+2 10 SF
+28642 36216(.\)q)P
+0 10 SF
+29563 36216(to)P
+30267 36216(surround)P
+6120 35496(the)P
+7053 35496(quote.)P
+8936 35496(For)P
+9970 35496(example,)P
+12352 35496(the)P
+13285 35496(input:)P
+8520 34524(As)P
+9386 34524(Weizenbaum)P
+12750 34524(points)P
+14417 34524(out:)P
+8520 33804(.\(q)P
+8520 33084(It)P
+9087 33084(is)P
+9687 33084(said)P
+10853 33084(that)P
+11953 33084(to)P
+12620 33084(explain)P
+14586 33084(is)P
+15186 33084(to)P
+15853 33084(explain)P
+17819 33084(away.)P
+8520 32364(This)P
+9787 32364(maxim)P
+11654 32364(is)P
+12254 32364(nowhere)P
+14519 32364(so)P
+15252 32364(well)P
+16485 32364(ful\212lled)P
+8520 31644(as)P
+9219 31644(in)P
+9886 31644(the)P
+10819 31644(areas)P
+12250 31644(of)P
+12950 31644(computer)P
+15416 31644(programming,...)P
+8520 30924(.\)q)P
+6120 29952(generates)P
+8584 29952(as)P
+9283 29952(output:)P
+6120 28980(As)P
+6986 28980(Weizenbaum)P
+10350 28980(points)P
+12017 28980(out:)P
+0 9 SF
+7320 28080(It)P
+7878 28080(is)P
+8466 28080(said)P
+9564 28080(that)P
+10602 28080(to)P
+11250 28080(explain)P
+13068 28080(is)P
+13656 28080(to)P
+14304 28080(explain)P
+16122 28080(away.)P
+17805 28080(This)P
+18993 28080(maxim)P
+20721 28080(is)P
+21309 28080(nowhere)P
+23397 28080(so)P
+24105 28080(well)P
+25263 28080(ful\212lled)P
+27201 28080(as)P
+27879 28080(in)P
+28526 28080(the)P
+29413 28080(areas)P
+30750 28080(of)P
+7320 27432(computer)P
+9540 27432(programming,...)P
+2 10 SF
+5220 25740(3.2.)P
+6520 25740(Lists)P
+0 10 SF
+7620 24768(A)P
+1 10 SF
+8279 24768(list)P
+0 10 SF
+9239 24768(is)P
+9865 24768(an)P
+10657 24768(indented,)P
+13099 24768(single)P
+14758 24768(spaced,)P
+16765 24768(un\212lled)P
+18825 24768(display.)P
+21134 24768(Lists)P
+22527 24768(should)P
+24353 24768(be)P
+25145 24768(used)P
+26469 24768(when)P
+27993 24768(the)P
+28951 24768(material)P
+31142 24768(to)P
+31834 24768(be)P
+6120 24048(printed)P
+8021 24048(should)P
+9822 24048(not)P
+10789 24048(be)P
+11555 24048(\212lled)P
+12989 24048(and)P
+14055 24048(justi\212ed)P
+16189 24048(like)P
+17289 24048(normal)P
+19189 24048(text,)P
+20439 24048(such)P
+21738 24048(as)P
+22437 24048(columns)P
+24670 24048(of)P
+25370 24048(\212gures)P
+27203 24048(or)P
+27903 24048(the)P
+28836 24048(examples)P
+31301 24048(used)P
+6120 23328(in)P
+6787 23328(this)P
+7854 23328(paper.)P
+9736 23328(Lists)P
+11103 23328(are)P
+12035 23328(surrounded)P
+14934 23328(by)P
+15734 23328(the)P
+16667 23328(requests)P
+2 10 SF
+18832 23328(.\(l)P
+0 10 SF
+19549 23328(and)P
+2 10 SF
+20615 23328(.\)l)P
+0 10 SF
+21132 23328(.)P
+21682 23328(For)P
+22716 23328(example,)P
+25098 23328(type:)P
+8520 22356(Alternatives)P
+11652 22356(to)P
+12319 22356(avoid)P
+13852 22356(deadlock)P
+16217 22356(are:)P
+8520 21636(.\(l)P
+8520 20916(Lock)P
+9953 20916(in)P
+10620 20916(a)P
+11086 20916(speci\212ed)P
+13418 20916(order)P
+8520 20196(Detect)P
+10285 20196(deadlock)P
+12650 20196(and)P
+13716 20196(back)P
+15048 20196(out)P
+16015 20196(one)P
+17081 20196(process)P
+8520 19476(Lock)P
+9953 19476(all)P
+10753 19476(resources)P
+13217 19476(needed)P
+15115 19476(before)P
+16847 19476(proceeding)P
+8520 18756(.\)l)P
+6120 17784(will)P
+7254 17784(produce:)P
+6120 17064(Alternatives)P
+9252 17064(to)P
+9919 17064(avoid)P
+11452 17064(deadlock)P
+13817 17064(are:)P
+8520 16092(Lock)P
+9953 16092(in)P
+10620 16092(a)P
+11086 16092(speci\212ed)P
+13418 16092(order)P
+8520 15372(Detect)P
+10285 15372(deadlock)P
+12650 15372(and)P
+13716 15372(back)P
+15048 15372(out)P
+16015 15372(one)P
+17081 15372(process)P
+8520 14652(Lock)P
+9953 14652(all)P
+10753 14652(resources)P
+13217 14652(needed)P
+15115 14652(before)P
+16847 14652(proceeding)P
+2 10 SF
+5220 12960(3.3.)P
+6520 12960(Keeps)P
+0 10 SF
+7620 11988(A)P
+1 10 SF
+8266 11988(keep)P
+0 10 SF
+9577 11988(is)P
+10189 11988(a)P
+10667 11988(display)P
+12612 11988(of)P
+13324 11988(lines)P
+14669 11988(which)P
+16347 11988(are)P
+17291 11988(kept)P
+18536 11988(on)P
+19348 11988(a)P
+19826 11988(single)P
+21471 11988(page)P
+22815 11988(if)P
+23394 11988(possible.)P
+25922 11988(An)P
+26867 11988(example)P
+29111 11988(of)P
+29823 11988(where)P
+31500 11988(you)P
+6120 11268(would)P
+7871 11268(use)P
+8921 11268(a)P
+9438 11268(keep)P
+10821 11268(might)P
+12473 11268(be)P
+13290 11268(a)P
+13806 11268(diagram.)P
+16372 11268(Keeps)P
+18120 11268(differ)P
+19703 11268(from)P
+21120 11268(lists)P
+22337 11268(in)P
+23054 11268(that)P
+24204 11268(lists)P
+25421 11268(may)P
+26704 11268(be)P
+27520 11268(broken)P
+29436 11268(over)P
+30752 11268(a)P
+31268 11268(page)P
+6120 10548(boundary)P
+8586 10548(whereas)P
+10750 10548(keeps)P
+12315 10548(will)P
+13449 10548(not.)P
+7620 9576(Blocks)P
+9491 9576(are)P
+10428 9576(the)P
+11366 9576(basic)P
+12803 9576(kind)P
+14075 9576(of)P
+14780 9576(keep.)P
+16467 9576(They)P
+17905 9576(begin)P
+19443 9576(with)P
+20715 9576(the)P
+21653 9576(request)P
+2 10 SF
+23590 9576(.\(b)P
+0 10 SF
+24478 9576(and)P
+25548 9576(end)P
+26618 9576(with)P
+27889 9576(the)P
+28826 9576(request)P
+2 10 SF
+30762 9576(.\)b)P
+0 10 SF
+31446 9576(.)P
+32000 9576(If)P
+6120 8856(there)P
+7586 8856(is)P
+8253 8856(not)P
+9286 8856(room)P
+10819 8856(on)P
+11685 8856(the)P
+12684 8856(current)P
+14649 8856(page)P
+16047 8856(for)P
+17013 8856(everything)P
+19845 8856(in)P
+20578 8856(the)P
+21577 8856(block,)P
+23326 8856(a)P
+23858 8856(new)P
+25123 8856(page)P
+26521 8856(is)P
+27187 8856(begun.)P
+29269 8856(This)P
+30602 8856(has)P
+31667 8856(the)P
+6120 8136(unpleasant)P
+8894 8136(effect)P
+10468 8136(of)P
+11177 8136(leaving)P
+13152 8136(blank)P
+14694 8136(space)P
+16234 8136(at)P
+16876 8136(the)P
+17818 8136(bottom)P
+19728 8136(of)P
+20437 8136(the)P
+21379 8136(page.)P
+23070 8136(When)P
+24711 8136(this)P
+25787 8136(is)P
+26395 8136(not)P
+27370 8136(appropriate,)P
+30460 8136(you)P
+31568 8136(can)P
+6120 7416(use)P
+7119 7416(the)P
+8052 7416(alternative,)P
+10934 7416(called)P
+1 10 SF
+12566 7416(\213oating)P
+14600 7416(keeps)P
+0 10 SF
+15931 7416(.)P
+1 10 SF
+7620 6444(Floating)P
+9903 6444(keeps)P
+0 10 SF
+11449 6444(move)P
+12997 6444(relative)P
+15011 6444(to)P
+15693 6444(the)P
+16641 6444(text.)P
+18106 6444(Hence,)P
+20002 6444(they)P
+21250 6444(are)P
+22197 6444(good)P
+23612 6444(for)P
+24527 6444(things)P
+26209 6444(which)P
+27890 6444(will)P
+29039 6444(be)P
+29820 6444(referred)P
+31933 6444(to)P
+6120 5724(by)P
+6931 5724(name,)P
+8591 5724(such)P
+9901 5724(as)P
+10611 5724(``See)P
+12088 5724(\212gure)P
+13699 5724(3''.)P
+14960 5724(A)P
+15604 5724(\213oating)P
+17649 5724(keep)P
+18992 5724(will)P
+20136 5724(appear)P
+21944 5724(at)P
+22587 5724(the)P
+23530 5724(bottom)P
+25441 5724(of)P
+26151 5724(the)P
+27094 5724(current)P
+29003 5724(page)P
+30345 5724(if)P
+30922 5724(it)P
+31466 5724(will)P
+6120 5004(\212t;)P
+7030 5004(otherwise,)P
+9754 5004(it)P
+10330 5004(will)P
+11506 5004(appear)P
+13346 5004(at)P
+14021 5004(the)P
+14996 5004(top)P
+16005 5004(of)P
+16747 5004(the)P
+17722 5004(next)P
+18997 5004(page.)P
+20721 5004(Floating)P
+22964 5004(keeps)P
+24571 5004(begin)P
+26146 5004(with)P
+27455 5004(the)P
+28429 5004(line)P
+2 10 SF
+29570 5004(.\(z)P
+0 10 SF
+30427 5004(and)P
+31534 5004(end)P
+6120 4284(with)P
+7461 4284(the)P
+8468 4284(line)P
+2 10 SF
+9642 4284(.\)z)P
+0 10 SF
+10258 4284(.)P
+10882 4284(For)P
+11990 4284(an)P
+12829 4284(example)P
+15134 4284(of)P
+15907 4284(a)P
+16446 4284(\213oating)P
+18553 4284(keep,)P
+20108 4284(see)P
+21146 4284(\212gure)P
+22819 4284(1.)P
+23742 4284(The)P
+2 10 SF
+24948 4284(.hl)P
+0 10 SF
+25872 4284(request)P
+27877 4284(is)P
+28550 4284(used)P
+29922 4284(to)P
+30662 4284(draw)P
+32134 4284(a)P
+end restore showpage
+%%Page: 6 6
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\2556)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+8640 41040 10 0 1 L
+8880 41040 10 0 64 L
+0 10 SF
+8640 39600(.\(z)P
+8640 38880(.hl)P
+8640 38160(Text)P
+9940 38160(of)P
+10640 38160(keep)P
+11972 38160(to)P
+12639 38160(be)P
+13405 38160(\213oated.)P
+8640 37440(.sp)P
+8640 36720(.ce)P
+8640 36000(Figure)P
+10407 36000(1.)P
+11257 36000(Example)P
+13590 36000(of)P
+14290 36000(a)P
+14756 36000(Floating)P
+16957 36000(Keep.)P
+8640 35280(.hl)P
+8640 34560(.\)z)P
+13494 33120(Figure)P
+15261 33120(1.)P
+16111 33120(Example)P
+18444 33120(of)P
+19144 33120(a)P
+19610 33120(Floating)P
+21811 33120(Keep.)P
+8640 32400 10 0 1 L
+8880 32400 10 0 64 L
+6120 30240(horizontal)P
+8753 30240(line)P
+9853 30240(so)P
+10586 30240(that)P
+11686 30240(the)P
+12619 30240(\212gure)P
+14219 30240(stands)P
+15918 30240(out)P
+16885 30240(from)P
+18252 30240(the)P
+19185 30240(text.)P
+2 10 SF
+5220 28800(3.4.)P
+6520 28800(Fancier)P
+8686 28800(Displays)P
+0 10 SF
+7620 27828(Keeps)P
+9340 27828(and)P
+10428 27828(lists)P
+11617 27828(are)P
+12571 27828(normally)P
+14960 27828(collected)P
+17347 27828(in)P
+1 10 SF
+18036 27828(no\212ll)P
+0 10 SF
+19492 27828(mode,)P
+21197 27828(so)P
+21952 27828(that)P
+23074 27828(they)P
+24328 27828(are)P
+25281 27828(good)P
+26702 27828(for)P
+27623 27828(tables)P
+29243 27828(and)P
+30330 27828(such.)P
+32000 27828(If)P
+6120 27108(you)P
+7286 27108(want)P
+8718 27108(a)P
+9250 27108(display)P
+11249 27108(in)P
+11982 27108(\212ll)P
+12916 27108(mode)P
+14515 27108(\(for)P
+15681 27108(text\),)P
+17197 27108(type)P
+2 10 SF
+18495 27108(.\(l)P
+19212 27108(F)P
+0 10 SF
+19844 27108(\(Throughout)P
+23143 27108(this)P
+24275 27108(section,)P
+26389 27108(comments)P
+29120 27108(applied)P
+31151 27108(to)P
+2 10 SF
+31883 27108(.\(l)P
+0 10 SF
+6120 26388(also)P
+7342 26388(apply)P
+8931 26388(to)P
+2 10 SF
+9654 26388(.\(b)P
+0 10 SF
+10594 26388(and)P
+2 10 SF
+11716 26388(.\(z)P
+0 10 SF
+12332 26388(\).)P
+13138 26388(This)P
+14461 26388(kind)P
+15784 26388(of)P
+16540 26388(display)P
+18528 26388(will)P
+19717 26388(be)P
+20538 26388(indented)P
+22859 26388(from)P
+24281 26388(both)P
+25603 26388(margins.)P
+28141 26388(For)P
+29230 26388(example,)P
+31667 26388(the)P
+6120 25668(input:)P
+8520 24696(.\(l)P
+9237 24696(F)P
+8520 23976(And)P
+9753 23976(now)P
+10986 23976(boys)P
+12319 23976(and)P
+13385 23976(girls,)P
+8520 23256(a)P
+8986 23256(newer,)P
+10801 23256(bigger,)P
+12684 23256(better)P
+14250 23256(toy)P
+15217 23256(than)P
+16450 23256(ever)P
+17682 23256(before!)P
+8520 22536(Be)P
+9386 22536(the)P
+10319 22536(\212rst)P
+11453 22536(on)P
+12253 22536(your)P
+13553 22536(block)P
+15086 22536(to)P
+15753 22536(have)P
+17085 22536(your)P
+18385 22536(own)P
+19618 22536(computer!)P
+8520 21816(Yes)P
+9652 21816(kids,)P
+11002 21816(you)P
+12102 21816(too)P
+13069 21816(can)P
+14101 21816(have)P
+15433 21816(one)P
+16499 21816(of)P
+17199 21816(these)P
+18631 21816(modern)P
+8520 21096(data)P
+9719 21096(processing)P
+12484 21096(devices.)P
+8520 20376(You)P
+9753 20376(too)P
+10720 20376(can)P
+11752 20376(produce)P
+13884 20376(beautifully)P
+16684 20376(formatted)P
+19217 20376(papers)P
+8520 19656(without)P
+10554 19656(even)P
+11886 19656(batting)P
+13753 19656(an)P
+14519 19656(eye!)P
+8520 18936(.\)l)P
+6120 17964(will)P
+7254 17964(be)P
+8020 17964(output)P
+9754 17964(as:)P
+8520 16992(And)P
+9777 16992(now)P
+11034 16992(boys)P
+12391 16992(and)P
+13480 16992(girls,)P
+14920 16992(a)P
+15409 16992(newer,)P
+17247 16992(bigger,)P
+19153 16992(better)P
+20742 16992(toy)P
+21732 16992(than)P
+22988 16992(ever)P
+24243 16992(before!)P
+26398 16992(Be)P
+27287 16992(the)P
+28243 16992(\212rst)P
+29400 16992(on)P
+8520 16272(your)P
+9910 16272(block)P
+11533 16272(to)P
+12290 16272(have)P
+13711 16272(your)P
+15100 16272(own)P
+16422 16272(computer!)P
+19377 16272(Yes)P
+20598 16272(kids,)P
+22037 16272(you)P
+23226 16272(too)P
+24282 16272(can)P
+25403 16272(have)P
+26824 16272(one)P
+27979 16272(of)P
+28768 16272(these)P
+8520 15552(modern)P
+10641 15552(data)P
+11928 15552(processing)P
+14781 15552(devices.)P
+17216 15552(You)P
+18536 15552(too)P
+19590 15552(can)P
+20709 15552(produce)P
+22928 15552(beautifully)P
+25815 15552(formatted)P
+28435 15552(papers)P
+8520 14832(without)P
+10554 14832(even)P
+11886 14832(batting)P
+13753 14832(an)P
+14519 14832(eye!)P
+7620 13608(Lists)P
+9054 13608(and)P
+10187 13608(blocks)P
+12020 13608(are)P
+13019 13608(also)P
+14252 13608(normally)P
+16686 13608(indented)P
+19019 13608(\(\213oating)P
+21320 13608(keeps)P
+22952 13608(are)P
+23951 13608(normally)P
+26385 13608(left)P
+27452 13608(justi\212ed\).)P
+30202 13608(To)P
+31135 13608(get)P
+32134 13608(a)P
+6120 12888(left\255justi\212ed)P
+9292 12888(list,)P
+10414 12888(type)P
+2 10 SF
+11685 12888(.\(l)P
+12402 12888(L)P
+0 10 SF
+12802 12888(.)P
+13390 12888(To)P
+14295 12888(get)P
+15266 12888(a)P
+15770 12888(list)P
+16742 12888(centered)P
+19011 12888(line\255for\255line,)P
+22299 12888(type)P
+2 10 SF
+23570 12888(.\(l)P
+24325 12888(C)P
+0 10 SF
+24758 12888(.)P
+25346 12888(For)P
+26418 12888(example,)P
+28838 12888(to)P
+29543 12888(get)P
+30513 12888(a)P
+31016 12888(\212lled,)P
+6120 12168(left)P
+7120 12168(justi\212ed)P
+9254 12168(list,)P
+10338 12168(enter:)P
+8520 11196(.\(l)P
+9237 11196(L)P
+9804 11196(F)P
+8520 10476(text)P
+9620 10476(of)P
+10320 10476(block)P
+8520 9756(.\)l)P
+6120 8784(The)P
+7253 8784(input:)P
+8520 7812(.\(l)P
+8520 7092(\212rst)P
+9654 7092(line)P
+10754 7092(of)P
+11454 7092(un\212lled)P
+13488 7092(display)P
+8520 6372(more)P
+9953 6372(lines)P
+8520 5652(.\)l)P
+6120 4680(produces)P
+8485 4680(the)P
+9418 4680(indented)P
+11684 4680(text:)P
+end restore showpage
+%%Page: 7 7
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29900 43920(USD:22\2557)P
+0 10 SF
+8520 41760(\212rst)P
+9654 41760(line)P
+10754 41760(of)P
+11454 41760(un\212lled)P
+13488 41760(display)P
+8520 41040(more)P
+9953 41040(lines)P
+6120 40068(Typing)P
+8054 40068(the)P
+8987 40068(character)P
+2 10 SF
+11384 40068(L)P
+0 10 SF
+11984 40068(after)P
+13283 40068(the)P
+2 10 SF
+14216 40068(.\(l)P
+0 10 SF
+14933 40068(request)P
+16865 40068(produces)P
+19230 40068(the)P
+20163 40068(left)P
+21163 40068(justi\212ed)P
+23297 40068(result:)P
+6120 39096(\212rst)P
+7254 39096(line)P
+8354 39096(of)P
+9054 39096(un\212lled)P
+11088 39096(display)P
+6120 38376(more)P
+7553 38376(lines)P
+6120 37404(Using)P
+2 10 SF
+7753 37404(C)P
+0 10 SF
+8386 37404(instead)P
+10285 37404(of)P
+2 10 SF
+10985 37404(L)P
+0 10 SF
+11585 37404(produces)P
+13950 37404(the)P
+14883 37404(line\255at\255a\255time)P
+18349 37404(centered)P
+20580 37404(output:)P
+15909 36432(\212rst)P
+17043 36432(line)P
+18143 36432(of)P
+18843 36432(un\212lled)P
+20877 36432(display)P
+17977 35712(more)P
+19410 35712(lines)P
+7620 34488(Sometimes)P
+10539 34488(it)P
+11125 34488(may)P
+12410 34488(be)P
+13228 34488(that)P
+14380 34488(you)P
+15531 34488(want)P
+16948 34488(to)P
+17666 34488(center)P
+19382 34488(several)P
+21331 34488(lines)P
+22715 34488(as)P
+23465 34488(a)P
+23982 34488(group,)P
+25783 34488(rather)P
+27433 34488(than)P
+28717 34488(centering)P
+31200 34488(them)P
+6120 33768(one)P
+7202 33768(line)P
+8318 33768(at)P
+8967 33768(a)P
+9449 33768(time.)P
+11082 33768(To)P
+11965 33768(do)P
+12781 33768(this)P
+13864 33768(use)P
+14878 33768(centered)P
+17124 33768(blocks,)P
+19055 33768(which)P
+20736 33768(are)P
+21683 33768(surrounded)P
+24597 33768(by)P
+25412 33768(the)P
+26360 33768(requests)P
+2 10 SF
+28540 33768(.\(c)P
+0 10 SF
+29371 33768(and)P
+2 10 SF
+30452 33768(.\)c)P
+0 10 SF
+31068 33768(.)P
+31633 33768(All)P
+6120 33048(the)P
+7065 33048(lines)P
+8410 33048(are)P
+9354 33048(centered)P
+11597 33048(as)P
+12308 33048(a)P
+12786 33048(unit,)P
+14082 33048(such)P
+15393 33048(that)P
+16505 33048(the)P
+17450 33048(longest)P
+19395 33048(line)P
+20507 33048(is)P
+21118 33048(centered)P
+23360 33048(and)P
+24437 33048(the)P
+25381 33048(rest)P
+26458 33048(are)P
+27401 33048(lined)P
+28812 33048(up)P
+29623 33048(around)P
+31500 33048(that)P
+6120 32328(line.)P
+7615 32328(Notice)P
+9459 32328(that)P
+10604 32328(lines)P
+11982 32328(do)P
+12827 32328(not)P
+13839 32328(move)P
+15417 32328(relative)P
+17461 32328(to)P
+18173 32328(each)P
+19515 32328(other)P
+20992 32328(using)P
+22536 32328(centered)P
+24811 32328(blocks,)P
+26771 32328(whereas)P
+28979 32328(they)P
+30256 32328(do)P
+31100 32328(using)P
+6120 31608(the)P
+2 10 SF
+7053 31608(C)P
+0 10 SF
+7686 31608(argument)P
+10152 31608(to)P
+10819 31608(keeps.)P
+7620 30636(Centered)P
+10001 30636(blocks)P
+11782 30636(are)P
+1 10 SF
+12729 30636(not)P
+0 10 SF
+13711 30636(keeps,)P
+15441 30636(and)P
+16522 30636(may)P
+17770 30636(be)P
+18551 30636(used)P
+19865 30636(in)P
+20547 30636(conjunction)P
+23595 30636(with)P
+24877 30636(keeps.)P
+26807 30636(For)P
+27856 30636(example,)P
+30253 30636(to)P
+30935 30636(center)P
+6120 29916(a)P
+6586 29916(group)P
+8186 29916(of)P
+8886 29916(lines)P
+10219 29916(as)P
+10918 29916(a)P
+11384 29916(unit)P
+12518 29916(and)P
+13584 29916(keep)P
+14916 29916(them)P
+16316 29916(on)P
+17116 29916(one)P
+18182 29916(page,)P
+19664 29916(use:)P
+8520 28944(.\(b)P
+9370 28944(L)P
+8520 28224(.\(c)P
+8520 27504(\212rst)P
+9654 27504(line)P
+10754 27504(of)P
+11454 27504(un\212lled)P
+13488 27504(display)P
+8520 26784(more)P
+9953 26784(lines)P
+8520 26064(.\)c)P
+8520 25344(.\)b)P
+6120 24372(to)P
+6787 24372(produce:)P
+15009 23400(\212rst)P
+16143 23400(line)P
+17243 23400(of)P
+17943 23400(un\212lled)P
+19977 23400(display)P
+15009 22680(more)P
+16442 22680(lines)P
+6120 21708(If)P
+6784 21708(the)P
+7781 21708(block)P
+9378 21708(requests)P
+11607 21708(\()P
+2 10 SF
+11807 21708(.\(b)P
+0 10 SF
+12755 21708(and)P
+2 10 SF
+13885 21708(.\)b)P
+0 10 SF
+14569 21708(\))P
+15033 21708(had)P
+16162 21708(been)P
+17557 21708(omitted)P
+19654 21708(the)P
+20650 21708(result)P
+22246 21708(would)P
+24009 21708(have)P
+25404 21708(been)P
+26799 21708(the)P
+27795 21708(same,)P
+29440 21708(but)P
+30470 21708(with)P
+31800 21708(no)P
+6120 20988(guarantee)P
+8699 20988(that)P
+9847 20988(the)P
+10828 20988(lines)P
+12208 20988(of)P
+12955 20988(the)P
+13935 20988(centered)P
+16213 20988(block)P
+17793 20988(would)P
+19540 20988(have)P
+20919 20988(all)P
+21766 20988(been)P
+23145 20988(on)P
+23992 20988(one)P
+25105 20988(page.)P
+26834 20988(Note)P
+28247 20988(the)P
+29227 20988(use)P
+30273 20988(of)P
+31020 20988(the)P
+2 10 SF
+32000 20988(L)P
+0 10 SF
+6120 20268(argument)P
+8614 20268(to)P
+2 10 SF
+9309 20268(.\(b)P
+0 10 SF
+9993 20268(;)P
+10388 20268(this)P
+11483 20268(causes)P
+13275 20268(the)P
+14236 20268(centered)P
+16495 20268(block)P
+18056 20268(to)P
+18751 20268(center)P
+20444 20268(within)P
+22206 20268(the)P
+23167 20268(entire)P
+24761 20268(line)P
+25889 20268(rather)P
+27516 20268(than)P
+28777 20268(within)P
+30539 20268(the)P
+31500 20268(line)P
+6120 19548(minus)P
+7787 19548(the)P
+8720 19548(indent.)P
+10770 19548(Also,)P
+12253 19548(the)P
+13186 19548(center)P
+14851 19548(requests)P
+17016 19548(must)P
+18383 19548(be)P
+19149 19548(nested)P
+1 10 SF
+20881 19548(inside)P
+0 10 SF
+22514 19548(the)P
+23447 19548(keep)P
+24779 19548(requests.)P
+2 10 SF
+4320 18108(4.)P
+5170 18108(Annotations)P
+0 10 SF
+6720 17136(There)P
+8360 17136(are)P
+9333 17136(a)P
+9840 17136(number)P
+11914 17136(of)P
+12655 17136(requests)P
+14861 17136(to)P
+15569 17136(save)P
+16875 17136(text)P
+18016 17136(for)P
+18957 17136(later)P
+20264 17136(printing.)P
+1 10 SF
+22756 17136(Footnotes)P
+0 10 SF
+25397 17136(are)P
+26370 17136(printed)P
+28311 17136(at)P
+28985 17136(the)P
+29959 17136(bottom)P
+31900 17136(of)P
+5220 16416(the)P
+6219 16416(current)P
+8184 16416(page.)P
+1 10 SF
+9932 16416(Delayed)P
+12195 16416(text)P
+0 10 SF
+13326 16416(is)P
+13991 16416(intended)P
+16322 16416(to)P
+17054 16416(be)P
+17885 16416(a)P
+18416 16416(variant)P
+20347 16416(form)P
+21779 16416(of)P
+22544 16416(footnote;)P
+24976 16416(the)P
+25974 16416(text)P
+27139 16416(is)P
+27804 16416(printed)P
+29769 16416(only)P
+31101 16416(when)P
+5220 15696(explicitly)P
+7692 15696(called)P
+9329 15696(for,)P
+10384 15696(such)P
+11688 15696(as)P
+12392 15696(at)P
+13030 15696(the)P
+13968 15696(end)P
+15039 15696(of)P
+15744 15696(each)P
+17047 15696(chapter.)P
+1 10 SF
+19367 15696(Indexes)P
+0 10 SF
+21403 15696(are)P
+22339 15696(a)P
+22809 15696(type)P
+24046 15696(of)P
+24750 15696(delayed)P
+26819 15696(text)P
+27923 15696(having)P
+29760 15696(a)P
+30230 15696(tag)P
+31167 15696(\(usu\255)P
+5220 14976(ally)P
+6313 14976(the)P
+7239 14976(page)P
+8564 14976(number\))P
+10791 14976(attached)P
+12983 14976(to)P
+13644 14976(each)P
+14936 14976(entry)P
+16363 14976(after)P
+17656 14976(a)P
+18116 14976(row)P
+19243 14976(of)P
+19937 14976(dots.)P
+21481 14976(Indexes)P
+23540 14976(are)P
+24466 14976(also)P
+25626 14976(saved)P
+27185 14976(until)P
+28480 14976(called)P
+30106 14976(for)P
+31000 14976(expli\255)P
+5220 14256(citly.)P
+2 10 SF
+5220 12816(4.1.)P
+6520 12816(Footnotes)P
+0 10 SF
+7620 11844(Footnotes)P
+10236 11844(begin)P
+11817 11844(with)P
+13132 11844(the)P
+14113 11844(request)P
+2 10 SF
+16093 11844(.\(f)P
+0 10 SF
+16891 11844(and)P
+18005 11844(end)P
+19119 11844(with)P
+20434 11844(the)P
+21415 11844(request)P
+2 10 SF
+23395 11844(.\)f)P
+0 10 SF
+23945 11844(.)P
+24543 11844(The)P
+25724 11844(current)P
+27671 11844(footnote)P
+29919 11844(number)P
+32000 11844(is)P
+6120 11004(maintained)P
+9009 11004(automatically,)P
+12648 11004(and)P
+13737 11004(can)P
+14792 11004(be)P
+15581 11004(used)P
+16903 11004(by)P
+17726 11004(typing)P
+19483 11004(\\**,)P
+20622 11004(to)P
+21311 11004(produce)P
+23465 11004(a)P
+23953 11004(footnote)P
+26175 11004(number)P
+0 7 SF
+28008 11244(1)P
+0 10 SF
+28218 11004(.)P
+28790 11004(The)P
+29945 11004(number)P
+32000 11004(is)P
+6120 10284(automatically)P
+9586 10284(incremented)P
+12751 10284(after)P
+14050 10284(every)P
+15582 10284(footnote.)P
+18132 10284(For)P
+19166 10284(example,)P
+21548 10284(the)P
+22481 10284(input:)P
+4320 6792 8 0 36 L
+0 5 SF
+5616 6168(1)P
+0 8 SF
+5766 5976(Like)P
+6805 5976(this.)P
+end restore showpage
+%%Page: 8 8
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\2558)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+0 10 SF
+8520 41760(.\(q)P
+8520 41040(A)P
+9153 41040(man)P
+10386 41040(who)P
+11619 41040(is)P
+12219 41040(not)P
+13186 41040(upright)P
+8520 40320(and)P
+9586 40320(at)P
+10219 40320(the)P
+11152 40320(same)P
+12584 40320(time)P
+13851 40320(is)P
+14451 40320(presumptuous;)P
+8520 39600(one)P
+9586 39600(who)P
+10819 39600(is)P
+11419 39600(not)P
+12386 39600(diligent)P
+14420 39600(and)P
+15486 39600(at)P
+16119 39600(the)P
+17052 39600(same)P
+18484 39600(time)P
+19751 39600(is)P
+20351 39600(ignorant;)P
+8520 38880(one)P
+9586 38880(who)P
+10819 38880(is)P
+11419 38880(untruthful)P
+14020 38880(and)P
+15086 38880(at)P
+15719 38880(the)P
+16652 38880(same)P
+18084 38880(time)P
+19351 38880(is)P
+19951 38880(incompetent;)P
+8520 38160(such)P
+9819 38160(men)P
+11052 38160(I)P
+11452 38160(do)P
+12252 38160(not)P
+13219 38160(count)P
+14752 38160(among)P
+16585 38160(acquaintances.\\**)P
+8520 37440(.\(f)P
+8520 36720(\\**James)P
+10952 36720(R.)P
+11702 36720(Ware,)P
+8520 36000(.ul)P
+8520 35280(The)P
+9653 35280(Best)P
+10919 35280(of)P
+11619 35280(Confucius,)P
+8520 34560(Halcyon)P
+10752 34560(House,)P
+12634 34560(1950.)P
+8520 33840(Page)P
+9886 33840(77.)P
+8520 33120(.\)f)P
+8520 32400(.\)q)P
+6120 31428(generates)P
+8584 31428(the)P
+9517 31428(result:)P
+0 9 SF
+7320 30528(A)P
+7912 30528(man)P
+9044 30528(who)P
+10176 30528(is)P
+10738 30528(not)P
+11630 30528(upright)P
+13392 30528(and)P
+14374 30528(at)P
+14966 30528(the)P
+15828 30528(same)P
+17139 30528(time)P
+18300 30528(is)P
+18861 30528(presumptuous;)P
+22242 30528(one)P
+23223 30528(who)P
+24354 30528(is)P
+24915 30528(not)P
+25806 30528(diligent)P
+27657 30528(and)P
+28638 30528(at)P
+29229 30528(the)P
+30090 30528(same)P
+7320 29880(time)P
+8532 29880(is)P
+9143 29880(ignorant;)P
+11344 29880(one)P
+12375 29880(who)P
+13556 29880(is)P
+14167 29880(untruthful)P
+16578 29880(and)P
+17609 29880(at)P
+18250 29880(the)P
+19161 29880(same)P
+20522 29880(time)P
+21733 29880(is)P
+22344 29880(incompetent;)P
+25415 29880(such)P
+26656 29880(men)P
+27837 29880(I)P
+28268 29880(do)P
+29059 29880(not)P
+30000 29880(count)P
+7320 29124(among)P
+8970 29124(acquaintances.)P
+0 6 SF
+12135 29340(2)P
+0 10 SF
+6120 28152(It)P
+6738 28152(is)P
+7389 28152(important)P
+9974 28152(that)P
+11125 28152(the)P
+12109 28152(footnote)P
+14360 28152(appears)P
+1 10 SF
+16442 28152(inside)P
+0 10 SF
+18126 28152(the)P
+19110 28152(quote,)P
+20844 28152(so)P
+21628 28152(that)P
+22779 28152(you)P
+23930 28152(can)P
+25013 28152(be)P
+25830 28152(sure)P
+27080 28152(that)P
+28231 28152(the)P
+29215 28152(footnote)P
+31466 28152(will)P
+6120 27432(appear)P
+7918 27432(on)P
+8718 27432(the)P
+9651 27432(same)P
+11083 27432(page)P
+12415 27432(as)P
+13114 27432(the)P
+14047 27432(quote.)P
+2 10 SF
+5220 25992(4.2.)P
+6520 25992(Delayed)P
+8786 25992(Text)P
+0 10 SF
+7620 25020(Delayed)P
+9854 25020(text)P
+10990 25020(is)P
+11626 25020(very)P
+12928 25020(similar)P
+14831 25020(to)P
+15534 25020(a)P
+16036 25020(footnote)P
+18271 25020(except)P
+20071 25020(that)P
+21206 25020(it)P
+21775 25020(is)P
+22410 25020(printed)P
+24345 25020(when)P
+25879 25020(called)P
+27546 25020(for)P
+28481 25020(explicitly.)P
+31333 25020(This)P
+6120 24300(allows)P
+7962 24300(a)P
+8504 24300(list)P
+9514 24300(of)P
+10290 24300(references)P
+13029 24300(to)P
+13772 24300(appear)P
+15646 24300(\(for)P
+16822 24300(example\))P
+19330 24300(at)P
+20039 24300(the)P
+21048 24300(end)P
+22190 24300(of)P
+22966 24300(each)P
+24340 24300(chapter,)P
+26531 24300(as)P
+27306 24300(is)P
+27982 24300(the)P
+28991 24300(convention)P
+31933 24300(in)P
+6120 23580(some)P
+7586 23580(disciplines.)P
+10702 23580(Use)P
+2 10 SF
+11834 23580(\\*#)P
+0 10 SF
+12801 23580(on)P
+13601 23580(delayed)P
+15666 23580(text)P
+16766 23580(instead)P
+18665 23580(of)P
+2 10 SF
+19365 23580(\\**)P
+0 10 SF
+20332 23580(as)P
+21031 23580(on)P
+21831 23580(footnotes.)P
+7620 22608(If)P
+8295 22608(you)P
+9470 22608(are)P
+10477 22608(using)P
+12052 22608(delayed)P
+14192 22608(text)P
+15367 22608(as)P
+16141 22608(your)P
+17516 22608(standard)P
+19823 22608(reference)P
+22328 22608(mechanism,)P
+25485 22608(you)P
+26660 22608(can)P
+27767 22608(still)P
+28943 22608(use)P
+30017 22608(footnotes,)P
+6120 21888(except)P
+7885 21888(that)P
+8985 21888(you)P
+10085 21888(may)P
+11318 21888(want)P
+12684 21888(to)P
+13351 21888(reference)P
+15781 21888(them)P
+17181 21888(with)P
+18448 21888(special)P
+20313 21888(characters*)P
+23243 21888(rather)P
+24842 21888(than)P
+26075 21888(numbers.)P
+2 10 SF
+5220 20448(4.3.)P
+6520 20448(Indexes)P
+0 10 SF
+7620 19476(An)P
+8587 19476(``index'')P
+10954 19476(\(actually)P
+13287 19476(more)P
+14754 19476(like)P
+15888 19476(a)P
+16388 19476(table)P
+17788 19476(of)P
+18522 19476(contents,)P
+20905 19476(since)P
+22371 19476(the)P
+23338 19476(entries)P
+25171 19476(are)P
+26136 19476(not)P
+27136 19476(sorted)P
+28835 19476(alphabetically\))P
+6120 18756(resembles)P
+8743 18756(delayed)P
+10833 18756(text,)P
+12108 18756(in)P
+12800 18756(that)P
+13925 18756(it)P
+14484 18756(is)P
+15109 18756(saved)P
+16699 18756(until)P
+18025 18756(called)P
+19682 18756(for.)P
+20956 18756(However,)P
+23528 18756(each)P
+24850 18756(entry)P
+26307 18756(has)P
+27330 18756(the)P
+28287 18756(page)P
+29643 18756(number)P
+31700 18756(\(or)P
+6120 18036(some)P
+7586 18036(other)P
+9019 18036(tag\))P
+10152 18036(appended)P
+12650 18036(to)P
+13317 18036(the)P
+14250 18036(last)P
+15283 18036(line)P
+16383 18036(of)P
+17083 18036(the)P
+18016 18036(index)P
+19549 18036(entry)P
+20982 18036(after)P
+22281 18036(a)P
+22747 18036(row)P
+23880 18036(of)P
+24580 18036(dots.)P
+7620 17064(Index)P
+9242 17064(entries)P
+11097 17064(begin)P
+12686 17064(with)P
+14009 17064(the)P
+14997 17064(request)P
+2 10 SF
+16984 17064(.\(x)P
+0 10 SF
+17889 17064(and)P
+19010 17064(end)P
+20131 17064(with)P
+2 10 SF
+21453 17064(.\)x)P
+0 10 SF
+22103 17064(.)P
+22708 17064(The)P
+2 10 SF
+23896 17064(.\)x)P
+0 10 SF
+24801 17064(request)P
+26788 17064(may)P
+28076 17064(have)P
+29463 17064(a)P
+29984 17064(argument,)P
+6120 16344(which)P
+7833 16344(is)P
+8480 16344(the)P
+9460 16344(value)P
+11006 16344(to)P
+11720 16344(print)P
+13101 16344(as)P
+13847 16344(the)P
+14827 16344(``page)P
+16606 16344(number''.)P
+19436 16344(It)P
+20050 16344(defaults)P
+22196 16344(to)P
+22910 16344(the)P
+23890 16344(current)P
+25836 16344(page)P
+27214 16344(number.)P
+29643 16344(If)P
+30289 16344(the)P
+31268 16344(page)P
+6120 15624(number)P
+8169 15624(given)P
+9718 15624(is)P
+10334 15624(an)P
+11116 15624(underscore)P
+13963 15624(\(``_''\))P
+15679 15624(no)P
+16495 15624(page)P
+17843 15624(number)P
+19892 15624(or)P
+20608 15624(line)P
+21724 15624(of)P
+22440 15624(dots)P
+23656 15624(is)P
+24272 15624(printed)P
+26188 15624(at)P
+26837 15624(all.)P
+28003 15624(To)P
+28886 15624(get)P
+29835 15624(the)P
+30784 15624(line)P
+31900 15624(of)P
+6120 14904(dots)P
+7320 14904(without)P
+9354 14904(a)P
+9820 14904(page)P
+11152 14904(number,)P
+13335 14904(type)P
+2 10 SF
+14568 14904(.\)x)P
+15418 14904("")P
+0 10 SF
+16084 14904(,)P
+16434 14904(which)P
+18100 14904(speci\212es)P
+20365 14904(an)P
+21131 14904(explicitly)P
+23598 14904(null)P
+24732 14904(page)P
+26064 14904(number.)P
+7620 13932(The)P
+2 10 SF
+8753 13932(.xp)P
+0 10 SF
+9737 13932(request)P
+11669 13932(prints)P
+13236 13932(the)P
+14169 13932(index.)P
+7620 12960(For)P
+8654 12960(example,)P
+11036 12960(the)P
+11969 12960(input:)P
+4320 7512 8 0 36 L
+0 5 SF
+5616 6888(2)P
+0 8 SF
+5766 6696(James)P
+7099 6696(R.)P
+7699 6696(Ware,)P
+1 8 SF
+9018 6696(The)P
+9898 6696(Best)P
+10884 6696(of)P
+11417 6696(Confucius,)P
+0 8 SF
+13643 6696(Halcyon)P
+15429 6696(House,)P
+16936 6696(1950.)P
+18336 6696(Page)P
+19429 6696(77.)P
+5616 5976(*Such)P
+6976 5976(as)P
+7536 5976(an)P
+8149 5976(asterisk.)P
+end restore showpage
+%%Page: 9 9
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29900 43920(USD:22\2559)P
+0 10 SF
+8520 41760(.\(x)P
+8520 41040(Sealing)P
+10520 41040(wax)P
+8520 40320(.\)x)P
+8520 39600(.\(x)P
+8520 38880(Cabbages)P
+11051 38880(and)P
+12117 38880(kings)P
+8520 38160(.\)x)P
+9370 38160(_)P
+8520 37440(.\(x)P
+8520 36720(Why)P
+9886 36720(the)P
+10819 36720(sea)P
+11784 36720(is)P
+12384 36720(boiling)P
+14285 36720(hot)P
+8520 36000(.\)x)P
+9370 36000(2.5a)P
+8520 35280(.\(x)P
+8520 34560(Whether)P
+10785 34560(pigs)P
+11985 34560(have)P
+13317 34560(wings)P
+8520 33840(.\)x)P
+9370 33840("")P
+8520 33120(.\(x)P
+8520 32400(This)P
+9787 32400(is)P
+10387 32400(a)P
+10853 32400(terribly)P
+12820 32400(long)P
+14087 32400(index)P
+15620 32400(entry,)P
+17203 32400(such)P
+18502 32400(as)P
+19201 32400(might)P
+20802 32400(be)P
+21568 32400(used)P
+8520 31680(for)P
+9420 31680(a)P
+9886 31680(list)P
+10820 31680(of)P
+11520 31680(illustrations,)P
+14704 31680(tables,)P
+16453 31680(or)P
+17153 31680(\212gures;)P
+19153 31680(I)P
+19553 31680(expect)P
+21318 31680(it)P
+21852 31680(to)P
+8520 30960(take)P
+9719 30960(at)P
+10352 30960(least)P
+11651 30960(two)P
+12751 30960(lines.)P
+8520 30240(.\)x)P
+8520 29520(.xp)P
+6120 28548(generates:)P
+6120 27684(Sealing)P
+8120 27684(wax)P
+9390 27684(...........................................................................................................................................)P
+32100 27684(9)P
+6120 26820(Cabbages)P
+8651 26820(and)P
+9717 26820(kings)P
+6120 25956(Why)P
+7486 25956(the)P
+8419 25956(sea)P
+9384 25956(is)P
+9984 25956(boiling)P
+11885 25956(hot)P
+12990 25956(...................................................................................................................)P
+31384 25956(2.5a)P
+6120 25092(Whether)P
+8385 25092(pigs)P
+9585 25092(have)P
+10917 25092(wings)P
+12690 25092(.....................................................................................................................)P
+6120 24228(This)P
+7437 24228(is)P
+8087 24228(a)P
+8603 24228(terribly)P
+10620 24228(long)P
+11937 24228(index)P
+13520 24228(entry,)P
+15153 24228(such)P
+16502 24228(as)P
+17250 24228(might)P
+18900 24228(be)P
+19715 24228(used)P
+21063 24228(for)P
+22012 24228(a)P
+22527 24228(list)P
+23510 24228(of)P
+24259 24228(illustrations,)P
+27492 24228(tables,)P
+29290 24228(or)P
+7620 23508(\212gures;)P
+9620 23508(I)P
+10020 23508(expect)P
+11785 23508(it)P
+12319 23508(to)P
+12986 23508(take)P
+14185 23508(at)P
+14818 23508(least)P
+16117 23508(two)P
+17217 23508(lines.)P
+18990 23508(...........................................................................)P
+32100 23508(9)P
+7620 22536(The)P
+2 10 SF
+8752 22536(.\(x)P
+0 10 SF
+9601 22536(request)P
+11532 22536(may)P
+12764 22536(have)P
+14095 22536(a)P
+14560 22536(single)P
+16192 22536(character)P
+18588 22536(argument,)P
+21203 22536(specifying)P
+23902 22536(the)P
+24835 22536(``name'')P
+27134 22536(of)P
+27834 22536(the)P
+28767 22536(index;)P
+30467 22536(the)P
+31400 22536(nor\255)P
+6120 21816(mal)P
+7229 21816(index)P
+8771 21816(is)P
+2 10 SF
+9380 21816(x)P
+0 10 SF
+9680 21816(.)P
+10238 21816(Thus,)P
+11796 21816(several)P
+13702 21816(``indices'')P
+16409 21816(may)P
+17650 21816(be)P
+18424 21816(maintained)P
+21298 21816(simultaneously)P
+25139 21816(\(such)P
+26646 21816(as)P
+27353 21816(a)P
+27827 21816(list)P
+28769 21816(of)P
+29477 21816(tables,)P
+31234 21816(table)P
+6120 21096(of)P
+6820 21096(contents,)P
+9169 21096(etc.\).)P
+7620 20124(Notice)P
+9443 20124(that)P
+10566 20124(the)P
+11522 20124(index)P
+13078 20124(must)P
+14468 20124(be)P
+15257 20124(printed)P
+17180 20124(at)P
+17836 20124(the)P
+1 10 SF
+18792 20124(end)P
+0 10 SF
+19881 20124(of)P
+20604 20124(the)P
+21560 20124(paper,)P
+23265 20124(rather)P
+24887 20124(than)P
+26143 20124(at)P
+26799 20124(the)P
+27755 20124(beginning)P
+30378 20124(where)P
+32066 20124(it)P
+6120 19404(will)P
+7281 19404(probably)P
+9641 19404(appear)P
+11466 19404(\(as)P
+12392 19404(a)P
+12885 19404(table)P
+14278 19404(of)P
+15005 19404(contents\);)P
+17598 19404(the)P
+18558 19404(pages)P
+20150 19404(may)P
+21410 19404(have)P
+22769 19404(to)P
+23463 19404(be)P
+24256 19404(physically)P
+26949 19404(rearranged)P
+29740 19404(after)P
+31066 19404(print\255)P
+6120 18684(ing.)P
+2 10 SF
+4320 17244(5.)P
+5170 17244(Fancier)P
+7336 17244(Features)P
+0 10 SF
+6720 16272(A)P
+7408 16272(large)P
+8862 16272(number)P
+10950 16272(of)P
+11705 16272(fancier)P
+13625 16272(requests)P
+15845 16272(exist,)P
+17383 16272(notably)P
+19438 16272(requests)P
+21658 16272(to)P
+22380 16272(provide)P
+24468 16272(other)P
+25956 16272(sorts)P
+27344 16272(of)P
+28098 16272(paragraphs,)P
+31133 16272(num\255)P
+5220 15552(bered)P
+6752 15552(sections)P
+8884 15552(of)P
+9584 15552(the)P
+10517 15552(form)P
+2 10 SF
+11884 15552(1.2.3)P
+0 10 SF
+13284 15552(\(such)P
+14783 15552(as)P
+15482 15552(used)P
+16781 15552(in)P
+17448 15552(this)P
+18515 15552(document\),)P
+21431 15552(and)P
+22497 15552(multicolumn)P
+25765 15552(output.)P
+2 10 SF
+5220 14112(5.1.)P
+6520 14112(More)P
+8118 14112(Paragraphs)P
+0 10 SF
+7620 13140(Paragraphs)P
+10546 13140(generally)P
+13039 13140(start)P
+14333 13140(with)P
+15661 13140(a)P
+16188 13140(blank)P
+17782 13140(line)P
+18943 13140(and)P
+20070 13140(with)P
+21398 13140(the)P
+22392 13140(\212rst)P
+23587 13140(line)P
+24748 13140(indented.)P
+27425 13140(It)P
+28053 13140(is)P
+28714 13140(possible)P
+30940 13140(to)P
+31667 13140(get)P
+6120 12420(left\255justi\212ed)P
+9254 12420(block\255style)P
+12120 12420(paragraphs)P
+14951 12420(by)P
+15751 12420(using)P
+2 10 SF
+17251 12420(.lp)P
+0 10 SF
+18102 12420(instead)P
+20001 12420(of)P
+2 10 SF
+20701 12420(.pp)P
+0 10 SF
+21519 12420(,)P
+21869 12420(as)P
+22568 12420(demonstrated)P
+26000 12420(by)P
+26800 12420(the)P
+27733 12420(next)P
+28966 12420(paragraph.)P
+6120 11448(Sometimes)P
+9017 11448(you)P
+10147 11448(want)P
+11543 11448(to)P
+12240 11448(use)P
+13269 11448(paragraphs)P
+16130 11448(that)P
+17260 11448(have)P
+18622 11448(the)P
+1 10 SF
+19584 11448(body)P
+0 10 SF
+20979 11448(indented,)P
+23424 11448(and)P
+24519 11448(the)P
+25481 11448(\212rst)P
+26644 11448(line)P
+27773 11448(exdented)P
+30167 11448(\(opposite)P
+6120 10728(of)P
+6857 10728(indented\))P
+9360 10728(with)P
+10664 10728(a)P
+11167 10728(label.)P
+12920 10728(This)P
+14224 10728(can)P
+15293 10728(be)P
+16096 10728(done)P
+17499 10728(with)P
+18803 10728(the)P
+2 10 SF
+19773 10728(.ip)P
+0 10 SF
+20661 10728(request.)P
+22980 10728(A)P
+23650 10728(word)P
+25120 10728(speci\212ed)P
+27489 10728(on)P
+28326 10728(the)P
+29296 10728(same)P
+30765 10728(line)P
+31901 10728(as)P
+2 10 SF
+6120 10008(.ip)P
+0 10 SF
+7036 10008(is)P
+7701 10008(printed)P
+9666 10008(in)P
+10398 10008(the)P
+11396 10008(margin,)P
+13511 10008(and)P
+14642 10008(the)P
+15640 10008(body)P
+17105 10008(is)P
+17770 10008(lined)P
+19235 10008(up)P
+20100 10008(at)P
+20798 10008(a)P
+21329 10008(prespeci\212ed)P
+24492 10008(position)P
+26691 10008(\(normally)P
+29322 10008(\212ve)P
+30486 10008(spaces\).)P
+6120 9288(For)P
+7154 9288(example,)P
+9536 9288(the)P
+10469 9288(input:)P
+end restore showpage
+%%Page: 10 10
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\25510)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+0 10 SF
+8520 41760(.ip)P
+9337 41760(one)P
+8520 41040(This)P
+9787 41040(is)P
+10387 41040(the)P
+11320 41040(\212rst)P
+12454 41040(paragraph.)P
+8520 40320(Notice)P
+10319 40320(how)P
+11552 40320(the)P
+12485 40320(\212rst)P
+13619 40320(line)P
+8520 39600(of)P
+9220 39600(the)P
+10153 39600(resulting)P
+12453 39600(paragraph)P
+15051 39600(lines)P
+16384 39600(up)P
+8520 38880(with)P
+9787 38880(the)P
+10720 38880(other)P
+12153 38880(lines)P
+13486 38880(in)P
+14153 38880(the)P
+15086 38880(paragraph.)P
+8520 38160(.ip)P
+9337 38160(two)P
+8520 37440(And)P
+9753 37440(here)P
+10985 37440(we)P
+11884 37440(are)P
+12816 37440(at)P
+13449 37440(the)P
+14382 37440(second)P
+16247 37440(paragraph)P
+18845 37440(already.)P
+8520 36720(You)P
+9753 36720(may)P
+10986 36720(notice)P
+12652 36720(that)P
+13752 36720(the)P
+14685 36720(argument)P
+17151 36720(to)P
+2 10 SF
+17818 36720(.ip)P
+0 10 SF
+8520 36000(appears)P
+8520 35280(in)P
+9187 35280(the)P
+10120 35280(margin.)P
+8520 34560(.lp)P
+8520 33840(We)P
+9552 33840(can)P
+10584 33840(continue)P
+12850 33840(text...)P
+6120 32868(produces)P
+8485 32868(as)P
+9184 32868(output:)P
+6120 31896(one)P
+7620 31896(This)P
+8948 31896(is)P
+9609 31896(the)P
+10603 31896(\212rst)P
+11798 31896(paragraph.)P
+14807 31896(Notice)P
+16667 31896(how)P
+17961 31896(the)P
+18955 31896(\212rst)P
+20150 31896(line)P
+21311 31896(of)P
+22072 31896(the)P
+23066 31896(resulting)P
+25427 31896(paragraph)P
+28086 31896(lines)P
+29480 31896(up)P
+30340 31896(with)P
+31667 31896(the)P
+7620 31176(other)P
+9053 31176(lines)P
+10386 31176(in)P
+11053 31176(the)P
+11986 31176(paragraph.)P
+6120 30204(two)P
+7620 30204(And)P
+8863 30204(here)P
+10105 30204(we)P
+11014 30204(are)P
+11956 30204(at)P
+12599 30204(the)P
+13542 30204(second)P
+15417 30204(paragraph)P
+18024 30204(already.)P
+20348 30204(You)P
+21590 30204(may)P
+22832 30204(notice)P
+24507 30204(that)P
+25616 30204(the)P
+26558 30204(argument)P
+29033 30204(to)P
+2 10 SF
+29709 30204(.ip)P
+0 10 SF
+30569 30204(appears)P
+7620 29484(in)P
+8287 29484(the)P
+9220 29484(margin.)P
+6120 28512(We)P
+7152 28512(can)P
+8184 28512(continue)P
+10450 28512(text)P
+11550 28512(without)P
+13584 28512(starting)P
+15584 28512(a)P
+16050 28512(new)P
+17249 28512(indented)P
+19515 28512(paragraph)P
+22113 28512(by)P
+22913 28512(using)P
+24413 28512(the)P
+2 10 SF
+25346 28512(.lp)P
+0 10 SF
+26197 28512(request.)P
+7620 27540(If)P
+8248 27540(you)P
+9376 27540(have)P
+10736 27540(spaces)P
+12528 27540(in)P
+13223 27540(the)P
+14184 27540(label)P
+15578 27540(of)P
+16306 27540(a)P
+2 10 SF
+16800 27540(.ip)P
+0 10 SF
+17679 27540(request,)P
+19789 27540(you)P
+20917 27540(must)P
+22312 27540(use)P
+23338 27540(an)P
+24131 27540(``unpaddable)P
+27523 27540(space'')P
+29481 27540(instead)P
+31407 27540(of)P
+32134 27540(a)P
+6120 26820(regular)P
+8063 26820(space.)P
+9988 26820(This)P
+11299 26820(is)P
+11943 26820(typed)P
+13520 26820(as)P
+14263 26820(a)P
+14773 26820(backslash)P
+17348 26820(character)P
+19789 26820(\(``\\''\))P
+21400 26820(followed)P
+23777 26820(by)P
+24621 26820(a)P
+25130 26820(space.)P
+27054 26820(For)P
+28131 26820(example,)P
+30556 26820(to)P
+31266 26820(print)P
+6120 26100(the)P
+7053 26100(label)P
+8419 26100(``Part)P
+9986 26100(1'',)P
+11036 26100(enter:)P
+8520 25128(.ip)P
+9337 25128("Part\\)P
+10916 25128(1")P
+7620 23904(If)P
+8257 23904(a)P
+8760 23904(label)P
+10163 23904(of)P
+10900 23904(an)P
+11703 23904(indented)P
+14006 23904(paragraph)P
+16641 23904(\(that)P
+17978 23904(is,)P
+18764 23904(the)P
+19733 23904(argument)P
+22235 23904(to)P
+2 10 SF
+22938 23904(.ip)P
+0 10 SF
+23589 23904(\))P
+24025 23904(is)P
+24661 23904(longer)P
+26430 23904(than)P
+27699 23904(the)P
+28668 23904(space)P
+30235 23904(allocated)P
+6120 23184(for)P
+7020 23184(the)P
+7953 23184(label,)P
+2 10 SF
+9469 23184(.ip)P
+0 10 SF
+10320 23184(will)P
+11454 23184(begin)P
+12987 23184(a)P
+13453 23184(new)P
+14652 23184(line)P
+15752 23184(after)P
+17051 23184(the)P
+17984 23184(label.)P
+19700 23184(For)P
+20734 23184(example,)P
+23116 23184(the)P
+24049 23184(input:)P
+8520 22212(.ip)P
+9337 22212(longlabel)P
+8520 21492(This)P
+9787 21492(paragraph)P
+12385 21492(had)P
+13451 21492(a)P
+13917 21492(long)P
+15184 21492(label.)P
+8520 20772(The)P
+9653 20772(\212rst)P
+10787 20772(character)P
+13184 20772(of)P
+13884 20772(text)P
+14984 20772(on)P
+15784 20772(the)P
+16717 20772(\212rst)P
+17851 20772(line)P
+8520 20052(will)P
+9654 20052(not)P
+10621 20052(line)P
+11721 20052(up)P
+12521 20052(with)P
+13788 20052(the)P
+14721 20052(text)P
+15821 20052(on)P
+16621 20052(second)P
+18486 20052(and)P
+19552 20052(subsequent)P
+22417 20052(lines,)P
+8520 19332(although)P
+10820 19332(they)P
+12053 19332(will)P
+13187 19332(line)P
+14287 19332(up)P
+15087 19332(with)P
+16354 19332(each)P
+17652 19332(other.)P
+6120 18360(will)P
+7254 18360(produce:)P
+6120 17388(longlabel)P
+7620 16668(This)P
+8935 16668(paragraph)P
+11581 16668(had)P
+12695 16668(a)P
+13209 16668(long)P
+14524 16668(label.)P
+16288 16668(The)P
+17469 16668(\212rst)P
+18651 16668(character)P
+21095 16668(of)P
+21842 16668(text)P
+22989 16668(on)P
+23836 16668(the)P
+24816 16668(\212rst)P
+25997 16668(line)P
+27144 16668(will)P
+28325 16668(not)P
+29339 16668(line)P
+30486 16668(up)P
+31333 16668(with)P
+7620 15948(the)P
+8553 15948(text)P
+9653 15948(on)P
+10453 15948(second)P
+12318 15948(and)P
+13384 15948(subsequent)P
+16249 15948(lines,)P
+17732 15948(although)P
+20032 15948(they)P
+21265 15948(will)P
+22399 15948(line)P
+23499 15948(up)P
+24299 15948(with)P
+25566 15948(each)P
+26864 15948(other.)P
+7620 14976(It)P
+8235 14976(is)P
+8883 14976(possible)P
+11097 14976(to)P
+11812 14976(change)P
+13758 14976(the)P
+14739 14976(size)P
+15919 14976(of)P
+16667 14976(the)P
+17648 14976(label)P
+19062 14976(by)P
+19910 14976(using)P
+21458 14976(a)P
+21972 14976(second)P
+23885 14976(argument)P
+26399 14976(which)P
+28113 14976(is)P
+28761 14976(the)P
+29741 14976(size)P
+30920 14976(of)P
+31667 14976(the)P
+6120 14256(label.)P
+7836 14256(For)P
+8870 14256(example,)P
+11252 14256(the)P
+12185 14256(above)P
+13817 14256(example)P
+16049 14256(could)P
+17582 14256(be)P
+18348 14256(done)P
+19714 14256(correctly)P
+22046 14256(by)P
+22846 14256(saying:)P
+8520 13284(.ip)P
+9337 13284(longlabel)P
+11770 13284(10)P
+6120 12312(which)P
+7795 12312(will)P
+8938 12312(make)P
+10446 12312(the)P
+11388 12312(paragraph)P
+13995 12312(indent)P
+15703 12312(10)P
+16511 12312(spaces)P
+18283 12312(for)P
+19191 12312(this)P
+20266 12312(paragraph)P
+22872 12312(only.)P
+24497 12312(If)P
+25105 12312(you)P
+26213 12312(have)P
+27553 12312(many)P
+29094 12312(paragraphs)P
+31933 12312(to)P
+6120 11592(indent)P
+7854 11592(all)P
+8688 11592(the)P
+9655 11592(same)P
+11121 11592(amount,)P
+13305 11592(use)P
+14338 11592(the)P
+1 10 SF
+15305 11592(number)P
+17371 11592(register)P
+2 10 SF
+19470 11592(ii)P
+0 10 SF
+19804 11592(.)P
+20388 11592(For)P
+21456 11592(example,)P
+23872 11592(to)P
+24573 11592(leave)P
+26072 11592(one)P
+27171 11592(inch)P
+28437 11592(of)P
+29170 11592(space)P
+30734 11592(for)P
+31667 11592(the)P
+6120 10872(label,)P
+7636 10872(type:)P
+8520 9900(.nr)P
+9370 9900(ii)P
+9904 9900(1i)P
+6120 8928(somewhere)P
+9051 8928(before)P
+10783 8928(the)P
+11716 8928(\212rst)P
+12850 8928(call)P
+13916 8928(to)P
+2 10 SF
+14583 8928(.ip)P
+0 10 SF
+15234 8928(.)P
+15784 8928(Refer)P
+17316 8928(to)P
+17983 8928(the)P
+18916 8928(reference)P
+21346 8928(manual)P
+23312 8928(for)P
+24212 8928(more)P
+25645 8928(information.)P
+7620 7956(If)P
+2 10 SF
+8220 7956(.ip)P
+0 10 SF
+9071 7956(is)P
+9671 7956(used)P
+10970 7956(with)P
+12237 7956(no)P
+13037 7956(argument)P
+15503 7956(at)P
+16136 7956(all)P
+16936 7956(no)P
+17736 7956(hanging)P
+19869 7956(tag)P
+20802 7956(will)P
+21936 7956(be)P
+22702 7956(printed.)P
+24952 7956(For)P
+25986 7956(example,)P
+28368 7956(the)P
+29301 7956(input:)P
+end restore showpage
+%%Page: 11 11
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29600 43920(USD:22\25511)P
+0 10 SF
+8520 41760(.ip)P
+9337 41760([a])P
+8520 41040(This)P
+9787 41040(is)P
+10387 41040(the)P
+11320 41040(\212rst)P
+12454 41040(paragraph)P
+15052 41040(of)P
+15752 41040(the)P
+16685 41040(example.)P
+8520 40320(We)P
+9552 40320(have)P
+10884 40320(seen)P
+12149 40320(this)P
+13216 40320(sort)P
+14316 40320(of)P
+15016 40320(example)P
+17248 40320(before.)P
+8520 39600(.ip)P
+8520 38880(This)P
+9787 38880(paragraph)P
+12385 38880(is)P
+12985 38880(lined)P
+14385 38880(up)P
+15185 38880(with)P
+16452 38880(the)P
+17385 38880(previous)P
+19651 38880(paragraph,)P
+8520 38160(but)P
+9487 38160(it)P
+10021 38160(has)P
+11020 38160(no)P
+11820 38160(tag)P
+12753 38160(in)P
+13420 38160(the)P
+14353 38160(margin.)P
+6120 37188(produces)P
+8485 37188(as)P
+9184 37188(output:)P
+6120 36216([a])P
+7620 36216(This)P
+8887 36216(is)P
+9487 36216(the)P
+10420 36216(\212rst)P
+11554 36216(paragraph)P
+14152 36216(of)P
+14852 36216(the)P
+15785 36216(example.)P
+18367 36216(We)P
+19399 36216(have)P
+20731 36216(seen)P
+21996 36216(this)P
+23063 36216(sort)P
+24163 36216(of)P
+24863 36216(example)P
+27095 36216(before.)P
+7620 35244(This)P
+8887 35244(paragraph)P
+11485 35244(is)P
+12085 35244(lined)P
+13485 35244(up)P
+14285 35244(with)P
+15552 35244(the)P
+16485 35244(previous)P
+18751 35244(paragraph,)P
+21499 35244(but)P
+22466 35244(it)P
+23000 35244(has)P
+23999 35244(no)P
+24799 35244(tag)P
+25732 35244(in)P
+26399 35244(the)P
+27332 35244(margin.)P
+7620 34272(A)P
+8343 34272(special)P
+10298 34272(case)P
+11619 34272(of)P
+2 10 SF
+12409 34272(.ip)P
+0 10 SF
+13350 34272(is)P
+2 10 SF
+14040 34272(.np)P
+0 10 SF
+14858 34272(,)P
+15298 34272(which)P
+17054 34272(automatically)P
+20609 34272(numbers)P
+22964 34272(paragraphs)P
+25884 34272(sequentially)P
+29072 34272(from)P
+30528 34272(1.)P
+31467 34272(The)P
+6120 33552(numbering)P
+8942 33552(is)P
+9564 33552(reset)P
+10918 33552(at)P
+11572 33552(the)P
+12526 33552(next)P
+2 10 SF
+13780 33552(.pp)P
+0 10 SF
+14598 33552(,)P
+2 10 SF
+14969 33552(.lp)P
+0 10 SF
+15620 33552(,)P
+15991 33552(or)P
+2 10 SF
+16712 33552(.sh)P
+0 10 SF
+17650 33552(\(to)P
+18538 33552(be)P
+19325 33552(described)P
+21844 33552(in)P
+22532 33552(the)P
+23486 33552(next)P
+24740 33552(section\))P
+26860 33552(request.)P
+29163 33552(For)P
+30218 33552(example,)P
+6120 32832(the)P
+7053 32832(input:)P
+8520 31860(.np)P
+8520 31140(This)P
+9787 31140(is)P
+10387 31140(the)P
+11320 31140(\212rst)P
+12454 31140(point.)P
+8520 30420(.np)P
+8520 29700(This)P
+9787 29700(is)P
+10387 29700(the)P
+11320 29700(second)P
+13185 29700(point.)P
+8520 28980(Points)P
+10221 28980(are)P
+11153 28980(just)P
+12220 28980(regular)P
+14119 28980(paragraphs)P
+8520 28260(which)P
+10186 28260(are)P
+11118 28260(given)P
+12651 28260(sequence)P
+15048 28260(numbers)P
+17314 28260(automatically)P
+8520 27540(by)P
+9320 27540(the)P
+10253 27540(.np)P
+11203 27540(request.)P
+8520 26820(.pp)P
+8520 26100(This)P
+9787 26100(paragraph)P
+12385 26100(will)P
+13519 26100(reset)P
+14851 26100(numbering)P
+17651 26100(by)P
+18451 26100(.np.)P
+8520 25380(.np)P
+8520 24660(For)P
+9554 24660(example,)P
+8520 23940(we)P
+9419 23940(have)P
+10751 23940(reverted)P
+12916 23940(to)P
+13583 23940(numbering)P
+16383 23940(from)P
+17750 23940(one)P
+18816 23940(now.)P
+6120 22968(generates:)P
+6420 21996(\(1\))P
+8020 21996(This)P
+9287 21996(is)P
+9887 21996(the)P
+10820 21996(\212rst)P
+11954 21996(point.)P
+6420 21024(\(2\))P
+8020 21024(This)P
+9352 21024(is)P
+10017 21024(the)P
+11015 21024(second)P
+12945 21024(point.)P
+14794 21024(Points)P
+16560 21024(are)P
+17557 21024(just)P
+18689 21024(regular)P
+20653 21024(paragraphs)P
+23549 21024(which)P
+25280 21024(are)P
+26276 21024(given)P
+27873 21024(sequence)P
+30334 21024(numbers)P
+8020 20304(automatically)P
+11486 20304(by)P
+12286 20304(the)P
+13219 20304(.np)P
+14169 20304(request.)P
+7620 19332(This)P
+8887 19332(paragraph)P
+11485 19332(will)P
+12619 19332(reset)P
+13951 19332(numbering)P
+16751 19332(by)P
+17551 19332(.np.)P
+6420 18360(\(1\))P
+8020 18360(For)P
+9054 18360(example,)P
+11436 18360(we)P
+12335 18360(have)P
+13667 18360(reverted)P
+15832 18360(to)P
+16499 18360(numbering)P
+19299 18360(from)P
+20666 18360(one)P
+21732 18360(now.)P
+7620 17388(The)P
+2 10 SF
+8742 17388(.bu)P
+0 10 SF
+9749 17388(request)P
+11670 17388(gives)P
+13125 17388(lists)P
+14281 17388(of)P
+14970 17388(this)P
+16026 17388(sort)P
+17115 17388(that)P
+18204 17388(are)P
+19125 17388(identi\212ed)P
+21581 17388(with)P
+22837 17388(bullets)P
+24627 17388(rather)P
+26216 17388(than)P
+27439 17388(numbers.)P
+30045 17388(The)P
+31168 17388(para\255)P
+6120 16668(graphs)P
+7919 16668(are)P
+8851 16668(also)P
+10017 16668(crunched)P
+12415 16668(together.)P
+14931 16668(For)P
+15965 16668(example,)P
+18347 16668(the)P
+19280 16668(input:)P
+8520 15696(.bu)P
+8520 14976(One)P
+9719 14976(egg)P
+10785 14976(yolk)P
+8520 14256(.bu)P
+8520 13536(One)P
+9719 13536(tablespoon)P
+12518 13536(cream)P
+14183 13536(or)P
+14883 13536(top)P
+15850 13536(milk)P
+8520 12816(.bu)P
+8520 12096(Salt,)P
+9804 12096(cayenne,)P
+12118 12096(and)P
+13184 12096(lemon)P
+14884 12096(juice)P
+16250 12096(to)P
+16917 12096(taste)P
+8520 11376(.bu)P
+8520 10656(A)P
+9153 10656(generous)P
+11518 10656(two)P
+12618 10656(tablespoonfuls)P
+16317 10656(of)P
+17017 10656(butter)P
+6120 9564(produces)P
+0 7 SF
+8285 9804(3)P
+0 10 SF
+8495 9564(:)P
+6420 8592(\007)P
+6930 8592(One)P
+8129 8592(egg)P
+9195 8592(yolk)P
+4320 7944 8 0 36 L
+0 5 SF
+5616 7320(3)P
+0 8 SF
+5766 7128(By)P
+6493 7128(the)P
+7246 7128(way,)P
+8333 7128(if)P
+8793 7128(you)P
+9680 7128(put)P
+10460 7128(the)P
+11213 7128(\212rst)P
+12127 7128(three)P
+13253 7128(ingredients)P
+15552 7128(in)P
+16092 7128(a)P
+16472 7128(a)P
+16852 7128(heavy,)P
+18285 7128(deep)P
+19358 7128(pan)P
+20218 7128(and)P
+21078 7128(whisk)P
+22391 7128(the)P
+23143 7128(ingredients)P
+25441 7128(madly)P
+26806 7128(over)P
+27825 7128(a)P
+28204 7128(medium)P
+29942 7128(\213ame)P
+31174 7128(\(never)P
+4320 6552(taking)P
+5690 6552(your)P
+6741 6552(hand)P
+7845 6552(off)P
+8576 6552(the)P
+9333 6552(handle)P
+10783 6552(of)P
+11354 6552(the)P
+12111 6552(pot\))P
+13055 6552(until)P
+14104 6552(the)P
+14860 6552(mixture)P
+16522 6552(reaches)P
+18131 6552(the)P
+18887 6552(consistency)P
+21296 6552(of)P
+21866 6552(custard)P
+23422 6552(\(just)P
+24445 6552(a)P
+24828 6552(minute)P
+26330 6552(or)P
+26900 6552(two\),)P
+28070 6552(then)P
+29066 6552(mix)P
+29982 6552(in)P
+30525 6552(the)P
+31281 6552(butter)P
+4320 5976(off\255heat,)P
+6119 5976(you)P
+6999 5976(will)P
+7905 5976(have)P
+8971 5976(a)P
+9344 5976(wonderful)P
+11477 5976(Hollandaise)P
+13929 5976(sauce.)P
+end restore showpage
+%%Page: 12 12
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\25512)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+0 10 SF
+6420 41760(\007)P
+6930 41760(One)P
+8129 41760(tablespoon)P
+10928 41760(cream)P
+12593 41760(or)P
+13293 41760(top)P
+14260 41760(milk)P
+6420 41040(\007)P
+6930 41040(Salt,)P
+8214 41040(cayenne,)P
+10528 41040(and)P
+11594 41040(lemon)P
+13294 41040(juice)P
+14660 41040(to)P
+15327 41040(taste)P
+6420 40320(\007)P
+6930 40320(A)P
+7563 40320(generous)P
+9928 40320(two)P
+11028 40320(tablespoonfuls)P
+14727 40320(of)P
+15427 40320(butter)P
+2 10 SF
+5220 38880(5.2.)P
+6520 38880(Section)P
+8587 38880(Headings)P
+0 10 SF
+7620 37908(Section)P
+9638 37908(numbers)P
+11922 37908(\(such)P
+13438 37908(as)P
+14154 37908(the)P
+15104 37908(ones)P
+16420 37908(used)P
+17736 37908(in)P
+18420 37908(this)P
+19504 37908(document\))P
+22287 37908(can)P
+23336 37908(be)P
+24119 37908(automatically)P
+27602 37908(generated)P
+30150 37908(using)P
+31667 37908(the)P
+2 10 SF
+6120 37188(.sh)P
+0 10 SF
+7089 37188(request.)P
+9423 37188(You)P
+10707 37188(must)P
+12125 37188(tell)P
+2 10 SF
+13143 37188(.sh)P
+0 10 SF
+14111 37188(the)P
+1 10 SF
+15095 37188(depth)P
+0 10 SF
+16679 37188(of)P
+17430 37188(the)P
+18414 37188(section)P
+20364 37188(number)P
+22448 37188(and)P
+23565 37188(a)P
+24082 37188(section)P
+26032 37188(title.)P
+27567 37188(The)P
+28751 37188(depth)P
+30335 37188(speci\212es)P
+6120 36468(how)P
+7378 36468(many)P
+8936 36468(numbers)P
+11227 36468(are)P
+12184 36468(to)P
+12876 36468(appear)P
+14699 36468(\(separated)P
+17387 36468(by)P
+18211 36468(decimal)P
+20334 36468(points\))P
+22225 36468(in)P
+22916 36468(the)P
+23873 36468(section)P
+25796 36468(number.)P
+28203 36468(For)P
+29261 36468(example,)P
+31667 36468(the)P
+6120 35748(section)P
+8019 35748(number)P
+2 10 SF
+10052 35748(4.2.5)P
+0 10 SF
+11452 35748(has)P
+12451 35748(a)P
+12917 35748(depth)P
+14450 35748(of)P
+15150 35748(three.)P
+7620 34776(Section)P
+9681 34776(numbers)P
+12008 34776(are)P
+13001 34776(incremented)P
+16227 34776(in)P
+16955 34776(a)P
+17481 34776(fairly)P
+19041 34776(intuitive)P
+21302 34776(fashion.)P
+23678 34776(If)P
+24338 34776(you)P
+25498 34776(add)P
+26624 34776(a)P
+27150 34776(number)P
+29243 34776(\(increase)P
+31667 34776(the)P
+6120 34056(depth\),)P
+8016 34056(the)P
+8962 34056(new)P
+10174 34056(number)P
+12220 34056(starts)P
+13699 34056(out)P
+14679 34056(at)P
+15325 34056(one.)P
+16753 34056(If)P
+17365 34056(you)P
+18477 34056(subtract)P
+20588 34056(section)P
+22499 34056(numbers)P
+24777 34056(\(or)P
+25689 34056(keep)P
+27033 34056(the)P
+27978 34056(same)P
+29422 34056(number\))P
+31667 34056(the)P
+6120 33336(\212nal)P
+7387 33336(number)P
+9420 33336(is)P
+10020 33336(incremented.)P
+13535 33336(For)P
+14569 33336(example,)P
+16951 33336(the)P
+17884 33336(input:)P
+8520 32364(.sh)P
+9403 32364(1)P
+9903 32364("The)P
+11281 32364(Preprocessor")P
+8520 31644(.sh)P
+9403 31644(2)P
+9903 31644("Basic)P
+11680 31644(Concepts")P
+8520 30924(.sh)P
+9403 30924(2)P
+9903 30924("Control)P
+12182 30924(Inputs")P
+8520 30204(.sh)P
+9403 30204(3)P
+8520 29484(.sh)P
+9403 29484(3)P
+8520 28764(.sh)P
+9403 28764(1)P
+9903 28764("Code)P
+11614 28764(Generation")P
+8520 28044(.sh)P
+9403 28044(3)P
+6120 27072(produces)P
+8485 27072(as)P
+9184 27072(output)P
+10918 27072(the)P
+11851 27072(result:)P
+2 10 SF
+8520 26100(1.)P
+9370 26100(The)P
+10570 26100(Preprocessor)P
+8520 25380(1.1.)P
+9820 25380(Basic)P
+11386 25380(Concepts)P
+8520 24660(1.2.)P
+9820 24660(Control)P
+12020 24660(Inputs)P
+8520 23940(1.2.1.)P
+8520 23220(1.2.2.)P
+8520 22500(2.)P
+9370 22500(Code)P
+10903 22500(Generation)P
+8520 21780(2.1.1.)P
+0 10 SF
+7620 20556(You)P
+8895 20556(can)P
+9969 20556(specify)P
+11943 20556(the)P
+12918 20556(section)P
+14859 20556(number)P
+16934 20556(to)P
+17643 20556(begin)P
+19218 20556(by)P
+20060 20556(placing)P
+22068 20556(the)P
+23043 20556(section)P
+24984 20556(number)P
+27059 20556(after)P
+28400 20556(the)P
+29375 20556(section)P
+31316 20556(title,)P
+6120 19836(using)P
+7620 19836(spaces)P
+9384 19836(instead)P
+11283 19836(of)P
+11983 19836(dots.)P
+13533 19836(For)P
+14567 19836(example,)P
+16949 19836(the)P
+17882 19836(request:)P
+8520 18864(.sh)P
+9403 18864(3)P
+9903 18864("Another)P
+12314 18864(section")P
+14458 18864(7)P
+14958 18864(3)P
+15458 18864(4)P
+6120 17892(will)P
+7254 17892(begin)P
+8787 17892(the)P
+9720 17892(section)P
+11619 17892(numbered)P
+2 10 SF
+14218 17892(7.3.4)P
+0 10 SF
+15418 17892(;)P
+15785 17892(all)P
+16585 17892(subsequent)P
+2 10 SF
+19450 17892(.sh)P
+0 10 SF
+20367 17892(requests)P
+22532 17892(will)P
+23666 17892(number)P
+25699 17892(relative)P
+27698 17892(to)P
+28365 17892(this)P
+29432 17892(number.)P
+7620 16920(There)P
+9232 16920(are)P
+10177 16920(more)P
+11623 16920(complex)P
+13902 16920(features)P
+16013 16920(which)P
+17692 16920(will)P
+18839 16920(cause)P
+20383 16920(each)P
+21694 16920(section)P
+23606 16920(to)P
+24286 16920(be)P
+25064 16920(indented)P
+27342 16920(proportionally)P
+30988 16920(to)P
+31667 16920(the)P
+6120 16200(depth)P
+7653 16200(of)P
+8353 16200(the)P
+9286 16200(section.)P
+11535 16200(For)P
+12569 16200(example,)P
+14951 16200(if)P
+15518 16200(you)P
+16618 16200(enter:)P
+8520 15228(.nr)P
+9370 15228(si)P
+1 10 SF
+9970 15228(N)P
+0 10 SF
+6120 14256(each)P
+7442 14256(section)P
+9365 14256(will)P
+10523 14256(be)P
+11313 14256(indented)P
+13603 14256(by)P
+14427 14256(an)P
+15217 14256(amount)P
+1 10 SF
+17241 14256(N)P
+0 10 SF
+17641 14256(.)P
+1 10 SF
+18215 14256(N)P
+0 10 SF
+18839 14256(must)P
+20230 14256(have)P
+21586 14256(a)P
+22076 14256(scaling)P
+23998 14256(factor)P
+25620 14256(attached,)P
+27991 14256(that)P
+29114 14256(is,)P
+29887 14256(it)P
+30444 14256(must)P
+31834 14256(be)P
+6120 13536(of)P
+6825 13536(the)P
+7763 13536(form)P
+1 10 SF
+9135 13536(Nx)P
+0 10 SF
+9801 13536(,)P
+10156 13536(where)P
+1 10 SF
+11826 13536(x)P
+0 10 SF
+12297 13536(is)P
+12902 13536(a)P
+13373 13536(character)P
+15775 13536(telling)P
+17514 13536(what)P
+18885 13536(units)P
+1 10 SF
+20257 13536(N)P
+0 10 SF
+20862 13536(is)P
+21467 13536(in.)P
+22489 13536(Common)P
+24927 13536(values)P
+26663 13536(for)P
+1 10 SF
+27567 13536(x)P
+0 10 SF
+28037 13536(are)P
+2 10 SF
+28973 13536(i)P
+0 10 SF
+29344 13536(for)P
+30248 13536(inches,)P
+2 10 SF
+32134 13536(c)P
+0 10 SF
+6120 12816(for)P
+7036 12816(centimeters,)P
+10167 12816(and)P
+2 10 SF
+11249 12816(n)P
+0 10 SF
+11799 12816(for)P
+1 10 SF
+12714 12816(ens)P
+0 10 SF
+13728 12816(\(the)P
+14876 12816(width)P
+16458 12816(of)P
+17173 12816(a)P
+17654 12816(single)P
+19302 12816(character\).)P
+22264 12816(For)P
+23313 12816(example,)P
+25710 12816(to)P
+26392 12816(indent)P
+28107 12816(each)P
+29420 12816(section)P
+31334 12816(one\255)P
+6120 12096(half)P
+7253 12096(inch,)P
+8636 12096(type:)P
+8520 11124(.nr)P
+9370 11124(si)P
+9970 11124(0.5i)P
+6120 10152(After)P
+7591 10152(this,)P
+8813 10152(sections)P
+10950 10152(will)P
+12089 10152(be)P
+12860 10152(indented)P
+15131 10152(by)P
+15936 10152(one\255half)P
+18140 10152(inch)P
+19378 10152(per)P
+20349 10152(level)P
+21720 10152(of)P
+22425 10152(depth)P
+23963 10152(in)P
+24635 10152(the)P
+25573 10152(section)P
+27476 10152(number.)P
+29863 10152(For)P
+30901 10152(exam\255)P
+6120 9432(ple,)P
+7203 9432(this)P
+8270 9432(document)P
+10836 9432(was)P
+11968 9432(produced)P
+14400 9432(using)P
+15900 9432(the)P
+16833 9432(request)P
+8520 8460(.nr)P
+9370 8460(si)P
+9970 8460(3n)P
+6120 7488(at)P
+6753 7488(the)P
+7686 7488(beginning)P
+10286 7488(of)P
+10986 7488(the)P
+11919 7488(input)P
+13353 7488(\212le,)P
+14470 7488(giving)P
+16204 7488(three)P
+17603 7488(spaces)P
+19367 7488(of)P
+20067 7488(indent)P
+21767 7488(per)P
+22733 7488(section)P
+24632 7488(depth.)P
+7620 6516(Section)P
+9620 6516(headers)P
+11651 6516(without)P
+13685 6516(automatically)P
+17151 6516(generated)P
+19682 6516(numbers)P
+21948 6516(can)P
+22980 6516(be)P
+23746 6516(done)P
+25112 6516(using:)P
+8520 5544(.uh)P
+9470 5544("Title")P
+6120 4572(which)P
+7786 4572(will)P
+8920 4572(do)P
+9720 4572(a)P
+10186 4572(section)P
+12085 4572(heading,)P
+14334 4572(but)P
+15301 4572(will)P
+16435 4572(put)P
+17402 4572(no)P
+18202 4572(number)P
+20235 4572(on)P
+21035 4572(the)P
+21968 4572(section.)P
+end restore showpage
+%%Page: 13 13
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29600 43920(USD:22\25513)P
+5220 41760(5.3.)P
+6520 41760(Parts)P
+8086 41760(of)P
+8786 41760(the)P
+9786 41760(Basic)P
+11352 41760(Paper)P
+0 10 SF
+7620 40788(There)P
+9300 40788(are)P
+10313 40788(some)P
+11860 40788(requests)P
+14106 40788(which)P
+15853 40788(assist)P
+17433 40788(in)P
+18181 40788(setting)P
+20062 40788(up)P
+20943 40788(papers.)P
+23138 40788(The)P
+2 10 SF
+24351 40788(.tp)P
+0 10 SF
+25315 40788(request)P
+27327 40788(initializes)P
+29940 40788(for)P
+30920 40788(a)P
+31466 40788(title)P
+6120 40068(page.)P
+7853 40068(There)P
+9503 40068(are)P
+10486 40068(no)P
+11337 40068(headers)P
+13419 40068(or)P
+14170 40068(footers)P
+16087 40068(on)P
+16938 40068(a)P
+17455 40068(title)P
+18640 40068(page,)P
+20173 40068(and)P
+21290 40068(unlike)P
+23040 40068(other)P
+24523 40068(pages)P
+26138 40068(you)P
+27288 40068(can)P
+28370 40068(space)P
+29951 40068(down)P
+31534 40068(and)P
+6120 39348(leave)P
+7585 39348(blank)P
+9118 39348(space)P
+10649 39348(at)P
+11282 39348(the)P
+12215 39348(top.)P
+13532 39348(For)P
+14566 39348(example,)P
+16948 39348(a)P
+17414 39348(typical)P
+19247 39348(title)P
+20381 39348(page)P
+21713 39348(might)P
+23314 39348(appear)P
+25112 39348(as:)P
+8520 38376(.tp)P
+8520 37656(.sp)P
+9403 37656(2i)P
+8520 36936(.\(l)P
+9237 36936(C)P
+8520 36216(THE)P
+9887 36216(GROWTH)P
+12719 36216(OF)P
+13686 36216(TOENAILS)P
+8520 35496(IN)P
+9353 35496(UPPER)P
+11421 35496(PRIMATES)P
+8520 34776(.sp)P
+8520 34056(by)P
+8520 33336(.sp)P
+8520 32616(Frank)P
+10120 32616(N.)P
+10903 32616(Furter)P
+8520 31896(.\)l)P
+8520 31176(.bp)P
+7620 29952(The)P
+8761 29952(request)P
+2 10 SF
+10701 29952(.th)P
+0 10 SF
+11593 29952(sets)P
+12700 29952(up)P
+13508 29952(the)P
+14449 29952(environment)P
+17690 29952(of)P
+18398 29952(the)P
+0 9 SF
+19319 29952(NROFF)P
+0 10 SF
+21266 29952(processor)P
+23771 29952(to)P
+24445 29952(do)P
+25252 29952(a)P
+25725 29952(thesis,)P
+27448 29952(using)P
+28955 29952(the)P
+29895 29952(rules)P
+31268 29952(esta\255)P
+6120 29232(blished)P
+8117 29232(at)P
+8814 29232(Berkeley.)P
+11593 29232(It)P
+12224 29232(de\212nes)P
+14186 29232(the)P
+15182 29232(correct)P
+17110 29232(headers)P
+19204 29232(and)P
+20333 29232(footers)P
+22262 29232(\(a)P
+22991 29232(page)P
+24386 29232(number)P
+26482 29232(in)P
+27212 29232(the)P
+28208 29232(upper)P
+29837 29232(right)P
+31234 29232(hand)P
+6120 28512(corner)P
+7852 28512(only\),)P
+9469 28512(sets)P
+10568 28512(the)P
+11501 28512(margins)P
+13634 28512(correctly,)P
+16116 28512(and)P
+17182 28512(double)P
+19015 28512(spaces.)P
+7620 27540(The)P
+2 10 SF
+8771 27540(.+c)P
+1 10 SF
+9729 27540(T)P
+0 10 SF
+10281 27540(request)P
+12231 27540(can)P
+13281 27540(be)P
+14065 27540(used)P
+15382 27540(to)P
+16067 27540(start)P
+17318 27540(chapters.)P
+19884 27540(Each)P
+21301 27540(chapter)P
+23284 27540(is)P
+23901 27540(automatically)P
+27384 27540(numbered)P
+30000 27540(from)P
+31384 27540(one,)P
+6120 26820(and)P
+7200 26820(a)P
+7680 26820(heading)P
+9793 26820(is)P
+10407 26820(printed)P
+12321 26820(at)P
+12968 26820(the)P
+13915 26820(top)P
+14896 26820(of)P
+15610 26820(each)P
+16922 26820(chapter)P
+18901 26820(with)P
+20182 26820(the)P
+21129 26820(chapter)P
+23108 26820(number)P
+25154 26820(and)P
+26233 26820(the)P
+27179 26820(chapter)P
+29157 26820(name)P
+1 10 SF
+30669 26820(T)P
+0 10 SF
+31003 26820(.)P
+31566 26820(For)P
+6120 26100(example,)P
+8502 26100(to)P
+9169 26100(begin)P
+10702 26100(a)P
+11168 26100(chapter)P
+13133 26100(called)P
+14765 26100(``Conclusions'',)P
+18881 26100(use)P
+19880 26100(the)P
+20813 26100(request:)P
+8520 25128(.+c)P
+9474 25128("CONCLUSIONS")P
+6120 24156(which)P
+7786 24156(will)P
+8920 24156(produce,)P
+11202 24156(on)P
+12002 24156(a)P
+12468 24156(new)P
+13667 24156(page,)P
+15149 24156(the)P
+16082 24156(lines)P
+17643 23184(CHAPTER)P
+20577 23184(5)P
+17160 22464(CONCLUSIONS)P
+6120 21492(with)P
+7407 21492(appropriate)P
+10359 21492(spacing)P
+12411 21492(for)P
+13331 21492(a)P
+13817 21492(thesis.)P
+15753 21492(Also,)P
+17256 21492(the)P
+18209 21492(header)P
+20027 21492(is)P
+20646 21492(moved)P
+22498 21492(to)P
+23184 21492(the)P
+24136 21492(foot)P
+25322 21492(of)P
+26041 21492(the)P
+26993 21492(page)P
+28344 21492(on)P
+29163 21492(the)P
+30115 21492(\212rst)P
+31268 21492(page)P
+6120 20772(of)P
+6829 20772(a)P
+7304 20772(chapter.)P
+9628 20772(Although)P
+12104 20772(the)P
+2 10 SF
+13046 20772(.+c)P
+0 10 SF
+14013 20772(request)P
+15954 20772(was)P
+17095 20772(not)P
+18071 20772(designed)P
+20412 20772(to)P
+21088 20772(work)P
+22530 20772(only)P
+23806 20772(with)P
+25082 20772(the)P
+2 10 SF
+26024 20772(.th)P
+0 10 SF
+26917 20772(request,)P
+29008 20772(it)P
+29551 20772(is)P
+30159 20772(tuned)P
+31700 20772(for)P
+6120 20052(the)P
+7053 20052(format)P
+8853 20052(acceptable)P
+11583 20052(for)P
+12483 20052(a)P
+12949 20052(PhD)P
+14216 20052(thesis)P
+15782 20052(at)P
+16415 20052(Berkeley.)P
+7620 19080(If)P
+8298 19080(the)P
+9309 19080(title)P
+10521 19080(parameter)P
+1 10 SF
+13197 19080(T)P
+0 10 SF
+13809 19080(is)P
+14487 19080(omitted)P
+16599 19080(from)P
+18044 19080(the)P
+2 10 SF
+19054 19080(.+c)P
+0 10 SF
+20089 19080(request,)P
+22248 19080(the)P
+23258 19080(result)P
+24868 19080(is)P
+25545 19080(a)P
+26088 19080(chapter)P
+28130 19080(with)P
+29474 19080(no)P
+30351 19080(heading.)P
+6120 18360(This)P
+7396 18360(can)P
+8437 18360(also)P
+9612 18360(be)P
+10387 18360(used)P
+11695 18360(at)P
+12337 18360(the)P
+13279 18360(beginning)P
+15888 18360(of)P
+16597 18360(a)P
+17072 18360(paper;)P
+18780 18360(for)P
+19689 18360(example,)P
+2 10 SF
+22080 18360(.+c)P
+0 10 SF
+23047 18360(was)P
+24188 18360(used)P
+25496 18360(to)P
+26172 18360(generate)P
+28411 18360(page)P
+29751 18360(one)P
+30825 18360(of)P
+31533 18360(this)P
+6120 17640(document.)P
+7620 16668(Although)P
+10149 16668(papers)P
+11976 16668(traditionally)P
+15172 16668(have)P
+16566 16668(the)P
+17561 16668(abstract,)P
+19838 16668(table)P
+21266 16668(of)P
+22028 16668(contents,)P
+24439 16668(and)P
+25567 16668(so)P
+26362 16668(forth)P
+27790 16668(at)P
+28484 16668(the)P
+29478 16668(front)P
+30906 16668(of)P
+31667 16668(the)P
+6120 15948(paper,)P
+7891 15948(it)P
+8514 15948(is)P
+9203 15948(more)P
+10725 15948(convenient)P
+13646 15948(to)P
+14402 15948(format)P
+16291 15948(and)P
+17446 15948(print)P
+18869 15948(them)P
+20358 15948(last)P
+21480 15948(when)P
+23068 15948(using)P
+0 9 SF
+24637 15948(NROFF)P
+0 10 SF
+26377 15948(.)P
+27015 15948(This)P
+28370 15948(is)P
+29058 15948(so)P
+29879 15948(that)P
+31067 15948(index)P
+6120 15228(entries)P
+7933 15228(can)P
+8979 15228(be)P
+9759 15228(collected)P
+12138 15228(and)P
+13218 15228(then)P
+14465 15228(printed)P
+16379 15228(for)P
+17293 15228(the)P
+18240 15228(table)P
+19620 15228(of)P
+20334 15228(contents)P
+22547 15228(\(or)P
+23460 15228(whatever\).)P
+26421 15228(At)P
+27234 15228(the)P
+28180 15228(end)P
+29259 15228(of)P
+29972 15228(the)P
+30918 15228(paper,)P
+6120 14508(issue)P
+7522 14508(the)P
+2 10 SF
+8458 14508(.++)P
+9495 14508(P)P
+0 10 SF
+10065 14508(request,)P
+12150 14508(which)P
+13819 14508(begins)P
+15588 14508(the)P
+16524 14508(preliminary)P
+19527 14508(part)P
+20663 14508(of)P
+21365 14508(the)P
+22300 14508(paper.)P
+24184 14508(After)P
+25652 14508(issuing)P
+27554 14508(this)P
+28623 14508(request,)P
+30707 14508(the)P
+2 10 SF
+31642 14508(.+c)P
+0 10 SF
+6120 13788(request)P
+8066 13788(will)P
+9214 13788(begin)P
+10761 13788(a)P
+11241 13788(preliminary)P
+14255 13788(section)P
+16168 13788(of)P
+16882 13788(the)P
+17829 13788(paper.)P
+19725 13788(Most)P
+21172 13788(notably,)P
+23336 13788(this)P
+24417 13788(prints)P
+25998 13788(the)P
+26944 13788(page)P
+28289 13788(number)P
+30335 13788(restarted)P
+6120 13068(from)P
+7501 13068(one)P
+8581 13068(in)P
+9262 13068(lower)P
+10842 13068(case)P
+12087 13068(Roman)P
+14034 13068(numbers.)P
+2 10 SF
+16664 13068(.+c)P
+0 10 SF
+17636 13068(may)P
+18883 13068(be)P
+19663 13068(used)P
+20976 13068(repeatedly)P
+23688 13068(to)P
+24369 13068(begin)P
+25916 13068(different)P
+28195 13068(parts)P
+29574 13068(of)P
+30287 13068(the)P
+31233 13068(front)P
+6120 12348(material)P
+8333 12348(for)P
+9280 12348(example,)P
+11709 12348(the)P
+12689 12348(abstract,)P
+14951 12348(the)P
+15931 12348(table)P
+17344 12348(of)P
+18091 12348(contents,)P
+20487 12348(acknowledgments,)P
+25215 12348(list)P
+26196 12348(of)P
+26942 12348(illustrations,)P
+30172 12348(etc.)P
+31467 12348(The)P
+6120 11628(request)P
+2 10 SF
+8076 11628(.++)P
+9134 11628(B)P
+0 10 SF
+9758 11628(may)P
+11015 11628(also)P
+12205 11628(be)P
+12995 11628(used)P
+14318 11628(to)P
+15009 11628(begin)P
+16566 11628(the)P
+17523 11628(bibliographic)P
+20947 11628(section)P
+22870 11628(at)P
+23527 11628(the)P
+24484 11628(end)P
+25574 11628(of)P
+26298 11628(the)P
+27255 11628(paper.)P
+29161 11628(For)P
+30218 11628(example,)P
+6120 10908(the)P
+7053 10908(paper)P
+8585 10908(might)P
+10186 10908(appear)P
+11984 10908(as)P
+12683 10908(outlined)P
+14850 10908(in)P
+15517 10908(\212gure)P
+17117 10908(2.)P
+17967 10908(\(In)P
+18867 10908(this)P
+19934 10908(\212gure,)P
+21684 10908(comments)P
+24350 10908(begin)P
+25883 10908(with)P
+27150 10908(the)P
+28083 10908(sequence)P
+2 10 SF
+30480 10908(\\")P
+0 10 SF
+30980 10908(.\))P
+2 10 SF
+5220 9468(5.4.)P
+6520 9468(Equations)P
+9322 9468(and)P
+10490 9468(Tables)P
+0 10 SF
+7620 8496(Two)P
+8941 8496(special)P
+0 9 SF
+10807 8496(UNIX)P
+0 10 SF
+12378 8496(programs)P
+14865 8496(exist)P
+16219 8496(to)P
+16906 8496(format)P
+18726 8496(special)P
+20611 8496(types)P
+22097 8496(of)P
+22817 8496(material.)P
+2 10 SF
+25353 8496(Eqn)P
+0 10 SF
+26641 8496(and)P
+2 10 SF
+27727 8496(neqn)P
+0 10 SF
+29215 8496(set)P
+30101 8496(equations)P
+6120 7776(for)P
+7033 7776(the)P
+7979 7776(phototypesetter)P
+11891 7776(and)P
+0 9 SF
+12950 7776(NROFF)P
+0 10 SF
+14902 7776(respectively.)P
+2 10 SF
+18362 7776(Tbl)P
+0 10 SF
+19475 7776(arranges)P
+21718 7776(to)P
+22397 7776(print)P
+23743 7776(extremely)P
+26354 7776(pretty)P
+27966 7776(tables)P
+29577 7776(in)P
+30256 7776(a)P
+30734 7776(variety)P
+6120 7056(of)P
+6899 7056(formats.)P
+9361 7056(This)P
+10707 7056(document)P
+13352 7056(will)P
+14565 7056(only)P
+15911 7056(describe)P
+18188 7056(the)P
+19200 7056(embellishments)P
+23245 7056(to)P
+23991 7056(the)P
+25003 7056(standard)P
+27313 7056(features;)P
+29656 7056(consult)P
+31667 7056(the)P
+6120 6336(reference)P
+8550 6336(manuals)P
+10749 6336(for)P
+11649 6336(those)P
+13115 6336(processors)P
+15846 6336(for)P
+16746 6336(a)P
+17212 6336(description)P
+20078 6336(of)P
+20778 6336(their)P
+22078 6336(use.)P
+7620 5364(The)P
+2 10 SF
+8762 5364(eqn)P
+0 10 SF
+9905 5364(and)P
+2 10 SF
+10980 5364(neqn)P
+0 10 SF
+12456 5364(programs)P
+14930 5364(are)P
+15870 5364(described)P
+18376 5364(fully)P
+19718 5364(in)P
+20393 5364(the)P
+21334 5364(document)P
+1 10 SF
+23908 5364(Typesetting)P
+26882 5364(Mathematics)P
+30189 5364(-)P
+30802 5364(User's)P
+6120 4644(Guide)P
+0 10 SF
+7801 4644(by)P
+8616 4644(Brian)P
+10164 4644(W.)P
+11095 4644(Kernighan)P
+13841 4644(and)P
+14921 4644(Lorinda)P
+17035 4644(L.)P
+17766 4644(Cherry.)P
+19996 4644(Equations)P
+22610 4644(are)P
+23556 4644(centered,)P
+25951 4644(and)P
+27031 4644(are)P
+27977 4644(kept)P
+29224 4644(on)P
+30038 4644(one)P
+31118 4644(page.)P
+end restore showpage
+%%Page: 14 14
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\25514)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+4320 41040 10 0 1 L
+4500 41040 10 0 93 L
+0 10 SF
+6480 39600(.th)P
+15120 39600(\\")P
+15732 39600(set)P
+16598 39600(for)P
+17498 39600(thesis)P
+19064 39600(mode)P
+6480 38880(.fo)P
+7330 38880(\222\222DRAFT\222\222)P
+15120 38880(\\")P
+15732 38880(de\212ne)P
+17398 38880(footer)P
+19031 38880(for)P
+19931 38880(each)P
+21229 38880(page)P
+6480 38160(.tp)P
+15120 38160(\\")P
+15732 38160(begin)P
+17265 38160(title)P
+18399 38160(page)P
+6480 37440(.\(l)P
+7197 37440(C)P
+15120 37440(\\")P
+15732 37440(center)P
+17397 37440(a)P
+17863 37440(large)P
+19262 37440(block)P
+6480 36720(THE)P
+7847 36720(GROWTH)P
+10679 36720(OF)P
+11646 36720(TOENAILS)P
+6480 36000(IN)P
+7313 36000(UPPER)P
+9381 36000(PRIMATES)P
+6480 35280(.sp)P
+6480 34560(by)P
+6480 33840(.sp)P
+6480 33120(Frank)P
+8080 33120(Furter)P
+6480 32400(.\)l)P
+15120 32400(\\")P
+15732 32400(end)P
+16798 32400(centered)P
+19029 32400(part)P
+6480 31680(.+c)P
+7434 31680(INTRODUCTION)P
+15120 31680(\\")P
+15732 31680(begin)P
+17265 31680(chapter)P
+19230 31680(named)P
+21029 31680("INTRODUCTION")P
+6480 30960(.\(x)P
+7330 30960(t)P
+15120 30960(\\")P
+15732 30960(make)P
+17231 30960(an)P
+17997 30960(entry)P
+19430 30960(into)P
+20564 30960(index)P
+22097 30960(`t')P
+6480 30240(Introduction)P
+6480 29520(.\)x)P
+15120 29520(\\")P
+15732 29520(end)P
+16798 29520(of)P
+17498 29520(index)P
+19031 29520(entry)P
+6480 28800(text)P
+7580 28800(of)P
+8280 28800(chapter)P
+10245 28800(one)P
+6480 28080(.+c)P
+7434 28080("NEXT)P
+9479 28080(CHAPTER")P
+15120 28080(\\")P
+15732 28080(begin)P
+17265 28080(another)P
+19264 28080(chapter)P
+6480 27360(.\(x)P
+7330 27360(t)P
+15120 27360(\\")P
+15732 27360(enter)P
+17131 27360(into)P
+18265 27360(index)P
+19798 27360(`t')P
+20565 27360(again)P
+6480 26640(Next)P
+7846 26640(Chapter)P
+6480 25920(.\)x)P
+6480 25200(text)P
+7580 25200(of)P
+8280 25200(chapter)P
+10245 25200(two)P
+6480 24480(.+c)P
+7434 24480(CONCLUSIONS)P
+6480 23760(.\(x)P
+7330 23760(t)P
+6480 23040(Conclusions)P
+6480 22320(.\)x)P
+6480 21600(text)P
+7580 21600(of)P
+8280 21600(chapter)P
+10245 21600(three)P
+6480 20880(.++)P
+7506 20880(B)P
+15120 20880(\\")P
+15732 20880(begin)P
+17265 20880(bibliographic)P
+20665 20880(information)P
+6480 20160(.+c)P
+7434 20160(BIBLIOGRAPHY)P
+15120 20160(\\")P
+15732 20160(begin)P
+17265 20160(another)P
+19264 20160(`chapter')P
+6480 19440(.\(x)P
+7330 19440(t)P
+6480 18720(Bibliography)P
+6480 18000(.\)x)P
+6480 17280(text)P
+7580 17280(of)P
+8280 17280(bibliography)P
+6480 16560(.++)P
+7506 16560(P)P
+15120 16560(\\")P
+15732 16560(begin)P
+17265 16560(preliminary)P
+20265 16560(material)P
+6480 15840(.+c)P
+7434 15840("TABLE)P
+9813 15840(OF)P
+10780 15840(CONTENTS")P
+6480 15120(.xp)P
+7430 15120(t)P
+15120 15120(\\")P
+15732 15120(print)P
+17066 15120(index)P
+18599 15120(`t')P
+19366 15120(collected)P
+21731 15120(above)P
+6480 14400(.+c)P
+7434 14400(PREFACE)P
+15120 14400(\\")P
+15732 14400(begin)P
+17265 14400(another)P
+19264 14400(preliminary)P
+22264 14400(section)P
+6480 13680(text)P
+7580 13680(of)P
+8280 13680(preface)P
+13785 11520(Figure)P
+15552 11520(2.)P
+16402 11520(Outline)P
+18402 11520(of)P
+19102 11520(a)P
+19568 11520(Sample)P
+21568 11520(Paper)P
+4320 10800 10 0 1 L
+4500 10800 10 0 93 L
+6120 8640(They)P
+7553 8640(are)P
+8485 8640(introduced)P
+11251 8640(by)P
+12051 8640(the)P
+2 10 SF
+12984 8640(.EQ)P
+0 10 SF
+14201 8640(request)P
+16133 8640(and)P
+17199 8640(terminated)P
+19965 8640(by)P
+20765 8640(the)P
+2 10 SF
+21698 8640(.EN)P
+0 10 SF
+22881 8640(request.)P
+7620 7668(The)P
+2 10 SF
+8775 7668(.EQ)P
+0 10 SF
+10014 7668(request)P
+11968 7668(may)P
+13223 7668(take)P
+14444 7668(an)P
+15232 7668(equation)P
+17519 7668(number)P
+19573 7668(as)P
+20293 7668(an)P
+21080 7668(optional)P
+23268 7668(argument,)P
+25905 7668(which)P
+27592 7668(is)P
+28213 7668(printed)P
+30134 7668(vertically)P
+6120 6948(centered)P
+8448 6948(on)P
+9345 6948(the)P
+10375 6948(right)P
+11806 6948(hand)P
+13269 6948(side)P
+14532 6948(of)P
+15329 6948(the)P
+16359 6948(equation.)P
+19071 6948(If)P
+19767 6948(the)P
+20796 6948(equation)P
+23158 6948(becomes)P
+25552 6948(too)P
+26615 6948(long)P
+27978 6948(it)P
+28608 6948(should)P
+30504 6948(be)P
+31366 6948(split)P
+6120 6228(between)P
+8318 6228(two)P
+9418 6228(lines.)P
+11101 6228(To)P
+11968 6228(do)P
+12768 6228(this,)P
+13985 6228(type:)P
+end restore showpage
+%%Page: 15 15
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29600 43920(USD:22\25515)P
+0 10 SF
+8520 41760(.EQ)P
+9670 41760(\(eq)P
+10636 41760(34\))P
+8520 41040(text)P
+9620 41040(of)P
+10320 41040(equation)P
+12586 41040(34)P
+8520 40320(.EN)P
+9670 40320(C)P
+8520 39600(.EQ)P
+8520 38880(continuation)P
+11720 38880(of)P
+12420 38880(equation)P
+14686 38880(34)P
+8520 38160(.EN)P
+6120 37188(The)P
+2 10 SF
+7253 37188(C)P
+0 10 SF
+7886 37188(on)P
+8686 37188(the)P
+2 10 SF
+9619 37188(.EN)P
+0 10 SF
+10802 37188(request)P
+12734 37188(speci\212es)P
+14999 37188(that)P
+16099 37188(the)P
+17032 37188(equation)P
+19298 37188(will)P
+20432 37188(be)P
+21198 37188(continued.)P
+7620 36216(The)P
+2 10 SF
+8777 36216(tbl)P
+0 10 SF
+9702 36216(program)P
+11959 36216(produces)P
+14348 36216(tables.)P
+16321 36216(It)P
+16912 36216(is)P
+17536 36216(fully)P
+18894 36216(described)P
+21416 36216(\(including)P
+24107 36216(numerous)P
+26697 36216(examples\))P
+29386 36216(in)P
+30077 36216(the)P
+31034 36216(docu\255)P
+6120 35496(ment)P
+1 10 SF
+7521 35496(Tbl)P
+8523 35496(-)P
+9129 35496(A)P
+9697 35496(Program)P
+12064 35496(to)P
+12732 35496(Format)P
+14733 35496(Tables)P
+0 10 SF
+16534 35496(by)P
+17335 35496(M.)P
+18219 35496(E.)P
+18937 35496(Lesk.)P
+20653 35496(Tables)P
+22452 35496(begin)P
+23985 35496(with)P
+25252 35496(the)P
+2 10 SF
+26185 35496(.TS)P
+0 10 SF
+27269 35496(request)P
+29201 35496(and)P
+30267 35496(end)P
+31333 35496(with)P
+6120 34776(the)P
+2 10 SF
+7090 34776(.TE)P
+0 10 SF
+8277 34776(request.)P
+10596 34776(Tables)P
+12432 34776(are)P
+13401 34776(normally)P
+15805 34776(kept)P
+17075 34776(on)P
+17912 34776(a)P
+18415 34776(single)P
+20085 34776(page.)P
+21804 34776(If)P
+22441 34776(you)P
+23578 34776(have)P
+24947 34776(a)P
+25450 34776(table)P
+26852 34776(which)P
+28554 34776(is)P
+29190 34776(too)P
+30193 34776(big)P
+31196 34776(to)P
+31899 34776(\212t)P
+6120 34056(on)P
+6929 34056(a)P
+7404 34056(single)P
+9046 34056(page,)P
+10537 34056(so)P
+11279 34056(that)P
+12388 34056(you)P
+13497 34056(know)P
+15039 34056(it)P
+15582 34056(will)P
+16725 34056(extend)P
+18533 34056(to)P
+19208 34056(several)P
+21114 34056(pages,)P
+22837 34056(begin)P
+24378 34056(the)P
+25319 34056(table)P
+26693 34056(with)P
+27968 34056(the)P
+28909 34056(request)P
+2 10 SF
+30849 34056(.TS)P
+31933 34056(H)P
+0 10 SF
+6120 33336(and)P
+7240 33336(put)P
+8261 33336(the)P
+9248 33336(request)P
+2 10 SF
+11234 33336(.TH)P
+0 10 SF
+12505 33336(after)P
+13858 33336(the)P
+14845 33336(part)P
+16032 33336(of)P
+16786 33336(the)P
+17773 33336(table)P
+19193 33336(which)P
+20913 33336(you)P
+22067 33336(want)P
+23486 33336(duplicated)P
+26238 33336(at)P
+26924 33336(the)P
+27910 33336(top)P
+28930 33336(of)P
+29683 33336(every)P
+31268 33336(page)P
+6120 32616(that)P
+7220 32616(the)P
+8153 32616(table)P
+9519 32616(is)P
+10119 32616(printed)P
+12019 32616(on.)P
+13169 32616(For)P
+14203 32616(example,)P
+16585 32616(a)P
+17051 32616(table)P
+18417 32616(de\212nition)P
+20918 32616(for)P
+21818 32616(a)P
+22284 32616(long)P
+23551 32616(table)P
+24917 32616(might)P
+26518 32616(look)P
+27785 32616(like:)P
+8520 31644(.TS)P
+9571 31644(H)P
+8520 30924(c)P
+8986 30924(s)P
+9419 30924(s)P
+8520 30204(n)P
+9020 30204(n)P
+9520 30204(n.)P
+8520 29484(THE)P
+9887 29484(TABLE)P
+12021 29484(TITLE)P
+8520 28764(.TH)P
+8520 28044(text)P
+9620 28044(of)P
+10320 28044(the)P
+11253 28044(table)P
+8520 27324(.TE)P
+2 10 SF
+5220 26100(5.5.)P
+6520 26100(Two)P
+7853 26100(Column)P
+10121 26100(Output)P
+0 10 SF
+7620 25128(You)P
+8943 25128(can)P
+10065 25128(get)P
+11088 25128(two)P
+12278 25128(column)P
+14368 25128(output)P
+16192 25128(automatically)P
+19748 25128(by)P
+20638 25128(using)P
+22227 25128(the)P
+23249 25128(request)P
+2 10 SF
+25270 25128(.2c)P
+0 10 SF
+25986 25128(.)P
+26625 25128(This)P
+27981 25128(causes)P
+29834 25128(everything)P
+6120 24408(after)P
+7441 24408(it)P
+7997 24408(to)P
+8686 24408(be)P
+9474 24408(output)P
+11230 24408(in)P
+11919 24408(two\255column)P
+15041 24408(form.)P
+16780 24408(The)P
+17935 24408(request)P
+2 10 SF
+19889 24408(.bc)P
+0 10 SF
+20860 24408(will)P
+22015 24408(start)P
+23269 24408(a)P
+23756 24408(new)P
+24976 24408(column;)P
+27164 24408(it)P
+27719 24408(differs)P
+29506 24408(from)P
+2 10 SF
+30894 24408(.bp)P
+0 10 SF
+31933 24408(in)P
+6120 23688(that)P
+2 10 SF
+7243 23688(.bp)P
+0 10 SF
+8284 23688(may)P
+9540 23688(leave)P
+11028 23688(a)P
+11517 23688(totally)P
+13274 23688(blank)P
+14830 23688(column)P
+16853 23688(when)P
+18375 23688(it)P
+18932 23688(starts)P
+20421 23688(a)P
+20910 23688(new)P
+22132 23688(page.)P
+23837 23688(To)P
+24727 23688(revert)P
+26349 23688(to)P
+27039 23688(single)P
+28694 23688(column)P
+30716 23688(output,)P
+6120 22968(use)P
+2 10 SF
+7119 22968(.1c)P
+0 10 SF
+7835 22968(.)P
+2 10 SF
+5220 21528(5.6.)P
+6520 21528(De\212ning)P
+8888 21528(Macros)P
+0 10 SF
+7620 20556(A)P
+1 10 SF
+8274 20556(macro)P
+0 10 SF
+10027 20556(is)P
+10648 20556(a)P
+11135 20556(collection)P
+13722 20556(of)P
+14443 20556(requests)P
+16629 20556(and)P
+17716 20556(text)P
+18837 20556(which)P
+20524 20556(may)P
+21778 20556(be)P
+22565 20556(used)P
+23885 20556(by)P
+24706 20556(stating)P
+26527 20556(a)P
+27013 20556(simple)P
+28833 20556(request.)P
+31135 20556(Mac\255)P
+6120 19836(ros)P
+7103 19836(begin)P
+8686 19836(with)P
+10003 19836(the)P
+10986 19836(line)P
+2 10 SF
+12136 19836(.de)P
+1 10 SF
+13086 19836(xx)P
+0 10 SF
+13868 19836(\(where)P
+1 10 SF
+15783 19836(xx)P
+0 10 SF
+16565 19836(is)P
+17215 19836(the)P
+18198 19836(name)P
+19747 19836(of)P
+20496 19836(the)P
+21478 19836(macro)P
+23226 19836(to)P
+23942 19836(be)P
+24757 19836(de\212ned\))P
+26972 19836(and)P
+28087 19836(end)P
+29202 19836(with)P
+30518 19836(the)P
+31500 19836(line)P
+6120 19116(consisting)P
+8792 19116(of)P
+9531 19116(two)P
+10670 19116(dots.)P
+12259 19116(After)P
+13764 19116(de\212ning)P
+15970 19116(the)P
+16942 19116(macro,)P
+18830 19116(stating)P
+20669 19116(the)P
+21641 19116(line)P
+2 10 SF
+22780 19116(.)P
+1 10 SF
+22930 19116(xx)P
+0 10 SF
+23701 19116(is)P
+24340 19116(the)P
+25312 19116(same)P
+26783 19116(as)P
+27520 19116(stating)P
+29358 19116(all)P
+30196 19116(the)P
+31167 19116(other)P
+6120 18396(lines.)P
+7803 18396(For)P
+8837 18396(example,)P
+11219 18396(to)P
+11886 18396(de\212ne)P
+13552 18396(a)P
+14018 18396(macro)P
+15717 18396(that)P
+16817 18396(spaces)P
+18581 18396(3)P
+19081 18396(lines)P
+20414 18396(and)P
+21480 18396(then)P
+22713 18396(centers)P
+24611 18396(the)P
+25544 18396(next)P
+26777 18396(input)P
+28211 18396(line,)P
+29461 18396(enter:)P
+8520 17424(.de)P
+9436 17424(SS)P
+8520 16704(.sp)P
+9403 16704(3)P
+8520 15984(.ce)P
+8520 15264(..)P
+6120 14292(and)P
+7186 14292(use)P
+8185 14292(it)P
+8719 14292(by)P
+9519 14292(typing:)P
+8520 13320(.SS)P
+8520 12600(Title)P
+9854 12600(Line)P
+8520 11880(\(beginning)P
+11320 11880(of)P
+12020 11880(text\))P
+7620 10656(Macro)P
+9391 10656(names)P
+11129 10656(may)P
+12367 10656(be)P
+13138 10656(one)P
+14209 10656(or)P
+14914 10656(two)P
+16019 10656(characters.)P
+19004 10656(In)P
+19709 10656(order)P
+21180 10656(to)P
+21852 10656(avoid)P
+23390 10656(con\213icts)P
+25628 10656(with)P
+26900 10656(names)P
+28637 10656(in)P
+29309 10656(-me,)P
+30735 10656(always)P
+6120 9936(use)P
+7119 9936(upper)P
+8685 9936(case)P
+9916 9936(letters)P
+11582 9936(as)P
+12281 9936(names.)P
+14363 9936(The)P
+15496 9936(only)P
+16763 9936(names)P
+18495 9936(to)P
+19162 9936(avoid)P
+20695 9936(are)P
+2 10 SF
+21627 9936(TS)P
+0 10 SF
+22361 9936(,)P
+2 10 SF
+22711 9936(TH)P
+0 10 SF
+23578 9936(,)P
+2 10 SF
+23928 9936(TE)P
+0 10 SF
+24728 9936(,)P
+2 10 SF
+25078 9936(EQ)P
+0 10 SF
+25945 9936(,)P
+26295 9936(and)P
+2 10 SF
+27361 9936(EN)P
+0 10 SF
+28194 9936(.)P
+2 10 SF
+5220 8496(5.7.)P
+6520 8496(Annotations)P
+9855 8496(Inside)P
+11622 8496(Keeps)P
+0 10 SF
+7620 7524(Sometimes)P
+10500 7524(you)P
+11613 7524(may)P
+12858 7524(want)P
+14236 7524(to)P
+14915 7524(put)P
+15894 7524(a)P
+16372 7524(footnote)P
+18584 7524(or)P
+19296 7524(index)P
+20841 7524(entry)P
+22286 7524(inside)P
+23931 7524(a)P
+24409 7524(keep.)P
+26103 7524(For)P
+27149 7524(example,)P
+29543 7524(if)P
+30122 7524(you)P
+31234 7524(want)P
+6120 6804(to)P
+6787 6804(maintain)P
+9087 6804(a)P
+9553 6804(``list)P
+10887 6804(of)P
+11587 6804(\212gures'')P
+13820 6804(you)P
+14920 6804(will)P
+16054 6804(want)P
+17420 6804(to)P
+18087 6804(do)P
+18887 6804(something)P
+21587 6804(like:)P
+end restore showpage
+%%Page: 16 16
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\25516)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+0 10 SF
+8520 41760(.\(z)P
+8520 41040(.\(c)P
+8520 40320(text)P
+9620 40320(of)P
+10320 40320(\212gure)P
+8520 39600(.\)c)P
+8520 38880(.ce)P
+8520 38160(Figure)P
+10287 38160(5.)P
+8520 37440(.\(x)P
+9370 37440(f)P
+8520 36720(Figure)P
+10287 36720(5)P
+8520 36000(.\)x)P
+8520 35280(.\)z)P
+6120 34308(which)P
+7804 34308(you)P
+8922 34308(may)P
+10173 34308(hope)P
+11557 34308(will)P
+12709 34308(give)P
+13960 34308(you)P
+15078 34308(a)P
+15562 34308(\212gure)P
+17180 34308(with)P
+18465 34308(a)P
+18949 34308(label)P
+20333 34308(and)P
+21416 34308(an)P
+22199 34308(entry)P
+23649 34308(in)P
+24333 34308(the)P
+25283 34308(index)P
+2 10 SF
+26833 34308(f)P
+0 10 SF
+27250 34308(\(presumably)P
+30466 34308(a)P
+30949 34308(list)P
+31900 34308(of)P
+6120 33588(\212gures)P
+7983 33588(index\).)P
+10096 33588(Unfortunately,)P
+13842 33588(the)P
+14805 33588(index)P
+16368 33588(entry)P
+17831 33588(is)P
+18461 33588(read)P
+19723 33588(and)P
+20819 33588(interpreted)P
+23648 33588(when)P
+25177 33588(the)P
+26140 33588(keep)P
+27502 33588(is)P
+28131 33588(read,)P
+29542 33588(not)P
+30538 33588(when)P
+32066 33588(it)P
+6120 32868(is)P
+6734 32868(printed,)P
+8798 32868(so)P
+9545 32868(the)P
+10492 32868(page)P
+11838 32868(number)P
+13885 32868(in)P
+14566 32868(the)P
+15513 32868(index)P
+17060 32868(is)P
+17674 32868(likely)P
+19255 32868(to)P
+19935 32868(be)P
+20714 32868(wrong.)P
+22810 32868(The)P
+23956 32868(solution)P
+26103 32868(is)P
+26716 32868(to)P
+27396 32868(use)P
+28408 32868(the)P
+29354 32868(magic)P
+31033 32868(string)P
+2 10 SF
+6120 32148(\\!)P
+0 10 SF
+6887 32148(at)P
+7520 32148(the)P
+8453 32148(beginning)P
+11053 32148(of)P
+11753 32148(all)P
+12553 32148(the)P
+13486 32148(lines)P
+14819 32148(dealing)P
+16785 32148(with)P
+18052 32148(the)P
+18985 32148(index.)P
+20868 32148(In)P
+21568 32148(other)P
+23001 32148(words,)P
+24817 32148(you)P
+25917 32148(should)P
+27717 32148(use:)P
+8520 31176(.\(z)P
+8520 30456(.\(c)P
+8520 29736(Text)P
+9820 29736(of)P
+10520 29736(\212gure)P
+8520 29016(.\)c)P
+8520 28296(.ce)P
+8520 27576(Figure)P
+10287 27576(5.)P
+8520 26856(\\!.\(x)P
+9737 26856(f)P
+8520 26136(\\!Figure)P
+10654 26136(5)P
+8520 25416(\\!.\)x)P
+8520 24696(.\)z)P
+6120 23724(which)P
+7818 23724(will)P
+8984 23724(defer)P
+10448 23724(the)P
+11413 23724(processing)P
+14210 23724(of)P
+14942 23724(the)P
+15907 23724(index)P
+17472 23724(until)P
+18805 23724(the)P
+19770 23724(\212gure)P
+21402 23724(is)P
+22033 23724(output.)P
+24148 23724(This)P
+25446 23724(will)P
+26611 23724(guarantee)P
+29173 23724(that)P
+30304 23724(the)P
+31268 23724(page)P
+6120 23004(number)P
+8153 23004(in)P
+8820 23004(the)P
+9753 23004(index)P
+11286 23004(is)P
+11886 23004(correct.)P
+14101 23004(The)P
+15234 23004(same)P
+16666 23004(comments)P
+19332 23004(apply)P
+20865 23004(to)P
+21532 23004(blocks)P
+23298 23004(\(with)P
+2 10 SF
+24765 23004(.\(b)P
+0 10 SF
+25649 23004(and)P
+2 10 SF
+26715 23004(.\)b)P
+0 10 SF
+27399 23004(\))P
+27799 23004(as)P
+28498 23004(well.)P
+2 10 SF
+4320 21564(6.)P
+2 9 SF
+5170 21564(TROFF)P
+2 10 SF
+7200 21564(and)P
+8368 21564(the)P
+9368 21564(Photosetter)P
+0 10 SF
+6720 20592(With)P
+8124 20592(a)P
+8594 20592(little)P
+9899 20592(care,)P
+11251 20592(you)P
+12355 20592(can)P
+13391 20592(prepare)P
+15393 20592(documents)P
+18196 20592(that)P
+19300 20592(will)P
+20438 20592(print)P
+21776 20592(nicely)P
+23446 20592(on)P
+24250 20592(either)P
+25820 20592(a)P
+26290 20592(regular)P
+28193 20592(terminal)P
+30397 20592(or)P
+31101 20592(when)P
+5220 19872(phototypeset)P
+8486 19872(using)P
+9986 19872(the)P
+0 9 SF
+10899 19872(TROFF)P
+0 10 SF
+12779 19872(formatting)P
+15513 19872(program.)P
+2 10 SF
+5220 18432(6.1.)P
+6520 18432(Fonts)P
+0 10 SF
+7620 17460(A)P
+1 10 SF
+8318 17460(font)P
+0 10 SF
+9517 17460(is)P
+10182 17460(a)P
+10713 17460(style)P
+12111 17460(of)P
+12876 17460(type.)P
+14524 17460(There)P
+16188 17460(are)P
+17185 17460(three)P
+18649 17460(fonts)P
+20114 17460(that)P
+21279 17460(are)P
+22276 17460(available)P
+24706 17460(simultaneously,)P
+28753 17460(Times)P
+30517 17460(Roman,)P
+6120 16740(Times)P
+7835 16740(Italic,)P
+9433 16740(and)P
+10514 16740(Times)P
+12229 16740(Bold,)P
+13761 16740(plus)P
+14976 16740(the)P
+15924 16740(special)P
+17804 16740(math)P
+19219 16740(font.)P
+20751 16740(The)P
+21899 16740(normal)P
+23814 16740(font)P
+24995 16740(is)P
+25609 16740(Roman.)P
+27906 16740(Text)P
+29220 16740(which)P
+30900 16740(would)P
+6120 16020(be)P
+6886 16020(underlined)P
+9652 16020(in)P
+0 9 SF
+10299 16020(NROFF)P
+0 10 SF
+12239 16020(with)P
+13506 16020(the)P
+2 10 SF
+14439 16020(.ul)P
+0 10 SF
+15290 16020(request)P
+17222 16020(is)P
+17822 16020(set)P
+18688 16020(in)P
+19355 16020(italics)P
+20988 16020(in)P
+0 9 SF
+21635 16020(TROFF)P
+0 10 SF
+23315 16020(.)P
+7620 15048(There)P
+9233 15048(are)P
+10179 15048(ways)P
+11624 15048(of)P
+12337 15048(switching)P
+14883 15048(between)P
+17094 15048(fonts.)P
+18857 15048(The)P
+20003 15048(requests)P
+2 10 SF
+22181 15048(.r)P
+0 10 SF
+22597 15048(,)P
+2 10 SF
+22960 15048(.i)P
+0 10 SF
+23277 15048(,)P
+23640 15048(and)P
+2 10 SF
+24719 15048(.b)P
+0 10 SF
+25416 15048(switch)P
+27195 15048(to)P
+27875 15048(Roman,)P
+29971 15048(italic,)P
+31534 15048(and)P
+6120 14328(bold)P
+7387 14328(fonts)P
+8787 14328(respectively.)P
+12235 14328(You)P
+13468 14328(can)P
+14500 14328(set)P
+15366 14328(a)P
+15832 14328(single)P
+17465 14328(word)P
+18898 14328(in)P
+19565 14328(some)P
+21031 14328(font)P
+22198 14328(by)P
+22998 14328(typing)P
+24732 14328(\(for)P
+25832 14328(example\):)P
+8520 13356(.i)P
+9037 13356(word)P
+6120 12384(which)P
+7818 12384(will)P
+8984 12384(set)P
+1 10 SF
+9882 12384(word)P
+0 10 SF
+11347 12384(in)P
+12046 12384(italics)P
+13711 12384(but)P
+14710 12384(does)P
+16041 12384(not)P
+17039 12384(affect)P
+18635 12384(the)P
+19599 12384(surrounding)P
+22730 12384(text.)P
+24211 12384(In)P
+0 9 SF
+24922 12384(NROFF)P
+0 10 SF
+26662 12384(,)P
+27043 12384(italic)P
+28474 12384(and)P
+29571 12384(bold)P
+30869 12384(text)P
+32000 12384(is)P
+6120 11664(underlined.)P
+7620 10692(Notice)P
+9467 10692(that)P
+10615 10692(if)P
+11230 10692(you)P
+12377 10692(are)P
+13356 10692(setting)P
+15203 10692(more)P
+16683 10692(than)P
+17963 10692(one)P
+19076 10692(word)P
+20556 10692(in)P
+21270 10692(whatever)P
+23715 10692(font,)P
+25079 10692(you)P
+26226 10692(must)P
+27640 10692(surround)P
+30020 10692(that)P
+31167 10692(word)P
+6120 9972(with)P
+7397 9972(double)P
+9239 9972(quote)P
+10781 9972(marks)P
+12456 9972(\(`)P
+12956 9972(")P
+13301 9972('\))P
+13910 9972(so)P
+14652 9972(that)P
+15761 9972(it)P
+16304 9972(will)P
+17447 9972(appear)P
+19254 9972(to)P
+19930 9972(the)P
+0 9 SF
+20852 9972(NROFF)P
+0 10 SF
+22801 9972(processor)P
+25308 9972(as)P
+26016 9972(a)P
+26491 9972(single)P
+28133 9972(word.)P
+29925 9972(The)P
+31067 9972(quote)P
+6120 9252(marks)P
+7789 9252(will)P
+8926 9252(not)P
+9896 9252(appear)P
+11697 9252(in)P
+12367 9252(the)P
+13303 9252(formatted)P
+15839 9252(text.)P
+17292 9252(If)P
+17895 9252(you)P
+18998 9252(do)P
+19801 9252(want)P
+21170 9252(a)P
+21639 9252(quote)P
+23174 9252(mark)P
+24609 9252(to)P
+25278 9252(appear,)P
+27228 9252(you)P
+28330 9252(should)P
+30132 9252(quote)P
+31667 9252(the)P
+6120 8532(entire)P
+7702 8532(string)P
+9285 8532(\(even)P
+10833 8532(if)P
+11416 8532(a)P
+11898 8532(single)P
+13546 8532(word\),)P
+15344 8532(and)P
+16425 8532(use)P
+1 10 SF
+17439 8532(two)P
+0 10 SF
+18521 8532(quote)P
+20069 8532(marks)P
+21750 8532(where)P
+23430 8532(you)P
+24545 8532(want)P
+25926 8532(one)P
+27007 8532(to)P
+27689 8532(appear.)P
+29852 8532(For)P
+30901 8532(exam\255)P
+6120 7812(ple,)P
+7203 7812(if)P
+7770 7812(you)P
+8870 7812(want)P
+10236 7812(to)P
+10903 7812(produce)P
+13035 7812(the)P
+13968 7812(text:)P
+1 10 SF
+8520 6840("Master)P
+10671 6840(Control)P
+12638 6840(")P
+0 10 SF
+6120 5868(in)P
+6787 5868(italics,)P
+8570 5868(you)P
+9670 5868(must)P
+11037 5868(type:)P
+8520 4896(.i)P
+9037 4896("""Master)P
+11637 4896(Control\\|""")P
+end restore showpage
+%%Page: 17 17
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29600 43920(USD:22\25517)P
+0 10 SF
+6120 41760(The)P
+2 10 SF
+7253 41760(\\|)P
+0 10 SF
+7752 41760(produces)P
+10117 41760(a)P
+10583 41760(very)P
+11849 41760(narrow)P
+13748 41760(space)P
+15279 41760(so)P
+16012 41760(that)P
+17112 41760(the)P
+18045 41760(``l'')P
+19212 41760(does)P
+20511 41760(not)P
+21478 41760(overlap)P
+23477 41760(the)P
+24410 41760(quote)P
+25943 41760(sign)P
+27143 41760(in)P
+0 9 SF
+27790 41760(TROFF)P
+0 10 SF
+29470 41760(,)P
+29820 41760(like)P
+30920 41760(this:)P
+1 10 SF
+8520 40788("Master)P
+10671 40788(Control")P
+0 10 SF
+7620 39564(There)P
+9219 39564(are)P
+10151 39564(also)P
+11317 39564(several)P
+13215 39564(``pseudo\255fonts'')P
+17314 39564(available.)P
+20029 39564(The)P
+21162 39564(input:)P
+8520 38592(.\(b)P
+8520 37872(.u)P
+9170 37872(underlined)P
+8520 37152(.bi)P
+9337 37152("bold)P
+10849 37152(italics")P
+8520 36432(.bx)P
+9470 36432("words)P
+11381 36432(in)P
+12048 36432(a)P
+12514 36432(box")P
+8520 35712(.\)b)P
+6120 34740(generates)P
+8520 33768(underlined)P
+8520 33768 10 -100 1 L
+8686 33768 10 -100 8 L
+1 10 SF
+8520 33048(bold)P
+9787 33048(italics)P
+8570 33048(bold)P
+9837 33048(italics)P
+8520 32328 10 br
+0 10 SF
+8620 32328(words)P
+10286 32328(in)P
+10953 32328(a)P
+11419 32328(box)P
+12419 32328 10 br
+8520 32328 10 900 1 L
+8819 32328 10 900 12 L
+8520 32328 10 -100 1 L
+8819 32328 10 -100 12 L
+6120 31356(In)P
+0 9 SF
+6817 31356(NROFF)P
+0 10 SF
+8774 31356(these)P
+10223 31356(all)P
+11040 31356(just)P
+12124 31356(underline)P
+14607 31356(the)P
+15557 31356(text.)P
+17024 31356(Notice)P
+18840 31356(that)P
+19957 31356(pseudo)P
+21873 31356(font)P
+23057 31356(requests)P
+25239 31356(set)P
+26121 31356(only)P
+27404 31356(the)P
+28353 31356(single)P
+30002 31356(parameter)P
+6120 30636(in)P
+6810 30636(the)P
+7766 30636(pseudo)P
+9688 30636(font;)P
+11045 30636(ordinary)P
+13301 30636(font)P
+14491 30636(requests)P
+16679 30636(will)P
+17836 30636(begin)P
+19392 30636(setting)P
+21214 30636(all)P
+22036 30636(text)P
+23158 30636(in)P
+23847 30636(the)P
+24802 30636(special)P
+26689 30636(font)P
+27878 30636(if)P
+28467 30636(you)P
+29589 30636(do)P
+30411 30636(not)P
+31400 30636(pro\255)P
+6120 29916(vide)P
+7383 29916(a)P
+7879 29916(parameter.)P
+10857 29916(No)P
+11820 29916(more)P
+13283 29916(than)P
+14546 29916(one)P
+15642 29916(word)P
+17105 29916(should)P
+18935 29916(appear)P
+20763 29916(with)P
+22060 29916(these)P
+23522 29916(three)P
+24951 29916(font)P
+26148 29916(requests)P
+28343 29916(in)P
+29040 29916(the)P
+30003 29916(middle)P
+31900 29916(of)P
+6120 29196(lines.)P
+7803 29196(This)P
+9070 29196(is)P
+9670 29196(because)P
+11767 29196(of)P
+12467 29196(the)P
+13400 29196(way)P
+0 9 SF
+14579 29196(TROFF)P
+0 10 SF
+16459 29196(justi\212es)P
+18526 29196(text.)P
+19976 29196(For)P
+21010 29196(example,)P
+23392 29196(if)P
+23959 29196(you)P
+25059 29196(were)P
+26424 29196(to)P
+27091 29196(issue)P
+28490 29196(the)P
+29423 29196(requests:)P
+8520 28224(.bi)P
+9337 28224("some)P
+11048 28224(bold)P
+12315 28224(italics")P
+8520 27504(and)P
+8520 26784(.bx)P
+9470 26784("words)P
+11381 26784(in)P
+12048 26784(a)P
+12514 26784(box")P
+6120 25812(in)P
+7080 25812(the)P
+8306 25812(middle)P
+10466 25812(of)P
+11459 25812(a)P
+12218 25812(line)P
+0 9 SF
+13591 25812(TROFF)P
+0 10 SF
+15764 25812(would)P
+17757 25812(produce)P
+1 10 SF
+20182 25812(some)P
+21907 25812(bold)P
+23467 25812(italics)P
+20818 25812(some)P
+22543 25812(bold)P
+24103 25812(italics)P
+0 10 SF
+26063 25812(and)P
+27422 25812 10 br
+27522 25812(words)P
+29481 25812(in)P
+30441 25812(a)P
+31200 25812(box)P
+32200 25812 10 br
+28301 25812 10 900 1 L
+28600 25812 10 900 12 L
+28301 25812 10 -100 1 L
+28600 25812 10 -100 12 L
+32250 25812(,)P
+6120 25092(which)P
+7786 25092(I)P
+8186 25092(think)P
+9620 25092(you)P
+10720 25092(will)P
+11854 25092(agree)P
+13352 25092(does)P
+14651 25092(not)P
+15618 25092(look)P
+16885 25092(good.)P
+7620 24120(The)P
+8753 24120(second)P
+10618 24120(parameter)P
+13216 24120(of)P
+13916 24120(all)P
+14716 24120(font)P
+15883 24120(requests)P
+18048 24120(is)P
+18648 24120(set)P
+19514 24120(in)P
+20181 24120(the)P
+21114 24120(original)P
+23181 24120(font.)P
+24698 24120(For)P
+25732 24120(example,)P
+28114 24120(the)P
+29047 24120(font)P
+30214 24120(request:)P
+8520 23148(.b)P
+9170 23148(bold)P
+10437 23148(face)P
+6120 22176(generates)P
+8584 22176(``bold'')P
+10651 22176(in)P
+11318 22176(bold)P
+12585 22176(font,)P
+13902 22176(but)P
+14869 22176(sets)P
+15968 22176(``face'')P
+17966 22176(in)P
+18633 22176(the)P
+19566 22176(font)P
+20733 22176(of)P
+21433 22176(the)P
+22366 22176(surrounding)P
+25466 22176(text,)P
+26716 22176(resulting)P
+29016 22176(in:)P
+2 10 SF
+8520 21204(bold)P
+0 10 SF
+9655 21204(face.)P
+6120 20232(To)P
+6987 20232(set)P
+7853 20232(the)P
+8786 20232(two)P
+9886 20232(words)P
+2 10 SF
+11552 20232(bold)P
+0 10 SF
+12887 20232(and)P
+2 10 SF
+13953 20232(face)P
+0 10 SF
+15185 20232(both)P
+16452 20232(in)P
+2 10 SF
+17119 20232(bold)P
+18454 20232(face)P
+0 10 SF
+19486 20232(,)P
+19836 20232(type:)P
+8520 19260(.b)P
+9170 19260("bold)P
+10682 19260(face")P
+7620 18036(You)P
+8861 18036(can)P
+9901 18036(mix)P
+11043 18036(fonts)P
+12451 18036(in)P
+13126 18036(a)P
+13600 18036(word)P
+15041 18036(by)P
+15849 18036(using)P
+17357 18036(the)P
+18298 18036(special)P
+20170 18036(sequence)P
+2 10 SF
+22574 18036(\\c)P
+0 10 SF
+23214 18036(at)P
+23854 18036(the)P
+24794 18036(end)P
+25867 18036(of)P
+26574 18036(a)P
+27047 18036(line)P
+28154 18036(to)P
+28828 18036(indicate)P
+30934 18036(``con\255)P
+6120 17316(tinue)P
+7566 17316(text)P
+8712 17316(processing'';)P
+12090 17316(this)P
+13203 17316(allows)P
+15015 17316(input)P
+16495 17316(lines)P
+17874 17316(to)P
+18587 17316(be)P
+19399 17316(joined)P
+21145 17316(together)P
+23357 17316(without)P
+25437 17316(a)P
+25949 17316(space)P
+27526 17316(between)P
+29770 17316(them.)P
+31566 17316(For)P
+6120 16596(example,)P
+8502 16596(the)P
+9435 16596(input:)P
+8520 15624(.u)P
+9170 15624(under)P
+10736 15624(\\c)P
+8520 14904(.i)P
+9037 14904(italics)P
+6120 13932(generates)P
+8584 13932(under)P
+8584 13932 10 -100 1 L
+8750 13932 10 -100 4 L
+1 10 SF
+9950 13932(italics)P
+0 10 SF
+11417 13932(,)P
+11767 13932(but)P
+12734 13932(if)P
+13301 13932(we)P
+14200 13932(had)P
+15266 13932(typed:)P
+8520 12960(.u)P
+9170 12960(under)P
+8520 12240(.i)P
+9037 12240(italics)P
+6120 11268(the)P
+7053 11268(result)P
+8586 11268(would)P
+10286 11268(have)P
+11618 11268(been)P
+12950 11268(under)P
+12950 11268 10 -100 1 L
+13116 11268 10 -100 4 L
+1 10 SF
+14516 11268(italics)P
+0 10 SF
+16183 11268(as)P
+16882 11268(two)P
+17982 11268(words.)P
+2 10 SF
+5220 9828(6.2.)P
+6520 9828(Point)P
+8088 9828(Sizes)P
+0 10 SF
+7620 8856(The)P
+8800 8856(phototypesetter)P
+12746 8856(supports)P
+15026 8856(different)P
+17339 8856(sizes)P
+18751 8856(of)P
+19498 8856(type,)P
+20928 8856(measured)P
+23473 8856(in)P
+24187 8856(points.)P
+26251 8856(The)P
+27430 8856(default)P
+29342 8856(point)P
+30822 8856(size)P
+32000 8856(is)P
+6120 8136(10)P
+6920 8136(points)P
+8587 8136(for)P
+9487 8136(most)P
+10854 8136(text,)P
+12104 8136(8)P
+12604 8136(points)P
+14271 8136(for)P
+15171 8136(footnotes.)P
+17954 8136(To)P
+18821 8136(change)P
+20719 8136(the)P
+21652 8136(pointsize,)P
+24168 8136(type:)P
+8520 7164(.sz)P
+1 10 SF
+9369 7164(+N)P
+0 10 SF
+6120 6192(where)P
+1 10 SF
+7819 6192(N)P
+0 10 SF
+8453 6192(is)P
+9087 6192(the)P
+10054 6192(size)P
+11220 6192(wanted)P
+13186 6192(in)P
+13887 6192(points.)P
+15938 6192(The)P
+1 10 SF
+17105 6192(vertical)P
+19171 6192(spacing)P
+0 10 SF
+21271 6192(\(distance)P
+23670 6192(between)P
+25901 6192(the)P
+26867 6192(bottom)P
+28801 6192(of)P
+29534 6192(most)P
+30934 6192(letters)P
+6120 5472(\(the)P
+1 10 SF
+7253 5472(baseline)P
+0 10 SF
+9252 5472(\))P
+9652 5472(between)P
+11850 5472(adjacent)P
+14048 5472(lines\))P
+15581 5472(is)P
+16181 5472(set)P
+17047 5472(to)P
+17714 5472(be)P
+18480 5472(proportional)P
+21647 5472(to)P
+22314 5472(the)P
+23247 5472(type)P
+24480 5472(size.)P
+end restore showpage
+%%Page: 18 18
+save $troff begin Sc
+2 10 SF
+4320 43920(USD:22\25518)P
+21923 43920(Writing)P
+24157 43920(Papers)P
+26123 43920(with)P
+27457 43920(NROFF)P
+29724 43920(using)P
+31292 43920(-me)P
+0 10 SF
+7620 41760(These)P
+9253 41760(pointsize)P
+11620 41760(changes)P
+13752 41760(are)P
+1 10 SF
+14685 41760(temporary)P
+0 10 SF
+17183 41760(!!!)P
+18184 41760(For)P
+19219 41760(example,)P
+21602 41760(to)P
+22270 41760(reset)P
+23603 41760(the)P
+24536 41760(pointsize)P
+26902 41760(of)P
+27602 41760(basic)P
+29034 41760(text)P
+30134 41760(to)P
+30801 41760(twelve)P
+6120 41040(point,)P
+7704 41040(use:)P
+8520 40068(.nr)P
+9370 40068(pp)P
+10170 40068(12)P
+8520 39348(.nr)P
+9370 39348(sp)P
+10103 39348(12)P
+8520 38628(.nr)P
+9370 38628(tp)P
+10037 38628(12)P
+6120 37656(to)P
+6830 37656(reset)P
+8205 37656(the)P
+9180 37656(default)P
+11088 37656(pointsize)P
+13496 37656(of)P
+14238 37656(paragraphs,)P
+17261 37656(section)P
+19202 37656(headers,)P
+21425 37656(and)P
+22533 37656(titles)P
+23942 37656(respectively.)P
+27432 37656(If)P
+28074 37656(you)P
+29216 37656(only)P
+30525 37656(want)P
+31933 37656(to)P
+6120 36936(set)P
+6986 36936(the)P
+7919 36936(names)P
+9651 36936(of)P
+10351 36936(sections)P
+12483 36936(in)P
+13150 36936(a)P
+13616 36936(larger)P
+15215 36936(pointsize,)P
+17731 36936(use:)P
+8520 35964(.nr)P
+9370 35964(sp)P
+10103 35964(11)P
+6120 34992(alone)P
+7619 34992(\210)P
+8419 34992(this)P
+9486 34992(sets)P
+10585 34992(section)P
+12484 34992(titles)P
+13851 34992(\(e.g.,)P
+2 10 SF
+15267 34992(Point)P
+16835 34992(Sizes)P
+0 10 SF
+18301 34992(above\))P
+20133 34992(in)P
+20800 34992(a)P
+21266 34992(larger)P
+22865 34992(font)P
+24032 34992(than)P
+25265 34992(the)P
+26198 34992(default.)P
+7620 34020(A)P
+8298 34020(single)P
+9976 34020(word)P
+11454 34020(or)P
+12199 34020(phrase)P
+14009 34020(can)P
+15086 34020(be)P
+15897 34020(set)P
+16808 34020(in)P
+17520 34020(a)P
+18031 34020(smaller)P
+20042 34020(pointsize)P
+22453 34020(than)P
+23731 34020(the)P
+24708 34020(surrounding)P
+27852 34020(text)P
+28996 34020(using)P
+30540 34020(the)P
+2 10 SF
+31517 34020(.sm)P
+0 10 SF
+6120 33300(request.)P
+8510 33300(This)P
+9885 33300(is)P
+10593 33300(especially)P
+13299 33300(convenient)P
+16239 33300(for)P
+17247 33300(words)P
+19021 33300(that)P
+20229 33300(are)P
+21269 33300(all)P
+22176 33300(capitals,)P
+24465 33300(due)P
+25638 33300(to)P
+26412 33300(the)P
+27452 33300(optical)P
+29392 33300(illusion)P
+31500 33300(that)P
+6120 32580(makes)P
+7852 32580(them)P
+9252 32580(look)P
+10519 32580(even)P
+11851 32580(larger)P
+13450 32580(than)P
+14683 32580(they)P
+15916 32580(actually)P
+18015 32580(are.)P
+19297 32580(For)P
+20331 32580(example:)P
+8520 31608(.sm)P
+9570 31608(UNIX)P
+6120 30636(prints)P
+7687 30636(as)P
+0 9 SF
+8366 30636(UNIX)P
+0 10 SF
+9916 30636(rather)P
+11515 30636(than)P
+12748 30636(UNIX.)P
+7620 29664(Warning:)P
+10184 29664(changing)P
+12681 29664(point)P
+14213 29664(sizes)P
+15676 29664(on)P
+16574 29664(the)P
+17605 29664(phototypesetter)P
+21602 29664(is)P
+22300 29664(a)P
+22864 29664(slow)P
+24295 29664(mechanical)P
+27324 29664(operation.)P
+30238 29664(On)P
+31268 29664(laser)P
+6120 28944(printers)P
+8153 28944(it)P
+8687 28944(may)P
+9920 28944(require)P
+11819 28944(loading)P
+13819 28944(new)P
+15018 28944(fonts.)P
+16768 28944(Size)P
+18001 28944(changes)P
+20132 28944(should)P
+21932 28944(be)P
+22698 28944(considered)P
+25496 28944(carefully.)P
+2 10 SF
+5220 27504(6.3.)P
+6520 27504(Quotes)P
+0 10 SF
+7620 26532(It)P
+8193 26532(is)P
+8799 26532(conventional)P
+12104 26532(when)P
+13609 26532(using)P
+15115 26532(the)P
+16054 26532(typesetter)P
+18592 26532(to)P
+19265 26532(use)P
+20269 26532(pairs)P
+21640 26532(of)P
+22345 26532(grave)P
+23882 26532(and)P
+24953 26532(acute)P
+26423 26532(accents)P
+28392 26532(to)P
+29064 26532(generate)P
+31300 26532(dou\255)P
+6120 25812(ble)P
+7080 25812(quotes,)P
+9023 25812(rather)P
+10649 25812(than)P
+11909 25812(the)P
+12869 25812(double)P
+14729 25812(quote)P
+16289 25812(character)P
+18713 25812(\(`)P
+19213 25812(")P
+19558 25812('\).)P
+20535 25812(This)P
+21829 25812(is)P
+22456 25812(because)P
+24580 25812(it)P
+25140 25812(looks)P
+26666 25812(better)P
+28258 25812(to)P
+28951 25812(use)P
+29976 25812(grave)P
+31534 25812(and)P
+6120 25092(acute)P
+7585 25092(accents;)P
+9716 25092(for)P
+10616 25092(example,)P
+12998 25092(compare)P
+15263 25092("quote")P
+17286 25092(to)P
+17953 25092(``quote''.)P
+7620 24120(In)P
+8495 24120(order)P
+10136 24120(to)P
+10978 24120(make)P
+12651 24120(quotes)P
+14591 24120(compatible)P
+17631 24120(between)P
+20003 24120(the)P
+21110 24120(typesetter)P
+23816 24120(and)P
+25056 24120(terminals,)P
+27813 24120(you)P
+29087 24120(may)P
+30494 24120(use)P
+31667 24120(the)P
+6120 23400(sequences)P
+2 10 SF
+8799 23400(\\*\(lq)P
+0 10 SF
+10216 23400(and)P
+2 10 SF
+11331 23400(\\*\(rq)P
+0 10 SF
+12847 23400(to)P
+13563 23400(stand)P
+15078 23400(for)P
+16027 23400(the)P
+17009 23400(left)P
+18058 23400(and)P
+19172 23400(right)P
+20554 23400(quote)P
+22135 23400(respectively.)P
+25631 23400(These)P
+27311 23400(both)P
+28626 23400(appear)P
+30472 23400(as)P
+2 10 SF
+31219 23400(")P
+0 10 SF
+31800 23400(on)P
+6120 22680(most)P
+7487 22680(terminals,)P
+10070 22680(but)P
+11037 22680(are)P
+11969 22680(typeset)P
+13868 22680(as)P
+2 10 SF
+14567 22680(``)P
+0 10 SF
+15167 22680(and)P
+2 10 SF
+16233 22680('')P
+0 10 SF
+16833 22680(respectively.)P
+20281 22680(For)P
+21315 22680(example,)P
+23697 22680(use:)P
+8520 21708(\\*\(lqSome)P
+11221 21708(things)P
+12888 21708(aren\222t)P
+14487 21708(true)P
+8520 20988(even)P
+9852 20988(if)P
+10419 20988(they)P
+11652 20988(did)P
+12619 20988(happen.\\*\(rq)P
+6120 20016(to)P
+6787 20016(generate)P
+9018 20016(the)P
+9951 20016(result:)P
+8520 19044(``Some)P
+10487 19044(things)P
+12154 19044(aren't)P
+13753 19044(true)P
+14886 19044(even)P
+16218 19044(if)P
+16785 19044(they)P
+18018 19044(did)P
+18985 19044(happen.'')P
+6120 18072(As)P
+6986 18072(a)P
+7452 18072(shorthand,)P
+10168 18072(the)P
+11101 18072(special)P
+12966 18072(font)P
+14133 18072(request:)P
+8520 17100(.q)P
+9170 17100("quoted)P
+11248 17100(text")P
+6120 16128(will)P
+7275 16128(generate)P
+9527 16128(``quoted)P
+11781 16128(text''.)P
+13652 16128(Notice)P
+15472 16128(that)P
+16593 16128(you)P
+17714 16128(must)P
+19102 16128(surround)P
+21456 16128(the)P
+22410 16128(material)P
+24597 16128(to)P
+25285 16128(be)P
+26072 16128(quoted)P
+27926 16128(with)P
+29214 16128(double)P
+31067 16128(quote)P
+6120 15408(marks)P
+7786 15408(if)P
+8353 15408(it)P
+8887 15408(is)P
+9487 15408(more)P
+10920 15408(than)P
+12153 15408(one)P
+13219 15408(word.)P
+2 10 SF
+4320 9648(Acknowledgments)P
+0 10 SF
+5820 8676(I)P
+6246 8676(would)P
+7972 8676(like)P
+9098 8676(to)P
+9791 8676(thank)P
+11350 8676(Bob)P
+12576 8676(Epstein,)P
+14752 8676(Bill)P
+15879 8676(Joy,)P
+17088 8676(and)P
+18180 8676(Larry)P
+19739 8676(Rowe)P
+21364 8676(for)P
+22290 8676(having)P
+24149 8676(the)P
+25108 8676(courage)P
+27231 8676(to)P
+27923 8676(use)P
+28947 8676(the)P
+29905 8676(-me)P
+31201 8676(mac\255)P
+4320 7956(ros)P
+5297 7956(to)P
+6008 7956(produce)P
+8184 7956(non\255trivial)P
+10962 7956(papers)P
+12771 7956(during)P
+14582 7956(the)P
+15559 7956(development)P
+18902 7956(stages;)P
+20778 7956(Ricki)P
+22322 7956(Blau,)P
+23848 7956(Pamela)P
+25857 7956(Humphrey,)P
+28816 7956(and)P
+29925 7956(Jim)P
+31035 7956(Joyce)P
+4320 7236(for)P
+5291 7236(their)P
+6662 7236(help)P
+7966 7236(with)P
+9304 7236(the)P
+10307 7236(documentation)P
+14143 7236(phase;)P
+15945 7236(peter)P
+17414 7236(kessler)P
+19349 7236(for)P
+20319 7236(numerous)P
+22955 7236(complaints)P
+25858 7236(years)P
+27393 7236(after)P
+28762 7236(I)P
+29232 7236(was)P
+30434 7236(``done'')P
+4320 6516(with)P
+5640 6516(this)P
+6760 6516(project,)P
+8828 6516(most)P
+10247 6516(accompanied)P
+13663 6516(by)P
+14515 6516(\212xes)P
+15900 6516(\(hence)P
+17750 6516(forcing)P
+19735 6516(me)P
+20720 6516(to)P
+21439 6516(\212x)P
+22325 6516(several)P
+24275 6516(small)P
+25827 6516(bugs\);)P
+27579 6516(and)P
+28697 6516(the)P
+29682 6516(plethora)P
+31900 6516(of)P
+4320 5796(people)P
+6119 5796(who)P
+7352 5796(have)P
+8684 5796(contributed)P
+11617 5796(ideas)P
+13049 5796(and)P
+14115 5796(have)P
+15447 5796(given)P
+16980 5796(support)P
+18980 5796(for)P
+19880 5796(the)P
+20813 5796(project.)P
+end restore showpage
+%%Page: 19 19
+save $troff begin Sc
+2 10 SF
+4320 43920(Writing)P
+6554 43920(Papers)P
+8520 43920(with)P
+9854 43920(NROFF)P
+12121 43920(using)P
+13689 43920(-me)P
+29600 43920(USD:22\25519)P
+0 10 SF
+4320 41760(This)P
+5587 41760(document)P
+8153 41760(was)P
+0 9 SF
+9265 41760(TROFF)P
+0 10 SF
+10945 41760('ed)P
+11911 41760(on)P
+12711 41760(July)P
+13911 41760(24,)P
+14861 41760(2012)P
+16261 41760(and)P
+17327 41760(applies)P
+19226 41760(to)P
+19893 41760(version)P
+21859 41760(2.27)P
+23109 41760(of)P
+23809 41760(the)P
+24742 41760(-me)P
+26013 41760(macros.)P
+end restore showpage
+%%Trailer
+%%Pages: 19
+%%EOF

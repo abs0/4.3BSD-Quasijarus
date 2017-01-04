@@ -1,0 +1,22 @@
+# This is an NS-anchor file in FalconDNS format
+# listing the standard root name servers.
+#
+# IPv4 addresses of the 13 servers are valid as of 2013-01-07,
+# verified by querying 198.41.0.4 for A of each of the 13 with dig.
+#
+# D has got a new IPv4 address recently, seems to have happened
+# on 2013-01-03.
+
+server A.ROOT-SERVERS.NET.      198.41.0.4
+server B.ROOT-SERVERS.NET.      192.228.79.201
+server C.ROOT-SERVERS.NET.      192.33.4.12
+server D.ROOT-SERVERS.NET.      199.7.91.13
+server E.ROOT-SERVERS.NET.      192.203.230.10
+server F.ROOT-SERVERS.NET.      192.5.5.241
+server G.ROOT-SERVERS.NET.      192.112.36.4
+server H.ROOT-SERVERS.NET.      128.63.2.53
+server I.ROOT-SERVERS.NET.      192.36.148.17
+server J.ROOT-SERVERS.NET.      192.58.128.30
+server K.ROOT-SERVERS.NET.      193.0.14.129 
+server L.ROOT-SERVERS.NET.      199.7.83.42
+server M.ROOT-SERVERS.NET.      202.12.27.33

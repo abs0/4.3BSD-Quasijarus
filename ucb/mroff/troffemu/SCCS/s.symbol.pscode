@@ -1,0 +1,31 @@
+h44195
+s 00020/00000/00000
+d D 2.1 2012/03/07 23:50:45 msokolov 1 0
+c new ambitious approach to TroffEmu-Symbol using m4
+e
+u
+U
+t
+T
+I 1
+/Erode{
+5.5 dup 3 -1 roll 0.1 mul exch 0.5 sub mul cvi sub dup mul
+85 0 dtransform dup mul exch dup mul add
+le{pop pop 1.0 1.0}{pop pop 0.0 1.5}ifelse}bind def
+/OtherSubrs 
+[ {} {} {} 
+{
+systemdict /internaldict known not
+{pop 3}
+{1183615869 systemdict /internaldict get exec
+dup /startlock known
+{/startlock get exec}
+{dup /strtlck known
+{/strtlck get exec}
+{pop 3}
+ifelse}
+ifelse}
+ifelse
+} bind
+]|-
+E 1

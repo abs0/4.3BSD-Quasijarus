@@ -1,0 +1,89 @@
+.\"	@(#)emul.3	6.1 (Berkeley) 2011/10/18
+.\"
+.TH EMUL 3 "October 18, 2011"
+.UC 8
+.SH NAME
+emul, emulu \- expanding integer multiplication
+.SH SYNOPSIS
+.nf
+.B long long emul(m1, m2, a)
+.B long m1, m2, a;
+.PP
+.B unsigned long long emulu(m1, m2, a)
+.B unsigned long m1, m2, a;
+.fi
+.SH DESCRIPTION
+The
+.I emul
+function provides C access to the
+.B EMUL
+instruction defined by the VAX architecture.
+The signed 64-bit result is equal to the product of the two signed 32-bit
+multiplicands plus the signed 32-bit addend.
+An
+.I emul
+function with identical semantics is guaranteed to be provided
+on any ports of 4.3BSD-Quasijarus to non-VAX architectures,
+hence it may be used freely by machine-independent code.
+.PP
+.I Emulu
+is the unsigned version of
+.IR emul :
+all 3 arguments are unsigned 32-bit integers and the result is an
+unsigned 64-bit integer.
+.PP
+It depends on the machine architecture whether
+.I emul
+or
+.I emulu
+is more native and/or efficient: on the VAX
+.I emul
+is an architectured machine instruction whereas
+.I emulu
+is implemented by executing the
+.B EMUL
+instruction, then applying the necessary corrections to the
+most significant half of the result.
+The converse may hold on other machine architectures.
+.PP
+Programmers needing to multiply two 32-bit integers to yield a
+64-bit integer product should use
+.I emul
+or
+.I emulu
+as appropriate.
+Both functions are expected to be more efficient (on all anticipated
+machine architectures) than casting one of the operands to
+.I "long long"
+or
+.I "unsigned long long"
+and then applying the standard C multiplication operator
+.BR * .
+With the latter approach, the best one can hope for is that the C compiler
+will recognize the idiom and convert the code to an
+.I emul
+operation automatically.
+If the compiler isn't smart enough to do that, the generated code
+would first expand each multiplicand to a 64-bit quadword, then
+call the general-case 64-bit multiplication function (one that takes
+64-bit multiplicands on input), which is virtually certain to be
+less efficient than
+.IR emul .
+.SH "RETURN VALUE"
+The least significant half of the product is returned in register R0
+and the most significant half is returned in register R1 on the VAX.
+This arrangement matches what is natural for the VAX architecture
+and will be the standard convention for functions returning
+.IR "long long" .
+.SH "SEE ALSO"
+mul64(3)
+.SH BUGS
+It is unfortunate that the design of the C programming language
+(in its definition of type convergence as applied to multiplicative
+binary operators) doesn't match the fundamental mathematical reality
+that the product of two binary integers of bit width
+.I N
+in its most natural abstract form has a bit width of
+.IR 2N .
+This shortcoming in the standard definition of C is what necessitates
+helper functions like the ones presented here.

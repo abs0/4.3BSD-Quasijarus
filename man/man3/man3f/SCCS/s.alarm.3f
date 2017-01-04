@@ -1,0 +1,66 @@
+h30570
+s 00001/00001/00045
+d D 6.1 85/05/15 16:14:06 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00046/00000/00000
+d D 5.1 85/05/15 16:14:00 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ALARM 3F "18 July 1983"
+E 2
+I 2
+.TH ALARM 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+alarm \- execute a subroutine after a specified time
+.SH SYNOPSIS
+.B integer function alarm (time, proc)
+.br
+.B integer time
+.br
+.B external proc
+.SH DESCRIPTION
+This routine arranges for subroutine
+.I proc
+to be called after
+.I time
+seconds. If
+.I time
+is ``0'', the alarm is turned off and no routine will be called.
+The returned value will be the time remaining on the last alarm.
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.SH "SEE ALSO"
+alarm(3C), sleep(3F), signal(3F)
+.SH BUGS
+.I Alarm
+and
+.I sleep
+interact. If
+.I sleep
+is called after
+.IR alarm ,
+the
+.I alarm
+process will never be called. SIGALRM will occur at the lesser of the
+remaining
+.I alarm
+time or the
+.I sleep
+time.
+E 1

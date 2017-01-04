@@ -2,16 +2,16 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)cat.1	6.3 (Berkeley) 9/29/87
+.\"	@(#)cat.1	6.4 (Berkeley) 1/2/04
 .\"
-.TH CAT 1 "September 29, 1987"
+.TH CAT 1 "January 2, 2004"
 .UC 4
 .SH NAME
 cat \- catenate and print
 .SH SYNOPSIS
 .B cat
 [
-.B \-benstuv
+.B \-78benstuv
 ]
 file ...
 .br
@@ -71,8 +71,43 @@ option with the
 .B \-v
 option displays tab characters as ^I.
 .PP
+The
+.B \-7
+option converts the catted character stream from KOI-8 to KOI-7
+by clearing the high bit of every character and inserting SO and SI
+(octal 016 and 017) control characters as necessary so that Russian letters
+in the input (octal 0300 through 0377 inclusive) can be distinguished
+from their Latin (ASCII) counterparts.
+The
+.B \-8
+option performs the opposite conversion by setting the high bit of
+characters between 0100 and 0177 octal (inclusive) that are preceded by SO
+(016 octal).
+While it will seem counterintuitive, the
+.B \-7
+transformation includes the
+.B \-8
+transformation as its first step.
+This is done so that if the input files contain a mixture of KOI-7 and KOI-8,
+the output of
+.I cat
+.B \-7
+will be in KOI-7 with the minimum necessary number of SO and SI control
+characters.
+The
+.B \-7
+and
+.B \-8
+options are incompatible with
+.BR \-v .
+.PP
 .SH "SEE ALSO"
-cp(1), ex(1), more(1), pr(1), tail(1)
+cp(1), ex(1), more(1), pr(1), tail(1), koi(7)
 .SH BUGS
 Beware of `cat a b >a' and `cat a b >b', which destroy
 the input files before reading them.
+.PP
+.B \-7
+option does not convert C1 high control characters to their equivalent
+7-bit two-character escape sequences by ISO rules, instead
+it merely clears the high bit.

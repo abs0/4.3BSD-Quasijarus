@@ -14,17 +14,24 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	6.1 (Berkeley) 12/4/03
+#	@(#)Makefile	6.2 (Berkeley) 9/13/04
 #
-NROFF=	nroff
+TROFF=	pstroff
+NROFF=	nroff8 -Tcol8
+COL=	col8 -b
 
 SRC=	title.t 0a.t 0b.t
 
+all:	qjchanges.ps qjchanges.txt
+
+qjchanges.ps: ${SRC}
+	${TROFF} -ms ${SRC} > qjchanges.ps
+
 qjchanges.txt: ${SRC}
-	${NROFF} -ms ${SRC} | colcrt - > qjchanges.txt
+	${NROFF} -ms ${SRC} | ${COL} > qjchanges.txt
 
 clean:
-	rm -f qjchanges.txt ?.t.spell errs Errs
+	rm -f qjchanges.ps qjchanges.txt ?.t.spell errs Errs
 
 spell:	${SRC}
 	@for i in ${SRC}; do \

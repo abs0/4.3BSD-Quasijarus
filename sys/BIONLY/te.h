@@ -1,0 +1,1 @@
+#define NTE 0

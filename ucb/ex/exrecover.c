@@ -11,7 +11,7 @@ char *copyright =
 #endif not lint
 
 #ifndef lint
-static char *sccsid = "@(#)exrecover.c	7.9 (Berkeley) 6/7/85";
+static char *sccsid = "@(#)exrecover.c	7.10 (Berkeley) 4/13/03";
 #endif not lint
 
 #include <stdio.h>	/* mjm: BUFSIZ: stdio = 512, VMUNIX = 1024 */
@@ -25,7 +25,7 @@ static char *sccsid = "@(#)exrecover.c	7.9 (Berkeley) 6/7/85";
 #include <sys/dir.h>
 #include "uparm.h"
 
-char xstr[1];		/* make loader happy */
+u_char xstr[1];		/* make loader happy */
 short tfile = -1;	/* ditto */
 
 /*
@@ -54,7 +54,7 @@ short tfile = -1;	/* ditto */
  * This directory definition also appears (obviously) in expreserve.c.
  * Change both if you change either.
  */
-char	mydir[] =	usrpath(preserve);
+u_char	mydir[] =	usrpath(preserve);
 
 /*
  * Limit on the number of printed entries
@@ -63,14 +63,14 @@ char	mydir[] =	usrpath(preserve);
 #define	NENTRY	50
 
 char	*ctime();
-char	nb[BUFSIZ];
+u_char	nb[BUFSIZ];
 int	vercnt;			/* Count number of versions of file found */
 
 main(argc, argv)
 	int argc;
-	char *argv[];
+	u_char *argv[];
 {
-	register char *cp;
+	register u_char *cp;
 	register int b, i;
 
 	/*
@@ -130,7 +130,7 @@ main(argc, argv)
 		ignorl(lseek(tfile, (long) blocks[b] * BUFSIZ, 0));
 		i = H.Flines < BUFSIZ / sizeof (line) ?
 			H.Flines * sizeof (line) : BUFSIZ;
-		if (read(tfile, (char *) dot, i) != i) {
+		if (read(tfile, (u_char *) dot, i) != i) {
 			perror(nb);
 			exit(1);
 		}
@@ -184,7 +184,7 @@ main(argc, argv)
  */
 /*VARARGS2*/
 error(str, inf)
-	char *str;
+	u_char *str;
 	int inf;
 {
 
@@ -207,20 +207,20 @@ error(str, inf)
  * at which the file was saved.
  */
 struct svfile {
-	char	sf_name[FNSIZE + 1];
+	u_char	sf_name[FNSIZE + 1];
 	int	sf_lines;
-	char	sf_entry[MAXNAMLEN + 1];
+	u_char	sf_entry[MAXNAMLEN + 1];
 	time_t	sf_time;
 };
 
 listfiles(dirname)
-	char *dirname;
+	u_char *dirname;
 {
 	register DIR *dir;
 	struct direct *dirent;
 	int ecount, qucmp();
 	register int f;
-	char *cp;
+	u_char *cp;
 	struct svfile *fp, svbuf[NENTRY];
 
 	/*
@@ -260,7 +260,7 @@ listfiles(dirname)
 #endif
 			continue;
 		}
-		if (read(f, (char *) &H, sizeof H) != sizeof H) {
+		if (read(f, (u_char *) &H, sizeof H) != sizeof H) {
 #ifdef DEBUG
 			fprintf(stderr, "culdnt read hedr\n");
 #endif
@@ -311,9 +311,9 @@ listfiles(dirname)
  */
 enter(fp, fname, count)
 	struct svfile *fp;
-	char *fname;
+	u_char *fname;
 {
-	register char *cp, *cp2;
+	register u_char *cp, *cp2;
 	register struct svfile *f, *fl;
 	time_t curtime, itol();
 
@@ -369,7 +369,7 @@ qucmp(p1, p2)
 /*
  * Scratch for search.
  */
-char	bestnb[BUFSIZ];		/* Name of the best one */
+u_char	bestnb[BUFSIZ];		/* Name of the best one */
 long	besttime;		/* Time at which the best file was saved */
 int	bestfd;			/* Keep best file open so it dont vanish */
 
@@ -379,7 +379,7 @@ int	bestfd;			/* Keep best file open so it dont vanish */
  * Want to find the newest so we search on and on.
  */
 findtmp(dir)
-	char *dir;
+	u_char *dir;
 {
 
 	/*
@@ -410,7 +410,7 @@ findtmp(dir)
 		 * Gotta be able to read the header or fall through
 		 * to lossage.
 		 */
-		if (read(tfile, (char *) &H, sizeof H) == sizeof H)
+		if (read(tfile, (u_char *) &H, sizeof H) == sizeof H)
 			return;
 	}
 
@@ -432,11 +432,11 @@ findtmp(dir)
  * we won't be able to find it again.
  */
 searchdir(dirname)
-	char *dirname;
+	u_char *dirname;
 {
 	struct direct *dirent;
 	register DIR *dir;
-	char dbuf[BUFSIZ];
+	u_char dbuf[BUFSIZ];
 
 	dir = opendir(dirname);
 	if (dir == NULL)
@@ -482,13 +482,13 @@ searchdir(dirname)
  * user and the file specified.
  */
 yeah(name)
-	char *name;
+	u_char *name;
 {
 
 	tfile = open(name, 2);
 	if (tfile < 0)
 		return (0);
-	if (read(tfile, (char *) &H, sizeof H) != sizeof H) {
+	if (read(tfile, (u_char *) &H, sizeof H) != sizeof H) {
 nope:
 		ignore(close(tfile));
 		return (0);
@@ -532,7 +532,7 @@ scrapbad()
 	struct stat stbuf;
 	off_t size, maxt;
 	int bno, cnt, bad, was;
-	char bk[BUFSIZ];
+	u_char bk[BUFSIZ];
 
 	ignore(fstat(tfile, &stbuf));
 	size = stbuf.st_size;
@@ -549,7 +549,7 @@ scrapbad()
 	 */
 	while (bno > 0) {
 		ignorl(lseek(tfile, (long) BUFSIZ * bno, 0));
-		cnt = read(tfile, (char *) bk, BUFSIZ);
+		cnt = read(tfile, (u_char *) bk, BUFSIZ);
 		while (cnt > 0)
 			if (bk[--cnt] == 0)
 				goto null;
@@ -612,7 +612,7 @@ Ignorl(a)
 }
 
 Ignore(a)
-	char *a;
+	u_char *a;
 {
 
 	a = a;
@@ -640,7 +640,7 @@ int	cntch, cntln, cntodd, cntnull;
 putfile()
 {
 	line *a1;
-	register char *fp, *lp;
+	register u_char *fp, *lp;
 	register int nib;
 
 	a1 = addr1;
@@ -696,7 +696,7 @@ clrstats()
 getline(tl)
 	line tl;
 {
-	register char *bp, *lp;
+	register u_char *bp, *lp;
 	register int nl;
 
 	lp = linebuf;
@@ -713,7 +713,7 @@ getline(tl)
 int	read();
 int	write();
 
-char *
+u_char *
 getblock(atl, iof)
 	line atl;
 	int iof;
@@ -747,7 +747,7 @@ getblock(atl, iof)
 
 blkio(b, buf, iofcn)
 	short b;
-	char *buf;
+	u_char *buf;
 	int (*iofcn)();
 {
 
@@ -776,10 +776,10 @@ syserror()
  */
 fprintf(fp, fmt, a1, a2, a3, a4, a5)
 	FILE *fp;
-	char *fmt;
-	char *a1, *a2, *a3, *a4, *a5;
+	u_char *fmt;
+	u_char *a1, *a2, *a3, *a4, *a5;
 {
-	char buf[BUFSIZ];
+	u_char buf[BUFSIZ];
 
 	if (fp != stderr)
 		return;

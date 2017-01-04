@@ -1,0 +1,138 @@
+h30343
+s 00001/00001/00088
+d D 6.1 85/04/29 18:01:32 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00005/00084
+d D 5.1 85/04/29 18:01:21 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00089/00000/00000
+d D 4.1 85/04/29 18:01:12 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TC 1 
+E 2
+I 2
+D 3
+.TH TC 1  "18 January 1983"
+E 3
+I 3
+.TH TC 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+D 2
+tc \- photypesetter simulator
+E 2
+I 2
+tc \- photoypesetter simulator
+E 2
+.SH SYNOPSIS
+.B tc
+[
+.B \-t
+]
+[
+.B \-s\c
+N
+]
+[
+.B \-p\c
+L
+]
+[
+file
+]
+.SH DESCRIPTION
+.I Tc
+interprets its
+input (standard input default)
+as device codes for a Graphic Systems phototypesetter (cat).
+The standard output of
+.I tc
+D 2
+is intended for a Tektronix 4015 (a 4014 teminal
+E 2
+I 2
+is intended for a Tektronix 4015 (a 4014 terminal
+E 2
+with ASCII and APL character sets).
+The sixteen typesetter sizes are mapped into the 4014's
+four sizes;
+the entire TROFF character set is drawn using the 4014's
+character generator,
+using overstruck combinations where necessary.
+Typical usage:
+.IP "" 15
+troff \-t file | tc
+.PP
+At the end of each page
+.I tc
+waits for a newline (empty line) from the keyboard before
+continuing on to the next page.
+In this wait state, the command
+.B e
+will suppress the screen erase before the next page;
+.B s\c
+N will cause the next N pages to be skipped;
+and
+.B !\c
+line will send line to the shell.
+.PP
+The command line options are:
+.TP
+.B  \-t
+Don't wait between pages; for directing output into a file.
+.TP 
+.BR \-s N
+Skip the first N pages.
+.TP 
+.BR \-p L
+Set page length to L.
+L may include the scale factors
+.B p
+(points),
+.B i
+(inches),
+.B c
+(centimeters),
+and
+.B P
+(picas);
+default is picas.
+.TP
+.BI \(fm\- l\ w \(fm
+Multiply the default aspect ratio, 1.5, of a displayed page
+by
+.I l/w.
+.SH "SEE ALSO"
+troff(1),
+D 2
+plot(1)
+E 2
+I 2
+plot(1G)
+E 2
+.SH BUGS
+Font distinctions are lost.
+.br
+D 2
+.I tc's
+E 2
+I 2
+.IR tc 's
+E 2
+character set is limited to ASCII in just one size.
+.br
+The aspect ratio option is unbelievable.
+E 1

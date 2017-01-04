@@ -15,7 +15,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)sendmail.h	5.14 (Berkeley) 5/29/02
+ *	@(#)sendmail.h	5.17 (Berkeley) 5/19/06
  */
 
 /*
@@ -25,7 +25,7 @@
 # ifdef _DEFINE
 # define EXTERN
 # ifndef lint
-static char SmailSccsId[] =	"@(#)sendmail.h	5.14		5/29/02";
+static char SmailSccsId[] =	"@(#)sendmail.h	5.17		5/19/06";
 # endif lint
 # else  _DEFINE
 # define EXTERN extern
@@ -445,6 +445,13 @@ EXTERN char	OpMode;		/* operation mode, see below */
 #define MD_PRINT	'p'		/* print the queue */
 #define MD_FREEZE	'z'		/* freeze the configuration file */
 
+/*
+**  The hack below is to remember the original OpMode on startup.
+**  MD_DAEMON is later changed to MD_SMTP, and we sometimes want to
+**  know whether we started out as a daemon.
+*/
+EXTERN char	OrigOpMode;
+
 
 EXTERN char	SendMode;	/* send mode, see below */
 
@@ -470,6 +477,16 @@ EXTERN char	ErrorMode;	/* error mode, see below */
  * codes are unique.
  */
 #define	MAX_ERRNO	100
+
+/* alias attributes */
+struct aliasattrs {
+	short	aa_flags;
+	short	aa_uid;
+	short	aa_gid;
+};
+#define	AA_HASUID	0x0001		/* alias has associated uid/gid */
+#define	AA_RESTRICTED	0x0002		/* not accessible to mere mortals */
+#define	AA_NOEXPN	0x0004		/* don't allow EXPN */
 /*
 **  Global variables.
 */
@@ -523,6 +540,8 @@ EXTERN char	*MyHostName;	/* name of this host for SMTP messages */
 EXTERN char	*RealHostName;	/* name of host we are talking to */
 EXTERN char	*RealHostAddr;	/* address of that host as "[a.b.c.d]" */
 EXTERN char	*CurHostName;	/* current host we are dealing with */
+EXTERN bool	FromInet;	/* coming from Internet */
+EXTERN bool	NoInetRelay;	/* do not relay mail coming from Inet */
 EXTERN jmp_buf	TopFrame;	/* branch-to-top-of-loop-on-error frame */
 EXTERN bool	QuickAbort;	/*  .... but only if we want a quick abort */
 extern char	*ConfFile;	/* location of configuration file [conf.c] */
@@ -539,6 +558,7 @@ EXTERN char	*PostMasterCopy;	/* address to get errs cc's */
 EXTERN char	*MxHosts[MAXMXHOSTS+1];	/* for MX RRs */
 EXTERN char	*TrustedUsers[MAXTRUST+1];	/* list of trusted users */
 EXTERN char	*UserEnviron[MAXUSERENVIRON+1];	/* saved user environment */
+EXTERN long	MaxMessageSize;	/* configurable hard limit on message size */
 /*
 **  Trace information
 */

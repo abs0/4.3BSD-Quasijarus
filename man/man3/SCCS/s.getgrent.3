@@ -1,0 +1,168 @@
+h26762
+s 00001/00001/00105
+d D 6.3 04/10/21 06:56:03 msokolov 6 5
+c missing comma in the NAME line
+e
+s 00010/00004/00096
+d D 6.2 87/11/05 14:44:12 bostic 5 3
+c add setgrfile
+e
+s 00009/00003/00097
+d R 6.2 87/11/05 14:20:36 bostic 4 3
+c add setgrfile
+e
+s 00001/00001/00099
+d D 6.1 85/05/15 14:59:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00099
+d D 5.1 85/05/15 14:59:47 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00100/00000/00000
+d D 4.1 85/05/15 14:59:41 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETGRENT 3 
+E 2
+I 2
+D 3
+.TH GETGRENT 3  "19 January 1983"
+E 3
+I 3
+.TH GETGRENT 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+D 5
+getgrent, getgrgid, getgrnam, setgrent, endgrent \- get group file entry
+E 5
+I 5
+D 6
+getgrent, getgrgid, getgrnam, setgrent, endgrent setgrfile \- get group file entry
+E 6
+I 6
+getgrent, getgrgid, getgrnam, setgrent, endgrent, setgrfile \- get group file entry
+E 6
+E 5
+.SH SYNOPSIS
+.nf
+.B #include <grp.h>
+.PP
+.B struct group *getgrent()
+.PP
+.B struct group *getgrgid(gid)
+.B int gid;
+.PP
+.B struct group *getgrnam(name)
+.B char *name;
+.PP
+.B setgrent()
+.PP
+.B endgrent()
+I 5
+.PP
+.B setgrfile(name)
+.B char *name;
+E 5
+.fi
+.SH DESCRIPTION
+.I Getgrent,
+.I getgrgid
+and
+.I getgrnam
+each return pointers
+to an object
+with the following structure
+containing the broken-out
+fields of a line in the group file.
+.RS
+.PP
+.nf
+.so /usr/include/grp.h
+.fi
+.RE
+.PP
+The members of this structure are:
+.TP \w'gr_passwd'u+2n
+gr_name
+The name of the group.
+.br
+.ns
+.TP \w'gr_passwd'u+2n
+gr_passwd
+The encrypted password of the group.
+.br
+.ns
+.TP \w'gr_passwd'u+2n
+gr_gid
+The numerical group-ID.
+.br
+.ns
+.TP \w'gr_passwd'u+2n
+gr_mem
+Null-terminated vector
+of pointers to the individual
+member names.
+.PP
+.I Getgrent
+simply reads the next
+line while
+.I getgrgid
+and
+.I getgrnam
+search until a matching
+.I gid
+or
+.I name
+is found
+(or until EOF is encountered).
+Each routine picks up
+where the others leave off
+so successive calls may be used
+to search the entire file.
+.PP
+A call to
+.I setgrent
+has the effect of rewinding
+the group file
+to allow
+repeated searches.
+.I Endgrent
+may be called to
+close the group file
+when processing is complete.
+I 5
+.PP
+\fISetgrfile\fP changes the default group file to \fIname\fP thus allowing
+alternate grioup files to be used.  Note that it does \fInot\fP close the
+previous file.  If this is desired, \fIendgrent\fP should be called prior
+to it.
+E 5
+.SH FILES
+/etc/group
+.SH "SEE ALSO"
+getlogin(3), getpwent(3), group(5)
+.SH DIAGNOSTICS
+A null pointer
+(0) is returned on EOF or error.
+.SH BUGS
+D 5
+All information
+is contained in a static area
+so it must be copied if it is
+E 5
+I 5
+All information is contained in a static area so it must be copied if it is
+E 5
+to be saved.
+E 1

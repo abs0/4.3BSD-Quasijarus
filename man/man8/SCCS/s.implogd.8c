@@ -1,0 +1,89 @@
+h15949
+s 00003/00005/00047
+d D 6.2 86/05/22 20:36:38 karels 3 2
+c update
+e
+s 00001/00001/00051
+d D 6.1 85/04/27 15:00:23 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00052/00000/00000
+d D 5.1 85/04/27 15:00:00 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH IMPLOGD 8C "4 March 1983"
+E 2
+I 2
+.TH IMPLOGD 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+implogd \- IMP logger process
+.SH SYNOPSIS
+.B /etc/implogd
+[
+.B \-d
+]
+.SH DESCRIPTION
+.I Implogd
+D 3
+is program which logs messages from the IMP,
+E 3
+I 3
+is program which logs error messages from the IMP,
+E 3
+placing them in the file
+.IR /usr/adm/implog .
+.PP
+Entries in the file are variable length.  Each log
+entry has a fixed length header of the form:
+.PP
+.ta 0.5i 1.0i 1.5i
+.nf
+struct sockstamp {
+	short	sin_family;
+	u_short	sin_port;
+	struct	in_addr sin_addr;
+	time_t	sin_time;
+	int	sin_len;
+};
+.fi
+.PP
+followed, possibly, by the message received from the 
+IMP.  Each time the logging process is started up it
+places a time stamp entry in the file (a header with
+.I sin_len
+field set to 0).
+.PP
+The logging process will catch only those message from
+the IMP which are not processed by a protocol module,
+e.g. IP.  This implies the log should contain only
+D 3
+status information such as ``IMP going down'' messages
+E 3
+I 3
+status information such as ``IMP going down'' messages,
+``host down'' and other error messages,
+E 3
+and, perhaps, stray NCP messages.
+.SH "SEE ALSO"
+imp(4P),
+implog(8C)
+D 3
+.SH BUGS
+The messages should probably be sent to the system error
+logging process instead of maintaining yet another log file.
+E 3
+E 1

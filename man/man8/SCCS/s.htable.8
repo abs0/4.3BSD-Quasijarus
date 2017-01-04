@@ -1,0 +1,170 @@
+h26080
+s 00017/00006/00090
+d D 6.3 86/05/22 20:12:17 karels 4 3
+c refer to named
+e
+s 00001/00001/00095
+d D 6.2 86/05/15 14:42:53 mckusick 3 2
+c gethostent => gethostbyname
+e
+s 00001/00001/00095
+d D 6.1 85/04/27 14:58:26 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00096/00000/00000
+d D 5.1 85/04/27 14:58:06 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH HTABLE 8 "4 March 1983"
+E 2
+I 2
+.TH HTABLE 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+htable \- convert NIC standard format host tables
+.SH SYNOPSIS
+.B /etc/htable
+[
+.B \-c
+.I connected-nets
+] [
+.B \-l
+.I local-nets
+]
+.I file
+.SH DESCRIPTION
+.I Htable
+is used to convert host files in the format specified
+in Internet RFC 810 to the format used by the network
+library routines.  Three files are created as a result
+of running 
+.IR htable :
+.IR hosts ,
+.IR networks ,
+and
+.IR gateways .
+The 
+.I hosts
+D 4
+file is used by the 
+E 4
+I 4
+file may be used by the 
+E 4
+D 3
+.IR gethostent (3N)
+E 3
+I 3
+.IR gethostbyname (3N)
+E 3
+D 4
+routines in mapping host names to addresses.
+E 4
+I 4
+routines in mapping host names to addresses
+if the nameserver,
+.IR named (8),
+is not used.
+E 4
+The
+.I networks
+file is used by the
+.IR getnetent (3N)
+routines in mapping network names to numbers.
+The
+.I gateways
+D 4
+file is used by the routing daemon
+E 4
+I 4
+file may be used by the routing daemon
+E 4
+in identifying ``passive'' Internet gateways;
+see
+.IR routed (8C)
+for an explanation.
+.PP
+If any of the files
+.IR localhosts ,
+.IR localnetworks ,
+or
+.I localgateways
+are present in the current directory,
+the file's contents is prepended to the
+output file.
+Of these, only the gateways file is interpreted.
+This allows sites to maintain local aliases and
+entries which are not normally present in the
+master database.
+Only one gateway to each network will be placed in the gateways file;
+a gateway listed in the localgateways file will override any in the
+input file.
+.PP
+D 4
+A list of networks to which the host is directly connected is specified with the
+E 4
+I 4
+If the gateways file is to be used,
+a list of networks to which the host is directly connected
+is specified with the
+E 4
+.B \-c
+flag.
+The networks, separated by commas,
+D 4
+may be given by name or in internet-standard dot notation,
+E 4
+I 4
+may be given by name or in Internet-standard dot notation,
+E 4
+e.g.
+.B \-c
+arpanet,128.32,local-ether-net.
+.I Htable
+only includes gateways
+which are directly connected to one of the networks specified,
+or which can be reached from another gateway on a connected net.
+.PP
+If the
+.B \-l
+option is given with a list of networks (in the same format as for
+.BR \-c ),
+these networks will be treated as ``local,''
+and information about hosts on local networks is
+taken only from the localhosts file.
+Entries for local hosts from the main database will be omitted.
+This allows the localhosts file to completely override
+any entries in the input file.
+.PP
+.I Htable
+is best used in conjunction with the
+.IR gettable (8C)
+program which retrieves the NIC database from a host.
+.SH "SEE ALSO"
+intro(3N),
+D 4
+gettable(8C)
+E 4
+I 4
+gettable(8C),
+named(8)
+.SH BUGS
+If the name-domain system provided network name mapping well as host
+name mapping,
+.I htable
+would no longer be needed.
+E 4
+E 1

@@ -1,0 +1,231 @@
+.\"	@(#)mjdtime.3	1.5 (IFCTF) 2013/01/20
+.\"
+.TH MJDTIME 3 "January 20, 2013"
+.UC 8
+.SH NAME
+struct mjdtime, unix2mjdtime, mjd2unixtime
+\- representation of time based on days
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/types.h>
+#include <mjdtime.h>
+.PP
+.ft B
+void unix2mjdtime(clock, mjdtime)
+time_t *clock;
+struct mjdtime *mjdtime;
+.PP
+.ft B
+time_t mjd2unixtime(mjdtime)
+struct mjdtime *mjdtime;
+.PP
+.ft B
+normalize_mjdtime(t)
+struct mjdtime t;
+.PP
+.ft B
+mjdtime_gtr(t1, t2)
+mjdtime_geq(t1, t2)
+mjdtime_leq(t1, t2)
+mjdtime_lss(t1, t2)
+struct mjdtime t1, t2;
+.fi
+.SH DATA TYPE
+.I Struct mjdtime
+is defined in
+.RI < mjdtime.h >
+as follows:
+.PP
+.nf
+.RS
+.DT
+struct mjdtime {
+	long	mjd;
+	long	fract;
+};
+.RE
+.fi
+.PP
+This representation of time is an alternative to the traditional UNIX
+.BR time_t ,
+and has the day, rather than the second, as its fundamental unit:
+the \fImjd\fP member counts days, whereas the \fIfract\fP member
+represents 1/86400th fractions of a day which the Sumerians called seconds.
+(The new SI definition of the second that is disconnected from the day
+is hereby explicitly rejected.)
+.PP
+This time representation structure is intended for the following
+purposes:
+.IP \(bu
+Handling absolute dates and times that aren't constrained to the
+relatively narrow
+.B time_t
+window of 1970\(em2106.
+.IP \(bu
+A convenient intermediate step in the conversion between
+.B time_t
+and human calendars: the new Quasijarus implementation of the
+.IR ctime (3)
+family of functions uses \fIunix2mjdtime\fP as the first step
+in the conversion algorithm.
+.IP \(bu
+Representing civil time intervals (deltas between absolute times)
+in days and fractions of a day rather than just seconds.
+.SH ABSOLUTE TIMES
+An \fImjdtime\fP structure
+represents a point in time in the Earth human world
+as a day identifier and a fraction of a day.
+The day identifier is a Modified Julian Day number, defined
+according to the standard scientific conventions of the astronomical
+community, and the fraction of the day is given in 1/86400th units
+called seconds.
+The
+.I fract
+member of the structure is supposed to lie between 0 and 86399,
+inclusive, with 0 denoting astronomical midnight, the point at
+which MJD numbers are defined to increment.
+.PP
+The origin of MJD numbers has no intrinsic meaning and is the result
+of a chain of historical precedents.
+MJD 0 corresponds to the Gregorian date of 1858-11-17,
+and the UNIX epoch of 1970-01-01 is MJD 40587.
+MJD numbers may be both positive and negative,
+and the range provided by a signed 32-bit
+.B long
+extends over 5 million years in each direction,
+which is deemed to be sufficient for the purposes of
+calendrical manipulations related to the human civilisation.
+.SH DELTAS
+It is possible to obtain an interval in days and fractions
+of a day between two time points represented as mjdtimes
+by subtracting them as follows:
+.PP
+.nf
+.RS
+.ft B
+struct mjdtime t1, t2, delta;
+
+delta.mjd = t2.mjd - t1.mjd;
+delta.fract = t2.fract - t1.fract;
+normalize_mjdtime(delta);
+.ft
+.RE
+.fi
+.PP
+The macro
+.I normalize_mjdtime
+forces the
+.I fract
+member into the proper range of 0 to 86399, inclusive, and increments
+or decrements the
+.I mjd
+member accordingly.
+Note that the structure is given to the macro
+\*(lqby value\*(rq.
+.PP
+It is recommended that you always subtract the relative-past date
+from the relative-future date, not the other way around:
+a negative delta represented as an mjdtime is rather non-intuitive
+and encourages programming errors.
+.SH CONVERSIONS
+.hw time-stamp
+\fIUnix2mjdtime\fP converts a
+.B time_t
+timestamp into an mjdtime;
+\fImjd2unixtime\fP performs the opposite conversion.
+.PP
+MJD and UNIX time epochs differ by 40587 days; this constant
+offset is incorporated into the conversion functions.
+These functions are intended for converting absolute times
+between the two representation formats;
+because of the offset, they cannot be used to convert a relative
+time delta between seconds and days.
+.PP
+The current VAX assembly implementation of \fIunix2mjdtime\fP
+reads a 32-bit value from the address passed as the first argument
+and interprets it as unsigned;
+this implementation of \fIunix2mjdtime\fP, used by the
+.IR ctime (3)
+family of functions, is what effectively defines the meaning
+of 32-bit \fBtime_t\fP timestamps with the high bit set
+as being in the 2038\(em2106 range, as opposed to 1901\(em1969.
+Because every possible 32-bit \fBtime_t\fP timestamp is representable
+as an mjdtime, the conversion cannot fail.
+The result is always normalized, i.e., \fIfract\fP lies between
+0 and 86399, inclusive.
+.PP
+The result of \fImjd2unixtime\fP should be treated as undefined
+if the input \fImjd\fP is less than the UNIX epoch MJD of 40587
+(the current Quasijarus \fBtime_t\fP can't represent proleptic dates),
+or if the input \fIfract\fP is less than 0 or greater than 86399.
+(The current VAX assembly implementation produces a correct
+signed 64-bit result for every possible input except for \fImjd\fP values
+at the negative extreme which overflow when the \(mi40587 offset
+is applied, but what C sees as the unsigned 32-bit result
+won't be anything useful.)
+.PP
+Every timestamp in the current \fBtime_t\fP range of 1970\(em2106
+can be converted freely in both directions without error.
+.SH NORMALIZATION
+The already-mentioned \fInormalize_mjdtime\fP macro is guaranteed
+to work correctly in the following cases:
+.IP \(bu
+After adding or subtracting an offset in seconds to or from
+the \fIfract\fP member.
+The absolute value of the offset must not exceed 86400.
+If multiple such offsets need to be applied such that they may
+exceed the limit in total, apply them one at a time, normalizing
+after each.
+.IP \(bu
+After computing a delta between two normalized mjdtimes as shown earlier.
+.IP \(bu
+After taking a normalized mjdtime delta as computed above and adding
+it to some other normalized mjdtime.
+If three or more mjdtimes need to be added together, normalize
+after each pairwise addition.
+.SH "COMPARISON OPERATIONS"
+Macros are provided that compare two normalized mjdtimes
+in temporal order:
+.PP
+.nf
+.ta \w'mjdtime_gtr(t1,t2))'u+.5i
+Macro	True if
+mjdtime_gtr(t1,t2)	t1 is greater than t2
+mjdtime_geq(t1,t2)	t1 is greater than or equal to t2
+mjdtime_leq(t1,t2)	t1 is less than or equal to t2
+mjdtime_lss(t1,t2)	t1 is less than t2
+.DT
+.fi
+.SH PORTABILITY
+The signed 32-bit integer data type that is used for both MJD numbers
+and fractions of a day is called \fBlong\fP on Classic UNIX systems.
+However, the IFCTF Calendar and Time Systems Library will likely
+also need to be ported to \*(lqmodern\*(rq perverted systems
+which have redefined \fBlong\fP to mean 64 bits;
+on the latter platforms the 32-bit \fBint\fP type will need to be
+used instead.
+.PP
+If you are writing code that may potentially need to run on
+everything from a PDP-11 (where a \fBlong\fP must be used) to a
+\*(lqmodern\*(rq 64-bit system (where an \fBint\fP should be used),
+use the \fIcalend_long\fP (\*(lqcalendrical long\*(rq) type:
+it is defined to \fBlong\fP or \fBint\fP as appropriate
+in both
+.B <mjdtime.h>
+and
+.B <caldate.h>
+header files.
+.SH SEE ALSO
+unixtime(7)
+.SH BUGS
+Arithmetic and comparison operations on mjdtimes
+are a little slower than on plain integers.
+.PP
+The use of MJD numbers and a structure like the present
+should have been adopted much earlier in UNIX history.
+Had this view of time been more mainstream, the outrageous
+proposals to decouple
+.B time_t
+from time-of-day and make it count atomic oscillations instead
+would have had less traction.

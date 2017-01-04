@@ -1,88 +1,28 @@
-#	@(#)Makefile	6.1 (Berkeley) 5/26/86
-#
-#	Makefile for the notesfile reference manual
-#	March 29, 1982
-#	Ray Essick, University of Illinois
-#	uiucdcs!essick     uiucdcs!notes
-#
-#	Note that the macros are set up for two-sided copying.
-#	The page numbers alternate between the left and right 
-#	sides of the page.
-#	See the file "macros" and the macro "hh" to modify this
-#
-#	This copy of everything has been modified to run with troff
-#	and a typesetter. Hopefully the only changes to make it
-#	run again under nroff will be in page length/width statements.
-#
-#
+# Makefile for the PostScript reprint of USD:11
+# The pages are troffed in the wrong order and need to be reshuffled
 
-DISTDIR	= p:/usr/src/uiuc/notesfiles
-DCP=	rcp
-NROPTS	= 
-TROPTS	= 
-PRINTER	= -Pdp
-#	ditroff actually prints the mother
-TROFF	= ditroff
-NROFF	= nroff
-NOUT	= qprx
-FILES=	0.long 0.short \
-	1 2.1 2.2 3.1 3.2 \
-	4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7 \
-	5 \
-	a.checklist b.interface c.changes
-LONGFILES= 0.long \
-	1 2.1 2.2 3.1 3.2 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7 \
-	5 a.checklist b.interface c.changes
 SHORTFILES= 0.short \
 	1 2.1 2.2 4.0 4.1 4.2 4.3 4.4 4.5
-OTHERS	= macros vtoc Makefile acks
+TROFF=	pstroff
+TROPTS=
+PARTS=	title.ps toc.ps body.ps
 
-man:	shortman
-all:	longman shortman
+all:	finished.ps
 
-longman:	$(LONGFILES) macros vtoc acks
-	$(TROFF) $(TROPTS) $(PRINTER) macros $(LONGFILES) vtoc acks
+shortman.ps: $(SHORTFILES) macros vtoc
+	$(TROFF) $(TROPTS) macros $(SHORTFILES) vtoc > $@
 
-shortman: $(SHORTFILES) macros vtoc
-	$(TROFF) $(TROPTS) $(PRINTER) macros $(SHORTFILES) vtoc
+title.ps:	shortman.ps
+	psrange shortman.ps 1 > $@
 
-longout: $(LONGFILES) macros vtoc acks
-	$(NROFF) $(NROPTS) macros $(LONGFILES) vtoc acks > longout
+body.ps:	shortman.ps
+	psrange shortman.ps 2-16 > $@
 
-shortout: $(SHORTFILES) macros vtoc
-	$(NROFF) $(NROPTS) macros $(SHORTFILES) vtoc > shortout
+toc.ps:		shortman.ps
+	psrange shortman.ps 18 > $@
 
-print: longout
-	$(NOUT) longout
-
-printsh: shortout
-	$(NOUT) shortout
-
-help:
-	@echo "make longman/shortman for long/abridged user man via ditroff"
-	@echo "make longout/shortout for long/abridged user man via nroff"
-	@echo "make print prints long nroff output"
-
-#
-#	Maintainence.
-#
-
-spell:	$(FILES)
-	sp $?
-	touch spell
-
-diction: out
-	diction out > diction
-
-style:	out
-	style out > style
-
-dist:	$(FILES) $(OTHERS)
-	${DCP} $? $(DISTDIR)/doc/.
-	touch dist
+finished.ps:	${PARTS}
+	pstmerge -s -l USD:11-%l ${PARTS} > $@
 
 clean:
-	rm -f man out Make.errs
-	rm -f diction style spell sp.*
-
-install:
+	rm -f *.ps *.out errs

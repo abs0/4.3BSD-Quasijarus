@@ -1,0 +1,161 @@
+h30552
+s 00001/00001/00126
+d D 6.3 04/10/21 06:30:28 msokolov 3 2
+c use \- in NAME
+e
+s 00002/00002/00125
+d D 6.2 03/11/09 19:12:35 msokolov 2 1
+c help => sccshelp
+e
+s 00127/00000/00000
+d D 6.1 99/05/14 13:07:27 msokolov 1 0
+c date and time created 99/05/14 13:07:27 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.tr ~
+.tr $%
+.if n .ds D " -- 
+.if t .ds D \(em
+.tr @|
+.de SP
+.if n .ul
+[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de DT
+.hc ^
+^...
+.hc
+..
+.de AR
+.s1
+.lp +10 5
+\fB\(em\\$1\\fR	\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+..
+.de FI
+.s1
+.lp +30 30
+\\$1	\\$2
+.i0
+..
+.ds F)  \fB\s-2FILES\s+2\fR
+.de I
+.if n .ul
+\fI\\$1\fR\c
+.if n .ul 0
+\\$2\\$3\\$4\\$5\\$6\\$7\\$8\\$9
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.th SCCSDIFF 1 %G%
+.sh NAME
+D 3
+sccsdiff \*- compare two versions of an SCCS file
+E 3
+I 3
+sccsdiff \- compare two versions of an SCCS file
+E 3
+.sh SYNOPSIS
+.bd sccsdiff
+old-spec
+new-spec
+[ pr-args ]
+sccsfile
+.DT
+.sh DESCRIPTION
+.ad
+.it Sccsdiff
+compares two versions of an SCCS file
+and
+generates the differences between the two versions.
+The
+.it old-spec
+is any
+valid
+.it get\c
+(1)
+specifier
+(e.g., \(emr1.1)
+for the old version to be gotten.
+Similarly,
+.it new-spec
+is any valid
+.it get\c
+(1)
+specifier
+(e.g., \(emr1.4)
+for the new version to be gotten.
+The
+.it pr-args
+are any valid
+.it pr\c
+(1)
+arguments which begin with a ``\(em'',
+except for ``\(emh''
+(the output of
+.it sccsdiff
+is piped through
+.it pr\c
+(1)).
+Any number of SCCS files may be specified,
+but the
+.it old-spec
+and
+.it new-spec
+apply to all files.
+.s1
+.it Sccsdiff
+is a simple shell procedure;
+interested persons should ``cat /usr/bin/sccsdiff''
+to discover how it works.
+.sh FILES
+.na
+.lp +18 18
+/tmp/get?????	temporary for old gotten version
+.lp +18 18
+/usr/bin/bdiff	program that generates differences
+.ad
+.lp +0 0
+.sh "SEE ALSO"
+.na
+get(1),
+D 2
+help(1),
+E 2
+I 2
+sccshelp(1),
+E 2
+pr(1),
+bdiff(1)
+.br
+.it "SCCS/PWB User's Manual"
+by L. E. Bonanni and A. L. Glasser.
+.ad
+.sh DIAGNOSTICS
+Use
+D 2
+.it help\c
+E 2
+I 2
+.it sccshelp\c
+E 2
+(1)
+for explanations.
+.tr ~~
+.tr $$
+.tr @@
+E 1

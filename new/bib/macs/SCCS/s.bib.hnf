@@ -1,0 +1,49 @@
+h60518
+s 00000/00000/00016
+d D 2.2 83/09/09 21:13:26 garrison 4 3
+c Incorporate changes from Arizona
+e
+s 00002/00000/00014
+d D 2.1 83/06/22 14:56:33 garrison 3 2
+c Add keywords, make new release to send to Arizona
+e
+s 00002/00001/00012
+d D 1.2 83/06/11 16:36:32 garrison 2 1
+c Fixed bug in bib.stda line defining sort order.
+c Changed macros so that editors are handled more sanely, and in more places.
+c Changed macros to correspond to changes in format specifications (for
+c authors and editors) made in bib.
+e
+s 00013/00000/00000
+d D 1.1 83/06/06 11:50:10 garrison 1 0
+c date and time created 83/06/06 11:50:10 by garrison
+e
+u
+U
+t
+T
+I 1
+#
+I 3
+#	"%W%	%G%";
+#
+E 3
+#  Hanson Normal Form
+#
+SAD-2
+CA3lD-2
+D 2
+A
+E 2
+I 2
+AA
+EA
+E 2
+I BMACLIB/bibinc.shortnames
+.so \*(l]/bmac.std
+.de s[   \" start reference
+.nh
+.IP [\\*([F] 2m
+.br
+..
+E 1

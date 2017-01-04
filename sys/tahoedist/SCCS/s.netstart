@@ -1,0 +1,90 @@
+h30297
+s 00004/00002/00019
+d D 5.4 99/01/14 01:27:03 msokolov 4 3
+c actually set the machine hostname rather than just the variable!
+e
+s 00005/00000/00016
+d D 5.3 88/10/24 12:48:03 bostic 3 2
+c add line for en0; comment that it has to be downloaded before ifconfig
+e
+s 00001/00018/00015
+d D 5.2 88/07/16 14:29:53 karels 2 1
+c symbolic hostid/name, can't see the example through the copyright
+e
+s 00033/00000/00000
+d D 5.1 88/07/16 14:13:22 bostic 1 0
+c date and time created 88/07/16 14:13:22 by bostic
+e
+u
+U
+t
+T
+I 1
+#!/bin/sh -
+D 2
+#
+# Copyright (c) 1988 Regents of the University of California.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+#
+E 2
+I 2
+D 4
+
+E 4
+I 4
+#
+E 4
+E 2
+#	%W% (Berkeley) %G%
+I 4
+
+E 4
+D 2
+#
+E 2
+routedflags=-q
+rwhod=NO
+
+# myname is my symbolic name
+D 2
+# myhostid is my internet address in #.#.#.# format
+E 2
+# my-netmask is specified in /etc/networks
+#
+hostname=myname.my.domain
+I 4
+hostname $hostname
+E 4
+I 3
+
+E 3
+ifconfig imp0 inet $hostname
+ifconfig ace0 inet $hostname netmask my-netmask
+D 4
+ifconfig lo0  inet localhost
+E 4
+I 3
+
+# for en enthernet interface, load microcode before ifconfig
+# /etc/enpload /dev/enp0ram /etc/enpcode	> /dev/console 2>&1
+ifconfig en0 inet $hostname netmask my-netmask
+E 3
+
+I 4
+ifconfig lo0  inet localhost
+E 4
+route add $hostname localhost 0
+hostid $hostname
+E 1

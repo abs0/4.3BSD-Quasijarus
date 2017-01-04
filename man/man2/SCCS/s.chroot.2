@@ -1,0 +1,120 @@
+h05427
+s 00003/00000/00061
+d D 6.3 85/08/26 23:32:31 mckusick 4 3
+c update error messages (mostly from sun!guy)
+e
+s 00009/00010/00052
+d D 6.2 85/05/22 18:31:44 mckusick 3 2
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00061
+d D 6.1 85/05/15 11:53:05 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00062/00000/00000
+d D 5.1 85/05/15 11:52:59 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHROOT 2 "2 July 1983"
+E 2
+I 2
+.TH CHROOT 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+chroot \- change root directory
+.SH SYNOPSIS
+.nf
+.ft B
+chroot(dirname)
+char *dirname;
+.ft R
+.fi
+.SH DESCRIPTION
+.I Dirname
+is the address of the pathname of a directory, terminated by a null byte.
+.I Chroot
+causes this directory
+to become the root directory,
+the starting point for path names beginning with ``/''.
+.PP
+In order for a directory to become the root directory
+a process must have execute (search) access to the directory.
+.PP
+This call is restricted to the super-user.
+.SH "RETURN VALUE
+Upon successful completion, a value of 0 is returned.  Otherwise,
+a value of \-1 is returned and \fIerrno\fP is set to indicate an error.
+.SH ERRORS
+.I Chroot
+will fail and the root directory will be unchanged if
+one or more of the following are true:
+.TP 15
+[ENOTDIR]
+A component of the path name is not a directory.
+.TP 15
+D 3
+[ENOENT]
+The pathname was too long.
+E 3
+I 3
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+E 3
+.TP 15
+D 3
+[EPERM]
+The argument contains a byte with the high-order bit set.
+E 3
+I 3
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+E 3
+.TP 15
+[ENOENT]
+The named directory does not exist.
+.TP 15
+[EACCES]
+D 3
+Search permission is denied for any component of
+the path name.
+E 3
+I 3
+Search permission is denied for any component of the path name.
+E 3
+.TP 15
+I 3
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+E 3
+[EFAULT]
+.I Path
+points outside the process's allocated address space.
+I 4
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 4
+D 3
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating
+the pathname.
+E 3
+.SH "SEE ALSO"
+chdir(2)
+E 1

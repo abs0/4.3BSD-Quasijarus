@@ -1,0 +1,113 @@
+h47592
+s 00002/00002/00065
+d D 6.1 85/05/15 15:01:14 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00005/00060
+d D 5.1 85/05/15 15:01:06 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00065/00000/00000
+d D 4.1 85/05/15 15:00:59 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETS 3S 
+E 2
+I 2
+D 3
+.TH GETS 3S  "19 January 1983"
+E 3
+I 3
+.TH GETS 3S  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+gets, fgets \- get a string from a stream
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.B char *gets(s)
+.br
+.B char *s;
+.PP
+.B char *fgets(s, n, stream)
+.br
+.B char *s;
+.br
+.SM
+.B FILE
+.B *stream;
+.SH DESCRIPTION
+.I Gets
+reads a string into
+.I s
+from the standard input stream
+D 2
+.B stdin.
+E 2
+I 2
+.BR stdin .
+E 2
+The string is terminated by a newline
+character, which is replaced in
+.I s
+by a null character.
+.I Gets
+returns its argument.
+.PP
+.I Fgets
+reads 
+.IR n \-1
+D 3
+characters, or up to a newline
+E 3
+I 3
+characters, or up through a newline
+E 3
+character, whichever comes first,
+from the
+.I stream
+into the string
+.IR s .
+The last character read into
+.I s
+is followed by a null character.
+.I Fgets
+returns its first argument.
+.SH "SEE ALSO"
+D 2
+puts(3),
+getc(3), scanf(3), fread(3),
+ferror(3)
+E 2
+I 2
+puts(3S),
+getc(3S),
+scanf(3S),
+fread(3S),
+ferror(3S)
+E 2
+.SH DIAGNOSTICS
+.I Gets
+and
+.I fgets
+return the constant pointer 
+.SM
+.B NULL
+upon end of file or error.
+.SH BUGS
+.I Gets
+deletes a newline,
+.I fgets
+keeps it,
+all in the name of backward compatibility.
+E 1

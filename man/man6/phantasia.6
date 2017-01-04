@@ -1,3 +1,4 @@
+.ds f. phantasia.6tbl
 .de sh
 .br
 .ne 5
@@ -301,17 +302,211 @@ The possible ranges for starting statistics are summarized in
 the following table.
 .PP
 .TS
-l c c c c c c
-l c c c c c c.
-Type	Strength	Quick	Mana	Energy	Brains	Magic
-_
-Mag. User	10-15	30-35	50-100	30-45	60-85	5-9
-Fighter	40-55	30-35	30-50	45-70	25-45	3-6
-Elf	35-45	32-38	45-90	30-50	40-65	4-7
-Dwarf	50-70	25-30	25-45	60-100	20-40	2-5
-Halfling	20-25	34	25-45	55-90	40-75	1-4
-Experimento	25	27	100	35	25	2
+.if \n+(b.=1 .nr d. \n(.c-\n(c.-1
+.de 35
+.ps \n(.s
+.vs \n(.vu
+.in \n(.iu
+.if \n(.u .fi
+.if \n(.j .ad
+.if \n(.j=0 .na
+..
+.nf
+.nr #~ 0
+.if n .nr #~ 0.6n
+.ds #d .d
+.if \(ts\n(.z\(ts\(ts .ds #d nl
+.fc
+.nr 33 \n(.s
+.rm 80 81 82 83 84 85 86
+.nr 80 0
+.nr 38 \wType
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wMag. User
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wFighter
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wElf
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wDwarf
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wHalfling
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wExperimento
+.if \n(80<\n(38 .nr 80 \n(38
+.80
+.rm 80
+.nr 81 0
+.nr 38 \wStrength
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w10-15
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w40-55
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w35-45
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w50-70
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w20-25
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w25
+.if \n(81<\n(38 .nr 81 \n(38
+.81
+.rm 81
+.nr 82 0
+.nr 38 \wQuick
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \w30-35
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \w30-35
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \w32-38
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \w25-30
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \w34
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \w27
+.if \n(82<\n(38 .nr 82 \n(38
+.82
+.rm 82
+.nr 83 0
+.nr 38 \wMana
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \w50-100
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \w30-50
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \w45-90
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \w25-45
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \w25-45
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \w100
+.if \n(83<\n(38 .nr 83 \n(38
+.83
+.rm 83
+.nr 84 0
+.nr 38 \wEnergy
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \w30-45
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \w45-70
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \w30-50
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \w60-100
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \w55-90
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \w35
+.if \n(84<\n(38 .nr 84 \n(38
+.84
+.rm 84
+.nr 85 0
+.nr 38 \wBrains
+.if \n(85<\n(38 .nr 85 \n(38
+.nr 38 \w60-85
+.if \n(85<\n(38 .nr 85 \n(38
+.nr 38 \w25-45
+.if \n(85<\n(38 .nr 85 \n(38
+.nr 38 \w40-65
+.if \n(85<\n(38 .nr 85 \n(38
+.nr 38 \w20-40
+.if \n(85<\n(38 .nr 85 \n(38
+.nr 38 \w40-75
+.if \n(85<\n(38 .nr 85 \n(38
+.nr 38 \w25
+.if \n(85<\n(38 .nr 85 \n(38
+.85
+.rm 85
+.nr 86 0
+.nr 38 \wMagic
+.if \n(86<\n(38 .nr 86 \n(38
+.nr 38 \w5-9
+.if \n(86<\n(38 .nr 86 \n(38
+.nr 38 \w3-6
+.if \n(86<\n(38 .nr 86 \n(38
+.nr 38 \w4-7
+.if \n(86<\n(38 .nr 86 \n(38
+.nr 38 \w2-5
+.if \n(86<\n(38 .nr 86 \n(38
+.nr 38 \w1-4
+.if \n(86<\n(38 .nr 86 \n(38
+.nr 38 \w2
+.if \n(86<\n(38 .nr 86 \n(38
+.86
+.rm 86
+.nr 38 1n
+.nr 79 0
+.nr 40 \n(79+(0*\n(38)
+.nr 80 +\n(40
+.nr 41 \n(80+(3*\n(38)
+.nr 81 +\n(41
+.nr 42 \n(81+(3*\n(38)
+.nr 82 +\n(42
+.nr 43 \n(82+(3*\n(38)
+.nr 83 +\n(43
+.nr 44 \n(83+(3*\n(38)
+.nr 84 +\n(44
+.nr 45 \n(84+(3*\n(38)
+.nr 85 +\n(45
+.nr 46 \n(85+(3*\n(38)
+.nr 86 +\n(46
+.nr TW \n(86
+.if t .if \n(TW>\n(.li .tm Table at line 314 file phantasia.6tbl is too wide - \n(TW units
+.fc  
+.nr #T 0-1
+.nr #a 0-1
+.eo
+.de T#
+.ds #d .d
+.if \(ts\n(.z\(ts\(ts .ds #d nl
+.mk ##
+.nr ## -1v
+.ls 1
+.ls
+..
+.ec
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u \n(86u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Type\h'|\n(41u'Strength\h'|\n(42u'Quick\h'|\n(43u'Mana\h'|\n(44u'Energy\h'|\n(45u'Brains\h'|\n(46u'Magic
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u \n(86u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Mag. User\h'|\n(41u'10-15\h'|\n(42u'30-35\h'|\n(43u'50-100\h'|\n(44u'30-45\h'|\n(45u'60-85\h'|\n(46u'5-9
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u \n(86u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Fighter\h'|\n(41u'40-55\h'|\n(42u'30-35\h'|\n(43u'30-50\h'|\n(44u'45-70\h'|\n(45u'25-45\h'|\n(46u'3-6
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u \n(86u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Elf\h'|\n(41u'35-45\h'|\n(42u'32-38\h'|\n(43u'45-90\h'|\n(44u'30-50\h'|\n(45u'40-65\h'|\n(46u'4-7
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u \n(86u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Dwarf\h'|\n(41u'50-70\h'|\n(42u'25-30\h'|\n(43u'25-45\h'|\n(44u'60-100\h'|\n(45u'20-40\h'|\n(46u'2-5
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u \n(86u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Halfling\h'|\n(41u'20-25\h'|\n(42u'34\h'|\n(43u'25-45\h'|\n(44u'55-90\h'|\n(45u'40-75\h'|\n(46u'1-4
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u \n(86u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Experimento\h'|\n(41u'25\h'|\n(42u'27\h'|\n(43u'100\h'|\n(44u'35\h'|\n(45u'25\h'|\n(46u'2
+.fc
+.nr T. 1
+.T# 1
+.35
 .TE
+.if \n-(b.=0 .nr c. \n(.c-\n(d.-11
 .PP
 Not only are the starting characteristics different for the different
 character types, the characteristics progress at different rates for the
@@ -323,16 +518,233 @@ The progression as characters increase in
 is summarized in the following table.
 .PP
 .TS
-l c c c c c
-l n n n n n.
-Type	Strength	Mana	Energy	Brains	Magic
-_
-Mag. User	2.0	75	20	6	2.75
-Fighter	3.0	40	30	3.0	1.5
-Elf	2.5	65	25	4.0	2.0
-Dwarf	5	30	35	2.5	1
-Halfling	2.0	30	30	4.5	1
+.if \n+(b.=1 .nr d. \n(.c-\n(c.-1
+.de 35
+.ps \n(.s
+.vs \n(.vu
+.in \n(.iu
+.if \n(.u .fi
+.if \n(.j .ad
+.if \n(.j=0 .na
+..
+.nf
+.nr #~ 0
+.if n .nr #~ 0.6n
+.ds #d .d
+.if \(ts\n(.z\(ts\(ts .ds #d nl
+.fc
+.nr 33 \n(.s
+.rm 80 81 82 83 84 85
+.nr 80 0
+.nr 38 \wType
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wMag. User
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wFighter
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wElf
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wDwarf
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wHalfling
+.if \n(80<\n(38 .nr 80 \n(38
+.80
+.rm 80
+.nr 81 0
+.nr 38 \wStrength
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 31 0
+.nr 32 0
+.nr 38 \w2
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.0
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w3
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.0
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w2
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.5
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w5
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w2
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.0
+.if \n(32<\n(38 .nr 32 \n(38
+.81
+.rm 81
+.nr 61 \n(31
+.nr 38 \n(61+\n(32
+.if \n(38>\n(81 .nr 81 \n(38
+.if \n(38<\n(81 .nr 61 +(\n(81-\n(38)/2
+.nr 82 0
+.nr 38 \wMana
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 31 0
+.nr 32 0
+.nr 38 \w75
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w40
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w65
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w30
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w30
+.if \n(31<\n(38 .nr 31 \n(38
+.82
+.rm 82
+.nr 62 \n(31
+.nr 38 \n(62+\n(32
+.if \n(38>\n(82 .nr 82 \n(38
+.if \n(38<\n(82 .nr 62 +(\n(82-\n(38)/2
+.nr 83 0
+.nr 38 \wEnergy
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 31 0
+.nr 32 0
+.nr 38 \w20
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w30
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w25
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w35
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w30
+.if \n(31<\n(38 .nr 31 \n(38
+.83
+.rm 83
+.nr 63 \n(31
+.nr 38 \n(63+\n(32
+.if \n(38>\n(83 .nr 83 \n(38
+.if \n(38<\n(83 .nr 63 +(\n(83-\n(38)/2
+.nr 84 0
+.nr 38 \wBrains
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 31 0
+.nr 32 0
+.nr 38 \w6
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w3
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.0
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w4
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.0
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w2
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.5
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w4
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.5
+.if \n(32<\n(38 .nr 32 \n(38
+.84
+.rm 84
+.nr 64 \n(31
+.nr 38 \n(64+\n(32
+.if \n(38>\n(84 .nr 84 \n(38
+.if \n(38<\n(84 .nr 64 +(\n(84-\n(38)/2
+.nr 85 0
+.nr 38 \wMagic
+.if \n(85<\n(38 .nr 85 \n(38
+.nr 31 0
+.nr 32 0
+.nr 38 \w2
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.75
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w1
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.5
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w2
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w.0
+.if \n(32<\n(38 .nr 32 \n(38
+.nr 38 \w1
+.if \n(31<\n(38 .nr 31 \n(38
+.nr 38 \w1
+.if \n(31<\n(38 .nr 31 \n(38
+.85
+.rm 85
+.nr 65 \n(31
+.nr 38 \n(65+\n(32
+.if \n(38>\n(85 .nr 85 \n(38
+.if \n(38<\n(85 .nr 65 +(\n(85-\n(38)/2
+.nr 38 1n
+.nr 79 0
+.nr 40 \n(79+(0*\n(38)
+.nr 80 +\n(40
+.nr 41 \n(80+(3*\n(38)
+.nr 81 +\n(41
+.nr 61 +\n(41
+.nr 42 \n(81+(3*\n(38)
+.nr 82 +\n(42
+.nr 62 +\n(42
+.nr 43 \n(82+(3*\n(38)
+.nr 83 +\n(43
+.nr 63 +\n(43
+.nr 44 \n(83+(3*\n(38)
+.nr 84 +\n(44
+.nr 64 +\n(44
+.nr 45 \n(84+(3*\n(38)
+.nr 85 +\n(45
+.nr 65 +\n(45
+.nr TW \n(85
+.if t .if \n(TW>\n(.li .tm Table at line 335 file phantasia.6tbl is too wide - \n(TW units
+.fc  
+.nr #T 0-1
+.nr #a 0-1
+.eo
+.de T#
+.ds #d .d
+.if \(ts\n(.z\(ts\(ts .ds #d nl
+.mk ##
+.nr ## -1v
+.ls 1
+.ls
+..
+.ec
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u \n(85u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Type\h'|\n(41u'Strength\h'|\n(42u'Mana\h'|\n(43u'Energy\h'|\n(44u'Brains\h'|\n(45u'Magic
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(61u \n(81u \n(62u \n(63u \n(64u \n(84u \n(65u \n(85u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Mag. User\h'|\n(41u'2.0\h'|\n(42u'75\h'|\n(43u'20\h'|\n(44u'6\h'|\n(45u'2.75
+.ta \n(80u \n(61u \n(81u \n(62u \n(63u \n(64u \n(84u \n(65u \n(85u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Fighter\h'|\n(41u'3.0\h'|\n(42u'40\h'|\n(43u'30\h'|\n(44u'3.0\h'|\n(45u'1.5
+.ta \n(80u \n(61u \n(81u \n(62u \n(63u \n(64u \n(84u \n(65u \n(85u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Elf\h'|\n(41u'2.5\h'|\n(42u'65\h'|\n(43u'25\h'|\n(44u'4.0\h'|\n(45u'2.0
+.ta \n(80u \n(61u \n(81u \n(62u \n(63u \n(64u \n(84u \n(65u \n(85u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Dwarf\h'|\n(41u'5\h'|\n(42u'30\h'|\n(43u'35\h'|\n(44u'2.5\h'|\n(45u'1
+.ta \n(80u \n(61u \n(81u \n(62u \n(63u \n(64u \n(84u \n(65u \n(85u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Halfling\h'|\n(41u'2.0\h'|\n(42u'30\h'|\n(43u'30\h'|\n(44u'4.5\h'|\n(45u'1
+.fc
+.nr T. 1
+.T# 1
+.35
 .TE
+.if \n-(b.=0 .nr c. \n(.c-\n(d.-10
 .PP
 The character type also determines how much gold a player may
 carry, how long until

@@ -1,0 +1,145 @@
+h43381
+s 00006/00002/00032
+d D 6.3 86/01/07 14:02:17 mckusick 5 4
+c int => uid_t
+e
+s 00001/00001/00033
+d D 6.2 85/06/28 17:06:54 sechrest 4 3
+c Improved English
+e
+s 00001/00001/00033
+d D 6.1 85/05/09 16:39:16 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00017/00030/00017
+d D 5.1 85/05/09 16:39:09 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00047/00000/00000
+d D 4.1 85/05/09 16:39:02 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETUID 2 
+E 2
+I 2
+D 3
+.TH GETUID 2 "12 February 1983"
+E 3
+I 3
+.TH GETUID 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+getuid, getgid, geteuid, getegid \- get user and group identity
+E 2
+I 2
+getuid, geteuid \- get user identity
+E 2
+.SH SYNOPSIS
+I 5
+.nf
+E 5
+D 2
+.B getuid()
+E 2
+I 2
+.ft B
+I 5
+#include <sys/types.h>
+.PP
+.ft B
+E 5
+.nf
+uid = getuid()
+D 5
+int uid;
+E 5
+I 5
+uid_t uid;
+E 5
+E 2
+.PP
+D 2
+.B geteuid()
+.PP
+.B getgid()
+.PP
+.B getegid()
+E 2
+I 2
+.ft B
+euid = geteuid()
+D 5
+int euid;
+E 5
+I 5
+uid_t euid;
+E 5
+.fi
+E 2
+.SH DESCRIPTION
+.I Getuid
+returns the real user ID of the current process,
+.I geteuid
+the effective user ID.
+D 2
+The real user ID identifies the person who is logged in,
+in contradistinction to the effective user ID, which
+determines his access permission at the moment.
+It is thus useful to programs which operate using
+the `set user ID' mode, to find out who invoked them.
+E 2
+.PP
+D 2
+.I Getgid
+returns the real group ID,
+.I getegid
+the effective group ID.
+E 2
+I 2
+The real user ID identifies the person who is logged in.
+The effective user ID
+gives the process additional permissions during
+execution of \*(lqset-user-ID\*(rq mode processes, which use
+D 4
+\fIgetuid\fP to determine the real-user-id of the process which
+E 4
+I 4
+\fIgetuid\fP to determine the real-user-id of the process that
+E 4
+invoked them.
+E 2
+.SH "SEE ALSO"
+D 2
+setuid(2)
+.SH "ASSEMBLER (PDP-11)"
+(getuid = 24.)
+.br
+.B sys getuid
+.br
+(real user ID in r0, effective user ID in r1)
+.PP
+(getgid = 47.)
+.br
+.B sys getgid
+.br
+(real group ID in r0, effective group ID in r1)
+E 2
+I 2
+getgid(2), setreuid(2)
+E 2
+E 1

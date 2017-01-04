@@ -1,0 +1,56 @@
+h56363
+s 00001/00001/00024
+d D 6.1 85/05/15 15:54:43 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00001/00023
+d D 5.1 85/05/15 15:54:12 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00024/00000/00000
+d D 4.1 85/05/15 15:53:26 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SWAB 3 
+E 2
+I 2
+D 3
+.TH SWAB 3  "19 January 1983"
+E 3
+I 3
+.TH SWAB 3  "%Q%"
+E 3
+E 2
+.AT 3
+I 2
+.nf
+E 2
+.SH NAME
+swab \- swap bytes
+.SH SYNOPSIS
+.nf
+.B swab(from, to, nbytes)
+.B char *from, *to;
+.fi
+.SH DESCRIPTION
+.I Swab
+copies
+.I nbytes
+bytes pointed to by
+.I from
+to the position pointed to by
+.I to,
+exchanging adjacent even and odd bytes.
+It is useful for carrying binary data between
+PDP11's and other machines.
+.I Nbytes
+should be even.
+E 1

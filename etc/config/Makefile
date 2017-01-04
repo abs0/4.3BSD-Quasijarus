@@ -14,15 +14,15 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.7 (Berkeley) 6/18/88
+#	@(#)Makefile	5.8 (Berkeley) 3/2/04
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
 LIBS=	-ll
 SRCS=	y.tab.c main.c lex.yy.c mkioconf.c mkmakefile.c \
-	mkglue.c mkheaders.c mkswapconf.c
+	mkglue.c mkheaders.c mkswapconf.c vaxflatten.c
 OBJS=	y.tab.o main.o lex.yy.o mkioconf.o mkmakefile.o \
-	mkglue.o mkheaders.o mkswapconf.o
+	mkglue.o mkheaders.o mkswapconf.o vaxflatten.o
 
 all: config
 
@@ -75,5 +75,8 @@ mkheaders.o: mkheaders.c /usr/include/stdio.h /usr/include/ctype.h config.h
 mkheaders.o: /usr/include/sys/types.h y.tab.h
 mkswapconf.o: mkswapconf.c config.h /usr/include/sys/types.h
 mkswapconf.o: /usr/include/stdio.h /usr/include/ctype.h
+vaxflatten.o: vaxflatten.c /usr/include/stdio.h /usr/include/vax/nexus.h
+vaxflatten.o: /usr/include/vaxuba/ubavar.h y.tab.h config.h
+vaxflatten.o: /usr/include/sys/types.h
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

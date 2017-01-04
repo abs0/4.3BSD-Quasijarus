@@ -1,0 +1,43 @@
+h56947
+s 00000/00000/00024
+d D 6.1 86/05/22 16:00:36 kjd 3 2
+c document for 4.3BSD release
+e
+s 00000/00000/00024
+d D 5.1 86/05/22 16:00:32 kjd 2 1
+c document distributed with 4.2BSD
+e
+s 00024/00000/00000
+d D 4.1 86/05/22 16:00:27 kjd 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.SH
+Acknowledgement
+.PP
+I am grateful to Ted Dolotta
+for his careful reading and valuable suggestions.
+.SH
+References
+.IP [1]
+Brian W. Kernighan,
+.ul
+A Tutorial Introduction to the UNIX Text Editor,
+Bell Laboratories internal memorandum.
+.IP [2]
+Brian W. Kernighan,
+.ul
+UNIX For Beginners,
+Bell Laboratories internal memorandum.
+.IP [3]
+Ken L. Thompson and Dennis M. Ritchie,
+.ul
+The UNIX Programmer's Manual.
+Bell Laboratories.
+E 1

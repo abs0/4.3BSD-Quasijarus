@@ -1,4 +1,4 @@
-/*	e.h	4.2	83/02/12	*/
+/*	e.h	4.3	04/09/15	*/
 
 #include <stdio.h>
 
@@ -12,12 +12,20 @@
 #define	BLD	'1'
 #endif NEQN
 
-#ifndef NEQN
+#ifdef CAT
 #define	VERT(n)	((((n)+1)/3)*3)
-#else NEQN
+#endif
+#ifdef PS
+#define	VERT(n)	(n)
+#endif
+#ifdef NEQN
 #define	VERT(n)	(20 * (n))
-#endif NEQN
+#endif
+#ifdef CAT
 #define	EFFPS(p)	((p) >= 6 ? (p) : 6)
+#else
+#define	EFFPS(p)	((p) >= 4 ? (p) : 4)
+#endif
 
 extern int	dbg;
 extern int	ct;

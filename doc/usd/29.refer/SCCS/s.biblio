@@ -1,0 +1,40 @@
+h06381
+s 00000/00000/00025
+d D 6.1 86/06/02 16:32:02 mckusick 2 1
+c 4.3BSD beta release document
+e
+s 00025/00000/00000
+d D 5.1 86/06/02 16:31:39 mckusick 1 0
+c document distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+%Z Copyright (c) 1983 Regents of the University of California.
+%Z All rights reserved.  The Berkeley software License Agreement
+%Z specifies the terms and conditions for redistribution.
+%Z
+%Z	%W% (Berkeley) %G%
+
+%A Mike E. Lesk
+%T Some Applications of Inverted Indexes on the Unix System
+%J Unix Programmer's Manual
+%I Bell Laboratories
+%C Murray Hill, NJ
+%D 1978
+%V 2a
+%X Difficult to read paper that dwells on indexing strategies,
+giving little practical advice about using \efBrefer\efP.
+
+%A Alfred V. Aho
+%A Brian W. Kernighan
+%A Peter J. Weinberger
+%T Awk \(em A Pattern Scanning and Processing Language
+%J Unix Programmer's Manual
+%I Bell Laboratories
+%C Murray Hill, NJ
+%D 1978
+%V 2a
+E 1

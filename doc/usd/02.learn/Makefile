@@ -3,23 +3,22 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 5/23/86
+#	@(#)Makefile	6.3 (Berkeley) 2012/02/19
 #
 DOCS = p0 p1 p2 p3 p4 p5 p6 p7
 #
 #
 # Change these to change the way the document is printed out
 #
-FMT = ditroff
-PKG = -msU
-PRINTER = -Pdp
+FMT = pstroff
+PKG = -ms
 FMTOPTIONS =
-TBL = dtbl
+TBL = tbl
 
-all: sources fmt
+all: sources learn.ps
 
 clean:
-	-rm $(FMTDST)
+	rm -f *.ps errs
 
 srcs: sources
 sources:  $(DOCS)
@@ -30,12 +29,8 @@ $(DOCS):
 
 docs.raw: $(DOCS)
 
-fmt: $(DOCS)
-	refer -p Refs -e $(DOCS) | $(TBL) $(PRINTER) | $(FMT) $(FMTOPTIONS) $(PKG) $(PRINTER)
+learn1.ps: $(DOCS)
+	refer -p Refs -e $(DOCS) | $(TBL) | $(FMT) $(FMTOPTIONS) $(PKG) > $@
 
-aps: $(DOCS)
-	refer -p Refs -e $(DOCS) | $(TBL) $(PRINTER) | $(FMT) $(FMTOPTIONS) $(PKG) $(PRINTER) | $(LPR)
-
-indexable: $(DOCS)
-	refer -p Refs -e $(DOCS) | $(TBL) $(PRINTER) | sed -f ../pre.sed | $(FMT) $(FMTOPTIONS) $(PKG) $(PRINTER) | sed -f ../post.sed >../learn.a
-
+learn.ps: learn1.ps
+	pstfinish -l USD:2-%l learn1.ps > $@

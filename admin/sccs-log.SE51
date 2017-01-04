@@ -1,0 +1,874 @@
+/usr/src/include/SCCS/s.mjdtime.h:
+1.3 2012/06/14 23:42:49 msokolov 3 2
+tvalue => mjdtime
+/usr/src/man/man3/SCCS/s.mjdtime.3:
+1.2 2012/06/15 05:47:35 msokolov 2 1
+arithmetic operations explained
+/usr/src/man/man3/SCCS/s.mjdtime.3:
+1.3 2012/06/15 06:06:32 msokolov 3 2
+hopefully complete
+/usr/src/lib/libc/gen/gen.vax/SCCS/s.Makefile:
+5.2 2012/06/15 06:48:48 msokolov 2 1
+mjd2unixtime and unix2mjdtime added
+/usr/src/sys/h/SCCS/s.time.h:
+7.3 2012/06/16 07:50:53 msokolov 11 10
+Y2038: time_t is now an unsigned long
+/usr/src/sys/h/SCCS/s.types.h:
+7.4 2012/06/16 07:50:54 msokolov 23 22
+Y2038: time_t is now an unsigned long
+/usr/src/man/man2/SCCS/s.gettimeofday.2:
+6.9 2012/06/18 23:09:41 msokolov 11 10
+Quasijarus system time: philosophical and Y2038 issues
+/usr/src/man/man2/SCCS/s.utimes.2:
+6.6 2012/06/19 00:02:18 msokolov 8 7
+utimeval
+/usr/src/include/SCCS/s.mjdtime.h:
+1.4 2012/06/19 02:00:09 msokolov 4 3
+added extern declarations for the conversion functions
+/usr/src/lib/libc/gen/gen.vax/SCCS/s.Makefile:
+5.3 2012/06/19 02:18:03 msokolov 3 2
+mjd2unix and unix2mjd are moving into the cal directory hierarchy
+/usr/src/man/man3/SCCS/s.mjdtime.3:
+1.4 2012/06/19 07:57:31 msokolov 4 3
+a more sensible rewrite
+/usr/src/include/SCCS/s.mjdtime.h:
+1.5 2012/06/20 01:55:07 msokolov 5 4
+struct sexatime definition added
+/usr/src/lib/libc/cal/cal.vax/SCCS/s.Makefile:
+5.2 2012/06/20 05:03:02 msokolov 2 1
+mjd2weekday.s added
+/usr/src/include/SCCS/s.time.h:
+1.3 2012/06/20 18:34:39 msokolov 3 2
+brave Quasijarus extension
+/usr/src/lib/libc/cal/SCCS/s.Makefile:
+5.2 2012/06/21 00:32:52 msokolov 2 1
+a functional ctime() reimplementation appears to be complete
+/usr/src/lib/libc/gen/SCCS/s.Makefile:
+5.27 2012/06/21 01:23:13 msokolov 66 65
+gen/ctime is going away to make room for the new Quasijarus version
+/usr/src/lib/libc/gen/SCCS/s.Makefile:
+5.28 2012/06/21 01:33:49 msokolov 67 66
+a smarter way to put ctype_ and errlst into .text
+/usr/src/lib/libc/SCCS/s.Makefile:
+4.35 2012/06/21 02:55:40 msokolov 36 35
+cal directories added
+/usr/src/include/SCCS/s.ctslcal.h:
+1.2 2012/06/22 04:33:09 msokolov 2 1
+struct calendar_date factored out into <caldate.h>
+/usr/src/include/SCCS/s.Makefile:
+5.24 2012/06/22 04:34:03 msokolov 39 38
+new additions: caldate.h and mjdtime.h
+/usr/src/usr.lib/libctsl/SCCS/s.gregtomjd.c:
+1.3 2012/06/22 05:58:28 msokolov 3 2
+first round of fixes for CTSL2
+/usr/src/usr.lib/libctsl/SCCS/s.julianlin.c:
+1.4 2012/06/22 05:58:29 msokolov 4 3
+first round of fixes for CTSL2
+/usr/src/usr.lib/libctsl/SCCS/s.mjdtogreg.c:
+1.4 2012/06/22 05:58:30 msokolov 4 3
+first round of fixes for CTSL2
+/usr/src/usr.lib/libctsl/SCCS/s.romanver.c:
+1.3 2012/06/22 05:58:31 msokolov 3 2
+first round of fixes for CTSL2
+/usr/src/usr.lib/libctsl/SCCS/s.romanver.c:
+1.4 2012/06/22 17:55:44 msokolov 4 3
+Gregorian leap year logic: even more efficient implementation
+/usr/src/usr.lib/libctsl/SCCS/s.gregtomjd.c:
+1.4 2012/06/22 22:55:57 msokolov 4 3
+proleptic Gregorian calendar support a la ISO 8601
+/usr/src/usr.lib/libctsl/SCCS/s.gregtomjd.c:
+1.5 2012/06/23 03:45:18 msokolov 5 4
+bugfix
+/usr/src/usr.lib/libctsl/SCCS/s.gregtomjd.c:
+1.6 2012/06/23 05:22:52 msokolov 6 5
+new design for CTSL2
+/usr/src/usr.lib/libctsl/SCCS/s.mjdtogreg.c:
+1.5 2012/06/23 05:23:38 msokolov 5 4
+new design for CTSL2
+/usr/src/usr.lib/libctsl/SCCS/s.Makefile:
+5.2 2012/06/23 05:24:27 msokolov 2 1
+new design for CTSL2
+/usr/src/usr.lib/libctsl/SCCS/s.romanver.c:
+1.5 2012/06/23 05:36:24 msokolov 5 4
+roman_year_bissextile() moved to romanleap.c
+/usr/src/usr.lib/libctsl/SCCS/s.romanver.c:
+1.6 2012/06/23 05:37:48 msokolov 6 5
+allow proleptic Gregorian dates
+/usr/src/usr.lib/libctsl/SCCS/s.Makefile:
+5.3 2012/06/23 05:42:21 msokolov 3 2
+romanmonths.c is no more, romanleap.c added
+/usr/src/usr.lib/libctsl/SCCS/s.romanver.c:
+1.7 2012/06/23 05:42:54 msokolov 7 6
+table of month lengths moved here from romanmonths.c
+/usr/src/include/SCCS/s.calendardefs.h:
+1.4 2012/06/23 06:03:34 msokolov 4 3
+better calendrical cycles section
+/usr/src/usr.lib/libctsl/SCCS/s.iso8601.c:
+1.2 2012/06/23 06:37:01 msokolov 2 1
+revamped for true ISO 8601
+/usr/src/include/SCCS/s.Makefile:
+5.25 2012/06/23 08:23:36 msokolov 40 39
+timeparse.h added
+/usr/src/usr.lib/libctsl/SCCS/s.iso8601.c:
+1.3 2012/06/23 08:38:03 msokolov 3 2
+revamped once again
+/usr/src/usr.lib/libctsl/SCCS/s.Makefile:
+5.4 2012/06/23 08:38:28 msokolov 4 3
+iso8601.c is back
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.17 2012/07/14 18:42:54 msokolov 17 16
+Th and ~~ added
+/usr/src/ucb/mroff/SCCS/s.fontinfo.h:
+5.2 2012/07/14 19:05:37 msokolov 2 1
+a few additional flags
+/usr/src/ucb/mroff/SCCS/s.mkfont.c:
+5.3 2012/07/14 19:49:35 msokolov 3 2
+support for the new flags
+/usr/src/ucb/mroff/SCCS/s.grokafm.c:
+5.3 2012/07/14 20:34:35 msokolov 3 2
+new TroffEncoding/CyrTroffEncoding support
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.11 2012/07/14 23:58:01 msokolov 11 10
+xinfo metachar range moved
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.19 2012/07/15 03:18:27 msokolov 19 18
+troff: named char handling converted to LUT, Cyrillic support added
+/usr/src/ucb/mroff/SCCS/s.n2.c:
+5.5 2012/07/15 03:18:28 msokolov 5 4
+troff: named char handling converted to LUT, Cyrillic support added
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.12 2012/07/15 03:18:29 msokolov 12 11
+troff: named char handling converted to LUT, Cyrillic support added
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.24 2012/07/15 03:18:31 msokolov 24 23
+troff: named char handling converted to LUT, Cyrillic support added
+/usr/src/ucb/mroff/SCCS/s.mkfont.c:
+5.4 2012/07/15 03:30:10 msokolov 4 3
+Cyrillic implies nolig
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.13 2012/07/15 22:45:50 msokolov 13 12
+suppress "0-width" chars not listed in mkfont input
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftB.src:
+1.2 2012/07/15 23:22:51 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftBI.src:
+1.2 2012/07/15 23:22:53 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftC.src:
+1.2 2012/07/15 23:22:54 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftCB.src:
+1.2 2012/07/15 23:22:55 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftCO.src:
+1.2 2012/07/15 23:22:56 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftCQ.src:
+1.2 2012/07/15 23:22:57 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftH.src:
+1.2 2012/07/15 23:22:58 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftHB.src:
+1.2 2012/07/15 23:22:59 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftHO.src:
+1.2 2012/07/15 23:23:00 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftHQ.src:
+1.2 2012/07/15 23:23:01 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftI.src:
+1.2 2012/07/15 23:23:03 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/stdfonts/SCCS/s.ftR.src:
+1.2 2012/07/15 23:23:04 msokolov 2 1
+encoding TroffEncoding line added
+set nolig for the Courier and Helvetica families
+/usr/src/ucb/mroff/troffemu/SCCS/s.ftB.src:
+5.2 2012/07/15 23:31:53 msokolov 2 1
+encoding TroffEncoding line added
+/usr/src/ucb/mroff/troffemu/SCCS/s.ftI.src:
+5.2 2012/07/15 23:31:54 msokolov 2 1
+encoding TroffEncoding line added
+/usr/src/ucb/mroff/troffemu/SCCS/s.ftR.src:
+5.2 2012/07/15 23:31:56 msokolov 2 1
+encoding TroffEncoding line added
+/usr/src/usr.bin/eqn/eqnchar/SCCS/s.eqnchar:
+1.3 2012/07/16 06:30:08 msokolov 3 2
+-wig constructed from \(mi & \(ap to look like old troff's \(~=
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.18 2012/07/16 07:43:35 msokolov 18 17
+\(bs can live in the compiled-in table once again
+/usr/src/ucb/mroff/troffemu/SCCS/s.ftS.src:
+2.2 2012/07/16 07:52:39 msokolov 2 1
+no need to do a namedchar instruction for bs here
+/usr/src/ucb/mroff/troffemu/SCCS/s.ftSv.src:
+2.2 2012/07/16 07:52:40 msokolov 2 1
+no need to do a namedchar instruction for bs here
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.14 2012/07/17 08:29:01 msokolov 14 13
+.fz S F N is known to do nothing, so don't bother trying
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.25 2012/07/17 08:29:03 msokolov 25 24
+.fz S F N is known to do nothing, so don't bother trying
+/usr/src/ucb/mroff/SCCS/s.ni.c:
+5.3 2012/07/18 01:29:47 msokolov 3 2
+spbits dropped from the environment, spacesz_cw_ovr added
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.26 2012/07/18 01:31:51 msokolov 26 25
+implemented automatic ".ss 0" for CWIDTH fonts, and an override capability
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.27 2012/07/18 02:07:25 msokolov 27 26
+getlg: restricted to Roman charset fonts without "nolig"
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.5 2012/07/18 03:58:02 msokolov 5 4
+file opening and closing moved to mergemain.c
+in preparation for a native implementation of pstfinish
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass2.c:
+5.5 2012/07/18 03:58:03 msokolov 5 4
+file opening and closing moved to mergemain.c
+in preparation for a native implementation of pstfinish
+/usr/src/ucb/mroff/finish+merge/SCCS/s.output.c:
+5.3 2012/07/18 03:59:29 msokolov 3 2
+trailer generation moved here from main()
+/usr/src/ucb/mroff/finish+merge/SCCS/s.Makefile:
+5.3 2012/07/18 04:21:59 msokolov 3 2
+pstfinish reimplemented natively, not as a front-end
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.6 2012/07/18 05:21:52 msokolov 6 5
+gentle wash cycle implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass2.c:
+5.6 2012/07/18 05:21:53 msokolov 6 5
+gentle wash cycle implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.finishmain.c:
+5.2 2012/07/18 05:21:55 msokolov 2 1
+gentle wash cycle implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.common.c:
+5.2 2012/07/18 05:21:56 msokolov 2 1
+gentle wash cycle implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.mergemain.c:
+5.2 2012/07/18 05:21:57 msokolov 2 1
+gentle wash cycle implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.output.c:
+5.4 2012/07/18 05:48:46 msokolov 4 3
+smart recognition of TroffEncoding and CyrTroffEncoding implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.7 2012/07/18 05:48:47 msokolov 7 6
+smart recognition of TroffEncoding and CyrTroffEncoding implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.common.c:
+5.3 2012/07/18 05:48:49 msokolov 3 2
+smart recognition of TroffEncoding and CyrTroffEncoding implemented
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.14 2012/07/18 06:09:32 msokolov 14 13
+don't need the %%LanguageLevel: 1 line
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.28 2012/07/21 00:08:18 msokolov 28 27
+-b spec parsing implemented
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.29 2012/07/21 00:18:54 msokolov 29 28
+.bd: casebd() setting bdtab[] implemented
+/usr/src/ucb/mroff/SCCS/s.n4.c:
+5.3 2012/07/21 00:22:11 msokolov 3 2
+.b register (bdtab) reinstated
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.30 2012/07/21 00:44:35 msokolov 30 29
+.bd: substitution mode implemented
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.31 2012/07/21 07:16:55 msokolov 31 30
+bd'ing implemented
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.15 2012/07/21 07:16:57 msokolov 15 14
+bd'ing implemented
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.20 2012/07/21 08:00:55 msokolov 20 19
+bdprocset.ps added
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.32 2012/07/22 00:20:44 msokolov 32 31
+bd'ing of S actually works
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.33 2012/07/22 01:01:30 msokolov 33 32
+a bare ".bd S" cancels all .bd S f x settings, like in the original
+/usr/src/ucb/mroff/finish+merge/SCCS/s.output.c:
+5.5 2012/07/22 01:42:23 msokolov 5 4
+implemented .bd procset preservation and skipping of extra setup
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.8 2012/07/22 01:42:25 msokolov 8 7
+implemented .bd procset preservation and skipping of extra setup
+/usr/src/ucb/mroff/finish+merge/SCCS/s.common.c:
+5.4 2012/07/22 01:42:26 msokolov 4 3
+implemented .bd procset preservation and skipping of extra setup
+/usr/src/ucb/mroff/finish+merge/SCCS/s.common.c:
+5.5 2012/07/22 01:53:49 msokolov 5 4
+setstrokeadjust insertion and -n option implemented
+/usr/src/ucb/mroff/finish+merge/SCCS/s.output.c:
+5.6 2012/07/22 01:53:51 msokolov 6 5
+setstrokeadjust insertion and -n option implemented
+/usr/src/ucb/mroff/SCCS/s.n2.c:
+5.6 2012/07/22 02:52:28 msokolov 6 5
+.bd S warning mechanism split out so it would work with -z
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.34 2012/07/22 02:52:29 msokolov 34 33
+.bd S warning mechanism split out so it would work with -z
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.35 2012/07/22 09:08:39 msokolov 35 34
+new resolve_char() function is like old troff's getcw()
+hoping that this reduction in the number of function calls per character
+will speed things up
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.16 2012/07/22 09:08:41 msokolov 16 15
+new resolve_char() function is like old troff's getcw()
+hoping that this reduction in the number of function calls per character
+will speed things up
+/usr/src/ucb/mroff/SCCS/s.n2.c:
+5.7 2012/07/22 09:43:23 msokolov 7 6
+bugfix in the bd_warn_check logic
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.36 2012/07/22 09:43:24 msokolov 36 35
+bugfix in the bd_warn_check logic
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.17 2012/07/22 14:27:14 msokolov 17 16
+setstrokeadjust line added
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.37 2012/07/22 14:39:12 msokolov 37 36
+-b S+/S- reinstated, default to S+ for now
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.38 2012/07/22 15:40:08 msokolov 38 37
+remap \(no, \(m., \(mu and \(di to base font (Latin-1) if no Symbol
+/usr/src/ucb/pstpipe/SCCS/s.docreq.h:
+5.2 2012/07/23 01:12:15 msokolov 2 1
+updated for the recent changes to pstroff and pstfinish
+/usr/src/ucb/pstpipe/SCCS/s.buildpipe.c:
+5.2 2012/07/23 01:12:16 msokolov 2 1
+updated for the recent changes to pstroff and pstfinish
+/usr/src/ucb/pstpipe/SCCS/s.main.c:
+5.2 2012/07/23 01:12:17 msokolov 2 1
+updated for the recent changes to pstroff and pstfinish
+/usr/src/ucb/pstpipe/SCCS/s.readheader.c:
+5.3 2012/07/23 01:12:18 msokolov 3 2
+updated for the recent changes to pstroff and pstfinish
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.12 2012/07/23 07:38:41 msokolov 12 11
+SymbolBV/Sv => Special1/S1
+/usr/src/ucb/mroff/troffemu/SCCS/s.boldvertical.m4:
+2.7 2012/07/23 07:46:52 msokolov 7 6
+use |- to def the charstrings
+/usr/src/ucb/mroff/troffemu/SCCS/s.troff~=.m4:
+2.2 2012/07/23 07:46:53 msokolov 2 1
+use |- to def the charstrings
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.9 2012/07/23 17:47:22 msokolov 9 8
+TroffEmu-SymbolBV => TroffEmu-Special1
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.15 2012/07/23 18:12:53 msokolov 15 14
+back to just one -T that does R,I,B,S,S1,ZD,SS
+/usr/src/doc/usd/27.eqnguide/SCCS/s.Makefile:
+6.5 2012/07/25 21:23:34 msokolov 5 4
+back to St for \(bs
+pstfinish label for the thumb index
+/usr/src/doc/usd/28.tbl/SCCS/s.tbl:
+6.4 2012/07/25 23:20:18 msokolov 6 5
+T in the cirle is back, circle drawn with \D
+fixed the point size oversight while at it
+/usr/src/doc/usd/28.tbl/SCCS/s.tbl:
+6.5 2012/07/26 01:39:44 msokolov 7 6
+minor formatting pretty-up for pstroff (std Adobe fonts)
+/usr/src/doc/usd/28.tbl/SCCS/s.tbl:
+6.6 2012/07/26 01:41:28 msokolov 8 7
+fix typo / spelling error introduced in 4.3BSD edit
+/usr/src/doc/usd/28.tbl/SCCS/s.tbl:
+6.7 2012/07/26 02:03:39 msokolov 9 8
+prettied-up depiction of the reserved number register names
+/usr/src/doc/usd/28.tbl/SCCS/s.Makefile:
+6.2 2012/07/26 02:07:20 msokolov 2 1
+BI font used; added pstfinish for the thumb index label
+/usr/src/ucb/mroff/5lig/SCCS/s.b.afm:
+1.3 2012/08/01 23:41:38 msokolov 3 2
+original expert codes for f[fil] were wrong
+/usr/src/ucb/mroff/troffemu/SCCS/s.troff~=.m4:
+2.3 2012/08/04 20:40:00 msokolov 3 2
+comment fix
+/usr/src/doc/dwg/pstroff/SCCS/s.ch00:
+1.2 2012/08/12 00:54:17 msokolov 2 1
+Objectives section rewritten; other minor edits
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.2 2012/08/12 03:54:01 msokolov 2 1
+section 2.4 finished
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.3 2012/08/21 07:20:00 msokolov 3 2
+.ss hacks documented
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.4 2012/08/22 05:47:17 msokolov 4 3
+ligatures section written
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.5 2012/08/22 23:12:36 msokolov 5 4
+beginning of mkfont documentation
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.6 2012/09/04 12:15:54 msokolov 6 5
+mkfont description finished
+/usr/src/ucb/mroff/SCCS/s.mkfont.c:
+5.5 2012/09/04 12:21:18 msokolov 5 4
+2 minor buglets in the code point specification parsing
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.7 2012/09/05 02:52:44 msokolov 7 6
+grokafm description started
+/usr/src/ucb/mroff/SCCS/s.mkfont.c:
+5.6 2012/09/05 03:13:11 msokolov 6 5
+isFixedWidth instruction added
+/usr/src/ucb/mroff/SCCS/s.grokafm.c:
+5.4 2012/09/05 03:42:56 msokolov 4 3
+turn IsFixedPitch true into the new isFixedWidth instruction
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.8 2012/09/05 05:30:30 msokolov 8 7
+mkfont and grokafm description apparently complete
+/usr/src/doc/dwg/pstroff/SCCS/s.ch02:
+1.9 2012/09/05 06:51:02 msokolov 9 8
+chapter finished with a description of the standard font set
+/usr/src/doc/dwg/pstroff/SCCS/s.ch03:
+1.2 2012/09/10 01:41:39 msokolov 2 1
+\(sc3.2 started
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.10 2012/09/10 04:28:51 msokolov 10 9
+ad hoc setup code for Times-{Roman,Italic,Bold} made to match
+the current "official" version in ../stdfonts/ft[RIB].src
+/usr/src/usr.etc/falcondns/SCCS/s.Makefile:
+1.39 2013/01/06 07:03:30 msokolov 39 38
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.class.c:
+1.11 2013/01/06 07:03:32 msokolov 11 10
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.defs.h:
+1.9 2013/01/06 07:03:34 msokolov 9 8
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.globals.c:
+1.32 2013/01/06 07:03:35 msokolov 32 31
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.globals.h:
+1.32 2013/01/06 07:03:36 msokolov 32 31
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.main.c:
+1.8 2013/01/06 07:03:37 msokolov 8 7
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.paths.c:
+1.4 2013/01/06 07:03:38 msokolov 4 3
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.masterconf.c:
+1.31 2013/01/06 07:03:39 msokolov 31 30
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.selectloop.c:
+1.14 2013/01/06 07:03:41 msokolov 14 13
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.util.c:
+1.3 2013/01/06 07:03:43 msokolov 3 2
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.ctlsock.c:
+1.15 2013/01/06 07:03:44 msokolov 15 14
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.udpserv.c:
+1.15 2013/01/06 07:03:45 msokolov 15 14
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.queryutil.c:
+1.11 2013/01/06 07:03:46 msokolov 11 10
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.zonemgmt.c:
+1.16 2013/01/06 07:03:47 msokolov 16 15
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.zoneload.c:
+1.15 2013/01/06 07:03:49 msokolov 15 14
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.attachrr.c:
+1.9 2013/01/06 07:03:51 msokolov 9 8
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.zoneinst.c:
+1.8 2013/01/06 07:03:52 msokolov 8 7
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.msdnsctl.c:
+1.4 2013/01/06 07:03:54 msokolov 4 3
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.queryinit.c:
+1.14 2013/01/06 07:03:55 msokolov 14 13
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.querystage.c:
+1.20 2013/01/06 07:03:57 msokolov 20 19
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.respwriter.c:
+1.9 2013/01/06 07:03:59 msokolov 9 8
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.nsanchor.c:
+1.10 2013/01/06 07:04:00 msokolov 10 9
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.acl.h:
+1.3 2013/01/06 07:04:02 msokolov 3 2
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.udpout.c:
+1.4 2013/01/06 07:04:03 msokolov 4 3
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.udpout.h:
+1.4 2013/01/06 07:04:04 msokolov 4 3
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.intquery.c:
+1.10 2013/01/06 07:04:05 msokolov 10 9
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.msgparse.c:
+1.5 2013/01/06 07:04:06 msokolov 5 4
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.askforns.c:
+1.24 2013/01/06 07:04:07 msokolov 24 23
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.tcpserv.c:
+1.6 2013/01/06 07:04:09 msokolov 6 5
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.16 2013/01/06 07:04:10 msokolov 16 15
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.querywrap.c:
+1.7 2013/01/06 07:04:12 msokolov 7 6
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.cachesweep.c:
+1.5 2013/01/06 07:04:13 msokolov 5 4
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.axfrserv.c:
+1.3 2013/01/06 07:04:14 msokolov 3 2
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.tcpqueue.h:
+1.3 2013/01/06 07:04:15 msokolov 3 2
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.nsanchorcmd.c:
+1.3 2013/01/06 07:04:16 msokolov 3 2
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.nsanchorval.c:
+1.4 2013/01/06 07:04:18 msokolov 4 3
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.tcpqueue.c:
+1.5 2013/01/06 07:04:19 msokolov 5 4
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.zonesecond.c:
+1.8 2013/01/06 07:04:20 msokolov 8 7
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.stats.c:
+1.5 2013/01/06 07:04:22 msokolov 5 4
+MSDNS => FalconDNS
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.17 2013/01/06 07:38:00 msokolov 17 16
+fsr_handle_answer: the check for CNAME pointing back to itself isn't necessary
+/usr/src/usr.etc/falcondns/SCCS/s.dname.c:
+1.9 2013/01/06 08:15:46 msokolov 9 8
+s/dname_in_bailiwick/dname_is_under/
+/usr/src/usr.etc/falcondns/SCCS/s.zoneload.c:
+1.16 2013/01/06 08:15:47 msokolov 16 15
+s/dname_in_bailiwick/dname_is_under/
+/usr/src/usr.etc/falcondns/SCCS/s.attachrr.c:
+1.10 2013/01/06 08:15:48 msokolov 10 9
+s/dname_in_bailiwick/dname_is_under/
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.18 2013/01/06 08:15:49 msokolov 18 17
+s/dname_in_bailiwick/dname_is_under/
+/usr/src/usr.etc/falcondns/SCCS/s.label.c:
+1.7 2013/01/06 08:30:35 msokolov 7 6
+preparations for librification:
+s/store_label_casepreserve/copy_label_casepreserve/
+s/store_label_can/copy_label_can/
+/usr/src/usr.etc/falcondns/SCCS/s.zonemgmt.c:
+1.17 2013/01/06 08:30:36 msokolov 17 16
+preparations for librification:
+s/store_label_casepreserve/copy_label_casepreserve/
+s/store_label_can/copy_label_can/
+/usr/src/usr.etc/falcondns/SCCS/s.respwriter.c:
+1.10 2013/01/06 08:30:38 msokolov 10 9
+preparations for librification:
+s/store_label_casepreserve/copy_label_casepreserve/
+s/store_label_can/copy_label_can/
+/usr/src/usr.etc/falcondns/SCCS/s.zoneload.c:
+1.17 2013/01/06 08:56:30 msokolov 17 16
+more sensible and consistent msgparse function naming:
+s/extract_dname_from_msg/msgparse_extract_dname/
+s/parse_incoming_rr/msgparse_rdata/
+/usr/src/usr.etc/falcondns/SCCS/s.queryinit.c:
+1.15 2013/01/06 08:56:32 msokolov 15 14
+more sensible and consistent msgparse function naming:
+s/extract_dname_from_msg/msgparse_extract_dname/
+s/parse_incoming_rr/msgparse_rdata/
+/usr/src/usr.etc/falcondns/SCCS/s.msgparse.c:
+1.6 2013/01/06 08:56:33 msokolov 6 5
+more sensible and consistent msgparse function naming:
+s/extract_dname_from_msg/msgparse_extract_dname/
+s/parse_incoming_rr/msgparse_rdata/
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.19 2013/01/06 08:56:35 msokolov 19 18
+more sensible and consistent msgparse function naming:
+s/extract_dname_from_msg/msgparse_extract_dname/
+s/parse_incoming_rr/msgparse_rdata/
+/usr/src/usr.etc/falcondns/SCCS/s.querywrap.c:
+1.8 2013/01/06 08:56:37 msokolov 8 7
+more sensible and consistent msgparse function naming:
+s/extract_dname_from_msg/msgparse_extract_dname/
+s/parse_incoming_rr/msgparse_rdata/
+/usr/src/usr.etc/falcondns/SCCS/s.nsanchorval.c:
+1.5 2013/01/06 08:56:38 msokolov 5 4
+more sensible and consistent msgparse function naming:
+s/extract_dname_from_msg/msgparse_extract_dname/
+s/parse_incoming_rr/msgparse_rdata/
+/usr/src/usr.etc/falcondns/SCCS/s.zonesecond.c:
+1.9 2013/01/06 08:56:39 msokolov 9 8
+more sensible and consistent msgparse function naming:
+s/extract_dname_from_msg/msgparse_extract_dname/
+s/parse_incoming_rr/msgparse_rdata/
+/usr/src/usr.etc/falcondns/SCCS/s.queryutil.c:
+1.12 2013/01/07 04:12:26 msokolov 12 11
+fixed a buglet in the more-compression-chunks logic
+/usr/src/usr.etc/falcondns/SCCS/s.askforns.c:
+1.25 2013/01/07 06:01:39 msokolov 25 24
+allow A subqueries on an NSTYPE_DELEGATION even if NSRR_FLAGS_NEEDGLUE is set
+/usr/src/usr.etc/falcondns/SCCS/s.selectloop.c:
+1.15 2013/01/07 20:17:02 msokolov 15 14
+tcpserv revamped for multiple simultaneous queries on one connection
+/usr/src/usr.etc/falcondns/SCCS/s.udpserv.c:
+1.16 2013/01/07 20:17:03 msokolov 16 15
+tcpserv revamped for multiple simultaneous queries on one connection
+/usr/src/usr.etc/falcondns/SCCS/s.query.h:
+1.18 2013/01/07 20:17:04 msokolov 18 17
+tcpserv revamped for multiple simultaneous queries on one connection
+/usr/src/usr.etc/falcondns/SCCS/s.tcpserv.c:
+1.7 2013/01/07 20:17:06 msokolov 7 6
+tcpserv revamped for multiple simultaneous queries on one connection
+/usr/src/usr.etc/falcondns/SCCS/s.masterconf.c:
+1.32 2013/01/07 21:04:49 msokolov 32 31
+msdns.conf => master.conf
+/usr/src/usr.etc/falcondns/SCCS/s.Makefile:
+1.40 2013/01/11 23:02:38 msokolov 40 39
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.rr.h:
+1.6 2013/01/11 23:02:40 msokolov 6 5
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.tree.h:
+1.11 2013/01/11 23:02:41 msokolov 11 10
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.treenode.c:
+1.18 2013/01/11 23:02:43 msokolov 18 17
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.zoneload.c:
+1.18 2013/01/11 23:02:44 msokolov 18 17
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.treedump.c:
+1.9 2013/01/11 23:02:46 msokolov 9 8
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.querystage.c:
+1.21 2013/01/11 23:02:48 msokolov 21 20
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.respwriter.c:
+1.11 2013/01/11 23:02:50 msokolov 11 10
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.20 2013/01/11 23:02:51 msokolov 20 19
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.cachesweep.c:
+1.6 2013/01/11 23:02:54 msokolov 6 5
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.axfrserv.c:
+1.4 2013/01/11 23:02:55 msokolov 4 3
+first round of changes for the new FSR cache design
+/usr/src/usr.etc/falcondns/SCCS/s.Makefile:
+1.41 2013/01/12 08:18:53 msokolov 41 40
+the daemon is now called dnsd, the control utility is dnsdctl
+/usr/src/usr.etc/falcondns/SCCS/s.paths.c:
+1.5 2013/01/12 08:19:25 msokolov 5 4
+comment fix
+/usr/src/usr.etc/falcondns/SCCS/s.dnsdctl.c:
+1.5 2013/01/12 08:20:52 msokolov 5 4
+this utility is now dnsdctl, controlling dnsd
+/usr/src/usr.etc/falcondns/SCCS/s.main.c:
+1.9 2013/01/12 08:27:10 msokolov 9 8
+call ourselves dnsd for syslog
+/usr/src/usr.etc/falcondns/SCCS/s.querywrap.c:
+1.9 2013/01/12 20:56:30 msokolov 9 8
+do A additional records processing for AFSDB
+/usr/src/usr.etc/falcondns/SCCS/s.intquery.c:
+1.11 2013/01/13 03:40:19 msokolov 11 10
+intquery_negative_ttl: the SOA we are parsing may come from the local
+FSR cache now - check AA to decide which TTL to go by
+/usr/src/usr.etc/falcondns/SCCS/s.globals.c:
+1.33 2013/01/13 07:02:36 msokolov 33 32
+new ttl-limit-neg setting, ttl-bump-{CNAME,NS} changed to numbers
+/usr/src/usr.etc/falcondns/SCCS/s.globals.h:
+1.33 2013/01/13 07:02:37 msokolov 33 32
+new ttl-limit-neg setting, ttl-bump-{CNAME,NS} changed to numbers
+/usr/src/usr.etc/falcondns/SCCS/s.masterconf.c:
+1.33 2013/01/13 07:02:38 msokolov 33 32
+new ttl-limit-neg setting, ttl-bump-{CNAME,NS} changed to numbers
+/usr/src/usr.etc/falcondns/SCCS/s.intquery.c:
+1.12 2013/01/13 07:02:40 msokolov 12 11
+new ttl-limit-neg setting, ttl-bump-{CNAME,NS} changed to numbers
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.21 2013/01/13 07:04:11 msokolov 21 20
+beginning of the new caching mechanism
+/usr/src/usr.etc/falcondns/SCCS/s.fsrcache.c:
+1.2 2013/01/13 07:04:13 msokolov 2 1
+beginning of the new caching mechanism
+/usr/src/usr.etc/falcondns/SCCS/s.fsrcache.c:
+1.3 2013/01/13 07:26:12 msokolov 3 2
+return specially-cached CNAMEs as answers when appropriate
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.22 2013/01/13 08:05:45 msokolov 22 21
+positive response caching implemented
+/usr/src/usr.etc/falcondns/SCCS/s.fsrcache.c:
+1.4 2013/01/13 08:05:47 msokolov 4 3
+positive response caching implemented
+/usr/src/usr.etc/falcondns/SCCS/s.Makefile:
+1.42 2013/01/13 08:25:15 msokolov 42 41
+fsrcache.c include dependencies updated
+/usr/src/usr.etc/falcondns/SCCS/s.queryfor.c:
+1.23 2013/01/13 09:11:18 msokolov 23 22
+cache the response even if it can't be returned because of TC
+/usr/src/usr.etc/falcondns/SCCS/s.querywrap.c:
+1.10 2013/01/13 09:14:10 msokolov 10 9
+clear AA when returning an FSR ERROR as SERVFAIL
+/usr/src/usr.etc/falcondns/SCCS/s.Makefile:
+1.43 2013/01/13 15:31:39 msokolov 43 42
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.class.h:
+1.5 2013/01/13 15:31:41 msokolov 5 4
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.selectloop.c:
+1.16 2013/01/13 15:31:42 msokolov 16 15
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.udpserv.c:
+1.17 2013/01/13 15:31:43 msokolov 17 16
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.query.h:
+1.19 2013/01/13 15:31:44 msokolov 19 18
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.queryinit.c:
+1.16 2013/01/13 15:31:46 msokolov 16 15
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.querystage.c:
+1.22 2013/01/13 15:31:47 msokolov 22 21
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.tcpserv.c:
+1.8 2013/01/13 15:31:48 msokolov 8 7
+duplicate query suppression implemented
+/usr/src/usr.etc/falcondns/SCCS/s.defs.h:
+1.10 2013/01/13 15:38:49 msokolov 10 9
+MAX_CNAME_CHAIN bumped up to 4
+/usr/src/usr.etc/falcondns/SCCS/s.treenode.c:
+1.19 2013/01/13 15:45:52 msokolov 19 18
+check for empty child hash tables: possible speed-up
+/usr/src/usr.etc/falcondns/SCCS/s.Makefile:
+1.44 2013/01/13 16:43:42 msokolov 44 43
+class refresh/reload split out into classreload.c
+/usr/src/usr.etc/falcondns/SCCS/s.class.c:
+1.12 2013/01/13 16:43:44 msokolov 12 11
+class refresh/reload split out into classreload.c
+/usr/src/usr.etc/falcondns/SCCS/s.treenode.c:
+1.20 2013/01/13 21:56:22 msokolov 20 19
+free_subtree: no more need to worry about deleting active NS-anchors,
+it was only needed for hard class reloads, and is now taken care of
+in the extra treewalk done by the hard class reload code in classreload.c
+/usr/src/usr.etc/falcondns/SCCS/s.globals.c:
+1.34 2013/01/13 22:03:47 msokolov 34 33
+NS-glue-answers and cache-max-rdlength tunable settings are no more
+/usr/src/usr.etc/falcondns/SCCS/s.globals.h:
+1.34 2013/01/13 22:03:49 msokolov 34 33
+NS-glue-answers and cache-max-rdlength tunable settings are no more
+/usr/src/usr.etc/falcondns/SCCS/s.masterconf.c:
+1.34 2013/01/13 22:03:50 msokolov 34 33
+NS-glue-answers and cache-max-rdlength tunable settings are no more
+/usr/src/usr.etc/falcondns/SCCS/s.class.c:
+1.13 2013/01/14 00:40:06 msokolov 13 12
+class ready-to-serve flag implemented
+/usr/src/usr.etc/falcondns/SCCS/s.class.h:
+1.6 2013/01/14 00:40:07 msokolov 6 5
+class ready-to-serve flag implemented
+/usr/src/usr.etc/falcondns/SCCS/s.zonemgmt.c:
+1.18 2013/01/14 00:40:08 msokolov 18 17
+class ready-to-serve flag implemented
+/usr/src/usr.etc/falcondns/SCCS/s.zoneload.c:
+1.19 2013/01/14 00:40:10 msokolov 19 18
+class ready-to-serve flag implemented
+/usr/src/usr.etc/falcondns/SCCS/s.nsanchor.c:
+1.11 2013/01/14 00:40:11 msokolov 11 10
+class ready-to-serve flag implemented
+/usr/src/usr.etc/falcondns/SCCS/s.zonesecond.c:
+1.10 2013/01/14 00:40:13 msokolov 10 9
+class ready-to-serve flag implemented
+/usr/src/usr.etc/falcondns/SCCS/s.classreload.c:
+1.2 2013/01/14 00:40:14 msokolov 2 1
+class ready-to-serve flag implemented
+/usr/src/usr.etc/falcondns/SCCS/s.queryinit.c:
+1.17 2013/01/14 00:46:43 msokolov 17 16
+return SERVFAIL until ready to serve
+/usr/src/usr.etc/falcondns/SCCS/s.Makefile:
+1.45 2013/01/14 00:48:14 msokolov 45 44
+queryinit.c includes class.h now
+/usr/src/usr.etc/falcondns/SCCS/s.zonesecond.c:
+1.11 2013/01/14 00:51:35 msokolov 11 10
+don't start MNAME query until the class is ready to serve
+/usr/src/usr.etc/falcondns/SCCS/s.zoneinst.c:
+1.9 2013/01/14 01:46:46 msokolov 9 8
+delete any cached answers from shadowed subtrees
+/usr/src/usr.etc/falcondns/SCCS/s.fsrcache.c:
+1.5 2013/01/14 01:57:52 msokolov 5 4
+all nodes with cached stuff on them get put on the cache sweep list
+/usr/src/usr.etc/falcondns/SCCS/s.attachns.c:
+1.2 2013/01/14 02:12:11 msokolov 2 1
+don't leave partial or mixed RRsets on malloc failure
+/usr/src/usr.etc/falcondns/SCCS/s.tcpserv.c:
+1.9 2013/01/15 04:32:46 msokolov 9 8
+brown paper bag
+/usr/src/man/man7/SCCS/s.unixtime.7:
+1.2 2013/01/19 20:00:16 msokolov 2 1
+use \(em instead of - (rendered as short hyphen) for year ranges
+/usr/src/include/SCCS/s.ctslcal.h:
+1.3 2013/01/19 21:39:19 msokolov 3 2
+changes for calend_long
+/usr/src/include/SCCS/s.mjdtime.h:
+1.6 2013/01/19 21:39:20 msokolov 6 5
+changes for calend_long
+/usr/src/include/SCCS/s.caldate.h:
+1.2 2013/01/19 21:39:22 msokolov 2 1
+changes for calend_long
+/usr/src/lib/libc/cal/SCCS/s.sexatime.c:
+5.2 2013/01/19 22:02:33 msokolov 2 1
+mjdtime.h declares sexatime() as returning void
+PDP-11 back-portability nitpick
+/usr/src/usr.lib/libctsl/SCCS/s.Makefile:
+5.5 2013/01/19 23:27:04 msokolov 5 4
+parsehms.c added
+romanleap.c now includes <caldate.h> for calend_long
+/usr/src/usr.lib/libctsl/SCCS/s.iso8601.c:
+1.4 2013/01/19 23:30:06 msokolov 4 3
+converted to use calend_long
+/usr/src/usr.lib/libctsl/SCCS/s.gregtomjd.c:
+1.7 2013/01/19 23:30:07 msokolov 7 6
+converted to use calend_long
+/usr/src/usr.lib/libctsl/SCCS/s.mjdtogreg.c:
+1.6 2013/01/19 23:30:08 msokolov 6 5
+converted to use calend_long
+/usr/src/usr.lib/libctsl/SCCS/s.romanleap.c:
+1.2 2013/01/19 23:30:10 msokolov 2 1
+converted to use calend_long
+/usr/src/usr.lib/libctsl/SCCS/s.juliantomjd.c:
+1.2 2013/01/19 23:30:11 msokolov 2 1
+converted to use calend_long
+/usr/src/usr.lib/libctsl/SCCS/s.mjdtojulian.c:
+1.2 2013/01/19 23:30:12 msokolov 2 1
+converted to use calend_long
+/usr/src/usr.lib/libctsl/SCCS/s.roman2mjd.c:
+1.2 2013/01/19 23:30:13 msokolov 2 1
+converted to use calend_long
+/usr/src/man/man3/SCCS/s.mjdtime.3:
+1.5 2013/01/20 00:23:00 msokolov 5 4
+calend_long explained
+/usr/src/man/man3/SCCS/s.sexatime.3:
+1.2 2013/01/20 19:26:41 msokolov 2 1
+mention sexatime_mult macro for portability

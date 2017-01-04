@@ -1,0 +1,47 @@
+h12918
+s 00001/00001/00026
+d D 6.1 85/04/27 14:55:02 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00027/00000/00000
+d D 5.1 85/04/27 14:54:43 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DUMPFS 8 "4 March 1983"
+E 2
+I 2
+.TH DUMPFS 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+dumpfs \- dump file system information
+.SH SYNOPSIS
+.B dumpfs
+.IR filesys | device
+.SH DESCRIPTION
+.I Dumpfs
+prints out the super block and cylinder group information
+for the file system or special device specified.
+The listing is very long and detailed.  This
+command is useful mostly for finding out certain file system
+information such as the file system block size and minimum
+free space percentage.
+.SH "SEE ALSO"
+fs(5),
+disktab(5),
+tunefs(8),
+newfs(8),
+fsck(8)
+E 1

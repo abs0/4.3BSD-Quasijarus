@@ -1,0 +1,265 @@
+h49330
+s 00009/00001/00143
+d D 6.4 88/02/27 15:13:39 mckusick 6 5
+c add -m flag to list statistics on kernel dynamic memory usage
+e
+s 00001/00003/00143
+d D 6.3 86/03/15 17:54:51 mckusick 5 4
+c vsta is gone; reference iostat
+e
+s 00001/00000/00145
+d D 6.2 85/06/07 19:08:57 mckusick 4 3
+c fill those paragraphs!
+e
+s 00024/00010/00121
+d D 6.1 85/04/29 19:43:57 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00010/00124
+d D 5.1 85/04/29 19:43:25 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00134/00000/00000
+d D 4.1 85/04/29 19:43:01 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH VMSTAT 1 4/26/81
+E 2
+I 2
+D 3
+.TH VMSTAT 1 "26 April 1981"
+E 3
+I 3
+.TH VMSTAT 1 "%Q%"
+E 3
+E 2
+.UC 4
+.de s1
+.if n .sp
+.if t .sp .1i
+..
+.de t1
+.if n .ta 5n
+.if t .ta 1i
+..
+.SH NAME
+vmstat \- report virtual memory statistics
+.SH SYNOPSIS
+.B vmstat
+[
+D 3
+.B \-fs
+E 3
+I 3
+D 6
+.B \-fsi
+E 6
+I 6
+.B \-fsim
+E 6
+E 3
+]
+I 3
+[ drives ]
+E 3
+[ interval [ count ] ]
+.SH DESCRIPTION
+.I Vmstat
+delves into the system and normally reports certain statistics kept about
+process, virtual memory, disk, trap and cpu activity.
+If given a
+.B \-f
+argument, it instead reports on the number of
+.I forks
+and
+.I vforks
+since system startup and the number of pages of virtual memory involved in each
+kind of fork.
+If given a
+.B \-s
+argument, it instead prints the contents
+of the
+.I sum
+structure, giving the total number of several kinds of paging related
+events which have occurred since boot.
+I 3
+If given a
+.B \-i
+argument, it instead reports on the number of
+.I interrupts
+taken by each device since system startup.
+I 6
+If given a
+.B \-m
+argument, it instead reports on the usage of
+kernel dynamic memory listed first by 
+.I size
+of allocation and then by
+.I type
+of usage.
+E 6
+E 3
+.PP
+If none of these options are given,
+.I vmstat
+D 2
+will report in a (usually) iterative fashion on the virtual memory
+activity in the system.
+In this case, the optional
+E 2
+I 2
+will report in the first line a summary of the virtual memory activity 
+since the system has been booted.
+If
+E 2
+.I interval
+D 2
+argument causes
+.I vmstat
+to report once each
+E 2
+I 2
+is specified, then successive lines are summaries over the last
+E 2
+.I interval
+D 2
+seconds;
+E 2
+I 2
+seconds.
+E 2
+``vmstat 5'' will print what the system is doing every five seconds;
+this is a good choice of printing interval since this is how often
+some of the statistics are sampled in the system; others vary every
+second, running the output for a while will make it apparent which
+are recomputed every second.
+If a
+.I count
+is given, the statistics are repeated
+.I count
+times.
+The format fields are:
+.PP
+Procs: information about numbers of processes in various states.
+.s1
+.t1
+.nf
+r	in run queue
+b	blocked for resources (i/o, paging, etc.)
+w	runnable or short sleeper (< 20 secs) but swapped
+.fi
+.s1
+Memory: information about the usage of virtual and real memory.
+Virtual pages are considered active if they belong to processes which
+are running or have run in the last 20 seconds.
+A ``page'' here is 1024 bytes.
+.s1
+.t1
+.nf
+avm	active virtual pages
+fre	size of the free list
+.fi
+.s1
+Page: information about page faults and paging activity.
+These are averaged each five seconds, and given in units per second.
+.s1
+.t1
+.nf
+re	page reclaims (simulating reference bits)
+I 3
+at	pages attached (found in free list)
+E 3
+pi	pages paged in
+po	pages paged out
+fr	pages freed per second
+de	anticipated short term memory shortfall
+sr	pages scanned by clock algorithm, per-second
+.fi
+.s1
+D 3
+up/hp/rk: Disk operations per second (this field is system dependent).
+E 3
+I 3
+up/hp/rk/ra: Disk operations per second (this field is system dependent).
+E 3
+Typically paging will be split across several of the available drives.
+The number under each of these is the unit number.
+.s1
+Faults: trap/interrupt rate averages per second over last 5 seconds.
+.s1
+.t1
+.nf
+in	(non clock) device interrupts per second
+sy	system calls per second
+cs	cpu context switch rate (switches/sec)
+.fi
+.s1
+Cpu: breakdown of percentage usage of CPU time
+.s1
+.nf
+us	user time for normal and low priority processes
+sy	system time
+id	cpu idle
+I 4
+.fi
+E 4
+I 3
+.PP
+If more than 4 disk drives are configured in the system,
+.I vmstat
+displays only the first 4 drives, with priority given
+to Massbus disk drives (i.e. if both Unibus and Massbus
+drives are present and the total number of drives exceeds
+4, then some number of Unibus drives will not be displayed
+in favor of the Massbus drives).  To force
+.I vmstat
+to display specific drives, their names may be supplied on
+the command line.
+E 3
+.SH FILES
+/dev/kmem, /vmunix
+.SH SEE ALSO
+I 3
+.IR systat (1),
+D 5
+.IR vsta (1)
+E 5
+I 5
+.IR iostat (1)
+E 5
+.PP
+E 3
+The sections starting with ``Interpreting system activity'' in
+D 2
+.I "Setting up 4.1bsd"
+by W. Joy.
+E 2
+I 2
+.IR "Installing and Operating 4.2bsd" .
+E 2
+D 5
+.SH AUTHORS
+William Joy and Ozalp Babaoglu
+E 5
+D 3
+.SH BUGS
+There should be a screen oriented program which combines
+.I vmstat
+and
+.IR ps (1)
+in real time
+as well as reporting on other system activity.
+E 3
+E 1

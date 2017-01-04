@@ -1,0 +1,258 @@
+h14483
+s 00003/00000/00167
+d D 6.5 87/07/21 13:41:07 bostic 6 5
+c msg_accrights should be NULL if not used
+e
+s 00001/00001/00166
+d D 6.4 87/07/21 09:55:03 karels 5 4
+c change misleading array notation to pointers on *msg
+e
+s 00002/00002/00165
+d D 6.3 86/05/23 09:58:56 kjd 4 3
+c clean up for 4.3
+e
+s 00008/00005/00159
+d D 6.2 86/05/14 11:11:46 karels 3 2
+c update, describe rights, add errnos
+c 
+e
+s 00004/00004/00160
+d D 6.1 85/05/15 11:58:17 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00164/00000/00000
+d D 5.1 85/05/15 11:58:10 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RECV 2 "7 July 1983"
+E 2
+I 2
+.TH RECV 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+recv, recvfrom, recvmsg \- receive a message from a socket
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/types.h>
+#include <sys/socket.h>
+.PP
+.ft B
+cc = recv(s, buf, len, flags)
+int cc, s;
+char *buf;
+int len, flags;
+.PP
+.ft B
+cc = recvfrom(s, buf, len, flags, from, fromlen)
+int cc, s;
+char *buf;
+int len, flags;
+struct sockaddr *from;
+int *fromlen;
+.PP
+.ft B
+cc = recvmsg(s, msg, flags)
+int cc, s;
+D 5
+struct msghdr msg[];
+E 5
+I 5
+struct msghdr *msg;
+E 5
+int flags;
+.ft R
+.SH DESCRIPTION
+.IR Recv ,
+.IR recvfrom ,
+and
+.IR recvmsg
+are used to receive messages from a socket.
+.PP
+The 
+.I recv
+D 3
+call may be used only on a 
+E 3
+I 3
+call is normally used only on a 
+E 3
+.I connected
+socket (see
+.IR connect (2)),
+while 
+.I recvfrom
+and 
+.I recvmsg
+may be used to receive data on a socket whether
+it is in a connected state or not.
+.PP
+If
+.I from
+is non-zero, the source address of the message is filled in.
+.I Fromlen
+is a value-result parameter, initialized to the size of
+the buffer associated with
+.IR from ,
+and modified on return to indicate the actual size of the
+address stored there.
+The length of the message is returned in
+.IR cc .
+If a message is too long to fit in the supplied buffer,
+excess bytes may be discarded depending on the type of socket
+D 4
+the message is received from; see
+.IR socket (2).
+E 4
+I 4
+the message is received from (see
+.IR socket (2)).
+E 4
+.PP
+If no messages are available at the socket, the
+receive call waits for a message to arrive, unless
+the socket is nonblocking (see
+.IR ioctl (2))
+in which case a
+.I cc
+of \-1 is returned with the external variable errno
+set to EWOULDBLOCK.
+.PP
+The
+.IR select (2)
+call may be used to determine when more data arrives.
+.PP
+The
+.I flags
+D 3
+argument to a send call is formed by 
+E 3
+I 3
+argument to a recv call is formed by 
+E 3
+.IR or 'ing
+one or more of the values,
+.PP
+.nf
+.RS
+D 3
+.DT
+E 3
+I 3
+.ta \w'#define\ \ 'u +\w'MSG_DONTROUTE\ \ \ 'u +\w'0x\0\0\0\ \ 'u
+E 3
+D 2
+#define	MSG_PEEK	0x1	/* peek at incoming message */
+#define	MSG_OOB	0x2	/* process out-of-band data */
+E 2
+I 2
+#define	MSG_OOB	0x1	/* process out-of-band data */
+#define	MSG_PEEK	0x2	/* peek at incoming message */
+E 2
+.RE
+.fi
+.PP
+The
+.I recvmsg
+call uses a 
+.I msghdr
+structure to minimize the number of directly supplied parameters.
+This structure has the following form, as defined in
+.IR <sys/socket.h> :
+.PP
+.nf
+.RS
+.DT
+struct msghdr {
+	caddr_t	msg_name;		/* optional address */
+	int	msg_namelen;		/* size of address */
+D 2
+	struct	iov *msg_iov;		/* scatter/gather array */
+E 2
+I 2
+	struct	iovec *msg_iov;		/* scatter/gather array */
+E 2
+	int	msg_iovlen;		/* # elements in msg_iov */
+	caddr_t	msg_accrights;		/* access rights sent/received */
+	int	msg_accrightslen;
+};
+.RE
+.fi
+.PP
+Here
+.I msg_name
+and
+.I msg_namelen
+specify the destination address if the socket is unconnected;
+.I msg_name
+may be given as a null pointer if no names are desired or required.
+The 
+.I msg_iov
+and
+.I msg_iovlen
+describe the scatter gather locations, as described in
+.IR read (2).
+D 3
+Access rights to be sent along with the message are specified
+E 3
+I 3
+A buffer to receive any access rights sent along with the message is specified
+E 3
+in 
+.IR msg_accrights ,
+which has length
+.IR msg_accrightslen .
+I 3
+Access rights are currently limited to file descriptors,
+which each occupy the size of an
+.BR int .
+I 6
+If access rights are not being transferred, the 
+.I msg_accrights
+field should be set to NULL.
+E 6
+E 3
+.SH "RETURN VALUE
+These calls return the number of bytes received, or \-1
+if an error occurred.
+.SH ERRORS
+The calls fail if:
+.TP 20
+[EBADF]
+The argument \fIs\fP is an invalid descriptor.
+.TP 20
+[ENOTSOCK]
+The argument \fIs\fP is not a socket.
+.TP 20
+[EWOULDBLOCK]
+The socket is marked non-blocking and the receive operation
+would block.
+.TP 20
+[EINTR]
+The receive was interrupted by delivery of a signal before
+any data was available for the receive.
+.TP 20
+[EFAULT]
+The data was specified to be received into a non-existent
+or protected part of the process address space.
+.SH SEE ALSO
+D 3
+read(2), send(2), socket(2)
+E 3
+I 3
+fcntl(2), read(2), send(2), select(2), getsockopt(2), socket(2)
+E 3
+E 1

@@ -1,0 +1,269 @@
+h40960
+s 00001/00001/00151
+d D 2.6 87/04/27 18:12:08 garrison 9 6
+c Comment for r2.5 was wrong.
+c 2.5 defined e] to be \fIet al.\fP.
+c 2.6 added quotes around first argument to .IP
+e
+s 00001/00001/00151
+d R 2.6 87/04/27 18:10:30 garrison 8 6
+c Comment for last revision was wrong.
+c 2.5 defined e] to be \fIet al.\fP
+e
+s 00001/00001/00151
+d R 2.6 87/04/27 18:07:28 garrison 7 6
+c Comment for last revision (2.5) was wrong.
+e
+s 00001/00000/00151
+d D 2.5 87/04/27 18:03:20 garrison 6 5
+c surrounded first argument to .IP with quotes
+e
+s 00002/00001/00149
+d D 2.4 84/10/15 12:19:46 garrison 5 4
+c Added space after comma between volume and issue number
+c of a journal.  Added space after volume number if no issue number given
+e
+s 00004/00004/00146
+d D 2.3 84/01/06 16:49:58 rrh 4 3
+c put all titles in quotes
+e
+s 00038/00018/00112
+d D 2.2 83/10/07 15:02:12 garrison 3 1
+c 
+e
+s 00156/00004/00126
+d R 2.2 83/09/09 21:14:04 garrison 2 1
+c Incorporate changes from Arizona
+e
+s 00130/00000/00000
+d D 2.1 83/09/09 18:15:07 garrison 1 0
+c date and time created 83/09/09 18:15:07 by garrison
+e
+u
+U
+t
+T
+I 1
+.\"	%W%	%G%;
+.\" standard format troff commands
+.\" citation formatting strings
+.ds [[ [
+.ds ]] ]
+.ds ], ,\|
+.ds ]- -
+.ds [. " \&
+.ds .] .
+.ds [, " \&
+.ds ,] ,
+I 3
+.ds [? " \&
+.ds ?] ?
+.ds [: " \&
+.ds :] :
+.ds [; " \&
+.ds ;] ;
+.ds [! " \&
+.ds !] !
+.ds [" " \&
+.ds "] \&"
+.ds [' " \&
+.ds '] '
+E 3
+.ds [< " \&
+.ds >]
+.\" reference formmating strings
+D 3
+.ds c] , \&
+.ds n] "" and \&
+.ds m] "" and \&
+E 3
+.ds a] " \&
+I 3
+.ds b] , \&
+.ds c] , \&
+.ds n] "\& and \&
+.ds m] "\& and \&
+I 6
+.ds e] \\fIet al.\\fP
+E 6
+.ds p] .
+E 3
+.\" reference formmating macros
+.de s[   \" start reference
+.nh
+D 9
+.IP [\\*([F] 5m
+E 9
+I 9
+.IP "[\\*([F]" 5m
+E 9
+..
+.de e[   \" end reference
+.[-
+..
+.de []   \" start to display collected references
+.LP
+..
+.de ][   \" choose format
+.ie !"\\*([J"" \{\
+.    ie !"\\*([V"" .nr t[ 1    \" journal
+.    el            .nr t[ 5    \" conference paper
+.\}
+.el .ie !"\\*([B"" .nr t[ 3    \" article in book
+.el .ie !"\\*([R"" .nr t[ 4    \" technical report
+.el .ie !"\\*([I"" .nr t[ 2    \" book
+.el                .nr t[ 0    \" other
+.\\n(t[[
+..
+.de 0[   \" other
+.s[
+D 3
+.if !"\\*([A"" \\*([A,
+.if !"\\*([T"" \\*([T,
+.if !"\\*([O"" \\*([O\c
+.if !"\\*([D"" , \\*([D\c
+E 3
+I 3
+.if !"\\*([A"" \\*([A\\c
+.if !"\\*([T"" , \\*([T\\c
+.if !"\\*([V"" , Vol. \\*([V\\c
+.if !"\\*([O"" , \\*([O\\c
+.if !"\\*([D"" , \\*([D\\c
+E 3
+\&.
+.e[
+..
+.de 1[ \" journal article
+.s[
+.if !"\\*([A"" \\*([A,
+D 3
+.if !"\\*([T"" \\*([T,
+\\fI\\*([J \\*([V\\fP,
+.if !"\\*([N"" \\*([N
+.if !"\\*([D"" (\\*([D),
+.if !"\\*([P"" \\*([P\c
+E 3
+I 3
+D 4
+.if !"\\*([T""  \\*([T,
+E 4
+I 4
+.if !"\\*([T""  \\*(lq\\*([T\\*(rq,
+E 4
+\\fI\\*([J \\*([V\\fP\c
+D 5
+.if !"\\*([N"" ,\\*([N
+E 5
+I 5
+.ie !"\\*([N"" , \\*([N
+.el  
+E 5
+.if !"\\*([D"" (\\*([D)\c
+.if !"\\*([P"" , \\*([P\c
+E 3
+.if !"\\*([I"" , \\*([I\c
+\\&.
+.if !"\\*([O"" \\*([O.
+.e[
+..
+.de 2[ \" book
+.s[
+.ie !"\\*([A"" \\*([A,
+.el .if !"\\*([E"" \{\
+.       ie \\n([E-1 \\*([E, eds.,
+.       el \\*([E, ed.,\}
+.if !"\\*([T"" \\fI\\*([T\\fP,
+.rm a[
+.if !"\\*([I"" .ds a[ \\*([I
+.if !"\\*([C"" \{\
+.       if !"\\*(a["" .as a[ , \\&
+.       as a[ \\*([C\}
+.if !"\\*([D"" \{\
+.       if !"\\*(a["" .as a[ , \\&
+.       as a[ \\*([D\}
+\\*(a[.
+.if !"\\*([G"" Gov. ordering no. \\*([G.
+.if !"\\*([O"" \\*([O.
+.e[
+..
+.de 3[ \" article in book
+.s[
+.if !"\\*([A"" \\*([A,
+D 4
+.if !"\\*([T"" \\*([T,
+E 4
+I 4
+.if !"\\*([T"" \\*(lq\\*([T\\*(rq,
+E 4
+D 3
+in \\fI\\*([B\\fP,
+.if !"\\*([V"" vol. \\*([V,
+.if !"\\*([E"" \\*([E (ed.),
+.if !"\\*([I"" \\*([I,
+.if !"\\*([C"" \\*([C,
+.if !"\\*([D"" \\*([D\c
+E 3
+I 3
+in \\fI\\*([B\\fP\c
+.if !"\\*([V"" , vol. \\*([V
+.if !~\\*([E~~ \{\
+.       ie , \\n([E-1  \\*([E (editors)\c
+.       el , \\*([E (editor)\c\}
+.if !"\\*([I"" , \\*([I\c
+.if !"\\*([C"" , \\*([C\c
+.if !"\\*([D"" , \\*([D\c
+E 3
+.if !"\\*([P"" , \\*([P\c
+\\&.
+.if !"\\*([O"" \\*([O.
+.e[
+..
+.de 4[ \" report
+.s[
+.if !"\\*([A"" \\*([A,
+I 3
+.if !~\\*([E~~ \{\
+.       ie \\n([E-1 \\*([E, editors.
+.       el \\*([E, editor.\}
+E 3
+D 4
+\\*([T,
+E 4
+I 4
+\&\\*(lq\\*([T\\*(rq,
+E 4
+\\*([R\c
+.if !"\\*([G"" \& (\\*([G)\c
+.if !"\\*([I"" , \\*([I\c
+.if !"\\*([C"" , \\*([C\c
+.if !"\\*([D"" , \\*([D\c
+\\&.
+.if !"\\*([O"" \\*([O.
+.e[
+..
+.de 5[ \" conference paper
+.s[
+.if !"\\*([A"" \\*([A,
+D 4
+.if !"\\*([T"" \\*([T,
+E 4
+I 4
+.if !"\\*([T"" \\*(lq\\*([T\\*(rq,
+E 4
+\\fI\\*([J\\fP,
+.if !"\\*([C"" \\*([C,
+.if !"\\*([D"" \\*([D\c
+.if !"\\*([P"" , \\*([P\c
+\\&.
+.if !"\\*([O"" \\*([O.
+.e[
+..
+.de [-   \" clean up after yourself
+.rm [A [B [C [D
+.rm [E [F [G
+.rm [I [J [K
+.rm [N [O [P
+.rm [R [T
+.rm [V [W
+..
+E 1

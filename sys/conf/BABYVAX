@@ -1,0 +1,15 @@
+#
+# MicroVAX/VAXstation 2000 and 3100
+#
+machine		vax
+cpu		"VAX410"
+cpu		"VAX3100"
+ident		BABYVAX
+timezone	0
+maxusers	8
+
+config		vmunix	root on up0 swap on up0
+
+adapter		bva0	at nexus ?
+
+device		ss0	at bva0 flags 0xff		vector ssrint ssxint

@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)kern_clock.c	7.2 (Berkeley) 11/3/86
+ *	@(#)kern_clock.c	7.3 (Berkeley) 2011/10/09
  */
 
 #include "../machine/reg.h"
@@ -64,6 +64,20 @@
 }
 
 /*
+ * Choose the slew factor based on how much adjustment is left to do.
+ */
+#define	CHOOSE_SLEW(left) { \
+	if ((left) < 100000) \
+		tickdelta = tickadj; \
+	else if ((left) < 200000) \
+		tickdelta = tickadj * 2; \
+	else if ((left) < 1000000) \
+		tickdelta = tickadj * 5; \
+	else \
+		tickdelta = tickadj * 10; \
+}
+
+/*
  * The hz hardware interval timer.
  * We update the events relating to real time.
  * If this timer is also being used to gather statistics,
@@ -78,7 +92,7 @@ hardclock(pc, ps)
 	register struct proc *p;
 	register int s;
 	int needsoft = 0;
-	extern int tickdelta;
+	extern int tickadj;
 	extern long timedelta;
 
 	/*
@@ -203,16 +217,17 @@ hardclock(pc, ps)
 	if (timedelta == 0)
 		BUMPTIME(&time, tick)
 	else {
-		register delta;
+		register tickdelta;
 
 		if (timedelta < 0) {
-			delta = tick - tickdelta;
+			CHOOSE_SLEW(-timedelta);
+			BUMPTIME(&time, tick - tickdelta);
 			timedelta += tickdelta;
 		} else {
-			delta = tick + tickdelta;
+			CHOOSE_SLEW(timedelta);
+			BUMPTIME(&time, tick + tickdelta);
 			timedelta -= tickdelta;
 		}
-		BUMPTIME(&time, delta);
 	}
 	if (needsoft) {
 		if (BASEPRI(ps)) {

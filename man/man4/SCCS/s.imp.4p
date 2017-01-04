@@ -1,0 +1,115 @@
+h21749
+s 00017/00003/00057
+d D 6.2 86/05/16 15:54:33 karels 3 2
+c corrections, different protos
+e
+s 00001/00001/00059
+d D 6.1 85/05/15 17:44:02 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00060/00000/00000
+d D 5.1 85/05/15 17:43:56 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH IMP 4P "26 March 1982"
+E 2
+I 2
+.TH IMP 4P "%Q%"
+E 2
+.UC 5
+.SH NAME
+imp \- IMP raw socket interface
+.SH SYNOPSIS
+.B #include <sys/socket.h>
+.br
+.B #include <netinet/in.h>
+.br
+.B #include <netimp/if_imp.h>
+.PP
+D 3
+.B s = socket(AF_IMPLINK, SOCK_RAW, IMPLINK_IP);
+E 3
+I 3
+.B s = socket(AF_IMPLINK, SOCK_RAW, proto);
+E 3
+.SH DESCRIPTION
+The raw imp socket provides direct access to the
+.IR imp (4)
+network interface.  Users send packets through
+the interface using the 
+.IR send (2)
+calls, and receive packets with the
+.IR recv (2),
+D 3
+calls.  All outgoing packets must have space for an 1822 96-bit
+E 3
+I 3
+calls.  All outgoing packets must have an 1822 96-bit
+E 3
+leader on the front.  Likewise, packets received
+by the user will have this leader on the front.  The
+1822 leader and the legal values for the various fields
+are defined in the include file
+.RI < netimp/if_imp.h >.
+D 3
+.PP
+E 3
+The raw imp interface automatically installs the length
+and destination address in the 1822 leader of all
+outgoing packets; these need not be filled in by the user.
+I 3
+.PP
+If the protocol selected,
+.IR proto ,
+is zero,
+the socket will receive
+all IMP messages except RFNM and incompletes
+which are not input data for a kernel protocol.
+If
+.I proto
+is non-zero,
+only messages for the specified link type will be received.
+E 3
+.SH DIAGNOSTICS
+An operation on a socket may fail with one of the following
+errors:
+.TP 15
+[EISCONN]
+when trying to establish a connection on a socket which
+already has one, or when trying to send a datagram with the destination
+address specified and the socket is already connected;
+.TP 15
+[ENOTCONN]
+when trying to send a datagram, but
+no destination address is specified, and the socket hasn't been
+connected;
+.TP 15
+[ENOBUFS]
+when the system runs out of memory for
+an internal data structure;
+I 3
+.TP 15
+[ENOBUFS]
+eight messages to the destination host are outstanding,
+and another eight are already queued for output;
+E 3
+.TP 15
+[EADDRNOTAVAIL]
+when an attempt is made to create a 
+socket with a network address for which no network interface
+exists.
+.SH SEE ALSO
+intro(4N), inet(4F), imp(4)
+E 1

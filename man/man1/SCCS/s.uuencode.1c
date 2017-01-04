@@ -1,0 +1,160 @@
+h56764
+s 00010/00009/00064
+d D 6.2 86/04/24 19:28:22 mckusick 4 3
+c update from rfg
+e
+s 00001/00001/00072
+d D 6.1 85/04/29 15:07:18 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00005/00068
+d D 5.1 85/04/29 15:07:08 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00073/00000/00000
+d D 4.1 85/04/29 15:07:00 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH UUENCODE 1C 6/1/80
+E 2
+I 2
+D 3
+.TH UUENCODE 1C "1 June 1980"
+E 3
+I 3
+.TH UUENCODE 1C "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+uuencode,uudecode \- encode/decode a binary file for tranmission via mail
+E 2
+I 2
+D 4
+uuencode,uudecode \- encode/decode a binary file for transmission via mail
+E 4
+I 4
+uuencode, uudecode \- encode/decode a binary file for transmission via mail
+E 4
+E 2
+.SH SYNOPSIS
+.B uuencode
+[ source ] remotedest |
+.B mail
+sys1!sys2!..!decode
+.br
+.B uudecode
+[ file ]
+.SH DESCRIPTION
+.I Uuencode
+and
+.I uudecode
+are used to send a binary file via uucp (or other) mail.
+This combination can be used over indirect mail links
+even when
+D 2
+.I uusend(1)
+E 2
+I 2
+.IR uusend (1C)
+E 2
+is not available.
+.PP
+.I Uuencode
+takes the named source file (default standard input) and
+produces an encoded version on the standard output.
+The encoding uses only printing ASCII characters,
+and includes the mode of the file and the
+.I remotedest
+for recreation on the remote system.
+.PP
+.I Uudecode
+reads an encoded file,
+strips off any leading and trailing lines added by mailers,
+and recreates the original file with the specified mode and name.
+.PP
+The intent is that all mail to the user ``decode'' should be filtered
+D 4
+through the uudecode program.  This way the file is created automatically
+E 4
+I 4
+through the
+.I uudecode
+program.  This way the file is created automatically
+E 4
+without human intervention.
+This is possible on the uucp network by either using
+D 2
+.I delivermail
+E 2
+I 2
+.I sendmail
+E 2
+or by making
+.I rmail
+be a link to
+.I Mail
+instead of
+D 4
+.I mail.
+E 4
+I 4
+.IR mail .
+E 4
+In each case, an alias must be created in a master file to get
+D 4
+the automatic invocation of uudecode.
+E 4
+I 4
+the automatic invocation of
+.IR uudecode .
+E 4
+.PP
+If these facilities are not available, the file can be sent to a
+user on the remote machine who can uudecode it manually.
+.PP
+The encode file has an ordinary text form and can be edited
+by any text editor to change the mode or remote name.
+D 4
+.SH SEE\ ALSO
+D 2
+uuencode(5), uusend(1), uucp(1), uux(1), mail(1)
+E 2
+I 2
+uuencode(5), uusend(1C), uucp(1C), uux(1C), mail(1)
+E 2
+.SH AUTHOR
+Mark Horton
+E 4
+I 4
+.SH SEE ALSO
+atob(n), uusend(1C), uucp(1C), uux(1C), mail(1), uuencode(5)
+E 4
+.SH BUGS
+The file is expanded by 35% (3 bytes become 4 plus control information)
+causing it to take longer to transmit.
+.PP
+The user on the remote system who is invoking
+.I uudecode
+(often
+D 4
+.I uucp)
+E 4
+I 4
+.IR uucp )
+E 4
+must have write permission on the specified file.
+E 1

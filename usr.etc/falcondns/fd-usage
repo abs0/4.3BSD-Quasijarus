@@ -1,0 +1,25 @@
+0/1/2: 3 reserved file descriptors
+
+Single fd usage:
+
+1 syslog connection
+1 class file read
+1 zone file read
+1 NS-anchor file read
+1 ctlsocket
+1 for various temporaries: master-config, debug dumps, tcpserv rejects, etc
+
+N sockets for all configured udpserv and tcpserv lines
+N sockets for the configured number of max inbound TCP connections
+N sockets for outbound UDP
+N sockets for max-outbound-tcp
+N file descriptors for the number of outstanding query traces
+
+example configuration:
+ 9 fds: fixed as listed above
+ 3 fds: servers (2 udpserv + 1 tcpserv)
+30 fds: tcpserv-max-conn
+ 5 fds: outbound-sockets
+ 3 fds: max-outbound-tcp
+-------
+50 fds total

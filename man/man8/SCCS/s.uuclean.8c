@@ -1,0 +1,126 @@
+h20981
+s 00014/00014/00043
+d D 6.3 86/04/24 22:21:52 mckusick 4 3
+c update from rfg
+e
+s 00001/00001/00056
+d D 6.2 85/06/23 15:59:20 bloom 3 2
+c correct spool directory
+e
+s 00001/00001/00056
+d D 6.1 85/04/27 16:01:04 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00057/00000/00000
+d D 5.1 85/04/27 16:00:54 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH UUCLEAN 8C "18 January 1983"
+E 2
+I 2
+.TH UUCLEAN 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+uuclean \- uucp spool directory clean-up
+.SH SYNOPSIS
+D 4
+.B uuclean
+[ option ] ...
+E 4
+I 4
+.B /usr/lib/uucp/uuclean
+[
+.B -m
+] [
+.BI -n time
+] [
+.BI -p pre
+]
+E 4
+.SH DESCRIPTION
+.I Uuclean
+will scan the spool directory for files with the
+specified prefix and delete all those which are
+older than the specified number of hours.
+.PP
+The following options are available.
+.TP 8
+.BI \-p pre
+Scan for files with
+.I pre
+as the file prefix.
+Up to 10
+.B \-p
+arguments may be specified.
+D 4
+A
+.B \-p
+without any
+.I pre
+following will cause all files older than the
+specified time to be deleted.
+E 4
+.TP
+.BI \-n time
+Files whose age is more than
+.I time
+hours will be deleted if the prefix
+test is satisfied.
+(default time is 72 hours)
+.TP 8
+.B \-m
+Send mail to the owner of the file
+when it is deleted.
+I 4
+.TP
+.BI \-d subdirectory
+Only the specified subdirectory will be cleaned.
+E 4
+.PP
+D 4
+This program will typically be started by
+E 4
+I 4
+This program will typically be run daily by
+E 4
+.IR cron (8).
+.SH FILES
+.TP 22
+D 4
+/usr/lib/uucp
+directory with commands used by uuclean internally
+.TP
+E 4
+D 3
+/usr/lib/uucp/spool
+E 3
+I 3
+/usr/spool/uucp
+E 3
+D 4
+spool directory
+E 4
+I 4
+Spool directory
+E 4
+.SH SEE ALSO
+D 4
+uucp(1C), uux(1C)
+E 4
+I 4
+uucp(1C), uux(1C), uucico(8C)
+E 4
+E 1

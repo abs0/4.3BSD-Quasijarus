@@ -1,0 +1,134 @@
+h30527
+s 00013/00010/00052
+d D 6.2 85/06/08 02:34:03 lepreau 4 3
+c add -p flag and correct sutf concerning umask
+e
+s 00001/00001/00061
+d D 6.1 85/04/29 14:20:36 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00012/00001/00050
+d D 5.1 85/04/29 14:20:27 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00051/00000/00000
+d D 4.1 85/04/29 14:20:20 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CP 1 
+E 2
+I 2
+D 3
+.TH CP 1 "1 April 1982"
+E 3
+I 3
+.TH CP 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+cp \- copy
+.SH SYNOPSIS
+.B cp
+[
+D 4
+.B \-i
+I 2
+] [
+.B \-r
+E 4
+I 4
+.B \-ip
+E 4
+E 2
+] file1 file2
+.PP
+.B cp
+[
+D 4
+.B \-i
+I 2
+] [
+.B \-r
+E 4
+I 4
+.B \-ipr
+E 4
+E 2
+] file ... directory
+.SH DESCRIPTION
+.I File1
+is copied onto
+.IR file2 .
+D 4
+The mode and owner of  
+E 4
+I 4
+By default, the mode and owner of  
+E 4
+.I file2
+are preserved if it already
+D 4
+existed; the mode of the source file
+is used otherwise.
+E 4
+I 4
+existed; otherwise the mode of the source file modified by the current
+.IR umask (2)
+is used.  The
+.B \-p
+option causes
+.I cp
+to attempt to preserve (duplicate) in its copies the modification
+times and modes of the source files, ignoring the present
+.IR umask .
+E 4
+.PP
+In the second form, one or more
+.I files
+are copied into the
+.I directory
+with their original file-names.
+.PP
+.I Cp
+refuses to copy a file onto itself.
+.PP
+If the 
+.B \-i
+option is specified, 
+.I cp
+will prompt the user with the name of the file
+whenever the copy will cause an old file to be
+overwritten. An answer of 'y' will cause 
+.I cp
+to continue. Any other answer will prevent it
+from overwriting the file.
+I 2
+.PP
+If the
+.B \-r
+option is specified and any of the source files are directories,
+.I cp
+copies each subtree rooted at that name; in this case
+the destination must be a directory.
+E 2
+.SH "SEE ALSO"
+D 4
+cat(1), pr(1), mv(1)
+E 4
+I 4
+cat(1), mv(1), rcp(1C)
+E 4
+E 1

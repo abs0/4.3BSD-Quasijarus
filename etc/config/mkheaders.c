@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)mkheaders.c	5.5 (Berkeley) 6/18/88";
+static char sccsid[] = "@(#)mkheaders.c	5.6 (Berkeley) 3/6/04";
 #endif /* not lint */
 
 /*
@@ -66,7 +66,7 @@ do_count(dev, hname, search)
 			if (search) {
 				mp = dp->d_conn;
 				if (mp != 0 && mp != TO_NEXUS &&
-				    mp->d_conn != 0 && mp->d_conn != TO_NEXUS) {
+				    !isadapter(mp->d_name)) {
 					do_count(mp->d_name, hname, 0);
 					search = 0;
 				}

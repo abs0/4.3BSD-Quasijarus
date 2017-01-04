@@ -1,0 +1,113 @@
+h18050
+s 00012/00013/00016
+d D 6.3 87/04/26 12:21:17 bostic 5 4
+c bug report 4.2BSD/ucb/55
+e
+s 00000/00004/00029
+d D 6.2 86/05/07 13:22:44 mckusick 4 3
+c delete author
+e
+s 00018/00008/00015
+d D 6.1 85/04/29 14:31:41 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00022
+d D 5.1 85/04/29 14:31:34 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00023/00000/00000
+d D 4.1 85/04/29 14:31:27 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LOCK 1 2/24/79
+E 2
+I 2
+D 3
+.TH LOCK 1 "24 February 1979"
+E 3
+I 3
+.TH LOCK 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+lock \- reserve a terminal
+.SH SYNOPSIS
+.B lock
+I 3
+[
+D 5
+.B \-number
+E 5
+I 5
+.B -p
+] [
+.B -number
+E 5
+]
+.br
+E 3
+.SH DESCRIPTION
+D 5
+.I Lock
+D 3
+requests a password from the user, then prints "LOCKED" on
+the terminal and refuses to relinquish the terminal until
+the password is repeated.  If the user forgets the password,
+he has no other recourse but to login elsewhere and kill
+the lock process.
+E 3
+I 3
+requests a password from the user, reads it again for verification and
+then it will normally not relinquish the terminal until the password is
+repeated. There are three other conditions under it will terminate:
+it accepts the password for root as an alternative to the one given
+by the user, it will timeout after some interval of time,
+and it may be killed by somebody with the appropiate permission.
+The default time limit is 15 minutes but it may be changed with the
+.B \-number
+option where
+.I number
+is the time limit in minutes.
+E 5
+I 5
+\fILock\fP requests a password from the user, reads it again for verification
+and then it will normally not relinquish the terminal until the password is
+repeated.  There are three other conditions under which it will terminate: it
+accepts the password for root as an alternative to the one given by the
+user, it will timeout after some interval of time, and it may be killed by
+somebody with the appropriate permission. The default time limit is 15 minutes
+but it may be changed with the \fI-number\fP option where \fInumber\fP is the
+time limit in minutes.  The \fI-p\fP option has \fIlock\fP use the user's
+standard password instead of requesting another one.
+E 5
+E 3
+D 4
+.SH AUTHOR
+D 3
+Kurt Shoens
+E 3
+I 3
+Kurt Shoens. Timeout and other features by Eduardo Pelegri-Llopart.
+E 3
+.SH BUGS
+D 3
+Should timeout after 15 minutes.
+E 3
+I 3
+None known.
+E 4
+E 3
+E 1

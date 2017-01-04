@@ -1,0 +1,312 @@
+h15439
+s 00038/00032/00147
+d D 6.1 86/05/22 14:50:53 kjd 3 2
+c document for 4.3BSD release
+e
+s 00000/00000/00179
+d D 5.1 86/05/22 14:50:44 kjd 2 1
+c document distributed with 4.2BSD
+e
+s 00179/00000/00000
+d D 4.1 86/05/22 14:50:34 kjd 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.SH
+V.  UNIX READING LIST
+.SH
+General:
+.LP
+K. L. Thompson and D. M. Ritchie,
+.IT The
+.ul
+.UC UNIX
+.ul
+Programmer's Manual,
+D 3
+Bell Laboratories, 1978.
+E 3
+I 3
+Bell Laboratories, 1978 (PS2:3)\(dd
+E 3
+Lists commands,
+system routines and interfaces, file formats,
+and some of the maintenance procedures.
+You can't live without this,
+although you will probably only need to read section 1.
+.LP
+D 3
+.ul
+Documents for Use with the
+.ul
+.UC UNIX
+.ul
+Time-sharing System.
+Volume 2 of the Programmer's Manual.
+This contains more extensive descriptions
+of major commands,
+and tutorials and reference manuals.
+All of the papers listed below are in it,
+as are descriptions of most of the programs
+mentioned above.
+.LP
+E 3
+D. M. Ritchie and K. L. Thompson,
+``The
+.UC UNIX
+Time-sharing System,''
+D 3
+CACM, July 1974.
+E 3
+I 3
+CACM, July 1974. (PS2:1)\(dd
+.FS
+\(dg These documents (previously in Volume 2 of the Bell Labs
+Unix distribution) are provided among the "User Supplementary"
+Documents for 4.3BSD, available from the Usenix Association.
+.FE
+.FS
+\(dd These are among the "Programmer Supplementary" Documents for 4.3BSD.
+PS1 is Volume 1, PS2 is Volume 2.
+.FE
+E 3
+An overview of the system,
+for people interested in operating systems.
+Worth reading by anyone who programs.
+Contains a remarkable number of one-sentence observations
+on how to do things right.
+.LP
+The Bell System Technical Journal
+(BSTJ)
+Special Issue on 
+.UC UNIX ,
+July/August, 1978,
+contains many papers describing recent developments,
+and some retrospective material.
+.LP
+The 2nd International Conference on Software Engineering
+(October, 1976)
+contains several 
+papers describing the use of the
+Programmer's Workbench
+.UC PWB ) (
+version of
+.UC UNIX .
+.SH
+Document Preparation:
+.LP
+B. W. Kernighan,
+``A Tutorial Introduction to the
+.UC UNIX
+D 3
+Text Editor''
+E 3
+I 3
+Text Editor'' (USD:12)
+E 3
+and
+``Advanced Editing on
+.UC UNIX ,''
+D 3
+Bell Laboratories, 1978.
+E 3
+I 3
+(USD:13) Bell Laboratories, 1978.\(dg
+E 3
+Beginners need the introduction;
+the advanced material will help you get the most
+out of the editor.
+.LP
+M. E. Lesk,
+``Typing Documents on
+.UC UNIX ,''
+D 3
+Bell Laboratories, 1978.
+E 3
+I 3
+Bell Laboratories, 1978. (USD:20)\(dg
+E 3
+Describes the
+.UL \-ms
+macro package, which isolates the novice
+from the vagaries of
+.UL nroff
+and
+.UL troff ,
+and takes care of most formatting situations.
+If this specific package isn't available on your system,
+something similar probably is.
+The most likely alternative is the
+.UC PWB/UNIX
+macro package
+.UL \-mm ;
+see your local guru if you use
+D 3
+.UC PWB/UNIX .
+E 3
+I 3
+.UC PWB/UNIX .*
+.FS
+*The macro package -me is additionally available on Berkeley Unix Systems.
+-mm is typically not available.
+.FE
+E 3
+.LP
+B. W. Kernighan and L. L. Cherry,
+``A System for Typesetting Mathematics,''
+D 3
+Bell Laboratories Computing Science Tech. Rep. 17.
+E 3
+I 3
+Bell Laboratories Computing Science Tech. Rep. 17. (USD:26)\(dg
+E 3
+.LP
+M. E. Lesk,
+``Tbl \(em A Program to Format Tables,''
+D 3
+Bell Laboratories CSTR 49, 1976.
+E 3
+I 3
+Bell Laboratories CSTR 49, 1976. (USD:28)\(dg
+E 3
+.LP
+J. F. Ossanna, Jr.,
+``NROFF/TROFF User's Manual,''
+D 3
+Bell Laboratories CSTR 54, 1976.
+E 3
+I 3
+Bell Laboratories CSTR 54, 1976. (USD:24)\(dg
+E 3
+.UL troff
+is the basic formatter used by
+.UL \-ms ,
+.UL eqn
+and
+.UL tbl .
+The reference manual is indispensable
+if you are going to write or maintain these
+or similar programs.
+But start with:
+.LP
+B. W. Kernighan,
+``A TROFF Tutorial,''
+D 3
+Bell Laboratories, 1976.
+E 3
+I 3
+Bell Laboratories, 1976. (USD:25)\(dg
+E 3
+An attempt to unravel the intricacies of
+.UL troff .
+.SH
+Programming:
+.LP
+B. W. Kernighan and D. M. Ritchie,
+.ul
+The C Programming Language,
+Prentice-Hall, 1978.
+Contains a tutorial introduction,
+complete discussions of all language features,
+and the reference manual.
+.LP
+I 3
+B. W. Kernighan and R. Pike,
+.ul
+The Unix Programming Environment,
+Prentice-Hall, 1984.
+Contains many examples of C programs which use the system
+interfaces, and explanations of ``why''.
+.LP
+E 3
+B. W. Kernighan and D. M. Ritchie,
+.UC UNIX \& ``
+Programming,''
+D 3
+Bell Laboratories, 1978.
+E 3
+I 3
+Bell Laboratories, 1978. (PS2:3)\(dd
+E 3
+Describes how to interface with the system from C programs:
+I/O calls, signals, processes.
+.LP
+S. R. Bourne,
+``An Introduction to the
+.UC UNIX
+Shell,''
+D 3
+Bell Laboratories, 1978.
+E 3
+I 3
+Bell Laboratories, 1978. (USD:3)\(dg
+E 3
+An introduction and reference manual for the Version 7 shell.
+Mandatory reading if you intend to make effective use
+of the programming power
+of this shell.
+.LP
+S. C. Johnson,
+``Yacc \(em Yet Another Compiler-Compiler,''
+D 3
+Bell Laboratories CSTR 32, 1978.
+E 3
+I 3
+Bell Laboratories CSTR 32, 1978. (PS1:15)\(dd
+E 3
+.LP
+M. E. Lesk,
+``Lex \(em A Lexical Analyzer Generator,''
+D 3
+Bell Laboratories CSTR 39, 1975.
+E 3
+I 3
+Bell Laboratories CSTR 39, 1975. (PS1:16)\(dd
+E 3
+.LP
+S. C. Johnson,
+``Lint, a C Program Checker,''
+D 3
+Bell Laboratories CSTR 65, 1977.
+E 3
+I 3
+Bell Laboratories CSTR 65, 1977. (PS1:9)\(dd
+E 3
+.LP
+S. I. Feldman,
+``MAKE \(em A Program for Maintaining Computer Programs,''
+D 3
+Bell Laboratories CSTR 57, 1977.
+E 3
+I 3
+Bell Laboratories CSTR 57, 1977. (PS1:12)\(dd
+E 3
+.LP
+J. F. Maranzano and S. R. Bourne,
+``A Tutorial Introduction to ADB,''
+D 3
+Bell Laboratories CSTR 62, 1977.
+E 3
+I 3
+Bell Laboratories CSTR 62, 1977. (PS1:10)\(dd
+E 3
+An introduction to a powerful but complex debugging tool.
+.LP
+S. I. Feldman and P. J. Weinberger,
+``A Portable Fortran 77 Compiler,''
+D 3
+Bell Laboratories, 1978.
+E 3
+I 3
+Bell Laboratories, 1978. (PS1:2)\(dd
+E 3
+A full Fortran 77 for
+.UC UNIX
+systems.
+E 1

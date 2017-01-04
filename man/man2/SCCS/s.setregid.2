@@ -1,0 +1,69 @@
+h00322
+s 00005/00001/00036
+d R 6.2 86/01/07 14:04:29 donn 3 2
+c int => gid_t
+e
+s 00004/00005/00033
+d D 6.1 85/05/15 12:00:10 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00038/00000/00000
+d D 5.1 85/05/15 12:00:03 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SETREGID 2 "12 February 1983"
+E 2
+I 2
+.TH SETREGID 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+setregid \- set real and effective group ID
+.SH SYNOPSIS
+.ft B
+setregid(rgid, egid)
+.br
+int rgid, egid;
+.ft R
+.SH DESCRIPTION
+The real and effective group ID's of the current process
+are set to the arguments.
+D 2
+Only the super-user may change the real group ID
+of a process.  Unpriviledged users may change the
+effective group ID to the real group ID, but to
+no other.
+E 2
+I 2
+Unprivileged users may change the real group
+ID to the effective group ID and vice-versa; only the super-user may
+make other changes.
+E 2
+.PP
+Supplying a value of \-1 for either the real or effective
+group ID forces the system to substitute the current
+ID in place of the \-1 parameter.
+.SH "RETURN VALUE
+Upon successful completion, a value of 0 is returned.  Otherwise,
+a value of \-1 is returned and \fIerrno\fP is set to indicate the error.
+.SH "ERRORS
+.TP 15
+[EPERM]
+The current process is not the super-user and a change
+other than changing the effective group-id to the real group-id
+was specified.
+.SH "SEE ALSO"
+getgid(2), setreuid(2), setgid(3)
+E 1

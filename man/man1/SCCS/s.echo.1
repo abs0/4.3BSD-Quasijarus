@@ -1,0 +1,70 @@
+h13871
+s 00001/00001/00022
+d D 6.1 85/04/29 17:45:31 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00007/00019
+d D 5.1 85/04/29 17:45:22 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00026/00000/00000
+d D 4.1 85/04/29 17:45:16 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ECHO 1 
+E 2
+I 2
+D 3
+.TH ECHO 1 "18 January 1983"
+E 3
+I 3
+.TH ECHO 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+echo \- echo arguments
+.SH SYNOPSIS
+.B echo
+[
+.B \-n
+]
+[ arg ] ...
+.SH DESCRIPTION
+.I Echo
+writes its arguments separated by blanks and terminated by
+D 2
+a newline on the standard output.
+If the flag
+E 2
+I 2
+a newline on the standard output.  If the flag
+E 2
+.B \-n
+D 2
+is used,
+no newline is added to the output.
+E 2
+I 2
+is used, no newline is added to the output.
+E 2
+.PP
+.I Echo
+is useful for producing diagnostics in
+shell programs and for writing constant data on pipes.
+D 2
+To send diagnostics to the standard error file, do
+`echo ... 1>&2'.
+E 2
+I 2
+To send diagnostics to the standard error file, do `echo ... 1>&2'.
+E 2
+E 1

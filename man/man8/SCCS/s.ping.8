@@ -1,0 +1,145 @@
+h12784
+s 00049/00013/00034
+d D 6.2 86/05/23 16:50:50 karels 2 1
+c new options
+e
+s 00047/00000/00000
+d D 6.1 85/10/18 13:49:49 mckusick 1 0
+c initial version from Mike Muuss
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH PING 8 "%Q%"
+.UC 6
+.SH NAME
+ping \- send ICMP ECHO_REQUEST packets to network hosts
+.SH SYNOPSIS
+.B /etc/ping
+D 2
+.B host
+E 2
+[
+D 2
+.B packetsize
+E 2
+I 2
+.B \-r
+] [
+.B \-v
+E 2
+]
+I 2
+.I host
+[
+.I packetsize
+] [
+.I count
+]
+E 2
+.SH DESCRIPTION
+D 2
+The ARPA InterNet is a large and complex aggregation of
+E 2
+I 2
+The DARPA Internet is a large and complex aggregation of
+E 2
+network hardware, connected together by gateways.
+Tracking a single-point hardware or software failure
+can often be difficult.
+.I Ping
+D 2
+utilizes the mandatory
+ICMP protocol's ECHO_REQUEST datagram to elicit an
+ICMP ECHO_RESPONSE from a distant host or gateway.
+E 2
+I 2
+utilizes the
+ICMP protocol's mandatory ECHO_REQUEST datagram to elicit an
+ICMP ECHO_RESPONSE from a host or gateway.
+E 2
+ECHO_REQUEST datagrams (``pings'') have an IP and ICMP header,
+followed by a \fBstruct timeval\fR, and then an arbitrary number
+of ``pad'' bytes used to fill out the packet.
+Default datagram length is 64 bytes, but this may be changed
+using the command-line option.
+I 2
+Other options are:
+.TP
+.B \-r
+Bypass the normal routing tables and send directly to a host on an attached
+network.
+If the host is not on a directly-attached network,
+an error is returned.
+This option can be used to ping a local host through an interface
+that has no route through it (e.g., after the interface was dropped by
+.IR routed (8C)).
+.TP
+.B \-v
+Verbose output.  ICMP packets other than ECHO RESPONSE that are received
+are listed.
+E 2
+.PP
+When using \fIping\fR for fault isolation,
+it should first be run on the local
+host, to verify that the local network interface is up and
+D 2
+running.  Then, hosts and gateways further and further away
+should be ``pinged''.  A lack of output from the \fIping\fR
+program indicates no response;  in normal operation,
+\fIping\fR sends one datagram per second, and
+E 2
+I 2
+running.
+Then, hosts and gateways further and further away
+should be ``pinged''.
+\fIPing\fR sends one datagram per second, and
+E 2
+prints one line of output for every ECHO_RESPONSE returned.
+I 2
+No output is produced if there is no response.
+If an optional
+.I count
+is given, only that number of requests is sent.
+E 2
+Round-trip times and packet loss statistics are computed.
+D 2
+If the program is terminated with a SIGINT, a brief
+E 2
+I 2
+When all responses have been received or the program times out (with a
+.I count
+specified),
+or if the program is terminated with a SIGINT, a brief
+E 2
+summary is displayed.
+I 2
+.PP
+This program is intended for use in network testing, measurement
+and management.
+It should be used primarily for manual fault isolation.
+Because of the load it could impose on the network,
+it is unwise to use
+.I ping
+during normal operations or from automated scripts.
+E 2
+.SH AUTHOR
+Mike Muuss
+.SH SEE ALSO
+D 2
+netstat(8),
+ifconfig(5)
+E 2
+I 2
+netstat(1),
+ifconfig(8C)
+E 2
+E 1

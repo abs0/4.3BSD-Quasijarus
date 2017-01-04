@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_temp.c	7.6 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_temp.c	7.7 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -26,15 +26,15 @@ static char *sccsid = "@(#)ex_temp.c	7.6 (Berkeley) 3/9/87";
 #define	EPOSITION	13
 #endif
 
-char	tfname[40];
-char	rfname[40];
+u_char	tfname[40];
+u_char	rfname[40];
 int	havetmp;
 short	tfile = -1;
 short	rfile = -1;
 
 fileinit()
 {
-	register char *p;
+	register u_char *p;
 	register int i, j;
 	struct stat stbuf;
 
@@ -103,7 +103,7 @@ vms_no_check_dir:
 	if (tfile < 0)
 		goto dumbness;
 #ifdef UNIX_SBRK
-/* 	brk((char *)fendcore); */
+/* 	brk((u_char *)fendcore); */
 #endif
 }
 
@@ -131,7 +131,7 @@ cleanup(all)
 getline(tl)
 	line tl;
 {
-	register char *bp, *lp;
+	register u_char *bp, *lp;
 	register int nl;
 
 	lp = linebuf;
@@ -147,7 +147,7 @@ getline(tl)
 
 putline()
 {
-	register char *bp, *lp;
+	register u_char *bp, *lp;
 	register int nl;
 	line tl;
 
@@ -177,14 +177,14 @@ putline()
 int	read();
 int	write();
 
-char *
+u_char *
 getblock(atl, iof)
 	line atl;
 	int iof;
 {
 	register int bno, off;
 #ifdef CRYPT
-        register char *p1, *p2;
+        register u_char *p1, *p2;
         register int n;
 #endif
 	
@@ -269,14 +269,14 @@ getblock(atl, iof)
 #else
 #define	INCORB	64
 #endif
-char	incorb[INCORB+1][BUFSIZ];
-#define	pagrnd(a)	((char *)(((int)a)&~(BUFSIZ-1)))
+u_char	incorb[INCORB+1][BUFSIZ];
+#define	pagrnd(a)	((u_char *)(((int)a)&~(BUFSIZ-1)))
 int	stilinc;	/* up to here not written yet */
 #endif
 
 blkio(b, buf, iofcn)
 	short b;
-	char *buf;
+	u_char *buf;
 	int (*iofcn)();
 {
 
@@ -360,7 +360,7 @@ synctmp()
 		cnt = ((dol - a) + 2) * sizeof (line);
 		if (cnt > BUFSIZ)
 			cnt = BUFSIZ;
-		if (write(tfile, (char *) a, cnt) != cnt) {
+		if (write(tfile, (u_char *) a, cnt) != cnt) {
 oops:
 			*zero = 0;
 			filioerr(tfname);
@@ -369,7 +369,7 @@ oops:
 	}
 	flines = lineDOL();
 	lseek(tfile, 0l, 0);
-	if (write(tfile, (char *) &H, sizeof H) != sizeof H)
+	if (write(tfile, (u_char *) &H, sizeof H) != sizeof H)
 		goto oops;
 #ifdef notdef
 	/*
@@ -423,7 +423,7 @@ struct	strreg {
 struct	rbuf {
 	short	rb_prev;
 	short	rb_next;
-	char	rb_text[BUFSIZ - 2 * sizeof (short)];
+	u_char	rb_text[BUFSIZ - 2 * sizeof (short)];
 } *rbuf, KILLrbuf, putrbuf, YANKrbuf, regrbuf;
 #ifdef VMUNIX
 short	rused[256];
@@ -433,7 +433,7 @@ short	rused[32];
 short	rnleft;
 short	rblock;
 short	rnext;
-char	*rbufcp;
+u_char	*rbufcp;
 
 regio(b, iofcn)
 	short b;
@@ -519,7 +519,7 @@ shread()
 {
 	struct front { short a; short b; };
 
-	if (read(rfile, (char *) rbuf, sizeof (struct front)) == sizeof (struct front))
+	if (read(rfile, (u_char *) rbuf, sizeof (struct front)) == sizeof (struct front))
 		return (sizeof (struct rbuf));
 	return (0);
 }
@@ -527,7 +527,7 @@ shread()
 int	getREG();
 
 putreg(c)
-	char c;
+	u_char c;
 {
 	register line *odot = dot;
 	register line *odol = dol;
@@ -568,7 +568,7 @@ putreg(c)
 }
 
 partreg(c)
-	char c;
+	u_char c;
 {
 
 	return (mapreg(c)->rg_flags);
@@ -584,7 +584,7 @@ notpart(c)
 
 getREG()
 {
-	register char *lp = linebuf;
+	register u_char *lp = linebuf;
 	register int c;
 
 	for (;;) {
@@ -613,7 +613,7 @@ YANKreg(c)
 {
 	register line *addr;
 	register struct strreg *sp;
-	char savelb[LBSIZE];
+	u_char savelb[LBSIZE];
 
 	if (isdigit(c))
 		kshift();
@@ -657,7 +657,7 @@ kshift()
 
 YANKline()
 {
-	register char *lp = linebuf;
+	register u_char *lp = linebuf;
 	register struct rbuf *rp = rbuf;
 	register int c;
 
@@ -696,11 +696,11 @@ rbflush()
 
 /* Register c to char buffer buf of size buflen */
 regbuf(c, buf, buflen)
-char c;
-char *buf;
+u_char c;
+u_char *buf;
 int buflen;
 {
-	register char *p, *lp;
+	register u_char *p, *lp;
 
 	rbuf = &regrbuf;
 	rnleft = 0;
@@ -736,15 +736,15 @@ int buflen;
  * buffer, and startn is the beginning of a sequence.
  */
 crblock(permp, buf, nchar, startn)
-char *permp;
-char *buf;
+u_char *permp;
+u_char *buf;
 int nchar;
 long startn;
 {
-	register char *p1;
+	register u_char *p1;
 	int n1;
 	int n2;
-	register char *t1, *t2, *t3;
+	register u_char *t1, *t2, *t3;
 
 	t1 = permp;
 	t2 = &permp[256];
@@ -769,11 +769,11 @@ long startn;
  * makekey: initialize buffers based on user key a.
  */
 makekey(a, b)
-char *a, *b;
+u_char *a, *b;
 {
        register int i;
 	long t;
-	char temp[KSIZE + 1];
+	u_char temp[KSIZE + 1];
 
 	for(i = 0; i < KSIZE; i++)
 		temp[i] = *a++;
@@ -789,13 +789,13 @@ char *a, *b;
  * returns 0 if the key is null, and 1 if it is non-null.
  */
 crinit(keyp, permp)
-char    *keyp, *permp;
+u_char    *keyp, *permp;
 {
-       register char *t1, *t2, *t3;
+       register u_char *t1, *t2, *t3;
 	register i;
 	int ic, k, temp;
 	unsigned random;
-	char buf[13];
+	u_char buf[13];
 	long seed;
 
 	t1 = permp;
@@ -846,7 +846,7 @@ char    *keyp, *permp;
  * in buffer.
  */
 domakekey(buffer)
-char *buffer;
+u_char *buffer;
 {
        int pf[2];
 

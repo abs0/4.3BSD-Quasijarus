@@ -2,14 +2,14 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)edittut.ms	6.1 (Berkeley) 5/27/86
+.\"	@(#)edittut.ms	6.2 (Berkeley) 10/23/04
 .\"
 .EH 'USD:14-%''Edit:  A Tutorial'
 .OH 'Edit:  A Tutorial''USD:14-%'
 .LP
 .ds u \s-2UNIX\s0
-.ll 5i
-.nr LL 5i
+.\".ll 5i
+.\".nr LL 5i
 .ND
 .sp 4
 .ce
@@ -52,9 +52,9 @@ and the \s-2UNIX\s+2 documentation in general.
 .sp .5v
 September 1981
 .bp
-.ll 6.5i
-.nr LL 6.5i
-.nr LT 6.5i
+.\".ll 6.5i
+.\".nr LL 6.5i
+.\".nr LT 6.5i
 .ds u \s-2UNIX\s0
 .ce
 \s+2\f3Contents\f1\s0

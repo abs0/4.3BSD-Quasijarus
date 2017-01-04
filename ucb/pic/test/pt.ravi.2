@@ -1,0 +1,294 @@
+.PS
+# u = 40;
+u = 40/200;
+boxwid = 2*u; boxht = u;
+ellipsewid = 2*u; ellipseht = u;
+d = 6*u/5;
+define test % line down u left u; line down u right u; line up u right u; line up u left u; %
+down;
+ellipse "$bi start$";
+line down d/2;
+P0:	"$\(bu$"; { move right u/2; "$p sub 0$"; }; line -> down d/2;
+	box "$f$";
+	line down d/2;
+P1:	"$\(bu$"; { move left u/2; "$p sub 1$"; }; line -> down d/2;
+B1:	test();
+	move down u;
+	"$b sub 1$";
+	{	move left u;
+		spline ->  from Here to Here + -2*u,0 to Here + -2*u,2*u+3*d/2 to P0.w;
+	}
+	move right u;
+	spline ->  from Here to Here + 2*u,0 to Here + 2*u,-u-d/2;
+P2:	"$\(bu$"; {move right u/2; "$p sub 2$";}
+	line down d/2;
+	box "$g$";
+	line -> down d;
+B2:	test();
+	move down u;
+	"$b sub 2$";
+	{	move right u;
+		spline ->  from Here to Here + 2*u,0 to Here + 2*u,3*d/2+5*u to P1.e;
+	}
+	move left u;
+	spline ->  from Here to Here + -d,0 to Here + -d,-d;
+	down;
+	box "$h$";
+	line down d/2; "$\(bu$"; { move right u/2; "$p sub 3$"; }; line -> down d/2;
+B3:	test();
+	move down u;
+	"$b sub 3$";
+	{	move left u;
+		spline -> from Here to Here + -d,0 to Here + -d,7*d/2+4*u to P2.w;
+	}
+	move right u;
+	spline ->  from Here to Here + d,0 to Here + d,-d;
+	down;
+	box "$bi out$";
+.PE
+.bp
+.PS
+.ps 9
+.sp
+u = 40;
+u = 40/200
+boxwid = 3*u; boxht = 2*u;
+ellipsewid = 3*u; ellipseht = 2*u;
+linewid = 2*u; lineht = 2*u;
+movewid = 2*u; moveht = 2*u;
+LA:	box "lexical" "analyzer"
+	arrow
+P:	box "parser," "graph" "builder"
+	arrow
+	box "reducer"
+	arrow
+	box "code" "generator"
+	arrow
+	ellipse "code"
+
+	arrow <- from LA.n up
+LX:	box "\f1LEX\fP"
+	arrow <- from LX.w left
+
+Tok:	ellipse "Ltok.r"
+	move to Tok.n
+	move up
+Sem:	ellipse "Lsem.d"
+	arrow -> from Sem.e right
+D:	box "d2y"
+
+	arrow -> right "Lsem.y" above
+Y2:	box "\f1YACC\fP"
+	arrow from Y2.s to P.n
+
+	arrow <- from LA.w left
+Prog:	ellipse "prog.L"
+	move to Prog.e
+	move right u down 2*u
+LC:	Here
+	line dotted right 15*u
+	line dotted up 12*u
+	line dotted left 15*u
+	line dotted down 12*u
+.PE
+.bp
+.PS
+scale = 225;
+x = 15/225; y = 3*x; z = 5*x;
+
+define dr % move down x right x; line -> down y right y; move down x right x; %
+define dl % move down x left x; line -> down y left y; move down x left x; %
+define ur % move up x right x; line <- up y right y; move up x right x; %
+define ul % move up x left x; line <- up y left y; move up x left x; %
+
+move to Here + 5*z,z;
+{
+	"#b sub 1#";
+	line -> from Here + 0,-x down y;
+	"#b sub 2#" at Here + 0,-x;
+	{
+		dl;
+		"#bi app#";
+		{
+			dr; "L1";
+		}
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -2*z,2*z to Here + x-4*z,x+z;
+	}
+	spline -> from Here + x,-x to Here + z,-z to Here + z,x-2*z;
+	move down x;
+	"#b sub 3#";
+	{
+		dr; "fall";
+	}
+	{
+		dl; "#bi app#";
+		{
+			dr; "L2";
+		}
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -3*z,z to Here + -4*z,4*z to Here + x-5*z,x+3*z;
+	}
+}
+.PE
+.bp
+.PS
+scale = 225;
+x = 15/225; y = 3*x; z = 5*x;
+
+define dr % move down x right x; line -> down y right y; move down x right x; %
+define dl % move down x left x; line -> down y left y; move down x left x; %
+define ur % move up x right x; line <- up y right y; move up x right x; %
+define ul % move up x left x; line <- up y left y; move up x left x; %
+
+"e";
+ur;
+"e' #bi updl#";
+{	line -> from Here + x,-x down y+z right y;
+	"list" at Here + x,-x;
+}
+move to Here + 5*z,z;
+{
+	"#b sub 1#";
+	line -> from Here + 0,-x down y;
+	"#b sub 2#" at Here + 0,-x;
+	{
+		dl;
+		"#bi app#";
+		{
+			dr; "L1";
+		}
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -2*z,2*z to Here + x-4*z,x+z;
+	}
+	spline -> from Here + x,-x to Here + z,-z to Here + z,x-2*z;
+	move down x;
+	"#b sub 3#";
+	{
+		dr; "fall";
+	}
+	{
+		dl; "#bi app#";
+		{
+			dr; "L2";
+		}
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -3*z,z to Here + -4*z,4*z to Here + x-5*z,x+3*z;
+	}
+}
+
+move up z;
+"L1";
+move up x right x;
+line <- up y/2 right y/2;
+"#\(bu#";
+{
+	spline -> from Here to Here + z/2,-z/2 to Here + -y/2,x-3*z/2;
+}
+line <- up z/2 right z/2;
+"#\(bu#";
+{
+	line -> down z right z;
+	"#\(bu#";
+	{
+		line -> down y/2 right y/2;
+		move down x right x;
+		"#bi nil#";
+	}
+	line down z/2 left z/2;
+	"#\(bu#";
+	{
+		line -> down y/2 left y/2;
+		move down x left x;
+		"L2";
+	}
+	spline -> from Here to Here + z/2,-z/2 to Here + -z-y/2,x-3*z/2;
+}
+
+line dashed from Here + -x,0 to Here + x-8*z,0;
+arc to Here + -x,-x rad x;
+line dashed down 5*z-2*x;
+arc to Here + x,-x rad x;
+line dashed right y/2+2*z;
+.PE
+.bp
+.PS
+scale = 225;
+x = 15/225; y = 3*x; z = 5*x;
+
+define dr % move down x right x; line -> down y right y; move down x right x; %
+define dl % move down x left x; line -> down y left y; move down x left x; %
+define ur % move up x right x; line <- up y right y; move up x right x; %
+define ul % move up x left x; line <- up y left y; move up x left x; %
+
+"e";
+ur;
+"#bi upd#";
+{
+	line -> from Here + 0,-x down y right x;
+	"L2" at Here + 0,-x;
+}
+{
+	spline -> from Here + x,-x to Here + z,-z to Here + 2*z,-z to Here + 5*z,2*z to Here + 6*z-x,z+x;
+}
+ur;
+"#bi upd#";
+{
+	line -> from Here + 0,-x down y right x;
+	"L1" at Here + 0,-x;
+}
+{
+	spline -> from Here + x,-x to Here + z,-z to Here + 4*z,2*z to Here +5*z-x,z+x;
+}
+move to Here + 5*z,z;
+{
+	"#b sub 1#";
+	line -> from Here + 0,-x down y;
+	"#b sub 2#" at Here + 0,-x;
+	{
+		dl;
+		"#bi app#";
+		{
+			dr; "L1";
+		}
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -2*z,2*z to Here + x-4*z,x+z;
+	}
+	spline -> from Here + x,-x to Here + z,-z to Here + z,x-2*z;
+	move down x;
+	"#b sub 3#";
+	{
+		dr; "fall";
+	}
+	{
+		dl; "#bi app#";
+		{
+			dr; "L2";
+		}
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -3*z,z to Here + -4*z,4*z to Here + x-5*z,x+3*z;
+	}
+}
+.PE
+.bp
+.PS
+scale = 225;
+x = 15/225; y = 3*x; z = 5*x;
+
+define dr % move down x right x; line -> down y right y; move down x right x; %
+define dl % move down x left x; line -> down y left y; move down x left x; %
+define ur % move up x right x; line <- up y right y; move up x right x; %
+define ul % move up x left x; line <- up y left y; move up x left x; %
+
+{
+	"#b sub 1#";
+	line -> from Here + 0,-x down y;
+	"#b sub 2#" at Here + 0,-x;
+	{
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -2*z,0 to Here + -2*z,z to Here + -z,2*z to Here + -x,z+x;
+	}
+	spline -> from Here + x,-x to Here + z,-z to Here + z,x-2*z;
+	move down x;
+	"#b sub 3#";
+	{
+		dr; "fall";
+	}
+	{
+		spline -> from Here + -x,-x to Here + -z,-z to Here + -4*z,-z to Here + -4*z,3*z to Here + -2*z,3*z to Here + -x-z,x+2*z;
+	}
+}
+.PE

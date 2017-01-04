@@ -17,37 +17,13 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)ka650.h	7.4 (Berkeley) 11/2/88
+ *	@(#)ka650.h	7.6 (Berkeley) 3/19/04
  */
 
 /*
  *
  * Definitions specific to the ka650 (uVAX 3600/3602) cpu card.
  */
-
-#ifdef VAX650
-/*
- * CAER: Memory System Error Register (IPR 39)
- */
-#define CAER_DAL	0x00000040	/* CDAL or level 2 cache data parity */
-#define CAER_MCD	0x00000020	/* mcheck due to DAL parity error */
-#define CAER_MCC	0x00000010	/* mcheck due to 1st lev cache parity */
-#define CAER_DAT	0x00000002	/* data parity in 1st level cache */
-#define CAER_TAG	0x00000001	/* tag parity in 1st level cache */
-
-/*
- * CADR: Cache Disable Register (IPR 37)
- */
-#define CADR_STMASK	0x000000f0	/* 1st level cache state mask */
-#define CADR_SEN2	0x00000080	/* 1st level cache set 2 enabled */
-#define CADR_SEN1	0x00000040	/* 1st level cache set 1 enabled */
-#define CADR_CENI	0x00000020	/* 1st level I-stream caching enabled */
-#define CADR_CEND	0x00000010	/* 1st level D-stream caching enabled */
-
-/*
- * Internal State Info 2: (for mcheck recovery)
- */
-#define IS2_VCR		0x00008000	/* VAX Can't Restart flag */
 
 /*
  * DMA System Error Register (merr_dser)
@@ -125,12 +101,6 @@ struct ka650_cbd {
 	u_long	cbd_bdr;	/* Boot & Diagnostic Register (unused) */
 };
 #define KA650_CBD	0x20084000
-
-/*
- * CACR: Cache Control Register (2nd level cache) (cbd_cacr)
- */
-#define CACR_CEN	0x00000010	/* Cache enable */
-#define CACR_CPE	0x00000020	/* Cache Parity Error */
 
 /*
  * System Support Chip (SSC) registers
@@ -233,4 +203,3 @@ extern	int	ka650cache[];		/* Cache Diagnostic space (for flush) */
 #define	KA650ROM_PUTS	0x2006000c	/* (jsb) put string to console */
 #define	KA650ROM_GETS	0x20060010	/* (jsb) read string with prompt */
 #define KA650_CONSTYPE	0x20140401	/* byte at which console type resides */
-#endif

@@ -1,0 +1,88 @@
+h21183
+s 00002/00002/00061
+d D 6.1 86/04/23 23:49:46 mckusick 3 2
+c Ken Arnold edits for document distributed with 4.3BSD
+e
+s 00000/00000/00063
+d D 5.1 86/04/23 23:49:42 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00063/00000/00000
+d D 4.1 86/04/23 23:49:37 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.sh 1 Variables
+.pp
+Many variables which are used to describe the terminal environment
+are available to the programmer. They are:
+.TS
+expand;
+lw(6m) lw(8n) lw(50n).
+type	name	description
+_
+WINDOW *	curscr	T{
+.fi
+current version of the screen (terminal screen).
+T}
+WINDOW *	stdscr	T{
+standard screen.  Most updates are usually done here.
+T}
+char *	Def\*_term	T{
+default terminal type if type cannot be determined
+T}
+bool	My\*_term	T{
+use the terminal specification in \fIDef\*_term\fR as terminal,
+irrelevant of real terminal type
+T}
+char *	ttytype	T{
+full name of the current terminal.
+T}
+int	LINES	T{
+number of lines on the terminal
+T}
+int	COLS	T{
+number of columns on the terminal
+T}
+int	ERR	T{
+error flag returned by routines on a fail.
+T}
+int	OK	T{
+error flag returned by routines when things go right.
+T}
+.TE
+.pp
+There are also several
+.q #define
+constants and types
+which are of general usefulness:
+.sp
+.ev 1
+.ta 11n
+.(b L
+.nf
+D 3
+reg	storage class ``register'' (e.g., \fIreg int i;\fR\|)
+bool	boolean type, actually a ``char'' (e.g., \fIbool doneit;\fR\|)
+E 3
+I 3
+reg	storage class ``register'' (\fIe.g.\fP, \fIreg int i;\fR\|)
+bool	boolean type, actually a ``char'' (\fIe.g.\fP, \fIbool doneit;\fR\|)
+E 3
+TRUE	boolean ``true'' flag (1).
+FALSE	boolean ``false'' flag (0).
+.fi
+.ev
+.)b
+.lp
+E 1

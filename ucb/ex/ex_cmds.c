@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_cmds.c	7.12 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_cmds.c	7.13 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -91,7 +91,7 @@ error("Offset out-of-bounds|Offset after command too large");
 		given = seensemi = 0;
 		do {
 			addr1 = addr2;
-			addr = address((char *) 0);
+			addr = address((u_char *) 0);
 			c = getcd();
 			if (addr == 0)
 				if (c == ',')
@@ -199,7 +199,7 @@ notinvis:
 			case 'h':
 				ignchar();
 				if (peekchar() == 'd') {
-					register char *p;
+					register u_char *p;
 					tail2of("chdir");
 changdir:
 					if (savedfile[0] == '/' || !value(WARN))
@@ -569,7 +569,7 @@ quit:
 				vnfl();
 				putpad(TE);
 				flush();
-				unixwt(1, unixex("-i", (char *) 0, 0, 0));
+				unixwt(1, unixex("-i", (u_char *) 0, 0, 0));
 				vcontin(0);
 				continue;
 

@@ -1,0 +1,14 @@
+h14373
+s 00003/00000/00000
+d D 5.1 88/03/30 14:46:17 bostic 1 0
+c date and time created 88/03/30 14:46:17 by bostic
+e
+u
+U
+t
+T
+I 1
+.>v
+./4+"iovcnt"16t"offset"16t"segflg"16t"resid"n4D"base"16t"len"
+*<v,*(<v+4)$<iovec
+E 1

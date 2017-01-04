@@ -1,0 +1,277 @@
+.SH
+.LG
+Chapter 1:  \fIPstroff\fP design fundamentals
+.SH
+1.1.  Font model
+.LP
+The selection of available fonts in the \*(PS world is
+practically infinite, and the present version of troff has been
+designed with a goal of making this very large variety
+of fonts available to troff users as well.
+The implementation comes close to the goal, with only
+two major shortcomings:
+.IP \(bu
+Fonts in the troff world are still identified by one- or two-character
+names.
+Obviously, assigning a two-character name to every existing PS font,
+such that all of these names would be mnemonic, world-unique, and
+valid once and for all, would be a non-starter.
+However, such short names are very convenient for switching
+back and forth between different fonts within a document.
+.IP \&
+The solution adopted in the present version is to allow these
+one- or two-character font names to be assigned at different levels
+of scope: a few truly global ones standardized by the
+software distribution, then whatever fonts may have been adopted
+on a system-wide basis by the local site administrator,
+and finally, local font adoptions which can be made for each document.
+See Chapter\ 3 for the details.
+.IP \(bu
+The total number of available characters in many standard Adobe
+fonts (that is, ``ordinary'' Latin or Cyrillic fonts,
+not even considering the non-Western languages here)
+has already exceeded 256, the number of code points
+that can be accessed by the \fBshow\fP operator in an ordinary font.
+.IP \&
+The present version of troff does not know how to use the \fBglyphshow\fP
+operator, the composite font extensions, CID fonts or
+any other new-fangled tricks which didn't exist in plain old
+\*(PS LanguageLevel\ 1.
+Therefore, no more than 256 characters may be used out of each font.
+We do, however, recode most fonts to our own encoding vector as explained below,
+thus the choice of \fIwhich\fP 256 characters are available is determined
+by us, not by whatever encoding vector the font came with.
+.LP
+The complete list of fonts that's going to be used in a troff session
+has to be declared upfront.
+The generated document prolog (more precisely, the DSC setup section)
+constructs a font list (an array of font dictionaries) that will live
+in the PS interpreter's VM for the whole duration of the print job,
+and all fonts used by the troff session that follows come from that
+constructed list.
+There is no provision for printing any text or getting individual characters
+from fonts that aren't in that upfront list.
+This design results in two main limitations:
+.IP \(bu
+Simply naming a new font in a \fB.ft\fP request or a \fB\ef\fP escape
+in the middle of a document, without declaring it upfront, won't work.
+.IP \(bu
+All ``special'' fonts, those that enrich the repertoire of named
+characters available via the \fB\e(\fIxx\fR escape (see the following
+section), have to be listed
+upfront and included in the setup section array of font dictionaries
+as well.
+Deferring the inclusion of a ``special'' font until one of its
+characters is actually used is not currently possible.
+.LP
+The primary factor that drove the design decision which results
+in the above limitations is the need for most fonts to be recoded
+or otherwise altered before they can be used conveniently.
+The situation is best illustrated by an example.
+In the default configuration, using the font list of ``R,I,B,S''
+which matches the font set of the historic troff, the boilerplate
+emitted by the present version of troff contains the following
+\*(PS code blob:
+.DS L
+.ft C
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+currentdict end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+currentdict end
+/Symbol-troff exch definefont
+] def
+.ft
+.DE
+.PP
+As you can see, each of the 3 standard text fonts is being
+recoded to our own encoding vector called TroffEncoding, the definition
+of which is included earlier in the prolog code.
+This recoding is necessary because the encoding vector
+used by these fonts in their ``pristine'' form (called StandardEncoding)
+does not cover many of the characters which we find useful.
+There are only two ways to access those standard font characters which
+aren't covered by the StandardEncoding vector:
+either recode the font(s) like we do, or use the \fBglyphshow\fP operator,
+which is a LanguageLevel\ 2 addition.
+Desiring compatibility with all \*(PS printers, including the first
+generation ones, we have opted for the former approach.\**
+.FS
+If it seems like all of the shortcomings of this troff stem
+from the desire for LanguageLevel\ 1 compatibility,
+let me also point out that if you are typesetting text in a
+Latin-1 language like French or Spanish, having those accented
+letters appear directly in \fBshow\fP strings is much more
+efficient and ``natural'' than invoking \fBglyphshow\fP for each.
+.FE
+.PP
+The need for recoding is what drives our current design of
+constructing the font list (array) upfront and then having the body
+of the page description pull font dictionaries from that array.
+If the fonts were usable without recoding, we would have simply used
+the \fBselectfont\fP operator (by way of a procset definition
+which would also provide a LanguageLevel\ 1 fallback), and would have
+had the precise list of fonts actually used at the end of the troff
+session, ready to go into a DSC trailer comment.
+But unfortunately, Adobe hasn't given us an operator like \fBselectfont\fP
+that also incorporates recoding, and I couldn't come up with a clean and
+efficient way to do the recoding other than the current upfront method.
+.PP
+Unlike the text fonts, ``special'' fonts normally don't need
+to be recoded, as their encoding vectors already cover all
+characters which they offer.
+However, the Symbol font needs to be modified in another way:
+the metrics chosen by Adobe for the square root and square root extension
+characters are quite strange, and we alter those metrics (left sidebearing
+and spacing width) to make the two characters in question
+more convenient to use.
+Thus the policy of requiring \fIall\fP fonts to be listed upfront
+has come about naturally.
+.PP
+The list of fonts to be used in a troff session (if it differs
+from the default of ``R,I,B,S'') is specified via a \fItroff\fP
+command line option, as explained in Chapter\ 3.
+This font list specified on the command line takes the place of
+the \fB.fp\fP request used in the original troff and in ditroff;
+the present version of troff does \fInot\fP implement the latter.
+.PP
+The present version of troff is designed to maintain one-to-one
+correspondence between fonts visible at the troff level and
+the actual underlying \*(PS fonts.
+This approach is in contrast to that taken by many ditroff-to-PS
+setups, in which the notion of fonts visible to ditroff differs
+significantly from the \*(PS reality and in which the post-processor
+does a bunch of black magic, pulling characters from different fonts
+while making ditroff believe that they all come from a single larger
+logical font, changing some characters to procset calls, etc.
+I have avoided the latter approach in this version of troff,
+striving to be as \*(PS-native as possible.
+.SH
+1.2.  Character set model
+.LP
+The repertoire of characters which the original C/A/T troff made
+available to its users can be broadly categorized as follows:
+.IP \(bu
+The 94 graphic characters of ASCII, from `!' to `~'.
+.IP \(bu
+A number of non-ASCII typographic characters which would be familiar
+to someone raised by typographers, but not to someone raised by
+computer scientists: em dashes, rules, daggers, ligatures etc.
+.IP \(bu
+An assortment of mathematical symbols, including Greek letters
+and others like \(if. \(gr, \(mo etc.
+Most computer scientists are very familiar with the noble
+discipline of mathematics, but the symbols in question are still
+non-ASCII, and most of them aren't part of any of the common
+8-bit ``ASCII extensions'' like Latin-1 either.
+.PP
+The ASCII characters would be input naturally as themselves
+(some needing to be escaped, but that's the norm in the \s-1UNIX\s0 world),
+whereas the non-ASCII mathematical and typographic symbols were given
+two-character mnenomic \fInames\fP, and were to be input as \fB\e(\fIxx\fR.
+Yet the physical realization of the just-categorized character set
+on the C/A/T had a different division: namely, between the ``base'' fonts
+and the Special Mathematical Font.
+Contrary to its name, the so-called Special Mathematical Font
+provided not only the mathematical symbols, but also some of the ASCII
+characters: the C/A/T's base text fonts weren't designed with
+ASCII-based computers in mind and didn't include the full ASCII
+graphic character set.
+Thus the intuitive distinction between ``normal'' ASCII characters
+and ``special'' characters which had to be entered as four-character
+escapes did \fInot\fP directly translate into whether a character
+would be printed from the base font or from the Special font.
+.PP
+But whether a character was physically printed from the base font
+or from the Special font, the logical character set model presented
+by the original troff was that of a single large character set,
+one that includes all of ASCII plus all of the named special characters.
+Even though the C/A/T machine physically had 4 fonts, and troff
+could be told about all 4 positions via the \fB.fp\fP request,
+in the user's logical view there were only 3 fonts:
+the \fB.ft\fP request and the \fB\ef\fP escape switched only between
+\fBR\fP, \fBI\fP and \fBB\fP, and all characters which physically
+lived in \fBS\fP (be they ASCII or named special characters)
+logically belonged to whichever base font was active at the moment.
+.PP
+The character set model that's been adopted for the present version
+of troff is essentially an extension of the old troff model
+to the much richer character set afforded by the Adobe fonts
+included in PS printers.
+The troff-internal character code space had to be expanded from 8 to 9
+bits: on the one hand, the user should be able to access all 256
+code points of whichever font s/he has explicitly selected with
+\&\fB.ft\fP or \fB\ef\fP; on the other hand,
+the notion of ``special font'' characters which are automatically
+drawn from some specific font independent of the explicitly-selected one
+had to be preserved: the four-character escapes naming Greek and
+mathematical symbols, for example, automatically pull those characters
+from the Symbol font without making the user switch to it explicitly.
+.PP
+Thus the repertoire of characters which the present version of troff
+makes available to its users consists of:
+.IP 1.
+All 256 code points of whichever font is currently selected with
+\&\fB.ft\fP or \fB\ef\fP; in the case of regular Roman text fonts,
+the repertoire and the encoding are both supersets of ISO Latin-1,
+with the addition of Adobe-provided characters (mostly typographic
+symbols) which are considered non-standard in the computer science world.
+Characters within this sub-repertoire can be input as follows:
+.RS
+.IP \(bu
+ASCII graphic characters are input as themselves,
+with the same escaping exceptions as in the original troff.
+.IP \(bu
+ISO Latin-1 characters may be input as themselves too, i.e.,
+8-bit text input.
+.IP \(bu
+Mnemonic two-character names (\fB\e(\fIxx\fR escapes)
+have been provided for all accented letters, most other Latin-1
+characters, and some of the ``non-standard'' (i.e., non-ASCII,
+non-Latin-1) characters as well.
+These names are listed in Appendix\ A.
+.IP \(bu
+A new hexadecimal input escape has been provided,
+which allows the user to access any of the 256 code points
+of the currently selected font.
+The escape form is \fB\eX\fIhh\fR, where \fIhh\fP are hexadecimal digits.
+.RE
+.IP 2.
+A set of ``special'' characters which have their ``font affiliation''
+bound to them, such that a special character is always printed
+from its own font, regardless of which font is currently selected
+for the regular characters.
+These ``special'' characters correspond to the Special Font characters
+of the original troff, except that none of the plain ASCII or Latin-1
+characters are among them.
+The set of these special characters is extendable;
+each font can add one or more of its own.
+.LP
+The present version of troff has several fonts which provide
+``special'' characters, much like the multiple special fonts of ditroff.
+In hindsight, it probably would have been cleaner to treat them
+all equally.
+However, in the initial implementation of \fIpstroff\fP only the Symbol
+font had the special status, and it is still

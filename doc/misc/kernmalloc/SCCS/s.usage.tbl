@@ -1,0 +1,72 @@
+h64885
+s 00001/00002/00042
+d D 1.3 88/04/22 21:14:10 mckusick 3 2
+c fix per Mike's comments
+e
+s 00002/00000/00042
+d D 1.2 88/04/22 18:42:40 mckusick 2 1
+c break the block so both tables get centered
+e
+s 00042/00000/00000
+d D 1.1 88/04/22 17:37:08 mckusick 1 0
+c date and time created 88/04/22 17:37:08 by mckusick
+e
+u
+U
+t
+T
+I 1
+.\"	%W%	(Copyright 1988 M. K. McKusick)	%E%
+.TS
+box;
+c s s s
+c c c c
+n n n n.
+Memory statistics by bucket size
+=
+Size	In Use	Free	Requests
+_
+D 3
+128	329	39	3129242
+E 3
+I 3
+128	329	39	3129219
+E 3
+256	0	0	0
+512	4	0	16
+1024	17	5	648771
+2048	13	0	13
+2049\-4096	0	0	157
+4097\-8192	2	0	103
+8193\-16384	0	0	0
+16385\-32768	1	0	1
+.TE
+I 2
+.DE
+.DS B
+E 2
+.TS
+box;
+c s s s s
+c c c c c
+c n n n n.
+Memory statistics by type
+=
+Type	In Use	Mem Use	High Use	Requests
+_
+mbuf	6	1K	17K	3099066
+devbuf	13	53K	53K	13
+socket	37	5K	6K	1275
+pcb	55	7K	8K	1512
+routetbl	229	29K	29K	2424
+fragtbl	0	0K	1K	404
+D 3
+arptbl	2	1K	1K	23
+E 3
+zombie	3	1K	1K	24538
+namei	0	0K	5K	648754
+ioctlops	0	0K	1K	12
+superblk	24	34K	34K	24
+temp	0	0K	8K	258
+.TE
+E 1

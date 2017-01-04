@@ -1,0 +1,78 @@
+h39367
+s 00006/00002/00041
+d D 6.1 86/05/22 14:12:36 kjd 3 2
+c document for 4.3BSD release
+e
+s 00000/00000/00043
+d D 5.1 86/05/22 14:12:25 kjd 2 1
+c document distributed with 4.2BSD
+e
+s 00043/00000/00000
+d D 4.1 86/05/22 14:12:12 kjd 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+...TM 78-1273-8
+D 3
+...ND October 2, 1978
+E 3
+I 3
+.EH 'USD:1-%''UNIX For Beginners'
+.OH 'UNIX For Beginners''USD:1-%'
+.ND October 2, 1978
+E 3
+...old TM -74-1273-18, October 29, 1974
+D 3
+.RP
+E 3
+I 3
+.\".RP
+E 3
+.TL
+UNIX For Beginners \(em
+Second Edition
+.AU
+Brian W. Kernighan
+.AI
+.MH
+I 3
+.AU
+(Updated for 4.3BSD by Mark Seiden)
+E 3
+.AB
+.PP
+This paper is meant to help
+new users get started on
+the
+.UX
+operating system.
+It includes:
+.IP "\ \(bu"
+basics needed for day-to-day use of the system \(em
+typing commands, correcting typing mistakes, logging in and out,
+mail, inter-terminal communication,
+the file system, printing files,
+redirecting I/O, pipes, and the shell.
+.IP "\ \(bu"
+document preparation \(em
+a brief discussion of the major formatting programs
+and macro packages,
+hints on preparing documents,
+and capsule descriptions of some supporting software.
+.IP "\ \(bu"
+.UC UNIX
+programming \(em
+using the editor, programming the shell, programming in C,
+other languages and tools.
+.IP "\ \(bu"
+An annotated
+.UC UNIX
+bibliography.
+.AE
+E 1

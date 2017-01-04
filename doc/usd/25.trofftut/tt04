@@ -1,4 +1,5 @@
 .\"	@(#)tt04	6.1 (Berkeley) 5/23/86
+.\"	patched for the PostScript reprint
 .\"
 .NH
 Indents and Line Lengths
@@ -135,8 +136,8 @@ command:
 \s36\v'2'P\v'-2'\s0ater noster qui est in caelis sanctificetur
 nomen tuum;
 adveniat regnum tuum;
-'in -.3i
 fiat voluntas tua,
+'in -.3i
 sicut in caelo, et in terra. ...
 Amen.
 .ll +0.3i

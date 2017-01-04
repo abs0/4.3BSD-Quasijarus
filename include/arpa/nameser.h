@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)nameser.h	5.18 (Berkeley) 6/27/88
+ *	@(#)nameser.h	5.23 (Berkeley) 12/23/2011
  */
 
 /*
@@ -70,7 +70,7 @@
 #define T_NS		2		/* authoritative server */
 #define T_MD		3		/* mail destination */
 #define T_MF		4		/* mail forwarder */
-#define T_CNAME		5		/* connonical name */
+#define T_CNAME		5		/* canonical name */
 #define T_SOA		6		/* start of authority zone */
 #define T_MB		7		/* mailbox domain name */
 #define T_MG		8		/* mail group member */
@@ -81,6 +81,25 @@
 #define T_HINFO		13		/* host information */
 #define T_MINFO		14		/* mailbox information */
 #define T_MX		15		/* mail routing information */
+#define	T_TXT		16		/* general purpose RR */
+	/* some post-RFC1035 additions */
+#define	T_RP		17		/* RFC 1183 */
+#define	T_AFSDB		18		/* RFC 1183 */
+#define	T_X25		19		/* RFC 1183 */
+#define	T_ISDN		20		/* RFC 1183 */
+#define	T_RT		21		/* RFC 1183 */
+#define	T_SIG		24		/* I don't really understand DNSSEC */
+#define	T_KEY		25		/* ditto */
+#define	T_PX		26		/* X.400 stuff */
+#define	T_AAAA		28		/* IPv6 */
+#define	T_LOC		29		/* RFC 1876 */
+#define	T_NXT		30		/* obsolete??? */
+#define	T_SRV		33		/* RFC 2052, 2782 */
+#define	T_NAPTR		35		/* ??? */
+#define	T_KX		36		/* ??? */
+#define	T_A6		38		/* does anyone use it? */
+#define	T_DNAME		39		/* ditto */
+#define	T_OPT		41		/* EDNS fake RR */
 	/* non standard */
 #define T_UINFO		100		/* user (finger) information */
 #define T_UID		101		/* user ID */
@@ -97,7 +116,9 @@
  */
 
 #define C_IN		1		/* the arpa internet */
+#define	C_CS		2		/* historical CSNET */
 #define C_CHAOS		3		/* for chaos net at MIT */
+#define	C_HS		4		/* Hesiod */
 	/* Query class values which do not appear in resource records */
 #define C_ANY		255		/* wildcard match */
 
@@ -131,7 +152,8 @@ typedef struct {
 			/* fields in fourth byte */
 	u_char	ra:1;		/* recursion available */
 	u_char	pr:1;		/* primary server required (non standard) */
-	u_char	unused:2;	/* unused bits */
+	u_char	ad:1;		/* authentic data (DNSSEC) */
+	u_char	cd:1;		/* checking disabled (DNSSEC) */
 	u_char	rcode:4;	/* response code */
 #else
 #if defined (vax) || defined(ns32000) || defined (BIT_ZERO_ON_RIGHT)
@@ -144,7 +166,8 @@ typedef struct {
 	u_char	qr:1;		/* response flag */
 			/* fields in fourth byte */
 	u_char	rcode:4;	/* response code */
-	u_char	unused:2;	/* unused bits */
+	u_char	cd:1;		/* checking disabled (DNSSEC) */
+	u_char	ad:1;		/* authentic data (DNSSEC) */
 	u_char	pr:1;		/* primary server required (non standard) */
 	u_char	ra:1;		/* recursion available */
 #else
@@ -165,7 +188,22 @@ typedef struct {
 #define INDIR_MASK	0xc0
 
 /*
- * Structure for passing resource records around.
+ * Be very careful with the following structure: the compiler
+ * will usually pad it to 12 bytes instead of 10!
+ * However, the padding is at the end, so as long as you don't
+ * use sizeof, you'll be OK.
+ */
+struct rrfixed {
+	u_short	type;
+	u_short	class;
+	u_long	ttl;
+	u_short	rdlength;
+};
+
+/*
+ * This struct doesn't belong in a wire protocol definition
+ * header, but apparently some bogus Berkeley code still uses it
+ * and expects it to be in this header. :-(
  */
 struct rrec {
 	short	r_zone;			/* zone number */

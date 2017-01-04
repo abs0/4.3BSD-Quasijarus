@@ -1,0 +1,107 @@
+h21727
+s 00002/00002/00039
+d D 6.2 86/05/12 17:10:32 karels 4 3
+c intro(3M) => math(3M), move see also's to end
+e
+s 00008/00002/00033
+d D 6.1 85/09/11 18:53:08 mckusick 3 2
+c new from Kahan
+e
+s 00012/00008/00023
+d D 1.2 85/08/21 14:53:39 miriam 2 1
+c Revision by Prof. Kahan.
+e
+s 00031/00000/00000
+d D 1.1 85/05/24 11:52:22 miriam 1 0
+c date and time created 85/05/24 11:52:22 by miriam
+e
+u
+U
+t
+From Prof. Kahan at UC at Berkeley
+T
+I 1
+D 2
+.TH ASINH 3M "8 May 1985"
+E 2
+I 2
+D 3
+.TH ASINH 3M "4 August 1985"
+E 2
+.UC 4
+E 3
+I 3
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH ASINH 3M  "%Q%"
+.UC 6
+E 3
+I 2
+.ds up \fIulp\fR
+E 2
+.SH NAME
+asinh, acosh, atanh \- inverse hyperbolic functions
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double asinh(x)
+.B double x;
+.PP
+.B double acosh(x)
+.B double x;
+.PP
+.B double atanh(x)
+.B double x;
+.fi
+.SH DESCRIPTION
+These functions compute the designated inverse hyperbolic functions for real
+arguments.
+D 4
+.SH SEE ALSO
+D 2
+intro(3M)
+E 2
+I 2
+intro(3M), exp(3M), infnan(3M)
+E 4
+.SH ERROR (due to Roundoff etc.)
+These functions inherit much of their error from log1p described in
+exp(3M).  On a VAX, acosh is accurate to about 3 \*(ups,
+asinh and atanh to about 2 \*(ups.
+An \*(up is one \fIU\fRnit in the \fIL\fRast \fIP\fRlace carried.
+E 2
+.SH DIAGNOSTICS
+D 2
+.I Acosh
+returns the reserved operand on the VAX if the argument is less than 1.
+E 2
+I 2
+Acosh returns the reserved operand on a VAX if the argument is less than 1.
+E 2
+.PP
+D 2
+.I Atanh
+returns the reserved operand on the VAX if the argument has absolute value
+bigger than or equal to 1.
+E 2
+I 2
+Atanh returns the reserved operand on a VAX if the argument has absolute
+value bigger than or equal to 1.
+I 4
+.SH SEE ALSO
+math(3M), exp(3M), infnan(3M)
+E 4
+E 2
+.SH AUTHOR
+D 2
+W. Kahan, Kwok-Choi Ng
+E 2
+I 2
+W. Kahan, Kwok\-Choi Ng
+E 2
+E 1

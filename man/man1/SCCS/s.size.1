@@ -1,0 +1,56 @@
+h01718
+s 00001/00001/00017
+d D 6.1 85/04/29 17:56:04 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00006/00015
+d D 5.1 85/04/29 17:55:53 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00021/00000/00000
+d D 4.1 85/04/29 17:55:41 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SIZE 1 VAX-11
+E 2
+I 2
+D 3
+.TH SIZE 1 "18 January 1983"
+E 3
+I 3
+.TH SIZE 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+size \- size of an object file
+.SH SYNOPSIS
+.B size
+[ object ... ]
+.SH DESCRIPTION
+.I Size
+D 2
+prints the (decimal) number of bytes
+required by the
+text, data, and bss
+portions, and their sum in hex and decimal,
+of each object-file argument.
+E 2
+I 2
+prints the (decimal) number of bytes required by the text, data, and
+bss portions, and their sum in hex and decimal, of each object-file argument.
+E 2
+If no file is specified,
+.B a.out
+is used.
+.SH "SEE ALSO"
+a.out(5)
+E 1

@@ -1,0 +1,442 @@
+h19232
+s 00087/00015/00126
+d D 6.2 86/05/20 23:39:59 karels 4 3
+c some messages from this century, too
+e
+s 00001/00001/00140
+d D 6.1 85/04/27 13:13:47 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00033/00054/00108
+d D 5.1 85/04/27 13:13:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00162/00000/00000
+d D 4.1 85/04/27 13:11:47 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CRASH 8 9/1/81
+E 2
+I 2
+D 3
+.TH CRASH 8V 9/1/81
+E 3
+I 3
+.TH CRASH 8V "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+crash \- what happens when the system crashes
+.SH DESCRIPTION
+D 4
+This section explains what happens when the system crashes and how
+you can analyze crash dumps.
+E 4
+I 4
+This section explains what happens when the system crashes
+and (very briefly) how to analyze crash dumps.
+E 4
+.PP
+When the system crashes voluntarily it prints a message of the form
+.IP
+panic: why i gave up the ghost
+.LP
+on the console, takes a dump on a mass storage peripheral,
+and then invokes an automatic reboot procedure as
+described in
+.IR reboot (8).
+(If auto-reboot is disabled on the front panel of the machine the system
+will simply halt at this point.)
+Unless some unexpected inconsistency is encountered in the state
+D 4
+of the file systems due to hardware or software failure the system
+E 4
+I 4
+of the file systems due to hardware or software failure, the system
+E 4
+will then resume multi-user operations.
+.PP
+The system has a large number of internal consistency checks; if one
+of these fails, then it will panic with a very short message indicating
+which one failed.
+I 4
+In many instances, this will be the name of the routine which detected
+the error, or a two-word description of the inconsistency.
+A full understanding of most panic messages requires perusal of the
+source code for the system.
+E 4
+.PP
+The most common cause of system failures is hardware failure, which
+can reflect itself in different ways.  Here are the messages which
+D 4
+you are likely to encounter, with some hints as to causes.
+E 4
+I 4
+are most likely, with some hints as to causes.
+E 4
+Left unstated in all cases is the possibility that hardware or software
+error produced the message in some unexpected way.
+.TP
+I 4
+.B iinit
+This cryptic panic message results from a failure to mount the root filesystem
+during the bootstrap process.
+Either the root filesystem has been corrupted,
+or the system is attempting to use the wrong device as root filesystem.
+Usually, an alternate copy of the system binary or an alternate root
+filesystem can be used to bring up the system to investigate.
+.TP
+.B Can't exec /etc/init
+This is not a panic message, as reboots are likely to be futile.
+Late in the bootstrap procedure, the system was unable to locate
+and execute the initialization process,
+.IR init (8).
+The root filesystem is incorrect or has been corrupted, or the mode
+or type of /etc/init forbids execution.
+.TP
+E 4
+D 2
+IO err in push
+E 2
+I 2
+.B IO err in push
+E 2
+.ns
+.TP
+D 2
+hard IO err in swap
+E 2
+I 2
+.B hard IO err in swap
+E 2
+The system encountered an error trying to write to the paging device
+or an error in reading critical information from a disk drive.
+D 4
+You should fix your disk if it is broken or unreliable.
+E 4
+I 4
+The offending disk should be fixed if it is broken or unreliable.
+E 4
+.TP
+I 4
+.B realloccg: bad optim
+.ns
+.TP
+.B ialloc: dup alloc
+.ns
+.TP
+.B alloccgblk: cyl groups corrupted
+.ns
+.TP
+.B ialloccg: map corrupted
+.ns
+.TP
+.B free: freeing free block
+.ns
+.TP
+.B free: freeing free frag
+.ns
+.TP
+.B ifree: freeing free inode
+.ns
+.TP
+.B alloccg: map corrupted
+These panic messages are among those that may be produced
+when filesystem inconsistencies are detected.
+The problem generally results from a failure to repair damaged filesystems
+after a crash, hardware failures, or other condition that should not
+normally occur.
+A filesystem check will normally correct the problem.
+.TP
+E 4
+D 2
+timeout table overflow
+E 2
+I 2
+.B timeout table overflow
+E 2
+.ns
+D 4
+This really shouldn't be a panic, but until we fix up the data structure
+involved, running out of entries causes a crash.  If this happens,
+you should make the timeout table bigger.
+E 4
+I 4
+This really shouldn't be a panic, but until the data structure
+involved is made to be extensible, running out of entries causes a crash.
+If this happens, make the timeout table bigger.
+E 4
+.TP
+D 2
+KSP not valid
+E 2
+I 2
+.B KSP not valid
+E 2
+.ns
+.TP
+D 2
+SBI fault
+E 2
+I 2
+.B SBI fault
+E 2
+.ns
+.TP
+D 2
+CHM? in kernel
+E 2
+I 2
+.B CHM? in kernel
+E 2
+These indicate either a serious bug in the system or, more often,
+a glitch or failing hardware.
+If SBI faults recur, check out the hardware or call
+field service.  If the other faults recur, there is likely a bug somewhere
+in the system, although these can be caused by a flakey processor.
+Run processor microdiagnostics.
+.TP
+D 2
+machine check %x: \fIdescription\fR
+E 2
+I 2
+.B machine check %x:
+.I description
+E 2
+.ns
+.TP
+D 2
+\0\0\0\fImachine dependent machine-check information\fR
+E 2
+I 2
+.I \0\0\0machine dependent machine-check information
+E 2
+.ns
+D 4
+We should describe machine checks, and will someday.
+For now, ask someone who knows (like your friendly field service people).
+E 4
+I 4
+Machine checks are different on each type of CPU.
+Most of the internal processor registers are saved at the time of the fault
+and are printed on the console.
+For most processors, there is one line that summarizes the type of machine
+check.
+Often, the nature of the problem is apparent from this messaage
+and/or the contents of key registers.
+The VAX Hardware Handbook should be consulted,
+and, if necessary, your friendly field service people should be informed
+of the problem.
+E 4
+.TP
+D 2
+trap type %d, code=%d, pc=%x
+E 2
+I 2
+D 4
+.B trap type %d, code=%d, pc=%x
+E 4
+I 4
+.B trap type %d, code=%x, pc=%x
+E 4
+E 2
+A unexpected trap has occurred within the system; the trap types are:
+D 2
+.PP
+E 2
+I 2
+.sp
+E 2
+.nf
+0	reserved addressing fault
+1	privileged instruction fault
+2	reserved operand fault
+3	bpt instruction fault
+4	xfc instruction fault
+5	system call trap
+6	arithmetic trap
+7	ast delivery trap
+8	segmentation fault
+9	protection fault
+10	trace trap
+11	compatibility mode fault
+12	page fault
+13	page table fault
+.fi
+D 2
+.PP
+The favorite trap type in system crashes is trap type 9, indicating
+E 2
+I 2
+.sp
+The favorite trap types in system crashes are trap types 8 and 9,
+indicating
+E 2
+a wild reference.  The code is the referenced address, and the pc at the
+time of the fault is printed.  These problems tend to be easy to track
+down if they are kernel bugs since the processor stops cold, but random
+D 2
+flakiness seems to cause this sometimes, e.g. we have trapped with
+code 80000800 three times in six months as an instruction fetch went across
+this page boundary in the kernel but have been unable to find any reason
+for this to have happened.
+E 2
+I 2
+flakiness seems to cause this sometimes.
+I 4
+The debugger can be used to locate the instruction and subroutine
+corresponding to the PC value.
+If that is insufficient to suggest the nature of the problem,
+more detailed examination of the system status at the time of the trap
+usually can produce an explanation.
+E 4
+E 2
+.TP
+D 2
+init died
+E 2
+I 2
+.B init died
+E 2
+The system initialization process has exited.  This is bad news, as no new
+users will then be able to log in.  Rebooting is the only fix, so the
+system just does it right away.
+I 4
+.TP
+.B out of mbufs: map full
+The network has exhausted its private page map for network buffers.
+This usually indicates that buffers are being lost, and rather than
+allow the system to slowly degrade, it reboots immediately.
+The map may be made larger if necessary.
+E 4
+.PP
+That completes the list of panic types you are likely to see.
+.PP
+D 2
+When the system crashes it write (or at least attempts to write)
+a image of the current memory into the back end of the primary swap
+E 2
+I 2
+When the system crashes it writes (or at least attempts to write)
+D 4
+an image of memory into the back end of the primary swap
+E 4
+I 4
+an image of memory into the back end of the dump device,
+usually the same as the primary swap
+E 4
+E 2
+area.  After the system is rebooted, the program
+.IR savecore (8)
+runs and preserves a copy of this core image and the current
+system in a specified directory for later perusal.  See
+.IR savecore (8)
+for details.
+.PP
+To analyze a dump you should begin by running
+D 2
+.I "ps \-alxk"
+to print the process table at the time of the crash.
+Use
+E 2
+.IR adb (1)
+D 2
+to examine
+.IR /vmcore .
+The location
+.I _rpb+0t508
+is the bottom of a stack onto which were pushed the stack pointer
+.BR sp ,
+.B PCBB
+(containing the physical address of a
+.IR u_area ),
+.BR MAPEN ,
+.BR IPL ,
+and registers
+.BR r13 \- r0
+(in that order).
+.BR r13 (fp)
+is the system frame pointer and the stack is used in standard
+.B calls
+format.  Use
+.IR  adb (1)
+to get a reverse calling order.
+In most cases this procedure will give
+an idea of what is wrong.
+E 2
+I 2
+with the 
+.B \-k
+D 4
+flag on the core dump.
+E 4
+I 4
+flag on the system load image and core dump.
+If the core image is the result of a panic,
+the panic message is printed.
+E 4
+Normally the command
+D 4
+``*(intstack-4)$c''
+E 4
+I 4
+``$c''
+E 4
+will provide a stack trace from the point of
+the crash and this will provide a clue as to
+what went wrong.
+E 2
+A more complete discussion
+of system debugging is impossible here.
+See, however,
+D 2
+.IR analyze (8)
+for some more hints.
+E 2
+I 2
+``Using ADB to Debug the UNIX Kernel''.
+E 2
+.SH "SEE ALSO"
+D 2
+analyze(8), reboot(8)
+E 2
+I 2
+adb(1),
+D 4
+analyze(8),
+E 4
+reboot(8)
+E 2
+.br
+.I "VAX 11/780 System Maintenance Guide"
+I 4
+and
+.I "VAX Hardware Handbook"
+E 4
+for more information about machine checks.
+D 2
+.SH BUGS
+There should be a better program than
+.IR analyze (8)
+available which prints out more of the system
+state symbolically after a crash to lessen the tedious
+tasks involved in crash analysis.
+E 2
+I 2
+.br
+.I "Using ADB to Debug the UNIX Kernel"
+E 2
+E 1

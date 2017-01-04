@@ -1,0 +1,533 @@
+h07694
+s 00005/00000/00255
+d D 2.13 87/10/01 12:57:44 garrison 16 15
+c Added CCC86 (Sigplan compiler construction conference)
+e
+s 00049/00003/00206
+d D 2.12 87/03/13 21:54:22 garrison 15 14
+c add new journals, conferences, places (mlvdv)
+e
+s 00006/00000/00203
+d D 2.11 87/03/05 16:20:03 garrison 14 13
+c Added POPL14 and OOPS86 conferences, and fixed some of
+c the early POPL conferences in bibinc.shortnames
+e
+s 00027/00001/00176
+d D 2.10 85/03/07 17:51:27 garrison 13 11
+c Added IEEESW,JS&S,CHI83,ICSE3-7,PSDE84,TEXT81,IJMMS,TOOIS (mlvdv)
+e
+s 00025/00001/00176
+d R 2.10 85/02/18 19:20:01 garrison 12 11
+c added IEEESW, JS&S, CHI83, ICSE3-7, PSDE84, TEXT81 (mlvdv)
+e
+s 00006/00000/00171
+d D 2.9 85/01/17 13:51:10 garrison 11 10
+c added popl12 and 13
+e
+s 00002/00001/00169
+d D 2.8 84/10/12 15:02:34 rrh 10 9
+c ccc84 has now appeared in sigplan
+e
+s 00008/00000/00162
+d D 2.7 84/04/11 14:49:19 garrison 9 8
+c Added POPL1 ... POPL4
+e
+s 00008/00009/00154
+d D 2.6 84/04/11 14:43:23 rrh 8 7
+c its ACM SIGPLAN symposium, not SIGPLAN symposium... pick pick
+e
+s 00003/00001/00160
+d D 2.5 84/01/08 12:54:18 rrh 7 6
+c add city and date to JER3
+e
+s 00076/00026/00085
+d D 2.4 84/01/06 17:02:29 rrh 6 4
+c add ccc, asplos, pliss, update popl, add more places
+e
+s 00076/00026/00085
+d R 2.4 84/01/06 16:48:47 rrh 5 4
+c update popl's, add ccc conferences, a bunch of new places, a bunch
+c of new publishers
+e
+s 00023/00001/00088
+d D 2.3 84/01/06 11:06:18 rrh 4 3
+c add asplos, pliss, ccc(s), popl 83 and popl 84
+e
+s 00004/00004/00085
+d D 2.2 83/09/09 21:14:00 garrison 3 2
+c Incorporate changes from Arizona
+e
+s 00003/00000/00086
+d D 2.1 83/06/22 14:57:41 garrison 2 1
+c Add keywords, make new release to send to Arizona
+e
+s 00086/00000/00000
+d D 1.1 83/06/08 15:30:50 garrison 1 0
+c date and time created 83/06/08 15:30:50 by garrison
+e
+u
+U
+t
+T
+I 2
+#
+#	"%W%	%G%";
+D 3
+#
+E 3
+E 2
+I 1
+# full journal names, and other names
+#
+# journals
+D ACTA Acta Informatica
+D BIT B\&IT
+D BSTJ Bell System Technical Journal
+D CACM Communications of the ACM
+D COMP IEEE Computer
+D COMPJOUR The Computer Journal
+D COMPLANG Journal of Computer Languages
+D COMPSUR ACM Computing Surveys
+I 15
+D HCI Human-Computer Interaction
+D HUMFACT Human Factors
+E 15
+D I&C Information and Control
+I 4
+D IBMJRD IBM Journal of Research and Development
+I 6
+D IBMSJ IBM Systems Journal
+I 13
+D IEEESW IEEE Software
+E 13
+E 6
+E 4
+D IEEETSE IEEE Transactions on Software Engineering
+I 15
+D IEEETSMC IEEE Transactions on Systems, Man, and Cybernetics
+E 15
+D IEEETC IEEE Transactions on Computers
+I 3
+D IJCIS International Journal of Computer and Information Sciences
+I 13
+D IJMMS International Journal of Man-Machine Studies
+E 13
+E 3
+D IPL Information Processing Letters
+D JACM Journal of the ACM
+D JCSS Journal of Computer and System Sciences
+I 13
+D JS&S Journal of Systems and Software
+E 13
+I 6
+D MATHST Mathematics Systems Theory
+E 6
+D NMATH Numerical Mathematics
+D SIAMJC Siam Journal on Computing
+D SIAMJNA Siam Journal on Numerical Analysis
+D SIGACT S\&IGACT News
+I 15
+D SIGCHI ACM S\&IGCHI Bulletin
+E 15
+D SIGPLAN SI\&GPLAN Notices
+D SIGSOFT Software Engineering Notes
+D 3
+D SP&E Software\*(emPractice & Experience
+D SPE Software\*(emPractice & Experience
+E 3
+I 3
+D SP&E Software\(emPractice & Experience
+D SPE Software\(emPractice & Experience
+I 4
+D TOCS ACM Transactions on Computer Systems
+E 4
+E 3
+D TODS ACM Transactions on Database Systems
+D TOMS ACM Transactions on Mathematical Software
+I 13
+D TOOIS ACM Transactions on Office Information Systems
+E 13
+D TOPLAS ACM Transactions on Programming Languages and Systems
+#
+# CONFs
+#
+D PROC Proceedings
+D CONF Conference
+D SYMP Symposium
+I 4
+D 6
+D ASPLOS82 PROC of the SYMP on Architectural Support for Programming Langauges and Operating Systems\
+%C Palo Alto, California\
+%D MAR 1982
+D CCC79 PROC of the SIGPLAN 1979 SYMP on Compiler Construction\
+%C Denver, Colorado\
+%D AUG 1979
+D CCC82 PROC of the SIGPLAN 1982 SYMP on Compiler Construction\
+%C Boston, Massachusetts
+%D JUN 1982
+D CCC84 PROC of the SIGPLAN 1984 SYMP on Compiler Construction\
+%C Montreal, Quebec
+%D JUN 1984
+D PLISS83 PROC SIGPLAN 1983 SYMP on Programming Language Issues in Software Systems\
+%C San Francisco, California\
+%D JUN 1983
+E 6
+I 6
+D 8
+D ASPLOS82 PROC of the SYMP on Architectural Support for Programming Languages and Operating Systems, SIGPLAN\
+E 8
+I 8
+D ASPLOS82 PROC of the SYMP on Architectural Support for Programming Languages and Operating Systems, ACM SIGPLAN\
+E 8
+%C Palo Alto, CA\
+%D MAR 1982\
+%V 17\
+%N 4
+D 8
+D CCC79 PROC of the SI\&GPLAN 1979 SYMP on Compiler Construction, SIGPLAN\
+E 8
+I 8
+D CCC79 PROC of the ACM SI\&GPLAN 1979 SYMP on Compiler Construction, SIGPLAN\
+E 8
+%C Denver, CO\
+%D AUG 1979\
+%V 14\
+%N 8
+D 8
+D CCC82 PROC of the SI\&GPLAN 1982 SYMP on Compiler Construction, SIGPLAN\
+E 8
+I 8
+D CCC82 PROC of the ACM SI\&GPLAN 1982 SYMP on Compiler Construction, SIGPLAN\
+E 8
+%C Boston, MA\
+%D JUN 1982\
+%V 17\
+%N 6
+D 8
+D CCC84 PROC of the SI\&GPLAN 1984 SYMP on Compiler Construction, SIGPLAN\
+E 8
+I 8
+D CCC84 PROC of the ACM SI\&GPLAN 1984 SYMP on Compiler Construction, SIGPLAN\
+E 8
+%C Montreal, Quebec\
+%D JUN 1984\
+D 8
+%V 19\
+%N 6
+D PLISS83 PROC SI\&GPLAN 1983 SYMP on Programming Language Issues in Software Systems, SIGPLAN\
+E 8
+I 8
+D 10
+%N (To Appear as issue of SIGPLAN)
+E 10
+I 10
+%V 19 \
+%N 6
+I 16
+D CCC86 PROC of the ACM SI\&GPLAN 1986 SYMP on Compiler Construction, SIGPLAN\
+%C Palo Alto, CA\
+%D JUL 1986\
+%V 21 \
+%N 7
+E 16
+I 13
+D CHI83 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%C Boston, MA\
+%D DEC 1983
+I 15
+D CHI85 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%C San Francisco, CA\
+%D APR 1985
+D CHI86 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%C Boston, MA\
+%D APR 1986
+D CHI87 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%C Toronto, Canada\
+%D APR 1987
+E 15
+D ICSE International CONF on Software Engineering
+D ICSE3 PROC 3rd ICSE\
+%D MAY 1978
+D ICSE4 PROC 4th ICSE\
+%D 1979
+D ICSE5 PROC 5th ICSE\
+%C San Diego, CA\
+%D MAR 1981
+D ICSE6 PROC 6th ICSE\
+%C Tokyo, Japan\
+%D SEP 1982
+D ICSE7 PROC 7th ICSE\
+%C Orlando, FL\
+%D APR 1984
+I 15
+D ICSE8 PROC 8th ICSE\
+%C London\
+%D AUG 1985
+D ICSE9 PROC 9th ICSE\
+%C Monterey, CA\
+%D MAR 1987
+D IJCAI International Joint CONF on Artificial Intelligence
+D OIS82 PROC S\&IGOA CONF on Office Information Systems\
+%C Philadelphia, PA\
+%D JUN 1982
+D OIS84 PROC Second ACM-S\&IGOA CONF on Office Information Systems\
+%C Toronto, Canada\
+%D JUN 1984
+D OIS86 PROC Third ACM-S\&IGOIS CONF on Office Information Systems\
+%C Providence, RI\
+%D OCT 1986
+D OOPS86 Object-Oriented Programming Systems, Languages and Applications CONF Proceedings\
+%C Portland, OR\
+%D NOV 1986
+D OOPS87 Object-Oriented Programming Systems, Languages and Applications CONF Proceedings\
+%C Orlando, FL\
+%D OCT 1987
+E 15
+E 13
+E 10
+D PLISS83 PROC ACM SI\&GPLAN 1983 SYMP on Programming Language Issues in Software Systems, SIGPLAN\
+E 8
+%C San Francisco, CA\
+%D JUN 1983\
+%V 18\
+%N 6
+E 6
+E 4
+D POPL ACM SYMP on Principles of Programming Languages
+I 9
+D POPL1 CONF Record of the First POPL\
+%D JAN 1974
+D POPL2 CONF Record of the Second POPL\
+%D JAN 1975
+D POPL3 CONF Record of the Third POPL\
+%D JAN 1976
+D POPL4 CONF Record of the Fourth POPL\
+%D JAN 1977
+E 9
+D POPL5 CONF Record of the Fifth POPL\
+D 6
+%C Tucson, Arizona\
+E 6
+I 6
+%C Tucson, AZ\
+E 6
+%D JAN 1978
+D POPL6 CONF Record of the Sixth POPL\
+D 6
+%C San Antonio, Texas\
+E 6
+I 6
+%C San Antonio, TX\
+E 6
+%D JAN 1979
+D POPL7 CONF Record of the Seventh POPL\
+D 6
+%C Las Vegas, Nevada\
+E 6
+I 6
+%C Las Vegas, NV\
+E 6
+%D JAN 1980
+D POPL8 CONF Record of the Eighth POPL\
+D 6
+%C Williamsburg, Virginia\
+E 6
+I 6
+%C Williamsburg, VA\
+E 6
+%D JAN 1981
+D POPL9 CONF Record of the Ninth POPL\
+D 6
+%C Albuquerque, New Mexico\
+E 6
+I 6
+%C Albuquerque, NM\
+E 6
+%D JAN 1982
+D 4
+D POPL10 CONF Record of the Tenth POPL
+E 4
+I 4
+D POPL10 CONF Record of the Tenth POPL\
+D 6
+%C Las Vegas, Nevada\
+E 6
+I 6
+%C Austin, TX\
+E 6
+%D JAN 1983
+D POPL11 CONF Record of the Eleventh POPL\
+D 6
+%C Salt Lake City, Utah\
+E 6
+I 6
+%C Salt Lake City, UT\
+E 6
+%D JAN 1984
+I 11
+D POPL12 CONF Record of the Twelfth POPL\
+%C New Orleans, LA\
+%D JAN 1985
+D POPL13 CONF Record of the Thirteenth POPL\
+%C Tampa Bay, FL\
+%D JAN 1986
+I 14
+D POPL14 CONF Record of the Fourteenth POPL\
+%C Munich, West Germany\
+%D JAN 1987
+D 15
+D OOPS86 Object-Oriented Programming Systems, Languages and Applications CONF Proceedings\
+%C Portland, OR\
+%D NOV 1986
+E 15
+E 14
+I 13
+D PSDE84 PROC of the ACM S\&IGSOFT/S\&IGPLAN Software Engineering SYMP on Practical Software Development Environments\
+%C Pittsburgh, PA\
+%D APR 1984
+I 15
+D PSDE86 PROC of the ACM S\&IGSOFT/S\&IGPLAN Software Engineering SYMP on Practical Software Development Environments\
+%C Palo Alto, CA\
+%D DEC 1986
+D SEEPIL Workshop on Software Engineering Environments for\
+Programming-in-the-Large\
+%C Harwichport, MA\
+%D JUN 1985
+E 15
+D TEXT81 PROC of the ACM S\&IGPLAN S\&IGOA SYMP on Text Manipulation\
+%C Portland, OR\
+%D JUN 1981
+E 13
+E 11
+E 4
+D STOC Annual ACM SYMP on Theory of Computing
+D FOCS Annual SYMP on Foundations of Computer Science
+D SOSP SYMP on Operating System Principles
+D 13
+D ICSE International CONF on Software Engineering
+E 13
+D JICAI Joint International CONF on Artificial Intelligence
+I 3
+D HICSS Hawaii International CONF on System Science
+I 6
+D ADA80 PROC of the ACM-SI\&GPLAN Symposium on the Ada Programming Language, SIGPLAN\
+%D DEC 1980\
+%C Boston, MA\
+%V 15\
+%N 11
+D FJCC Fall Joint Computer Conference
+I 15
+D SJCC Spring Joint Computer CONF
+E 15
+D 7
+D JER3 PROC Third Jerusalem CONF on Information Technology
+E 7
+I 7
+D JER3 PROC Third Jerusalem CONF on Information Technology\
+%C Jerusalem, Israel\
+%D AUG 1978
+E 7
+D WJCC PROC Western Joint Computer CONF
+E 6
+E 3
+#
+#  publishers
+#
+I BMACLIB/bibinc.publishers
+#
+# months
+#
+D JAN January
+D FEB February
+D MAR March
+D APR April
+D MAY May
+D JUN June
+D JUL July
+D AUG August
+D SEP September
+D OCT October
+D NOV November
+D DEC December
+#
+#  miscellaneous
+#
+D 6
+D DEPT Department
+D UNIV University
+E 6
+D TR Technical Report
+I 6
+D DISS Dissertation
+#
+# Short Places
+#
+D CORP Corporation
+D UNIV University
+E 6
+D UATR UNIV of Arizona TR
+D 6
+D DCS  DEPT of Computer Science
+E 6
+I 6
+D DCS DEPT of Computer Science
+E 6
+D CSD Computer Science DEPT
+D 6
+D DISS Dissertation
+E 6
+I 6
+D DEPT Department
+D ERL Electronics Research Laboratory
+#
+# Full Places
+#
+D BTLMH Bell Laboratories\
+%C Murray Hill, NJ
+D BTLHO Bell Laboratories\
+%C Holmdel, NJ
+D CMU Carnegie-Mellon University\
+%C Pittsburgh, PA
+D CMUCS CSD, CMU
+I 15
+D CSLI Center for the Study of Language and Information\
+%C Stanford, CA
+E 15
+D DG Data General
+#
+I 15
+D IBMRD IBM CORP, Research Division
+E 15
+D MITLCS MIT Laboratory for Computer Science\
+%C Cambridge, MA
+D MITAI MIT Artificial Intelligence Laboratory\
+%C Cambridge, MA
+D SUCS CSD, Stanford University
+D SUCSL Computer Systems Lab., Stanford Electronics Lab., Dept. of Electrical Engineering and Computer Science
+D SUEE Department of Electrical Engineering, Stanford University
+D TUM Technische Universita\*`t Mu\*`nchen
+D UCB University of California, Berkeley
+D UCBCS Computer Science Division, EECS, UCB\
+D 8
+%C Berkeley, CA
+E 8
+I 8
+%C CA
+E 8
+D UCBERL ERL, EECS, UCB\
+D 8
+%C Berkeley, CA
+E 8
+I 8
+%C CA
+I 15
+D XEROXISL Intelligent Systems Laboratory, XEROXPARC
+D XEROXPARC Xerox Palo Alto Research Center\
+%C Palo Alto, CA
+E 15
+E 8
+E 6
+D 3
+
+E 3
+E 1

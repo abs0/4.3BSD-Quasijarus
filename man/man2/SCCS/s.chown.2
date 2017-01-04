@@ -1,0 +1,283 @@
+h16600
+s 00006/00000/00111
+d D 6.6 86/05/22 10:18:36 mckusick 8 7
+c note that symbolic links are not followed
+e
+s 00008/00007/00103
+d D 6.5 86/05/13 11:26:23 karels 7 6
+c owners can chgrp; clarifications
+e
+s 00010/00002/00100
+d D 6.4 85/08/26 23:30:38 mckusick 6 5
+c update error messages (mostly from sun!guy)
+e
+s 00001/00001/00101
+d D 6.3 85/06/28 16:22:07 sechrest 5 4
+c Improved English
+e
+s 00012/00011/00090
+d D 6.2 85/05/22 18:30:25 mckusick 4 3
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00100
+d D 6.1 85/05/09 16:03:00 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00073/00019/00028
+d D 5.1 85/05/09 16:02:51 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00047/00000/00000
+d D 4.1 85/05/09 16:02:43 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHOWN 2 
+E 2
+I 2
+D 3
+.TH CHOWN 2 "27 July 1983"
+E 3
+I 3
+.TH CHOWN 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+chown \- change owner and group of a file
+.SH SYNOPSIS
+.nf
+D 2
+.B chown(name, owner, group)
+.B char *name;
+E 2
+I 2
+.ft B
+chown(path, owner, group)
+char *path;
+int owner, group;
+.PP
+.ft B
+fchown(fd, owner, group)
+int fd, owner, group;
+E 2
+.fi
+.SH DESCRIPTION
+The file
+D 2
+whose name is given by the null-terminated string pointed
+to by
+.I name
+E 2
+I 2
+D 5
+which is named by \fIpath\fP or referenced by \fIfd\fP
+E 5
+I 5
+that is named by \fIpath\fP or referenced by \fIfd\fP
+E 5
+E 2
+has its
+.I owner
+and 
+.I group
+changed as specified.
+D 7
+Only the super-user may
+execute this call,
+E 7
+I 7
+Only the super-user
+may change the owner of the file,
+E 7
+because if users were able to give files away,
+D 2
+they could defeat the (nonexistent)
+file-space accounting procedures.
+E 2
+I 2
+they could defeat the file-space accounting procedures.
+I 7
+The owner of the file may change the group
+to a group of which he is a member.
+E 7
+E 2
+.PP
+On some systems,
+.I chown
+D 2
+clears the set-user-id bit
+E 2
+I 2
+clears the set-user-id and set-group-id bits
+E 2
+on the file
+to prevent accidental creation of
+D 2
+set-user-id programs owned by the super-user.
+E 2
+I 2
+D 7
+set-user-id and set-group-id programs
+owned by the super-user.
+E 7
+I 7
+set-user-id and set-group-id programs.
+E 7
+.PP
+.I Fchown
+is particularly useful when used in conjunction
+with the file locking primitives (see
+.IR flock (2)).
+.PP
+D 7
+Only one of the owner and group id's
+may be set by specifying the other as \-1.
+E 7
+I 7
+One of the owner or group id's
+may be left unchanged by specifying it as \-1.
+I 8
+.PP
+If the final component of
+.I path
+is a symbolic link,
+the ownership and group of the symbolic link is changed,
+not the ownership and group of the file or directory to which it points.
+E 8
+E 7
+.SH "RETURN VALUE
+Zero is returned if the operation was successful;
+\-1 is returned if an error occurs, with a more specific
+error code being placed in the global variable \fIerrno\fP.
+.SH "ERRORS
+.I Chown
+will fail and the file will be unchanged if:
+.TP 15
+D 4
+[EINVAL]
+The argument path does not refer to a file.
+.TP 15
+E 4
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+D 4
+[ENOENT]
+The argument pathname is too long.
+E 4
+I 4
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+E 4
+.TP 15
+D 4
+[EPERM]
+The argument contains a byte with the high-order bit set.
+E 4
+I 4
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+E 4
+.TP 15
+[ENOENT]
+The named file does not exist.
+.TP 15
+[EACCES]
+D 4
+Search permission is denied on a component of the path prefix.
+E 4
+I 4
+Search permission is denied for a component of the path prefix.
+E 4
+.TP 15
+I 4
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+E 4
+[EPERM]
+D 6
+The effective user ID does not match the owner of the file and
+the effective user ID is not the super-user.
+E 6
+I 6
+The effective user ID is not the super-user.
+E 6
+.TP 15
+[EROFS]
+The named file resides on a read-only file system.
+.TP 15
+[EFAULT]
+.I Path
+points outside the process's allocated address space.
+I 6
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 6
+D 4
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+E 4
+.PP
+.I Fchown
+will fail if:
+.TP 15
+[EBADF]
+.I Fd
+does not refer to a valid descriptor.
+.TP 15
+[EINVAL]
+.I Fd
+refers to a socket, not a file.
+I 4
+.TP 15
+I 6
+[EPERM]
+The effective user ID is not the super-user.
+.TP 15
+E 6
+[EROFS]
+The named file resides on a read-only file system.
+I 6
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 6
+E 4
+E 2
+.SH "SEE ALSO"
+D 2
+chown(1), passwd(5)
+.SH DIAGNOSTICS
+Zero is returned if the owner is changed;
+\-1 is returned
+on illegal owner changes.
+.SH "ASSEMBLER (PDP-11)"
+(chown = 16.)
+.br
+.B sys chown; name; owner; group
+E 2
+I 2
+D 7
+chmod(2), flock(2)
+E 7
+I 7
+chown(8), chgrp(1), chmod(2), flock(2)
+E 7
+E 2
+E 1

@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)1.t	6.3 (Berkeley) 4/28/86
+.\"	@(#)1.t	6.4 (Berkeley) 8/24/04
 .\"
 .NH 1
 Overview
@@ -19,9 +19,10 @@ printers, and
 printers attached via serial lines that require
 line initialization such as the baud rate.
 .LP
-Raster output devices
-such as a Varian or Versatec, and laser printers such as an Imagen,
-are also supported by the line printer system.
+The line printer system can also support, via converting filters,
+printing devices that do not follow the line printer model.
+Ready to use filters are provided for Varian/Versatec and for
+PostScript printers.
 .PP
 The line printer system consists mainly of the
 following files and commands:
@@ -46,5 +47,5 @@ the format of this data base, as well as
 specifying default values for important items
 such as the directory in which spooling is performed.
 This document introduces some of the
-information that may be placed
+information that may be placed in
 .IR printcap .

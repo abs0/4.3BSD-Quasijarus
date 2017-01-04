@@ -1,0 +1,55 @@
+/usr/src/sys/net/SCCS/s.if_pppipcp.c:
+7.4 07/04/15 05:11:04 msokolov 4 3
+fixed race condition with Up/Down events
+/usr/src/sys/net/SCCS/s.if_pppasync.c:
+7.4 07/04/15 05:11:06 msokolov 4 3
+fixed race condition with Up/Down events
+/usr/src/sys/net/SCCS/s.if_ppplcp.c:
+7.5 07/04/15 05:11:08 msokolov 5 4
+fixed race condition with Up/Down events
+/usr/src/sys/net/SCCS/s.if_pppvar.h:
+7.3 07/04/15 05:11:11 msokolov 3 2
+fixed race condition with Up/Down events
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.9 07/04/15 05:11:12 msokolov 9 8
+fixed race condition with Up/Down events
+/usr/src/sys/netinet/SCCS/s.in.h:
+7.7 07/05/18 19:46:53 msokolov 39 38
+IPPROTO_GRE defined
+/usr/src/sys/conf/SCCS/s.files:
+7.10 07/05/18 19:49:26 msokolov 36 35
+add netinet/ip_gre.c
+/usr/src/sys/netinet/SCCS/s.in_proto.c:
+7.4 07/05/18 19:58:52 msokolov 22 21
+added GRE
+/usr/src/usr.lib/sendmail/src/SCCS/s.collect.c:
+5.6 07/09/19 19:59:18 msokolov 85 84
+change to oversize handling strategy:
+trim at limit and silently discard the rest instead of error in mid-message
+/usr/src/usr.lib/sendmail/src/SCCS/s.version.c:
+5.61.1.6 07/09/20 02:56:07 msokolov 490 489
+change to oversize handling strategy:
+trim at limit and silently discard the rest instead of error in mid-message
+/usr/src/lib/libc/inet/SCCS/s.inet_addr.c:
+5.7 07/12/14 19:56:10 msokolov 12 11
+off by 1 error allowed 4 dots (5 parts) resulting in a buffer overflow
+/usr/src/lib/libc/inet/SCCS/s.inet_network.c:
+5.6 07/12/14 19:56:12 msokolov 8 7
+off by 1 error allowed 4 dots (5 parts) resulting in a buffer overflow
+/usr/src/lib/libc/inet/SCCS/s.inet_makeaddr.c:
+5.4 07/12/14 20:35:30 msokolov 8 7
+attempt to handle the case of the net number already having all 4 octets
+no guarantee of correctness, but can't be worse than the garbage returned
+previously
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.10 08/02/18 04:16:37 msokolov 10 9
+hooks for pppaux unknown protocols Rx
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.19 08/02/18 04:17:26 msokolov 86 85
+new ioctls for pppaux
+/usr/src/sys/conf/SCCS/s.files:
+7.11 08/02/18 04:17:59 msokolov 37 36
+welcome net/if_pppaux.c
+/usr/src/sys/vax/SCCS/s.conf.c:
+7.16 08/02/18 04:18:27 msokolov 120 119
+welcome pppaux char device

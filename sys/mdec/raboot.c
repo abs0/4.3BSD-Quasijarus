@@ -4,7 +4,7 @@
  * specifies the terms and conditions for redistribution.
  */
 
-/* "@(#)raboot.c	7.2 (Berkeley) 8/28/86" */
+/* "@(#)raboot.c	7.3 (Berkeley) 2/28/04" */
 #include <sys/disklabel.h>
 
 	.set	MAJOR,9			/* major("/dev/ra0a") */
@@ -29,13 +29,10 @@ start:
 	xorb2	$0x01,r4		/* complement bit */
 	insv	r4,$24,$8,r10		/* set UBA number */
 	insv	r3,$16,$8,r10		/* drive number */
-	extzv	$12,$4,r5,r4		/* get partition from r5 */
-	bicw2	$0xf000,r5		/* remove from r5 */
+	extzv	$28,$4,r5,r4		/* get partition from r5 */
+	bicl2	$0xf0000000,r5		/* remove from r5 */
 	insv	r4,$8,$8,r10		/* set partition */
 	movl	r5,r11			/* boot flags */
-	movl	r1,r9			/* UNIBUS I/O page address */
-	movl	r2,r8			/* boot device CSR */
-	movl	r3,r7			/* unit number */
 	brw	start0
 
 /*
@@ -47,6 +44,9 @@ packlabel:
 	.space	d_end_
 
 start0:
+	movl	r1,r9			/* UNIBUS I/O page address */
+	movl	r2,r8			/* boot device CSR */
+	movl	r3,r7			/* unit number */
 	movl	$RELOC,sp
 	moval	init,r4
 	movc3	$end,(r4),(sp)

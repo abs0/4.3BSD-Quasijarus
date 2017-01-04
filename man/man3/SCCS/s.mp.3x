@@ -1,0 +1,312 @@
+h58556
+s 00002/00002/00157
+d D 6.4 86/06/04 14:37:07 mckusick 4 3
+c needs a date
+e
+s 00001/00001/00158
+d D 6.3 86/05/27 11:14:53 kjd 3 2
+c add comma
+e
+s 00090/00034/00069
+d D 6.2 86/03/13 18:24:26 donn 2 1
+c Added copyright and sccs keywords.  Updated it to cover more of the
+c routines in the package and to fix syntax and other fluff.
+e
+s 00103/00000/00000
+d D 6.1 86/03/13 18:12:22 donn 1 0
+c date and time created 86/03/13 18:12:22 by donn
+e
+u
+U
+t
+T
+I 2
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+E 2
+I 1
+D 4
+.TH MP 3X
+.UC
+E 4
+I 4
+.TH MP 3X "%Q%"
+.UC 6
+E 4
+.SH NAME
+D 2
+itom, mcmp, m_in, m_out, madd, msub, mult, mdiv, min, mout,
+pow, gcd, rpow \- multiple precision integer arithmetic
+E 2
+I 2
+madd, msub, mult, mdiv, pow, gcd, invert, rpow, msqrt, mcmp,
+move, min, omin, fmin, m_in, mout, omout, fmout, m_out, sdiv, itom
+\- multiple precision integer arithmetic
+E 2
+.SH SYNOPSIS
+.nf
+.B #include <mp.h>
+D 2
+.sp
+E 2
+I 2
+.B #include <stdio.h>
+.PP
+E 2
+.B "typedef struct mint { int len; short *val; } MINT;"
+.PP
+D 2
+.PP
+E 2
+.B madd(a, b, c)
+.B msub(a, b, c)
+.B mult(a, b, c)
+.B mdiv(a, b, q, r)
+D 2
+.B min(a)
+.B mout(a)
+E 2
+.B pow(a, b, m, c)
+.B gcd(a, b, c)
+I 2
+.B invert(a, b, c)
+E 2
+.B rpow(a, n, c)
+.B msqrt(a, b, r)
+D 2
+.B mcmp(a,b)
+E 2
+I 2
+.B mcmp(a, b)
+.B move(a, b)
+.B min(a)
+.B omin(a)
+.B fmin(a, f)
+.B m_in(a, n, f)
+.B mout(a)
+.B omout(a)
+.B fmout(a, f)
+.B m_out(a, n, f)
+E 2
+.B MINT *a, *b, *c, *m, "*q, *r;"
+I 2
+.B FILE *f;
+E 2
+.B int n;
+.PP
+D 2
+.B
+E 2
+.B sdiv(a, n, q, r)
+.B MINT *a, *q;
+I 2
+.B short n;
+E 2
+.B short *r;
+.PP
+.B MINT *itom(n)
+D 2
+.PP
+.B cc ... \-lmp
+E 2
+.SH DESCRIPTION
+These routines perform arithmetic on integers of
+arbitrary length.
+The integers are stored using the defined type
+.IR MINT .
+D 2
+Pointers to
+a
+E 2
+I 2
+Pointers to a
+E 2
+.I MINT
+can be initialized using the function
+.I itom
+which sets the initial value to
+.IR n .
+D 3
+After that space is managed automatically by the routines.
+E 3
+I 3
+After that, space is managed automatically by the routines.
+E 3
+.PP
+D 2
+.IR madd , " msub" , " mult" ,
+assign to their third arguments the sum, difference, and
+product, respectively, of their first two arguments.
+E 2
+I 2
+.IR madd , " msub " and " mult"
+assign to
+.I c
+the sum, difference and
+product, respectively, of
+.IR a " and " b .
+E 2
+.I mdiv
+D 2
+assigns the quotient and remainder, respectively,
+to its third and fourth arguments.
+E 2
+I 2
+assigns to
+.IR q " and " r
+the quotient and remainder obtained
+from dividing
+.IR a " by " b.
+E 2
+.I sdiv
+is like
+.I mdiv
+D 2
+except that the divisor is an ordinary integer.
+E 2
+I 2
+except that the divisor is a short integer
+.I n
+and the remainder is placed in a short
+whose address is given as
+.IR r .
+E 2
+.I msqrt
+D 2
+produces the square root and remainder of its first argument.
+E 2
+I 2
+produces the integer square root of
+.IR a " in " b
+and places the remainder in
+.IR r .
+E 2
+.I rpow
+D 2
+calculates
+E 2
+I 2
+calculates in
+.I c
+the value of
+E 2
+.I a
+raised to the (``regular'' integral) power
+.IR n ,
+while
+.I pow
+D 2
+calculates this (for
+.IR *n " a " MINT )
+reduced modulo
+E 2
+I 2
+calculates this with a full multiple precision exponent
+.I b
+and the result is reduced modulo
+E 2
+.IR m .
+I 2
+.I gcd
+returns the greatest common denominator of
+.IR a " and " b " in " c ,
+and
+.I invert
+computes
+.IR c " such that " a*c " mod " b " = 1,"
+for
+.IR a " and " b
+relatively prime.
+.I mcmp
+returns a negative, zero or positive integer value when
+.I a
+is less than, equal to or greater than
+.IR b ,
+respectively.
+.I move
+copies
+.IR a " to " b .
+E 2
+.IR min " and " mout
+D 2
+do decimal input and output.
+E 2
+I 2
+do decimal input and output while
+.IR omin " and " omout
+do octal input and output.
+E 2
+More generally,
+.IR fmin " and " fmout
+D 2
+do decimal input and output from file
+E 2
+I 2
+do decimal input and output using file
+E 2
+.IR f ,
+and
+.IR m_in " and " m_out
+D 2
+do I/O base 
+E 2
+I 2
+do I/O with arbitrary radix
+E 2
+.IR n .
+I 2
+On input, records should have the form of
+strings of digits terminated by a newline;
+output records have a similar form.
+E 2
+.PP
+D 2
+The functions are obtained with the
+loader option
+E 2
+I 2
+Programs which use the multiple-precision arithmetic library
+must be loaded using the loader flag
+E 2
+.IR \-lmp .
+.SH FILES
+.ta 2i
+/usr/include/mp.h	include file
+.br
+/usr/lib/libmp.a	object code library
+.SH SEE ALSO
+D 2
+ape(3X)
+E 2
+I 2
+dc(1), bc(1)
+E 2
+.SH DIAGNOSTICS
+Illegal operations and running out of memory
+produce messages and core images.
+.SH BUGS
+Bases for input and output should be <= 10.
+.PP
+D 2
+The
+.I mp
+package has some bugs--users are advised to use
+.I ape
+instead.
+E 2
+I 2
+.IR dc (1)
+and
+.IR bc (1)
+don't use this library.
+.PP
+The input and output routines are a crock.
+.PP
+.I pow
+is also the name of a standard math library routine.
+E 2
+E 1

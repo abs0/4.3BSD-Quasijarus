@@ -1,0 +1,31 @@
+.EQ
+delim $$
+.EN
++
+.PS
+x = .5
+# this is the start of the bottom row of box + ellipse
+arrow right x
+box wid x ht x/2 "$lambda sub n$"
+arrow
+ellipse width x ht x/2 "$mu sub n$"
+arrow
+# now start the top outer part
+line up 3*x
+arrow left 3*x/2
+box wid 2*x ht x "+++ big box +++"
+arrow left 3*x/2
+line down 3*x
+# this brings us back to A
+move up 2*x
+arrow right x
+box wid x ht x/2 "$lambda sub 1$"
+arrow
+ellipse width x ht x/2 "$mu sub 1$"
+arrow
+# this finishes the inner row
+#now to middle
+# buggy: move to 5*x/2, x
+"\s-2\(bu  \(bu  \(bu\s0" at 3*x/2, x
+.PE
++

@@ -3,27 +3,31 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.3	(Berkeley)	6/2/87
+#	@(#)Makefile	5.4	(Berkeley)	12/7/04
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
 SRCS=	main.c init.c subr.c gettytab.c get_date.c
 OBJS=	main.o init.o subr.o gettytab.o get_date.o
+PROGS=	getty smgetty
 
-all: getty
+all: ${PROGS}
 
 getty:	${OBJS} ${LIBC}
 	${CC} -o $@ ${CFLAGS} ${OBJS}
 
+smgetty: smgetty.c
+	${CC} -o $@ ${CFLAGS} smgetty.c
+
 clean: FRC
-	rm -f ${OBJS} core getty
+	rm -f ${OBJS} ${PROGS} core a.out errs
 
 depend: FRC
 	mkdep ${CFLAGS} ${SRCS}
 
 install: FRC
-	install -s -o bin -g bin -m 755 getty ${DESTDIR}/etc/getty
-	install -c -o bin -g bin -m 444 gettytab ${DESTDIR}/etc/gettytab
+	install -s -o bin -g bin -m 755 ${PROGS} ${DESTDIR}/etc
+	install -c -o bin -g bin -m 444 gettytab ${DESTDIR}/etc
 
 lint: FRC
 	lint ${CFLAGS} ${SRCS}

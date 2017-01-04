@@ -1,0 +1,82 @@
+h20542
+s 00002/00000/00038
+d R 6.3 85/06/03 18:10:43 miriam 5 4
+c add declaration on n to be an integer
+e
+s 00003/00004/00035
+d R 6.2 85/05/24 12:08:50 miriam 4 3
+c From Prof. Kahan
+e
+s 00001/00001/00038
+d D 6.1 85/05/15 15:01:51 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00003/00037
+d D 5.1 85/05/15 15:01:44 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00040/00000/00000
+d D 4.1 85/05/15 15:01:39 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH J0 3M 
+E 2
+I 2
+D 3
+.TH J0 3M  "19 January 1983"
+E 3
+I 3
+.TH J0 3M  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+j0, j1, jn, y0, y1, yn \- bessel functions
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double j0(x)
+.B double x;
+.PP
+.B double j1(x)
+.B double x;
+.PP
+.B double jn(n, x)
+.B double x;
+.PP
+.B double y0(x)
+.B double x;
+.PP
+.B double y1(x)
+.B double x;
+.PP
+.B double yn(n, x)
+.B double x;
+.fi
+.SH DESCRIPTION
+These functions calculate Bessel functions of the first
+and second kinds for real arguments and integer orders.
+.SH DIAGNOSTICS
+Negative arguments cause
+.I y0, y1,
+and
+.I yn
+D 2
+to return a huge negative value
+and set
+E 2
+I 2
+to return a huge negative value and set
+E 2
+.I errno
+to EDOM.
+E 1

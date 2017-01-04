@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)lpr.c	5.4 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)lpr.c	5.5 (Berkeley) 9/3/04";
 #endif /* not lint */
 
 /*
@@ -67,6 +67,7 @@ char	*width;			/* width for versatec printing */
 char	host[32];		/* host name */
 char	*class = host;		/* class title on header page */
 char    *jobname;		/* job name on header page */
+char	*options;		/* processing options for advanced printers */
 char	*name;			/* program name */
 char	*printer;		/* printer name */
 struct	stat statb;
@@ -142,6 +143,15 @@ main(argc, argv)
 			else if (argc > 1) {
 				argc--;
 				jobname = *++argv;
+			}
+			break;
+
+		case 'O':		/* processing options */
+			if (arg[2])
+				options = &arg[2];
+			else if (argc > 1) {
+				argc--;
+				options = *++argv;
 			}
 			break;
 
@@ -261,6 +271,8 @@ main(argc, argv)
 	(void) fchown(tfd, DU, -1);	/* owned by daemon for protection */
 	card('H', host);
 	card('P', person);
+	if (options)
+		card('O', options);
 	if (hdr) {
 		if (jobname == NULL) {
 			if (argc == 1)

@@ -1,0 +1,244 @@
+h26088
+s 00005/00008/00095
+d D 6.4 87/10/14 16:58:18 bostic 5 4
+c don't underline "etc."
+e
+s 00053/00036/00050
+d D 6.3 87/10/14 16:15:12 jak 4 3
+c added TERMPATH, reordered, rephrased awkward parts (still needs work)
+e
+s 00002/00008/00084
+d D 6.2 87/04/13 16:58:30 bostic 3 2
+c add execle(3) to SEE ALSO
+e
+s 00001/00001/00091
+d D 6.1 85/05/20 20:44:00 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00092/00000/00000
+d D 5.1 85/05/20 20:43:46 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ENVIRON 7 "5 February 1983"
+E 2
+I 2
+.TH ENVIRON 7 "%Q%"
+E 2
+.UC 5
+.SH NAME
+environ \- user environment
+.SH SYNOPSIS
+.B extern char **environ;
+.SH DESCRIPTION
+D 4
+An array of strings called the `environment' is made available by
+E 4
+I 4
+An array of strings called the
+.I environment
+is made available by
+E 4
+.IR execve (2)
+when a process begins.  By convention these strings have the form
+D 4
+.RI ` name = value '.
+E 4
+I 4
+D 5
+.IR name = value .
+E 4
+The following names are used by various commands:
+E 5
+I 5
+``\fIname=value\fP''.  The following names are used by various commands:
+E 5
+D 4
+.TP "\w'TERMCAP 'u"
+PATH
+The sequence of directory prefixes that
+.I sh, time,
+.IR nice (1),
+etc., apply in searching for a file known by an incomplete path name.
+The prefixes are separated by `:'.
+.IR Login (1)
+sets PATH=:/usr/ucb:/bin:/usr/bin.
+E 4
+I 4
+.TP "\w'TERMPATH 'u"
+EXINIT
+A startup list of commands read by
+.IR ex (1),
+.IR edit (1),
+and
+.IR vi (1).
+E 4
+.TP
+HOME
+A user's login directory, set by
+.IR login (1)
+from the password file
+.IR passwd (5).
+.TP
+I 4
+PATH
+The sequence of directories, separated by colons, searched by
+.IR csh (1),
+.IR sh (1),
+.IR system (3),
+.IR execvp (3),
+D 5
+.IR etc ,
+when looking for an executable file.
+PATH is set to :/usr/ucb:/bin:/usr/bin initially by
+E 5
+I 5
+etc, when looking for an executable file.
+PATH is set to ``:/usr/ucb:/bin:/usr/bin'' initially by
+E 5
+.IR login (1).
+.TP
+PRINTER
+The name of the default printer to be used by
+.IR lpr (1),
+.IR lpq (1),
+and
+.IR lprm (1).
+.TP
+SHELL
+The full pathname of the user's login shell.
+.TP
+E 4
+TERM
+The kind of terminal for which output is to be prepared.
+This information is used by commands, such as
+D 4
+.I nroff
+E 4
+I 4
+.IR nroff (1)
+E 4
+or
+.IR plot (1G),
+which may exploit special terminal capabilities.  See
+.I /etc/termcap
+.RI ( termcap (5))
+for a list of terminal types.
+.TP
+D 4
+SHELL
+The file name of the users login shell.
+.TP
+E 4
+TERMCAP
+D 4
+The string describing the terminal in TERM, or the name of the termcap file, see
+.IR termcap (5), termcap (3X).
+.TP
+EXINIT
+A startup list of commands read by
+.IR ex (1),
+.IR edit (1),
+E 4
+I 4
+The string describing the terminal in TERM, or, if
+it begins with a '/', the name of the termcap file.
+See TERMPATH below, 
+.IR termcap (5),
+E 4
+and
+D 4
+.IR vi (1).
+E 4
+I 4
+.IR termcap (3X).
+E 4
+.TP
+I 4
+TERMPATH
+A sequence of pathnames of termcap files, separated by colons or spaces,
+D 5
+which are searched for terminal descriptions in the order listed.
+Having no TERMPATH is equivalent to a TERMPATH of
+$HOME/.termcap:/etc/termcap.
+E 5
+I 5
+which are searched for terminal descriptions in the order listed.  Having
+no TERMPATH is equivalent to a TERMPATH of ``$HOME/.termcap:/etc/termcap''.
+E 5
+TERMPATH is ignored if TERMCAP contains a full pathname.
+.TP
+E 4
+USER
+The login name of the user.
+D 4
+.TP
+PRINTER
+The name of the default printer to be used by
+.IR lpr (1),
+.IR lpq (1),
+and
+.IR lprm (1).
+E 4
+.PP
+Further names may be placed in the environment by the
+.I export
+D 4
+command and `name=value' arguments in
+E 4
+I 4
+command and
+.IR name = value
+arguments in
+E 4
+.IR sh (1),
+or by the
+.I setenv
+command if you use
+.IR csh (1).
+D 4
+Arguments may also be placed in the environment at the point of an
+.IR execve (2).
+It is unwise to conflict with certain 
+E 4
+I 4
+It is unwise to change certain 
+E 4
+.IR sh (1)
+D 4
+variables that are frequently exported by `.profile' files:
+MAIL, PS1, PS2, IFS.
+E 4
+I 4
+variables that are frequently exported by
+.I .profile
+files, such as MAIL, PS1, PS2, and IFS,
+unless you know what you are doing.
+E 4
+.SH SEE ALSO
+D 3
+csh(1),
+ex(1),
+login(1),
+sh(1),
+execve(2),
+system(3),
+termcap(3X),
+termcap(5)
+E 3
+I 3
+csh(1), ex(1), login(1), sh(1), execve(2), execle(3),
+system(3), termcap(3), termcap(5)
+E 3
+E 1

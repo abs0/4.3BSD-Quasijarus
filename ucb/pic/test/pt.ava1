@@ -1,0 +1,65 @@
+.po .25i
+.PS
+h = .5i
+w = .75i
+dh = .02i
+dw = .1i
+r1 = .05i
+circlerad = r1
+
+define part /
+	line from Start \
+		up dh \
+		then right w \
+		then down h \
+		then left dw
+	line from Start + (dh,dh) to Root chop 0 chop r1
+	Start: start of 2nd last line + (dw,dh)
+/
+define space /
+	Start: Start + (dw,dh)
+/
+
+Origin: box ht h wid w
+Start: last box.nw - (0,dh)
+Top: Start + (3*w,6*h)
+circle at Top
+fixh = h/4
+define node X
+	Root: Start + (h/2, 3*h-fixh)
+	fixh = fixh + h/4
+	circle at Root
+	line from Root to Top chop
+	part; part; part; part; part; space; part
+X
+
+Left: node; node; node; space; space; node; node; node
+right
+circle rad 2*r1 at Left
+circle rad 5*w/4 with .e at Origin + (-h, 6*h)
+arrow from 2nd last circle to last circle \
+	chop 2*r1 chop last circle.rad
+[
+	Ptr: [
+		boxht = h; boxwid = dw
+		A: box
+		B: box
+		C: box
+		box wid 2*boxwid "..."
+		D: box
+	]
+	Block: [
+		boxht = 2*dw; boxwid = 2*dw
+		movewid = 2*dh
+		A: box; move
+		B: box; move
+		C: box; move
+		box invis "..." wid 2*boxwid; move
+		D: box
+	] with .t at Ptr.s - (0,h/2)
+	arrow from Ptr.A to Block.A.nw
+	arrow from Ptr.B to Block.B.nw
+	arrow from Ptr.C to Block.C.nw
+	arrow from Ptr.D to Block.D.nw
+] at last circle
+.PE

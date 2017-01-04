@@ -1,0 +1,251 @@
+h12127
+s 00002/00002/00111
+d D 6.5 86/05/22 11:49:11 anne 8 7
+c punctuation
+e
+s 00004/00002/00109
+d D 6.4 85/08/26 23:30:26 mckusick 7 6
+c update error messages (mostly from sun!guy)
+e
+s 00000/00000/00111
+d D 6.3 85/06/28 16:15:16 sechrest 6 5
+c 
+e
+s 00008/00004/00103
+d D 6.2 85/05/22 18:30:17 mckusick 5 3
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00008/00004/00103
+d R 6.2 85/05/21 15:13:45 mckusick 4 3
+c update error return values
+e
+s 00001/00001/00106
+d D 6.1 85/05/09 16:18:33 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00082/00030/00025
+d D 5.1 85/05/09 16:17:35 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00055/00000/00000
+d D 4.1 85/05/09 16:17:12 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ACCESS 2 
+E 2
+I 2
+D 3
+.TH ACCESS 2 "18 July 1983"
+E 3
+I 3
+.TH ACCESS 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+access \- determine accessibility of file
+.SH SYNOPSIS
+.nf
+D 2
+.B access(name, mode)
+.B char *name;
+E 2
+I 2
+.ft B
+#include <sys/file.h>
+.PP
+.ft B
+.ta 1.25i 1.6i
+#define R_OK	4	/* test for read permission */
+#define W_OK	2	/* test for write permission */
+#define X_OK	1	/* test for execute (search) permission */
+#define F_OK	0	/* test for presence of file */
+.PP
+.ft B
+accessible = access(path, mode)
+int accessible;
+char *path;
+int mode;
+.ft R
+E 2
+.fi
+.SH DESCRIPTION
+.I Access
+checks the given
+file
+D 2
+.I name
+E 2
+I 2
+.I path
+E 2
+for accessibility according to
+D 2
+.I mode,
+which is 4 (read), 2 (write) or 1 (execute) or a combination thereof.
+Specifying mode 0
+E 2
+I 2
+.IR mode ,
+which is an inclusive or of the bits
+R_OK,
+W_OK
+and
+X_OK.
+Specifying
+.I mode
+D 8
+as F_OK (i.e. 0)
+E 8
+I 8
+as F_OK (i.e., 0)
+E 8
+E 2
+tests whether the directories leading to the file can be
+searched and the file exists.
+.PP
+D 2
+An appropriate error indication is returned if 
+.I name
+cannot be found or if any
+of the desired access modes would not be granted.
+On disallowed accesses
+\-1 is returned and the error code is in
+.IR errno .
+0 is returned from successful tests.
+E 2
+I 2
+The real user ID and the group access list
+(including the real group ID) are
+used in verifying permission, so this call
+is useful to set-UID programs.
+E 2
+.PP
+D 2
+The user and group IDs with respect to which permission is checked
+are the real UID and GID of the process, so this call is
+useful to set-UID programs.
+.PP
+Notice that it is only access bits that are checked.
+A directory may be announced as writable by
+.I access,
+E 2
+I 2
+Notice that only access bits are checked.
+A directory may be indicated as writable by
+.IR access ,
+E 2
+but an attempt to open it for writing will fail
+(although files may be created there);
+a file may look executable, but
+D 2
+.I exec
+E 2
+I 2
+.I execve
+E 2
+will fail unless it is in proper format.
+D 2
+.PP
+.SH SEE ALSO
+stat(2)
+.SH "ASSEMBLER (PDP-11)"
+(access = 33.)
+.br
+.B sys access; name; mode
+E 2
+I 2
+.SH "RETURN VALUE
+If
+.I path
+cannot be found or if any of the desired access modes would
+not be granted, then a \-1 value is returned; otherwise
+a 0 value is returned.
+.SH "ERRORS
+Access to the file is denied if one or more of the following are true:
+.TP 15
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+D 5
+[ENOENT]
+The argument path name was too long.
+E 5
+I 5
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+E 5
+.TP 15
+I 5
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+.TP 15
+E 5
+[ENOENT]
+D 7
+Read, write, or execute (search) permission is requested for a null
+path name or the named file does not exist.
+E 7
+I 7
+The named file does not exist.
+E 7
+.TP 15
+D 5
+[EPERM]
+The argument contains a byte with the high-order bit set.
+E 5
+I 5
+[EACCES]
+Search permission is denied for a component of the path prefix.
+E 5
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+[EROFS]
+Write access is requested for a file on a read-only file system.
+.TP 15
+[ETXTBSY]
+Write access is requested for a pure procedure (shared text)
+file that is being executed.
+.TP 15
+[EACCES]
+Permission bits of the file mode do not permit the requested
+D 8
+access; or search permission is denied on a component of the
+E 8
+I 8
+access, or search permission is denied on a component of the
+E 8
+path prefix.  The owner of a file has permission checked with
+respect to the ``owner'' read, write, and execute mode bits,
+members of the file's group other than the owner have permission
+checked with respect to the ``group'' mode bits, and all
+others have permissions checked with respect to the ``other''
+mode bits.
+.TP 15
+[EFAULT]
+.I Path
+points outside the process's allocated address space.
+I 7
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 7
+.SH "SEE ALSO
+chmod(2), stat(2)
+E 2
+E 1

@@ -1,0 +1,90 @@
+h16420
+s 00004/00003/00049
+d D 6.3 86/05/23 15:55:22 karels 3 2
+c refer to named
+e
+s 00001/00001/00051
+d D 6.2 86/05/10 20:31:21 mckusick 2 1
+c format
+e
+s 00052/00000/00000
+d D 6.1 85/04/27 16:15:32 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH MKHOSTS 8 "%Q%"
+.UC 6
+.SH NAME
+D 2
+mkhosts - generate hashed host table
+E 2
+I 2
+mkhosts \- generate hashed host table
+E 2
+.SH SYNOPSIS
+.B /etc/mkhosts
+[
+.B \-v
+]
+hostfile
+.SH DESCRIPTION
+.I Mkhosts
+D 3
+is used to generated the hashed host database used by the
+E 3
+I 3
+is used to generated the hashed host database used by one version of the
+E 3
+library routines
+.B gethostbyaddr()
+and
+.BR gethostbyname() .
+I 3
+It is not used if host name translation is performed by
+.IR named (8).
+E 3
+If the
+.B \-v
+option is supplied, each host will be listed as it is added.
+The file
+.I hostfile
+is usually /etc/hosts, and in any case
+must be in the format of /etc/hosts (see hosts(5)).
+.I Mkhosts
+will generate database files named
+.I hostfile.pag
+and
+.I hostfile.dir.
+The new database is build in a set of temporary files and
+only replaces the real database if the new one is built
+without errors.
+.I Mkhosts
+will exit with a non-zero exit code if any errors are detected.
+.SH FILES
+.ta \w'hostfile.new.dir    'u
+\fIhostfile\fR.pag	- real database filenames
+.br
+\fIhostfile\fR.dir
+.br
+\fIhostfile\fR.new.pag	- temporary database filenames
+.br
+\fIhostfile\fR.new.dir
+.SH SEE ALSO
+D 3
+gethostbyaddr(3), gethostbyname(3), gettable(8), hosts(5), htable(8)
+.SH BUGS
+E 3
+I 3
+gethostbyname(3), gettable(8), hosts(5), htable(8), named(8)
+E 3
+E 1

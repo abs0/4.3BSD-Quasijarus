@@ -1,0 +1,44 @@
+h41294
+s 00001/00001/00023
+d D 4.2 85/08/29 22:10:06 bloom 2 1
+c add backwards scanning
+e
+s 00024/00000/00000
+d D 4.1 83/02/17 20:53:09 sam 1 0
+c date and time created 83/02/17 20:53:09 by sam
+e
+u
+U
+t
+T
+I 1
+
+Most commands optionally preceded by integer argument k.  Defaults in brackets.
+Star (*) indicates argument becomes new default.
+-------------------------------------------------------------------------------
+<space>			Display next k lines of text [current screen size]
+z			Display next k lines of text [current screen size]*
+<return>		Display next k lines of text [1]*
+d or ctrl-D		Scroll k lines [current scroll size, initially 11]*
+q or Q or <interrupt>	Exit from more
+s			Skip forward k lines of text [1]
+f			Skip forward k screenfuls of text [1]
+I 2
+b or ctrl-B		Skip backwards k screenfuls of text [1]
+E 2
+'			Go to place where previous search started
+=			Display current line number
+/<regular expression>	Search for kth occurrence of regular expression [1]
+n			Search for kth occurrence of last r.e [1]
+!<cmd> or :!<cmd>	Execute <cmd> in a subshell
+v			Start up /usr/ucb/vi at current line
+D 2
+h			Display this message
+E 2
+ctrl-L			Redraw screen
+:n			Go to kth next file [1]
+:p			Go to kth previous file [1]
+:f			Display current file name and line number
+.			Repeat previous command
+-------------------------------------------------------------------------------
+E 1

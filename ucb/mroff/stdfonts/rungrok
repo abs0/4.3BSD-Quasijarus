@@ -1,0 +1,14 @@
+../grokafm -r /usr/lib/afm/Times-Roman.afm > ftR.src
+../grokafm -r /usr/lib/afm/Times-Italic.afm > ftI.src
+../grokafm -r /usr/lib/afm/Times-Bold.afm > ftB.src
+../grokafm -r /usr/lib/afm/Times-BoldItalic.afm > ftBI.src
+../grokafm -r /usr/lib/afm/Helvetica.afm > ftH.src
+../grokafm -r /usr/lib/afm/Helvetica-Oblique.afm > ftHO.src
+../grokafm -r /usr/lib/afm/Helvetica-Bold.afm > ftHB.src
+../grokafm -r /usr/lib/afm/Helvetica-BoldOblique.afm > ftHQ.src
+../grokafm -r /usr/lib/afm/Courier.afm > ftC.src
+../grokafm -r /usr/lib/afm/Courier-Oblique.afm > ftCO.src
+../grokafm -r /usr/lib/afm/Courier-Bold.afm > ftCB.src
+../grokafm -r /usr/lib/afm/Courier-BoldOblique.afm > ftCQ.src
+../grokafm  /usr/lib/afm/Symbol.afm > ftS.src
+../grokafm  /usr/lib/afm/ZapfDingbats.afm > ftZD.src

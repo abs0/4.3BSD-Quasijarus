@@ -1,0 +1,265 @@
+h12462
+s 00003/00000/00100
+d D 6.4 86/06/17 10:26:59 mckusick 6 5
+c add note about finding the end of memory
+e
+s 00002/00002/00098
+d D 6.3 86/05/22 11:53:17 anne 5 4
+c punctuation
+e
+s 00003/00003/00097
+d D 6.2 86/03/04 17:11:48 donn 4 3
+c Changed 'caddr_t' to 'char *' -- 'caddr_t' isn't supposed to be visible
+c outside the kernel.
+e
+s 00003/00001/00097
+d D 6.1 85/05/09 16:02:06 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00050/00038/00048
+d D 5.1 85/05/09 16:01:52 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00086/00000/00000
+d D 4.1 85/05/09 16:01:42 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BRK 2 
+E 2
+I 2
+D 3
+.TH BRK 2 "27 July 1983"
+E 3
+I 3
+.TH BRK 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+brk, sbrk, break \- change core allocation
+E 2
+I 2
+brk, sbrk \- change data segment size
+E 2
+.SH SYNOPSIS
+D 2
+.B char *brk(addr)
+E 2
+I 2
+.nf
+I 3
+#include <sys/types.h>
+.PP
+E 3
+.ft B
+D 4
+caddr_t brk(addr)
+caddr_t addr;
+E 4
+I 4
+char *brk(addr)
+char *addr;
+E 4
+E 2
+.PP
+D 2
+.B char *sbrk(incr)
+E 2
+I 2
+.ft B
+D 4
+caddr_t sbrk(incr)
+E 4
+I 4
+char *sbrk(incr)
+E 4
+int incr;
+.fi
+E 2
+.SH DESCRIPTION
+.I Brk
+D 2
+sets the system's idea of the lowest location not used by the program
+(called the break)
+E 2
+I 2
+sets the system's idea of the lowest data segment 
+location not used by the program (called the break)
+E 2
+to
+.I addr
+D 2
+(rounded up to the next multiple of 64 bytes
+on the PDP11, 256 bytes on the Interdata 8/32,
+and 1024 bytes on a VAX-11).
+Locations not less than
+E 2
+I 2
+(rounded up to the next multiple of the system's page size).
+Locations greater than
+E 2
+.I addr
+and below the stack pointer
+are not in the address space and will thus
+cause a memory violation if accessed.
+.PP
+In the alternate function
+D 2
+.I sbrk,
+E 2
+I 2
+.IR sbrk ,
+E 2
+.I incr
+more bytes are added to the
+program's data space and a pointer to the
+start of the new area is returned.
+.PP
+When a program begins execution via
+D 2
+.I exec
+E 2
+I 2
+.I execve
+E 2
+the break is set at the
+highest location defined by the program
+and data storage areas.
+Ordinarily, therefore, only programs with growing
+data areas need to use
+D 2
+.IR break .
+E 2
+I 2
+.IR sbrk .
+E 2
+.PP
+I 6
+The current value of the program break is reliably returned by
+``sbrk(0)'' (see also 
+.IR end (3)).
+E 6
+The
+D 2
+.IR vlimit (2)
+E 2
+I 2
+.IR getrlimit (2)
+E 2
+system call may be used to determine
+the maximum permissible size of the
+.I data
+D 2
+region;
+E 2
+I 2
+segment;
+E 2
+it will not be possible to set the break
+D 2
+beyond
+\*(lqetext + vlimit(LIM_DATA, \-1).\*(rq
+E 2
+I 2
+beyond the
+.I rlim_max
+value returned from a call to
+.IR getrlimit ,
+e.g. \*(lqetext + rlp\(->rlim_max.\*(rq
+E 2
+D 5
+(See
+E 5
+I 5
+(see
+E 5
+.IR end (3)
+for the definition of
+D 5
+.IR etext .)
+E 5
+I 5
+.IR etext ).
+E 5
+D 2
+.SH "SEE ALSO"
+exec(2),
+vlimit(2),
+malloc(3),
+end(3)
+.SH DIAGNOSTICS
+E 2
+I 2
+.SH "RETURN VALUE
+E 2
+Zero is returned if the 
+.I brk
+could be set;
+\-1 if the program requests more
+D 2
+memory than the system limit
+or if too many segmentation
+registers would be required to implement the break.
+E 2
+I 2
+memory than the system limit.
+E 2
+.I Sbrk
+returns \-1 if the break could not be set.
+I 2
+.SH ERRORS
+.I Sbrk
+will fail and no additional memory will be allocated if
+one of the following are true:
+.TP 15
+[ENOMEM]
+The limit, as set by
+.IR setrlimit (2),
+was exceeded.
+.TP 15
+[ENOMEM]
+The maximum possible size of a data segment (compiled into the
+system) was exceeded.
+.TP 15
+[ENOMEM]
+Insufficient space existed in the swap area
+to support the expansion.
+.SH "SEE ALSO"
+execve(2), getrlimit(2), malloc(3), end(3)
+E 2
+.SH BUGS
+D 2
+Setting the break in the range
+0177701 to 0177777 (on the PDP11) is the same as setting it to zero.
+.SH "ASSEMBLER (PDP-11)"
+(break = 17.)
+.br
+.B sys break; addr
+.PP
+.I Break
+performs the function of
+.IR brk .
+The name of the routine differs from that in C
+for historical reasons.
+E 2
+I 2
+Setting the break may fail due to a temporary lack of
+swap space.  It is not possible to distinguish this
+from a failure caused by exceeding the maximum size of
+the data segment without consulting 
+.IR getrlimit .
+E 2
+E 1

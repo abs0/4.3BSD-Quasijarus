@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)init_main.c	7.6 (Berkeley) 5/26/88
+ *	@(#)init_main.c	7.7 (Berkeley) 7/12/02
  */
 
 #include "../machine/pte.h"
@@ -112,6 +112,10 @@ main(firstaddr)
 #include "sl.h"
 #if NSL > 0
 	slattach();			/* XXX */
+#endif
+#include "ppp.h"
+#if NPPP > 0
+	pppattach();			/* XXX */
 #endif
 #if NLOOP > 0
 	loattach();			/* XXX */

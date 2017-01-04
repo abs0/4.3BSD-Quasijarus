@@ -1,0 +1,159 @@
+h34300
+s 00004/00001/00079
+d R 6.3 86/06/01 00:43:10 mis 5 4
+c added ENOBUFS as a possible error.
+e
+s 00003/00000/00077
+d D 6.2 85/08/26 23:31:51 mckusick 4 3
+c update error messages (mostly from sun!guy)
+e
+s 00001/00001/00076
+d D 6.1 85/05/09 16:41:15 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00026/00019/00051
+d D 5.1 85/05/09 16:41:07 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00070/00000/00000
+d D 4.1 85/05/09 16:40:57 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PIPE 2 
+E 2
+I 2
+D 3
+.TH PIPE 2 "12 February 1983"
+E 3
+I 3
+.TH PIPE 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+pipe \- create an interprocess channel
+E 2
+I 2
+pipe \- create an interprocess communication channel
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B pipe(fildes)
+.B int fildes[2];
+E 2
+I 2
+.ft B
+pipe(fildes)
+int fildes[2];
+E 2
+.fi
+I 2
+.ft R
+E 2
+.SH DESCRIPTION
+The
+.I pipe
+system call
+creates an I/O mechanism called a pipe.
+The file descriptors returned can
+be used in read and write operations.
+When the pipe is written using the descriptor
+.IR fildes [1]
+up to 4096 bytes of data are buffered
+before the writing process is suspended.
+A read using the descriptor
+.IR fildes [0]
+will pick up the data.
+.PP
+It is assumed that after the
+pipe has been set up,
+two (or more)
+cooperating processes
+(created by subsequent
+.I fork
+calls)
+will pass data through the
+pipe with
+.I read
+and
+.I write
+calls.
+.PP
+D 2
+The Shell has a syntax
+E 2
+I 2
+The shell has a syntax
+E 2
+to set up a linear array of processes
+connected by pipes.
+.PP
+Read calls on an empty
+pipe (no buffered data) with only one end
+(all write file descriptors closed)
+returns an end-of-file.
+D 2
+.SH "SEE ALSO"
+sh(1), read(2), write(2), fork(2)
+.SH DIAGNOSTICS
+The function value zero is returned if the
+pipe was created; \-1 if
+too many files are already open.
+E 2
+I 2
+.PP
+Pipes are really a special case of the 
+.IR socketpair (2)
+call and, in fact, are implemented as such in the system.
+.PP
+E 2
+A signal is generated if a write on a pipe with only one end is attempted.
+I 2
+.SH "RETURN VALUE
+The function value zero is returned if the
+pipe was created; \-1 if an error occurred.
+.SH ERRORS
+The \fIpipe\fP call will fail if:
+.TP 15
+[EMFILE]
+Too many descriptors are active.
+.TP 15
+I 4
+[ENFILE]
+The system file table is full.
+.TP 15
+E 4
+[EFAULT]
+The \fIfildes\fP buffer is in an invalid area of the process's address
+space.
+.SH "SEE ALSO"
+sh(1), read(2), write(2), fork(2), socketpair(2)
+E 2
+.SH BUGS
+Should more than 4096 bytes be necessary in any
+pipe among a loop of processes, deadlock will occur.
+D 2
+.SH "ASSEMBLER (PDP-11)"
+(pipe = 42.)
+.br
+.B sys pipe
+.br
+(read file descriptor in r0)
+.br
+(write file descriptor in r1)
+E 2
+E 1

@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)title.prm	6.2 (Berkeley) 5/15/86
+.\"	@(#)title.prm	6.4 (Berkeley) 10/21/04
 .\"
 .ps 18
 .vs 22
@@ -16,13 +16,13 @@ UNIX Programmer's Reference Manual
 .sp |4i
 .ce 2
 4.3 Berkeley Software Distribution
-Virtual VAX\-11 Version
+4.3BSD-Quasijarus1 Preliminary Version
 .sp |5.75i
 .ft R
 .pt 12
 .vs 16
 .ce
-April, 1986
+October, 2004
 .sp |8.2i
 .ce 5
 Computer Systems Research Group
@@ -111,11 +111,11 @@ or of the US Government.
 .cs 3 36
 .so \\$1
 ..
-.t /usr/man/man0/toc2 2 "System Calls"
-.t /usr/man/man0/toc3 3 "C Library Subroutines"
-.t /usr/man/man0/toc3f 3F "Fortran Library"
-.t /usr/man/man0/toc4 4 "Special Files"
-.t /usr/man/man0/toc5 5 "File Formats"
+.t toc2 2 "System Calls"
+.t toc3 3 "C Library Subroutines"
+.t toc3f 3F "Fortran Library"
+.t toc4 4 "Special Files"
+.t toc5 5 "File Formats"
 .in -.5i
 .cs 3
 .if n .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n 80n

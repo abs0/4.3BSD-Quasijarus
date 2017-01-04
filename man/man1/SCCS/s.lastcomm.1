@@ -1,0 +1,195 @@
+h13670
+s 00004/00001/00063
+d D 6.3 88/03/08 21:55:02 bostic 5 4
+c document the -f option
+e
+s 00001/00002/00063
+d D 6.2 86/01/05 19:09:04 mckusick 4 3
+c X indicates that the program was terminated by some signal
+e
+s 00004/00002/00061
+d D 6.1 85/04/29 14:28:08 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00038/00028/00025
+d D 5.1 85/04/29 14:27:57 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00053/00000/00000
+d D 4.1 85/04/29 14:27:50 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LASTCOMM 1 10/27/79
+E 2
+I 2
+D 3
+.TH LASTCOMM 1 "4 April 1983"
+E 3
+I 3
+.TH LASTCOMM 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+lastcomm \- show last commands executed in reverse order
+.SH SYNOPSIS
+.B lastcomm
+I 5
+[ -f file ]
+E 5
+D 2
+[ command name ] ... [user name] ...
+E 2
+I 2
+[ command name ] ... [user name] ... [terminal name] ...
+E 2
+.SH DESCRIPTION
+D 2
+.PP
+E 2
+.I Lastcomm
+gives information on previously executed commands.
+D 2
+.I Lastcomm
+with no arguments prints information about all the commands recorded
+E 2
+I 2
+With no arguments,
+.I lastcomm
+prints information about all the commands recorded
+E 2
+D 5
+during the current accounting file's lifetime.
+E 5
+I 5
+during the current accounting file's lifetime.  The \fI-f\fP option
+causes \fIlastcomm\fP to read from a file other than the default
+accounting file.
+E 5
+D 2
+If called with arguments, only those accounting entries whose command
+name or user name matches one of the arguments are printed.
+E 2
+I 2
+If called with arguments, only accounting entries with a
+matching command
+name, user name, or terminal name are printed.
+E 2
+So, for example,
+I 2
+.ti +0.5i
+lastcomm a.out root ttyd0
+E 2
+.br
+D 2
+	lastcomm a.out
+.br
+E 2
+would produce a listing of all the
+D 2
+executions of commands named a.out, and
+.br
+	lastcomm root
+.br
+would produce a listing of all the commands executed by user root.
+.LP
+
+E 2
+I 2
+executions of commands named
+.I a.out
+by user
+.I root
+on the terminal
+.IR ttyd0 .
+E 2
+.PP
+For each process entry, the following are printed.
+I 2
+.in +0.5i
+The name of the user who ran the process.
+E 2
+.br
+D 2
+	The name of the user who ran the process.
+E 2
+I 2
+Flags, as accumulated by the accounting facilities in the system.
+E 2
+.br
+D 2
+	The command name under which the process was called.
+E 2
+I 2
+The command name under which the process was called.
+E 2
+.br
+D 2
+	The amount of cpu time used by the process (in seconds).
+E 2
+I 2
+The amount of cpu time used by the process (in seconds).
+E 2
+.br
+D 2
+	The time the process exited.
+.br
+.LP
+
+.SH "AUTHOR"
+Len Edmondson
+
+E 2
+I 2
+The time the process exited.
+.in -0.5i
+.PP
+The flags are encoded as follows: ``S'' indicates the command was
+executed by the super-user, ``F'' indicates the command ran after
+a fork, but without a following 
+.IR exec ,
+``C'' indicates the command was run in PDP-11 compatibility mode
+(VAX only),
+``D'' indicates the command terminated with the generation of a
+.I core
+D 4
+file, and ``X'' indicates the command was terminated with the signal
+SIGTERM.
+E 4
+I 4
+file, and ``X'' indicates the command was terminated with a signal.
+E 4
+I 3
+.SH FILES
+/usr/adm/acct
+E 3
+E 2
+.SH "SEE ALSO"
+D 2
+last (1)
+.br
+E 2
+I 2
+last(1),
+sigvec(2),
+D 3
+acct(5),
+E 3
+I 3
+acct(8),
+E 3
+core(5)
+E 2
+E 1

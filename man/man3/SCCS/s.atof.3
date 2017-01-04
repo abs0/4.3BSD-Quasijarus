@@ -1,0 +1,96 @@
+h60575
+s 00001/00001/00037
+d D 6.1 85/05/15 14:53:28 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00010/00031
+d D 5.1 85/05/15 14:53:19 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00041/00000/00000
+d D 4.1 85/05/15 14:53:13 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ATOF 3 
+E 2
+I 2
+D 3
+.TH ATOF 3  "19 January 1983"
+E 3
+I 3
+.TH ATOF 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+atof, atoi, atol \- convert ASCII to numbers
+.SH SYNOPSIS
+.nf
+.B double atof(nptr)
+.B char *nptr;
+.PP
+.B atoi(nptr)
+.B char *nptr;
+.PP
+.B long atol(nptr)
+.B char *nptr;
+.fi
+.SH DESCRIPTION
+These functions convert a string pointed to by
+.I nptr
+D 2
+to floating, integer, and long integer
+representation respectively.
+E 2
+I 2
+to floating, integer, and long integer representation respectively.
+E 2
+The first unrecognized character ends the string.
+.PP
+.I Atof
+D 2
+recognizes an optional string of tabs and spaces,
+then an optional sign, then
+E 2
+I 2
+recognizes an optional string of spaces, then an optional sign, then
+E 2
+a string of digits optionally containing a decimal
+D 2
+point, then an optional `e' or `E' followed
+by an optionally signed integer.
+E 2
+I 2
+point, then an optional `e' or `E' followed by an optionally signed integer.
+E 2
+.PP
+.I Atoi
+and
+.I atol
+D 2
+recognize an optional string of tabs and spaces,
+then an optional sign, then a string of
+E 2
+I 2
+recognize an optional string of spaces, then an optional sign, then a
+string of
+E 2
+digits.
+.SH SEE ALSO
+D 2
+scanf(3)
+E 2
+I 2
+scanf(3S)
+E 2
+.SH BUGS
+There are no provisions for overflow.
+E 1

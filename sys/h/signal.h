@@ -3,16 +3,18 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)signal.h	7.3 (Berkeley) 5/14/88
+ *	@(#)signal.h	7.4 (Berkeley) 1/11/04
  */
 
 #ifndef	NSIG
 #define NSIG	32
 
+#ifndef LOCORE
 #ifdef KERNEL
 #include "../machine/trap.h"	/* codes for SIGILL, SIGFPE */
 #else
 #include <machine/trap.h>	/* codes for SIGILL, SIGFPE */
+#endif
 #endif
 
 #define	SIGHUP	1	/* hangup */
@@ -48,6 +50,7 @@
 #define SIGUSR1 30	/* user defined signal 1 */
 #define SIGUSR2 31	/* user defined signal 2 */
 
+#ifndef LOCORE
 #ifndef KERNEL
 int	(*signal())();
 #endif
@@ -97,10 +100,11 @@ struct	sigcontext {
 #define	SIG_CATCH	(int (*)())2
 #define	SIG_HOLD	(int (*)())3
 #endif
-#endif
 
 /*
  * Macro for converting signal number to a mask suitable for
  * sigblock().
  */
 #define sigmask(m)	(1 << ((m)-1))
+#endif	!LOCORE
+#endif	!NSIG

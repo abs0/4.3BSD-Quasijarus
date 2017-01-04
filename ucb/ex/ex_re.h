@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ex_re.h	7.3 (Berkeley) 5/31/85
+ *	@(#)ex_re.h	7.4 (Berkeley) 4/13/03
  */
 
 /*
@@ -16,7 +16,7 @@
  * more and alternation.)
  */
 struct	regexp {
-	char	Expbuf[ESIZE + 2];
+	u_char	Expbuf[ESIZE + 2];
 	bool	Circfl;
 	short	Nbra;
 };
@@ -49,9 +49,9 @@ var struct	regexp subre;		/* Last substitute re */
 /*
  * Definitions for substitute
  */
-var char	*braslist[NBRA];	/* Starts of \(\)'ed text in lhs */
-var char	*braelist[NBRA];	/* Ends... */
-var char	rhsbuf[RHSSIZE];	/* Rhs of last substitute */
+var u_char	*braslist[NBRA];	/* Starts of \(\)'ed text in lhs */
+var u_char	*braelist[NBRA];	/* Ends... */
+var u_char	rhsbuf[RHSSIZE];	/* Rhs of last substitute */
 
 /*
  * Definitions of codes for the compiled re's.
@@ -71,3 +71,10 @@ var char	rhsbuf[RHSSIZE];	/* Rhs of last substitute */
 #define	CCHR	20
 #define	CBRC	24
 #define	CLET	25
+
+/*
+ * Since in 8-bit ex we can no longer use bit 7 for this purpose, we use ~@
+ * (0200) as a prefix in substitute RHS to indicate quoted chars. Thus ~@ is
+ * one character that cannot be used in substitute RHS.
+ */
+#define	RHSQUOTE	0200

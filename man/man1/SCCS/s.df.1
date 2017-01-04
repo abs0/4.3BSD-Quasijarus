@@ -1,0 +1,96 @@
+h64991
+s 00001/00001/00038
+d D 6.1 85/04/29 14:22:07 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00017/00036
+d D 5.1 85/04/29 14:22:00 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00053/00000/00000
+d D 4.1 85/04/29 14:21:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DF 1
+E 2
+I 2
+D 3
+.TH DF 1 "18 January 1983"
+E 3
+I 3
+.TH DF 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+df \- disk free
+.SH SYNOPSIS
+.B df
+[
+.B \-i
+D 2
+] [
+.B \-l
+E 2
+] [ filesystem ... ] [ file ... ]
+.SH DESCRIPTION
+.I Df
+D 2
+prints out the number of free blocks
+E 2
+I 2
+prints out the amount of free disk space
+E 2
+available on the specified
+.I filesystem,
+e.g. ``/dev/rp0a'',
+or on the filesystem in which the specified
+.I file,
+e.g. ``$HOME'',
+is contained.
+If no file system is specified,
+the free space on all of
+the normally mounted file systems
+is printed.
+I 2
+The reported numbers are in kilobytes.
+E 2
+.PP
+D 2
+The reported numbers are in file system block units; currently each filesystem
+block is 1024 bytes long, twice the size of the blocks reported by
+.IR du (1)
+or
+.IR ls (1)
+with the
+.B \-s
+option.
+.PP
+E 2
+Other options are:
+.TP
+.B \-i
+Report also the number of inodes which are used and free.
+D 2
+.TP
+.B \-l
+examines also the free list, double checking that the
+summary number in the filesystem superblock is correct.
+E 2
+.SH FILES
+/etc/fstab	list of normally mounted filesystems
+.SH "SEE ALSO"
+fstab(5), icheck(8), quot(8)
+E 1

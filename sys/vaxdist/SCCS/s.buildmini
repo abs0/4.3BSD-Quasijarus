@@ -1,0 +1,151 @@
+h15825
+s 00001/00001/00022
+d D 4.10 99/10/03 13:14:30 msokolov 10 9
+c building miniroots on ra0d now
+e
+s 00015/00013/00008
+d D 4.9 99/01/10 12:35:50 msokolov 9 8
+c 4.3BSD-Quasijarus
+e
+s 00001/00001/00020
+d D 4.8 86/06/06 20:02:54 karels 8 7
+c sensible copyright
+e
+s 00001/00001/00020
+d D 4.7 85/06/23 16:29:22 karels 7 6
+c 4.3
+e
+s 00007/00002/00014
+d D 4.6 85/06/08 12:10:30 mckusick 6 5
+c Add copyright
+e
+s 00001/00001/00015
+d D 4.5 83/11/15 16:05:57 karels 5 4
+c miniroot on hp0d
+e
+s 00002/00002/00014
+d D 4.4 83/07/09 01:38:39 sam 4 3
+c miscellaneous
+e
+s 00001/00001/00015
+d D 4.3 83/02/18 01:38:23 sam 3 2
+c tired of looking at sh commands
+e
+s 00001/00001/00015
+d D 4.2 83/02/17 12:07:15 sam 2 1
+c more cleanup
+e
+s 00016/00000/00000
+d D 4.1 83/02/13 10:58:31 sam 1 0
+c date and time created 83/02/13 10:58:31 by sam
+e
+u
+U
+t
+T
+I 1
+D 6
+#! /bin/sh
+#	%W%	%G%
+E 6
+I 6
+D 7
+#!/bin/sh -
+E 7
+I 7
+D 9
+#!/bin/sh
+E 9
+I 9
+#!/bin/sh -
+E 9
+E 7
+#
+D 8
+# Copyright (c) 1980 Regents of the University of California.
+E 8
+I 8
+D 9
+# Copyright (c) 1983 Regents of the University of California.
+E 8
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+E 9
+I 9
+# 4.3BSD-Quasijarus release-making script.
+E 9
+#
+I 9
+# This file is freely redistributable.
+#
+E 9
+#	%W% (Berkeley) %G%
+E 6
+#
+D 4
+miniroot=hp1a
+minitype=eagle
+E 4
+I 4
+D 5
+miniroot=hp0g
+E 5
+I 5
+D 9
+miniroot=hp0d
+E 5
+minitype=rm80
+E 4
+#
+E 9
+I 9
+
+dist=/sys/vaxdist
+D 10
+miniroot=ra1d
+E 10
+I 10
+miniroot=ra0d
+E 10
+minimnt=/tmp/mini
+
+E 9
+date
+D 9
+umount /dev/${miniroot}
+D 2
+makefs -s 2048 ${miniroot} ${minitype}
+E 2
+I 2
+newfs -s 4096 ${miniroot} ${minitype}
+E 9
+I 9
+mkdir ${minimnt}
+newfs -s 6144 ${miniroot}
+E 9
+E 2
+fsck /dev/r${miniroot}
+D 9
+mount /dev/${miniroot} /mnt
+D 3
+cd /mnt; sh -x /sys/dist/get
+E 3
+I 3
+cd /mnt; sh /sys/dist/get
+E 3
+cd /sys/dist; sync
+E 9
+I 9
+mount /dev/${miniroot} ${minimnt}
+cd ${minimnt}; sh ${dist}/get
+cd /; sync
+E 9
+umount /dev/${miniroot}
+D 9
+fsck /dev/${miniroot}
+E 9
+I 9
+fsck /dev/r${miniroot}
+E 9
+date
+E 1

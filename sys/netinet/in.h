@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)in.h	7.6 (Berkeley) 6/29/88
+ *	@(#)in.h	7.7 (Berkeley) 5/18/07
  */
 
 /*
@@ -33,6 +33,7 @@
 #define	IPPROTO_PUP		12		/* pup */
 #define	IPPROTO_UDP		17		/* user datagram protocol */
 #define	IPPROTO_IDP		22		/* xns idp */
+#define	IPPROTO_GRE		47		/* generic routing encap */
 
 #define	IPPROTO_RAW		255		/* raw IP packet */
 #define	IPPROTO_MAX		256

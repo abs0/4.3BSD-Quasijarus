@@ -1,0 +1,68 @@
+h05558
+s 00001/00001/00022
+d D 6.1 85/05/15 14:52:42 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00005/00015
+d D 5.1 85/05/15 14:52:33 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00020/00000/00000
+d D 4.1 85/05/15 14:52:26 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ABS 3 
+E 2
+I 2
+D 3
+.TH ABS 3 "18 January 1983"
+E 3
+I 3
+.TH ABS 3 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+abs \- integer absolute value
+.SH SYNOPSIS
+.nf
+.B abs(i)
+.B int i;
+.fi
+.SH DESCRIPTION
+.I Abs
+D 2
+returns
+the absolute value of its integer operand.
+E 2
+I 2
+returns the absolute value of its integer operand.
+E 2
+.SH SEE ALSO
+D 2
+floor(3) for
+E 2
+I 2
+floor(3M) for
+E 2
+.I fabs
+.SH BUGS
+D 2
+You get what the hardware gives on the smallest integer.
+E 2
+I 2
+Applying the \fIabs\fP function to the most negative integer generates a
+result which is the most negative integer.  That is, 
+.IP "abs(0x80000000)"
+.LP
+returns 0x80000000 as a result.
+E 2
+E 1

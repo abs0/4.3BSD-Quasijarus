@@ -1,6 +1,6 @@
 # ------------------------
 #
-#	Termcap source file	@(#)termcap.src	5.40 (Berkeley) 3/22/03
+#	Termcap source file	@(#)termcap.src	5.41 (Berkeley) 10/29/08
 #	John Kunze, Berkeley
 #
 # Please mail changes to (arpanet):  termcap@berkeley
@@ -793,7 +793,22 @@ S1|wsiris|iris40|iris emulating a 40 line visual 50 (approximately):\
 	:HS=\E7F2:HE=\E7F7:\
 	:us=\E7R2\E9P:ue=\E7R3\E0@:\
 	:CT#2:CZ=*Bblack,red,green,yellow,blue,magenta,cyan,*Fwhite:
-	
+# For those using a Linux PeeCee as a terminal to rlogin to a real computer:
+lx|linux|linux80x25|LINUX System Console:\
+	:do=^J:co#80:li#25:cl=\E[H\E[J:sf=\ED:sb=\EM:\
+	:le=^H:bs:am:cm=\E[%i%d;%dH:nd=\E[C:up=\E[A:\
+	:ce=\E[K:cd=\E[J:so=\E[7m:se=\E[27m:us=\E[36m:ue=\E[m:\
+	:md=\E[1m:mr=\E[7m:mb=\E[5m:me=\E[m:is=\E[1;25r\E[25;1H:\
+	:ll=\E[1;25r\E[25;1H:al=\E[L:dc=\E[P:dl=\E[M:\
+	:it#8:ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:kb=^H:ti=\E[r\E[H:\
+	:ho=\E[H:kP=\E[5~:kN=\E[6~:kH=\E[4~:kh=\E[1~:kD=\E[3~:kI=\E[2~:\
+	:k1=\E[[A:k2=\E[[B:k3=\E[[C:k4=\E[[D:k5=\E[[E:k6=\E[17~:\
+	:k7=\E[18~:k8=\E[19~:k9=\E[20~:k0=\E[21~:K1=\E[1~:K2=\E[5~:\
+	:K4=\E[4~:K5=\E[6~:\
+	:pt:sr=\EM:vt#3:xn:km:bl=^G:vi=\E[?25l:ve=\E[?25h:vs=\E[?25h:\
+	:sc=\E7:rc=\E8:cs=\E[%i%d;%dr:\
+	:r1=\Ec:r2=\Ec:r3=\Ec:
+
 # # --------------------------------
 #
 # N: ANN ARBOR
@@ -1853,6 +1868,7 @@ dl|vt200|vt220|vt200-am|vt220-am|DEC VT200 series:\
 	:md=\E[1m:mr=\E[7m:mb=\E[5m:me=\E[m:\
 	:is=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?7h\E>\E[1,24r:\
 	:rs=\E<\E[62;1"p\E[4l\E[20l\E[?1l\E[?3l\E[?7h\E>\E[1,24r\E[24,1H:\
+	:ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:ks@:ke@:\
 	:kN=\E[6~:kP=\E[5~:\
 	:tc=vt100:
 dm|vt200-nam|vt220-nam|DEC VT200 series, no am:\
@@ -1879,6 +1895,7 @@ dL|vt300|vt320|vt300-am|vt320-am|DEC VT300 series:\
 	:md=\E[1m:mr=\E[7m:mb=\E[5m:me=\E[m:\
 	:is=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?7h\E>\E[1,24r:\
 	:rs=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?3l\E[?7h\E>\E[1,24r\E[24,1H:\
+	:ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:ks@:ke@:\
 	:kN=\E[6~:kP=\E[5~:\
 	:tc=vt100:
 dM|vt300-nam|vt320-nam|DEC VT300 series, no am:\
@@ -1896,15 +1913,17 @@ dO|vt300-w-nam|vt320-w-nam|DEC VT300 series, 132 col, no am:\
 	:rs=\E<\E[63;1"p\E[4l\E[20l\E[?1l\E[?3h\E[?7l\E>\E[1,24r\E[24,1H:\
 	:tc=vt300:
 # @(#)termcap	X10/6.6	11/7/86, minus alternate screen, plus :cs
+# Misconceived ks/ke axed out by Michael Sokolov: if we want to make
+# our secretarial staff use UNIX, we gotta give them the numeric keypad!
 vs|xterm|vs100|xterm terminal emulator (X window system):\
 	:do=^J:le=^H:ho=\E[H:\
 	:co#80:li#65:cl=\E[H\E[2J:bs:am:cm=\E[%i%d;%dH:nd=\E[C:up=\E[A:\
 	:ce=\E[K:cd=\E[J:so=\E[7m:se=\E[m:us=\E[4m:ue=\E[m:\
 	:md=\E[1m:mr=\E[7m:me=\E[m:\
-	:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:kb=^H:\
+	:ku=\E[A:kd=\E[B:kr=\E[C:kl=\E[D:kb=^H:\
 	:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:pt:sf=\n:sr=\EM:\
 	:al=\E[L:dl=\E[M:ic=\E[@:dc=\E[P:\
-	:MT:ks=\E[?1h\E=:ke=\E[?1l\E>:xn:\
+	:MT:ks=:ke=:xn:\
 	:AL=\E[%dL:DL=\E[%dM:IC=\E[%d@:DC=\E[%dP:\
 	:hs:ts=\E[?E\E[?%i%dT:fs=\E[?F:es:ds=\E[?E:\
 	:is=\E\E[m\E[?7h\E[?1;4l:cs=\E[%i%d;%dr:\

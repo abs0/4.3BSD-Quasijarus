@@ -1,0 +1,85 @@
+h34367
+s 00006/00003/00031
+d D 6.2 85/09/29 13:47:04 mckusick 4 3
+c ul does not interpret \u correctly
+e
+s 00001/00001/00033
+d D 6.1 85/05/15 15:45:56 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00001/00026
+d D 5.1 85/05/15 15:45:26 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00027/00000/00000
+d D 4.1 85/05/15 15:44:51 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RAND 3 VAX-11
+E 2
+I 2
+D 3
+.TH RAND 3C "19 January 1983"
+E 3
+I 3
+.TH RAND 3C "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+rand, srand \- random number generator
+.SH SYNOPSIS
+.nf
+.B srand(seed)
+.B int seed;
+.PP
+.B rand()
+.fi
+.SH DESCRIPTION
+I 2
+.ft B
+The newer random(3) should be used in new applications;
+rand remains for compatibilty.
+.ft R
+.PP
+E 2
+.I Rand
+uses a multiplicative congruential
+D 4
+random number generator
+with period 2\u\s732\s0\d
+E 4
+I 4
+random number generator with period
+.if t 2\u\s732\s0\d
+.if n 2**32
+E 4
+to return successive pseudo-random
+D 4
+numbers in the range from 0 to 2\u\s731\s10\d\-1.
+E 4
+I 4
+numbers in the range from 0 to
+.if t 2\u\s731\s10\d\(mi1.
+.if n (2**31)\(mi1
+E 4
+.PP
+The generator is reinitialized by calling
+.I srand
+with 1 as argument.
+It can be set to a random starting point by calling
+.I srand
+with whatever you like as argument.
+I 2
+.SH "SEE ALSO"
+random(3)
+E 2
+E 1

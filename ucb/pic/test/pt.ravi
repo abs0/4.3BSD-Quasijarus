@@ -1,0 +1,64 @@
+.PP
+this is figure 3
+.KS
+.nf
+.PS 6i
+"$upd$" at 100,300;
+line from 80,280 to 20,220;
+arc cw to 0,220;
+line to 0,360;
+arc cw to 40,400 radius 40;
+line -> to 180,400;
+"$upd$" at 200,400;
+line -> from 180,380 to 120,320;
+line -> from 100,280 to 120,220;
+"\f2L2\fP" at 100,200;
+line from 120,280 to 180,220;
+arc to 220,200;
+line to 280,200;
+arc to 320,220;
+line to 580,560;
+arc cw to 620,580;
+line -> to 680,520;
+line -> from 200,380 to 220,320;
+"\f2L1\fP" at 200,320;
+line from 220,380 to 280,320;
+arc to 320,320;
+line to 580,660;
+arc cw to 620,680;
+line -> to 680,620;
+"$a sub 1$" at 700,600;
+line -> from 700,580 to 700,520;
+"$a sub 2$" at 700,500;
+line from 700,480 to 700,420;
+"$b sub 1$" at 700,400;
+line -> from 680,380 to 620,320;
+"$app$" at 600,300;
+line from 580,280 to 520,220;
+arc cw to 480,220;
+line to 320,480;
+arc to 280,480;
+line -> to 220,420;
+line -> from 620,280 to 680,220;
+"\f2L1\fP" at 700,200;
+line -> from 720,380 to 780,320;
+"$a sub 3$" at 800,300;
+line -> from 800,280 to 800,220;
+"$b sub 2$" at 800,200;
+line -> from 780,180 to 720,120;
+"$app$" at 700,100;
+line from 680,80 to 620,20;
+arc cw to 580,0;
+line to 520,0;
+arc cw to 480,20;
+line to 320,480;
+line -> from 820,180 to 880,120;
+"$I$" at 900,100;
+line -> from 720,80 to 780,20;
+"\f2L2\fP" at 800,0;
+.PE
+.sp 2
+.ce
+Figure 3.
+.sp 2
+.KE

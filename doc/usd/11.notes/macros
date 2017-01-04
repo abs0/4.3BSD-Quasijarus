@@ -240,7 +240,7 @@ APPENDIX \\$1
 .if \n(dw-4 .ds dw Thursday
 .if \n(dw-5 .ds dw Friday
 .if \n(dw-6 .ds dw Saturday
-.ds DA \*(mo \n(dy, 19\n(yr
+.ds DA \*(mo \n(dy, \n(Yr
 .de RS
 .ls 1
 .in +5

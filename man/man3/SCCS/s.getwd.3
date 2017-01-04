@@ -1,0 +1,63 @@
+h28286
+s 00000/00003/00029
+d D 6.2 86/05/12 19:15:49 karels 3 2
+c no more we don't
+e
+s 00004/00002/00028
+d D 6.1 85/05/15 16:21:39 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00030/00000/00000
+d D 5.1 85/05/15 16:21:33 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETWD 3 "25 February 1983"
+E 2
+I 2
+.TH GETWD 3 "%Q%"
+E 2
+.UC 5
+.SH NAME
+getwd \- get current working directory pathname
+.SH SYNOPSIS
+.nf
+.B char *getwd(pathname)
+.B char *pathname;
+.fi
+.SH DESCRIPTION
+.I Getwd
+copies the absolute pathname of the current working directory to
+.I pathname
+and returns a pointer to the result.
+.SH LIMITATIONS
+D 2
+Maximum pathname length is MAXPATHLEN characters (1024).
+E 2
+I 2
+Maximum pathname length is MAXPATHLEN characters (1024),
+as defined in
+.I <sys/param.h>.
+E 2
+.SH DIAGNOSTICS
+.I Getwd
+returns zero and places a message in
+.I pathname
+if an error occurs.
+D 3
+.SH BUGS
+.I Getwd
+may fail to return to the current directory if an error occurs.
+E 3
+E 1

@@ -1,0 +1,1353 @@
+h59314
+s 00001/00001/00442
+d D 1.44 87/10/22 09:44:40 bostic 47 46
+c sprintf returns an int, now
+e
+s 00002/00002/00441
+d D 1.43 87/10/01 14:42:26 bostic 46 45
+c return u_long, not int; bug report 4.3BSD/lib/37
+e
+s 00001/00001/00442
+d D 1.42 87/09/14 16:11:34 bostic 45 44
+c endgrent doesn't return anything; bug report 4.3BSD/usr.bin/85
+e
+s 00002/00000/00441
+d D 1.41 87/09/09 15:30:58 bostic 44 43
+c added case-insensitive string comparison routines
+e
+s 00003/00003/00438
+d D 1.40 87/05/12 17:32:38 karels 43 42
+c fix dir.h/wait.h(machparam.h) order, update getdiskbyname
+e
+s 00002/00002/00439
+d D 1.39 87/05/12 17:24:29 karels 42 41
+c u_ => unsigned hton[sl]
+e
+s 00001/00001/00440
+d D 1.38 86/11/20 16:02:17 bostic 41 40
+c bug report 4.3/usr.bin/15
+e
+s 00003/00002/00438
+d D 1.37 86/05/17 22:07:08 lepreau 40 39
+c correct return type of strtok and strpbrk; add fchown
+e
+s 00017/00002/00423
+d D 1.36 86/04/27 03:27:20 donn 39 38
+c Added functions in compat-sys5.  Took the type definitions from the source;
+c hope they're right!
+e
+s 00002/00002/00423
+d D 1.35 86/03/20 17:55:53 donn 38 36
+c Fix bcmp() return value; adjust sccs keywords.
+e
+s 00000/00000/00425
+d R 1.35 86/03/20 17:54:15 donn 37 36
+c Fix return value of bcmp(); adjust SCCS keywords.
+e
+s 00140/00015/00285
+d D 1.34 86/03/14 03:59:23 donn 36 35
+c massive additions and changes; many new routines
+e
+s 00013/00006/00287
+d D 1.33 86/03/04 19:16:32 donn 35 34
+c Added several entries (fchmod, getpeername, quota, setquota, sigreturn,
+c umount, vhangup) and fixed a few others (getsockopt, ptrace, setregid,
+c setreuid, swapon).  Made ioctl requests have type u_long.
+e
+s 00001/00001/00292
+d D 1.32 86/03/01 05:02:54 lepreau 34 33
+c fseek back to returning int
+e
+s 00001/00001/00292
+d D 1.31 86/02/17 12:07:06 bloom 33 32
+c getgroups' first arg is an int
+e
+s 00001/00001/00292
+d D 1.30 86/02/14 08:51:48 bloom 32 31
+c nlist returns a value
+e
+s 00008/00008/00285
+d D 1.29 86/01/07 14:11:58 mckusick 31 30
+c int => uid_t and int => gid_t
+e
+s 00002/00002/00291
+d D 1.28 85/11/28 11:00:27 bloom 30 29
+c gethostid and sethostid should use longs
+e
+s 00001/00001/00292
+d D 1.27 85/11/07 13:23:08 bloom 29 28
+c use return value and not same function
+e
+s 00001/00001/00292
+d D 1.26 85/11/01 18:17:10 bloom 28 27
+c fix sigstack (from donn@utah-cs)
+e
+s 00002/00002/00291
+d D 1.25 85/10/30 17:53:59 bloom 27 26
+c declaration of void type requires programs to also declare void type
+e
+s 00004/00004/00289
+d D 1.24 85/10/30 17:31:40 bloom 26 24
+c fix time, endpwent, setpwent, fseek
+e
+s 00004/00004/00289
+d R 1.24 85/10/30 17:15:14 bloom 25 24
+c fix fseek, time, endpwent, setpwent
+e
+s 00003/00003/00290
+d D 1.23 85/10/28 19:49:35 mckusick 24 23
+c types for lseek and truncate
+e
+s 00003/00003/00290
+d D 1.22 85/10/08 17:31:44 mckusick 23 22
+c changes to correspond to the manual pages
+e
+s 00001/00001/00292
+d D 1.21 85/06/25 15:36:13 karels 22 21
+c use fd_set's for select
+e
+s 00002/00001/00291
+d D 1.20 85/06/17 17:56:20 mckusick 21 20
+c add adjtime; fix setsockopt
+e
+s 00006/00006/00286
+d D 1.19 85/05/15 17:23:54 mckusick 20 19
+c be more specific about VARARGS for printf and scanf
+e
+s 00001/00001/00291
+d D 1.18 85/04/16 20:13:23 edward 19 18
+c _iob[] is not extern
+e
+s 00005/00000/00287
+d D 1.17 85/04/09 12:10:56 ralph 18 17
+c added syslog routines.
+e
+s 00001/00001/00286
+d D 1.16 85/04/08 11:42:37 ralph 17 16
+c _NFILE nolonger defined
+e
+s 00001/00001/00286
+d D 1.15 84/12/11 14:29:19 edward 16 14
+c sigvec fixed
+e
+s 00002/00002/00285
+d R 1.15 84/12/11 14:20:06 edward 15 14
+c sigvec fixed
+e
+s 00001/00002/00286
+d D 1.14 84/11/21 12:06:55 ralph 14 13
+c fix parameter type to flsbuf().
+e
+s 00001/00000/00287
+d D 1.13 84/11/20 23:32:29 edward 13 12
+c char **environ added
+e
+s 00001/00001/00286
+d D 1.12 84/09/24 09:19:28 ralph 12 11
+c change long to off_t for lseek.
+e
+s 00001/00001/00286
+d D 1.11 84/08/02 10:21:45 ralph 11 10
+c fix utimes argument types.
+e
+s 00001/00001/00286
+d D 1.10 84/03/15 16:33:21 ralph 10 9
+c fix gethostname() length parameter type.
+e
+s 00001/00001/00286
+d D 1.9 84/02/13 16:12:12 ralph 9 8
+c fix longjmp() parameter type
+e
+s 00001/00001/00286
+d D 1.8 83/09/09 13:28:22 edward 8 7
+c open is VARARGS2 not VARARGS
+e
+s 00002/00001/00285
+d D 1.7 83/07/06 17:09:50 sam 7 6
+c noticed by edwaRd
+e
+s 00005/00005/00281
+d D 1.6 83/06/30 14:14:18 sam 6 5
+c from sun
+e
+s 00016/00008/00270
+d D 1.5 83/06/02 16:44:24 sam 5 4
+c cleanup a tad?
+e
+s 00001/00001/00277
+d D 1.4 83/04/12 18:24:10 edward 4 3
+c valloc's argument should be unsigned
+e
+s 00228/00063/00050
+d D 1.3 83/04/01 00:04:35 sam 3 2
+c from sun, but with lots of work by yours truly
+e
+s 00002/00000/00111
+d D 1.2 83/03/05 17:48:53 nicklin 2 1
+c added sys_nerr and sys_errlist
+e
+s 00111/00000/00000
+d D 1.1 82/08/30 13:16:03 rrh 1 0
+c date and time created 82/08/30 13:16:03 by rrh
+e
+u
+U
+t
+T
+I 1
+D 3
+	/* LINTLIBRARY */
+/*
+ *	%W%	(Berkeley)	%G%
+ */
+E 3
+I 3
+D 38
+/*	%M%	%I%	%E%	*/
+E 38
+I 38
+/*	%W% (Berkeley) %G%	*/
+E 38
+I 36
+
+E 36
+/* LINTLIBRARY */
+I 36
+
+E 36
+#include <sys/types.h>
+I 36
+#include <sys/time.h>
+
+I 43
+#include <sys/wait.h>
+E 43
+#include <sys/dir.h>
+#include <sys/resource.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/timeb.h>
+#include <sys/times.h>
+#include <sys/uio.h>
+#include <sys/vtimes.h>
+D 43
+#include <sys/wait.h>
+E 43
+
+#include <netinet/in.h>
+
+#include <netns/ns.h>
+
+#include <arpa/inet.h>
+
+D 43
+#include <disktab.h>
+E 43
+I 43
+#include <sys/disklabel.h>
+E 43
+E 36
+D 5
+#include <sys/descrip.h>
+E 5
+#include <fstab.h>
+#include <grp.h>
+D 36
+#include <sys/dir.h>
+E 36
+I 36
+#include <ndbm.h>
+#include <netdb.h>
+E 36
+#include <nlist.h>
+#include <pwd.h>
+#include <setjmp.h>
+E 3
+D 36
+#include <stdio.h>
+E 36
+#include <sgtty.h>
+#include <signal.h>
+D 3
+#include <sys/types.h>
+#include <sys/stat.h>
+E 3
+D 6
+#include <time.h>
+I 3
+#include <resource.h>
+#include <wait.h>
+E 6
+I 6
+D 36
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+E 6
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/uio.h>
+E 36
+I 36
+#include <stdio.h>
+#include <ttyent.h>
+E 36
+
+	/***	SECTION 2	***/
+E 3
+int	errno;
+I 2
+D 3
+int	sys_nerr;
+char	*sys_errlist[];
+E 2
+int	alarm(s) unsigned s; { return(s); }
+E 3
+I 3
+
+int	accept(s, a, l) struct sockaddr *a; int *l; { return s; }
+int	access( p, m) char *p; { return 0; }
+int	acct(f) char *f; { return 0;}
+I 21
+int	adjtime(delta, odelta) struct timeval *delta, *odelta; { return 0; }
+E 21
+int	bind(s, n, l) struct sockaddr *n; { return 0; }
+E 3
+char	*brk(a) char *a; { return(a); }
+int	chdir(s) char *s; { return(0); }
+int	chmod(s, m) char *s; { return(0); }
+int	chown(s, u, g) char *s; { return(0); }
+I 3
+int	chroot( d ) char *d; { return 0; }
+E 3
+int	close(f) { return(0); }
+D 3
+int	creat(s, m) char *s; { return(0); }
+E 3
+I 3
+int	connect( s, n, l) struct sockaddr *n; { return 0; }
+E 3
+int	dup(f) { return(f); }
+D 3
+	/* VARARGS */
+	execl(f, a) char *f, *a; {;}
+	execv(s, v) char *s, *v[]; {;}
+	exit(s) {;}
+E 3
+I 3
+int	dup2( o, n) { return o; }
+	execve(s, v, e) char *s, *v[], *e[]; {;}
+	_exit(s) {;}
+I 35
+int	fchmod(f, m) { return(0); }
+I 40
+int	fchown(f, u, g) { return(0); }
+E 40
+E 35
+I 5
+int	fcntl(f, c, a) { return (0); }
+E 5
+int	flock( f, o ) { return 0; }
+E 3
+int	fork() { return(0); }
+I 3
+int	fsync( f ) { return 0; }
+E 3
+int	fstat(f, b) struct stat *b; { return(0); }
+D 3
+int	getgid() { return(1); }
+E 3
+I 3
+D 24
+int	ftruncate( d, l) { return 0;}
+E 24
+I 24
+int	ftruncate( d, l) off_t l; { return 0;}
+E 24
+D 5
+int	getdopt( x, w, d ) struct dopt *d; { return 0; }
+E 5
+int	getdtablesize() { return 20 ; }
+E 3
+D 31
+int	getegid() { return(1); }
+I 3
+int	geteuid() { return(1); }
+int	getgid() { return(1); }
+E 31
+I 31
+gid_t	getegid() { return((gid_t)1); }
+uid_t	geteuid() { return((uid_t)1); }
+gid_t	getgid() { return((gid_t)1); }
+E 31
+D 33
+int	getgroups( n, g ) int *n, *g; { return 0; }
+E 33
+I 33
+int	getgroups( n, g ) int n, *g; { return 0; }
+E 33
+D 30
+int	gethostid() { return 1; }
+E 30
+I 30
+long	gethostid() { return 1L; }
+E 30
+D 10
+int	gethostname( n, l ) char *n; int *l; { return 0 ;}
+E 10
+I 10
+int	gethostname( n, l ) char *n; int l; { return 0 ;}
+E 10
+int	getitimer( w, v ) struct itimerval *v; { return 0; }
+int	getpagesize() { return 1; }
+I 35
+int	getpeername(s, n, l) struct sockaddr *n; int *l; { return (0); }
+E 35
+int	getpgrp(p) { return 1; }
+E 3
+int	getpid() { return(1); }
+I 3
+int	getppid() { return(1); }
+int	getpriority( w, who) { return 1;}
+int	getrlimit( res, rip) struct rlimit *rip; { return 0;}
+int	getrusage( res, rip) struct rusage *rip; { return 0;}
+D 41
+int	getsockname(s, name, namelen) char *name; int *namelen; { return(0); }
+E 41
+I 41
+int	getsockname(s, name, namelen) struct sockaddr *name; int *namelen; { return(0); }
+E 41
+D 35
+int	getsockopt( s, level, opt, buf, len ) { return 0;}
+E 35
+I 35
+int	getsockopt( s, level, opt, buf, len ) char *buf; int *len; { return 0;}
+E 35
+int	gettimeofday( t, z ) struct timeval *t; struct timezone *z; { return 0;}
+E 3
+D 31
+int	getuid() { return(1); }
+E 31
+I 31
+uid_t	getuid() { return((uid_t)1); }
+E 31
+D 3
+int	geteuid() { return(1); }
+int	gtty(f, b) struct sgttyb *b; { return(0); }
+E 3
+I 3
+D 35
+int	ioctl( d, r, p) char *p; { return 0;}
+E 35
+I 35
+int	ioctl( d, r, p) u_long r; char *p; { return 0;}
+E 35
+E 3
+int	kill(p, s) { return(0); }
+I 3
+int	killpg( pg, s) { return 0;}
+E 3
+int	link(a, b) char *a, *b; { return(0); }
+I 3
+int	listen( s, b ){ return 0; }
+E 3
+D 12
+long	lseek(f, o, d) long o; { return(0); }
+E 12
+I 12
+D 24
+off_t	lseek(f, o, d) off_t o; { return(0); }
+E 24
+I 24
+off_t	lseek(f, o, d) off_t o; { return(o); }
+E 24
+E 12
+I 3
+int	lstat(s, b) char *s; struct stat *b; { return(0); }
+I 5
+#ifdef notdef
+E 5
+int	madvise( a, l, b ) char * a; int l, b; { return 0;}
+int	mmap( a, l, p, s, f, o ) char * a; off_t o; { return 0;}
+int	mincore( a, l, v ) char * a; int l; char *v; { return 0; }
+I 5
+#endif
+E 5
+int	mkdir( p, m ) char *p; { return 0; }
+E 3
+int	mknod(n, m, a) char *n; { return(0); }
+D 3
+char	*mktemp(p) char *p; { return(p);}
+E 3
+int	mount(s, n, f) char *s, *n; { return(0); }
+I 5
+#ifdef notdef
+E 5
+D 3
+int	nice(p) { return(0); }
+int	open(f, m) char *f; { return(0); }
+E 3
+I 3
+int	mprotect( a, l, p) char * a; { return 0;}
+int	mremap( a, l, p, s, f) char * a, f; { return 0;}
+int	munmap( a, l) char * a; { return 0;}
+I 5
+#endif
+E 5
+D 8
+	/* VARARGS */
+E 8
+I 8
+	/* VARARGS2 */
+E 8
+int	open(f, m, stuff) char *f; { return(0); }
+E 3
+D 5
+	pause() {;}
+E 5
+int	pipe(f) int f[2]; { return(0); }
+	profil(b, s, o, i) char *b; {;}
+D 35
+int	ptrace(r, p, a, d) { return(0); }
+E 35
+I 35
+int	ptrace(r, p, a, d) int *a; { return(0); }
+int	quota(c, u, a, ad) char *ad; { return(0); }
+E 35
+int	read(f, b, l) char *b; { return(l); }
+I 3
+int	readv( d, v, l) struct iovec *v; { return l; }
+int	readlink( p, b, s ) char *p, *b; { return 1; }
+	reboot( h ) {;}
+int	recv( s, b, l, f ) char *b; { return l ; }
+int	recvfrom( s, b, l, f, fr, fl ) char *b; struct sockaddr *fr; int *fl;
+		{ return l; }
+int	recvmsg( s, m, f ) struct msghdr m[]; { return 1; }
+int	rename( f, t ) char *f, *t; { return 0;}
+int	rmdir( p ) char *p; { return 0;}
+E 3
+char	*sbrk(i) { return((char *)0); }
+D 3
+int	setgid(g) { return(0); }
+int	setuid(u) { return(0); }
+E 3
+I 3
+D 22
+int	select( n, r, w, e, t ) int *r, *w, *e; struct timeval *t; { return n; }
+E 22
+I 22
+int	select( n, r, w, e, t ) fd_set *r, *w, *e; struct timeval *t; { return n; }
+E 22
+int	send( s, m, l, f )  char *m; { return l; }
+int	sendto( s, m, l, f, t, tl ) char *m; struct sockaddr *t; { return l; }
+int	sendmsg( s, m, l) struct msghdr m[]; { return l; }
+D 5
+int	setdopt( x, w, d ) struct dopt *d; { return 0; }
+E 5
+int	setgroups( n, g) int *g; { return 0; }
+D 30
+int	sethostid( h ) { return 0;}
+E 30
+I 30
+int	sethostid( h ) long h; { return 0;}
+E 30
+int	sethostname( n, l ) char *n; int l; { return 0 ;}
+D 5
+int	setitimer( w, v ) struct itimerval *v; { return 0; }
+E 5
+I 5
+int	setitimer( w, v, ov ) struct itimerval *v, *ov; { return 0; }
+E 5
+int	setpgrp( g, pg) { return 0; }
+int	setpriority( w, who, pri ) { return 1;}
+D 31
+int	setregid( r, e){ return 0; }
+int	setreuid( r, e){ return 0; }
+E 31
+I 31
+D 35
+int	setregid( r, e) gid_t r, e; { return 0; }
+int	setreuid( r, e) uid_t r, e; { return 0; }
+E 35
+I 35
+int	setquota(s, f) char *s, *f; { return 0; }
+int	setregid( r, e) int r, e; { return 0; }
+int	setreuid( r, e) int r, e; { return 0; }
+E 35
+E 31
+int	setrlimit( res, rip) struct rlimit *rip; { return 0;}
+	/* VARARGS */
+D 21
+int	setsockopt( s, level, opt, buf, len ) { return 0;}
+E 21
+I 21
+int	setsockopt( s, level, opt, buf, len ) char *buf; { return 0;}
+E 21
+int	settimeofday( t, z ) struct timeval *t; struct timezone *z; { return 0;}
+int	shutdown( s, h ){ return 0;}
+E 3
+int	(*signal(c, f))() int (*f)(); { return(f); }
+I 3
+D 5
+int	(*sigsys(c, f))() int (*f)(); { return(f); }
+E 5
+I 5
+D 16
+int	(*sigvec(c, f, m))() int (*f)(); { return(f); }
+E 16
+I 16
+int	sigvec(c, f, m) struct sigvec *f, *m; { return 0; }
+E 16
+int	sigblock(m) { return (m); }
+int	sigsetmask(m) { return (m); }
+	sigpause(m) { ; }
+I 35
+int	sigreturn(scp) struct sigcontext *scp; { return -1; }
+E 35
+D 28
+int	sigstack(a, on) char *a; int on; { ; }
+E 28
+I 28
+int	sigstack(ss, oss) struct sigstack *ss, *oss; { return 0 ; }
+E 28
+E 5
+int	socket( a, t, p) {return 1;}
+int	socketpair( d, t, p, s ) int s[2]; { return 0; }
+E 3
+int	stat(s, b) char *s; struct stat *b; { return(0); }
+I 5
+#ifdef notdef
+E 5
+D 3
+char	*strcat(a, b) char *a, *b; { ; }
+E 3
+I 3
+char *	stk( a ) char * a; { return a; }
+char *	sstk( a ) int a; { return (char *)0; }
+D 5
+int	swapon( b, s, q ) char *b; { return 0;}
+int	swapoff( i, m) { return 0;}
+E 5
+I 5
+#endif
+D 35
+int	swapon( b, s ) char *b; { return 0;}
+E 35
+I 35
+int	swapon( s ) char *s; { return 0;}
+E 35
+E 5
+int	symlink( t, f) char *t, *f; { return 0;}
+	sync(){;}
+D 24
+int	truncate( p, l) char *p; { return 0;}
+E 24
+I 24
+int	truncate( p, l) char *p; off_t l; { return 0;}
+E 24
+int	umask( n ) { return n; }
+I 35
+int	umount(s) char *s; { return 0; }
+E 35
+int	unlink(s) char *s; { return(0); }
+D 11
+int	utimes( f, t ) char *f; struct timeval *t[2]; { return 0 ;}
+E 11
+I 11
+int	utimes( f, t ) char *f; struct timeval t[2]; { return 0 ;}
+E 11
+int	vfork() { return(0); }
+I 35
+	vhangup() { ; }
+E 35
+int	wait(s) union wait *s; { return(1); }
+D 6
+int	wait3( s, o, r) union wait s; struct rusage *r; { return 1;}
+E 6
+I 6
+int	wait3( s, o, r) union wait *s; struct rusage *r; { return 1;}
+E 6
+int	write(f, b, l) char *b; { return(l); }
+int	writev( f, v, l) struct iovec *v; { return l; }
+
+
+D 36
+	/***	SECTION	3	***/
+E 36
+I 36
+	/***	SECTION 3	***/
+E 36
+
+I 36
+struct qelem {	/* this should really be defined in an include file */
+	struct qelem	*q_forw;
+	struct qelem	*q_back;
+	char		data[1];
+}
+
+E 36
+	/* antique system calls and unclassified */
+I 36
+	_longjmp( e, v) jmp_buf e; {;}
+int	_setjmp(e) jmp_buf e; { return(0); }
+E 36
+	abort() {;}
+int	abs(i) int i; { return(i); }
+int	alarm(s) unsigned s; { return(s); }
+D 36
+	alphasort( d1, d2) struct direct *d1, *d2; { return 0;}
+E 36
+I 36
+	alphasort( d1, d2) struct direct **d1, **d2; { return 0;}
+E 36
+char *	asctime(t) struct tm *t; { return(""); }
+double	atof(s) char *s; { return(1.); }
+int	atoi(s) char *s; { return 1;   }
+long	atol(s) char *s; { return 1L;   }
+I 38
+int	bcmp(b1, b2, length) char *b1, *b2; { return 0; }
+E 38
+I 36
+	bcopy(src, dst, length) char *src, *dst; { ; }
+D 38
+	bcmp(b1, b2, length) char *b1, *b2; { ; }
+E 38
+	bzero(b, length) char *b; { ; }
+E 36
+char *	calloc(n,s) unsigned n, s; { static char c[1]; return(c); }
+void	closedir( p ) DIR *p; {}
+I 18
+	closelog() {}
+E 18
+int	creat(s, m) char *s; { return(0); }
+char *	crypt(k,s) char *k, *s; { return(""); }
+D 36
+char *	ctime(c) time_t *c;{ return(""); }
+E 36
+I 36
+char *	ctime(c) long *c;{ return(""); }
+E 36
+char	_ctype_[];
+I 36
+DBM *	dbm_open(file, flags, mode) char *file; { return (DBM *) 0; }
+void	dbm_close(db) DBM *db; { ; }
+datum	dbm_fetch(db, key) DBM *db; datum key; { return key; }
+int	dbm_store(db, key, cont, flags) DBM *db; datum key, cont; { return 0; }
+int	dbm_delete(db, key) DBM *db; datum key; { return 0; }
+datum	dbm_firstkey(db) DBM *db; { datum key; return key; }
+datum	dbm_nextkey(db) DBM *db; { datum key; return key; }
+E 36
+char *	ecvt(v, n, d, s) double v; int *d, *s; { return(""); }
+	encrypt(s, i) char *s; {}
+int	endfsent() { return 0; }
+D 45
+int	endgrent() { return 0; }
+E 45
+I 45
+int	endgrent() { ; }
+E 45
+I 36
+	endhostent() { ; }
+	endnetent() { ; }
+	endprotoent() { ; }
+E 36
+D 26
+int	endpwent() { return 0; }
+E 26
+I 26
+D 27
+void	endpwent() {}
+E 27
+I 27
+	endpwent() {}
+I 36
+	endservent() { ; }
+	endttyent() { ; }
+	endusershell() { ; }
+E 36
+E 27
+E 26
+I 13
+char **	environ;
+E 13
+	/* VARARGS */
+	execl(f, a) char *f, *a; {;}
+	/* VARARGS */
+	execle(f, a) char *f, *a; {;}
+I 36
+	/* VARARGS */
+	execlp(f, a) char *f, *a; {;}
+E 36
+	execv(s, v) char *s, *v[]; {;}
+I 36
+	execvp(s, v) char *s, *v[]; {;}
+	exect(s, v, e) char *s, *v[], *e[]; {;}
+E 36
+	exit(s) {;}
+char *	fcvt(v, n, d, s) double v; int *d, *s; { return(""); }
+I 36
+int	ffs(i) { return i; }
+E 36
+	free(p) char *p; {;}
+double	frexp( v, e) double v; int *e; { return v; }
+I 36
+	ftime(tp) struct timeb *tp; { ; }
+E 36
+char *	gcvt(v, n, b) double v; char *b; { return(""); }
+I 36
+D 43
+struct disktab *	getdiskbyname(name) char *name; { return (struct disktab *) 0; }
+E 43
+I 43
+struct disklabel *	getdiskbyname(name) char *name; { return (struct disklabel *) 0; }
+E 43
+E 36
+char *	getenv( n ) char *n; { return n; }
+struct fstab *	getfsent() { return (struct fstab *)NULL; }
+struct fstab *	getfsspec( n ) char *n; { return (struct fstab *)NULL; }
+struct fstab *	getfsfile( n ) char *n; { return (struct fstab *)NULL; }
+I 5
+struct fstab *	getfstype( t ) char *t; { return (struct fstab *)NULL; }
+E 5
+struct group *	getgrent() { return (struct group *)NULL; }
+struct group *	getgrgid( n ) { return (struct group *)NULL; }
+struct group *	getgrnam( n ) char *n; { return (struct group *)NULL; }
+I 36
+struct hostent *	gethostbyaddr(addr, len, type) char *addr; { return (struct hostent *) 0; }
+struct hostent *	gethostbyname(name) char *name; { return (struct hostent *) 0; }
+struct hostent *	gethostent() { return (struct hostent *) 0; }
+E 36
+char *	getlogin(){ return " "; }
+I 36
+struct netent *	getnetbyaddr(net, type) { return (struct netent *) 0; }
+struct netent *	getnetbyname(name) char *name; { return (struct netent *) 0; }
+struct netent *	getnetent() { return (struct netent *) 0; }
+int	getopt(argc, argv, optstr) char **argv, *optstr; { return EOF; }
+E 36
+char *	getpass( n ) char *n ; { return n; }
+I 36
+struct protoent *	getprotobyname(name) char *name; { return (struct protoent *) 0; }
+struct protoent *	getprotobynumber(proto) { return (struct protoent *) 0; }
+struct protoent *	getprotoent() { return (struct protoent *) 0; }
+E 36
+int	getpw( u, b) char *b;  { return 0; }
+struct passwd *	getpwent() { return (struct passwd *)NULL; }
+struct passwd *	getpwuid( n ) { return (struct passwd *)NULL; }
+struct passwd *	getpwnam( n ) char *n; { return (struct passwd *)NULL; }
+I 36
+struct servent *	getservbyname(name, proto) char *name, *proto; { return (struct servent *) 0; }
+struct servent *	getservbyport(port, proto) char *proto; { return (struct servent *) 0; }
+struct servent *	getservent() { return (struct servent *) 0; }
+struct ttyent *	getttynam(name) char *name; { return (struct ttyent *) 0; }
+char *	getusershell() { return (char *) 0; }
+char *	getwd(pathname) char *pathname; { return pathname; }
+E 36
+D 23
+struct	tm *	gmtime(c) time_t *c; { return gmtime(c); }
+E 23
+I 23
+struct	tm *	gmtime(c) long *c; { return gmtime(c); }
+E 23
+int	gtty(f, b) struct sgttyb *b; { return(0); }
+I 36
+#ifndef htonl
+D 42
+u_long	htonl(hostlong) u_long hostlong; { return hostlong; }
+E 42
+I 42
+unsigned long htonl(hostlong) u_long hostlong; { return hostlong; }
+E 42
+#endif htonl
+#ifndef htons
+D 42
+u_short	htons(hostshort) u_short hostshort; { return hostshort; }
+E 42
+I 42
+unsigned short htons(hostshort) u_short hostshort; { return hostshort; }
+E 42
+#endif htons
+E 36
+char *	index(s, c) char *s, c; { return s; }
+D 36
+long *	initstate( s, st, n) unsigned s; long *st; { return st; }
+E 36
+I 36
+u_long	inet_addr(cp) char *cp; { return 0L; }
+D 46
+int	inet_lnaof(in) struct in_addr in; { return 0; }
+int	inet_netof(in) struct in_addr in; { return 0; }
+E 46
+I 46
+u_long	inet_lnaof(in) struct in_addr in; { return 0L; }
+u_long	inet_netof(in) struct in_addr in; { return 0L; }
+E 46
+struct in_addr	inet_makeaddr(net, host) { struct in_addr in; return in; }
+u_long	inet_network(cp) char *cp; { return 0L; }
+char *	inet_ntoa(in) struct in_addr in; { return (char *) 0; }
+int	initgroups(uname, agroup) char *uname; { return 0; }
+char *	initstate( s, st, n) unsigned s; char *st; { return st; }
+	insque(elem, pred) struct qelem *elem, pred; { ; }
+E 36
+int	isatty(f) { return 1; }
+double	ldexp( v, e) double v; { return v; }
+D 9
+	longjmp( e, v) jmp_buf *e; {;}
+E 9
+I 9
+	longjmp( e, v) jmp_buf e; {;}
+I 36
+	longjmperror() {;}
+E 36
+E 9
+D 23
+struct	tm *localtime(c) time_t *c; { return localtime(c); }
+E 23
+I 23
+struct	tm *localtime(c) long *c; { return localtime(c); }
+E 23
+char *	malloc(n) unsigned n; {static char c; return(&c);}
+D 39
+double	modf( v, p ) double v, *p; { return v; }
+E 39
+I 39
+char *	memccpy(t, f, c, n) char *t, *f; { return t; }
+char *	memchr(s, c, n) char *s; { return s; }
+int	memcmp(s1, s2, n) char *s1, *s2; { return 0; }
+char *	memcpy(t, f, n) char *t, *f; { return t; }
+char *	memset(s, c, n) char *s; { return s; }
+E 39
+char *	mktemp(p) char *p; { return(p);}
+I 36
+int	mkstemp(p) char *p; { return(0);}
+I 39
+double	modf( v, p ) double v, *p; { return v; }
+	moncontrol(mode) { ; }
+E 39
+E 36
+	monitor(l, h, b, s, n) int (*l)(), (*h)(); short *b; {}
+	monstartup( l, h) int (*l)(), (*h)(); {;}
+D 32
+	nlist( f, n) char *f; struct nlist n[]; {;}
+E 32
+I 32
+D 36
+	nlist( f, n) char *f; struct nlist n[]; { return (0);}
+E 36
+I 36
+D 39
+	moncontrol(mode) { ; }
+E 39
+int	nice(incr) { return 0; }
+int	nlist( f, n) char *f; struct nlist n[]; { return (0);}
+struct ns_addr	ns_addr(name) char *name; { struct ns_addr ns; return ns; }
+char *	ns_ntoa(addr) struct ns_addr addr; { return (char *) 0; }
+#ifndef ntohl
+u_long	ntohl(netlong) u_long netlong; { return netlong; }
+#endif ntohl
+#ifndef ntohs
+u_short	ntohs(netshort) u_short netshort; { return netshort; }
+#endif ntohs
+E 36
+E 32
+DIR *	opendir( f ) char *f; { return (DIR *)NULL; }
+I 18
+	openlog(s, f, l) char *s; {}
+I 36
+char *	optarg;
+int	optind;
+E 36
+E 18
+I 5
+	pause() {;}
+E 5
+	perror(s) char *s; {}
+D 36
+struct direct *	readdir( p ) DIR *p; { return (struct direct *)NULL; }
+E 36
+I 36
+	psignal(sig, s) unsigned sig; char *s; {}
+E 36
+	qsort( b, n, w, c ) char *b; int (*c)(); {;}
+int	rand(){ return 1; }
+long	random() { return 1L; }
+I 36
+int	rcmd(a, rp, lu, ru, c, f) char **a, *lu, *ru, *c; u_short rp; int *f; { return 0; }
+E 36
+char *	re_comp(s) char *s ; { return s; }
+int	re_exec(s) char *s ; { return 1; }
+I 36
+struct direct *	readdir( p ) DIR *p; { return (struct direct *)NULL; }
+E 36
+char *	realloc(p, n) char *p; unsigned n; { static char c[1]; return(c);}
+I 36
+	remque(elem) struct qelem *elem; { ; }
+int	rexec(a, rp, n, p, c, f) char **a, *n, *p, *c; u_short rp; int *f; { return 0; }
+E 36
+char *	rindex(s, c) char *s, c; { return s; }
+I 36
+int	rresvport(p) int *p; { return 0; }
+int	ruserok(rh, su, ru, lu) char *rh, *ru, *lu; { return 0; }
+E 36
+int	scandir(d, n, s, c) char *d; struct direct *(*n[]); int (*s)(),(*c)();
+		{ return 1; }
+void	seekdir( p, l) DIR *p; long l; {}
+I 36
+int	setegid(egid) gid_t egid; { return 0; }
+int	seteuid(euid) uid_t euid; { return 0; }
+E 36
+int	setfsent() { return 0; }
+int	setgrent() { return 0; }
+D 31
+int	setgid(g) { return(0); }
+E 31
+I 31
+int	setgid(g) gid_t g; { return(0); }
+I 36
+	sethostent(stayopen) { ; }
+	sethostfile(name) char *name; { ; }
+E 36
+E 31
+int	setjmp(e) jmp_buf e; { return(0); }
+	setkey(k) char *k; {}
+I 18
+int	setlogmask(m) { return(0); }
+I 36
+	setnetent(stayopen) { ; }
+	setprotoent(stayopen) { ; }
+E 36
+E 18
+D 26
+int	setpwent() { return 0; }
+E 26
+I 26
+D 27
+void	setpwent() {}
+E 27
+I 27
+	setpwent() {}
+E 27
+E 26
+D 36
+long *	setstate( st ) long *st; { return st; }
+E 36
+I 36
+	setpwfile(file) char *file; {}
+int	setrgid(rgid) gid_t rgid; { return 0; }
+int	setruid(ruid) uid_t ruid; { return 0; }
+	setservent(stayopen) { ; }
+char *	setstate( st ) char *st; { return st; }
+	setttyent() { ; }
+E 36
+D 31
+int	setuid(u) { return(0); }
+E 31
+I 31
+int	setuid(u) uid_t u; { return(0); }
+I 36
+	setusershell() { ; }
+int	siginterrupt(sig, flag) { return 0; }
+E 36
+E 31
+	sleep(i) unsigned i; {}
+int	srand(s){ return s; }
+char *	strcat(a, b) char *a, *b; { return a; }
+I 39
+char *	strcatn(a, b, n) char *a, *b; { return a;}
+char *	strchr(s, c) char *s, c; { return s; }
+E 39
+E 3
+int	strcmp(a, b) char *a, *b; { return(1); }
+I 44
+int	strcasecmp(a, b) char *a, *b; { return(1); }
+E 44
+I 39
+int	strcmpn(a, b, n) char *a, *b; { return(1); }
+E 39
+D 3
+char	*strcpy(a, b) char *a, *b; { ; }
+E 3
+I 3
+char *	strcpy(a, b) char *a, *b; { return a; }
+I 39
+char *	strcpyn(a, b, n) char *a, *b; { return a; }
+int	strcspn(s, set) char *s, *set; { return(0); }
+E 39
+E 3
+int	strlen(s) char *s; { return(1); }
+I 3
+char *	strncat(a, b, n) char *a, *b; { return a;}
+int	strncmp(a, b, n) char *a, *b; { return(1); }
+I 44
+int	strncasecmp(a, b, n) char *a, *b; { return(1); }
+E 44
+char *	strncpy(a, b, n) char *a, *b; { return a; }
+I 39
+D 40
+int	strpbrk(s, brk) char *s, *brk; { return(0); }
+E 40
+I 40
+char *	strpbrk(s, brk) char *s, *brk; { return s; }
+E 40
+char *	strrchr(s, c) char *s, c; { return s; }
+int	strspn(s, set) char *s, *set; { return(0); }
+D 40
+int	strtok(s, sep) char *s, *sep; { return(0); }
+E 40
+I 40
+char *	strtok(s, sep) char *s, *sep; { return s; }
+E 40
+E 39
+E 3
+int	stty(f, b) struct sgttyb *b; { return(0); }
+D 3
+long	tell(f) { return((long)0); }
+E 3
+I 3
+	swab( f, t, n) char *f, *t; {;}
+I 18
+	/* VARARGS2 */
+	syslog(l, f) char *f; {}
+E 18
+char *	sys_errlist[];
+I 36
+char *	sys_siglist[];
+E 36
+int	sys_nerr;
+E 3
+int	system(s) char *s; { return(0); }
+I 3
+long	tell(f) { return((long)0); }
+long	telldir( p ) DIR *p; { return 1L; }
+E 3
+D 26
+time_t	time(t) time_t *t; { return( 0 );}
+E 26
+I 26
+long	time(t) long *t; { return( 0L );}
+I 36
+int	times(tmsp) struct tms *tmsp; { return 0; }
+E 36
+E 26
+D 3
+int	unlink(s) char *s; { return(0); }
+int	wait(s) int *s; { return(1); }
+int	write(f, b, l) char *b; { return(l); }
+char	*calloc(n,s) unsigned n, s; { static char c[1]; return(c); }
+char	*malloc(n) unsigned n; {static char c; return(&c);}
+char	*realloc(p, n) char *p; unsigned n; { static char c; return(&c);}
+	free(p) char *p; {;}
+	fclose(f) FILE *f; {return(0);}
+	fflush(f) FILE *f; {return(0);}
+char	*fgets( s, l, f ) char *s; FILE *f; { return(s); }
+FILE	*fopen(s,m) char *s, *m; { return(stdin); }
+FILE	*freopen(s, m, f) char *s, *m; FILE *f; { return(stdin); }
+FILE	*fdopen(fd, m) char *m; { return(stdin);}
+E 3
+I 3
+D 23
+char *	timezone( z, d ){}
+E 23
+I 23
+D 29
+char *	timezone( z, d ){ return timezone(z, d); }
+E 29
+I 29
+char *	timezone( z, d ){ return (char *)0; }
+I 39
+char *	tmpnam(s) char *s; { return s; }
+E 39
+E 29
+E 23
+char *	ttyname(f) { return " "; }
+int	ttyslot() { return 1; }
+I 36
+unsigned	ualarm(value, interval) unsigned value, interval; { return 0; }
+	usleep(useconds) unsigned useconds; { ; }
+int	utime(name, timep) char *name; time_t *timep; { return 0; }
+E 36
+D 4
+char *	valloc(s) { return malloc(s); }
+E 4
+I 4
+char *	valloc(s) unsigned s; { return malloc(s); }
+I 36
+int	vlimit(limit, value) { return 0; }
+int	vtimes(par, ch) struct vtimes *par, *ch; { return 0; }
+E 36
+E 4
+
+	/* standard I/O library */
+
+int	fclose(f) FILE *f; {return(0);}
+FILE *	fdopen(fd, m) char *m; { return(stdin);}
+int	fflush(f) FILE *f; {return(0);}
+int	fgetc(f)  FILE *f; {return 0; }
+char *	fgets( s, l, f ) char *s; FILE *f; { return(s); }
+int	_filbuf( f ) FILE *f; { return 0; }
+D 6
+int	_flsbuf( c, f ) FILE *f; { return c; }
+E 6
+I 6
+D 7
+int	_flsbuf( c, f ) FILE *f; { return 0; }
+E 7
+I 7
+D 14
+/* the unsigned is due to putc and putchar macro expansion */
+int	_flsbuf( c, f ) unsigned c; FILE *f; { return 0; }
+E 14
+I 14
+int	_flsbuf( c, f ) unsigned char c; FILE *f; { return 0; }
+E 14
+E 7
+E 6
+FILE *	fopen(s,m) char *s, *m; { return(stdin); }
+E 3
+D 20
+	/* VARARGS */
+E 20
+I 20
+	/* VARARGS2 */
+E 20
+	fprintf( f, s ) FILE *f; char *s; {;}
+I 3
+int	fputc(c, f) char c; FILE *f; {return 0; }
+E 3
+	fputs(s,f) char *s; FILE *f; {;}
+D 3
+	fread( p, s, n, f ) char *p; FILE *f; {return(1);}
+E 3
+I 3
+int	fread( p, s, n, f ) char *p; FILE *f; {return(1);}
+FILE *	freopen(s, m, f) char *s, *m; FILE *f; { return(stdin); }
+E 3
+D 20
+	/* VARARGS */
+E 20
+I 20
+	/* VARARGS2 */
+E 20
+	fscanf( f, s ) FILE *f; char *s; {return(1);}
+I 3
+D 26
+	fseek(f, o, p) FILE *f; long o; { return(0); }
+E 26
+I 26
+D 34
+long	fseek(f, o, p) FILE *f; long o; { return(0L); }
+E 34
+I 34
+int	fseek(f, o, p) FILE *f; long o; { return(0); }
+E 34
+E 26
+long	ftell(f) FILE *f; { return(0L); }
+E 3
+int	fwrite( p, s, n, f ) char *p; FILE *f; {return(0);}
+I 36
+#ifndef getc
+int	getc(f) FILE *f; { return EOF; }
+#endif getc
+E 36
+D 3
+	intss(){return(1); }
+E 3
+I 3
+int	getw(f) FILE *f; { return 0;}
+char *	gets( s ) char *s; { return(s); }
+D 17
+struct	_iobuf _iob[_NFILE];
+E 17
+I 17
+D 19
+extern	struct _iobuf _iob[];
+E 19
+I 19
+struct _iobuf _iob[];
+E 19
+E 17
+int	pclose( f ) FILE *f; { return 0; }
+FILE *	popen( c, t ) char *c, *t; { return(stdin); }
+E 3
+D 20
+	/* VARARGS */
+E 20
+I 20
+	/* VARARGS1 */
+E 20
+	printf( s ) char *s; {;}
+I 3
+	puts(s) char *s;{;}
+I 36
+#ifndef putc
+int	putc(c, f) char c; FILE *f; { return 0; }
+#endif putc
+E 36
+int	putw(w, f) FILE *f; { return 0;}
+E 3
+	rewind(f) FILE *f; {;}
+D 3
+long	ftell(f) FILE *f; { return(0L); }
+	fseek(f, o, p) FILE *f; long o; { return(0); }
+E 3
+D 20
+	/* VARARGS */
+E 20
+I 20
+	/* VARARGS1 */
+E 20
+	scanf( f ) char *f; {return(1); }
+	setbuf( f, b ) FILE *f; char *b; {;}
+I 3
+	setbuffer( f, b, s ) FILE *f; char *b; {;}
+I 36
+	setlinebuf( f ) FILE *f; {;}
+E 36
+E 3
+D 20
+	/* VARARGS */
+E 20
+I 20
+	/* VARARGS2 */
+E 20
+D 3
+char	*sprintf( s, f ) char *s, *f; { return(s);}
+E 3
+I 3
+D 47
+char *	sprintf( s, f ) char *s, *f; { return(s);}
+E 47
+I 47
+int	sprintf( s, f ) char *s, *f; { return(s);}
+E 47
+E 3
+D 20
+	/* VARARGS */
+E 20
+I 20
+	/* VARARGS2 */
+E 20
+	sscanf( s, f ) char *s, *f; { return(1); }
+	ungetc( c, f ) FILE *f; {  return(c); }
+D 3
+char	*ctime(c) time_t *c;{ return(""); }
+struct	tm *localtime(c) time_t *c; { return localtime(c); }
+struct	tm *gmtime(c) time_t *c; { return gmtime(c); }
+char	*asctime(t) struct tm *t; { return(""); }
+	abort() {}
+int	abs(i) int i; { return(i); }
+double	atof(s) char *s; { return(1.); }
+char	*crypt(k,s) char *k, *s; { return(""); }
+	setkey(k) char *k; {}
+	encrypt(s, i) char *s; {}
+char	*ecvt(v, n, d, s) double v; int *d, *s; { return(""); }
+char	*fcvt(v, n, d, s) double v; int *d, *s; { return(""); }
+char	*gcvt(v, n, b) double v; char *b; { return(""); }
+	monitor(l, h, b, s, n) int (*l)(), (*h)(); short *b; {}
+	perror(s) char *s; {}
+#include <setjmp.h>
+	setjmp(e) jmp_buf e; { return(0); }
+	sleep(i) unsigned i; {}
+struct	_iobuf _iob[_NFILE];
+char	_ctype_[];
+E 3
+E 1

@@ -1,0 +1,573 @@
+h13530
+s 00002/00001/00363
+d D 6.6 87/10/03 13:57:42 karels 7 6
+c show software interrupts
+e
+s 00001/00001/00363
+d D 6.5 86/05/12 09:17:22 anne 6 5
+c grammar
+e
+s 00014/00013/00350
+d D 6.4 86/05/11 04:39:27 lepreau 5 3
+c typos spelling and grammar
+e
+s 00001/00001/00362
+d R 6.4 85/05/04 00:29:20 sam 4 3
+c move to %Q%
+e
+s 00060/00040/00303
+d D 6.3 85/05/02 00:18:34 sam 3 2
+c correct manual page to reflect current code
+e
+s 00096/00000/00247
+d D 6.2 85/04/29 22:02:14 mckusick 2 1
+c elaborate on what is shown in the "vmstat" display
+e
+s 00247/00000/00000
+d D 6.1 85/04/29 21:49:29 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH SYSTAT 1 "%Q%"
+.UC 6
+.SH NAME
+systat \- display system statistics on a crt
+.SH SYNOPSIS
+.B systat
+[
+.RI \- display
+] [
+refresh-interval
+]
+.SH DESCRIPTION
+.B Systat
+displays various system statistics in a screen oriented fashion
+using the curses screen display library, 
+.IR curses (3X).
+.PP
+While
+.I systat
+is running the screen is usually divided into two windows (an exception
+is the vmstat display which uses the entire screen).  The
+upper window depicts the current system load average.  The
+information displayed in the lower window may vary, depending on
+user commands.  The last line on the screen is reserved for user
+input and error messages.
+.PP
+By default
+.I systat
+displays the processes getting the largest percentage of the processor
+in the lower window.  Other displays show swap space usage, disk i/o
+statistics (a la
+.IR iostat (1)),
+virtual memory statistics (a la
+.IR vmstat (1)),
+network ``mbuf'' utilization, and network connections (a la
+.IR netstat (1)).
+.PP
+Input is interpreted at two different levels. 
+A ``global'' command interpreter processes all keyboard input.
+If this command interpreter fails to recognize a command, the
+input line is passed to a per-display command interpreter.  This
+allows each display to have certain display-specific commands.
+.PP
+Certain characters cause immediate action by 
+.IR systat .
+These are
+.IP ^L
+Refresh the screen.
+.IP ^G
+Print the name of the current ``display'' being shown in
+the lower window and the refresh interval.
+.IP ^Z
+Stop 
+.IR systat .
+.IP :
+Move the cursor to the command line and interpret the input
+line typed as a command.  While entering a command the
+current character erase, word erase, and line kill characters
+may be used.
+.PP
+The following commands are interpreted by the ``global''
+command interpreter.
+.IP help
+.br
+Print the names of the available displays on the command line.
+.IP load
+.br
+Print the load average over the past 1, 5, and 15 minutes
+on the command line.
+.IP stop
+.br
+Stop refreshing the screen.
+.IP "[ start ] [ number ]"
+.br
+Start (continue) refreshing the screen.  If a second, numeric,
+argument is provided it is interpreted as a refresh interval
+(in seconds).
+Supplying only a number will set the refresh interval to this
+value.
+.IP "quit"
+.br
+Exit 
+.IR systat .
+(This may be abbreviated to
+D 6
+.IR q ).
+E 6
+I 6
+.IR q .)
+E 6
+.PP
+The available displays are:
+.IP pigs
+.br
+Display, in the lower window, those processes resident in main
+memory and getting the
+largest portion of the processor (the default display). 
+When less than 100% of the
+processor is scheduled to user processes, the remaining time
+is accounted to the ``idle'' process.
+.IP iostat
+.br
+Display, in the lower window, statistics about processor use
+and disk throughput.  Statistics on processor use appear as
+bar graphs of the amount of time executing in user mode (``user''),
+in user mode running low priority processes (``nice''), in 
+system mode (``system''), and idle (``idle'').  Statistics
+on disk throughput show, for each drive, kilobytes of data transferred,
+D 5
+number disk transaction performed, and average seek time
+E 5
+I 5
+number of disk transactions performed, and average seek time
+E 5
+(in milliseconds).  This information may be displayed as
+bar graphs or as rows of numbers which scroll downward.  Bar
+graphs are shown by default; commands specific to this display  
+are discussed below.
+.IP swap
+.br
+Display, in the lower window, swap space in use on each swap
+device configured.  Two sets of bar graphs are shown.  The
+upper graph displays swap space allocated to pure text segments
+(code), the lower graph displays space allocated to stack and
+data segments.  Allocated space is sorted by its size into buckets
+of size dmmin, dmmin*2, dmmin*4, up to dmmax (to reflect allocation
+policies imposed by the system).  The disk segment size, in sectors,
+is displayed along the left hand side of the text,
+and data and stack graphs.
+Space allocated to the user structure and page
+tables is not currently accounted for.
+.IP mbufs
+.br
+Display, in the lower window, the number of mbufs allocated
+for particular uses, i.e. data, socket structures, etc.
+.IP vmstat
+.br
+Take over the entire display and show a (rather crowded) compendium
+of statistics related to virtual memory usage, process scheduling,
+device interrupts, system name translation cacheing, disk i/o, etc.
+I 2
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+The upper left quadrant of the screen shows the number
+of users logged in and the load average over the last one, five,
+D 5
+and fifteen minute interval.
+E 5
+I 5
+and fifteen minute intervals.
+E 5
+Below this line are statistics on memory utilization.
+The first row of the table reports memory usage only among
+D 5
+active process, that is process that have run in the previous 
+E 5
+I 5
+active processes, that is processes that have run in the previous 
+E 5
+twenty seconds.
+The second row reports on memory usage of all processes.
+The first column reports on the number of physical pages
+claimed by processes.
+The second column reports the number of physical pages that
+are devoted to read only text pages.
+The third and fourth columns report the same two figures for
+virtual pages, that is the number of pages that would be
+needed if all processes had all of their pages.
+Finally the last column shows the number of physical pages
+on the free list.
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+Below the memory display is the disk usage display.
+It reports the number of seeks, transfers, and number
+of kilobyte blocks transferred per second averaged over the
+refresh period of the display (by default, five seconds).
+D 5
+For some disks it also reports the average millisecond per seek.
+E 5
+I 5
+For some disks it also reports the average milliseconds per seek.
+E 5
+Note that the system only keeps statistics on at most four disks.
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+Below the disk display is a list of the
+average number of processes (over the last refresh interval)
+D 5
+that are runable (`r'), in page wait (`p'),
+E 5
+I 5
+that are runnable (`r'), in page wait (`p'),
+E 5
+in disk wait other than paging (`d'),
+sleeping (`s'), and swapped out but desiring to run (`w').
+Below the queue length listing is a numerical listing and
+a bar graph showing the amount of
+system (shown as `='), user (shown as `>'),
+nice (shown as `-'), and idle time (shown as ` ').
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+At the bottom left are statistics on name translations.
+D 5
+It lists the number names translated in the previous interval,
+E 5
+I 5
+It lists the number of names translated in the previous interval,
+E 5
+the number and percentage of the translations that were
+handled by the system wide name translation cache, and
+the number and percentage of the translations that were
+handled by the per process name translation cache.
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+Under the date in the upper right hand quadrant are statistics
+on paging and swapping activity.
+The first two columns report the average number of pages
+brought in and out per second over the last refresh interval
+due to page faults and the paging daemon.
+The third and fourth columns report the average number of pages
+brought in and out per second over the last refresh interval
+due to swap requests initiated by the scheduler.
+The first row of the display shows the average
+number of disk transfers per second over the last refresh interval;
+the second row of the display shows the average
+number of pages transferred per second over the last refresh interval.
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+Below the paging statistics is a line listing the average number of
+total reclaims ('Rec'),
+intransit blocking page faults (`It'),
+swap text pages found in free list (`F/S'),
+file system text pages found in free list (`F/F'),
+reclaims from free list (`RFL'),
+pages freed by the clock daemon (`Fre'),
+and sequential process pages freed (`SFr') 
+per second over the refresh interval.
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+Below this line are statistics on the average number of
+zero filled pages (`zf') and demand filled text pages (`xf')
+per second over the refresh period.
+The first row indicates the number of requests that were
+resolved, the second row shows the number that were set up,
+and the last row shows the percentage of setup requests were
+actually used.
+Note that this percentage is usually less than 100%,
+however it may exceed 100% if a large number of requests
+are actually used long after they were set up during a
+period when no new pages are being set up. 
+Thus this figure is most interesting when observed over
+a long time period, such as from boot time
+(see below on getting such a display).
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+Below the page fill statistics is a column that
+lists the average number of context switches (`Csw'),
+D 7
+traps (`Trp'), system calls (`Sys'), interrupts (`Int'),
+E 7
+I 7
+traps (`Trp'; includes page faults), system calls (`Sys'), interrupts (`Int'),
+E 7
+characters output to DZ ports using pseudo-DMA (`Pdm'),
+I 7
+network software interrupts (`Sof'),
+E 7
+page faults (`Flt'), pages scanned by the page daemon (`Scn'),
+and revolutions of the page daemon's hand (`Rev')
+per second over the refresh interval.
+D 3
+.PP
+E 3
+I 3
+.IP
+E 3
+Running down the right hand side of the display is a breakdown
+of the interrupts being handled by the system.
+At the top of the list is the total interrupts per second
+over the time interval.
+The rest of the column breaks down the total on a device
+by device basis. 
+Only devices that have interrupted at least once since boot time are shown.
+E 2
+.IP netstat
+.br
+Display, in the lower window, network connections.  By default,
+network servers awaiting requests are not displayed.  Each address
+is displayed in the format ``host.port'', with each shown symbolically,
+when possible.  It is possible to have addresses displayed numerically,
+limit the display to a set of ports, hosts, and/or protocols; see the
+D 3
+list commands below.
+E 3
+I 3
+list of commands below.
+E 3
+.PP
+Commands to switch between displays may be abbreviated to the
+minimum unambiguous prefix; for example, ``io'' for ``iostat''.
+Certain information may be discarded when the screen size is
+insufficient for display.  For example, on a machine with 10
+drives the 
+.I iostat
+bar graph displays only 3 drives on a 24 line terminal.  When
+a bar graph would overflow the allotted screen space it is
+truncated and the actual value is printed ``over top'' of the bar.
+.PP
+The following commands are specific to the 
+.I iostat
+display; the minimum unambiguous prefix may be supplied.
+.IP numbers
+Show the disk i/o statistics in numeric form.  Values are
+displayed in numeric columns which scroll downward.
+.IP bars
+Show the disk i/o statistics in bar graph form (default).
+.IP msps
+Toggle the display of average seek time (the default is to
+not display seek times).
+D 3
+.IP "ignore [ drives ]"
+Do not display information about the drives indicated.  Multiple
+drives may be specified, separated by spaces.
+.IP "display [ drives ]"
+Display information about the drives indicated.  Multiple drives
+may be specified, separated by spaces.
+E 3
+.PP
+The following commands are specific to the
+.I vmstat
+display; the minimum unambiguous prefix may be supplied.
+.IP boot
+D 5
+Display cummulative statistics since the system was booted.
+E 5
+I 5
+Display cumulative statistics since the system was booted.
+E 5
+.IP run
+Display statistics as a running total from the point this
+command is given.
+.IP time
+Display statistics averaged over the refresh interval (the default).
+.IP zero
+Reset running statistics to zero.
+.PP
+D 3
+The following commands are specific to the
+E 3
+I 3
+The following commands are common to each display which shows
+information about disk drives.  These commands are used to
+select a set of drives to report on, should your system have
+more drives configured than can normally be displayed on the
+screen.
+.IP "ignore [ drives ]"
+Do not display information about the drives indicated.  Multiple
+drives may be specified, separated by spaces.
+.IP "display [ drives ]"
+Display information about the drives indicated.  Multiple drives
+may be specified, separated by spaces.
+.PP
+The following command is specific to the
+E 3
+.I netstat
+display; the minimum unambiguous prefix may be supplied.
+.IP all
+Toggle the displaying of server processes awaiting requests (this
+is the equivalent of the 
+.B \-a
+flag to
+.IR netstat (1)).
+.IP numbers
+Display network addresses numerically.
+.IP names
+Display network addresses symbolically.
+D 3
+.IP "port name"
+Limit the display to connections on the specified port (the port
+is matched against the port both on the local and the foreign side
+of a connection).  A port
+.I name
+may be specified symbolically, e.g. ``ftp'', or numerically (base 10).
+This command may be specified many times to create a set of ports
+for matching.
+.IP "host name"
+Limit the display to connections to or from the specified host.  A
+host
+.I name
+may be specified symbolically or numerically in the Internet dot
+notation.  This command may be specified many times to create a set
+of hosts for matching.
+.IP "protocol name"
+Limit the display to connections using the specified protocol (currently
+``tcp'' or ``udp'').  The commands
+.I tcp
+and
+.I udp
+are shorthands for ``protocol tcp'' and ``protocol udp'', respectively.
+E 3
+I 3
+.PP
+The remaining commands are common to displays which report
+network connections (currently only the
+.I netstat
+display).   These commands may be used to select a specific set
+of connections for
+.I systat
+to report on.
+.IP "\fIprotocol\fP"
+Display only network connections using the indicated protocol
+(currently either ``tcp'' or ``udp'').
+.IP "ignore [items]"
+Do not display information about connections associated with
+the specified hosts or ports.  Hosts and ports may be specified
+by name (``ucbmonet'', ``ftp''), or numerically.  Host addresses
+use the Internet dot notation (``128.32.0.9'').  Multiple items
+may be specified with a single command by separating them with
+spaces.
+.IP "display [items]"
+Display information about the connections associated with the
+specified hosts or ports.  As for 
+.IR ignore ,
+D 5
+items may be names or numbers.
+E 5
+I 5
+.I items
+may be names or numbers.
+E 5
+.IP "show [ports|hosts]"
+Show, on the command line, the currently selected protocols,
+hosts, and ports.  Hosts and ports which are being ignored
+are prefixed with a `!'.  If
+.I ports
+or
+.I hosts
+D 5
+are supplied as an argument to 
+E 5
+I 5
+is supplied as an argument to 
+E 5
+.IR show ,
+D 5
+then only the request information will be displayed.
+E 5
+I 5
+then only the requested information will be displayed.
+E 5
+E 3
+.IP "reset"
+Reset the port, host, and protocol matching mechanisms to the default
+(any protocol, port, or host).
+.SH FILES
+.nf
+.ta \w'/dev/services   'u
+/vmunix	for the namelist
+/dev/kmem	for information in main memory
+/dev/drum	for information about swapped out processes
+/etc/hosts	for host names
+/etc/networks	for network names
+/etc/services	for port names
+.SH AUTHOR
+D 3
+The unknown hacker.
+E 3
+I 3
+The unknown hacker.  The 
+.I pigs
+display is derived from a program of the same name
+written by Bill Reeves.
+E 3
+.SH BUGS
+Takes 2-10 percent of the cpu.  Certain displays presume
+a 24 line by 80 character terminal.  The swap space display
+should account for space allocated to the user structure and
+D 5
+page tables.   The
+E 5
+I 5
+page tables.  The
+E 5
+.I vmstat
+display looks out of place because it is (it was added in as
+D 5
+a separate display rather than create a new program). 
+E 5
+I 5
+a separate display rather than create a new program).
+E 5
+.PP
+The whole
+D 5
+thing is pretty hoakey, it was included in the distribution under
+E 5
+I 5
+thing is pretty hokey and was included in the distribution under
+E 5
+serious duress.
+E 1

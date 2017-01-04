@@ -1,0 +1,43 @@
+h59444
+s 00001/00001/00022
+d D 5.2 10/10/05 05:21:04 msokolov 2 1
+c more correct handling of missing characters
+e
+s 00023/00000/00000
+d D 5.1 04/09/14 09:44:38 msokolov 1 0
+c date and time created 04/09/14 09:44:38 by msokolov
+e
+u
+U
+t
+T
+I 1
+% %W% (Berkeley) %G%
+/BuildChar {
+	1 index /Encoding get exch get
+	1 index /BuildGlyph get exec
+} bind def
+/BuildGlyph {
+	exch begin
+	CharMetrics 1 index known {
+		CharMetrics 1 index get dup cvx exec setcachedevice
+		CharImages 2 index known {
+			CharImages 2 index get
+			1 index 2 get 2 index 3 get translate
+			1 index 4 get 2 index 2 get sub
+			2 index 5 get 3 index 3 get sub
+			true IdMatrix {dup} imagemask
+			pop
+		} if
+		pop
+D 2
+	} if
+E 2
+I 2
+	} {0 0 0 0 0 0 setcachedevice} ifelse
+E 2
+	pop
+	end
+} bind def
+/IdMatrix [1 0 0 1 0 0] readonly def
+E 1

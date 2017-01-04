@@ -1,0 +1,14 @@
+.PS
+ellipse
+ellipse with .ne at last ellipse.sw
+.PE
+.PS
+box with .sw at 0,0
+box with .ne at last box.sw
+.PE
+.PS
+box
+box ht .25i width .25i with .sw at last box.se
+box ht .15i width .5 with .sw at last box.se
+circle with .sw at last box.ne
+.PE

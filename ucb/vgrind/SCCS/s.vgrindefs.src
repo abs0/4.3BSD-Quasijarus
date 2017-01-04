@@ -1,0 +1,309 @@
+h39929
+s 00011/00005/00120
+d D 1.14 88/07/09 10:54:46 bostic 15 14
+c install approved copyright notice
+e
+s 00032/00008/00093
+d D 1.13 87/12/24 11:37:17 bostic 14 12
+c add C++ (from Ken Arnold), add header, put C first
+e
+s 00011/00000/00101
+d R 1.13 87/12/24 11:28:04 bostic 13 12
+c C++ from Ken Arnold
+e
+s 00019/00000/00082
+d D 1.12 84/12/18 10:16:02 rrh 12 11
+c add modula2 (only reserved words, not standard identifiers) and yacc
+e
+s 00001/00001/00081
+d D 1.11 84/09/26 09:14:30 ralph 11 10
+c added void keyword
+e
+s 00020/00000/00062
+d D 1.10 83/06/07 14:58:39 mo 10 9
+c added Icon and ratfor support
+e
+s 00017/00005/00045
+d D 1.9 82/10/21 22:34:07 mckusick 9 8
+c arpa updates
+e
+s 00003/00001/00047
+d D 1.8 81/06/11 17:01:58 presott 8 7
+c I added an alternate comment spec for PASCAL
+e
+s 00001/00001/00047
+d D 1.7 81/06/04 12:17:13 presott 7 6
+c changed the end of character literal for model -- presotto
+e
+s 00001/00001/00047
+d D 1.6 81/03/29 01:24:40 presott 6 5
+c C procedure definition changed to require no semicolon.
+e
+s 00004/00004/00044
+d D 1.5 81/03/13 02:06:12 presott 5 4
+c fix to csh entry
+e
+s 00018/00001/00030
+d D 1.4 81/03/12 20:32:52 presott 4 3
+c Took an extra \e out of the pascal def and added greg's
+c definitions for shell scripts. -- presotto
+e
+s 00001/00001/00030
+d D 1.3 81/01/27 15:44:09 root 3 2
+c took out the procedure definition stuff since it was
+c wrong.  Also made comments end at the end of a line.
+e
+s 00001/00001/00030
+d D 1.2 81/01/27 15:28:03 root 2 1
+c fixed format of isp entry - missing : -- presotto
+e
+s 00031/00000/00000
+d D 1.1 81/01/20 00:55:29 root 1 0
+c date and time created 81/01/20 00:55:29 by root
+e
+u
+U
+t
+T
+I 14
+#
+# Copyright (c) 1987 Regents of the University of California.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms are permitted
+D 15
+# provided that this notice is preserved and that due credit is given
+# to the University of California at Berkeley. The name of the University
+# may not be used to endorse or promote products derived from this
+# software without specific prior written permission. This software
+# is provided ``as is'' without express or implied warranty.
+E 15
+I 15
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 15
+#
+#	%W% (Berkeley) %G%
+#
+I 15
+
+E 15
+C|c:\
+	:pb=^\d?*?\d?\p\d?\(\a?\)(\d|{):bb={:be=}:cb=/*:ce=*/:sb=":se=\e":lb=':\
+	:le=\e':tl:\
+	:kw=asm auto break case char continue default do double else enum\
+	extern float for fortran goto if int long register return short\
+	sizeof static struct switch typedef union unsigned void while #define\
+	#else #endif #if #ifdef #ifndef #include #undef # define else endif\
+	if ifdef ifndef include undef:
+E 14
+I 1
+model|mod|m:\
+D 9
+	:pb=\p\dis\dbeginproc:bb=\dbeginproc\d:be=\dendproc\d|;:\
+E 9
+I 9
+	:pb=^\d(space\d\p\drep)|(\p\dis|inline|public\dbeginproc):\
+	:bb=\dbeginproc|space|case\d:be=\dendproc|end\d|;:\
+E 9
+D 7
+	:cb=\$:ce=\$|$:sb=":se=":lb=':le=':\
+E 7
+I 7
+	:cb=\$:ce=\$|$:sb=":se=":lb=':le=\a|$:\
+E 7
+	:kw=abs and array beginproc boolean by case cdnl char copied dispose\
+D 9
+	div do dynamic else elsif end endproc entry external f FALSE false\
+	fi file for formal fortran global if in integer include inline is lbnd\
+E 9
+I 9
+	div do dynamic else elsif end endproc entry external FALSE false\
+	fi file for formal fortran global if iff ift\
+	in integer include inline is lbnd\
+E 9
+	max min mod new NIL nil noresult not notin od of or procedure public\
+D 9
+	read readln readonly record recursive rem rep repeat result return set\
+E 9
+I 9
+	read readln readonly record recursive rem rep repeat res\
+	result return set\
+E 9
+	space string subscript such then TRUE true type ubnd union until\
+D 9
+	varies while width write writeln:
+E 9
+I 9
+	varies while width:
+E 9
+pascal|pasc|p:\
+	:pb=(^\d?procedure|function|program\d\p\d|\(|;|\:)|(=\d?record\d):\
+	:bb=\dcase|begin\d:be=\dend|forward\d|;:\
+D 4
+	:cb={|\(*:ce=}|*\):sb=':se=\e':\
+E 4
+I 4
+D 8
+	:cb={|\(*:ce=}|*\):sb=':se=':\
+E 8
+I 8
+	:cb={:ce=}:\
+	:ab=\(*:ae=*\):\
+	:sb=':se=':\
+E 8
+E 4
+	:kw=and array assert begin case const div do downto else end file for\
+	forward function goto if in label mod nil not of or packed procedure\
+	program record repeat set then to type until var while with oct hex\
+	external:
+D 14
+C|c:\
+D 6
+	:pb=^\d?*?\d?\p\d?\(\a?\):bb={:be=}:cb=/*:ce=*/:sb=":se=\e":lb=':\
+E 6
+I 6
+	:pb=^\d?*?\d?\p\d?\(\a?\)(\d|{):bb={:be=}:cb=/*:ce=*/:sb=":se=\e":lb=':\
+E 6
+	:le=\e':tl:\
+	:kw=asm auto break case char continue default do double else enum\
+	extern float for fortran goto if int long register return short\
+D 11
+	sizeof static struct switch typedef union unsigned while #define\
+E 11
+I 11
+	sizeof static struct switch typedef union unsigned void while #define\
+E 11
+	#else #endif #if #ifdef #ifndef #include #undef # define else endif\
+	if ifdef ifndef include undef:
+E 14
+D 2
+ISP|isp|i\
+E 2
+I 2
+ISP|isp|i:\
+E 2
+D 3
+	:pb=\d?\p\d?\:=\d?begin:bb=^begin:be=^end:cb=^!:ce=!:oc:\
+E 3
+I 3
+	:cb=!:ce=!|$:oc:\
+E 3
+	:kw=and begin decode define end eql eqv geq gtr if leave leq lss mod\
+	neq next not or otherwise repeat restart resume sr0 sr1 srd srr sl0 sl1\
+	sld slr tst xor:
+I 4
+SH|sh:\
+D 5
+	:bb={:be=}:cb=#:sb=":se=\e":lb=':\
+E 5
+I 5
+	:bb={:be=}:cb=#:ce=$:sb=":se=\e":lb=':\
+E 5
+	:le=\e':tl:\
+	:kw=break case cd continue do done \
+	elif else esac eval exec exit export \
+	fi for if in then while until \
+	read readonly set shift test trap umask wait:
+CSH|csh:\
+D 5
+	:bb={:be=}:cb=#:sb=":se=\e":lb=':\
+E 5
+I 5
+	:bb={:be=}:cb=#:ce=$:sb=":se=\e":lb=':\
+E 5
+	:le=\e':tl:\
+D 5
+	:kw=alias alloc break breaksw case cd chdir continue default
+E 5
+I 5
+	:kw=alias alloc break breaksw case cd chdir continue default\
+E 5
+	echo else end endif endsw exec exit foreach \
+D 5
+	glob goto history if logout nice nohup onintr repeat set
+E 5
+I 5
+	glob goto history if logout nice nohup onintr repeat set\
+E 5
+	setenv shift source switch then time \
+	while umask unalias unset wait while @ env \
+	argv child home ignoreeof noclobber noglob \
+	nomatch path prompt shell status verbose :
+I 9
+ldl|LDL:\
+	:pb=^\p\::bb=\::be=;:cb=/*:ce=*/:sb=":se=\e":\
+	:kw=constant functions grammar reswords tokens add1 addste\
+	car cdr check colno cond cons copy defun divide empty enter\
+	eq equal findattr firstchild ge getattr getfield gt hash label\
+	lambda lastchild le leftsibling lookone lookup lt minus name ne\
+	newnode nextcom nil null parent plus precnl prevcom prog progn\
+	quote reglob return rightsibling self set setattr setfield setq\
+	stjoin sub1 t times tnull tokno ttype:
+I 10
+Icon|icon|I:\
+	:pb=^\d?procedure\d\p\d?\(\a?\):\
+	:bb=(^\d?procedure\d\p\d?\(\a?\))|{:be=}|(^\d?end\d?$):\
+	:cb=#:ce=$:\
+	:sb=":se=\e":lb=':le=\e':tl:\
+	:kw=break by case create default do dynamic else end every external\
+	fail global if initial local next not of procedure record\
+	repeat return static suspend then to until using while\
+	&ascii &clock &cset &date &dateline &errout &fail &host &input\
+	&lcase &level &main &null &output &pos &random &source &subject\
+	&time &trace &ucase &version:
+ratfor|rat|r:\
+	:pb=(subroutine|function)\d\p\d?\(\a?\):\
+	:bb=(subroutine|function)\d\p\d?\(\a?\):be=^\d?end:\
+	:cb=#:ce=$:\
+	:sb=":se=\e":lb=':le=\e':oc:\
+	:kw=DRETURN DRIVER arith break case character default define do\
+	else elsedef enddef filedes for function goto if ifdef ifelse\
+	ifnotdef include incr integer linepointer next opeq pointer\
+	real repeat return select string subroutine substr until:
+I 12
+modula2|mod2|m2:\
+	:pb=(^\d?(procedure|function|module)\d\p\d|\(|;|\:):\
+	:bb=\d(begin|case|for|if|loop|record|repeat|while|with)\d:\
+	:be=\dend|;:\
+	:cb={:ce=}:\
+	:ab=\(*:ae=*\):\
+	:sb=":se=":\
+	:oc:\
+	:kw=and array begin by case const\
+	definition div do else elsif end exit export\
+	for from if implementation import in\
+	loop mod module not of or pointer procedure qualified\
+	record repeat return set then to type\
+	until var while with:
+yacc|Yacc|y:\
+	:cb=/*:ce=*/:sb=":se=\e":lb=':le=\e':tl:\
+	:kw=%{ %} %% %union %token %type\
+	#else #endif #if #ifdef #ifndef #include #undef # define else endif\
+	if ifdef ifndef include undef:
+I 14
+C++|c++:\
+	:pb=^\d?*?\d?\p\d?\(\a?\)(\d|{):bb={:be=}:cb=/*:ce=*/:ab=//:\
+	:ae=$:sb=":se=\e":lb=':\
+	:le=\e':tl:\
+	:kw=asm auto break case char continue default do double else enum\
+	extern float for fortran goto if int long register return short\
+	sizeof static struct switch typedef union unsigned while void #define\
+	#else #endif #if #ifdef #ifndef #include #undef # define endif\
+	ifdef ifndef include undef defined\
+	class const delete friend inline new operator overload private\
+	protected public virtual:
+E 14
+E 12
+E 10
+E 9
+E 4
+E 1

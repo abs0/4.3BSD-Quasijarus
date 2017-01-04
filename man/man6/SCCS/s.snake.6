@@ -1,0 +1,178 @@
+h52540
+s 00006/00013/00080
+d D 6.2 88/04/20 12:33:28 bostic 4 3
+c shell escape and busy file gone, minor cleanups
+e
+s 00001/00001/00092
+d D 6.1 85/05/20 17:03:01 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00007/00089
+d D 5.1 85/05/20 17:02:53 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00096/00000/00000
+d D 4.1 85/05/20 17:02:45 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SNAKE 6
+E 2
+I 2
+D 3
+.TH SNAKE 6 "1 February 1983"
+E 3
+I 3
+.TH SNAKE 6 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+snake, snscore \- display chase game
+.SH SYNOPSIS
+D 4
+.B /usr/games/snake
+E 4
+I 4
+.B snake
+E 4
+[
+D 4
+.BI \-w n
+E 4
+I 4
+.B -w width
+E 4
+] [
+D 4
+.BI \-l n
+E 4
+I 4
+.B -l length
+E 4
+]
+.br
+D 4
+.B /usr/games/snscore
+E 4
+I 4
+.B snscore
+E 4
+.SH DESCRIPTION
+D 4
+Snake is a display-based game which must be played on a CRT terminal
+from among those supported by vi(1).
+E 4
+I 4
+Snake is a display-based game which must be played on a CRT terminal.
+E 4
+The object of the game is to make as much money as possible without
+D 2
+getting eaten by the snake.
+The
+E 2
+I 2
+getting eaten by the snake.  The
+E 2
+.B \-l
+and
+.B \-w
+options allow you to specify the length and width of the field.
+By default the entire screen (except for the last column) is used.
+.PP
+You are represented on the screen by an I.
+The snake is 6 squares long and is represented by S's.
+The money is $, and an exit is #.
+Your score is posted in the upper left hand corner.
+.PP
+You can move around using the same conventions as vi(1),
+the h, j, k, and l keys work, as do the arrow keys.
+Other possibilities include:
+.IP sefc
+These keys are like hjkl but form a directed pad around the d key.
+.IP HJKL
+These keys move you all the way in the indicated direction to the
+D 2
+same row or column as the money.
+This does
+E 2
+I 2
+same row or column as the money.  This does
+E 2
+.I not
+let you jump away from the snake, but rather saves you from having
+D 2
+to type a key repeatedly.
+The snake still gets all his turns.
+E 2
+I 2
+to type a key repeatedly.  The snake still gets all his turns.
+E 2
+.IP SEFC
+Likewise for the upper case versions on the left.
+.IP ATPB
+These keys move you to the four edges of the screen.
+Their position on the keyboard is the mnemonic, e.g.
+P is at the far right of the keyboard.
+.IP x
+This lets you quit the game at any time.
+.IP p
+Points in a direction you might want to go.
+.IP w
+Space warp to get out of tight squeezes, at a price.
+D 4
+.IP !
+Shell escape
+.IP ^Z
+Suspend the snake game, on systems which support it.
+Otherwise an interactive shell is started up.
+E 4
+.PP
+To earn money, move to the same square the money is on.
+A new $ will appear when you earn the current one.
+As you get richer, the snake gets hungrier.
+To leave the game, move to the exit (#).
+.PP
+A record is kept of the personal best score of each player.
+Scores are only counted if you leave at the exit,
+getting eaten by the snake is worth nothing.
+.PP
+As in pinball, matching the last digit of your score to the number
+which appears after the game is worth a bonus.
+.PP
+To see who wastes time playing snake, run
+D 4
+.I /usr/games/snscore .
+E 4
+I 4
+.I snscore .
+E 4
+.SH FILES
+.nf
+.ta \w'/usr/games/lib/snakerawscores 'u
+/usr/games/lib/snakerawscores	database of personal bests
+/usr/games/lib/snake.log	log of games played
+D 4
+/usr/games/busy	program to determine if system too busy
+E 4
+.DT
+.fi
+.SH BUGS
+.PP
+When playing on a small screen,
+it's hard to tell when you hit the edge of the screen.
+.PP
+The scoring function takes into account the size of the screen.
+A perfect function to do this equitably has not been devised.
+E 1

@@ -1,0 +1,91 @@
+h16544
+s 00001/00001/00030
+d D 6.1 85/04/29 18:06:10 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00018/00020/00013
+d D 5.1 85/04/29 18:06:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00033/00000/00000
+d D 4.1 85/04/29 18:05:53 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TRUE 1 
+E 2
+I 2
+D 3
+.TH TRUE 1 "11 January 1982"
+E 3
+I 3
+.TH TRUE 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+true, false \- provide truth values
+.SH SYNOPSIS
+.B true
+.PP
+.B false
+.SH DESCRIPTION
+.I True
+D 2
+does nothing, successfully.
+.I False
+does nothing, unsuccessfully.
+They are typically used in input to
+.IR  sh (1)
+such as:
+.PP
+	while true
+.br
+	do
+.br
+		command
+.br
+	done
+E 2
+I 2
+and
+.I false
+are usually used in a Bourne shell script.
+They test for the appropriate status "true" or "false" before running 
+(or failing to run) a list of commands.  
+.SH EXAMPLE
+.IP
+.nf
+     while true 
+     do
+          command list 
+     done
+E 2
+.SH "SEE ALSO"
+D 2
+sh(1)
+E 2
+I 2
+csh(1),
+sh(1),
+false(1)
+E 2
+.SH DIAGNOSTICS
+D 2
+.I True
+has exit status zero,
+.I false
+nonzero.
+E 2
+I 2
+.I True 
+has exit status zero.
+E 2
+E 1

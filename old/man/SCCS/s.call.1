@@ -1,0 +1,33 @@
+h41942
+s 00022/00000/00000
+d D 4.1 85/04/29 20:00:38 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.TH CALL 1C 
+.AT 3
+.SH NAME
+call \- ring a telephone
+.SH SYNOPSIS
+.B call
+phonenumber
+.SH DESCRIPTION
+.I Call
+places an outgoing call to the specified
+.IR phonenumber .
+Nothing special happens when the called party answers.
+.I Phonenumber
+may have any number of digits;
+a `+' sign may be used to specify a point at
+which to wait for a second dial tone.
+.SH FILES
+/dev/dn0
+.SH "SEE ALSO"
+cu(1), dn(5)
+E 1

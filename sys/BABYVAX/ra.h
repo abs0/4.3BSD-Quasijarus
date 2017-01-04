@@ -1,0 +1,1 @@
+#define NRA 0

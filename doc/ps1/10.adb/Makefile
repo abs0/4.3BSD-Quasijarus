@@ -3,24 +3,19 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 5/7/86
+#	@(#)Makefile	6.2 (Berkeley) 9/13/04
 #
-PRINTER=-Pdp
-TROFF=	ditroff ${PRINTER}
-EQN=	deqn ${PRINTER}
-TBL=	dtbl ${PRINTER}
-LPR=	lpr -n ${PRINTER}
+TROFF=	pstroff
 
 SRCS=	adb.ms
 
-paper:	adb.n
-	${LPR} adb.n
+all:	adb.ps
 
-adb.n:	${SRCS}
-	${EQN} ${SRCS} | ${TBL} | ${TROFF} -t -ms >adb.n
+adb.ps:	${SRCS}
+	${TROFF} -ms ${SRCS} > adb.ps
 
 clean:
-	rm -f adb.n
+	rm -f adb.ps
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \

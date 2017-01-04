@@ -1,0 +1,93 @@
+h17685
+s 00000/00003/00049
+d D 6.2 86/05/07 13:21:42 mckusick 5 4
+c delete author
+e
+s 00005/00002/00047
+d D 6.1 85/04/29 17:31:38 mckusick 4 2
+c 4.3BSD beta release manual page
+e
+s 00004/00001/00048
+d R 6.1 85/04/29 14:29:16 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00000/00000/00049
+d D 5.1 85/04/29 14:29:09 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00049/00000/00000
+d D 4.1 85/04/29 14:29:03 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 4
+.TH LEAVE 1
+E 4
+I 4
+.TH LEAVE 1 "%Q%"
+E 4
+.UC
+.SH NAME
+leave \- remind you when you have to leave
+.SH SYNOPSIS
+.B leave
+D 4
+[ hhmm ]
+E 4
+I 4
+[ [+]hhmm ]
+E 4
+.SH DESCRIPTION
+.I Leave
+waits until the specified time, then reminds you that you
+have to leave.
+You are reminded 5 minutes and 1 minute before the actual
+time, at the time, and every minute thereafter.
+When you log off,
+.I leave
+exits just before it would have
+printed the next message.
+.PP
+The time of day is in the form hhmm where hh is a time in
+hours (on a 12 or 24 hour clock).
+All times are converted to a 12 hour clock, and assumed to
+be in the next 12 hours.
+I 4
+.PP
+If the time is preceeded by `+', the alarm will go off in hours and minutes
+from the current time.
+E 4
+.PP
+If no argument is given,
+.I leave
+prompts with "When do you
+have to leave?". A reply of newline causes
+.I leave
+to exit,
+otherwise the reply is assumed to be a time.
+This form is suitable for inclusion in a
+.I .login
+or
+.I .profile.
+.PP
+Leave ignores interrupts, quits, and terminates.
+To get rid of it you should either log off or use ``kill \-9''
+giving its process id.
+.SH SEE ALSO
+calendar(1)
+D 5
+.SH AUTHOR
+Mark Horton
+.SH BUGS
+E 5
+E 1

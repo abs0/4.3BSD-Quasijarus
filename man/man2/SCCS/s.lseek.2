@@ -1,0 +1,240 @@
+h55108
+s 00000/00003/00091
+d D 6.3 86/02/24 03:33:11 lepreau 5 4
+c lseek doesn't mind negative offsets, read & write do;
+c bring write.2 up to read.2 stds.
+e
+s 00003/00002/00091
+d D 6.2 85/10/28 16:42:24 mckusick 4 3
+c cleanup of return value
+e
+s 00010/00004/00083
+d D 6.1 85/05/09 16:39:38 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00055/00042/00032
+d D 5.1 85/05/09 16:39:30 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00074/00000/00000
+d D 4.1 85/05/09 16:39:23 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LSEEK 2 
+E 2
+I 2
+D 3
+.TH LSEEK 2 "7 July 1983"
+E 3
+I 3
+.TH LSEEK 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+lseek, tell \- move read/write pointer
+E 2
+I 2
+lseek \- move read/write pointer
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B long lseek(fildes, offset, whence)
+.B long offset;
+E 2
+I 2
+.ft B
+D 3
+.ta 1.25i 1.6i
+E 3
+I 3
+#include <sys/file.h>
+.PP
+.nf
+.ft B
+.ta 1.25i 1.6i 1.8i
+E 3
+#define L_SET	0	/* set the seek pointer */
+#define L_INCR	1	/* increment the seek pointer */
+#define L_XTND	2	/* extend the file size */
+E 2
+.PP
+D 2
+.B long tell(fildes)
+E 2
+I 2
+.ft B
+pos = lseek(d, offset, whence)
+D 3
+int pos;
+int d, offset, whence;
+E 3
+I 3
+off_t pos;
+int d;
+off_t offset;
+int whence;
+E 3
+E 2
+.fi
+I 2
+.ft R
+E 2
+.SH DESCRIPTION
+D 2
+The file
+descriptor refers to a file open for reading or writing.
+The read (resp. write) pointer for the file is set as follows:
+E 2
+I 2
+The descriptor 
+.I d
+refers to a file or device open for reading and/or writing.
+.I Lseek
+sets the file pointer of
+.I d
+as follows:
+E 2
+.IP
+If
+.I whence
+D 2
+is 0, the pointer is set to
+E 2
+I 2
+is L_SET, the pointer is set to
+E 2
+.I offset
+bytes.
+.IP
+If
+.I whence
+D 2
+is 1, the pointer is set to its current location plus
+E 2
+I 2
+is L_INCR, the pointer is set to its current location plus
+E 2
+.IR offset .
+.IP
+If
+.I whence
+D 2
+is 2, the pointer is set to the size of the
+E 2
+I 2
+is L_XTND, the pointer is set to the size of the
+E 2
+file plus
+.IR offset .
+.PP
+D 2
+The returned value is the resulting pointer location.
+.PP
+The obsolete function
+.IR tell ( fildes )
+is identical to
+.IR lseek ( "fildes, 0L, 1" ).
+.PP
+E 2
+I 2
+Upon successful completion, the resulting pointer location
+as measured in bytes from beginning of the file is returned.
+Some devices are incapable of seeking.  The value of the pointer
+associated with such a device is undefined.
+.SH NOTES
+E 2
+Seeking far beyond the end of a file, then writing,
+D 2
+creates a gap or `hole', which occupies no
+E 2
+I 2
+creates a gap or \*(lqhole\*(rq, which occupies no
+E 2
+physical space and reads as zeros.
+I 2
+.SH "RETURN VALUE
+D 4
+Upon successful completion, a non-negative integer,
+the current file pointer value, is returned.  Otherwise,
+E 4
+I 4
+Upon successful completion,
+the current file pointer value is returned.
+Otherwise,
+E 4
+a value of \-1 is returned and \fIerrno\fP is set to indicate
+the error.
+.SH "ERRORS
+.I Lseek
+will fail and the file pointer will remain unchanged if:
+.TP 15
+[EBADF]
+.I Fildes
+is not an open file descriptor.
+.TP 15
+[ESPIPE]
+.I Fildes
+is associated with a pipe or a socket.
+.TP 15
+[EINVAL]
+.I Whence
+is not a proper value.
+D 5
+.TP 15
+[EINVAL]
+The resulting file pointer would be negative.
+E 5
+E 2
+.SH "SEE ALSO"
+D 2
+open(2), creat(2), fseek(3)
+.SH DIAGNOSTICS
+\-1
+is returned for
+an undefined file descriptor,
+seek on a pipe,
+or seek to a position before the beginning of file.
+E 2
+I 2
+dup(2), open(2)
+E 2
+.SH BUGS
+D 2
+.I Lseek
+is a no-op on character special files.
+.SH "ASSEMBLER (PDP-11)"
+(lseek = 19.)
+.br
+(file descriptor in r0)
+.br
+.B sys lseek; offset1; offset2; whence
+.PP
+.I Offset1
+and
+.I offset2
+are the high and low words of 
+.IR offset ;
+r0 and r1 contain
+the pointer upon return.
+E 2
+I 2
+This document's use of
+.I whence
+is incorrect English, but maintained for historical reasons.
+E 2
+E 1

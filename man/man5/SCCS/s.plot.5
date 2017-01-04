@@ -1,0 +1,223 @@
+h39930
+s 00003/00000/00132
+d D 6.2 87/04/25 14:25:28 bostic 4 3
+c bug report 4.2BSD/man/37
+e
+s 00017/00006/00115
+d D 6.1 85/05/15 18:15:23 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00007/00114
+d D 5.1 85/05/15 18:15:14 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00121/00000/00000
+d D 4.1 85/05/15 18:15:06 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PLOT 5 
+E 2
+I 2
+D 3
+.TH PLOT 5  "15 January 1983"
+E 3
+I 3
+.TH PLOT 5  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+plot \- graphics interface
+.SH DESCRIPTION
+Files of this format are produced by routines
+described in 
+D 2
+.IR  plot (3),
+E 2
+I 2
+D 3
+.IR  plot (3X),
+E 3
+I 3
+.IR plot (3X)
+and
+.IR plot (3F),
+E 3
+E 2
+and are interpreted for various devices
+by commands described in
+D 2
+.IR  plot (1).
+E 2
+I 2
+.IR  plot (1G).
+E 2
+A graphics file is a stream of plotting instructions.
+Each instruction consists of an ASCII letter
+usually followed by bytes of binary information.
+The instructions are executed in order.
+A point is designated by
+four bytes representing
+the
+x and y
+values;
+each value
+is a signed integer.
+The last designated point in an
+D 3
+.B "l, m, n,"
+E 3
+I 3
+.B "l, m, n, a,"
+E 3
+or
+.B p
+instruction becomes the `current point'
+for the next instruction.
+I 3
+The
+.B a
+and
+.B c
+instructions change the current point in a manner dependent
+upon the specific device.
+E 3
+.PP
+Each of the following descriptions begins with the name
+of the corresponding routine in
+D 2
+.IR  plot (3).
+E 2
+I 2
+.IR  plot (3X).
+E 2
+.TP 3
+.B  m
+move: The next four bytes give a new current point.
+.TP 3
+.B  n
+cont: Draw a line from the current point to
+the point given by the next four bytes.
+D 3
+See
+D 2
+.IR  plot (1).
+E 2
+I 2
+.IR  plot (1G).
+E 3
+E 2
+.TP 3
+.B  p
+point: Plot the point given by the next four bytes.
+.TP 3
+.B  l
+line: Draw a line from the point given by the next
+four bytes to the point given by the following four bytes.
+.TP 3
+.B  t
+label: Place the following ASCII string so that its
+first character falls on the current point.
+The string is terminated by a newline.
+.TP 3
+.B  a
+arc:
+The first four bytes give the center, the next four give the
+starting point,
+and the last four give the end point of a circular arc.
+The least significant coordinate of the end point is
+used only to determine the quadrant.
+The arc is drawn counter-clockwise.
+.TP 3
+.B  c
+circle:
+The first four bytes give the center of the circle,
+the next two the radius.
+.TP 3
+.B  e
+erase: Start another frame of output.
+.TP 3
+.B  f
+linemod: Take the following string, up to a newline,
+as the style for drawing further lines.
+The styles are
+`dotted,'
+`solid,' `longdashed,' `shortdashed,' and `dotdashed.'
+Effective only in 
+.I plot 4014
+and
+.I plot ver.
+.TP 3
+.B  s
+space: The next four bytes give
+the lower left corner of the plotting area;
+the following four give the upper right corner.
+The plot will be magnified or reduced to fit
+the device as closely as possible.
+.IP
+Space settings that exactly fill the plotting area
+with unity scaling appear below for
+devices supported by the filters of
+D 2
+.IR  plot (1).
+E 2
+I 2
+.IR  plot (1G).
+E 2
+The upper limit is just outside the plotting area.
+In every case the plotting area is taken to be square;
+points outside may be displayable on
+devices whose face isn't square.
+.RS
+.TP 10n
+I 3
+4013
+space(0, 0, 780, 780);
+.br
+.ns
+.TP 10n
+E 3
+4014
+space(0, 0, 3120, 3120);
+.br
+.ns
+.TP 
+ver
+space(0, 0, 2048, 2048);
+.br
+.ns
+.TP 
+300, 300s
+space(0, 0, 4096, 4096);
+.br
+.ns
+.TP 
+450
+space(0, 0, 4096, 4096);
+.RE
+.SH "SEE ALSO"
+D 2
+plot(1), plot(3), graph(1)
+E 2
+I 2
+D 3
+plot(1G), plot(3X), graph(1G)
+E 3
+I 3
+plot(1G), plot(3X), plot(3F), graph(1G)
+I 4
+.SH BUGS
+A \fIlabel\fP instruction immediately followed by a \fIcont\fP
+instruction does the wrong thing on a 4014.
+E 4
+E 3
+E 2
+E 1

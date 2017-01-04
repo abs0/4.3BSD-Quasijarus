@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vops2.c	6.10 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_vops2.c	6.11 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -17,8 +17,8 @@ static char *sccsid = "@(#)ex_vops2.c	6.10 (Berkeley) 1/2/88";
  * and mostly, insert mode (and a subroutine
  * to read an input line, including in the echo area.)
  */
-extern char	*vUA1, *vUA2;		/* mjm: extern; also in ex_vops.c */
-extern char	*vUD1, *vUD2;		/* mjm: extern; also in ex_vops.c */
+extern u_char	*vUA1, *vUA2;		/* mjm: extern; also in ex_vops.c */
+extern u_char	*vUD1, *vUD2;		/* mjm: extern; also in ex_vops.c */
 
 /*
  * Obleeperate characters in hardcopy
@@ -26,12 +26,12 @@ extern char	*vUD1, *vUD2;		/* mjm: extern; also in ex_vops.c */
  */
 bleep(i, cp)
 	register int i;
-	char *cp;
+	u_char *cp;
 {
 
 	i -= column(cp);
 	do
-		ex_putchar('\\' | QUOTE);
+		ex_putchar('\\');
 	while (--i >= 0);
 	rubble = 1;
 }
@@ -42,7 +42,7 @@ bleep(i, cp)
  */
 vdcMID()
 {
-	register char *cp;
+	register u_char *cp;
 
 	squish();
 	setLAST();
@@ -60,9 +60,9 @@ vdcMID()
  * deleted text of part of line.
  */
 takeout(BUF)
-	char *BUF;
+	u_char *BUF;
 {
-	register char *cp;
+	register u_char *cp;
 
 	if (wcursor < linebuf)
 		wcursor = linebuf;
@@ -76,7 +76,7 @@ takeout(BUF)
 		cursor = cp;
 	}
 	ex_setBUF(BUF);
-	if ((BUF[0] & (QUOTE|TRIM)) == OVERBUF)
+	if (BUF[0] == OVERBUF)
 		beep();
 }
 
@@ -87,13 +87,13 @@ takeout(BUF)
 ateopr()
 {
 	register int i, c;
-	register char *cp = vtube[destline] + destcol;
+	register u_char *cp = vtube[destline] + destcol;
 
 	for (i = WCOLS - destcol; i > 0; i--) {
 		c = *cp++;
 		if (c == 0)
 			return (1);
-		if (c != ' ' && (c & QUOTE) == 0)
+		if (c != ' ' && !isC1(c))
 			return (0);
 	}
 	return (1);
@@ -109,14 +109,14 @@ ateopr()
  */
 bool	vaifirst;
 bool	gobbled;
-char	*ogcursor;
+u_char	*ogcursor;
 
 vappend(ch, cnt, indent)
 	int ch;		/* mjm: char --> int */
 	int cnt, indent;
 {
 	register int i;
-	register char *gcursor;
+	register u_char *gcursor;
 	bool escape;
 	int repcnt, savedoomed;
 	short oldhold = hold;
@@ -182,7 +182,7 @@ vappend(ch, cnt, indent)
 	 * so far (e.g. if we are a change.)
 	 */
 	if ((vglobp && *vglobp == 0) || peekbr()) {
-		if ((INS[0] & (QUOTE|TRIM)) == OVERBUF) {
+		if (INS[0] == OVERBUF) {
 			beep();
 			if (!splitw)
 				ungetkey('u');
@@ -423,18 +423,18 @@ back1()
  * first time you did it.  commch is the command character
  * involved, including the prompt for readline.
  */
-char *
+u_char *
 vgetline(cnt, gcursor, aescaped, commch)
 	int cnt;
-	register char *gcursor;
+	register u_char *gcursor;
 	bool *aescaped;
-	char commch;
+	u_char commch;
 {
 	register int c, ch;
-	register char *cp;
+	register u_char *cp;
 	int x, y, iwhite, backsl=0;
-	char *iglobp;
-	char cstr[2];
+	u_char *iglobp;
+	u_char cstr[2];
 	int (*OO)() = Outchar;
 
 	/*
@@ -473,7 +473,7 @@ vgetline(cnt, gcursor, aescaped, commch)
 		}
 		c = getkey();
 		if (c != ATTN)
-			c &= (QUOTE|TRIM);
+			c &= TRIM8;
 		ch = c;
 		maphopcnt = 0;
 		if (vglobp == 0 && Peek_key == 0 && commch != 'r')
@@ -829,7 +829,7 @@ def:
 			}
 			if (gcursor > &genbuf[LBSIZE - 2])
 				error("Line too long");
-			*gcursor++ = c & TRIM;
+			*gcursor++ = c;
 			vcsync();
 			if (value(SHOWMATCH) && !iglobp)
 				if (c == ')' || c == '}')
@@ -846,14 +846,14 @@ vadone:
 }
 
 int	vgetsplit();
-char	*vsplitpt;
+u_char	*vsplitpt;
 
 /*
  * Append the line in buffer at lp
  * to the buffer after dot.
  */
 vdoappend(lp)
-	char *lp;
+	u_char *lp;
 {
 	register int oing = inglobal;
 
@@ -882,7 +882,7 @@ vgetsplit()
  * LBSIZE characters and also does hacks for the R command.
  */
 vmaxrep(ch, cnt)
-	char ch;
+	u_char ch;
 	register int cnt;
 {
 	register int len, replen;

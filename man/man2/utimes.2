@@ -2,9 +2,9 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)utimes.2	6.5 (Berkeley) 9/30/87
+.\"	@(#)utimes.2	6.6 (Berkeley) 2012/06/19
 .\"
-.TH UTIMES 2 "September 30, 1987"
+.TH UTIMES 2 "June 19, 2012"
 .UC 4
 .SH NAME
 utimes \- set file times
@@ -16,7 +16,7 @@ utimes \- set file times
 .ft B
 utimes(file, tvp)
 char *file;
-struct timeval tvp[2];
+struct utimeval tvp[2];
 .fi
 .SH DESCRIPTION
 The
@@ -32,12 +32,12 @@ to set the corresponding recorded times for
 .PP
 The caller must be the owner of the file or the super-user.
 The \*(lqinode-changed\*(rq time of the file is set to the current time.
-.SH "RETURN VALUE
+.SH "RETURN VALUE"
 Upon successful completion, a value of 0 is returned.
 Otherwise, a value of \-1 is returned and
 .I errno
 is set to indicate the error.
-.SH "ERRORS
+.SH ERRORS
 .I Utimes
 will fail if one or more of the following are true:
 .TP 15
@@ -73,4 +73,4 @@ or \fItvp\fP points outside the process's allocated address space.
 [EIO]
 An I/O error occurred while reading or writing the affected inode.
 .SH SEE ALSO
-stat(2)
+gettimeofday(2), stat(2)

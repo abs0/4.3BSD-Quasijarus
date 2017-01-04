@@ -4,7 +4,7 @@
 machine		vax
 cpu		"VAX650"
 ident		LUTHIEN
-timezone	8 dst
+timezone	0
 maxusers	32
 options		INET
 options		"TCP_COMPAT_42"
@@ -29,6 +29,7 @@ pseudo-device	ether
 pseudo-device	sl	8
 pseudo-device	ppp	8
 pseudo-device	netmon	8
+pseudo-device	lk
 
 device		qe0	at uba? csr 0174440	vector qeintr
 device		dsv0	at uba? csr 0160740	vector dsvintr

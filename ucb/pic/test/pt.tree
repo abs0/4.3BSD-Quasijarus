@@ -1,0 +1,30 @@
+.EQ
+delim $$
+.EN
+.PS
+circlerad = .15i
+d = .5i
+s = .3i
+define tree X
+{ R: $1; move to R
+	{ line from R to R - $4,d chop; line from R to R + $4,-d chop }
+	{ move left $4 down d - circlerad; $2; }
+	{ move right $4 down d - circlerad; $3; }
+}
+X
+.PE
+This is a simple tree:
+.PS
+tree(circle "root", circle "left", circle "right", .3i)
+.PE
+This one is harder.
+.PS
+tree(circle "+", circle "$op sub 1$", tree(circle "*", circle "$op sub 2$", circle "$op sub 3$", .3i) , .3i)
+.PE
+This one is even worse:
+.PS
+tree(circle "+", tree(circle "*", circle "$op sub 1$", circle "$op sub 2$",.3i), tree(circle "+", circle "$op sub 3$", circle "$op sub 4$",.3i),.6i)
+.PE
+.PS
+tree(circle invis "+", tree(circle invis "*", circle invis "$op sub 1$", circle invis "$op sub 2$",.3i), tree(circle invis "+", circle invis "$op sub 3$", circle invis "$op sub 4$",.3i),.6i)
+.PE

@@ -1,0 +1,1053 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	CharStrings dup length 3 add dict begin
+		{def} forall
+		/underrule {
+			pop
+			500 0 0 -125 500 -75 setcachedevice
+			50 setlinewidth 0 setlinecap
+			0 -100 moveto 500 0 rlineto stroke
+		} bind def
+		/overrule {
+			pop
+			500 0 0 875 500 925 setcachedevice
+			50 setlinewidth 0 setlinecap
+			0 900 moveto 500 0 rlineto stroke
+		} bind def
+		/boxrule {
+			pop
+			0 0 -25 -100 25 900 setcachedevice
+			50 setlinewidth 0 setlinecap
+			0 -100 moveto 0 1000 rlineto stroke
+		} bind def
+		currentdict
+	end
+	/CharStrings exch def
+	Encoding 256 array copy
+	dup 15 /underrule put
+	dup 16 /overrule put
+	dup 17 /boxrule put
+	/Encoding exch def
+	currentdict
+end
+/Symbol-troff exch definefont
+] def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+%%EndSetup
+%%Page: 1 1
+save 1 60 div dup scale
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+2 12 SF
+10090 40140 (Bug) P
+11570 40140 (Fixes) P
+13410 40140 (and) P
+14810 40140 (Changes) P
+17690 40140 (in) P
+18530 40140 (4.3BSD\255Quasijarus) P
+14490 38340 (December) P
+17850 38340 (4,) P
+18630 38340 (2003) P
+1 10 SF
+15247 36900 (Michael) P
+17413 36900 (Sokolov) P
+0 10 SF
+15047 35820 (Quasijarus) P
+17812 35820 (Project) P
+12197 35100 (International) P
+15463 35100 (Free) P
+16729 35100 (Computing) P
+19630 35100 (Task) P
+20996 35100 (Force) P
+12514 34380 (http://ifctfvax.Harhan.ORG/Quasijarus/) P
+1 10 SF
+15862 32220 (ABSTRACT) P
+0 10 SF
+7980 30780 (This) P
+9315 30780 (document) P
+11949 30780 (brie\213y) P
+13784 30780 (describes) P
+16283 30780 (the) P
+17284 30780 (changes) P
+19483 30780 (to) P
+20218 30780 (the) P
+21218 30780 (Berkeley) P
+23650 30780 (version) P
+25683 30780 (of) P
+0 9 SF
+26430 30780 (UNIX) P
+0 10 SF
+27780 30780 (\200) P
+6480 30060 (for) P
+7543 30060 (the) P
+8639 30060 (VAX\201) P
+10601 30060 (made) P
+12263 30060 (by) P
+13226 30060 (Quasijarus) P
+16154 30060 (Project) P
+18217 30060 (in) P
+19046 30060 (each) P
+20506 30060 (successive) P
+23398 30060 (4.3BSD\255Quasijarus) P
+6480 29340 (release) P
+8387 29340 (up) P
+9230 29340 (to) P
+9940 29340 (the) P
+10916 29340 (present.) P
+13240 29340 (It) P
+13849 29340 (attempts) P
+16124 29340 (only) P
+17433 29340 (to) P
+18142 29340 (summarize) P
+21016 29340 (the) P
+21991 29340 (major) P
+23633 29340 (changes) P
+25806 29340 (that) P
+26948 29340 (have) P
+6480 28620 (been) P
+7812 28620 (made.) P
+9661 28620 (There) P
+11260 28620 (are) P
+12192 28620 (many) P
+13725 28620 (more) P
+15158 28620 (minor) P
+16792 28620 (changes.) P
+2 12 SF
+12610 26460 (4.3BSD\255Quasijarus0a) P
+19510 26460 (changes) P
+0 11 SF
+4320 24804 (\007) P
+0 10 SF
+5820 24804 (SCCS) P
+7488 24804 (commands) P
+10287 24804 (are) P
+11219 24804 (now) P
+12452 24804 (part) P
+13585 24804 (of) P
+14285 24804 (the) P
+15218 24804 (standard) P
+17450 24804 (system.) P
+0 11 SF
+4320 23868 (\007) P
+0 10 SF
+5820 23868 (The) P
+6992 23868 (MicroVAX) P
+9996 23868 (bootblock) P
+12635 23868 (has) P
+13673 23868 (been) P
+15044 23868 (added) P
+16715 23868 (to) P
+17421 23868 (the) P
+18393 23868 (standard) P
+20664 23868 (distribution) P
+23671 23868 (tape.) P
+25259 23868 (Since) P
+26831 23868 (it) P
+27403 23868 (must) P
+28808 23868 (reside) P
+5820 23148 (at) P
+6453 23148 (the) P
+7386 23148 (beginning) P
+9986 23148 (of) P
+10686 23148 (the) P
+11619 23148 (tape,) P
+12968 23148 (the) P
+13901 23148 (original) P
+15968 23148 (toggle\255in) P
+18335 23148 (bootstraps) P
+21001 23148 (have) P
+22333 23148 (been) P
+23665 23148 (moved) P
+25498 23148 (two) P
+26598 23148 (blocks) P
+28364 23148 (down.) P
+0 11 SF
+4320 22212 (\007) P
+0 10 SF
+5820 22212 (Franz) P
+7386 22212 (Lisp) P
+8653 22212 (has) P
+9652 22212 (been) P
+10984 22212 (separated) P
+13448 22212 (from) P
+14815 22212 (the) P
+15748 22212 (main) P
+17148 22212 (system.) P
+0 11 SF
+4320 21276 (\007) P
+0 10 SF
+5820 21276 (Jean\255loup) P
+8352 21276 (Gailly's) P
+1 10 SF
+10485 21276 (zlib) P
+0 10 SF
+11652 21276 (compression) P
+14884 21276 (library) P
+16684 21276 (\(-lz\)) P
+18055 21276 (has) P
+19054 21276 (been) P
+20386 21276 (included) P
+22652 21276 (in) P
+23319 21276 (the) P
+24252 21276 (standard) P
+26484 21276 (system.) P
+0 11 SF
+4320 20340 (\007) P
+2 10 SF
+5820 20340 (-s) P
+0 10 SF
+6721 20340 (option) P
+8581 20340 (has) P
+9706 20340 (been) P
+11164 20340 (added) P
+12922 20340 (to) P
+1 10 SF
+13714 20340 (compress) P
+0 10 SF
+16178 20340 (\(1\)) P
+17203 20340 (to) P
+17995 20340 (use) P
+19119 20340 (strong) P
+20944 20340 (compression) P
+24301 20340 (instead) P
+26325 20340 (of) P
+27150 20340 (the) P
+28208 20340 (standard) P
+1 10 SF
+5820 19620 (compress) P
+0 10 SF
+8384 19620 (algorithm) P
+10918 19620 (\(also) P
+12284 19620 (known) P
+14117 19620 (as) P
+14816 19620 (LZW\).) P
+0 11 SF
+4320 18684 (\007) P
+0 10 SF
+5820 18684 (Several) P
+7876 18684 (new) P
+9132 18684 (MSCP) P
+10990 18684 (disks) P
+12480 18684 (have) P
+13869 18684 (been) P
+15258 18684 (added) P
+16947 18684 (to) P
+17671 18684 (the) P
+18661 18684 (distributed) P
+21484 18684 (/etc/disktab) P
+24506 18684 (and) P
+25628 18684 (to) P
+26351 18684 (the) P
+27340 18684 (compiled\255in) P
+5820 17964 (disk) P
+7020 17964 (tables) P
+8619 17964 (in) P
+9286 17964 (the) P
+1 10 SF
+10219 17964 (uda) P
+0 10 SF
+11319 17964 (\(4\)) P
+12219 17964 (driver.) P
+0 11 SF
+4320 17028 (\007) P
+1 10 SF
+5820 17028 (Kdb) P
+0 10 SF
+7020 17028 (\(4\)) P
+7920 17028 (driver) P
+9553 17028 (now) P
+10786 17028 (uses) P
+12018 17028 (the) P
+12951 17028 (same) P
+14383 17028 (partitions) P
+16850 17028 (as) P
+1 10 SF
+17549 17028 (uda) P
+0 10 SF
+18649 17028 (\(4\)) P
+19549 17028 (on) P
+20349 17028 (the) P
+21282 17028 (same) P
+22714 17028 (disks.) P
+0 11 SF
+4320 16092 (\007) P
+0 10 SF
+5820 16092 (The) P
+6994 16092 (kernel) P
+8733 16092 (and) P
+9839 16092 (the) P
+10812 16092 (standalone) P
+13617 16092 (system) P
+15523 16092 (have) P
+16895 16092 (been) P
+18267 16092 (taught) P
+20007 16092 (that) P
+21147 16092 (VAXBI) P
+23286 16092 (KLESI) P
+25227 16092 (\(TU81) P
+27067 16092 (controller\)) P
+29840 16092 (is) P
+5820 15372 (actually) P
+8041 15372 (a) P
+8628 15372 (UNIBUS) P
+11182 15372 (adapter) P
+13268 15372 (with) P
+14656 15372 (a) P
+15243 15372 (UNIBUS) P
+17797 15372 (KLESI) P
+19819 15372 (sitting) P
+21641 15372 (behind) P
+23595 15372 (it,) P
+24400 15372 (which) P
+26187 15372 (DEC) P
+27708 15372 (apparently) P
+5820 14652 (doesn't) P
+7786 14652 (want) P
+9152 14652 (you) P
+10252 14652 (to) P
+10919 14652 (know,) P
+12602 14652 (instantly) P
+14869 14652 (gaining) P
+16869 14652 (full) P
+17903 14652 (support) P
+19903 14652 (for) P
+20803 14652 (this) P
+21870 14652 (device.) P
+0 11 SF
+4320 13716 (\007) P
+0 10 SF
+5820 13716 (Added) P
+1 10 SF
+7671 13716 (Make\212le) P
+0 10 SF
+10088 13716 (support) P
+12140 13716 (for) P
+13092 13716 (building) P
+15345 13716 (a) P
+15863 13716 (distribution) P
+18883 13716 (console) P
+20967 13716 (RL02) P
+22586 13716 (pack) P
+23970 13716 (for) P
+24922 13716 (VAX) P
+26472 13716 (8600) P
+27923 13716 (and) P
+29040 13716 (8650) P
+5820 12996 (machines,) P
+8435 12996 (so) P
+9168 12996 (that) P
+10268 12996 (one) P
+11334 12996 (can) P
+12366 12996 (be) P
+13132 12996 (supplied) P
+15365 12996 (to) P
+16032 12996 (sites) P
+17298 12996 (cold\255bootstrapping) P
+0 9 SF
+22011 12996 (UNIX) P
+0 10 SF
+23561 12996 (on) P
+24361 12996 (such) P
+25660 12996 (a) P
+26126 12996 (machine.) P
+0 11 SF
+4320 12060 (\007) P
+0 10 SF
+5820 12060 (The) P
+6958 12060 (protocol) P
+9163 12060 (used) P
+10467 12060 (by) P
+1 10 SF
+11272 12060 (dmc) P
+0 10 SF
+12471 12060 (\(4\)) P
+13376 12060 (and) P
+1 10 SF
+14447 12060 (dmv) P
+0 10 SF
+15646 12060 (\(4\)) P
+16551 12060 (drivers) P
+18422 12060 (has) P
+19426 12060 (been) P
+20763 12060 (standardized) P
+23999 12060 (to) P
+24671 12060 (MTU) P
+26209 12060 (of) P
+26914 12060 (1284) P
+28319 12060 (bytes,) P
+29940 12060 (8) P
+5820 11340 (garbage) P
+7929 11340 (bytes) P
+9406 11340 (present.) P
+11699 11340 (This) P
+12977 11340 (is) P
+13588 11340 (the) P
+14531 11340 (protocol) P
+16741 11340 (used) P
+18050 11340 (4.3BSD) P
+1 10 SF
+20177 11340 (dmc) P
+0 10 SF
+21376 11340 (\(4\)) P
+22286 11340 (and) P
+23362 11340 (Ultrix) P
+1 10 SF
+25006 11340 (dmc) P
+0 10 SF
+26205 11340 (\(4\)) P
+27115 11340 (and) P
+1 10 SF
+28191 11340 (dmv) P
+0 10 SF
+29390 11340 (\(4\),) P
+5820 10620 (i.e.,) P
+6903 10620 (by) P
+7703 10620 (all) P
+8503 10620 (existing) P
+10603 10620 (stable) P
+12202 10620 (releases.) P
+0 11 SF
+4320 9684 (\007) P
+0 10 SF
+5820 9684 (The) P
+6988 9684 (``mini) P
+8724 9684 (root'') P
+10326 9684 (\212le) P
+11328 9684 (system) P
+13229 9684 (used) P
+14563 9684 (in) P
+15265 9684 (the) P
+16233 9684 (full) P
+17302 9684 (bootstrap) P
+19770 9684 (procedure) P
+22403 9684 (has) P
+23437 9684 (been) P
+24804 9684 (increased) P
+27303 9684 (from) P
+28705 9684 (2) P
+29239 9684 (to) P
+29940 9684 (3) P
+5820 8964 (megabytes.) P
+0 11 SF
+4320 8028 (\007) P
+0 10 SF
+5820 8028 (The) P
+1 10 SF
+7147 8028 (troff) P
+0 10 SF
+8381 8028 (\(1\)) P
+9475 8028 (sources) P
+11667 8028 (for) P
+12761 8028 (the) P
+13888 8028 (supplementary) P
+17814 8028 (documents) P
+20807 8028 (have) P
+22333 8028 (been) P
+23859 8028 (moved) P
+25886 8028 (from) P
+27447 8028 (/usr/doc) P
+29773 8028 (to) P
+5820 7308 (/usr/src/doc.) P
+3 8 SF
+4320 6240 (\017\017\017\017\017\017\017\017\017\017\017\017\017\017\017\017\017\017) P
+0 8 SF
+4320 5640 (\200) P
+0 7 SF
+4700 5640 (UNIX) P
+0 8 SF
+5909 5640 (is) P
+6389 5640 (a) P
+6762 5640 (registered) P
+8814 5640 (trademark) P
+10919 5640 (of) P
+11479 5640 (AT&T) P
+12945 5640 (Bell) P
+13904 5640 (Laboratories) P
+16489 5640 (in) P
+17022 5640 (the) P
+17768 5640 (USA) P
+18889 5640 (and) P
+19742 5640 (other) P
+20888 5640 (countries.) P
+4320 5040 (\201) P
+0 6 SF
+4680 5040 (DEC) P
+0 8 SF
+5400 5040 (,) P
+0 6 SF
+5640 5040 (VAX) P
+0 8 SF
+6420 5040 (,) P
+0 6 SF
+6660 5040 (PDP) P
+0 8 SF
+7320 5040 (,) P
+0 6 SF
+7560 5040 (MASSBUS) P
+0 8 SF
+9240 5040 (,) P
+0 6 SF
+9480 5040 (UNIBUS) P
+0 8 SF
+10820 5040 (,) P
+0 6 SF
+11060 5040 (Q\255bus) P
+0 8 SF
+12100 5040 (and) P
+0 6 SF
+12913 5040 (ULTRIX) P
+0 8 SF
+14393 5040 (are) P
+15139 5040 (trademarks) P
+17431 5040 (of) P
+17991 5040 (Digital) P
+19483 5040 (Equipment) P
+21748 5040 (Corporation.) P
+restore showpage
+%%Page: 2 2
+save 1 60 div dup scale
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+4320 44400 (SMM:23\2552) P
+18860 44400 (Bug) P
+20060 44400 (Fixes) P
+21560 44400 (and) P
+22626 44400 (Changes) P
+24891 44400 (in) P
+25558 44400 (4.3BSD\255Quasijarus) P
+0 11 SF
+4320 42480 (\007) P
+0 10 SF
+5820 42480 (The) P
+6976 42480 (system) P
+8865 42480 (headers) P
+10919 42480 (are) P
+11874 42480 (now) P
+13130 42480 (copied) P
+14952 42480 (rather) P
+16574 42480 (than) P
+17830 42480 (symlinked) P
+20553 42480 (from) P
+21943 42480 (/sys) P
+23099 42480 (to) P
+23789 42480 (/usr/include) P
+26845 42480 (by) P
+27668 42480 (default,) P
+29707 42480 (so) P
+5820 41760 (that) P
+7060 41760 (the) P
+8133 41760 (system) P
+10138 41760 (can) P
+11309 41760 (still) P
+12549 41760 (be) P
+13454 41760 (used) P
+14892 41760 (operationally,) P
+18547 41760 (including) P
+21153 41760 (compiling) P
+23926 41760 (user) P
+25264 41760 (programs) P
+27869 41760 (when) P
+29507 41760 (the) P
+5820 41040 (sources) P
+7818 41040 (are) P
+8750 41040 (not) P
+9717 41040 (installed.) P
+2 12 SF
+12590 38880 (4.3BSD\255Quasijarus0b) P
+19530 38880 (changes) P
+0 11 SF
+4320 37224 (\007) P
+0 10 SF
+5820 37224 (Y2K) P
+7186 37224 (\212xes) P
+8519 37224 (throughout) P
+11353 37224 (the) P
+12286 37224 (system.) P
+0 11 SF
+4320 36288 (\007) P
+0 10 SF
+5820 36288 (Fix) P
+6866 36288 (for) P
+7811 36288 (a) P
+8322 36288 (critical) P
+10232 36288 (bug) P
+11376 36288 (in) P
+1 10 SF
+12087 36288 (c2) P
+0 10 SF
+12753 36288 (,) P
+13147 36288 (the) P
+14124 36288 (peephole) P
+16533 36288 (optimiser,) P
+19194 36288 (which) P
+20904 36288 (caused) P
+22779 36288 (it) P
+23357 36288 (under) P
+24967 36288 (certain) P
+26843 36288 (circumstances) P
+5820 35568 (to) P
+6497 35568 (throw) P
+8107 35568 (out) P
+9084 35568 (instructions) P
+12093 35568 (loading) P
+14102 35568 (registers) P
+16343 35568 (which) P
+18018 35568 (were) P
+19392 35568 (later) P
+20667 35568 (used) P
+21975 35568 (in) P
+22651 35568 (deferred) P
+24858 35568 (or) P
+25567 35568 (indexed) P
+27675 35568 (addressing) P
+5820 34848 (modes.) P
+8051 34848 (The) P
+9299 34848 (resulting) P
+11714 34848 (misoptimised) P
+15263 34848 (code) P
+16710 34848 (thus) P
+18025 34848 (dereferenced) P
+21436 34848 (bogus) P
+23184 34848 (addresses,) P
+25946 34848 (dumping) P
+28394 34848 (core) P
+29740 34848 (or) P
+5820 34128 (even) P
+7196 34128 (worse,) P
+9022 34128 (behaving) P
+11465 34128 (unpredictably.) P
+15358 34128 (Many) P
+17001 34128 (other) P
+18478 34128 (minor) P
+20156 34128 (bugs) P
+21533 34128 (have) P
+22909 34128 (also) P
+24119 34128 (been) P
+25495 34128 (\212xed) P
+26938 34128 (in) P
+1 10 SF
+27648 34128 (c2) P
+0 10 SF
+28314 34128 (.) P
+28907 34128 (Since) P
+5820 33408 (all) P
+6620 33408 (system) P
+8486 33408 (binaries) P
+10585 33408 (are) P
+11517 33408 (compiled) P
+13950 33408 (with) P
+2 10 SF
+15217 33408 (-O) P
+0 10 SF
+16226 33408 (this) P
+17293 33408 (potentially) P
+20060 33408 (affects) P
+21858 33408 (every) P
+23390 33408 (binary) P
+25123 33408 (in) P
+25790 33408 (the) P
+26723 33408 (system.) P
+0 11 SF
+4320 32472 (\007) P
+1 10 SF
+5820 32472 (As) P
+0 10 SF
+6620 32472 (\(1\)) P
+7611 32472 (now) P
+8934 32472 (automatically) P
+12490 32472 (chooses) P
+14678 32472 (between) P
+16966 32472 (byte) P
+18289 32472 (branches,) P
+20860 32472 (word) P
+22383 32472 (branches,) P
+24954 32472 (and) P
+26110 32472 (long) P
+27467 32472 (jumps,) P
+29374 32472 (and) P
+5820 31752 (ignores) P
+7821 31752 (the) P
+2 10 SF
+8789 31752 (-J) P
+0 10 SF
+9666 31752 (option.) P
+11785 31752 (It) P
+12387 31752 (now) P
+13655 31752 (also) P
+14855 31752 (provides) P
+17155 31752 (relaxed) P
+19154 31752 (forms) P
+20788 31752 (of) P
+21522 31752 (SOB,) P
+23073 31752 (AOB,) P
+24723 31752 (and) P
+25823 31752 (ACB) P
+27290 31752 (instructions,) P
+5820 31032 (which) P
+7486 31032 (are) P
+8418 31032 (now) P
+9651 31032 (used) P
+10950 31032 (by) P
+1 10 SF
+11750 31032 (c2) P
+0 10 SF
+12416 31032 (.) P
+0 11 SF
+4320 30096 (\007) P
+1 10 SF
+5820 30096 (Cc) P
+0 10 SF
+6686 30096 (\(1\)) P
+2 10 SF
+7586 30096 (-J) P
+0 10 SF
+8428 30096 (option) P
+10162 30096 (causes) P
+1 10 SF
+11926 30096 (switch) P
+0 10 SF
+13759 30096 (tables) P
+15358 30096 (to) P
+16025 30096 (be) P
+16791 30096 (generated) P
+19322 30096 (in) P
+19989 30096 (long) P
+21256 30096 (form) P
+22623 30096 (like) P
+23723 30096 (on) P
+24523 30096 (Sun3.) P
+0 11 SF
+4320 29160 (\007) P
+0 10 SF
+5820 29160 (A) P
+6453 29160 (number) P
+8486 29160 (of) P
+9186 29160 (tables) P
+10785 29160 (have) P
+12117 29160 (been) P
+13449 29160 (enlarged) P
+15714 29160 (in) P
+16381 29160 (the) P
+17314 29160 (C) P
+17914 29160 (compiler) P
+20247 29160 (and) P
+21313 29160 (preprocessor.) P
+0 11 SF
+4320 28224 (\007) P
+0 10 SF
+5820 28224 (When) P
+7446 28224 (emulating) P
+10040 28224 (CRC,) P
+11584 28224 (MATCHC,) P
+14494 28224 (and) P
+15554 28224 (MOVTUC) P
+18347 28224 (instructions) P
+21341 28224 (on) P
+22135 28224 (uVAXen) P
+24494 28224 (the) P
+25421 28224 (registers) P
+27647 28224 (and) P
+28707 28224 (condi\255) P
+5820 27504 (tion) P
+6954 27504 (codes) P
+8519 27504 (were) P
+9884 27504 (being) P
+11417 27504 (set) P
+12283 27504 (incorrectly) P
+15082 27504 (in) P
+15749 27504 (some) P
+17215 27504 (corner) P
+18947 27504 (cases.) P
+20761 27504 (This) P
+22028 27504 (has) P
+23027 27504 (been) P
+24359 27504 (\212xed.) P
+0 11 SF
+4320 26568 (\007) P
+0 10 SF
+5820 26568 (A) P
+6603 26568 (security) P
+8851 26568 (hole) P
+10233 26568 (in) P
+11049 26568 (kernel) P
+12897 26568 (affecting) P
+15378 26568 (VAX) P
+17026 26568 (CPUs) P
+18775 26568 (without) P
+20958 26568 (PDP\25511) P
+23208 26568 (compatibility) P
+26758 26568 (mode) P
+28440 26568 (support) P
+5820 25848 (\(uVAXen) P
+8453 25848 (and) P
+9587 25848 (VAX) P
+11154 25848 (8200\)) P
+12822 25848 (has) P
+13889 25848 (been) P
+15289 25848 (plugged.) P
+17840 25848 (The) P
+19041 25848 (hole) P
+20342 25848 (allowed) P
+22508 25848 (any) P
+23641 25848 (ordinary) P
+25941 25848 (unprivileged) P
+29241 25848 (user) P
+5820 25128 (who) P
+7054 25128 (is) P
+7655 25128 (able) P
+8855 25128 (to) P
+9523 25128 (run) P
+10524 25128 (programs) P
+12991 25128 (on) P
+13792 25128 (the) P
+14726 25128 (machine) P
+16959 25128 (to) P
+17627 25128 (cause) P
+19159 25128 (a) P
+19626 25128 (kernel) P
+21325 25128 (panic) P
+22824 25128 (by) P
+23624 25128 (giving) P
+25358 25128 (PSL<CM>=1) P
+28840 25128 (to) P
+29507 25128 (the) P
+1 10 SF
+5820 24408 (sigreturn) P
+0 10 SF
+8219 24408 (\(2\)) P
+9119 24408 (system) P
+10985 24408 (call.) P
+0 11 SF
+4320 23472 (\007) P
+0 10 SF
+5820 23472 (A) P
+6528 23472 (kernel) P
+8302 23472 (panic\255causing) P
+11908 23472 (bug) P
+13082 23472 (in) P
+13823 23472 (TCP) P
+15198 23472 (has) P
+16271 23472 (been) P
+17677 23472 (\212xed.) P
+19501 23472 (The) P
+20708 23472 (kernel) P
+22481 23472 (could) P
+24088 23472 (panic) P
+25661 23472 (if) P
+26302 23472 (a) P
+1 10 SF
+26842 23472 (setsockopt) P
+0 10 SF
+29540 23472 (\(2\)) P
+5820 22752 (was) P
+6952 22752 (attempted) P
+9518 22752 (on) P
+10318 22752 (a) P
+10784 22752 (TCP) P
+12085 22752 (socket) P
+13817 22752 (that) P
+14917 22752 (had) P
+15983 22752 (its) P
+16750 22752 (connection) P
+19582 22752 (reset.) P
+21264 22752 (Fix) P
+22265 22752 (from) P
+23632 22752 (4.4BSD.) P
+0 11 SF
+4320 21816 (\007) P
+0 10 SF
+5820 21816 (Support) P
+7921 21816 (for) P
+8821 21816 (DEC) P
+10221 21816 (DSV11) P
+12221 21816 (point\255to\255point) P
+15756 21816 (links) P
+17123 21816 (using) P
+18623 21816 (Cisco) P
+20189 21816 (HDLC) P
+22022 21816 (protocol.) P
+0 11 SF
+4320 20880 (\007) P
+1 10 SF
+5820 20880 (Sendmail) P
+0 10 SF
+8420 20880 (cf) P
+9153 20880 (\212les:) P
+10587 20880 (the) P
+11587 20880 (prophecy) P
+14085 20880 (has) P
+15150 20880 (come) P
+16715 20880 (true.) P
+18264 20880 (HOSTS.TXT) P
+21748 20880 (is) P
+22414 20880 (gone,) P
+23996 20880 (everyone) P
+26460 20880 (uses) P
+27758 20880 (DNS,) P
+29374 20880 (and) P
+5820 20160 (there) P
+7219 20160 (are) P
+8151 20160 (no) P
+8951 20160 (more) P
+10384 20160 (NIC\255registered) P
+14182 20160 (hosts) P
+15615 20160 (to) P
+16282 20160 (worry) P
+17915 20160 (about.) P
+0 11 SF
+4320 19224 (\007) P
+0 10 SF
+5820 19224 (Several) P
+7876 19224 (new) P
+9132 19224 (MSCP) P
+10990 19224 (disks) P
+12480 19224 (have) P
+13869 19224 (been) P
+15258 19224 (added) P
+16947 19224 (to) P
+17671 19224 (the) P
+18661 19224 (distributed) P
+21484 19224 (/etc/disktab) P
+24506 19224 (and) P
+25628 19224 (to) P
+26351 19224 (the) P
+27340 19224 (compiled\255in) P
+5820 18504 (disk) P
+7020 18504 (tables) P
+8619 18504 (in) P
+9286 18504 (the) P
+1 10 SF
+10219 18504 (uda) P
+0 10 SF
+11319 18504 (\(4\)) P
+12219 18504 (and) P
+1 10 SF
+13285 18504 (kdb) P
+0 10 SF
+14351 18504 (\(4\)) P
+15251 18504 (drivers.) P
+0 11 SF
+4320 17568 (\007) P
+0 10 SF
+5820 17568 (The) P
+7001 17568 (MicroVAX) P
+10014 17568 (boot) P
+11329 17568 (code) P
+12709 17568 (no) P
+13557 17568 (longer) P
+15338 17568 (requires) P
+17518 17568 (the) P
+18499 17568 (boot) P
+19814 17568 (disk) P
+21062 17568 (to) P
+21777 17568 (be) P
+22591 17568 (unit) P
+23773 17568 (0.) P
+24671 17568 (It) P
+25285 17568 (must) P
+26699 17568 (still) P
+27847 17568 (be) P
+28660 17568 (on) P
+29507 17568 (the) P
+5820 16848 (\212rst) P
+6954 16848 (MSCP) P
+8755 16848 (controller,) P
+11438 16848 (though.) P
+0 11 SF
+4320 15912 (\007) P
+0 10 SF
+5820 15912 (An) P
+6753 15912 (RX50) P
+8386 15912 (console) P
+10418 15912 (\213oppy) P
+12152 15912 (is) P
+12752 15912 (now) P
+13985 15912 (available) P
+16350 15912 (for) P
+17250 15912 (the) P
+18183 15912 (standard) P
+20415 15912 (system) P
+22281 15912 (to) P
+22948 15912 (bootstrap) P
+25381 15912 (on) P
+26181 15912 (a) P
+26647 15912 (VAX) P
+28146 15912 (8200.) P
+0 -180 (\255\255) P
+32432 -180 (\255\255) P
+restore showpage
+%%Trailer
+%%Pages: 2
+%%EOF

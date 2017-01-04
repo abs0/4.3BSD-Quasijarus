@@ -1,0 +1,92 @@
+h10794
+s 00002/00005/00055
+d D 6.2 86/05/13 15:21:02 karels 3 2
+c bugs fixed
+e
+s 00001/00001/00059
+d D 6.1 85/05/15 11:56:12 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00060/00000/00000
+d D 5.1 85/05/15 11:56:06 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETPEERNAME 2 "21 July 1983"
+E 2
+I 2
+.TH GETPEERNAME 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+getpeername \- get name of connected peer
+.SH SYNOPSIS
+.nf
+.PP
+.ft B
+getpeername(s, name, namelen)
+int s;
+struct sockaddr *name;
+int *namelen;
+.fi
+.SH DESCRIPTION
+.I Getpeername
+returns the name of the peer connected to
+socket
+.IR s .
+The
+.I namelen
+parameter should be initialized to indicate
+the amount of space pointed to by
+.IR name .
+On return it contains the actual size of the name
+returned (in bytes).
+I 3
+The name is truncated if the buffer provided is too small.
+E 3
+.SH DIAGNOSTICS
+A 0 is returned if the call succeeds, \-1 if it fails.
+.SH ERRORS
+The call succeeds unless:
+.TP 15
+[EBADF]
+The argument \fIs\fP is not a valid descriptor.
+.TP 15
+[ENOTSOCK]
+The argument \fIs\fP is a file, not a socket.
+.TP 15
+[ENOTCONN]
+The socket is not connected.
+.TP 15
+[ENOBUFS]
+Insufficient resources were available in the system
+to perform the operation.
+.TP 15
+[EFAULT]
+The 
+.I name
+parameter points to memory not in a valid part of the
+process address space.
+.SH "SEE ALSO"
+D 3
+bind(2), socket(2), getsockname(2)
+.SH BUGS
+Names bound to sockets in the UNIX domain are inaccessible;
+.I getpeername
+returns a zero length name.
+E 3
+I 3
+accept(2), bind(2), socket(2), getsockname(2)
+E 3
+E 1

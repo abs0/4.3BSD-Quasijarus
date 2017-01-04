@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)bivar.h	7.2 (Berkeley) 7/9/88
+ *	@(#)bivar.h	7.3 (Berkeley) 3/6/04
  */
 
 /*
@@ -36,7 +36,23 @@ struct	binode_status {
 /*
  * ... per BI
  */
+#ifdef notdef
+/* this isn't even compilable! (redefinition) who the hell wrote this? */
 struct	bi_hd {
 	short	bh_nodes;		/* which nodes are present */
 	struct	binode_status bh_nodes[16];	/* info about those nodes */
 };
+#endif
+
+/*
+ * BI device table matching device types to drivers
+ */
+struct	bi_devtab {
+	u_short	bidt_dtype;
+	short	bidt_isctlr;
+	struct	uba_driver *bidt_driver;
+};
+
+#ifdef KERNEL
+extern struct bi_devtab bi_devtab[];
+#endif

@@ -1,0 +1,96 @@
+h23041
+s 00001/00001/00049
+d D 6.1 85/05/15 15:03:44 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00006/00042
+d D 5.1 85/05/15 15:03:35 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00048/00000/00000
+d D 4.1 85/05/15 15:03:29 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PUTS 3S 
+E 2
+I 2
+D 3
+.TH PUTS 3S  "19 January 1983"
+E 3
+I 3
+.TH PUTS 3S  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+puts, fputs \- put a string on a stream
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.B puts(s)
+.br
+.B char *s;
+.PP
+.B fputs(s, stream)
+.br
+.B char *s;
+.br
+.SM
+.B FILE
+.B *stream;
+.SH DESCRIPTION
+.I Puts
+copies the null-terminated string
+.I s
+to the standard output stream
+D 2
+.I stdout
+E 2
+I 2
+.B stdout
+E 2
+and appends a
+newline character.
+.PP
+.I Fputs
+copies the null-terminated string
+.I s
+to the named output
+.IR stream .
+.PP
+Neither routine copies the terminal null character.
+.SH "SEE ALSO"
+D 2
+fopen(3), gets(3),
+putc(3), printf(3),
+ferror(3)
+E 2
+I 2
+fopen(3S),
+gets(3S),
+putc(3S),
+printf(3S),
+ferror(3S)
+E 2
+.br
+D 2
+fread(3) for
+E 2
+I 2
+fread(3S) for
+E 2
+.I fwrite
+.SH BUGS
+.I Puts
+appends a newline,
+.I fputs
+does not, all in the name of backward compatibility.
+E 1

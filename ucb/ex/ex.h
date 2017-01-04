@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ex.h	7.9 (Berkeley) 1/2/88
+ *	@(#)ex.h	7.10 (Berkeley) 4/13/03
  */
 
 #ifdef V6
@@ -106,12 +106,12 @@ typedef	short	bool;
  * ex_data.c... see the shell script "makeoptions".
  */
 struct	option {
-	char	*oname;
-	char	*oabbrev;
+	u_char	*oname;
+	u_char	*oabbrev;
 	short	otype;		/* Types -- see below */
 	short	odefault;	/* Default value */
 	short	ovalue;		/* Current value */
-	char	*osvalue;
+	u_char	*osvalue;
 };
 
 #define	ONOFF	0
@@ -147,7 +147,7 @@ extern	 struct	option options[NOPTS + 1];
 	var	FILE	*trace;
 	var	bool	trubble;
 	var	bool	techoin;
-	var	char	tracbuf[BUFSIZ];
+	var	u_char	tracbuf[BUFSIZ];
 #else
 # ifdef	VMUNIX
 #	define	BUFSIZ	1024
@@ -168,10 +168,29 @@ extern	 struct	option options[NOPTS + 1];
  * The editor uses the QUOTE bit as a flag to pass on with characters
  * e.g. to the putchar routine.  The editor never uses a simple char variable.
  * Only arrays of and pointers to characters are used and parameters and
- * registers are never declared character.
+ * registers are never declared character. All char arrays and pointers are
+ * declared as u_char to stop the @#$%^&* C from sign-extending 8-bit chars
+ * when loaded into int registers.
+ *
+ * This is the 8-bit ex. We now handle all 8-bit codes from 1 to 0377 (0 is
+ * still banned as this is a C program). We no longer abuse bit 7 as QUOTE.
+ * Instead we take advantage of abovenoted fact that we don't use simple char
+ * vars and use a non-char bit of int as QUOTE. We handle C1 control codes in
+ * the same fashion as C0 ones have always been handled, i.e., we represent
+ * them graphically and let the user edit them. The graphic representation is
+ * ~@ thru ~_. (Very rarely ~@ may cause an inconvenience in vi, see the
+ * comments in ex_vis.h) No actual C1 control code should ever be sent to the
+ * tty unless there is a bug somewhere. 0377 is assumed to be a normal
+ * printable char, i.e., a 96-character set in ISO 2022 terms.
+ *
+ * In order not to shock our American users the 8-bit support is controlled by
+ * on/off option eightbit which is off by default, but it only controls whether
+ * we allow or block 8-bit chars when reading files or taking keyboard input.
+ * Internally we are always 100% 8-bit now.
  */
-#define	QUOTE	0200
-#define	TRIM	0177
+#define	QUOTE	0400
+#define	TRIM7	0177
+#define	TRIM8	0377
 #ifndef vms
 #undef CTRL
 #endif
@@ -180,6 +199,8 @@ extern	 struct	option options[NOPTS + 1];
 #define	CR	CTRL('m')
 #define	DELETE	0177		/* See also ATTN, QUIT in ex_tune.h */
 #define	ESCAPE	033
+#define	isC1(c)		((c) >= 0200 && (c) <= 0237)
+#define	ishichar(c)	((c) >= 0240)
 
 /*
  * Miscellaneous random variables used in more than one place
@@ -187,7 +208,7 @@ extern	 struct	option options[NOPTS + 1];
 var	bool	aiflag;		/* Append/change/insert with autoindent */
 var	bool	anymarks;	/* We have used '[a-z] */
 var	int	chng;		/* Warn "No write" */
-var	char	*Command;
+var	u_char	*Command;
 var	short	defwind;	/* -w# change default window size */
 var	int	dirtcnt;	/* When >= MAXDIRT, should sync temporary */
 #ifdef TIOCLGET
@@ -200,36 +221,36 @@ extern	 bool	endline;	/* Last cmd mode command ended with \n */
 var	short	erfile;		/* Error message file unit */
 #endif
 var	line	*fendcore;	/* First address in line pointer space */
-var	char	file[FNSIZE];	/* Working file name */
-var	char	genbuf[MAXBSIZE]; /* Working buffer when manipulating linebuf */
+var	u_char	file[FNSIZE];	/* Working file name */
+var	u_char	genbuf[MAXBSIZE]; /* Working buffer when manipulating linebuf */
 var	bool	hush;		/* Command line option - was given, hush up! */
-var	char	*globp;		/* (Untyped) input string to command mode */
+var	u_char	*globp;		/* (Untyped) input string to command mode */
 var	bool	holdcm;		/* Don't cursor address */
 var	bool	inappend;	/* in ex command append mode */
 var	bool	inglobal;	/* Inside g//... or v//... */
-var	char	*initev;	/* Initial : escape for visual */
+var	u_char	*initev;	/* Initial : escape for visual */
 var	bool	inopen;		/* Inside open or visual */
-var	char	*input;		/* Current position in cmd line input buffer */
+var	u_char	*input;		/* Current position in cmd line input buffer */
 var	bool	intty;		/* Input is a tty */
 var	short	io;		/* General i/o unit (auto-closed on error!) */
 extern	 short	lastc;		/* Last character ret'd from cmd input */
 var	bool	laste;		/* Last command was an "e" (or "rec") */
-var	char	lastmac;	/* Last macro called for ** */
-var	char	lasttag[TAGSIZE];	/* Last argument to a tag command */
-var	char	*linebp;	/* Used in substituting in \n */
-var	char	linebuf[LBSIZE];	/* The primary line buffer */
+var	u_char	lastmac;	/* Last macro called for ** */
+var	u_char	lasttag[TAGSIZE];	/* Last argument to a tag command */
+var	u_char	*linebp;	/* Used in substituting in \n */
+var	u_char	linebuf[LBSIZE];	/* The primary line buffer */
 var	bool	listf;		/* Command should run in list mode */
-var	char	*loc1;		/* Where re began to match (in linebuf) */
-var	char	*loc2;		/* First char after re match (") */
+var	u_char	*loc1;		/* Where re began to match (in linebuf) */
+var	u_char	*loc2;		/* First char after re match (") */
 var	line	names['z'-'a'+2];	/* Mark registers a-z,' */
 var	int	notecnt;	/* Count for notify (to visual from cmd) */
 var	bool	numberf;	/* Command should run in number mode */
-var	char	obuf[BUFSIZ];	/* Buffer for tty output */
+var	u_char	obuf[BUFSIZ];	/* Buffer for tty output */
 var	short	oprompt;	/* Saved during source */
 extern	short	ospeed;		/* Output speed (from gtty) */
 var	int	otchng;		/* Backup tchng to find changes in macros */
 var	short	peekc;		/* Peek ahead character (cmd mode input) */
-var	char	*pkill[2];	/* Trim for put with ragged (LISP) delete */
+var	u_char	*pkill[2];	/* Trim for put with ragged (LISP) delete */
 var	bool	pfast;		/* Have stty -nl'ed to go faster */
 var	int	pid;		/* Process id of child */
 var	int	ppid;		/* Process id of parent (e.g. main ex proc) */
@@ -257,7 +278,7 @@ var	long	bsize;		/* Block size for disk i/o */
 			 */
 #define FIXUNDO		(inopen >= 0 && (inopen || !inglobal))
 #define ckaw()		{if (chng && value(AUTOWRITE)) wop(0);}
-#define	copy(a,b,c)	Copy((char *) a, (char *) b, c)
+#define	copy(a,b,c)	Copy((u_char *) a, (u_char *) b, c)
 #define	eq(a, b)	((a) && (b) && strcmp(a, b) == 0)
 #define	getexit(a)	copy(a, resetlab, sizeof (jmp_buf))
 #define	lastchar()	lastc
@@ -277,11 +298,11 @@ var	long	bsize;		/* Block size for disk i/o */
 /*
  * Environment like memory
  */
-var	char	altfile[FNSIZE];	/* Alternate file name */
-extern	 char	direct[ONMSZ];		/* Temp file goes here */
-extern	 char	shell[ONMSZ];		/* Copied to be settable */
-extern	 char	ttytype[ONMSZ];		/* A long and pretty name */
-var	char	uxb[UXBSIZE + 2];	/* Last !command for !! */
+var	u_char	altfile[FNSIZE];	/* Alternate file name */
+extern	 u_char	direct[ONMSZ];		/* Temp file goes here */
+extern	 u_char	shell[ONMSZ];		/* Copied to be settable */
+extern	 u_char	ttytype[ONMSZ];		/* A long and pretty name */
+var	u_char	uxb[UXBSIZE + 2];	/* Last !command for !! */
 
 /*
  * The editor data structure for accessing the current file consists
@@ -341,17 +362,17 @@ var	line	*undadot;	/* If we saved all lines, dot reverts here */
 var	int	xflag;		/* True if we are in encryption mode */
 var	int	xtflag;		/* True if the temp file is being encrypted */
 var	int	kflag;		/* True if the key has been accepted */
-var	char	perm[768];
-var	char	tperm[768];
-var	char	*key;
-var	char	crbuf[CRSIZE];
+var	u_char	perm[768];
+var	u_char	tperm[768];
+var	u_char	*key;
+var	u_char	crbuf[CRSIZE];
 char	*getpass();
 #endif
 
 /*
  * Function type definitions
  */
-#define	NOSTR	(char *) 0
+#define	NOSTR	(u_char *) 0
 #define	NOLINE	(line *) 0
 
 extern	int	(*Outchar)();
@@ -363,33 +384,33 @@ int	(*setnorm())();
 int	(*setnorm())();
 int	(*setnumb())();
 line	*address();
-char	*cgoto();
-char	*genindent();
-char	*getblock();
+u_char	*cgoto();
+u_char	*genindent();
+u_char	*getblock();
 char	*getenv();
 #ifdef	vms
 char	*getlog();
 #endif
 line	*getmark();
-char	*longname();
-char	*mesg();
-char	*place();
-char	*plural();
+u_char	*longname();
+u_char	*mesg();
+u_char	*place();
+u_char	*plural();
 line	*scanfor();
 line	*setin();
 char	*strcat();
 char	*strcpy();
-char	*strend();
-char	*tailpath();
+u_char	*strend();
+u_char	*tailpath();
 char	*tgetstr();
 char	*tgoto();
 char	*ttyname();
 line	*vback();
-char	*vfindcol();
-char	*vgetline();
-char	*vinit();
-char	*vpastwh();
-char	*vskipwh();
+u_char	*vfindcol();
+u_char	*vgetline();
+u_char	*vinit();
+u_char	*vpastwh();
+u_char	*vskipwh();
 int	put();
 int	putreg();
 int	YANKreg();
@@ -424,7 +445,7 @@ int	yank();
  * C doesn't have a (void) cast, so we have to fake it for lint's sake.
  */
 #ifdef lint
-#	define	ignore(a)	Ignore((char *) (a))
+#	define	ignore(a)	Ignore((u_char *) (a))
 #	define	ignorf(a)	Ignorf((int (*) ()) (a))
 #else
 #	define	ignore(a)	a

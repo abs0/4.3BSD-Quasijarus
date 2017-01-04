@@ -3,11 +3,12 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)prf.c	7.6 (Berkeley) 8/27/88
+ *	@(#)prf.c	7.7 (Berkeley) 2/7/04
  */
 
 #include "param.h"
 
+#include "../vax/cpu.h"
 #include "../vax/mtpr.h"
 #include "../vax/cons.h"
 
@@ -114,17 +115,27 @@ number:
 putchar(c)
 	register c;
 {
-	register s, timo;
-#if VAX630 || VAX650
-	extern (*v_putc)();
+	extern int cpu;
 
-	if (v_putc) {
-		(*v_putc)(c);
-		if (c == '\n')
-			(*v_putc)('\r');
-		return;
-	}
+	if (c == '\n')
+		putchar('\r');
+	switch (cpu) {
+#if VAX630 || VAX650
+	case VAX_630:
+	case VAX_650:
+		c6xxputc(c);
+		break;
 #endif
+	default:
+		_putchar(c);
+	}
+}
+
+_putchar(c)
+	register c;
+{
+	register s, timo;
+
 	timo = 30000;
 	/*
 	 * Try waiting for the console tty to come ready,
@@ -138,31 +149,38 @@ putchar(c)
 	s = mfpr(TXCS);
 	mtpr(TXCS,0);
 	mtpr(TXDB, c&0xff);
-	if(c == '\n')
-		putchar('\r');
-	putchar(0);
+	_putchar(0);
 	mtpr(TXCS, s);
 }
 
 getchar()
 {
 	register c;
-#if VAX630 || VAX650
-	extern (*v_getc)();
+	extern int cpu;
 
-	if (v_getc) {
-		c = (*v_getc)();
-	} else {
-#endif
-	while((mfpr(RXCS)&RXCS_DONE) == 0)
-		;
-	c = mfpr(RXDB)&0177;
+	switch (cpu) {
 #if VAX630 || VAX650
-	}
+	case VAX_630:
+	case VAX_650:
+		c = c6xxgetc(c);
+		break;
 #endif
+	default:
+		c = _getchar();
+	}
 	if (c=='\r')
 		c = '\n';
 	if (c != '\b' && c != '\177')
 		putchar(c);
+	return(c);
+}
+
+_getchar()
+{
+	register c;
+
+	while((mfpr(RXCS)&RXCS_DONE) == 0)
+		;
+	c = mfpr(RXDB)&0177;
 	return(c);
 }

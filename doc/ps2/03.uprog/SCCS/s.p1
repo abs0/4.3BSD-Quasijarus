@@ -1,0 +1,69 @@
+h37888
+s 00000/00000/00050
+d D 6.1 86/04/25 02:20:28 cuccia 3 2
+c Mark Seiden edits for 4.3BSD release
+e
+s 00000/00000/00050
+d D 5.1 86/04/25 02:20:21 cuccia 2 1
+c document distributed with 4.2BSD
+e
+s 00050/00000/00000
+d D 4.1 86/04/25 02:20:15 cuccia 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.if n .ls 2
+.if t .tr |\(or
+.NH
+INTRODUCTION
+.PP
+This paper describes how to write
+programs 
+that interface with the
+.UC UNIX
+operating system in a non-trivial way.
+This includes programs that use files by name,
+that use pipes,
+that invoke other commands as they run,
+or that attempt to catch interrupts and other signals
+during execution.
+.PP
+The document collects material which is scattered
+throughout several sections of
+.I
+The
+.UC UNIX
+Programmer's Manual
+.R
+[1]
+for Version 7
+.UC UNIX .
+There is no attempt to be complete;
+only generally useful material is dealt with.
+It is assumed that you will be programming in C,
+so you must be able to read the language
+roughly up to the level of
+.I
+The C Programming Language
+.R
+[2].
+Some of the material in sections 2 through 4
+is based on
+topics covered more carefully there.
+You should also be familiar with
+.UC UNIX
+itself
+at least
+to the level of
+.I
+.UC UNIX
+for Beginners
+.R
+[3].
+E 1

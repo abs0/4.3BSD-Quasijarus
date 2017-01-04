@@ -14,12 +14,12 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.7 (Berkeley) 7/13/99
+#	@(#)Makefile	5.11 (Berkeley) 4/16/11
 #
-CFLAGS=	-O
+CFLAGS=	-O -DGZCOMPAT
 LIBC=	/lib/libc.a
-SRCS=	ftpd.c ftpcmd.c glob.c
-OBJS=	ftpd.o ftpcmd.o glob.o
+SRCS=	ftpd.c ftpcmd.c glob.c ls.c eps.c specialguests.c
+OBJS=	ftpd.o ftpcmd.o glob.o ls.o eps.o specialguests.o
 
 all: ftpd
 
@@ -58,16 +58,27 @@ ftpd.o: /usr/include/arpa/telnet.h /usr/include/stdio.h /usr/include/signal.h
 ftpd.o: /usr/include/pwd.h /usr/include/setjmp.h /usr/include/netdb.h
 ftpd.o: /usr/include/errno.h /usr/include/strings.h /usr/include/syslog.h
 ftpd.o: /usr/include/utmp.h
-ftpcmd.o: ftpcmd.c /usr/include/sys/types.h /usr/include/sys/socket.h
-ftpcmd.o: /usr/include/netinet/in.h /usr/include/arpa/ftp.h
-ftpcmd.o: /usr/include/stdio.h /usr/include/signal.h
-ftpcmd.o: /usr/include/machine/trap.h /usr/include/ctype.h /usr/include/pwd.h
-ftpcmd.o: /usr/include/setjmp.h /usr/include/syslog.h
+ftpcmd.o: ftpcmd.c /usr/include/sys/types.h /usr/include/sys/stat.h
+ftpcmd.o: /usr/include/sys/socket.h /usr/include/netinet/in.h
+ftpcmd.o: /usr/include/arpa/ftp.h /usr/include/stdio.h /usr/include/signal.h
+ftpcmd.o: /usr/include/machine/trap.h /usr/include/errno.h /usr/include/ctype.h
+ftpcmd.o: /usr/include/pwd.h /usr/include/setjmp.h /usr/include/syslog.h
 ftpcmd.o: /usr/include/arpa/telnet.h
 glob.o: glob.c /usr/include/sys/param.h /usr/include/sys/types.h
 glob.o: /usr/include/signal.h /usr/include/machine/trap.h
 glob.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-glob.o: /usr/include/sys/stat.h /usr/include/sys/dir.h /usr/include/stdio.h
-glob.o: /usr/include/errno.h /usr/include/pwd.h
+glob.o: /usr/include/sys/dir.h /usr/include/stdio.h
+ls.o: ls.c /usr/include/sys/param.h /usr/include/sys/types.h
+ls.o: /usr/include/signal.h /usr/include/machine/trap.h
+ls.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+ls.o: /usr/include/sys/stat.h /usr/include/sys/dir.h /usr/include/stdio.h
+ls.o: /usr/include/pwd.h /usr/include/grp.h /usr/include/utmp.h
+eps.o: eps.c /usr/include/sys/param.h /usr/include/sys/types.h
+eps.o: /usr/include/signal.h /usr/include/machine/trap.h
+eps.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
+eps.o: /usr/include/ctype.h /usr/include/stdio.h /usr/include/strings.h
+eps.o: /usr/include/pwd.h
+specialguests.o: specialguests.c /usr/include/stdio.h /usr/include/ctype.h
+specialguests.o: /usr/include/strings.h
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

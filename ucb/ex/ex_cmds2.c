@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_cmds2.c	7.6 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_cmds2.c	7.7 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -73,10 +73,10 @@ eol()
 /*VARARGS2*/
 error(str, i)
 #ifndef EXSTRINGS
-	char *str;
+	u_char *str;
 #else
 # ifdef lint
-	char *str;
+	u_char *str;
 # else
 	int str;
 # endif
@@ -165,7 +165,7 @@ error0()
  * finish state reset, and throw to top.
  */
 error1(str)
-	char *str;
+	u_char *str;
 {
 	bool die;
 
@@ -366,11 +366,11 @@ resetflav()
  */
 serror(str, cp)
 #ifdef lint
-	register char *str;
+	register u_char *str;
 #else
 	register int str;
 #endif
-	char *cp;
+	u_char *cp;
 {
 
 	error0();
@@ -410,7 +410,7 @@ skipend()
 tailspec(c)
 	int c;
 {
-	static char foocmd[2];
+	static u_char foocmd[2];
 
 	foocmd[0] = c;
 	Command = foocmd;
@@ -421,27 +421,27 @@ tailspec(c)
  * If alphabetics follow, then this is not the command we seek.
  */
 tail(comm)
-	char *comm;
+	u_char *comm;
 {
 
 	tailprim(comm, 1, 0);
 }
 
 tail2of(comm)
-	char *comm;
+	u_char *comm;
 {
 
 	tailprim(comm, 2, 0);
 }
 
-char	tcommand[20];
+u_char	tcommand[20];
 
 tailprim(comm, i, notinvis)
-	register char *comm;
+	register u_char *comm;
 	int i;
 	bool notinvis;
 {
-	register char *cp;
+	register u_char *cp;
 	register int c;
 
 	Command = comm;

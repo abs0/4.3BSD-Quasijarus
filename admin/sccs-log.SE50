@@ -1,0 +1,1790 @@
+/usr/src/etc/ftpd/SCCS/s.Makefile:
+5.11 11/04/16 00:35:54 msokolov 14 13
+added support for multiple guest accounts
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.17 11/04/16 00:35:55 msokolov 30 29
+added support for multiple guest accounts
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.24 11/04/16 00:35:58 msokolov 62 61
+added support for multiple guest accounts
+/usr/src/ucb/vtools/SCCS/s.vfontinfo.c:
+5.2 11/07/04 18:22:06 msokolov 6 5
+bugfix: skipping horizontal pixels in the default zoom mode
+/usr/src/etc/msdns/SCCS/s.class.c:
+1.2 11/07/11 16:42:40 msokolov 2 1
+catch class redefinition, don't bother trying to catch no classes
+/usr/src/etc/msdns/SCCS/s.masterconf.c:
+1.2 11/07/11 16:43:03 msokolov 2 1
+a little debug aid
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.zonexfer.c:
+5.2 11/07/12 19:07:04 msokolov 2 1
+converted to binary format
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.Makefile:
+1.2 11/07/12 19:12:33 msokolov 2 1
+this Makefile looks production-ready
+/usr/src/include/SCCS/s.Makefile:
+5.23 11/07/13 03:31:48 msokolov 38 37
+calendardefs.h and ctslcal.h added
+/usr/src/usr.lib/SCCS/s.Makefile:
+5.18 11/07/13 03:45:45 msokolov 31 30
+libctsl added to SUBDIR
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.ctime.c:
+4.4 2011/07/13 06:22:32 msokolov 4 3
+test edit
+/usr/src/usr.bin/sccscmds/com/SCCS/s.date_ab.c:
+4.7 2011/07/13 06:33:49 msokolov 7 6
+finally switched to 4-digit years
+/usr/src/usr.bin/sccscmds/com/SCCS/s.date_ba.c:
+5.3 2011/07/13 06:33:50 msokolov 3 2
+finally switched to 4-digit years
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.makefile:
+4.8 2011/07/13 06:36:20 msokolov 8 7
+the new date_ab() implementation uses libctsl
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.get.c:
+4.11 2011/07/13 06:37:48 msokolov 12 11
+date keyword handling adjusted for 4-digit years
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.2 2011/07/13 16:02:36 msokolov 2 1
+work in progress
+/usr/src/usr.etc/msdns/SCCS/s.paths.c:
+1.2 2011/07/13 16:07:23 msokolov 2 1
+binary zone files adopted
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.3 2011/07/13 19:23:12 msokolov 3 2
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.3 2011/07/13 19:23:14 msokolov 3 2
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.class.h:
+1.2 2011/07/13 19:23:15 msokolov 2 1
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.defs.h:
+1.2 2011/07/13 19:23:16 msokolov 2 1
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.2 2011/07/13 19:23:17 msokolov 2 1
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.2 2011/07/13 19:23:18 msokolov 2 1
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.3 2011/07/13 19:23:19 msokolov 3 2
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.2 2011/07/13 19:23:20 msokolov 2 1
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.2 2011/07/13 19:23:21 msokolov 2 1
+we now read the class def file, although don't do anything with it yet
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.4 2011/07/13 20:30:57 msokolov 4 3
+parsing of zone lines implemented
+/usr/src/usr.etc/msdns/SCCS/s.dname.c:
+1.2 2011/07/13 22:06:17 msokolov 2 1
+ASCII parsing and dname comparison implemented
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.3 2011/07/13 23:13:06 msokolov 3 2
+started zone management implementation
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.4 2011/07/13 23:13:48 msokolov 4 3
+label.c and zonemgmt.c added
+/usr/src/usr.etc/msdns/SCCS/s.dname.c:
+1.3 2011/07/13 23:45:01 msokolov 3 2
+parse_ascii_dname: big oops
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.5 2011/07/13 23:45:44 msokolov 5 4
+preparations for zone file reading
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.3 2011/07/13 23:45:45 msokolov 3 2
+preparations for zone file reading
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.3 2011/07/13 23:45:46 msokolov 3 2
+preparations for zone file reading
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.2 2011/07/13 23:45:47 msokolov 2 1
+preparations for zone file reading
+/usr/src/usr.etc/msdns/SCCS/s.label.c:
+1.2 2011/07/14 00:26:29 msokolov 2 1
+store_label_in_node: support root as well
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.2 2011/07/14 02:03:51 msokolov 2 1
+children substructure split out
+/usr/src/include/arpa/SCCS/s.nameser.h:
+5.21 2011/07/14 03:23:52 msokolov 26 25
+struct rrfixed added
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.zonecomp.c:
+1.2 2011/07/14 03:26:43 msokolov 2 1
+struct rrfixed moved to <arpa/nameser.h>
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.zonedump.c:
+1.2 2011/07/14 03:26:45 msokolov 2 1
+struct rrfixed moved to <arpa/nameser.h>
+/usr/src/usr.etc/msdns/SCCS/s.rr.h:
+1.2 2011/07/14 04:23:13 msokolov 2 1
+reworking structures for zone loading
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.3 2011/07/14 04:23:14 msokolov 3 2
+reworking structures for zone loading
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.4 2011/07/14 04:23:15 msokolov 4 3
+reworking structures for zone loading
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.4 2011/07/14 07:03:11 msokolov 4 3
+node_findchild()/node_addchild() magic implemented
+/usr/src/usr.etc/msdns/SCCS/s.label.c:
+1.3 2011/07/14 07:03:12 msokolov 3 2
+node_findchild()/node_addchild() magic implemented
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.2 2011/07/14 07:03:13 msokolov 2 1
+node_findchild()/node_addchild() magic implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.5 2011/07/14 07:29:36 msokolov 5 4
+treenode.c and zoneload.c added
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.3 2011/07/14 07:42:36 msokolov 3 2
+a few fixes
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.6 2011/07/14 22:51:45 msokolov 6 5
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.6 2011/07/14 22:51:46 msokolov 6 5
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.class.h:
+1.3 2011/07/14 22:51:48 msokolov 3 2
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.defs.h:
+1.3 2011/07/14 22:51:49 msokolov 3 2
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.4 2011/07/14 22:51:50 msokolov 4 3
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.4 2011/07/14 22:51:51 msokolov 4 3
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.main.c:
+1.2 2011/07/14 22:51:52 msokolov 2 1
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.4 2011/07/14 22:51:53 msokolov 4 3
+daemonization better thought through
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.2 2011/07/15 07:39:44 msokolov 2 1
+detect and mark wildcard nodes
+/usr/src/usr.etc/msdns/SCCS/s.dname.c:
+1.4 2011/07/15 07:41:33 msokolov 4 3
+extract_dname_from_msg() and dname_copy_discontig() implemented
+/usr/src/usr.etc/msdns/SCCS/s.rr.h:
+1.3 2011/07/15 08:55:37 msokolov 3 2
+more thought
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.5 2011/07/15 19:21:32 msokolov 5 4
+current_time added
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.5 2011/07/15 19:21:33 msokolov 5 4
+current_time added
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.3 2011/07/15 19:21:34 msokolov 3 2
+current_time added
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.7 2011/07/15 19:21:50 msokolov 7 6
+attachrr.c added
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.3 2011/07/15 20:11:19 msokolov 3 2
+non-SOA RR handling implemented
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.4 2011/07/15 20:54:16 msokolov 4 3
+SOA parsing implemented
+/usr/src/usr.etc/msdns/SCCS/s.rr.h:
+1.4 2011/07/15 21:47:39 msokolov 4 3
+don't use struct in_addr to avoid dependency on <netinet/in.h>
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.3 2011/07/15 21:48:07 msokolov 3 2
+free_subtree() implemented
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.5 2011/07/15 23:51:43 msokolov 5 4
+#include <stdio.h> internally, flag change
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.8 2011/07/15 23:53:12 msokolov 8 7
+zoneinst.c added
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.4 2011/07/15 23:53:13 msokolov 4 3
+zoneinst.c added
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.6 2011/07/16 01:18:44 msokolov 6 5
+zone loading code complete
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.5 2011/07/16 01:18:45 msokolov 5 4
+zone loading code complete
+/usr/src/usr.etc/msdns/SCCS/s.zoneinst.c:
+1.2 2011/07/16 01:18:47 msokolov 2 1
+zone loading code complete
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.4 2011/07/16 01:20:54 msokolov 4 3
+zone_fileread_find() hooked in
+/usr/src/usr.etc/msdns/SCCS/s.zoneinst.c:
+1.3 2011/07/16 02:12:11 msokolov 3 2
+correctly go down zonech path as well
+/usr/src/usr.etc/msdns/SCCS/s.main.c:
+1.3 2011/07/16 02:14:19 msokolov 3 2
+LOG_PID
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.9 2011/07/16 03:43:29 msokolov 9 8
+ctlsocket mechanism implemented
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.5 2011/07/16 03:43:30 msokolov 5 4
+ctlsocket mechanism implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.10 2011/07/16 06:08:15 msokolov 10 9
+msdnsctl written
+/usr/src/usr.etc/msdns/SCCS/s.defs.h:
+1.4 2011/07/16 06:08:16 msokolov 4 3
+msdnsctl written
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.2 2011/07/16 06:08:17 msokolov 2 1
+msdnsctl written
+/usr/src/usr.etc/msdns/SCCS/s.msdnsctl.c:
+1.2 2011/07/16 06:14:17 msokolov 2 1
+newline on EOF
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.3 2011/07/16 23:40:42 msokolov 3 2
+duplicate ctlsocket line detection
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.5 2011/07/17 00:38:19 msokolov 5 4
+label case handling rethought slightly
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.7 2011/07/17 00:38:20 msokolov 7 6
+label case handling rethought slightly
+/usr/src/usr.etc/msdns/SCCS/s.label.c:
+1.4 2011/07/17 00:38:21 msokolov 4 3
+label case handling rethought slightly
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.5 2011/07/17 00:38:23 msokolov 5 4
+label case handling rethought slightly
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.4 2011/07/17 00:38:24 msokolov 4 3
+label case handling rethought slightly
+/usr/src/usr.etc/msdns/SCCS/s.dname.c:
+1.5 2011/07/18 00:21:45 msokolov 5 4
+label and dname printing functions
+/usr/src/usr.etc/msdns/SCCS/s.label.c:
+1.5 2011/07/18 00:21:47 msokolov 5 4
+label and dname printing functions
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.6 2011/07/18 00:22:49 msokolov 6 5
+further optimization and tree walking support
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.6 2011/07/18 00:22:51 msokolov 6 5
+further optimization and tree walking support
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.11 2011/07/18 01:05:01 msokolov 11 10
+tree-dump command implemented
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.4 2011/07/18 01:05:02 msokolov 4 3
+tree-dump command implemented
+/usr/src/usr.etc/msdns/SCCS/s.treedump.c:
+1.2 2011/07/18 03:03:20 msokolov 2 1
+RR dump implemented
+/usr/src/usr.etc/msdns/SCCS/s.treedump.c:
+1.3 2011/07/18 03:12:34 msokolov 3 2
+little buglet
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.6 2011/07/18 05:15:49 msokolov 6 5
+timesched mechanism implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.6 2011/07/18 05:15:49 msokolov 6 5
+timesched mechanism implemented
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.5 2011/07/18 05:15:50 msokolov 5 4
+timesched mechanism implemented
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.h:
+1.2 2011/07/18 05:15:51 msokolov 2 1
+timesched mechanism implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.12 2011/07/18 05:54:10 msokolov 12 11
+basic refresh logic implemented
+/usr/src/usr.etc/msdns/SCCS/s.defs.h:
+1.5 2011/07/18 05:54:11 msokolov 5 4
+basic refresh logic implemented
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.8 2011/07/18 05:54:12 msokolov 8 7
+basic refresh logic implemented
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.5 2011/07/18 05:54:13 msokolov 5 4
+basic refresh logic implemented
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.6 2011/07/18 05:54:14 msokolov 6 5
+basic refresh logic implemented
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.7 2011/07/19 19:02:41 msokolov 7 6
+reattach_lower_zones() split off from free_subtree()
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.7 2011/07/19 19:02:42 msokolov 7 6
+reattach_lower_zones() split off from free_subtree()
+/usr/src/usr.etc/msdns/SCCS/s.zoneinst.c:
+1.4 2011/07/19 19:02:43 msokolov 4 3
+reattach_lower_zones() split off from free_subtree()
+/usr/src/usr.etc/msdns/SCCS/s.defs.h:
+1.6 2011/07/20 06:23:39 msokolov 6 5
+query processing defs added
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.13 2011/07/20 06:23:51 msokolov 13 12
+queryutil.c added
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.2 2011/08/13 19:14:59 msokolov 2 1
+simple bug
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.3 2011/09/07 06:33:09 msokolov 3 2
+query_response_byteswap_counts() function added
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.2 2011/09/07 06:34:00 msokolov 2 1
+q_hdr member is redundant as it is always a direct cast of q_msg
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.2 2011/09/07 06:35:27 msokolov 2 1
+minor fixes from weeks ago
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.7 2011/09/07 07:00:07 msokolov 7 6
+echo-question setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.7 2011/09/07 07:00:08 msokolov 7 6
+echo-question setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.6 2011/09/07 07:00:09 msokolov 6 5
+echo-question setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.14 2011/09/07 18:47:39 msokolov 14 13
+queryinit.c and udpserv.c added
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.3 2011/09/07 18:52:50 msokolov 3 2
+handle_query_initial() hooked up
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.9 2011/09/08 01:27:53 msokolov 9 8
+z_catnode: unused member deleted
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.15 2011/09/12 04:25:59 msokolov 15 14
+NS record handling revamped into RRset model
+/usr/src/usr.etc/msdns/SCCS/s.rr.h:
+1.5 2011/09/12 04:26:01 msokolov 5 4
+NS record handling revamped into RRset model
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.7 2011/09/12 04:26:02 msokolov 7 6
+NS record handling revamped into RRset model
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.8 2011/09/12 04:26:03 msokolov 8 7
+NS record handling revamped into RRset model
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.8 2011/09/12 04:26:04 msokolov 8 7
+NS record handling revamped into RRset model
+/usr/src/usr.etc/msdns/SCCS/s.attachrr.c:
+1.2 2011/09/12 04:26:06 msokolov 2 1
+NS record handling revamped into RRset model
+/usr/src/usr.etc/msdns/SCCS/s.treedump.c:
+1.4 2011/09/12 05:10:26 msokolov 4 3
+added dump of new NS RRsets
+/usr/src/usr.etc/msdns/SCCS/s.nsrec.h:
+1.2 2011/09/12 06:11:52 msokolov 2 1
+need pointer to class in struct ns_anchor
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.16 2011/09/12 06:13:41 msokolov 16 15
+nsanchor.c started
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.8 2011/09/12 06:13:42 msokolov 8 7
+nsanchor.c started
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.8 2011/09/12 06:13:43 msokolov 8 7
+nsanchor.c started
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.7 2011/09/12 06:20:30 msokolov 7 6
+NS-anchor directive implemented
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.9 2011/09/13 00:30:57 msokolov 9 8
+free_rrchain() and free_ns_rrset() exported
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.2 2011/09/13 00:31:59 msokolov 2 1
+file reading: parsing implemented, action not yet
+/usr/src/sys/net/SCCS/s.if_ppplcp.c:
+7.8 2011/10/09 04:45:57 msokolov 8 7
+bug in Echo-Request handling would crash the kernel
+/usr/src/sys/sys/SCCS/s.kern_clock.c:
+7.3 2011/10/09 08:53:52 msokolov 99 98
+adjtime: more thoughtful slew rate selection logic
+/usr/src/sys/sys/SCCS/s.kern_time.c:
+7.6 2011/10/09 08:53:54 msokolov 32 31
+adjtime: more thoughtful slew rate selection logic
+/usr/src/sys/vax/emul/SCCS/s.emul_opspec.h:
+7.3 2011/10/17 04:08:48 msokolov 3 2
+a couple of bugs fixed, extended to support G and H
+/usr/src/sys/vax/emul/SCCS/s.emul_opspec.s:
+7.3 2011/10/17 04:08:49 msokolov 3 2
+a couple of bugs fixed, extended to support G and H
+/usr/src/lib/mip/SCCS/s.pftn.c:
+1.28 2011/10/19 05:44:52 msokolov 29 28
+long long support begins with syntax parsing
+/usr/src/usr.etc/msdns/SCCS/s.defs.h:
+1.7 2011/10/28 04:27:08 msokolov 7 6
+NS-anchor installation fully implemented
+/usr/src/usr.etc/msdns/SCCS/s.nsrec.h:
+1.3 2011/10/28 04:27:09 msokolov 3 2
+NS-anchor installation fully implemented
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.3 2011/10/28 04:27:10 msokolov 3 2
+NS-anchor installation fully implemented
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.10 2011/10/28 04:43:15 msokolov 10 9
+NS-anchor deletion handling
+/usr/src/usr.etc/msdns/SCCS/s.zoneinst.c:
+1.5 2011/10/28 04:43:16 msokolov 5 4
+NS-anchor deletion handling
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.6 2011/10/28 04:45:56 msokolov 6 5
+NS-anchor fileread hooked in
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.4 2011/10/28 05:59:18 msokolov 4 3
+fix core-dumping buglet
+/usr/src/usr.etc/msdns/SCCS/s.label.c:
+1.6 2011/10/29 05:41:43 msokolov 6 5
+label_match_casesen() added, used for compression trees
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.3 2011/10/29 05:42:31 msokolov 3 2
+coming along
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.9 2011/10/29 05:43:06 msokolov 9 8
+query queues added
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.9 2011/10/29 05:43:07 msokolov 9 8
+query queues added
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.4 2011/10/29 05:46:04 msokolov 4 3
+query queue operations added
+/usr/src/usr.etc/msdns/SCCS/s.respwriter.c:
+1.2 2011/10/29 07:48:13 msokolov 2 1
+RR output implemented
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.4 2011/10/29 10:00:22 msokolov 4 3
+a couple of small additions
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.17 2011/10/29 10:07:58 msokolov 17 16
+querystage.c and respwriter.c added
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.5 2011/10/29 18:37:59 msokolov 5 4
+release_query_noa_subtrees() function added
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.2 2011/10/29 19:19:31 msokolov 2 1
+qstage_handle_cname() factored out
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.3 2011/10/29 20:39:16 msokolov 3 2
+cached RR expiration implemented
+/usr/src/usr.etc/msdns/SCCS/s.dname.c:
+1.6 2011/10/29 21:22:53 msokolov 6 5
+dname_of_node() and dname_in_bailiwick() functions added
+/usr/src/usr.etc/msdns/SCCS/s.attachrr.c:
+1.3 2011/10/29 21:33:40 msokolov 3 2
+NS RR flags slight reform
+/usr/src/usr.etc/msdns/SCCS/s.nsrec.h:
+1.4 2011/10/29 21:33:41 msokolov 4 3
+NS RR flags slight reform
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.18 2011/10/29 21:35:12 msokolov 18 17
+dname.c depends on tree.h now
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.4 2011/10/29 22:01:48 msokolov 4 3
+catch those cached referrals that have gone unusable but not expired
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.10 2011/10/30 01:16:45 msokolov 10 9
+query processing shaping up
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.10 2011/10/30 01:16:47 msokolov 10 9
+query processing shaping up
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.4 2011/10/30 01:16:48 msokolov 4 3
+query processing shaping up
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.5 2011/10/30 01:16:49 msokolov 5 4
+query processing shaping up
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.6 2011/10/30 01:16:50 msokolov 6 5
+query processing shaping up
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.2 2011/10/30 01:16:51 msokolov 2 1
+query processing shaping up
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.5 2011/10/30 01:16:53 msokolov 5 4
+query processing shaping up
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.5 2011/10/30 01:22:30 msokolov 5 4
+oops
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.19 2011/10/30 02:24:27 msokolov 19 18
+querytrace.c added
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.5 2011/10/30 02:28:51 msokolov 5 4
+query trace hooked in
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.3 2011/10/30 02:28:53 msokolov 3 2
+query trace hooked in
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.6 2011/10/30 07:41:18 msokolov 6 5
+trace implemented
+/usr/src/usr.etc/msdns/SCCS/s.util.c:
+1.2 2011/10/30 19:38:22 msokolov 2 1
+is_string_numeric() vanity function added just in case
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.6 2011/10/30 19:38:48 msokolov 6 5
+buglet
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.7 2011/10/30 19:40:02 msokolov 7 6
+udpserv is now live
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.6 2011/10/30 19:40:03 msokolov 6 5
+udpserv is now live
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.20 2011/10/30 20:13:25 msokolov 20 19
+query queue dispatch
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.7 2011/10/30 20:13:26 msokolov 7 6
+query queue dispatch
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.7 2011/10/30 21:06:44 msokolov 7 6
+set the socket to non-blocking just in case
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.8 2011/10/31 07:18:48 msokolov 8 7
+n_zonehead and n_nextinzone implemented
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.10 2011/10/31 07:18:50 msokolov 10 9
+n_zonehead and n_nextinzone implemented
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.9 2011/10/31 07:18:51 msokolov 9 8
+n_zonehead and n_nextinzone implemented
+/usr/src/usr.etc/msdns/SCCS/s.respwriter.c:
+1.3 2011/10/31 08:44:02 msokolov 3 2
+minimum TTL logic added
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.7 2011/10/31 08:44:53 msokolov 7 6
+minimum TTL, AXFR and other logic fixes
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.10 2011/10/31 17:42:56 msokolov 10 9
+suppress wildcard NS
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.8 2011/11/01 02:27:56 msokolov 8 7
+tcp-acl and udp-acl implemented
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.6 2011/11/01 02:40:17 msokolov 6 5
+udpserv ACL implemented
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.8 2011/11/01 02:40:18 msokolov 8 7
+udpserv ACL implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.21 2011/11/01 03:31:28 msokolov 21 20
+updated dependencies
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.11 2011/11/01 03:32:18 msokolov 11 10
+compress-case-preserve setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.11 2011/11/01 03:32:19 msokolov 11 10
+compress-case-preserve setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.9 2011/11/01 03:32:20 msokolov 9 8
+compress-case-preserve setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.7 2011/11/01 03:32:22 msokolov 7 6
+compress-case-preserve setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.4 2011/11/01 03:32:23 msokolov 4 3
+compress-case-preserve setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.7 2011/11/01 03:58:12 msokolov 7 6
+brown paper bag
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.22 2011/11/01 05:53:23 msokolov 22 21
+dname_of_node() split from dname.c into its own compilation unit
+/usr/src/usr.etc/msdns/SCCS/s.dname.c:
+1.7 2011/11/01 05:53:25 msokolov 7 6
+dname_of_node() split from dname.c into its own compilation unit
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.8 2011/11/01 05:54:42 msokolov 8 7
+safer and more sensible handling of RR owner names
+/usr/src/usr.etc/msdns/SCCS/s.respwriter.c:
+1.4 2011/11/01 05:54:43 msokolov 4 3
+safer and more sensible handling of RR owner names
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.9 2011/11/01 08:00:48 msokolov 9 8
+NOA concept rethought
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.8 2011/11/01 08:00:49 msokolov 8 7
+NOA concept rethought
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.8 2011/11/01 08:00:50 msokolov 8 7
+NOA concept rethought
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.9 2011/11/01 08:00:51 msokolov 9 8
+NOA concept rethought
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.10 2011/11/01 08:59:40 msokolov 10 9
+implemented A additional data return for referrals
+/usr/src/usr.etc/msdns/SCCS/s.respwriter.c:
+1.5 2011/11/01 08:59:42 msokolov 5 4
+implemented A additional data return for referrals
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.10 2011/11/01 21:11:11 msokolov 10 9
+don't bother setting q_socket
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.12 2011/11/01 22:00:13 msokolov 12 11
+num_outbound_udp_sockets added
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.12 2011/11/01 22:00:14 msokolov 12 11
+num_outbound_udp_sockets added
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.23 2011/11/01 22:00:52 msokolov 23 22
+udpout.c added
+/usr/src/usr.etc/msdns/SCCS/s.udpout.c:
+1.2 2011/11/01 23:29:02 msokolov 2 1
+setup_udpout() implemented
+/usr/src/usr.etc/msdns/SCCS/s.udpout.h:
+1.2 2011/11/01 23:31:19 msokolov 2 1
+uo_userinfo field added
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.10 2011/11/01 23:40:01 msokolov 10 9
+outbound-sockets implemented
+/usr/src/usr.etc/msdns/SCCS/s.udpout.h:
+1.3 2011/11/02 01:20:20 msokolov 3 2
+query length fields added
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.8 2011/11/02 01:25:59 msokolov 8 7
+more careful handling of serialized activities
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.11 2011/11/02 02:02:09 msokolov 11 10
+proper handling of multiple local IP addresses in udpserv
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.11 2011/11/02 02:02:11 msokolov 11 10
+proper handling of multiple local IP addresses in udpserv
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.12 2011/11/02 06:55:10 msokolov 12 11
+query trace adapted for nested queries
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.9 2011/11/02 06:55:11 msokolov 9 8
+query trace adapted for nested queries
+/usr/src/usr.etc/msdns/SCCS/s.querytrace.c:
+1.2 2011/11/02 06:55:12 msokolov 2 1
+query trace adapted for nested queries
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.10 2011/11/05 10:06:42 msokolov 10 9
+no need for a per-stage answer pointer
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.11 2011/11/05 10:06:43 msokolov 11 10
+no need for a per-stage answer pointer
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.11 2011/11/05 10:50:02 msokolov 11 10
+q_nest_depth added
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.5 2011/11/05 10:50:03 msokolov 5 4
+q_nest_depth added
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.13 2011/11/05 11:05:30 msokolov 13 12
+max-nested-queries setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.13 2011/11/05 11:05:32 msokolov 13 12
+max-nested-queries setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.2 2011/11/05 11:05:32 msokolov 2 1
+max-nested-queries setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.12 2011/11/05 11:05:33 msokolov 12 11
+max-nested-queries setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.24 2011/11/07 19:55:35 msokolov 24 23
+intquery.c and msgparse.c added
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.3 2011/11/11 06:01:46 msokolov 3 2
+intquery_extract_A_answer() implemented
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.12 2011/11/11 09:01:29 msokolov 12 11
+new fields for the askforns service
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.25 2011/11/11 09:01:49 msokolov 25 24
+askforns.c added
+/usr/src/usr.etc/msdns/SCCS/s.attachrr.c:
+1.4 2011/11/11 18:49:01 msokolov 4 3
+ns_roundrobin member added
+/usr/src/usr.etc/msdns/SCCS/s.nsrec.h:
+1.5 2011/11/11 18:49:03 msokolov 5 4
+ns_roundrobin member added
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.13 2011/11/11 20:55:17 msokolov 13 12
+#include <machine/endian.h> for hton[ls] and ntoh[ls]
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.9 2011/11/11 20:55:19 msokolov 9 8
+#include <machine/endian.h> for hton[ls] and ntoh[ls]
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.11 2011/11/11 20:55:20 msokolov 11 10
+#include <machine/endian.h> for hton[ls] and ntoh[ls]
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.6 2011/11/11 20:55:21 msokolov 6 5
+#include <machine/endian.h> for hton[ls] and ntoh[ls]
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.2 2011/11/11 20:55:23 msokolov 2 1
+#include <machine/endian.h> for hton[ls] and ntoh[ls]
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.4 2011/11/11 21:04:48 msokolov 4 3
+intquery_extract_A_answer: return TTL as well
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.3 2011/11/11 21:30:35 msokolov 3 2
+question echo and TC checks implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.14 2011/11/11 23:10:03 msokolov 14 13
+askforns timeout/retries tuning global variables added
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.14 2011/11/11 23:10:04 msokolov 14 13
+askforns timeout/retries tuning global variables added
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.4 2011/11/11 23:10:45 msokolov 4 3
+fleshing out
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.5 2011/11/12 06:08:46 msokolov 5 4
+askforns done except for the subquery completion function
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.5 2011/11/12 06:08:48 msokolov 5 4
+askforns done except for the subquery completion function
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.6 2011/11/12 18:46:02 msokolov 6 5
+askforns_subquery_complete implemented
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.6 2011/11/12 18:57:32 msokolov 6 5
+intquery_extract_A_answer: some work moved to the caller
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.15 2011/11/12 19:16:05 msokolov 15 14
+askforns retries logic better thought through
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.15 2011/11/12 19:16:06 msokolov 15 14
+askforns retries logic better thought through
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.13 2011/11/12 19:16:07 msokolov 13 12
+askforns retries logic better thought through
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.7 2011/11/12 19:16:08 msokolov 7 6
+askforns retries logic better thought through
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.26 2011/11/12 19:16:37 msokolov 26 25
+make depend update
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.12 2011/12/01 05:22:04 msokolov 12 11
+minimum TTL for NS records returned as referrals
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.13 2011/12/01 05:49:36 msokolov 13 12
+foreign-NS-* settings implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.16 2011/12/01 06:15:53 msokolov 16 15
+data structure changes in preparation for cache-created nodes
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.16 2011/12/01 06:15:54 msokolov 16 15
+data structure changes in preparation for cache-created nodes
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.9 2011/12/01 06:15:55 msokolov 9 8
+data structure changes in preparation for cache-created nodes
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.11 2011/12/01 06:15:56 msokolov 11 10
+data structure changes in preparation for cache-created nodes
+/usr/src/usr.etc/msdns/SCCS/s.zoneinst.c:
+1.6 2011/12/01 06:27:18 msokolov 6 5
+set n_unlinked flag
+/usr/src/usr.etc/msdns/SCCS/s.dname.c:
+1.8 2011/12/02 05:48:57 msokolov 8 7
+extract_dname_from_msg() moved from dname.c to msgparse.c
+/usr/src/usr.etc/msdns/SCCS/s.msgparse.c:
+1.2 2011/12/02 05:48:58 msokolov 2 1
+extract_dname_from_msg() moved from dname.c to msgparse.c
+/usr/src/usr.etc/msdns/SCCS/s.msgparse.c:
+1.3 2011/12/02 06:40:17 msokolov 3 2
+parse_incoming_rr() implemented
+/usr/src/usr.etc/msdns/SCCS/s.respwriter.c:
+1.6 2011/12/03 07:39:19 msokolov 6 5
+emit_parsedrr_into_msg() implemented
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.12 2011/12/04 03:18:11 msokolov 12 11
+attach_rr_to_node() converted to use struct parsedrr
+/usr/src/usr.etc/msdns/SCCS/s.attachrr.c:
+1.5 2011/12/04 03:18:13 msokolov 5 4
+attach_rr_to_node() converted to use struct parsedrr
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.17 2011/12/04 17:29:28 msokolov 17 16
+tunable settings for the caching mechanism
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.17 2011/12/04 17:29:29 msokolov 17 16
+tunable settings for the caching mechanism
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.27 2011/12/07 02:00:04 msokolov 27 26
+queryfor.c added, dependencies updated
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.2 2011/12/07 05:35:47 msokolov 2 1
+fsr_handle_auth() implemented
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.3 2011/12/07 06:42:52 msokolov 3 2
+fsr_extract_ns_addrs() written
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.13 2011/12/07 07:40:01 msokolov 13 12
+recursive query logic hooked in
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.4 2011/12/07 07:40:02 msokolov 4 3
+recursive query logic hooked in
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.8 2011/12/07 07:46:58 msokolov 8 7
+skip unusable glueless servers
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.14 2011/12/07 19:01:12 msokolov 14 13
+caching and TTL tunable settings
+/usr/src/usr.etc/msdns/SCCS/s.attachrr.c:
+1.6 2011/12/07 19:07:40 msokolov 6 5
+ttl-limit setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.7 2011/12/07 19:13:11 msokolov 7 6
+set RA
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.14 2011/12/07 20:00:41 msokolov 14 13
+preparations for the query wrap-up logic
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.8 2011/12/07 20:05:11 msokolov 8 7
+disallow back-pointers in QNAME
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.28 2011/12/07 21:06:01 msokolov 28 27
+querywrap.c added
+/usr/src/usr.etc/msdns/SCCS/s.udpserv.c:
+1.14 2011/12/07 21:08:09 msokolov 14 13
+final output hooked in
+/usr/src/usr.etc/msdns/SCCS/s.queryutil.c:
+1.10 2011/12/07 21:10:40 msokolov 10 9
+query_response_byteswap_counts() absorbed into query_response_wrapup()
+/usr/src/usr.etc/msdns/SCCS/s.querywrap.c:
+1.2 2011/12/07 21:31:53 msokolov 2 1
+set q_msglen
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.18 2011/12/07 23:14:21 msokolov 18 17
+fixed 'fromlen' bug in udpout.c
+created udpout-debug apparatus in the process of chasing after that bug
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.18 2011/12/07 23:14:22 msokolov 18 17
+fixed 'fromlen' bug in udpout.c
+created udpout-debug apparatus in the process of chasing after that bug
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.15 2011/12/07 23:14:23 msokolov 15 14
+fixed 'fromlen' bug in udpout.c
+created udpout-debug apparatus in the process of chasing after that bug
+/usr/src/usr.etc/msdns/SCCS/s.udpout.c:
+1.3 2011/12/07 23:14:24 msokolov 3 2
+fixed 'fromlen' bug in udpout.c
+created udpout-debug apparatus in the process of chasing after that bug
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.9 2011/12/07 23:14:25 msokolov 9 8
+fixed 'fromlen' bug in udpout.c
+created udpout-debug apparatus in the process of chasing after that bug
+/usr/src/usr.etc/msdns/SCCS/s.attachrr.c:
+1.7 2011/12/07 23:25:12 msokolov 7 6
+oops, need MIN, not MAX
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.10 2011/12/07 23:25:13 msokolov 10 9
+oops, need MIN, not MAX
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.5 2011/12/07 23:25:14 msokolov 5 4
+oops, need MIN, not MAX
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.9 2011/12/07 23:41:21 msokolov 9 8
+QCLASS and QTYPE were swapped
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.16 2011/12/08 00:32:00 msokolov 16 15
+reorg without massive code duplication, using generic functions
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.17 2011/12/08 00:50:28 msokolov 17 16
+uid setting implemented
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.18 2011/12/08 00:59:27 msokolov 18 17
+uid setting: check if we are root first
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.14 2011/12/08 01:39:52 msokolov 14 13
+guard against returning stale anchors/referrals to NS/* queries
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.6 2011/12/08 03:19:13 msokolov 6 5
+use the incoming RR owner capitalization for answer cache nodes
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.19 2011/12/08 05:15:34 msokolov 19 18
+configurable policy settings for caching/glue corner cases
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.19 2011/12/08 05:15:35 msokolov 19 18
+configurable policy settings for caching/glue corner cases
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.19 2011/12/08 05:15:36 msokolov 19 18
+configurable policy settings for caching/glue corner cases
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.15 2011/12/08 05:15:37 msokolov 15 14
+configurable policy settings for caching/glue corner cases
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.7 2011/12/08 08:09:44 msokolov 7 6
+AR section forwarding implemented
+/usr/src/usr.etc/msdns/SCCS/s.querywrap.c:
+1.3 2011/12/08 19:18:59 msokolov 3 2
+AR section implemented
+/usr/src/usr.etc/msdns/SCCS/s.zoneinst.c:
+1.7 2011/12/10 04:53:23 msokolov 7 6
+more careful handling of new zones overlapped an in-zone child
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.20 2011/12/10 05:59:57 msokolov 20 19
+max_hash_chain tunable var added
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.20 2011/12/10 05:59:58 msokolov 20 19
+max_hash_chain tunable var added
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.20 2011/12/10 06:01:19 msokolov 20 19
+legal minimums implemented for numeric settings
+/usr/src/usr.etc/msdns/SCCS/s.tree.h:
+1.10 2011/12/10 07:24:01 msokolov 10 9
+hash splitting implemented
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.12 2011/12/10 07:24:03 msokolov 12 11
+hash splitting implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.29 2011/12/10 07:26:44 msokolov 29 28
+updated dependencies
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.13 2011/12/10 07:37:03 msokolov 13 12
+node_has_children() implemented
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.14 2011/12/10 07:55:33 msokolov 14 13
+find_node_by_dname() implemented
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.30 2011/12/10 08:40:50 msokolov 30 29
+treedump2.c added
+/usr/src/usr.etc/msdns/SCCS/s.treedump.c:
+1.5 2011/12/10 08:46:43 msokolov 5 4
+fprintf fix, alternative dump format option
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.21 2011/12/11 03:35:55 msokolov 21 20
+preparations for cache s
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.21 2011/12/11 03:35:56 msokolov 21 20
+preparations for cache s
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.21 2011/12/11 03:35:57 msokolov 21 20
+preparations for cache s
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.31 2011/12/11 04:41:40 msokolov 31 30
+cachesweep.c added
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.9 2011/12/11 04:44:11 msokolov 9 8
+cache sweep tied in
+/usr/src/usr.etc/msdns/SCCS/s.main.c:
+1.4 2011/12/11 04:46:35 msokolov 4 3
+initial schedule_cache_sweep()
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.7 2011/12/11 04:47:58 msokolov 7 6
+schedule_cache_sweep() on master-config
+/usr/src/usr.etc/msdns/SCCS/s.defs.h:
+1.8 2011/12/11 06:29:33 msokolov 8 7
+prep for NS-anchor refresh logic
+/usr/src/usr.etc/msdns/SCCS/s.nsrec.h:
+1.6 2011/12/11 06:29:34 msokolov 6 5
+prep for NS-anchor refresh logic
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.5 2011/12/11 06:29:35 msokolov 5 4
+prep for NS-anchor refresh logic
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.8 2011/12/11 06:46:13 msokolov 8 7
+cache-sweep-now command added
+/usr/src/usr.etc/msdns/SCCS/s.cachesweep.c:
+1.2 2011/12/11 06:46:14 msokolov 2 1
+cache-sweep-now command added
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.9 2011/12/11 07:15:24 msokolov 9 8
+delete-NS-anchor and reload-NS-anchor implemented
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.6 2011/12/11 07:15:25 msokolov 6 5
+delete-NS-anchor and reload-NS-anchor implemented
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.15 2011/12/11 07:30:26 msokolov 15 14
+internal queries: prep for NS-anchor refresh
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.7 2011/12/11 07:30:27 msokolov 7 6
+internal queries: prep for NS-anchor refresh
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.11 2011/12/11 07:30:28 msokolov 11 10
+internal queries: prep for NS-anchor refresh
+/usr/src/usr.etc/msdns/SCCS/s.nsrec.h:
+1.7 2011/12/12 22:14:59 msokolov 7 6
+NS-anchor validation code written
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.7 2011/12/12 22:15:00 msokolov 7 6
+NS-anchor validation code written
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.32 2011/12/12 22:33:34 msokolov 32 31
+nsanchorcmd.c and nsanchorval.c added
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.8 2011/12/12 22:34:35 msokolov 8 7
+refresh logic hooked in, commands split off to nsanchorcmd.c
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.10 2011/12/12 22:53:42 msokolov 10 9
+refresh-NS-anchor command added
+/usr/src/usr.etc/msdns/SCCS/s.nsanchorcmd.c:
+1.2 2011/12/12 22:53:43 msokolov 2 1
+refresh-NS-anchor command added
+/usr/src/usr.etc/msdns/SCCS/s.class.h:
+1.4 2011/12/13 01:21:02 msokolov 4 3
+struct catalog moved from zone.h to class.h
+support for class file reloading and zone deletion
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.11 2011/12/13 01:21:03 msokolov 11 10
+struct catalog moved from zone.h to class.h
+support for class file reloading and zone deletion
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.6 2011/12/13 01:22:00 msokolov 6 5
+zone deletion support
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.8 2011/12/13 02:41:13 msokolov 8 7
+class reloading implemented
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.11 2011/12/13 02:41:15 msokolov 11 10
+class reloading implemented
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.7 2011/12/13 02:46:29 msokolov 7 6
+syslog zone deletion
+/usr/src/usr.etc/msdns/SCCS/s.treedump.c:
+1.6 2011/12/13 03:21:00 msokolov 6 5
+dump-subtree implemented
+/usr/src/usr.etc/msdns/SCCS/s.treedump2.c:
+1.2 2011/12/13 03:28:26 msokolov 2 1
+dump-tree-node implemented
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.15 2011/12/13 03:33:51 msokolov 15 14
+free_subtree() on an NS-anchor is now legal with hard reload-class
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.16 2011/12/13 03:54:49 msokolov 16 15
+hash-info implemented
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.12 2011/12/13 03:57:17 msokolov 12 11
+additional dump commands
+/usr/src/usr.etc/msdns/SCCS/s.querywrap.c:
+1.4 2011/12/13 04:18:42 msokolov 4 3
+RRset-style handling of AR not fitting
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.22 2011/12/13 04:54:31 msokolov 22 21
+TC stats implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.22 2011/12/13 04:54:32 msokolov 22 21
+TC stats implemented
+/usr/src/usr.etc/msdns/SCCS/s.cachesweep.c:
+1.3 2011/12/13 04:54:32 msokolov 3 2
+TC stats implemented
+/usr/src/usr.etc/msdns/SCCS/s.querywrap.c:
+1.5 2011/12/13 05:00:22 msokolov 5 4
+TC stats implemented
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.12 2011/12/13 05:02:09 msokolov 12 11
+TC stats implemented
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.8 2011/12/13 05:05:40 msokolov 8 7
+TC stats implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.23 2011/12/13 22:55:53 msokolov 23 22
+globals for tcpserv
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.23 2011/12/13 22:55:54 msokolov 23 22
+globals for tcpserv
+/usr/src/usr.etc/msdns/SCCS/s.acl.h:
+1.2 2011/12/13 22:56:14 msokolov 2 1
+idle permission for tcpserv
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.33 2011/12/13 23:02:00 msokolov 33 32
+tcpserv.c added
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.22 2011/12/13 23:05:30 msokolov 22 21
+tcpserv implemented
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.16 2011/12/13 23:28:18 msokolov 16 15
+NS answer fix for AXFR serving
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.16 2011/12/14 00:42:35 msokolov 16 15
+q_axfrptr overloaded on q_noa
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.34 2011/12/14 00:44:56 msokolov 34 33
+axfrserv.c added
+/usr/src/usr.etc/msdns/SCCS/s.tcpserv.c:
+1.2 2011/12/14 00:56:10 msokolov 2 1
+AXFR service hooked in
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.10 2011/12/14 00:59:14 msokolov 10 9
+enable AXFR
+/usr/src/usr.etc/msdns/SCCS/s.axfrserv.c:
+1.2 2011/12/14 01:01:06 msokolov 2 1
+set AA
+/usr/src/usr.etc/msdns/SCCS/s.main.c:
+1.5 2011/12/14 01:48:44 msokolov 5 4
+need to ignore SIGPIPE for TCP
+/usr/src/usr.etc/msdns/SCCS/s.paths.c:
+1.3 2011/12/14 01:50:51 msokolov 3 2
+let's go with /usr/adm/dns
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.zonecomp.c:
+1.3 2011/12/14 06:38:44 msokolov 3 2
+revamped origin handling
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.zonecomp.c:
+1.4 2011/12/14 07:09:55 msokolov 4 3
+restructured for atomic updates of live binary zone files
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.zonexfer.c:
+5.3 2011/12/14 07:22:21 msokolov 3 2
+added -p option for non-standard port numbers
+/usr/src/usr.etc/msdns/SCCS/s.msdnsctl.c:
+1.3 2011/12/14 18:50:47 msokolov 3 2
+default pathname change
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.23 2011/12/14 18:57:22 msokolov 23 22
+allow * to specify INADDR_ANY for tcpserv and udpserv
+/usr/src/usr.etc/msdns/SCCS/s.tcpserv.c:
+1.3 2011/12/14 19:16:57 msokolov 3 2
+read timeout implemented
+/usr/src/usr.etc/msdns/SCCS/s.tcpserv.c:
+1.4 2011/12/14 19:21:12 msokolov 4 3
+write timeout implemented
+/usr/src/usr.etc/msdns/SCCS/s.tcpserv.c:
+1.5 2011/12/14 19:26:49 msokolov 5 4
+enable SO_KEEPALIVE
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.24 2011/12/14 20:45:51 msokolov 24 23
+globals and tunable settings for the outbound TCP service
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.24 2011/12/14 20:45:52 msokolov 24 23
+globals and tunable settings for the outbound TCP service
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.24 2011/12/14 20:45:53 msokolov 24 23
+globals and tunable settings for the outbound TCP service
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.35 2011/12/14 22:34:56 msokolov 35 34
+tcpqueue.c added
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.10 2011/12/14 22:48:24 msokolov 10 9
+tcpqueue tied in
+/usr/src/usr.etc/msdns/zoneutils/SCCS/s.zonecomp.c:
+1.5 2011/12/14 22:50:37 msokolov 5 4
+C operator precedence fix
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.13 2011/12/14 23:59:29 msokolov 13 12
+TCP retry implemented
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.9 2011/12/15 00:16:32 msokolov 9 8
+new syntax for secondary zones
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.12 2011/12/15 01:02:33 msokolov 12 11
+additions for remote/secondary zones
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.8 2011/12/15 01:03:41 msokolov 8 7
+beginning of refactoring
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.9 2011/12/15 01:13:59 msokolov 9 8
+zone definition change implemented
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.10 2011/12/15 01:28:35 msokolov 10 9
+reload-zone command implemented
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.11 2011/12/15 01:31:46 msokolov 11 10
+zone def change handling: be more careful with zones_needing_fileread count
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.12 2011/12/15 02:18:20 msokolov 12 11
+prep for zone refresh generalization
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.13 2011/12/15 02:25:54 msokolov 13 12
+do an immediate refresh after a successful file read
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.13 2011/12/15 02:40:42 msokolov 13 12
+refresh-zone command implemented
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.13 2011/12/15 02:43:10 msokolov 13 12
+refresh-zone and reload-zone added
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.25 2011/12/15 02:55:22 msokolov 25 24
+sigchild_flag implemented
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.25 2011/12/15 02:55:23 msokolov 25 24
+sigchild_flag implemented
+/usr/src/usr.etc/msdns/SCCS/s.main.c:
+1.6 2011/12/15 02:55:24 msokolov 6 5
+sigchild_flag implemented
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.13 2011/12/16 06:14:39 msokolov 13 12
+minor fixes in preparation for secondary zone refresh support
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.36 2011/12/16 06:34:14 msokolov 36 35
+zonesecond.c added
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.14 2011/12/16 07:01:55 msokolov 14 13
+zonesecond.c code tied in
+/usr/src/usr.etc/msdns/SCCS/s.zoneload.c:
+1.14 2011/12/16 07:03:14 msokolov 14 13
+clear Z_RETRYING
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.26 2011/12/17 06:37:56 msokolov 26 25
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.26 2011/12/17 06:37:57 msokolov 26 25
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.11 2011/12/17 06:37:58 msokolov 11 10
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.zone.h:
+1.14 2011/12/17 06:37:59 msokolov 14 13
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.14 2011/12/17 06:38:01 msokolov 14 13
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.tcpqueue.c:
+1.2 2011/12/17 06:38:02 msokolov 2 1
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.tcpqueue.h:
+1.2 2011/12/17 06:38:04 msokolov 2 1
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.zonesecond.c:
+1.2 2011/12/17 06:38:05 msokolov 2 1
+tcpqueue revamped
+/usr/src/usr.etc/msdns/SCCS/s.zonesecond.c:
+1.3 2011/12/17 07:10:00 msokolov 3 2
+start_axfr_pull() implemented
+/usr/src/usr.etc/msdns/SCCS/s.zonesecond.c:
+1.4 2011/12/17 07:37:46 msokolov 4 3
+axfr_pull_complete() implemented
+/usr/src/usr.etc/msdns/SCCS/s.zonesecond.c:
+1.5 2011/12/17 07:59:08 msokolov 5 4
+zonexfer_child_reaper() implemented
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.12 2011/12/17 08:09:38 msokolov 12 11
+child reaping tied in, still has a possible race condition
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.27 2011/12/17 08:24:36 msokolov 27 26
+workaround for the child exit race condition
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.27 2011/12/17 08:24:37 msokolov 27 26
+workaround for the child exit race condition
+/usr/src/usr.etc/msdns/SCCS/s.selectloop.c:
+1.13 2011/12/17 08:24:38 msokolov 13 12
+workaround for the child exit race condition
+/usr/src/usr.etc/msdns/SCCS/s.zonesecond.c:
+1.6 2011/12/17 08:24:40 msokolov 6 5
+workaround for the child exit race condition
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.25 2011/12/17 08:29:07 msokolov 25 24
+child-race-timer tunable
+/usr/src/usr.etc/msdns/SCCS/s.main.c:
+1.7 2011/12/17 08:47:49 msokolov 7 6
+maximize memory limit
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.37 2011/12/17 08:49:49 msokolov 37 36
+updated dependencies
+/usr/src/usr.etc/msdns/SCCS/s.tcpqueue.c:
+1.3 2011/12/17 09:03:20 msokolov 3 2
+missing return
+/usr/src/usr.etc/msdns/SCCS/s.zonesecond.c:
+1.7 2011/12/17 20:47:57 msokolov 7 6
+SOA check bug: forgot about the TCP message length octets
+/usr/src/usr.etc/msdns/SCCS/s.tcpqueue.c:
+1.4 2011/12/17 21:37:58 msokolov 4 3
+
+/usr/src/usr.etc/msdns/SCCS/s.querytrace.c:
+1.3 2011/12/18 00:29:21 msokolov 3 2
+line-buffered trace files
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.15 2011/12/18 00:35:30 msokolov 15 14
+missing returns were wreaking havoc with glueless NS
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.28 2011/12/18 08:27:19 msokolov 28 27
+cache-NS-tempfail tunable setting added
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.28 2011/12/18 08:27:20 msokolov 28 27
+cache-NS-tempfail tunable setting added
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.26 2011/12/18 08:27:21 msokolov 26 25
+cache-NS-tempfail tunable setting added
+/usr/src/usr.etc/msdns/SCCS/s.treenode.c:
+1.17 2011/12/18 20:10:05 msokolov 17 16
+bugfix in split_hash()
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.17 2011/12/19 08:03:49 msokolov 17 16
+axed NSRR_FLAGS_BAD, preparing for caching foreign NS temp failures
+/usr/src/usr.etc/msdns/SCCS/s.nsrec.h:
+1.8 2011/12/19 08:03:51 msokolov 8 7
+axed NSRR_FLAGS_BAD, preparing for caching foreign NS temp failures
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.16 2011/12/19 08:03:52 msokolov 16 15
+axed NSRR_FLAGS_BAD, preparing for caching foreign NS temp failures
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.9 2011/12/19 08:03:54 msokolov 9 8
+axed NSRR_FLAGS_BAD, preparing for caching foreign NS temp failures
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.17 2011/12/19 09:13:09 msokolov 17 16
+tempfail caching implemented
+/usr/src/usr.etc/msdns/SCCS/s.treedump.c:
+1.7 2011/12/19 09:19:20 msokolov 7 6
+show cached NS tempfail info
+/usr/src/usr.etc/msdns/SCCS/s.treedump2.c:
+1.3 2011/12/19 09:19:21 msokolov 3 2
+show cached NS tempfail info
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.8 2011/12/19 20:48:30 msokolov 8 7
+intquery_extract_A_answer(): bug in the handling of multiple As
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.18 2011/12/20 05:15:03 msokolov 18 17
+ability to send to more than just the first A of many
+/usr/src/usr.etc/msdns/SCCS/s.Makefile:
+1.38 2011/12/20 06:02:41 msokolov 38 37
+stats reporting moved into stats.c
+/usr/src/usr.etc/msdns/SCCS/s.cachesweep.c:
+1.4 2011/12/20 06:02:43 msokolov 4 3
+stats reporting moved into stats.c
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.19 2011/12/20 06:05:02 msokolov 19 18
+log UDP TC responses
+/usr/src/usr.etc/msdns/SCCS/s.ctlsock.c:
+1.14 2011/12/20 06:28:06 msokolov 14 13
+report-udp-tc command implemented
+/usr/src/usr.etc/msdns/SCCS/s.stats.c:
+1.2 2011/12/20 06:28:07 msokolov 2 1
+report-udp-tc command implemented
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.20 2011/12/20 07:35:51 msokolov 20 19
+guard against inadvertent NS-anchor alteration
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.29 2011/12/20 19:48:14 msokolov 29 28
+track and report outcomes of TCP retry attempts (after getting UDP TC)
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.29 2011/12/20 19:48:15 msokolov 29 28
+track and report outcomes of TCP retry attempts (after getting UDP TC)
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.21 2011/12/20 19:48:16 msokolov 21 20
+track and report outcomes of TCP retry attempts (after getting UDP TC)
+/usr/src/usr.etc/msdns/SCCS/s.stats.c:
+1.3 2011/12/20 19:48:18 msokolov 3 2
+track and report outcomes of TCP retry attempts (after getting UDP TC)
+/usr/src/usr.etc/msdns/SCCS/s.query.h:
+1.17 2011/12/20 20:45:17 msokolov 17 16
+query flags slightly revamped
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.11 2011/12/20 20:45:18 msokolov 11 10
+query flags slightly revamped
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.18 2011/12/20 20:45:19 msokolov 18 17
+query flags slightly revamped
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.10 2011/12/20 20:45:21 msokolov 10 9
+query flags slightly revamped
+/usr/src/usr.etc/msdns/SCCS/s.nsanchorval.c:
+1.2 2011/12/20 20:51:54 msokolov 2 1
+request AA for A refresh
+/usr/src/usr.etc/msdns/SCCS/s.querywrap.c:
+1.6 2011/12/21 03:51:14 msokolov 6 5
+C operator precedence bug was causing duplicate RRsets in AR
+/usr/src/usr.etc/msdns/SCCS/s.stats.c:
+1.4 2011/12/21 07:05:22 msokolov 4 3
+severity lowered to LOG_INFO for most TCP retry outcomes
+/usr/src/usr.etc/msdns/SCCS/s.querystage.c:
+1.19 2011/12/21 07:18:16 msokolov 19 18
+suppress NS duplication between answer and authority sections
+/usr/src/usr.etc/msdns/SCCS/s.nsanchorval.c:
+1.3 2011/12/21 08:08:05 msokolov 3 2
+on further thought, always demanding AA isn't the best strategy
+implemented a better solution that reacts intelligently to whether or not
+the answer has AA set
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.11 2011/12/21 22:47:52 msokolov 11 10
+smarter handling of delegates updating their own referrals
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.12 2011/12/21 23:33:18 msokolov 12 11
+fsr_handle_auth() is now only used for referrals and negative answers
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.30 2011/12/22 05:52:13 msokolov 30 29
+ttl-limit tunable setting split into several
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.30 2011/12/22 05:52:14 msokolov 30 29
+ttl-limit tunable setting split into several
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.27 2011/12/22 05:52:15 msokolov 27 26
+ttl-limit tunable setting split into several
+/usr/src/usr.etc/msdns/SCCS/s.attachrr.c:
+1.8 2011/12/22 05:52:17 msokolov 8 7
+ttl-limit tunable setting split into several
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.22 2011/12/22 05:52:18 msokolov 22 21
+ttl-limit tunable setting split into several
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.13 2011/12/22 05:52:20 msokolov 13 12
+ttl-limit tunable setting split into several
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.14 2011/12/22 06:00:23 msokolov 14 13
+require AA for extending TTL of original NS
+/usr/src/usr.etc/msdns/SCCS/s.queryfor.c:
+1.15 2011/12/22 06:22:24 msokolov 15 14
+block CNAME attacks coming from above
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.12 2011/12/22 06:27:14 msokolov 12 11
+support for AA queries
+/usr/src/usr.etc/msdns/SCCS/s.intquery.c:
+1.9 2011/12/22 07:44:00 msokolov 9 8
+intquery_negative_ttl() implemented
+/usr/src/usr.etc/msdns/SCCS/s.askforns.c:
+1.23 2011/12/22 07:56:22 msokolov 23 22
+SOA/CNAME negative caching implemented
+/usr/src/include/arpa/SCCS/s.nameser.h:
+5.22 2011/12/23 06:32:00 msokolov 27 26
+added some post-RFC1035 RR types
+/usr/src/include/arpa/SCCS/s.nameser.h:
+5.23 2011/12/23 06:41:08 msokolov 28 27
+AD and CD header bits
+/usr/src/usr.etc/msdns/SCCS/s.queryinit.c:
+1.13 2011/12/23 06:57:23 msokolov 13 12
+allow querying for unknown RR types
+/usr/src/usr.etc/msdns/SCCS/s.treedump.c:
+1.8 2011/12/23 07:06:10 msokolov 8 7
+symbolic names for new RR types
+/usr/src/usr.etc/msdns/SCCS/s.treedump2.c:
+1.4 2011/12/23 07:06:11 msokolov 4 3
+symbolic names for new RR types
+/usr/src/usr.etc/msdns/SCCS/s.msgparse.c:
+1.4 2011/12/23 07:36:28 msokolov 4 3
+parsing new RR types
+/usr/src/usr.etc/msdns/SCCS/s.globals.c:
+1.31 2011/12/23 07:42:58 msokolov 31 30
+compress-new-RR-types config setting
+/usr/src/usr.etc/msdns/SCCS/s.globals.h:
+1.31 2011/12/23 07:42:59 msokolov 31 30
+compress-new-RR-types config setting
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.28 2011/12/23 07:43:01 msokolov 28 27
+compress-new-RR-types config setting
+/usr/src/usr.etc/msdns/SCCS/s.respwriter.c:
+1.7 2011/12/23 08:10:36 msokolov 7 6
+preliminary handling of some new post-RFC1035 RR types
+abstention from compression per RFC 3597 remains to be implemented
+/usr/src/usr.etc/msdns/SCCS/s.respwriter.c:
+1.8 2011/12/24 04:31:17 msokolov 8 7
+emit_dname_into_msg_newtype() fully implemented
+/usr/src/ucb/zoneutils/SCCS/s.Makefile:
+1.3 2011/12/24 05:44:48 msokolov 3 2
+do-nothing depend: target added
+/usr/src/ucb/zoneutils/SCCS/s.zonexfer.c:
+5.4 2011/12/24 05:55:38 msokolov 4 3
+decompress domain-names in RDATA of RFC 1183 types
+/usr/src/ucb/zoneutils/SCCS/s.zonecomp.c:
+1.6 2011/12/24 06:09:14 msokolov 6 5
+ensure the source filename is good before creating the .tmp
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.29 2011/12/25 05:42:44 msokolov 29 28
+allow comments at the end of config lines
+/usr/src/usr.etc/msdns/SCCS/s.class.c:
+1.10 2011/12/25 05:48:47 msokolov 10 9
+allow comments at the end of zone or NS-anchor lines
+/usr/src/usr.etc/msdns/SCCS/s.nsanchor.c:
+1.9 2011/12/25 05:53:28 msokolov 9 8
+allow comments on server lines after all IP addresses
+/usr/src/usr.etc/msdns/SCCS/s.zonemgmt.c:
+1.15 2011/12/25 23:56:55 msokolov 15 14
+watch out for zone_fileread_roundrobin when deleting a zone
+/usr/src/usr.etc/msdns/SCCS/s.masterconf.c:
+1.30 2011/12/26 01:46:12 msokolov 30 29
+msdns.conf security check implemented
+/usr/src/man/man3/SCCS/s.dname.3x:
+1.2 2011/12/27 18:47:27 msokolov 2 1
+indentation fixes
+/usr/src/man/man3/SCCS/s.dname.3x:
+1.3 2011/12/27 19:05:31 msokolov 3 2
+associate more with MSDNS than with 4.3BSD-Quasijarus
+/usr/src/man/man3/SCCS/s.dname.3x:
+1.4 2011/12/27 23:53:32 msokolov 4 3
+dname_emit_bstring() added
+/usr/src/man/man5/SCCS/s.binzone.5:
+1.2 2011/12/28 03:14:34 msokolov 2 1
+EOF handling clarified
+/usr/src/usr.lib/libmsdns/SCCS/s.Makefile:
+1.2 2011/12/28 03:37:08 msokolov 2 1
+dnameread.c and dnamestr.c added
+/usr/src/man/man3/SCCS/s.dname.3x:
+1.5 2011/12/28 04:02:55 msokolov 5 4
+read_dname_from_file() documented
+/usr/src/usr.lib/libmsdns/SCCS/s.dnamelabels.c:
+1.2 2011/12/28 04:42:54 msokolov 2 1
+s/store/copy/
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.12 2012/02/16 00:53:22 msokolov 12 11
+chtab sorting implemented
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.19 2012/02/16 03:11:25 msokolov 19 18
+setch: linear search implemented
+/usr/src/ucb/mroff/SCCS/s.n6.c:
+5.3 2012/02/16 03:29:20 msokolov 3 2
+setch() binary search
+/usr/src/usr.bin/eqn/SCCS/s.Makefile:
+5.3 2012/02/16 03:54:09 msokolov 3 2
+call the CAT eqn object directory cat
+/usr/src/usr.bin/eqn/cat/SCCS/s.Makefile:
+5.3 2012/02/16 03:58:01 msokolov 3 2
+install it as cateqn as well
+/usr/src/usr.bin/eqn/pseqn/SCCS/s.Makefile:
+5.2 2012/02/16 04:03:20 msokolov 2 1
+it's about time for pseqn to become /usr/ucb/eqn
+/usr/src/usr.bin/eqn/pseqn/SCCS/s.Makefile:
+5.3 2012/02/16 05:13:10 msokolov 3 2
+need to save the binary on install, needed in ../eqnchar/Makefile
+/usr/src/usr.bin/eqn/eqnchar/SCCS/s.eqnchar:
+1.2 2012/02/16 05:56:34 msokolov 2 1
+touch-up
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.9 2012/02/16 07:05:47 msokolov 9 8
+put full A.D. year in \n(Yr
+/usr/src/ucb/mroff/SCCS/s.ni.c:
+5.2 2012/02/16 07:05:49 msokolov 2 1
+put full A.D. year in \n(Yr
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.9 2012/02/16 07:05:50 msokolov 9 8
+put full A.D. year in \n(Yr
+/usr/src/ucb/mroff/SCCS/s.v.h:
+5.2 2012/02/16 07:05:51 msokolov 2 1
+put full A.D. year in \n(Yr
+/usr/src/usr.bin/roff/common_source/SCCS/s.v.h:
+4.4 2012/02/16 07:22:28 msokolov 4 3
+put full A.D. year in \n(Yr
+/usr/src/usr.bin/roff/common_source/SCCS/s.tdef.h:
+4.10 2012/02/16 07:22:29 msokolov 10 9
+put full A.D. year in \n(Yr
+/usr/src/usr.bin/roff/common_source/SCCS/s.ni.c:
+4.4 2012/02/16 07:22:30 msokolov 4 3
+put full A.D. year in \n(Yr
+/usr/src/usr.bin/roff/common_source/SCCS/s.n1.c:
+4.11 2012/02/16 07:22:31 msokolov 11 10
+put full A.D. year in \n(Yr
+/usr/src/usr.bin/roff/troff/SCCS/s.Makefile:
+5.2 2012/02/16 07:28:32 msokolov 2 1
+C/A/T troff becomes otroff
+/usr/src/ucb/mroff/finish+merge/SCCS/s.main.c:
+5.3 2012/02/17 08:29:07 msokolov 3 2
+page relabeling implemented (new -l option)
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass2.c:
+5.3 2012/02/17 08:29:08 msokolov 3 2
+page relabeling implemented (new -l option)
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pstfinish.c:
+5.5 2012/02/17 08:31:16 msokolov 5 4
+pass -l through to pstmerge
+/usr/src/ucb/pstpipe/SCCS/s.Makefile:
+5.2 2012/02/17 21:36:28 msokolov 2 1
+call it tps!
+/usr/src/doc/usd/04.csh/SCCS/s.csh.1:
+6.3 2012/02/19 01:16:21 msokolov 5 4
+bring the footnote back and use a different fix for the ugly spill
+/usr/src/ucb/mroff/finish+merge/SCCS/s.main.c:
+5.4 2012/02/19 05:12:21 msokolov 4 3
+-l option rethought
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass2.c:
+5.4 2012/02/19 05:12:23 msokolov 4 3
+-l option rethought
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.13 2012/02/19 05:18:22 msokolov 13 12
+we are now officially troff!
+/usr/src/doc/usd/01.begin/SCCS/s.Makefile:
+6.2 2012/02/19 05:35:00 msokolov 2 1
+label for the thumb index
+/usr/src/doc/usd/02.learn/SCCS/s.Makefile:
+6.3 2012/02/19 05:39:18 msokolov 3 2
+labels for the thumb index
+/usr/src/doc/usd/03.shell/SCCS/s.Makefile:
+6.2 2012/02/19 05:41:44 msokolov 2 1
+labels for the thumb index
+/usr/src/doc/usd/04.csh/SCCS/s.Makefile:
+6.2 2012/02/19 05:44:57 msokolov 2 1
+labels for the thumb index
+/usr/src/doc/usd/05.dc/SCCS/s.Makefile:
+6.2 2012/02/19 05:46:29 msokolov 2 1
+labels for the thumb index
+/usr/src/doc/usd/06.bc/SCCS/s.Makefile:
+6.2 2012/02/19 05:48:11 msokolov 2 1
+labels for the thumb index
+/usr/src/doc/usd/07.Mail/SCCS/s.Makefile:
+6.3 2012/02/19 05:50:38 msokolov 3 2
+labels for the thumb index
+/usr/src/doc/usd/09.newsread/SCCS/s.Makefile:
+6.3 2012/02/19 06:03:15 msokolov 3 2
+labels for the thumb index
+/usr/src/doc/usd/10.etiq/SCCS/s.Makefile:
+6.3 2012/02/19 06:19:06 msokolov 3 2
+need pstfinish to handle \(rh and labels for the thumb index
+/usr/src/usr.bin/eqn/SCCS/s.Makefile:
+5.4 2012/02/19 18:41:21 msokolov 4 3
+eqnchar added
+/usr/src/ucb/grep/SCCS/s.bin-grep.c:
+4.9 2012/02/20 20:54:46 msokolov 11 10
+debostication + fix for an ancient buglet
+/usr/src/ucb/grep/SCCS/s.Makefile:
+5.4 2012/02/20 20:57:26 msokolov 4 3
+Asar lives, Asar returns!
+/usr/src/ucb/grep/SCCS/s.fgrep.c:
+4.5 2012/02/20 21:49:35 msokolov 5 4
+more efficient case folding
+/usr/src/ucb/grep/SCCS/s.egrep.y:
+4.7 2012/02/20 23:37:30 msokolov 8 7
+axe bostic's broken -i
+/usr/src/ucb/grep/SCCS/s.fgrep.c:
+4.6 2012/02/21 08:05:44 msokolov 6 5
+found a way to make -i support even less burdensome
+/usr/src/ucb/grep/SCCS/s.fgrep.c:
+4.7 2012/02/26 03:33:47 msokolov 7 6
+brown paper bag
+/usr/src/ucb/grep/SCCS/s.egrep.y:
+4.8 2012/02/26 06:39:22 msokolov 9 8
+-i reimplemented sensibly
+8-bit character data path
+256 states instead of 128
+separate buffer limit for character classes
+/usr/src/ucb/grep/SCCS/s.fgrep.c:
+4.8 2012/02/26 06:57:25 msokolov 8 7
+convert to u_char like egrep
+/usr/src/ucb/grep/SCCS/s.egrep.y:
+4.9 2012/02/27 05:46:36 msokolov 10 9
+fix -b
+/usr/src/ucb/grep/SCCS/s.bin-grep.c:
+4.10 2012/02/27 05:46:38 msokolov 12 11
+fix -b
+/usr/src/ucb/grep/SCCS/s.Makefile:
+5.5 2012/03/03 18:17:24 msokolov 5 4
+directory recursion added to [ef]grep
+/usr/src/ucb/grep/SCCS/s.egrep.y:
+4.10 2012/03/03 18:17:25 msokolov 11 10
+directory recursion added to [ef]grep
+/usr/src/ucb/grep/SCCS/s.fgrep.c:
+4.9 2012/03/03 18:17:27 msokolov 9 8
+directory recursion added to [ef]grep
+/usr/src/ucb/grep/SCCS/s.recurse.c:
+1.2 2012/03/03 19:17:22 msokolov 2 1
+oops, forgot to skip . and ..
+/usr/src/ucb/grep/SCCS/s.egrep.y:
+4.11 2012/03/03 20:51:07 msokolov 12 11
+-h/-o logic revamped for sanity
+/usr/src/ucb/grep/SCCS/s.fgrep.c:
+4.10 2012/03/03 20:55:48 msokolov 10 9
+-h/-o logic revamped for sanity
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.14 2012/03/04 00:53:36 msokolov 14 13
+bad use of fgrep
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.10 2012/03/04 02:06:14 msokolov 10 9
+tr handles the full 512-char set now
+/usr/src/ucb/mroff/SCCS/s.n2.c:
+5.4 2012/03/04 02:06:15 msokolov 4 3
+tr handles the full 512-char set now
+/usr/src/ucb/mroff/SCCS/s.n5.c:
+5.3 2012/03/04 02:06:16 msokolov 3 2
+tr handles the full 512-char set now
+/usr/src/ucb/mroff/SCCS/s.n6.c:
+5.4 2012/03/04 02:06:18 msokolov 4 3
+tr handles the full 512-char set now
+/usr/src/ucb/mroff/SCCS/s.n7.c:
+5.4 2012/03/04 02:06:19 msokolov 4 3
+tr handles the full 512-char set now
+/usr/src/ucb/mroff/SCCS/s.nii.c:
+5.2 2012/03/04 02:06:21 msokolov 2 1
+tr handles the full 512-char set now
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.20 2012/03/04 02:06:22 msokolov 20 19
+tr handles the full 512-char set now
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.15 2012/03/04 05:38:30 msokolov 15 14
+troffchar utility added
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.11 2012/03/05 00:07:43 msokolov 11 10
+first restructuring steps for fcXX and .bd simulation
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.10 2012/03/05 00:07:45 msokolov 10 9
+first restructuring steps for fcXX and .bd simulation
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.21 2012/03/05 00:07:47 msokolov 21 20
+first restructuring steps for fcXX and .bd simulation
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.10 2012/03/05 00:07:49 msokolov 10 9
+first restructuring steps for fcXX and .bd simulation
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.16 2012/03/05 00:22:33 msokolov 16 15
+dependency on chardef.h
+/usr/src/ucb/mroff/SCCS/s.grokafm.c:
+5.2 2012/03/05 07:53:13 msokolov 2 1
+system includes not needed
+/usr/src/ucb/mroff/5lig/SCCS/s.Makefile:
+1.5 2012/03/06 01:43:16 msokolov 5 4
+changeover from f[ws]XX to ftXX, preppsfont => grokafm & mkfont
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.10 2012/03/06 02:55:04 msokolov 10 9
+converted to the new font and charset model
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.12 2012/03/06 04:12:34 msokolov 12 11
+converted to ftXX files and font search paths
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.22 2012/03/06 04:12:36 msokolov 22 21
+converted to ftXX files and font search paths
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.11 2012/03/06 04:12:38 msokolov 11 10
+converted to ftXX files and font search paths
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.17 2012/03/06 04:14:05 msokolov 17 16
+new font model
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.18 2012/03/06 04:19:57 msokolov 18 17
+clean chtabs.c and sortchtab
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.23 2012/03/06 05:06:53 msokolov 23 22
+character set extension implemented
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.16 2012/03/06 05:17:43 msokolov 16 15
+new handling of SS chars, \(sl rethought
+/usr/src/ucb/mroff/finish+merge/SCCS/s.main.c:
+5.5 2012/03/06 06:07:30 msokolov 5 4
+more aggressive substitution of TroffEmu-Symbol
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.3 2012/03/06 06:07:31 msokolov 3 2
+more aggressive substitution of TroffEmu-Symbol
+/usr/src/ucb/mroff/SCCS/s.mkfont.c:
+5.2 2012/03/06 06:16:02 msokolov 2 1
+exit(1) silently on ABORT indicating grokafm errors
+/usr/src/ucb/mroff/troffemu/SCCS/s.bellsystem.m4:
+2.2 2012/03/09 07:43:34 msokolov 2 1
+parameterized bellsystem glyph drawn
+/usr/src/ucb/mroff/troffemu/SCCS/s.symbol.m4:
+2.2 2012/03/09 07:43:35 msokolov 2 1
+parameterized bellsystem glyph drawn
+/usr/src/ucb/mroff/troffemu/SCCS/s.bellsystem.m4:
+2.3 2012/03/09 19:34:18 msokolov 3 2
+path drawing bugs fixed, now draws as intended
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.13 2012/03/09 22:05:29 msokolov 13 12
+TroffEmu fonts restructured once again
+/usr/src/ucb/mroff/troffemu/SCCS/s.ftSS.src:
+5.2 2012/03/10 03:07:51 msokolov 2 1
+TroffEmu-SuperSpecial => TroffEmu-Supplement
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.4 2012/03/10 03:12:45 msokolov 4 3
+TroffEmu fonts restructured once again
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.11 2012/03/10 04:18:24 msokolov 11 10
+TroffEmu fonts restructured once again
+/usr/src/ucb/mroff/troffemu/SCCS/s.boldvertical.m4:
+2.2 2012/03/10 06:19:56 msokolov 2 1
+parameterized
+/usr/src/ucb/mroff/troffemu/SCCS/s.boldvertical.m4:
+2.3 2012/03/11 04:18:45 msokolov 3 2
+braceleft{tp,bt} implemented
+/usr/src/ucb/mroff/troffemu/SCCS/s.boldvertical.m4:
+2.4 2012/03/11 04:59:43 msokolov 4 3
+braceright{tp,bt} implemented
+/usr/src/ucb/mroff/troffemu/SCCS/s.symbolbv.m4:
+2.2 2012/03/11 17:37:27 msokolov 2 1
+all 11 chars of the bv family are in boldvertical.m4
+/usr/src/ucb/mroff/troffemu/SCCS/s.boldvertical.m4:
+2.5 2012/03/11 17:42:11 msokolov 5 4
+braceleftmid implemented
+/usr/src/ucb/mroff/troffemu/SCCS/s.boldvertical.m4:
+2.6 2012/03/11 18:29:30 msokolov 6 5
+bracerightmid implemented
+/usr/src/doc/usd/10.etiq/SCCS/s.Makefile:
+6.4 2012/03/12 02:35:48 msokolov 4 3
+s/SS/ZD/ for \(rh
+/usr/src/ucb/mroff/troffemu/SCCS/s.symbolchars.m4:
+2.2 2012/03/12 04:45:48 msokolov 2 1
+big brace and parenthesis endpieces: fixed hstem hints
+big bracket pieces: make protrusion consistent
+/usr/src/ucb/mroff/troffemu/SCCS/s.symbolchars.m4:
+2.3 2012/03/12 05:01:38 msokolov 3 2
+brace{left,right}mid: hstem hints were wrong, fixed
+/usr/src/ucb/mroff/troffemu/SCCS/s.symbolchars.m4:
+2.4 2012/03/12 05:30:00 msokolov 4 3
+plusminus: hints were wrong, fixed

@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)netisr.h	7.4 (Berkeley) 6/27/88
+ *	@(#)netisr.h	7.5 (Berkeley) 7/11/02
  */
 
 /*
@@ -39,6 +39,7 @@
 #define	NETISR_IP	2		/* same as AF_INET */
 #define	NETISR_IMP	3		/* same as AF_IMPLINK */
 #define	NETISR_NS	6		/* same as AF_NS */
+#define	NETISR_PPPCTL	30
 
 #define	schednetisr(anisr)	{ netisr |= 1<<(anisr); setsoftnet(); }
 

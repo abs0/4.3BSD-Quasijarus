@@ -1,0 +1,127 @@
+h00799
+s 00001/00001/00056
+d D 6.1 85/05/15 18:22:19 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00020/00050
+d D 5.1 85/05/15 18:21:55 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00070/00000/00000
+d D 4.1 85/05/15 18:21:18 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH AR 5 
+E 2
+I 2
+D 3
+.TH AR 5  "15 January 1983"
+E 3
+I 3
+.TH AR 5  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+ar \- archive (library) file format
+.SH SYNOPSIS
+.B #include <ar.h>
+.SH DESCRIPTION
+D 2
+.IR N.B. :
+This archive format is new to this distribution.
+See
+.IR old (8)
+and
+.IR arcv (1)
+for programs to deal with the old format.
+E 2
+.PP
+The archive command
+.I ar
+D 2
+is used to combine several files into
+one.
+Archives are used mainly as libraries to be searched
+by the link-editor
+E 2
+I 2
+combines several files into one.
+Archives are used mainly as libraries to be searched by the link-editor
+E 2
+.I ld.
+.PP
+A file produced by
+.I ar
+has a magic string at the start,
+followed by the constituent files, each preceded by a file header.
+D 2
+The magic number and header layout as described in the
+include file are:
+E 2
+I 2
+The magic number and header layout as described in the include file are:
+E 2
+.RS
+.PP
+.nf
+.ta \w'#define 'u +\w'SARMAG 'u
+.ec %
+.so /usr/include/ar.h
+.ec \
+.fi
+.RE
+.LP
+The name is a blank-padded string.
+The
+.I ar_fmag
+D 2
+field contains ARFMAG
+to help verify the presence of a header.
+E 2
+I 2
+field contains ARFMAG to help verify the presence of a header.
+E 2
+The other fields are left-adjusted, blank-padded numbers.
+They are decimal except for
+.IR ar_mode ,
+which is octal.
+The date is the modification date of the file
+at the time of its insertion into the archive.
+.PP
+Each file begins on a even (0 mod 2) boundary;
+a new-line is inserted between files if necessary.
+Nevertheless the size given reflects the
+actual size of the file exclusive of padding.
+.PP
+D 2
+There is no provision for empty areas in an archive
+file.
+E 2
+I 2
+There is no provision for empty areas in an archive file.
+E 2
+.PP
+The encoding of the header is portable across machines.
+D 2
+If an archive contains printable files, the archive itself
+is printable.
+E 2
+I 2
+If an archive contains printable files, the archive itself is printable.
+E 2
+.SH "SEE ALSO"
+ar(1), ld(1), nm(1)
+.SH BUGS
+File names lose trailing blanks.
+Most software dealing with archives takes even
+an included blank as a name terminator.
+E 1

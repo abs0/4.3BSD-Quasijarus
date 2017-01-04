@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)n1.c	4.9 5/28/02";
+static char sccsid[] = "@(#)n1.c	4.11 2/16/2012";
 #endif lint
 
 #include "tdef.h"
@@ -146,6 +146,10 @@ extern int fmt[NN];
 #ifndef NROFF
 int acctf;
 #endif
+#ifdef NROFF
+int saved_argc;
+char **saved_argv;
+#endif
 
 main(argc,argv)
 int argc;
@@ -164,6 +168,10 @@ char **argv;
 	signal(SIGFPE,fpecatch);
 	signal(SIGPIPE,catch);
 	signal(SIGTERM,kcatch);
+#ifdef NROFF
+	saved_argc = argc;
+	saved_argv = argv;
+#endif
 	init1(argv[0][0]);
 options:
 	while(--argc > 0 && (++argv)[0][0]=='-')
@@ -339,24 +347,21 @@ acctg() {
 init1(a)
 char a;
 {
-	register char *p;
-	char *mktemp();
+	static char tmpf[] = "/tmp/taXXXXX";
 	register i;
 
 #ifndef NROFF
 	acctg();/*open troff actg file while mode 4755*/
 #endif
-	p = mktemp("/tmp/taXXXXX");
-	if(a == 'a')p = &p[5];
-	if((close(creat(p, 0600))) < 0){
+	ibf = mkstemp(tmpf);
+	if(ibf < 0){
 		prstr("Cannot create temp file.\n");
 		exit(-1);
 	}
-	ibf = open(p, 2);
 	for(i=256; --i;)trtab[i]=i;
 	trtab[UNPAD] = ' ';
 	mchbits();
-	if(a != 'a')unlkp = p;
+	unlkp = tmpf;
 }
 init2()
 {
@@ -406,6 +411,7 @@ cvtime()
 	v.yr = tmp->tm_year % 100;
 	fmt[2] = 2;	/* make \n(yr 2 digits */
 	v.cn = 19 + tmp->tm_year / 100;
+	v.Yr = tmp->tm_year + 1900;
 	v.mo = tmp->tm_mon + 1;
 }
 cnum(a)

@@ -1,0 +1,187 @@
+h54986
+s 00007/00007/00066
+d D 6.2 86/05/12 12:22:17 mckusick 4 3
+c update for 4.3BSD
+e
+s 00007/00012/00066
+d D 6.1 86/05/11 00:00:06 mckusick 3 2
+c document distributed with 4.3BSD
+e
+s 00019/00014/00059
+d D 5.1 86/05/10 23:59:55 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00073/00000/00000
+d D 4.1 86/05/10 23:59:46 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.if t .pn 13\"TABLE OF CONTENTS
+.if n .pn 15
+E 2
+I 2
+D 3
+.if t .pn 15\"TABLE OF CONTENTS
+E 3
+I 3
+D 4
+.if t .pn 13\"TABLE OF CONTENTS
+E 3
+.if n .pn 17
+E 4
+I 4
+.af % i
+.if t .pn 11\"TABLE OF CONTENTS
+.if n .pn 15
+E 4
+E 2
+.tr ~
+.ll 6.5i
+.lt 6.5i
+D 4
+.po .5i
+E 4
+I 4
+.po .75i
+E 4
+.ds ET\"
+.de HD
+.po 0
+.lt 7.4i
+D 4
+.tl '\(rn\(rn''\(rn\(rn'
+E 4
+I 4
+.tl ''''
+E 4
+.lt
+.po
+'sp 18p
+D 3
+.if e .tl '\\*(ET'''
+.if o .tl '''\\*(ET'
+E 3
+I 3
+D 4
+.if e .tl '\\*(ET''- % -'
+.if o .tl '- % -''\\*(ET'
+E 4
+I 4
+.if o .tl '\\*(ET''- % -'
+.if e .tl '- % -''\\*(ET'
+E 4
+E 3
+'sp 18p
+.ns
+..
+.de FO
+'sp 18p
+D 4
+.af % i
+E 4
+D 3
+.if e .tl '\s9\\*(Dt'- % -'\\*(Ed\s0'
+.if o .tl '\s9\\*(Ed'- % -'\\*(Dt\s0'
+E 3
+I 3
+.if e .tl '\s9\\*(Dt''\\*(Ed\s0'
+.if o .tl '\s9\\*(Ed''\\*(Dt\s0'
+E 3
+'bp
+..
+.wh 0 HD
+.wh -60p FO
+.if \n(nl .bp
+.br
+.ds ET \s9\f2Table \|of \|Contents\fP\s0
+D 3
+.ds Ed Fourth Berkeley Distribution
+D 2
+.ds Dt November \|1980
+E 2
+I 2
+.ds Dt August \|1983
+E 3
+I 3
+.ds Ed 4.3BSD
+.ds Dt April \|1986
+E 3
+E 2
+.ce
+\f3TABLE \|OF \|CONTENTS\fP
+.nr x .5i
+.in +\nxu
+.nf
+.ta \n(.lu-\nxuR
+.de xx
+\\$1\f3 \a \fP\\$2
+..
+D 2
+.nr a 0 1
+E 2
+.de t
+.sp 1v
+.ne .5i
+.cs 3
+.ti -.5i
+.ss 18
+D 2
+\f3\s9\\n+a. \\$1\s0\fP
+E 2
+I 2
+\f3\s9\\$2. \\$3\s0\fP
+E 2
+.ss 12
+.if t .sp .5v
+.cs 3 36
+D 2
+.so toc\\na
+E 2
+I 2
+.so \\$1
+E 2
+..
+D 2
+.t "Commands and Application Programs"
+.t "System Calls"
+.t "Subroutines"
+.t "Special Files"
+.t "File Formats"
+.t "Games"
+.t "Miscellaneous"
+.t "System Maintenance"
+E 2
+I 2
+.t toc1 1 "Commands and Application Programs"
+.t toc2 2 "System Calls"
+.t toc3 3 "C Library Subroutines"
+.t toc3f 3F "Fortran Library"
+D 3
+.t toc3m 3M "Math Library"
+.t toc3n 3N "Internet Network Library"
+.t toc3s 3S "C Standard I/O Library Subroutines"
+.t toc3x 3X "Other Libraries"
+.t toc3c 3C "Compatibility Library Subroutines"
+E 3
+.t toc4 4 "Special Files"
+.t toc5 5 "File Formats"
+.t toc6 6 "Games"
+.t toc7 7 "Miscellaneous"
+.t toc8 8 "System Maintenance"
+E 2
+.in -.5i
+.cs 3
+.if n .ta 8n 16n 24n 32n 40n 48n 56n 64n 72n 80n
+.if t .ta .5i 1i 1.5i 2i 2.5i 3i 3.5i 4i 4.5i 5i 5.5i 6i 6.5i
+E 1

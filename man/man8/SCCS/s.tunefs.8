@@ -1,0 +1,150 @@
+h62340
+s 00004/00003/00088
+d D 6.4 86/05/22 13:27:30 mckusick 5 4
+c explain it clearly
+e
+s 00003/00002/00088
+d D 6.3 86/05/21 22:10:31 mckusick 4 3
+c update citations
+e
+s 00016/00003/00074
+d D 6.2 85/09/12 00:02:15 mckusick 3 2
+c allow specification of optimization preference
+e
+s 00001/00001/00076
+d D 6.1 85/04/27 16:00:42 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00077/00000/00000
+d D 5.1 85/04/27 16:00:34 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TUNEFS 8 "20 February 1983"
+E 2
+I 2
+.TH TUNEFS 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+tunefs \- tune up an existing file system
+.SH SYNOPSIS
+.B /etc/tunefs
+.I tuneup-options
+.IR special | filesys
+.SH DESCRIPTION
+.I Tunefs
+is designed to change the dynamic parameters of a file system
+which affect the layout policies.
+The parameters which are to be changed are indicated by the flags
+given below:
+.IP "\fB\-a\fP maxcontig"
+.br
+This specifies the maximum number of contiguous blocks that will
+be laid out before forcing a rotational delay (see \-d below).
+The default value is one, since most device drivers require
+an interrupt per disk transfer.
+Device drivers that can chain several buffers together in a single
+transfer should set this to the maximum chain length.
+.IP "\fB\-d\fP rotdelay"
+.br
+This specifies the expected time (in milliseconds)
+to service a transfer completion
+interrupt and initiate a new transfer on the same disk.
+It is used to decide how much rotational spacing to place between
+successive blocks in a file.
+.IP "\fB\-e\fP maxbpg"
+.br
+This indicates the maximum number of blocks any single file can
+allocate out of a cylinder group before it is forced to begin
+allocating blocks from another cylinder group.
+Typically this value is set to about one quarter of the total blocks
+in a cylinder group.
+The intent is to prevent any single file from using up all the
+blocks in a single cylinder group,
+thus degrading access times for all files subsequently allocated 
+in that cylinder group.
+The effect of this limit is to cause big files to do long seeks
+more frequently than if they were allowed to allocate all the blocks
+in a cylinder group before seeking elsewhere.
+For file systems with exclusively large files, 
+this parameter should be set higher.
+.IP "\fB\-m\fP minfree"
+.br
+This value specifies the percentage of space held back
+from normal users; the minimum free space threshold.
+The default value used is 10%.
+This value can be set to zero, however up to a factor of three
+in throughput will be lost over the performance obtained at a 10%
+threshold.
+Note that if the value is raised above the current usage level,
+users will be unable to allocate files until enough files have
+been deleted to get under the higher threshold.
+I 3
+.IP "\fB\-o\fP optimization preference"
+.br
+The file system can either try to minimize the time spent
+allocating blocks, or it can attempt minimize the space
+fragmentation on the disk.
+If the value of minfree (see above) is less than 10%,
+then the file system should optimize for space to avoid
+running out of full sized blocks.
+For values of minfree greater than or equal to 10%,
+fragmentation is unlikely to be problematical, and
+the file system can be optimized for time.
+E 3
+.SH "SEE ALSO"
+fs(5),
+newfs(8),
+mkfs(8)
+.PP
+D 3
+McKusick, Joy, Leffler; "A Fast File System for Unix",
+Computer Systems Research Group, Dept of EECS, Berkeley, CA 94720;
+TR #7, September 1982.
+E 3
+I 3
+M. McKusick, W. Joy, S. Leffler, R. Fabry,
+``A Fast File System for UNIX'',
+\fIACM Transactions on Computer Systems 2\fP, 3.
+pp 181-197, August 1984.
+D 4
+(reprinted in the System Manager's Manual and in Volume 2c)
+E 4
+I 4
+(reprinted in the System Manager's Manual, SMM:14)
+E 4
+E 3
+.SH BUGS
+This program should work on mounted and active file systems.
+Because the super-block is not kept in the buffer cache,
+D 5
+the program will only take effect if it is run on dismounted file systems.
+D 4
+(if run on the root file system, the system must be rebooted)
+E 4
+I 4
+To take effect on the root file system, the system must be rebooted
+after being tuned.
+E 5
+I 5
+the changes will only take effect if the program
+is run on dismounted file systems.
+To change the root file system, the system must be rebooted
+after the file system is tuned.
+E 5
+E 4
+.PP
+You can tune a file system, but you can't tune a fish.
+E 1

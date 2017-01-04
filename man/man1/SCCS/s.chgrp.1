@@ -1,0 +1,102 @@
+h57566
+s 00005/00007/00039
+d D 6.3 88/04/21 11:23:34 bostic 4 3
+c minor cleanups, clarify -f flag
+e
+s 00002/00000/00044
+d D 6.2 86/05/22 10:39:22 mckusick 3 2
+c clarify that -R does not follow symbolic links
+e
+s 00009/00002/00035
+d D 6.1 85/04/29 21:05:43 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00037/00000/00000
+d D 5.1 85/04/29 21:05:24 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHGRP 1 "28 April 1982"
+E 2
+I 2
+.TH CHGRP 1 "%Q%"
+E 2
+.UC 5
+.SH NAME
+chgrp \- change group
+.SH SYNOPSIS
+.B chgrp
+D 2
+[ -f ]
+E 2
+I 2
+D 4
+[ -f -R ]
+E 4
+I 4
+[
+.B -Rf
+]
+E 4
+E 2
+group file ...
+.SH DESCRIPTION
+.I Chgrp
+changes the group-ID of the
+.I files
+to
+.IR group .
+The group may be either a decimal GID or
+a group name found in the group-ID file.
+.PP
+The user invoking 
+.I chgrp
+must belong
+to the specified group and be the owner of the file, or be the super-user.
+.PP
+D 4
+No errors are reported when the
+E 4
+I 4
+No errors, except for usage errors, are reported when the
+E 4
+.B \-f
+(force) option is given.
+I 2
+.PP
+When the
+.B \-R
+option is given, 
+.I chgrp
+recursively descends its directory arguments
+setting the specified group-ID.
+I 3
+When symbolic links are encountered, their group is changed,
+but they are not traversed.
+E 3
+E 2
+D 4
+.SH FILES
+/etc/group
+E 4
+.SH "SEE ALSO"
+D 4
+chown(2),
+passwd(5),
+group(5)
+E 4
+I 4
+chown(1), chown(2), passwd(5), group(5)
+E 4
+E 1

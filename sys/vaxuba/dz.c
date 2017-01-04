@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dz.c	7.2 (Berkeley) 1/14/87
+ *	@(#)dz.c	7.4 (Berkeley) 12/9/04
  */
 
 #include "dz.h"
@@ -168,7 +168,7 @@ dzopen(dev, flag)
 		return (EBUSY);
 	(void) dzmctl(dev, DZ_ON, DMSET);
 	(void) spl5();
-	while ((tp->t_state & TS_CARR_ON) == 0) {
+	while ((tp->t_state & TS_CARR_ON) == 0 && !(flag & FNDELAY)) {
 		tp->t_state |= TS_WOPEN;
 		sleep((caddr_t)&tp->t_rawq, TTIPRI);
 	}
@@ -465,7 +465,7 @@ dzstart(tp)
 	}
 	if (tp->t_outq.c_cc == 0)
 		goto out;
-	if (tp->t_flags & (RAW|LITOUT))
+	if (tp->t_flags & (RAW|LITOUT|PASS8))
 		cc = ndqb(&tp->t_outq, 0);
 	else {
 		cc = ndqb(&tp->t_outq, 0200);

@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vwind.c	7.4 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_vwind.c	7.5 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -26,8 +26,8 @@ static char *sccsid = "@(#)ex_vwind.c	7.4 (Berkeley) 3/9/87";
  */
 vmoveto(addr, curs, context)
 	register line *addr;
-	char *curs;
-	char context;
+	u_char *curs;
+	u_char context;
 {
 
 	markit(addr);
@@ -41,8 +41,8 @@ vmoveto(addr, curs, context)
  */
 vjumpto(addr, curs, context)
 	register line *addr;
-	char *curs;
-	char context;
+	u_char *curs;
+	u_char context;
 {
 
 	ignore(noteit(0));
@@ -59,7 +59,7 @@ vjumpto(addr, curs, context)
  */
 vupdown(cnt, curs)
 	register int cnt;
-	char *curs;
+	u_char *curs;
 {
 
 	if (cnt > 0)
@@ -178,7 +178,7 @@ dcontxt:
  */
 vcontext(addr, where)
 	register line *addr;
-	char where;
+	u_char where;
 {
 	register line *top;
 
@@ -454,7 +454,7 @@ vdepth()
  * Move onto a new line, with cursor at position curs.
  */
 vnline(curs)
-	char *curs;
+	u_char *curs;
 {
 
 	if (curs)

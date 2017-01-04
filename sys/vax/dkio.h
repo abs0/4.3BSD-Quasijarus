@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dkio.h	7.2 (Berkeley) 12/22/87
+ *	@(#)dkio.h	7.1 (Berkeley) 6/5/86
  */
 
 /*
@@ -15,4 +15,4 @@
  */
 
 /* disk io control commands */
-#define DKIOCHDR	_IO('d', 1)	/* next I/O will read/write header */
+#define DKIOCHDR	_IO(d, 1)	/* next I/O will read/write header */

@@ -1,0 +1,27 @@
+h23707
+s 00003/00002/00001
+d D 1.2 84/01/19 16:04:10 edward 2 1
+c fix up
+e
+s 00003/00000/00000
+d D 1.1 83/12/17 12:41:41 edward 1 0
+c date and time created 83/12/17 12:41:41 by edward
+e
+u
+U
+t
+T
+I 1
+D 2
+./"name"16t"specs"16t"nation"nppb1+
++/"row"8t"col"8t"dir"nddc1+
+E 2
+I 2
+./"name"16t"specs"16t"nation"nppb+
++/"row"8t"col"8t"dir"nddb+
+E 2
++/"file"np
+I 2
++/t
+E 2
+E 1

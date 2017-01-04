@@ -1,0 +1,8 @@
+To make pic,
+	make
+
+The lex phase in particular takes an eon, about 15 minutes
+of cpu time on a 750.  Be patient.
+
+The file UNDOC lists new features, some of which have
+found their way into the technical report of June 1985.

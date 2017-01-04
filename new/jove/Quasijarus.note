@@ -1,0 +1,6 @@
+Quasijarus Consortium has no interest in Jove, does not approve of it,
+and will not support it.  It continues to be provided with our BSD releases
+only because of the USD:17 document.  The same version that shipped with
+4.3BSD is included (static and unmaintained) ostensibly for the benefit
+of users who have read the wildly popular Usenix 4.3BSD manuals and want
+to use Jove as described in USD:17.

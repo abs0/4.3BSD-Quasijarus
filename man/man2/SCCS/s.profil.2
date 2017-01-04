@@ -1,0 +1,146 @@
+h16409
+s 00002/00005/00055
+d D 6.2 86/05/14 11:12:13 karels 4 3
+c update for VAX
+e
+s 00001/00001/00059
+d D 6.1 85/05/09 16:06:49 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00010/00016/00050
+d D 5.1 85/05/09 16:06:41 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00066/00000/00000
+d D 4.1 85/05/09 16:06:34 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PROFIL 2 
+E 2
+I 2
+D 3
+.TH PROFIL 2 "12 February 1983"
+E 3
+I 3
+.TH PROFIL 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+profil \- execution time profile
+.SH SYNOPSIS
+.nf
+.B profil(buff, bufsiz, offset, scale)
+.B char *buff;
+.B int bufsiz, offset, scale;
+.fi
+.SH DESCRIPTION
+.I Buff
+points to an area of core whose length (in bytes) is given by
+.IR bufsiz .
+After this call, the user's program counter (pc)
+D 2
+is examined each clock tick (60th second);
+E 2
+I 2
+is examined each clock tick (10 milliseconds);
+E 2
+.I offset
+is subtracted from it, and the result multiplied by
+.IR scale .
+If the resulting number corresponds to a word
+inside
+.I buff,
+that word is incremented.
+.PP
+The scale is interpreted as an unsigned,
+D 4
+fixed-point fraction with binary point at the
+D 2
+left: 0177777(8) gives a 1-1 mapping of pc's to words
+E 2
+I 2
+left: 0x10000 gives a 1-1 mapping of pc's to words
+E 4
+I 4
+fixed-point fraction with 16 bits of fraction:
+0x10000 gives a 1-1 mapping of pc's to words
+E 4
+E 2
+in
+.I buff;
+D 2
+077777(8) maps each pair of instruction words
+E 2
+I 2
+0x8000 maps each pair of instruction words
+E 2
+together.
+D 2
+02(8) maps all instructions onto the beginning of
+E 2
+I 2
+D 4
+0x2 maps all instructions onto the beginning of
+E 2
+.I buff
+(producing a non-interrupting core clock).
+E 4
+.PP
+Profiling is turned off by giving a
+.I scale
+of 0 or 1.
+It is rendered
+ineffective by giving a
+.I bufsiz
+of 0.
+Profiling is turned off when an
+D 2
+.I exec
+E 2
+I 2
+.I execve
+E 2
+is executed, but remains on in child and parent both
+after a
+.IR fork .
+D 2
+Profiling may be turned off if an update in
+E 2
+I 2
+Profiling is turned off if an update in
+E 2
+.I buff
+would cause a memory fault.
+I 2
+.SH "RETURN VALUE
+A 0, indicating success, is always returned.
+E 2
+.SH "SEE ALSO"
+D 2
+monitor(3), prof(1)
+.SH "ASSEMBLER (PDP-11)"
+(profil = 44.)
+.br
+.B sys profil; buff; bufsiz; offset; scale
+.SH BUGS
+Profiling does not work for interpreters; if a signal were given
+to a process when its cpu-time clock ticked then profiling interpreters
+would be possible.
+E 2
+I 2
+gprof(1), setitimer(2), monitor(3)
+E 2
+E 1

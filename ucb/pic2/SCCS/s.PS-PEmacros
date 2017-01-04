@@ -1,0 +1,26 @@
+h27542
+s 00000/00000/00010
+d D 3.1 85/07/30 15:06:27 jaap 2 1
+c Edition 8 Version of pic (July 1985). 
+c Local hacks from jaap.
+e
+s 00010/00000/00000
+d D 1.1 85/07/23 11:24:21 jaap 1 0
+c date and time created 85/07/23 11:24:21 by jaap
+e
+u
+U
+t
+T
+I 1
+.de PS	\" start picture
+.	\" $1 is height, $2 is width, both in inches
+.if t .sp .3
+.in (\\n(.lu-\\$2)/2u
+.ne \\$1
+..
+.de PE	\" end of picture
+.in
+.if t .sp .6
+..
+E 1

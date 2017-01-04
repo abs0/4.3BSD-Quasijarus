@@ -1,0 +1,91 @@
+h29639
+s 00002/00006/00042
+d D 6.2 88/06/30 17:16:37 bostic 4 3
+c allow both -a and file names, minor cleanups
+e
+s 00001/00001/00047
+d D 6.1 85/04/27 13:53:02 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00047
+d D 5.1 85/04/27 13:52:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00048/00000/00000
+d D 4.1 85/04/27 13:52:26 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SWAPON 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH SWAPON 8 "4 February 1983"
+E 3
+I 3
+.TH SWAPON 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+swapon \- specify additional device for paging and swapping
+.SH SYNOPSIS
+D 4
+.B "/etc/swapon"
+.B \-a
+.br
+.B "/etc/swapon"
+name ...
+E 4
+I 4
+.B "swapon [-a] [special_file ...]"
+E 4
+.SH DESCRIPTION
+.I Swapon
+is used to specify additional devices on which paging and swapping
+are to take place.
+The system begins by swapping and paging on only a single device
+so that only one disk is required at bootstrap time.
+Calls to
+.I swapon
+normally occur in the system multi-user initialization file
+.I /etc/rc
+making all swap devices available, so that the paging and swapping
+activity is interleaved across several devices.
+.PP
+Normally, the
+.B \-a
+argument is given, causing all devices marked as ``sw''
+swap devices in
+.B /etc/fstab
+to be made available.
+.PP
+The second form gives individual block devices as given
+in the system swap configuration table.  The call makes only this space
+available to the system for swap allocation.
+.SH SEE ALSO
+swapon(2), init(8)
+.SH FILES
+.DT
+D 4
+/dev/[ru][pk]?b	normal paging devices
+E 4
+I 4
+/dev/[ru][pk]?b	standard paging devices
+E 4
+.SH BUGS
+There is no way to stop paging and swapping on a device.
+It is therefore not possible to make use of devices which may be
+dismounted during system operation.
+E 1

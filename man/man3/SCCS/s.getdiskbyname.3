@@ -1,0 +1,104 @@
+h01589
+s 00006/00017/00022
+d D 6.3 87/06/18 21:20:58 karels 4 3
+c update for pack labels
+e
+s 00001/00001/00038
+d D 6.2 86/05/12 17:40:34 karels 3 2
+c move from 3X to 3
+e
+s 00001/00001/00038
+d D 6.1 85/05/15 16:19:11 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00039/00000/00000
+d D 5.1 85/05/15 16:19:05 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETDISKBYNAME 3X "4 March 1983"
+E 2
+I 2
+D 3
+.TH GETDISKBYNAME 3X "%Q%"
+E 3
+I 3
+.TH GETDISKBYNAME 3 "%Q%"
+E 3
+E 2
+.UC 5
+.SH NAME
+D 4
+getdiskbyname \- get disk description by its name
+E 4
+I 4
+getdiskbyname \- get generic disk description by its name
+E 4
+.SH SYNOPSIS
+.nf
+D 4
+.B #include <disktab.h>
+E 4
+I 4
+.B #include <sys/disklabel.h>
+E 4
+.PP
+D 4
+.B struct disktab *
+E 4
+I 4
+.B struct disklabel *
+E 4
+.B getdiskbyname(name)
+.B char *name;
+.fi
+.SH DESCRIPTION
+.I Getdiskbyname
+D 4
+takes a disk name (e.g. rm03) and returns a structure
+E 4
+I 4
+takes a disk name (e.g. rm03) and returns a prototype disk label
+E 4
+describing its geometry information and the standard
+D 4
+disk partition tables.  All information obtained from
+E 4
+I 4
+disk partition tables.  All information is obtained from
+E 4
+the 
+.IR disktab (5)
+file.
+D 4
+.PP
+.RI < disktab.h >
+has the following form:
+.PP
+.nf
+.DT
+.so /usr/include/disktab.h
+E 4
+.SH "SEE ALSO"
+D 4
+disktab(5)
+.SH BUGS
+This information should be obtained from the system for
+locally available disks (in particular, the disk partition
+tables).
+E 4
+I 4
+disklabel(5), disktab(5), disklabel(8)
+E 4
+E 1

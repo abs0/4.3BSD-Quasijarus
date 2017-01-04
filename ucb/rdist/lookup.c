@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)lookup.c	5.4 (Berkeley) 6/29/88";
+static char sccsid[] = "@(#)lookup.c	5.5 (Berkeley) 10/23/04";
 #endif /* not lint */
 
 #include "defs.h"
@@ -44,6 +44,10 @@ define(name)
 	register struct namelist *nl;
 	struct namelist *value;
 
+	if (strlen(name) > 128) {
+		fprintf(stderr, "rdist: -d arg is too long.\n");
+		exit(1);
+	}
 	if (debug)
 		printf("define(%s)\n", name);
 

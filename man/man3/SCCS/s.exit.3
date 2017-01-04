@@ -1,0 +1,55 @@
+h06700
+s 00001/00001/00025
+d D 6.2 86/05/12 17:10:44 karels 3 2
+c intro(3M) => math(3M), move see also's to end
+e
+s 00001/00001/00025
+d D 6.1 85/05/15 16:17:05 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00026/00000/00000
+d D 5.1 85/05/15 16:16:58 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH EXIT 3 "1 April 1983"
+E 2
+I 2
+.TH EXIT 3 "%Q%"
+E 2
+.UC 5
+.SH NAME
+exit \- terminate a process after flushing any pending output
+.SH SYNOPSIS
+.nf
+.ft B
+exit(status)
+int status;
+.fi
+.SH DESCRIPTION
+.I Exit
+terminates a process after calling the Standard I/O library
+function
+.I _cleanup
+to flush any buffered output.
+.I Exit
+never returns.
+.SH "SEE ALSO"
+D 3
+exit(2), intro(3S)
+E 3
+I 3
+exit(2), intro(3)
+E 3
+E 1

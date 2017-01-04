@@ -1,0 +1,89 @@
+h53054
+s 00007/00003/00046
+d D 6.2 86/12/01 18:39:35 bostic 3 1
+c added "see also"
+e
+s 00012/00025/00024
+d R 6.2 86/11/25 21:05:10 bostic 2 1
+c rewrote to reflect reality
+e
+s 00049/00000/00000
+d D 6.1 85/11/08 18:31:09 mckusick 1 0
+c date and time created 85/11/08 18:31:09 by mckusick
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH GETUSERSHELL 3  "%Q%"
+.UC 6
+.SH NAME
+getusershell, setusershell, endusershell \- get legal user shells
+.SH SYNOPSIS
+.nf
+.B char *getusershell()
+.PP
+.B setusershell()
+.PP
+.B endusershell()
+.fi
+.SH DESCRIPTION
+.I Getusershell
+returns a pointer to a legal user shell as defined by the
+system manager in the file 
+.IR /etc/shells .
+If 
+.I /etc/shells
+D 3
+does not exist, the two standard system shells
+E 3
+I 3
+is unreadable or does not exist,
+.I getusershell
+behaves as if
+E 3
+.I /bin/sh
+and
+.I /bin/csh
+D 3
+are returned.
+E 3
+I 3
+were listed in the file.
+E 3
+.PP
+.I Getusershell
+reads the next
+line (opening the file if necessary);
+.I setusershell
+rewinds the file;
+.I endusershell
+closes it.
+.SH FILES
+/etc/shells
+I 3
+.SH "SEE ALSO"
+shells(5)
+E 3
+.SH DIAGNOSTICS
+The routine
+.I getusershell
+D 3
+returns a null pointer (0) on EOF or error.
+E 3
+I 3
+returns a null pointer (0) on EOF.
+E 3
+.SH BUGS
+All information
+is contained in a static area
+so it must be copied if it is
+to be saved.
+E 1

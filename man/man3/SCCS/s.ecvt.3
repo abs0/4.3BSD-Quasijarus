@@ -1,0 +1,120 @@
+h50827
+s 00001/00001/00055
+d D 6.1 85/05/15 14:54:44 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00016/00048
+d D 5.1 85/05/15 14:54:35 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00064/00000/00000
+d D 4.1 85/05/15 14:54:28 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ECVT 3 
+E 2
+I 2
+D 3
+.TH ECVT 3  "19 January 1983"
+E 3
+I 3
+.TH ECVT 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+ecvt, fcvt, gcvt \- output conversion
+.SH SYNOPSIS
+.nf
+.B char *ecvt(value, ndigit, decpt, sign)
+.B double value;
+.B int ndigit, *decpt, *sign;
+.PP
+.B char *fcvt(value, ndigit, decpt, sign)
+.B double value;
+.B int ndigit, *decpt, *sign;
+.PP
+.B char *gcvt(value, ndigit, buf)
+.B double value;
+.B char *buf;
+.fi
+.SH DESCRIPTION
+.I Ecvt
+converts the 
+.I value
+to a null-terminated string of
+.I ndigit
+D 2
+ASCII digits
+and returns a pointer thereto.
+E 2
+I 2
+ASCII digits and returns a pointer thereto.
+E 2
+The position of the decimal point relative to the
+D 2
+beginning of the string is stored indirectly
+through
+E 2
+I 2
+beginning of the string is stored indirectly through
+E 2
+.IR decpt ""
+D 2
+(negative means to the left of the
+returned digits).
+If the sign of the result is negative,
+the word pointed to by
+E 2
+I 2
+(negative means to the left of the returned digits).
+If the sign of the result is negative, the word pointed to by
+E 2
+.IR sign ""
+D 2
+is non-zero, otherwise
+it is zero.
+The low-order digit is rounded.
+E 2
+I 2
+is non-zero, otherwise it is zero.  The low-order digit is rounded.
+E 2
+.PP
+.IR Fcvt " is identical to " "ecvt\fR, except that the correct digit"
+has been rounded for Fortran F-format output of the number
+of digits specified by
+.IR \(*_ndigits .
+.PP
+.I Gcvt
+converts the
+.I value
+to a null-terminated ASCII string in
+.I buf
+and returns a pointer to 
+.I buf.
+It attempts to produce
+.I ndigit
+D 2
+significant digits in Fortran F format if
+possible, otherwise E format, ready for
+printing.
+Trailing zeros may be suppressed.
+E 2
+I 2
+significant digits in Fortran F format if possible, otherwise E format,
+ready for printing.  Trailing zeros may be suppressed.
+E 2
+.SH "SEE ALSO"
+printf(3)
+.SH BUGS
+The return values point to static data
+whose content is overwritten by each call.
+E 1

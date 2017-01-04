@@ -1,0 +1,128 @@
+h16655
+s 00000/00000/00073
+d D 4.1 83/07/25 20:15:09 eric 3 2
+c 4.2 release version
+e
+s 00011/00008/00062
+d D 1.2 82/11/14 20:12:42 eric 2 1
+c basic cleanup for 4.2
+e
+s 00070/00000/00000
+d D 1.1 82/11/14 20:06:46 eric 1 0
+c date and time created 82/11/14 20:06:46 by eric
+e
+u
+U
+f b 
+f i 
+t
+T
+I 1
+D 2
+.TH syslog 3
+E 2
+I 2
+.TH SYSLOG 3
+E 2
+.\"	%W%	%Y%	%G%
+.SH NAME
+syslog, openlog, closelog -- control system log
+.SH SYNOPSIS
+# include <syslog.h>
+D 2
+
+E 2
+I 2
+.PP
+E 2
+openlog(ident, logstat)
+.br
+char *ident;
+D 2
+
+E 2
+I 2
+.PP
+E 2
+syslog(priority, message, parameters ... )
+.br
+char *message;
+D 2
+
+E 2
+I 2
+.PP
+E 2
+closelog()
+.SH DESCRIPTION
+.I Syslog
+D 2
+writes the
+E 2
+I 2
+arranges to
+write the
+E 2
+.I message
+D 2
+onto the log file
+.I /dev/log.
+The message is tagged with priority
+E 2
+I 2
+onto the
+system log maintained by
+.IR syslog (8).
+The message is tagged with
+E 2
+.I priority.
+The message looks like a
+.I printf(3)
+string except that
+.B %m
+is replaced by the current error message
+(collected from
+.I errno\c
+).
+A trailing newline is added if needed.
+This message will be read by
+.I syslog(8)
+and output to the system console or files as appropriate.
+.PP
+If special processing is needed,
+.I openlog
+can be called to initialize the log file.
+Parameters are
+.I ident
+which is prepended to every message,
+and
+.I logstat
+I 2
+which is
+E 2
+a bit field indicating special status;
+current values are:
+.IP LOG_PID \w'LOG_PID'u+3
+log the process id with each message:
+useful for identifying instantiations of daemons.
+.LP
+.I Openlog
+returns zero on success.
+If it cannot open the file
+.I /dev/log,
+it writes on
+.I /dev/console
+instead and returns -1.
+.PP
+.I Closelog
+can be used to close the log file.
+.SH EXAMPLES
+.nf
+syslog(LOG_SALERT, "who: internal error 23");
+
+openlog("serverftp", LOG_PID);
+syslog(LOG_INFO, "Connection from host %d", CallingHost);
+.fi
+.SH SEE\ ALSO
+syslog(8)
+E 1

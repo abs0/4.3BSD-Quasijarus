@@ -1,0 +1,102 @@
+h35602
+s 00008/00005/00053
+d D 6.2 86/05/14 10:03:23 karels 3 2
+c fixes and updates
+e
+s 00001/00001/00057
+d D 6.1 85/05/15 11:57:13 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00058/00000/00000
+d D 5.1 85/05/15 11:57:02 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LISTEN 2 "12 February 1983"
+E 2
+I 2
+.TH LISTEN 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+listen \- listen for connections on a socket
+.SH SYNOPSIS
+.nf
+.ft B
+listen(s, backlog)
+int s, backlog;
+.fi
+.SH DESCRIPTION
+To accept connections, a socket
+is first created with
+.IR socket (2),
+D 3
+a backlog for incoming connections is specified with
+.IR listen (2)
+E 3
+I 3
+a willingness to accept incoming connections and
+a queue limit for incoming connections are specified with
+.IR listen (2),
+E 3
+and then the connections are
+accepted with
+.IR accept (2).
+The
+.I listen
+call applies only to sockets of type
+SOCK_STREAM
+or
+D 3
+SOCK_PKTSTREAM.
+E 3
+I 3
+SOCK_SEQPACKET.
+E 3
+.PP
+The
+.I backlog
+parameter defines the maximum length the queue of
+pending connections may grow to.
+If a connection
+D 3
+request arrives with the queue full the client will
+receive an error with an indication of ECONNREFUSED.
+E 3
+I 3
+request arrives with the queue full the client may
+receive an error with an indication of ECONNREFUSED,
+or, if the underlying protocol supports retransmission,
+the request may be ignored so that retries may succeed.
+E 3
+.SH "RETURN VALUE
+A 0 return value indicates success; \-1 indicates an error.
+.SH "ERRORS
+The call fails if:
+.TP 20
+[EBADF]
+The argument \fIs\fP is not a valid descriptor.
+.TP 20
+[ENOTSOCK]
+The argument \fIs\fP is not a socket.
+.TP 20
+[EOPNOTSUPP]
+The socket is not of a type that supports the operation \fIlisten\fP.
+.SH "SEE ALSO"
+accept(2), connect(2), socket(2)
+.SH BUGS
+The
+.I backlog
+is currently limited (silently) to 5.
+E 1

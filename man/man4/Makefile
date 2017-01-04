@@ -14,28 +14,25 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.2 (Berkeley) 7/9/88
+#	@(#)Makefile	5.3 (Berkeley) 10/20/04
 #
-MDIR=	/usr/man/cat4
-SRCS=	arp.4 bk.4 drum.4 icmp.4 idp.4 imp.4 inet.4 ip.4 kdb.4 \
-	lo.4 netintro.4 ns.4 nsip.4 null.4 pty.4 spp.4 tcp.4 tty.4 udp.4
-OBJS=	arp.0 bk.0 drum.0 icmp.0 idp.0 imp.0 inet.0 ip.0 kdb.0 \
-	lo.0 netintro.0 ns.0 nsip.0 null.0 pty.0 spp.0 tcp.0 tty.0 udp.0
-LINKS=	networking.0
+MDIR=	/usr/man/man4
+SUBDIR=	tahoe vax
 
-.SUFFIXES: .4 .0
+all:
 
-.4.0:
-	${DESTDIR}/usr/man/manroff $*.4 > $*.0
-
-all: ${OBJS}
+psman: FRC
+	for i in *.4 *.4?; do echo $$i; pstroff -man $$i > $$i.ps; done
+	for i in ${SUBDIR}; do (cd $$i; make ${MFLAGS} psman); done
 
 clean: FRC
-	rm -f ${OBJS}
+	rm -f *.ps
+	for i in ${SUBDIR}; do (cd $$i; make ${MFLAGS} clean); done
 
 install: FRC
-	cd ${DESTDIR}${MDIR}; rm -f *.0
-	install -c -o bin -g bin -m 444 ${OBJS} ${DESTDIR}${MDIR}
-	ln ${DESTDIR}${MDIR}/netintro.0 ${DESTDIR}${MDIR}/networking.0
+	cd ${DESTDIR}${MDIR}; rm -f *.4 *.4?
+	install -c -o bin -g bin -m 444 *.4 *.4? ${DESTDIR}${MDIR}
+	install -c -o bin -g bin -m 444 links/*.4? ${DESTDIR}${MDIR}
+	cd ${MACHINE}; make ${MFLAGS} DESTDIR=${DESTDIR} install
 
 FRC:

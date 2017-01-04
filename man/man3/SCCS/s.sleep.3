@@ -1,0 +1,88 @@
+h17270
+s 00001/00003/00031
+d D 6.2 86/05/12 20:02:16 karels 4 3
+c ualarm
+e
+s 00001/00001/00033
+d D 6.1 85/05/15 15:49:46 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00005/00026
+d D 5.1 85/05/15 15:49:32 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00031/00000/00000
+d D 4.1 85/05/15 15:49:18 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SLEEP 3 
+E 2
+I 2
+D 3
+.TH SLEEP 3  "19 January 1983"
+E 3
+I 3
+.TH SLEEP 3  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+sleep \- suspend execution for interval
+.SH SYNOPSIS
+.nf
+.B sleep(seconds)
+.B unsigned seconds;
+.fi
+.SH DESCRIPTION
+The current process is suspended from execution for the number
+of seconds specified by the argument.
+The actual suspension time may be up to 1 second less than
+that requested, because scheduled wakeups occur at fixed 1-second intervals,
+and an arbitrary amount longer because of other activity
+in the system.
+.PP
+D 2
+The routine is implemented by setting an alarm clock signal
+E 2
+I 2
+The routine is implemented by setting an interval timer
+E 2
+and pausing until it occurs.
+D 2
+The previous state of this signal is saved and restored.
+If the sleep time exceeds the time to the alarm signal,
+E 2
+I 2
+The previous state of this timer is saved and restored.
+If the sleep time exceeds the time to the expiration of the
+previous timer,
+E 2
+the process sleeps only until the signal would have occurred, and the
+signal is sent 1 second later.
+.SH "SEE ALSO"
+D 2
+alarm(2), pause(2)
+E 2
+I 2
+D 4
+setitimer(2), sigpause(2)
+.SH BUGS
+An interface with finer resolution is needed.
+E 4
+I 4
+setitimer(2), sigpause(2), usleep(3)
+E 4
+E 2
+E 1

@@ -1,0 +1,42 @@
+h38571
+s 00000/00000/00021
+d D 2.2 83/09/09 21:13:27 garrison 3 2
+c Incorporate changes from Arizona
+e
+s 00002/00000/00019
+d D 2.1 83/06/22 14:56:37 garrison 2 1
+c Add keywords, make new release to send to Arizona
+e
+s 00019/00000/00000
+d D 1.1 83/06/06 11:50:12 garrison 1 0
+c date and time created 83/06/06 11:50:12 by garrison
+e
+u
+U
+t
+T
+I 1
+#
+I 2
+#	"%W%	%G%";
+#
+E 2
+#  format for listrefs
+#
+I BMACLIB/bibinc.shortnames
+T AT
+H
+.so \*(l]/bmac.std
+.de s[   \" start reference
+.nh
+.LP
+..
+.LP
+.if t \{\
+.   nr LL 6.0i
+.   nr LT \n(LL
+.   nr PS 7
+.   nr VS 8.5p\}
+.LP
+.nr X 1
+E 1

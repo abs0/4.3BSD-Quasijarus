@@ -1,0 +1,199 @@
+h06994
+s 00008/00004/00096
+d D 6.6 86/03/29 05:01:13 lepreau 7 6
+c add some error returns; remove non-zero partial block bug warning.
+e
+s 00003/00002/00097
+d D 6.5 85/10/28 18:24:16 mckusick 6 5
+c fix types
+e
+s 00001/00001/00098
+d D 6.4 85/08/26 23:33:27 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00001/00001/00098
+d D 6.3 85/06/30 17:05:21 sechrest 4 3
+c improved english
+e
+s 00014/00007/00085
+d D 6.2 85/05/22 18:32:13 mckusick 3 2
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00091
+d D 6.1 85/05/15 12:02:20 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00092/00000/00000
+d D 5.1 85/05/15 12:02:13 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TRUNCATE 2 "7 July 1983"
+E 2
+I 2
+.TH TRUNCATE 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+truncate \- truncate a file to a specified length
+.SH SYNOPSIS
+.nf
+.ft B
+truncate(path, length)
+char *path;
+D 6
+int length;
+E 6
+I 6
+off_t length;
+E 6
+.PP
+.ft B
+ftruncate(fd, length)
+D 6
+int fd, length;
+E 6
+I 6
+int fd;
+off_t length;
+E 6
+.fi
+.SH DESCRIPTION
+.I Truncate
+causes the file named by
+.I path
+or referenced by
+.I fd
+to be truncated to at most
+.I length
+bytes in size.  If the file previously
+was larger than this size, the extra data
+is lost.
+With
+.IR ftruncate ,
+the file must be open for writing.
+.SH "RETURN VALUES
+A value of 0 is returned if the call succeeds.  If the call
+fails a \-1 is returned, and the global variable \fIerrno\fP
+specifies the error.
+.SH "ERRORS
+.I Truncate
+succeeds unless:
+.TP 15
+D 3
+[EPERM]
+E 3
+I 3
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+[EINVAL]
+E 3
+The pathname contains a character with the high-order bit set.
+.TP 15
+D 3
+[ENOENT]
+The pathname was too long.
+E 3
+I 3
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+E 3
+.TP 15
+D 3
+[ENOTDIR]
+A component of the path prefix of \fIpath\fP is not a directory.
+.TP 15
+E 3
+[ENOENT]
+The named file does not exist.
+.TP 15
+[EACCES]
+D 3
+A component of the \fIpath\fP prefix denies search permission.
+E 3
+I 3
+Search permission is denied for a component of the path prefix.
+E 3
+.TP 15
+I 7
+[EACCES]
+The named file is not writable by the user.
+.TP 15
+E 7
+I 3
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+E 3
+[EISDIR]
+The named file is a directory.
+.TP 15
+[EROFS]
+The named file resides on a read-only file system.
+.TP 15
+[ETXTBSY]
+The file is a pure procedure (shared text) file that is being executed.
+I 3
+.TP 15
+[EIO]
+An I/O error occurred updating the inode.
+E 3
+.TP 15
+[EFAULT]
+D 5
+.I Name
+E 5
+I 5
+.I Path
+E 5
+points outside the process's allocated address space.
+.PP
+.I Ftruncate
+succeeds unless:
+.TP 15
+[EBADF]
+The
+.I fd
+is not a valid descriptor.
+.TP 15
+[EINVAL]
+The
+.I fd
+references a socket, not a file.
+I 7
+.TP 15
+[EINVAL]
+The
+.I fd
+is not open for writing.
+E 7
+.SH "SEE ALSO"
+open(2)
+.SH BUGS
+D 7
+Partial blocks discarded as the result of truncation
+are not zero filled; this can result in holes in files
+D 4
+which do not read as zero.
+E 4
+I 4
+that do not read as zero.
+E 4
+.PP
+E 7
+These calls should be generalized to allow ranges
+of bytes in a file to be discarded.
+E 1

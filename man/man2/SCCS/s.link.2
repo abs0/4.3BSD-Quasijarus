@@ -1,0 +1,232 @@
+h33450
+s 00013/00001/00098
+d D 6.3 85/08/26 23:30:48 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00016/00012/00083
+d D 6.2 85/05/22 18:30:29 mckusick 4 3
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00094
+d D 6.1 85/05/09 16:05:54 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00076/00028/00019
+d D 5.1 85/05/09 16:05:43 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00047/00000/00000
+d D 4.1 85/05/09 16:05:34 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LINK 2 
+E 2
+I 2
+D 3
+.TH LINK 2 "12 February 1983"
+E 3
+I 3
+.TH LINK 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+link \- link to a file
+E 2
+I 2
+link \- make a hard link to a file
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B link(name1, name2)
+.B char *name1, *name2;
+E 2
+I 2
+.ft B
+link(name1, name2)
+char *name1, *name2;
+E 2
+.fi
+I 2
+.ft R
+E 2
+.SH DESCRIPTION
+D 2
+A link
+E 2
+I 2
+A hard link
+E 2
+to
+.I name1
+is created;
+the link has the name
+.IR name2 .
+D 2
+Either name may be an arbitrary path name.
+.SH "SEE ALSO"
+ln(1), unlink(2)
+.SH DIAGNOSTICS
+Zero is returned when a link is made;
+\-1 is returned when
+E 2
+I 2
+.I Name1
+must exist.
+.PP
+With hard links,
+both
+E 2
+.I name1
+D 2
+cannot be found; when
+E 2
+I 2
+and
+E 2
+.I name2
+D 2
+already exists; when the directory of
+.I name2
+cannot be written; when
+an attempt is made to link to a directory by a user
+other than the super-user;
+when an attempt is made to link
+to a file on another file system;
+when a file has too many links.
+.PP
+On some systems
+the super-user may link
+to non-ordinary files.
+.SH "ASSEMBLER (PDP-11)"
+(link = 9.)
+.br
+.B sys link; name1; name2
+E 2
+I 2
+must be in the same file system.
+Unless the caller is the super-user,
+.I name1
+must not be a directory.
+Both the old and the new
+.I link
+share equal access and rights to
+the underlying object.
+.SH "RETURN VALUE
+Upon successful completion, a value of 0 is returned.  Otherwise,
+a value of \-1 is returned and
+.I errno
+is set to indicate the error.
+.SH "ERRORS
+.I Link
+will fail and no link will be created if one or more of the following
+are true:
+.TP 15
+D 4
+[EPERM]
+Either pathname contains a byte with the high-order bit set.
+.TP 15
+[ENOENT]
+Either pathname was too long.
+.TP 15
+E 4
+[ENOTDIR]
+A component of either path prefix is not a directory.
+.TP 15
+I 4
+[EINVAL]
+Either pathname contains a character with the high-order bit set.
+.TP 15
+[ENAMETOOLONG]
+A component of either pathname exceeded 255 characters,
+or entire length of either path name exceeded 1023 characters.
+.TP 15
+E 4
+[ENOENT]
+A component of either path prefix does not exist.
+.TP 15
+[EACCES]
+A component of either path prefix denies search permission.
+.TP 15
+I 4
+[EACCES]
+The requested link requires writing in a directory with a mode
+that denies write permission.
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating one of the pathnames.
+.TP 15
+E 4
+[ENOENT]
+The file named by \fIname1\fP does not exist.
+.TP 15
+[EEXIST]
+The link named by \fIname2\fP does exist.
+.TP 15
+[EPERM]
+The file named by \fIname1\fP is a directory and the effective
+user ID is not super-user.
+.TP 15
+[EXDEV]
+The link named by \fIname2\fP and the file named by \fIname1\fP
+are on different file systems.
+.TP 15
+I 5
+[ENOSPC]
+The directory in which the entry for the new link is being placed
+cannot be extended because there is no space left on the file
+system containing the directory.
+.TP 15
+[EDQUOT]
+The directory in which the entry for the new link
+is being placed cannot be extended because the
+user's quota of disk blocks on the file system
+containing the directory has been exhausted.
+.TP 15
+E 5
+D 4
+[EACCES]
+The requested link requires writing in a directory with a mode
+that denies write permission.
+E 4
+I 4
+[EIO]
+D 5
+An I/O error occurred while making the directory entry.
+E 5
+I 5
+An I/O error occurred while reading from or writing to 
+the file system to make the directory entry.
+E 5
+E 4
+.TP 15
+[EROFS]
+The requested link requires writing in a directory on a read-only file
+system.
+.TP 15
+[EFAULT]
+One of the pathnames specified
+is outside the process's allocated address space.
+D 4
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+E 4
+.SH "SEE ALSO"
+symlink(2), unlink(2)
+E 2
+E 1

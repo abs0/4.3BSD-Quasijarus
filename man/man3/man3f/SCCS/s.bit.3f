@@ -1,0 +1,116 @@
+h62011
+s 00001/00001/00063
+d D 6.4 86/04/30 15:08:36 mckusick 5 4
+c spelling
+e
+s 00000/00001/00064
+d D 6.3 85/09/05 15:29:37 mckusick 4 3
+c update from jerry
+e
+s 00015/00004/00050
+d D 6.2 85/06/07 20:37:10 kre 3 2
+c From Jerry Berkman
+e
+s 00001/00001/00053
+d D 6.1 85/05/15 16:14:37 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00054/00000/00000
+d D 5.1 85/05/15 16:14:29 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BIT 3F "13 June 1983"
+E 2
+I 2
+.TH BIT 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+bit \- and, or, xor, not, rshift, lshift bitwise functions
+.SH SYNOPSIS
+.B (intrinsic) function and (word1, word2)
+.sp 1
+.B (intrinsic) function or (word1, word2)
+.sp 1
+.B (intrinsic) function xor (word1, word2)
+.sp 1
+.B (intrinsic) function not (word)
+.sp 1
+.B (intrinsic) function rshift (word, nbits)
+.sp 1
+.B (intrinsic) function lshift (word, nbits)
+.SH DESCRIPTION
+These bitwise functions are built into the compiler and return
+the data type of their argument(s).
+D 4
+It is recommended that their arguments be
+E 4
+I 3
+Their arguments must be
+E 3
+.B integer
+D 3
+values;
+inappropriate manipulation of
+.B real
+objects may cause unexpected results.
+E 3
+I 3
+or
+.B logical
+values.
+E 3
+.PP
+The bitwise combinatorial functions return the
+bitwise ``and'' (\fBand\fR), ``or'' (\fBor\fR), or ``exclusive or'' (\fBxor\fR)
+of two operands.
+.B Not
+returns the bitwise complement of its operand.
+.PP
+.IR Lshift ,
+or
+.I rshift
+with a negative
+.IR nbits ,
+is a logical left shift with no end around carry.
+.IR Rshift ,
+or
+.I lshift
+with a negative
+.IR nbits ,
+D 5
+is an arithmatic right shift with sign extension.
+E 5
+I 5
+is an arithmetic right shift with sign extension.
+E 5
+No test is made for a reasonable value of
+.I nbits.
+I 3
+.PP
+These functions may be used to create a variety of general routines, as in
+the following statement function definitions:
+.sp 1
+.B	integer bitset, bitclr, getbit, word, bitnum
+.sp 1
+.B	bitset( word, bitnum ) = or(word,lshift(1,bitnum))
+.br
+.B	bitclr( word, bitnum ) = and(word,not(lshift(1,bitnum)))
+.br
+.B	getbit( word, bitnum ) = and(rshift(word,bitnum),1)
+E 3
+.SH FILES
+These functions are generated in-line by the f77 compiler.
+E 1

@@ -1,0 +1,109 @@
+h28165
+s 00000/00002/00051
+d D 6.2 86/05/07 13:26:30 mckusick 4 3
+c delete author
+e
+s 00002/00001/00051
+d D 6.1 85/04/29 20:13:44 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00009/00008/00043
+d D 5.1 85/04/29 20:13:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00051/00000/00000
+d D 4.1 85/04/29 20:12:19 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SOELIM 1 2/24/79
+.UC
+E 2
+I 2
+D 3
+.TH SOELIM 1 "16 September 1982"
+E 3
+I 3
+.TH SOELIM 1 "%Q%"
+.UC
+E 3
+E 2
+.SH NAME
+soelim \- eliminate \&.so's from nroff input
+.SH SYNOPSIS
+.B soelim
+[
+file ...
+]
+.SH DESCRIPTION
+.I Soelim
+reads the specified files or the standard input and performs the textual
+inclusion implied by the
+.I nroff
+directives of the form
+.PP
+.DT
+	\&.so somefile
+.PP
+when they appear at the beginning of input lines.
+This is useful since programs such as
+.I tbl
+D 2
+do not normally do this;
+it allows the placement of individual tables
+E 2
+I 2
+do not normally do this; it allows the placement of individual tables
+E 2
+in separate files to be run as a part of a large document.
+.PP
+D 2
+Note that inclusion can be suppressed by using
+`\'' instead of `\.', i.e.
+E 2
+I 2
+An argument consisting of a single minus
+.RB ( \- )
+is taken to be
+a file name corresponding to the standard input.
+E 2
+.PP
+I 2
+Note that inclusion can be suppressed by using `\'' instead of `\.', i.e.
+.PP
+E 2
+.DT
+	\'so /usr/lib/tmac.s
+.PP
+A sample usage of
+.I soelim
+would be
+.PP
+	soelim exum?.n | tbl | nroff \-ms | col | lpr
+.SH SEE\ ALSO
+colcrt(1), more(1)
+D 4
+.SH AUTHOR
+William Joy
+E 4
+.SH BUGS
+The format of the source commands must involve no strangeness \-
+D 2
+exactly one
+blank must precede and no blanks follow the file name.
+E 2
+I 2
+exactly one blank must precede and no blanks follow the file name.
+E 2
+E 1

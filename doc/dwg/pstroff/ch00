@@ -1,0 +1,338 @@
+.\"	@(#)ch00	1.2 (Falcon) 2012/08/12
+.\"
+.\" The following tps instructions are used only when
+.\" troffing this chapter separately (editing drafts).
+.\"
+.\" Macros: -ms defs
+.TL
+4.3BSD-Quasijarus PostScript \*(Tr
+.sp .5
+Technical Description
+.AU
+Michael Spacefalcon
+.AI
+Quasijarus Project
+International Free Computing Task Force
+.Ch "Introduction" "What it is and why I wrote it"
+.PP
+The version of troff described in this document
+is Yet Another addition to the large repertoire
+of various existing versions, created at different times
+by different people and institutions
+over the decades of Unix history.
+The key distinguishing characteristics of the present version are:
+.IP \(bu
+It runs under \*(4B \s-1UNIX\s0 on the \s-1VAX\s0.
+.IP \(bu
+The code base is traceable back to Joe Ossanna's original,
+not a from-scratch reimplementation like groff.
+.IP \(bu
+The output language of this troff is Adobe PostScript.
+The PostScript output is produced directly by the main troff
+program; no ditroff intermediate language is used.
+The generated PS page descriptions conform to the
+Document Structuring Conventions and feature fully independent pages,
+which can be extracted and/or reordered freely.
+.IP \(bu
+The starting troff code base for this project was the original
+C/A/T-targeting one (made ``standard'' through the V7 release),
+\fInot\fP one of the many ditroff versions.\**
+.FS
+More specifically, the starting point for Quasijarus troff
+was the version shipped with 4.3BSD-Tahoe, which is essentially
+unchanged V7 troff, maintained at Berkeley for the VAX.
+.FE
+.SH
+Why PostScript?
+.PP
+Many \s-1UNIX\s0 vendors in the late 1980s and early 1990s had ``embraced''
+PostScript, adopting it as a full-fledged part of the
+``Unix way of doing things.''
+I wholeheartedly agree with the latter view, and the present version
+of troff is part of my strategy of adopting \*(PS into my \s-1UNIX\s0
+environment, much like those other vendors have done a couple of
+decades earlier.
+.PP
+This work was/is necessary because unfortunately, \*(4B was \fInot\fP
+one of the systems that had adopted \*(PS Back In The Day \(em
+even though \*(PS already existed at the time of the \*(4B release
+and most certainly at the time of 4.3-tahoe.
+Thus the task of adding \*(PS tools to \*(4B was left for me to do
+as part of \*(Qj Project.
+.SH
+Why not \fIditroff\fP?
+.PP
+When people were making troff work with \*(PS Back In The Day,
+they did it by treating PS as a ``device'' for ditroff, not by
+doing what I've done:
+creating a new troff that's designed specifically to embrace
+the new language and to make the most native use of it.
+.PP
+But I personally dislike the ``ps device'' approach: in my opinion,
+it is philosophically and technically incorrect to mix \fIlanguages\fP
+like \*(PS and \fIdevices\fP like the C/A/T, Linotron\ 202 or
+Autologic APS-5 as ``equal peers'' on the same level of software
+abstraction.
+\*(PS is a \fIlanguage\fP, not a device, and it is much more
+device-independent than ditroff ever was.
+.PP
+The introduction of \*(PS has significantly changed the nature of
+the game, compared to the situation that existed at the time when
+Brian Kernighan wrote ditroff a few years prior.\**
+.FS
+Ditroff: circa 1979-80.
+\*(PS: ca. 1984-85.
+.FE
+Compared to the kind of device independence one gains with
+\*(PS, ``device-independent'' troff is really a misnomer.
+When one uses ditroff, the repertoire of available fonts,
+of characters in those fonts, and of usable formatting features
+(point sizes, height/slant hacks, line drawing)
+are all at the mercy of whatever the typesetter vendor
+has chosen to provide, and will differ greatly from one vendor
+to another.
+The appearance of the printed document will also vary accordingly.
+.PP
+With \*(PS, on the other hand, your choice of physical output device
+(printer, typesetter, on-screen previewer, etc) has absolutely no
+bearing on what fonts you can use, what characters exist in those
+fonts, how they will look when printed, and what graphics features
+you can use.
+While the set of fonts included in a PS printer's ROM is limited
+and not totally dependable (older printers generally have fewer
+included fonts, and may have older versions of the fonts which lack
+some characters), you are not limited to using only your printer's
+built-in fonts: \*(PS fonts are just digital files in a standard
+format, hence you can simply download them from your favourite
+warez site, or even buy them legally from fonts.com if you so fancy.
+.PP
+Once you have chosen your fonts and formatted your document with
+the present version of troff, the resulting \*(PS page description
+is completely device-independent, can be printed on \fIany\fP
+\*(PS device, and the printed output will look exactly the same
+in terms of character and graphic shapes and metrics, regardless
+of which physical printing device make and model is used.
+.PP
+None of that true device-independence exists with the kind of devices
+that ditroff was made to support, which is why I argue that \*(PS
+should not be mixed ``on equal'' with those devices, and instead
+deserves to be supported by a new version of troff that is made
+specifically for \*(PS and only for \*(PS.
+.PP
+The practical effect is that my troff does not target anything
+other than PS output.
+That means no support for historical typesetters like the APS-5
+(use the corresponding historical version of ditroff for those),
+and no support for those ``modern'' languages which have posited
+themselves as ``competitors'' to \*(PS: I have no desire
+to support HP PCL in addition to PS.
+However, if you are using a ``modern'' laser or inkjet printer that is
+too cheap to include \*(PS in its firmware, you can still print standard page
+descriptions in this great language, including those produced by
+the present version of troff,
+by going through Ghostscript.
+The latter is a freebie reimplementation
+of the PS interpreter that runs on host computers
+and is able to render PS page descriptions on a myriad of devices,
+including dot-matrix and inkjet printers, cheap laser printers which
+don't support PS natively, etc.
+.SH
+\*(4B specific circumstances
+.PP
+Of the various 1980s versions of \s-1UNIX\s0, \*(4B is somewhat unique
+in that it never included ditroff as an officially-supported component.\**
+.FS
+For historical reasons which no longer matter \(em had to do with
+the licensing regime that was in effect in those days.
+.FE
+Instead, the only troff that shipped on BSD tapes and enjoyed the status
+of an officially-supported system component was the Berkeley-maintained
+version of V7 troff, targeting the C/A/T.
+The actual C/A/T typesetters (early 1970s technology) were already
+getting close to extinction even in the \*(4B days, but as a result of the
+licensing regime that made V7 troff much more readily accessible than
+ditroff, the C/A/T codes emitted by troff became somewhat of a \fIde facto\fP
+``standard'', accepted by a number of post-processors which turned them
+into something more useful (including PS).
+.PP
+UCB did use ditroff internally, but because it was unshippable
+for licensing reasons, it was never cleanly integrated into
+the supported and documented system.
+Furthermore, it appears that more than one version of ditroff has been
+in use at UCB at one time or another, and I wasn't particularly
+interested in sorting it all out.
+.PP
+Given this combination of factors (my preference for targeting PS
+exclusively, rather than treating it as a ``device'', and the fact that
+ditroff wasn't officially a part of \*(4B), I had made the choice to
+ignore ditroff (pretend as if it never existed) and to go directly
+from the C/A/T-targeting V7 troff to my native \*(PS-generating one.
+.SH
+Continuity and compatibility with previous versions of troff
+.PP
+The first obvious requirement which my \*(PS-generating troff
+had to meet is that it must function as real \s-1UNIX\s0 troff.
+When serving as a core system component,
+troff's main job is to produce
+typeset versions of the system manual pages and supplementary documents.
+In order to be legitimate, the new troff must perform this job
+no worse than the versions which came before.
+In particular, producing \*(PS reprints of the original \*(4B manual set
+(or possibly other historical \s-1UNIX\s0 manuals, such as the
+famous 7th Edition) has been one of my main motivations for this project.
+.PP
+The key problem here is compatibility with the original C/A/T troff
+and other troff versions which came before the present one
+in the \*(4B branch of \s-1UNIX\s0 history.
+That problem, in turn, is almost entirely one of font and
+character set compatibility.
+Even more specifically, the problem is that the goal of
+old troff compatibility conflicts with several other worthy goals:
+efficiency in the new \*(PS world, taking advantage of those
+instances in which the new PS fonts are \fIbetter\fP than the old ones,
+and saving the human labor cost.
+.PP
+The ways in which the old troff font and character set can be mapped
+to the new \*(PS world range along a spectrum of possibilities.
+At one extreme, a troff-to-PS implementation could limit itself
+to what exists in the standard Adobe fonts which are included
+``for free'' in all \*(PS printers, and nothing more.
+Such an implementation would be very efficient: no human labor
+expenditure to draw any special fonts, no disk space wasted by
+including copies of bulky font programs in every generated
+page description, no print time wasted on the transmission of
+these fonts over a 9600 baud serial link, no burden placed on
+system administrators to install these special fonts
+via \fBexitserver\fP.
+.PP
+On the one hand, Adobe's fonts are better in many ways than
+the old C/A/T ones: the full set of ASCII graphic characters
+is included in each of the base fonts, the Roman fonts include
+valuable international characters like \(!!, \(??, \(AE, \(OE,
+\(Th, \(D- and many accented letters, the Symbol font contains
+many more mathematical symbols than the original troff's
+Special Mathematical Font, with useful additions like
+\(a+, \(ax, \(fa, \(te, \(tf, etc.
+However, a few of the characters from the C/A/T character set
+are missing altogether, and the ones which are available
+often look noticeably different from their C/A/T counterparts.
+.PP
+At the other extreme,
+if someone found an extant copy of the photographic film strips
+from the 1970s which served as the font masters for the C/A/T,
+and hired a professional font designer to reproduce those 408
+character shapes (4 fonts of 102 characters each) in a digital
+vector outline form like Type\ 1 or OpenType, it would probably
+be possible to make the new \*(PS troff printouts visually
+indistinguishable (at least in the post-mass-reproduction form)
+from those made on the original C/A/T back in the 1970s.
+Taking the idea to its utmost limit, one could even leave the
+troff program itself and all of its inputs completely untouched,
+and instead have a post-processor convert the C/A/T binary codes
+to \*(PS, using the custom-designed fonts.\**
+.FS
+In fact, the C/A/T-to-PS converter part is trivial: Adobe included
+one in their TranScript package Back In The Day, and being ignorant
+of that one, I wrote my own in one afternoon.
+The fonts are the hard part.
+.FE
+.PP
+This approach, or a variant thereof with ``APS-5 configuration at UCB''
+substituted instead of C/A/T, would certainly satisfy any desires
+to produce a \*(PS reprint of some ancient \s-1UNIX\s0 manual,
+by producing a reprint that is practically indistinguishable
+from the original.
+But is it really the best approach, as far as the general spirit of Unix
+is concerned?
+The C/A/T character set is plainly deficient in many areas,
+and I don't really see a commandment stipulating that we must
+continue artificially emulating those deficiencies when
+something better is available.
+Do we really need to refrain from using native bold backslashes and
+curly braces in the Adobe fonts, and continue to construct poor
+simulations thereof with \fB.bd\fP, only because the C/A/T
+was limited to such?
+.PP
+Finally, a troff implementation which \fIrequires\fP the use of
+custom special fonts and can't make use of the standard Adobe fonts
+is certain to draw long curse words from anyone who needs
+to print a simple one-page note to be stuck on a door,
+and has a hard time understanding why such a simple job
+requires that some 100\(em200\ KiB of special fonts be downloaded first.
+.PP
+In accord with the general Unix philosophy of providing mechanism
+rather than policy,
+the present version of troff puts the choice of fonts in the
+hands of the user.
+With respect to old troff compatibility, two major modes
+of operation are provided:
+.IP \(bu
+In the default configuration, only the standard Adobe fonts are used.
+Using these fonts, the present version of troff can
+produce good-looking renditions of \fImost\fP historical troff
+document sources.
+This default configuration can't work for \fIevery\fP historical troff
+document, as some will deliberately exercise those quirks of the
+ancient C/A/T character set which simply don't map to the standard Adobe
+fonts, but as a simple litmus test, the default configuration
+(using only the basic printer-resident fonts) should work for every old
+document that was written to look good in both troff and nroff
+\(em that means all man pages.
+The exact behaviour of troff in this default configuration
+is detailed in Chapter\ 1.
+.IP \(bu
+For more demanding tasks, such as reprinting the 4.3BSD USD book
+(which contains the \*(Mn) and other historical document sources
+which make heavy use of the original troff character set,
+some special fonts have been created.
+This ``extended troff compatibility'' mode emulates the ancient troff
+character set well enough to produce satisfactory renditions of
+the original V7 troff documentation, but does so at the expense
+of inflating the \*(PS output with a blob of included special fonts,
+and has some additional quirks documented in Chapter\ 3 of this manual.
+.SH
+A new tool for new documents
+.PP
+When the folks at Bell Labs wrote the original troff suite,
+they most certainly meant these tools to be usable for
+doing actual work of interest to the end user,
+not only for printing their own manuals.
+In a similar vein, I have written my version of troff with the
+intent of making it usable not only for reprinting old man pages
+and supplementary documents,
+but also for my own everyday document formatting needs:
+printing event flyers, snail mail letters, various TPS reports
+and other papers.
+.PP
+In this use case, I view my ultimate task as the creation
+of a \*(PS page description that looks the way I want and uses the fonts,
+characters and \*(PS graphics features of my choosing.
+In this view, troff becomes merely a handy tool for creating
+such PS page descriptions without having to resort to hand-coding
+the whole thing in raw PS.
+Thus the roles are reversed relative to the old troff compatibility
+mode \(em now \*(PS is the end goal, and troff is a means to it.
+.PP
+If the new troff system were built around the idea of bug-for-bug
+emulation of some specific historical version, e.g., a post-processor
+that emulates the C/A/T by turning those binary codes into a
+PS page description, then it would be almost totally precluded
+from using any of the more powerful capabilities of the new language.
+But because I didn't implement it in that manner, and instead created
+a new version of the troff program itself for which \*(PS is native,
+the system is well-suited for exploiting much of the power of \*(PS
+in new documents.
+.PP
+A specific design goal for the present version of troff has been to
+make as much as possible of the full power of \*(PS available to
+new documents written specifically for it, as natively as possible.
+The shenanigans necessary for the emulation of the old troff
+character set have been kept out of the troff core as much as possible,
+and relegated to the font information files and \*(PS-level manipulations,
+as explained in the following chapters.
+.PP
+Chapter\ 2, Chapter\ 6 and Appendix\ A contain the information
+that would be most useful to someone approaching the new troff
+as a new tool for new jobs, rather than an emulation of the old:
+how to use new fonts, new graphics capabilities, and the
+rich character set available with Adobe's fonts.

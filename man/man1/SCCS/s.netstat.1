@@ -1,0 +1,513 @@
+h43368
+s 00008/00002/00227
+d D 6.7 88/05/14 10:23:36 karels 8 7
+c add -d
+e
+s 00023/00000/00206
+d D 6.6 86/08/11 12:21:59 kupfer 7 6
+c -p is now implemented.
+e
+s 00095/00065/00111
+d D 6.5 86/05/08 15:09:09 karels 6 5
+c update for 4.3
+e
+s 00004/00003/00172
+d D 6.4 85/12/08 16:55:47 mckusick 5 4
+c format glitches
+e
+s 00016/00000/00159
+d D 6.3 85/08/16 23:14:54 sklower 4 3
+c document -f flag, limiting reporting of statistics to a single address family;
+c suggested by mkm.
+e
+s 00004/00000/00155
+d D 6.2 85/04/30 20:59:54 kupfer 3 2
+c Note that -p isn't implemented yet.
+e
+s 00011/00004/00144
+d D 6.1 85/04/29 21:12:39 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00148/00000/00000
+d D 5.1 85/04/29 21:12:26 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH NETSTAT 1 "18 October 1982"
+E 2
+I 2
+.TH NETSTAT 1 "%Q%"
+E 2
+.UC 5
+.SH NAME
+netstat \- show network status
+.SH SYNOPSIS
+.B netstat
+[ 
+D 6
+.B \-Aahimnrs
+E 6
+I 6
+.B \-Aan
+E 6
+] [
+I 4
+.B \-f
+.I address_family
+] [
+E 4
+I 2
+D 6
+.B \-I
+.I interface
+E 6
+I 6
+.I system
+E 6
+] [
+E 2
+D 6
+.B \-p
+D 2
+.I protocol 
+E 2
+I 2
+.I protocol
+E 6
+I 6
+.I core
+]
+.br
+.B netstat
+[ 
+.B \-himnrs
+E 6
+E 2
+] [
+D 2
+.B \-a
+] [
+E 2
+D 6
+.I interval
+E 6
+I 6
+.B \-f
+.I address_family
+E 6
+] [
+.I system
+] [
+.I core
+]
+I 6
+.br
+.B netstat
+[ 
+.B \-n
+] [
+.B \-I
+.I interface
+]
+.I interval
+[
+.I system
+] [
+.I core
+]
+I 7
+.br
+.B netstat
+[ 
+.B \-p
+.I protocol
+] [
+.I system
+] [
+.I core
+]
+E 7
+E 6
+.SH DESCRIPTION
+The
+.I netstat 
+command symbolically displays the contents of various network-related
+D 6
+data structures.  The options have the following meaning:
+E 6
+I 6
+data structures.
+There are a number of output formats,
+depending on the options for the information presented.
+The first form of the command displays a list of active sockets for
+each protocol.
+The second form presents the contents of one of the other network
+data structures according to the option selected.
+Using the third form, with an 
+.I interval
+specified,
+.I netstat
+will continuously display the information regarding packet
+traffic on the configured network interfaces.
+I 7
+The fourth form displays statistics about the named protocol.
+E 7
+.PP
+The options have the following meaning:
+E 6
+.TP 
+.B \-A
+D 6
+show the address of any associated protocol control blocks; used
+for debugging
+E 6
+I 6
+With the default display,
+show the address of any protocol control blocks associated with sockets; used
+for debugging.
+E 6
+.TP
+.B \-a
+I 6
+With the default display,
+E 6
+show the state of all sockets; normally sockets used by
+D 6
+server processes are not shown
+E 6
+I 6
+server processes are not shown.
+I 8
+.B \-d
+With either interface display (option
+.B \-i
+or an interval, as described below),
+show the number of dropped packets.
+E 8
+E 6
+.TP
+.B \-h
+D 6
+show the state of the IMP host table
+E 6
+I 6
+Show the state of the IMP host table.
+E 6
+.TP
+.B \-i
+D 6
+show the state of interfaces which have been auto-configured
+E 6
+I 6
+Show the state of interfaces which have been auto-configured
+E 6
+(interfaces statically configured into a system, but not
+D 6
+located at boot time are not shown)
+E 6
+I 6
+located at boot time are not shown).
+E 6
+I 2
+.TP
+.BI \-I " interface"
+D 6
+show information only about this interface
+(see also
+E 6
+I 6
+Show information only about this interface;
+used with an
+E 6
+.I interval
+D 6
+below)
+E 6
+I 6
+as described below.
+E 6
+E 2
+.TP
+.B \-m
+D 6
+show statistics recorded by the memory management routines
+(the network manages a ``private share'' of memory)
+E 6
+I 6
+Show statistics recorded by the memory management routines
+(the network manages a private pool of memory buffers).
+E 6
+.TP
+.B \-n
+D 6
+show network addresses as numbers (normally 
+E 6
+I 6
+Show network addresses as numbers (normally 
+E 6
+.I netstat
+interprets addresses and attempts to display them
+D 6
+symbolically)
+E 6
+I 6
+symbolically).
+This option may be used with any of the display formats.
+I 7
+.TP
+.BI \-p " protocol"
+Show statistics about 
+.IR protocol ,
+which is either a well-known name for a protocol or an alias for it.  Some
+protocol names and aliases are listed in the file 
+.IR /etc/protocols .
+A null response typically means that there are no interesting numbers to 
+report.
+The program will complain if
+.I protocol
+is unknown or if there is no statistics routine for it.
+E 7
+E 6
+.TP
+D 6
+.BI \-p " proto"
+show the state of sockets utilizing protocol
+.IR proto ;
+the protocol is specified symbolically, and may be any
+protocol listed in the file
+.IR /etc/protocols .
+.TP
+E 6
+.B \-s
+D 6
+show per-protocol statistics
+E 6
+I 6
+Show per-protocol statistics.
+E 6
+.TP
+.B \-r
+D 6
+show the routing tables
+E 6
+I 6
+Show the routing tables.
+When
+.B \-s
+is also present, show routing statistics instead.
+E 6
+I 4
+.TP
+.BI \-f " address_family"
+D 6
+will limit statistics or address control block reports to those
+E 6
+I 6
+Limit statistics or address control block reports to those
+E 6
+of the specified
+.IR address\ family .
+D 6
+The two address families
+E 6
+I 6
+The following address families
+are recognized:
+E 6
+.IR inet ,
+for
+D 5
+.BR AF_INET and
+E 5
+I 5
+D 6
+.B AF_INET
+and
+E 6
+I 6
+.BR AF_INET ,
+E 6
+E 5
+.IR ns ,
+for
+D 5
+.BR AF_NS are
+recognized.
+E 5
+I 5
+D 6
+.B AF_NS
+are recognized.
+E 6
+I 6
+.BR AF_NS ,
+and
+.IR unix ,
+for
+.BR AF_UNIX .
+E 6
+E 5
+E 4
+.PP
+The arguments, 
+.I system
+and
+.I core
+allow substitutes for the defaults ``/vmunix'' and ``/dev/kmem''.
+.PP
+D 6
+If an 
+.I interval
+is specified,
+.I netstat
+will continuously display the information regarding packet
+traffic on the configured network interfaces, pausing
+.I interval
+seconds before refreshing the screen.
+.PP
+There are a number of display formats, depending on the information
+presented.  The default display, for active sockets, shows the local
+E 6
+I 6
+The default display, for active sockets, shows the local
+E 6
+and remote addresses, send and receive queue sizes (in bytes), protocol,
+D 6
+and, optionally, the internal state of the protocol.
+.PP
+E 6
+I 6
+and the internal state of the protocol.
+E 6
+Address formats are of the form ``host.port'' or ``network.port''
+if a socket's address specifies a network but no specific host address.
+When known the host and network addresses are displayed symbolically
+according to the data bases
+.I /etc/hosts
+and
+.IR /etc/networks ,
+respectively.  If a symbolic name for an address is unknown, or if
+the 
+.B \-n
+D 6
+option is specified, the address is printed in the Internet ``dot format'';
+E 6
+I 6
+option is specified, the address is printed numerically, according
+to the address family.
+For more information regarding 
+the Internet ``dot format,''
+E 6
+refer to 
+D 6
+.IR inet (3N)
+for more information regarding this format.
+E 6
+I 6
+.IR inet (3N).
+E 6
+Unspecified,
+or ``wildcard'', addresses and ports appear as ``*''.  
+.PP
+The interface display provides a table of cumulative
+statistics regarding packets transferred, errors, and collisions.
+D 6
+The network address (currently Internet specific) of the interface
+E 6
+I 6
+The network addresses of the interface
+E 6
+and the maximum transmission unit (``mtu'') are also displayed.
+.PP
+The routing table display indicates the available routes and
+their status.  Each route consists of a destination host or network
+and a gateway to use in forwarding packets.  The flags field shows
+D 6
+the state of the route (``U'' if ``up''), and whether the route
+is to a gateway (``G'').  Direct routes are created for each
+interface attached to the local host.  The refcnt field gives the
+E 6
+I 6
+the state of the route (``U'' if ``up''), whether the route
+D 8
+is to a gateway (``G''), and whether the route was created dynamically
+by a redirect (``D'').  Direct routes are created for each
+E 8
+I 8
+is to a gateway (``G''), whether the route was created dynamically
+by a redirect (``D''), and whether the route has been modified
+by a redirect (``M'').  Direct routes are created for each
+E 8
+interface attached to the local host;
+the gateway field for such entries shows the address of the outgoing interface.
+The refcnt field gives the
+E 6
+current number of active uses of the route.  Connection oriented
+protocols normally hold on to a single route for the duration of
+D 6
+a connection while connectionless protocols obtain a route then
+discard it.  The use field provides a count of the number of packets
+E 6
+I 6
+a connection while connectionless protocols obtain a route while sending
+to the same destination.
+The use field provides a count of the number of packets
+E 6
+sent using that route.  The interface entry indicates the network
+interface utilized for the route.
+.PP
+When 
+.I netstat
+is invoked with an
+.I interval
+argument, it displays a running count of statistics related to
+D 6
+network interfaces.  This display consists of a column summarizing
+information for all interfaces, and a column for the interface with
+the most traffic since the system was last rebooted.  The first
+line of each screen of information contains a summary since the
+E 6
+I 6
+network interfaces.  This display consists of a
+column for the primary interface
+(the first interface found during autoconfiguration)
+and a column summarizing
+information for all interfaces.
+The primary interface may be replaced with another interface with the
+.I \-I
+option.
+The first line of each screen of information contains a summary since the
+E 6
+system was last rebooted.  Subsequent lines of output show values
+accumulated over the preceding interval.
+.SH SEE ALSO
+iostat(1),
+vmstat(1),
+hosts(5),
+networks(5),
+protocols(5),
+services(5),
+trpt(8C)
+.SH BUGS
+The notion of errors is ill-defined.  Collisions mean
+something else for the IMP.
+I 3
+D 6
+.PP
+The 
+.B \-p 
+option is not yet implemented.
+E 6
+E 3
+E 1

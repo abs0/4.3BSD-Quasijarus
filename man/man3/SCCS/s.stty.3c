@@ -1,0 +1,76 @@
+h40769
+s 00001/00001/00055
+d D 6.1 85/05/15 16:30:02 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00056/00000/00000
+d D 5.1 85/05/15 16:29:55 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH STTY 3C "1 April 1983"
+E 2
+I 2
+.TH STTY 3C "%Q%"
+E 2
+.UC 5
+.SH NAME
+stty, gtty \- set and get terminal state (defunct)
+.SH SYNOPSIS
+.nf
+.B #include <sgtty.h>
+.sp
+.B stty(fd, buf)
+.B int fd;
+.B struct sgttyb *buf;
+.sp
+.B gtty(fd, buf)
+.B int fd;
+.B struct sgttyb *buf;
+.fi
+.SH DESCRIPTION
+.ft B
+This interface is obsoleted by ioctl(2).
+.ft R
+.PP
+.I Stty
+sets the state of the terminal associated with
+.IR fd .
+.I Gtty
+retrieves the state of the terminal associated
+with
+.IR fd .
+To set the state of a terminal the call must have
+write permission.
+.PP
+The
+.I stty
+call is actually ``ioctl(fd, TIOCSETP, buf)'', while
+the
+.I gtty
+call is ``ioctl(fd, TIOCGETP, buf)''.
+See 
+.IR ioctl (2)
+and
+.IR tty (4)
+for an explanation.
+.SH DIAGNOSTICS
+If the call is successful 0 is returned, otherwise \-1 is
+returned and the global variable
+.I errno
+contains the reason for the failure.
+.SH SEE ALSO
+ioctl(2),
+tty(4)
+E 1

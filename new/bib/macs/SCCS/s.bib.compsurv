@@ -1,0 +1,50 @@
+h35410
+s 00010/00003/00014
+d D 2.2 87/10/31 12:34:40 garrison 2 1
+c fixed bogus call on .IP: compsurv format now works
+e
+s 00017/00000/00000
+d D 2.1 87/04/23 19:53:27 garrison 1 0
+c date and time created 87/04/23 19:53:27 by garrison
+e
+u
+U
+t
+T
+I 1
+#
+#	"%W%	%G%";
+#
+#  Computing Surveys style references
+#
+I BMACLIB/bibinc.shortnames
+C4<\0>D-4
+SAD-2
+D 2
+A
+E
+E 2
+I 2
+SAD-2
+AA
+AR
+AX
+EA
+AR
+AX
+E 2
+.so \*(l]/bmac.std
+.ds m] "\&, and \&
+.ds ], ;\|
+.de s[   \" start reference
+I 2
+.LP
+.in 0.5i
+.ti -0.5i
+E 2
+.nh
+D 2
+.IP [\\*([F] 10n
+E 2
+..
+E 1

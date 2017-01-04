@@ -1,0 +1,62 @@
+h03074
+s 00001/00001/00026
+d D 6.1 85/05/15 15:05:27 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00003/00023
+d D 5.1 85/05/15 15:05:18 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00026/00000/00000
+d D 4.1 85/05/15 15:05:09 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SYSTEM 3
+E 2
+I 2
+D 3
+.TH SYSTEM 3 "19 January 1983"
+E 3
+I 3
+.TH SYSTEM 3 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+system \- issue a shell command
+.SH SYNOPSIS
+.nf
+.B system(string)
+.B char *string;
+.fi
+.SH DESCRIPTION
+.I System
+causes the
+.I string
+to be given to
+.IR  sh (1)
+as input as if the string had been typed as a command
+at a terminal.
+The current process waits until the shell has
+completed, then returns the exit status of the shell.
+.SH "SEE ALSO"
+D 2
+popen(3),
+exec(2), wait(2)
+E 2
+I 2
+popen(3S),
+execve(2),
+wait(2)
+E 2
+.SH DIAGNOSTICS
+Exit status 127 indicates the shell couldn't be executed.
+E 1

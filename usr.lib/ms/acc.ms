@@ -1,4 +1,4 @@
-.\" @(#)acc.ms	1.3 (Berkeley) 6/2/90
+.\" @(#)acc.ms	1.4 (Berkeley) 10/28/04
 .	\" AM - accent mark definitions
 .bd S B 3
 .	\" fudge factors for nroff and troff
@@ -31,9 +31,11 @@
 .if t \{\
 .	ds ' \\k:\h'-(\\n(.wu*8/10-\*(#H)'\'\h"|\\n:u"
 .	ds ` \\k:\h'-(\\n(.wu*8/10-\*(#H)'\`\h'|\\n:u'
-.	ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'^\h'|\\n:u'
+.	if \n(.C .ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'\X93\h'|\\n:u'
+.	el .ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'^\h'|\\n:u'
 .	ds , \\k:\h'-(\\n(.wu*8/10)',\h'|\\n:u'
-.	ds ~ \\k:\h'-(\\n(.wu-\*(#H-.1m)'~\h'|\\n:u'
+.	if \n(.C .ds ~ \\k:\h'-(\\n(.wu-\*(#H-.1m)'\X94\h'|\\n:u'
+.	el .ds ~ \\k:\h'-(\\n(.wu-\*(#H-.1m)'~\h'|\\n:u'
 .	ds ? \s-2c\h'-\w'c'u*7/10'\u\h'\*(#H'\zi\d\s+2\h'\w'c'u*8/10'
 .	ds ! \s-2\(or\s+2\h'-\w'\(or'u'\v'-.8m'.\v'.8m'
 .	ds / \\k:\h'-(\\n(.wu*8/10-\*(#H)'\z\(sl\h'|\\n:u'
@@ -76,5 +78,19 @@
 .	ds Ae AE
 .	ds oe oe
 .	ds Oe OE
+.\}
+.	\" some of them are now ISO Latin-1 characters
+.if \n(.C \{\
+.	ds ! \(!!
+.	ds ? \(??
+.	ds ae \(ae
+.	ds AE \(AE
+.	ds oe \(oe
+.	ds OE \(OE
+.	ds d- \(d-
+.	ds D- \(D-
+.	ds th \(th
+.	ds Th \(TH
+.	ds 8 \(ss
 .\}
 .rm #[ #] #H #V #F C

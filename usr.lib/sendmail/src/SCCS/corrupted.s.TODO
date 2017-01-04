@@ -1,0 +1,739 @@
+h11879
+s 00000/00000/00034
+d D 4.1 83/07/25 19:43:15 eric 46 45
+m 
+c 4.2 release version
+e
+s 00000/00023/00034
+d D 3.32 82/11/28 00:23:10 eric 45 44
+m 
+c Many changes resulting from a complete code readthrough.  Most of these
+c fix minor bugs or change the internal structure for clarity, etc.  There
+c should be almost no externally visible changes (other than some cleaner
+c error message printouts and the like).
+e
+s 00001/00027/00056
+d D 3.31 82/09/05 20:12:33 eric 44 43
+c 
+e
+s 00009/00014/00074
+d D 3.30 82/08/23 20:06:36 eric 43 42
+c 
+e
+s 00022/00002/00066
+d D 3.29 82/08/08 00:39:05 eric 42 41
+c changes from CSNET conference & general up-to-date
+e
+s 00005/00006/00063
+d D 3.28 82/07/05 12:42:38 eric 41 40
+c 
+e
+s 00000/00002/00069
+d D 3.27 82/06/19 21:09:16 eric 40 39
+c get rid of comment lines when storing rewriting rules
+e
+s 00003/00000/00068
+d D 3.26 82/06/17 17:00:58 eric 39 38
+c 
+e
+s 00000/00005/00068
+d D 3.25 82/06/16 14:57:52 eric 38 37
+c 
+e
+s 00000/00005/00073
+d D 3.24 82/06/07 07:20:46 eric 37 36
+c up to date
+e
+s 00007/00000/00071
+d D 3.23 82/05/31 19:08:45 eric 36 35
+c finally, a weekend to so some work.  this is what is left.
+e
+s 00029/00017/00042
+d D 3.22 82/05/20 17:58:26 eric 35 34
+c adjust priorities to be more realistic in the frame of limited time.
+c I have changed my basic goals here, in that I am optimizing for the
+c VAX 4.2BSD rather than the "general case" (whatever the hell that is).
+e
+s 00003/00007/00056
+d D 3.21 82/02/27 11:36:18 eric 34 33
+c drop return-receipt, daemon mode
+e
+s 00000/00007/00063
+d D 3.20 82/02/20 19:16:19 eric 33 32
+c make rewriting of addresses in headers really work.  This adds the $q
+c macro.  The rewriting of the From: address is still ad hoc and should
+c be integrated into this format.
+c Note:  old .cf files will not work with this version.
+e
+s 00023/00011/00047
+d D 3.19 82/02/10 21:43:11 eric 32 31
+c BLI problems
+e
+s 00005/00000/00053
+d D 3.18 82/02/04 20:44:38 eric 31 30
+c 
+e
+s 00001/00000/00052
+d D 3.17 81/12/05 12:30:40 eric 30 29
+c 
+e
+s 00001/00007/00051
+d D 3.16 81/11/27 21:22:52 eric 29 28
+c 
+e
+s 00007/00000/00051
+d D 3.15 81/11/21 18:36:19 eric 28 27
+c add comment about fixing queue control files
+e
+s 00006/00000/00045
+d D 3.14 81/11/21 15:41:08 eric 27 26
+c 
+e
+s 00007/00002/00038
+d D 3.13 81/11/19 23:32:10 eric 26 25
+c 
+e
+s 00006/00000/00034
+d D 3.12 81/10/30 08:54:00 eric 25 24
+c 
+e
+s 00002/00006/00032
+d D 3.11 81/10/27 10:51:18 eric 24 23
+c More queueing cleanup: implement timeouts (still one-stage),
+c properly implement priorities (didn't work before), and miscellaneous
+c cleanup.
+e
+s 00005/00005/00033
+d D 3.10 81/10/15 21:10:25 eric 23 22
+c rearrange priorities
+e
+s 00004/00003/00034
+d D 3.9 81/10/15 20:41:17 eric 22 21
+c 
+e
+s 00005/00000/00032
+d D 3.8 81/10/14 21:28:09 eric 21 20
+c 
+e
+s 00014/00015/00018
+d D 3.7 81/09/12 17:48:40 eric 20 19
+c 
+e
+s 00005/00003/00028
+d D 3.6 81/09/08 09:59:10 eric 19 18
+c 
+e
+s 00000/00013/00031
+d D 3.5 81/09/07 10:23:07 eric 18 17
+c add NOTUNIX compile flag to turn off UNIX "From " line processing
+e
+s 00014/00000/00030
+d D 3.4 81/08/31 15:42:26 eric 17 16
+c add entries
+e
+s 00000/00002/00030
+d D 3.3 81/08/24 14:06:11 eric 16 15
+c Add "-t" option to read To:, Cc:, and Bcc: lines to get recipients
+e
+s 00000/00002/00032
+d D 3.2 81/08/22 17:52:13 eric 15 14
+c Arrange to pull full name out of From line if found; includes
+c Original-From: hacking (oh so ugly).  There's got to be a better way
+c to do this...
+e
+s 00022/00007/00012
+d D 3.1 81/08/22 15:09:30 eric 14 13
+c random thoughts
+e
+s 00002/00005/00017
+d D 1.13 81/08/18 11:38:17 eric 13 12
+c allow :include: specs
+e
+s 00000/00002/00022
+d D 1.12 81/08/17 14:42:12 eric 12 11
+c fixed symbol table
+e
+s 00011/00000/00013
+d D 1.11 81/08/11 09:55:00 eric 11 10
+c add things
+e
+s 00002/00019/00011
+d D 1.10 81/08/09 15:23:43 eric 10 9
+c clean out cruft
+e
+s 00000/00002/00030
+d D 1.9 81/08/09 12:34:46 eric 9 8
+c add private incoming mailers; add q_home field to ADDRESS struct;
+c some general cleanup
+e
+s 00000/00002/00032
+d D 1.8 81/08/08 17:48:02 eric 8 7
+c add another set of rewrite rules to process From: address;
+c this will allow generalized from address processing in an
+c internet
+e
+s 00000/00004/00034
+d D 1.7 81/08/08 16:19:28 eric 7 6
+c implement forwarding using .forward technique
+e
+s 00000/00003/00038
+d D 1.6 81/08/08 15:04:57 eric 6 5
+c implement blow-by-blow verbose mode
+e
+s 00000/00003/00041
+d D 1.5 81/08/08 13:51:46 eric 5 4
+c give arpanet-style error messages on -a
+e
+s 00000/00003/00044
+d D 1.4 81/08/08 11:27:29 eric 4 3
+c implement word classes
+e
+s 00022/00000/00025
+d D 1.3 81/08/07 09:59:56 eric 3 2
+c 
+e
+s 00003/00018/00022
+d D 1.2 81/04/01 23:49:10 eric 2 1
+c reflect changes already made
+e
+s 00040/00000/00000
+d D 1.1 81/04/01 23:46:56 eric 1 0
+c date and time created 81/04/01 23:46:56 by eric
+e
+u
+U
+f i 
+f v 
+t
+T
+I 1
+(Version %I% of %G%)
+
+I 28
+D 29
+*******	Fix queued control files to delete recipient lines after
+	they have been successfully sent.  Alternatively, add
+	lines at the end saying "successfully done" which can
+	effectively delete them from the queue.  We could be as
+	stupid as MMDF and return all the addresses that have
+	succeeded after three days......
+
+E 29
+E 28
+I 20
+D 32
+ ******	Deal with editing the "Sender:" field to be correct also.
+I 25
+	Perhaps this can be generalized to all mailbox fields --
+	so that ARPANET messages can go out with correct To: & Cc:
+	fields.
+E 32
+I 32
+D 33
+*******	Expand macros in rewriting rules early to allow multi-word
+	macros.
+E 32
+E 25
+
+I 32
+ ******	Deal with editing all address fields.  Make all addresses
+	relative to the receiving host and add commas as necessary.
+	Map translates back into the message.
+
+E 33
+D 35
+ ******	Fix processing of "From:" line to be right if we have to
+	rewrite the from address.  E.g.,
+		BLUnixB:sdcnet!xyzzy ==> sdcnet!xyzzy
+	Currently is correct in the -f flag, but not From: field
+	but only if the rewrite is at final site.
+E 35
+I 35
+D 38
+*******	Fix problems in return messages that end up being queued --
+	since they are generated on the fly, they don't have an
+	existance as such, so the queued return message will be wrong.
+E 35
+
+E 38
+I 36
+D 42
+******* Don't lose control files on interrupt: recover tf099999 files.
+E 42
+I 42
+D 44
+******* Figure out why tf & df files are being left around.
+E 42
+
+I 43
+******* Find out why we are getting "Connection Refused"
+
+E 44
+E 43
+E 36
+E 32
+I 27
+ ******	Finish properly implementing SMTP:
+D 45
+	- handle <sender-path> and <receiver-path>.
+D 44
+	- enforce output limits on line length, etc.
+E 44
+I 29
+	- enforce maximum sizes.
+I 30
+D 44
+	- put in Mail-From and Return-Path lines.
+E 44
+I 44
+	- put in Return-Path line.
+E 44
+I 43
+	- handle null sender ("MAIL FROM: <>" line)
+E 45
+	- check correct name in HELO exchange (?)
+D 45
+	- make RSET do what it is supposed to.  Memory allocation is
+	  the main problem here..... ugh.
+E 45
+E 43
+I 36
+D 38
+	- putline(buf, fp, fullsmtpflag)
+E 38
+E 36
+E 30
+E 29
+
+I 42
+D 43
+  *****	Add a trace package so that -d can select printing of
+	specific items.  Put logging on a -L flag or some such for
+	the same thing.  Log everything based on message-id.
+	Logging records: {bytes, sender}, {recipient, time-in-queue,
+	cpu-time}.
+E 43
+I 43
+D 45
+  ***** Rewrite all user names into RFC822 standard form.
+E 43
+
+E 45
+  ***** Add an accounting package.  [acct.c]
+
+E 42
+I 39
+D 41
+  ***** Time out in reads in SMTP -- in case distant ho
+E 34
+E 22
+
+I 31
+D 32
+  ***** Allow alternate paths.
+E 32
+I 32
+   **** Implement two stage timeout in queueing code.
+E 32
+
+E 31
+I 21
+D 24
+   **** Put conditionals on .cf H specification into .cf file.
+	For example, a possible syntax might be:
+		H/xyz/Phone: 888-8888
+	to only include the Phone: field if flags x, y, or z are set.
+I 22
+
+D 23
+    *** Include queueing on EX_TEMPFAIL internally.
+E 23
+I 23
+   **** Include queueing on EX_TEMPFAIL internally.
+E 24
+I 24
+D 26
+  ***** Finish implementing queueing.
+	+ Two stage timeout.
+E 26
+I 26
+D 32
+  ***** Implement two stage timeout in queueing code.
+I 31
+
+   **** Arrange to substitute translated names back into the
+	message header.
+E 31
+E 26
+I 25
+
+E 32
+   ****	In aliases, have ability to substitute the name of someone
+E 35
+I 35
+D 37
+  *****	In aliases, have ability to substitute the name of someone
+E 35
+	as the person to get error messages -- the "list maintainer".
+I 32
+	Perhaps this can be the owner of a :include: file?
+E 32
+E 25
+E 24
+E 23
+E 22
+
+E 37
+I 36
+D 40
+  ***** Don't save away the comment fields in rewriting rules.
+
+E 40
+E 36
+I 35
+   ****	Get rid of anything that shouldn't be here -- let's give some
+	thought to making this supportable in the long run.
+I 36
+	- file type mailers.
+E 41
+I 41
+  *****	When processing the queue, batch messages on the basis of
+	receiving host rather than message -- so that if connections
+	are expensive to complete, we get the most for our money.
+	Unfortunately, this is a major change, and will probably
+	wait for the next version.
+E 41
+D 37
+	- xlate feature for uucp routing.
+E 37
+E 36
+
+I 42
+D 43
+   ****	Deal with especially long header lines -- probably truncate
+	and give an error.
+
+E 43
+   ****	Put in some more performance hooks.
+
+E 42
+D 43
+   ****	Fix processing of "From:" line to be right if we have to
+	rewrite the from address.  E.g.,
+		BLUnixB:sdcnet!xyzzy ==> sdcnet!xyzzy
+	Currently is correct in the -f flag, but not From: field
+	but only if the rewrite is at final site.
+
+E 43
+E 35
+I 26
+D 45
+   **** Put the special flags for headers (currently in conf.c) into
+	the configuration file.  Could also make "mailer flags"
+	symbolic here.
+
+E 45
+I 32
+D 35
+    *** Implement special flags in .cf file.
+E 35
+I 35
+D 42
+    *** Implement two stage timeout in queueing code.
+E 42
+I 42
+D 44
+    *** canonname(paddr) => "<name>", exactly one set of <>, etc.
+E 42
+E 35
+D 34
+
+    *** Implement registered & certified mail.
+	Certified mail gives "I have delivered to ... message".
+	What does registered mail do?  Possibly give return message
+	at each hop.
+E 34
+
+E 44
+I 42
+    *** Integrate a null name server for future hackers.  [names.c]
+
+D 45
+    *** Implement two stage timeout in queueing code.  Dave Crocker
+	says this may not be a good idea.
+
+E 42
+E 32
+E 26
+E 21
+I 19
+D 20
+   **** Recognize full names as local addresses.  This could be
+	done as another (or concurrent) scan of /etc/passwd while
+	verifying local names, or we could automatically extend
+	the DBM alias file to include them when we build it.
+E 20
+I 20
+D 35
+    *** Extend full name matching.
+E 35
+I 35
+    *** Implement special flags in .cf file, e.g., be able to specify
+	that you should never do both phases (collection and delivery)
+	automatically.
+E 35
+E 20
+
+E 45
+E 19
+D 18
+   ****	Put in statistics gathering:
+	- # messages from each mailer
+	- # bytes from each mailer
+	- # messages to each mailer
+	- # bytes to each mailer
+	- # of messages forwarded only (no local delivery)
+	- # of bytes forwarded only
+	- etc.
+	Also, need a program to print all this out.
+
+E 18
+E 17
+I 3
+D 10
+ ****** (Somehow) resolve ambiguity with combinations of left and
+	right associative names, e.g., "x!y@z"; this is especially
+	bad in networks with multiple UUCP-ARPA connections and
+	the like.
+
+E 10
+D 8
+ ****** Correctly determine the "From:" person.
+
+E 8
+D 4
+  ***** Define word classes to allow more flexible determination
+	of host.
+
+E 4
+E 3
+D 14
+  ***** Change sendto & aliasdbm to know about quoted commas.
+	Currently, quoted commas delimit aliases when they should be
+	ignored.
+E 14
+I 14
+D 15
+ ****** Correctly edit From: lines to change address.
+E 14
+
+E 15
+I 11
+D 14
+   **** Verify to addresses before reading mail; print "350 Enter
+	mail" message when OK -- implies verifying addresses
+	in recipient() rather than in deliver() -- and how do we
+	handle berknet errors, etc.?
+E 14
+I 14
+D 20
+   **** Change configuration file to be in somewhat LISP-like
+E 20
+I 20
+    *** Have "Operating System Error" give more info (e.g.,
+D 32
+	"cannot fork").
+E 32
+I 32
+	"cannot fork").  [It really seems like this is ok now -- but
+	this is an old delivermail gripe -- check it out more?]
+I 42
+
+     ** Per-mailer timeouts.  Invalidates old .cf files.
+E 42
+E 32
+I 27
+
+D 35
+    *** Implement SEND and related commands in SMTP.
+E 27
+
+E 35
+D 23
+    *** Change sendto to know about quoted commas.
+	Currently, quoted commas delimit aliases when they should be
+	ignored.
+
+E 23
+     ** Be able to generate a "response" (edit headers, etc.)
+	given a message to respond to.
+I 26
+D 44
+
+     ** Allow more that 26 classes -- with symbolic names.
+E 26
+
+     ** Change configuration file to be in somewhat LISP-like
+E 20
+	format, e.g.
+		(MACRO name value)
+		(HEADER name value
+			(OPTION option) ...
+			(NEEDS option) ... )
+		(MAILER name path xlatstring
+			(OPTION option) ...
+			(ARGV arg ... ))
+		(CLASS name word ...)
+		(REWRITE setname
+			(RULE lhs rhs) ... )
+I 35
+	Actually, this format should be even friendlier.  Perhaps we
+	need an interactive configuration file generator that roams
+	around your system, makes intelligent guesses, and asks you
+	about them.
+E 44
+E 35
+I 23
+D 45
+
+D 35
+      * Change sendto to know about quoted commas.
+E 35
+I 35
+     ** Change sendto to know about quoted commas.
+E 35
+	Currently, quoted commas delimit aliases when they should be
+	ignored.
+E 45
+I 43
+
+      * Have VRFY act as a limited name server (?).
+E 43
+I 35
+
+      * Implement SEND and related commands in SMTP.
+
+      * Extend full name matching.  This should actually be done in a
+	complete name server.  Should the name server be integrated
+	into sendmail (via a portal?) or should I "assume" that it
+	has been called by the time I am called?
+E 35
+E 23
+E 14
+D 20
+
+E 11
+D 2
+  ***** Collect headers in memory and output them (with commas,
+	etc.) so as to do clever editing, etc.
+E 2
+I 2
+D 5
+   **** Output ARPANET FTP codes on -a; this will allow immediate
+	recognition of error.
+E 2
+
+E 5
+D 2
+   **** Have "Operating System Error" give more info (e.g.,
+E 2
+I 2
+    *** Have "Operating System Error" give more info (e.g.,
+E 2
+	"cannot fork").
+I 11
+
+I 14
+    *** Change sendto to know about quoted commas.
+	Currently, quoted commas delimit aliases when they should be
+	ignored.
+D 19
+
+D 16
+    ***	Be able to scan header to determine recipients.
+
+E 16
+E 14
+D 12
+    *** Improve the symbol table.
+
+E 12
+D 13
+     ** Have the dbm alias stuff be rebuilt by sendmail itself
+	(perhaps automatically?) -- since most of the code is
+	there already anyway.
+E 11
+I 3
+
+D 7
+    *** Implement some form of forwarding that would allow
+	/usr/lib/aliases to be non-writable; i.e., let individual
+	users specify their forwarding address.
+
+E 7
+D 9
+    *** Allow users to specify their incoming mailer.
+
+E 9
+D 6
+    *** Give a blow-by-blow description of what is happening
+	on option.
+
+E 6
+D 10
+     ** Allow non-UNIX mailers (?) -- i.e., be able to ignore
+	UNIX-style message headers.
+E 3
+D 2
+
+   ****	Collect mail together that can be sent all at once, i.e.,
+	create equivalence classes of hosts.  This could end up needing
+	great knowledge about network topology, but most errors would
+	end up being inefficient although still ok.
+
+    *** Put host aliasing into the users file, e.g.,
+	``vax135!:research!vax135!''   This would simplify
+	configuration considerably, but it might not be worth it.
+	For example, this is too sensitive to be in a file that
+	is writable by all users.
+
+     ** Collect all names that are local in advance, and send
+	them all off to /bin/mail at once -- fork before sending so
+	that we can return status quickly.
+E 2
+
+E 10
+     ** Handle :Include: specifications.
+E 13
+I 13
+     ** Have the dbm alias stuff be rebuilt by sendmail automatically;
+	this could be a problem if you have a protected alias file.
+E 19
+I 14
+
+     ** Be able to generate a "response" (edit headers, etc.)
+	given a message to respond to.
+E 20
+E 14
+E 13
+D 18
+
+D 10
+      * Allow #include (or some such thing) in /usr/lib/aliases.
+
+      * (Somehow) have "From" person modified so that if an alias exists
+	for the person, it will appear post-aliased rather than pre-aliased,
+	especially (perhaps only?) in ARPANET mail.  For example, if there
+	exists an alias "fabry->cory:fabry", then if mail comes in from
+	"cory:fabry", make it appear as though it were from "fabry".
+	This should probably be in Mail (put "From" and "Date" lines in)
+	or in the arpa mailer.
+
+      * Do aliasing on mail being returned also (?).
+E 10
+I 10
+      * Allow non-UNIX mailers (?) -- i.e., be able to ignore
+	UNIX-style message headers.
+E 18
+E 10
+E 1

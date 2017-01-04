@@ -1,0 +1,172 @@
+h43172
+s 00007/00003/00048
+d D 6.3 86/05/14 10:03:20 karels 5 4
+c fixes and updates
+e
+s 00001/00001/00050
+d D 6.2 85/06/28 17:17:46 sechrest 4 3
+c Improved english
+e
+s 00001/00001/00050
+d D 6.1 85/05/09 17:34:37 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00031/00041/00020
+d D 5.1 85/05/09 17:34:10 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00061/00000/00000
+d D 4.1 85/05/09 17:33:42 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH KILLPG 2J
+E 2
+I 2
+D 3
+.TH KILLPG 2 "27 July 1983"
+E 3
+I 3
+.TH KILLPG 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+killpg \- send signal to a process or a process group
+E 2
+I 2
+killpg \- send signal to a process group
+E 2
+.SH SYNOPSIS
+D 2
+.B killpg(pgrp, sig)
+.PP
+.B cc ... \-ljobs
+E 2
+I 2
+.ft B
+killpg(pgrp, sig)
+.br
+int pgrp, sig;
+.ft R
+E 2
+.SH DESCRIPTION
+.I Killpg
+sends the signal
+.I sig
+D 2
+to the specified process group.
+E 2
+I 2
+to the process group
+.IR pgrp .
+E 2
+See
+D 2
+.IR sigsys (2)
+for a list of signals;
+see
+.IR jobs (3)
+for an explanation of process groups.
+E 2
+I 2
+.IR sigvec (2)
+for a list of signals.
+E 2
+.PP
+The sending process and members of the process group must
+D 5
+have the same effective user ID, otherwise
+this call is restricted to the super-user.
+E 5
+I 5
+have the same effective user ID, or
+the sender must be the super-user.
+E 5
+As a single special case the continue signal SIGCONT may be sent
+D 2
+to any process which is a descendant of the current process.  This
+allows a command interpreter such as
+.IR csh (1)
+to restart set-user-id processes stopped from the keyboard with a stop signal.
+.PP
+The calls
+.IP
+.B "killpg(0, sig)"
+.LP
+and
+.IP
+.B "kill(0, sig)
+.LP
+have identical effects, sending the signal to all members of the
+invoker's process group (including the process itself).
+It is preferable to use the call involving
+.I kill
+in this case, as it is portable to other UNIX systems.
+E 2
+I 2
+D 4
+to any process which is a descendant of the current process.
+E 4
+I 4
+to any process that is a descendant of the current process.
+E 4
+.SH "RETURN VALUE
+Upon successful completion, a value of 0 is returned.  Otherwise,
+a value of \-1 is returned and the global variable \fIerrno\fP
+is set to indicate the error.
+.SH "ERRORS
+\fIKillpg\fP will fail and no signal will be sent if any of the
+following occur:
+.TP 15
+[EINVAL]
+\fISig\fP is not a valid signal number.
+.TP 15
+[ESRCH]
+D 5
+No process can be found corresponding to that specified by \fIpid\fP.
+E 5
+I 5
+No process can be found in the process group specified by \fIpgrp\fP.
+.TP 15
+[ESRCH]
+The process group was given as 0
+but the sending process does not have a process group.
+E 5
+.TP 15
+[EPERM]
+The sending process is not the super-user and one or more
+of the target processes has an effective user ID different from that
+of the sending process.
+E 2
+.SH "SEE ALSO"
+D 2
+jobs(3), kill(2), sigsys(2), signal(2), csh(1), kill(1)
+.SH DIAGNOSTICS
+Zero is returned if the processes are sent the signals;
+\-1 is returned if any process in the process group cannot be sent
+the signal, or if there are no members in the process group.
+.SH BUGS
+The job control facilities are not available in standard version 7 UNIX.
+These facilities are still under development and may change in future
+releases of the system as better inter-process communication facilities
+and support for virtual terminals become available.  The options and
+specifications of this system call and even the call itself
+are thus subject to change.
+E 2
+I 2
+kill(2), getpgrp(2), sigvec(2)
+E 2
+E 1

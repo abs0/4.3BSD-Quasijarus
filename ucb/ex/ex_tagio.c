@@ -9,7 +9,7 @@
 
 #ifdef FASTTAG
 #ifndef lint
-static char *sccsid = "@(#)ex_tagio.c	7.4 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_tagio.c	7.5 (Berkeley) 4/13/03";
 #endif
 
 #ifndef vms
@@ -23,10 +23,10 @@ static long offset = -1;
 static long block = -1;
 static int bcnt = 0;
 static int b_size = MAXBSIZE;
-static char *ibuf;
+static u_char *ibuf;
 
 topen(file, buf)
-char *file, *buf;
+u_char *file, *buf;
 {
 	int fd;
 	struct stat statb;
@@ -63,11 +63,11 @@ long off;
 }
 
 tgets(buf, cnt, fd)
-register char *buf;
+register u_char *buf;
 int cnt;
 int fd;
 {
-	register char *cp;
+	register u_char *cp;
 	register cc;
 
 	cc = offset;

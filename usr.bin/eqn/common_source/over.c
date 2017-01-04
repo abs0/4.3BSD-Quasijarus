@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)over.c	4.3 8/11/83";
+static char sccsid[] = "@(#)over.c	4.4 9/15/04";
 #endif
 
 # include "e.h"
@@ -9,13 +9,18 @@ boverb(p1, p2) int p1, p2; {
 
 	treg = oalloc();
 	yyval = p1;
-#ifndef NEQN
+#ifdef CAT
 	d = VERT((ps*6*3) / 10);	/* 0.3m */
 	h = eht[p1] + eht[p2] + d;
-#else NEQN
+#endif
+#ifdef PS
+	d = ps*6*3;			/* 0.3m */
+	h = eht[p1] + eht[p2] + d;
+#endif
+#ifdef NEQN
 	d = VERT(1);
 	h = eht[p1] + eht[p2];
-#endif NEQN
+#endif
 	b = eht[p2] - d;
 	if(dbg)printf(".\tb:bob: S%d <- S%d over S%d; b=%d, h=%d\n", 
 		yyval, p1, p2, b, h);

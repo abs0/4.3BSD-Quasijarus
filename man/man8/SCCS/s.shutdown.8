@@ -1,0 +1,206 @@
+h46492
+s 00001/00001/00111
+d D 6.4 86/05/26 15:37:57 karels 6 5
+c updates
+e
+s 00018/00001/00094
+d D 6.3 86/05/16 02:13:13 lepreau 5 4
+c doc -f and -n flags
+e
+s 00001/00003/00094
+d D 6.2 86/05/12 17:44:50 eric 4 3
+c shutdownlog subsumed into syslog
+e
+s 00001/00001/00096
+d D 6.1 85/04/27 13:50:56 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00010/00009/00087
+d D 5.1 85/04/27 13:50:34 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00096/00000/00000
+d D 4.1 85/04/27 13:50:15 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SHUTDOWN 8 4/1/81
+E 2
+I 2
+D 3
+.TH SHUTDOWN 8 4/1/83
+E 3
+I 3
+.TH SHUTDOWN 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+shutdown \- close down the system at a given time
+.SH SYNOPSIS
+.B /etc/shutdown
+[
+.B \-k
+] [
+.B \-r
+] [
+.B \-h
+I 5
+] [
+.B \-f
+] [
+.B \-n
+E 5
+]
+time [ warning-message ... ]
+.SH DESCRIPTION
+.I Shutdown
+provides an automated shutdown procedure which a super-user
+can use to notify users
+nicely when the system is shutting down, saving them from
+system administrators, hackers, and gurus, who would otherwise
+not bother with niceties.
+.LP
+.I Time
+is the time at which
+.I shutdown
+will bring the system down and
+D 2
+may take two formats:
+E 2
+I 2
+may be the word
+.B now
+(indicating an immediate shutdown)
+or specify a future time in one of two formats:
+E 2
+.BR + number
+and
+.RB hour : min.
+The first form brings the system down in
+.I number
+minutes
+and the second brings the system down at the time of day indicated
+(as a 24\-hour clock).
+.PP
+At intervals which get closer together as apocalypse approaches,
+warning messages are displayed at the terminals of all users on the
+system.  Five minutes before shutdown, or immediately if
+shutdown is in less than 5 minutes, logins are disabled by
+creating
+/etc/nologin
+and writing a message there.
+D 2
+If this file exists when a user logs in,
+E 2
+I 2
+If this file exists when a user attempts to log in,
+E 2
+.IR login (1)
+prints its contents
+and exits.
+The file is removed just before
+.I shutdown
+exits.
+.PP
+At shutdown time a
+D 4
+message is written in the file /usr/adm/shutdownlog, containing the
+E 4
+I 4
+message is written in the system log, containing the
+E 4
+time of shutdown, who ran shutdown and the reason.
+D 6
+Then a terminate signal is sent at
+E 6
+I 6
+Then a terminate signal is sent to
+E 6
+.I init
+to bring the system down to single-user state.
+Alternatively, if
+D 2
+.B -r,
+.B -h,
+E 2
+I 2
+.B \-r,
+.B \-h,
+E 2
+or
+D 2
+.B -k
+E 2
+I 2
+.B \-k
+E 2
+was used, then
+.I shutdown
+will exec
+.IR reboot (8),
+.IR halt (8),
+or avoid shutting the system down (respectively).
+(If it isn't obvious,
+.B \-k
+is to make people
+.I think
+the system is going down!)
+.PP
+I 5
+With the
+.B \-f
+option,
+.I shutdown
+arranges, in the manner of
+.IR fastboot (8),
+that when the system is rebooted the file systems will not
+be checked.  The
+.B \-n
+option prevents the normal
+.IR sync (2)
+before stopping.
+.PP
+E 5
+The time of the shutdown and the warning message
+are placed in /etc/nologin and should be used to
+inform the users about when the system will be back up
+and why it is going down (or anything else).
+.SH FILES
+.DT
+/etc/nologin	tells login not to let anyone log in
+D 4
+.br
+D 2
+/usr/adm/shutdownlog	log file for succesful shutdowns.
+E 2
+I 2
+/usr/adm/shutdownlog	log file for successful shutdowns.
+E 4
+E 2
+.SH "SEE ALSO"
+D 5
+login(1), reboot(8)
+E 5
+I 5
+login(1), reboot(8), fastboot(8)
+E 5
+.SH BUGS
+Only allows you to kill the system between now and 23:59 if
+you use the absolute time for shutdown.
+D 2
+.PP
+Times to shutdown are not nice and round, i.e. ``shutdown in 18 seconds''.
+E 2
+E 1

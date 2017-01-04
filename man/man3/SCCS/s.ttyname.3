@@ -1,0 +1,107 @@
+h61483
+s 00001/00001/00046
+d D 6.1 85/05/15 15:05:52 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00009/00008/00038
+d D 5.1 85/05/15 15:05:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00046/00000/00000
+d D 4.1 85/05/15 15:05:35 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TTYNAME 3 
+E 2
+I 2
+D 3
+.TH TTYNAME 3  "19 January 1983"
+E 3
+I 3
+.TH TTYNAME 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+ttyname, isatty, ttyslot \- find name of a terminal
+.SH SYNOPSIS
+D 2
+.B char *ttyname(fildes)
+E 2
+I 2
+.B char *ttyname(filedes)
+E 2
+.PP
+D 2
+.B isatty(fildes)
+E 2
+I 2
+.B isatty(filedes)
+E 2
+.PP
+.B ttyslot()
+.SH DESCRIPTION
+.I Ttyname
+returns a pointer to the null-terminated path name
+of the terminal device associated with file descriptor
+D 2
+.IR fildes .
+E 2
+I 2
+.I filedes
+(this is a system file descriptor and has nothing to do with the
+standard I/O FILE typedef).
+E 2
+.PP
+.I Isatty
+returns 1 if
+D 2
+.I fildes
+E 2
+I 2
+.I filedes
+E 2
+is associated with a terminal device, 0 otherwise.
+.PP
+.I Ttyslot
+returns the number of the entry in the
+.IR ttys (5)
+D 2
+file for the control terminal of the
+current process.
+E 2
+I 2
+file for the control terminal of the current process.
+E 2
+.SH FILES
+/dev/\(**
+.br
+/etc/ttys
+.SH SEE ALSO
+ioctl(2), ttys(5)
+.SH DIAGNOSTICS
+.I Ttyname
+returns a null pointer (0) if
+D 2
+.I fildes
+E 2
+I 2
+.I filedes
+E 2
+does not describe a terminal device in directory `/dev'.
+.PP
+.I Ttyslot
+returns 0 if `/etc/ttys' is inaccessible or if
+it cannot determine the control terminal.
+.SH BUGS
+The return value points to static data
+whose content is overwritten by each call.
+E 1

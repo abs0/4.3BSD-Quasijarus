@@ -1,0 +1,12 @@
+We use binary zone files in MSDNS.  They are compiled from standard RFC 1035
+master files by the zonecomp utility and can be "disassembled" for debug
+inspection with zonedump.
+
+A binary zone file consists of a static signature header followed by RRs.
+Each RR is written in the standard binary format, i.e., exactly as it would
+appear in DNS protocol messages, except that compressed domain name pointers
+are not allowed.  These standard binary RRs are simply abutted together
+(i.e., without the message structure of AXFR) and the end is indicated by
+the end of file.  When reading/parsing, getting an EOF when expecting the
+first octet of a new RR is normal, getting an EOF in the middle of an RR
+is an error.

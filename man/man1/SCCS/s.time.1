@@ -1,0 +1,129 @@
+h15300
+s 00016/00028/00018
+d D 6.2 87/11/17 17:30:26 bostic 4 3
+c document -l flag, minor cleanups
+e
+s 00001/00001/00045
+d D 6.1 85/04/29 15:05:27 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00003/00043
+d D 5.1 85/04/29 15:05:15 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00046/00000/00000
+d D 4.1 85/04/29 15:05:05 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TIME 1 
+E 2
+I 2
+D 3
+.TH TIME 1  "18 January 1983"
+E 3
+I 3
+.TH TIME 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+time \- time a command
+.SH SYNOPSIS
+.B time
+D 4
+command
+E 4
+I 4
+[-l] command
+E 4
+.SH DESCRIPTION
+D 4
+The
+given command is executed; after it is complete,
+.I time
+prints the elapsed time during the command, the time
+spent in the system, and the time spent in execution
+of the command.
+Times are reported in seconds.
+E 4
+I 4
+The given command is executed; after it is complete, \fItime\fP
+prints the elapsed time during the command, the time spent in the
+system, and the time spent in execution of the command.  Times are
+reported in seconds.  If the \fB-l\fP option is supplied, the
+contents of the \fIrusage\fP structure are printed as well.
+E 4
+.PP
+On a PDP-11, the execution time can depend on what kind of memory
+D 4
+the program happens to land in;
+the user time in MOS is often half what it is in core.
+E 4
+I 4
+the program happens to land in; the user time in MOS is often half
+what it is in core.
+E 4
+.PP
+D 4
+The times are printed on the diagnostic output stream.
+E 4
+I 4
+The times are printed on the diagnostic output stream, ``stderr''.
+E 4
+.PP
+D 4
+.I Time
+is built in to
+D 2
+.I csh(1),
+E 2
+I 2
+.IR csh (1),
+E 2
+using a different output format.
+E 4
+I 4
+\fITime\fP is a built-in command to \fIcsh\fP(1), with a much different
+syntax.  This command is available as ``/bin/time'' to \fIcsh\fP users.
+E 4
+.SH BUGS
+D 4
+Elapsed time is accurate to the second,
+while the CPU times are measured
+D 2
+to the 60th second.
+E 2
+I 2
+to the 100th second.
+E 2
+Thus the sum of the CPU times can be up to a second larger
+than the elapsed time.
+.PP
+.I Time
+is a built-in command to
+.IR csh (1),
+with a much different syntax.  This command is available as
+``/bin/time'' to
+.I csh
+users.
+E 4
+I 4
+Elapsed time is accurate to the second, while the CPU times are measured
+to the 100th second.  Thus the sum of the CPU times can be up to a second
+larger than the elapsed time.
+.SH "SEE ALSO"
+include/sys/h/resource.h
+E 4
+E 1

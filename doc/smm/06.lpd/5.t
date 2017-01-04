@@ -2,15 +2,16 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)5.t	6.4 (Berkeley) 4/28/86
+.\"	@(#)5.t	6.5 (Berkeley) 8/24/04
 .\"
 .NH 1
 Output filter specifications
 .PP
-The filters supplied with 4.3BSD
+The filters supplied with 4.3BSD-Quasijarus
 handle printing and accounting for most common
-line printers, the Benson-Varian, the wide (36") and
-narrow (11") Versatec printer/plotters. For other devices or accounting
+line printers, for the Benson-Varian and the wide (36") and
+narrow (11") Versatec printer/plotters, and for PostScript printers.
+For other devices or accounting
 methods, it may be necessary to create a new filter.
 .PP
 Filters are spawned by \fIlpd\fP
@@ -87,3 +88,14 @@ entries in the printcap file).
 The rest of the arguments are the same as for the
 .B if
 filter.
+.PP
+Additional arguments are passed to input filters if the
+.I printcap
+entry includes
+.B ea
+or
+.B pi
+capabilities.
+See
+.IR printcap (5)
+for details.

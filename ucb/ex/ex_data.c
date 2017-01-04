@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_data.c	7.6 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_data.c	7.7 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -19,30 +19,30 @@ static char *sccsid = "@(#)ex_data.c	7.6 (Berkeley) 3/9/87";
  * These initializations are done char by char instead of as strings
  * to confuse xstr so it will leave them alone.
  */
-char	direct[ONMSZ] =
+u_char	direct[ONMSZ] =
 #ifdef vms
 	{'t', 'm', 'p', ':'}; 
 #else
 	{'/', 't', 'm', 'p'}; 
 #endif
-char	paragraphs[ONMSZ] = {
+u_char	paragraphs[ONMSZ] = {
 	'I', 'P', 'L', 'P', 'P', 'P', 'Q', 'P',		/* -ms macros */
 	'P', ' ', 'L', 'I',				/* -mm macros */
 	'p', 'p', 'l', 'p', 'i', 'p',			/* -me macros */
 	'b', 'p'					/* bare nroff */
 };
-char	sections[ONMSZ] = {
+u_char	sections[ONMSZ] = {
 	'N', 'H', 'S', 'H',				/* -ms macros */
 	'H', ' ', 'H', 'U',				/* -mm macros */
 	'n', 'h', 's', 'h'				/* -me macros */
 };
-char	shell[ONMSZ] =
+u_char	shell[ONMSZ] =
 	{ '/', 'b', 'i', 'n', '/', 's', 'h' };
-char	tags[ONMSZ] = {
+u_char	tags[ONMSZ] = {
 	't', 'a', 'g', 's', ' ',
 	'/', 'u', 's', 'r', '/', 'l', 'i', 'b', '/', 't', 'a', 'g', 's'
 };
-char	ttytype[ONMSZ] =
+u_char	ttytype[ONMSZ] =
 	{ 'd', 'u', 'm', 'b' };
 
 short	COLUMNS = 80;
@@ -55,6 +55,7 @@ struct	option options[NOPTS + 1] = {
 	"beautify",	"bf",	ONOFF,		0,	0,	0,
 	"directory",	"dir",	STRING,		0,	0,	direct,
 	"edcompatible",	"ed",	ONOFF,		0,	0,	0,
+	"eightbit",	"eight",ONOFF,		0,	0,	0,
 	"errorbells",	"eb",	ONOFF,		0,	0,	0,
 	"hardtabs",	"ht",	NUMERIC,	8,	8,	0,
 	"ignorecase",	"ic",	ONOFF,		0,	0,	0,

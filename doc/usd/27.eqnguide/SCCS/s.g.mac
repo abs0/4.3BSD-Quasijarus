@@ -1,0 +1,47 @@
+h34736
+s 00000/00000/00028
+d D 6.1 86/05/22 16:36:00 kjd 3 2
+c document for 4.3BSD release
+e
+s 00000/00000/00028
+d D 5.1 86/05/22 16:35:56 kjd 2 1
+c document distributed with 4.2BSD
+e
+s 00028/00000/00000
+d D 4.1 86/05/22 16:35:51 kjd 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.tr %$
+.de SC
+.NH
+\\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9 
+..
+.de UC
+\&\\$3\s-2\\$1\\s+2\\$2
+..
+.de P1
+.nf
+.tr -\(mi
+.tr ^.
+.tr '\(fm
+.ss 18
+.if \\n(.$ .DS I \\$1
+.if !\\n(.$ .DS
+..
+.de P2
+.DE
+.fi
+.ss 12
+.tr --
+.tr ^^
+.tr ''
+..
+.tr _\(em
+E 1

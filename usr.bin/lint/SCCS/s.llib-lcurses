@@ -1,0 +1,378 @@
+h37026
+s 00013/00006/00140
+d D 1.6 87/04/22 15:23:54 bostic 6 5
+c bug report 4.3BSD/usr.bin/52
+e
+s 00132/00068/00014
+d D 1.5 83/03/27 14:57:50 arnold 5 4
+c 
+e
+s 00001/00000/00081
+d D 1.4 81/05/15 16:09:54 arnold 4 3
+c add getcap() function
+e
+s 00001/00000/00080
+d D 1.3 81/03/06 00:13:22 arnold 3 2
+c add tstp()
+e
+s 00070/00052/00010
+d D 1.2 81/03/05 20:51:45 arnold 2 1
+c redo it right(er)
+e
+s 00062/00000/00000
+d D 1.1 81/01/26 17:05:04 arnold 1 0
+c date and time created 81/01/26 17:05:04 by arnold
+e
+u
+U
+t
+T
+I 1
+D 2
+/* %W% (Berkeley) %G% */
+E 2
+I 2
+D 5
+/* %G% (Berkely) %W% */
+E 5
+I 5
+/* %W% (Berkeley) %G% */
+E 5
+E 2
+
+D 2
+# include	"curses.h"
+E 2
+I 2
+/* LINTLIBRARY */
+I 5
+# include	"curses.h"
+E 5
+E 2
+
+D 2
+void	box(win,vert,hor) WINDOW *win; int vert, hor; {}
+void	delwin(win) WINDOW *win; {}
+void	endwin() {}
+void	gettmode() {}
+WINDOW *initscr() { return (WINDOW *) 0;}
+char *	longname(bp, def) char *bp, *def; { return bp; }
+	mvcur(ly,lx,y,x) int ly, lx, y, x; { }
+/* VARARGS3 */
+	mvprintw(y,x,fmt) int y, x; char *fmt; { }
+/* VARARGS3 */
+	mvscanw(y,x,fmt) int y, x; char *fmt; { }
+/* VARARGS4 */
+	mvwprintw(win,y,x,fmt) WINDOW *win; int y, x; char *fmt; { }
+/* VARARGS4 */
+	mvwscanw(win,y,x,fmt) WINDOW *win; int y, x; char *fmt; { }
+WINDOW *newwin(Nl, Nc, by, bx) int Nl, Nc, by, bx; { return (WINDOW *) 0; }
+void	overlay(win1, win2) WINDOW *win1, *win2; { }
+void	overwrite(win1, win2) WINDOW *win1, *win2; { }
+/* VARARGS1 */
+	printw(fmt) char *fmt; { }
+/* VARARGS1 */
+	scanw(fmt) char *fmt; { }
+void	scroll(win) WINDOW *win; { }
+void	startwin() { }
+void	setterm(type) char *type; { }
+WINDOW *subwin(o, Nl, Nc, by, bx) WINDOW *o; int Nl, Nc, by, bx; { return o; }
+	waddch(win,ch) WINDOW *win; char ch; { }
+	waddstr(win,str) WINDOW *win; char *str; { }
+void	wclear(win) WINDOW *win; { }
+void	wclrtobot(win) WINDOW *win; { }
+void	wclrtoeol(win) WINDOW *win; { }
+void	wdeleteln(win) WINDOW *win; { }
+void	werase(win) WINDOW *win; { }
+	wgetch(win) WINDOW *win; { }
+	wgetstr(win,str) WINDOW *win; char *str; { }
+void	winsertln(win) WINDOW *win; { }
+	wmove(win,y,x) WINDOW *win; int y, x; { }
+/* VARARGS2 */
+	wprintw(win,fmt) WINDOW *win; char *fmt; { }
+	wrefresh(win) WINDOW *win; { }
+/* VARARGS2 */
+	wscanw(win,fmt) WINDOW *win; char *fmt; { }
+void	wstandout(win) WINDOW *win; { }
+void	wstandend(win) WINDOW *win; { }
+E 2
+I 2
+D 5
+# include	<curses.h>
+E 5
+I 5
+/*
+ * Fake declarations; all of these are declared as externs in curses.h,
+ * but lint needs something a little more solid than that
+ */
+E 5
+E 2
+
+D 2
+bool	AM, BS, CA, DA, DB, EO, GT, HZ, IN, MI, My_term, _echoit,
+	_rawmode, NC, NONL, OS, UL, UPPERCASE, XN, normtty, pfast;
+E 2
+I 2
+D 5
+static char	*sp;
+static WINDOW	*wp;
+E 5
+I 5
+D 6
+bool	AM, BS, CA, DA, DB, EO, GT, HZ, IN, MI, MS, NC, OS, UL, XN;
+E 6
+I 6
+bool	AM, BS, CA, DA, DB, EO, HC, HZ, IN, MI, MS, NC, NS, OS, UL,
+	XB, XN, XT, XS, XX;
+char	*AL, *BC, *BT, *CD, *CE, *CL, *CM, *CR, *CS, *DC, *DL,
+	*DM, *DO, *ED, *EI, *K0, *K1, *K2, *K3, *K4, *K5, *K6,
+	*K7, *K8, *K9, *HO, *IC, *IM, *IP, *KD, *KE, *KH, *KL,
+	*KR, *KS, *KU, *LL, *MA, *ND, *NL, *RC, *SC, *SE, *SF,
+	*SO, *SR, *TA, *TE, *TI, *UC, *UE, *UP, *US, *VB, *VS,
+	*VE, *AL_PARM, *DL_PARM, *UP_PARM, *DOWN_PARM,
+	*LEFT_PARM, *RIGHT_PARM;
+char	PC;
+E 6
+E 5
+E 2
+
+D 2
+char    *AL, *BC, *BT, *CD, *CE, *CL, *CM, *DC, *DL, *DM, *DO,
+	*Def_term, ttytype[], *ED, *EI, *HO, *IC, *IM, *IP, *LL, *MA,
+	*ND, *SE, *SF, *SO, *SR, *TA, *TE, *TI, *UE, *UP, *US, *VB,
+	*VE, *VS, PC;
+E 2
+I 2
+D 5
+char	_putchar(c) char c; { return c; }
+	/* VARARGS2 */
+int	_sprintw(win, fmt, args) WINDOW *win; char *fmt; { return 0; }
+	/* VARARGS2 */
+int	_sscans(win, fmt, args) WINDOW *win; char *fmt; { return 0; }
+	box(win, vert, hor) WINDOW *win; int vert, hor; {}
+	delwin(win) WINDOW *win; {}
+	endwin() {}
+	fgoto() {}
+	gettmode() {}
+I 4
+char   *getcap(name) char *name; { return name; }
+E 4
+WINDOW *initscr() { return wp; }
+char   *longname(bp, def) char *bp ,*def; { return sp; }
+	mvcur(ly, lx, y, x) int ly, lx, y, x; {}
+	/* VARARGS3 */
+int	mvprintw(y, x, fmt, args) int y, x; char *fmt; { return 0; }
+	/* VARARGS3 */
+int	mvscanw(y, x, fmt, args) int y, x; char *fmt; { return 0; }
+int	mvwin(win, by, bx) WINDOW *win; { return 0; }
+	/* VARARGS4 */
+int	mvwprintw(win, y, x, fmt, args) WINDOW *win; int y, x; char *fmt; { return 0; }
+	/* VARARGS4 */
+int	mvwscanw(win, y, x, fmt, args) WINDOW *win; int y, x; char *fmt; { return 0; }
+WINDOW *newwin(num_lines, num_cols, begy, begx) int num_lines, num_cols, begy, begx; { return wp; }
+	overlay(win1, win2) WINDOW *win1, *win2; {}
+	overwrite(win1, win2) WINDOW *win1, *win2; {}
+int	plod(cnt) int cnt; { return 0; }
+	plodput(c) char c; {}
+	/* VARARGS1 */
+int	printw(fmt, args) char *fmt; { return 0; }
+	/* VARARGS1 */
+	putpad(cp) char *cp; {}
+int	scanw(fmt, args) char *fmt; { return 0; }
+int	scroll(win) WINDOW *win; { return 0; }
+int	setterm(type) char *type; { return 0; }
+WINDOW *subwin(orig, num_lines, num_cols, begy, begx) WINDOW *orig; int num_lines, num_cols, begy, begx; { return wp; }
+	touchwin(win) WINDOW *win; {}
+I 3
+	tstp() {}
+E 3
+int	waddch(win, c) WINDOW *win; char c; { return 0; }
+int	waddstr(win, str) WINDOW *win; char *str; { return 0; }
+int	wclear(win) WINDOW *win; { return 0; }
+	wclrtobot(win) WINDOW *win; {}
+	wclrtoeol(win) WINDOW *win; {}
+	wdeleteln(win) WINDOW *win; {}
+	werase(win) WINDOW *win; {}
+int	wgetch(win) WINDOW *win; { return 0; }
+int	wgetstr(win, str) WINDOW *win; char *str; { return 0; }
+	winsertln(win) WINDOW *win; {}
+int	wmove(win, y, x) WINDOW *win; int y, x; { return 0; }
+	/* VARARGS2 */
+int	wprintw(win, fmt, args) WINDOW *win; char *fmt; { return 0; }
+	/* VARARGS2 */
+int	wrefresh(win) WINDOW *win; { return 0; }
+int	wscanw(win, fmt, args) WINDOW *win; char *fmt; { return 0; }
+char   *wstandend(win) WINDOW *win; { return sp; }
+char   *wstandout(win) WINDOW *win; { return sp; }
+	zap() {}
+E 5
+I 5
+D 6
+char	*AL, *BC, *BT, *CD, *CE, *CL, *CM, *DC, *DL, *DM, *DO, *ED,
+	*EI, *HO, *IC, *IM, *IP, *LL, *MA, *ND, *SE, *SF, *SO, *SR,
+	*TA, *TE, *TI, *UC, *UE, *UP, *US, *VB, *VE, *VS, PC;
+E 5
+
+E 6
+D 5
+bool	AM, BS, CA, DA, DB, EO, GT, HZ, IN, MI, MS, NC, OS, UL, XN,
+	NONL, UPPERCASE, normtty, _pfast, My_term, _echoit, _rawmode,
+	_endwin;
+E 5
+I 5
+/*
+ * From the tty modes...
+ */
+E 5
+
+I 5
+D 6
+bool	NONL, UPPERCASE, normtty, _pfast;
+E 6
+I 6
+bool	GT, NONL, UPPERCASE, normtty, _pfast;
+E 6
+E 5
+
+D 5
+char	*AL, *BC, *BT, *CD, *CE, *CL, *CM, *DC, *DL, *DM, *DO, *ED,
+	*EI, *HO, *IC, *IM, *IP, *LL, *MA, *ND, *SE, *SF, *SO, *SR,
+	*TA, *TE, *TI, *UC, *UE, *UP, *US, *VB, *VE, *VS, PC,
+	*Def_term, ttytype[];
+E 5
+I 5
+# define	WINDOW	struct _win_st
+E 5
+E 2
+
+I 5
+bool	My_term, _echoit, _rawmode, _endwin;
+
+char	*Def_term, ttytype[];
+
+E 5
+int	LINES, COLS, _tty_ch, _res_flg;
+
+SGTTY	_tty;
+
+WINDOW	*stdscr, *curscr;
+I 5
+
+	box(win,vert,hor) WINDOW *win; int vert, hor; {}
+	delwin(win) WINDOW *win; {}
+	endwin() {}
+	gettmode() {}
+WINDOW *initscr() {
+	AL = AL;
+	AM = AM;
+	BC = BC;
+	BS = BS;
+	BT = BT;
+	CA = CA;
+	CD = CD;
+	CE = CE;
+	CL = CL;
+	CM = CM;
+	DA = DA;
+	DB = DB;
+	DC = DC;
+	DL = DL;
+	DM = DM;
+	DO = DO;
+	ED = ED;
+	EO = EO;
+	EI = EI;
+	GT = GT;
+	HO = HO;
+	HZ = HZ;
+	IC = IC;
+	IN = IN;
+	IM = IM;
+	IP = IP;
+	LL = LL;
+	MA = MA;
+	MI = MI;
+	NC = NC;
+	ND = ND;
+	OS = OS;
+	PC = PC;
+	SE = SE;
+	SF = SF;
+	SO = SO;
+	SR = SR;
+	TA = TA;
+	TE = TE;
+	TI = TI;
+	UC = UC;
+	UE = UE;
+	UL = UL;
+	UP = UP;
+	US = US;
+	VB = VB;
+	VE = VE;
+	VS = VS;
+	XN = XN;
+	NONL = NONL;
+	UPPERCASE = UPPERCASE;
+	normtty = normtty;
+	_pfast = _pfast;
+	_tty = _tty;
+	My_term = My_term;
+	_echoit = _echoit;
+	_rawmode = _rawmode;
+	LINES = LINES;
+	COLS = COLS;
+	_tty_ch = _tty_ch;
+	_res_flg = _res_flg;
+	stdscr = stdscr;
+	curscr = curscr;
+	_echoit = _echoit;
+	_rawmode = _rawmode;
+	_tty_ch = _tty_ch;
+	return (WINDOW *) 0;
+}
+char *	longname(bp, def) char *bp, *def; { return bp; }
+	mvcur(ly,lx,y,x) int ly, lx, y, x; { }
+/* VARARGS3 */
+	mvprintw(y,x,fmt) int y, x; char *fmt; { return 0; }
+/* VARARGS3 */
+	mvscanw(y,x,fmt) int y, x; char *fmt; { return 0; }
+/* VARARGS4 */
+	mvwprintw(win,y,x,fmt) WINDOW *win; int y, x; char *fmt; { return 0; }
+/* VARARGS4 */
+	mvwscanw(win,y,x,fmt) WINDOW *win; int y, x; char *fmt; { return 0; }
+WINDOW *newwin(Nl, Nc, by, bx) int Nl, Nc, by, bx; { return (WINDOW *) 0; }
+	overlay(win1, win2) WINDOW *win1, *win2; { }
+	overwrite(win1, win2) WINDOW *win1, *win2; { }
+/* VARARGS1 */
+	printw(fmt) char *fmt; { return 0; }
+/* VARARGS1 */
+	scanw(fmt) char *fmt; { return 0; }
+	scroll(win) WINDOW *win; { return 0; }
+	setterm(type) char *type; { return 0; }
+WINDOW *subwin(o, Nl, Nc, by, bx) WINDOW *o; int Nl, Nc, by, bx; { return o; }
+	waddch(win,ch) WINDOW *win; char ch; { return 0; }
+	waddstr(win,str) WINDOW *win; char *str; { return 0; }
+	wclear(win) WINDOW *win; { return 0; }
+	wclrtobot(win) WINDOW *win; { return 0; }
+	wclrtoeol(win) WINDOW *win; { return 0; }
+	wdeleteln(win) WINDOW *win; { return 0; }
+	werase(win) WINDOW *win; { return 0; }
+	wgetch(win) WINDOW *win; { return '0'; }
+	wgetstr(win,str) WINDOW *win; char *str; { return 0; }
+	winsertln(win) WINDOW *win; { return 0; }
+	wmove(win,y,x) WINDOW *win; int y, x; { return 0; }
+/* VARARGS2 */
+	wprintw(win,fmt) WINDOW *win; char *fmt; { return 0; }
+	wrefresh(win) WINDOW *win; { return 0; }
+/* VARARGS2 */
+	wscanw(win,fmt) WINDOW *win; char *fmt; { return 0; }
+	/* These really return char *'s but this will do. */
+int	wstandout(win) WINDOW *win; { return 0; }
+int	wstandend(win) WINDOW *win; { return 0; }
+I 6
+char *	getcap(name) char * name; { return 0; }
+char *	_unctrl[1];
+E 6
+E 5
+E 1

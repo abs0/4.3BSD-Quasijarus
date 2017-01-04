@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ex_vis.h	7.5 (Berkeley) 3/9/87
+ *	@(#)ex_vis.h	7.6 (Berkeley) 4/13/03
  */
 
 /*
@@ -110,8 +110,17 @@ var	short	vcnt;
  * data itself.  It is also rearranged during insert mode across line
  * boundaries to make incore work easier.
  */
-var	char	*vtube[TUBELINES];
-var	char	*vtube0;
+var	u_char	*vtube[TUBELINES];
+var	u_char	*vtube0;
+
+/*
+ * We need to represent "tab spaces" and "tab blanks" in vtube. We use the
+ * following C1 chars for this purpose. It is not a problem that they coincide
+ * with valid C1 chars that we allow in edited text, as the latter will never
+ * be sent to the tube as they are, they will be ~X on the tube.
+ */
+#define	TABSPC	0200
+#define	TABLANK	0201	/* formerly meta-space 0240 */
 
 /*
  * The current cursor position within the current line is kept in
@@ -121,8 +130,8 @@ var	char	*vtube0;
  * lines to mark the other end of the affected area, or the target
  * for a motion.
  */
-var	char	*cursor;
-var	char	*wcursor;
+var	u_char	*cursor;
+var	u_char	*wcursor;
 var	line	*wdot;
 
 /*
@@ -140,7 +149,7 @@ var	line	*wdot;
 #define	VMANYINS 5
 
 var	short	vundkind;	/* Which kind of undo - from above */
-var	char	*vutmp;		/* Prev line image when "VCHNG" */
+var	u_char	*vutmp;		/* Prev line image when "VCHNG" */
 
 /*
  * State information for undoing of macros.  The basic idea is that
@@ -163,7 +172,7 @@ var	short	vch_mac;	/* Change state - one of the above */
  * are made, i.e. after a 'J' join.  This is because a 'JU' would
  * lose completely the text of the line just joined on.
  */
-var	char	*vUNDcurs;	/* Cursor just before 'U' */
+var	u_char	*vUNDcurs;	/* Cursor just before 'U' */
 var	line	*vUNDdot;	/* The line address of line saved in vUNDsav */
 var	line	vUNDsav;	/* Grabbed initial "*dot" */
 
@@ -210,10 +219,10 @@ var	short	holdupd;	/* Hold off update when echo line is too long */
  * Miscellaneous variables
  */
 var	short	CDCNT;		/* Count of ^D's in insert on this line */
-var	char	DEL[VBSIZE];	/* Last deleted text */
+var	u_char	DEL[VBSIZE];	/* Last deleted text */
 var	bool	HADUP;		/* This insert line started with ^ then ^D */
 var	bool	HADZERO;	/* This insert line started with 0 then ^D */
-var	char	INS[VBSIZE];	/* Last inserted text */
+var	u_char	INS[VBSIZE];	/* Last inserted text */
 var	int	Vlines;		/* Number of file lines "before" vi command */
 var	int	Xcnt;		/* External variable holding last cmd's count */
 var	bool	Xhadcnt;	/* Last command had explicit count? */
@@ -224,28 +233,28 @@ var	bool	gobblebl;	/* Wrapmargin space generated nl, eat a space */
 var	bool	hadcnt;		/* (Almost) internal to vmain() */
 var	bool	heldech;	/* We owe a clear of echo area */
 var	bool	insmode;	/* Are in character insert mode */
-var	char	lastcmd[5];	/* Chars in last command */
+var	u_char	lastcmd[5];	/* Chars in last command */
 var	int	lastcnt;	/* Count for last command */
-var	char	*lastcp;	/* Save current command here to repeat */
+var	u_char	*lastcp;	/* Save current command here to repeat */
 var	bool	lasthad;	/* Last command had a count? */
 var	short	lastvgk;	/* Previous input key, if not from keyboard */
 var	short	lastreg;	/* Register with last command */
-var	char	*ncols['z'-'a'+2];	/* Cursor positions of marks */
-var	char	*notenam;	/* Name to be noted with change count */
-var	char	*notesgn;	/* Change count from last command */
-var	char	op;		/* Operation of current command */
+var	u_char	*ncols['z'-'a'+2];	/* Cursor positions of marks */
+var	u_char	*notenam;	/* Name to be noted with change count */
+var	u_char	*notesgn;	/* Change count from last command */
+var	u_char	op;		/* Operation of current command */
 var	short	Peek_key;	/* Peek ahead key */
 var	bool	rubble;		/* Line is filthy (in hardcopy open), redraw! */
 var	int	ex_vSCROLL;	/* Number lines to scroll on ^D/^U */
-var	char	*vglobp;	/* Untyped input (e.g. repeat insert text) */
-var	char	vmacbuf[VBSIZE];   /* Text of visual macro, hence nonnestable */
-var	char	*vmacp;		/* Like vglobp but for visual macros */
-var	char	*vmcurs;	/* Cursor for restore after undo d), e.g. */
+var	u_char	*vglobp;	/* Untyped input (e.g. repeat insert text) */
+var	u_char	vmacbuf[VBSIZE];   /* Text of visual macro, hence nonnestable */
+var	u_char	*vmacp;		/* Like vglobp but for visual macros */
+var	u_char	*vmcurs;	/* Cursor for restore after undo d), e.g. */
 var	short	vmovcol;	/* Column to try to keep on arrow keys */
 var	bool	vmoving;	/* Are trying to keep vmovcol */
 var	short	vreg;		/* Reg for this command */   /* mjm: was char */
 var	short	wdkind;		/* Liberal/conservative words? */
-var	char	workcmd[5];	/* Temporary for lastcmd */
+var	u_char	workcmd[5];	/* Temporary for lastcmd */
 
 
 /*
@@ -253,11 +262,20 @@ var	char	workcmd[5];	/* Temporary for lastcmd */
  */
 #define	INF		30000
 #define	LASTLINE	LINE(vcnt)
-#define	OVERBUF		QUOTE
 #define	beep		obeep
 #define	cindent()	((outline - vlinfo[vcline].vliny) * WCOLS + outcol)
 #define	vputp(cp, cnt)	tputs(cp, cnt, vputch)
 #define	vputc(c)	putch(c)
+
+/*
+ * The OVERBUF thing. vi puts OVERBUF in the first byte of buffers likes INS
+ * and DEL to indicate that they are overflowed. The problem is what should
+ * OVERBUF be now that every byte except 0 is a valid character? Well, we
+ * define OVERBUF as 0200 (~@). This means that users cutting and pasting text
+ * starting with ~@'s will be surprised. Oh well. At least this is just an
+ * inconvenience and not an inability to edit files with ~@'s.
+ */
+#define	OVERBUF		0200
 
 /*
  * Function types

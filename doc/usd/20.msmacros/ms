@@ -1,4 +1,4 @@
-.\"	@(#)ms	6.1 (Berkeley) 5/22/86
+.\"	@(#)ms	6.2 (Berkeley) 10/28/04
 .\"
 .EH 'USD:20-%''Using the \-ms Macros with Troff and Nroff'
 .OH 'Using the \-ms Macros with Troff and Nroff''USD:20-%'
@@ -681,10 +681,10 @@ Here are the strings:
 center;
 c c6 c c.
 Input	Output	Input	Output
-\e*\(fme	\*'e	\e*~a	\*~a
-\e*\(gae	\*`e	\e*Ce	\h'0.15m'\v'-0.6m'\s6\zv\s0\v'0.6m'\h'-0.15m'e
+\e*\'e	\*'e	\e*~a	\*~a
+\e*\`e	\*`e	\e*Ce	\*Ce
 \e*:u	\*:u	\e*,c	\*,c
-\e*^e	\o'^e'
+\e*^e	\*^e
 .TE
 .PP
 .I

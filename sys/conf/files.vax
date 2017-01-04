@@ -3,12 +3,16 @@ vax/clock.c		standard
 vax/conf.c		standard
 vax/cons.c		standard
 vax/cpudata.c		standard
+vax/cpuid.s		standard
 vax/crl.c		standard
+vax/cvax.c		standard
 vax/dkbad.c		standard
 vax/flp.c		standard
 vax/in_cksum.c		optional inet
-vax/ka650.c		standard
+vax/ka410.c		standard
+vax/ka42.c		standard
 vax/ka630.c		standard
+vax/ka650.c		standard
 vax/ka730.c		standard
 vax/ka750.c		standard
 vax/ka780.c		standard
@@ -32,7 +36,22 @@ vax/vm_machdep.c	standard
 vax/iidr.o		optional ii
 vax/iidrsys.o		optional ii
 vax/iidr_glob.o		optional ii
-vaxbi/bi.c		optional bi device-driver
+vax/emul/emul_ashp.s	standard
+vax/emul/emul_cvtlp.s	standard
+vax/emul/emul_cvtpl.s	standard
+vax/emul/emul_decarith.s standard
+vax/emul/emul_deccvt.s	standard
+vax/emul/emul_decimal.s	standard
+vax/emul/emul_dflt.s	standard
+vax/emul/emul_editpc.s	standard
+vax/emul/emul_fflt.s	standard
+vax/emul/emul_float.s	standard
+vax/emul/emul_opspec.s	standard
+vax/emul/emul_resinstr.s standard
+vax/emul/emul_samemode.s standard
+vax/emul/emul_string.s	standard
+vaxbi/bi.c		optional vaxbi device-driver
+vaxbi/bidevtab.c	optional vaxbi
 vaxbi/kdb.c		optional kra device-driver
 vaxif/if_acc.c		optional acc imp device-driver
 vaxif/if_css.c		optional css imp device-driver
@@ -93,3 +112,5 @@ vaxuba/qv.c		optional qv device-driver
 vaxuba/qfont.c		optional qv device-driver
 vaxuba/qd.c		optional qd device-driver
 vaxuba/qfont.c		optional qd device-driver
+babyvax/babyvax.c	optional bva device-driver
+babyvax/ss.c		optional ss device-driver

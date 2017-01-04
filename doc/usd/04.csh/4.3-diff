@@ -1,0 +1,46 @@
+*** /fs1/4.3man/doc/usd/04.csh/csh.1	Fri May 23 18:41:14 1986
+--- csh.1	Sun Feb 19 01:16:25 2012
+***************
+*** 2,8 ****
+  .\" All rights reserved.  The Berkeley software License Agreement
+  .\" specifies the terms and conditions for redistribution.
+  .\"
+! .\"	@(#)csh.1	6.1 (Berkeley) 5/23/86
+  .\"
+  .EH 'USD:4-%''An Introduction to the C shell'
+  .OH 'An Introduction to the C shell''USD:4-%'
+--- 2,8 ----
+  .\" All rights reserved.  The Berkeley software License Agreement
+  .\" specifies the terms and conditions for redistribution.
+  .\"
+! .\"	@(#)csh.1	6.3 (Berkeley) 2/19/2012
+  .\"
+  .EH 'USD:4-%''An Introduction to the C shell'
+  .OH 'An Introduction to the C shell''USD:4-%'
+***************
+*** 98,103 ****
+--- 98,121 ----
+  who made the crucial observation that history commands could be
+  done well over the word structure of input text, and implemented
+  a prototype history mechanism in an older version of the shell.
++ .\"
++ .\" The following artificial page break is a real hack.
++ .\" C/A/T character metrics hard-coded into otroff are generally
++ .\" wider than standard Adobe Times-Roman we use now, and those
++ .\" used in the printing of the original UCB/Usenix 4.3BSD books
++ .\" are even wider.  In the original print this paragraph has a
++ .\" page break after the word `those' in the sentence below,
++ .\" spilling 3+ lines onto the verso; section 1 starts on the following
++ .\" recto.  However, with standard PS fonts the paragraph *almost*
++ .\" fits on the page, and spills just one partial line of 4 words
++ .\" onto the otherwise blank verso.  That looks really ugly.
++ .\"
++ .\" This artificial page break is silly, but it makes the output
++ .\" look a little more like the original print, and I feel that it's
++ .\" a little less invasive than my previous fix of removing the
++ .\" famous .UX footnote, which makes the whole thing fit and causes
++ .\" section 1 to start on the verso.
++ 'bp
+  Eric Allman has also provided a large number of useful comments on the
+  shell, helping to unify those concepts which are present and to identify
+  and eliminate useless and marginally useful features.

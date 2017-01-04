@@ -1,0 +1,229 @@
+LL0:
+	.data
+	.comm	_cpuspeed,4
+	.comm	_mbstat,540
+	.comm	_nmbclusters,4
+	.comm	_mfree,4
+	.comm	_mclfree,4
+	.comm	_mclrefcnt,257
+	.comm	_m_want,4
+	.comm	_rawintrq,20
+	.comm	_ifnet,4
+	.data
+	.align	1
+	.globl	_ccitt_fcs16tab
+_ccitt_fcs16tab:
+	.long	0x11890000
+	.long	0x329b2312
+	.long	0x57ad4624
+	.long	0x74bf6536
+	.long	0x9dc18c48
+	.long	0xbed3af5a
+	.long	0xdbe5ca6c
+	.long	0xf8f7e97e
+	.long	0x1081081
+	.long	0x221a3393
+	.long	0x472c56a5
+	.long	0x643e75b7
+	.long	0x8d409cc9
+	.long	0xae52bfdb
+	.long	0xcb64daed
+	.long	0xe876f9ff
+	.long	0x308b2102
+	.long	0x13990210
+	.long	0x76af6726
+	.long	0x55bd4434
+	.long	0xbcc3ad4a
+	.long	0x9fd18e58
+	.long	0xfae7eb6e
+	.long	0xd9f5c87c
+	.long	0x200a3183
+	.long	0x3181291
+	.long	0x662e77a7
+	.long	0x453c54b5
+	.long	0xac42bdcb
+	.long	0x8f509ed9
+	.long	0xea66fbef
+	.long	0xc974d8fd
+	.long	0x538d4204
+	.long	0x709f6116
+	.long	0x15a90420
+	.long	0x36bb2732
+	.long	0xdfc5ce4c
+	.long	0xfcd7ed5e
+	.long	0x99e18868
+	.long	0xbaf3ab7a
+	.long	0x430c5285
+	.long	0x601e7197
+	.long	0x52814a1
+	.long	0x263a37b3
+	.long	0xcf44decd
+	.long	0xec56fddf
+	.long	0x896098e9
+	.long	0xaa72bbfb
+	.long	0x728f6306
+	.long	0x519d4014
+	.long	0x34ab2522
+	.long	0x17b90630
+	.long	0xfec7ef4e
+	.long	0xddd5cc5c
+	.long	0xb8e3a96a
+	.long	0x9bf18a78
+	.long	0x620e7387
+	.long	0x411c5095
+	.long	0x242a35a3
+	.long	0x73816b1
+	.long	0xee46ffcf
+	.long	0xcd54dcdd
+	.long	0xa862b9eb
+	.long	0x8b709af9
+	.long	0x95818408
+	.long	0xb693a71a
+	.long	0xd3a5c22c
+	.long	0xf0b7e13e
+	.long	0x19c90840
+	.long	0x3adb2b52
+	.long	0x5fed4e64
+	.long	0x7cff6d76
+	.long	0x85009489
+	.long	0xa612b79b
+	.long	0xc324d2ad
+	.long	0xe036f1bf
+	.long	0x94818c1
+	.long	0x2a5a3bd3
+	.long	0x4f6c5ee5
+	.long	0x6c7e7df7
+	.long	0xb483a50a
+	.long	0x97918618
+	.long	0xf2a7e32e
+	.long	0xd1b5c03c
+	.long	0x38cb2942
+	.long	0x1bd90a50
+	.long	0x7eef6f66
+	.long	0x5dfd4c74
+	.long	0xa402b58b
+	.long	0x87109699
+	.long	0xe226f3af
+	.long	0xc134d0bd
+	.long	0x284a39c3
+	.long	0xb581ad1
+	.long	0x6e6e7fe7
+	.long	0x4d7c5cf5
+	.long	0xd785c60c
+	.long	0xf497e51e
+	.long	0x91a18028
+	.long	0xb2b3a33a
+	.long	0x5bcd4a44
+	.long	0x78df6956
+	.long	0x1de90c60
+	.long	0x3efb2f72
+	.long	0xc704d68d
+	.long	0xe416f59f
+	.long	0x812090a9
+	.long	0xa232b3bb
+	.long	0x4b4c5ac5
+	.long	0x685e79d7
+	.long	0xd681ce1
+	.long	0x2e7a3ff3
+	.long	0xf687e70e
+	.long	0xd595c41c
+	.long	0xb0a3a12a
+	.long	0x93b18238
+	.long	0x7acf6b46
+	.long	0x59dd4854
+	.long	0x3ceb2d62
+	.long	0x1ff90e70
+	.long	0xe606f78f
+	.long	0xc514d49d
+	.long	0xa022b1ab
+	.long	0x833092b9
+	.long	0x6a4e7bc7
+	.long	0x495c58d5
+	.long	0x2c6a3de3
+	.long	0xf781ef1
+	.text
+	.align	1
+	.globl	_ccitt_addfcs16
+_ccitt_addfcs16:
+	.word	L38
+	jbr 	L40
+L41:
+	movl	4(ap),r11
+	movzwl	$65535,r10
+	moval	_ccitt_fcs16tab,r7
+L42:
+	cvtwl	8(r11),r8
+	jeql	L44
+	addl3	4(r11),r11,r0
+	movl	r0,r9
+clrl r0; 0: xorb3 (r9)+,r10,r0; ashl $-8,r10,r10; xorw2 (r7)[r0],r10; sobgtr r8,0b
+L44:
+	tstl	(r11)
+	jneq	L45
+	jbr 	L43
+L45:
+	movl	(r11),r11
+	jbr 	L42
+L43:
+	xorl3	$65535,r10,r0
+	movl	r0,r10
+	cvtwl	8(r11),r0
+	addl2	4(r11),r0
+	cmpl	r0,$126
+	jlequ	L46
+	mfpr	$18,r0
+	mtpr	$0x16,$18
+	movl	r0,-8(fp)
+	movl	_mfree,-4(fp)
+	jeql	L48
+	movl	-4(fp),r0
+	tstw	10(r0)
+	jeql	L49
+	.data	1
+L51:
+	.ascii	"mget\0"
+	.text
+	pushl	$L51
+	calls	$1,_panic
+L49:
+	movl	-4(fp),r0
+	cvtlw	$2,10(r0)
+	decw	_mbstat+28
+	incw	_mbstat+32
+	movl	*-4(fp),_mfree
+	clrl	*-4(fp)
+	movl	-4(fp),r0
+	movl	$12,4(r0)
+	jbr 	L52
+L48:
+	pushl	$2
+	pushl	$0
+	calls	$2,_m_more
+	movl	r0,-4(fp)
+L52:
+	movl	-8(fp),r0
+	mtpr	r0,$18
+	tstl	-4(fp)
+	jneq	L54
+	movl	$55,r0
+	ret
+L54:
+	movl	-4(fp),(r11)
+	movl	-4(fp),r11
+	clrw	8(r11)
+L46:
+	addl3	4(r11),r11,r0
+	movl	r0,r9
+	bicl3	$-256,r10,r0
+	cvtlb	r0,(r9)+
+	extzv	$8,$24,r10,r0
+	cvtlb	r0,(r9)+
+	addw2	$2,8(r11)
+	clrl	r0
+	ret
+	ret
+	.set	L38,0xf80
+L40:
+	subl2	$8,sp
+	jbr 	L41
+	.data

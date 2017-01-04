@@ -1,0 +1,114 @@
+/*
+ * Michael Sokolov's Domain Name Server (MSDNS)
+ *
+ * This module handles NS-anchor objects.
+ */
+
+#ifndef lint
+static char sccsid[] = "%W% (IFCTF) %E%";
+#endif
+
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <arpa/nameser.h>
+#include <syslog.h>
+#include <ctype.h>
+#include "class.h"
+#include "dname.h"
+#include "tree.h"
+#include "nsrec.h"
+#include "globals.h"
+
+extern u_char *myalloc();
+extern struct node *alloc_new_node(), *node_findchild();
+
+/*
+ * This static function is called from nsanchor_directive() below
+ * to do the actual work of installing the anchor into our active tree.
+ */
+static
+install_nsanchor(cl, anchor, server, add)
+	struct class *cl;
+	struct dname *anchor, *server;
+	struct ns_add_data *add;
+{
+
+
+}
+
+/*
+ * This function handles the ASCII line parsing of the
+ * ns-anchor directive in a class definition file.
+ */
+void
+nsanchor_directive(cl, args)
+	struct class *cl;
+	char *args;
+{
+	struct dname anchor, server;
+	struct ns_add_data *add;
+	register char *cp, *np;
+
+	for (cp = args; isspace(*cp); cp++)
+		;
+	if (!*cp) {
+syntaxerr:	syslog(LOG_ERR,
+			"%s: line %d: ns-anchor line syntax error, skipping",
+			cl->c_filename, cl->c_fileread_lineno);
+		return;
+	}
+	for (np = cp; *cp && !isspace(*cp); cp++)
+		;
+	if (!*cp)
+		goto syntaxerr;
+	*cp++ = '\0';
+	if (parse_ascii_dname(np, &anchor) < 0) {
+bad_dname:	syslog(LOG_ERR,
+			"%s: line %d: ns-anchor: invalid domain-name, skipping",
+			cl->c_filename, cl->c_fileread_lineno);
+		return;
+	}
+	while (isspace(*cp))
+		cp++;
+	if (!*cp)
+		goto syntaxerr;
+	for (np = cp; *cp && !isspace(*cp); cp++)
+		;
+	if (*cp)
+		*cp++ = '\0';
+	if (parse_ascii_dname(np, &server) < 0)
+		goto bad_dname;
+	add = (struct ns_add_data *) myalloc(sizeof(struct ns_add_data));
+	if (!add) {
+mallocfail:	syslog(LOG_CRIT, "%s: line %d: ns-anchor: malloc failure",
+			cl->c_filename, cl->c_fileread_lineno);
+		return;
+	}
+	for (add->nsa_addrcnt = 0; add->nsa_addrcnt < NS_MAX_ADDRESSES;
+	     add->nsa_addrcnt++) {
+		while (isspace(*cp))
+			cp++;
+		if (!*cp)
+			break;
+		for (np = cp; *cp && !isspace(*cp); cp++)
+			;
+		if (*cp)
+			*cp++ = '\0';
+		add->nsa_addrs[add->nsa_addrcnt] = inet_addr(np);
+		if (add->nsa_addrs[add->nsa_addrcnt] == INADDR_NONE) {
+			free(add);
+			goto syntaxerr;
+		}
+	}
+	if (!add->nsa_addrcnt) {
+		free(add);
+		syslog(LOG_ERR,
+		"%s: line %d: ns-anchor: must specify at least one IP address",
+			cl->c_filename, cl->c_fileread_lineno);
+		return;
+	}
+	add->nsa_expire = current_time;		/* anchors are "pre-expired" */
+
+
+}

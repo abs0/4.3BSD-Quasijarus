@@ -1,0 +1,36 @@
+.nf
+.ll 5i
+Dragon book, page 388:
+.sp
+.PS
+x = .5; y = .325;	# dimensions of the boxes
+
+LA:
+	box wid x ht y "lexical" "analyzer";
+	arrow right x/2 from LA.w - x/2,0 "" "" "source" "code";
+Parser:
+	box at LA + 2*x, 0 "parser";
+	arrow from LA.e to Parser.w "" "tokens";
+Sem:
+	box at Parser + 5*x/2, 0 "semantic" "checker";
+	arrow from Parser.e to Sem.w "" "" "intermediate" "code";
+	arrow from Sem.e right x/2;
+LC:
+	box at LA + 0, 2*y "lexical" "corrector";
+	arrow from LA.t to LC.b <->;
+Syn:
+	box at LC + 2*x, 0 "syntactic" "corrector";
+	arrow from Parser.t to Syn.b <->;
+DMP:
+	box wid x ht x at Syn + 0,2*y "diagnostic" "message" "printer";
+	arrow from LC.ne to DMP.sw;
+	arrow from Syn.t to DMP.b;
+	arrow from Sem.nw to DMP.se;
+ST:
+	box at DMP + 5*x/2,0 "symbol" "table";
+	arrow <-> from Sem.t to ST.b;
+	arrow <-> from DMP.r to ST.l;
+.PE
+.sp 2
+.ce
+\f3Fig. 11.1.\fP  Plan of an error detector/corrector

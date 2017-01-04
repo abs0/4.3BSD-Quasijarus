@@ -4,12 +4,10 @@
 machine		vax
 cpu		"VAX650"
 ident		IVAN
-timezone	8 dst
+timezone	0
 maxusers	128
 options		INET
 options		"TCP_COMPAT_42"
-options		GATEWAY
-#options		KADB
 options		"MAXDSIZ=67108864"
 options		"MAXSSIZ=67108864"
 options		TTYKBHACKS
@@ -31,7 +29,8 @@ pseudo-device	pty
 pseudo-device	loop
 pseudo-device	ether
 pseudo-device	ppp	4
-pseudo-device	netmon	8
+pseudo-device	pppaux
+pseudo-device	netmon	4
 
 device		qe0	at uba? csr 0174440	vector qeintr
-device		dhu0	at uba? csr 0160440	vector dhurint dhuxint
+device		dhu0	at uba? csr 0160440 flags 0xF0	vector dhurint dhuxint

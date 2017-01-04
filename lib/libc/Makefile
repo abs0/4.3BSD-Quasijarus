@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	4.34 (Berkeley) 7/9/88
+#	@(#)Makefile	4.35 (Berkeley) 2012/06/21
 #
 # Compatibility routines are kept in directories with a prefixing
 # ``compat'' (so they all sort together).
@@ -51,9 +51,10 @@ DFLMON=		mon.o
 DEFS="-DLIBC_SCCS -DSYSLIBC_SCCS"
 
 SUBDIR=	${ALL} net/hosttable net/named
-ONE=	compat-4.1 compat-4.3 compat-sys5 gen inet net ns stdio
+ONE=	compat-4.1 compat-4.3 compat-sys5 gen inet net ns stdio cal
 TWO=	compat-4.1/compat-4.1.${MACHINE} gen/gen.${MACHINE} \
 	net/net.${MACHINE} net/${HOSTLOOKUP} stdio/stdio.${MACHINE} \
+	cal/cal.${MACHINE} \
 	compat-sys5/compat-sys5.${MACHINE} ${MACHINE}/csu ${MACHINE}/sys
 ALL=	${ONE} ${TWO}
 TAGSFILE=tags

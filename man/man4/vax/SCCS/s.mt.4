@@ -1,0 +1,162 @@
+h34059
+s 00001/00001/00061
+d D 6.3 86/06/01 00:43:50 mis 5 4
+c corrected a printf.
+e
+s 00004/00000/00058
+d D 6.2 86/05/16 15:59:07 karels 4 3
+c bugs
+e
+s 00001/00001/00057
+d D 6.1 85/05/15 17:23:30 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00026/00017/00032
+d D 5.1 85/05/15 17:23:20 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00049/00000/00000
+d D 4.1 85/05/15 17:23:13 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MT 4 10/8/81
+E 2
+I 2
+D 3
+.TH MT 4 "27 July 1983"
+E 3
+I 3
+.TH MT 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+mt \- TM-78/TU-78 MASSBUS magtape interface
+E 2
+I 2
+mt \- TM78/TU-78 MASSBUS magtape interface
+E 2
+.SH SYNOPSIS
+D 2
+formatter mt0 at mba? drive ?
+E 2
+I 2
+.B master mt0 at mba? drive ?
+E 2
+.br
+D 2
+tape mu0 at mt0 slave 0
+E 2
+I 2
+.B tape mu0 at mt0 slave 0
+E 2
+.SH DESCRIPTION
+D 2
+The tm-78/transport combination provides a standard tape drive
+E 2
+I 2
+The tm78/tu-78 combination provides a standard tape drive
+E 2
+interface as described in
+D 2
+.IR mtop (4).
+The TU78 provides both 1600 and 6250 bpi,
+runs at 125 ips, and autoloads tapes.
+E 2
+I 2
+.IR mtio (4).
+Only 1600 and 6250 bpi are supported; the
+TU-78 runs at 125 ips and autoloads tapes.
+E 2
+.SH "SEE ALSO"
+D 2
+mt(1), tar(1), tp(1), mtop(4), ht(4), tm(4), ts(4)
+E 2
+I 2
+mt(1),
+tar(1),
+tp(1),
+mtio(4),
+tm(4),
+ts(4),
+ut(4)
+E 2
+.SH DIAGNOSTICS
+\fBmu%d: no write ring\fR.  An attempt was made to write on the tape drive
+when no write ring was present; this message is written on the terminal of
+the user who tried to access the tape.
+.PP
+\fBmu%d: not online\fR.  An attempt was made to access the tape while it
+was offline; this message is written on the terminal of the user
+who tried to access the tape.
+.PP
+D 5
+\fBmu%d: can't switch density in mid-tape\fR.  An attempt was made to write
+E 5
+I 5
+\fBmu%d: can't change density in mid-tape\fR.  An attempt was made to write
+E 5
+on a tape at a different density than is already recorded on the tape.
+This message is written on the terminal of the user who tried to switch
+the density.
+.PP
+D 2
+\fBmu%d: hard error bn%d mbsr=%b er=%o ds=%b\fR.   A tape error occurred
+E 2
+I 2
+\fBmu%d: hard error bn%d mbsr=%b er=%x ds=%b\fR.   A tape error occurred
+E 2
+at block \fIbn\fR; the mt error register and drive status register are
+D 2
+printed in octal with the drive status bits symbolically decoded.  Any error is
+E 2
+I 2
+printed in octal with the bits symbolically decoded.  Any error is
+E 2
+fatal on non-raw tape; when possible the driver will have retried
+the operation which failed several times before reporting the error.
+.PP
+D 2
+\fBmu%d: blank tape\fR.  An attempt was made to read or space a blank tape.
+.SH BUGS
+If any non-data error is encountered on non-raw tape, it refuses to do anything
+more until closed.
+E 2
+I 2
+\fBmu%d: blank tape\fP.
+An attempt was made to read a blank tape (a tape without even
+end-of-file marks).
+E 2
+.PP
+D 2
+The system should remember which controlling terminal has the tape drive
+open and write error messages to that terminal rather than on the console.
+E 2
+I 2
+\fBmu%d: offline\fP.
+During an i/o operation the device was set offline.  If a
+non-raw tape was used in the access it is closed.
+.SH BUGS
+If any non-data error is encountered on non-raw tape,
+it refuses to do anything more until closed.
+I 4
+.PP
+Because 800 bpi tapes are not supported, the numbering of minor devices
+is inconsistent with triple-density tape units.
+Unit 0 is drive 0, 1600 bpi.
+E 4
+E 2
+E 1

@@ -1,0 +1,96 @@
+h25088
+s 00001/00001/00048
+d D 6.1 85/05/20 16:59:32 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00007/00045
+d D 5.1 85/05/20 16:59:22 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00052/00000/00000
+d D 4.1 85/05/20 16:59:12 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BOGGLE 6
+E 2
+I 2
+D 3
+.TH BOGGLE 6 "1 February 1983"
+E 3
+I 3
+.TH BOGGLE 6 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+boggle \- play the game of boggle
+.SH SYNOPSIS
+.B /usr/games/boggle
+[
+.B +
+] [
+.B ++
+]
+.SH DESCRIPTION
+This program is intended for people wishing to sharpen their
+skills at Boggle (TM Parker Bros.).
+D 2
+If you invoke the program with 4 arguments of 4
+letters each,
+E 2
+I 2
+If you invoke the program with 4 arguments of 4 letters each,
+E 2
+.RI ( e.g.
+.RB \*(lq "boggle appl epie moth erhd" \*(rq)
+D 2
+the program forms the
+obvious Boggle grid and lists all the words from
+E 2
+I 2
+the program forms the obvious Boggle grid and lists all the words from
+E 2
+.B /usr/dict/words
+D 2
+found
+therein. If you invoke the program without arguments, it will generate
+E 2
+I 2
+found therein. If you invoke the program without arguments, it will generate
+E 2
+a board for you, let you enter words for 3 minutes, and then tell you
+how well you did relative to
+.BR /usr/dict/words .
+.PP
+The object of Boggle is to find, within 3
+minutes, as many words as possible in a 4 by 4 grid of letters. Words
+may be formed from any sequence of 3 or more adjacent letters in the
+grid. The letters may join horizontally, vertically, or diagonally.
+However, no position in the grid may be used more than once within any
+one word. In competitive play amongst humans, each player is given
+credit for those of his words which no other player has found.
+.PP
+In interactive play, enter your words separated by spaces, tabs,
+or newlines. A bell will ring when there is 2:00, 1:00, 0:10, 0:02,
+0:01, and 0:00 time left. You may complete any word started before the
+expiration of time. You can surrender before time is up by hitting
+\&'break'. While entering words, your erase character is only effective
+within the current word and your line kill character is ignored.
+.PP
+Advanced players may wish to invoke the program with 1 or 2 +'s as
+the first argument. The first + removes the restriction that positions
+can only be used once in each word. The second + causes a position to
+be considered adjacent to itself as well as its (up to) 8 neighbors.
+E 1

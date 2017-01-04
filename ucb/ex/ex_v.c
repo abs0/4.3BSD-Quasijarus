@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_v.c	7.9 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_v.c	7.10 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -62,19 +62,19 @@ int	winch();
  * Enter open mode
  */
 #ifdef u370
-char	atube[TUBESIZE+LBSIZE];
+u_char	atube[TUBESIZE+LBSIZE];
 #endif
 oop()
 {
-	register char *ic;
+	register u_char *ic;
 #ifndef u370
-	char atube[TUBESIZE + LBSIZE];
+	u_char atube[TUBESIZE + LBSIZE];
 #endif
 	ttymode f;	/* mjm: was register */
 
 	if (setjmp(venv)) {
 		setsize();
-		initev = (char *)0;
+		initev = (u_char *)0;
 		inopen = 0;
 		addr1 = addr2 = dot;
 	}
@@ -182,7 +182,7 @@ vop()
 {
 	register int c;
 #ifndef u370
-	char atube[TUBESIZE + LBSIZE];
+	u_char atube[TUBESIZE + LBSIZE];
 #endif
 	ttymode f;	/* mjm: was register */
 
@@ -213,7 +213,7 @@ toopen:
 	}
 	if (setjmp(venv)) {
 		setsize();
-		initev = (char *)0;
+		initev = (u_char *)0;
 		inopen = 0;
 		addr1 = addr2 = dot;
 	}
@@ -354,7 +354,7 @@ setwind()
  * and initialize a bunch of state variables before we start.
  */
 vok(atube)
-	register char *atube;
+	register u_char *atube;
 {
 	register int i;
 
@@ -368,11 +368,11 @@ vok(atube)
 	vtube0 = atube;
 	vclrbyte(atube, WCOLS * (WECHO - ex_ZERO + 1));
 	for (i = 0; i < ex_ZERO; i++)
-		vtube[i] = (char *) 0;
+		vtube[i] = (u_char *) 0;
 	for (; i <= WECHO; i++)
 		vtube[i] = atube, atube += WCOLS;
 	for (; i < TUBELINES; i++)
-		vtube[i] = (char *) 0;
+		vtube[i] = (u_char *) 0;
 	vutmp = atube;
 	vundkind = VNONE;
 	vUNDdot = 0;

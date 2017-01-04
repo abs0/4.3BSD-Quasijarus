@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)text.c	4.3 8/11/83";
+static char sccsid[] = "@(#)text.c	4.5 9/17/04";
 #endif
 
 # include "e.h"
@@ -20,11 +20,15 @@ text(t,p1) int t; char *p1; {
 
 	yyval = oalloc();
 	ebase[yyval] = 0;
-#ifndef NEQN
+#ifdef CAT
 	eht[yyval] = VERT(6 * ((ps>6)?ps:6));	/* ht in machine units */
-#else NEQN
+#endif
+#ifdef PS
+	eht[yyval] = VERT(60 * ((ps>4)?ps:4));	/* ht in machine units */
+#endif
+#ifdef NEQN
 	eht[yyval] = VERT(2);	/* 2 half-spaces */
-#endif NEQN
+#endif
 	lfont[yyval] = rfont[yyval] = ROM;
 	if (t == QTEXT)
 		p = p1;
@@ -64,8 +68,7 @@ trans(c,p1) int c; char *p1; {
 	case ':': case ';': case '!': case '%':
 	case '(': case '[': case ')': case ']':
 	case ',':
-		if (rf == ITAL)
-			shim();
+		itshim();
 		roman(c); break;
 	case '.':
 		if (rf == ROM)
@@ -75,22 +78,18 @@ trans(c,p1) int c; char *p1; {
 		f = rf;
 		break;
 	case '|':
-		if (rf == ITAL)
-			shim();
+		itshim();
 		shim(); roman(c); shim(); break;
 	case '=':
-		if (rf == ITAL)
-			shim();
+		itshim();
 		name4('e','q');
 		break;
 	case '+':
-		if (rf == ITAL)
-			shim();
+		itshim();
 		name4('p', 'l');
 		break;
 	case '>': case '<':
-		if (rf == ITAL)
-			shim();
+		itshim();
 		if (p1[psp]=='=') {	/* look ahead for == <= >= */
 			name4(c,'=');
 			psp++;
@@ -99,8 +98,7 @@ trans(c,p1) int c; char *p1; {
 		}
 		break;
 	case '-':
-		if (rf == ITAL)
-			shim();
+		itshim();
 		if (p1[psp]=='>') {
 			name4('-','>'); psp++;
 		} else {
@@ -108,8 +106,7 @@ trans(c,p1) int c; char *p1; {
 		}
 		break;
 	case '/':
-		if (rf == ITAL)
-			shim();
+		itshim();
 		name4('s','l');
 		break;
 	case '~': case ' ':
@@ -117,20 +114,23 @@ trans(c,p1) int c; char *p1; {
 	case '^':
 		shim(); break;
 	case '\\':	/* troff - pass 2 or 3 more chars */
-		if (rf == ITAL)
-			shim();
+		itshim();
 		cs[csp++] = c; cs[csp++] = c = p1[psp++]; cs[csp++] = p1[psp++];
-		if (c=='(') cs[csp++] = p1[psp++];
+		if (c=='(' || c=='X' || c=='S') cs[csp++] = p1[psp++];
 		if (c=='*' && cs[csp-1] == '(') {
 			cs[csp++] = p1[psp++];
 			cs[csp++] = p1[psp++];
 		}
 		break;
 	case '\'':
+#ifdef PS
+		name4('M','i');
+#else
 		cs[csp++] = '\\'; cs[csp++] = 'f'; cs[csp++] = rf==ITAL ? ITAL : ROM;
 		name4('f','m');
 		cs[csp++] = '\\'; cs[csp++] = 'f'; cs[csp++] = 'P';
 		f = rf==ITAL ? ITAL : ROM;
+#endif
 		break;
 
 	case 'f':
@@ -162,6 +162,14 @@ trans(c,p1) int c; char *p1; {
 
 shim() {
 	cs[csp++] = '\\'; cs[csp++] = '|';
+}
+
+itshim()
+{
+#ifdef CAT
+	if (rf == ITAL)
+		shim();
+#endif
 }
 
 roman(c) int c; {

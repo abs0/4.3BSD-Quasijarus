@@ -1,4 +1,4 @@
-.\"	@(#)m0a	6.3 (Berkeley) 11/9/03
+.\"	@(#)m0a	6.2 (Berkeley) 4/21/86
 .\"
 .pn3
 .br
@@ -217,13 +217,13 @@ Output Line Numbering.
 .mh
 Conditional Acceptance of Input
 .bt
-\fB&if\fI|c|anything\fR	-	-	If condition \fIc\fR true, accept \fIanything\fR as input,
+\fB&if\fI|c|anything\fR		-	-	If condition \fIc\fR true, accept \fIanything\fR as input,
 .b1
 				for multi-line use \fI\e{anything\|\e}\fR.
 .b1
 \fB&if|!\fIc|anything\fR	-	-	If condition \fIc\fR false, accept \fIanything\fR.
 .b1
-\fB&if\fI|N|anything\fR	-	\fBu\fR	If expression \fIN\fR > 0, accept \fIanything\fR.
+\fB&if\fI|N|anything\fR		-	\fBu\fR	If expression \fIN\fR > 0, accept \fIanything\fR.
 .b1
 \fB&if|!\fIN|anything\fR	-	\fBu\fR	If expression \fIN\fR \(<= 0, accept \fIanything\fR.
 .b1
@@ -233,7 +233,7 @@ accept \fIanything\fR.
 \fB&if|!\fI\|\'string1\|\'string2\|\'|anything\fR	-	If \fIstring1\fR not identical to \fIstring2\fR,
 accept \fIanything\fR.
 .b1
-\fB&ie\fI|c|anything\fR	-	\fBu\fR	If portion of if-else; all above forms (like \fBif\fR).
+\fB&ie\fI|c|anything\fR		-	\fBu\fR	If portion of if-else; all above forms (like \fBif\fR).
 .b1
 \fB&el\fI|anything\fR		-	-	Else portion of if-else.
 .mh
@@ -243,7 +243,7 @@ Environment Switching.
 .mh
 Insertions from the Standard Input
 .bt
-\fB&rd\fI|prompt\fR\fR	-	\fIprompt=\s-1\fRBEL\s+1	Read insertion.
+\fB&rd\fI|prompt\fR\fR	-	\fIprompt=\s-1\fRBEL\s+1		Read insertion.
 .b1
 \fB&ex\fR	-	-	-	\
 Exit from \*(NR\(sl\*(TR.
@@ -503,7 +503,6 @@ Reference	Name	Description
 .xx
 3	\fB%\fR	Current page number.
 19	\fBc&\fR	Number of \fIlines\fR read from current input file.
--	\fBcn\fR	Current year \(sl 100.
 11.2	\fBct\fR	Character type (set by \fIwidth\fR function).
 7.4	\fBdl\fR	Width (maximum) of last completed diversion.
 7.4	\fBdn\fR	Height (vertical size) of last completed diversion.

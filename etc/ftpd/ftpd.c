@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)ftpd.c	5.14 (Berkeley) 6/27/00";
+static char sccsid[] = "@(#)ftpd.c	5.24 (Berkeley) 4/16/11";
 #endif /* not lint */
 
 /*
@@ -56,17 +56,32 @@ static char sccsid[] = "@(#)ftpd.c	5.14 (Berkeley) 6/27/00";
  * Commonly used to disallow uucp.
  */
 #define	FTPUSERS	"/etc/ftpusers"
+/*
+ * File containing pathnames that guest users can access. If not found, guest
+ * users can do anything that file permissions allow.
+ */
+#define	ANONFTPALLOW	"/etc/anonftp.allow"
+/*
+ * We keep a buffer with pointers to pathnames read from the above file.
+ * Allocate it 32 entries at a time (first malloc, then realloc).
+ */
+#define	GUESTDIRSINCR	32
 
-char	version[] = "Version 5.14 June 27, 2000 10:10:55";
+/* Longest arglist we are willing to generate from globbing */
+#define	GAVSIZ		(NCARGS/6)
+
+char	version[] = "Version 5.24 April 16, 2011 00:35:58";
 
 extern	int errno;
 extern	char *sys_errlist[];
 extern	char *crypt();
-extern	char *home;		/* pointer to home directory for glob */
 extern	FILE *popen(), *fopen(), *freopen();
 extern	int  pclose(), fclose();
+extern	char *alloca();
 extern	char *getline();
 extern	char cbuf[];
+extern	int _pw_stayopen;
+extern	int epsquota;
 
 struct	sockaddr_in ctrl_addr;
 struct	sockaddr_in data_source;
@@ -80,7 +95,6 @@ struct	passwd *pw;
 int	debug;
 int	timeout = 900;    /* timeout after 15 minutes of inactivity */
 int	logging;
-int	guest;
 int	wtmp;
 int	type;
 int	form;
@@ -88,11 +102,21 @@ int	stru;			/* avoid C keyword */
 int	mode;
 int	usedefault = 1;		/* for data transfers */
 int	pdata;			/* for passive mode */
-int	unique;
 int	transflag;
 char	tmpline[7];
 char	hostname[32];
 char	remotehost[32];
+char	**guestdirs;
+int	nguestdirs;
+int	authmode;
+char	epsaccount[10];
+int	chrooted;
+
+#define	AUTHMODE_INIT	0
+#define	AUTHMODE_USER	1
+#define	AUTHMODE_GUEST	2
+#define	AUTHMODE_EPS	3
+#define	AUTHMODE_BAD	4
 
 /*
  * Timeout intervals for retrying connections
@@ -108,6 +132,8 @@ int	swaitint = SWAITINT;
 int	lostconn();
 int	myoob();
 FILE	*getdatasock(), *dataconn();
+FILE	*mypopen();
+int	mypclose();
 
 main(argc, argv)
 	int argc;
@@ -129,7 +155,7 @@ main(argc, argv)
 	}
 	data_source.sin_port = htons(ntohs(ctrl_addr.sin_port) - 1);
 	debug = 0;
-	openlog("ftpd", LOG_PID, LOG_DAEMON);
+	openlog("ftpd", LOG_PID|LOG_NDELAY, LOG_DAEMON);
 	argc--, argv++;
 	while (argc > 0 && *argv[0] == '-') {
 		for (cp = &argv[0][1]; *cp; cp++) switch (*cp) {
@@ -190,6 +216,8 @@ nextopt:
 	(void) gethostname(hostname, sizeof (hostname));
 	reply(220, "%s FTP server (%s) ready.",
 		hostname, version);
+	_pw_stayopen = 1;
+	init_special_guests();
 	for (;;) {
 		(void) setjmp(errcatch);
 		(void) yyparse();
@@ -204,24 +232,87 @@ lostconn()
 	dologout(-1);
 }
 
+user(name)
+	register char *name;
+{
+	/*
+	 * RFC 959 allows us to change users, but doesn't
+	 * require us to.  We used to support this, but it never
+	 * worked right and now we have to block it altogether.
+	 * 503 reply code is not in the table for USER, but RFC 1123
+	 * relaxed rules let us use it.
+	 */
+	if (logged_in) {
+		reply(503, "Changing USER is not supported.");
+	} else if (strcmp(name, "ftp") == 0 || strcmp(name, "anonymous") == 0) {
+		if ((pw = getpwnam("ftp")) != NULL) {
+			authmode = AUTHMODE_GUEST;
+			reply(331, "Guest login ok, send ident as password.");
+		}
+		else {
+			reply(530, "No anonymous FTP service.");
+		}
+	} else if (pw = getpwnam(name)) {
+		if (is_special_guest(name)) {
+			authmode = AUTHMODE_GUEST;
+			reply(331,
+				"Special guest login ok, send dummy password.");
+		} else if (checkuser(name)) {
+			authmode = AUTHMODE_USER;
+askpass:		reply(331, "Password required for %s.", name);
+		} else
+			reply(530, "User %s access denied.", name);
+	} else if (isepsname(name) && !eps_readaccount(name)) {
+		authmode = AUTHMODE_EPS;
+		strcpy(epsaccount, name);
+		goto askpass;
+	} else {
+		/*
+		 * Don't tell them whether the username or the password is
+		 * invalid.
+		 */
+		authmode = AUTHMODE_BAD;
+		goto askpass;
+	}
+}
+
 pass(passwd)
 	char *passwd;
 {
 	char *xpasswd, *savestr();
 	static struct passwd save;
 
-	if (logged_in || pw == NULL) {
-		reply(503, "Login with USER first.");
+	if (logged_in) {
+		reply(503, "You are already logged in.");
 		return;
 	}
-	if (!guest) {		/* "ftp" is only account allowed no password */
+	switch (authmode) {
+	case AUTHMODE_INIT:
+		reply(503, "Login with USER first.");
+		return;
+	case AUTHMODE_USER:
+		chrooted = 0;
+		goto checkpass;
+	case AUTHMODE_EPS:
+		chrooted = 1;
+	checkpass:
 		xpasswd = crypt(passwd, pw->pw_passwd);
 		/* The strcmp does not catch null passwords! */
-		if (*pw->pw_passwd == '\0' || strcmp(xpasswd, pw->pw_passwd)) {
-			reply(530, "Login incorrect.");
-			pw = NULL;
-			return;
-		}
+		if (*pw->pw_passwd == '\0' || strcmp(xpasswd, pw->pw_passwd))
+			goto badlogin;
+		break;
+	case AUTHMODE_GUEST:
+		/* anonymous - anything goes for the password */
+		if (strcmp(pw->pw_dir, "/"))
+			chrooted = 1;
+		else
+			chrooted = 0;
+		break;
+	case AUTHMODE_BAD:
+	badlogin:
+		reply(530, "Login incorrect.");
+		authmode = AUTHMODE_INIT;
+		return;
 	}
 	setegid(pw->pw_gid);
 	initgroups(pw->pw_name, pw->pw_gid);
@@ -232,21 +323,34 @@ pass(passwd)
 	}
 
 	/* grab wtmp before chroot */
-	wtmp = open("/usr/adm/wtmp", O_WRONLY|O_APPEND);
-	if (guest && chroot(pw->pw_dir) < 0) {
-		reply(550, "Can't set guest privileges.");
+	if (authmode != AUTHMODE_EPS)
+		wtmp = open("/usr/adm/wtmp", O_WRONLY|O_APPEND);
+	if (chrooted && chroot(pw->pw_dir) < 0) {
+		reply(530, "Can't set guest privileges.");
 		if (wtmp >= 0) {
 			(void) close(wtmp);
 			wtmp = -1;
 		}
 		goto bad;
 	}
-	if (!guest)
+	switch (authmode) {
+	case AUTHMODE_USER:
 		reply(230, "User %s logged in.", pw->pw_name);
-	else
+		break;
+	case AUTHMODE_GUEST:
+		init_guest_dirs();
 		reply(230, "Guest login ok, access restrictions apply.");
+		break;
+	case AUTHMODE_EPS:
+		reply(230, "Logged into EPS account %s.", epsaccount);
+		break;
+	}
 	logged_in = 1;
-	dologin(pw);
+	if (authmode != AUTHMODE_EPS)
+		dologin(pw);
+	else
+		syslog(LOG_INFO, "EPS session: account %s, connection from %s",
+			epsaccount, remotehost);
 	seteuid(pw->pw_uid);
 	/*
 	 * Save everything so globbing doesn't
@@ -260,11 +364,10 @@ pass(passwd)
 	save.pw_dir = savestr(pw->pw_dir);
 	save.pw_shell = savestr(pw->pw_shell);
 	pw = &save;
-	home = pw->pw_dir;		/* home dir for globbing */
 	return;
 bad:
 	seteuid(0);
-	pw = NULL;
+	authmode = AUTHMODE_INIT;
 }
 
 char *
@@ -273,10 +376,125 @@ savestr(s)
 {
 	char *malloc();
 	char *new = malloc((unsigned) strlen(s) + 1);
-	
+
 	if (new != NULL)
 		(void) strcpy(new, s);
 	return (new);
+}
+
+/*
+ * Here is how we implement the list commands.
+ *
+ * First if a pathname is specified and it contains slash(es), we first chdir
+ * to the last slash (rindex). No globbing is allowed before the last slash,
+ * and we do the anonymous FTP protection at this point.
+ *
+ * After this we have four possibilities as far as the list spec goes: nothing,
+ * a filename, a directory name, or a globbing pattern. If nothing, we ls the
+ * current directory. If a subdirectory name, we ls that subdirectory. If a
+ * single filename, we ls that (arguably not very useful). The last two cases
+ * are distinguished by ls, not by us. The specified thing must exist (tested
+ * by lstat) or we 550. Finally, if we have a globbing pattern (contains '*',
+ * '?', '[', or '{'), we glob it. If we got nothing, we 550. Otherwise, we give
+ * the list to ls with -d.
+ */
+list(spec)
+	register char *spec;
+{
+	int p[2];
+	char *dir = ".";
+	int haveglob = 0;
+	char *argv[GAVSIZ], **globvec;
+	register int argc;
+	register int i;
+	register char *cp;
+	register char **av;
+	struct stat st;
+	char flg;
+
+	if (pipe(p) < 0) {
+		reply(451, "System error: pipe: %s.", sys_errlist[errno]);
+		return;
+	}
+	i = fork();
+	if (i < 0) {
+		reply(451, "System error: fork: %s.", sys_errlist[errno]);
+		close(p[0]);
+		close(p[1]);
+		return;
+	}
+	if (i > 0) {
+		close(p[1]);
+		i = p[0];
+		read(i, &flg, 1);
+		if (flg) {
+			close(i);
+			goto out;
+		}
+		retrcore(fdopen(i, "r"), "file list", (off_t) -1);
+out:		(void) wait();
+		return;
+	}
+	close(p[0]);
+
+	if (spec) {
+		if (guestdirs && guest_check_pathname(spec)) {
+			reply(550, "%s: %s.", spec, sys_errlist[EACCES]);
+			goto childfail;
+		}
+		cp = rindex(spec, '/');
+		if (cp) {
+			if (cp == spec)
+				dir = "/";
+			else {
+				*cp = '\0';
+				dir = spec;
+			}
+			if (chdir(dir) < 0) {
+				reply(550, "%s: %s.", dir, sys_errlist[errno]);
+				goto childfail;
+			}
+			spec = cp + 1;
+		}
+		haveglob = isaglob(spec);
+	}
+
+	argv[0] = "ls";
+	argc = 1;
+	if (spec == NULL || *spec == '\0')
+		goto doit;
+	if (!haveglob) {
+		if (lstat(spec, &st) < 0) {
+			reply(550, "%s: %s.", spec, sys_errlist[errno]);
+			goto childfail;
+		}
+		argv[argc++] = spec;
+		goto doit;
+	}
+	globvec = argv + argc;
+	i = glob(spec, globvec, GAVSIZ - argc - 1);
+	if (i < 0) {
+		reply(550, "%s: %s.", dir, sys_errlist[errno]);
+		goto childfail;
+	}
+	if (i == 0) {
+		reply(550, "%s: No match.", spec);
+		goto childfail;
+	}
+	argc += i;
+
+doit:	flg = 0;
+	argv[argc] = NULL;
+	dup2(p[1], 1);
+	dup2(p[1], 2);
+	close(p[1]);
+	write(1, &flg, 1);
+	exit(ls(haveglob, argc, argv));
+
+childfail:
+	flg = 1;
+	write(p[1], &flg, 1);
+	exit(1);
 }
 
 retrieve(cmd, name)
@@ -285,7 +503,12 @@ retrieve(cmd, name)
 	FILE *fin, *dout;
 	struct stat st;
 	int (*closefunc)(), tmp;
+	char **argv = (char **) name;
+#ifdef GZCOMPAT
+	char *gzcompat_argv[3];
+#endif
 
+retry:
 	if (cmd == 0) {
 #ifdef notdef
 		/* no remote command execution -- it's a security hole */
@@ -293,19 +516,52 @@ retrieve(cmd, name)
 			fin = popen(name + 1, "r"), closefunc = pclose;
 		else
 #endif
-			fin = fopen(name, "r"), closefunc = fclose;
+		{
+			if (guestdirs && guest_check_pathname(name))
+				fin = NULL, errno = EACCES;
+			else
+				fin = fopen(name, "r"), closefunc = fclose;
+		}
 	} else {
-		char line[BUFSIZ];
-
-		(void) sprintf(line, cmd, name), name = line;
-		fin = popen(line, "r"), closefunc = pclose;
+		fin = mypopen(cmd, argv, "r"), closefunc = mypclose;
+		name = cmd;
 	}
 	if (fin == NULL) {
+#ifdef GZCOMPAT
+		if (cmd == NULL && errno == ENOENT && !chrooted) {
+			int namelen;
+			char *newname;
+
+			namelen = strlen(name);
+			if (namelen > 2 && name[namelen-2] == '.'
+			  && name[namelen-1] == 'Z') {
+				newname = alloca(namelen + 2);
+				strncpy(newname, name, namelen - 2);
+				strcat(newname, ".gz");
+			} else if (namelen > 3 && name[namelen-3] == '.'
+			  && name[namelen-2] == 'g' && name[namelen-1] == 'z') {
+				newname = alloca(namelen);
+				strncpy(newname, name, namelen - 3);
+				strcat(newname, ".Z");
+			} else
+				goto bailout;
+			if (stat(newname, &st) < 0
+			    || (st.st_mode&S_IFMT) != S_IFREG)
+				goto bailout;
+			cmd = "/usr/ucb/gzcompat";
+			argv = gzcompat_argv;
+			argv[0] = "gzcompat";
+			argv[1] = newname;
+			argv[2] = NULL;
+			goto retry;
+bailout:		errno = ENOENT;
+		}
+#endif
 		if (errno != 0)
 			reply(550, "%s: %s.", name, sys_errlist[errno]);
 		return;
 	}
-	st.st_size = 0;
+	st.st_size = -1;
 	if (cmd == 0 &&
 	    (stat(name, &st) < 0 || (st.st_mode&S_IFMT) != S_IFREG)) {
 		reply(550, "%s: not a plain file.", name);
@@ -327,13 +583,41 @@ done:
 	(*closefunc)(fin);
 }
 
+retrcore(fin, name, size)
+	FILE *fin;
+	char *name;
+	off_t size;
+{
+	FILE *dout;
+	int tmp;
+
+	dout = dataconn(name, size, "w");
+	if (dout == NULL)
+		goto done;
+	if ((tmp = send_data(fin, dout)) > 0 || ferror(dout) > 0) {
+		reply(550, "%s: %s.", name, sys_errlist[errno]);
+	}
+	else if (tmp == 0) {
+		reply(226, "Transfer complete.");
+	}
+	(void) fclose(dout);
+	data = -1;
+	pdata = -1;
+done:
+	(void) fclose(fin);
+}
+
 store(name, mode)
 	char *name, *mode;
 {
 	FILE *fout, *din;
-	int (*closefunc)(), dochown = 0, tmp;
-	char *gunique(), *local;
+	int (*closefunc)(), dochown = 0, tmp, localcnt = 0;
+	char *local, localname[MAXPATHLEN], *localtail;
 
+	if (authmode == AUTHMODE_EPS && !epsquota) {
+		reply(550, "This EPS account is read-only.");
+		return;
+	}
 #ifdef notdef
 	/* no remote command execution -- it's a security hole */
 	if (name[0] == '|')
@@ -341,19 +625,54 @@ store(name, mode)
 	else
 #endif
 	{
-		struct stat st;
-
-		local = name;
-		if (stat(name, &st) < 0) {
-			dochown++;
+		if (guestdirs != NULL && guest_check_pathname(name)) {
+			reply(553, "%s: %s.", name, sys_errlist[EACCES]);
+			return;
 		}
-		else if (unique) {
-			if ((local = gunique(name)) == NULL) {
+		local = name;
+openretry:
+		tmp = open(local, O_CREAT | O_EXCL | O_WRONLY, 0666);
+		if (tmp >= 0) {
+			dochown++;
+			goto openok;
+		}
+		if (errno != EEXIST) {
+			reply(553, "%s: %s.", local, sys_errlist[errno]);
+			return;
+		}
+		switch (*mode) {
+		case 'w':
+			tmp = open(local, O_TRUNC | O_WRONLY);
+			break;
+		case 'a':
+			tmp = open(local, O_WRONLY);
+			break;
+		case 'u':
+			if (!localcnt) {
+				if (strlen(name) > MAXPATHLEN - 4) {
+					reply(553, "%s: %s.", name,
+					      sys_errlist[ENAMETOOLONG]);
+					return;
+				}
+				strcpy(localname, name);
+				local = localname;
+				localtail = index(local, '\0');
+			}
+			if (++localcnt == 100) {
+				reply(452,
+				      "Unique file name cannot be created.");
 				return;
 			}
-			dochown++;
+			sprintf(localtail, ".%d", localcnt);
+			goto openretry;
 		}
-		fout = fopen(local, mode), closefunc = fclose;
+		if (tmp < 0) {
+			reply(553, "%s: %s.", local, sys_errlist[errno]);
+			return;
+		}
+openok:
+		fout = fdopen(tmp, *mode == 'u' ? "w" : mode);
+		closefunc = fclose;
 	}
 	if (fout == NULL) {
 		reply(553, "%s: %s.", local, sys_errlist[errno]);
@@ -365,10 +684,10 @@ store(name, mode)
 	if ((tmp = receive_data(din, fout)) > 0 || ferror(fout) > 0) {
 		reply(552, "%s: %s.", local, sys_errlist[errno]);
 	}
-	else if (tmp == 0 && !unique) {
+	else if (tmp == 0 && *mode != 'u') {
 		reply(226, "Transfer complete.");
 	}
-	else if (tmp == 0 && unique) {
+	else if (tmp == 0 && *mode == 'u') {
 		reply(226, "Transfer complete (unique file name:%s).", local);
 	}
 	(void) fclose(din);
@@ -434,7 +753,7 @@ dataconn(name, size, mode)
 		}
 		(void) close(pdata);
 		pdata = s;
-		reply(150, "Openning data connection for %s (%s,%d)%s.",
+		reply(150, "Opening data connection for %s (%s,%d)%s.",
 		     name, inet_ntoa(from.sin_addr),
 		     ntohs(from.sin_port), sizebuf);
 		return(fdopen(pdata, mode));
@@ -662,6 +981,14 @@ delete(name)
 {
 	struct stat st;
 
+	if (authmode == AUTHMODE_GUEST || authmode == AUTHMODE_EPS) {
+		reply(550, "Guest users are not allowed to delete files.");
+		return;
+	}
+	if (guestdirs != NULL && guest_check_pathname(name)) {
+		reply(550, "%s: %s.", name, sys_errlist[EACCES]);
+		return;
+	}
 	if (stat(name, &st) < 0) {
 		reply(550, "%s: %s.", name, sys_errlist[errno]);
 		return;
@@ -684,7 +1011,10 @@ done:
 cwd(path)
 	char *path;
 {
-
+	if (guestdirs != NULL && guest_check_pathname(path)) {
+		reply(550, "%s: %s.", path, sys_errlist[EACCES]);
+		return;
+	}
 	if (chdir(path) < 0) {
 		reply(550, "%s: %s.", path, sys_errlist[errno]);
 		return;
@@ -695,22 +1025,27 @@ cwd(path)
 makedir(name)
 	char *name;
 {
-	struct stat st;
-	int dochown = stat(name, &st) < 0;
-	
+	if (authmode == AUTHMODE_GUEST || authmode == AUTHMODE_EPS) {
+		reply(550,
+			"Guest users are not allowed to create directories.");
+		return;
+	}
 	if (mkdir(name, 0777) < 0) {
 		reply(550, "%s: %s.", name, sys_errlist[errno]);
 		return;
 	}
-	if (dochown)
-		(void) chown(name, pw->pw_uid, -1);
+	(void) chown(name, pw->pw_uid, -1);
 	reply(257, "MKD command successful.");
 }
 
 removedir(name)
 	char *name;
 {
-
+	if (authmode == AUTHMODE_GUEST || authmode == AUTHMODE_EPS) {
+		reply(550,
+			"Guest users are not allowed to delete directories.");
+		return;
+	}
 	if (rmdir(name) < 0) {
 		reply(550, "%s: %s.", name, sys_errlist[errno]);
 		return;
@@ -720,7 +1055,7 @@ removedir(name)
 
 pwd()
 {
-	char path[MAXPATHLEN + 1];
+	char path[MAXPATHLEN];
 
 	if (getwd(path) == NULL) {
 		reply(550, "%s.", path);
@@ -735,6 +1070,10 @@ renamefrom(name)
 {
 	struct stat st;
 
+	if (authmode == AUTHMODE_GUEST || authmode == AUTHMODE_EPS) {
+		reply(550, "Guest users are not allowed to rename files.");
+		return;
+	}
 	if (stat(name, &st) < 0) {
 		reply(550, "%s: %s.", name, sys_errlist[errno]);
 		return ((char *)0);
@@ -746,7 +1085,6 @@ renamefrom(name)
 renamecmd(from, to)
 	char *from, *to;
 {
-
 	if (rename(from, to) < 0) {
 		reply(550, "rename: %s.", sys_errlist[errno]);
 		return;
@@ -795,7 +1133,7 @@ dologin(pw)
 		SCPYN(utmp.ut_host, remotehost);
 		utmp.ut_time = (long) time((time_t *) 0);
 		(void) write(wtmp, (char *)&utmp, sizeof (utmp));
-		if (!guest) {		/* anon must hang on */
+		if (!chrooted) {		/* anon must hang on */
 			(void) close(wtmp);
 			wtmp = -1;
 		}
@@ -809,8 +1147,9 @@ dologin(pw)
 dologout(status)
 	int status;
 {
-
-	if (logged_in) {
+	if (logged_in && authmode != AUTHMODE_EPS) {
+		if (guestdirs)
+			free_guest_dirs();
 		(void) seteuid(0);
 		if (wtmp < 0)
 			wtmp = open("/usr/adm/wtmp", O_WRONLY|O_APPEND);
@@ -831,81 +1170,36 @@ dologout(status)
  * call to shell.  This insures noone may 
  * create a pipe to a hidden program as a side
  * effect of a list or dir command.
+ *
+ * This version is also more efficient and
+ * convenient for us as it takes ready argv,
+ * which is what globbing gives us.
  */
 #define	tst(a,b)	(*mode == 'r'? (b) : (a))
 #define	RDR	0
 #define	WTR	1
-static	int popen_pid[5];
-
-static char *
-nextarg(cpp)
-	char *cpp;
-{
-	register char *cp = cpp;
-
-	if (cp == 0)
-		return (cp);
-	while (*cp && *cp != ' ' && *cp != '\t')
-		cp++;
-	if (*cp == ' ' || *cp == '\t') {
-		*cp++ = '\0';
-		while (*cp == ' ' || *cp == '\t')
-			cp++;
-	}
-	if (cp == cpp)
-		return ((char *)0);
-	return (cp);
-}
+static	int popen_pid[20];
 
 FILE *
-popen(cmd, mode)
-	char *cmd, *mode;
+mypopen(cmd, argv, mode)
+	char *cmd, **argv, *mode;
 {
-	int p[2], ac, gac;
+	int p[2];
 	register myside, hisside, pid;
-	char *av[20], *gav[512];
 	register char *cp;
 
 	if (pipe(p) < 0)
 		return (NULL);
-	cp = cmd, ac = 0;
-	/* break up string into pieces */
-	do {
-		av[ac++] = cp;
-		cp = nextarg(cp);
-	} while (cp && *cp && ac < 20);
-	av[ac] = (char *)0;
-	gav[0] = av[0];
-	/* glob each piece */
-	for (gac = ac = 1; av[ac] != NULL; ac++) {
-		char **pop;
-		extern char **glob(), **copyblk();
-
-		pop = glob(av[ac]);
-		if (pop == (char **)NULL) {	/* globbing failed */
-			char *vv[2];
-
-			vv[0] = av[ac];
-			vv[1] = 0;
-			pop = copyblk(vv);
-		}
-		av[ac] = (char *)pop;		/* save to free later */
-		while (*pop && gac < 512)
-			gav[gac++] = *pop++;
-	}
-	gav[gac] = (char *)0;
 	myside = tst(p[WTR], p[RDR]);
 	hisside = tst(p[RDR], p[WTR]);
-	if ((pid = fork()) == 0) {
+	if ((pid = vfork()) == 0) {
 		/* myside and hisside reverse roles in child */
 		(void) close(myside);
 		(void) dup2(hisside, tst(0, 1));
 		(void) close(hisside);
-		execv(gav[0], gav);
+		execv(cmd, argv);
 		_exit(1);
 	}
-	for (ac = 1; av[ac] != NULL; ac++)
-		blkfree((char **)av[ac]);
 	if (pid == -1)
 		return (NULL);
 	popen_pid[myside] = pid;
@@ -913,7 +1207,7 @@ popen(cmd, mode)
 	return (fdopen(myside, mode));
 }
 
-pclose(ptr)
+mypclose(ptr)
 	FILE *ptr;
 {
 	register f, r, (*hstat)(), (*istat)(), (*qstat)();
@@ -945,14 +1239,10 @@ checkuser(name)
 	register char *name;
 {
 	register char *cp;
-	char line[BUFSIZ], *index(), *getusershell();
+	char line[BUFSIZ], *getusershell();
 	FILE *fd;
-	struct passwd *pw;
 	int found = 0;
 
-	pw = getpwnam(name);
-	if (pw == NULL)
-		return (0);
 	if (pw ->pw_shell == NULL || pw->pw_shell[0] == NULL)
 		pw->pw_shell = "/bin/sh";
 	while ((cp = getusershell()) != NULL)
@@ -987,7 +1277,7 @@ myoob()
 	}
 	cp = tmpline;
 	if (getline(cp, 7, stdin) == NULL) {
-		reply(221, "You could at least say goodby.");
+		reply(221, "You could at least say goodbye.");
 		dologout(0);
 	}
 	upper(cp);
@@ -1047,55 +1337,125 @@ passive()
 		UC(a[1]), UC(a[2]), UC(a[3]), UC(p[0]), UC(p[1]));
 }
 
-char *
-gunique(local)
-	char *local;
-{
-	static char new[MAXPATHLEN];
-	char *cp = rindex(local, '/');
-	int d, count=0;
-	char ext = '1';
+/*
+ * The following functions implement the logic for restricting the set of
+ * directories that anonymous users can access to less than all world-readable
+ * directories without chrooting. This is accomplished by listing the allowed
+ * directories in /etc/anonftp.allow as absolute pathnames. Their parent
+ * directories are also necessarily accessible, as are their subdirectories,
+ * unless the listed pathname ends with a slash. All files in an accessible
+ * directory are also accessible. However, directories that are not children of
+ * an explicitly listed allowed directory, but are children of a parent
+ * directory of one, are NOT accessible.
+ */
 
-	if (cp) {
-		*cp = '\0';
-	}
-	d = access(cp ? local : ".", 2);
-	if (cp) {
-		*cp = '/';
-	}
-	if (d < 0) {
-		syslog(LOG_ERR, "%s: %m", local);
-		return((char *) 0);
-	}
-	(void) strcpy(new, local);
-	cp = new + strlen(new);
-	*cp++ = '.';
-	while (!d) {
-		if (++count == 100) {
-			reply(452, "Unique file name not cannot be created.");
-			return((char *) 0);
-		}
-		*cp++ = ext;
-		*cp = '\0';
-		if (ext == '9') {
-			ext = '0';
-		}
-		else {
-			ext++;
-		}
-		if ((d = access(new, 0)) < 0) {
+init_guest_dirs()
+{
+	FILE *fd;
+	int nalloc;
+	char line[MAXPATHLEN + 1];
+
+	fd = fopen(ANONFTPALLOW, "r");
+	if (fd == NULL)
+		return;
+	guestdirs = (char **) malloc(sizeof(char *) * GUESTDIRSINCR);
+	if (guestdirs == NULL)
+		return;
+	bzero((char *) guestdirs, sizeof(char *) * GUESTDIRSINCR);
+	nguestdirs = 0;
+	nalloc = GUESTDIRSINCR;
+	while (fgets(line, sizeof(line), fd) != NULL) {
+		char *copy, *cp;
+
+		cp = index(line, '\n');
+		if (cp)
+			*cp = '\0';
+		else
 			break;
+		if (line[0] != '/')
+			continue;
+		if (nguestdirs == nalloc) {
+			guestdirs = (char **) realloc((char *) guestdirs,
+					sizeof(char *) *
+					(nalloc + GUESTDIRSINCR));
+			if (guestdirs == NULL)
+				break;
+			bzero((char *) guestdirs + sizeof(char *) * nalloc,
+			      sizeof(char *) * GUESTDIRSINCR);
+			nalloc += GUESTDIRSINCR;
 		}
-		if (ext != '0') {
-			cp--;
-		}
-		else if (*(cp - 2) == '.') {
-			*(cp - 1) = '1';
-		}
-		else {
-			*(cp - 2) = *(cp - 2) + 1;
-			cp--;
-		}
+		copy = malloc(strlen(line) + 1);
+		if (copy == NULL)
+			break;
+		strcpy(copy, line);
+		guestdirs[nguestdirs++] = copy;
 	}
-	return(new);
+	(void) fclose(fd);
+}
+
+free_guest_dirs()
+{
+	int i;
+
+	for (i = 0; i < nguestdirs; i++)
+		free(guestdirs[i]);
+	free((char *) guestdirs);
+	guestdirs = NULL;
+}
+
+guest_check_curdir()
+{
+	char curdir[MAXPATHLEN];
+	int i;
+
+	getwd(curdir);
+	if (!strcmp(curdir, "/"))
+		return(0);
+	for (i = 0; i < nguestdirs; i++) {
+		char *cp1 = curdir, *cp2 = guestdirs[i];
+
+		while (*cp1 == *cp2 && *cp1 != '\0')
+			cp1++, cp2++;
+		if (*cp1 == '\0' && *cp2 == '\0')
+			return(0);
+		if (*cp1 == '\0' && *cp2 == '/')
+			return(0);
+		if (*cp1 == '/' && *cp2 == '\0')
+			return(0);
+	}
+	return(1);
+}
+
+guest_check_pathname(pathname)
+	char *pathname;
+{
+	char origdir[MAXPATHLEN];
+	char *comp, *slash;
+	int status;
+
+	getwd(origdir);
+	if (pathname[0] == '/')
+		chdir("/");
+	for (comp = pathname; ; comp = slash) {
+		while (*comp == '/')
+			comp++;
+		if (*comp == '\0')
+			break;
+		slash = index(comp, '/');
+		if (slash != NULL)
+			*slash = '\0';
+		status = chdir(comp);
+		if (slash != NULL)
+			*slash = '/';
+		if (status)
+			break;
+		if (guest_check_curdir()) {
+			chdir(origdir);
+			return(1);
+		}
+		if (slash == NULL)
+			break;
+	}
+	chdir(origdir);
+	return(0);
 }

@@ -1,0 +1,236 @@
+h09272
+s 00002/00002/00113
+d D 6.5 86/05/28 14:04:40 mckusick 7 6
+c now uses symbolic links
+e
+s 00009/00004/00106
+d D 6.4 86/01/13 17:40:37 donn 6 5
+c Documented the new 'manpath' feature.  Standardized quotation marks...
+e
+s 00001/00001/00109
+d D 6.3 85/08/13 17:55:19 mckusick 5 4
+c /usr/lib/whatis moves to /usr/man/whatis
+e
+s 00033/00001/00077
+d D 6.2 85/08/07 20:11:19 mckusick 4 3
+c use links for manuals with only .so;
+c describe how to eliminate man? with rdist (from ks@purdue)
+e
+s 00021/00010/00057
+d D 6.1 85/04/27 13:04:56 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00066
+d D 5.1 85/04/27 13:04:32 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00067/00000/00000
+d D 4.1 85/04/27 13:03:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CATMAN 8 "4/3/81"
+E 2
+I 2
+D 3
+.TH CATMAN 8 "4 February 1983"
+E 3
+I 3
+.TH CATMAN 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+catman \- create the cat files for the manual
+.SH SYNOPSIS
+.B /etc/catman
+[
+.B \-p
+] [
+.B \-n
+] [
+.B \-w
+I 3
+] [
+.B \-M
+D 6
+.I directory
+E 6
+I 6
+.I path
+E 6
+E 3
+]
+[ sections ]
+.SH DESCRIPTION
+.I Catman
+creates the preformatted versions of the on-line manual from the nroff
+input files.
+Each manual page is examined and those whose preformatted versions are
+missing or out of date are recreated.
+If any changes are made,
+.I catman
+will recreate the
+D 3
+.B /usr/lib/whatis
+E 3
+I 3
+.B whatis
+E 3
+database.
+.PP
+If there is one parameter not starting with a `\-',
+D 3
+it is take to be a list of manual sections to look in.
+E 3
+I 3
+it is taken to be a list of manual sections to look in.
+E 3
+For example
+.IP
+.B catman 123
+.LP
+will cause the updating to only happen to manual sections
+1, 2, and 3.
+.PP
+Options:
+.TP
+.B \-n
+D 3
+prevents creations of
+.BR /usr/lib/whatis .
+E 3
+I 3
+prevents creations of the
+.B whatis
+database.
+E 3
+.TP
+.B \-p
+prints what would be done instead of doing it.
+.TP
+.B \-w
+causes only the 
+D 3
+.B /usr/lib/whatis
+E 3
+I 3
+.B whatis
+E 3
+database to be created.
+No manual reformatting is done.
+I 3
+.TP
+.B \-M
+D 6
+update manual pages located in the specified
+.I directory
+E 6
+I 6
+updates manual pages located in the set of directories specified by
+.I path
+E 6
+(/usr/man by default).
+I 6
+.I Path
+has the form of a colon (`:') separated list of directory names,
+for example `/usr/local/man:/usr/man'.
+If the environment variable `MANPATH' is set,
+its value is used for the default path.
+E 6
+I 4
+.PP
+D 6
+If the nroff source file contains only a line of the form ".so manx/yyy.x",
+E 6
+I 6
+If the nroff source file contains only a line of the form `.so manx/yyy.x',
+E 6
+D 7
+a link is made in the catx directory to the appropriate preformatted manual
+page.
+E 7
+I 7
+a symbolic link is made in the catx directory to the appropriate
+preformatted manual page.
+E 7
+This feature allows easy distribution of the preformatted manual pages
+among a group of associated machines with
+.I rdist(1).
+The nroff sources need not be distributed to all machines,
+thus saving the associated disk space.
+As an example, consider a local network with 5 machines,
+called mach1 through mach5.
+Suppose mach3 has the manual page nroff sources.
+Every night, mach3 runs
+.I catman
+via
+.I cron(8)
+and later runs
+.I rdist
+with a distfile that looks like:
+.IP
+.nf
+.ta \w'${MANUAL'u
+
+MANSLAVES = ( mach1 mach2 mach4 mach5 )
+
+D 5
+MANUALS = (/usr/man/cat[1-8no] /usr/lib/whatis)
+E 5
+I 5
+MANUALS = (/usr/man/cat[1-8no] /usr/man/whatis)
+E 5
+
+${MANUALS} -> ${MANSLAVES}
+	install -R;
+	notify root;
+
+.fi
+E 4
+E 3
+.SH FILES
+D 3
+.ta 2i
+E 3
+I 3
+.nf
+.ta \w'/usr/lib/makewhatis   'u
+/usr/man	default manual directory location
+E 3
+/usr/man/man?/*.*	raw (nroff input) manual sections
+D 3
+.br
+E 3
+/usr/man/cat?/*.*	preformatted manual pages
+D 3
+.br
+/usr/lib/makewhatis	commands to make whatis database
+E 3
+I 3
+/usr/man/whatis	whatis database
+/usr/lib/makewhatis	command script to make whatis database
+.fi
+E 3
+.DT
+.SH "SEE ALSO"
+D 4
+man(1)
+E 4
+I 4
+man(1), cron(8), rdist(1)
+E 4
+.SH BUGS
+Acts oddly on nights with full moons.
+E 1

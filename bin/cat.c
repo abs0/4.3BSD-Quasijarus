@@ -11,7 +11,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)cat.c	5.3 (Berkeley) 4/24/88";
+static char sccsid[] = "@(#)cat.c	5.4 (Berkeley) 12/6/02";
 #endif /* not lint */
 
 /*
@@ -24,8 +24,8 @@ static char sccsid[] = "@(#)cat.c	5.3 (Berkeley) 4/24/88";
 
 /* #define OPTSIZE BUFSIZ	/* define this only if not 4.2 BSD or beyond */
 
-int	bflg, eflg, nflg, sflg, tflg, uflg, vflg;
-int	spaced, col, lno, inaline, ibsize, obsize;
+int	bflg, eflg, nflg, sflg, tflg, uflg, vflg, koi7flg, koi8flg;
+int	spaced, col, lno, inaline, ibsize, obsize, outkoi7state;
 
 main(argc, argv)
 char **argv;
@@ -67,8 +67,20 @@ char **argv;
 			tflg++;
 			vflg++;
 			continue;
+		case '7':
+			koi7flg++;
+			koi8flg++;
+			continue;
+		case '8':
+			koi8flg++;
+			continue;
 		}
 		break;
+	}
+	if (vflg && koi8flg) {
+		fputs("cat: -v cannot be used together with -7 or -8\n",
+			stderr);
+		exit(1);
 	}
 	if (fstat(fileno(stdout), &statb) == 0) {
 		statb.st_mode &= S_IFMT;
@@ -111,7 +123,7 @@ char **argv;
 		}
 		else
 			ibsize = 0;
-		if (nflg||sflg||vflg)
+		if (nflg||sflg||vflg|koi8flg)
 			copyopt(fi);
 		else if (uflg) {
 			while ((c = getc(fi)) != EOF)
@@ -135,11 +147,35 @@ copyopt(f)
 	register FILE *f;
 {
 	register int c;
+	register int inkoi7state = 0;
 
 top:
 	c = getc(f);
 	if (c == EOF)
 		return;
+	if (koi8flg) {
+		if (c == '\016') {
+			inkoi7state = 1;
+			goto top;
+		}
+		if (c == '\017') {
+			inkoi7state = 0;
+			goto top;
+		}
+		if (c >= 0100 && c <= 0177 && inkoi7state)
+			c |= 0200;
+	}
+	if (koi7flg) {
+		if (c >= 0100 && c <= 0177 && outkoi7state) {
+			putchar('\017');
+			outkoi7state = 0;
+		}
+		if (c >= 0300 && !outkoi7state) {
+			putchar('\016');
+			outkoi7state = 1;
+		}
+		c &= 0177;
+	}
 	if (c == '\n') {
 		if (inaline == 0) {
 			if (sflg && spaced)
@@ -183,7 +219,6 @@ register int fd;
 {
 	register int	buffsize, n, nwritten, offset;
 	register char	*buff;
-	struct stat	statbuff;
 	char		*malloc();
 
 #ifndef	OPTSIZE

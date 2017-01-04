@@ -1,0 +1,110 @@
+h20082
+s 00004/00004/00072
+d D 6.2 86/05/16 15:53:15 karels 3 2
+c options, updates
+e
+s 00001/00001/00075
+d D 6.1 85/05/15 17:51:15 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00076/00000/00000
+d D 5.1 85/05/15 17:51:06 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH UDP 4P "25 March 1982"
+E 2
+I 2
+.TH UDP 4P "%Q%"
+E 2
+.UC 5
+.SH NAME
+udp \- Internet User Datagram Protocol
+.SH SYNOPSIS
+.B #include <sys/socket.h>
+.br
+.B #include <netinet/in.h>
+.PP
+.B s = socket(AF_INET, SOCK_DGRAM, 0);
+.SH DESCRIPTION
+UDP is a simple, unreliable datagram protocol which is used
+to support the SOCK_DGRAM abstraction for the Internet
+protocol family.  UDP sockets are connectionless, and are
+normally used with the
+.I sendto 
+and
+.IR recvfrom 
+calls, though the
+.IR connect (2)
+call may also be used to fix the destination for future
+packets (in which case the 
+.IR recv (2)
+or
+.IR read (2)
+and 
+.IR send (2)
+or
+.IR write(2)
+system calls may be used).
+.PP
+UDP address formats are identical to those used by
+TCP. In particular UDP provides a port identifier in addition
+to the normal Internet address format.  Note that the UDP port
+space is separate from the TCP port space (i.e. a UDP port
+may not be \*(lqconnected\*(rq to a TCP port).  In addition broadcast
+packets may be sent (assuming the underlying network supports
+this) by using a reserved \*(lqbroadcast address\*(rq; this address
+is network interface dependent.
+I 3
+.PP
+Options at the IP transport level may be used with UDP; see
+.IR ip (4P).
+E 3
+.SH DIAGNOSTICS
+A socket operation may fail with one of the following errors returned:
+.TP 15
+[EISCONN]
+when trying to establish a connection on a socket which
+already has one, or when trying to send a datagram with the destination
+address specified and the socket is already connected;
+.TP 15
+[ENOTCONN]
+when trying to send a datagram, but
+no destination address is specified, and the socket hasn't been
+connected;
+.TP 15
+[ENOBUFS]
+when the system runs out of memory for
+an internal data structure;
+.TP 15
+[EADDRINUSE]
+when an attempt
+is made to create a socket with a port which has already been
+allocated;
+.TP 15
+[EADDRNOTAVAIL]
+when an attempt is made to create a 
+socket with a network address for which no network interface
+exists.
+.SH SEE ALSO
+D 3
+send(2),
+recv(2),
+intro(4N),
+inet(4F)
+E 3
+I 3
+getsockopt(2), recv(2), send(2), socket(2), intro(4N), inet(4F), ip(4P)
+E 3
+E 1

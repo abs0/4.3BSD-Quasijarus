@@ -30,6 +30,7 @@
 %token	MINOR
 %token	MINUS
 %token	NEXUS
+%token	NODE
 %token	ON
 %token	OPTIONS
 %token	MAKEOPTIONS
@@ -78,7 +79,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)config.y	5.8 (Berkeley) 6/18/88
+ *	@(#)config.y	5.11 (Berkeley) 3/20/04
  */
 
 #include "config.h"
@@ -419,6 +420,8 @@ Dev_name:
 			seen_mba = 1;
 		else if (eq($2, "uba"))
 			seen_uba = 1;
+		else if (eq($2, "bva"))
+			seen_bva = 1;
 		else if (eq($2, "vba"))
 			seen_vba = 1;
 		cur.d_unit = $3;
@@ -437,7 +440,7 @@ Dev_info:
 Con_info:
 	AT Dev NUMBER
 	      = {
-		if (eq(cur.d_name, "mba") || eq(cur.d_name, "uba")) {
+		if (isadapter(cur.d_name)) {
 			(void) sprintf(errbuf,
 				"%s must be connected to a nexus", cur.d_name);
 			yyerror(errbuf);
@@ -456,6 +459,8 @@ Info_list:
 Info:
 	CSR NUMBER
 	      = { cur.d_addr = $2; } |
+	NODE NUMBER
+	      = { cur.d_node = $2; } |
 	DRIVE NUMBER
 	      = { cur.d_drive = $2; } |
 	SLAVE NUMBER
@@ -705,7 +710,7 @@ init_dev(dp)
 	dp->d_conn = 0;
 	dp->d_vec = 0;
 	dp->d_addr = dp->d_pri = dp->d_flags = dp->d_dk = 0;
-	dp->d_slave = dp->d_drive = dp->d_unit = UNKNOWN;
+	dp->d_node = dp->d_slave = dp->d_drive = dp->d_unit = UNKNOWN;
 }
 
 /*
@@ -719,9 +724,10 @@ check_nexus(dev, num)
 	switch (machine) {
 
 	case MACHINE_VAX:
-		if (!eq(dev->d_name, "uba") && !eq(dev->d_name, "mba") &&
-		    !eq(dev->d_name, "bi"))
-			yyerror("only uba's, mba's, and bi's should be connected to the nexus");
+		/*
+		 * With peripheral nexi, almost anything can now be connected
+		 * to a VAX nexus.
+		 */
 		if (num != QUES)
 			yyerror("can't give specific nexus numbers");
 		break;
@@ -730,6 +736,24 @@ check_nexus(dev, num)
 		if (!eq(dev->d_name, "vba")) 
 			yyerror("only vba's should be connected to the nexus");
 		break;
+	}
+}
+
+isadapter(name)
+	register char *name;
+{
+	switch (machine) {
+	case MACHINE_VAX:
+		if (eq(name, "uba") || eq(name, "mba") || eq(name, "vaxbi") ||
+		    eq(name, "xmi") || eq(name, "bva"))
+			return(1);
+		else
+			return(0);
+	case MACHINE_TAHOE:
+		if (eq(name, "vba"))
+			return(1);
+		else
+			return(0);
 	}
 }
 

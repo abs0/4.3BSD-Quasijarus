@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dh.c	7.7 (Berkeley) 7/30/02
+ *	@(#)dh.c	7.9 (Berkeley) 12/9/04
  */
 
 #include "dh.h"
@@ -345,7 +345,7 @@ dhioctl(dev, cmd, data, flag)
 {
 	register struct tty *tp;
 	register int unit = minor(dev);
-	int error;
+	int error, s;
 
 	tp = &dh11[unit];
 	error = (*linesw[tp->t_line].l_ioctl)(tp, cmd, data, flag);
@@ -369,11 +369,30 @@ dhioctl(dev, cmd, data, flag)
 		break;
 
 	case TIOCSDTR:
-		dmctl(unit, DML_DTR|DML_RTS, DMBIS);
+		(void) dmctl(unit, DML_DTR|DML_RTS, DMBIS);
 		break;
 
 	case TIOCCDTR:
-		dmctl(unit, DML_DTR|DML_RTS, DMBIC);
+		(void) dmctl(unit, DML_DTR|DML_RTS, DMBIC);
+		break;
+
+	case TIOCMSET:
+		(void) dmctl(unit, *(int *)data, DMSET);
+		break;
+
+	case TIOCMBIS:
+		(void) dmctl(unit, *(int *)data, DMBIS);
+		break;
+
+	case TIOCMBIC:
+		(void) dmctl(unit, *(int *)data, DMBIC);
+		break;
+
+	case TIOCMGET:
+		s = spltty();
+		tp->t_state &= ~TS_MODEMCHG;
+		splx(s);
+		*(int *)data = dmctl(unit, 0, DMGET);
 		break;
 
 	default:
@@ -520,7 +539,7 @@ dhstart(tp)
 	 */
 	if (tp->t_outq.c_cc == 0)
 		goto out;
-	if (tp->t_flags & (RAW|LITOUT))
+	if (tp->t_flags & (RAW|LITOUT|PASS8))
 		nch = ndqb(&tp->t_outq, 0);
 	else {
 		nch = ndqb(&tp->t_outq, 0200);
@@ -749,9 +768,12 @@ dmctl(dev, bits, how)
 	case DMBIC:
 		addr->dmlstat &= ~bits;
 		break;
+	case DMGET:
+		bits = addr->dmlstat;
 	}
 	addr->dmcsr = DM_IE|DM_SE;
 	splx(s);
+	return(bits);
 }
 
 /*
@@ -770,14 +792,20 @@ dmintr(dm)
 		return;
 	addr = (struct dmdevice *)ui->ui_addr;
 	if (addr->dmcsr&DM_DONE) {
+		unit = addr->dmcsr & 0xf;
+		tp = &dh11[(dm << 4) + unit];
 		if (addr->dmcsr&DM_CF) {
-			unit = addr->dmcsr & 0xf;
-			tp = &dh11[(dm << 4) + unit];
 			if (addr->dmlstat & DML_CAR)
 				(void)(*linesw[tp->t_line].l_modem)(tp, 1);
 			else if ((dhsoftCAR[dm] & (1<<unit)) == 0 &&
 			    (*linesw[tp->t_line].l_modem)(tp, 0) == 0)
 				addr->dmlstat = 0;
+		}
+		tp->t_state |= TS_MODEMCHG;
+		if (tp->t_rsel) {
+			selwakeup(tp->t_rsel, tp->t_state & TS_RCOLL);
+			tp->t_rsel = 0;
+			tp->t_state &= ~TS_RCOLL;
 		}
 		addr->dmcsr = DM_IE|DM_SE;
 	}

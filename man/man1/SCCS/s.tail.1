@@ -1,0 +1,103 @@
+h28300
+s 00001/00003/00053
+d D 6.3 87/09/29 20:34:34 bostic 5 4
+c remove ^H chars; bug report 4.3BSD/man/24
+e
+s 00001/00001/00055
+d D 6.2 86/03/06 14:20:07 bloom 4 3
+c fix underlining (from george lavender)
+e
+s 00001/00001/00055
+d D 6.1 85/04/29 15:04:56 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00055
+d D 5.1 85/04/29 15:04:43 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00056/00000/00000
+d D 4.1 85/04/29 15:04:35 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TAIL 1 
+E 2
+I 2
+D 3
+.TH TAIL 1  "18 January 1983"
+E 3
+I 3
+.TH TAIL 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+tail \- deliver the last part of a file
+.SH SYNOPSIS
+.B tail
+D 5
+.if t [ \(+-number[\fBlbc\fR][\fBfr\fR] ]
+D 4
+.if n +_number[lbc___][r_f_]
+E 4
+I 4
+.if n +_number[l_b_c_][r_f_]
+E 4
+[ file ]
+E 5
+I 5
+[\fB+-\fP]\fBnumber\fP[\fBlbc\fP][\fBrf\fP] [\fBfile\fP]
+E 5
+.SH DESCRIPTION
+.I Tail
+copies the named file to the standard output beginning
+at a designated place.
+If no file is named, the standard input is used.
+.PP
+Copying begins at distance
+.I +number
+from the beginning, or
+.I \-number
+from the end of the input.
+.I Number
+is counted in units of lines, blocks or characters,
+according to the appended option
+.B l,
+.B b
+or
+.B c.
+When no units are specified, counting is by lines.
+.PP
+Specifying
+.B r
+causes tail to print lines from the end of the file in reverse order.
+The default for
+.B r
+is to print the entire file this way.
+Specifying
+.B f
+causes
+.I tail
+to not quit at end of file, but rather wait and try to read repeatedly
+in hopes that the file will grow.
+.SH "SEE ALSO"
+dd(1)
+.SH BUGS
+Tails relative to the end of the file
+are treasured up in a buffer, and thus 
+are limited in length.
+.PP
+Various kinds of anomalous behavior may happen
+with character special files.
+E 1

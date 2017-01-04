@@ -16,7 +16,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)config.l	5.5 (Berkeley) 6/18/88
+ *	@(#)config.l	5.6 (Berkeley) 3/2/04
  */
 
 #include <ctype.h>
@@ -33,6 +33,7 @@ struct kt {
 	char *kt_name;
 	int kt_val;
 } key_words[] = {
+	{ "adapter",	CONTROLLER },
 	{ "and",	AND },
 	{ "args",	ARGS },
 	{ "at",		AT },
@@ -55,6 +56,7 @@ struct kt {
 	{ "maxusers",	MAXUSERS },
 	{ "minor",	MINOR },
 	{ "nexus",	NEXUS },
+	{ "node",	NODE },
 	{ "on",		ON },
 	{ "options",	OPTIONS },
 	{ "priority",	PRIORITY },

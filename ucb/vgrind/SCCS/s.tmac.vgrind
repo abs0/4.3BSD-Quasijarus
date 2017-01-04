@@ -1,0 +1,149 @@
+h12846
+s 00002/00001/00066
+d D 1.8 87/04/29 15:08:41 bostic 8 7
+c bug report 4.2BSD/ucb/174
+e
+s 00001/00001/00066
+d D 1.7 83/08/12 09:02:33 karels 7 6
+c no cut marks unless troff, not vtroff/itroff
+e
+s 00002/00002/00065
+d D 1.6 81/03/29 01:21:43 presott 6 5
+c change to procedure definition for C.  Should reduce the number
+c of wrongly identified procedures.
+e
+s 00000/00002/00067
+d D 1.5 81/03/15 16:26:09 presott 5 4
+c take the wh's out of the macros file
+e
+s 00000/00001/00069
+d D 1.4 81/01/20 00:54:53 root 4 3
+c to go with the new table driven vgrind -- presotto
+e
+s 00006/00000/00064
+d D 1.3 81/01/12 05:58:07 root 3 2
+c The ds / and de FC definitions have been added for use with
+c the new table driven vgrind.  This is consistent with the old vgrind.
+e
+s 00000/00002/00064
+d D 1.2 80/12/06 14:56:31 root 2 1
+c The space size change was taken out of the comment
+c macros since it broke the allignment of *`s in comments.
+e
+s 00066/00000/00000
+d D 1.1 80/11/30 15:57:20 root 1 0
+c date and time created 80/11/30 15:57:20 by root
+e
+u
+U
+t
+T
+I 1
+'ss 23
+'ds _ \d\(mi\u
+'ps 9p
+'vs 10p
+'ds - \(mi
+I 3
+'ds / \\h'\\w' 'u-\\w'/'u'/
+E 3
+'ds /* \\h'\\w' 'u-\\w'/'u'/*
+'bd B 3
+'bd S B 3
+'nr cm 0
+'nf
+D 5
+'wh 0 he
+E 5
+D 6
+'de he
+E 6
+I 6
+'de vH
+E 6
+'ev 2
+D 7
+'tl '\-\-''\-\-'
+E 7
+I 7
+'if t 'if !\nv 'tl '\-\-''\-\-'
+E 7
+'ft 1
+'sp .35i
+'tl '\s14\f3\\*(=F\fP\s0'\\*(=H'\f3\s14\\*(=F\fP\s0'
+'sp .25i
+'ft 1
+\f2\s12\h'\\n(.lu-\w'\\*(=f'u'\\*(=f\fP\s0\h'|0u'
+.sp .05i
+'ev
+'ds =G \\*(=F
+..
+D 5
+'wh -1i fo
+E 5
+D 6
+'de fo
+E 6
+I 6
+'de vF
+E 6
+'ev 2
+'sp .35i
+D 8
+'tl '\f2\\*(=M''Page % of \\*(=G\fP'
+E 8
+I 8
+'ie o 'tl '\f2\\*(=M''Page % of \\*(=G\fP'
+'el 'tl '\f2Page % of \\*(=G''\\*(=M\fP'
+E 8
+'bp
+'ev
+'ft 1
+'if \\n(cm=1 'ft 2
+..
+'de ()
+'pn 1
+..
+'de +C
+'nr cm 1
+'ft 2
+'ds +K
+'ds -K
+D 2
+'ss 12
+E 2
+..
+'de -C
+'nr cm 0
+'ft 1
+'ds +K \f3
+'ds -K \fP
+D 2
+'ss 23
+E 2
+..
+'+C
+'-C
+'am +C
+'ne 3
+..
+'de FN
+\f2\s14\h'\\n(.lu-\w'\\$1'u'\\$1\fP\s0\h'|0u'\c
+I 3
+.if \\nx .tm \\$1 \\*(=F \\n%
+'ds =f \&...\\$1
+..
+'de FC
+D 4
+\f2\s14\h'\\n(.lu-\w'...\\$1'u'...\\$1\fP\s0\h'|0u'\c
+E 4
+E 3
+.if \\nx .tm \\$1 \\*(=F \\n%
+'ds =f \&...\\$1
+..
+'de -F
+'rm =f
+..
+'ft 1
+'lg 0
+E 1

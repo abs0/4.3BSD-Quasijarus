@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)fingerd.c	5.1 (Berkeley) 6/6/85";
+static char sccsid[] = "@(#)fingerd.c	5.2 (Berkeley) 10/1/04";
 #endif not lint
 
 /*
@@ -22,6 +22,7 @@ static char sccsid[] = "@(#)fingerd.c	5.1 (Berkeley) 6/6/85";
 
 #include <stdio.h>
 #include <ctype.h>
+#include <strings.h>
 
 main(argc, argv)
 	char *argv[];
@@ -37,7 +38,9 @@ main(argc, argv)
 	if (getpeername(0, &sin, &i) < 0)
 		fatal(argv[0], "getpeername");
 	line[0] = '\0';
-	gets(line);
+	fgets(line, 512, stdin);
+	if (sp = index(line, '\n'))
+		*sp = '\0';
 	sp = line;
 	av[0] = "finger";
 	i = 1;

@@ -1,0 +1,288 @@
+/usr/src/usr.lib/sendmail/src/SCCS/s.daemon.c:
+5.28 02/01/08 09:10:49 msokolov 98 97
+add logging of incoming connections by origin
+/usr/src/sys/vaxuba/SCCS/s.dhureg.h:
+7.3 02/05/17 20:08:02 msokolov 5 4
+change DHU_BA2_XBA to support DHQ11 with 22-bit addressing
+/usr/src/sys/vaxuba/SCCS/s.dhu.c:
+7.5 02/05/17 20:16:54 msokolov 15 14
+DHQ11 supports 38400 baud
+/usr/src/usr.lib/SCCS/s.Makefile:
+5.15 02/05/24 12:20:53 msokolov 28 27
+man was mysteriously missing from SUBDIRS
+/usr/src/usr.lib/SCCS/s.Makefile:
+5.16 02/05/24 22:29:32 msokolov 29 28
+add ms
+/usr/src/usr.bin/roff/common_source/SCCS/s.n1.c:
+4.9 02/05/28 20:57:12 msokolov 9 8
+Y2K: make \n(yr really two digits as the manual says and add \n(cn for century
+/usr/src/usr.bin/roff/common_source/SCCS/s.ni.c:
+4.3 02/05/28 20:57:15 msokolov 3 2
+Y2K: make \n(yr really two digits as the manual says and add \n(cn for century
+/usr/src/usr.bin/roff/common_source/SCCS/s.tdef.h:
+4.9 02/05/28 20:57:16 msokolov 9 8
+Y2K: make \n(yr really two digits as the manual says and add \n(cn for century
+/usr/src/usr.bin/roff/common_source/SCCS/s.v.h:
+4.3 02/05/28 20:57:17 msokolov 3 2
+Y2K: make \n(yr really two digits as the manual says and add \n(cn for century
+/usr/src/usr.lib/man/SCCS/s.tmac.an.new:
+6.6 02/05/28 21:01:23 msokolov 8 7
+Y2K
+/usr/src/usr.lib/ms/SCCS/s.tmac.s:
+1.6 02/05/28 21:04:43 msokolov 6 5
+Y2K
+/usr/src/usr.lib/ms/SCCS/s.tmac.s:
+1.7 02/05/28 21:05:22 msokolov 7 6
+restore SCCS ID keywords
+/usr/src/usr.lib/me/SCCS/s.tmac.e:
+2.32 02/05/28 21:09:28 msokolov 39 38
+Y2K
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.harhantcp.mc:
+1.2 02/05/29 18:42:18 msokolov 2 1
+The dogs and executioners of ORBS lie under the rubble of the Bastille,
+and for us the sun is shining in the beauty of its rays: harhantcp.mc is now
+like ucbtcp.mc again!
+/usr/src/usr.lib/sendmail/src/SCCS/s.daemon.c:
+5.29 02/05/29 21:57:58 msokolov 99 98
+preserve the numeric IP address of origin in the traces left by a message
+(it would now normally appear as a (comment) in CurHostName and $s)
+/usr/src/usr.lib/sendmail/src/SCCS/s.sendmail.h:
+5.14 02/05/29 21:58:00 msokolov 163 162
+preserve the numeric IP address of origin in the traces left by a message
+(it would now normally appear as a (comment) in CurHostName and $s)
+/usr/src/usr.lib/sendmail/src/SCCS/s.srvrsmtp.c:
+5.23 02/05/29 21:58:03 msokolov 88 87
+preserve the numeric IP address of origin in the traces left by a message
+(it would now normally appear as a (comment) in CurHostName and $s)
+/usr/src/usr.lib/sendmail/src/SCCS/s.version.c:
+5.61.1.2 02/05/29 22:17:11 msokolov 486 485
+minor Y2K fix
+fix handling of null from addresses
+Log source IP addresses of everything coming from Internet (daemon mode).
+This feature will help catch Sendmail abusers while not suspending any
+Sendmail civil liberties.
+/usr/src/man/man1/SCCS/s.compress.1:
+6.6 02/06/02 19:08:49 msokolov 7 6
+document strong compression
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.7 02/07/07 18:31:18 msokolov 74 73
+start Quasijarus tty ioctl additions for the improved SLIP implementation and
+upcoming async PPP
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.13 02/07/07 18:34:31 msokolov 112 111
+add TIOCSLATTACH hook for the sl module
+/usr/src/sys/net/SCCS/s.if_sl.c:
+7.10 02/07/07 18:39:21 msokolov 20 19
+Redesign attachment logic. Now we don't just set SLIPDISC, one must explicitly
+attach an sl unit to the tty with TIOCSLATTACH. Stop abusing TIOCGETD to get
+the interface number, we now have TIOCGETIF.
+/usr/src/etc/SCCS/s.slattach.c:
+4.4 02/07/07 18:44:01 msokolov 5 4
+change for the new tty/sl attachment design (TIOCSLATTACH)
+now specify the if on the command line (finally!)
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.8 02/07/08 00:03:58 msokolov 75 74
+add SIOCGIFMTU and SIOCSIFMTU
+/usr/src/sys/net/SCCS/s.if.c:
+7.5 02/07/08 00:04:58 msokolov 52 51
+add variable MTU support
+/usr/src/sys/net/SCCS/s.if.h:
+7.4 02/07/08 00:04:59 msokolov 37 36
+add variable MTU support
+/usr/src/sys/net/SCCS/s.if_sl.c:
+7.11 02/07/08 00:12:06 msokolov 21 20
+Support configurable MTU. The receive buffer logic could only work with MTU of
+a little less than 1024, so I replaced it with a carbon copy of if_ubaget. Now
+it's a 2048 byte buffer that works like the UNIBUS ones and MTU can be anything
+from 576 to 2046, default 1500. While I was at it, made overflow handling right
+and fixed an outright bug in out-of-mbufs handling.
+/usr/src/etc/SCCS/s.ifconfig.c:
+4.22 02/07/08 00:15:33 msokolov 25 24
+add support for displaying and changing the MTU
+/usr/src/sys/net/SCCS/s.netisr.h:
+7.5 02/07/11 10:57:55 msokolov 12 11
+add PPPCTL software interrupt
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.17 02/07/11 10:58:15 msokolov 167 166
+add PPPCTL software interrupt
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.9 02/07/12 15:32:53 msokolov 76 75
+no separate ppp and ppt modules after all, it's all ppp
+/usr/src/sys/sys/SCCS/s.init_main.c:
+7.7 02/07/12 15:33:55 msokolov 91 90
+attach ppp interfaces at boot time like sl and lo
+/usr/src/sys/net/SCCS/s.if.h:
+7.5 02/07/12 19:46:07 msokolov 38 37
+add IFF_NOFCS flag (no frame check sequence at the end)
+/usr/src/sys/net/SCCS/s.if_sl.c:
+7.12 02/07/12 19:54:55 msokolov 22 21
+Option to append CCITT FCS-16 to each IP datagram (disabled by default).
+With this non-standard extension SLIP becomes reliable for checksumless UDP,
+etc. and thus a viable alternative to the ugly PPP for asynchronous links.
+/usr/src/etc/SCCS/s.ifconfig.c:
+4.23 02/07/12 19:57:07 msokolov 26 25
+support IFF_NOFCS flag
+/usr/src/sys/net/SCCS/s.if_ppp.h:
+7.2 02/07/19 22:01:05 msokolov 2 1
+add RFC 1662 definitions for octet-oriented framing
+/usr/src/sys/net/SCCS/s.if_pppvar.h:
+7.2 02/07/19 22:04:31 msokolov 2 1
+pppasync implemented
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.2 02/07/19 22:05:14 msokolov 2 1
+add pppasync_init() call to pppattach
+/usr/src/sys/sys/SCCS/s.tty_conf.c:
+7.3 02/07/19 22:06:08 msokolov 15 14
+add PPPDISC
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.14 02/07/19 22:08:24 msokolov 113 112
+add TIOCPPPATTACH hook for the ppp module
+/usr/src/sys/conf/SCCS/s.files:
+7.6 02/07/19 22:09:40 msokolov 32 31
+add net/if_fcs16* and net/if_ppp*
+/usr/src/etc/SCCS/s.slattach.c:
+4.5 02/07/19 23:20:32 msokolov 6 5
+support ppp too
+/usr/src/sys/net/SCCS/s.if_fcs16.c:
+7.2 02/07/20 10:58:28 msokolov 2 1
+brown paper bag
+/usr/src/sys/net/SCCS/s.if_pppasync.c:
+7.2 02/07/20 10:59:32 msokolov 2 1
+fix pppasync_ugly_accm
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.3 02/07/20 15:07:25 msokolov 3 2
+first working version (2 ppp's connected with null-modem reach OPENED)
+add diagnostic output
+/usr/src/sys/net/SCCS/s.if_ppplcp.c:
+7.2 02/07/20 15:07:27 msokolov 2 1
+first working version (2 ppp's connected with null-modem reach OPENED)
+add diagnostic output
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.4 02/07/21 12:37:42 msokolov 4 3
+minor buglets, better PERSIST handling, more diagnostic output
+/usr/src/sys/net/SCCS/s.if_ppplcp.c:
+7.3 02/07/21 12:37:44 msokolov 3 2
+minor buglets, better PERSIST handling, more diagnostic output
+/usr/src/sys/net/SCCS/s.if_sl.c:
+7.13 02/07/21 14:01:43 msokolov 23 22
+implement modem control like in ppp
+/usr/src/sys/sys/SCCS/s.tty_conf.c:
+7.4 02/07/21 14:02:44 msokolov 16 15
+SLIP has slmodem now
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.10 02/07/22 21:07:24 msokolov 77 76
+add ppp if ioctls
+/usr/src/sys/net/SCCS/s.if.c:
+7.6 02/07/22 21:08:07 msokolov 53 52
+add ppp if ioctls
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.5 02/07/22 21:10:31 msokolov 5 4
+add ioctls for fine control of PPP features/quirks
+/usr/src/etc/SCCS/s.ifconfig.c:
+4.24 02/07/22 21:12:59 msokolov 27 26
+add support for some PPP controls
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.6 02/07/23 19:36:36 msokolov 6 5
+pass ifa to pppipcp_open
+/usr/src/sys/net/SCCS/s.if_pppipcp.c:
+7.2 02/07/23 23:16:36 msokolov 2 1
+actually works (reaches OPENED and exchanges pings with N2)
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.11 02/07/23 23:55:21 msokolov 78 77
+add SIOCPPPGETIPCPS
+/usr/src/sys/net/SCCS/s.if.c:
+7.7 02/07/23 23:55:47 msokolov 54 53
+add SIOCPPPGETIPCPS
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.7 02/07/23 23:55:48 msokolov 7 6
+add SIOCPPPGETIPCPS
+/usr/src/sys/net/SCCS/s.if_ppplcp.c:
+7.4 02/07/23 23:57:34 msokolov 4 3
+fix one memory leak and one logic oversight
+/usr/src/sys/vaxuba/SCCS/s.dh.c:
+7.7 02/07/30 23:44:46 msokolov 103 102
+finally support FNDELAY on open
+/usr/src/sys/vaxuba/SCCS/s.dhu.c:
+7.6 02/07/30 23:44:49 msokolov 16 15
+finally support FNDELAY on open
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.12 02/07/30 23:45:45 msokolov 79 78
+add TIOCSOFTCAR ioctl to force soft carrier on at any time
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.15 02/07/30 23:46:16 msokolov 114 113
+add TIOCSOFTCAR ioctl to force soft carrier on at any time
+/usr/src/sys/sys/SCCS/s.subr_prf.c:
+7.13 02/08/02 22:07:33 msokolov 60 59
+add sprintf
+/usr/src/sys/net/SCCS/s.if.c:
+7.8 02/08/02 22:10:00 msokolov 55 54
+ifp <-> ifr_name conversion support more than 10 units
+/usr/src/sys/net/SCCS/s.if.h:
+7.6 02/08/02 22:10:37 msokolov 39 38
+add declaration for ifunit(), it's useful to others
+/usr/src/sys/conf/SCCS/s.files:
+7.7 02/08/02 22:12:28 msokolov 33 32
+add netmon
+/usr/src/sys/vax/SCCS/s.conf.c:
+7.14 02/08/02 22:13:02 msokolov 118 117
+add netmon
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.13 02/08/02 22:15:09 msokolov 80 79
+start new ioctl class for network supervisory devices
+/usr/src/sys/net/SCCS/s.if.c:
+7.9 02/08/02 23:38:33 msokolov 56 55
+notify netmon on if_down
+/usr/src/sys/net/SCCS/s.if_ppp.c:
+7.8 02/08/02 23:39:22 msokolov 8 7
+notify netmon on state transitions
+/usr/src/sys/net/SCCS/s.if_pppipcp.c:
+7.3 02/08/02 23:39:23 msokolov 3 2
+notify netmon on state transitions
+/usr/src/sys/net/SCCS/s.if_sl.c:
+7.14 02/08/02 23:39:42 msokolov 24 23
+notify netmon on carrier transitions
+/usr/src/sys/netimp/SCCS/s.if_imp.c:
+7.9 02/08/02 23:40:20 msokolov 74 73
+notify netmon on major state transitions
+/usr/src/sys/vaxdist/SCCS/s.MAKEDEV:
+4.33 02/08/04 09:22:37 msokolov 34 33
+add netmon
+/usr/src/sys/vaxdist/SCCS/s.MAKEDEV:
+4.34 02/08/04 09:31:04 msokolov 35 34
+ok, get it right
+/usr/src/sys/net/SCCS/s.if_sl.c:
+7.15 02/08/05 00:31:58 msokolov 25 24
+switching to and from network disciplines is a very delicate matter
+/usr/src/sys/net/SCCS/s.if_pppasync.c:
+7.3 02/08/05 00:32:00 msokolov 3 2
+switching to and from network disciplines is a very delicate matter
+/usr/src/sys/net/SCCS/s.if_fcs16.c:
+7.3 02/08/31 12:38:49 msokolov 3 2
+(ccitt_addfcs16) bad check for when it's OK to append to the last mbuf
+/usr/src/sys/vax/SCCS/s.vmparam.h:
+7.3 02/09/15 00:51:21 msokolov 17 16
+add P1LOW define
+/usr/src/sys/vax/SCCS/s.trap.c:
+7.4 02/09/15 00:53:36 msokolov 50 49
+knock some sense into T_SEGFLT handling wrt stack expansion
+/usr/src/bin/SCCS/s.cat.c:
+5.4 02/12/06 22:34:49 msokolov 13 12
+add -7 and -8 options to convert between KOI-7 and KOI-8
+/usr/src/ucb/SCCS/s.txtps.c:
+5.2 02/12/19 14:20:19 msokolov 2 1
+%%EndSetup was missing
+/usr/src/ucb/SCCS/s.Makefile:
+5.28 02/12/19 14:42:14 msokolov 28 27
+add txtps
+/usr/src/ucb/SCCS/s.txtps.c:
+5.3 02/12/19 14:43:09 msokolov 3 2
+fix handling of \377, add -H
+/usr/src/ucb/SCCS/s.txtps.c:
+5.4 02/12/19 15:00:26 msokolov 4 3
+finally handle font requirements nicely
+/usr/src/ucb/SCCS/s.txtps.c:
+5.5 02/12/19 15:02:57 msokolov 5 4
+fix -X (missing break in switch)
+/usr/src/ucb/SCCS/s.txtps.c:
+5.6 02/12/20 11:57:08 msokolov 6 5
+doh, font names are literal, not executable!

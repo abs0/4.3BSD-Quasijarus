@@ -1,0 +1,3487 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%DocumentSuppliedResources: encoding TroffEncoding
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/04
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+	currentdict
+end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: 1 1
+save $troff begin Sc
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+2 12 SF
+14360 40140 (The) P
+15800 40140 (M4) P
+17080 40140 (Macro) P
+19360 40140 (Processor) P
+1 10 SF
+15868 38700 (Brian) P
+17435 38700 (W.) P
+18285 38700 (Kernighan) P
+16135 37620 (Dennis) P
+18034 37620 (M.) P
+18884 37620 (Ritchie) P
+0 10 SF
+15327 36540 (AT&T) P
+17161 36540 (Bell) P
+18361 36540 (Laboratories) P
+14453 35820 (Murray) P
+16452 35820 (Hill,) P
+17736 35820 (New) P
+19068 35820 (Jersey) P
+20766 35820 (07974) P
+1 10 SF
+16942 33660 (ABSTRACT) P
+0 10 SF
+8160 32004 (M4) P
+9216 32004 (is) P
+9839 32004 (a) P
+10328 32004 (macro) P
+12050 32004 (processor) P
+14571 32004 (available) P
+16959 32004 (on) P
+0 9 SF
+17761 32004 (UNIX) P
+0 10 SF
+19111 32004 (\200) P
+19633 32004 (and) P
+0 9 SF
+20721 32004 (GCOS) P
+0 10 SF
+22161 32004 (.) P
+22733 32004 (Its) P
+23555 32004 (primary) P
+25677 32004 (use) P
+26698 32004 (has) P
+27719 32004 (been) P
+29073 32004 (as) P
+29794 32004 (a) P
+6660 31284 (front) P
+8058 31284 (end) P
+9155 31284 (for) P
+10086 31284 (Ratfor) P
+11850 31284 (for) P
+12781 31284 (those) P
+14278 31284 (cases) P
+15773 31284 (where) P
+17468 31284 (parameterless) P
+20995 31284 (macros) P
+22957 31284 (are) P
+23919 31284 (not) P
+24916 31284 (adequately) P
+27744 31284 (powerful.) P
+6660 30564 (It) P
+7237 30564 (has) P
+8246 30564 (also) P
+9422 30564 (been) P
+10764 30564 (used) P
+12073 30564 (for) P
+12983 30564 (languages) P
+15591 30564 (as) P
+16300 30564 (disparate) P
+18674 30564 (as) P
+19382 30564 (C) P
+19991 30564 (and) P
+21066 30564 (Cobol.) P
+23092 30564 (M4) P
+24134 30564 (is) P
+24743 30564 (particularly) P
+27718 30564 (suited) P
+29360 30564 (for) P
+6660 29844 (functional) P
+9321 29844 (languages) P
+11947 29844 (like) P
+13075 29844 (Fortran,) P
+15220 29844 (PL/I) P
+16516 29844 (and) P
+17610 29844 (C) P
+18238 29844 (since) P
+19698 29844 (macros) P
+21658 29844 (are) P
+22618 29844 (speci\212ed) P
+24978 29844 (in) P
+25673 29844 (a) P
+26167 29844 (functional) P
+28827 29844 (nota\255) P
+6660 29124 (tion.) P
+8160 28188 (M4) P
+9193 28188 (provides) P
+11459 28188 (features) P
+13557 28188 (seldom) P
+15490 28188 (found) P
+17090 28188 (even) P
+18422 28188 (in) P
+19089 28188 (much) P
+20622 28188 (larger) P
+22221 28188 (macro) P
+23920 28188 (processors,) P
+26801 28188 (including) P
+7060 27252 (\007) P
+8160 27252 (arguments) P
+7060 26316 (\007) P
+8160 26316 (condition) P
+10627 26316 (testing) P
+7060 25380 (\007) P
+8160 25380 (arithmetic) P
+10793 25380 (capabilities) P
+7060 24444 (\007) P
+8160 24444 (string) P
+9727 24444 (and) P
+10793 24444 (substring) P
+13193 24444 (functions) P
+7060 23508 (\007) P
+8160 23508 (\212le) P
+9127 23508 (manipulation) P
+8160 22356 (This) P
+9427 22356 (paper) P
+10959 22356 (is) P
+11559 22356 (a) P
+12025 22356 (user's) P
+13657 22356 (manual) P
+15623 22356 (for) P
+16523 22356 (M4.) P
+2 10 SF
+4320 19476 (Introduction) P
+0 10 SF
+5820 18540 (A) P
+6480 18540 (macro) P
+8206 18540 (processor) P
+10731 18540 (is) P
+11358 18540 (a) P
+11850 18540 (useful) P
+13542 18540 (way) P
+14767 18540 (to) P
+15460 18540 (enhance) P
+4320 17820 (a) P
+4838 17820 (programming) P
+8356 17820 (language,) P
+10922 17820 (to) P
+11640 17820 (make) P
+13190 17820 (it) P
+13775 17820 (more) P
+15259 17820 (palatable) P
+4320 17100 (or) P
+5039 17100 (more) P
+6491 17100 (readable,) P
+8891 17100 (or) P
+9610 17100 (to) P
+10296 17100 (tailor) P
+11782 17100 (it) P
+12335 17100 (to) P
+13021 17100 (a) P
+13506 17100 (particular) P
+16024 17100 (appli\255) P
+4320 16380 (cation.) P
+6419 16380 (The) P
+2 10 SF
+7634 16380 (#de\212ne) P
+0 10 SF
+9750 16380 (statement) P
+12331 16380 (in) P
+13080 16380 (C) P
+13762 16380 (and) P
+14910 16380 (the) P
+15925 16380 (analo\255) P
+4320 15660 (gous) P
+2 10 SF
+5642 15660 (de\212ne) P
+0 10 SF
+7366 15660 (in) P
+8023 15660 (Ratfor) P
+9746 15660 (are) P
+10668 15660 (examples) P
+13123 15660 (of) P
+13813 15660 (the) P
+14736 15660 (basic) P
+16158 15660 (facil\255) P
+4320 14940 (ity) P
+5175 14940 (provided) P
+7529 14940 (by) P
+8350 14940 (any) P
+9436 14940 (macro) P
+11155 14940 (processor) P
+13673 14940 (\210) P
+14493 14940 (replacement) P
+4320 14220 (of) P
+5020 14220 (text) P
+6120 14220 (by) P
+6920 14220 (other) P
+8353 14220 (text.) P
+5820 13284 (The) P
+7005 13284 (M4) P
+8090 13284 (macro) P
+9840 13284 (processor) P
+12389 13284 (is) P
+13040 13284 (an) P
+13857 13284 (extension) P
+16407 13284 (of) P
+17158 13284 (a) P
+4320 12564 (macro) P
+6040 12564 (processor) P
+8558 12564 (called) P
+10210 12564 (M3) P
+11263 12564 (which) P
+12949 12564 (was) P
+14101 12564 (written) P
+16021 12564 (by) P
+16841 12564 (D.) P
+4320 11844 (M.) P
+5281 11844 (Ritchie) P
+7292 11844 (for) P
+8270 11844 (the) P
+9281 11844 (AP\2553) P
+10826 11844 (minicomputer;) P
+14638 11844 (M3) P
+15748 11844 (was) P
+16957 11844 (in) P
+4320 11124 (turn) P
+5613 11124 (based) P
+7303 11124 (on) P
+8228 11124 (a) P
+8819 11124 (macro) P
+10643 11124 (processor) P
+13266 11124 (implemented) P
+16724 11124 (for) P
+4320 10404 ([1].) P
+5779 10404 (Readers) P
+8119 10404 (unfamiliar) P
+11028 10404 (with) P
+12503 10404 (the) P
+13644 10404 (basic) P
+15284 10404 (ideas) P
+16924 10404 (of) P
+4320 9684 (macro) P
+6039 9684 (processing) P
+8824 9684 (may) P
+10077 9684 (wish) P
+11430 9684 (to) P
+12117 9684 (read) P
+13368 9684 (some) P
+14853 9684 (of) P
+15572 9684 (the) P
+16524 9684 (dis\255) P
+4320 8964 (cussion) P
+6319 8964 (there.) P
+5820 8028 (M4) P
+6938 8028 (is) P
+7622 8028 (a) P
+8172 8028 (suitable) P
+10322 8028 (front) P
+11773 8028 (end) P
+12923 8028 (for) P
+13907 8028 (Ratfor) P
+15724 8028 (and) P
+16874 8028 (C,) P
+4320 7308 (and) P
+5562 7308 (has) P
+6737 7308 (also) P
+8078 7308 (been) P
+9585 7308 (used) P
+11059 7308 (successfully) P
+14365 7308 (with) P
+15807 7308 (Cobol.) P
+4320 6588 (Besides) P
+6687 6588 (the) P
+7922 6588 (straightforward) P
+12123 6588 (replacement) P
+15556 6588 (of) P
+16558 6588 (one) P
+4320 5868 (string) P
+6011 5868 (of) P
+6835 5868 (text) P
+8059 5868 (by) P
+8983 5868 (another,) P
+11256 5868 (it) P
+11913 5868 (provides) P
+14302 5868 (macros) P
+16357 5868 (with) P
+4320 5268 8 0 18 L
+0 8 SF
+4320 4668 (\200) P
+0 7 SF
+4700 4668 (UNIX) P
+0 8 SF
+5909 4668 (is) P
+6389 4668 (a) P
+6762 4668 (registered) P
+8814 4668 (trademark) P
+10919 4668 (of) P
+11479 4668 (AT&T) P
+12945 4668 (Bell) P
+13904 4668 (Laboratories) P
+16489 4668 (in) P
+17022 4668 (the) P
+17768 4668 (USA) P
+18889 4668 (and) P
+19742 4668 (other) P
+20888 4668 (countries.) P
+0 10 SF
+19296 19476 (arguments,) P
+22218 19476 (conditional) P
+25191 19476 (macro) P
+26963 19476 (expansion,) P
+29817 19476 (arithmetic,) P
+19296 18756 (\212le) P
+20373 18756 (manipulation,) P
+24000 18756 (and) P
+25176 18756 (some) P
+26751 18756 (specialized) P
+29724 18756 (string) P
+31400 18756 (pro\255) P
+19296 18036 (cessing) P
+21261 18036 (functions.) P
+20796 17100 (The) P
+21952 17100 (basic) P
+23407 17100 (operation) P
+25896 17100 (of) P
+26619 17100 (M4) P
+27675 17100 (is) P
+28298 17100 (to) P
+28988 17100 (copy) P
+30377 17100 (its) P
+31166 17100 (input) P
+19296 16380 (to) P
+20059 16380 (its) P
+20922 16380 (output.) P
+23102 16380 (As) P
+24063 16380 (the) P
+25091 16380 (input) P
+26620 16380 (is) P
+27315 16380 (read,) P
+28792 16380 (however,) P
+31302 16380 (each) P
+19296 15660 (alphanumeric) P
+22827 15660 (``token'') P
+25226 15660 (\(that) P
+26591 15660 (is,) P
+27406 15660 (string) P
+29038 15660 (of) P
+29803 15660 (letters) P
+31534 15660 (and) P
+19296 14940 (digits\)) P
+21034 14940 (is) P
+21638 14940 (checked.) P
+24156 14940 (If) P
+24760 14940 (it) P
+25298 14940 (is) P
+25902 14940 (the) P
+26839 14940 (name) P
+28342 14940 (of) P
+29046 14940 (a) P
+29515 14940 (macro,) P
+31367 14940 (then) P
+19296 14220 (the) P
+20338 14220 (name) P
+21946 14220 (of) P
+22755 14220 (the) P
+23796 14220 (macro) P
+25603 14220 (is) P
+26311 14220 (replaced) P
+28650 14220 (by) P
+29558 14220 (its) P
+30433 14220 (de\212ning) P
+19296 13500 (text,) P
+20564 13500 (and) P
+21648 13500 (the) P
+22599 13500 (resulting) P
+24917 13500 (string) P
+26501 13500 (is) P
+27118 13500 (pushed) P
+29034 13500 (back) P
+30383 13500 (onto) P
+31667 13500 (the) P
+19296 12780 (input) P
+20805 12780 (to) P
+21547 12780 (be) P
+22387 12780 (rescanned.) P
+25408 12780 (Macros) P
+27480 12780 (may) P
+28787 12780 (be) P
+29627 12780 (called) P
+31333 12780 (with) P
+19296 12060 (arguments,) P
+22316 12060 (in) P
+23154 12060 (which) P
+24991 12060 (case) P
+26393 12060 (the) P
+27496 12060 (arguments) P
+30365 12060 (are) P
+31467 12060 (col\255) P
+19296 11340 (lected) P
+21067 11340 (and) P
+22272 11340 (substituted) P
+25211 11340 (into) P
+26483 11340 (the) P
+27554 11340 (right) P
+29026 11340 (places) P
+30862 11340 (in) P
+31667 11340 (the) P
+19296 10620 (de\212ning) P
+21463 10620 (text) P
+22563 10620 (before) P
+24295 10620 (it) P
+24829 10620 (is) P
+25429 10620 (rescanned.) P
+20796 9684 (M4) P
+22064 9684 (provides) P
+24565 9684 (a) P
+25266 9684 (collection) P
+28066 9684 (of) P
+29000 9684 (about) P
+30767 9684 (twenty) P
+19296 8964 (built\255in) P
+21305 8964 (macros) P
+23277 8964 (which) P
+24983 8964 (perform) P
+27156 8964 (various) P
+29162 8964 (useful) P
+30868 8964 (opera\255) P
+19296 8244 (tions;) P
+20915 8244 (in) P
+21667 8244 (addition,) P
+24069 8244 (the) P
+25086 8244 (user) P
+26369 8244 (can) P
+27485 8244 (de\212ne) P
+29235 8244 (new) P
+30518 8244 (macros.) P
+19296 7524 (Built\255ins) P
+21688 7524 (and) P
+22845 7524 (user\255de\212ned) P
+26100 7524 (macros) P
+28122 7524 (work) P
+29645 7524 (exactly) P
+31667 7524 (the) P
+19296 6804 (same) P
+20811 6804 (way,) P
+22243 6804 (except) P
+24091 6804 (that) P
+25273 6804 (some) P
+26821 6804 (of) P
+27603 6804 (the) P
+28618 6804 (built\255in) P
+30668 6804 (macros) P
+19296 6084 (have) P
+20628 6084 (side) P
+21794 6084 (effects) P
+23592 6084 (on) P
+24392 6084 (the) P
+25325 6084 (state) P
+26624 6084 (of) P
+27324 6084 (the) P
+28257 6084 (process.) P
+end restore showpage
+%%Page: 2 2
+save $troff begin Sc
+0 10 SF
+0 47280 (\255\255) P
+32432 47280 (\255\255) P
+4320 44400 (PS1:17\2552) P
+26137 44400 (The) P
+27270 44400 (M4) P
+28303 44400 (Macro) P
+30068 44400 (Processor) P
+2 10 SF
+4320 42480 (Usage) P
+0 10 SF
+5820 41544 (On) P
+0 9 SF
+6753 41544 (UNIX) P
+0 10 SF
+8103 41544 (,) P
+8453 41544 (use) P
+2 10 SF
+5220 40464 (m4) P
+6220 40464 ([\212les]) P
+0 10 SF
+4320 39384 (Each) P
+5732 39384 (argument) P
+8211 39384 (\212le) P
+9190 39384 (is) P
+9802 39384 (processed) P
+12378 39384 (in) P
+13057 39384 (order;) P
+14702 39384 (if) P
+15281 39384 (there) P
+16692 39384 (are) P
+4320 38664 (no) P
+5154 38664 (arguments,) P
+8037 38664 (or) P
+8771 38664 (if) P
+9372 38664 (an) P
+10172 38664 (argument) P
+12672 38664 (is) P
+13305 38664 (\221-',) P
+14426 38664 (the) P
+15392 38664 (standard) P
+4320 37944 (input) P
+5879 37944 (is) P
+6604 37944 (read) P
+7961 37944 (at) P
+8719 37944 (that) P
+9944 37944 (point.) P
+11853 37944 (The) P
+13111 37944 (processed) P
+15800 37944 (text) P
+17024 37944 (is) P
+4320 37224 (written) P
+6303 37224 (on) P
+7186 37224 (the) P
+8201 37224 (standard) P
+10515 37224 (output,) P
+12481 37224 (which) P
+14229 37224 (may) P
+15544 37224 (be) P
+16392 37224 (cap\255) P
+4320 36504 (tured) P
+5753 36504 (for) P
+6653 36504 (subsequent) P
+9518 36504 (processing) P
+12283 36504 (with) P
+2 10 SF
+5220 35424 (m4) P
+6220 35424 ([\212les]) P
+7820 35424 (>output\212le) P
+0 10 SF
+4320 34344 (On) P
+0 9 SF
+5412 34344 (GCOS) P
+0 10 SF
+6852 34344 (,) P
+7361 34344 (usage) P
+9085 34344 (is) P
+9843 34344 (identical,) P
+12417 34344 (but) P
+13542 34344 (the) P
+14633 34344 (program) P
+17024 34344 (is) P
+4320 33624 (called) P
+2 10 SF
+5952 33624 (./m4) P
+0 10 SF
+7069 33624 (.) P
+2 10 SF
+4320 32184 (De\212ning) P
+6688 32184 (Macros) P
+0 10 SF
+5820 31248 (The) P
+6960 31248 (primary) P
+9067 31248 (built-in) P
+11180 31248 (function) P
+13387 31248 (of) P
+14094 31248 (M4) P
+15134 31248 (is) P
+2 10 SF
+15740 31248 (de\212ne) P
+0 10 SF
+17274 31248 (,) P
+4320 30528 (which) P
+5986 30528 (is) P
+6586 30528 (used) P
+7885 30528 (to) P
+8552 30528 (de\212ne) P
+10218 30528 (new) P
+11417 30528 (macros.) P
+13699 30528 (The) P
+14832 30528 (input) P
+2 10 SF
+5220 29448 (de\212ne\(name,) P
+8704 29448 (stuff\)) P
+0 10 SF
+4320 28368 (causes) P
+6158 28368 (the) P
+7164 28368 (string) P
+2 10 SF
+8804 28368 (name) P
+0 10 SF
+10477 28368 (to) P
+11217 28368 (be) P
+12056 28368 (de\212ned) P
+14095 28368 (as) P
+2 10 SF
+14867 28368 (stuff) P
+0 10 SF
+16034 28368 (.) P
+16657 28368 (All) P
+4320 27648 (subsequent) P
+7206 27648 (occurrences) P
+10290 27648 (of) P
+2 10 SF
+11011 27648 (name) P
+0 10 SF
+12632 27648 (will) P
+13787 27648 (be) P
+14573 27648 (replaced) P
+16824 27648 (by) P
+2 10 SF
+4320 26928 (stuff) P
+0 10 SF
+5487 26928 (.) P
+2 10 SF
+6098 26928 (name) P
+0 10 SF
+7759 26928 (must) P
+9187 26928 (be) P
+10013 26928 (alphanumeric) P
+13538 26928 (and) P
+14664 26928 (must) P
+16091 26928 (begin) P
+4320 26208 (with) P
+5694 26208 (a) P
+6267 26208 (letter) P
+7807 26208 (\(the) P
+9047 26208 (underscore) P
+11985 26208 10 -100 1 L
+12592 26208 (counts) P
+14464 26208 (as) P
+15269 26208 (a) P
+15841 26208 (letter\).) P
+2 10 SF
+4320 25488 (stuff) P
+0 10 SF
+5741 25488 (is) P
+6395 25488 (any) P
+7515 25488 (text) P
+8669 25488 (that) P
+9823 25488 (contains) P
+12076 25488 (balanced) P
+14460 25488 (parentheses;) P
+4320 24768 (it) P
+4854 24768 (may) P
+6087 24768 (stretch) P
+7886 24768 (over) P
+9152 24768 (multiple) P
+11353 24768 (lines.) P
+5820 23832 (Thus,) P
+7370 23832 (as) P
+8069 23832 (a) P
+8535 23832 (typical) P
+10368 23832 (example,) P
+2 10 SF
+5220 22752 (de\212ne\(N,) P
+7737 22752 (100\)) P
+5420 22032 (...) P
+5220 21312 (if) P
+5787 21312 (\(i) P
+6354 21312 (>) P
+6896 21312 (N\)) P
+0 10 SF
+4320 20232 (de\212nes) P
+2 10 SF
+6293 20232 (N) P
+0 10 SF
+6999 20232 (to) P
+7739 20232 (be) P
+8578 20232 (100,) P
+9901 20232 (and) P
+11040 20232 (uses) P
+12345 20232 (this) P
+13485 20232 (\221\221symbolic) P
+16358 20232 (con\255) P
+4320 19512 (stant'') P
+6053 19512 (in) P
+6720 19512 (a) P
+7186 19512 (later) P
+2 10 SF
+8452 19512 (if) P
+0 10 SF
+9019 19512 (statement.) P
+5820 18576 (The) P
+7041 18576 (left) P
+8129 18576 (parenthesis) P
+11115 18576 (must) P
+12570 18576 (immediately) P
+15857 18576 (follow) P
+4320 17856 (the) P
+5262 17856 (word) P
+2 10 SF
+6704 17856 (de\212ne) P
+0 10 SF
+8238 17856 (,) P
+8597 17856 (to) P
+9273 17856 (signal) P
+10915 17856 (that) P
+2 10 SF
+12024 17856 (de\212ne) P
+0 10 SF
+13767 17856 (has) P
+14775 17856 (arguments.) P
+4320 17136 (If) P
+4932 17136 (a) P
+5409 17136 (macro) P
+7119 17136 (or) P
+7830 17136 (built-in) P
+9947 17136 (name) P
+11457 17136 (is) P
+12068 17136 (not) P
+13046 17136 (followed) P
+15390 17136 (immedi\255) P
+4320 16416 (ately) P
+5813 16416 (by) P
+6740 16416 (\221\(',) P
+7817 16416 (it) P
+8478 16416 (is) P
+9205 16416 (assumed) P
+11597 16416 (to) P
+12391 16416 (have) P
+13849 16416 (no) P
+14775 16416 (arguments.) P
+4320 15696 (This) P
+5708 15696 (is) P
+6429 15696 (the) P
+7483 15696 (situation) P
+9871 15696 (for) P
+2 10 SF
+10892 15696 (N) P
+0 10 SF
+11646 15696 (above;) P
+13565 15696 (it) P
+14219 15696 (is) P
+14939 15696 (actually) P
+17158 15696 (a) P
+4320 14976 (macro) P
+6074 14976 (with) P
+7396 14976 (no) P
+8251 14976 (arguments,) P
+11155 14976 (and) P
+12276 14976 (thus) P
+13530 14976 (when) P
+15083 14976 (it) P
+15671 14976 (is) P
+16325 14976 (used) P
+4320 14256 (there) P
+5719 14256 (need) P
+7051 14256 (be) P
+7817 14256 (no) P
+8617 14256 (\(...\)) P
+9667 14256 (following) P
+12201 14256 (it.) P
+5820 13320 (You) P
+7125 13320 (should) P
+8997 13320 (also) P
+10235 13320 (notice) P
+11973 13320 (that) P
+13145 13320 (a) P
+13683 13320 (macro) P
+15454 13320 (name) P
+17024 13320 (is) P
+4320 12600 (only) P
+5635 12600 (recognized) P
+8513 12600 (as) P
+9259 12600 (such) P
+10605 12600 (if) P
+11219 12600 (it) P
+11800 12600 (appears) P
+13878 12600 (surrounded) P
+16824 12600 (by) P
+4320 11880 (non-alphanumerics.) P
+9606 11880 (For) P
+10640 11880 (example,) P
+13022 11880 (in) P
+2 10 SF
+5220 10800 (de\212ne\(N,) P
+7737 10800 (100\)) P
+5420 10080 (...) P
+5220 9360 (if) P
+5787 9360 (\(NNN) P
+7486 9360 (>) P
+8028 9360 (100\)) P
+0 10 SF
+4320 8280 (the) P
+5459 8280 (variable) P
+2 10 SF
+7797 8280 (NNN) P
+0 10 SF
+9502 8280 (is) P
+10308 8280 (absolutely) P
+13180 8280 (unrelated) P
+15818 8280 (to) P
+16691 8280 (the) P
+4320 7560 (de\212ned) P
+6389 7560 (macro) P
+2 10 SF
+8191 7560 (N) P
+0 10 SF
+8624 7560 (,) P
+9077 7560 (even) P
+10512 7560 (though) P
+12482 7560 (it) P
+13119 7560 (contains) P
+15420 7560 (a) P
+15988 7560 (lot) P
+16924 7560 (of) P
+2 10 SF
+4320 6840 (N) P
+0 10 SF
+4753 6840 ('s.) P
+5820 5904 (Things) P
+7922 5904 (may) P
+9389 5904 (be) P
+10389 5904 (de\212ned) P
+12589 5904 (in) P
+13490 5904 (terms) P
+15257 5904 (of) P
+16191 5904 (other) P
+4320 5184 (things.) P
+6337 5184 (For) P
+7371 5184 (example,) P
+2 10 SF
+20196 42120 (de\212ne\(N,) P
+22713 42120 (100\)) P
+20196 41400 (de\212ne\(M,) P
+22846 41400 (N\)) P
+0 10 SF
+19296 40320 (de\212nes) P
+21195 40320 (both) P
+22462 40320 (M) P
+23195 40320 (and) P
+24261 40320 (N) P
+24894 40320 (to) P
+25561 40320 (be) P
+26327 40320 (100.) P
+20796 39384 (What) P
+22324 39384 (happens) P
+24518 39384 (if) P
+2 10 SF
+25114 39384 (N) P
+0 10 SF
+25776 39384 (is) P
+26405 39384 (rede\212ned?) P
+29332 39384 (Or,) P
+30344 39384 (to) P
+31039 39384 (say) P
+32066 39384 (it) P
+19296 38664 (another) P
+21336 38664 (way,) P
+22726 38664 (is) P
+2 10 SF
+23367 38664 (M) P
+0 10 SF
+24174 38664 (de\212ned) P
+26180 38664 (as) P
+2 10 SF
+26919 38664 (N) P
+0 10 SF
+27592 38664 (or) P
+28332 38664 (as) P
+29071 38664 (100?) P
+30677 38664 (In) P
+31417 38664 (M4,) P
+19296 37944 (the) P
+20295 37944 (latter) P
+21794 37944 (is) P
+22460 37944 (true) P
+23659 37944 (\210) P
+2 10 SF
+24525 37944 (M) P
+0 10 SF
+25357 37944 (is) P
+26023 37944 (100,) P
+27339 37944 (so) P
+28138 37944 (even) P
+29536 37944 (if) P
+2 10 SF
+30169 37944 (N) P
+0 10 SF
+30868 37944 (subse\255) P
+19296 37224 (quently) P
+21296 37224 (changes,) P
+2 10 SF
+23577 37224 (M) P
+0 10 SF
+24343 37224 (does) P
+25642 37224 (not.) P
+20796 36288 (This) P
+22339 36288 (behavior) P
+24914 36288 (arises) P
+26755 36288 (because) P
+29127 36288 (M4) P
+30435 36288 (expands) P
+19296 35568 (macro) P
+21096 35568 (names) P
+22929 35568 (into) P
+24164 35568 (their) P
+25565 35568 (de\212ning) P
+27833 35568 (text) P
+29034 35568 (as) P
+29834 35568 (soon) P
+31267 35568 (as) P
+32066 35568 (it) P
+19296 34848 (possibly) P
+21531 34848 (can.) P
+22948 34848 (Here,) P
+24498 34848 (that) P
+25633 34848 (means) P
+27399 34848 (that) P
+28533 34848 (when) P
+30066 34848 (the) P
+31033 34848 (string) P
+2 10 SF
+19296 34128 (N) P
+0 10 SF
+19974 34128 (is) P
+20619 34128 (seen) P
+21929 34128 (as) P
+22672 34128 (the) P
+23649 34128 (arguments) P
+26392 34128 (of) P
+2 10 SF
+27136 34128 (de\212ne) P
+0 10 SF
+28914 34128 (are) P
+29890 34128 (being) P
+31467 34128 (col\255) P
+19296 33408 (lected,) P
+21096 33408 (it) P
+21648 33408 (is) P
+22266 33408 (immediately) P
+25484 33408 (replaced) P
+27732 33408 (by) P
+28549 33408 (100;) P
+29833 33408 (it's) P
+30817 33408 (just) P
+31901 33408 (as) P
+19296 32688 (if) P
+19863 32688 (you) P
+20963 32688 (had) P
+22029 32688 (said) P
+2 10 SF
+20196 31608 (de\212ne\(M,) P
+22846 31608 (100\)) P
+0 10 SF
+19296 30528 (in) P
+19963 30528 (the) P
+20896 30528 (\212rst) P
+22030 30528 (place.) P
+20796 29592 (If) P
+21520 29592 (this) P
+22711 29592 (isn't) P
+24102 29592 (what) P
+25592 29592 (you) P
+26816 29592 (really) P
+28506 29592 (want,) P
+30146 29592 (there) P
+31668 29592 (are) P
+19296 28872 (two) P
+20480 28872 (ways) P
+21996 28872 (out) P
+23047 28872 (of) P
+23831 28872 (it.) P
+24799 28872 (The) P
+26016 28872 (\212rst,) P
+27384 28872 (which) P
+29134 28872 (is) P
+29818 28872 (speci\212c) P
+31933 28872 (to) P
+19296 28152 (this) P
+20554 28152 (situation,) P
+23162 28152 (is) P
+23953 28152 (to) P
+24810 28152 (interchange) P
+27998 28152 (the) P
+29121 28152 (order) P
+30777 28152 (of) P
+31667 28152 (the) P
+19296 27432 (de\212nitions:) P
+2 10 SF
+20196 26352 (de\212ne\(M,) P
+22846 26352 (N\)) P
+20196 25632 (de\212ne\(N,) P
+22713 25632 (100\)) P
+0 10 SF
+19296 24552 (Now) P
+2 10 SF
+20713 24552 (M) P
+0 10 SF
+21530 24552 (is) P
+22181 24552 (de\212ned) P
+24198 24552 (to) P
+24916 24552 (be) P
+25733 24552 (the) P
+26717 24552 (string) P
+2 10 SF
+28335 24552 (N) P
+0 10 SF
+28768 24552 (,) P
+29168 24552 (so) P
+29951 24552 (when) P
+31500 24552 (you) P
+19296 23832 (ask) P
+20331 23832 (for) P
+2 10 SF
+21267 23832 (M) P
+0 10 SF
+22069 23832 (later,) P
+23521 23832 (you'll) P
+25191 23832 (always) P
+27092 23832 (get) P
+28061 23832 (the) P
+29030 23832 (value) P
+30564 23832 (of) P
+2 10 SF
+31299 23832 (N) P
+0 10 SF
+31967 23832 (at) P
+19296 23112 (that) P
+20549 23112 (time) P
+21969 23112 (\(because) P
+24419 23112 (the) P
+2 10 SF
+25505 23112 (M) P
+0 10 SF
+26424 23112 (will) P
+27711 23112 (be) P
+28630 23112 (replaced) P
+31014 23112 (by) P
+2 10 SF
+31967 23112 (N) P
+0 10 SF
+19296 22392 (which) P
+20962 22392 (will) P
+22096 22392 (be) P
+22862 22392 (replaced) P
+25093 22392 (by) P
+25893 22392 (100\).) P
+2 10 SF
+19296 20952 (Quoting) P
+0 10 SF
+20796 20016 (The) P
+22135 20016 (more) P
+23774 20016 (general) P
+25945 20016 (solution) P
+28285 20016 (is) P
+29091 20016 (to) P
+29963 20016 (delay) P
+31667 20016 (the) P
+19296 19296 (expansion) P
+22082 19296 (of) P
+22935 19296 (the) P
+24021 19296 (arguments) P
+26873 19296 (of) P
+2 10 SF
+27726 19296 (de\212ne) P
+0 10 SF
+29613 19296 (by) P
+1 10 SF
+30566 19296 (quoting) P
+0 10 SF
+19296 18576 (them.) P
+21145 18576 (Any) P
+22477 18576 (text) P
+23676 18576 (surrounded) P
+26674 18576 (by) P
+27573 18576 (the) P
+28605 18576 (single) P
+30336 18576 (quotes) P
+32200 18576 (\221) P
+19296 17856 (and) P
+20553 17856 (\222) P
+21144 17856 (is) P
+21935 17856 (not) P
+23093 17856 (expanded) P
+25781 17856 (immediately,) P
+29321 17856 (but) P
+30478 17856 (has) P
+31667 17856 (the) P
+19296 17136 (quotes) P
+21062 17136 (stripped) P
+23195 17136 (off.) P
+24445 17136 (If) P
+25045 17136 (you) P
+26145 17136 (say) P
+2 10 SF
+20196 16056 (de\212ne\(N,) P
+22713 16056 (100\)) P
+20196 15336 (de\212ne\(M,) P
+22846 15336 (\221N\222\)) P
+0 10 SF
+19296 14256 (the) P
+20240 14256 (quotes) P
+22017 14256 (around) P
+23894 14256 (the) P
+2 10 SF
+24838 14256 (N) P
+0 10 SF
+25482 14256 (are) P
+26425 14256 (stripped) P
+28569 14256 (off) P
+29480 14256 (as) P
+30190 14256 (the) P
+31134 14256 (argu\255) P
+19296 13536 (ment) P
+20779 13536 (is) P
+21462 13536 (being) P
+23078 13536 (collected,) P
+25675 13536 (but) P
+26724 13536 (they) P
+28039 13536 (have) P
+29453 13536 (served) P
+31300 13536 (their) P
+19296 12816 (purpose,) P
+21591 12816 (and) P
+2 10 SF
+22703 12816 (M) P
+0 10 SF
+23515 12816 (is) P
+24161 12816 (de\212ned) P
+26173 12816 (as) P
+26918 12816 (the) P
+27897 12816 (string) P
+2 10 SF
+29510 12816 (N) P
+0 10 SF
+29943 12816 (,) P
+30338 12816 (not) P
+31350 12816 (100.) P
+19296 12096 (The) P
+20542 12096 (general) P
+22619 12096 (rule) P
+23864 12096 (is) P
+24576 12096 (that) P
+25788 12096 (M4) P
+26933 12096 (always) P
+28910 12096 (strips) P
+30522 12096 (off) P
+31534 12096 (one) P
+19296 11376 (level) P
+20759 11376 (of) P
+21556 11376 (single) P
+23286 11376 (quotes) P
+25149 11376 (whenever) P
+27777 11376 (it) P
+28407 11376 (evaluates) P
+30934 11376 (some\255) P
+19296 10656 (thing.) P
+21144 10656 (This) P
+22475 10656 (is) P
+23139 10656 (true) P
+24336 10656 (even) P
+25732 10656 (outside) P
+27729 10656 (of) P
+28492 10656 (macros.) P
+30837 10656 (If) P
+31500 10656 (you) P
+19296 9936 (want) P
+20750 9936 (the) P
+21771 9936 (word) P
+2 10 SF
+23292 9936 (de\212ne) P
+0 10 SF
+25114 9936 (to) P
+25869 9936 (appear) P
+27755 9936 (in) P
+28509 9936 (the) P
+29529 9936 (output,) P
+31500 9936 (you) P
+19296 9216 (have) P
+20628 9216 (to) P
+21295 9216 (quote) P
+22828 9216 (it) P
+23362 9216 (in) P
+24029 9216 (the) P
+24962 9216 (input,) P
+26546 9216 (as) P
+27245 9216 (in) P
+2 10 SF
+21924 8136 (\221de\212ne\222) P
+24058 8136 (=) P
+24600 8136 (1;) P
+0 10 SF
+20796 6840 (As) P
+21728 6840 (another) P
+23793 6840 (instance) P
+26024 6840 (of) P
+26790 6840 (the) P
+27788 6840 (same) P
+29285 6840 (thing,) P
+30934 6840 (which) P
+19296 6120 (is) P
+19896 6120 (a) P
+20362 6120 (bit) P
+21196 6120 (more) P
+22629 6120 (surprising,) P
+25379 6120 (consider) P
+27611 6120 (rede\212ning) P
+2 10 SF
+30244 6120 (N) P
+0 10 SF
+30677 6120 (:) P
+end restore showpage
+%%Page: 3 3
+save $troff begin Sc
+0 10 SF
+0 47280 (--) P
+32156 47280 (--) P
+4320 44400 (The) P
+5453 44400 (M4) P
+6486 44400 (Macro) P
+8251 44400 (Processor) P
+30027 44400 (PS1:17-3) P
+2 10 SF
+5220 42120 (de\212ne\(N,) P
+7737 42120 (100\)) P
+5420 41400 (...) P
+5220 40680 (de\212ne\(N,) P
+7737 40680 (200\)) P
+0 10 SF
+4320 39600 (Perhaps) P
+6435 39600 (regrettably,) P
+9400 39600 (the) P
+2 10 SF
+10349 39600 (N) P
+0 10 SF
+10998 39600 (in) P
+11680 39600 (the) P
+12628 39600 (second) P
+14508 39600 (de\212nition) P
+17024 39600 (is) P
+4320 38880 (evaluated) P
+6865 38880 (as) P
+7610 38880 (soon) P
+8989 38880 (as) P
+9734 38880 (it's) P
+10747 38880 (seen;) P
+12225 38880 (that) P
+13371 38880 (is,) P
+14167 38880 (it) P
+14747 38880 (is) P
+15393 38880 (replaced) P
+4320 38160 (by) P
+5120 38160 (100,) P
+6370 38160 (so) P
+7103 38160 (it's) P
+8070 38160 (as) P
+8769 38160 (if) P
+9336 38160 (you) P
+10436 38160 (had) P
+11502 38160 (written) P
+2 10 SF
+5220 37080 (de\212ne\(100,) P
+8204 37080 (200\)) P
+0 10 SF
+4320 36000 (This) P
+5598 36000 (statement) P
+8107 36000 (is) P
+8717 36000 (ignored) P
+10760 36000 (by) P
+11570 36000 (M4,) P
+12763 36000 (since) P
+14205 36000 (you) P
+15315 36000 (can) P
+16357 36000 (only) P
+4320 35280 (de\212ne) P
+6056 35280 (things) P
+7793 35280 (that) P
+8962 35280 (look) P
+10298 35280 (like) P
+11467 35280 (names,) P
+13418 35280 (but) P
+14454 35280 (it) P
+15057 35280 (obviously) P
+4320 34560 (doesn't) P
+6528 34560 (have) P
+8102 34560 (the) P
+9277 34560 (effect) P
+11084 34560 (you) P
+12426 34560 (wanted.) P
+14950 34560 (To) P
+16058 34560 (really) P
+4320 33840 (rede\212ne) P
+2 10 SF
+6518 33840 (N) P
+0 10 SF
+6951 33840 (,) P
+7367 33840 (you) P
+8533 33840 (must) P
+9966 33840 (delay) P
+11530 33840 (the) P
+12528 33840 (evaluation) P
+15292 33840 (by) P
+16157 33840 (quot\255) P
+4320 33120 (ing:) P
+2 10 SF
+5220 32040 (de\212ne\(N,) P
+7737 32040 (100\)) P
+5420 31320 (...) P
+5220 30600 (de\212ne\(\221N\222,) P
+8137 30600 (200\)) P
+0 10 SF
+4320 29520 (In) P
+5032 29520 (M4,) P
+6226 29520 (it) P
+6771 29520 (is) P
+7382 29520 (often) P
+8826 29520 (wise) P
+10136 29520 (to) P
+10814 29520 (quote) P
+12358 29520 (the) P
+13302 29520 (\212rst) P
+14447 29520 (argument) P
+16924 29520 (of) P
+4320 28800 (a) P
+4786 28800 (macro.) P
+5820 27864 (If) P
+6457 27864 (\221) P
+6894 27864 (and) P
+7996 27864 (\222) P
+8432 27864 (are) P
+9400 27864 (not) P
+10403 27864 (convenient) P
+13271 27864 (for) P
+14207 27864 (some) P
+15709 27864 (reason,) P
+4320 27144 (the) P
+5300 27144 (quote) P
+6880 27144 (characters) P
+9557 27144 (can) P
+10636 27144 (be) P
+11449 27144 (changed) P
+13693 27144 (with) P
+15006 27144 (the) P
+15985 27144 (built-) P
+4320 26424 (in) P
+2 10 SF
+4987 26424 (changequote) P
+0 10 SF
+8221 26424 (:) P
+2 10 SF
+5220 25344 (changequote\([,) P
+9204 25344 (]\)) P
+0 10 SF
+4320 24264 (makes) P
+6170 24264 (the) P
+7221 24264 (new) P
+8538 24264 (quote) P
+10189 24264 (characters) P
+12937 24264 (the) P
+13988 24264 (left) P
+15106 24264 (and) P
+16290 24264 (right) P
+4320 23544 (brackets.) P
+7040 23544 (You) P
+8445 23544 (can) P
+9649 23544 (restore) P
+11652 23544 (the) P
+12756 23544 (original) P
+14994 23544 (characters) P
+4320 22824 (with) P
+5587 22824 (just) P
+2 10 SF
+5220 21744 (changequote) P
+0 10 SF
+5820 20448 (There) P
+7542 20448 (are) P
+8597 20448 (two) P
+9820 20448 (additional) P
+12542 20448 (built-ins) P
+15003 20448 (related) P
+16957 20448 (to) P
+2 10 SF
+4320 19728 (de\212ne) P
+0 10 SF
+5854 19728 (.) P
+2 10 SF
+6569 19728 (unde\212ne) P
+0 10 SF
+9136 19728 (removes) P
+11532 19728 (the) P
+12629 19728 (de\212nition) P
+15294 19728 (of) P
+16158 19728 (some) P
+4320 19008 (macro) P
+6019 19008 (or) P
+6719 19008 (built-in:) P
+2 10 SF
+5220 17928 (unde\212ne\(\221N\222\)) P
+0 10 SF
+4320 16848 (removes) P
+6647 16848 (the) P
+7675 16848 (de\212nition) P
+10271 16848 (of) P
+2 10 SF
+11066 16848 (N) P
+0 10 SF
+11499 16848 (.) P
+12144 16848 (\(Why) P
+13805 16848 (are) P
+14831 16848 (the) P
+15858 16848 (quotes) P
+4320 16128 (absolutely) P
+7208 16128 (necessary?\)) P
+10425 16128 (Built-ins) P
+13085 16128 (can) P
+14338 16128 (be) P
+15325 16128 (removed) P
+4320 15408 (with) P
+2 10 SF
+5587 15408 (unde\212ne) P
+0 10 SF
+7789 15408 (,) P
+8139 15408 (as) P
+8838 15408 (in) P
+2 10 SF
+5220 14328 (unde\212ne\(\221de\212ne\222\)) P
+0 10 SF
+4320 13248 (but) P
+5287 13248 (once) P
+6619 13248 (you) P
+7719 13248 (remove) P
+9718 13248 (one,) P
+10934 13248 (you) P
+12034 13248 (can) P
+13066 13248 (never) P
+14598 13248 (get) P
+15531 13248 (it) P
+16065 13248 (back.) P
+5820 12312 (The) P
+6954 12312 (built-in) P
+2 10 SF
+9060 12312 (ifdef) P
+0 10 SF
+10427 12312 (provides) P
+12693 12312 (a) P
+13159 12312 (way) P
+14358 12312 (to) P
+15025 12312 (determine) P
+4320 11592 (if) P
+5001 11592 (a) P
+5581 11592 (macro) P
+7394 11592 (is) P
+8108 11592 (currently) P
+10587 11592 (de\212ned.) P
+13016 11592 (In) P
+13829 11592 (particular,) P
+16591 11592 (M4) P
+4320 10872 (has) P
+5462 10872 (pre-de\212ned) P
+8674 10872 (the) P
+9749 10872 (names) P
+2 10 SF
+11623 10872 (unix) P
+0 10 SF
+13100 10872 (and) P
+2 10 SF
+14308 10872 (gcos) P
+0 10 SF
+15749 10872 (on) P
+16691 10872 (the) P
+4320 10152 (corresponding) P
+8075 10152 (systems,) P
+10447 10152 (so) P
+11303 10152 (you) P
+12526 10152 (can) P
+13681 10152 (tell) P
+14770 10152 (which) P
+16558 10152 (one) P
+4320 9432 (you're) P
+6086 9432 (using:) P
+2 10 SF
+5220 8352 (ifdef\(\221unix\222,) P
+8472 8352 (\221de\212ne\(wordsize,16\)\222) P
+14021 8352 (\)) P
+5220 7632 (ifdef\(\221gcos\222,) P
+8436 7632 (\221de\212ne\(wordsize,36\)\222) P
+13985 7632 (\)) P
+0 10 SF
+4320 6552 (makes) P
+6276 6552 (a) P
+6966 6552 (de\212nition) P
+9691 6552 (appropriate) P
+12846 6552 (for) P
+13969 6552 (the) P
+15125 6552 (particular) P
+4320 5832 (machine.) P
+6902 5832 (Don't) P
+8502 5832 (forget) P
+10135 5832 (the) P
+11068 5832 (quotes!) P
+2 10 SF
+5820 4896 (ifdef) P
+0 10 SF
+7283 4896 (actually) P
+9478 4896 (permits) P
+11574 4896 (three) P
+13068 4896 (arguments;) P
+16029 4896 (if) P
+16691 4896 (the) P
+4320 4176 (name) P
+5955 4176 (is) P
+6691 4176 (unde\212ned,) P
+9543 4176 (the) P
+10612 4176 (value) P
+12247 4176 (of) P
+2 10 SF
+13083 4176 (ifdef) P
+0 10 SF
+14586 4176 (is) P
+15322 4176 (then) P
+16691 4176 (the) P
+19296 42480 (third) P
+20630 42480 (argument,) P
+23246 42480 (as) P
+23945 42480 (in) P
+2 10 SF
+20196 41400 (ifdef\(\221unix\222,) P
+23448 41400 (on) P
+24282 41400 (UNIX,) P
+26164 41400 (not) P
+27198 41400 (on) P
+28032 41400 (UNIX\)) P
+19296 39600 (Arguments) P
+0 10 SF
+20796 38664 (So) P
+21652 38664 (far) P
+22540 38664 (we) P
+23461 38664 (have) P
+24815 38664 (discussed) P
+27335 38664 (the) P
+28290 38664 (simplest) P
+30512 38664 (form) P
+31900 38664 (of) P
+19296 37944 (macro) P
+21021 37944 (processing) P
+23811 37944 (\210) P
+24636 37944 (replacing) P
+27093 37944 (one) P
+28184 37944 (string) P
+29776 37944 (by) P
+30601 37944 (another) P
+19296 37224 (\(\212xed\)) P
+21178 37224 (string.) P
+23177 37224 (User-de\212ned) P
+26694 37224 (macros) P
+28707 37224 (may) P
+30021 37224 (also) P
+31268 37224 (have) P
+19296 36504 (arguments,) P
+22322 36504 (so) P
+23232 36504 (different) P
+25675 36504 (invocations) P
+28817 36504 (can) P
+30025 36504 (have) P
+31533 36504 (dif\255) P
+19296 35784 (ferent) P
+21066 35784 (results.) P
+23353 35784 (Within) P
+25390 35784 (the) P
+26493 35784 (replacement) P
+29794 35784 (text) P
+31064 35784 (for) P
+32134 35784 (a) P
+19296 35064 (macro) P
+21235 35064 (\(the) P
+22607 35064 (second) P
+24711 35064 (argument) P
+27416 35064 (of) P
+28355 35064 (its) P
+2 10 SF
+29361 35064 (de\212ne) P
+0 10 SF
+30895 35064 (\)) P
+31534 35064 (any) P
+19296 34344 (occurrence) P
+22194 34344 (of) P
+2 10 SF
+22962 34344 ($n) P
+0 10 SF
+23864 34344 (will) P
+25066 34344 (be) P
+25900 34344 (replaced) P
+28199 34344 (by) P
+29066 34344 (the) P
+2 10 SF
+30066 34344 (n) P
+0 10 SF
+30400 34344 (th) P
+31134 34344 (argu\255) P
+19296 33624 (ment) P
+20814 33624 (when) P
+22431 33624 (the) P
+23482 33624 (macro) P
+25299 33624 (is) P
+26017 33624 (actually) P
+28234 33624 (used.) P
+30000 33624 (Thus,) P
+31667 33624 (the) P
+19296 32904 (macro) P
+2 10 SF
+20995 32904 (bump) P
+0 10 SF
+22497 32904 (,) P
+22847 32904 (de\212ned) P
+24813 32904 (as) P
+2 10 SF
+20196 31824 (de\212ne\(bump,) P
+23782 31824 ($1) P
+24582 31824 (=) P
+25124 31824 ($1) P
+25924 31824 (+) P
+26466 31824 (1\)) P
+0 10 SF
+19296 30744 (generates) P
+21760 30744 (code) P
+23092 30744 (to) P
+23759 30744 (increment) P
+26358 30744 (its) P
+27125 30744 (argument) P
+29591 30744 (by) P
+30391 30744 (1:) P
+2 10 SF
+20196 29664 (bump\(x\)) P
+0 10 SF
+19296 28584 (is) P
+2 10 SF
+20196 27504 (x) P
+20696 27504 (=) P
+21238 27504 (x) P
+21738 27504 (+) P
+22280 27504 (1) P
+0 10 SF
+20796 26208 (A) P
+21477 26208 (macro) P
+23224 26208 (can) P
+24303 26208 (have) P
+25682 26208 (as) P
+26428 26208 (many) P
+28008 26208 (arguments) P
+30754 26208 (as) P
+31500 26208 (you) P
+19296 25488 (want,) P
+20872 25488 (but) P
+21899 25488 (only) P
+23226 25488 (the) P
+24218 25488 (\212rst) P
+25411 25488 (nine) P
+26703 25488 (are) P
+27694 25488 (accessible,) P
+30533 25488 (through) P
+2 10 SF
+19296 24768 ($1) P
+0 10 SF
+20197 24768 (to) P
+2 10 SF
+20965 24768 ($9) P
+0 10 SF
+21565 24768 (.) P
+22216 24768 (\(The) P
+23650 24768 (macro) P
+25450 24768 (name) P
+27050 24768 (itself) P
+28550 24768 (is) P
+2 10 SF
+29250 24768 ($0) P
+0 10 SF
+29850 24768 (,) P
+30300 24768 (although) P
+19296 24048 (that) P
+20424 24048 (is) P
+21052 24048 (less) P
+22179 24048 (commonly) P
+24974 24048 (used.\)) P
+26651 24048 (Arguments) P
+29545 24048 (that) P
+30673 24048 (are) P
+31633 24048 (not) P
+19296 23328 (supplied) P
+21699 23328 (are) P
+22801 23328 (replaced) P
+25202 23328 (by) P
+26172 23328 (null) P
+27476 23328 (strings,) P
+29596 23328 (so) P
+30499 23328 (we) P
+31568 23328 (can) P
+19296 22608 (de\212ne) P
+21102 22608 (a) P
+21708 22608 (macro) P
+2 10 SF
+23547 22608 (cat) P
+0 10 SF
+24653 22608 (which) P
+26458 22608 (simply) P
+28431 22608 (concatenates) P
+31833 22608 (its) P
+19296 21888 (arguments,) P
+22145 21888 (like) P
+23245 21888 (this:) P
+2 10 SF
+20196 20808 (de\212ne\(cat,) P
+23046 20808 ($1$2$3$4$5$6$7$8$9\)) P
+0 10 SF
+19296 19728 (Thus) P
+2 10 SF
+20196 18648 (cat\(x,) P
+21812 18648 (y,) P
+22462 18648 (z\)) P
+0 10 SF
+19296 17568 (is) P
+19896 17568 (equivalent) P
+22595 17568 (to) P
+2 10 SF
+20196 16488 (xyz) P
+19296 15408 ($4) P
+0 10 SF
+20108 15408 (through) P
+2 10 SF
+22187 15408 ($9) P
+0 10 SF
+22999 15408 (are) P
+23942 15408 (null,) P
+25237 15408 (since) P
+26680 15408 (no) P
+27491 15408 (corresponding) P
+31134 15408 (argu\255) P
+19296 14688 (ments) P
+20929 14688 (were) P
+22294 14688 (provided.) P
+20796 13536 (Leading) P
+23151 13536 (unquoted) P
+25772 13536 (blanks,) P
+27876 13536 (tabs,) P
+29380 13536 (or) P
+30268 13536 (newlines) P
+19296 12816 (that) P
+20445 12816 (occur) P
+22026 12816 (during) P
+23842 12816 (argument) P
+26357 12816 (collection) P
+28972 12816 (are) P
+29952 12816 (discarded.) P
+19296 12096 (All) P
+20263 12096 (other) P
+21696 12096 (white) P
+23229 12096 (space) P
+24760 12096 (is) P
+25360 12096 (retained.) P
+27842 12096 (Thus) P
+2 10 SF
+20196 11016 (de\212ne\(a,) P
+22980 11016 (b) P
+23914 11016 (c\)) P
+0 10 SF
+19296 9936 (de\212nes) P
+2 10 SF
+21195 9936 (a) P
+0 10 SF
+21695 9936 (to) P
+22362 9936 (be) P
+2 10 SF
+23128 9936 (b) P
+24062 9936 (c) P
+0 10 SF
+24328 9936 (.) P
+20796 9000 (Arguments) P
+23948 9000 (are) P
+25165 9000 (separated) P
+27914 9000 (by) P
+28999 9000 (commas,) P
+31633 9000 (but) P
+19296 8280 (parentheses) P
+22312 8280 (are) P
+23263 8280 (counted) P
+25380 8280 (properly,) P
+27781 8280 (so) P
+28532 8280 (a) P
+29016 8280 (comma) P
+31000 8280 (\221\221pro\255) P
+19296 7560 (tected'') P
+21401 7560 (by) P
+22274 7560 (parentheses) P
+25344 7560 (does) P
+26716 7560 (not) P
+27756 7560 (terminate) P
+30295 7560 (an) P
+31134 7560 (argu\255) P
+19296 6840 (ment.) P
+21046 6840 (That) P
+22346 6840 (is,) P
+23096 6840 (in) P
+2 10 SF
+20196 5760 (de\212ne\(a,) P
+22580 5760 (\(b,c\)\)) P
+0 10 SF
+19296 4680 (there) P
+20730 4680 (are) P
+21697 4680 (only) P
+22999 4680 (two) P
+24133 4680 (arguments;) P
+27033 4680 (the) P
+28000 4680 (second) P
+29899 4680 (is) P
+30533 4680 (literally) P
+2 10 SF
+19296 3960 (\(b,c\)) P
+0 10 SF
+20446 3960 (.) P
+21077 3960 (And) P
+22391 3960 (of) P
+23172 3960 (course) P
+25018 3960 (a) P
+25564 3960 (bare) P
+26876 3960 (comma) P
+28922 3960 (or) P
+29702 3960 (parenthesis) P
+end restore showpage
+%%Page: 4 4
+save $troff begin Sc
+0 10 SF
+0 47280 (--) P
+32156 47280 (--) P
+4320 44400 (PS1:17-4) P
+26137 44400 (The) P
+27270 44400 (M4) P
+28303 44400 (Macro) P
+30068 44400 (Processor) P
+4320 42480 (can) P
+5352 42480 (be) P
+6118 42480 (inserted) P
+8217 42480 (by) P
+9017 42480 (quoting) P
+11051 42480 (it.) P
+2 10 SF
+4320 41040 (Arithmetic) P
+7319 41040 (Built-ins) P
+0 10 SF
+5820 40104 (M4) P
+6920 40104 (provides) P
+9253 40104 (two) P
+10420 40104 (built-in) P
+12592 40104 (functions) P
+15091 40104 (for) P
+16057 40104 (doing) P
+4320 39384 (arithmetic) P
+7016 39384 (on) P
+7879 39384 (integers) P
+10041 39384 (\(only\).) P
+12121 39384 (The) P
+13317 39384 (simplest) P
+15579 39384 (is) P
+2 10 SF
+16241 39384 (incr) P
+0 10 SF
+17274 39384 (,) P
+4320 38664 (which) P
+6037 38664 (increments) P
+8920 38664 (its) P
+9738 38664 (numeric) P
+11955 38664 (argument) P
+14472 38664 (by) P
+15323 38664 (1.) P
+16224 38664 (Thus) P
+4320 37944 (to) P
+5022 37944 (handle) P
+6856 37944 (the) P
+7823 37944 (common) P
+10157 37944 (programming) P
+13658 37944 (situation) P
+15959 37944 (where) P
+4320 37224 (you) P
+5421 37224 (want) P
+6788 37224 (a) P
+7255 37224 (variable) P
+9388 37224 (to) P
+10056 37224 (be) P
+10823 37224 (de\212ned) P
+12790 37224 (as) P
+13490 37224 (\221\221one) P
+14957 37224 (more) P
+16391 37224 (than) P
+4320 36504 (N'',) P
+5503 36504 (write) P
+2 10 SF
+5220 35424 (de\212ne\(N,) P
+7737 35424 (100\)) P
+5220 34704 (de\212ne\(N1,) P
+8037 34704 (\221incr\(N\)\222\)) P
+0 10 SF
+4320 33624 (Then) P
+2 10 SF
+5877 33624 (N1) P
+0 10 SF
+6934 33624 (is) P
+7657 33624 (de\212ned) P
+9746 33624 (as) P
+10568 33624 (one) P
+11757 33624 (more) P
+13313 33624 (than) P
+14669 33624 (the) P
+15725 33624 (current) P
+4320 32904 (value) P
+5819 32904 (of) P
+2 10 SF
+6519 32904 (N) P
+0 10 SF
+6952 32904 (.) P
+5820 31968 (The) P
+6988 31968 (more) P
+8456 31968 (general) P
+10456 31968 (mechanism) P
+13423 31968 (for) P
+14357 31968 (arithmetic) P
+17024 31968 (is) P
+4320 31248 (a) P
+4843 31248 (built-in) P
+7006 31248 (called) P
+2 10 SF
+8695 31248 (eval) P
+0 10 SF
+9728 31248 (,) P
+10135 31248 (which) P
+11858 31248 (is) P
+12515 31248 (capable) P
+14602 31248 (of) P
+15358 31248 (arbitrary) P
+4320 30528 (arithmetic) P
+7004 30528 (on) P
+7855 30528 (integers.) P
+10355 30528 (It) P
+10973 30528 (provides) P
+13290 30528 (the) P
+14274 30528 (operators) P
+16757 30528 (\(in) P
+4320 29808 (decreasing) P
+7084 29808 (order) P
+8550 29808 (of) P
+9250 29808 (precedence\)) P
+6480 28728 (unary) P
+8046 28728 (+) P
+8584 28728 (and) P
+3 10 SF
+9650 28728 (-) P
+0 10 SF
+6480 28008 (**) P
+7280 28008 (or) P
+7980 28008 (^) P
+9480 28008 (\(exponentiation\)) P
+6480 27288 (*) P
+7180 27288 (/) P
+7747 27288 (%) P
+8447 27288 (\(modulus\)) P
+6480 26568 (+) P
+3 10 SF
+7218 26568 (-) P
+0 10 SF
+6480 25848 (==) P
+7556 25848 (!=) P
+8494 25848 (<) P
+9232 25848 (<=) P
+10308 25848 (>) P
+11046 25848 (>=) P
+6480 25128 (!) P
+9480 25128 (\(not\)) P
+6480 24408 (&) P
+7147 24408 (or) P
+7847 24408 (&&) P
+9480 24408 (\(logical) P
+11513 24408 (and\)) P
+3 10 SF
+6480 23688 (|) P
+0 10 SF
+6800 23688 (or) P
+3 10 SF
+7500 23688 (||) P
+0 10 SF
+9480 23688 (\(logical) P
+11513 23688 (or\)) P
+4320 22608 (Parentheses) P
+7401 22608 (may) P
+8683 22608 (be) P
+9498 22608 (used) P
+10846 22608 (to) P
+11562 22608 (group) P
+13211 22608 (operations) P
+15959 22608 (where) P
+4320 21888 (needed.) P
+6613 21888 (All) P
+7625 21888 (the) P
+8603 21888 (operands) P
+11013 21888 (of) P
+11758 21888 (an) P
+12569 21888 (expression) P
+15379 21888 (given) P
+16957 21888 (to) P
+2 10 SF
+4320 21168 (eval) P
+0 10 SF
+5802 21168 (must) P
+7417 21168 (ultimately) P
+10299 21168 (be) P
+11313 21168 (numeric.) P
+14077 21168 (The) P
+15458 21168 (numeric) P
+4320 20448 (value) P
+5873 20448 (of) P
+6627 20448 (a) P
+7147 20448 (true) P
+8334 20448 (relation) P
+10420 20448 (\(like) P
+11773 20448 (1>0\)) P
+13164 20448 (is) P
+13817 20448 (1,) P
+14520 20448 (and) P
+15639 20448 (false) P
+17024 20448 (is) P
+4320 19728 (0.) P
+5201 19728 (The) P
+6365 19728 (precision) P
+8795 19728 (in) P
+2 10 SF
+9493 19728 (eval) P
+0 10 SF
+10757 19728 (is) P
+11388 19728 (32) P
+12219 19728 (bits) P
+13317 19728 (on) P
+0 9 SF
+14148 19728 (UNIX) P
+0 10 SF
+15728 19728 (and) P
+16824 19728 (36) P
+4320 19008 (bits) P
+5387 19008 (on) P
+0 9 SF
+6187 19008 (GCOS) P
+0 10 SF
+7627 19008 (.) P
+5820 18072 (As) P
+6744 18072 (a) P
+7268 18072 (simple) P
+9126 18072 (example,) P
+11566 18072 (suppose) P
+13755 18072 (we) P
+14711 18072 (want) P
+2 10 SF
+16134 18072 (M) P
+0 10 SF
+16957 18072 (to) P
+4320 17352 (be) P
+2 10 SF
+5086 17352 (2**N+1) P
+0 10 SF
+7061 17352 (.) P
+7611 17352 (Then) P
+2 10 SF
+5220 16272 (de\212ne\(N,) P
+7737 16272 (3\)) P
+5220 15552 (de\212ne\(M,) P
+7870 15552 (\221eval\(2**N+1\)\222\)) P
+0 10 SF
+4320 14472 (As) P
+5219 14472 (a) P
+5718 14472 (matter) P
+7484 14472 (of) P
+8217 14472 (principle,) P
+10732 14472 (it) P
+11298 14472 (is) P
+11930 14472 (advisable) P
+14427 14472 (to) P
+15126 14472 (quote) P
+16691 14472 (the) P
+4320 13752 (de\212ning) P
+6607 13752 (text) P
+7827 13752 (for) P
+8846 13752 (a) P
+9431 13752 (macro) P
+11249 13752 (unless) P
+13067 13752 (it) P
+13720 13752 (is) P
+14439 13752 (very) P
+15824 13752 (simple) P
+4320 13032 (indeed) P
+6308 13032 (\(say) P
+7696 13032 (just) P
+8952 13032 (a) P
+9606 13032 (number\);) P
+12194 13032 (it) P
+12916 13032 (usually) P
+15037 13032 (gives) P
+16691 13032 (the) P
+4320 12312 (result) P
+5853 12312 (you) P
+6953 12312 (want,) P
+8469 12312 (and) P
+9535 12312 (is) P
+10135 12312 (a) P
+10601 12312 (good) P
+12001 12312 (habit) P
+13401 12312 (to) P
+14068 12312 (get) P
+15001 12312 (into.) P
+2 10 SF
+4320 10872 (File) P
+5487 10872 (Manipulation) P
+0 10 SF
+5820 9936 (You) P
+7074 9936 (can) P
+8127 9936 (include) P
+10114 9936 (a) P
+10601 9936 (new) P
+11821 9936 (\212le) P
+12809 9936 (in) P
+13497 9936 (the) P
+14451 9936 (input) P
+15905 9936 (at) P
+16558 9936 (any) P
+4320 9216 (time) P
+5587 9216 (by) P
+6387 9216 (the) P
+7320 9216 (built-in) P
+9426 9216 (function) P
+2 10 SF
+11626 9216 (include) P
+0 10 SF
+13494 9216 (:) P
+2 10 SF
+5220 8136 (include\(\212lename\)) P
+0 10 SF
+4320 7056 (inserts) P
+6283 7056 (the) P
+7413 7056 (contents) P
+9809 7056 (of) P
+2 10 SF
+10706 7056 (\212lename) P
+0 10 SF
+13270 7056 (in) P
+14134 7056 (place) P
+15795 7056 (of) P
+16691 7056 (the) P
+2 10 SF
+4320 6336 (include) P
+0 10 SF
+6433 6336 (command.) P
+9394 6336 (The) P
+10572 6336 (contents) P
+12815 6336 (of) P
+13559 6336 (the) P
+14536 6336 (\212le) P
+15547 6336 (is) P
+16191 6336 (often) P
+4320 5616 (a) P
+4868 5616 (set) P
+5816 5616 (of) P
+6598 5616 (de\212nitions.) P
+9764 5616 (The) P
+10979 5616 (value) P
+12560 5616 (of) P
+2 10 SF
+13342 5616 (include) P
+0 10 SF
+15492 5616 (\(that) P
+16874 5616 (is,) P
+4320 4896 (its) P
+5147 4896 (replacement) P
+8338 4896 (text\)) P
+9698 4896 (is) P
+10358 4896 (the) P
+11351 4896 (contents) P
+13610 4896 (of) P
+14370 4896 (the) P
+15363 4896 (\212le;) P
+16557 4896 (this) P
+4320 4176 (can) P
+5352 4176 (be) P
+6118 4176 (captured) P
+8383 4176 (in) P
+9050 4176 (de\212nitions,) P
+11934 4176 (etc.) P
+20796 42480 (It) P
+21417 42480 (is) P
+22071 42480 (a) P
+22591 42480 (fatal) P
+23911 42480 (error) P
+25331 42480 (if) P
+25952 42480 (the) P
+26939 42480 (\212le) P
+27960 42480 (named) P
+29812 42480 (in) P
+2 10 SF
+30532 42480 (include) P
+0 10 SF
+19296 41760 (cannot) P
+21170 41760 (be) P
+22011 41760 (accessed.) P
+24731 41760 (To) P
+25672 41760 (get) P
+26679 41760 (some) P
+28219 41760 (control) P
+30193 41760 (over) P
+31533 41760 (this) P
+19296 41040 (situation,) P
+21822 41040 (the) P
+22863 41040 (alternate) P
+25236 41040 (form) P
+2 10 SF
+26711 41040 (sinclude) P
+0 10 SF
+29120 41040 (can) P
+30260 41040 (be) P
+31134 41040 (used;) P
+2 10 SF
+19296 40320 (sinclude) P
+0 10 SF
+21615 40320 (\(\221\221silent) P
+23733 40320 (include''\)) P
+26317 40320 (says) P
+27566 40320 (nothing) P
+29617 40320 (and) P
+30700 40320 (contin\255) P
+19296 39600 (ues) P
+20295 39600 (if) P
+20862 39600 (it) P
+21396 39600 (can't) P
+22795 39600 (access) P
+24525 39600 (the) P
+25458 39600 (\212le.) P
+20796 38664 (It) P
+21434 38664 (is) P
+22105 38664 (also) P
+23342 38664 (possible) P
+25579 38664 (to) P
+26317 38664 (divert) P
+27988 38664 (the) P
+28992 38664 (output) P
+30797 38664 (of) P
+31567 38664 (M4) P
+19296 37944 (to) P
+20014 37944 (temporary) P
+22731 37944 (\212les) P
+23982 37944 (during) P
+25800 37944 (processing,) P
+28766 37944 (and) P
+29883 37944 (output) P
+31667 37944 (the) P
+19296 37224 (collected) P
+21840 37224 (material) P
+24184 37224 (upon) P
+25762 37224 (command.) P
+28856 37224 (M4) P
+30067 37224 (maintains) P
+19296 36504 (nine) P
+20593 36504 (of) P
+21357 36504 (these) P
+22853 36504 (diversions,) P
+25732 36504 (numbered) P
+28394 36504 (1) P
+28957 36504 (through) P
+31087 36504 (9.) P
+32000 36504 (If) P
+19296 35784 (you) P
+20396 35784 (say) P
+2 10 SF
+20196 34704 (divert\(n\)) P
+0 10 SF
+19296 33624 (all) P
+20157 33624 (subsequent) P
+23083 33624 (output) P
+24878 33624 (is) P
+25539 33624 (put) P
+26567 33624 (onto) P
+27895 33624 (the) P
+28888 33624 (end) P
+30014 33624 (of) P
+30774 33624 (a) P
+31300 33624 (tem\255) P
+19296 32904 (porary) P
+21105 32904 (\212le) P
+22115 32904 (referred) P
+24255 32904 (to) P
+24964 32904 (as) P
+2 10 SF
+25705 32904 (n) P
+0 10 SF
+26039 32904 (.) P
+26631 32904 (Diverting) P
+29173 32904 (to) P
+29882 32904 (this) P
+30991 32904 (\212le) P
+32000 32904 (is) P
+19296 32184 (stopped) P
+21472 32184 (by) P
+22382 32184 (another) P
+2 10 SF
+24491 32184 (divert) P
+0 10 SF
+26333 32184 (command;) P
+29175 32184 (in) P
+29951 32184 (particular,) P
+2 10 SF
+19296 31464 (divert) P
+0 10 SF
+21102 31464 (or) P
+2 10 SF
+21875 31464 (divert\(0\)) P
+0 10 SF
+24380 31464 (resumes) P
+26617 31464 (the) P
+27622 31464 (normal) P
+29594 31464 (output) P
+31400 31464 (pro\255) P
+19296 30744 (cess.) P
+20796 29808 (Diverted) P
+23134 29808 (text) P
+24273 29808 (is) P
+24911 29808 (normally) P
+27316 29808 (output) P
+29088 29808 (all) P
+29926 29808 (at) P
+30597 29808 (once) P
+31967 29808 (at) P
+19296 29088 (the) P
+20282 29088 (end) P
+21401 29088 (of) P
+22154 29088 (processing,) P
+25122 29088 (with) P
+26442 29088 (the) P
+27428 29088 (diversions) P
+30147 29088 (output) P
+31933 29088 (in) P
+19296 28368 (numeric) P
+21647 28368 (order.) P
+23648 28368 (It) P
+24399 28368 (is) P
+25183 28368 (possible,) P
+27683 28368 (however,) P
+30282 28368 (to) P
+31133 28368 (bring) P
+19296 27648 (back) P
+20666 27648 (diversions) P
+23370 27648 (at) P
+24041 27648 (any) P
+25145 27648 (time,) P
+26600 27648 (that) P
+27738 27648 (is,) P
+28526 27648 (to) P
+29231 27648 (append) P
+31200 27648 (them) P
+19296 26928 (to) P
+19963 26928 (the) P
+20896 26928 (current) P
+22795 26928 (diversion.) P
+2 10 SF
+20196 25848 (undivert) P
+0 10 SF
+19296 24768 (brings) P
+21181 24768 (back) P
+22698 24768 (all) P
+23683 24768 (diversions) P
+26533 24768 (in) P
+27384 24768 (numeric) P
+29734 24768 (order,) P
+31534 24768 (and) P
+2 10 SF
+19296 24048 (undivert) P
+0 10 SF
+21838 24048 (with) P
+23245 24048 (arguments) P
+26084 24048 (brings) P
+27924 24048 (back) P
+29396 24048 (the) P
+30469 24048 (selected) P
+19296 23328 (diversions) P
+22032 23328 (in) P
+22769 23328 (the) P
+23772 23328 (order) P
+25308 23328 (given.) P
+27261 23328 (The) P
+28463 23328 (act) P
+29431 23328 (of) P
+30200 23328 (undivert\255) P
+19296 22608 (ing) P
+20279 22608 (discards) P
+22460 22608 (the) P
+23409 22608 (diverted) P
+25591 22608 (stuff,) P
+27056 22608 (as) P
+27770 22608 (does) P
+29084 22608 (diverting) P
+31466 22608 (into) P
+19296 21888 (a) P
+19852 21888 (diversion) P
+22375 21888 (whose) P
+24197 21888 (number) P
+26320 21888 (is) P
+27010 21888 (not) P
+28067 21888 (between) P
+30355 21888 (0) P
+30945 21888 (and) P
+32100 21888 (9) P
+19296 21168 (inclusive.) P
+20796 20232 (The) P
+22130 20232 (value) P
+23830 20232 (of) P
+2 10 SF
+24731 20232 (undivert) P
+0 10 SF
+27333 20232 (is) P
+1 10 SF
+28134 20232 (not) P
+0 10 SF
+29301 20232 (the) P
+30434 20232 (diverted) P
+19296 19512 (stuff.) P
+21000 19512 (Furthermore,) P
+24404 19512 (the) P
+25390 19512 (diverted) P
+27609 19512 (material) P
+29828 19512 (is) P
+1 10 SF
+30481 19512 (not) P
+0 10 SF
+31501 19512 (res\255) P
+19296 18792 (canned) P
+21194 18792 (for) P
+22094 18792 (macros.) P
+20796 17856 (The) P
+22073 17856 (built-in) P
+2 10 SF
+24323 17856 (divnum) P
+0 10 SF
+26636 17856 (returns) P
+28646 17856 (the) P
+29723 17856 (number) P
+31900 17856 (of) P
+19296 17136 (the) P
+20333 17136 (currently) P
+22803 17136 (active) P
+24539 17136 (diversion.) P
+27425 17136 (This) P
+28795 17136 (is) P
+29498 17136 (zero) P
+30833 17136 (during) P
+19296 16416 (normal) P
+21196 16416 (processing.) P
+2 10 SF
+19296 14976 (System) P
+21329 14976 (Command) P
+0 10 SF
+20796 14040 (You) P
+22076 14040 (can) P
+23155 14040 (run) P
+24202 14040 (any) P
+25315 14040 (program) P
+27595 14040 (in) P
+28309 14040 (the) P
+29289 14040 (local) P
+30701 14040 (operat\255) P
+19296 13320 (ing) P
+20263 13320 (system) P
+22129 13320 (with) P
+23396 13320 (the) P
+2 10 SF
+24329 13320 (syscmd) P
+0 10 SF
+26395 13320 (built-in.) P
+28851 13320 (For) P
+29885 13320 (example,) P
+2 10 SF
+20196 12240 (syscmd\(date\)) P
+0 10 SF
+19296 11160 (on) P
+0 9 SF
+20097 11160 (UNIX) P
+0 10 SF
+21648 11160 (runs) P
+22882 11160 (the) P
+2 10 SF
+23816 11160 (date) P
+0 10 SF
+25117 11160 (command.) P
+28034 11160 (Normally) P
+2 10 SF
+30534 11160 (syscmd) P
+0 10 SF
+19296 10440 (would) P
+21172 10440 (be) P
+22114 10440 (used) P
+23588 10440 (to) P
+24430 10440 (create) P
+26236 10440 (a) P
+26877 10440 (\212le) P
+28019 10440 (for) P
+29094 10440 (a) P
+29735 10440 (subsequent) P
+2 10 SF
+19296 9720 (include) P
+0 10 SF
+21164 9720 (.) P
+20796 8784 (To) P
+21834 8784 (facilitate) P
+24304 8784 (making) P
+26475 8784 (unique) P
+28478 8784 (\212le) P
+29615 8784 (names,) P
+31667 8784 (the) P
+19296 8064 (built-in) P
+2 10 SF
+21499 8064 (maketemp) P
+0 10 SF
+24496 8064 (is) P
+25193 8064 (provided,) P
+27772 8064 (with) P
+29135 8064 (speci\212cations) P
+19296 7344 (identical) P
+21609 7344 (to) P
+22323 7344 (the) P
+23303 7344 (system) P
+25216 7344 (function) P
+1 10 SF
+27463 7344 (mktemp:) P
+0 10 SF
+29775 7344 (a) P
+30287 7344 (string) P
+31900 7344 (of) P
+19296 6624 (XXXXX) P
+21700 6624 (in) P
+22406 6624 (the) P
+23378 6624 (argument) P
+25883 6624 (is) P
+26522 6624 (replaced) P
+28792 6624 (by) P
+29631 6624 (the) P
+30602 6624 (process) P
+19296 5904 (id) P
+19963 5904 (of) P
+20663 5904 (the) P
+21596 5904 (current) P
+23495 5904 (process.) P
+end restore showpage
+%%Page: 5 5
+save $troff begin Sc
+0 10 SF
+0 47280 (--) P
+32156 47280 (--) P
+4320 44400 (The) P
+5453 44400 (M4) P
+6486 44400 (Macro) P
+8251 44400 (Processor) P
+30027 44400 (PS1:17-5) P
+2 10 SF
+4320 42480 (Conditionals) P
+0 10 SF
+5820 41544 (There) P
+7453 41544 (is) P
+8087 41544 (a) P
+8587 41544 (built-in) P
+10727 41544 (called) P
+2 10 SF
+12393 41544 (ifelse) P
+0 10 SF
+13926 41544 (which) P
+15626 41544 (enables) P
+4320 40824 (you) P
+5485 40824 (to) P
+6217 40824 (perform) P
+8415 40824 (arbitrary) P
+10746 40824 (conditional) P
+13711 40824 (testing.) P
+15926 40824 (In) P
+16691 40824 (the) P
+4320 40104 (simplest) P
+6520 40104 (form,) P
+2 10 SF
+5220 39024 (ifelse\(a,) P
+7369 39024 (b,) P
+8053 39024 (c,) P
+8669 39024 (d\)) P
+0 10 SF
+4320 37944 (compares) P
+6813 37944 (the) P
+7742 37944 (two) P
+8838 37944 (strings) P
+2 10 SF
+10634 37944 (a) P
+0 10 SF
+11130 37944 (and) P
+2 10 SF
+12192 37944 (b) P
+0 10 SF
+12526 37944 (.) P
+13072 37944 (If) P
+13668 37944 (these) P
+15096 37944 (are) P
+16024 37944 (ident\255) P
+4320 37224 (ical,) P
+2 10 SF
+5619 37224 (ifelse) P
+0 10 SF
+7201 37224 (returns) P
+9149 37224 (the) P
+10164 37224 (string) P
+2 10 SF
+11813 37224 (c) P
+0 10 SF
+12079 37224 (;) P
+12528 37224 (otherwise) P
+15142 37224 (it) P
+15758 37224 (returns) P
+2 10 SF
+4320 36504 (d) P
+0 10 SF
+4654 36504 (.) P
+5283 36504 (Thus) P
+6761 36504 (we) P
+7738 36504 (might) P
+9417 36504 (de\212ne) P
+11161 36504 (a) P
+11705 36504 (macro) P
+13482 36504 (called) P
+2 10 SF
+15192 36504 (compare) P
+0 10 SF
+4320 35784 (which) P
+6102 35784 (compares) P
+8716 35784 (two) P
+9932 35784 (strings) P
+11848 35784 (and) P
+13029 35784 (returns) P
+15010 35784 (\221\221yes'') P
+16924 35784 (or) P
+4320 35064 (\221\221no'') P
+5920 35064 (if) P
+6487 35064 (they) P
+7720 35064 (are) P
+8652 35064 (the) P
+9585 35064 (same) P
+11017 35064 (or) P
+11717 35064 (different.) P
+2 10 SF
+5220 33984 (de\212ne\(compare,) P
+9536 33984 (\221ifelse\($1,) P
+12185 33984 ($2,) P
+13135 33984 (yes,) P
+14284 33984 (no\)\222\)) P
+0 10 SF
+4320 32904 (Note) P
+5723 32904 (the) P
+6693 32904 (quotes,) P
+8646 32904 (which) P
+10349 32904 (prevent) P
+12385 32904 (too-early) P
+14925 32904 (evaluation) P
+4320 32184 (of) P
+2 10 SF
+5020 32184 (ifelse) P
+0 10 SF
+6319 32184 (.) P
+5820 31248 (If) P
+6465 31248 (the) P
+7443 31248 (fourth) P
+9155 31248 (argument) P
+11665 31248 (is) P
+12309 31248 (missing,) P
+14570 31248 (it) P
+15148 31248 (is) P
+15792 31248 (treated) P
+4320 30528 (as) P
+5019 30528 (empty.) P
+2 10 SF
+5820 29592 (ifelse) P
+0 10 SF
+7402 29592 (can) P
+8517 29592 (actually) P
+10699 29592 (have) P
+12113 29592 (any) P
+13261 29592 (number) P
+15376 29592 (of) P
+16158 29592 (argu\255) P
+4320 28872 (ments,) P
+6197 28872 (and) P
+7357 28872 (thus) P
+8651 28872 (provides) P
+11011 28872 (a) P
+11571 28872 (limited) P
+13565 28872 (form) P
+15025 28872 (of) P
+15818 28872 (multi-) P
+4320 28152 (way) P
+5519 28152 (decision) P
+7718 28152 (capability.) P
+10634 28152 (In) P
+11334 28152 (the) P
+12267 28152 (input) P
+2 10 SF
+5220 27072 (ifelse\(a,) P
+7369 27072 (b,) P
+8053 27072 (c,) P
+8669 27072 (d,) P
+9353 27072 (e,) P
+9969 27072 (f,) P
+10519 27072 (g\)) P
+0 10 SF
+4320 25992 (if) P
+4952 25992 (the) P
+5950 25992 (string) P
+2 10 SF
+7581 25992 (a) P
+0 10 SF
+8145 25992 (matches) P
+10374 25992 (the) P
+11371 25992 (string) P
+2 10 SF
+13002 25992 (b) P
+0 10 SF
+13336 25992 (,) P
+13750 25992 (the) P
+14747 25992 (result) P
+16344 25992 (is) P
+2 10 SF
+17008 25992 (c) P
+0 10 SF
+17274 25992 (.) P
+4320 25272 (Otherwise,) P
+7134 25272 (if) P
+2 10 SF
+7700 25272 (d) P
+0 10 SF
+8233 25272 (is) P
+8832 25272 (the) P
+9764 25272 (same) P
+11195 25272 (as) P
+2 10 SF
+11893 25272 (e) P
+0 10 SF
+12159 25272 (,) P
+12508 25272 (the) P
+13441 25272 (result) P
+14974 25272 (is) P
+2 10 SF
+15574 25272 (f) P
+0 10 SF
+15774 25272 (.) P
+16324 25272 (Oth\255) P
+4320 24552 (erwise) P
+6111 24552 (the) P
+7070 24552 (result) P
+8629 24552 (is) P
+2 10 SF
+9255 24552 (g) P
+0 10 SF
+9555 24552 (.) P
+10131 24552 (If) P
+10757 24552 (the) P
+11715 24552 (\212nal) P
+13007 24552 (argument) P
+15498 24552 (is) P
+16123 24552 (omit\255) P
+4320 23832 (ted,) P
+5403 23832 (the) P
+6336 23832 (result) P
+7869 23832 (is) P
+8469 23832 (null,) P
+9753 23832 (so) P
+2 10 SF
+5220 22752 (ifelse\(a,) P
+7369 22752 (b,) P
+8053 22752 (c\)) P
+0 10 SF
+4320 21672 (is) P
+2 10 SF
+4920 21672 (c) P
+0 10 SF
+5386 21672 (if) P
+2 10 SF
+5953 21672 (a) P
+0 10 SF
+6453 21672 (matches) P
+2 10 SF
+8618 21672 (b) P
+0 10 SF
+8952 21672 (,) P
+9302 21672 (and) P
+10368 21672 (null) P
+11502 21672 (otherwise.) P
+2 10 SF
+4320 20232 (String) P
+6121 20232 (Manipulation) P
+0 10 SF
+5820 19296 (The) P
+7163 19296 (built-in) P
+2 10 SF
+9479 19296 (len) P
+0 10 SF
+10656 19296 (returns) P
+12731 19296 (the) P
+13873 19296 (length) P
+15782 19296 (of) P
+16691 19296 (the) P
+4320 18576 (string) P
+5887 18576 (that) P
+6987 18576 (makes) P
+8719 18576 (up) P
+9519 18576 (its) P
+10286 18576 (argument.) P
+13102 18576 (Thus) P
+2 10 SF
+5220 17496 (len\(abcdef\)) P
+0 10 SF
+4320 16416 (is) P
+4920 16416 (6,) P
+5570 16416 (and) P
+2 10 SF
+6636 16416 (len\(\(a,b\)\)) P
+0 10 SF
+9187 16416 (is) P
+9787 16416 (5.) P
+5820 15480 (The) P
+7078 15480 (built-in) P
+2 10 SF
+9308 15480 (substr) P
+0 10 SF
+11232 15480 (can) P
+12388 15480 (be) P
+13278 15480 (used) P
+14701 15480 (to) P
+15492 15480 (produce) P
+4320 14760 (substrings) P
+6979 14760 (of) P
+7705 14760 (strings.) P
+2 10 SF
+9881 14760 (substr\(s,) P
+12264 14760 (i,) P
+12781 14760 (n\)) P
+0 10 SF
+13541 14760 (returns) P
+15433 14760 (the) P
+16391 14760 (sub\255) P
+4320 14040 (string) P
+5896 14040 (of) P
+2 10 SF
+6605 14040 (s) P
+0 10 SF
+7047 14040 (that) P
+8156 14040 (starts) P
+9631 14040 (at) P
+10273 14040 (the) P
+2 10 SF
+11215 14040 (i) P
+0 10 SF
+11382 14040 (th) P
+12058 14040 (position) P
+14200 14040 (\(origin) P
+16042 14040 (zero\),) P
+4320 13320 (and) P
+5408 13320 (is) P
+2 10 SF
+6030 13320 (n) P
+0 10 SF
+6586 13320 (characters) P
+9238 13320 (long.) P
+10877 13320 (If) P
+2 10 SF
+11499 13320 (n) P
+0 10 SF
+12055 13320 (is) P
+12677 13320 (omitted,) P
+14883 13320 (the) P
+15837 13320 (rest) P
+16924 13320 (of) P
+4320 12600 (the) P
+5253 12600 (string) P
+6820 12600 (is) P
+7420 12600 (returned,) P
+9769 12600 (so) P
+2 10 SF
+5220 11520 (substr\(\221now) P
+8487 11520 (is) P
+9087 11520 (the) P
+10087 11520 (time\222,) P
+11770 11520 (1\)) P
+0 10 SF
+4320 10440 (is) P
+2 10 SF
+5220 9360 (ow) P
+6153 9360 (is) P
+6753 9360 (the) P
+7753 9360 (time) P
+0 10 SF
+4320 8280 (If) P
+2 10 SF
+5026 8280 (i) P
+0 10 SF
+5499 8280 (or) P
+2 10 SF
+6305 8280 (n) P
+0 10 SF
+6945 8280 (are) P
+7983 8280 (out) P
+9056 8280 (of) P
+9862 8280 (range,) P
+11649 8280 (various) P
+13720 8280 (sensible) P
+15957 8280 (things) P
+4320 7560 (happen.) P
+2 10 SF
+5820 6624 (index\(s1,) P
+8304 6624 (s2\)) P
+0 10 SF
+9258 6624 (returns) P
+11144 6624 (the) P
+12097 6624 (index) P
+13650 6624 (\(position\)) P
+16204 6624 (in) P
+2 10 SF
+16891 6624 (s1) P
+0 10 SF
+4320 5904 (where) P
+6006 5904 (the) P
+6960 5904 (string) P
+2 10 SF
+8548 5904 (s2) P
+0 10 SF
+9302 5904 (occurs,) P
+11237 5904 (or) P
+11957 5904 (-1) P
+12815 5904 (if) P
+13402 5904 (it) P
+13956 5904 (doesn't) P
+15942 5904 (occur.) P
+4320 5184 (As) P
+5186 5184 (with) P
+2 10 SF
+6453 5184 (substr) P
+0 10 SF
+8053 5184 (,) P
+8403 5184 (the) P
+9336 5184 (origin) P
+10970 5184 (for) P
+11870 5184 (strings) P
+13670 5184 (is) P
+14270 5184 (0.) P
+20796 42480 (The) P
+21896 42480 (built-in) P
+2 10 SF
+23969 42480 (translit) P
+0 10 SF
+26003 42480 (performs) P
+28336 42480 (character) P
+30700 42480 (transli\255) P
+19296 41760 (teration.) P
+2 10 SF
+20196 40680 (translit\(s,) P
+22846 40680 (f,) P
+23396 40680 (t\)) P
+0 10 SF
+19296 39600 (modi\212es) P
+2 10 SF
+21613 39600 (s) P
+0 10 SF
+22095 39600 (by) P
+22944 39600 (replacing) P
+25425 39600 (any) P
+26540 39600 (character) P
+28986 39600 (found) P
+30635 39600 (in) P
+2 10 SF
+31351 39600 (f) P
+0 10 SF
+31800 39600 (by) P
+19296 38880 (the) P
+20229 38880 (corresponding) P
+23861 38880 (character) P
+26258 38880 (of) P
+2 10 SF
+26958 38880 (t) P
+0 10 SF
+27158 38880 (.) P
+27708 38880 (That) P
+29008 38880 (is,) P
+2 10 SF
+20196 37800 (translit\(s,) P
+22846 37800 (aeiou,) P
+24563 37800 (12345\)) P
+0 10 SF
+19296 36720 (replaces) P
+21468 36720 (the) P
+22409 36720 (vowels) P
+24316 36720 (by) P
+25123 36720 (the) P
+26063 36720 (corresponding) P
+29702 36720 (digits.) P
+31593 36720 (If) P
+2 10 SF
+32200 36720 (t) P
+0 10 SF
+19296 36000 (is) P
+20046 36000 (shorter) P
+22062 36000 (than) P
+2 10 SF
+23444 36000 (f) P
+0 10 SF
+23644 36000 (,) P
+24143 36000 (characters) P
+26922 36000 (which) P
+28737 36000 (don't) P
+30353 36000 (have) P
+31834 36000 (an) P
+19296 35280 (entry) P
+20779 35280 (in) P
+2 10 SF
+21496 35280 (t) P
+0 10 SF
+21946 35280 (are) P
+22927 35280 (deleted;) P
+25075 35280 (as) P
+25823 35280 (a) P
+26338 35280 (limiting) P
+28489 35280 (case,) P
+29919 35280 (if) P
+2 10 SF
+30535 35280 (t) P
+0 10 SF
+30984 35280 (is) P
+31633 35280 (not) P
+19296 34560 (present) P
+21293 34560 (at) P
+21991 34560 (all,) P
+23005 34560 (characters) P
+25699 34560 (from) P
+2 10 SF
+27130 34560 (f) P
+0 10 SF
+27594 34560 (are) P
+28590 34560 (deleted) P
+30586 34560 (from) P
+2 10 SF
+32017 34560 (s) P
+0 10 SF
+32250 34560 (.) P
+19296 33840 (So) P
+2 10 SF
+20196 32760 (translit\(s,) P
+22846 32760 (aeiou\)) P
+0 10 SF
+19296 31680 (deletes) P
+21161 31680 (vowels) P
+23060 31680 (from) P
+2 10 SF
+24427 31680 (s) P
+0 10 SF
+24660 31680 (.) P
+20796 30744 (There) P
+22615 30744 (is) P
+23434 30744 (also) P
+24819 30744 (a) P
+25504 30744 (built-in) P
+27829 30744 (called) P
+2 10 SF
+29680 30744 (dnl) P
+0 10 SF
+30934 30744 (which) P
+19296 30024 (deletes) P
+21181 30024 (all) P
+22001 30024 (characters) P
+24651 30024 (that) P
+25771 30024 (follow) P
+27557 30024 (it) P
+28110 30024 (up) P
+28929 30024 (to) P
+29615 30024 (and) P
+30700 30024 (includ\255) P
+19296 29304 (ing) P
+20323 29304 (the) P
+21316 29304 (next) P
+22609 29304 (newline;) P
+24935 29304 (it) P
+25529 29304 (is) P
+26189 29304 (useful) P
+27915 29304 (mainly) P
+29841 29304 (for) P
+30800 29304 (throw\255) P
+19296 28584 (ing) P
+20335 28584 (away) P
+21872 28584 (empty) P
+23644 28584 (lines) P
+25049 28584 (that) P
+26221 28584 (otherwise) P
+28825 28584 (tend) P
+30129 28584 (to) P
+30867 28584 (clutter) P
+19296 27864 (up) P
+20096 27864 (M4) P
+21129 27864 (output.) P
+23213 27864 (For) P
+24247 27864 (example,) P
+26629 27864 (if) P
+27196 27864 (you) P
+28296 27864 (say) P
+2 10 SF
+20196 26784 (de\212ne\(N,) P
+22713 26784 (100\)) P
+20196 26064 (de\212ne\(M,) P
+22846 26064 (200\)) P
+20196 25344 (de\212ne\(L,) P
+22680 25344 (300\)) P
+0 10 SF
+19296 24264 (the) P
+20247 24264 (newline) P
+22364 24264 (at) P
+23015 24264 (the) P
+23966 24264 (end) P
+25050 24264 (of) P
+25767 24264 (each) P
+27082 24264 (line) P
+28199 24264 (is) P
+28816 24264 (not) P
+29800 24264 (part) P
+30950 24264 (of) P
+31667 24264 (the) P
+19296 23544 (de\212nition,) P
+22040 23544 (so) P
+22866 23544 (it) P
+23493 23544 (is) P
+24186 23544 (copied) P
+26078 23544 (into) P
+27305 23544 (the) P
+28331 23544 (output,) P
+30308 23544 (where) P
+32066 23544 (it) P
+19296 22824 (may) P
+20544 22824 (not) P
+21526 22824 (be) P
+22307 22824 (wanted.) P
+24604 22824 (If) P
+25218 22824 (you) P
+26332 22824 (add) P
+2 10 SF
+27412 22824 (dnl) P
+0 10 SF
+28461 22824 (to) P
+29142 22824 (each) P
+30454 22824 (of) P
+31168 22824 (these) P
+19296 22104 (lines,) P
+20779 22104 (the) P
+21712 22104 (newlines) P
+24044 22104 (will) P
+25178 22104 (disappear.) P
+20796 21168 (Another) P
+23149 21168 (way) P
+24535 21168 (to) P
+25389 21168 (achieve) P
+27606 21168 (this,) P
+29009 21168 (due) P
+30261 21168 (to) P
+31114 21168 (J.) P
+31883 21168 (E.) P
+19296 20448 (Weythman,) P
+22278 20448 (is) P
+2 10 SF
+20196 19368 (divert\(-1\)) P
+21924 18648 (de\212ne\(...\)) P
+21924 17928 (...) P
+20196 17208 (divert) P
+19296 15408 (Printing) P
+0 10 SF
+20796 14472 (The) P
+21957 14472 (built-in) P
+2 10 SF
+24091 14472 (errprint) P
+0 10 SF
+26418 14472 (writes) P
+28112 14472 (its) P
+28907 14472 (arguments) P
+31633 14472 (out) P
+19296 13752 (on) P
+20096 13752 (the) P
+21029 13752 (standard) P
+23261 13752 (error) P
+24627 13752 (\212le.) P
+25944 13752 (Thus) P
+27344 13752 (you) P
+28444 13752 (can) P
+29476 13752 (say) P
+2 10 SF
+20196 12672 (errprint\(\221fatal) P
+24062 12672 (error\222\)) P
+20796 11376 (dumpdef) P
+0 10 SF
+23323 11376 (is) P
+23948 11376 (a) P
+24439 11376 (debugging) P
+27196 11376 (aid) P
+28153 11376 (which) P
+29843 11376 (dumps) P
+31667 11376 (the) P
+19296 10656 (current) P
+21244 10656 (de\212nitions) P
+24027 10656 (of) P
+24776 10656 (de\212ned) P
+26791 10656 (terms.) P
+28723 10656 (If) P
+29372 10656 (there) P
+30820 10656 (are) P
+31800 10656 (no) P
+19296 9936 (arguments,) P
+22299 9936 (you) P
+23553 9936 (get) P
+24640 9936 (everything;) P
+27727 9936 (otherwise) P
+30413 9936 (you) P
+31667 9936 (get) P
+19296 9216 (the) P
+20333 9216 (ones) P
+21735 9216 (you) P
+22938 9216 (name) P
+24540 9216 (as) P
+25342 9216 (arguments.) P
+28494 9216 (Don't) P
+30197 9216 (forget) P
+31933 9216 (to) P
+19296 8496 (quote) P
+20829 8496 (the) P
+21762 8496 (names!) P
+2 10 SF
+19296 7056 (Summary) P
+22030 7056 (of) P
+22730 7056 (Built-ins) P
+0 10 SF
+20796 6120 (Each) P
+22325 6120 (entry) P
+23888 6120 (is) P
+24618 6120 (preceded) P
+27112 6120 (by) P
+28042 6120 (the) P
+29105 6120 (page) P
+30567 6120 (number) P
+19296 5400 (where) P
+20961 5400 (it) P
+21495 5400 (is) P
+22095 5400 (described.) P
+end restore showpage
+%%Page: 6 6
+save $troff begin Sc
+0 10 SF
+0 47280 (--) P
+32156 47280 (--) P
+4320 44400 (PS1:17-6) P
+26137 44400 (The) P
+27270 44400 (M4) P
+28303 44400 (Macro) P
+30068 44400 (Processor) P
+6480 42120 (3) P
+7560 42120 (changequote\(L,) P
+11508 42120 (R\)) P
+6480 41400 (1) P
+7560 41400 (de\212ne\(name,) P
+10875 41400 (replacement\)) P
+6480 40680 (4) P
+7560 40680 (divert\(number\)) P
+6480 39960 (4) P
+7560 39960 (divnum) P
+6480 39240 (5) P
+7560 39240 (dnl) P
+6480 38520 (5) P
+7560 38520 (dumpdef\(\221name\222,) P
+11942 38520 (\221name\222,) P
+13991 38520 (...\)) P
+6480 37800 (5) P
+7560 37800 (errprint\(s,) P
+10143 37800 (s,) P
+10726 37800 (...\)) P
+6480 37080 (4) P
+7560 37080 (eval\(numeric) P
+10925 37080 (expression\)) P
+6480 36360 (3) P
+7560 36360 (ifdef\(\221name\222,) P
+10942 36360 (this) P
+12009 36360 (if) P
+12576 36360 (true,) P
+13859 36360 (this) P
+14926 36360 (if) P
+15493 36360 (false\)) P
+6480 35640 (5) P
+7560 35640 (ifelse\(a,) P
+9675 35640 (b,) P
+10325 35640 (c,) P
+10941 35640 (d\)) P
+6480 34920 (4) P
+7560 34920 (include\(\212le\)) P
+6480 34200 (3) P
+7560 34200 (incr\(number\)) P
+6480 33480 (5) P
+7560 33480 (index\(s1,) P
+9976 33480 (s2\)) P
+6480 32760 (5) P
+7560 32760 (len\(string\)) P
+6480 32040 (4) P
+7560 32040 (maketemp\(...XXXXX...\)) P
+6480 31320 (4) P
+7560 31320 (sinclude\(\212le\)) P
+6480 30600 (5) P
+7560 30600 (substr\(string,) P
+10910 30600 (position,) P
+13194 30600 (number\)) P
+6480 29880 (4) P
+7560 29880 (syscmd\(s\)) P
+6480 29160 (5) P
+7560 29160 (translit\(str,) P
+10377 29160 (from,) P
+11894 29160 (to\)) P
+6480 28440 (3) P
+7560 28440 (unde\212ne\(\221name\222\)) P
+6480 27720 (4) P
+7560 27720 (undivert\(number,number,...\)) P
+2 10 SF
+4320 25920 (Acknowledgements) P
+0 10 SF
+5820 24984 (We) P
+7218 24984 (are) P
+8516 24984 (indebted) P
+11148 24984 (to) P
+12180 24984 (Rick) P
+13878 24984 (Becker,) P
+16291 24984 (John) P
+4320 24264 (Chambers,) P
+7092 24264 (Doug) P
+8615 24264 (McIlroy,) P
+10921 24264 (and) P
+11978 24264 (especially) P
+14567 24264 (Jim) P
+15625 24264 (Weyth\255) P
+4320 23544 (man,) P
+5725 23544 (whose) P
+7479 23544 (pioneering) P
+10267 23544 (use) P
+11288 23544 (of) P
+12010 23544 (M4) P
+13064 23544 (has) P
+14084 23544 (led) P
+15038 23544 (to) P
+15726 23544 (several) P
+4320 22824 (valuable) P
+6568 22824 (improvements.) P
+10567 22824 (We) P
+11615 22824 (are) P
+12563 22824 (also) P
+13744 22824 (deeply) P
+15558 22824 (grateful) P
+4320 22104 (to) P
+5022 22104 (Weythman) P
+7889 22104 (for) P
+8824 22104 (several) P
+10756 22104 (substantial) P
+13556 22104 (contributions) P
+16957 22104 (to) P
+4320 21384 (the) P
+5253 21384 (code.) P
+2 10 SF
+4320 19944 (References) P
+0 10 SF
+4320 18792 ([1]) P
+5820 18792 (B.) P
+6650 18792 (W.) P
+7646 18792 (Kernighan) P
+10458 18792 (and) P
+11604 18792 (P.) P
+12367 18792 (J.) P
+13029 18792 (Plauger,) P
+1 10 SF
+15291 18792 (Software) P
+5820 18072 (Tools,) P
+0 10 SF
+7504 18072 (Addison-Wesley,) P
+12023 18072 (Inc.,) P
+13289 18072 (1976.) P
+0 -180 (--) P
+32156 -180 (--) P
+end restore showpage
+%%Trailer
+%%Pages: 6
+%%EOF

@@ -1,0 +1,472 @@
+h41649
+s 00002/00000/00266
+d D 6.4 86/05/05 15:35:54 mckusick 6 5
+c author lists
+e
+s 00009/00001/00257
+d D 6.3 85/09/05 15:28:25 mckusick 5 4
+c update from jerry
+e
+s 00040/00010/00218
+d D 6.2 85/06/08 11:19:09 mckusick 4 3
+c from Jerry Berkman
+e
+s 00007/00011/00221
+d D 6.1 85/04/29 14:24:31 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00113/00031/00119
+d D 5.1 85/04/29 14:24:18 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00150/00000/00000
+d D 4.1 85/04/29 14:24:10 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH F77 1 4/1/81
+E 2
+I 2
+D 3
+.TH F77 1 "13 May 1983"
+E 3
+I 3
+.TH F77 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+f77 \- Fortran 77 compiler
+.SH SYNOPSIS
+.B f77
+[ option ] ... file ...
+.SH DESCRIPTION
+.I F77
+is the UNIX Fortran 77 compiler.
+It accepts several types of arguments:
+.PP
+Arguments whose names end with `.f' are taken to be
+Fortran 77 source programs;
+they are compiled, and
+each object program is left on the file in the current directory
+whose name is that of the source with `.o' substituted
+for '.f'.
+.PP
+D 2
+Arguments whose names end with `.r' or `.e' are taken to be Ratfor or EFL
+source programs, respectively; these are first transformed by the
+E 2
+I 2
+Arguments whose names end with `.F' are also taken to be Fortran 77 source
+programs; these are first processed by the C preprocessor before being
+compiled by
+.I f77.
+.PP
+Arguments whose names end with `.r' or `.e' are taken to be Ratfor
+or EFL source programs respectively; these are first transformed by the
+E 2
+appropriate preprocessor, then compiled by f77.
+.PP
+D 2
+In the same way,
+arguments whose names end with `.c' or `.s' are taken to be C or assembly source programs
+and are compiled or assembled, producing a `.o' file.
+E 2
+I 2
+Arguments whose names end with `.c' or `.s' are taken to be C or assembly
+source programs and are compiled or assembled, producing a `.o' file.
+E 2
+.PP
+The following options have the same meaning as in
+.IR cc (1).
+See
+.IR ld (1)
+for load-time options.
+.TP
+.B \-c
+Suppress loading and produce `.o' files for each source 
+file.
+.TP
+.B \-g
+D 4
+Have the compiler produce additional symbol table information for
+D 2
+.IR sdb (1).
+E 2
+I 2
+.IR dbx (1).
+E 2
+Also pass the
+E 4
+I 4
+Produce additional symbol table information for
+.IR dbx (1)
+and pass the
+E 4
+.B \-lg
+flag to
+D 4
+.IR ld (1).
+E 4
+I 4
+.IR ld (1)
+so that on abnormal terminations, the memory image is written
+to file \fIcore\fP.
+Incompatible with
+.BR \-O .
+E 4
+.TP
+D 2
+.BR \-w
+Suppress all warning messages.
+If the option is `\-w66', only Fortran 66 compatibility warnings are suppressed.
+E 2
+I 2
+.BR \-o " output"
+Name the final output file
+.I output
+instead of `a.out'.
+E 2
+.TP
+.B \-p
+Prepare object files for profiling, see
+.IR  prof (1).
+.TP
+D 2
+.SM
+E 2
+I 2
+.B \-pg
+Causes the compiler to produce counting code in the manner of
+.B \-p,
+but invokes a run-time recording mechanism that keeps more extensive
+statistics and produces a
+.I gmon.out
+file at normal termination. An execution profile can then be generated
+by use of
+.IR gprof (1).
+E 2
+.TP
+I 2
+.BR \-w
+Suppress all warning messages.
+If the option is `\-w66', only Fortran 66 compatibility warnings are suppressed.
+.TP
+.BI \-D name=def
+.TP
+.BI \-D name
+Define the
+.I name
+to the C preprocessor, as if by `#define'. If no definition is given, the name
+is defined as "1". (`.F' suffix files only).
+.TP
+.BI \-I dir
+`#include' files whose names do not begin with `/' are always sought
+first in the directory of the
+.I file
+argument, then in directories named in
+.B \-I
+options, then in directories on a standard list. (`.F' suffix files only).
+.TP
+E 2
+.B \-O
+Invoke an
+object-code optimizer.
+I 4
+Incompatible with
+.BR \-g .
+E 4
+.TP
+D 2
+.SM
+E 2
+.B \-S
+Compile the named programs, and leave the
+assembler-language output on corresponding files suffixed `.s'.
+(No `.o' is created.).
+D 2
+.TP
+.BR \-o " output"
+Name the final output file
+.I output
+instead of `a.out'.
+E 2
+.PP
+The following options are peculiar to
+.IR f77 .
+.TP
+I 4
+.B \-d
+Used for debugging the compiler.
+.TP
+E 4
+I 2
+.B \-i2
+On machines which support short integers, make the default integer constants
+and variables short.
+.RB ( \-i4
+is the standard value of this option). All logical quantities will be short.
+.TP
+I 3
+.B \-q
+Suppress printing of file names and program unit names during compilation.
+.TP
+E 3
+.BR \-m
+Apply the M4 preprocessor to each `.r' file before transforming
+it with the Ratfor or EFL preprocessor.
+.TP
+E 2
+.SM
+.BR \-onetrip
+I 4
+.TP
+.BR \-1
+E 4
+Compile DO loops that are performed at least once if reached.
+(Fortran 77 DO loops are not performed at all if the upper limit is smaller than the lower limit.)
+.TP
+I 5
+.BR \-r8
+Treat all floating point variables,
+constants, functions and intrinsics
+as double precision and all complex
+quantities as double complex.
+.TP
+E 5
+.BR \-u
+Make the default type of a variable `undefined' rather than using the default Fortran rules.
+.TP
+I 2
+.BR \-v
+Print the version number of the compiler, and the name of each pass as it
+executes.
+.TP
+E 2
+.BR \-C
+Compile code to check that subscripts are within declared array bounds.
+I 4
+For multi-dimensional arrays, only the equivalent linear subscript is checked.
+E 4
+.TP
+.BR \-F
+D 2
+Apply EFL and Ratfor preprocessor to relevant files, put the result in the file
+with the suffix changed to `.f', but do not compile.
+E 2
+I 2
+D 4
+Apply the C, EFL, or Ratfor preprocessors to relevant files, put the
+E 4
+I 4
+Apply the C preprocessor to `.F' files, and the EFL, or Ratfor preprocessors
+to `.e' and `.r' files, put the
+E 4
+result in the file with the suffix changed to `.f', but do not compile.
+E 2
+.TP
+D 2
+.BR \-m
+Apply the M4 preprocessor to each `.r' or `.e' file before transforming
+it with the Ratfor or EFL preprocessor.
+.TP
+.TP
+E 2
+.BI \-E x
+D 2
+Use the string
+E 2
+I 2
+Use the string 
+E 2
+.I x
+as an EFL option in processing `.e' files.
+.TP
+.BI \-R x
+Use the string 
+.I x
+as a Ratfor option in processing `.r' files.
+I 2
+.TP
+\fB\-N\fR[\fBqxscn\fR]\fInnn
+Make static tables in the compiler bigger. The compiler will complain
+if it overflows its tables and suggest you apply one or more of these
+flags. These flags have the following meanings:
+.RS
+.TP
+.B q
+Maximum number of equivalenced variables. Default is 150.
+.TP
+.B x
+Maximum number of external names (common block names, subroutine and
+function names). Default is 200.
+.TP
+.B s
+Maximum number of statement numbers. Default is 401.
+.TP
+.B c
+Maximum depth of nesting for control statements (e.g. DO loops). Default is
+20.
+.TP
+.B n
+Maximum number of identifiers. Default is 1009.
+.RE
+.TP
+.BR \-U
+Do not convert upper case letters to lower case. The default is to convert
+Fortran programs to lower case except within character string constants.
+E 2
+.PP
+Other arguments
+are taken
+to be either loader option arguments, or F77-compatible
+object programs, typically produced by an earlier
+run,
+or perhaps libraries of F77-compatible routines.
+These programs, together with the results of any
+compilations specified, are loaded (in the order
+given) to produce an executable program with name
+`a.out'.
+I 4
+.PP
+Programs compiled with
+.I f77
+produce memory dumps in file
+.I core
+upon abnormal termination if the
+.B \(mig
+flag was specified during loading.
+If the environment variable
+.I f77_dump_flag
+is set to a value beginning with
+D 5
+.BR y or n ,
+E 5
+I 5
+.B y
+or
+.BR n ,
+E 5
+dumps for abnormal terminations are respectively forced or
+suppressed.
+E 4
+.SH FILES
+.nf
+D 2
+.ta \w'/usr/lib/libF77.a   'u
+file.[fresc]	input file
+E 2
+I 2
+.ta \w'/usr/lib/libF77_p.a   'u
+file.[fFresc]	input file
+E 2
+file.o	object file
+a.out	loaded output
+./fort[pid].?	temporary
+/usr/lib/f77pass1	compiler
+/lib/f1	pass 2
+/lib/c2	optional optimizer
+I 2
+/lib/cpp	C preprocessor
+E 2
+/usr/lib/libF77.a	intrinsic function library
+/usr/lib/libI77.a	Fortran I/O library
+I 2
+/usr/lib/libU77.a	UNIX interface library
+I 4
+/usr/lib/libm.a	math library
+/lib/libc.a	C library, see section 3
+E 4
+/usr/lib/libF77_p.a	profiling intrinsic function library
+/usr/lib/libI77_p.a	profiling Fortran I/O library
+/usr/lib/libU77_p.a	profiling UNIX interface library
+E 2
+D 4
+/lib/libc.a	C library, see section 3
+E 4
+I 4
+/usr/lib/libm_p.a	profiling math library
+/usr/lib/libc_p.a	profiling C library, see section 3
+E 4
+I 2
+mon.out	file produced for analysis by prof(1).
+gmon.out	file produced for analysis by gprof(1).
+E 2
+.fi
+.SH "SEE ALSO"
+S. I. Feldman,
+P. J. Weinberger,
+I 6
+J. Berkman,
+E 6
+.I
+A Portable Fortran 77 Compiler
+.br
+D 2
+prof(1), cc(1), ld(1), efl(1), ratfor(1)
+E 2
+I 2
+D. L. Wasley,
+I 6
+J. Berkman,
+E 6
+.I
+Introduction to the f77 I/O Library
+.br
+D 4
+prof(1), gprof(1), cc(1), ld(1), efl(1), ratfor(1)
+E 4
+I 4
+fpr(1), fsplit(1), ld(1), ar(1), ranlib(1), dbx(1), intro(3f)
+.br
+efl(1), ratfor(1), struct(1), prof(1), gprof(1), cc(1)
+E 4
+E 2
+.SH DIAGNOSTICS
+The diagnostics produced by
+.I f77
+itself are intended to be
+self-explanatory.
+Occasional messages may be produced by the loader.
+.SH BUGS
+D 2
+The Fortran 66 subset of the language has been
+exercised extensively;
+the newer features have not.
+E 2
+I 2
+D 3
+This compiler is still somewhat experimental.
+The optimizer occasionally makes mistakes;
+it should be avoided when debugging if apparently incorrect results
+are obtained.
+Because of an assembler error, complaints about long branches may occur
+with very large source files; such errors can be avoided by splitting
+the sources into smaller sections.
+If necessary, the old version of
+.I f77
+can be resurrected from /usr/src/old.
+E 3
+I 3
+D 4
+Formats in format statements are translated by the compiler;
+formats in I/O statements are translated during execution by the
+I/O library.
+E 4
+I 4
+Files longer than about 50,000 lines must be split up to be compiled.
+E 4
+E 3
+E 2
+E 1

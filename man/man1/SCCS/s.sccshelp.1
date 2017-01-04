@@ -1,0 +1,131 @@
+h59137
+s 00001/00001/00069
+d D 6.3 04/10/21 06:30:29 msokolov 3 2
+c use \- in NAME
+e
+s 00009/00009/00061
+d D 6.2 03/06/12 23:38:32 msokolov 2 1
+c help => sccshelp
+e
+s 00070/00000/00000
+d D 6.1 99/05/14 12:50:02 msokolov 1 0
+c date and time created 99/05/14 12:50:02 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.tr ~
+D 2
+.th HELP 1 %G%
+E 2
+I 2
+.th SCCSHELP 1 %G%
+E 2
+.sh NAME
+D 2
+help \*- ask for help
+E 2
+I 2
+D 3
+sccshelp \*- ask for help
+E 3
+I 3
+sccshelp \- ask for help
+E 3
+E 2
+.sh SYNOPSIS
+D 2
+.bd help
+E 2
+I 2
+.bd sccshelp
+E 2
+[arg]~...
+.sh DESCRIPTION
+D 2
+.it Help
+finds information to explain a message from a command or explain the use of
+a command.
+E 2
+I 2
+.it Sccshelp
+finds information to explain a message from an SCCS command or explain the use
+of a command.
+E 2
+Zero or more arguments may be supplied.
+If no arguments are given,
+D 2
+.it help
+E 2
+I 2
+.it sccshelp
+E 2
+will prompt for one.
+.s1
+The arguments may be either
+message numbers (which normally appear in parentheses following messages)
+or command names,
+of one of the following types:
+.s1
+.lp +20 10
+type~1	Begins with non-numerics, ends in numerics.
+The non-numeric prefix is usually an abbreviation for the program or
+set of routines which produced the message
+(e.g., ``ge6'', for message 6 from the
+.it get
+command).
+.s1
+.lp +20 10
+type~2	Does not contain numerics (as a command, such as
+.it get
+)
+.s1
+.lp +20 10
+type~3	Is all numeric (e.g., ``212'')
+.i0
+.s1
+The response of the program will be the explanatory information related
+to the argument, if there is any.
+.s1
+D 2
+When all else fails, try ``help stuck''.
+E 2
+I 2
+When all else fails, try ``sccshelp stuck''.
+E 2
+.sh FILES
+The ASCII file searched for the explanatory information
+for each type of argument is as follows:
+.s1
+.lp +20 10
+.if n type~1	/usr/lib/help/``prefix-of-argument''
+.if t type~1	/usr/lib/help/\fIprefix-of-argument\fR
+.s1
+.lp +20 10
+type~2	/usr/lib/help/cmds
+.s1
+.lp +20 10
+type~3	/usr/lib/sccs.hf
+.i0
+.s1
+If the file to be searched for either a type 1 or a type 2
+argument does not exist, the search will be attempted on the
+file for the type 3 argument.
+In no case, however, will more than one file be searched per argument.
+.s1
+Anyone wishing to modify the files should list out portions
+of them \*- the format will be obvious.
+.sh DIAGNOSTICS
+Use
+D 2
+.it help
+E 2
+I 2
+.it sccshelp
+E 2
+for help.
+.tr ~~
+E 1

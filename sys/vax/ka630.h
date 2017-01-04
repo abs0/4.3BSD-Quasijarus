@@ -3,14 +3,13 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ka630.h	7.3 (Berkeley) 7/9/88
+ *	@(#)ka630.h	7.4 (Berkeley) 3/18/04
  */
 
 /*
  * Definitions specific to the ka630 uvax2 cpu card. Includes the tod
  * clock chip and the cpu registers.
  */
-#ifdef VAX630
 /* Bdr register bits */
 #define	KA630BDR_PWROK	0x8000
 #define	KA630BDR_HLTENB	0x4000
@@ -80,5 +79,11 @@ struct ka630cpu {
 	u_long  ka630_cear;
 	u_long  ka630_dear;
 };
+
+#ifdef KERNEL
+extern struct pte Clockmap[];
+extern struct pte Ka630map[];
+extern struct ka630clock ka630clock;
+extern struct ka630cpu ka630cpu;
 #endif
 #endif

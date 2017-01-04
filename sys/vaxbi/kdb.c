@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)kdb.c	7.11 (Berkeley) 11/24/03
+ *	@(#)kdb.c	7.12 (Berkeley) 3/6/04
  */
 
 /*
@@ -26,7 +26,6 @@
 
 /*
  * TODO
- *	rethink BI software interface
  *	write bad block forwarding code
  */
 
@@ -75,6 +74,8 @@
 #include "../vax/mscp.h"
 #include "../vax/mscpvar.h"
 #include "../vax/mtpr.h"
+#include "../vax/nexus.h"
+#include "../vax/scb.h"
 
 #include "bireg.h"
 #include "kdbreg.h"
@@ -356,18 +357,20 @@ struct	kdbtypes {
 #define	kdbslavereply	udaslavereply	/* shared */
 #endif
 
-int	kdbprobe();		/* XXX */
+int	kdbcattach();
 int	kdbslave(), kdbattach();
 
 int	kdbdgram(), kdbctlrdone(), kdbunconf(), kdbiodone();
 int	kdbonline(), kdbgotstatus(), kdbioerror();
 
+struct	uba_ctlr *kdbminfo[NKDB];
 struct	uba_device *kdbdinfo[NKRA];	/* uba_device indeed! */
 struct	buf kdbutab[NKRA];	/* per drive transfer queue */
 
-u_short kdbstd[] = { 0 };	/* XXX */
+u_short kdbstd[] = { 0 };	/* dummy, meaningless for VAXBI */
 struct uba_driver kdbdriver =	/* XXX */
- { kdbprobe, kdbslave, kdbattach, 0, kdbstd, DRIVENAMES, kdbdinfo, "kdb" };
+ { kdbcattach, kdbslave, kdbattach, 0, kdbstd, DRIVENAMES, kdbdinfo, "kdb",
+   kdbminfo };
 
 struct	mscp_driver kdbmscpdriver =
  { MAXUNIT, NKRA, UNITSHIFT, kdbutab, (struct disklabel *)0, kdbdinfo,
@@ -393,25 +396,11 @@ int	kdbwstart, kdbwatch();	/* watchdog timer */
 int	wakeup();
 
 /*
- * If kdbprobe is called, return 0 to keep Unibus code from attempting
- * to use this device.	XXX rethink
- */
-/* ARGSUSED */
-kdbprobe(reg, ctlr)
-	caddr_t reg;
-	int ctlr;
-{
-
-	return (0);
-}
-
-/*
  * Configure in a KDB50 controller.
  */
-kdbconfig(kdbnum, va, pa, vec)
-	int kdbnum;
-	struct biiregs *va, *pa;
-	int vec;
+kdbcattach(um, nexclass, binum, node)
+	register struct uba_ctlr *um;
+	int nexclass, binum, node;
 {
 	register struct kdbinfo *ki;
 #define mi (&ki->ki_mi)
@@ -426,19 +415,22 @@ kdbconfig(kdbnum, va, pa, vec)
 	/*
 	 * Set up local KDB status.
 	 */
-	ki = &kdbinfo[kdbnum];
-	ki->ki_kdb = (struct kdb_regs *)va;
-	ki->ki_physkdb = (struct kdb_regs *)pa;
-	ki->ki_vec = vec;
+	ki = &kdbinfo[um->um_ctlr];
+	ki->ki_kdb = (struct kdb_regs *)&nexus[binum*NNODEBI+node];
+	ki->ki_physkdb = (struct kdb_regs *)
+			(BI_BASE(binum) + node * sizeof(struct bi_node));
 	ki->ki_map =
 	    (struct map *)malloc((u_long)(KI_MAPSIZ * sizeof(struct map)),
 	    M_DEVBUF, M_NOWAIT);
 	if (ki->ki_map == NULL) {
-		printf("kdb%d: cannot get memory for ptes\n", kdbnum);
+		printf("kdb%d: cannot get memory for ptes\n", um->um_ctlr);
 		return;
 	}
+	ki->ki_vec = (int)&scb[0].scb_ipl15[node] - (int)&scb[0]; /* XXX */
+	scb[0].scb_ipl15[node] = scbentry(um->um_intr[0], SCB_ISTACK); /* XXX */
 	ki->ki_ptephys = PHYS(long, ki->ki_pte); /* kvtophys(ki->ki_pte) */
 	ki->ki_flags = KDB_ALIVE;
+	um->um_alive = 1;
 
 	/* THE FOLLOWING IS ONLY NEEDED TO CIRCUMVENT A BUG IN rminit */
 	bzero((caddr_t)ki->ki_map, KI_MAPSIZ * sizeof(struct map));
@@ -449,9 +441,9 @@ kdbconfig(kdbnum, va, pa, vec)
 	 * Set up the generic MSCP structures.
 	 */
 	mi->mi_md = &kdbmscpdriver;
-	mi->mi_ctlr = kdbnum;	/* also sets ki->ki_ctlr */
+	mi->mi_ctlr = um->um_ctlr;	/* also sets ki->ki_ctlr */
 	mi->mi_tab = &ki->ki_tab;
-	mi->mi_ip = kdbip[kdbnum];
+	mi->mi_ip = kdbip[um->um_ctlr];
 	mi->mi_cmd.mri_size = NCMD;
 	mi->mi_cmd.mri_desc = ki->ki_ca.ca_cmddsc;
 	mi->mi_cmd.mri_ring = ki->ki_cmd;

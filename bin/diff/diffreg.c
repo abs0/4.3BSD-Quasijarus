@@ -1,4 +1,4 @@
-static	char sccsid[] = "@(#)diffreg.c 4.17 10/22/87";
+static	char sccsid[] = "@(#)diffreg.c 4.18 7/10/03";
 
 #include "diff.h"
 /*
@@ -218,7 +218,7 @@ notsame:
 	 *	Files certainly differ at this point; set status accordingly
 	 */
 	status = 1;
-	if (!asciifile(f1) || !asciifile(f2)) {
+	if (!aflag && (!asciifile(f1) || !asciifile(f2))) {
 		printf("Binary files %s and %s differ\n", file1, file2);
 		fclose(f1);
 		fclose(f2);
@@ -536,7 +536,7 @@ check()
 				ctold++;
 				ctnew++;
 				if((c=getc(input[0])) != (d=getc(input[1]))) {
-					/* jackpot++; */
+					jackpot++;
 					J[i] = 0;
 					if(c!='\n')
 						ctold += skipline(0);
@@ -557,10 +557,8 @@ check()
 	}
 	fclose(input[0]);
 	fclose(input[1]);
-/*
-	if(jackpot)
-		fprintf(stderr, "jackpot\n");
-*/
+	if(jackpot && Jflag)
+		fprintf(stderr, "jackpot %d lines\n", jackpot);
 }
 
 sort(a,n)	/*shellsort CACM #201*/

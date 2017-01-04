@@ -1,0 +1,28 @@
+#
+# Harhan Internet gateway
+#
+machine		vax
+cpu		"VAX630"
+cpu		"VAX650"
+makeoptions	INLINEOPTS="-s"
+options		NOSUBSINST
+ident		HARHANGW
+timezone	0
+maxusers	8
+options		INET
+options		"TCP_COMPAT_42"
+options		GATEWAY
+#options		KADB
+
+config		vmunix	root on ra0
+
+controller	uba0	at nexus ?
+
+controller	uda0	at uba? csr 0172150		vector udaintr
+disk		ra0	at uda0 drive 0
+
+pseudo-device	loop
+pseudo-device	ether
+
+device		qe0	at uba? csr 0174440	vector qeintr
+device		qe1	at uba? csr 0174460	vector qeintr

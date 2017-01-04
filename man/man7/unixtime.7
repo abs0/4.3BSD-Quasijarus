@@ -1,0 +1,448 @@
+.\"	@(#)unixtime.7	1.2 (IFCTF) 2013/01/19
+.\"
+.hw time-stamp
+.TH UNIXTIME 7 "January 19, 2013"
+.UC 8
+.SH NAME
+time_t \- representation of time in UNIX
+.SH DESCRIPTION
+``Everyone'' knows that UNIX represents civil time
+(that is, time intended for display to casual human users)
+internally as a linear count of seconds since Zulu midnight,
+January 1, A.D. 1970, i.e., since \%1970-01-01T00:00:00Z.
+But does this ``Zulu'' mean GMT (a natural phenomenon
+whose meaning is independent of human whim) or UTC (a man-made
+political construct)?
+And does ``seconds'' mean counts of periods of radiation emitted
+by Cesium atoms, 1/86400th fractions of naturally-occurring cycles
+of day and night, or the rotation of the hands of some
+``official civil time'' clock by a certain angle?
+.SH HISTORY
+As a matter of historical precedent, it is absolutely certain
+that in the early days of UNIX, computer clocks were set from
+wall clocks or wristwatches, \fInot\fP the other way around.
+Therefore, whatever abstract philosophical definition
+the Founding Fathers of UNIX may have had in mind,
+the meaning of
+.B time_t
+was defined
+.I de facto
+by the broken-down-time algorithm implemented in the
+.IR ctime (3)
+family of functions and its inverse implemented in the
+.IR date (1)
+command.
+In other words, the de facto meaning of
+.B time_t
+is whatever number results when the operator looks at a wall clock
+or wristwatch and enters the observed local civil time into
+.IR date .
+.PP
+The original
+.I de facto
+definition of
+.B time_t
+can thus be formally stated as follows:
+.IP 1.
+It is the rotation angle of the hands of a non-DST-observing
+civil time clock, i.e., time-of-day rather than physical time interval.
+.IP 2.
+One count of
+.B time_t
+represents an interval of civil time during which the hour hand of
+an official civil time clock rotates by 30 arc-seconds, while
+the minute hand of the same clock rotates by 6 arc-minutes,
+\fBcompletely irrespective of what this time interval may happen to
+equal in SI seconds.\fP
+.IP 3.
+The
+.B time_t
+epoch is the moment when the official civil time clocks at
+Murray Hill, New Jersey displayed \%1969-12-31T19:00:00 exactly,
+\fBcompletely irrespective of what this moment may correspond to
+on more formally defined timescales.\fP
+.SH CONTROVERSY
+Being merely a representation of civil time that has an uncertainty
+on the order of seconds and is completely meaningless on even finer
+scales, the traditional UNIX time is clearly unsuitable for
+applications that require time in a Newtonian or Einsteinian
+physical sense, such as physics experiments, air traffic control, etc.
+.PP
+In the opinion of Michael Spacefalcon, the maintainer of
+4.3BSD-Quasijarus and the author of this manual page,
+the least invasive and least disruptive way to solve that problem would be
+to implement an entirely separate timekeeping system for physical interval
+time, entirely disconnected from traditional UNIX time, keeping the
+latter strictly for \fIcivil\fP (or social) purposes for which
+it has been predominantly used.
+.PP
+Unfortunately, a strong technocratic lobby has been relentlessly
+pushing in a different direction: they assert that the counts of
+.B time_t
+should be SI seconds, rather than seconds of mean solar time
+(1/86400th fractions of a day) whose duration in Newtonian physical time
+is variable and somewhat unpredictable thanks to the irregularities
+in Earth's rotation,
+and they demand that ``POSIX'' time be defined in terms of UTC,
+which is very problematic because the latter is a purely man-made
+construct that is highly susceptible to political machinations.
+.PP
+A commonly heard proposal is to switch
+.B time_t
+to a linear count of SI seconds, or more precisely, a count of
+SI seconds
+.I
+as reckoned by the technocratic cartel's worldwide ensemble of atomic clocks
+(never mind that such a count would instantly become devoid of all meaning
+if those clocks were all powered off for just a couple of minutes),
+and to produce time for human display (at least for those users
+who operate in jurisdictions that still use Mean Solar Time as the basis
+of their legal time, even if it's indirect MST in the form of UTC with
+leap seconds) by having
+.IR ctime (3)
+or other similar functions perform leap second manipulations.
+.PP
+At first glance the above proposal sounds like a good idea,
+and I have seriously considered it at one time as well.
+After all, given that MST is not directly and continuously observable,
+the most expedient method of producing a practical realization thereof
+that is continuously accessible in real time is to derive it algorithmically
+from a stable interval time source such as an atomic clock.
+If in today's society the approximation to Mean Solar Time that serves
+as most people's civil time is algorithmically derived from stable
+interval time, wouldn't it make more sense to adopt the latter as the
+fundamental basis of time for computers, and to synthesize the
+MST-approximation locally as needed?
+.PP
+Deeper thought, however, reveals the following problems with the proposal:
+.IP \(bu
+Terrestrial Time (TT), the most philosophically perfect (Platonic ideal)
+form of physical interval time on Earth, is in fact just as unattainable
+as the Platonic ideal form of Mean Solar Time.
+Therefore, attempting to build a system that runs on ``true physical time''
+would in fact produce a system dependent on the
+.I
+human civilisation's consensus idea
+of true physical time,
+or even more precisely,
+.I
+a technocratic cartel's idea
+of true physical time.
+.IP \&
+Therefore, if we ever have to make a complete breakaway from
+the mainstream civilisation such that we lose access to all means
+of dissemination of ``consensus atomic time'', or if that consensus
+and its corresponding means of dissemination shift (either instantly
+or gradually) to something that we find completely unusable
+for whatever reason,
+all our efforts to maintain a notion of ``true physical time''
+on our UNIX systems would be suddenly brought to naught.
+.IP \&
+On the other hand, recovery of an approximation to Mean Solar Time
+by an infrastructurally-deprived observer ought to be much easier
+than, for example, recovery of an approximation to TT using observation
+of various bodies of the solar system and fitting their positions
+into dynamical models.
+A form of solar time (mean or otherwise) would also most likely
+be of much more immediate benefit to a breakaway colony seeking
+to rebuild civilisation than a system of less tangible dynamical time.
+.IP \(bu
+Putting it another way, GMT, being a natural phenomenon, is more
+durable than UTC, a man-made construct whose survival is totally
+dependent on continuous, unbroken operation of very complex equipment
+with worldwide cooperation, and which is subject to political whim.
+If all humans were to kill each other off, UTC would cease to exist,
+and the same would happen if a new world war put an end to the notions
+of international cooperation.
+However, GMT would still be perfectly meaningful as the Mean Solar Time
+at the site of the ruins of Greenwich.
+.IP \(bu
+Assuming that the UNIX systems in question primarily serve the needs
+of human users whose civil time is a form of MST,
+we can take it for granted that every UNIX system will always need
+to be able to display MST-based civil times on demand, whether we
+like it or not, whether it be done by using MST as the ``native''
+internal timescale, or by computing MST from a TT-approximating
+internal timescale on the fly.
+And since the ``real time'' reckoning requirements of the vast
+majority of applications are perfectly satisfied by the undisciplined
+off-the-shelf low-cost crystal oscillators that serve as standard
+computer system clocks, whose inherent instability (unpredictable
+frequency variations) exceeds the difference between TT and MST,
+it follows that a system clock that is steered to MST and reckoned
+in MST seconds is perfectly sufficient for the typical ``real time'' functions
+such as timing between retries, toggling DTR long enough for a modem
+to detect it, DNS zone refresh intervals, etc.
+.IP \&
+Therefore, it follows that an MST-modeling system clock is always
+needed, whereas an additional TT-modeling one is optional and
+very rarely needed.
+An ordinary UNIX system has absolutely no need for an interval time
+clock whose stability with respect to TT is greater than that of MST;
+hence the technocratic lobby's efforts to impose one upon us
+whether we want it or not are hereby rejected as unwelcome advances.
+.IP \&
+A system whose internal clock is maintained as a count of how many
+``seconds'' total have been announced to the world by the
+technocratic cartel's ensemble of atomic clocks would have no practical
+use for this count except to convert it to an MST representation,
+be it a true angle measure or a pseudo-sexagesimal concoction
+of the 23:59:60 kind.
+Such a system would be burdened with the need to maintain up-to-date
+leap second tables, which are otherwise completely unnecessary,
+and worst of all, when those tables inevitably go stale, the result
+will likely be the opposite of the desired outcome: one would naively
+hope that the ``true atomic'' time in the kernel would remain correct
+with respect to TAI but the user display would be off by a second,
+alerting operators to the need to update their leap second tables,
+but the likely result is the opposite: if MST-based time forms as
+shown by wall clocks and wristwatches are seen as the ultimate authority
+on what the correct time is, ignorant operators will likely set the
+kernel time to the wrong value so that the user display would look
+``right''.
+.IP \(bu
+``If it ain't broke, don't fix it!''
+The de facto definition of UNIX
+.B time_t
+that has existed up until now is a measure of Mean Solar Time:
+while the historical
+.I de facto
+definition is, more strictly speaking, a representation of
+.I civil
+time defined by local jurisdictions, rather than a more exalted
+scientific concept like MST,
+no jurisdiction (as of this writing) has yet defined its civil
+time to anything other than some form of MST, even if it's
+indirect MST in the form of UTC with leap seconds,
+hence the existing historical definition of
+.B time_t
+has, in fact, been MST in practice.
+This definition has served us very well all this time,
+it still works fine at the present, hence there is no need
+to change it now.
+.IP \&
+Any proposed switchover of
+.B time_t
+from a model of MST to a model of TT can only be done in two ways:
+either by instituting a retroactive redefinition and breaking the
+precise meaning of all historical timestamps, or by declaring some
+arbitrary numerical value of
+.B time_t
+to be the switchover point, such that values that are numerically lower
+are to be interpreted as MST,
+and those that are numerically higher as TT.
+The former method involves breakage of historical data for no gain;
+the latter method involves introducing additional complexity
+for no immediate benefit over status quo.
+.IP \&
+If we ever decide to make such a switchover in the future, doing
+it by the latter method at that future time would be no different
+conceptually from doing it now,
+hence there is no benefit to making the transition right now,
+and it makes more sense to maintain status quo
+until and unless a more compelling reason for change arises.
+.SH DECISION
+.IP \(bu
+The semantic meaning of
+.B time_t
+in 4.3BSD-Quasijarus
+is hereby defined to be a linear measure of elapsed Mean Solar Time
+on Earth in days, with each count of
+.BR time_t ,
+hereby called a second,
+denoting 1/86400th of a day.
+.IP \(bu
+The timescale represented by
+.B time_t
+is hereby officially clarified to be
+.B GMT
+rather than UTC.
+.IP \(bu
+The SI definition of the second is hereby explicitly
+declared null and void for the purposes of timekeeping under
+4.3BSD-Quasijarus, reverting to the original Sumerian definition
+of 1/86400th of a day.
+.SH "DIFFERENCE FROM POSIX"
+In
+.I de facto
+terms, the present UNIX definition of
+.B time_t
+is equivalent to what is colloquially known as ``POSIX time''.
+However, there are some important differences:
+.IP \(bu
+The POSIX definition of time makes references to ``UTC''.
+The Quasijarus definition, on the other hand, disavows all ties to UTC,
+explicitly and deliberately using GMT instead.
+.IP \(bu
+Because leap seconds are a special quirk of UTC that does not exist
+in GMT, no leap second handling issues are relevant to Quasijarus
+systems.
+Instead our system time is steered to an external source of
+astronomically observed Mean Solar Time via the
+.IR adjtime (2)
+system call.
+.IP \(bu
+The technocratic lobby that rallies under the banners of SI, UTC and
+POSIX derides the smoothed monotonic increase of system time at
+variable rates to account for the irregularities in Mean Solar Time
+relative to TT as being ``wrong''.
+I am not qualified to comment on whether such an approach is
+right or wrong in the POSIX world,
+but when it comes to Quasijarus systems,
+the present document authoritatively declares that the smoothed
+monotonic increase of system time at a slewed rate as produced
+by the
+.IR adjtime (2)
+system call
+.B
+is the most correct way
+to maintain the system's idea of civil Mean Solar Time.
+.PP
+In practical terms, for as long as UTC retains its leap seconds,
+and for as long as the systems claiming to follow POSIX continue
+to count the non-leap seconds of UTC, such that their
+.B time_t
+counts represent a measure of Mean Solar Time in reality,
+the POSIX and Quasijarus
+.B time_t
+timestamps will remain interoperable without error.
+However, the precise behaviour around a leap second will most
+likely differ: while Quasijarus systems are required to
+produce a smooth time ``smear'', most POSIX systems in this
+author's experience jump back in time and repeat a second instead.
+But the absolute time error between two systems, each implementing
+its respective ideal of time handling with absolute perfection,
+cannot exceed one second (one count of
+.BR time_t ),
+which should not be a problem for any reasonable civil or social
+application.
+.PP
+However, in the event that UTC is deleteriously redefined
+without leap seconds, such that it ceases to be a good-faith
+approximation to GMT, the explicit definition of Quasijarus system time
+as GMT rather than UTC will compel us to switch to some alternate
+realization of GMT, e.g., this author's proposed UTR system.
+And if the ``POSIX'' time count stops being a measure of MST and
+makes a switchover to being an approximation to some other time ideal
+such as TT (whether that happens by explicit action or implicitly
+as a result of a surreptitious change in some underlying reference
+like UTC or NTP),
+in the absence of Quasijarus making the same switchover decision
+explicitly,
+the POSIX and Quasijarus
+.B time_t
+timescales will begin to drift apart secularly.
+.SH RANGE LIMITS
+Completely separate from the question of philosophical semantics
+of the represented time is the issue of range limits imposed by the
+.B time_t
+data storage type.
+The original native type used for
+.B time_t
+has been the signed 32-bit
+.BR long ,
+with the additional reinforcement that the original implementation of the
+.IR ctime (3)
+family of functions actually treated 32-bit values with the high bit set
+as negative, displaying years before 1970.
+The implications of this original
+.B time_t
+definition are:
+.IP \(bu
+All systems using this unchanged definition (or implementation,
+depending on one's point of view) are doomed to fail in
+early A.D. 2038 (year SE76 on the Terran Revolutionary Calendar)
+when the largest second count that can fit into 31 bits is reached:
+upon reaching the fateful count, the system will suddenly start
+displaying dates in late 1901.
+.IP \(bu
+The original definition and implementation allowed
+.B time_t
+values to represent proleptic timestamps between
+\%1901-12-13T20:45:52 and \%1969-12-31T23:59:59 GMT, inclusive.
+However, no such timestamps exist in any of the releases from BTL or Berkeley,
+and no such timestamps have been created at Harhan either,
+as I have always considered
+.B time_t
+to be the wrong format for representing such historical data.
+.PP
+There are two possible solutions to the upcoming Y2038 crisis:
+.IP \(bu
+Change the 32-bit
+.B time_t
+type from signed to unsigned interpretation.
+Such a change would move the end-date from 2038 to some time
+in early A.D. 2106 (late SE144) at the expense of giving up
+the ability to represent proleptic dates in the 1901\(em1969 range.
+.IP \(bu
+Expand the storage allocated for each timestamp from 32 to 64 bits.
+.B 2**63
+seconds equals hundreds of billions of years (using the current
+length of the Terran tropical year in SI seconds or in Terran MST
+seconds) and exceeds the current estimate for the age of the
+Universe by an order of magnitude, hence a 64-bit
+second count can be treated as either signed or unsigned as
+convenient, and can represent all known past and projected future.
+.PP
+Expanding
+.B time_t
+to 64 bits would be a more permanent solution (A.D. 2106 is a future
+date close enough to contemplate, hence an unsigned 32-bit solution
+has to be seen as a temporary band-aid fix), and to the best of
+this author's knowledge, it's the solution that has already been
+implemented by the more mainstream operating systems.
+However, shoehorning 64-bit
+.B time_t
+into an Ancient UNIX system such as 4.3BSD-Quasijarus
+would be
+.I extremely
+painful,
+and the much simpler unsigned 32-bit solution should be sufficient
+for the projected biological lifetime of the system's last remaining user.
+Therefore, the adopted Quasijarus solution is:
+.IP \(bu
+The current system is being patched up for unsigned 32-bit
+.BR time_t ,
+officially redefining the meaning of 32-bit
+.B time_t
+values with the high bit set from the 1901\(em1969 range
+to the 2038\(em2106 range and
+extending the life of 32-bit-only systems till 2106.
+.IP \(bu
+If I live that long, I'll start working on a 64-bit-enabled version
+of Quasijarus some time in the 2nd half of the 21st century.
+.PP
+The changes for unsigned 32-bit
+.B time_t
+consist of:
+.IP \(bu
+The
+.B typedef
+for
+.B time_t
+in
+.B <sys/types.h>
+has been changed from
+.B long
+to
+.BR "unsigned long" .
+.IP \(bu
+The new Quasijarus versions of the
+.IR ctime (3)
+family of functions treat their
+.B time_t
+inputs as unsigned, producing dates between
+\%1969-12-31 (the epoch in time zones west of Greenwich) and \%2106-02-07.
+.IP \(bu
+The few places where the kernel does time comparisons for ordering
+will be fixed to make them correct for the unsigned interpretation.
+.IP \(bu
+Any other places in the code base that may be in need of fixing
+will be fixed as they are discovered.
+.PP
+Additionally, a new time data type has been created for safe
+processing and representation of data that may contain dates falling
+outside of the UNIX window of 1970\(em2106: see
+.IR mjdtime (3).
+.SH SEE ALSO
+date(1), gettimeofday(2), mjdtime(3), time(3)

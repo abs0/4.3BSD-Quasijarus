@@ -1,0 +1,100 @@
+.PS
+boxwid=2.0i
+psize=.06
+.ps 9
+#
+define	memsect	X	box ht $3 $4 $5 $6 $7 $8 $9 ; \
+			move to last box.nw ; \
+			move left psize/2 then down psize*3/2 ; \
+			$1 rjust ; \
+			move to last box.sw ; \
+			move left psize/2 then up psize ; \
+			$2 rjust ; \
+			move to last box.s ; \
+			down ; \
+		X
+#
+define	filler	X	box ht $1 $2 $3 $4 $5 $6 $7 $8 $9 ; \
+			move to last box.s ; \
+			down ; \
+		X
+#
+define	bracket	X	move to $1.ne then down psize*2 ; \
+			line <- right psize*5 ; \
+			move to $2.se then up psize*2 ; \
+			line <- right psize*5 ; \
+			line from 2nd last line.r to last line.r ; \
+			line right from last line.c ; \
+			$3 ljust ; \
+			move to $2.s ; \
+			down ; \
+		X
+#
+#
+#
+Traps:	memsect("0", "034", 0.4i, "Processor Traps")
+	filler(0.25i)
+	memsect("060-4", "", psize*3, "Console Interrupts")
+	filler(0.25i)
+	memsect("0100", "", psize*3, "60 Hz Line Clock")
+EndT:	memsect("0104", "0776", 0.6i)
+#
+	bracket(Traps, EndT, " Low Core Vectors")
+#
+	move down 0.1i
+Start:	memsect("01000", "", 0.25i, "start:")
+	filler(0.75i, "main()", ".", ".", "goto start;")
+	filler(0.35i, "user subroutines")
+	filler(0.35i, "device drivers")
+	filler(0.75i, "standard libraries")
+	filler(0.75i, "initialized data", "and", "BSS data")
+	filler(0.5i invis, "Available memory")
+	line <- from last box.sw to last box.nw
+	line <- from last box.se to last box.ne
+	line <- from last box.s to last box.n
+	move to last box.s
+	move down 0.2i
+EndS:	memsect("", "157776", 0.5i invis, "stack")
+	line -> from last box.sw to last box.nw
+	line -> from last box.se to last box.ne
+	line <- from last box.n to last box.s
+	line from last box.sw to last box.se
+#
+	bracket(Start, EndS, " Downloaded Program (Max 56Kb)")
+#
+	move down 0.1i
+Devs:	memsect("160000", "", 0.5i)
+	memsect("173000", "173776", 0.35i, "ROM Boot")
+	filler(0.25i)
+	memsect("177560-6", "", psize*3, "Console registers")
+EndD:	memsect("", "177776", 0.5i)
+#
+	bracket(Devs, EndD, " Device Registers")
+#
+.PE
+.PS
+Locore:	box "Low Core" "Vectors"
+	line -> right from Locore.e
+DevDr:	box "Device" "Drivers"
+	move to Locore.s
+	move down
+Init:	box "Initialize"
+	line <- left from Init.w
+Start:	circle "Start"
+	move to Init.s
+	line -> down
+Main:	box ht 2*boxht "User" "Program"
+	move to Main.ne then down Main.ht/8
+	line <-> right
+DevLib:	box "Device" "Libraries"
+	move to DevLib.n
+	line <-> to DevDr.s
+	move to Main.se then up Main.ht/8
+	line <-> right
+Libs:	box "Standard" "Libraries"
+	move to Main.s
+	line -> down
+Reset:	box "reset"
+	line down then left Reset.x - Start.x
+	line -> to Start.s
+.PE

@@ -1,0 +1,62 @@
+h50508
+s 00001/00001/00028
+d D 6.1 85/04/29 15:11:52 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00003/00028
+d D 5.1 85/04/29 15:11:43 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00031/00000/00000
+d D 4.1 85/04/29 15:11:36 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH WHICH 1 10/10/79
+E 2
+I 2
+D 3
+.TH WHICH 1 "10 October 1979"
+E 3
+I 3
+.TH WHICH 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+which \- locate a program file including aliases and paths (\fIcsh\fR only)
+.SH SYNOPSIS
+.B which
+[ name ] ...
+.SH DESCRIPTION
+.I Which
+takes a list of names and looks for the files which would be
+executed had these names been given as commands.
+Each argument is expanded if it is aliased,
+and searched for along the user's path.
+Both aliases and path are taken from the user's \&.cshrc file.
+.SH FILES
+.ta 1i
+~/\&.cshrc	source of aliases and path values
+.SH DIAGNOSTICS
+A diagnostic is given for names which are aliased to more than a single
+word,
+or if an executable file with the argument name was not found in the path.
+.SH BUGS
+D 2
+Only aliases and paths from ~/\&.cshrc are used, importing from the current
+environment is not attempted.
+E 2
+Must be executed by a csh, since only csh's know about aliases.
+E 1

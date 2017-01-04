@@ -1,0 +1,80 @@
+h11589
+s 00003/00005/00028
+d R 6.2 85/05/24 12:03:27 miriam 4 3
+c From Prof. Kahan
+e
+s 00001/00001/00032
+d D 6.1 85/05/15 14:56:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00007/00030
+d D 5.1 85/05/15 14:56:45 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00037/00000/00000
+d D 4.1 85/05/15 14:56:37 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FLOOR 3M 
+E 2
+I 2
+D 3
+.TH FLOOR 3M  "19 January 1983"
+E 3
+I 3
+.TH FLOOR 3M  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+fabs, floor, ceil \- absolute value, floor, ceiling functions
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double floor(x)
+.B double x;
+.PP
+.B double ceil(x)
+.B double x;
+.PP
+.B double fabs(x)
+.B double x;
+.nf
+.SH DESCRIPTION
+.I Fabs
+returns the absolute value
+.RI | \|x\| |.
+.PP
+.I Floor
+D 2
+returns the
+largest integer
+not greater than
+E 2
+I 2
+returns the largest integer not greater than
+E 2
+.IR x .
+.PP
+.I Ceil
+D 2
+returns the
+smallest integer
+not less than
+E 2
+I 2
+returns the smallest integer not less than
+E 2
+.IR x .
+.SH SEE ALSO
+abs(3)
+E 1

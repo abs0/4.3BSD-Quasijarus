@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)cons.c	7.5 (Berkeley) 5/7/88
+ *	@(#)cons.c	7.6 (Berkeley) 3/16/03
  */
 
 /*
@@ -203,7 +203,7 @@ cnstart(tp)
 	if (consdone == 0)
 		goto out;
 	c = getc(&tp->t_outq) & 0xff;
-	if ((tp->t_flags & (RAW|LITOUT)) == 0) {
+	if ((tp->t_flags & (RAW|LITOUT|PASS8)) == 0) {
 		if (c <= 0177)
 			c |= (partab[c] & 0200);
 		else {

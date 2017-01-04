@@ -11,12 +11,12 @@
  */
 
 #ifdef notdef
-static char sccsid[] = "@(#)version.c	5.3 (Berkeley) 2/18/88";
+static char sccsid[] = "@(#)version.c	5.4 (Berkeley) 4/15/03";
 #endif /* notdef */
 
 /*
  * Just keep track of the date/sid of this version of Mail.
  * Load this file first to get a "total" Mail version.
  */
-static	char	*SccsID = "@(#)UCB Mail Version 5.3 (2/18/88)";
-char	*version = "5.3 2/18/88";
+static	char	*SccsID = "@(#)UCB Mail Version 5.4 (4/15/03)";
+char	*version = "5.4 4/15/03";

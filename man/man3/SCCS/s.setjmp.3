@@ -1,0 +1,134 @@
+h05711
+s 00017/00006/00065
+d D 6.2 86/01/09 16:04:14 mckusick 4 3
+c bug is fixed; longjmp botch can now be caught
+e
+s 00001/00001/00070
+d D 6.1 85/05/15 15:47:04 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00025/00002/00046
+d D 5.1 85/05/15 15:46:50 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00048/00000/00000
+d D 4.1 85/05/15 15:46:37 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SETJMP 3
+E 2
+I 2
+D 3
+.TH SETJMP 3 "19 January 1983"
+E 3
+I 3
+.TH SETJMP 3 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+setjmp, longjmp \- non-local goto
+.SH SYNOPSIS
+.nf
+.B #include <setjmp.h>
+.PP
+.B setjmp(env)
+.B jmp_buf env;
+.PP
+.B longjmp(env, val)
+.B jmp_buf env;
+I 2
+.PP
+.B _setjmp(env)
+.B jmp_buf env;
+.PP
+.B _longjmp(env, val)
+.B jmp_buf env;
+E 2
+.fi
+.SH DESCRIPTION
+These routines are useful for dealing with errors 
+and interrupts encountered in
+a low-level subroutine of a program.
+.PP
+.I Setjmp 
+saves its stack environment in
+.I env
+for later use by
+.I longjmp.
+It returns value 0.
+.PP
+.I Longjmp
+restores the environment saved by the last call of
+.IR setjmp .
+It then returns in such a way that execution
+continues as if the call of 
+.I setjmp
+had just returned the value
+.I val
+to the function that invoked
+.I setjmp,
+which must not itself have returned in the interim.
+All accessible data have values as of the time
+.I longjmp
+was called.
+I 2
+.PP
+.I Setjmp
+and
+.I longjmp
+save and restore the signal mask
+.IR sigmask (2),
+while
+.I _setjmp
+and
+.I _longjmp
+manipulate only the C stack and registers.
+I 4
+.SH ERRORS
+.PP
+If the contents of the
+.B jmp_buf
+are corrupted, or correspond to an environment that has already returned,
+.I longjmp
+calls the routine 
+.IR longjmperror .
+If
+.I longjmperror
+returns the program is aborted.
+The default version of 
+.I longjmperror
+prints the message ``longjmp botch'' to standard error and returns.
+User programs wishing to exit more gracefully can write their own
+versions of 
+.IR longjmperror .
+E 4
+E 2
+.SH "SEE ALSO"
+D 2
+signal(2)
+E 2
+I 2
+sigvec(2), sigstack(2), signal(3)
+D 4
+.SH BUGS
+.I Setjmp
+does not save current notion of whether the process is
+executing on the signal stack.  The result is that a
+longjmp to some place on the signal stack leaves the
+signal stack state incorrect.
+E 4
+E 2
+E 1

@@ -1,0 +1,22 @@
+h16054
+s 00011/00000/00000
+d D 5.1 88/03/30 15:54:25 bostic 1 0
+c date and time created 88/03/30 15:54:25 by bostic
+e
+u
+U
+t
+T
+I 1
+.>3
+<3>4
+*<3>c
+*(<3+4)>f
+(<f&7fffffff)>f
+(<f#20-<f)>i
+(((<c-<i)#20)%20)>l
+,<l$<<clist.nxt
+(<f&7fffffff)>f
+(80000000|<f),<c/C
+<4/D
+E 1

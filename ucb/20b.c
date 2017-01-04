@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)20b.c	5.5 (Berkeley) 6/29/88";
+static char sccsid[] = "@(#)20b.c	5.6 (Berkeley) 4/7/04";
 #endif /* not lint */
 
 #include <stdio.h>
@@ -48,13 +48,17 @@ main(argc, argv)
 	for (cc = bsize; cc > 0;) {
 		current = base;
 		for (want = bsize; want > 0 && cc > 0; want -= cc) {
-			if ((cc = read(0, current, want)) < 0)
+			if ((cc = read(0, current, want)) < 0) {
+				perror("20b: read");
 				return(-1);
+			}
 			current += cc;
 		}
 		want = bsize - want;
-		if (want && write(1, base, want) != want)
+		if (want && write(1, base, want) != want) {
+			perror("20b: write");
 			return(-1);
+		}
 	}
 	return(0);
 }

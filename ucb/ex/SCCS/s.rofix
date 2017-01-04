@@ -1,0 +1,14 @@
+h09397
+s 00003/00000/00000
+d D 4.1 83/06/15 13:58:00 sam 1 0
+c date and time created 83/06/15 13:58:00 by sam
+e
+u
+U
+t
+T
+I 1
+g/^[ 	]*\.data/s//	.text/
+w
+q
+E 1

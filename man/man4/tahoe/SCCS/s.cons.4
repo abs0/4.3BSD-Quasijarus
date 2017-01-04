@@ -1,0 +1,82 @@
+h10834
+s 00024/00005/00017
+d D 6.2 87/06/30 21:22:16 sam 2 1
+c update addresses to reflect change form 24 to 32 bit addresses 
+c in config file; rewrite cy.4 and vd.4 as well as vx.4
+e
+s 00022/00000/00000
+d D 6.1 86/11/24 18:20:12 mckusick 1 0
+c from CCI
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH CONS 4 "%Q%"
+.UC 7
+.SH NAME
+D 2
+cons \- TAHOE console interface
+E 2
+I 2
+cons, CP, remote \- Tahoe console interface
+E 2
+.SH DESCRIPTION
+The console is available to the processor through the console registers.
+It acts like a normal terminal, except that a ``~'' is used to transfer
+D 2
+command to the console processor.
+E 2
+I 2
+commands to the console processor when the front panel key switch is
+in the ``foo'' or ``bar'' position.
+.PP
+Useful commands to the console processor include ``~h'' to halt
+the machine and ``~b'' to force a reboot.  When the console processor
+is in control, a ``#>'' prompt is displayed.  To continue execution
+after halting the machine with ``~h'', use ``r.''.
+Refer to the Tahoe
+console processor handbook for the complete list of facilities available
+through the console processor.
+.PP
+The
+.I CP
+device provides direct access to the console processor.  The
+.I remote
+device is a secondary console terminal used for remote diagnosis;
+it is normally connected to a modem.
+E 2
+.SH FILES
+D 2
+/dev/console
+E 2
+I 2
+.nf
+/dev/console,
+/dev/CP,
+/dev/remote
+E 2
+.SH "SEE ALSO"
+D 2
+tty(4), reboot(8)
+E 2
+I 2
+kdb(4), tty(4), reboot(8)
+E 2
+.br
+D 2
+CP Handbook
+E 2
+I 2
+Console processor handbook
+E 2
+.SH DIAGNOSTICS
+None.
+E 1

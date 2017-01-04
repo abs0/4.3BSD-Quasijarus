@@ -1,438 +1,616 @@
 /*
- * Copyright (c) 1987 Regents of the University of California.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms are permitted
- * provided that the above copyright notice and this paragraph are
- * duplicated in all such forms and that any documentation,
- * advertising materials, and other materials related to such
- * distribution and use acknowledge that the software was developed
- * by the University of California, Berkeley.  The name of the
- * University may not be used to endorse or promote products derived
- * from this software without specific prior written permission.
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
- * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
- * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ * Copyright (c) 1980 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
  */
 
 #ifndef lint
 char copyright[] =
-"@(#) Copyright (c) 1987 Regents of the University of California.\n\
+"@(#) Copyright (c) 1980 Regents of the University of California.\n\
  All rights reserved.\n";
-#endif /* not lint */
+#endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)man.c	5.18 (Berkeley) 8/28/99";
-#endif /* not lint */
+static char sccsid[] = "@(#)man.c	5.14 (Berkeley) 10/20/04";
+#endif not lint
 
-#include <sys/param.h>
-#include <sys/file.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <sgtty.h>
+#include <sys/param.h>
+#include <sys/stat.h>
+#include <signal.h>
+#include <strings.h>
 
-#define	DEF_PAGER	"/usr/ucb/more -s"
-#define	DEF_PATH	"/usr/man:/usr/new/man:/usr/local/man"
-#define	LOCAL_PATH	"/usr/local/man"
-#define	NEW_PATH	"/usr/new/man"
+/*
+ * man
+ * link also to apropos and whatis
+ * This version uses more for underlining and paging.
+ */
+#define	NROFF	"nroff -man"		/* for nroffing to tty */
+#define	MORE	"more -s"		/* paging filter */
+#define	CAT_	"/bin/cat"		/* for when output is not a tty */
+#define	CAT_S	"/bin/cat -s"		/* for '-' opt (no more) */
 
-#define	NO	0
-#define	YES	1
+#define TROFFCMD "vtroff -man %s"
 
-static char	*command,		/* command buffer */
-		*defpath,		/* default search path */
-		*locpath,		/* local search path */
-		*machine,		/* machine type */
-		*manpath,		/* current search path */
-		*newpath,		/* new search path */
-		*pager,			/* requested pager */
-		how;			/* how to display */
+#define	ALLSECT	"1nl6823457po"	/* order to look through sections */
+#define	SECT1	"1nlo"		/* sections to look at if 1 is specified */
+#define	SUBSEC1	"cg"		/* subsections to try in section 1 */
+#define	SUBSEC3	"sxmncf"
+#define	SUBSEC4	"pfn"
+#define	SUBSEC8	"cv"
 
-#define	ALL	0x1			/* show all man pages */
-#define	CAT	0x2			/* copy file to stdout */
-#define	WHERE	0x4			/* just tell me where */
+#define	WHATIS	"whatis"
+
+int	nomore;
+char	*CAT	= CAT_;
+char	*manpath = "/usr/man";
+char	*strcpy();
+char	*strcat();
+char	*getenv();
+char	*calloc();
+char	*trim();
+int	remove();
+int	apropos();
+int	whatis();
+int	section;
+int	subsec;
+int	troffit;
+int	mypid;
+
+#define	eq(a,b)	(strcmp(a,b) == 0)
 
 main(argc, argv)
 	int argc;
-	register char **argv;
+	char *argv[];
 {
-	extern char *optarg;
-	extern int optind;
-	int ch;
-	char *getenv(), *malloc();
+	char *mp;
 
-	while ((ch = getopt(argc, argv, "-M:P:afkw")) != EOF)
-		switch((char)ch) {
-		case '-':
-			how |= CAT;
+	if ((mp = getenv("MANPATH")) != NULL)
+		manpath = mp;
+	umask(0);
+	mypid = getpid();
+	if (strcmp(argv[0], "apropos") == 0) {
+		runpath(argc-1, argv+1, apropos);
+		exit(0);
+	}
+	if (strcmp(argv[0], "whatis") == 0) {
+		runpath(argc-1, argv+1, whatis);
+		exit(0);
+	}
+	if (argc <= 1) {
+		fprintf(stderr, "Usage: man [ section ] name ...\n");
+		exit(1);
+	}
+	argc--, argv++;
+	while (argc > 0 && argv[0][0] == '-') {
+		switch(argv[0][1]) {
+
+		case 0:
+			nomore++;
+			CAT = CAT_S;
 			break;
-		case 'M':
-		case 'P':		/* backward compatibility */
-			defpath = optarg;
+
+		case 't':
+			troffit++;
 			break;
-		case 'a':
-			how |= ALL;
-			break;
-		/*
-		 * "man -f" and "man -k" are backward contemptible,
-		 * undocumented ways of calling whatis(1) and apropos(1).
-		 */
-		case 'f':
-			jump(argv, "-f", "whatis");
-			/*NOTREACHED*/
+
 		case 'k':
-			jump(argv, "-k", "apropos");
-			/*NOTREACHED*/
-		/*
-		 * Deliberately undocumented; really only useful when
-		 * you're moving man pages around.  Not worth adding.
-		 */
-		case 'w':
-			how |= WHERE | ALL;
-			break;
-		case '?':
-		default:
-			usage();
-		}
-	argv += optind;
+			apropos(argc-1, argv+1);
+			exit(0);
 
-	if (!*argv)
-		usage();
+		case 'f':
+			whatis(argc-1, argv+1);
+			exit(0);
 
-	if (!(how & CAT))
-		if (!isatty(1))
-			how |= CAT;
-		else if (pager = getenv("PAGER")) {
-			register char *p;
-
-			/*
-			 * if the user uses "more", we make it "more -s"
-			 * watch out for PAGER = "mypager /usr/ucb/more"
-			 */
-			for (p = pager; *p && !isspace(*p); ++p);
-			for (; p > pager && *p != '/'; --p);
-			if (p != pager)
-				++p;
-			/* make sure it's "more", not "morex" */
-			if (!strncmp(p, "more", 4) && (!p[4] || isspace(p[4]))){
-				char *opager = pager;
-				/*
-				 * allocate space to add the "-s"
-				 */
-				if (!(pager = malloc((u_int)(strlen(opager) 
-				    + sizeof("-s") + 1)))) {
-					fputs("man: out of space.\n", stderr);
-					exit(1);
-				}
-				(void)sprintf(pager, "%s %s", opager, "-s");
+		case 'P':		/* backwards compatibility */
+		case 'M':
+			if (argc < 2) {
+				fprintf(stderr, "%s: missing path\n", *argv);
+				exit(1);
 			}
+			argc--, argv++;
+			manpath = *argv;
+			break;
 		}
-		else
-			pager = DEF_PAGER;
-	if (!(machine = getenv("MACHINE")))
-		machine = MACHINE;
-	if (!defpath && !(defpath = getenv("MANPATH")))
-		defpath = DEF_PATH;
-	locpath = LOCAL_PATH;
-	newpath = NEW_PATH;
-	man(argv);
-	/* use system(3) in case someone's pager is "pager arg1 arg2" */
-	if (command)
-		(void)system(command);
+		argc--, argv++;
+	}
+	if (troffit == 0 && nomore == 0 && !isatty(1))
+		nomore++;
+	section = 0;
+	do {
+		if (eq(argv[0], "local")) {
+			section = 'l';
+			goto sectin;
+		} else if (eq(argv[0], "new")) {
+			section = 'n';
+			goto sectin;
+		} else if (eq(argv[0], "old")) {
+			section = 'o';
+			goto sectin;
+		} else if (eq(argv[0], "public")) {
+			section = 'p';
+			goto sectin;
+		} else if (isdigit(argv[0][0]) &&
+		    (argv[0][1] == 0 || argv[0][2] == 0)) {
+			section = argv[0][0];
+			subsec = argv[0][1];
+sectin:
+			argc--, argv++;
+			if (argc == 0) {
+				fprintf(stderr,
+				    "But what do you want from section %s?\n",
+				    argv[-1]);
+				exit(1);
+			}
+			continue;
+		}
+		manual(section, argv[0]);
+		argc--, argv++;
+	} while (argc > 0);
 	exit(0);
 }
 
-typedef struct {
-	char	*name, *msg;
-} DIR;
-static DIR	list1[] = {		/* section one list */
-	"cat1", "1st",		"cat8", "8th",		"cat6", "6th",
-	"cat.old", "old",	NULL, NULL,
-},		list2[] = {		/* rest of the list */
-	"cat2", "2nd",		"cat3", "3rd",		"cat4", "4th",
-	"cat5", "5th", 		"cat7", "7th",		"cat3f", "3rd (F)",
-	NULL, NULL,
-},		list3[2];		/* single section */
+runpath(ac, av, f)
+	int ac;
+	char *av[];
+	int (*f)();
+{
 
-static
-man(argv)
+	if (ac > 0 && strcmp(av[0], "-M") == 0 || strcmp(av[0], "-P") == 0) {
+		if (ac < 2) {
+			fprintf(stderr, "%s: missing path\n", av[0]);
+			exit(1);
+		}
+		manpath = av[1];
+		ac -= 2, av += 2;
+	}
+	(*f)(ac, av);
+	exit(0);
+}
+
+manual(sec, name)
+	char sec, *name;
+{
+	char section = sec;
+	char work[100], work2[100];
+	char path[MAXPATHLEN+1], realname[MAXPATHLEN+1];
+	char cmdbuf[150];
+	int ss = 0;
+	struct stat stbuf, stbuf2;
+	int last;
+	char *sp = ALLSECT;
+	FILE *it;
+	char abuf[BUFSIZ];
+
+	strcpy(work, "manx/");
+	strcat(work, name);
+	strcat(work, ".x");
+	last = strlen(work) - 1;
+	if (section == '1') {
+		sp = SECT1;
+		section = 0;
+	}
+	if (section == 0) {		/* no section or section 1 given */
+		for (section = *sp++; section; section = *sp++) {
+			work[3] = section;
+			work[last] = section;
+			work[last+1] = 0;
+			work[last+2] = 0;
+			if (pathstat(work, path, &stbuf))
+				break;
+			if (work[last] >= '1' && work[last] <= '8') {
+				char *cp;
+search:
+				switch (work[last]) {
+				case '1': cp = SUBSEC1; break;
+				case '3': cp = SUBSEC3; break;
+				case '4': cp = SUBSEC4; break;
+				case '8': cp = SUBSEC8; break;
+				default:  cp = ""; break;
+				}
+				while (*cp) {
+					work[last+1] = *cp++;
+					if (pathstat(work, path, &stbuf)) {
+						ss = work[last+1];
+						goto found;
+					}
+				}
+				if (ss == 0)
+					work[last+1] = 0;
+			}
+		}
+		if (section == 0) {
+			if (sec == 0)
+				printf("No manual entry for %s.\n", name);
+			else
+				printf("No entry for %s in section %c%s.\n",
+				   name, sec, " of the manual");
+			return;
+		}
+	} else {			/* section given */
+		work[3] = section;
+		work[last] = section;
+		work[last+1] = subsec;
+		work[last+2] = 0;
+		if (!pathstat(work, path, &stbuf)) {
+			if ((section >= '1' && section <= '8') && subsec == 0) {
+				sp = "\0";
+				goto search;
+			}
+			else if (section == 'o') {	/* XXX */
+				char *cp;
+				char sec;
+				for (sec = '0'; sec <= '8'; sec++) {
+					work[last] = sec;
+					if (pathstat(work, path, &stbuf))
+						goto found;
+					switch (work[last]) {
+					case '1': cp = SUBSEC1; break;
+					case '3': cp = SUBSEC3; break;
+					case '4': cp = SUBSEC4; break;
+					case '8': cp = SUBSEC8; break;
+					default:  cp = ""; break;
+					}
+					while (*cp) {
+						work[last+1] = *cp++;
+						if (pathstat(work, path, &stbuf)) {
+							ss = work[last+1];
+							goto found;
+						}
+					}
+					if (ss == 0)
+						work[last+1] = 0;
+				}
+			}
+			printf("No entry for %s in section %c", name, section);
+			if (subsec)
+				putchar(subsec);
+			printf(" of the manual.\n");
+			return;
+		}
+	}
+found:
+	sprintf(realname, "%s/%s", path, work);
+	if (troffit) {
+		troff(path, work);
+		return;
+	}
+	if (!nomore) {
+		if ((it = fopen(realname, "r")) == NULL) {
+			goto catit;
+		}
+		if (fgets(abuf, BUFSIZ-1, it) &&
+		   strncmp(abuf, ".so ", 4) == 0) {
+			register char *cp = abuf+4;
+			char *dp;
+
+			while (*cp && *cp != '\n')
+				cp++;
+			*cp = 0;
+			while (cp > abuf && *--cp != '/')
+				;
+			dp = ".so man";
+			if (cp != abuf+strlen(dp)+1) {
+tohard:
+				fclose(it);
+				nomore = 1;
+				strcpy(work, abuf+4);
+				goto hardway;
+			}
+			for (cp = abuf; *cp == *dp && *cp; cp++, dp++)
+				;
+			if (*dp)
+				goto tohard;
+			strcpy(work, cp-3);
+		}
+		fclose(it);
+	}
+catit:
+	strcpy(work2, "cat");
+	work2[3] = work[3];
+	work2[4] = 0;
+	sprintf(realname, "%s/%s", path, work2);
+	if (stat(realname, &stbuf2) < 0)
+		goto hardway;
+	strcpy(work2+4, work+4);
+	sprintf(realname, "%s/%s", path, work2);
+	if (stat(realname, &stbuf2) < 0 || stbuf2.st_mtime < stbuf.st_mtime) {
+		if (nomore)
+			goto hardway;
+		printf("Reformatting page.  Wait...");
+		fflush(stdout);
+		if (signal(SIGINT, SIG_IGN) == SIG_DFL) {
+			(void) signal(SIGINT, remove);
+			(void) signal(SIGQUIT, remove);
+			(void) signal(SIGTERM, remove);
+		}
+		sprintf(cmdbuf, "%s %s/%s > /tmp/man%d; trap '' 1 15",
+			NROFF, path, work, mypid);
+		if (system(cmdbuf)) {
+			printf(" aborted (sorry)\n");
+			remove();
+			/*NOTREACHED*/
+		}
+		sprintf(cmdbuf, "/bin/mv -f /tmp/man%d %s/%s 2>/dev/null",
+			mypid, path, work2);
+		if (system(cmdbuf)) {
+			sprintf(path,  "/");
+			sprintf(work2, "tmp/man%d", mypid);
+		}
+		printf(" done\n");
+	}
+	strcpy(work, work2);
+hardway:
+	nroff(path, work);
+	if (work2[0] == 't')
+		remove();
+}
+
+/*
+ * Use the manpath to look for
+ * the file name.  The result of
+ * stat is returned in stbuf, the
+ * successful path in path.
+ */
+pathstat(name, path, stbuf)
+	char *name, path[];
+	struct stat *stbuf;
+{
+	char *cp, *tp, *ep;
+	char **cpp;
+	static char *manpaths[] = {"man", "cat", 0};
+	static char *nopaths[]  = {"", 0};
+
+	if (strncmp(name, "man", 3) == 0)
+		cpp = manpaths;
+	else
+		cpp = nopaths;
+	for ( ; *cpp ; cpp++) {
+		for (cp = manpath; cp && *cp; cp = tp) {
+			tp = index(cp, ':');
+			if (tp) {
+				if (tp == cp) {
+					sprintf(path, "%s%s", *cpp,
+						name+strlen(*cpp));
+				}
+				else {
+					sprintf(path, "%.*s/%s%s", tp-cp, cp, 
+						*cpp, name+strlen(*cpp));
+				}
+				ep = path + (tp-cp);
+				tp++;
+			} else {
+				sprintf(path, "%s/%s%s", cp, *cpp,
+					name+strlen(*cpp));
+				ep = path + strlen(cp);
+			}
+			if (stat(path, stbuf) >= 0) {
+				*ep = '\0';
+				return (1);
+			}
+		}
+	}
+	return (0);
+}
+
+nroff(pp, wp)
+	char *pp, *wp;
+{
+	char cmd[BUFSIZ];
+
+	chdir(pp);
+	if (wp[0] == 'c' || wp[0] == 't')
+		sprintf(cmd, "%s %s", nomore? CAT : MORE, wp);
+	else
+		sprintf(cmd, nomore? "%s %s" : "%s %s|%s", NROFF, wp, MORE);
+	(void) system(cmd);
+}
+
+troff(pp, wp)
+	char *pp, *wp;
+{
+	char cmdbuf[BUFSIZ];
+
+	chdir(pp);
+	sprintf(cmdbuf, TROFFCMD, wp);
+	(void) system(cmdbuf);
+}
+
+any(c, sp)
+	register int c;
+	register char *sp;
+{
+	register int d;
+
+	while (d = *sp++)
+		if (c == d)
+			return (1);
+	return (0);
+}
+
+remove()
+{
+	char name[15];
+
+	sprintf(name, "/tmp/man%d", mypid);
+	unlink(name);
+	exit(1);
+}
+
+unsigned int
+blklen(ip)
+	register char **ip;
+{
+	register unsigned int i = 0;
+
+	while (*ip++)
+		i++;
+	return (i);
+}
+
+apropos(argc, argv)
+	int argc;
 	char **argv;
 {
-	register char *p;
-	DIR *section, *getsect();
-	int res;
+	char buf[BUFSIZ], file[MAXPATHLEN+1];
+	char *gotit, *cp, *tp;
+	register char **vp;
 
-	for (; *argv; ++argv) {
-		manpath = defpath;
-		section = NULL;
-		switch(**argv) {
-		case 'l':				/* local */
-			/* support the "{l,local,n,new}###"  syntax */
-			for (p = *argv; isalpha(*p); ++p);
-			if (!strncmp(*argv, "l", p - *argv) ||
-			    !strncmp(*argv, "local", p - *argv)) {
-				++argv;
-				manpath = locpath;
-				section = getsect(p);
-			}
-			break;
-		case 'n':				/* new */
-			for (p = *argv; isalpha(*p); ++p);
-			if (!strncmp(*argv, "n", p - *argv) ||
-			    !strncmp(*argv, "new", p - *argv)) {
-				++argv;
-				manpath = newpath;
-				section = getsect(p);
-			}
-			break;
-		/*
-		 * old isn't really a separate section of the manual,
-		 * and its entries are all in a single directory.
-		 */
-		case 'o':				/* old */
-			for (p = *argv; isalpha(*p); ++p);
-			if (!strncmp(*argv, "o", p - *argv) ||
-			    !strncmp(*argv, "old", p - *argv)) {
-				++argv;
-				list3[0] = list1[3];
-				section = list3;
-			}
-			break;
-		case '1': case '2': case '3': case '4':
-		case '5': case '6': case '7': case '8':
-			if (section = getsect(*argv))
-				++argv;
-		}
-
-		if (*argv) {
-			if (section)
-				res = manual(section, *argv);
-			else {
-				res = manual(list1, *argv);
-				if (!res || (how & ALL))
-					res += manual(list2, *argv);
-			}
-			if (res || how&WHERE)
-				continue;
-		}
-
-		fputs("man: ", stderr);
-		if (*argv)
-			fprintf(stderr, "no entry for %s in the ", *argv);
-		else
-			fputs("what do you want from the ", stderr);
-		if (section)
-			fprintf(stderr, "%s section of the ", section->msg);
-		if (manpath == locpath)
-			fputs("local ", stderr);
-		else if (manpath == newpath)
-			fputs("new ", stderr);
-		if (*argv)
-			fputs("manual.\n", stderr);
-		else
-			fputs("manual?\n", stderr);
+	if (argc == 0) {
+		fprintf(stderr, "apropos what?\n");
 		exit(1);
 	}
-}
-
-/*
- * manual --
- *	given a directory list and a file name find a file that
- *	matches; check ${directory}/${dir}/{file name} and
- *	${directory}/${dir}/${machine}/${file name}.
- */
-static
-manual(section, name)
-	DIR *section;
-	char *name;
-{
-	register char *beg, *end;
-	register DIR *dp;
-	register int res;
-	char fname[MAXPATHLEN + 1], *index();
-
-	for (beg = manpath, res = 0;; beg = end + 1) {
-		if (end = index(beg, ':'))
-			*end = '\0';
-		for (dp = section; dp->name; ++dp) {
-			(void)sprintf(fname, "%s/%s/%s.0", beg, dp->name, name);
-			if (access(fname, R_OK)) {
-				(void)sprintf(fname, "%s/%s/%s/%s.0", beg,
-				    dp->name, machine, name);
-				if (access(fname, R_OK))
-					continue;
-			}
-			if (how & WHERE)
-				printf("man: found in %s.\n", fname);
-			else if (how & CAT)
-				cat(fname);
+	gotit = calloc(1, blklen(argv));
+	for (cp = manpath; cp; cp = tp) {
+		tp = index(cp, ':');
+		if (tp) {
+			if (tp == cp)
+				strcpy(file, WHATIS);
 			else
-				add(fname);
-			if (!(how & ALL))
-				return(1);
-			res = 1;
-		}
-		if (!end)
-			return(res);
-		*end = ':';
+				sprintf(file, "%.*s/%s", tp-cp, cp, WHATIS);
+			tp++;
+		} else
+			sprintf(file, "%s/%s", cp, WHATIS);
+		if (freopen(file, "r", stdin) == NULL)
+			continue;
+		while (fgets(buf, sizeof buf, stdin) != NULL)
+			for (vp = argv; *vp; vp++)
+				if (match(buf, *vp)) {
+					printf("%s", buf);
+					gotit[vp - argv] = 1;
+					for (vp++; *vp; vp++)
+						if (match(buf, *vp))
+							gotit[vp - argv] = 1;
+					break;
+				}
 	}
-	/*NOTREACHED*/
+	for (vp = argv; *vp; vp++)
+		if (gotit[vp - argv] == 0)
+			printf("%s: nothing appropriate\n", *vp);
 }
 
-/*
- * cat --
- *	cat out the file
- */
-static
-cat(fname)
-	char *fname;
+match(bp, str)
+	register char *bp;
+	char *str;
 {
-	register int fd, n;
-	char buf[BUFSIZ];
 
-	if (!(fd = open(fname, O_RDONLY, 0))) {
-		perror("man: open");
+	for (;;) {
+		if (*bp == 0)
+			return (0);
+		if (amatch(bp, str))
+			return (1);
+		bp++;
+	}
+}
+
+amatch(cp, dp)
+	register char *cp, *dp;
+{
+
+	while (*cp && *dp && lmatch(*cp, *dp))
+		cp++, dp++;
+	if (*dp == 0)
+		return (1);
+	return (0);
+}
+
+lmatch(c, d)
+	register int c, d;
+{
+
+	if (c == d)
+		return (1);
+	if (!isalpha(c) || !isalpha(d))
+		return (0);
+	if (islower(c))
+		c = toupper(c);
+	if (islower(d))
+		d = toupper(d);
+	return (c == d);
+}
+
+whatis(argc, argv)
+	int argc;
+	char **argv;
+{
+	register char *gotit, **vp;
+	char buf[BUFSIZ], file[MAXPATHLEN+1], *cp, *tp;
+
+	if (argc == 0) {
+		fprintf(stderr, "whatis what?\n");
 		exit(1);
 	}
-	while ((n = read(fd, buf, sizeof(buf))) > 0)
-		if (write(1, buf, n) != n) {
-			perror("man: write");
-			exit(1);
-		}
-	if (n == -1) {
-		perror("man: read");
-		exit(1);
+	for (vp = argv; *vp; vp++)
+		*vp = trim(*vp);
+	gotit = calloc(1, blklen(argv));
+	for (cp = manpath; cp; cp = tp) {
+		tp = index(cp, ':');
+		if (tp) {
+			if (tp == cp)
+				strcpy(file, WHATIS);
+			else
+				sprintf(file, "%.*s/%s", tp-cp, cp, WHATIS);
+			tp++;
+		} else
+			sprintf(file, "%s/%s", cp, WHATIS);
+		if (freopen(file, "r", stdin) == NULL)
+			continue;
+		while (fgets(buf, sizeof buf, stdin) != NULL)
+			for (vp = argv; *vp; vp++)
+				if (wmatch(buf, *vp)) {
+					printf("%s", buf);
+					gotit[vp - argv] = 1;
+					for (vp++; *vp; vp++)
+						if (wmatch(buf, *vp))
+							gotit[vp - argv] = 1;
+					break;
+				}
 	}
-	(void)close(fd);
+	for (vp = argv; *vp; vp++)
+		if (gotit[vp - argv] == 0)
+			printf("%s: not found\n", *vp);
 }
 
-/*
- * add --
- *	add a file name to the list for future paging
- */
-static
-add(fname)
-	char *fname;
+wmatch(buf, str)
+	char *buf, *str;
 {
-	static u_int buflen;
-	static int len;
-	static char *cp;
-	int flen;
-	char *malloc(), *realloc(), *strcpy();
+	register char *bp, *cp;
 
-	if (!command) {
-		if (!(command = malloc(buflen = 1024))) {
-			fputs("man: out of space.\n", stderr);
-			exit(1);
-		}
-		len = strlen(strcpy(command, pager));
-		cp = command + len;
-	}
-	flen = strlen(fname);
-	if (len + flen + 2 > buflen) {		/* +2 == space, EOS */
-		if (!(command = realloc(command, buflen += 1024))) {
-			fputs("man: out of space.\n", stderr);
-			exit(1);
-		}
-		cp = command + len;
-	}
-	*cp++ = ' ';
-	len += flen + 1;			/* +1 = space */
-	(void)strcpy(cp, fname);
-	cp += flen;
+	bp = buf;
+again:
+	cp = str;
+	while (*bp && *cp && lmatch(*bp, *cp))
+		bp++, cp++;
+	if (*cp == 0 && (*bp == '(' || *bp == ',' || *bp == '\t' || *bp == ' '))
+		return (1);
+	while (isalpha(*bp) || isdigit(*bp))
+		bp++;
+	if (*bp != ',')
+		return (0);
+	bp++;
+	while (isspace(*bp))
+		bp++;
+	goto again;
 }
 
-/*
- * getsect --
- *	return a point to the section structure for a particular suffix
- */
-static DIR *
-getsect(s)
-	char *s;
+char *
+trim(cp)
+	register char *cp;
 {
-	switch(*s++) {
-	case '1':
-		if (!*s)
-			return(list1);
-		break;
-	case '2':
-		if (!*s) {
-			list3[0] = list2[0];
-			return(list3);
-		}
-		break;
-	/* sect. 3 requests are for either section 3, or section 3[fF]. */
-	case '3':
-		if (!*s) {
-			list3[0] = list2[1];
-			return(list3);
-		}
-		else if ((*s == 'f'  || *s == 'F') && !*++s) {
-			list3[0] = list2[5];
-			return(list3);
-		}
-		break;
-	case '4':
-		if (!*s) {
-			list3[0] = list2[2];
-			return(list3);
-		}
-		break;
-	case '5':
-		if (!*s) {
-			list3[0] = list2[3];
-			return(list3);
-		}
-		break;
-	case '6':
-		if (!*s) {
-			list3[0] = list1[2];
-			return(list3);
-		}
-		break;
-	case '7':
-		if (!*s) {
-			list3[0] = list2[4];
-			return(list3);
-		}
-		break;
-	case '8':
-		if (!*s) {
-			list3[0] = list1[1];
-			return(list3);
-		}
+	register char *dp;
+
+	for (dp = cp; *dp; dp++)
+		if (*dp == '/')
+			cp = dp + 1;
+	if (cp[0] != '.') {
+		if (cp + 3 <= dp && dp[-2] == '.' &&
+		    any(dp[-1], "cosa12345678npP"))
+			dp[-2] = 0;
+		if (cp + 4 <= dp && dp[-3] == '.' &&
+		    any(dp[-2], "13") && isalpha(dp[-1]))
+			dp[-3] = 0;
 	}
-	return((DIR *)NULL);
-}
-
-/*
- * jump --
- *	strip out flag argument and jump
- */
-static
-jump(argv, flag, name)
-	char **argv, *name;
-	register char *flag;
-{
-	register char **arg;
-
-	argv[0] = name;
-	for (arg = argv + 1; *arg; ++arg)
-		if (!strcmp(*arg, flag))
-			break;
-	for (; *arg; ++arg)
-		arg[0] = arg[1];
-	execvp(name, argv);
-	fprintf(stderr, "%s: Command not found.\n", name);
-	exit(1);
-}
-
-/*
- * usage --
- *	print usage and die
- */
-static
-usage()
-{
-	fputs("usage: man [-] [-a] [-M path] [section] title ...\n", stderr);
-	exit(1);
+	return (cp);
 }

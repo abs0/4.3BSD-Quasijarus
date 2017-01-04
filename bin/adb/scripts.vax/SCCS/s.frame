@@ -1,0 +1,18 @@
+h15478
+s 00007/00000/00000
+d D 5.1 88/03/30 15:59:44 bostic 1 0
+c date and time created 88/03/30 15:59:44 by bostic
+e
+u
+U
+t
+T
+I 1
+./"handler"16t"psr"16t"mask"nXx8txn"ap"16t"fp"16t"pc"n3X^^pn
+*(.+0c)>2
+<f>1
+<2>f
+<9-1>8
+,#<8$<
+<f,<8$<frame
+E 1

@@ -1,0 +1,114 @@
+h45945
+s 00001/00001/00059
+d D 6.4 86/05/22 12:23:34 anne 5 4
+c spelling
+e
+s 00003/00003/00057
+d D 6.3 86/05/13 15:03:56 karels 4 3
+c update limit
+e
+s 00001/00001/00059
+d D 6.2 85/08/26 23:32:43 mckusick 3 2
+c update error messages (mostly from sun!guy)
+e
+s 00004/00002/00056
+d D 6.1 85/05/15 11:55:31 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00058/00000/00000
+d D 5.1 85/05/15 11:55:25 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETHOSTNAME 2 "12 February 1983"
+E 2
+I 2
+.TH GETHOSTNAME 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+gethostname, sethostname \- get/set name of current host
+.SH SYNOPSIS
+.nf
+.ft B
+gethostname(name, namelen)
+char *name;
+int namelen;
+.PP
+.ft B
+sethostname(name, namelen)
+char *name;
+int namelen;
+.fi
+.SH DESCRIPTION
+.I Gethostname
+returns the standard host name for the current processor, as
+previously set by
+.IR sethostname . 
+The parameter
+.I namelen
+specifies the size of the 
+.I name
+array.  The returned name is null-terminated unless insufficient
+space is provided.
+.PP
+.I Sethostname
+sets the name of the host machine to be
+.IR name ,
+which has length
+.IR namelen .
+This call is restricted to the super-user and
+is normally used only when the system is bootstrapped.
+.SH "RETURN VALUE
+If the call succeeds a value of 0 is returned.  If the call
+fails, then a value of \-1 is returned and an error code is
+D 5
+placed int the global location \fIerrno\fP.
+E 5
+I 5
+placed in the global location \fIerrno\fP.
+E 5
+.SH "ERRORS
+The following errors may be returned by these calls:
+.TP 15
+[EFAULT]
+The \fIname\fP or \fInamelen\fP parameter gave an
+invalid address.
+.TP 15
+[EPERM]
+D 3
+The caller was not the super-user.
+E 3
+I 3
+The caller tried to set the hostname and was not the super-user.
+E 3
+.SH SEE ALSO
+gethostid(2)
+.SH BUGS
+D 2
+Host names are limited to 255 characters.
+E 2
+I 2
+D 4
+Host names are limited to
+.I 32
+characters.
+E 4
+I 4
+Host names are limited to MAXHOSTNAMELEN (from
+.IR <sys/param.h> )
+characters, currently 64.
+E 4
+E 2
+E 1

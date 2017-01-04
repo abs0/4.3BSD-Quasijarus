@@ -1,0 +1,269 @@
+h35654
+s 00002/00002/00143
+d D 4.4 85/09/10 12:37:04 mckusick 4 3
+c bmac moves to /usr/new/lib
+e
+s 00009/00006/00136
+d D 4.3 83/09/09 21:09:11 garrison 3 2
+c add changes from new version from Arizona
+e
+s 00014/00013/00128
+d D 4.2 83/09/09 21:07:12 nicklin 2 1
+c 
+e
+s 00141/00000/00000
+d D 4.1 83/07/03 19:40:45 sam 1 0
+c date and time created 83/07/03 19:40:45 by sam
+e
+u
+U
+t
+T
+I 3
+.\"	"%W%	%G%";
+E 3
+I 1
+D 2
+.TH invert/lookup 1 local
+E 2
+I 2
+.TH INVERT 1 "28 July 1983"
+.UC 4
+E 2
+.SH NAME
+invert, lookup \- create and access an inverted index
+.SH SYNOPSIS
+.B invert
+[option ... ] file ...
+.ns
+.PP
+.B lookup
+[option ... ]
+.SH DESCRIPTION
+.I Invert
+creates an inverted index to one or more files.
+.I Lookup
+retrieves records from files for which an inverted index exists.
+The inverted indices are intended for use with
+.IR bib (1).
+.PP
+.I Invert
+creates one inverted index to all of its input files.
+The index must be stored in the current directory and may not be moved.
+Input files may be absolute path names or paths relative to the current
+directory.
+Each input file is viewed as a set of records;
+each record consists of non-blank lines;
+records are separated by blank lines.
+.PP
+.I Lookup
+retrieves records based on its input
+.I (stdin).
+Each line of input is a retrieval request.
+All records that contain all of the keywords in the retrieval request
+are sent to
+.I stdout.
+D 3
+If there are no matching references,
+"No references found." is sent to
+E 3
+I 3
+If there are no matching references, ``No references found.'' is sent to
+E 3
+.I stdout.
+D 3
+.I Lookup
+E 3
+I 3
+.I \ Lookup
+E 3
+first searches in the user's private index (default INDEX)
+and then, if no references are found,
+in the system index (/usr/dict/papers/INDEX).
+The system index was produced using
+.I invert
+with the default options;
+in general, the user is advised to use the defaults.
+.PP
+Keywords are a sequence of non-white space characters
+with non-alphanumeric characters removed.
+Keywords must be at least two characters and are truncated
+(default length is 6).
+Some common words are ignored.
+Some lines of input are ignored for the purpose of collecting keywords.
+.PP
+The following options are available for
+.I invert:
+D 2
+.IP "-c \fIfile\fP" 8m
+E 2
+I 2
+.IP "\-c \fIfile\fP" 8m
+E 2
+.ns
+D 2
+.IP -c\fIfile\fP
+E 2
+I 2
+.IP \-c\fIfile\fP
+E 2
+File contains common words, one per line.
+Common words are not used as keys.
+D 4
+(Default /usr/lib/bmac/common.)
+E 4
+I 4
+(Default /usr/new/lib/bmac/common.)
+E 4
+D 2
+.IP "-k \fIi\fP"
+E 2
+I 2
+.IP "\-k \fIi\fP"
+E 2
+.ns
+D 2
+.IP -k\fIi\fP
+E 2
+I 2
+.IP \-k\fIi\fP
+E 2
+Maximum number of keys kept per record. (Default 100)
+D 2
+.IP "-l \fIi\fP"
+E 2
+I 2
+.IP "\-l \fIi\fP"
+E 2
+.ns
+D 2
+.IP -l\fIi\fP
+E 2
+I 2
+.IP \-l\fIi\fP
+E 2
+Maximum length of keys. (Default 6)
+D 2
+.IP "-p \fIfile\fP"
+E 2
+I 2
+.IP "\-p \fIfile\fP"
+E 2
+.ns
+D 2
+.IP -p\fIfile\fP
+E 2
+I 2
+.IP \-p\fIfile\fP
+E 2
+File is the name of the private index file (output of
+.IR invert ).
+(Default is INDEX.)
+The index must be stored in the current directory.
+(Be careful of the second form.
+The shell will not know to expand the file name.
+D 2
+E.g. -p~/index won't work; use -p\ ~/index.)
+.IP -s
+E 2
+I 2
+E.g. \-p~/index won't work; use \-p\ ~/index.)
+.IP \-s
+E 2
+Silent.
+Suppress statistics.
+D 2
+.IP -%\fIstr\fP
+E 2
+I 2
+D 3
+.IP \-%\fIstr\fP
+E 3
+I 3
+.IP -%\fIstr\fP
+E 3
+E 2
+Ignore lines that begin with %x
+where x is in
+.I str.
+(Default is CNOPVX. See
+.IR bib (1)
+for explanation of field names.)
+.PP
+.I Lookup
+has only the options
+.BR c ,
+.BR l ,
+and
+.B  p
+with the same meanings as
+.I bib.
+In particular, the
+.B p
+option can be followed by a list of comma separated index files.
+These are searched in order from left to right until at least one reference
+is found.
+.SH FILES
+INDEX                    inverted index
+.br
+/usr/tmp/invertxxxxxx    scratch file for invert
+.br
+D 4
+/usr/lib/bmac/common     default list of common words
+E 4
+I 4
+/usr/new/lib/bmac/common     default list of common words
+E 4
+.br
+/usr/dict/papers/INDEX   default system index
+.SH SEE ALSO
+\fIA UNIX Bibliographic Database Facility\fP,
+Timothy A. Budd and Gary M. Levin,
+University of Arizona Technical Report 82-1, 1982.
+.br
+bib(1)
+.SH DIAGNOSTICS
+Messages indicating trouble accessing files are sent on
+.I  stderr.
+There is an explicit message on
+.I stdout
+from
+.I lookup
+if no references are found.
+.LP
+.I Invert
+produces a one line message of the form,
+D 3
+"%D\ documents\ \ \ %D distinct\ keys\ \ %D\ key\ occurrences".
+E 3
+I 3
+\*(oq%D\ documents\ \ \ %D distinct\ keys\ \ %D\ key\ occurrences\*(cq.
+E 3
+D 2
+This can be suppressed with the -s option.
+E 2
+I 2
+This can be suppressed with the \-s option.
+E 2
+.LP
+D 3
+The message "locate: first key (%s) matched too many refs"
+E 3
+I 3
+The message \*(oqlocate: first key (%s) matched too many refs\*(cq
+E 3
+indicates that the first key matched more references than could be stored
+in memory.
+The simple solution is to use a less frequently occurring key as the first
+key in the citation.
+.SH BUGS
+No attempt is made to check the compatibility between an index
+and the files indexed.
+The user must create a new index whenever
+the files that are indexed are modified.
+I 3
+.LP
+Attempting to invert a file containing unprintable characters can
+cause chaos.
+E 3
+E 1

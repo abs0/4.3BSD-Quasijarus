@@ -1,0 +1,160 @@
+h42636
+s 00018/00007/00067
+d D 6.2 04/11/02 01:50:48 msokolov 4 3
+c editor's notes for 4.3BSD-Quasijarus
+e
+s 00019/00013/00055
+d D 6.1 86/05/23 09:34:23 kjd 3 2
+c document for 4.3BSD release
+e
+s 00000/00000/00068
+d D 5.1 86/05/23 09:34:19 kjd 2 1
+c document distributed with 4.2BSD
+e
+s 00068/00000/00000
+d D 4.1 86/05/23 09:34:15 kjd 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 3
+.RP
+E 3
+I 3
+.EH 'USD:25-%''A TROFF Tutorial'
+.OH 'A TROFF Tutorial''USD:25-%'
+.\".RP
+E 3
+.....TM 76-1273-7 39199 39199-11
+.TL
+A TROFF Tutorial
+.AU "MH 2C-518" 6021
+Brian W. Kernighan
+I 3
+(updated for 4.3BSD by Mark Seiden)
+I 4
+(updated for 4.3BSD-Quasijarus by Michael Sokolov)
+E 4
+E 3
+.AI
+.MH
+.OK
+D 3
+Typesetting
+Text formatting
+NROFF
+E 3
+I 3
+\"Typesetting
+\"Text formatting
+\"NROFF
+E 3
+.AB
+.PP
+.UL troff
+D 3
+is a text-formatting program for driving the Graphic Systems
+phototypesetter on the
+E 3
+I 3
+is a text-formatting program for
+typesetting on the
+E 3
+.UX
+D 3
+and
+.UC GCOS
+operating systems.
+E 3
+I 3
+operating system.
+E 3
+This device is capable of producing high quality
+text;
+this paper is an example of
+.UL troff
+output.
+.PP
+The phototypesetter itself normally runs with four fonts,
+containing roman, italic and bold letters 
+(as on this page),
+a full greek alphabet, and a substantial number of
+special characters and mathematical symbols.
+Characters can be printed in a range of sizes,
+and placed anywhere on the page.
+.PP
+.UL troff
+allows the user full control over fonts,
+sizes, and character positions,
+as well as the usual features of a formatter _
+right-margin justification, automatic hyphenation,
+page titling and numbering, and so on.
+It also provides macros, arithmetic variables and operations,
+and conditional testing, for complicated formatting tasks.
+.PP
+This document is an introduction to the most basic use of
+.UL troff .
+It presents just enough information to enable the user
+to do simple formatting
+tasks like making viewgraphs,
+and to make incremental changes to existing packages
+of
+.UL troff
+commands.
+In most respects, the 
+.UC UNIX
+formatter
+.UL nroff
+D 3
+is identical to
+.UL troff ,
+so this document also serves as a tutorial on
+.UL nroff .
+E 3
+I 3
+D 4
+and a more recent version
+.ul
+(device-independent 
+.UL troff)
+are identical to
+the version described here, so this document also serves as a tutorial for
+them as well.
+E 4
+I 4
+is identical to
+.UL troff ,
+so this document also serves as a tutorial on
+.UL nroff .
+E 4
+E 3
+.AE
+I 3
+.nr LL 6.5i
+.nr LT 6.5i
+E 3
+.CS 13 1 14 0 0 5
+I 4
+.LP
+[\fIEditor's note:\fP
+This document has been formatted with
+.UL pstroff
+like the rest of the book, but has not been edited in content.
+There have been significant improvements made to
+.UL troff
+since this document was written, most noticeably
+the PostScript version called
+.UL pstroff .
+See [1] for details.
+\(em \fIMichael Sokolov, ed.\fP]
+.sp
+E 4
+.if t .2C
+.nr PS 9
+.nr VS 11
+E 1

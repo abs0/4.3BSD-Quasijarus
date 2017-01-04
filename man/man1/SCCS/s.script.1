@@ -1,0 +1,135 @@
+h43666
+s 00001/00001/00041
+d D 6.1 85/04/29 15:01:29 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00018/00049/00024
+d D 5.1 85/04/29 15:01:15 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00073/00000/00000
+d D 4.1 85/04/29 15:01:05 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SCRIPT 1
+E 2
+I 2
+D 3
+.TH SCRIPT 1 "26 March 1982"
+E 3
+I 3
+.TH SCRIPT 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+script \- make typescript of terminal session
+.SH SYNOPSIS
+.B script
+[
+.B \-a
+D 2
+] [
+.B \-q
+] [
+.B \-S
+shell
+E 2
+] [ file ]
+.SH DESCRIPTION
+.I Script
+makes a typescript of everything printed on your terminal.
+D 2
+The typescript is saved in a file, and can be sent to the
+line printer later with
+.I lpr.
+If a file name is given, the typescript
+is saved there.  If not, the typescript is saved in the file
+.I typescript.
+E 2
+I 2
+The typescript is written to 
+.IR file ,
+or appended to
+.IR file
+if the
+.B \-a
+option is given.
+It can be sent to the line printer later with
+.IR lpr .
+If no file name is given, the typescript
+is saved in the file
+.IR typescript .
+E 2
+.PP
+D 2
+To exit script, type control D.  This sends an end of file to
+all processes you have started up, and causes script to exit.
+For this reason, control D behaves as though you had typed an
+infinite number of control D's.
+E 2
+I 2
+The script ends when the forked shell exits.
+E 2
+.PP
+This program is useful when using a crt and a hard-copy
+record of the dialog is desired, as for a student handing
+in a program that was developed on a crt when hard-copy
+terminals are in short supply.
+D 2
+.PP
+.B \-S
+lets you specify the shell to use.
+The default depends on the system:
+If the variable SHELL is set in the environment, it is used if possible.
+.PP
+The
+.B \-q
+flag asks for ``quiet mode'', where the ``script started''
+and ``script done'' messages are turned off.
+The
+.B \-a
+flag causes script to append to the typescript file
+instead of creating a new file.
+.SH AUTHOR
+Mark Horton
+E 2
+.SH BUGS
+D 2
+Since UNIX has no way to write an end-of-file down a pipe without closing
+the pipe, there is no way to simulate a single control D without
+ending script.
+.PP
+The new shell has its standard input coming
+from a pipe rather than a tty, so stty will not work, and neither
+will ttyname.
+In particular, this means that screen editors such as
+.IR vi (1)
+and the job control facilities of
+.IR csh (1)
+are inoperative.
+.PP
+When the user interrupts a printing process,
+.I script
+attempts to flush the output backed up in the pipe for better response.
+Usually the next prompt also gets flushed.
+E 2
+I 2
+.I Script
+places 
+.B everything
+in the log file.  This is not what the naive user expects.
+E 2
+E 1

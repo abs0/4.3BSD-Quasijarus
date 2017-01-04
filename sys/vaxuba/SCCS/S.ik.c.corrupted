@@ -1,0 +1,370 @@
+h44089
+s 00001/00001/00251
+d D 7.1 86/06/05 01:10:50 mckusick 16 15
+c 4.3BSD release version
+e
+s 00007/00001/00245
+d D 6.3 85/06/08 14:17:17 mckusick 15 14
+c Add copyright
+e
+s 00011/00011/00235
+d D 6.2 84/08/29 20:08:28 bloom 14 13
+c Change to includes.  No more ../h
+e
+s 00000/00000/00246
+d D 6.1 83/07/29 07:27:54 sam 13 12
+c 4.2 distribution
+e
+s 00002/00001/00244
+d D 4.11 82/12/17 12:02:38 sam 12 11
+c sun merge
+e
+s 00001/00000/00244
+d D 4.10 82/10/22 01:14:02 root 11 10
+c lint
+e
+s 00033/00024/00211
+d D 4.9 82/10/21 21:20:14 root 10 9
+c lint
+e
+s 00018/00022/00217
+d D 4.8 82/10/17 11:49:20 root 9 8
+c ioctl/open return errors, not u.u_error; remove ubarelses (it is
+c now done in uba.c); add open routines to some disk drivers
+e
+s 00004/00003/00235
+d D 4.7 82/10/10 17:27:35 root 8 7
+c header files for vax are in their place
+e
+s 00004/00006/00234
+d D 4.6 82/09/12 03:07:35 root 7 6
+c physio returns error, not in u.u_error
+e
+s 00002/00002/00238
+d D 4.5 82/08/22 21:18:29 root 6 5
+c fully uio()'d
+e
+s 00007/00005/00233
+d D 4.4 82/08/13 00:15:52 root 5 4
+c changes for char dev uio'ing
+e
+s 00008/00005/00230
+d D 4.3 82/08/01 19:25:26 sam 4 3
+c new ioctl's
+e
+s 00001/00000/00234
+d D 4.2 82/07/15 20:02:08 kre 3 1
+c probe routines return size of unibus dev regs to reserve space
+e
+s 00001/00001/00233
+d R 4.2 82/06/26 16:10:50 sam 2 1
+c sorry bill, but noone gets blamed for anything around here
+e
+s 00234/00000/00000
+d D 4.1 82/06/26 16:08:58 sam 1 0
+c date and time created 82/06/26 16:08:58 by sam
+e
+u
+U
+t
+T
+I 1
+D 15
+/*	%M%	%I%	%E%	*/
+E 15
+I 15
+/*
+D 16
+ * Copyright (c) 1982 Regents of the University of California.
+E 16
+I 16
+ * Copyright (c) 1982, 1986 Regents of the University of California.
+E 16
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
+ *
+ *	%W% (Berkeley) %G%
+ */
+E 15
+
+#include "ik.h"
+#if NIK > 0
+/*
+ * Ikonas Frame Buffer Interface -- Bill Reeves.
+ */
+I 12
+#include "../machine/pte.h"
+
+E 12
+D 14
+#include "../h/param.h"
+#include "../h/dir.h"
+#include "../h/user.h"
+#include "../h/buf.h"
+#include "../h/systm.h"
+#include "../h/map.h"
+D 12
+#include "../h/pte.h"
+E 12
+D 8
+#include "../h/ubareg.h"
+#include "../h/ubavar.h"
+#include "../h/ikreg.h"
+E 8
+I 5
+#include "../h/uio.h"
+I 10
+#include "../h/ioctl.h"
+E 14
+I 14
+#include "param.h"
+#include "dir.h"
+#include "user.h"
+#include "buf.h"
+#include "systm.h"
+#include "map.h"
+#include "uio.h"
+#include "ioctl.h"
+E 14
+E 10
+I 8
+
+D 14
+#include "../vaxuba/ubareg.h"
+#include "../vaxuba/ubavar.h"
+#include "../vaxuba/ikreg.h"
+E 14
+I 14
+#include "ubareg.h"
+#include "ubavar.h"
+#include "ikreg.h"
+E 14
+E 8
+E 5
+
+#define IKBUSY 01
+#define IKDMAPRI (PZERO-1)
+#define IKWAITPRI (PZERO+1)
+
+D 10
+int ikprobe(), ikattach();
+struct uba_device *ikdinfo[NIK];
+u_short ikstd[] = { 0772460, 0000000, 0 };
+struct uba_driver ikdriver =
+E 10
+I 10
+int	ikprobe(), ikattach(), ikintr();
+struct	uba_device *ikdinfo[NIK];
+u_short	ikstd[] = { 0772460, 0000000, 0 };
+struct	uba_driver ikdriver =
+E 10
+	{ ikprobe, 0, ikattach, 0, ikstd, "ik", ikdinfo, 0, 0 };
+
+D 10
+struct ik {
+E 10
+I 10
+struct ik_softc {
+E 10
+	char	ik_open;
+D 10
+	short int ik_uid;
+	short int ik_state;
+E 10
+I 10
+	short	ik_uid;
+	short	ik_state;
+E 10
+	int	ik_ubinfo;
+	int	ik_count;
+D 10
+	struct buf *ik_bp;
+E 10
+I 10
+	struct	buf *ik_bp;
+E 10
+	int	ik_bufp;
+	int	ik_icnt;
+D 10
+} ik[NIK];
+E 10
+I 10
+} ik_softc[NIK];
+E 10
+
+D 10
+int ikstrategy(), ikminphys();
+struct buf rikbuf[NIK];
+E 10
+I 10
+int	ikstrategy();
+u_int	ikminphys();
+struct	buf rikbuf[NIK];
+E 10
+
+#define IKUNIT(dev) (minor(dev))
+
+ikprobe(reg)
+	caddr_t reg;
+{
+D 10
+	register int br, cvec;
+E 10
+I 10
+	register int br, cvec;		/* value-result */
+E 10
+	register struct ikdevice *ikaddr = (struct ikdevice *) reg;
+
+I 10
+#ifdef lint
+	br = 0; cvec = br; br = cvec;
+I 11
+	ikintr(0);
+E 11
+#endif
+E 10
+	ikaddr->ik_istat = 0;
+	ikaddr->ik_xaddr = 0;
+	ikaddr->ik_yaddr = 0;
+	ikaddr->ik_ustat = IK_IENABLE | IK_GO;
+	DELAY(10000);
+	ikaddr->ik_ustat = 0;
+I 3
+	return (sizeof (struct ikdevice));
+E 3
+}
+
+I 10
+/*ARGSUSED*/
+E 10
+ikattach(ui)
+	struct uba_device *ui;
+{
+I 9
+
+E 9
+}
+
+ikopen(dev)
+	dev_t dev;
+{
+D 10
+	register struct ik *ikp;
+E 10
+I 10
+	register struct ik_softc *ikp;
+E 10
+	register struct uba_device *ui;
+
+D 9
+	if(IKUNIT(dev) >= NIK || (ikp = &ik[minor(dev)])->ik_open ||
+		(ui = ikdinfo[IKUNIT(dev)]) == 0 || ui->ui_alive == 0) {
+			u.u_error = ENXIO;
+			return;
+	}
+E 9
+I 9
+D 10
+	if (IKUNIT(dev) >= NIK || (ikp = &ik[minor(dev)])->ik_open ||
+E 10
+I 10
+	if (IKUNIT(dev) >= NIK || (ikp = &ik_softc[minor(dev)])->ik_open ||
+E 10
+	    (ui = ikdinfo[IKUNIT(dev)]) == 0 || ui->ui_alive == 0)
+		return (ENXIO);
+E 9
+	ikp->ik_open = 1;
+	ikp->ik_icnt = 0;
+	ikp->ik_state = 0;
+	ikp->ik_uid = u.u_uid;
+	maptouser(ui->ui_addr);
+I 9
+	return (0);
+E 9
+}
+
+ikclose(dev)
+	dev_t dev;
+{
+
+D 10
+	ik[minor(dev)].ik_open = 0;
+	ik[minor(dev)].ik_state = 0;
+E 10
+I 10
+	ik_softc[minor(dev)].ik_open = 0;
+	ik_softc[minor(dev)].ik_state = 0;
+E 10
+	unmaptouser(ikdinfo[IKUNIT(dev)]->ui_addr);
+}
+
+D 5
+ikread(dev)
+E 5
+I 5
+ikread(dev, uio)
+E 5
+	dev_t dev;
+I 5
+	struct uio *uio;
+E 5
+{
+	register int unit = IKUNIT(dev);
+
+D 5
+	if(unit >= NIK)
+E 5
+I 5
+	if (unit >= NIK)
+E 5
+D 7
+		u.u_error = ENXIO;
+	else
+D 5
+		physio(ikstrategy, &rikbuf[unit], dev, B_READ, ikminphys);
+E 5
+I 5
+		physio(ikstrategy, &rikbuf[unit], dev, B_READ, ikminphys, uio);
+E 7
+I 7
+		return (ENXIO);
+	return (physio(ikstrategy, &rikbuf[unit], dev, B_READ, ikminphys, uio));
+E 7
+E 5
+}
+
+D 6
+ikwrite(dev)
+E 6
+I 6
+ikwrite(dev, uio)
+E 6
+	dev_t dev;
+I 10
+	struct uio *uio;
+E 10
+{
+	register int unit = IKUNIT(dev);
+
+D 5
+	if(unit >= NIK)
+E 5
+I 5
+	if (unit >= NIK)
+E 5
+D 7
+		u.u_error = ENXIO;
+	else
+D 5
+		physio(ikstrategy, &rikbuf[unit], dev, B_WRITE, ikminphys);
+E 5
+I 5
+D 6
+		physio(ikstrategy, &rikbuf[unit], dev, B_WRITE, ikminphys, 0);
+E 6
+I 6
+		physio(ikstrategy, &rikbuf[unit], dev, B_WRITE, ikminphys, uio);
+E 7
+I 7
+		return (ENXIO);
+	return (physio(ikstrategy, &rikbuf[unit], dev, B_WRITE, 

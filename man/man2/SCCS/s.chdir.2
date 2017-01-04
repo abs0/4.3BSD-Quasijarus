@@ -1,0 +1,158 @@
+h42657
+s 00003/00000/00061
+d D 6.3 85/08/26 23:31:34 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00010/00010/00051
+d D 6.2 85/05/22 18:30:47 mckusick 4 3
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00060
+d D 6.1 85/05/09 16:37:42 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00044/00016/00017
+d D 5.1 85/05/09 16:37:31 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00033/00000/00000
+d D 4.1 85/05/09 16:37:21 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHDIR 2 
+E 2
+I 2
+D 3
+.TH CHDIR 2 "2 July 1983"
+E 3
+I 3
+.TH CHDIR 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+chdir \- change current working directory
+.SH SYNOPSIS
+.nf
+D 2
+.B chdir(dirname)
+.B char *dirname;
+E 2
+I 2
+.ft B
+chdir(path)
+char *path;
+.ft R
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+.I Dirname
+is the address of the pathname of a directory, terminated by a null byte.
+E 2
+I 2
+.I Path
+is the pathname of a directory.
+E 2
+.I Chdir
+causes this directory
+to become the current working directory,
+D 2
+the starting point for path names not beginning with `/'.
+E 2
+I 2
+the starting point for path names not beginning with ``/''.
+.PP
+In order for a directory to become the current directory,
+a process must have execute (search) access to the directory.
+.SH "RETURN VALUE
+Upon successful completion, a value of 0 is returned.
+Otherwise, a value of \-1 is returned and \fIerrno\fP is set to indicate
+the error.
+.SH ERRORS
+.I Chdir
+will fail and the current working directory will be unchanged if
+one or more of the following are true:
+.TP 15
+[ENOTDIR]
+D 4
+A component of the pathname is not a directory.
+E 4
+I 4
+A component of the path prefix is not a directory.
+E 4
+.TP 15
+I 4
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+.TP 15
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+.TP 15
+E 4
+[ENOENT]
+The named directory does not exist.
+.TP 15
+D 4
+[ENOENT]
+The argument path name was too long.
+E 4
+I 4
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+E 4
+.TP 15
+D 4
+[EPERM]
+The argument contains a byte with the high-order bit set.
+.TP 15
+E 4
+[EACCES]
+Search permission is denied for any component of
+the path name.
+.TP 15
+[EFAULT]
+.I Path
+points outside the process's allocated address space.
+I 5
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 5
+D 4
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating
+the pathname.
+E 4
+E 2
+.SH "SEE ALSO"
+D 2
+cd(1)
+.SH DIAGNOSTICS
+Zero is returned if the directory is changed; \-1
+is returned
+if the given name is not that of a directory
+or is not searchable.
+.SH ASSEMBLER
+(chdir = 12.)
+.br
+.B sys chdir; dirname
+E 2
+I 2
+chroot(2)
+E 2
+E 1

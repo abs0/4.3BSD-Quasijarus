@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)lookup.c	4.2 8/11/83";
+static char sccsid[] = "@(#)lookup.c	4.3 9/15/04";
 #endif
 
 # include "e.h"
@@ -97,7 +97,11 @@ struct {
 	"infinity",	"\\(if",
 	"partial",	"\\(pd",
 	"half",	"\\f1\\(12\\fP",
+#ifdef PS
+	"prime",	"\\(Mi",
+#else
 	"prime",	"\\f1\\(fm\\fP",
+#endif
 	"dollar",	"\\f1$\\fP",
 	"nothing",	"",
 	"times",	"\\(mu",
@@ -113,8 +117,14 @@ struct {
 #else
 	"<<",	"<\\h'-.3m'<",
 	">>",	">\\h'-.3m'>",
+#ifdef CAT
 	"approx",	"\\v'-.2m'\\z\\(ap\\v'.25m'\\(ap\\v'-.05m'",
 	"cdot",	"\\v'-.3m'.\\v'.3m'",
+#endif
+#ifdef PS
+	"approx",	"\\SBB",
+	"cdot",	"\\SD7",
+#endif
 	"...",	"\\v'-.3m'\\ .\\ .\\ .\\ \\v'.3m'",
 	",...,",	",\\ .\\ .\\ .\\ ,\\|",
 #endif
@@ -126,7 +136,11 @@ struct {
 	"delta",	"\\(*d",
 	"DELTA",	"\\(*D",
 	"epsilon",	"\\(*e",
+#ifdef PS
+	"EPSILON",	"\\(*E",
+#else
 	"EPSILON",	"\\f1E\\fP",
+#endif
 	"omega",	"\\(*w",
 	"OMEGA",	"\\(*W",
 	"lambda",	"\\(*l",

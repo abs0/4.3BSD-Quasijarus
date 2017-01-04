@@ -1,0 +1,501 @@
+/usr/src/sys/mdec/SCCS/s.tmscpboot.c:
+7.3 98/12/21 16:01:09 msokolov 3 2
+SID check commented out, see the comments inside
+/usr/src/usr.bin/sccscmds/SCCS/s.Makefile:
+4.7 99/01/03 20:14:11 msokolov 7 6
+no more doc, the man pages are now in their standard location
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.admin.c:
+4.4 99/01/03 20:21:26 msokolov 4 3
+SCCS is not "local" any more. /usr/local => /usr/bin
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.delta.c:
+4.11 99/01/03 20:42:22 msokolov 12 11
+SCCS is not "local" any more. /usr/local => /usr/bin
+/usr/src/usr.bin/sccscmds/SCCS/s.Makefile:
+4.8 99/01/07 01:23:43 msokolov 8 7
+SCCS is not "local" any more. /usr/local/lib => /usr/lib
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.help.c:
+4.4 99/01/07 01:25:50 msokolov 4 3
+SCCS is not "local" any more. /usr/local/lib => /usr/lib
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.prs.c:
+4.4 99/01/07 01:34:52 msokolov 6 5
+SCCS is not "local" any more. /usr/local => /usr/bin
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.makefile:
+4.6 99/01/07 02:07:53 msokolov 6 5
+SCCS is not "local" any more. /usr/local => /usr/bin
+fix makefile so that stree and cmt get built and installed
+/usr/src/ucb/SCCS/s.sccs.c:
+5.7 99/01/07 21:40:10 msokolov 84 83
+SCCS is not "local" any more. /usr/local => /usr/bin
+/usr/src/sys/conf/SCCS/s.newvers.sh:
+7.3 99/01/07 22:05:02 msokolov 10 9
+Started Quasijarus Project. This is now 4.3 BSD Quasijarus UNIX
+/usr/src/sys/cassette/SCCS/s.Makefile:
+7.2 99/01/08 02:32:12 msokolov 16 15
+Removed ${DEFBOO} from the cassette, they don't belong there
+Moved tuboot smacking-in from "make install" to "make" where it belongs
+Removed the outdated and IMHO inappropriate rule for building tuboot
+Made the cassette and update targets clean up after themselves
+/usr/src/sys/mdec/SCCS/s.tmscpboot.c:
+7.4 99/01/08 17:02:44 msokolov 4 3
+tmscpboot now goes on the standard tape! Yay! Now have to skip over 7 blocks.
+/usr/src/sys/mdec/SCCS/s.Makefile:
+7.7 99/01/08 17:10:28 msokolov 14 13
+tmscpboot.c wasn't listed among SRCS
+add -c to the install command (maketape and cassette Makefile depend on this)
+/usr/src/sys/stand/SCCS/s.copy.c:
+7.6 99/01/09 18:19:46 msokolov 15 14
+Excluded delta 7.5 (record size auto-detection stuff).
+It causes MUCH more trouble than benefit.
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.18 99/01/09 23:04:30 msokolov 101 100
+put interrupt br, cvec in globals for qbus code
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.16 99/01/10 00:13:08 msokolov 166 165
+added cvec and br stuff
+/usr/src/sys/vaxdist/SCCS/s.buildmini:
+4.9 99/01/10 12:35:50 msokolov 9 8
+4.3BSD-Quasijarus
+/usr/src/sys/vaxdist/SCCS/s.get:
+4.27 99/01/10 12:37:19 msokolov 27 26
+4.3BSD-Quasijarus
+/usr/src/sys/vaxdist/SCCS/s.maketape:
+4.32 99/01/10 12:55:21 msokolov 34 33
+4.3BSD-Quasijarus
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.19 99/01/12 00:12:03 msokolov 77 76
+Split the install target into installint (copies to other subdirs of /sys,
+normally executed by /sys programmers) and installext (copies to /, /stand,
+and /usr/mdec, normally executed by root).
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.20 99/01/12 00:14:22 msokolov 78 77
+confkra.c was missing from the clean target
+/usr/src/sys/tahoedist/SCCS/s.netstart:
+5.4 99/01/14 01:27:03 msokolov 4 3
+actually set the machine hostname rather than just the variable!
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.21 99/01/14 18:00:32 msokolov 79 78
+Pitch the 730-only standalone programs.
+They are now totally useless since they are much larger than 12.5 KB no
+matter what you do.
+If you can't load files larger than 12.5 KB, get a ucode patch!
+/usr/src/sys/cassette/SCCS/s.Makefile:
+7.3 99/01/14 18:33:59 msokolov 17 16
+Pitch the 730-only standalone programs.
+They are now totally useless since they are much larger than 12.5 KB no
+matter what you do.
+If you can't load files larger than 12.5 KB, get a ucode patch!
+/usr/src/SCCS/s.Makefile:
+4.19 99/01/14 19:53:06 msokolov 21 20
+new and local are not part of the UNIX system and shouldn't be built with it
+also what the hell was that -k doing in there?!
+how is one supposed to use a system that's only half-built?
+/usr/src/games/SCCS/s.Makefile:
+5.12 99/01/14 21:29:09 msokolov 33 31
+Axe gnuchess and larn. Hell knows how they ended up here.
+Also having dependencies in the SCCS file is sick.
+/usr/src/usr.bin/SCCS/s.Makefile:
+5.2 99/01/17 00:02:20 msokolov 2 1
+add sccscmds subdir
+/usr/src/ucb/SCCS/s.Makefile:
+5.27 99/01/17 00:53:05 msokolov 27 26
+Remove lisp and vlp. Franz Lisp is now a separate package.
+Retire what. SCCS now comes standard with the system and has its own what.
+Add 20b. It's a standard utility now.
+/usr/src/include/SCCS/s.Makefile:
+5.21 99/01/18 00:23:14 msokolov 36 35
+add zconf.h and zlib.h
+/usr/src/usr.lib/SCCS/s.Makefile:
+5.14 99/01/18 01:20:14 msokolov 27 26
+add libz
+/usr/src/usr.lib/libz/SCCS/s.Makefile:
+5.2 99/01/19 00:03:36 msokolov 2 1
+add compressio.c
+/usr/src/ucb/compress/SCCS/s.Makefile:
+5.9 99/01/19 15:34:07 msokolov 9 8
+Get rid of all that USERMEM crap and set BITS=16 directly.
+The distributed compress binary must not depend on how much memory does the
+system builder have on his machine.
+/usr/src/include/SCCS/s.zlib.h:
+5.2 99/01/19 20:10:09 msokolov 2 1
+add compressio functions
+/usr/src/ucb/compress/SCCS/s.compress.c:
+5.10 99/01/19 20:16:32 msokolov 11 10
+add strong compression mode
+/usr/src/ucb/compress/SCCS/s.Makefile:
+5.10 99/01/19 20:16:37 msokolov 10 9
+add strong compression mode
+/usr/src/ucb/compress/SCCS/s.Makefile:
+5.11 99/01/21 00:43:01 msokolov 11 10
+add gzcompat
+/usr/src/usr.bin/SCCS/s.file.c:
+4.16 99/01/21 00:56:19 msokolov 21 20
+add compress -s and gzip formats
+/usr/src/etc/SCCS/s.Makefile:
+5.27 99/01/25 00:38:08 msokolov 27 26
+retire mklost+found (pointed out by mckusick)
+/usr/src/usr.lib/sendmail/md/SCCS/s.c.vmunix.m4:
+4.5 99/04/18 17:54:17 msokolov 5 4
+remove -DMXDOMAIN for 5.61
+/usr/src/old/man/SCCS/s.cxref.1:
+6.2 99/05/08 16:40:09 msokolov 4 3
+axe out .pl 1
+hell knows how it got there
+/usr/src/man/man1/SCCS/s.Makefile:
+5.4 99/05/31 14:26:18 msokolov 4 3
+add man pages for SCCS commands, also limit.0 was missing from LINKS
+/usr/src/man/man2/SCCS/s.Makefile:
+5.3 99/05/31 17:47:44 msokolov 3 2
+Put vadvise back in! Long live VAX BSD!
+/usr/src/man/man4/vax/SCCS/s.Makefile:
+5.3 99/05/31 23:31:54 msokolov 3 2
+add dmv(4)
+/usr/src/man/man5/SCCS/s.Makefile:
+5.3 99/06/01 16:57:22 msokolov 3 2
+add sccsfile(5)
+/usr/src/man/man6/SCCS/s.Makefile:
+5.5 99/06/02 14:17:36 msokolov 5 4
+Axe out gnuchess. Hell known how it got there.
+Add phantasia(6)
+ppt.0 was missing from LINKS
+/usr/src/man/man8/SCCS/s.Makefile:
+5.4 99/06/02 20:40:38 msokolov 5 4
+now that mklost+found is retired, its man page goes too
+/usr/src/man/man8/vax/SCCS/s.Makefile:
+5.3 99/06/02 21:13:11 msokolov 3 2
+installboot has been laid to rest, disklabel does its job now
+/usr/src/man/man8/tahoe/SCCS/s.enpload.8:
+5.2 99/06/02 21:30:25 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/bin/adb/adb.tahoe/SCCS/s.format.c:
+1.6 99/06/09 21:59:19 msokolov 6 5
+correct SCCS ID keywords
+/usr/src/bin/as/as.tahoe/SCCS/s.asparse.c:
+1.7 99/06/10 18:11:02 msokolov 7 6
+No, Mike, let's really fix those keywords!
+/usr/src/usr.bin/diction/SCCS/s.README:
+4.3 99/06/11 13:07:28 msokolov 3 2
+Berkeley chose to stick with explain, so change suggest back to explain
+/usr/src/usr.bin/f77/SCCS/s.Makefile:
+5.5 99/07/09 20:02:34 msokolov 5 4
+correct SCCS ID keywords
+/usr/src/man/man8/SCCS/s.Makefile:
+5.5 99/07/11 13:01:17 msokolov 6 5
+add acucntrl(8)
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.13 99/07/13 22:47:46 msokolov 51 50
+"version" means when the code was written, not when it was compiled!
+make the version string based on ftpd.c SCCS ID and get rid of vers.c kludge
+/usr/src/etc/ftpd/SCCS/s.Makefile:
+5.7 99/07/13 22:47:50 msokolov 10 9
+"version" means when the code was written, not when it was compiled!
+make the version string based on ftpd.c SCCS ID and get rid of vers.c kludge
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.delta.c:
+4.12 99/08/28 14:57:33 msokolov 13 12
+fix the LOGDELTA mechanism (remove control characters from the log file
+and use O_APPEND atomic appended writes)
+/usr/src/ucb/man/SCCS/s.man.c:
+5.18 99/08/28 21:15:40 msokolov 22 21
+What in the hell happened to #include <stdio.h>?!
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.22 99/09/04 00:58:33 msokolov 74 73
+qbgetpri is just as problematic for KDA50 as it is for TQK50
+see uda.c delta 7.8
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.23 99/09/04 08:40:47 msokolov 75 74
+Put drives in the new ONLINE state instead of the OPENRAW state when they come
+on-line. This fixes the bug that caused a drive to become completely
+inaccessible if it came on-line on its own when there is no one waiting for it
+to do so.
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.24 99/09/04 10:38:24 msokolov 76 75
+wait for 2 minutes for disks to spin up, 10 seconds was WAY too short
+/usr/src/etc/SCCS/s.diskpart.c:
+5.11 99/09/04 15:00:24 msokolov 15 14
+name and type were still confused when prompting for parameters
+let the user specify more cylinders than needed to cover totsect if he knows
+the real geometry
+threshold was set incorrectly (and it's spelled with one 'h')
+the conditional to ask about bad sector forwarding for SMD only was busted
+/usr/src/etc/SCCS/s.diskpart.c:
+5.12 99/09/04 15:09:44 msokolov 16 15
+don't output the commented-out c line if it's meaningless (because the user
+specified -s) or redundant (because there is no bad sector forwarding)
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.20 99/09/04 16:54:02 msokolov 22 21
+add RA71, RA72, RA90, and RA92
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.25 99/09/04 16:58:37 msokolov 77 76
+add RA71, RA72, RA90, and RA92
+list partition sizes as "to end" wherever possible to make life easier for
+folks with third-party controllers faking RA disks
+/usr/src/sys/vaxstand/SCCS/s.uda.c:
+7.10 99/09/04 17:26:05 msokolov 25 24
+add RA71, RA72, RA90, and RA92
+the partitions were wrong for RA70 and RA82
+/usr/src/sys/vaxbi/SCCS/s.kdb.c:
+7.7 99/09/04 17:52:36 msokolov 7 6
+axe those horrible kra partitions (which aren't even in disktab) and lift the
+partition tables from the uda driver, including the new ones
+/usr/src/sys/vaxstand/SCCS/s.kdb.c:
+7.5 99/09/04 18:02:03 msokolov 5 4
+resync the partition tables with the just updated standalone uda driver
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.19 99/09/05 14:02:52 msokolov 102 101
+recognize BI KLESI as a DWBUA in disguise
+/usr/src/sys/vaxstand/SCCS/s.autoconf.c:
+7.13 99/09/05 14:08:54 msokolov 23 22
+recognize BI KLESI as a DWBUA in disguise
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.22 99/09/05 14:58:07 msokolov 80 79
+Build different bootxx's with different sets of supported CPUs (750 only for
+most, 750 + 8200 + MVAXen for bootra, and 8200 only for bootkra). Trying to use
+the same SMOPTS for all bootxx's no longer works.
+/usr/src/sys/mdec/SCCS/s.Makefile:
+7.8 99/09/05 15:48:20 msokolov 15 14
+add kraboot
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.21 99/09/05 20:49:12 msokolov 23 22
+RA92 only has 2940951 blocks
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.26 99/09/05 20:58:40 msokolov 78 77
+RA92 only has 2940951 blocks
+/usr/src/sys/vaxbi/SCCS/s.kdb.c:
+7.8 99/09/05 21:00:18 msokolov 8 7
+RA92 only has 2940951 blocks
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.22 99/09/06 20:37:44 msokolov 24 23
+In accordance with the Quasijarus Project policy on the shipment of standard
+disk tables, remove RD52, RD53, and QD33/Eagle
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.27 99/09/06 20:41:25 msokolov 79 78
+In accordance with the Quasijarus Project policy on the shipment of standard
+disk tables, remove RD52, RD53, and RX50
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.27 99/09/06 20:47:52 msokolov 80 78
+In accordance with the Quasijarus Project policy on the shipment of standard
+disk tables, remove RD52 and RD53
+/usr/src/sys/vaxstand/SCCS/s.uda.c:
+7.11 99/09/06 20:50:40 msokolov 26 25
+In accordiance with the Quasijarus Project policy on the shipment of standard
+disk tables, remove RD52 and RD53
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.23 99/09/06 20:53:09 msokolov 25 24
+add RX50
+/usr/src/sys/vaxstand/SCCS/s.uda.c:
+7.12 99/09/06 20:54:37 msokolov 27 26
+on RX50 only partitions a and c are valid
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.28 99/09/06 21:41:40 msokolov 81 80
+it's the total size that's reported by the drive, not the number of cylinders,
+so use that to map types instead of the geometry
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.29 99/09/06 21:42:24 msokolov 82 81
+round the number of cylinders up, not down
+/usr/src/sys/vaxbi/SCCS/s.kdb.c:
+7.9 99/09/06 21:47:41 msokolov 9 8
+resync partition tables with uda
+/usr/src/sys/consolerl/SCCS/s.Makefile:
+7.2 99/09/07 09:15:48 msokolov 6 5
+we are now shipping these packs too!
+/usr/src/sys/vaxdist/SCCS/s.get:
+4.28 99/09/07 09:45:14 msokolov 28 27
+add kra
+mt0 must be made last or it will never make it there!
+/usr/src/sys/vaxdist/SCCS/s.MAKEDEV:
+4.32 99/09/07 10:19:51 msokolov 33 32
+fix kra
+/usr/src/sys/vaxif/SCCS/s.if_dmc.h:
+7.5 99/09/07 11:33:41 msokolov 11 10
+Change the MTU back to 1284. Sure, 1500 is more reasonable, but we have to keep
+compatibility with existing stable releases which all universally agree on
+1284...
+/usr/src/sys/vaxif/SCCS/s.if_dmv.h:
+7.4 99/09/07 11:40:53 msokolov 4 3
+Put the 8 garbage bytes back in the header. Sure, they are garbage, but all
+existing stable releases put them there...
+/usr/src/ucb/SCCS/s.sccs.c:
+5.8 99/09/07 12:26:57 msokolov 85 84
+add bump command to bump SCCS files (get -e/delta)
+/usr/src/ucb/pascal/pi/SCCS/s.Makefile:
+1.3 99/09/07 17:36:12 msokolov 7 6
+fix SCCS ID keywords
+/usr/src/sys/sys/SCCS/s.vm_sw.c:
+7.4 99/09/08 10:06:58 msokolov 30 29
+have to make the miniroot 3 MB, it just doesn't fit...
+/usr/src/ucb/tn3270/SCCS/s.telnet.ext:
+1.2 99/09/12 19:16:46 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/ascii/SCCS/s.map3270.ext:
+1.2 99/09/12 20:00:03 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/ascii/SCCS/s.termin.ext:
+1.2 99/09/12 20:00:48 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/ctlr/SCCS/s.inbound.ext:
+1.2 99/09/12 20:19:03 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/ctlr/SCCS/s.options.ext:
+1.2 99/09/12 20:19:05 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/ctlr/SCCS/s.outbound.ext:
+1.2 99/09/12 20:19:06 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/general/SCCS/s.bsubs.ext:
+1.3 99/09/12 20:26:35 msokolov 3 2
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/sys_curses/SCCS/s.termout.ext:
+1.2 99/09/12 20:33:23 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/ucb/tn3270/sys_dos/SCCS/s.termout.ext:
+1.2 99/09/12 20:41:06 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/games/fortune/SCCS/s.strfile.h:
+5.2 99/09/14 19:45:59 msokolov 2 1
+fix SCCS ID keywords
+/usr/src/games/games.vax/compat/SCCS/s.Makefile:
+4.4 99/09/14 20:10:10 msokolov 5 4
+please don't litter in /usr/local!
+/usr/src/doc/ps1/01.Clang/SCCS/s.Clang.ms:
+6.3 99/09/16 17:49:30 msokolov 3 2
+use .MH macro
+/usr/src/doc/smm/01.setup/tahoe/SCCS/s.2.t:
+1.6 99/09/23 12:58:32 msokolov 6 5
+restore r, not restore x
+/usr/src/old/vpr/vtools/SCCS/s.Makefile:
+6.2 99/09/27 17:47:32 msokolov 2 1
+vwidth was misspelled
+/usr/src/bin/cpio/SCCS/s.Makefile:
+5.4 99/09/27 18:23:17 msokolov 5 4
+man pages move to /usr/src/man
+/usr/src/man/man1/SCCS/s.Makefile:
+5.5 99/09/27 18:53:44 msokolov 5 4
+add cpio(1)
+/usr/src/man/man5/SCCS/s.Makefile:
+5.4 99/09/27 18:55:04 msokolov 4 3
+add cpio(5)
+/usr/src/games/hack/SCCS/s.Makefile:
+5.7 99/09/27 19:18:16 msokolov 11 10
+man pages move to /usr/src/man
+/usr/src/games/phantasia/SCCS/s.Makefile:
+5.6 99/09/28 14:53:10 msokolov 8 7
+man pages move to /usr/src/man
+/usr/src/man/man6/SCCS/s.Makefile:
+5.6 99/09/28 14:56:38 msokolov 6 5
+run phantasia.6 through tbl -TX
+/usr/src/lib/libc/net/SCCS/s.res_mkquery.c:
+6.8 99/09/28 16:41:46 msokolov 19 18
+let a query for "localhost" go out to the name server
+/usr/src/lib/libc/net/SCCS/s.res_query.c:
+5.5 99/09/28 16:41:47 msokolov 5 4
+let a query for "localhost" go out to the name server
+/usr/src/etc/named/tools/SCCS/s.nsquery.c:
+4.3 99/09/28 17:18:03 msokolov 3 2
+herror takes a string, not h_errno
+add -a option to query by address
+/usr/src/etc/named/tools/SCCS/s.Makefile:
+4.8 99/09/28 17:28:44 msokolov 8 7
+build and install nsquery and don't build nstest
+/usr/src/man/man1/SCCS/s.Makefile:
+5.6 99/09/29 14:27:30 msokolov 6 5
+add nslookup(1)
+/usr/src/etc/named/tools/nslookup/SCCS/s.main.c:
+5.16 99/09/29 14:39:27 msokolov 16 15
+nslookup is not "local"
+/usr/src/etc/named/tools/nslookup/SCCS/s.Makefile:
+5.17 99/09/29 14:39:58 msokolov 17 16
+nslookup is not "local"
+man pages move to /usr/src/man
+/usr/src/etc/named/SCCS/s.newvers.sh:
+4.6 99/09/29 17:31:33 msokolov 6 5
+don't count builds
+/usr/src/etc/named/SCCS/s.Makefile:
+4.16 99/09/29 17:44:07 msokolov 16 15
+build and install nsquery and nslookup too!
+/usr/src/man/man8/SCCS/s.Makefile:
+5.6 99/09/29 17:59:23 msokolov 7 6
+add zdump(8) and zic(8)
+/usr/src/etc/tzone/SCCS/s.Makefile:
+5.4 99/09/29 18:10:23 msokolov 4 3
+install zdump and zic, don't build the timezone files twice
+BSD UNIX development is now hosted at the IFCTF Harhan facility in Dallas, TX,
+change the default timezone to US/Central
+/usr/src/man/man1/SCCS/s.Makefile:
+5.7 99/09/29 18:23:12 msokolov 7 6
+Franz Lisp is now a separate package, so its man pages go
+/usr/src/man/man6/SCCS/s.Makefile:
+5.7 99/09/29 18:25:34 msokolov 7 6
+Franz Lisp is now a separate package, so its man pages go
+/usr/src/usr.lib/sendmail/src/SCCS/s.version.c:
+5.61.1.1 99/10/01 18:43:01 msokolov 485 484
+started Quasijarus Sendmail
+/usr/src/usr.lib/sendmail/src/SCCS/s.alias.c:
+5.17 99/10/01 18:58:17 msokolov 92 91
+get the SCCS ID right
+/usr/src/sys/sys/SCCS/s.ufs_subr.c:
+7.8 99/10/02 11:28:53 msokolov 25 24
+use the NOSUBSINST define to determine when to supply scanc in C instead of
+specific CPU types
+/usr/src/etc/termcap/SCCS/s.Makefile:
+5.6 99/10/02 21:36:49 msokolov 19 18
+group bin, not staff
+/usr/src/usr.lib/learn/SCCS/s.Makefile:
+4.5 99/10/02 21:42:00 msokolov 7 6
+group bin, not staff
+/usr/src/games/phantasia/SCCS/s.Makefile:
+5.7 99/10/02 21:49:22 msokolov 9 8
+oops, need rm -f before ln
+/usr/src/man/SCCS/s.Makefile:
+5.4 99/10/03 12:58:30 msokolov 4 3
+clean out the man pages on the big make clean too
+/usr/src/sys/vaxdist/SCCS/s.buildmini:
+4.10 99/10/03 13:14:30 msokolov 10 9
+building miniroots on ra0d now
+/usr/src/sys/vaxdist/SCCS/s.maketape:
+4.33 99/10/03 13:14:31 msokolov 35 34
+building miniroots on ra0d now
+/usr/src/sys/vaxdist/SCCS/s.maketape:
+4.34 99/10/03 13:42:02 msokolov 36 35
+have to specify the actual device for the distribution root, just /nbsd doesn't
+work because it's listed as "xx" in /etc/fstab
+also call the tape /dev/rmt12 and rewind it at the end
+/usr/src/sys/vaxdist/SCCS/s.maketape:
+4.35 99/10/09 21:17:44 msokolov 37 36
+old was missing from the /usr image
+doc moves from /usr to /usr/src
+/usr/src/include/SCCS/s.Makefile:
+5.22 99/10/09 21:43:08 msokolov 37 36
+By default copy /sys and others instead of symlinking so that the system as
+distributed is usable without the sources.
+Also remove the unnecessary "./" in front of the machine symlink and make
+/usr/include/sys mode 755.
+/usr/src/include/SCCS/s.Makefile.install:
+5.5 99/10/09 22:46:03 msokolov 5 4
+Always have all include files for all machines
+Also make /usr/include/sys mode 755
+/usr/src/bin/SCCS/s.date.c:
+4.23 99/12/14 20:31:32 msokolov 26 25
+Y2K
+/usr/src/usr.bin/sccscmds/com/SCCS/s.date_ab.c:
+4.6 99/12/14 21:20:17 msokolov 6 5
+Y2K
+/usr/src/usr.bin/sccscmds/com/SCCS/s.date_ba.c:
+5.2 99/12/14 21:32:27 msokolov 2 1
+Y2K
+/usr/src/usr.bin/sccscmds/cmd/SCCS/s.get.c:
+4.10 99/12/14 21:47:13 msokolov 11 10
+Y2K
+/usr/src/usr.lib/sendmail/src/SCCS/s.envelope.c:
+5.16 99/12/31 06:34:16 msokolov 43 42
+Y2K
+/usr/src/usr.bin/at/SCCS/s.at.c:
+5.6 99/12/31 18:40:23 msokolov 21 20
+Y2K
+/usr/src/usr.bin/at/SCCS/s.atq.c:
+5.2 99/12/31 18:40:27 msokolov 5 4
+Y2K
+/usr/src/usr.bin/at/SCCS/s.atrm.c:
+5.4 99/12/31 18:40:29 msokolov 8 7
+Y2K
+/usr/src/usr.bin/at/SCCS/s.atrun.c:
+5.6 99/12/31 18:40:31 msokolov 14 13
+Y2K

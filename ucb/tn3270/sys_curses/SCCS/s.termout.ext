@@ -1,0 +1,36 @@
+h31316
+s 00001/00001/00015
+d D 1.2 99/09/12 20:33:23 msokolov 2 1
+c fix SCCS ID keywords
+e
+s 00016/00000/00000
+d D 1.1 86/11/12 12:06:21 minshall 1 0
+c date and time created 86/11/12 12:06:21 by minshall
+e
+u
+U
+t
+T
+I 1
+/*
+D 2
+ *	@(#)outbound.ext	3.1  10/29/86
+E 2
+I 2
+ *	%W%  %G%
+E 2
+ */
+
+extern void
+	StartScreen(),
+	StopScreen(),
+	ConnectScreen(),
+	ClearScreen(),
+	LocalClearScreen(),
+	RefreshScreen(),
+	RingBell(),
+	AddHost();
+
+extern int
+	DoTerminalOutput();
+E 1

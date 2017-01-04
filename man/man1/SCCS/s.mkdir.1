@@ -1,0 +1,74 @@
+h11832
+s 00001/00001/00023
+d D 6.1 85/04/29 17:50:44 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00010/00020
+d D 5.1 85/04/29 17:50:34 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00030/00000/00000
+d D 4.1 85/04/29 17:50:25 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MKDIR 1 
+E 2
+I 2
+D 3
+.TH MKDIR 1  "18 January 1983"
+E 3
+I 3
+.TH MKDIR 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+mkdir \- make a directory
+.SH SYNOPSIS
+.B mkdir
+dirname ...
+.SH DESCRIPTION
+.I Mkdir
+D 2
+creates specified directories
+in mode 777.
+E 2
+I 2
+creates specified directories in mode 777.
+E 2
+Standard entries,
+.RB ` . ',
+D 2
+for the directory itself,
+and 
+E 2
+I 2
+for the directory itself, and 
+E 2
+.lg 0
+.BR ` .. '
+.lg 1
+for its parent, are made automatically.
+.PP
+.I Mkdir
+requires write permission in the parent directory.
+.SH "SEE ALSO"
+D 2
+rm(1)
+.SH DIAGNOSTICS
+.I Mkdir
+returns exit code 0 if all directories were successfully made.
+Otherwise it prints a diagnostic and returns nonzero.
+E 2
+I 2
+rmdir(1)
+E 2
+E 1

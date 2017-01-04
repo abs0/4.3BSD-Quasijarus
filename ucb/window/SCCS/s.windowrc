@@ -1,0 +1,179 @@
+h48161
+s 00000/00000/00057
+d D 3.8 88/02/21 13:37:54 bostic 8 7
+c written by Edward Wang; attach Berkeley specific copyright
+e
+s 00044/00013/00013
+d D 3.7 85/06/04 18:53:58 edward 7 6
+c new syntax, and some fancier commands
+e
+s 00004/00000/00022
+d D 3.6 85/04/24 16:18:23 edward 6 5
+c copyright messages
+e
+s 00001/00001/00021
+d D 3.5 84/05/23 01:59:32 edward 5 4
+c new sccs id
+e
+s 00012/00008/00010
+d D 3.4 84/03/02 14:49:55 edward 4 3
+c new syntax
+e
+s 00006/00003/00012
+d D 3.3 83/08/25 17:58:56 edward 3 2
+c new 'buffer' command and fifth arg to 'window'
+e
+s 00001/00000/00014
+d D 3.2 83/08/22 17:00:47 edward 2 1
+c say where to put the file
+e
+s 00014/00000/00000
+d D 3.1 83/08/22 15:59:47 edward 1 0
+c date and time created 83/08/22 15:59:47 by edward
+e
+u
+U
+t
+T
+I 1
+D 5
+#	%W% %E%
+E 5
+I 5
+# %W% %G%
+E 5
+D 7
+
+E 7
+I 7
+#
+E 7
+I 6
+# Copyright (c) 1983 Regents of the University of California,
+# All rights reserved.  Redistribution permitted subject to
+# the terms of the Berkeley Software License Agreement.
+D 7
+
+E 7
+I 7
+#
+E 7
+E 6
+D 4
+# configuration file example for window manager
+I 2
+# to be installed in ~/.windowrc
+E 4
+I 4
+# Configuration file example for window manager
+# To be installed in ~/.windowrc
+E 4
+E 2
+#
+D 4
+# creates two unequal sized windows of full screen width.
+E 4
+I 4
+D 7
+# Create two unequal sized windows of full screen width.
+E 7
+I 7
+# Create two unequal sized windows of full screen width,
+# and set up some useful aliases.
+#
+E 7
+E 4
+
+D 3
+# terse				# set terse mode (if you want)
+# escape ^A			# set escape character (if you want)
+E 3
+I 3
+D 7
+# terse				# set terse mode
+# escape ^A			# set escape character
+# buffer 50			# set default buffer size
+E 7
+I 7
+#
+# Optional settings
+#
+# terse on			# set terse mode
+# escape "^A"			# set escape character
+# nline 100			# set default buffer size
+E 7
+				# initially, this is 48
+E 3
+
+D 3
+window * * 15 *			# top window 15 lines
+E 3
+I 3
+D 4
+window * * 15 * 100		# top window 15 lines, 100 lines in the buffer
+E 3
+label 1 "Top Window"		# label it
+window 17 * * *			# bottom window rest of the screen
+I 3
+				# with default buffer size
+E 3
+label 2 "Bottom Window"		# label
+E 4
+I 4
+D 7
+# Make 2 windows
+E 7
+I 7
+#
+# Make two windows
+E 7
+# The bottom one is MIN(24, total lines * 3 / 4) lines
+# The top one is the rest of the screen.
+D 7
+tmp = $nrow * 3 / 4
+tmp = $tmp > 24 ? $nrow - 24 - 1 : $nrow - $tmp - 1
+window row = 0, nrow = $tmp, label = "Top Window"
+window row = $tmp + 1, label = "Bottom Window"
+unset tmp
+E 7
+I 7
+#
+three_fourth = $nrow - ((_ = $nrow * 3 / 4) > 24 ? 24 : $_)
+unset _
+window row = 0, nrow = $three_fourth - 1, label = "Top"
+window row = $three_fourth, label = "Local"
+E 7
+
+E 4
+D 7
+%1				# current window is 1
+E 7
+I 7
+#
+# Useful aliases
+#
+#
+# Standard window
+#
+alias std "window r = $three_fourth, l = $?1 ? $1 : ''"
+#
+# Sysline, add your own options
+#
+alias sysline "_ = select();" \
+	"foreground window(r = 0, nr = 1, nc = $ncol + 1, nl = 0," \
+		"l = sysline, pty = no, frame = no, sh = sysline \\-w), 1;" \
+	"select $_; unset _"
+#
+# Rlogin
+#
+alias rlogin "window r = $three_fourth, l = $1, pty = no, mapnl = no," \
+	"sh = sh \\-c 'echo $TERMCAP | rsh ' + $1 + ' \\'cat > .TERMCAP\\' ;" \
+	"exec rlogin ' + $1"
+alias rl rlogin \$1
+#
+# Two equal windows
+#
+alias two "window r = 1, nr = $nrow / 2 - 1, l = top;" \
+	"window r = $nrow / 2 + 1, l = bottom"
+E 7
+E 1

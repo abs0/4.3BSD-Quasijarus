@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_cmdsub.c	7.9 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_cmdsub.c	7.10 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -86,7 +86,7 @@ appendnone()
  */
 pargs()
 {
-	register char **av = argv0, *as = args0;
+	register u_char **av = argv0, *as = args0;
 	register int ac;
 
 	for (ac = 0; ac < argc0; ac++) {
@@ -206,7 +206,7 @@ join(c)
 	int c;
 {
 	register line *a1;
-	register char *cp, *cp1;
+	register u_char *cp, *cp1;
 
 	cp = genbuf;
 	*cp = 0;
@@ -265,7 +265,7 @@ move()
 		setdot();
 	}
 	nonzero();
-	adt = address((char*)0);
+	adt = address((u_char*)0);
 	if (adt == 0)
 		serror("%s where?|%s requires a trailing address", Command);
 	newline();
@@ -376,8 +376,8 @@ put()
 pragged(kill)
 	bool kill;
 {
-	extern char *cursor;
-	register char *gp = &genbuf[cursor - linebuf];
+	extern u_char *cursor;
+	register u_char *gp = &genbuf[cursor - linebuf];
 
 	/*
 	 * This kind of stuff is TECO's forte.
@@ -415,8 +415,8 @@ shift(c, cnt)
 	int cnt;
 {
 	register line *addr;
-	register char *cp;
-	char *dp;
+	register u_char *cp;
+	u_char *dp;
 	register int i;
 
 	if(FIXUNDO)
@@ -469,25 +469,25 @@ shift(c, cnt)
 tagfind(quick)
 	bool quick;
 {
-	char cmdbuf[BUFSIZ];
-	char filebuf[FNSIZE];
-	char tagfbuf[128];
+	u_char cmdbuf[BUFSIZ];
+	u_char filebuf[FNSIZE];
+	u_char tagfbuf[128];
 	register int c, d;
 	bool samef = 1;
 	int tfcount = 0;
 	int omagic;
-	char *fn, *fne;
+	u_char *fn, *fne;
 	struct stat sbuf;
 #ifdef FASTTAG
 	int iof;
-	char iofbuf[MAXBSIZE];
+	u_char iofbuf[MAXBSIZE];
 	long mid;	/* assumed byte offset */
 	long top, bot;	/* length of tag file */
 #endif
 
 	omagic = value(MAGIC);
 	if (!skipend()) {
-		register char *lp = lasttag;
+		register u_char *lp = lasttag;
 
 		while (!iswhite(peekchar()) && !endcmd(peekchar()))
 			if (lp < &lasttag[sizeof lasttag - 2])
@@ -549,9 +549,9 @@ badtag:
 		while (getfile() == 0) {
 #endif
 			/* loop for each tags file entry */
-			register char *cp = linebuf;
-			register char *lp = lasttag;
-			char *oglobp;
+			register u_char *cp = linebuf;
+			register u_char *lp = lasttag;
+			u_char *oglobp;
 
 #ifdef FASTTAG
 			mid = (top + bot) / 2;
@@ -616,15 +616,15 @@ badtags:
 				 */
 				names['t'-'a'] = *dot &~ 01;
 				if (inopen) {
-					extern char *ncols['z'-'a'+2];
-					extern char *cursor;
+					extern u_char *ncols['z'-'a'+2];
+					extern u_char *cursor;
 
 					ncols['t'-'a'] = cursor;
 				}
 			}
 			strcpy(cmdbuf, cp);
 			if (strcmp(filebuf, savedfile) || !edited) {
-				char cmdbuf2[sizeof filebuf + 10];
+				u_char cmdbuf2[sizeof filebuf + 10];
 
 				/* Different file.  Do autowrite & get it. */
 				if (!quick) {
@@ -1076,10 +1076,10 @@ mapcmd(un, ab)
 	int un;	/* true if this is unmap command */
 	int ab;	/* true if this is abbr command */
 {
-	char lhs[100], rhs[100];	/* max sizes resp. */
-	register char *p;
+	u_char lhs[100], rhs[100];	/* max sizes resp. */
+	register u_char *p;
 	register int c;		/* mjm: char --> int */
-	char *dname;
+	u_char *dname;
 	struct maps *mp;	/* the map structure we are working on */
 
 	mp = ab ? abbrevs : exclam() ? immacs : arrows;
@@ -1146,9 +1146,9 @@ mapcmd(un, ab)
 	 * If the terminal doesn't have function keys, we just use #1.
 	 */
 	if (lhs[0] == '#') {
-		char *fnkey;
-		char *fkey();
-		char funkey[3];
+		u_char *fnkey;
+		u_char *fkey();
+		u_char funkey[3];
 
 		fnkey = fkey(lhs[1] - '0');
 		funkey[0] = 'f'; funkey[1] = lhs[1]; funkey[2] = 0;
@@ -1169,7 +1169,7 @@ mapcmd(un, ab)
  * the structure to affect (arrows, etc).
  */
 addmac(src,dest,dname,mp)
-	register char *src, *dest, *dname;
+	register u_char *src, *dest, *dname;
 	register struct maps *mp;
 {
 	register int slot, zer;
@@ -1265,11 +1265,11 @@ addmac(src,dest,dname,mp)
  * get the macro from.
  */
 cmdmac(c)
-char c;
+u_char c;
 {
-	char macbuf[BUFSIZ];
+	u_char macbuf[BUFSIZ];
 	line *ad, *a1, *a2;
-	char *oglobp;
+	u_char *oglobp;
 	short pk;
 	bool oinglobal;
 

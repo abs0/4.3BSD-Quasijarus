@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)qv.c	1.9 (Berkeley) 2/7/89
+ *	@(#)qv.c	1.10 (Berkeley) 2/5/04
  */
 
 /*
@@ -252,8 +252,8 @@ int	qvstart(), qvputc(),  ttrstrt();
 /*
  * Keyboard translation and font tables
  */
-extern u_short q_key[], q_shift_key[], q_cursor[];
-extern char *q_special[], q_font[];
+extern char q_key[], q_shift_key[], *q_special[], q_font[];
+extern u_short q_cursor[];
 
 /*
  * See if the qvss will interrupt.

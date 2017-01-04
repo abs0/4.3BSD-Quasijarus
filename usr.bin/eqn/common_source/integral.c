@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)integral.c	4.3 8/11/83";
+static char sccsid[] = "@(#)integral.c	4.4 9/15/04";
 #endif
 
 # include "e.h"
@@ -28,15 +28,22 @@ setintegral() {
 
 	yyval = oalloc();
 	f = "\\(is";
-#ifndef NEQN
+#ifdef CAT
 	printf(".ds %d \\s%d\\v'.1m'\\s+4%s\\s-4\\v'-.1m'\\s%d\n", 
 		yyval, ps, f, ps);
 	eht[yyval] = VERT( (((ps+4)*12)/10)*6 );
 	ebase[yyval] = VERT( (ps*6*3)/10 );
-#else NEQN
+#endif
+#ifdef PS
+	printf(".ds %d \\s%d\\v'.1m'\\s+4%s\\s-4\\v'-.1m'\\s%d\n", 
+		yyval, ps, f, ps);
+	eht[yyval] = VERT( ((ps+4)*12)*6 );
+	ebase[yyval] = VERT( ps*6*3 );
+#endif
+#ifdef NEQN
 	printf(".ds %d %s\n", yyval, f);
 	eht[yyval] = VERT(2);
 	ebase[yyval] = 0;
-#endif NEQN
+#endif
 	lfont[yyval] = rfont[yyval] = ROM;
 }

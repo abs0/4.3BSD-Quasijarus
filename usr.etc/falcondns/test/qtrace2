@@ -1,0 +1,22 @@
+QNAME=www.google.com.
+QCLASS=1 QTYPE=1 RD=1 RA=1
+q_flags=4001
+Entering query 0 stage 0
+QNAME=www.google.com.
+NOA is google.COM. type 4
+looking in the cache
+found CNAME
+CNAME www.l.google.com.
+CNAME: scheduling the next stage
+Entering query 0 stage 1
+QNAME=www.l.google.com.
+NOA is google.COM. type 4
+looking in the cache
+found answer
+final result from stage 1: code 0, flags 0000
+CNAME count 0, answer count 5
+forwarded AA=0 from the first stage
+answer: need additional section
+final answer: msglen=148 RCODE=0
+QDCOUNT=1 ANCOUNT=6 NSCOUNT=0 ARCOUNT=0
+-- end of trace --

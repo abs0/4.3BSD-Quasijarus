@@ -3,8 +3,14 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)mtpr.h	7.5 (Berkeley) 11/9/88
+ *	@(#)mtpr.h	7.7 (Berkeley) 3/18/04
  */
+
+#if defined(KERNEL) || defined(STANDALONE) || defined(LOCORE)
+#include "../vax/cpucond.h"
+#else
+#include <vax/cpucond.h>
+#endif
 
 /*
  * VAX processor register numbers
@@ -36,9 +42,7 @@
 #define	ICCS	0x18		/* interval clock control */
 #define	NICR	0x19		/* next interval count */
 #define	ICR	0x1a		/* interval count */
-#if VAX8600 || VAX8200 || VAX780 || VAX750 || VAX730 || VAX650
 #define	TODR	0x1b		/* time of year (day) */
-#endif
 #if VAX750 || VAX730
 #define	CSRS	0x1c		/* console storage receive status register */
 #define	CSRD	0x1d		/* console storage receive data register */
@@ -49,14 +53,15 @@
 #define	RXDB	0x21		/* console receiver data buffer */
 #define	TXCS	0x22		/* console transmitter control and status */
 #define	TXDB	0x23		/* console transmitter data buffer */
-#if VAX8200 || VAX750 || VAX730 || VAX650
+#if VAX8200 || VAX750 || VAX730 || NEED_CVAX_SUPPORT
 #define	TBDR	0x24		/* translation buffer disable register */
 #define	CADR	0x25		/* cache disable register */
+#define	CCR	CADR		/* it's called Cache Control Register on SOC */
 #endif
 #if VAX8200 || VAX750 || VAX730
 #define	MCESR	0x26		/* machine check error summary register */
 #endif
-#if VAX750 || VAX730 || VAX650
+#if VAX750 || VAX730 || NEED_CVAX_SUPPORT
 #define	CAER	0x27		/* cache error */
 #endif
 #define	ACCS	0x28		/* accelerator control and status */
@@ -93,9 +98,7 @@
 #endif
 #define	PMR	0x3d		/* performance monitor enable */
 #define	SID	0x3e		/* system identification */
-#if VAX8600 || VAX8200 || VAX650
 #define TBCHK	0x3f		/* Translation Buffer Check */
-#endif
 #if VAX8600
 #define PAMACC	0x40		/* PAMM access */
 #define PAMLOC	0x41		/* PAMM location */

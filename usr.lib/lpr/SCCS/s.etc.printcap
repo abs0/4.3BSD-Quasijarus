@@ -1,0 +1,62 @@
+h39865
+s 00008/00004/00023
+d D 5.2 88/05/05 18:07:48 bostic 2 1
+c written by Ralph Campbell; add Berkeley specific header
+e
+s 00027/00000/00000
+d D 5.1 85/06/07 20:43:11 mckusick 1 0
+c date and time created 85/06/07 20:43:11 by mckusick
+e
+u
+U
+t
+T
+I 1
+#
+# Copyright (c) 1983 Regents of the University of California.
+D 2
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+E 2
+I 2
+# All rights reserved.
+E 2
+#
+D 2
+#	%W% (Berkeley) %G%
+E 2
+I 2
+# Redistribution and use in source and binary forms are permitted
+# provided that this notice is preserved and that due credit is given
+# to the University of California at Berkeley. The name of the University
+# may not be used to endorse or promote products derived from this
+# software without specific prior written permission. This software
+# is provided ``as is'' without express or implied warranty.
+E 2
+#
+D 2
+# This is a sample of printcap entries used by various printers/plotters
+E 2
+I 2
+#	%W% (Berkeley) %G%
+E 2
+#
+# DecWriter over a tty line.
+lp|ap|arpa|ucbarpa|LA-180 DecWriter III:\
+	:br#1200:fs#06320:tr=\f:of=/usr/lib/lpf:lf=/usr/adm/lpd-errs:
+# typical remote printer entry
+ucbvax|vax|vx|ucbvax line printer:\
+	:lp=:rm=ucbvax:sd=/usr/spool/vaxlpd:lf=/usr/adm/lpd-errs:
+varian|va|Benson Varian:\
+	:lp=/dev/va0:sd=/usr/spool/vad:mx#2000:pl#58:px#2112:py#1700:tr=\f:\
+	:of=/usr/lib/vpf:if=/usr/lib/vpf:tf=/usr/lib/rvcat:cf=/usr/lib/vdmp:\
+	:gf=/usr/lib/vplotf:df=/usr/local/dvif:\
+	:vf=/usr/lib/vpltdmp:lf=/usr/adm/lpd-errs:
+versatec|vp|Versatec plotter:\
+	:lp=/dev/vp0:sd=/usr/spool/vpd:sb:sf:mx#0:pw#106:pl#86:px#7040:py#2400:\
+	:of=/usr/lib/vpfW:if=/usr/lib/vpsf:tf=/usr/lib/vcat:cf=/usr/lib/vdmp:\
+	:gf=/usr/lib/vplotf:vf=/usr/lib/vpltdmp:lf=/usr/adm/lpd-errs:\
+	:tr=\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n:
+E 1

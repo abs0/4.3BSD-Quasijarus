@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)displayq.c	5.8 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)displayq.c	5.9 (Berkeley) 2/13/06";
 #endif /* not lint */
 
 /*
@@ -222,7 +222,7 @@ localcheck_done:
 		(void) strcpy(cp, user[i]);
 	}
 	strcat(line, "\n");
-	fd = getport(RM);
+	fd = getport(RM, 0);
 	if (fd < 0) {
 		if (from != host)
 			printf("%s: ", host);

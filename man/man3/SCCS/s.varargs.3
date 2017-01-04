@@ -1,0 +1,246 @@
+h05159
+s 00007/00002/00125
+d D 6.3 86/05/15 16:11:56 karels 5 4
+c try again
+e
+s 00025/00001/00102
+d D 6.2 86/05/15 14:20:27 karels 4 3
+c caveats
+e
+s 00001/00001/00102
+d D 6.1 85/05/15 15:06:46 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00037/00025/00066
+d D 5.1 85/05/15 15:06:33 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00091/00000/00000
+d D 4.1 85/05/15 15:06:25 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH VARARGS 3 
+E 2
+I 2
+D 3
+.TH VARARGS 3  "19 January 1983"
+E 3
+I 3
+.TH VARARGS 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+varargs \- variable argument list
+.SH SYNOPSIS
+D 2
+.nf
+#include <varargs.h>
+\fIfunction\fR(\fBva_alist\fR)
+\fBva_dcl
+va_list \fIpvar\fR;
+\fBva_start\fR(\fIpvar\fR);
+f = \fBva_arg\fR(\fIpvar\fR, \fItype\fR);
+\fBva_end\fR(\fIpvar\fR);
+.fi
+E 2
+I 2
+.B "#include <varargs.h>"
+.PP
+.I function\c
+.RB ( va_alist )
+.br
+.B va_dcl
+.br
+.B va_list
+.IR pvar ;
+.br
+.B va_start\c
+.RI ( pvar );
+.br
+f =
+.B va_arg\c
+.RI ( pvar ,
+.IR type );
+.br
+.B va_end\c
+.RI ( pvar );
+E 2
+.SH DESCRIPTION
+D 2
+This set of macros allows portable procedures that accept variable
+argument lists to be written.
+Routines which have variable argument lists (such as
+.IR printf(3))
+E 2
+I 2
+This set of macros provides a means of writing portable procedures that
+accept variable argument lists.
+Routines having variable argument lists (such as
+.IR printf (3))
+E 2
+that do not use varargs are inherently nonportable, since different
+machines use different argument passing conventions.
+.PP
+.B va_alist
+is used in a function header to declare a variable argument list.
+.PP
+.B va_dcl
+D 2
+is a declaration for \fBva_alist\fP.
+E 2
+I 2
+is a declaration for
+.BR va_alist .
+E 2
+Note that there is no semicolon after
+.B va_dcl.
+.PP
+.B va_list
+is a type which can be used for the variable
+D 2
+.I pvar,
+E 2
+I 2
+.IR pvar ,
+E 2
+which is used to traverse the list.
+One such variable must always be declared.
+.PP
+D 2
+.B va_start
+E 2
+I 2
+.B va_start\c
+E 2
+.RI (pvar)
+is called to initialize
+.I pvar
+to the beginning of the list.
+.PP
+D 2
+.B va_arg
+.RI ( pvar , type )
+will return the next argument in the list
+pointed to by
+E 2
+I 2
+.B va_arg\c
+.RI ( pvar ,
+.IR type )
+will return the next argument in the list pointed to by
+E 2
+.IR pvar .
+.I Type
+D 4
+is the type the argument is expected to be.
+E 4
+I 4
+is the type to which the expected argument will be converted
+when passed as an argument.
+In standard C, arguments that are
+.B char
+or
+.B short
+should be accessed as
+.BR int ,
+.B "unsigned char
+or
+.B "unsigned short
+are converted to
+.BR "unsigned int" ,
+and
+.B float
+arguments are converted to
+.BR double .
+E 4
+Different types can be mixed, but it is up
+to the routine to know what type of argument is
+expected, since it cannot be determined at runtime.
+.PP
+D 2
+.B va_end
+E 2
+I 2
+.B va_end\c
+E 2
+.RI ( pvar )
+is used to finish up.
+.PP
+D 2
+Multiple traversals, each bracketted by
+E 2
+I 2
+Multiple traversals, each bracketed by
+E 2
+.B va_start
+D 2
+\&..
+E 2
+I 2
+\&...
+E 2
+.B va_end,
+are possible.
+.SH EXAMPLE
+.nf
+	\fB#include\fP <varargs.h>
+	execl(\fBva_alist\fP)
+	\fBva_dcl\fP
+	{
+		\fBva_list\fP ap;
+		\fBchar\fP *file;
+		\fBchar\fP *args[100];
+		\fBint\fP argno = 0;
+
+		\fBva_start\fP(ap);
+		file = \fBva_arg(ap, \fBchar\fP *);
+		\fBwhile\fP (args[argno++] = \fBva_arg\fP(ap, \fBchar\fP *))
+			\fB;\fP
+		\fBva_end\fP(ap);
+		\fBreturn\fP execv(file, args);
+	}
+.fi
+.SH BUGS
+It is up to the calling routine to determine how many arguments
+there are, since it is not possible to determine this from the
+stack frame.  For example,
+.I execl
+passes a 0 to signal the end of the list.
+.I Printf
+D 2
+can tell how many arguments are there by the format.
+E 2
+I 2
+can tell how many arguments are supposed to be there by the format.
+I 4
+.PP
+The macros
+.I va_start
+and
+.I va_end
+D 5
+may be arbitrarily complex,
+and thus may only be used where they could
+E 5
+I 5
+may be arbitrarily complex;
+for example,
+.I va_start
+might contain an opening brace,
+which is closed by a matching brace in
+.IR va_end .
+Thus, they should only be used where they could
+E 5
+be placed within a single complex statement.
+E 4
+E 2
+E 1

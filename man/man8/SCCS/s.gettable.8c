@@ -1,0 +1,98 @@
+h14746
+s 00006/00002/00050
+d D 6.2 86/05/22 20:11:38 karels 3 2
+c 
+e
+s 00015/00001/00037
+d D 6.1 85/04/27 14:57:49 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00038/00000/00000
+d D 5.1 85/04/27 14:57:28 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETTABLE 8C "4 March 1983"
+E 2
+I 2
+.TH GETTABLE 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+gettable \- get NIC format host tables from a host 
+.SH SYNOPSIS
+.B /etc/gettable
+I 2
+[
+.B \-v
+]
+E 2
+.I host
+I 2
+[ outfile ]
+E 2
+.SH DESCRIPTION
+.I Gettable
+is a simple program used to obtain the NIC standard
+host tables from a ``nicname'' server.  The indicated
+.I host
+is queried for the tables.  The tables, if retrieved,
+are placed in the file
+I 2
+.I outfile
+or by default,
+E 2
+.IR hosts.txt .
+I 2
+.PP
+The
+.B \-v
+option will get just the version number instead of the complete host table
+and put the output in the file
+.I outfile
+or by default,
+.IR hosts.ver .
+E 2
+.PP
+.I Gettable
+operates by opening a TCP connection to the port indicated
+in the service specification for ``nicname''.  A request
+is then made for ``ALL'' names and the resultant information
+is placed in the output file.
+.PP
+.I Gettable
+is best used in conjunction with the
+.IR htable (8)
+program which converts the NIC standard file format to
+that used by the network library lookup routines.
+.SH "SEE ALSO"
+intro(3N),
+D 3
+htable(8)
+E 3
+I 3
+htable(8),
+named(8)
+E 3
+.SH BUGS
+D 3
+Should allow requests for only part of the database.
+E 3
+I 3
+If the name-domain system provided network name mapping well as host
+name mapping,
+.I gettable
+would no longer be needed.
+E 3
+E 1

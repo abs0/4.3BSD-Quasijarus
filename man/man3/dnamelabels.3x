@@ -1,0 +1,44 @@
+.\"	%W% (IFCTF) %E%
+.\"
+.TH DNAMELABELS 3X "%Q%" MSDNS "MSDNS Library Functions Manual"
+.SH NAME
+label_match, label_match_can, label_match_casesen,
+copy_label_can, copy_label_casepreserve
+\- operations on individual domain name labels
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/types.h>
+.PP
+.ft B
+extern u_char dns_label_uc_table[256];
+.PP
+.ft B
+label_match(l1, l2)
+u_char *l1, *l2;
+.PP
+.ft B
+label_match_can(ext, ref)
+u_char *ext, *ref;
+.PP
+.ft B
+label_match_casesen(l1, l2)
+u_char *l1, *l2;
+.PP
+.ft B
+copy_label_can(src, dest)
+u_char *src, *dest;
+.PP
+.ft B
+copy_label_casepreserve(src, dest)
+u_char *src, *dest;
+.PP
+.ft B
+#include <stdio.h>
+.PP
+.ft B
+print_label(lab, stream)
+u_char *lab;
+FILE *stream;
+.fi
+.SH DESCRIPTION

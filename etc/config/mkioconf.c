@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)mkioconf.c	5.10 (Berkeley) 6/18/88";
+static char sccsid[] = "@(#)mkioconf.c	5.13 (Berkeley) 3/20/04";
 #endif /* not lint */
 
 #include <stdio.h>
@@ -122,13 +122,16 @@ vax_ioconf()
 	}
 	/*
 	 * Now generate interrupt vectors for the unibus
+	 * Peripheral nexus interrupts are handled the same way
 	 */
 	for (dp = dtab; dp != 0; dp = dp->d_next) {
 		if (dp->d_vec != 0) {
 			struct idlst *ip;
 			mp = dp->d_conn;
-			if (mp == 0 || mp == TO_NEXUS ||
-			    (!eq(mp->d_name, "uba") && !eq(mp->d_name, "bi")))
+			if (mp == 0 || mp != TO_NEXUS &&
+			    !eq(mp->d_name, "uba") && !eq(mp->d_name, "bva"))
+				continue;
+			if (mp == TO_NEXUS && isadapter(dp->d_name))
 				continue;
 			fprintf(fp,
 			    "extern struct uba_driver %sdriver;\n",
@@ -202,10 +205,21 @@ vax_ioconf()
 		    eq(mp->d_name, "mba"))
 			continue;
 		np = mp->d_conn;
-		if (np != 0 && np != TO_NEXUS && eq(np->d_name, "mba"))
+		if (np == 0) {
+			printf("%s%d isn't connected to anything ",
+			    mp->d_name, mp->d_unit);
+			printf(", so %s%d is unattached\n",
+			    dp->d_name, dp->d_unit);
 			continue;
-		np = 0;
-		if (eq(mp->d_name, "uba")) {
+		}
+		if (np == TO_NEXUS) {
+			if (!eq(mp->d_name, "uba"))
+				continue;
+		} else {
+			if (!eq(np->d_name, "uba"))
+				continue;
+		}
+		if (np == TO_NEXUS) {
 			if (dp->d_vec == 0) {
 				printf("must specify vector for device %s%d\n",
 				    dp->d_name, dp->d_unit);
@@ -226,13 +240,6 @@ vax_ioconf()
 			uba_n = mp->d_unit;
 			slave = QUES;
 		} else {
-			if ((np = mp->d_conn) == 0) {
-				printf("%s%d isn't connected to anything ",
-				    mp->d_name, mp->d_unit);
-				printf(", so %s%d is unattached\n",
-				    dp->d_name, dp->d_unit);
-				continue;
-			}
 			uba_n = np->d_unit;
 			if (dp->d_drive == UNKNOWN) {
 				printf("must specify ``drive number'' ");
@@ -269,6 +276,214 @@ vax_ioconf()
 		    dp->d_flags);
 	}
 	fprintf(fp, "\t0\n};\n");
+	/*
+	 * Now generate unibus-like tables for pnexus controllers and devices
+	 */
+	fprintf(fp, "\nstruct uba_ctlr pnexminit[] = {\n");
+	fprintf(fp, "/*\t driver,\tctlr,\ttie,\talive,\tintr */\n");
+	for (dp = dtab; dp != 0; dp = dp->d_next) {
+		mp = dp->d_conn;
+		if (dp->d_type != CONTROLLER || mp != TO_NEXUS ||
+		    isadapter(dp->d_name))
+			continue;
+		if (dp->d_vec == 0) {
+			printf("must specify vector for %s%d\n",
+			    dp->d_name, dp->d_unit);
+			continue;
+		}
+		if (dp->d_drive != UNKNOWN || dp->d_slave != UNKNOWN) {
+			printf("drives need their own entries; dont ");
+			printf("specify drive or slave for %s%d\n",
+			    dp->d_name, dp->d_unit);
+			continue;
+		}
+		if (dp->d_flags) {
+			printf("controllers (e.g. %s%d) ",
+			    dp->d_name, dp->d_unit);
+			printf("don't have flags, only devices do\n");
+			continue;
+		}
+		fprintf(fp,
+		    "\t{ &%sdriver,\t%d,\t%d,\t0,\t%sint%d },\n",
+		    dp->d_name, dp->d_unit, dp->d_node,
+		    dp->d_name, dp->d_unit, dp->d_addr);
+	}
+	fprintf(fp, "\t0\n};\n");
+	/* devices */
+	fprintf(fp, "\nstruct uba_device pnexdinit[] = {\n");
+	fprintf(fp,
+"\t/* driver,  unit, ctlr,  tie, slave,   intr,    addr,    dk, flags*/\n");
+	for (dp = dtab; dp != 0; dp = dp->d_next) {
+		mp = dp->d_conn;
+		if (dp->d_unit == QUES || dp->d_type != DEVICE || mp == 0)
+			continue;
+		if (mp != TO_NEXUS) {
+			if (mp->d_conn != TO_NEXUS || isadapter(mp->d_name))
+				continue;
+		}
+		if (mp == TO_NEXUS) {
+			if (dp->d_vec == 0) {
+				printf("must specify vector for device %s%d\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			if (dp->d_drive != UNKNOWN || dp->d_slave != UNKNOWN) {
+				printf("drives/slaves can be specified ");
+				printf("only for controllers, ");
+				printf("not for device %s%d\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			uba_n = dp->d_node;
+			slave = QUES;
+		} else {
+			uba_n = mp->d_node;
+			if (dp->d_drive == UNKNOWN) {
+				printf("must specify ``drive number'' ");
+				printf("for %s%d\n", dp->d_name, dp->d_unit);
+				continue;
+			}
+			/* NOTE THAT ON THE UNIBUS ``drive'' IS STORED IN */
+			/* ``SLAVE'' AND WE DON'T WANT A SLAVE SPECIFIED */
+			if (dp->d_slave != UNKNOWN) {
+				printf("slave numbers should be given only ");
+				printf("for massbus tapes, not for %s%d\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			if (dp->d_vec != 0) {
+				printf("interrupt vectors should not be ");
+				printf("given for drive %s%d\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			if (dp->d_addr != 0) {
+				printf("csr addresses should be given only ");
+				printf("on controllers, not on %s%d\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			slave = dp->d_drive;
+		}
+		fprintf(fp, "\t{ &%sdriver,  %2d,   %s,",
+		    mp == TO_NEXUS ? dp->d_name : mp->d_name, dp->d_unit,
+		    mp == TO_NEXUS ? " -1" : qu(mp->d_unit));
+		fprintf(fp, "  %d,    %2d,   %s, C 0x%x,  %d,  0x%x },\n",
+		    uba_n, slave, intv(dp), dp->d_addr, dp->d_dk,
+		    dp->d_flags);
+	}
+	fprintf(fp, "\t0\n};\n");
+	/* BabyVAX controller and device tables */
+	if (seen_bva) {
+		fprintf(fp, "\nstruct uba_ctlr bvaxminit[] = {\n");
+		fprintf(fp, "/*\t driver,\tctlr,\tubanum,\talive,\tintr,\taddr */\n");
+		for (dp = dtab; dp != 0; dp = dp->d_next) {
+			mp = dp->d_conn;
+			if (dp->d_type != CONTROLLER || mp == TO_NEXUS ||
+			    mp == 0 || !eq(mp->d_name, "bva"))
+				continue;
+			if (dp->d_vec == 0) {
+				printf("must specify vector for %s%d\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			if (dp->d_drive != UNKNOWN || dp->d_slave != UNKNOWN) {
+				printf("drives need their own entries; dont ");
+				printf("specify drive or slave for %s%d\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			if (dp->d_flags) {
+				printf("controllers (e.g. %s%d) ",
+				    dp->d_name, dp->d_unit);
+				printf("don't have flags, only devices do\n");
+				continue;
+			}
+			fprintf(fp,
+			    "\t{ &%sdriver,\t%d,\t%s,\t0,\t%sint%d, C 0%o },\n",
+			    dp->d_name, dp->d_unit, qu(mp->d_unit),
+			    dp->d_name, dp->d_unit, dp->d_addr);
+		}
+		fprintf(fp, "\t0\n};\n");
+		/* non-mass storage devices */
+		fprintf(fp, "\nstruct uba_device bvaxdinit[] = {\n");
+		fprintf(fp,
+"\t/* driver,  unit, ctlr,  ubanum, slave,   intr,    addr,    dk, flags*/\n");
+		for (dp = dtab; dp != 0; dp = dp->d_next) {
+			mp = dp->d_conn;
+			if (dp->d_unit == QUES || dp->d_type != DEVICE ||
+			    mp == 0 || mp == TO_NEXUS || mp->d_type == MASTER ||
+			    eq(mp->d_name, "mba"))
+				continue;
+			np = mp->d_conn;
+			if (np == 0) {
+				printf("%s%d isn't connected to anything ",
+				    mp->d_name, mp->d_unit);
+				printf(", so %s%d is unattached\n",
+				    dp->d_name, dp->d_unit);
+				continue;
+			}
+			if (np == TO_NEXUS) {
+				if (!eq(mp->d_name, "bva"))
+					continue;
+			} else {
+				if (!eq(np->d_name, "bva"))
+					continue;
+			}
+			if (np == TO_NEXUS) {
+				if (dp->d_vec == 0) {
+				printf("must specify vector for device %s%d\n",
+					    dp->d_name, dp->d_unit);
+					continue;
+				}
+				if (dp->d_drive != UNKNOWN ||
+				    dp->d_slave != UNKNOWN) {
+				    printf("drives/slaves can be specified ");
+					printf("only for controllers, ");
+					printf("not for device %s%d\n",
+					    dp->d_name, dp->d_unit);
+					continue;
+				}
+				uba_n = mp->d_unit;
+				slave = QUES;
+			} else {
+			    uba_n = np->d_unit;
+			    if (dp->d_drive == UNKNOWN) {
+				printf("must specify ``drive number'' ");
+				printf("for %s%d\n", dp->d_name, dp->d_unit);
+				continue;
+			    }
+			    /* NOTE THAT ON THE UNIBUS ``drive'' IS STORED IN */
+			    /* ``SLAVE'' AND WE DON'T WANT A SLAVE SPECIFIED */
+			    if (dp->d_slave != UNKNOWN) {
+				printf("slave numbers should be given only ");
+				printf("for massbus tapes, not for %s%d\n",
+					dp->d_name, dp->d_unit);
+					continue;
+			    }
+			    if (dp->d_vec != 0) {
+				printf("interrupt vectors should not be ");
+				printf("given for drive %s%d\n",
+					dp->d_name, dp->d_unit);
+				continue;
+			    }
+			    if (dp->d_addr != 0) {
+				printf("csr addresses should be given only ");
+				printf("on controllers, not on %s%d\n",
+					dp->d_name, dp->d_unit);
+				continue;
+			    }
+			    slave = dp->d_drive;
+			}
+			fprintf(fp, "\t{ &%sdriver,  %2d,   %s,",
+			    eq(mp->d_name, "bva") ? dp->d_name : mp->d_name, dp->d_unit,
+			    eq(mp->d_name, "bva") ? " -1" : qu(mp->d_unit));
+			fprintf(fp, "  %s,    %2d,   %s, C 0%-6o,  %d,  0x%x },\n",
+			    qu(uba_n), slave, intv(dp), dp->d_addr, dp->d_dk,
+			    dp->d_flags);
+		}
+		fprintf(fp, "\t0\n};\n");
+	}
 	(void) fclose(fp);
 }
 #endif

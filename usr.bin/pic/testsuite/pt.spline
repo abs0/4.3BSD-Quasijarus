@@ -1,0 +1,11 @@
+.nf
+.PS
+box "thing 1"
+spline -> right 150 down 20 then left 100 down 20 then down 20 right 150
+box "thing 2"
+.PE
+.PS 4i
+box "thing 1"
+spline -> right 150 down 20 then left 100 down 20 then down 20 right 150
+box "thing 2"
+.PE

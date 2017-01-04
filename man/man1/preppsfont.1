@@ -1,0 +1,65 @@
+.\"	@(#)preppsfont.1	6.2 (Berkeley) 10/30/04
+.\"
+.TH PREPPSFONT 1 "October 30, 2004"
+.UC 8
+.SH NAME
+preppsfont \- prepare PostScript fonts for pstroff
+.SH SYNOPSIS
+.B preppsfont
+[ \fB\-r\fP ] [ \fB\-s\fP ] afmfile fn
+.SH DESCRIPTION
+.I Preppsfont
+prepares the PostScript font described by the Adobe Font Metrics file
+.I afmfile
+for use with
+.IR pstroff (1).
+It generates a simple
+binary file with 256 character widths for the font as it will be used, and a
+text file with PostScript code that will fetch the font, make any
+desired modifications to it, and leave the font dictionary on the
+operand stack.
+These files are generated in the current directory, which should be
+.B /usr/lib/pstroff
+to install the font system-wide.
+.PP
+.I fn
+is the one or two character name by which the font will be known in
+.IR pstroff (1).
+The generated width and setup files are named
+.BI fw fn
+and
+.BI fs fn
+respectively.
+.PP
+The
+.B \-r
+option indicates that the font is a Roman font and should be recoded to
+\%\fBTroffEncoding\fP.
+All Roman fonts must be prepared with this option to use the full
+character set described in the
+.I Nroff/Troff user's manual.
+.PP
+The
+.B \-s
+option should be used to prepare the Symbol font.
+This adds code to the setup file
+to change the metrics of the
+.I radical
+and
+.I radicalex
+characters to make them more useful.
+The width file is adjusted accordingly as well.
+.SH FILES
+.ta 5n +\w'TroffEncoding.ps  'u
+/usr/lib/pstroff/	directory containing:
+.br
+	fw*	font width tables
+.br
+	fs*	font setup files
+.br
+	TroffEncoding.ps	encoding vector for Roman fonts
+.SH SEE ALSO
+J. F. Ossanna,
+.I Nroff/Troff user's manual
+.br
+pstroff(1)

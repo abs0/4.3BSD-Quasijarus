@@ -1,0 +1,118 @@
+h00593
+s 00003/00004/00064
+d D 6.1.1.1 86/08/12 18:43:37 mckusick 4 3
+c delete decryption for the foreign sites
+e
+s 00001/00001/00067
+d D 6.1 85/05/15 14:53:54 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00066
+d D 5.1 85/05/15 14:53:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00068/00000/00000
+d D 4.1 85/05/15 14:53:35 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+f b 
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CRYPT 3 
+E 2
+I 2
+D 3
+.TH CRYPT 3  "25 February 1983"
+E 3
+I 3
+.TH CRYPT 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+crypt, setkey, encrypt \- DES encryption
+.SH SYNOPSIS
+.nf
+.B char *crypt(key, salt)
+.B char *key, *salt;
+.PP
+.B setkey(key)
+.B char *key;
+.PP
+.B encrypt(block, edflag)
+.B char *block;
+.fi
+.SH DESCRIPTION
+.I Crypt
+is the password encryption routine.
+It is based on the NBS Data Encryption Standard, with
+variations intended (among other things) to frustrate use of hardware
+implementations of the DES for key search.
+.PP
+The first argument to
+.I crypt
+D 2
+is a user's typed password.
+E 2
+I 2
+is normally a user's typed password.
+E 2
+The second is a 2-character string chosen from the
+set [a-zA-Z0-9./].
+The
+.I salt
+string is used to perturb the DES algorithm in one of 4096
+different ways, after which the password
+is used as the key to encrypt repeatedly a constant string.
+The returned value points to the encrypted password,
+in the same alphabet as the salt.
+The first two characters are the salt itself.
+.PP
+The other entries provide (rather primitive)
+access to the actual DES algorithm.
+The argument of
+.I setkey
+is a character array of length 64 containing only the characters
+with numerical value 0 and 1.
+If this string is divided into groups of 8,
+the low-order bit in each group is ignored,
+leading to a 56-bit key which is set into the machine.
+.PP
+The argument to the
+.I encrypt
+entry is likewise a character array of length 64
+containing 0's and 1's.
+The argument array is modified in place
+to a similar array
+representing the bits of the argument after having been
+subjected to the DES algorithm using the key set by
+.I setkey.
+D 4
+If
+E 4
+I 4
+The
+E 4
+.I edflag
+D 4
+is 0, the argument is encrypted;
+if non-zero,
+it is decrypted.
+E 4
+I 4
+flag is ignored;
+the argument can only be encrypted.
+E 4
+.SH "SEE ALSO"
+passwd(1), passwd(5), login(1), getpass(3)
+.SH BUGS
+The return value
+points to static data whose content is overwritten
+by each call.
+E 1

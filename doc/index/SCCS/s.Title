@@ -1,0 +1,76 @@
+h61312
+s 00003/00017/00033
+d D 6.2 86/10/11 12:26:43 mckusick 2 1
+c update from tef
+e
+s 00050/00000/00000
+d D 6.1 86/10/09 17:35:25 mckusick 1 0
+c date and time created 86/10/09 17:35:25 by mckusick
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.ps 18
+.vs 22
+E 2
+I 2
+.\" run this off with NO macro package.
+.ps 20
+.vs 24
+E 2
+.sp 2.75i
+.ft B
+.ce 1
+Master Index
+.ps 14
+.vs 16
+.sp |4i
+.ce 2
+4.3 Berkeley Software Distribution
+Virtual VAX\-11 Version
+.sp |5.75i
+.ft R
+.pt 12
+.vs 16
+.ce
+April, 1986
+.sp |8.2i
+D 2
+.ce 5
+Computer Systems Research Group
+Computer Science Division
+Department of Electrical Engineering and Computer Science
+University of California
+Berkeley, California  94720
+E 2
+.bp
+.ll 5.3i
+.in 1.25i
+.hy 0
+.ps 10
+.vs 12p
+.sp |4i
+This index is in the public domain.
+It may be freely copied provided that the acknowledgement
+in the introduction is included.
+D 2
+.sp 2
+This index reflects system enhancements made at Berkeley and sponsored
+in part by the Defense Advanced Research Projects Agency
+(DoD), Arpa Order No. 4871 monitored by the Naval Electronics Systems
+Command under contract No. N00039-84-C-0089.
+The views and conclusions contained in these documents are those of the
+authors and should not be interpreted as representing official policies,
+either expressed or implied, of the Defense Research Projects Agency
+or of the US Government.
+E 2
+E 1

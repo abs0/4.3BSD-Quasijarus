@@ -1,0 +1,82 @@
+h00448
+s 00003/00003/00040
+d D 6.2 86/05/27 10:09:05 kjd 3 2
+c spelling corrections
+e
+s 00001/00001/00042
+d D 6.1 85/05/15 16:13:49 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00043/00000/00000
+d D 5.1 85/05/15 16:13:41 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ACCESS 3F "26 July 1983"
+E 2
+I 2
+.TH ACCESS 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+D 3
+access \- determine accessability of a file
+E 3
+I 3
+access \- determine accessibility of a file
+E 3
+.SH SYNOPSIS
+.B integer function access (name, mode)
+.br
+.B character*(*) name, mode
+.SH DESCRIPTION
+.I Access
+checks the given file,
+.I name,
+D 3
+for accessability with respect to the caller according to
+E 3
+I 3
+for accessibility with respect to the caller according to
+E 3
+.I mode.
+.I Mode
+may include in any order and in any combination one or more of:
+.LP
+.nf
+.ta 1i 2i
+	   \fBr\fR	test for read permission
+	   \fBw\fR	test for write permission
+	   \fBx\fR	test for execute permission
+	(blank)	test for existence
+.DT
+.fi
+.PP
+An error code is returned if either argument is illegal, or if the file
+D 3
+can not be accessed in all of the specified modes.
+E 3
+I 3
+cannot be accessed in all of the specified modes.
+E 3
+0 is returned if the specified access would be successful.
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.SH "SEE ALSO"
+access(2), perror(3F)
+.SH BUGS
+Pathnames can be no longer than MAXPATHLEN as defined in
+.RI < sys/param.h >.
+E 1

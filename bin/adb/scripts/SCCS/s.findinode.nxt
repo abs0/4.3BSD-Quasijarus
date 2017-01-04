@@ -1,0 +1,18 @@
+h13708
+s 00007/00000/00000
+d D 5.1 88/03/30 15:42:16 bostic 1 0
+c date and time created 88/03/30 15:42:16 by bostic
+e
+u
+U
+t
+T
+I 1
+(<f)=X
+(*(<f+0t20))="inode "D
+,#(*(<f+0t20)-<4)$<
+<l-1>l
+<f+0t176>f
+,#<l$<
+$<findinode.nxt
+E 1

@@ -1,0 +1,147 @@
+h06800
+s 00001/00001/00061
+d D 6.1 85/04/29 18:07:57 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00012/00025/00050
+d D 5.1 85/04/29 18:07:43 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00075/00000/00000
+d D 4.1 85/04/29 18:07:34 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH UNIQ 1 
+E 2
+I 2
+D 3
+.TH UNIQ 1  "10 February 1983"
+E 3
+I 3
+.TH UNIQ 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+uniq \- report repeated lines in a file
+.SH SYNOPSIS
+.B uniq
+[
+.B \-udc
+[
+.BR + n
+] [
+.BR \- n
+]
+] [ input [ output ] ]
+.SH DESCRIPTION
+.I Uniq
+D 2
+reads the input
+file comparing adjacent lines.
+In the normal case, the second and succeeding copies
+of repeated lines are
+E 2
+I 2
+reads the input file comparing adjacent lines.
+In the normal case, the second and succeeding copies of repeated lines are
+E 2
+removed; the remainder is written on the output file.
+D 2
+Note that repeated lines must be adjacent
+in order to be found;
+see
+E 2
+I 2
+Note that repeated lines must be adjacent in order to be found; see
+E 2
+.IR  sort (1).
+If the
+.B \-u
+D 2
+flag is used,
+just the lines that are not repeated
+in the original file are output.
+The
+E 2
+I 2
+flag is used, just the lines that are not repeated
+in the original file are output.  The
+E 2
+.B \-d
+D 2
+option specifies that
+one copy of just the repeated lines is to
+be written.
+E 2
+I 2
+option specifies that one copy of just the repeated lines is to be written.
+E 2
+The normal mode output is the union of the
+.B \-u
+and
+.B \-d
+mode outputs.
+.PP
+The
+.B \-c
+option supersedes
+.B \-u
+and
+.B \-d
+D 2
+and generates
+an output report in default style
+but with each line preceded by a count of the
+number of times it occurred.
+E 2
+I 2
+and generates an output report in default style
+but with each line preceded by a count of the number of times it occurred.
+E 2
+.PP
+The
+.I n
+D 2
+arguments specify skipping an initial portion of each line
+in the comparison:
+E 2
+I 2
+arguments specify skipping an initial portion of each line in the comparison:
+E 2
+.TP 8
+.BI \- n
+The first
+.IR n 
+D 2
+fields
+together with any blanks before each are ignored.
+E 2
+I 2
+fields together with any blanks before each are ignored.
+E 2
+A field is defined as a string of non-space, non-tab characters
+separated by tabs and spaces from its neighbors.
+.TP 8
+.BI + n
+The first
+.IR n 
+D 2
+characters are ignored.
+Fields are skipped before characters.
+E 2
+I 2
+characters are ignored.  Fields are skipped before characters.
+E 2
+.PP
+.SH "SEE ALSO"
+sort(1), comm(1)
+E 1

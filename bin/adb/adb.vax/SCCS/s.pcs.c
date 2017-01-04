@@ -1,0 +1,149 @@
+h35005
+s 00003/00002/00123
+d D 4.2 83/08/11 20:01:39 sam 2 1
+c fix sccs keyword lines
+e
+s 00125/00000/00000
+d D 4.1 81/05/14 15:19:54 root 1 0
+c date and time created 81/05/14 15:19:54 by root
+e
+u
+U
+t
+T
+I 1
+D 2
+#
+E 2
+I 2
+#ifndef lint
+static	char sccsid[] = "%W% %G%";
+#endif
+E 2
+/*
+ *
+ *	UNIX debugger
+ *
+ */
+
+#include "defs.h"
+D 2
+static	char sccsid[] = "%Z%%M% %I% %G%";
+E 2
+
+
+MSG		NOBKPT;
+MSG		SZBKPT;
+MSG		EXBKPT;
+MSG		NOPCS;
+MSG		BADMOD;
+
+/* breakpoints */
+BKPTR		bkpthead;
+
+CHAR		*lp;
+CHAR		lastc;
+
+INT		signo;
+L_INT		dot;
+INT		pid;
+L_INT		cntval;
+L_INT		loopcnt;
+
+L_INT		entrypt;
+INT		adrflg;
+
+
+
+/* sub process control */
+
+subpcs(modif)
+{
+	REG INT		check;
+	INT		execsig,runmode;
+	REG BKPTR	bkptr;
+	STRING		comptr;
+	execsig=0; loopcnt=cntval;
+
+	switch (modif) {
+
+	    /* delete breakpoint */
+	    case 'd': case 'D':
+		IF (bkptr=scanbkpt(dot))
+		THEN bkptr->flag=0; return;
+		ELSE error(NOBKPT);
+		FI
+
+	    /* set breakpoint */
+	    case 'b': case 'B':
+		IF (bkptr=scanbkpt(dot))
+		THEN bkptr->flag=0;
+		FI
+		FOR bkptr=bkpthead; bkptr; bkptr=bkptr->nxtbkpt
+		DO IF bkptr->flag == 0
+		   THEN break;
+		   FI
+		OD
+		IF bkptr==0
+		THEN IF (bkptr=sbrk(sizeof *bkptr)) == -1
+		     THEN error(SZBKPT);
+		     ELSE bkptr->nxtbkpt=bkpthead;
+			  bkpthead=bkptr;
+		     FI
+		FI
+		bkptr->loc = dot;
+		bkptr->initcnt = bkptr->count = cntval;
+		bkptr->flag = BKPTSET;
+		check=MAXCOM-1; comptr=bkptr->comm; rdc(); lp--;
+		REP *comptr++ = readchar();
+		PER check-- ANDF lastc!=EOR DONE
+		*comptr=0; lp--;
+		IF check
+		THEN return;
+		ELSE error(EXBKPT);
+		FI
+
+	    /* exit */
+	    case 'k' :case 'K':
+		IF pid
+		THEN printf("%d: killed", pid); endpcs(); return;
+		FI
+		error(NOPCS);
+
+	    /* run program */
+	    case 'r': case 'R':
+		endpcs();
+		setup(); runmode=CONTIN;
+		IF adrflg 
+		THEN IF !scanbkpt(dot) THEN loopcnt++; FI
+		ELSE IF !scanbkpt(entrypt+2) THEN loopcnt++; FI
+		FI
+		break;
+
+	    /* single step */
+	    case 's': case 'S':
+		IF pid
+		THEN
+			runmode=SINGLE; execsig=getsig(signo);
+		ELSE setup(); loopcnt--;
+		FI
+		break;
+
+	    /* continue with optional signal */
+	    case 'c': case 'C': case 0:
+		IF pid==0 THEN error(NOPCS); FI
+		runmode=CONTIN; execsig=getsig(signo);
+		break;
+
+	    default: error(BADMOD);
+	}
+
+	IF loopcnt>0 ANDF runpcs(runmode,execsig)
+	THEN printf("breakpoint%16t");
+	ELSE printf("stopped at%16t");
+	FI
+	delbp();
+	printpc();
+}
+
+E 1

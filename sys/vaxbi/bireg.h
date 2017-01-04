@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)bireg.h	7.2 (Berkeley) 7/9/88
+ *	@(#)bireg.h	7.3 (Berkeley) 3/6/04
  */
 
 /*
@@ -29,7 +29,6 @@
  */
 #define	BI_BASE(bi)	((struct bi_node *) (0x20000000 + (bi)*0x2000000))
 #define	NNODEBI		16		/* 16 nodes per BI */
-/*	`local space'	0x20800000	/* ??? */
 
 #ifndef LOCORE
 /*
@@ -201,7 +200,7 @@ struct bi_cpu {
 #define	BIW_GPR1	0x20000000	/* gpr 1 was written */
 #define	BIW_GPR0	0x10000000	/* gpr 0 was written */
 
-/* bits in force-bit ipintr/stop command register 8/
+/* bits in force-bit ipintr/stop command register */
 #define	BIFIPSC_CMDMASK	0x0000f000	/* command */
 #define	BIFIPSC_MIDEN	0x00000800	/* master ID enable */
 

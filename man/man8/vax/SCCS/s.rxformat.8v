@@ -1,0 +1,101 @@
+h45326
+s 00002/00002/00055
+d D 6.3 86/06/03 15:23:58 cuccia 4 3
+c Swapped BUGS: and AUTHOR: sections
+e
+s 00002/00001/00055
+d D 6.2 85/08/28 10:18:15 bloom 3 2
+c now only verfies format if isatty
+e
+s 00002/00002/00054
+d D 6.1 85/04/27 15:59:35 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00056/00000/00000
+d D 5.1 85/04/27 15:59:28 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RXFORMAT 8V "28 April 1983"
+E 2
+I 2
+.TH RXFORMAT 8V "%Q%"
+E 2
+.UC 5
+.SH NAME
+rxformat \- format floppy disks
+.SH SYNOPSIS
+.B /etc/rxformat
+[
+.B \-d
+] special
+.SH DESCRIPTION
+The
+.I rxformat
+program formats a diskette in the specified drive
+associated with the special device
+.IR special .
+(
+.I Special
+D 2
+is normally /dev/rrx0, for drive 0, or /dev/rrx1,
+E 2
+I 2
+is normally /dev/rx0, for drive 0, or /dev/rx1,
+E 2
+for drive 1.)
+By default, the diskette is formatted single density;
+a
+.B \-d
+flag may be supplied to force double density formatting.
+Single density is compatible 
+with the IBM 3740 standard (128 bytes/sector). 
+In double density, each sector
+contains 256 bytes of data.
+.PP
+Before formatting a diskette
+.I rxformat
+D 3
+prompts for verification (this allows a user to cleanly
+E 3
+I 3
+prompts for verification if standard input is a tty
+(this allows a user to cleanly
+E 3
+abort the operation; note that
+formatting a diskette will destroy any existing data).
+Formatting is done by the hardware.
+All sectors are zero-filled.
+.SH DIAGNOSTICS
+`No such device' means that the drive is not ready, 
+usually because no disk is in the drive or the drive door is open.
+Other error messages are selfexplanatory.
+.SH FILES
+/dev/rx?
+.SH SEE ALSO
+rx(4V)
+I 4
+.SH AUTHOR
+Helge Skrivervik
+E 4
+.SH BUGS
+A floppy may not be formatted if the
+header info on sector 1, track 0 has been damaged.  Hence, it is not
+possible to format a completely degaussed disk. 
+(This is actually a problem in the hardware.)
+D 4
+.SH AUTHOR
+Helge Skrivervik
+E 4
+E 1

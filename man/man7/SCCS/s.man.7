@@ -1,0 +1,366 @@
+h34771
+s 00004/00005/00162
+d D 6.4 87/08/10 15:31:38 bostic 6 5
+c rename /usr/man/man0/xx to /usr/man/man.template
+e
+s 00021/00040/00146
+d D 6.3 86/05/15 19:48:42 mckusick 5 4
+c the .li macro no longer exists
+e
+s 00002/00001/00184
+d D 6.2 86/05/06 15:07:53 anne 4 3
+c spelling, grammar, diction
+e
+s 00001/00001/00184
+d D 6.1 85/05/20 20:22:14 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00004/00177
+d D 5.1 85/05/20 20:22:04 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00181/00000/00000
+d D 4.1 85/05/20 20:21:58 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MAN 7 
+E 2
+I 2
+D 3
+.TH MAN 7 "7 March 1983"
+E 3
+I 3
+.TH MAN 7 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+man \- macros to typeset manual
+.SH SYNOPSIS
+.B
+nroff  \-man\ 
+file ...
+.PP
+.B
+troff  \-man\ 
+file ...
+.SH DESCRIPTION
+D 6
+These macros are used to lay out pages of this manual.
+A skeleton page may be found in the file 
+/usr/man/man0/xx.
+E 6
+I 6
+These macros are used to lay out pages of this manual.  A skeleton page may
+be found in the file /usr/man/man.template.
+E 6
+.PP
+Any text argument
+.I t
+may be zero to six words.
+Quotes may be used to include blanks in a `word'.
+If 
+.I text
+is empty,
+D 4
+the special treatment is applied to
+E 4
+I 4
+special treatment is applied to
+E 4
+the next input line with text to be printed.
+In this way
+.BR . I
+may be used to italicize a whole line, or
+.BR . SM
+I 4
+may be
+E 4
+followed by
+.BR . B
+to make small bold letters.
+.PP
+A prevailing indent distance is remembered between
+successive indented paragraphs,
+and is reset to default value upon reaching a non-indented paragraph.
+Default units for indents
+.I i
+are ens.
+.PP
+Type font and size are reset to default values
+before each paragraph, and after processing
+font and size setting macros.
+.PP
+These strings are predefined by
+.BR \-man :
+.IP \e*R
+.if t `\*R', `(Reg)' in
+.if t .I nroff.
+.if n `(Reg)', trademark symbol in
+.if n .I troff.
+.IP \e*S
+Change to default type size.
+.SH FILES
+/usr/lib/tmac/tmac.an
+.br
+D 6
+/usr/man/man0/xx
+E 6
+I 6
+/usr/man/man.template
+E 6
+.SH SEE ALSO
+D 6
+troff(1), man(1)
+E 6
+I 6
+man(1), troff(1)
+E 6
+.SH BUGS
+Relative indents don't nest.
+.SH REQUESTS
+D 2
+.ta \w'.TH n c x 'u +\w'Cause 'u +\w'Argument\ 'u
+E 2
+I 2
+.ta \w'.TH n c x v m'u +\w'Cause 'u +\w'Argument\ 'u
+E 2
+.di xx
+			\ka
+.br
+.di
+.in \nau
+.ti0
+Request	Cause	If no	Explanation
+.ti0
+	Break	Argument
+.ti0
+D 5
+.li
+.B \fIt\fR	no	\fIt\fR=n.t.l.*	Text
+E 5
+I 5
+.tr ~.
+~B \fIt\fR	no	\fIt\fR=n.t.l.*	Text
+E 5
+.I t
+is bold.
+.ti0
+D 5
+.li
+.BI \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+I 5
+~BI \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+words of
+.I t
+alternating bold and italic.
+.ti0
+D 5
+.li
+.BR \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+I 5
+~BR \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+words of
+.I t
+alternating bold and Roman.
+.ti0
+D 5
+.li
+.DT	no	.5i 1i...	Restore default tabs.
+E 5
+I 5
+~DT	no	.5i 1i...	Restore default tabs.
+E 5
+.ti0
+D 5
+.li
+.HP \fIi\fR	yes	\fIi\fR=p.i.*	Set prevailing indent to
+E 5
+I 5
+~HP \fIi\fR	yes	\fIi\fR=p.i.*	Set prevailing indent to
+E 5
+.I i.
+Begin paragraph with hanging indent.
+.ti0
+D 5
+.li
+.I \fIt\fR	no	\fIt\fR=n.t.l.	Text
+E 5
+I 5
+~I \fIt\fR	no	\fIt\fR=n.t.l.	Text
+E 5
+.I t
+is italic.
+.ti0
+D 5
+.li
+.IB \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+I 5
+~IB \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+words of
+.I t
+alternating italic and bold.
+.ti0
+D 5
+.li
+.IP \fIx i\fR	yes	\fIx\fR=""	Same as .TP with tag
+E 5
+I 5
+~IP \fIx i\fR	yes	\fIx\fR=""	Same as .TP with tag
+E 5
+.I x.
+.ti0
+D 5
+.li
+.IR \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+I 5
+~IR \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+words of
+.I t
+alternating italic and Roman.
+.ti0
+D 5
+.li
+.LP	yes	-	Same as .PP.
+E 5
+I 5
+~LP	yes	-	Same as .PP.
+E 5
+.ti0
+D 5
+.li
+.PD \fId\fR	no	\fId\fR=.4v	Interparagraph distance is 
+E 5
+I 5
+~PD \fId\fR	no	\fId\fR=.4v	Interparagraph distance is 
+E 5
+.I d.
+.ti0
+D 5
+.li
+.PP	yes	-	Begin paragraph.
+E 5
+I 5
+~PP	yes	-	Begin paragraph.
+E 5
+Set prevailing indent to .5i.
+.ti0
+D 5
+.li
+.RE	yes	-	End of relative indent.
+E 5
+I 5
+~RE	yes	-	End of relative indent.
+E 5
+Set prevailing indent to amount of starting .RS.
+.ti0
+D 5
+.li
+.RB \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+I 5
+~RB \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+words of
+.I t
+alternating Roman and bold.
+.ti0
+D 5
+.li
+.RI \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+I 5
+~RI \fIt\fR	no	\fIt\fR=n.t.l.	Join
+E 5
+words of
+.I t
+alternating Roman and italic.
+.ti0
+D 5
+.li
+.RS \fIi\fR	yes	\fIi\fR=p.i.	Start relative indent,
+E 5
+I 5
+~RS \fIi\fR	yes	\fIi\fR=p.i.	Start relative indent,
+E 5
+move left margin in distance
+.I i.
+Set prevailing indent to .5i for nested indents.
+.ti0
+D 5
+.li
+.SH \fIt\fR	yes	\fIt\fR=n.t.l.	Subhead.
+E 5
+I 5
+~SH \fIt\fR	yes	\fIt\fR=n.t.l.	Subhead.
+E 5
+.ti0
+D 5
+.li
+.SM \fIt\fR	no	\fIt\fR=n.t.l.	Text
+E 5
+I 5
+~SM \fIt\fR	no	\fIt\fR=n.t.l.	Text
+E 5
+.I t
+is small.
+.ti0
+D 5
+.li
+D 2
+.TH \fIn c x\fR	yes	-	Begin page named
+E 2
+I 2
+.TH \fIn c x v m\fR	yes	-	Begin page named
+E 5
+I 5
+~TH \fIn c x v m\fR	yes	-	Begin page named
+E 5
+E 2
+.I n
+of chapter
+.IR c;
+.I x
+D 2
+is extra commentary, e.g. `local', for page foot.
+E 2
+I 2
+is extra commentary, e.g. `local', for page foot center;
+.I v
+alters page foot left, e.g. `4th Berkeley Distribution';
+.I m
+alters page head center, e.g. `Brand X Programmer's Manual'.
+E 2
+Set prevailing indent and tabs to .5i.
+.ti0
+D 5
+.li
+.TP \fIi\fR	yes	\fIi\fR=p.i.	Set prevailing indent to
+E 5
+I 5
+~TP \fIi\fR	yes	\fIi\fR=p.i.	Set prevailing indent to
+E 5
+.I i.
+Begin indented paragraph
+with hanging tag given by next text line.
+If tag doesn't fit, place it on separate line.
+.PP
+.ti0
+* n.t.l. = next text line; p.i. = prevailing indent
+E 1

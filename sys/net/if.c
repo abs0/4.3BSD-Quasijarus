@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if.c	7.4 (Berkeley) 6/27/88
+ *	@(#)if.c	7.9 (Berkeley) 8/2/02
  */
 
 #include "param.h"
@@ -33,6 +33,7 @@
 #include "af.h"
 
 #include "ether.h"
+#include "netmon.h"
 
 int	ifqmaxlen = IFQ_MAXLEN;
 
@@ -188,6 +189,9 @@ if_down(ifp)
 	for (ifa = ifp->if_addrlist; ifa; ifa = ifa->ifa_next)
 		pfctlinput(PRC_IFDOWN, &ifa->ifa_addr);
 	if_qflush(&ifp->if_snd);
+#if NNETMON > 0
+	netmon_ifevent(ifp);
+#endif
 }
 
 /*
@@ -236,16 +240,21 @@ ifunit(name)
 {
 	register char *cp;
 	register struct ifnet *ifp;
-	int unit;
+	register int unit = 0, namelen;
 
 	for (cp = name; cp < name + IFNAMSIZ && *cp; cp++)
 		if (*cp >= '0' && *cp <= '9')
 			break;
 	if (*cp == '\0' || cp == name + IFNAMSIZ)
 		return ((struct ifnet *)0);
-	unit = *cp - '0';
+	namelen = cp - name;
+	while (cp < name + IFNAMSIZ && *cp) {
+		if (*cp < '0' || *cp > '9')
+			return ((struct ifnet *)0);
+		unit = unit * 10 + *cp++ - '0';
+	}
 	for (ifp = ifnet; ifp; ifp = ifp->if_next) {
-		if (bcmp(ifp->if_name, name, (unsigned)(cp - name)))
+		if (bcmp(ifp->if_name, name, namelen))
 			continue;
 		if (unit == ifp->if_unit)
 			break;
@@ -293,6 +302,10 @@ ifioctl(so, cmd, data)
 		ifr->ifr_metric = ifp->if_metric;
 		break;
 
+	case SIOCGIFMTU:
+		ifr->ifr_mtu = ifp->if_mtu;
+		break;
+
 	case SIOCSIFFLAGS:
 		if (!suser())
 			return (u.u_error);
@@ -312,6 +325,22 @@ ifioctl(so, cmd, data)
 			return (u.u_error);
 		ifp->if_metric = ifr->ifr_metric;
 		break;
+
+	/* The if may or may not handle these to its ability */
+	case SIOCSIFMTU:
+	case SIOCPPPSRESTIM:
+	case SIOCPPPSMAXCONF:
+	case SIOCPPPSMAXTERM:
+	case SIOCPPPSPECACT:
+		if (!suser())
+			return (u.u_error);
+	case SIOCPPPGETSTATE:
+	case SIOCPPPGETFLAGS:
+	case SIOCPPPGRESTIM:
+	case SIOCPPPGMAXCONF:
+	case SIOCPPPGMAXTERM:
+	case SIOCPPPGETIPCPS:
+		return((*ifp->if_ioctl)(ifp, cmd, data));
 
 	default:
 		if (so->so_proto == 0)
@@ -336,17 +365,12 @@ ifconf(cmd, data)
 	register struct ifconf *ifc = (struct ifconf *)data;
 	register struct ifnet *ifp = ifnet;
 	register struct ifaddr *ifa;
-	register char *cp, *ep;
 	struct ifreq ifr, *ifrp;
 	int space = ifc->ifc_len, error = 0;
 
 	ifrp = ifc->ifc_req;
-	ep = ifr.ifr_name + sizeof (ifr.ifr_name) - 2;
 	for (; space > sizeof (ifr) && ifp; ifp = ifp->if_next) {
-		bcopy(ifp->if_name, ifr.ifr_name, sizeof (ifr.ifr_name) - 2);
-		for (cp = ifr.ifr_name; cp < ep && *cp; cp++)
-			;
-		*cp++ = '0' + ifp->if_unit; *cp = '\0';
+		sprintf(ifr.ifr_name, "%s%d", ifp->if_name, ifp->if_unit);
 		if ((ifa = ifp->if_addrlist) == 0) {
 			bzero((caddr_t)&ifr.ifr_addr, sizeof(ifr.ifr_addr));
 			error = copyout((caddr_t)&ifr, (caddr_t)ifrp, sizeof (ifr));

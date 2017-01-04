@@ -4,7 +4,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)MAKEDEV	4.32 (Berkeley) 9/7/99
+#	@(#)MAKEDEV	4.35 (Berkeley) 4/6/08
 #
 # Device "make" file.  Valid arguments:
 #	std	standard devices
@@ -48,6 +48,8 @@
 #	np*	unibus ethernet co-processor interface, for downloading.
 #	qv*	qvss (microvax) display
 #	ttyv0	qvss (microvax) display reserved pty
+#	netmon	network monitor pseudo-devices (8 units assumed)
+#	pppaux	PPP auxiliary channel pseudo-devices (8 units assumed)
 umask 77
 for i
 do
@@ -358,6 +360,30 @@ ttyv0)
 	if [ ! -f ttyqe ]; then sh ./MAKEDEV pty1; fi
 	mv ttyqf ttyv0
 	mv ptyqf ptyv0
+	;;
+
+netmon)
+	/etc/mknod netmon0 c 53 0
+	/etc/mknod netmon1 c 53 1
+	/etc/mknod netmon2 c 53 2
+	/etc/mknod netmon3 c 53 3
+	/etc/mknod netmon4 c 53 4
+	/etc/mknod netmon5 c 53 5
+	/etc/mknod netmon6 c 53 6
+	/etc/mknod netmon7 c 53 7
+	chmod 666 netmon?
+	;;
+
+pppaux)
+	/etc/mknod ppp0aux c 55 0
+	/etc/mknod ppp1aux c 55 1
+	/etc/mknod ppp2aux c 55 2
+	/etc/mknod ppp3aux c 55 3
+	/etc/mknod ppp4aux c 55 4
+	/etc/mknod ppp5aux c 55 5
+	/etc/mknod ppp6aux c 55 6
+	/etc/mknod ppp7aux c 55 7
+	chmod 600 ppp?aux
 	;;
 
 local)

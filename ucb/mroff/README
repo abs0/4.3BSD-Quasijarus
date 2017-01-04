@@ -1,0 +1,42 @@
+This is the source for the modernized [nt]roff, a fork of the original
+classic [nt]roff by Michael Sokolov, Quasijarus Project, IFCTF.
+
+The fundamental difference between the classic and modernized [nt]roff
+is the internal character set through which everything passes.  The
+internal character set of classic troff and nroff is modeled after the
+character repertoire of the CAT typesetter and reflects its idiosyncrasies.
+The modernized [nt]roff uses a 9-bit internal character set for a total of 512
+possible characters.  The lower 256 characters correspond to ISO Latin-1 with
+some extra characters added in the control character positions, as defined
+by TroffEncoding.ps.  The upper 256 characters correspond to Adobe Symbol
+encoding (this replaces the classic troff's special font).
+
+The internal character representation has been expanded from 16 to 32 bits,
+allowing for the 9-bit internal character set and for more than 4 fonts
+and more than 16 possible point sizes.
+
+Instead of driving the CAT phototypesetter, the new troff generates
+PostScript output.  It is installed as pstroff.  pstroff supports arbitrary
+PostScript fonts (using the standard Times-* and Symbol by default) and
+allows more than 4 fonts to be used (up to 32 currently).  Arbitrary integral
+point sizes are also allowed (up to 255 currently).  Resolution is logically
+infinite in PostScript, but all math inside troff is still integral.  The
+unit size used is 1/60 of a point.  Since this corresponds to 4320 DPI,
+it should be sufficiently precise for all applications.
+
+The new nroff produces output for 8-bit typewriters and terminals and is
+installed as nroff8.
+
+It is possible to use nroff8 with 8-bit terminals whose 8-bit character set
+is something other than ISO Latin-1 (e.g., KOI-8), or to use pstroff with
+fonts with the encoding vector set to something other than the ISO Latin-1
+based TroffEncoding (e.g., Latin/Cyrillic fonts using ISOCyrillicEncoding
+or KOI8Encoding).  The user is then responsible for avoiding \(xx sequences
+that map to TroffEncoding characters not present in the font being used.
+
+Before using pstroff, you must prepare the font description files in
+/usr/lib/pstroff with preppsfont(1).  They are generated from Adobe
+Font Metrics (AFM) files.
+
+To use nroff8, you will need one or more compatible terminal tables.
+The default is tablpr8.

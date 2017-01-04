@@ -1,0 +1,45 @@
+.\"	%M%	%I%	%E%
+.PS
+scale=100
+define m0 |
+[ box invis ht 16 wid 38 with .sw at 0,0
+"\f1\s10\&V   0\f1\s0" at 19,8
+] |
+
+box invis ht 167 wid 336 with .sw at 0,0
+"\f1\s10\&BN \- block number on disk\f1\s0" at 171,8
+"\f1\s10\&F \- fill-on-demand bit\f1\s0" at 153,24
+"\f1\s10\&Legend:  V \- valid bit\f1\s0" at 96,39
+line -> from 191,151 to 191,135 
+line  from 168,135 to 168,79 
+"\f1\s10\&F   1\f1\s0" at 48,102
+m0 with .nw at 220,126
+line  from 24,134 to 24,78 
+m0 with .nw at 171,126
+m0 with .nw at 29,126
+line  from 310,134 to 310,78 
+"\f1\s10\&BN 90\f1\s0" at 48,86
+"\f1\s10\&---\f1\s0" at 285,89
+line  from 120,133 to 120,77 
+line  from 263,134 to 263,78 
+"\f1\s10\&BN 46\f1\s0" at 95,87
+line  from 215,134 to 215,78 
+"\f1\s10\&F   1\f1\s0" at 239,102
+line -> from 112,63 to 72,63 
+"\f1\s10\&F   1\f1\s0" at 143,102
+line  from 1,79 to 336,79 
+"\f1\s10\&V   1\f1\s0" at 286,118
+"\f1\s10\&F   1\f1\s0" at 190,102
+m0 with .nw at 124,126
+"\f1\s10\&BN 48\f1\s0" at 191,87
+"\f1\s10\&klustered pages\f1\s0" at 168,63
+line  from 0,134 to 335,134 
+"\f1\s10\&---\f1\s0" at 285,103
+m0 with .nw at 77,126
+"\f1\s10\&F   1\f1\s0" at 96,102
+"\f1\s10\&BN 49\f1\s0" at 240,87
+"\f1\s10\&BN 47\f1\s0" at 145,87
+line  from 72,134 to 72,78 
+line -> from 223,63 to 263,63 
+"\f1\s10\&faulted page\f1\s0" at 199,159
+.PE

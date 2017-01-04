@@ -1,0 +1,454 @@
+h54028
+s 00114/00012/00219
+d D 6.5 04/08/23 01:33:28 msokolov 6 5
+c document new bf, ct, ea and pi capabilities
+c a few fixes along the way
+e
+s 00002/00002/00229
+d D 6.4 86/05/14 18:57:19 bloom 5 4
+c change doc reference
+e
+s 00130/00004/00101
+d D 6.3 85/11/17 15:54:10 eric 4 3
+c try to explain logging and filters
+e
+s 00001/00000/00104
+d D 6.2 85/10/30 12:15:07 bloom 3 2
+c add pc for printing cost for accounting
+e
+s 00003/00001/00101
+d D 6.1 85/05/15 18:55:38 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00102/00000/00000
+d D 5.1 85/05/15 18:55:23 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PRINTCAP 5 "18 July 1983"
+E 2
+I 2
+.TH PRINTCAP 5 "%Q%"
+E 2
+.UC 5
+.ad
+.SH NAME
+printcap \- printer capability data base
+.SH SYNOPSIS
+/etc/printcap
+.SH DESCRIPTION
+.I Printcap
+is a simplified version of the
+.IR termcap (5)
+data base
+used to describe line printers.  The spooling system accesses the
+.I printcap
+file every time it is used, allowing dynamic
+addition and deletion of printers.  Each entry in the data base
+is used to describe one printer.  This data base may not be
+substituted for, as is possible for 
+.IR termcap ,
+because it may allow accounting to be bypassed.
+.PP
+The default printer is normally 
+.IR lp ,
+though the environment variable PRINTER
+may be used to override this.  Each spooling utility supports an option,
+.BI \-P printer,
+to allow explicit naming of a destination printer.
+.PP
+Refer to the
+.ul
+D 5
+4.2BSD Line Printer Spooler Manual
+E 5
+I 5
+4.3BSD Line Printer Spooler Manual
+E 5
+D 6
+for a complete discussion on how setup the database for a given printer.
+E 6
+I 6
+for a complete discussion on how to setup the database for a given printer.
+E 6
+.SH CAPABILITIES
+Refer to
+D 4
+.I termcap
+E 4
+I 4
+.IR termcap (5)
+E 4
+for a description of the file layout.
+.nf
+
+.ta \w'k0-k9  'u +\w'Type  'u +\w'``/usr/spool/lpd\'\'  'u
+\fBName	Type	Default	Description\fR
+af	str	NULL	name of accounting file
+D 6
+br	num	none	if lp is a tty, set the baud rate (ioctl call)
+E 6
+I 6
+bf	str	NULL	name of banner filter program
+br	num	none	if lp is a tty, set the baud rate
+			(ioctl call)
+E 6
+cf	str	NULL	cifplot data filter
+I 6
+ct	bool	false	check PostScript printer for readiness
+			with ^T
+E 6
+df	str	NULL	tex data filter (DVI format)
+I 6
+ea	bool	false	pass extended arguments to input filters
+E 6
+fc	num	0	if lp is a tty, clear flag bits (sgtty.h)
+ff	str	``\ef''	string to send for a form feed
+fo	bool	false	print a form feed when device is opened
+fs	num	0	like `fc' but set bits
+gf	str	NULL	graph data filter (plot (3X) format)
+I 2
+hl	bool	false	print the burst header page last
+E 2
+D 6
+ic	bool	false	driver supports (non standard) ioctl to indent printout
+E 6
+I 6
+ic	bool	false	driver supports (non standard) ioctl to
+			indent printout
+E 6
+if	str	NULL	name of text filter which does accounting
+lf	str	``/dev/console''	error logging file name
+lo	str	``lock''	name of lock file
+lp	str	``/dev/lp''	device name to open for output
+D 6
+mx	num	1000	maximum file size (in BUFSIZ blocks), zero = unlimited
+nd	str	NULL	next directory for list of queues (unimplemented)
+nf	str	NULL	ditroff data filter (device independent troff)
+E 6
+I 6
+mx	num	1000	maximum file size (in BUFSIZ blocks),
+			zero = unlimited
+nd	str	NULL	next directory for list of queues
+			(unimplemented)
+nf	str	NULL	ditroff data filter (device independent
+			troff)
+E 6
+of	str	NULL	name of output filtering program
+I 3
+D 6
+pc	num	200	price per foot or page in hundredths of cents
+E 6
+I 6
+pc	num	200	price per foot or page in hundredths of
+			cents
+pi	bool	false	input filter incorporates \fIpr\fP(1)
+			functionality
+E 6
+E 3
+pl	num	66	page length (in lines)
+pw	num	132	page width (in characters)
+px	num	0	page width in pixels (horizontal)
+py	num	0	page length in pixels (vertical)
+D 6
+rf	str	NULL	filter for printing FORTRAN style text files
+I 2
+rg	str	NULL	restricted group. Only members of group allowed access
+E 6
+I 6
+rf	str	NULL	filter for printing FORTRAN style text
+			files
+rg	str	NULL	restricted group. Only members of group
+			allowed access
+E 6
+E 2
+rm	str	NULL	machine name for remote printer
+rp	str	``lp''	remote printer name argument
+D 6
+rs	bool	false	restrict remote users to those with local accounts
+rw	bool	false	open the printer device for reading and writing
+E 6
+I 6
+rs	bool	false	restrict remote users to those with local
+			accounts
+rw	bool	false	open the printer device for reading and
+			writing
+E 6
+sb	bool	false	short banner (one line only)
+sc	bool	false	suppress multiple copies
+sd	str	``/usr/spool/lpd''	spool directory
+sf	bool	false	suppress form feeds
+sh	bool	false	suppress printing of burst page header
+st	str	``status''	status file name
+tf	str	NULL	troff data filter (cat phototypesetter)
+tr	str	NULL	trailer string to print when queue empties
+vf	str	NULL	raster image filter
+D 6
+xc	num	0	if lp is a tty, clear local mode bits (tty (4))
+E 6
+I 6
+xc	num	0	if lp is a tty, clear local mode bits
+			(tty (4))
+E 6
+xs	num	0	like `xc' but set bits
+.fi
+.PP
+D 4
+Error messages sent to the console have a carriage return and a line
+feed appended to them, rather than just a line feed.
+.PP
+E 4
+If the local line printer driver supports indentation, the daemon
+must understand how to invoke it.
+I 4
+.SH FILTERS
+The
+.IR lpd (8)
+daemon creates a pipeline of
+.I filters
+to process files for various printer types.
+The filters selected depend on the flags passed to
+.IR lpr (1).
+The pipeline set up is:
+.RS
+.PP
+.nf
+.ta 0.5i +1i
+\-p	pr | if	regular text + \fIpr\fP(1)
+none	if	regular text
+\-c	cf	cifplot
+\-d	df	DVI (tex)
+\-g	gf	\fIplot\fP(3)
+\-n	nf	ditroff
+\-f	rf	Fortran
+\-t	tf	troff
+\-v	vf	raster image
+.fi
+.RE
+.PP
+The
+.B if
+filter is invoked with arguments:
+.PP
+	\fIif\fP [ \fB\-c\fP ] \fB\-w\fPwidth \fB\-l\fPlength \fB\-i\fPindent \fB\-n\fP login \fB\-h\fP host acct-file
+.PP
+The
+.B \-c
+flag is passed only if the
+.B \-l
+flag (pass control characters literally)
+is specified to
+.IR lpr .
+.I Width
+and
+.I length
+specify the page width and length
+(from
+.B pw
+and
+.B pl
+respectively) in characters.
+The
+.B \-n
+and
+.B \-h
+parameters specify the login name and host name of the owner
+of the job respectively.
+.I Acct-file
+is passed from the
+.B af
+.I printcap
+entry.
+.PP
+I 6
+If
+.IR lpr (1)
+was invoked with
+.B \-p
+and the
+.B pi
+capability is specified, indicating that the input filter incorporates the
+functionality of
+.IR pr (1),
+instead of setting up a
+.IR pr | if
+pipeline,
+.I lpd
+invokes only
+.B if
+with the extra argument
+.PP
+	\fB\-p\fP title
+.PP
+where
+.I title
+is the string that would otherwise be passed to
+.IR pr (1)
+with
+.BR \-h .
+.PP
+E 6
+If no
+.B if
+is specified,
+.B of
+is used instead,
+with the distinction that
+.B of
+is opened only once,
+while
+.B if
+is opened for every individual job.
+Thus,
+.B if
+is better suited to performing accounting.
+The
+.B of
+is only given the
+.I width
+and
+.I length
+flags.
+.PP
+All other filters are called as:
+.PP
+	\fIfilter\fP \fB\-x\fPwidth \fB\-y\fPlength \fB\-n\fP login \fB\-h\fP host acct-file
+.PP
+where
+.I width
+and
+.I length
+are represented in pixels,
+specified by the
+.B px
+and
+.B py
+entries respectively.
+I 6
+The exception is the
+.B rf
+(FORTRAN) filter, which is given text-oriented
+.B \-w
+and
+.B \-l
+flags rather than the graphics-oriented
+.B \-x
+and
+.BR \-y .
+E 6
+.PP
+I 6
+If the
+.B ea
+capability is specified,
+the text-oriented
+.B if
+and
+.B rf
+filters are given the
+.B \-x
+and
+.B \-y
+flags in addition to
+.B \-w
+and
+.BR \-l ,
+and all input filters are additionally given a
+.B \-P
+.I printer
+flag, where
+.I printer
+is the printer name.
+.PP
+E 6
+All filters take
+.I stdin
+as the file,
+.I stdout
+as the printer,
+may log either to
+.I stderr
+or using
+.IR syslog (3),
+and must not ignore
+.SM SIGINT.
+I 6
+.SH BANNER FILTER
+If the
+.B bf
+capability is specified,
+.I lpd
+won't generate banner pages like it normally does,
+but will instead invoke the
+.B bf
+program to do it.
+.B bf
+is invoked with arguments:
+.PP
+	\fIbf\fP \fB\-P\fP printer \fB\-x\fPwidth \fB\-y\fPlength
+.PP
+The flags have the same meaning as for regular filters.
+On
+.I stdin
+the banner filter is fed data describing the banner page to be generated.
+The banner description consists of several text lines,
+each line giving one item of information to be placed on the banner page.
+These lines have the same format as
+.I lpd
+control file lines described in
+.IR lpd (8).
+.PP
+The currently defined banner description lines are L, J and C equivalent
+to the corresponding control file lines and D for date.
+E 6
+.SH LOGGING
+Error messages generated by the line printer programs themselves
+(that is, the
+.IR lp *
+programs)
+are logged by
+.IR syslog (3)
+using the
+.I LPR
+facility.
+Messages printed on
+.I stderr
+of one of the filters
+are sent to the corresponding
+.B lf
+file.
+The filters may, of course, use
+.I syslog
+themselves.
+.PP
+Error messages sent to the console have a carriage return and a line
+feed appended to them, rather than just a line feed.
+E 4
+.SH "SEE ALSO"
+termcap(5),
+lpc(8),
+lpd(8),
+pac(8),
+lpr(1),
+lpq(1),
+lprm(1)
+.br
+.ul
+D 5
+4.2BSD Line Printer Spooler Manual
+E 5
+I 5
+4.3BSD Line Printer Spooler Manual
+E 5
+E 1

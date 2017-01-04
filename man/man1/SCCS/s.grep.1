@@ -1,0 +1,408 @@
+h01493
+s 00007/00001/00155
+d D 6.3 87/10/08 11:30:39 bostic 8 5
+c document -h, -o flags
+e
+s 00002/00004/00158
+d R 6.4 87/10/07 18:28:43 bostic 7 6
+c fix -f for grep
+e
+s 00006/00000/00156
+d R 6.3 87/10/07 17:38:32 bostic 6 5
+c document -h, -o flags
+e
+s 00002/00005/00154
+d D 6.2 87/10/05 09:16:20 bostic 5 3
+c egrep now supports -i
+e
+s 00001/00002/00157
+d R 6.2 87/10/05 06:50:57 bostic 4 3
+c egrep now handles -i
+e
+s 00001/00001/00158
+d D 6.1 85/04/29 14:26:20 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00046/00070/00113
+d D 5.1 85/04/29 14:26:06 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00183/00000/00000
+d D 4.1 85/04/29 14:25:58 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GREP 1 8/11/80
+E 2
+I 2
+D 3
+.TH GREP 1 "11 August 1980"
+E 3
+I 3
+.TH GREP 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+grep, egrep, fgrep \- search a file for a pattern
+.SH SYNOPSIS
+.B grep
+[ option ] ...
+expression [ file ] ...
+.LP
+.B egrep 
+[ option ] ...
+[ expression ]
+[ file ] ...
+D 2
+.PP
+E 2
+I 2
+.LP
+E 2
+.B fgrep
+[ option ] ...
+[ strings ]
+[ file ]
+.SH DESCRIPTION
+Commands of the
+.I grep
+family search the input
+.I files
+D 2
+(standard input default)
+for lines matching
+a pattern.
+Normally, each line found
+is copied to the standard output.
+E 2
+I 2
+(standard input default) for lines matching a pattern.
+Normally, each line found is copied to the standard output.
+E 2
+.I Grep
+patterns are limited regular expressions in the style of
+.IR ex (1);
+it uses a compact nondeterministic algorithm.
+.I Egrep
+D 2
+patterns are full regular expressions;
+it uses a fast deterministic algorithm that
+sometimes needs exponential space.
+E 2
+I 2
+patterns are full regular expressions; it uses a fast deterministic
+algorithm that sometimes needs exponential space.
+E 2
+.I Fgrep
+patterns are fixed strings; it is fast and compact.
+The following options are recognized.
+.TP
+.B \-v
+D 2
+All lines but those matching
+are printed.
+E 2
+I 2
+All lines but those matching are printed.
+E 2
+.TP
+.B \-x
+(Exact) only lines matched in their entirety are printed
+.RI ( fgrep
+only).
+.TP
+.B \-c
+Only a count of matching lines is printed.
+.TP
+.B \-l
+D 2
+The names of files with matching lines are listed (once)
+separated by newlines.
+E 2
+I 2
+The names of files with matching lines are listed (once) separated by newlines.
+E 2
+.TP
+.B \-n
+D 2
+Each line is preceded by
+its relative line number in the file.
+E 2
+I 2
+Each line is preceded by its relative line number in the file.
+E 2
+.TP
+.B \-b
+D 2
+Each line is preceded by the block number
+on which it was found.
+This is sometimes useful in locating
+disk block numbers by context.
+E 2
+I 2
+Each line is preceded by the block number on which it was found.
+This is sometimes useful in locating disk block numbers by context.
+E 2
+.TP
+I 8
+.B \-h
+Never print filename headers with output lines.
+.TP
+.B \-o
+Always print filename headers with output lines.
+.TP
+E 8
+.B \-i
+D 2
+The case of letters is ignored in making comparisons.
+(E.g. upper and lower case are considered identical.)
+(\fIgrep\fR\| and \fIfgrep\fR only)
+E 2
+I 2
+The case of letters is ignored in making comparisons \(em that is, upper and
+D 5
+lower case are considered identical.  This applies to \fIgrep\fR\| and
+\fIfgrep\fR only.
+E 5
+I 5
+lower case are considered identical.
+E 5
+E 2
+.TP
+.B \-s
+D 2
+Silent mode.
+Nothing is printed (except error messages).
+E 2
+I 2
+Silent mode.  Nothing is printed (except error messages).
+E 2
+This is useful for checking the error status.
+.TP
+.B \-w
+The expression is searched for as a word
+(as if surrounded by `\e<' and `\e>', see
+.IR ex (1).)
+(\fIgrep\fR\| only)
+.TP
+.BI \-e " expression"
+Same as a simple
+.I expression 
+D 2
+argument,
+but useful when the
+E 2
+I 2
+argument, but useful when the
+E 2
+.I expression
+begins with a \-.
+.TP
+.BI \-f " file"
+D 5
+The regular expression
+.RI ( egrep )
+or string list
+E 5
+I 5
+D 8
+The regular expression (\fIgrep\fP or \fIegrep\fP) or string list
+E 8
+I 8
+The regular expression (\fIegrep\fP) or string list
+E 8
+E 5
+.RI ( fgrep ) 
+is taken from the
+.I file.
+D 2
+.PP
+E 2
+I 2
+.LP
+E 2
+In all cases the file name is shown if there is more than one input file.
+D 2
+Care should be taken when
+using the characters
+$ * [ ^ | ( ) and \\ in the
+E 2
+I 2
+Care should be taken when using the characters $ * [ ^ | ( ) and \\ in the
+E 2
+.I expression
+D 2
+as they are
+also meaningful to the Shell.
+It is safest to enclose the
+entire
+E 2
+I 2
+as they are also meaningful to the Shell.  It is safest to enclose the entire
+E 2
+.I expression
+argument in single quotes \' \'.
+D 2
+.PP
+E 2
+I 2
+.LP
+E 2
+.I Fgrep
+searches for lines that contain one of the (newline-separated)
+.I strings.
+D 2
+.PP
+E 2
+I 2
+.LP
+E 2
+.I Egrep
+accepts extended regular expressions.
+D 2
+In the following description `character' excludes
+newline:
+E 2
+I 2
+In the following description `character' excludes newline:
+E 2
+.IP
+D 2
+A \e followed by a single character
+other than newline
+matches that character.
+E 2
+I 2
+A \e followed by a single character other than newline matches that character.
+E 2
+.IP
+D 2
+The character ^ ($) matches the beginning (end) of
+a line.
+E 2
+I 2
+The character ^ matches the beginning of a line.
+E 2
+.IP
+I 2
+The character $ matches the end of a line.
+.IP
+E 2
+A 
+.B .
+D 2
+matches any character.
+E 2
+I 2
+(period) matches any character.
+E 2
+.IP
+A single character not otherwise endowed with special
+meaning matches that character.
+.IP
+D 2
+A string enclosed in brackets [\|]
+matches any single character from the string.
+Ranges of ASCII character codes may be abbreviated
+as in `a\-z0\-9'.
+E 2
+I 2
+A string enclosed in brackets [\|] matches any single character from the string.
+Ranges of ASCII character codes may be abbreviated as in `a\-z0\-9'.
+E 2
+A ]
+may occur only as the first character of the string.
+D 2
+A literal \- must be placed where it can't be
+mistaken as a range indicator.
+E 2
+I 2
+A literal \- must be placed where it can't be mistaken as a range indicator.
+E 2
+.IP
+D 2
+A regular expression followed by * (+, ?) matches a sequence
+of 0 or more (1 or more, 0 or 1)
+E 2
+I 2
+A regular expression followed by an * (asterisk) matches a sequence of 0
+or more matches of the regular expression.
+A regular expression followed by a + (plus) matches a sequence of 1 or more
+E 2
+matches of the regular expression.
+I 2
+A regular expression followed by a ? (question mark) matches a sequence of
+0 or 1 matches of the regular expression.
+E 2
+.IP
+D 2
+Two regular expressions concatenated
+match a match of the first followed by a match of 
+the second.
+E 2
+I 2
+Two regular expressions concatenated match a match of the first followed
+by a match of the second.
+E 2
+.IP
+Two regular expressions separated by | or newline
+D 2
+match either a match for the first or a match for the
+second.
+E 2
+I 2
+match either a match for the first or a match for the second.
+E 2
+.IP
+A regular expression enclosed in parentheses
+matches a match for the regular expression.
+.LP
+D 2
+The order of precedence of operators
+at the same parenthesis level
+is [\|] then
+*+? then concatenation then | and newline.
+E 2
+I 2
+The order of precedence of operators at the same parenthesis level
+is [\|] then *+? then concatenation then | and newline.
+.LP
+Ideally there should be only one
+.I grep,
+but we don't know a single algorithm that spans a wide enough
+range of space-time tradeoffs.
+E 2
+.SH "SEE ALSO"
+ex(1),
+sed(1),
+sh(1)
+.SH DIAGNOSTICS
+Exit status is 0 if any matches are found,
+1 if none, 2 for syntax errors or inaccessible files.
+.SH BUGS
+D 2
+Ideally there should be only one
+.I grep,
+but we don't know a single algorithm that spans a wide enough
+range of space-time tradeoffs.
+.PP
+Lines
+are limited to 256 characters;
+longer lines are truncated.
+E 2
+I 2
+Lines are limited to 256 characters; longer lines are truncated.
+E 2
+E 1

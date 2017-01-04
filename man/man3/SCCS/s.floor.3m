@@ -1,0 +1,177 @@
+h32427
+s 00004/00004/00057
+d D 6.4 86/05/12 17:10:57 karels 6 5
+c intro(3M) => math(3M), move see also's to end
+e
+s 00042/00012/00019
+d D 6.3 85/09/11 18:52:30 mckusick 5 4
+c new from Kahan
+e
+s 00003/00005/00028
+d D 6.2 85/05/24 12:03:27 miriam 4 3
+c From Prof. Kahan
+e
+s 00001/00001/00032
+d D 6.1 85/05/15 14:56:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00007/00030
+d D 5.1 85/05/15 14:56:45 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00037/00000/00000
+d D 4.1 85/05/15 14:56:37 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+D 4
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FLOOR 3M 
+E 2
+I 2
+D 3
+.TH FLOOR 3M  "19 January 1983"
+E 3
+I 3
+.TH FLOOR 3M  "%Q%"
+E 3
+E 2
+.AT 3
+E 4
+I 4
+D 5
+.TH FLOOR 3M  "19 January 1983"
+E 5
+I 5
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH FLOOR 3M  "%Q%"
+.UC 4
+E 5
+E 4
+.SH NAME
+D 5
+fabs, floor, ceil \- absolute value, floor, ceiling functions
+E 5
+I 5
+fabs, floor, ceil, rint \- absolute value, floor, ceiling, and
+round-to-nearest functions
+E 5
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+.B double floor(x)
+.B double x;
+.PP
+.B double ceil(x)
+.B double x;
+.PP
+.B double fabs(x)
+.B double x;
+D 5
+.nf
+E 5
+I 5
+.PP
+.B double rint(x)
+.B double x;
+.fi
+E 5
+.SH DESCRIPTION
+D 5
+.I Fabs
+returns the absolute value
+.RI | \|x\| |.
+E 5
+I 5
+Fabs returns the absolute value |\|x\||.
+E 5
+.PP
+D 5
+.I Floor
+D 2
+returns the
+largest integer
+not greater than
+E 2
+I 2
+returns the largest integer not greater than
+E 2
+.IR x .
+E 5
+I 5
+Floor returns the largest integer no greater than x.
+E 5
+.PP
+D 5
+.I Ceil
+D 2
+returns the
+smallest integer
+not less than
+E 2
+I 2
+returns the smallest integer not less than
+E 2
+.IR x .
+E 5
+I 5
+Ceil returns the smallest integer no less than x.
+.PP
+Rint returns the integer (represented as a double precision number)
+nearest x in the direction of the prevailing rounding mode.
+E 5
+D 6
+.SH SEE ALSO
+D 4
+abs(3)
+E 4
+I 4
+abs(3),
+I 5
+ieee(3M),
+E 5
+intro(3M)
+E 6
+I 5
+.SH NOTES
+On a VAX, rint(x) is equivalent to adding half to the magnitude
+and then rounding towards zero.
+.PP
+In the default rounding mode, to nearest,
+on a machine that conforms to IEEE 754,
+rint(x) is the integer nearest x with the additional stipulation
+that if |rint(x)\-x|=1/2 then rint(x) is even.
+Other rounding modes can make rint act like floor, or like ceil,
+or round towards zero.
+.PP
+Another way to obtain an integer near x is to declare (in C)
+.RS
+double x;\0\0\0\0 int k;\0\0\0\0k\0=\0x;
+.RE
+Most C compilers round x towards 0 to get the integer k, but
+some do otherwise.
+If in doubt, use floor, ceil, or rint first, whichever you intend.
+Also note that, if x is larger than k can accommodate, the value of
+k and the presence or absence of an integer overflow are hard to
+predict.
+I 6
+.SH SEE ALSO
+abs(3),
+ieee(3M),
+math(3M)
+E 6
+E 5
+E 4
+E 1

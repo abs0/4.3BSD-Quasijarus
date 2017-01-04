@@ -1,0 +1,65 @@
+h26909
+s 00007/00000/00039
+d D 5.2 04/09/17 08:44:24 msokolov 2 1
+c broke down and added baseline rule to the line drawing chars
+e
+s 00039/00000/00000
+d D 5.1 04/09/16 08:18:59 msokolov 1 0
+c put under SCCS
+e
+u
+U
+t
+T
+I 1
+%	%W% (Berkeley) %G%
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	CharStrings dup length 3 add dict begin
+		{def} forall
+I 2
+		/baserule {
+			pop
+			500 0 0 -25 500 25 setcachedevice
+			50 setlinewidth 0 setlinecap
+			0 0 moveto 500 0 rlineto stroke
+		} bind def
+E 2
+		/underrule {
+			pop
+			500 0 0 -125 500 -75 setcachedevice
+			50 setlinewidth 0 setlinecap
+			0 -100 moveto 500 0 rlineto stroke
+		} bind def
+		/overrule {
+			pop
+			500 0 0 875 500 925 setcachedevice
+			50 setlinewidth 0 setlinecap
+			0 900 moveto 500 0 rlineto stroke
+		} bind def
+		/boxrule {
+			pop
+			0 0 -25 -100 25 900 setcachedevice
+			50 setlinewidth 0 setlinecap
+			0 -100 moveto 0 1000 rlineto stroke
+		} bind def
+		currentdict
+	end
+	/CharStrings exch def
+	2 dict begin
+		/radical 515 def
+		/radicalex [0 610] def
+		currentdict
+	end
+	/Metrics exch def
+	Encoding 256 array copy
+	dup 15 /underrule put
+	dup 16 /overrule put
+	dup 17 /boxrule put
+I 2
+	dup 18 /baserule put
+E 2
+	/Encoding exch def
+	currentdict
+end
+E 1

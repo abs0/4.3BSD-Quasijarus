@@ -1,0 +1,55 @@
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)l2trayconfutil.ps	5.1 (Berkeley) 8/27/04
+%%LanguageLevel: 2
+%%BeginResource: procset (4.3BSD-Quasijarus PS L2 tray config utility) 0 0
+10 dict begin
+/settrayconfig {
+	% This procedure takes one argument: the dictionary to go into
+	% InputAttributes. We check that it matches the hardware-detected
+	% page sizes and then install it.
+	%
+	% Do the check first with currentpagedevice.
+	currentpagedevice /InputAttributes get
+	% Iterate through the requested trays checking each
+	1 index {
+		exch dup type /integertype eq {
+			% get currentpagedevice info about this tray
+			2 index 1 index known {
+				2 index 1 index get
+			} {
+				null
+			} ifelse
+			% is it there at all?
+			dup null ne {
+				% tray is there, check page size
+				/PageSize get
+				2 index /PageSize get
+				dup 0 get 2 index 0 get eq
+				1 index 1 get 3 index 1 get eq
+				and
+				% bomb out on mismatch
+				not {
+					errmsg print
+					stop
+				} if
+				pop pop	% don't need PageSize arrays any more
+				% good to go!
+			} {
+				pop
+				% tray is not there, drop it from new dict
+				3 index 2 index undef
+			} ifelse
+		} if
+		pop pop	% pushed by forall
+	} forall
+	% don't need old InputAttributes any more
+	pop
+	% install the new InputAttributes!
+	/InputAttributes exch
+	1 dict dup 4 2 roll put
+	setpagedevice
+} bind def
+/errmsg (%%[ tray config error ]%%\n) readonly def
+currentdict end
+/trayconfdict exch def
+%%EndResource

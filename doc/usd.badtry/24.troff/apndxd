@@ -1,0 +1,148 @@
+.\"	@(#)apndxd	6.3 (Berkeley) 10/28/04
+.\"
+.pn37
+.br
+.ftB
+.ps+2
+.ce 2
+Appendix D
+Historic \*(TR Special Mathematical Font
+.ftR
+.ps 9
+.vs 10
+.sp
+Historic \*(TR is designed to work with Bell Labs' Special Mathematical Font
+which contained \s-1ASCII\s0 characters
+.ft CB
+@ # " < > \e { } ~ ^ _
+.ft R
+and named non-\s-1ASCII\s0 characters listed below.
+The character graphics shown are from the default Hershey font used with
+\fIvtroff\fR(1).
+.sp
+.ds SF \\f(VS
+.cf VarianSpecial.ps
+\!/VSF /VarianSpecial findfont 540 scalefont def
+.nf
+.ftBI
+.ta .25iC .5i +.45i 3.25iC +.25i +.45i
+		Input	Character		Input	Character
+	Char	Name	Name	Char	Name	Name
+.ftR
+.sp.2
+.mk
+	\*(SF+\fP	\e(pl	math plus
+	\*(SF\-\fP	\e(mi	math minus
+	\*(SF=\fP	\e(eq	math equals
+	\*(SF9\fP	\e(**	math star
+	\*(SF8\fP	\e(sc	section
+	\*(SF'\fP	\e(aa	acute accent
+	\*(SF`\fP	\e(ga	grave accent
+	\*(SF_\fP	\e(ul	underrule
+	\*(SF\XCE\fP	\e(sl	slash (matching backslash)
+	\*(SFa\fP	\e(*a	alpha
+	\*(SFb\fP	\e(*b	beta
+	\*(SFc\fP	\e(*g	gamma
+	\*(SFd\fP	\e(*d	delta
+	\*(SFe\fP	\e(*e	epsilon
+	\*(SFf\fP	\e(*z	zeta
+	\*(SFg\fP	\e(*y	eta
+	\*(SFh\fP	\e(*h	theta
+	\*(SFi\fP	\e(*i	iota
+	\*(SFj\fP	\e(*k	kappa
+	\*(SFk\fP	\e(*l	lambda
+	\*(SFl\fP	\e(*m	mu
+	\*(SFm\fP	\e(*n	nu
+	\*(SFn\fP	\e(*c	xi
+	\*(SFo\fP	\e(*o	omicron
+	\*(SFp\fP	\e(*p	pi
+	\*(SFq\fP	\e(*r	rho
+	\*(SFr\fP	\e(*s	sigma
+	\*(SF\XCC\fP	\e(ts	terminal sigma
+	\*(SFs\fP	\e(*t	tau
+	\*(SFt\fP	\e(*u	upsilon
+	\*(SFu\fP	\e(*f	phi
+	\*(SFv\fP	\e(*x	chi
+	\*(SFw\fP	\e(*q	psi
+	\*(SFx\fP	\e(*w	omega
+	\*(SFA\fP	\e(*A	Alpha\(dg
+	\*(SFB\fP	\e(*B	Beta\(dg
+	\*(SFC\fP	\e(*G	Gamma
+	\*(SFD\fP	\e(*D	Delta
+	\*(SFE\fP	\e(*E	Epsilon\(dg
+	\*(SFF\fP	\e(*Z	Zeta\(dg
+	\*(SFG\fP	\e(*Y	Eta\(dg
+	\*(SFH\fP	\e(*H	Theta
+	\*(SFI\fP	\e(*I	Iota\(dg
+	\*(SFJ\fP	\e(*K	Kappa\(dg
+	\*(SFK\fP	\e(*L	Lambda
+	\*(SFL\fP	\e(*M	Mu\(dg
+	\*(SFM\fP	\e(*N	Nu\(dg
+	\*(SFN\fP	\e(*C	Xi
+	\*(SFO\fP	\e(*O	Omicron\(dg
+	\*(SFP\fP	\e(*P	Pi
+	\*(SFQ\fP	\e(*R	Rho\(dg
+	\*(SFR\fP	\e(*S	Sigma
+	\*(SFS\fP	\e(*T	Tau\(dg
+.rt
+.po +3i
+	\*(SFT\fP	\e(*U	Upsilon
+	\*(SFU\fP	\e(*F	Phi
+	\*(SFV\fP	\e(*X	Chi\(dg
+	\*(SFW\fP	\e(*Q	Psi
+	\*(SFX\fP	\e(*W	Omega
+	\*(SF\XCB\fP	\e(sr	square root
+	\*(SF\XC6\fP	\e(rn	root en extender
+	\*(SF\XCA\fP	\e(>=	>=
+	\*(SF\XC9\fP	\e(<=	<=
+	\*(SF0\fP	\e(==	identically equal
+	\*(SF1\fP	\e(~=	approx =
+	\*(SF2\fP	\e(ap	approximates
+	\*(SF3\fP	\e(!=	not equal
+	\*(SF5\fP	\e(\->	right arrow
+	\*(SF4\fP	\e(<\-	left arrow
+	\*(SF6\fP	\e(ua	up arrow
+	\*(SF7\fP	\e(da	down arrow
+	\*(SF*\fP	\e(mu	multiply
+	\*(SF/\fP	\e(di	divide
+	\*(SF\XC8\fP	\e(+\-	plus-minus
+	\*(SF\XC5\fP	\e(cu	cup (union)
+	\*(SF\XDC\fP	\e(ca	cap (intersection)
+	\*(SF\XDA\fP	\e(sb	subset of
+	\*(SF\XDB\fP	\e(sp	superset of
+	\*(SF[\fP	\e(ib	improper subset
+	\*(SF\XC2\fP	\e(ip	improper superset
+	\*(SF\XC1\fP	\e(if	infinity
+	\*(SFy\fP	\e(pd	partial derivative
+	\*(SF(\fP	\e(gr	gradient
+	\*(SF\XDD\fP	\e(no	not
+	\*(SF\XCD\fP	\e(is	integral sign
+	\*(SF\XC3\fP	\e(pt	proportional to
+	\*(SFz\fP	\e(es	empty set
+	\*(SF\XDF\fP	\e(mo	member of
+	\*(SFZ\fP	\e(br	box vertical rule
+	\*(SFY\fP	\e(dd	double dagger
+	\*(SF\XC4\fP	\e(rh	right hand
+	\*(SF\XDE\fP	\e(lh	left hand
+	\*(SF\XC7\fP	\e(bs	Bell System logo (typesetter-dependent)
+	\*(SF|\fP	\e(or	or
+	\*(SF]\fP	\e(ci	circle
+	\*(SF\XD4\fP	\e(lt	left top of big curly bracket
+	\*(SF\XD5\fP	\e(lb	left bottom
+	\*(SF\XD6\fP	\e(rt	right top
+	\*(SF\XD7\fP	\e(rb	right bot
+	\*(SF\XD8\fP	\e(lk	left center of big curly bracket
+	\*(SF\XD9\fP	\e(rk	right center of big curly bracket
+	\*(SF\XCF\fP	\e(bv	bold vertical
+	\*(SF\XD0\fP	\e(lf	left floor (left bottom of big
+			square bracket)
+	\*(SF\XD1\fP	\e(rf	right floor (right bottom)
+	\*(SF\XD2\fP	\e(lc	left ceiling (left top)
+	\*(SF\XD3\fP	\e(rc	right ceiling (right top)
+.po 1i
+.sp
+.fi
+\(dg Although these characters are present in the bitmap fonts used by
+Berkeley \s-1UNIX\s0, they were not present in original Bell Labs'
+Special Mathematical Font, and \*(TR in fact substitutes the equivalent
+\s-1ASCII\s0 letters from the base font.

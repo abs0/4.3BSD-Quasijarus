@@ -1,0 +1,137 @@
+h22704
+s 00010/00005/00044
+d D 5.6 88/07/09 11:45:03 bostic 8 7
+c install approved copyright notice
+e
+s 00008/00002/00041
+d D 5.5 88/02/19 14:55:07 bostic 7 6
+c add Berkeley header
+e
+s 00001/00002/00042
+d D 5.4 87/09/11 12:32:22 bostic 6 4
+c flags are optional
+e
+s 00001/00001/00043
+d R 5.4 87/09/11 12:31:26 bostic 5 4
+c flags are optional
+e
+s 00017/00005/00027
+d D 5.3 87/06/04 17:55:55 bostic 4 2
+c added -f, -p flags
+e
+s 00013/00001/00031
+d R 5.3 87/06/04 17:50:23 bostic 3 2
+c added -f and -p flags
+e
+s 00002/00000/00030
+d D 5.2 87/06/02 20:08:00 bostic 2 1
+c use RS/RE combo
+e
+s 00030/00000/00000
+d D 5.1 87/06/02 18:11:12 bostic 1 0
+c date and time created 87/06/02 18:11:12 by bostic
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1987 Regents of the University of California.
+D 7
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 7
+I 7
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 8
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 8
+I 8
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 8
+E 7
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH MKDEP 1 "%Q%"
+.UC 5
+.SH NAME
+mkdep \- construct Makefile dependency list
+.SH SYNOPSIS
+.B mkdep
+I 4
+[
+.B \-f makefile
+] [
+.B \-p
+D 6
+]
+E 4
+flags file ...
+E 6
+I 6
+] [ flags ] file ...
+E 6
+.SH DESCRIPTION
+\fIMkdep\fP takes a set of flags for the C compiler and a list of C
+D 4
+sources as arguments and constructs a set of include file dependencies.
+It attaches this dependency list to the end of the file \fIMakefile\fP.
+An example of its use in a Makefile might be:
+E 4
+I 4
+source files as arguments and constructs a set of include file dependencies.
+It attaches this dependency list to the end of the file ``Makefile''.
+An example of its use in a makefile might be:
+E 4
+.nf
+I 2
+.RS
+E 2
+
+D 4
+CFLAGS= -I../include -I.
+E 4
+I 4
+CFLAGS= -O -I../include -I.
+E 4
+SRCS= file1.c file2.c
+
+depend:
+	mkdep ${CFLAGS} ${SRCS}
+I 2
+.RE
+E 2
+.PP
+where the macro SRCS is the list of C source files and the macro
+D 4
+CFLAGS is the list of flags for the C compiler.
+E 4
+I 4
+CFLAGS is the list of flags for the C compiler.  The \fB-f\fP option
+provides \fImkdep\fP with a name other than ``Makefile'' to be edited.
+If the \fB-p\fP option is provided, \fImkdep\fP produces dependencies
+of the form ``program: program.c'' so that subsequent makes will
+produce \fIprogram\fP directly from its C module rather than using an
+intermediate \fI.o\fP module.  This is useful in directories that
+contain many programs, each of whose source is contained in a single
+C module.
+E 4
+.SH "SEE ALSO"
+cc(1), make(1)
+E 1

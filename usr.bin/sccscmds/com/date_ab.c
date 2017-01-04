@@ -1,7 +1,9 @@
 # include	"../hdr/macros.h"
-# include	<tzfile.h>
+# include	<ctype.h>
+# include	<calendardefs.h>
+# include	<ctslcal.h>
 
-static char Sccsid[] = "@(#)date_ab.c	4.6	12/14/99";
+static char Sccsid[] = "@(#)date_ab.c	4.7	7/13/2011";
 
 /*
 	Function to convert date in the form "yymmddhhmmss" to
@@ -9,103 +11,128 @@ static char Sccsid[] = "@(#)date_ab.c	4.6	12/14/99";
 	Units left off of the right are replaced by their
 	maximum possible values.
 
-	The function corrects properly for leap year,
-	daylight savings time, offset from Greenwich time, etc.
+	Completely rewritten by Michael Sokolov to use
+	CTSL MJD functions.
 
 	Function returns -1 if bad time is given (i.e., "730229").
 */
 
-#define	dysize(year)	(isleap(year) ? DAYS_PER_LYEAR : DAYS_PER_NYEAR)
-
 char *Datep;
 
+extern long atol();
+
+static int
+collect_number(cp, reqdig, var)
+	register char *cp;
+	int reqdig, *var;
+{
+	register int c, i;
+	int accum;
+
+	for (accum = i = 0; i < reqdig; i++) {
+		c = *cp++;
+		if (!isdigit(c))
+			return(-1);
+		c -= '0';
+		accum = accum * 10 + c;
+	}
+	*var = accum;
+	return(0);
+}
 
 date_ab(adt,bdt)
 char *adt;
 long *bdt;
 {
-	int y, t, d, h, m, s, i;
-	long tim;
-	extern int *localtime();
-#define	time_t	long
-#include <sys/timeb.h>
-	struct timeb timeb;
+	struct calendar_date caldate;
+	register char *cp;
+	long mjd;
+	int hh = 23, mm = 59, ss = 59;
 
-	ftime(&timeb);
-	Datep = adt;
-
-	if((y=g2()) == -2) y = 99;
-	if (y < 0)
+	for (cp = adt; isspace(*cp); cp++)
+		;
+	if (isdigit(*cp)) {
+		/* assume Gregorian, deal with the 2 vs 4 digit mess */
+		if (cp[0] == '1' && cp[1] == '9' || cp[0] == '2') {
+			if (collect_number(cp, 4, &caldate.year) < 0)
+				return(-1);
+			cp += 4;
+		} else if (cp[0] >= '7') {	/* 2-digit year */
+			if (collect_number(cp, 2, &caldate.year) < 0)
+				return(-1);
+			cp += 2;
+			caldate.year += 1900;
+		} else if (cp[0] == '0' ||
+			   cp[0] == '1' && (cp[1] == '0' || cp[1] == '1')) {
+			/* silly me kept using 2-digit years through 2011! */
+			if (collect_number(cp, 2, &caldate.year) < 0)
+				return(-1);
+			cp += 2;
+			caldate.year += 2000;
+		} else
+			return(-1);
+		while (*cp && !isdigit(*cp))
+			cp++;
+		if (*cp) {
+			/* require both month and day */
+			if (collect_number(cp, 2, &caldate.month) < 0)
+				return(-1);
+			cp += 2;
+			while (*cp && !isdigit(*cp))
+				cp++;
+			if (collect_number(cp, 2, &caldate.day) < 0)
+				return(-1);
+			cp += 2;
+			if (!roman_date_valid(&caldate, 1))
+				return(-1);
+		} else {
+			caldate.month = 12;
+			caldate.day = 31;
+			/* we know it's valid */
+		}
+		mjd = gregtomjd(&caldate);
+	} else if (cp[0] == 'M' && cp[1] == 'J' && cp[2] == 'D') {
+		cp += 3;
+		while (*cp && !isdigit(*cp))
+			cp++;
+		if (!isdigit(*cp))
+			return(-1);
+		mjd = atol(cp);
+		while (isdigit(*cp))
+			cp++;
+	} else
 		return(-1);
-	if (y >= 70)
-		y += 1900;
-	else
-		y += 2000;
-
-	if((t=g2()) == -2) t = 12;
-	if(t<1 || t>12) return(-1);
-
-	if((d=g2()) == -2) d = mosize(y,t);
-	if(d<1 || d>mosize(y,t)) return(-1);
-
-	if((h=g2()) == -2) h = 23;
-	if(h<0 || h>23) return(-1);
-
-	if((m=g2()) == -2) m = 59;
-	if(m<0 || m>59) return(-1);
-
-	if((s=g2()) == -2) s = 59;
-	if(s<0 || s>59) return(-1);
-
-	tim = 0L;
-	for(i=1970; i<y; i++)
-		tim += dysize(i);
-	while(--t)
-		tim += mosize(y,t);
-	tim += d - 1;
-	tim *= 24;
-	tim += h;
-	tim *= 60;
-	tim += m;
-	tim += timeb.timezone;			/* GMT correction */
-	tim *= 60;
-	tim += s;
-
-	if(localtime(&tim)[8])
-		tim += -1*60*60;		/* daylight savings */
-	*bdt = tim;
+	if (mjd < UNIX_EPOCH_MJD)
+		return(-1);
+	/* now collect HH:MM:SS */
+	while (*cp && !isdigit(*cp))
+		cp++;
+	if (!*cp)
+		goto finish;
+	if (collect_number(cp, 2, &hh) < 0)
+		return(-1);
+	cp += 2;
+	if (hh > 23)
+		return(-1);
+	while (*cp && !isdigit(*cp))
+		cp++;
+	if (!*cp)
+		goto finish;
+	if (collect_number(cp, 2, &mm) < 0)
+		return(-1);
+	cp += 2;
+	if (mm > 59)
+		return(-1);
+	while (*cp && !isdigit(*cp))
+		cp++;
+	if (!*cp)
+		goto finish;
+	if (collect_number(cp, 2, &ss) < 0)
+		return(-1);
+	cp += 2;
+	if (ss > 59)
+		return(-1);
+finish:	Datep = cp;
+	*bdt = (mjd-UNIX_EPOCH_MJD) * 86400 + hh*3600 + mm*60 + ss;
 	return(0);
-}
-
-
-mosize(y,t)
-int y, t;
-{
-	static	int dmsize[12] =
-	    { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-	if(t==2 && dysize(y)==366) return(29);
-	return(dmsize[t-1]);
-}
-
-
-g2()
-{
-	register int c;
-	register char *p;
-
-	for (p = Datep; *p; p++)
-		if (numeric(*p))
-			break;
-	if (*p) {
-		c = (*p++ - '0') * 10;
-		if (*p)
-			c += (*p++ - '0');
-		else
-			c = -1;
-	}
-	else
-		c = -2;
-	Datep = p;
-	return(c);
 }

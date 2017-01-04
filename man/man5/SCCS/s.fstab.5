@@ -1,0 +1,227 @@
+h12217
+s 00001/00001/00121
+d D 6.1 85/05/15 18:12:17 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00036/00041/00086
+d D 5.1 85/05/15 18:12:06 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00127/00000/00000
+d D 4.1 85/05/15 18:11:59 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FSTAB 5 
+E 2
+I 2
+D 3
+.TH FSTAB 5  "26 June 1983"
+E 3
+I 3
+.TH FSTAB 5  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+fstab \- static information about the filesystems
+.SH SYNOPSIS
+.B #include <fstab.h>
+.SH DESCRIPTION
+The file
+.I /etc/fstab
+contains descriptive information about the various file
+systems.
+.I /etc/fstab
+is only
+.I read
+by programs, and not written;
+it is the duty of the system administrator to properly create 
+and maintain this file.
+D 2
+.PP
+These programs use
+.I /etc/fstab:
+.I dump,
+.I mount,
+.I umount,
+.I swapon,
+.I fsck
+and
+.I df.
+E 2
+The order of records in
+.I /etc/fstab
+D 2
+is important,
+for both
+E 2
+I 2
+is important because
+E 2
+.I fsck,
+.I mount,
+and
+.I umount
+sequentially iterate through
+.I /etc/fstab
+doing their thing.
+.PP
+The special file name is the 
+.B block
+special file name, 
+and not the character special file name.
+If a program needs the character special file name,
+the program must create it by appending a ``r'' after the
+last ``/'' in the special file name.
+.PP
+If
+.I fs_type
+is ``rw'' or ``ro'' then the file system whose name is given in the
+.I fs_file
+D 2
+field is normally mounted read-write or read-only on the specified special
+file.
+E 2
+I 2
+field is normally mounted read-write or read-only on the
+specified special file.  If
+.I fs_type
+is ``rq'', then the file system is normally mounted read-write
+with disk quotas enabled.
+E 2
+The
+.I fs_freq
+field is used for these file systems by the
+.IR dump (8)
+command to determine which file systems need to be dumped.
+The
+.I fs_passno
+field is used by the
+.IR fsck (8)
+program to determine the order in which file system checks are done
+at reboot time.
+The root file system should be specified with a
+.I fs_passno
+of 1, and other file systems should have larger numbers.  File systems
+within a drive should have distinct numbers, but file systems on different
+drives can be checked on the same pass to utilize parallelism available in
+the hardware.
+.PP
+If
+.I fs_type
+D 2
+is ``sw'' then the special file is made avaiable as a piece of swap
+E 2
+I 2
+is ``sw'' then the special file is made available as a piece of swap
+E 2
+space by the
+.IR swapon (8)
+command at the end of the system reboot procedure.
+The fields other than
+.I fs_spec
+and
+.I fs_type
+are not used in this case.
+.PP
+D 2
+.I Fs_type
+may be specified as ``xx'' to cause an entry to be ignored.
+This is useful to show disk partitions which are currently not
+used but will be used later.
+E 2
+I 2
+If
+.I fs_type
+is ``rq'' then at boot time the file system is automatically
+processed by the
+.IR quotacheck (8)
+command and disk quotas are then enabled with
+.IR quotaon (8).
+File system quotas are maintained in a file ``quotas'', which is
+located at the root of the associated file system.
+.PP
+If
+.I fs_type
+is specified as ``xx'' the entry is ignored.
+This is useful to show disk partitions which are currently not used.
+E 2
+.sp 1
+.nf
+D 2
+.ta \w'#define 'u +\w'FSTABARG(p) 'u \w'#define 'u+\w'char\ \ 'u+\w'fs_spec[FSNMLG]; 'u
+#define	FSTAB		"/etc/fstab"
+#define	FSNMLG		16
+
+#define	FSTABFMT	"%16s:%16s:%2s:%d:%d\en"
+#define	FSTABARG(p)	(p)\->fs_spec, (p)\->fs_file, \e
+		(p)\->fs_type, &(p)\->fs_freq, &(p)\->fs_passno
+#define	FSTABNARGS	5
+
+#define	FSTAB_RW	"rw"		/* read write device */
+#define	FSTAB_RO	"ro"		/* read only device */
+#define	FSTAB_SW	"sw"		/* swap device */
+#define	FSTAB_XX	"xx"		/* ignore totally */
+
+.ta \w'#define 'u +\w'char\ \ 'u +\w'fs_spec[FSNMLG]; 'u
+E 2
+I 2
+.DT
+#define	FSTAB_RW	"rw"	/* read-write device */
+#define	FSTAB_RO	"ro"	/* read-only device */
+#define	FSTAB_RQ	"rq"	/* read-write with quotas */
+#define	FSTAB_SW	"sw"	/* swap device */
+#define	FSTAB_XX	"xx"	/* ignore totally */
+.PP
+.ta \w'#define 'u +\w'char\ \ 'u +\w'fs_passno; 'u
+E 2
+struct fstab {
+D 2
+	char	fs_spec[FSNMLG];	/* block special device name */
+	char	fs_file[FSNMLG];	/* file system path prefix */
+	char	fs_type[3];		/* rw,ro,sw or xx */
+E 2
+I 2
+	char	*fs_spec;	/* block special device name */
+	char	*fs_file;	/* file system path prefix */
+	char	*fs_type;		/* rw,ro,sw or xx */
+E 2
+	int	fs_freq;		/* dump frequency, in days */
+	int	fs_passno;		/* pass number on parallel dump */
+};
+.fi
+D 2
+
+E 2
+.PP
+The proper way to read records from
+.I /etc/fstab
+D 2
+is to use the routines getfsent(), getfsspec() or getfsfile().
+E 2
+I 2
+is to use the routines getfsent(), getfsspec(), getfstype(),
+and getfsfile().
+E 2
+.SH FILES
+/etc/fstab
+.SH SEE ALSO
+D 2
+getfsent(3)
+E 2
+I 2
+getfsent(3X)
+E 2
+E 1

@@ -1,0 +1,278 @@
+h14849
+s 00004/00002/00171
+d D 6.7 87/12/05 19:53:03 bostic 7 6
+c mention that returned data is not aligned
+e
+s 00001/00001/00172
+d D 6.6 86/05/20 08:33:37 anne 6 5
+c spelling correction
+e
+s 00005/00004/00168
+d D 6.5 86/05/12 17:41:12 karels 5 4
+c move from 3X to 3
+e
+s 00012/00000/00160
+d D 6.4 86/04/20 04:46:37 lepreau 4 3
+c doc return val of 1 when store(INSERT) finds existing entry; point
+c out multiple db feature
+e
+s 00006/00006/00154
+d D 6.3 86/03/13 20:38:06 donn 3 2
+c dbm_error and dbm_clearerr are macros that return ints, not datums;
+c fixed a capitalization error.
+e
+s 00000/00001/00160
+d D 6.2 86/03/13 20:24:57 donn 2 1
+c Fixed 'struct key;' goof
+e
+s 00161/00000/00000
+d D 6.1 85/05/15 16:43:14 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 5
+.TH NDBM 3X  "%Q%"
+E 5
+I 5
+.TH NDBM 3  "%Q%"
+E 5
+.UC 6
+.SH NAME
+dbm_open, dbm_close, dbm_fetch, dbm_store, dbm_delete, dbm_firstkey, dbm_nextkey, dbm_error, dbm_clearerr \- data base subroutines
+.SH SYNOPSIS
+.nf
+.PP
+.ft B
+#include <ndbm.h>
+.PP
+.ft B
+typedef struct {
+    char *dptr;
+    int dsize;
+} datum;
+.PP
+.ft B
+DBM *dbm_open(file, flags, mode)
+    char *file;
+    int flags, mode;
+.PP
+.ft B
+D 3
+dbm_close(db)
+E 3
+I 3
+void dbm_close(db)
+E 3
+    DBM *db;
+.PP
+.ft B
+datum dbm_fetch(db, key)
+    DBM *db;
+D 2
+    struct key;
+E 2
+    datum key;
+.PP
+.ft B
+D 3
+dbm_store(db, key, content, flags)
+E 3
+I 3
+int dbm_store(db, key, content, flags)
+E 3
+    DBM *db;
+    datum key, content;
+    int flags;
+.PP
+.ft B
+D 3
+dbm_delete(db, key)
+E 3
+I 3
+int dbm_delete(db, key)
+E 3
+    DBM *db;
+    datum key;
+.PP
+.ft B
+datum dbm_firstkey(db)
+    DBM *db;
+.PP
+.ft B
+datum dbm_nextkey(db)
+    DBM *db;
+.PP
+.ft B
+D 3
+datum dbm_error(db)
+E 3
+I 3
+int dbm_error(db)
+E 3
+    DBM *db;
+.PP
+.ft B
+D 3
+datum dbm_clearerr(db)
+E 3
+I 3
+int dbm_clearerr(db)
+E 3
+    DBM *db;
+.SH DESCRIPTION
+These functions maintain key/content pairs in a data base.
+The functions will handle very large (a billion blocks)
+databases and will access a keyed item in one or two file system accesses.
+I 4
+D 5
+An advantage over the
+E 5
+I 5
+This package replaces the earlier
+E 5
+.IR dbm (3x)
+D 5
+package
+is that these functions can have more than one database open at a time.
+E 5
+I 5
+library, which managed only a single database.
+E 5
+E 4
+.PP
+.IR Key s
+and
+.IR content s
+are described by the
+.I datum
+typedef.  A
+.I datum
+specifies a string of
+.I dsize
+bytes pointed to by
+.I dptr.
+Arbitrary binary data, as well as normal ASCII strings, are allowed.
+The data base is stored in two files.
+One file is a directory containing a bit map and has `.dir' as its suffix.
+The second file contains all data and has `.pag' as its suffix.
+.PP
+Before a database can be accessed, it must be opened by
+.IR dbm_open .
+This will open and/or create the files
+.IB file .dir
+and
+.IB file .pag
+depending on the flags parameter (see
+.IR open (2)).
+.PP
+Once open, the data stored under a key is accessed by
+.I dbm_fetch
+and data is placed under a key by
+.IR dbm_store .
+The
+.I flags
+field can be either
+.B DBM_INSERT
+or
+.B DBM_REPLACE.
+.B DBM_INSERT
+will only insert new entries into the database and will not
+change an existing entry with the same key.
+.B DBM_REPLACE
+will replace an existing entry if it has the same key.
+A key (and its associated contents) is deleted by
+.IR dbm_delete .
+A linear pass through all keys in a database may be made,
+in an (apparently) random order, by use of
+.I dbm_firstkey
+and
+.IR dbm_nextkey .
+.I Dbm_firstkey
+will return the first key in the database.
+.I Dbm_nextkey
+will return the next key in the database.
+This code will traverse the data base:
+.IP
+.B for
+(key = dbm_firstkey(db); key.dptr != NULL; key = dbm_nextkey(db))
+.PP
+.I Dbm_error
+D 6
+returns non-zero when an error has occured reading or writing the database.
+E 6
+I 6
+returns non-zero when an error has occurred reading or writing the database.
+E 6
+.I Dbm_clearerr
+D 3
+Resets the error condition on the named database.
+E 3
+I 3
+resets the error condition on the named database.
+E 3
+.SH DIAGNOSTICS
+All functions that return an
+.I int
+indicate errors with negative values.  A zero return indicates ok.
+Routines that return a
+.I datum
+indicate errors with a null (0)
+.I dptr.
+I 4
+If
+.IR dbm_store
+called with a
+.I flags
+value of
+.B DBM_INSERT
+finds an existing entry with the same key
+it returns 1.
+E 4
+.SH BUGS
+The `.pag' file will contain holes so that its apparent size is about
+four times its actual content.  Older UNIX systems may create real
+file blocks for these holes when touched.  These files cannot be copied
+by normal means (cp, cat, tp, tar, ar) without filling in the holes.
+.PP
+.I Dptr
+D 7
+pointers returned by these subroutines point into static storage
+that is changed by subsequent calls.
+E 7
+I 7
+pointers returned by these subroutines point into static storage that is
+changed by subsequent calls.  This storage is not necessarily aligned;
+stored ``longs'', for example, should be copied to a properly aligned
+block of memory before being accessed.
+E 7
+.PP
+The sum of the sizes of a key/content pair must not exceed
+the internal block size (currently 4096 bytes).
+Moreover all key/content pairs that hash together must fit on a single block.
+.I Dbm_store
+will return an error in the event that a disk block fills with inseparable data.
+.PP
+.I Dbm_delete
+does not physically reclaim file space,
+although it does make it available for reuse.
+.PP
+The order of keys presented by
+.I dbm_firstkey
+and
+.I dbm_nextkey
+depends on a hashing function, not on anything interesting.
+I 5
+.SH SEE ALSO
+dbm(3X)
+E 5
+E 1

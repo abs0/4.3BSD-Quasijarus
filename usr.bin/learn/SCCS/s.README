@@ -1,0 +1,213 @@
+h61746
+s 00000/00007/00059
+d D 4.4 88/01/25 17:03:52 jak 8 7
+c make instructions were wrong/irrelevant
+e
+s 00024/00015/00042
+d D 4.3 86/05/15 17:58:02 bloom 7 6
+c updates from John Kunze
+e
+s 00039/00027/00018
+d D 4.2 83/04/27 16:14:19 mckusick 6 1
+c 
+e
+s 00000/00000/00057
+d R 4.3 83/04/27 15:20:54 mckusick 5 4
+c 
+e
+s 00039/00027/00018
+d R 4.2 83/04/26 01:27:18 mckusick 4 1
+c 
+e
+s 00039/00027/00018
+d R 4.2 83/04/26 01:03:35 mckusick 3 1
+c 
+e
+s 00040/00027/00018
+d R 4.2 83/04/25 23:58:32 mckusick 2 1
+c 
+e
+s 00045/00000/00000
+d D 4.1 83/02/24 12:56:28 mckusick 1 0
+c date and time created 83/02/24 12:56:28 by mckusick
+e
+u
+U
+t
+T
+I 7
+Important changes since 4.2:
+	Now uses 4.2 filesystem correctly and removes files between lessons.
+	Tee'd output to the .ocopy file works.  No more infinite loop on EOF.
+	Now maintains a .learnrc file to start you where you left off last
+	session.  The undocumented and dubious "xyzzy" command has become
+	the documented and dubious "hint" command.  Miscellaneous typos.
+
+E 7
+I 1
+D 6
+%W%	(Berkeley)	%E%
+E 6
+I 6
+Note that play directories are created in /tmp, no longer
+in /usr/lib/learn/play.  The C script is not complete;
+use at your own risk.  The editor script still smacks of ed.
+E 6
+
+D 6
+The C script is not complete; use at your own risk.
+
+E 6
+D 7
+Lessons are in
+E 7
+I 7
+Lessons are in (vi lessons are on user-contributed-software tape)
+E 7
+	/usr/lib/learn/*
+D 6
+Source is in
+	/usr/src/cmd/learn
+Miscellaneous supporting code is also in source.
+E 6
+I 6
+and auxilliary programs are in
+	/usr/lib/learn/bin
+E 6
+
+D 8
+Make a learn by
+	make
+D 6
+When this seems right, extract the lessons by
+	make lessons
+This extracts the lesson archives
+for each course.  You can also do this one step at a
+time with "make files", "make editor", etc.,
+if you don't want all courses.
+If you do things separately, you must also say
+	make play; make log
+
+Finally, check that it's sensible with
+E 6
+I 6
+Check that it's sensible with
+E 6
+	make check
+If that doesn't print any messages,
+you're probably in good shape.
+
+E 8
+D 6
+Learn requires general write permission on the user playpen
+directory .../lib/play.  Lesson directories may be protected.
+E 6
+I 6
+Lesson directories may be protected.
+E 6
+
+D 6
+Learn collects a log file for each script in the .../lib/log
+directory, with a file for each script (files,
+editor, etc.) containing an entry for each lesson
+attempted. These files will grow without bound,
+E 6
+I 6
+D 7
+Learn collects a log file for each script in the .../learn/log
+directory, with a file for each script (files, editor, etc.)
+containing an entry for each lesson attempted.
+These files will grow without bound,
+E 7
+I 7
+Learn keeps a log file for each script in the .../learn/log
+directory (files, editor, etc.) containing an entry for each
+lesson attempted.  These files will grow without bound,
+E 7
+E 6
+unless they are periodically truncated. 
+The log files should have general write permission.
+If you don't want logging (a sensible position to take),
+D 6
+set the variable "logging" to zero in source/lrndef
+before making learn.
+E 6
+I 6
+set the variable "logging" to zero in source/learn.c
+D 7
+before making learn, remove the log directory, or just
+E 7
+I 7
+before making learn, or remove the log directory, or just
+E 7
+turn off write permission for a particular log file.
+E 6
+
+Learn requires about 1500 blocks to make itself,
+and about 1000 when completely made.
+
+D 6
+Please report problems, bad lessons, etc., to
+Brian Kernighan, MH 6021, 2C-518, or
+Mike Lesk, MH 6377, 2C-572.  Thanks.
+E 6
+I 6
+The best way to get ex to prompt within learn was to modify
+the user's environment variables PATH and EXINIT.
+
+Due to inane assumptions in the VAX versions of csh -i and ex
+when stdin and stdout are not terminals, kludges have been
+added with #if's.  In particular, I use the old terminal driver
+D 7
+to keep #copyout working and make sh -i masquerades as
+E 7
+I 7
+to keep #copyout working and make sh -i masquerade as
+E 7
+a csh -i (by setting PS1=% ) to keep #pipe working.
+
+D 7
+"#create" can now end in an incomplete last line with ....#\n
+On input the string %s is converted to the lesson directory.
+E 7
+I 7
+"#create" can now end in an incomplete last line by making '#'
+the last character on the line.  On input the string %s is
+converted to the lesson directory (useful for debugging).
+E 7
+On output with "#copyout", prompt signs ("% ") are removed.
+D 7
+"#cmp" now takes a trailing number specifying that only that
+E 7
+I 7
+"#cmp" now takes a trailing NUMBER specifying that only NUMBER
+E 7
+many lines are to be compared.
+
+D 7
+The new command "xyzzy" prints the answer (i.e. the last part
+of the lesson), and "xyzzy x" prints the whole lesson text.
+E 7
+I 7
+The new command "hint" prints the "answer" (i.e. the last part
+of the lesson).  With an argument it prints the whole lesson text.
+E 7
+A new routine called getlesson tries to construct a valid
+lesson number from in invalid one before giving up.
+The commands "where", "skip", and "again" are also new.
+Greeting, closing, and reminder messages have been expanded.
+
+D 7
+Please report problems, bad lessons, contributions, etc., to
+John Kunze, UC Berkeley, 415-642-1530, ucbvax!ucbernie.jak .
+Thanks.
+E 7
+I 7
+The "vi" lessons are packaged separately as part of the user-
+contributed software.  Ask the system administrator to install them.
+
+Please report problems, bad lessons, contributions, etc.,
+to John Kunze, jak@ernie.Berkeley.EDU.  Thanks.
+E 7
+E 6
+E 1

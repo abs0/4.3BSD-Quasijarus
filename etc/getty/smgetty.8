@@ -1,0 +1,45 @@
+/*
+ * smart modem getty
+ *
+ * This program is a front-end to getty for smart modems that speak AT commands.
+ * Traditionally these modems have been configured for automatic answer with
+ * modem messages suppressed, i.e., effectively reduced to dumb modems, when
+ * connected to UNIX.  This program supports the alternative approach of
+ * keeping the modem in its native smart configuration (AT commands enabled,
+ * verbose responses enabled, no auto answer), answering calls with ATA upon
+ * seeing RING, and waiting for the CONNECT response.  The advantages of
+ * this approach are:
+ *
+ * 1. Calls won't be answered when the UNIX machine is down but the modem
+ *    (usually in a separate rack) is still powered on.
+ *
+ * 2. The established connection speed can be extracted from the CONNECT
+ *    response.  If the modem is also configured to adjust the RS-232 baud
+ *    rate to the connection speed, UNIX can then know the true connection
+ *    speed instead of being deluded into some very high speed at the RS-232
+ *    level when in fact it may be a 300 bps call.
+ *
+ * This program assumes and requires a smart modem that supports a wide range
+ * of speeds and corresponding modulation schemes from 300 bps to 9600 bps or
+ * higher (up to 33.6 kbps), and is configured for autobaud mode, i.e., fixed
+ * baud rate for chatting AT commands, but switching to the actual connection
+ * speed (or the lowest legal RS-232 baud rate that is equal or higher) after
+ * CONNECT.  If the modem supports 14.4 kbps, the RS-232 port must support
+ * 19200 baud.  If the modem supports 28.8 or 33.6 kbps, the RS-232 port must
+ * support 38400 baud.
+ *
+ * AT commands are chatted at 9600 baud, and the modem must be configured in
+ * NVRAM to send its first RING messages after power-up before seeing the
+ * first AT command at this baud rate.  Raw mode is used for chatting AT
+ * commands and the ATA command is sent with the high bit clear, putting the
+ * smart modem in 8-N-1 mode.  This makes any difference only if the modem
+ * usurps and regenerates the XON/XOFF characters.  The USR Courier modems
+ * used at our facility always accept them with the high bit either clear or
+ * set, but regenerate them in accordance with the character format sensed
+ * from the AT command that connected us.  By sending the ATA command with
+ * the high bit clear we make those regenerated flow control characters have
+ * it clear as well.  This choice was made because the normal UNIX tty config
+ * accepts any parity, so the traditional 7-E-1 mode won't be broken, but users
+ * who want an 8-bit tty will be able to switch to 8-N-1 mode with stty pass8,
+ * which would be broken if the modem regenerated XOFF in 7-E-1.
+

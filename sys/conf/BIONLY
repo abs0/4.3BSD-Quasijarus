@@ -1,0 +1,19 @@
+#
+# BI-only test build
+#
+machine		vax
+cpu		"VAX8200"
+ident		BIONLY
+timezone	0
+maxusers	8
+
+config		vmunix	root on kra0 swap on kra0
+
+adapter		vaxbi0	at nexus ?
+
+# KDB50 and drives
+controller	kdb0	at vaxbi? node ?		vector kdbintr
+disk		kra0	at kdb0 drive 0
+disk		kra1	at kdb0 drive 1
+disk		kra2	at kdb0 drive 2
+disk		kra3	at kdb0 drive 3

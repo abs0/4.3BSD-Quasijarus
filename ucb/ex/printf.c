@@ -5,11 +5,12 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)printf.c	7.4 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)printf.c	7.5 (Berkeley) 4/13/03";
 /* The pwb version this is based on */
 static char *printf_id = "@(#) printf.c:2.2 6/5/79";
 #endif not lint
 
+#include <sys/types.h>
 #include <varargs.h>
  
 /*
@@ -27,24 +28,24 @@ static char *printf_id = "@(#) printf.c:2.2 6/5/79";
 
 static int width, sign, fill;
 
-char *_p_dconv();
+u_char *_p_dconv();
 
 /* VARARGS */
 ex_printf(va_alist)
 	va_dcl
 {
 	va_list ap;
-	register char *fmt;
-	char fcode;
+	register u_char *fmt;
+	u_char fcode;
 	int prec;
 	int length,mask1,nbits,n;
 	long int mask2, num;
-	register char *bptr;
-	char *ptr;
-	char buf[134];
+	register u_char *bptr;
+	u_char *ptr;
+	u_char buf[134];
 
 	va_start(ap);
-	fmt = va_arg(ap,char *);
+	fmt = va_arg(ap,u_char *);
 	for (;;) {
 		/* process format string first */
 		while ((fcode = *fmt++)!='%') {
@@ -135,7 +136,7 @@ ex_printf(va_alist)
 					ptr++;
 				break;
 			case 's':
-				bptr = va_arg(ap,char *);
+				bptr = va_arg(ap,u_char *);
 				if (bptr==0)
 					bptr = "(null pointer)";
 				if (prec < 0)
@@ -243,12 +244,12 @@ ex_printf(va_alist)
  * This program assumes it is running on 2's complement machine
  * with reasonable overflow treatment.
  */
-char *
+u_char *
 _p_dconv(value, buffer)
 	long value;
-	char *buffer;
+	u_char *buffer;
 {
-	register char *bp;
+	register u_char *bp;
 	register int svalue;
 	int n;
 	long lval;
@@ -316,10 +317,10 @@ _p_dconv(value, buffer)
  * "000-3" where "-0003" was intended).
  */
 _p_emit(s, send)
-	register char *s;
-	char *send;
+	register u_char *s;
+	u_char *send;
 {
-	char cfill;
+	u_char cfill;
 	register int alen;
 	int npad;
 	

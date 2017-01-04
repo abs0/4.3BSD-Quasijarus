@@ -1,0 +1,59 @@
+h24684
+s 00003/00001/00032
+d D 6.1 86/05/22 15:46:49 kjd 3 2
+c document for 4.3BSD release
+e
+s 00000/00000/00033
+d D 5.1 86/05/22 15:46:45 kjd 2 1
+c document distributed with 4.2BSD
+e
+s 00033/00000/00000
+d D 4.1 86/05/22 15:46:42 kjd 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 3
+.RP
+E 3
+I 3
+.EH 'USD:12-%''A Tutorial Introduction to the \s-2UNIX\s+2 Text Editor'
+.OH 'A Tutorial Introduction to the \s-2UNIX\s+2 Text Editor''USD:12-%'
+.\".RP
+E 3
+.TL
+A Tutorial Introduction to the \s-2UNIX\s+2 Text Editor
+.AU
+Brian W. Kernighan
+.AI
+.MH
+.AB
+.PP
+Almost all text input on
+the
+.UX
+operating system
+is done with
+the text-editor
+.IT ed .
+This memorandum is a tutorial guide
+to help beginners get started
+with text editing.
+.PP
+Although it does not cover everything,
+it does discuss enough for most users'
+day-to-day needs.
+This includes
+printing, appending, changing, deleting, moving and inserting entire lines of text;
+reading and writing files;
+context searching and line addressing;
+the substitute command;
+the global commands;
+and the use of special characters for advanced editing.
+.AE
+E 1

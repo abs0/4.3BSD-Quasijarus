@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)ni.c	4.3 5/28/02";
+static char sccsid[] = "@(#)ni.c	4.4 2/16/2012";
 #endif lint
 
 #include "tdef.h"
@@ -20,7 +20,8 @@ int r[NN] = {
 	PAIR('s','t'),
 	PAIR('s','b'),
 	PAIR('c','.'),
-	PAIR('c','n')};
+	PAIR('c','n'),
+	PAIR('Y','r')};
 int pto = 10000;
 int pfrom = 1;
 int print = 1;

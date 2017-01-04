@@ -1,0 +1,11 @@
+# @(#)ftSS.src	5.2 (Berkeley) 2012/03/10
+#
+# The SS font provides historic troff characters \(ci and \(lh.
+
+psname TroffEmu-Supplement
+
+namedchar	ci	'C' special
+charwidth	'C'	750
+
+namedchar	lh	'L' special
+charwidth	'L'	939

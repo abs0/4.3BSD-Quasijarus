@@ -2,23 +2,26 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)00.contents	5.1 (Berkeley) 4/15/86
+.\"	@(#)00.contents	5.2 (Berkeley) 11/2/04
 .\"
 .OH '''USD Contents'
 .EH 'USD Contents'''
 .TL
 UNIX User's Supplementary Documents (USD)
 .sp
-\s-24.3 Berkeley Software Distribution, Virtual \s-2VAX\s+2\-11 Version\s+2
+\s-24.3 Berkeley Software Distribution, Harhan Preliminary Edition\s+2
 .sp
-\fRFebruary, 1986\fR
+\fRNovember, 2004\fR
 .PP
 This volume contains documents which supplement the manual pages in
 .I
 The Unix User's Reference Manual
 .R
-for the Virtual \s-2VAX\s0-11 version of the system as distributed by U.C.
-Berkeley, and Volumes 2a and 2b as provided by Bell Laboratories.
+for the Berkeley version of the system as installed at Harhan.
+.PP
+Documents USD:8, USD:9, USD:10 and USD:11 are not included in this
+edition and the software described therein is not currently available
+at Harhan.
 
 .SH
 Getting Started
@@ -62,11 +65,18 @@ Communicating with the World
 .tl 'Mail Reference Manual''USD:7'
 .QP
 Complete details on one of the programs for sending and reading your mail.
+.KS
+\!\!gsave 0.5 setgray
 .IP
 .tl 'The Rand MH Message Handling System''USD:8'
 .QP
 This system for managing your computer mail uses lots of small programs, 
 instead of one large one.
+.br
+\!\!grestore
+.KE
+.KS
+\!\!gsave 0.5 setgray
 .IP
 .tl 'How to Read the Network News''USD:9'
 .QP
@@ -74,16 +84,29 @@ Describes how news works (generally) and some alternatives for reading it,
 .I readnews
 and 
 .I vnews .
+.br
+\!\!grestore
+.KE
+.KS
+\!\!gsave 0.5 setgray
 .IP
 .tl 'How to Use USENET Effectively''USD:10'
 .QP
 Describes the customs, protocols, and etiquette of network news, plus answers
 to the questions most frequently asked by newcomers to the network.
+.br
+\!\!grestore
+.KE
+.KS
+\!\!gsave 0.5 setgray
 .IP
 .tl 'Notesfile Reference Manual''USD:11'
 .QP
 This feature-packed system for maintaining computer-aided discussion groups is
 also useful for reading netnews.
+.br
+\!\!grestore
+.KE
 .SH
 Text Editing
 .IP

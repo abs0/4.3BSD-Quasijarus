@@ -1,0 +1,85 @@
+h53248
+s 00001/00001/00030
+d D 6.2 86/05/21 15:55:19 anne 4 3
+c spelling
+e
+s 00001/00001/00030
+d D 6.1 85/05/15 17:20:10 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00005/00027
+d D 5.1 85/05/15 17:20:02 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00032/00000/00000
+d D 4.1 85/05/15 17:19:55 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FL 4 5/11/81
+E 2
+I 2
+D 3
+.TH FL 4 "27 July 1983"
+E 3
+I 3
+.TH FL 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+fl \- floppy interface
+E 2
+I 2
+fl \- console floppy interface
+E 2
+.SH DESCRIPTION
+D 2
+.PP
+This is a simple interface to the D.E.C. RX01
+E 2
+I 2
+This is a simple interface to the DEC RX01
+E 2
+floppy disk unit, which is part of the console
+D 4
+LSI-11 subsytem for VAX-11/780's.
+E 4
+I 4
+LSI-11 subsystem for VAX-11/780's.
+E 4
+Access is given to the entire
+floppy consisting of 77 tracks of 26 sectors of 128 bytes.
+.PP
+All i/o is raw; the seek addresses in raw transfers should be a multiple
+of 128 bytes and a multiple of 128 bytes should be transferred,
+as in other ``raw'' disk interfaces.
+.SH FILES
+/dev/floppy
+.SH SEE ALSO
+D 2
+arff(8)
+E 2
+I 2
+arff(8V)
+E 2
+.SH DIAGNOSTICS
+None.
+.SH BUGS
+Multiple console floppies are not supported.
+.PP
+If a write is given with a count not a multiple of 128 bytes then
+the trailing portion of the last sector will be zeroed.
+E 1

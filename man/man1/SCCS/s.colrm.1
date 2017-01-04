@@ -1,0 +1,82 @@
+h40393
+s 00000/00002/00031
+d D 6.2 86/05/07 13:16:40 mckusick 4 3
+c delete author
+e
+s 00001/00001/00032
+d D 6.1 85/04/29 14:19:52 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00005/00030
+d D 5.1 85/04/29 14:19:46 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00035/00000/00000
+d D 4.1 85/04/29 14:19:40 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH COLRM 1
+E 2
+I 2
+D 3
+.TH COLRM 1 "18 January 1983"
+E 3
+I 3
+.TH COLRM 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+colrm \- remove columns from a file
+.SH SYNOPSIS
+.B colrm
+[
+startcol
+[
+endcol
+]
+]
+.SH DESCRIPTION
+.I Colrm
+D 2
+removes selected columns from a file.
+Input is taken from standard input.
+E 2
+I 2
+removes selected columns from a file.  Input is taken from standard input.
+E 2
+Output is sent to standard output.
+.PP
+If called with one parameter the columns
+of each line will be removed starting with the specified column.
+If called with two parameters the columns from the first column
+to the last column will be removed.
+.PP
+Column numbering starts with column 1.
+D 2
+.SH SEE\ ALSO
+E 2
+I 2
+.SH "SEE ALSO"
+E 2
+expand(1)
+D 4
+.SH AUTHOR
+Jeff Schriebman
+E 4
+D 2
+.SH BUGS
+E 2
+E 1

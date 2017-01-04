@@ -1,0 +1,520 @@
+h04833
+s 00001/00000/00165
+d D 5.7 86/02/12 17:08:04 bloom 7 6
+c add another supported dialer
+e
+s 00002/00000/00163
+d D 5.6 86/01/13 12:01:01 bloom 6 5
+c two more dialers
+e
+s 00006/00000/00157
+d D 5.5 86/01/06 15:00:53 bloom 5 4
+c more fixes from rick adams
+e
+s 00009/00001/00148
+d D 5.4 85/10/09 17:24:21 bloom 4 3
+c more from rick@seismo
+e
+s 00017/00001/00132
+d D 5.3 85/06/19 16:48:35 bloom 3 2
+c new version from rick adams and comment about 7 char names
+e
+s 00098/00159/00035
+d D 5.2 85/04/10 15:16:49 ralph 2 1
+c more changes from rick adams.
+e
+s 00194/00000/00000
+d D 5.1 83/07/02 18:46:56 root 1 0
+c date and time created 83/07/02 18:46:56 by root
+e
+u
+U
+t
+T
+I 1
+List of Changes to UUCP
+%M%	%I%	%E%
+D 2
+This is a list of changes made to the base version of uucp.
+An attempt is made to justify the changes made.
+This list may be useful to those implementing yet better versions.
+	Tom Truscott
+E 2
+
+D 2
+anlwrk.c: lots of changes. See the comments at the top.
+	Main efficiency improvement: eliminate stat(II)s.
+	Main bug fix: avoid sending files to wrong system.
+E 2
+I 2
+Added support for Eunice.
+E 2
+
+D 2
+Uses Berkeley 4.2bsd directory reading subroutines.
+	Useful if someone wants to run this uucp under 4.2bsd.
+E 2
+I 2
+Added new dialers:
+	Racal Vadic 212
+	Racal Vadic 811 dialer with 831 adaptor
+	Racal Vadic 820 dialer with 831 adaptor
+	Racal Vadic MACS, 811 dialer with 831 adaptor
+	Racal Vadic MACS, 820 dialer with 831 adaptor
+I 3
+	Dec DF112
+E 3
+	4.2BSD style networking on top of tcp/ip ('t' protocol)
+	X.25/PAD support ('f' protocol)
+	Novation
+I 3
+	Penril
+I 6
+	Hayes 2400 Smartmodem
+	Concord Data Systems CDS 224
+I 7
+	ATT 2224 2400 baud modem
+E 7
+E 6
+E 3
+E 2
+
+D 2
+Added uucp subdirectories.  See 'README' or 'INSTALL' for details.
+	Subdirectories are enabled by #define-ing UUDIR in uucp.h.
+	No more assembler code needed.
+	grep UUDIR *.[hc]  to see how it is implemented.
+E 2
+I 2
+Running uucico with debugging on requires read access to L.sys.
+E 2
+
+D 2
+Times of form 'hh:mm' are uniformly printf-ed with "%d:%02d".
+	The %02d guarantees a 2 digit number w/ leading zero if needed.
+E 2
+I 2
+If "NOSTRANGERS" is defined in uucp.h, the remote site
+must be in you L.sys or the call will be rejected.
+E 2
+
+D 2
+uucp work files (e.g. spool files) are created with umask==WFMASK (uucp.h).
+WFMASK can disable reading by 'others'.  In fact that is the default,
+which might be annoying, but you can change it.
+LOG files (LOGFILE, SYSLOG, ERRLOG) are created with umask=LOGMASK (uucp.h),
+which as distributed permits general read access to avoid loud user screams.
+User files are created with mode (not umask!) at least BASEMODE (uucp.h)
+and possibly with more permissions if the user so specified.
+To avoid loud user screams, BASEMODE should probably be 666
+since uucp-created files are owned by uucp.
+E 2
+I 2
+Lock files may be kept in a subdirectory if desired.
+E 2
+
+D 2
+chkpth.c: uses dynamic allocation due to Doug Kingston.
+	chkpth() and chkperm() are no longer called for vanilla
+	Spool area requests, so they can be made 'tougher'.
+	These routines, and how they are used, is a bleak area
+	of uucp that should be scrapped and redone coherently.
+E 2
+I 2
+STST files are kept in a subdirectory.
+E 2
+
+D 2
+#define for SYSIII added.  The idea is to have code that runs
+on SYSIII etc. as well as v7, 32V, 4.1bsd, etc.
+However it has never been tested and surely won't work.
+E 2
+I 2
+CORRUPT subdirectory contains corrupted C. and X. files that could
+not be processed. (Instead of just exiting)
+E 2
+
+D 2
+cntrl.c: lots off changes here.  Mostly performance enhancements.
+	Bypasses chkpth/chkperm/anyread checks for vanilla spool files.
+	No longer logs 'COPY SUCCEEDED' in LOGFILE, only failures.
+	(Still logs request data. And SYSLOG still logs file transfers.)
+	Has 'PATIENCE' when shipping huge files (this partially works,
+	the huge file gets over okay, and is signed off, but the
+	next attempted transfer fails.  Not catastrophic, but not nice.)
+	Cranks up a uuxqt each time ten 'X' files have gone past
+	(to avoid collecting 100+ X files before uuxqt starts!)
+	ultouch() is called only rarely.  A missing chmod after an 'xmv'
+	has been added.  Due to the extra diligence in chkperm, etc.
+	the old 'put files in /usr/spool/uucppublic' may no longer
+	work "right".  Sorry, but I am not sure how it is supposed to work.
+	I will look into this someday, sooner if it is an actual problem.
+E 2
+I 2
+You can specify a maximum grade to send either on the command line (-gX)
+D 3
+or in the L.sys file (Any@C|Evening will only send class C [usually
+E 3
+I 3
+or in the L.sys file (Any/C|Evening will only send class C [usually
+E 3
+mail] or higher during the day and will send everything in the evening)
+See UUAIDS/L.sys for examples.
+E 2
+
+D 2
+vectors/buffers for L.sys lines increased in versys.c and conn.c
+to permit 1000 char lines and 100 'fields' on a line.
+E 2
+I 2
+L.sys (and any of the files in lib/uucp) can contain comments by
+putting a # as the first character on a line. Lines may be
+continued by placing a \ as the last character of the line.
+E 2
+
+D 2
+conn.c:	obscure changes here, mostly in the send/expect sequence.
+	File descriptor prediction implemented (not tested!),
+	extremely obscure problem apparently first noted by Steve Bellovin.
+	Default end of 'send' string is \r, not \n.
+	PAUSE5 pauses 5 seconds.  \d pauses 1 second (\d\d\d\d\d pauses 5).
+	foo\c  sends 'foo' with no ending \r.  \05 sends control-e.
+	\s sends a space (so does \40). CR sends a \r, LF sends \n.
+	"" sends a \r.  Output is in even parity, changable with send strings
+	P_ZERO, P_EVEN, P_ODD, P_ONE.  BREAK sends a break (or simulates one).
+	And expect string of "" expects nothing, just returns, so
+	to send an initial \r one can just do
+		"" ""   ogin:--ogin:
+	to poke the remote site into sending a login message.
+	Send strings are only printed in debug if uid <= PRIV_UIDS (uucp.h).
+E 2
+I 2
+-R flag reverses role. (Lets the remote system be master first instead
+of slave)
+E 2
+
+D 2
+	Alan Watt's date changes were in decvax, but should mentioned here.
+	Except I am not sure how they work.  Look near the end of conn.c.
+E 2
+I 2
+-L flag only calls "local" sites. Local sites are those sites having
+one of LOCAL,TCP or DIRECT in the ACU field of L.sys.
+E 2
+
+D 2
+expfile() returns 0 if the expanded file is a vanilla spool file.
+	That way chkpth/chkperm can be bypassed, and those routines
+	can have several huge loopholes removed.
+E 2
+I 2
+If /etc/nologin is present (usually created by a graceful shutdown),
+uucico and uuxqt will gracefully exit instead of getting killed
+off when the system goes down.
+E 2
+
+D 2
+gename.c has Alan Watt's (a) base 62 sequence numbering and (b)
+	greatly reduced locking rate.
+	The comments at the top describe it fairly well.
+	It looks awful, but just use it.  It works.
+E 2
+I 2
+Does an exponential backoff on retry time if call fails instead
+of always waiting the default 5 minutes. The default may be
+overridden by adding ",TIME" to the time field in L.sys. e.g.
+"seismo Any,2" will use a default retry time of 2 minutes.
+E 2
+
+D 2
+gio.c: ultouch() is called occasionally (kludge!)
+	IO errors are checked for.
+gnsys.c	calls each system only once in a uucico session.
+	Also, calls callok() only once for each system.
+	I forget how that works.
+E 2
+I 2
+If uucico receives a SIGFPE while running, it will toggle debugging
+on and off.
+E 2
+
+D 2
+imsg.c:	strips parity bits, in case the incoming chars have some.
+E 2
+I 2
+Better status messages provided for uustat.
+E 2
+
+D 2
+logent.c:	greatly simplified!  Justs opens LOGFILE for append
+	and then seeks to end and writes each new entry.
+	Can cause scrambling on systems w/o guaranteed append-to-end,
+	but is too good a speedup to pass up.
+E 2
+I 2
+New program uuq to give more decriptive information on status of
+jobs in uucp queue.
+E 2
+
+D 2
+pk.c:	check-summing is done correctly on machines which do not
+	sign-extend characters.  Time-outs made more generous.
+E 2
+I 2
+Don't send files to remote system if it is returning out of
+temp space error.
+E 2
+
+D 2
+lint:	The code has been de-linted as best I could.
+	uucp.h contains lots of declarations of functions which
+	return non-int, like strcpy(), etc.
+E 2
+I 2
+Correctly does the closing hangup sequence.
+E 2
+
+D 2
+uucplock.c:
+	ultouch() changed to be done only occasionally.
+	Only changes st_ctime, not atime or mtime,
+	so programs can be written to display time spent locked.
+E 2
+I 2
+condevs.c was broken into a file for each dialer in the
+directory aculib for much easier maintenance.
+E 2
+
+D 2
+uucp:	uucp x foo!y  causes a uucico to call only system foo,
+	not a uucico to try to call everyone with spooled work.
+E 2
+I 2
+Only try at most TRYCALLS to dial a site instead of one try
+for each dialer (lost big on systems with many dialers)
+E 2
+
+D 2
+uucp.h:	unused #defines have been removed.
+E 2
+I 2
+Add ABORT sequence to the expect/send sequence so don't have
+to wait for timeout if can't get through dataswitch. e.g.
+	noao Evening ACU 1200 6021234565 "" \d\r CLASS NOAOUUCP ABORT Down GO \d\r ogin:-\b-ogin: uucplogin word: uucppassword
+will only call noao in the evening (evening is defined by the phone rates).
+It will expect nothing and then wait 1 second (\d) and send a carriage return.
+Look for CLASS, then send NOAOUUCP. From then on, if it sees the word Down
+before finishing logging in, it will hang up immediately. In the mean time,
+it looks for GO and if it sees it, delays 1 second and sends a CR. Looks
+for ogin:, etc. This abort sequence is very useful if you must go through a 
+dataswitch to get to the computer.
+E 2
+
+D 2
+uulog.c:	greatly simplied, since logent.c is greatly simplied.
+	Only used in forms 'uulog -u user' and 'uulog -s system'.
+	Also, 'uulog -uuser' and 'uulog -ssystem' are permitted.
+	And both options may be specifed. None is an error.
+E 2
+I 2
+The time field in L.sys now handles "Evening" and "Night" in addition
+to Any, Mo,Tu,We,Th,Fr,Sa,Su. Evening and Night are defined to
+be when the phone rates are cheaper.
+	Evening = Wk1700-0800|Sa|Su
+	Night = Any2300-0800|Sa|Su0800-1700
+E 2
+
+D 2
+uux:	-g<g> option added to specify priority grade.
+	-c option does not copy.  -l is a synonym.
+	'X' files use local system name to avoid possible name conflict.
+	uucico cranked up calls only target system, not everyone.
+E 2
+I 2
+The expect/send code now supports:
+	\s	space
+	\d	delay 1 second
+	\r	carriage return with no linefeed
+	\b	break
+	\c	don't send a CR after these characters
+	\xxx	the octal character xxx (e.g. \s == \040
+E 2
+
+D 2
+uuxqt:	reads commands from /usr/lib/uucp/L.cmds.
+	A line of form 'PATH=...' changes the command search path.
+E 2
+I 2
+L-devices now handles "chat" scripts (like HoneyDanber) to get
+through local port selectors and smart modems more easily
+without mucking up every line of L.sys. See UUAIDs/L-devices for
+details.
+E 2
+
+D 2
+uucpname.c:	A real kludge went here.
+	On some UNIX systems, a program's set-user-id bit is ignored
+	if the invoker is root.  But then uucp would create files
+	owned by root, and if not generally writable uucp
+	would later be unable to write on them (e.g. LOGFILE).
+	So uucpname, since it is called at the start of
+	every relevant uucp program, checks for getuid()==geteuid()==0
+	in which case it changes its uid/gid to that of the owner of
+	the file /usr/lib/uucp/uucico.
+E 2
+I 2
+D 4
+The 'g'  protocol code was clean up a lot and is now almost
+E 4
+I 4
+The 'g'  protocol code was cleaned up a lot and is now almost
+E 4
+readable.
+E 2
+
+D 2
+Debugging mode is permitted only to invokers with uid <= PRIV_UIDS.
+E 2
+I 2
+If you need a parity other than even (the default) to login to
+another system, you can change it in L.sys by putting in a
+sequence like "" P_ZERO (expect nothing, send zero parity).
+	Odd Parity	P_ODD
+	Even Parity	P_EVEN
+	Zero Parity	P_ZERO
+	One Parity	P_ONE
+E 2
+
+D 2
+dialout.c routine has dialend() routine which is called to hang up.
+Tue Mar 29 16:25:01 EST 1983
+E 2
+I 2
+If DONTCOPY is defined in uucp.h, uucp will not make a copy
+of the source file by default. (This is the way System 3 does it).
+E 2
+
+D 2
+Makefile: GROUP variable added so file OWNER and GROUP are both set correctly.
+uuxqt/uucico/uuclean are no longer executable by 'others'.
+E 2
+I 2
+If an X. request fails, the notification is returned to the
+originator of the request instead of "uucp" on the previous
+system. 
+E 2
+
+D 2
+uucp.h: PRIV_UIDS reduced to 3 to reduce security danger.
+E 2
+I 2
+The man pages are actually accurate!
+E 2
+
+D 2
+cico.c: cleanup() ioctl(II)s changed to avoid hang-up on Gould/SEL machine.
+E 2
+I 2
+If LOGBYSITE is defined, uucp logging is done with
+a log file per site instead of one LOGFILE. (Like Honey DanBer does)
+E 2
+
+D 2
+anlwrk.c: Infinite loop check was buggy, causing occasional,
+sometimes persistent, 'NO WORK' messages.  Simpler method now used.
+E 2
+I 2
+There is a new file (optional) L.aliases that makes life simpler when
+a site changes it's name. uucp, uux, uucico, etc all check it so 
+when a site is renamed (e.g convex <- parsec) all you have to do is add
+an entry in L.aliases of the form:
+newname oldname
+E 2
+
+D 2
+conn.c: dialout() argument format changed to support variant dialers.
+Also, #defines added to support different UNIX-es understanding
+of different baud rates.
+E 2
+I 2
+uucico will not try and resend files it has already sent (when the
+files are specified in one C. file)
+E 2
+
+D 2
+Compatibility mods:
+#include <ascii.h> in dialout.c now deleted.  ncsu!mcm
+	(Mike Mitchell)
+
+System V compatibility mods.  burl!lda, Larry Auton
+PATH=... in Makefile changed to APATH=... .
+
+FIOCLEX added to prevent ACU/communication files being inherited by children.
+
+Files cleaned up (register variables added) by Mike Mitchell (ncsu!mcm).
+
+u[bs]_sst.c, us_rrs.c: "a+" fopen mode changed to "r+".  NOTE:
+	uusub, uustat are not claimed to work in this version.
+	Further, "r+" does not work in 4.1bsd or 32V.
+
+cntrl.c calls wait(II) after uuxqt()s are started, to avoid
+filling the proc table with zombies.
+
+uuxqt now sorts "X" files to keep execution in order.
+
+setline.c: fixes for 'system III' sites.  NOT TESTED.
+
+gwd.c: The pwd(I) is run with effective uid reverted to the real uid.
+
+logent also prints to stderr if debugging is on
+
+UNET channel added.  Still running slowly, though.
+
+Changed XQTDIR from /usr/lib/uucp/.XQTDIR to /usr/spool/uucp/XTMP.
+
+Add gethostname().
+
+Add SYSFILECR.
+
+sysexits.h added
+E 2
+I 2
+Incorporated Bill Sebok's code to dial in and out on the same modem.
+I 4
+NOTE: acucntrl is heavily Vax/4.xbsd specific and will require work to
+run on any other system.
+E 4
+I 3
+
+For compatibility with Honey DanBer, in the Date fields of L.sys,
+	| was changed to , (| is supported, but not encouraged)
+	, was changed to ; (to allow , to be the date seperator)
+
+For Honey DanBer compatibility, the Grade flag is now passed as
+	-vgrade=X instead of the old -pX
+
+Don't truncate site names to 7 characters (truncate to 14 if
+anyone gets that absurd) for HDB compatibility.  L.aliases may
+be used to map host with longer names in L.sys to 7 character
+names that some hosts send.  Entries should be 
+
+	fullname 7-char-name
+I 4
+
+You can specify a time for the expect send sequences with ~ instead
+of getting the default MAXMSGTIME. E.g.
+	system Any ACU 1200 1234567 ogin~20-\r-ogin~10-\b-ogin user password pw
+will look for ogin for 20 seconds, send CR, look for ogin for 10
+seconds, send a BREAK and look for ogin for MAXMSGTIME seconds
+I 5
+
+Added code to support GTEs PC Pursuit service. It's mainly the handling of the
+dialback they use.
+
+Added time "NonPeak" for Tymnet/Telenet services that charge lower
+rates from 6pm-7am M-F and Sat & Sun.
+E 5
+E 4
+E 3
+E 2
+E 1

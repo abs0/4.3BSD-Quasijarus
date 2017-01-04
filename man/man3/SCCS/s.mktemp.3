@@ -1,0 +1,137 @@
+h42523
+s 00014/00020/00017
+d D 6.3 87/04/10 14:57:41 bostic 5 4
+c major rework; bug report 4.2BSD/lib/63
+e
+s 00015/00009/00022
+d D 6.2 86/05/14 18:53:16 karels 4 3
+c Englishisize, add error return for mkstemp
+e
+s 00010/00001/00021
+d D 6.1 85/05/15 15:02:09 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00021
+d D 5.1 85/05/15 15:02:02 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00022/00000/00000
+d D 4.1 85/05/15 15:01:56 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MKTEMP 3 
+E 2
+I 2
+D 3
+.TH MKTEMP 3  "19 January 1983"
+E 3
+I 3
+.TH MKTEMP 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+mktemp \- make a unique file name
+.SH SYNOPSIS
+.nf
+.B char *mktemp(template)
+.B char *template;
+I 3
+.sp
+.B mkstemp(template)
+.B char *template;
+E 3
+.fi
+.SH DESCRIPTION
+D 5
+.I Mktemp
+D 4
+replaces
+E 4
+I 4
+creates a unique file name, typically in a temporary filesystem,
+by replacing
+E 4
+.I template
+D 4
+by a unique file name, and returns the
+E 4
+I 4
+with a unique file name, and returns the
+E 4
+address of the template.
+D 4
+The template should look like a file name with six trailing
+X's, which will be replaced with the
+E 4
+I 4
+The template should contain a file name with six trailing
+X's, which are replaced with the
+E 4
+current process id and a unique letter.
+I 3
+.I Mkstemp
+D 4
+makes the same replacement to the template but returns an open file descriptor
+for the template file suitable for reading or writing.
+E 4
+I 4
+makes the same replacement to the template
+but returns a file descriptor
+for the template file open for reading and writing.
+E 4
+.I Mkstemp
+D 4
+avoids the potential race between the creation of the unique
+file name and its being opened for use.
+E 4
+I 4
+avoids the race between testing whether the
+file exists and opening it for use.
+E 5
+I 5
+\fIMktemp\fP creates a unique file name and returns the address of
+the template.  The template should contain a file name with trailing
+\fIX\fP's, normally something like \fI/tmp/tempXXXXXX\fP.  The \fIX\fP's
+are replaced by the current process number and/or a unique letter
+combination.  \fIMkstemp\fP makes the same replacement to the template
+but opens the template file and returns a file descriptor open for
+reading and writing.  \fIMkstemp\fP avoids the race between testing
+whether the file exists and opening it for use.  The number of file
+name combinations \fImktemp\fP and \fImkstemp\fP will try depends on
+the number of \fIX\fP's placed on the end of the template; six \fIX\fP's
+will result in them trying roughly 26 ** 6 combinations.
+E 5
+E 4
+E 3
+.SH "SEE ALSO"
+D 4
+getpid(2)
+E 4
+I 4
+D 5
+getpid(2), open(2)
+E 5
+I 5
+access(2), getpid(2), open(2)
+E 5
+.SH DIAGNOSTICS
+D 5
+.I Mkstemp
+returns an open file descriptor upon success.
+It returns -1 if no suitable file could be created.
+E 5
+I 5
+\fIMktemp\fP returns NULL on failure, \fImkstemp\fP returns -1 if no
+suitable file could be created.
+E 5
+E 4
+E 1

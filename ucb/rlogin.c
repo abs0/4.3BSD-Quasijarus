@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)rlogin.c	5.11 (Berkeley) 8/7/86";
+static char sccsid[] = "@(#)rlogin.c	5.12 (Berkeley) 1/13/09";
 #endif not lint
 
 /*
@@ -51,6 +51,7 @@ int	rem;
 char	cmdchar = '~';
 int	eight;
 int	litout;
+int	notty;
 char	*speeds[] =
     { "0", "50", "75", "110", "134", "150", "200", "300",
       "600", "1200", "1800", "2400", "4800", "9600", "19200", "38400" };
@@ -107,6 +108,8 @@ main(argc, argv)
 	int uid, options = 0, oldmask;
 	int on = 1;
 
+	if (argc < 1)
+		goto usage;
 	host = rindex(argv[0], '/');
 	if (host)
 		host++;
@@ -163,7 +166,8 @@ another:
 	if (ioctl(0, TIOCGETP, &ttyb) == 0) {
 		(void) strcat(term, "/");
 		(void) strcat(term, speeds[ttyb.sg_ospeed]);
-	}
+	} else
+		eight = notty = 1;
 	(void) get_window_size(0, &winsize);
 	(void) signal(SIGPIPE, lostpeer);
 	/* will use SIGUSR1 for window size hack, so hold it off */
@@ -351,7 +355,7 @@ writer()
 		 */
 		if (bol) {
 			bol = 0;
-			if (c == cmdchar) {
+			if (c == cmdchar && c && !notty) {
 				bol = 0;
 				local = 1;
 				continue;
@@ -492,7 +496,8 @@ oob()
 		/*
 		 * Let server know about window size changes
 		 */
-		(void) kill(ppid, SIGUSR1);
+		if (!notty)
+			(void) kill(ppid, SIGUSR1);
 	}
 	if (!eight && (mark & TIOCPKT_NOSTOP)) {
 		(void) ioctl(0, TIOCGETP, (char *)&sb);
@@ -602,6 +607,8 @@ mode(f)
 	struct sgttyb sb;
 	int	lflags;
 
+	if (notty)
+		return;
 	(void) ioctl(0, TIOCGETP, (char *)&sb);
 	(void) ioctl(0, TIOCLGET, (char *)&lflags);
 	switch (f) {

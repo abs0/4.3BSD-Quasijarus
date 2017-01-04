@@ -1,0 +1,58 @@
+h64675
+s 00001/00001/00022
+d D 6.1 85/04/29 19:31:48 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00003/00020
+d D 5.1 85/04/29 19:31:17 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00023/00000/00000
+d D 4.1 85/04/29 19:30:55 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PRINT 1 2/24/79
+E 2
+I 2
+D 3
+.TH PRINT 1 "24 February 1979"
+E 3
+I 3
+.TH PRINT 1 "%G%"
+E 3
+E 2
+.UC
+.SH NAME
+print \- pr to the line printer
+.SH SYNOPSIS
+.B print
+file ...
+.SH DESCRIPTION
+.I Print
+.I pr's
+a copy of each named file on the line printer.
+It is a one line shell script:
+.PP
+D 2
+.DT
+	pr $* | lpr
+E 2
+I 2
+.ti +0.5i
+lpr -p $*
+E 2
+.SH SEE\ ALSO
+lpr(1), pr(1)
+E 1

@@ -1,0 +1,610 @@
+h60180
+s 00010/00006/00174
+d D 6.5 86/05/26 22:17:26 karels 6 5
+c clarifications
+e
+s 00003/00000/00177
+d D 6.4 85/10/13 14:00:35 eric 5 4
+c finish documenting -m flag
+e
+s 00033/00008/00144
+d D 6.3 85/10/13 13:49:42 eric 4 3
+c add mark facility; clean up some small glitches
+e
+s 00093/00062/00059
+d D 6.2 85/09/17 20:15:14 eric 3 2
+c facilities in syslog
+e
+s 00059/00123/00062
+d D 6.1 85/04/27 16:04:01 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00185/00000/00000
+d D 5.1 85/04/27 16:03:20 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+D 6
+.\" Copyright (c) 1983 Regents of the University of California.
+E 6
+I 6
+.\" Copyright (c) 1983,1986 Regents of the University of California.
+E 6
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+D 3
+.\"
+.\"	@(#)syslog.8	4.2		7/28/83
+D 2
+.TH SYSLOG 8 "7/28/83"
+E 2
+I 2
+.TH SYSLOG 8 "%Q%"
+E 3
+I 3
+.TH SYSLOGD 8 "%Q%"
+E 3
+E 2
+.UC 5
+.SH NAME
+D 2
+syslog \- log systems messages
+E 2
+I 2
+syslogd \- log systems messages
+E 2
+.SH SYNOPSIS
+D 2
+/etc/syslog [
+E 2
+I 2
+.B /etc/syslogd
+[
+E 2
+D 3
+.BI \-m N
+E 3
+I 3
+.BI \-f configfile
+E 3
+] [
+I 4
+.BI \-m markinterval
+] [
+E 4
+D 3
+.BI \-f name
+] [
+E 3
+.B \-d
+]
+.SH DESCRIPTION
+D 2
+.I Syslog
+E 2
+I 2
+.I Syslogd
+E 2
+D 3
+reads a datagram socket
+and logs each line it reads into a set of files
+E 3
+I 3
+reads and logs messages into a set of files
+E 3
+described by the configuration file
+/etc/syslog.conf.
+D 2
+.I Syslog
+configures when it starts up
+and whenever it receives a hangup signal.
+.PP
+E 2
+Each message is one line.
+A message can contain a priority code,
+D 2
+marked by a digit in angle braces
+E 2
+I 2
+marked by a number in angle braces
+E 2
+at the beginning of the line.
+Priorities are defined in
+D 2
+.RI < syslog.h >,
+as follows:
+.IP LOG_ALERT \w'LOG_WARNING'u+2n
+this priority should essentially never
+be used.  It applies only to messages that
+are so important that every user should be
+aware of them, e.g., a serious hardware failure.
+.IP LOG_SALERT
+messages of this priority should be
+issued only when immediate attention is needed
+by a qualified system person, e.g., when some
+valuable system resource dissappears.  They get
+sent to a list of system people.
+.IP LOG_EMERG
+Emergency messages are not sent to users,
+but represent major conditions.  An example
+might be hard disk failures.  These could be
+logged in a separate file so that critical
+conditions could be easily scanned.
+.IP LOG_ERR
+these represent error conditions, such as soft
+disk failures, etc.
+.IP LOG_CRIT
+such messages contain critical information,
+but which can not be classed as errors, for example,
+`su' attempts.
+Messages of this priority and higher
+are typically logged on the system console.
+.IP LOG_WARNING
+issued when an abnormal condition has been
+detected, but recovery can take place.
+.IP LOG_NOTICE
+something that falls in the class of
+``important information''; this class is informational
+but important enough that you don't want to throw
+it away casually.
+Messages without any priority assigned to them
+are typically mapped into this priority.
+.IP LOG_INFO
+information level messages.  These messages
+could be thrown away without problems, but should
+be included if you want to keep a close watch on
+your system.
+.IP LOG_DEBUG
+it may be useful to log certain debugging
+information.  Normally this will be thrown away.
+E 2
+I 2
+D 6
+.RI < syslog.h >.
+E 6
+I 6
+.RI < sys/syslog.h >.
+E 6
+I 3
+.I Syslogd
+reads from the UNIX domain socket
+.IR /dev/log ,
+from an Internet domain socket specified in
+.IR /etc/services ,
+and from the special device
+.I /dev/klog
+(to read kernel messages).
+E 3
+E 2
+.PP
+D 2
+It is expected that the kernel will not log anything below
+LOG_ERR priority.
+.PP
+E 2
+I 2
+.I Syslogd
+configures when it starts up
+and whenever it receives a hangup signal.
+E 2
+D 3
+The configuration file is in two sections
+separated by a blank line.
+The first section defines files that
+E 3
+I 3
+Lines in the configuration file have a
+.I selector
+to determine the message priorities to which the line applies
+and an
+.IR action .
+I 6
+The
+.I action
+field are separated from the selector by one or more tabs.
+E 6
+.PP
+Selectors are semicolon separated lists of priority specifiers.
+Each priority has a
+.I facility
+describing the part of the system that generated the message,
+a dot,
+and a
+.I level
+indicating the severity of the message.
+Symbolic names may be used.
+An asterisk selects all facilities.
+D 6
+All messages of the specified level or higher
+E 6
+I 6
+All messages of the specified level or higher (greater severity)
+E 6
+are selected.
+More than one facility may be selected using commas to separate them.
+For example:
+.PP
+.ti +5
+*.emerg;mail,daemon.crit
+.PP
+Selects all facilities at the
+.I emerg
+level and the
+.I mail
+and
+.I daemon
+facilities at the
+.I crit
+level.
+D 4
+Known facilities and levels are described in
+.IR syslog (3).
+E 4
+.PP
+I 4
+Known facilities and levels
+recognized by
+.I syslogd
+are those listed in
+.IR syslog (3)
+without the leading ``LOG_''.
+The additional facility
+D 6
+``mark'' has a message sent to it every
+E 6
+I 6
+``mark'' has a message at priority LOG_INFO sent to it every
+E 6
+20 minutes
+(this may be changed with the
+.B \-m
+flag).
+I 6
+The ``mark'' facility is not enabled by a facility field containing an asterisk.
+E 6
+The level ``none'' may be used to disable a particular facility.
+For example,
+.PP
+.ti +5
+D 6
+*.debug;mark.none
+E 6
+I 6
+*.debug;mail.none
+E 6
+.PP
+Sends all messages
+.I except
+D 6
+mark messages to the selected file.
+E 6
+I 6
+mail messages to the selected file.
+E 6
+.PP
+E 4
+The second part of each line describes where the message is to be logged
+if this line is selected.
+There are four forms:
+.IP \(bu 3n
+A filename (beginning with a leading slash).
+The file will be opened in append mode.
+.IP \(bu 3n
+A hostname preceeded by an at sign (``@'').
+Selected messages are forwarded to the
+E 3
+D 2
+.I syslog
+will log into.
+E 2
+I 2
+.I syslogd
+D 3
+will log into or host names that
+.I syslogd
+will forward messages to.
+E 2
+Each line contains
+D 2
+a single digit which defines the lowest priority
+(highest numbered priority)
+that this file will receive,
+E 2
+I 2
+a set of numbers which define the message priorities
+that this file or host will receive;
+E 2
+an optional asterisk
+which guarantees that something gets output
+D 2
+at least every 20 minutes,
+and a pathname.
+E 2
+I 2
+at least every 15 minutes;
+and a pathname or a hostname prefixed by `@'.
+E 2
+The second part of the file
+D 2
+contains a list of users that will be
+informed on SALERT level messages.
+E 2
+I 2
+contains a list of users who will receive messages if logged in.
+Each line contains an optional
+set of numbers which define the message priorities
+that this user will receive followed by the user's login name.
+The default priority level is LOG_SALERT if none is specified.
+Priority numbers may range from 1 to 31,
+and may be given in comma-separated lists
+and/or dash-separated ranges.
+E 3
+I 3
+on the named host.
+.IP \(bu 3n
+A comma separated list of users.
+Selected messages are written to those users
+if they are logged in.
+.IP \(bu 3n
+An asterisk.
+Selected messages are written to all logged-in users.
+E 3
+.PP
+I 4
+Blank lines and lines beginning with `#' are ignored.
+.PP
+E 4
+E 2
+For example, the configuration file:
+I 4
+.PP
+E 4
+.nf
+D 4
+
+E 4
+D 2
+	5*/dev/console
+	8/usr/spool/adm/syslog
+	3/usr/adm/critical
+E 2
+I 2
+D 3
+	1-5*/dev/console
+	8-9,25/usr/spool/adm/syslog
+	1-3/usr/adm/critical
+	1-4@ucbarpa
+E 3
+I 3
+.ta 4m +\w'*.alert,auth.warning'u+3
+D 4
+	kern.debug	/dev/console
+	*.notice,mail.info	/usr/spool/adm/syslog
+E 4
+I 4
+	kern,mark.debug	/dev/console
+	*.notice;mail.info	/usr/spool/adm/syslog
+E 4
+	*.crit	/usr/adm/critical
+	kern.err	@ucbarpa
+	*.emerg	*
+	*.alert	eric,kridle
+D 4
+	*.alert,auth.warning	ralph
+E 3
+E 2
+
+E 4
+I 4
+	*.alert;auth.warning	ralph
+E 4
+D 3
+	eric
+	kridle
+D 2
+	kalash
+E 2
+I 2
+	1-5,25ralph
+E 2
+
+E 3
+.fi
+D 2
+logs all messages of priority 5 or higher
+E 2
+I 2
+D 3
+logs all messages of priorities 1 through 5
+E 2
+onto the system console,
+D 2
+including timing marks every 20 minutes;
+all messages of priority 8 or higher
+E 2
+I 2
+including timing marks every 15 minutes;
+all messages of priorities 8, 9 or 25
+E 2
+into the file /usr/spool/adm/syslog;
+D 2
+and all messages of priority 3 or higher
+into /usr/adm/critical.
+The users ``eric'', ``kridle'', and ``kalash''
+E 2
+I 2
+all messages of priorities 3 or higher
+into /usr/adm/critical and
+forwards all messages of priorities 4 or higher to ucbarpa.
+The users ``eric'' and ``kridle''
+E 2
+will be informed on any subalert messages.
+I 2
+The user ``ralph''
+will be informed on any message of priorities 5 or higher,
+and any message of priority 25.
+E 3
+I 3
+D 4
+logs all kernel messages onto the system console,
+E 4
+I 4
+.PP
+logs all kernel messages
+and 20 minute marks onto the system console,
+E 4
+all notice (or higher) level messages and all mail system messages
+except debug messages
+into the file /usr/spool/adm/syslog,
+and all critical messages
+into /usr/adm/critical;
+kernel messages of error severity or higher are forwarded
+to ucbarpa.
+All users will be informed of any emergency messages,
+the users ``eric'' and ``kridle''
+will be informed of any alert messages,
+and the user ``ralph''
+will be informed of any alert message,
+or any warning message (or higher)
+from the authorization system.
+E 3
+E 2
+.PP
+The flags are:
+.TP 0.5i
+D 3
+.B \-m
+Set the mark interval to
+.I N
+D 2
+(default 20 minutes).
+E 2
+I 2
+(default 15 minutes).
+E 2
+.TP
+E 3
+.B \-f
+Specify an alternate configuration file.
+.TP
+I 5
+.B \-m
+Select the number of minutes between mark messages.
+.TP
+E 5
+.B \-d
+D 3
+Turn on debugging (if compiled in).
+E 3
+I 3
+Turn on debugging.
+E 3
+.PP
+I 2
+.I Syslogd
+creates the file /etc/syslog.pid, if possible,
+containing a single line with its process id.
+This can be used to kill or reconfigure
+.I syslogd.
+.PP
+E 2
+To bring
+D 2
+.I syslog
+E 2
+I 2
+.I syslogd
+E 2
+down,
+D 2
+it should be sent a terminate signal.
+It logs that it is going down
+and then waits approximately 30 seconds
+for any additional messages to come in.
+.PP
+There are some special messages that cause control functions.
+``<*>N'' sets the default message priority to
+.I N.
+``<$>'' causes
+.I syslog
+to reconfigure
+(equivalent to a hangup signal).
+This can be used in a shell file run automatically
+early in the morning to truncate the log.
+.PP
+.I Syslog
+creates the file
+/etc/syslog.pid
+if possible
+containing a single line
+with its process id.
+This can be used to kill or reconfigure
+.I syslog.
+.\".PP
+.\".I Syslog
+.\"can also be compiled to use
+.\".IR mpx (2)
+.\"files instead of datagrams
+.\"if you are running V7.
+.\"In this case it creates and reads the file
+.\"/dev/log.
+E 2
+I 2
+D 3
+it should be sent a terminate signal (e.g. kill `cat /etc/syslog.pid`).
+E 3
+I 3
+it should be sent a terminate signal (e.g. kill \`cat /etc/syslog.pid\`).
+E 3
+E 2
+.SH FILES
+D 2
+/etc/syslog.conf \- the configuration file
+.br
+/etc/syslog.pid \- the process id
+.\".br
+.\"/dev/log \- under V7, the mpx file
+E 2
+I 2
+.ta \w'/etc/syslog.conf    'u
+.nf
+/etc/syslog.conf	the configuration file
+/etc/syslog.pid	the process id
+D 3
+/dev/log	UNIX domain datagram socket to listen to
+E 3
+I 3
+/dev/log	Name of the UNIX domain datagram log socket
+/dev/klog	The kernel log device
+E 3
+.fi
+E 2
+D 3
+.SH BUGS
+D 2
+LOG_ALERT and LOG_SUBALERT messages
+should only be allowed to privileged programs.
+.PP
+Actually,
+.I syslog
+is not clever enough to deal with kernel error messages
+in the current implementation.
+.SH SEE\ ALSO
+E 2
+I 2
+Kernel priorities should only be allowed to privileged programs.
+.SH "SEE ALSO"
+E 3
+I 3
+.SH SEE ALSO
+logger(1),
+E 3
+E 2
+syslog(3)
+E 1

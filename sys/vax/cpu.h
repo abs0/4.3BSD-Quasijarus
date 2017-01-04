@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)cpu.h	7.7 (Berkeley) 5/3/03
+ *	@(#)cpu.h	7.12 (Berkeley) 3/19/04
  */
 
 #ifndef LOCORE
@@ -49,35 +49,96 @@ union cpusid {
 			:8,			/* reserved */
 			cp_type:8;		/* VAX_730 */
 	} cpu730;
- 	struct cpu630 {
-		u_int	cp_hrev:8,		/* hardware rev level */
-			cp_urev:8,		/* ucode rev level */
-			:8,
- 			cp_type:8;		/* VAX_630 */
- 	} cpu630;
-	struct cpu650 {
+	struct cpu_cvax {
 		u_int	cp_urev:8,		/* ucode rev level */
 			:16,			/* reserved */
-			cp_type:8;		/* VAX_650 */
-	} cpu650;
+			cp_type:8;		/* SID_CPUTYPE_CVAX */
+	} cpu_cvax;
 };
 #endif
 /*
- * Vax CPU types.
- * Similar types are grouped with their earliest example.
+ * Values for cp_type field above, assigned by
+ * DEC Assigned Number Authority
  */
-#define	VAX_780		1
-#define	VAX_750		2
-#define	VAX_730		3
-#define	VAX_8600	4
-#define	VAX_8200	5
-#define	VAX_8800	6
-#define	VAX_8500	6	/* same as 8800, 8700 */
-#define	VAX_610		7	/* uVAX I */
-#define	VAX_630		8	/* uVAX II */
-#define	VAX_650		10	/* uVAX 3000 */
+#define	SID_CPUTYPE_780		0x01
+#define	SID_CPUTYPE_750		0x02
+#define	SID_CPUTYPE_730		0x03
+#define	SID_CPUTYPE_8600	0x04
+#define	SID_CPUTYPE_8200	0x05	/* 8200/8300 */
+#define	SID_CPUTYPE_8800	0x06	/* 8500/8700/8800 */
+#define	SID_CPUTYPE_UV1		0x07
+#define	SID_CPUTYPE_UV2		0x08
+#define	SID_CPUTYPE_VVAX	0x09	/* Virtual VAX */
+#define	SID_CPUTYPE_CVAX	0x0A
+#define	SID_CPUTYPE_RIGEL	0x0B
+#define	SID_CPUTYPE_9000	0x0E
+#define	SID_CPUTYPE_78R32	0x10	/* rtVAX can't run UNIX or VMS */
+#define	SID_CPUTYPE_POLARSTAR	0x11	/* 8800 Polarstar */
+#define	SID_CPUTYPE_MARIAH	0x12
+#define	SID_CPUTYPE_NVAX	0x13
+#define	SID_CPUTYPE_SOC		0x14
 
-#define	VAX_MAX		10
+/*
+ * Newer systems have, in addition to SID, a System ID Extension (SIE) longword
+ * which describes the system rather than the CPU.  It is the second longword
+ * of the firmware ROM.
+ */
+#ifndef LOCORE
+union cpusie {
+	int	cpusie;
+	struct sysany {
+		u_int	:24,
+			sys_type:8;
+	} sysany;
+	struct sys6xx {
+		u_int	sys_license:8,		/* DEC license crap */
+			sys_subtype:8,		/* which KA6xx board */
+			sys_version:8,		/* system ROM version */
+			sys_type:8;		/* SIE_SYSTYPE_QBUS */
+	} sys6xx;
+};
+#endif
+/*
+ * Values for sys_type field above, assigned by
+ * DEC Assigned Number Authority
+ */
+#define	SIE_SYSTYPE_QBUS	0x01
+#define	SIE_SYSTYPE_XMI		0x02
+#define	SIE_SYSTYPE_FIREFOX	0x03
+#define	SIE_SYSTYPE_BABYVAX	0x04
+/*
+ * KA650 and later boards sys_subtype codes
+ */
+#define	SIE_SYSSUBTYPE_KA650	0x01
+#define	SIE_SYSSUBTYPE_KA640	0x02
+#define	SIE_SYSSUBTYPE_KA655	0x03
+#define	SIE_SYSSUBTYPE_KA670	0x04
+#define	SIE_SYSSUBTYPE_KA660	0x05
+
+/*
+ * VAX CPU types.
+ *
+ * Unfortunately with the introduction of integrated circuit VAX CPUs DEC broke
+ * the rule that each VAX was identified by a unique code in the top byte of
+ * SID register.  Therefore, if we want a single number to identify what VAX it
+ * is, we have to invent our own VAX CPU ID codes which do NOT come from DEC.
+ *
+ * These codes are defined below.  They match DEC CPUTYPE codes for machines
+ * supported by 4.3-Quasijarus0, but not necessarily so for new machines.
+ */
+#define	VAX_780		0x01
+#define	VAX_750		0x02
+#define	VAX_730		0x03
+#define	VAX_8600	0x04
+#define	VAX_8200	0x05	/* 8200/8300 */
+#define	VAX_8800	0x06	/* 8500/8700/8800 */
+#define	VAX_610		0x07	/* KA610 MicroVAX I */
+#define	VAX_630		0x08	/* KA630 MicroVAX II */
+#define	VAX_410		0x09	/* KA410 MV/VS2000 (but not KA41!) */
+#define	VAX_650		0x0A	/* KA650 family */
+#define	VAX_3100	0x0B	/* VS3100 (KA42) and early MV3100s (KA41) */
+
+#define	VAX_MAX		0x0B
 
 /*
  * Main IO backplane types.
@@ -90,6 +151,8 @@ union cpusid {
 #define IO_QBUS		5
 #define	IO_BI		6
 #define	IO_NMI		7
+#define	IO_XMI		8
+#define	IO_BABYVAX	9
 
 #ifndef LOCORE
 /*
@@ -155,14 +218,6 @@ struct nexusconnect {
 };
 
 /*
- * Description of a BI bus configuration.
- */
-struct bibus {
-	struct	bi_node *pbi_base;	/* base of node space */
-	/* that cannot possibly be all! */
-};
-
-/*
  * Description of a Q-bus configuration.
  */
 struct qbus {
@@ -175,6 +230,8 @@ struct qbus {
 
 #ifdef KERNEL
 int	cpu;
+union	cpusid cpusid;
+union	cpusie cpusie;
 #if VAX8800 || VAX8200
 int	mastercpu;		/* if multiple cpus, this identifies master */
 #endif

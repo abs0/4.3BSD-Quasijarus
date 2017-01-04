@@ -1,0 +1,552 @@
+h38744
+s 00001/00000/00115
+d D 7.20 04/03/22 17:48:43 msokolov 56 55
+c add babyvax/ss.c
+e
+s 00002/00000/00113
+d D 7.19 04/03/20 01:54:42 msokolov 55 54
+c add vax/cvax.c and vax/ka42.c
+e
+s 00003/00001/00110
+d D 7.18 04/03/18 19:27:30 msokolov 54 53
+c add vax/ka410.c and babyvax/babyvax.c
+e
+s 00002/00001/00109
+d D 7.17 04/03/06 01:51:39 msokolov 53 52
+c VAXBI changes
+e
+s 00005/00000/00105
+d D 7.16 04/02/03 18:30:11 msokolov 52 51
+c add F & D floating point instruction emulator
+e
+s 00009/00001/00096
+d D 7.15 04/01/11 11:35:17 msokolov 51 50
+c new instruction emulation code
+e
+s 00001/00000/00096
+d D 7.14 04/01/04 10:41:07 msokolov 50 49
+c move emulate.s from special handling in Makefile.vax and config to files.vax
+e
+s 00001/00000/00095
+d D 7.13 04/01/03 18:12:10 msokolov 49 48
+c add vax/cpuid.s
+e
+s 00001/00000/00094
+d D 7.12 00/03/25 15:42:55 msokolov 48 47
+c add dsv
+e
+s 00001/00000/00093
+d D 7.11 88/08/27 07:23:57 tef 47 46
+c add support for microvax 3000
+e
+s 00004/00003/00089
+d D 7.10 88/08/16 16:20:37 marc 46 45
+c QDSS and QVSS
+e
+s 00015/00005/00077
+d D 7.9 88/05/14 11:30:13 karels 45 44
+c rename kdb to kadb; add 8200, bi support from torek; add dmv
+e
+s 00000/00001/00082
+d D 7.8 88/01/23 14:01:01 karels 44 43
+c not yet for kra
+e
+s 00002/00001/00081
+d D 7.7 87/11/12 14:41:11 karels 43 42
+c make old config files work with uda
+e
+s 00001/00000/00081
+d D 7.6 87/10/23 10:56:08 bostic 42 41
+c genmscp -- generic MSCP driver (Chris Torek)
+e
+s 00001/00000/00080
+d D 7.5 87/06/16 10:09:46 karels 41 40
+c need font file for qv
+e
+s 00003/00000/00077
+d D 7.4 87/06/15 10:35:10 karels 40 39
+c I thought I added ingres once already!
+e
+s 00002/00000/00075
+d D 7.3 87/04/16 17:56:10 karels 39 38
+c add np
+e
+s 00006/00000/00069
+d D 7.2 87/04/02 15:58:59 karels 38 37
+c kdb (for sam)
+e
+s 00000/00000/00069
+d D 7.1 86/06/06 18:46:38 karels 37 36
+c rev 7
+e
+s 00001/00001/00068
+d D 6.15 86/06/06 18:44:57 karels 36 34
+c qn => qe
+e
+s 00000/00000/00069
+d R 7.1 86/06/05 01:46:51 mckusick 35 34
+c 4.3BSD release version
+e
+s 00000/00002/00069
+d D 6.14 86/06/03 16:59:57 karels 34 33
+c rm np, if_ix
+e
+s 00002/00000/00069
+d D 6.13 86/04/22 10:41:43 kridle 33 32
+c MicroVAX II Integration (KA630)
+e
+s 00003/00000/00066
+d D 6.12 86/02/17 12:23:11 karels 32 31
+c add tmscp driver (karels). add interlan np100 driver (sklower).
+e
+s 00000/00001/00066
+d D 6.11 86/02/08 14:19:52 karels 31 30
+c rm if_ub
+e
+s 00000/00002/00067
+d D 6.10 85/12/19 16:07:13 karels 30 29
+c rm bbnnet
+e
+s 00003/00000/00066
+d D 6.9 85/09/17 23:02:48 karels 29 28
+c remove inet dependencies, allow multiple dependencies for if_uba
+e
+s 00001/00000/00065
+d D 6.8 85/08/30 12:51:08 jg 28 27
+c Added Vs100 driver.  (Jim Gettys)
+e
+s 00004/00001/00061
+d D 6.7 85/08/26 18:18:18 karels 27 26
+c add hdh, ddn, raw_hy, dmz
+e
+s 00001/00000/00061
+d D 6.6 85/08/02 18:41:09 bloom 26 25
+c add crl.c (8600 support)
+e
+s 00003/00003/00058
+d D 6.5 85/06/03 08:38:00 karels 25 24
+c add ns, if_ex; purge gpib, ib
+e
+s 00001/00000/00060
+d D 6.4 85/05/20 21:13:37 mckusick 24 23
+c add dhu11 driver
+e
+s 00001/00001/00059
+d D 6.3 84/09/08 13:46:57 bloom 23 22
+c changed if_un.c to if_ub.c and device changed to ub
+e
+s 00001/00000/00059
+d D 6.2 83/11/02 08:50:54 karels 22 21
+c add deuna
+e
+s 00000/00000/00059
+d D 6.1 83/08/04 20:30:58 sam 21 20
+c 4.2 distribution
+e
+s 00001/00001/00058
+d D 1.16 83/08/04 20:30:41 sam 20 18
+c must generate a uba.h file for new second uba support code
+e
+s 00000/00000/00059
+d R 6.1 83/07/29 07:41:18 sam 19 18
+c 4.2 distribution
+e
+s 00001/00001/00058
+d D 1.15 83/06/16 18:18:54 root 18 17
+c machdep is configuration dependent because of SYSPTSIZE
+e
+s 00001/00000/00058
+d D 1.14 83/06/14 23:11:28 sam 17 16
+c broke up buffer cache code
+e
+s 00001/00000/00057
+d D 1.13 83/05/30 18:39:36 sam 16 15
+c pup checksum routine
+e
+s 00001/00000/00056
+d D 1.12 83/05/27 14:21:31 sam 15 14
+c yet another reorganization from wnj
+e
+s 00001/00000/00055
+d D 1.11 83/05/12 15:06:49 sam 14 13
+c add tu58 on unibus
+e
+s 00001/00000/00054
+d D 1.10 83/03/31 21:09:01 sam 13 12
+c pcl-11 driver
+e
+s 00001/00001/00053
+d D 1.9 83/03/24 13:19:11 sam 12 11
+c wrong place
+e
+s 00001/00000/00053
+d D 1.8 83/03/01 18:48:01 mckusick 11 8
+c add optional statistical clock (kg*) device
+e
+s 00001/00000/00053
+d R 1.8 83/03/01 18:42:34 mckusick 10 8
+c add optional statistics gathering clock (kg)
+e
+s 00001/00000/00053
+d R 1.8 83/03/01 18:23:28 mckusick 9 8
+c add vaxuba/kgcount.c as an optional device driver
+e
+s 00001/00000/00052
+d D 1.7 83/02/21 00:14:08 sam 8 6
+c hyperchannel
+e
+s 00002/00000/00052
+d R 1.7 83/02/20 23:23:50 sam 7 6
+c hyperchannel
+e
+s 00002/00000/00050
+d D 1.6 83/02/08 23:16:01 sam 6 5
+c add rl and rx drivers
+e
+s 00001/00000/00049
+d D 1.5 83/01/20 16:54:16 sam 5 4
+c in_cksum.c is now machine dependent
+e
+s 00003/00001/00046
+d D 1.4 82/12/22 15:28:38 sam 4 3
+c missing css and vv drivers
+e
+s 00001/00000/00046
+d D 1.3 82/11/03 01:33:22 root 3 2
+c add vm_machdep.c
+e
+s 00001/00001/00045
+d D 1.2 82/10/31 16:53:28 root 2 1
+c add clock.c
+e
+s 00046/00000/00000
+d D 1.1 82/10/28 10:40:53 root 1 0
+c date and time created 82/10/28 10:40:53 by root
+e
+u
+U
+t
+T
+I 5
+D 12
+netinet/in_cksum.c	optional inet
+E 12
+E 5
+I 1
+D 2
+# %M% %I% %E%
+E 2
+vax/autoconf.c		standard device-driver
+I 2
+vax/clock.c		standard
+E 2
+vax/conf.c		standard
+vax/cons.c		standard
+vax/cpudata.c		standard
+I 49
+vax/cpuid.s		standard
+E 49
+I 26
+vax/crl.c		standard
+I 55
+vax/cvax.c		standard
+E 55
+E 26
+vax/dkbad.c		standard
+I 50
+D 51
+vax/emulate.s		standard
+E 51
+E 50
+vax/flp.c		standard
+I 12
+vax/in_cksum.c		optional inet
+I 47
+D 54
+vax/ka650.c		standard
+E 54
+I 54
+vax/ka410.c		standard
+I 55
+vax/ka42.c		standard
+E 55
+E 54
+E 47
+I 33
+vax/ka630.c		standard
+I 54
+vax/ka650.c		standard
+E 54
+I 38
+D 45
+vax/kdb_machdep.c	optional kdb
+vax/kdb_opset.c		optional kdb
+E 38
+E 33
+I 29
+D 30
+vax/in_cksum.c		optional bbnnet
+E 30
+E 29
+I 25
+vax/ns_cksum.c		optional ns
+E 45
+I 45
+vax/ka730.c		standard
+vax/ka750.c		standard
+vax/ka780.c		standard
+vax/ka820.c		standard
+vax/ka860.c		standard
+vax/kdb_machdep.c	optional kadb
+vax/kdb_opset.c		optional kadb
+E 45
+E 25
+E 12
+D 18
+vax/machdep.c		standard
+E 18
+I 18
+vax/machdep.c		standard config-dependent
+E 18
+vax/mem.c		standard
+I 42
+D 43
+vax/mscp.c		optional genmscp
+E 43
+I 43
+D 45
+vax/mscp.c		optional uda
+E 45
+I 45
+vax/mscp.c		optional ra
+vax/mscp.c		optional kra
+vax/ns_cksum.c		optional ns
+vax/rx50.c		standard device-driver
+E 45
+D 44
+vax/mscp.c		optional kra
+E 44
+E 43
+E 42
+I 16
+D 27
+vax/pup_cksum.c		optional pup
+E 27
+E 16
+I 15
+vax/sys_machdep.c	standard
+E 15
+vax/trap.c		standard
+vax/tu.c		standard
+vax/udiv.s		standard
+I 17
+vax/ufs_machdep.c	standard
+E 17
+vax/urem.s		standard
+I 3
+vax/vm_machdep.c	standard
+I 40
+vax/iidr.o		optional ii
+vax/iidrsys.o		optional ii
+vax/iidr_glob.o		optional ii
+I 51
+vax/emul/emul_ashp.s	standard
+vax/emul/emul_cvtlp.s	standard
+vax/emul/emul_cvtpl.s	standard
+vax/emul/emul_decarith.s standard
+vax/emul/emul_deccvt.s	standard
+vax/emul/emul_decimal.s	standard
+I 52
+vax/emul/emul_dflt.s	standard
+E 52
+vax/emul/emul_editpc.s	standard
+I 52
+vax/emul/emul_fflt.s	standard
+vax/emul/emul_float.s	standard
+vax/emul/emul_opspec.s	standard
+vax/emul/emul_resinstr.s standard
+E 52
+vax/emul/emul_samemode.s standard
+vax/emul/emul_string.s	standard
+E 51
+I 45
+D 53
+vaxbi/bi.c		optional bi device-driver
+E 53
+I 53
+vaxbi/bi.c		optional vaxbi device-driver
+vaxbi/bidevtab.c	optional vaxbi
+E 53
+vaxbi/kdb.c		optional kra device-driver
+E 45
+E 40
+E 3
+D 4
+vaxif/if_acc.c		optional acc imp inet device-driver
+E 4
+I 4
+vaxif/if_acc.c		optional acc imp device-driver
+vaxif/if_css.c		optional css imp device-driver
+I 22
+vaxif/if_de.c		optional de device-driver
+I 27
+vaxif/if_ddn.c		optional ddn device-driver
+E 27
+E 22
+E 4
+vaxif/if_dmc.c		optional dmc device-driver
+I 45
+vaxif/if_dmv.c		optional dmv device-driver
+I 48
+vaxif/if_dsv.c		optional dsv device-driver
+E 48
+E 45
+vaxif/if_ec.c		optional ec device-driver
+D 25
+vaxif/if_en.c		optional en inet device-driver
+E 25
+I 25
+vaxif/if_en.c		optional en device-driver
+vaxif/if_ex.c		optional ex device-driver
+I 27
+vaxif/if_hdh.c		optional hdh device-driver
+E 27
+E 25
+I 8
+vaxif/if_hy.c		optional hy device-driver
+E 8
+vaxif/if_il.c		optional il device-driver
+I 39
+vaxif/if_ix.c		optional np device-driver
+vaxuba/np.c		optional np device-driver
+E 39
+I 32
+D 34
+vaxif/if_ix.c		optional np device-driver
+E 34
+E 32
+I 13
+vaxif/if_pcl.c		optional pcl device-driver
+I 33
+D 36
+vaxif/if_qn.c		optional qn device-driver
+E 36
+I 36
+vaxif/if_qe.c		optional qe device-driver
+E 36
+E 33
+E 13
+vaxif/if_uba.c		optional inet device-driver
+I 29
+D 30
+vaxif/if_uba.c		optional bbnnet device-driver
+E 30
+vaxif/if_uba.c		optional ns device-driver
+E 29
+D 23
+vaxif/if_un.c		optional un device-driver
+E 23
+I 23
+D 31
+vaxif/if_ub.c		optional ub device-driver
+E 31
+E 23
+I 4
+vaxif/if_vv.c		optional vv device-driver
+I 27
+vaxif/raw_hy.c		optional hy device-driver
+E 27
+E 4
+vaxmba/hp.c		optional hp device-driver
+vaxmba/ht.c		optional tu device-driver
+vaxmba/mba.c		optional mba device-driver
+vaxmba/mt.c		optional mu device-driver
+vaxuba/ad.c		optional ad device-driver
+vaxuba/ct.c		optional ct device-driver
+vaxuba/dh.c		optional dh device-driver
+I 24
+vaxuba/dhu.c		optional dhu device-driver
+E 24
+vaxuba/dmf.c		optional dmf device-driver
+I 38
+vaxuba/dmx.c		optional dmf device-driver
+E 38
+I 27
+vaxuba/dmz.c		optional dmz device-driver
+I 38
+vaxuba/dmx.c		optional dmz device-driver
+E 38
+E 27
+vaxuba/dn.c		optional dn device-driver
+vaxuba/dz.c		optional dz device-driver
+D 25
+vaxuba/gpib.c		optional gpib device-driver
+vaxuba/ib.c		optional ib device-driver
+E 25
+I 11
+D 45
+vaxuba/kgclock.c	optional kg device-driver
+E 45
+E 11
+vaxuba/idc.c		optional rb device-driver
+vaxuba/ik.c		optional ik device-driver
+I 45
+vaxuba/kgclock.c	optional kg device-driver
+E 45
+vaxuba/lp.c		optional lp device-driver
+vaxuba/lpa.c		optional lpa device-driver
+I 32
+D 34
+vaxuba/np.c		optional np device-driver
+E 34
+E 32
+vaxuba/ps.c		optional ps device-driver
+vaxuba/rk.c		optional rk device-driver
+I 6
+vaxuba/rl.c		optional rl device-driver
+vaxuba/rx.c		optional rx device-driver
+E 6
+vaxuba/tm.c		optional te device-driver
+I 32
+vaxuba/tmscp.c		optional tms device-driver
+E 32
+vaxuba/ts.c		optional ts device-driver
+D 20
+vaxuba/uba.c		standard device-driver
+E 20
+I 20
+vaxuba/uba.c		optional uba device-driver
+E 20
+vaxuba/uda.c		optional ra device-driver
+vaxuba/up.c		optional up device-driver
+vaxuba/ut.c		optional tj device-driver
+I 14
+vaxuba/uu.c		optional uu device-driver
+E 14
+vaxuba/va.c		optional va device-driver
+vaxuba/vp.c		optional vp device-driver
+I 28
+vaxuba/vs.c		optional vs device-driver
+I 38
+D 46
+ultrix/qv.c		optional qv device-driver
+I 41
+ultrix/qfont.c		optional qv device-driver
+E 41
+ultrix/qd.c		optional qd device-driver
+E 46
+I 46
+vaxuba/qv.c		optional qv device-driver
+vaxuba/qfont.c		optional qv device-driver
+vaxuba/qd.c		optional qd device-driver
+vaxuba/qfont.c		optional qd device-driver
+I 54
+babyvax/babyvax.c	optional bva device-driver
+I 56
+babyvax/ss.c		optional ss device-driver
+E 56
+E 54
+E 46
+E 38
+E 28
+E 1

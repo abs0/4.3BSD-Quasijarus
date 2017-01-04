@@ -1,0 +1,84 @@
+h12419
+s 00001/00001/00036
+d D 6.1 85/04/29 18:03:18 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00015/00005/00022
+d D 5.1 85/04/29 18:03:09 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00027/00000/00000
+d D 4.1 85/04/29 18:03:01 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TOUCH 1 
+E 2
+I 2
+D 3
+.TH TOUCH 1  "18 January 1983"
+E 3
+I 3
+.TH TOUCH 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+touch \- update date last modified of a file
+.SH SYNOPSIS
+.B touch
+[
+.B \-c
+]
+I 2
+[
+.B \-f
+]
+E 2
+file ...
+.SH DESCRIPTION
+.I Touch
+attempts to set the modified date of each
+D 2
+.I file.
+This is done by reading a character from the file
+E 2
+I 2
+.IR file .
+If a
+.I file
+exists,
+this is done by reading a character from the file
+E 2
+and writing it back.
+D 2
+.PP
+E 2
+If a
+.I file
+does not exist,
+an attempt will be made to create it unless the
+.B \-c
+option is specified.
+I 2
+The
+.B \-f
+option will attempt to force the touch
+in spite of read and write permissions on a
+.IR file .
+E 2
+.SH SEE\ ALSO
+D 2
+utime(2)
+E 2
+I 2
+utimes(2)
+E 2
+E 1

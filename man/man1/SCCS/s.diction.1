@@ -1,0 +1,124 @@
+h02059
+s 00012/00006/00053
+d D 4.3 88/10/22 16:51:34 bostic 3 2
+c fold version from /usr/man on top; SCCS lines were:
+c >>> 4.1   85/04/29 17:44:24       mckusick
+c >>> manual page distributed with 4.1BSD
+c >>>
+c >>> 5.1   85/04/29 17:44:32       mckusick
+c >>> manual page distributed with 4.2BSD
+c >>>
+c >>> 6.1   85/04/29 17:44:40       mckusick
+c >>> 4.3BSD beta release manual page
+c >>>
+c >>> 6.2   86/05/10 19:55:36       mckusick
+c >>> add space after comma
+e
+s 00000/00000/00059
+d D 4.2 82/11/06 14:32:03 rrh 2 1
+c Bill Jolitz @ Berkeley received this version from Lorindia Cherry
+c around September 1981, as the ``most recent version''.  Deltas 
+c seem to be progressive, rather than regressive, although the BTL sid for
+c deroff.c is retrograde; this is probably a case of parallel development
+e
+s 00059/00000/00000
+d D 4.1 82/11/06 13:47:34 rrh 1 0
+c Oldest available version at Berkeley
+e
+u
+U
+t
+T
+I 3
+.\" Copyright (c) 1988 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 3
+I 1
+.\"
+D 3
+.\" %W%	(Berkeley)	%E%
+E 3
+I 3
+.\"	%W% (Berkeley) %G%
+E 3
+.\"
+D 3
+.TH DICTION 1 
+E 3
+I 3
+.TH DICTION 1 "%Q%"
+.AT 3
+E 3
+.SH NAME
+D 3
+diction \- print wordy sentences
+.br
+explain \- interactive thesaurus for diction
+E 3
+I 3
+diction, explain \- print wordy sentences; thesaurus for diction
+E 3
+.SH SYNOPSIS
+.B diction
+[
+.B \-ml
+] [
+.B \-mm
+] [
+.B \-n
+] [
+.B \-f
+pfile ]
+file ...
+.br
+.B explain
+.LP
+.SH DESCRIPTION
+.I Diction
+finds all sentences in a document that contain phrases
+from a data base of bad or wordy diction.
+Each phrase is bracketed with [ ].
+Because
+.I diction
+runs
+.I deroff
+before looking at the text, formatting
+header files should be included as part of the input.
+The default macro package
+.B \-ms
+may be overridden with the flag
+.B \-mm.
+The flag
+.B \-ml
+which causes 
+.B deroff
+to skip lists, should be used if the document contains many lists of
+non-sentences.
+The user may supply her/his own pattern file to be used in addition to the default file
+with
+.B \-f
+.I pfile.
+If the flag
+.B \-n
+D 3
+is also supplied the default file will be supressed.
+E 3
+I 3
+is also supplied the default file will be suppressed.
+E 3
+.PP
+.I Explain
+is an interactive thesaurus for the phrases found by diction.
+.SH "SEE ALSO"
+deroff(1)
+.SH BUGS
+Use of non-standard formatting macros may cause
+incorrect sentence breaks.
+I 3
+In particular,
+.I diction
+doesn't grok
+.B \-me.
+E 3
+E 1

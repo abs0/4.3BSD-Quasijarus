@@ -3,12 +3,16 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.1	(Berkeley)	12/12/87
+#	@(#)Makefile	5.4	(Berkeley)	2012/02/19
 #
-SUBDIR=	eqn neqn
+SUBDIR=	cat eqnchar neqn pseqn
 
-all: FRC
-	for i in ${SUBDIR}; do (cd $$i; make ${MFLAGS}); done
+all:	${SUBDIR}
+
+eqnchar: pseqn
+
+${SUBDIR}: FRC
+	cd $@; make ${MFLAGS}
 
 install: FRC
 	for i in ${SUBDIR}; do \

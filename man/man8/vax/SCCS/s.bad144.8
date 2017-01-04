@@ -1,0 +1,371 @@
+h05610
+s 00005/00018/00144
+d D 6.5 88/07/09 19:15:08 karels 7 6
+c update
+e
+s 00019/00004/00143
+d D 6.4 87/11/18 15:14:07 karels 6 5
+c pack labels
+e
+s 00004/00002/00143
+d D 6.3 86/05/20 19:05:38 karels 5 4
+c finish my sentence
+e
+s 00056/00020/00089
+d D 6.2 86/05/20 17:25:27 karels 4 3
+c new options
+e
+s 00001/00001/00108
+d D 6.1 85/04/27 12:57:50 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00037/00016/00072
+d D 5.1 85/04/27 12:57:23 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00088/00000/00000
+d D 4.1 85/04/27 12:56:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+D 7
+.\" Copyright (c) 1980 Regents of the University of California.
+E 7
+I 7
+.\" Copyright (c) 1980, 1988 Regents of the University of California.
+E 7
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BAD144 8 "5/11/81"
+E 2
+I 2
+D 3
+.TH BAD144 8 "18 July 1983"
+E 3
+I 3
+.TH BAD144 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+bad144 \- read/write dec standard 144 bad sector information
+.SH SYNOPSIS
+D 2
+.B bad144
+E 2
+I 2
+.B /etc/bad144
+[
+.B \-f
+I 4
+] [
+.B \-c
+] [
+.B \-v
+E 4
+]
+E 2
+D 6
+disktype disk
+E 6
+I 6
+disk
+E 6
+[ sno [
+bad ...
+] ]
+I 4
+.br
+.B /etc/bad144
+.B \-a
+[
+.B \-f
+] [
+.B \-c
+] [
+.B \-v
+]
+D 6
+disktype disk
+E 6
+I 6
+disk
+E 6
+[
+bad ...
+]
+E 4
+.SH DESCRIPTION
+.I Bad144
+can be used to inspect the information stored on a disk that is used by
+the disk drivers to implement bad sector forwarding.  The format of
+the information is specified by DEC standard 144, as follows.
+.PP
+The bad sector information is located in the first 5 even numbered sectors
+of the last track of the disk pack.  There are five identical copies of
+D 2
+the information, described by the dkbad structure.
+E 2
+I 2
+the information, described by the
+.I dkbad
+structure.
+E 2
+.PP
+Replacement sectors are allocated starting with the first sector before
+the bad sector information and working backwards towards the beginning
+of the disk.  A maximum of 126 bad sectors are supported.  The position
+D 4
+of the bad sector in the bad sector table determines which replacement
+sector it corresponds to.
+E 4
+I 4
+of the bad sector in the bad sector table determines the replacement
+sector to which it corresponds.
+E 4
+I 2
+The bad sectors must be listed in ascending order.
+E 2
+.PP
+The bad sector information and replacement sectors are conventionally
+D 2
+only accessable through the ``c'' file system partition of the disk.  If
+E 2
+I 2
+only accessible through the ``c'' file system partition of the disk.  If
+E 2
+that partition is used for a file system, the user is responsible for
+making sure that it does not overlap the bad sector information or any
+replacement sectors.
+I 4
+Thus, one track plus 126 sectors must be reserved to allow use
+of all of the possible bad sector replacements.
+E 4
+.PP
+The bad sector structure is as follows:
+.PP
+.ta .75i 1.5i 3.5i
+.nf
+struct dkbad {
+	long	bt_csn;	/* cartridge serial number */
+	u_short	bt_mbz;	/* unused; should be 0 */
+	u_short	bt_flag;	/* -1 => alignment cartridge */
+	struct bt_bad {
+		u_short bt_cyl;	/* cylinder number of bad sector */
+		u_short bt_trksec;	/* track and sector number */
+	} bt_bad[126];
+};
+.fi
+.PP
+D 2
+Unused slots in the bt_bad array are filled with all bits set, a putatively
+E 2
+I 2
+Unused slots in the
+.I bt_bad
+array are filled with all bits set, a putatively
+E 2
+illegal value.
+.PP
+.I Bad144
+D 6
+is invoked by giving a device type (e.g. rk07, rm03, rm05, etc.), and a device
+D 4
+name (e.g. hk0, hp1, etc.).  It reads the first sector of the last track
+E 4
+I 4
+name (e.g. hk0, hp1, etc.).  With no optional arguments
+E 6
+I 6
+is invoked by giving a device name (e.g. hk0, hp1, etc.).
+With no optional arguments
+E 6
+it reads the first sector of the last track
+E 4
+of the corresponding disk and prints out the bad sector information.
+D 4
+It may also be invoked giving a serial number for the pack and a list
+of bad sectors, and will then write the supplied information onto the
+same location.  Note, however, that 
+E 4
+I 4
+It issues a warning if the bad sectors are out of order.
+.I Bad144
+may also be invoked with a serial number for the pack and a list
+of bad sectors.
+It will write the supplied information into all copies
+of the bad-sector file, replacing any previous information.
+Note, however, that 
+E 4
+.I bad144
+does not arrange for the specified sectors to be marked bad in this case.
+D 4
+This option should only be used to restore known bad sector information which
+E 4
+I 4
+This procedure should only be used to restore known bad sector information which
+E 4
+was destroyed.
+I 2
+D 4
+It is necessary to reboot before the change will take effect.
+E 4
+I 4
+D 7
+It is necessary to reboot before any change will take effect.
+E 7
+E 4
+E 2
+.PP
+D 2
+New bad sectors can be added by running the standard DEC formatter in
+section ``bad''.
+E 2
+I 2
+D 4
+If the disk is an RP06, Fujitsu Eagle,
+or Ampex Capricorn on a Massbus, the
+E 4
+I 4
+With the
+.B \-a
+option,
+the argument list consists of new bad sectors to be added to an existing
+list.
+The new sectors are sorted into the list,
+which must have been in order.
+Replacement sectors are moved to accommodate the additions;
+the new replacement sectors are cleared.
+The entire process is described as it happens in gory detail if
+.B \-v
+(verbose) is given.
+The
+.B \-c
+option forces an attempt to copy the old sector to the replacement,
+and may be useful when replacing an unreliable sector.
+.PP
+If the disk is an RP06, RM03, RM05, Fujitsu Eagle,
+or SMD disk on a Massbus, the
+E 4
+.B \-f
+D 4
+option may be used to mark the bad sectors as ``bad''.
+\fBNOTE:  this can only be done safely when there is no other disk activity\fP,
+E 4
+I 4
+D 5
+option may be used to mark the new bad sectors as ``bad.''
+E 5
+I 5
+option may be used to mark the new bad sectors as ``bad''
+by reformatting them as unusable sectors.
+E 5
+D 7
+\fBNOTE:  this can be done safely only when there is no other disk activity\fP,
+E 4
+preferably while running single-user.
+E 7
+D 4
+Otherwise,
+new bad sectors can be added only
+by running a formatter.
+Note that the order in which the sectors are listed determines which sectors
+used for replacements; if new sectors are being inserted into the list on a
+drive that is in use, care should be taken that replacements for
+existing bad sectors have the correct contents.
+E 4
+I 4
+D 5
+This option is required unless 
+E 5
+I 5
+This option is required unless the sectors have already been marked bad,
+or the system will not be notified that it should use the replacement sector.
+I 7
+This option may be used while running multiuser; it is no longer necessary
+to perform format operations while running single-user.
+E 7
+I 6
+.PP
+D 7
+The normal procedure for adding new bad sectors to an SMD or RP06 drive
+with an existing bad sector table is the following:
+.IP 1.
+Shut down to single-user operation.
+.IP 2.
+Use ``\c
+.I bad144 \-a \-f
+drive sector ...''
+to add new bad sectors to the table, formatting them as bad.
+The
+.B \-c
+option may also be used if the original sectors may be readable.
+.IP 3.
+Reboot to allow the kernel to reread the bad-sector table from the drive.
+E 7
+I 7
+It is no longer necessary to reboot to allow the kernel
+to reread the bad-sector table from the drive.
+E 7
+E 6
+E 5
+E 4
+E 2
+.SH SEE ALSO
+D 2
+badsect (8), format (8)
+E 2
+I 2
+badsect(8),
+format(8V)
+E 2
+.SH BUGS
+D 2
+It should be possible to both format disks on-line under UNIX and to change
+the bad sector information, marking new bad sectors, without running
+a standalone program.
+E 2
+I 2
+It should be possible to format disks on-line under UNIX.
+E 2
+.PP
+D 2
+The bootstrap drivers used to boot the system do not understand bad sectors,
+E 2
+I 2
+It should be possible to mark bad sectors on drives of all type.
+.PP
+On an 11/750,
+the standard bootstrap drivers used to boot the system do
+not understand bad sectors,
+E 2
+D 4
+handle ECC errors, or the special SSE (skip sector) errors of RM80 type disks.
+E 4
+I 4
+handle ECC errors, or the special SSE (skip sector) errors of RM80-type disks.
+E 4
+This means that none of these errors can occur when reading the file
+D 2
+/vmunix to boot.  When a disk drive is used to load the bootstrap code
+(the alternative would be that the bootstrap would be loaded from the console
+media), sector 0 of the disk drive and the file /boot in the root file
+system of that drive must also not have any of these errors in it.
+E 2
+I 2
+/vmunix to boot.  Sectors 0-15 of the disk drive
+must also not have any of these errors.
+E 2
+.PP
+The drivers which write a system core image on disk after a crash do not
+handle errors; thus the crash dump area must be free of errors and bad
+sectors.
+E 1

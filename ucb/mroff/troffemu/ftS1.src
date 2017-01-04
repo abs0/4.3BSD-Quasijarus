@@ -1,0 +1,49 @@
+# @(#)ftS1.src	2.1 (Berkeley) 2012/07/23
+#
+# The TroffEmu-Special1 (S1) font provides replacement versions for
+# 12 special characters which are otherwise drawn from Symbol.
+# The S1 versions of the 12 chars in question look closer to the way
+# they did in the original troff character set.
+
+psname TroffEmu-Special1
+
+# approximate equality symbol
+namedchar	~=	'=' special
+charwidth	'='	549	# same as Adobe's version
+
+# the "bold vertical" family of brace and bracket construction pieces
+
+namedchar	lt	'P' special
+namedchar	lb	'Q' special
+namedchar	rt	'R' special
+namedchar	rb	'S' special
+namedchar	lk	'T' special
+namedchar	rk	'U' special
+namedchar	bv	'V' special
+# Because we are redefining [lr][tbkcf], we should also redefine
+# pstroff's bx, lx and rx for consistency, making them aliases for bv.
+# Because of a quirk in the code implementation (see add_uchars() in t6.c),
+# we need to list these aliases consecutively in order to avoid wasting
+# code points in pstroff's internal 9-bit charset.
+namedchar	bx	'V' special
+namedchar	lx	'V' special
+namedchar	rx	'V' special
+# the bracket pieces come last
+namedchar	lf	'W' special
+namedchar	rf	'X' special
+namedchar	lc	'Y' special
+namedchar	rc	'Z' special
+
+# All of these critters have the spacing width of 1/4 em,
+# like in the original troff (see troff/tab3.c).
+charwidth	'P'	250
+charwidth	'Q'	250
+charwidth	'R'	250
+charwidth	'S'	250
+charwidth	'T'	250
+charwidth	'U'	250
+charwidth	'V'	250
+charwidth	'W'	250
+charwidth	'X'	250
+charwidth	'Y'	250
+charwidth	'Z'	250

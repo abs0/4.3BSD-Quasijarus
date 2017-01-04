@@ -1,0 +1,57 @@
+h62499
+s 00001/00001/00027
+d D 6.1 85/04/29 17:58:54 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00027
+d D 5.1 85/04/29 17:58:47 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00028/00000/00000
+d D 4.1 85/04/29 17:58:40 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH STRIP 1 
+E 2
+I 2
+D 3
+.TH STRIP 1  "18 January 1983"
+E 3
+I 3
+.TH STRIP 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+strip \- remove symbols and relocation bits
+.SH SYNOPSIS
+.B strip
+name ...
+.SH DESCRIPTION
+.I Strip
+removes the symbol
+table and relocation bits ordinarily attached to the output
+of the assembler and loader.
+This is useful to save space after a program has been
+debugged.
+.PP
+The effect of
+.I strip
+is the same as use of the
+.B \-s
+option
+of
+.IR ld .
+.SH FILES
+/tmp/stm?	temporary file
+.SH "SEE ALSO"
+ld(1)
+E 1

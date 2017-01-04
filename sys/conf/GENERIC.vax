@@ -7,28 +7,32 @@ cpu		"VAX8200"
 cpu		"VAX780"
 cpu		"VAX750"
 cpu		"VAX730"
+cpu		"VAX630"
+cpu		"VAX650"	# covers 640/655/660 too
 ident		GENERIC
-timezone	8 dst
+timezone	0
 maxusers	8
 options		QUOTA
 options		INET
 options		NS
 options		"TCP_COMPAT_42"
-options		KADB
+#options		KADB
+options		EMULFFLT
+options		EMULDFLT
 
 config		vmunix		swap generic
 
-controller	mba0	at nexus ?
-controller	mba1	at nexus ?
-controller	mba2	at nexus ?
-controller	mba3	at nexus ?
+adapter		mba0	at nexus ?
+adapter		mba1	at nexus ?
+adapter		mba2	at nexus ?
+adapter		mba3	at nexus ?
 
-controller	bi0	at nexus ?
+adapter		vaxbi0	at nexus ?
 
-controller	uba0	at nexus ?
-controller	uba1	at nexus ?
-controller	uba2	at nexus ?
-controller	uba3	at nexus ?
+adapter		uba0	at nexus ?
+adapter		uba1	at nexus ?
+adapter		uba2	at nexus ?
+adapter		uba3	at nexus ?
 
 disk		hp0	at mba? drive 0
 disk		hp1	at mba? drive ?
@@ -43,12 +47,11 @@ tape		mu0	at mt0 slave 0
 tape		mu1	at mt0 slave 1
 
 # KDB50 and drives
-controller	kdb0	at bi0	csr 0 			vector kdbintr
+controller	kdb0	at vaxbi? node ?		vector kdbintr
 disk		kra0	at kdb0 drive 0
 disk		kra1	at kdb0 drive 1
 disk		kra2	at kdb0 drive 2
 disk		kra3	at kdb0 drive 3
-
 
 controller	hk0	at uba? csr 0177440 		vector rkintr
 disk		rk0	at hk0 drive 0
@@ -113,6 +116,9 @@ device		dhu0	at uba? csr 0160440		vector dhurint dhuxint
 
 device		lp0	at uba? csr 0177514		vector lpintr
 
+device		qv0	at uba0 csr 0177200 	vector qvkint qvvint
+device		qd0	at uba0 csr 0177400 	vector qddint qdaint qdiint  
+
 pseudo-device	pty
 pseudo-device	loop
 pseudo-device	ether
@@ -122,3 +128,4 @@ device		ec0	at uba? csr 0164330 flags 0
 device		de0	at uba? csr 0174510	vector deintr
 device		il0	at uba? csr 0164000	vector ilrint ilcint
 device		ex0	at uba? csr 0164344	vector excdint
+device		qe0	at uba? csr 0174440	vector qeintr

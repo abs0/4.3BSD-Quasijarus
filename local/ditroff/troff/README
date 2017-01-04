@@ -1,0 +1,74 @@
+The troff in this directory is a troff that produces
+machine-independent output.  It requires a file of
+descriptive information about the particular typesetter
+you have in mind, and produces output parameterized for
+that device.
+
+Thus:
+	troff -Pva ...
+produces output for the varian raster plotter.  (This is
+the default.)
+
+To make this work, one needs to create a set of device and
+font descriptions in the directory
+	/usr/lib/font/devxxx
+where "xxx" is your device name.
+
+Currently supported devices are
+	va	benson/varian raster plotter
+	vp	Versatec wide raster plotter
+	ip	canon/imagen laser printer
+	ter	terminals/line-printer
+
+The "DESC" files contain information about the devices and
+their character sets.  These files are in ../driver/?font.desc.
+
+In addition, each font needs a description of its characters,
+width and device-driving codes; these are with the DESC files.
+
+The program "devconfig" will convert these text descriptions
+into a binary form that the troff can slurp up in a single
+gulp during initialization; these wind up in devva/DESC.out
+(which includes default font info) and XX.out for info about
+font XX.
+
+The second half of the job is to write a post-processor that
+converts the more or less machine-independent troff output
+into specific codes for your favorite typesetter.  The ../driver
+directory has drivers for all the above-mentioned printers.
+
+One can always simply run
+	troff
+and look at the output; it is guaranteed to be ascii text and
+thus safe to edit, grep, etc. (since it is ascii, it is also
+guaranteed to be quite voluminous.)
+
+On our system, /usr/local/troff is actually a shell program
+(also included as troff.sh) that detects -Pxxx arguments;  the
+current default is va.
+
+Putting output codes into the font description files seems like
+the right thing to do but I'm not happy yet.  Accordingly, the
+formats of any or all of the files described here are subject to
+drastic change; hang loose.
+
+To clear up one potential misapprehension, the code in this
+directory has not been retrofitted to make an nroff. That would
+require major surgery, primarily on n6.c and n10.c.
+
+As it says in the Unix warranty:
+	"There is no warranty of merchantability nor any warranty
+	of fitness for a particular purpose nor any other warranty,
+	either express or implied, as to the accuracy of the
+	enclosed materials or as to their suitability for any
+	particular purpose.  Accordingly, Bell Telephone
+	Laboratories assumes no responsibility for their use by the
+	recipient.   Further, Bell Laboratories assumes no obligation
+	to furnish any assistance of any kind whatsoever, or to
+	furnish any additional information or documentation."
+
+Nevertheless, I will try to answer questions in cases of dire
+necessity.  Suggestions and other comments would be appreciated.
+
+Brian W. Kernighan
+(with modifications by David Slattengren, U.C. Berkeley)

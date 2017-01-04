@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)tty.h	7.1 (Berkeley) 6/4/86
+ *	@(#)tty.h	7.4 (Berkeley) 12/8/04
  */
 
 #ifdef KERNEL
@@ -117,6 +117,7 @@ extern	struct ttychars ttydefaults;
 #define	TS_WCOLL	0x001000	/* collision in write select */
 #define	TS_NBIO		0x002000	/* tty in non-blocking mode */
 #define	TS_ASYNC	0x004000	/* tty in async i/o mode */
+#define	TS_KBHACKS	0x008000	/* doing kb hacks on this tty */
 /* state for intra-line fancy editing work */
 #define	TS_BKSL		0x010000	/* state for lowercase \ work */
 #define	TS_QUOT		0x020000	/* last character input was \ */
@@ -124,8 +125,13 @@ extern	struct ttychars ttydefaults;
 #define	TS_LNCH		0x080000	/* next character is literal */
 #define	TS_TYPEN	0x100000	/* retyping suspended input (PENDIN) */
 #define	TS_CNTTB	0x200000	/* counting tab width; leave FLUSHO alone */
-
 #define	TS_LOCAL	(TS_BKSL|TS_QUOT|TS_ERASE|TS_LNCH|TS_TYPEN|TS_CNTTB)
+/* KOI-related states */
+#define	TS_KOI7INRUS	0x00400000	/* KOI-7 input in RUS mode */
+#define	TS_OUTKOI7TO8	0x00800000	/* KOI-7 to KOI-8 xlat on output */
+#define	TS_OUTKOI8TO7	0x01000000	/* KOI-8 to KOI-7 xlat on output */
+/* Other Quasijarus additions */
+#define	TS_MODEMCHG	0x02000000	/* modem status changed */
 
 /* define partab character types */
 #define	ORDINARY	0

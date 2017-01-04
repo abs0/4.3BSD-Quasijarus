@@ -1,0 +1,122 @@
+h37899
+s 00005/00000/00040
+d D 6.2 86/04/16 18:41:36 mckusick 4 3
+c add declaration of <syscall.h>
+e
+s 00001/00001/00039
+d D 6.1 85/05/09 16:42:43 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00033/00038
+d D 5.1 85/05/09 16:42:36 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00071/00000/00000
+d D 4.1 85/05/09 16:42:29 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SYSCALL 2 
+E 2
+I 2
+D 3
+.TH SYSCALL 2 "12 February 1983"
+E 3
+I 3
+.TH SYSCALL 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+syscall \- indirect system call
+.SH SYNOPSIS
+.nf
+I 4
+.ft B
+#include <syscall.h>
+.PP
+E 4
+D 2
+.BR "syscall(number, r0, r1, arg ...)" \  \  (PDP-11)
+E 2
+.BR "syscall(number, arg, ...)" \  \  (VAX-11)
+.fi
+.SH DESCRIPTION
+.I Syscall
+performs the system call whose assembly language
+interface has the specified
+.I number,
+register arguments
+.I r0
+and
+.I r1
+D 2
+(on the PDP-11, regardless of whether the entry point really
+uses them) and further arguments
+E 2
+I 2
+and further arguments
+E 2
+.IR arg .
+I 4
+Symbolic constants for system calls can be found in the header file
+.I <syscall.h>.
+E 4
+.PP
+The r0 value of the system call is returned.
+.SH DIAGNOSTICS
+When the C-bit is set,
+.I syscall
+returns \-1 and sets the
+external variable 
+.I errno
+(see
+.IR intro (2)).
+.SH BUGS
+There is no way to simulate system calls
+such as
+.IR pipe (2),
+which return values in register r1.
+D 2
+.SH "ASSEMBLER (PDP-11)"
+(indir = 0.)
+.br
+.B sys indir; call
+.PP
+The system call at the location
+.I call
+is executed.
+Execution resumes after the
+.I indir
+call.
+.PP
+On the PDP-11, the main purpose of
+.I indir
+is to allow a program to
+store arguments in system calls and execute them
+out of line in the data segment.
+This preserves the purity of the text segment.
+.PP
+If
+.I indir
+is executed indirectly,
+it is a no-op.
+If the instruction at the indirect
+location is not a system call,
+.I indir
+returns error code EINVAL;
+see
+.IR intro (2).
+E 2
+E 1

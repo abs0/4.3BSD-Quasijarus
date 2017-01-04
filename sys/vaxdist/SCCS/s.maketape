@@ -1,0 +1,856 @@
+h38630
+s 00012/00032/00040
+d D 4.36 03/12/06 23:11:28 msokolov 38 37
+c we now generate tape images rather than an actual tape
+e
+s 00003/00003/00069
+d D 4.35 99/10/09 21:17:44 msokolov 37 36
+c old was missing from the /usr image
+c doc moves from /usr to /usr/src
+e
+s 00005/00002/00067
+d D 4.34 99/10/03 13:42:02 msokolov 36 35
+c have to specify the actual device for the distribution root, just /nbsd doesn't
+c work because it's listed as "xx" in /etc/fstab
+c also call the tape /dev/rmt12 and rewind it at the end
+e
+s 00001/00001/00068
+d D 4.33 99/10/03 13:14:31 msokolov 35 34
+c building miniroots on ra0d now
+e
+s 00047/00076/00022
+d D 4.32 99/01/10 12:55:21 msokolov 34 33
+c 4.3BSD-Quasijarus
+e
+s 00001/00001/00097
+d D 4.31 86/06/06 20:03:03 karels 33 32
+c sensible copyright
+e
+s 00001/00001/00097
+d D 4.30 86/06/06 18:27:48 bloom 32 31
+c fix default density
+e
+s 00004/00002/00094
+d D 4.29 86/06/06 17:49:05 bloom 31 30
+c fix files in /usr/src/new
+e
+s 00016/00002/00080
+d D 4.28 86/04/29 18:49:01 bloom 30 29
+c different files for 6250 and 1600 tapes
+e
+s 00001/00001/00081
+d D 4.27 85/10/17 13:09:05 karels 29 28
+c put tp directory here
+e
+s 00003/00003/00079
+d D 4.26 85/09/23 19:15:06 bloom 28 27
+c fix miniroot command and dump new partition for /nbsd
+e
+s 00002/00002/00080
+d D 4.25 85/07/01 15:10:31 mckusick 27 26
+c understand paranoia
+e
+s 00003/00003/00079
+d D 4.24 85/06/28 10:54:48 bloom 26 25
+c put fonts after source
+e
+s 00002/00002/00080
+d D 4.23 85/06/27 18:34:53 bloom 25 24
+c fix instructions
+e
+s 00018/00007/00064
+d D 4.22 85/06/27 15:12:11 bloom 24 23
+c Rearanged tapes for 1600bpi versions.
+e
+s 00002/00001/00069
+d D 4.21 85/06/26 23:53:54 bloom 23 22
+c want only one copy of the system and contrib source
+e
+s 00015/00014/00055
+d D 4.20 85/06/26 15:15:59 bloom 22 21
+c hopefully makes a 6250 tape (I want it on distribution), but may not work
+c on 1600bpi
+e
+s 00001/00001/00068
+d D 4.19 85/06/26 09:22:45 bloom 21 20
+c add missing "|"
+e
+s 00001/00001/00068
+d D 4.18 85/06/25 20:24:47 karels 20 19
+c add feather
+e
+s 00039/00019/00030
+d D 4.17 85/06/23 16:37:03 karels 19 17
+c 4.3
+e
+s 00039/00019/00030
+d R 4.17 85/06/23 16:29:34 karels 18 17
+c 4.3
+e
+s 00007/00002/00042
+d D 4.16 85/06/08 12:11:51 mckusick 17 16
+c Add copyright
+e
+s 00001/00001/00043
+d D 4.15 83/11/15 16:06:01 karels 16 15
+c miniroot on hp0d
+e
+s 00004/00004/00040
+d D 4.14 83/08/14 22:57:45 sam 15 14
+c don't feather, removes stuff like rogue .o's
+e
+s 00001/00001/00043
+d D 4.13 83/08/13 20:19:39 sam 14 13
+c take user contributed software from frozen area
+e
+s 00001/00001/00043
+d D 4.12 83/08/04 22:33:56 sam 13 12
+c get guest so people can have my test programs
+e
+s 00004/00002/00040
+d D 4.11 83/07/31 18:29:26 sam 12 11
+c try yet another format for the tape
+e
+s 00011/00002/00031
+d D 4.10 83/07/28 14:37:53 sam 11 10
+c new format
+e
+s 00003/00003/00030
+d D 4.9 83/07/09 01:38:57 sam 10 9
+c miscellaneous
+e
+s 00002/00001/00031
+d D 4.8 83/03/08 12:22:48 sam 9 8
+c add utboot and rewind at finish
+e
+s 00001/00001/00031
+d D 4.7 83/02/27 18:46:35 sam 8 7
+c purge rewind
+e
+s 00009/00009/00023
+d D 4.6 83/02/17 12:07:22 sam 7 6
+c more cleanup
+e
+s 00016/00009/00016
+d D 4.5 83/02/13 10:59:00 sam 6 5
+c random stuff
+e
+s 00001/00001/00024
+d D 4.4 83/01/23 18:20:41 sam 5 4
+c make it work dummy
+e
+s 00002/00000/00023
+d D 4.3 83/01/23 18:06:47 sam 4 2
+c manuals are needed (maybe)
+e
+s 00002/00000/00023
+d R 4.3 83/01/23 18:05:13 sam 3 2
+c manuals aren't currently on /usr
+e
+s 00014/00008/00009
+d D 4.2 83/01/23 17:32:04 sam 2 1
+c check before cutting tape for Robert
+e
+s 00017/00000/00000
+d D 4.1 82/12/25 19:43:38 sam 1 0
+c date and time created 82/12/25 19:43:38 by sam
+e
+u
+U
+t
+T
+I 7
+D 17
+#! /bin/sh
+E 7
+I 1
+D 2
+#! /bin/sh
+E 2
+#	%W%	%G%
+E 17
+I 17
+D 19
+#!/bin/sh -
+E 19
+I 19
+D 34
+#!/bin/sh
+E 34
+I 34
+#!/bin/sh -
+E 34
+E 19
+#
+D 33
+# Copyright (c) 1980 Regents of the University of California.
+E 33
+I 33
+D 34
+# Copyright (c) 1983 Regents of the University of California.
+E 33
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+E 34
+I 34
+# 4.3BSD-Quasijarus release-making script.
+E 34
+#
+I 34
+# This file is freely redistributable.
+#
+E 34
+#	%W% (Berkeley) %G%
+E 17
+#
+I 19
+D 34
+#	%M% [ 6250 | 1600 [ tapename [ remotetapemachine ] ] ]
+E 19
+I 2
+D 7
+machine=arpa
+E 7
+I 6
+D 10
+miniroot=hp1a
+E 10
+I 10
+D 16
+miniroot=hp0g
+E 16
+I 16
+miniroot=hp0d
+I 19
+tape=/dev/rmt12
+D 32
+type=6250
+E 32
+I 32
+type=1600
+E 32
+if [ $# -gt 0 ]; then type=$1; fi
+if [ $# -gt 1 ]; then tape=$2; fi
+tartape=$tape
+if [ $# -gt 2 ]; then remote=$3; tartape='-'; fi
+E 19
+E 16
+E 10
+#
+E 6
+E 2
+trap "rm -f /tmp/tape.$$; exit" 0 1 2 3 13 15
+D 2
+arpa rewind
+E 2
+I 2
+D 7
+${machine} rewind
+E 7
+I 7
+D 8
+rewind
+E 8
+I 8
+D 19
+mt rew
+E 19
+I 19
+$remote mt -t ${tape} rew
+E 34
+I 34
+
+D 38
+# maketape [ 6250 | 1600 [ tapename ] ]
+E 38
+I 38
+# maketape releasedir
+E 38
+D 35
+miniroot=ra1d
+E 35
+I 35
+miniroot=ra0d
+E 35
+D 36
+tape=/dev/nrmt8
+E 36
+I 36
+D 38
+tape=/dev/rmt12
+E 36
+type=6250
+E 38
+I 38
+fullroot=ra1a
+E 38
+block=20
+tflag=cbf
+
+if [ $# -gt 0 ]; then
+D 38
+	type=$1;
+E 38
+I 38
+	releasedir=$1;
+else
+	echo usage: $0 releasedir
+	exit
+E 38
+fi
+
+D 38
+if [ $# -gt 1 ]; then
+	tape=$2;
+fi
+
+mt -t ${tape} rew
+E 34
+E 19
+E 8
+E 7
+E 2
+date
+E 38
+D 6
+cd /tp
+D 2
+tp cmf /tmp/tape.$$ boot copy
+E 2
+I 2
+D 5
+tp cmf /tmp/tape.$$ boot copy upchk hpchk updrtest hpdrtest
+E 5
+I 5
+tp cmf /tmp/tape.$$ boot copy
+E 5
+E 2
+cd /usr/mdec
+E 6
+I 6
+D 19
+umount /dev/hp2g /dev/hp2h
+E 19
+I 19
+D 34
+umount /dev/hp2g
+E 19
+umount /dev/hp2a
+D 27
+mount -r /dev/hp2a /nbsd
+mount -r /dev/hp2g /nbsd/usr
+E 27
+I 27
+mount -r /dev/hp2a /c/nbsd
+mount -r /dev/hp2g /c/nbsd/usr
+E 27
+D 19
+mount -r /dev/hp2h /nbsd/a
+E 19
+D 29
+cd /nbsd/tp
+E 29
+I 29
+cd tp
+E 34
+I 34
+cd /nbsd
+sync
+
+cd /nbsd/sys/vaxdist/tp
+E 34
+E 29
+tp cmf /tmp/tape.$$ boot copy format
+cd /nbsd/sys/mdec
+E 6
+I 2
+echo "Build 1st level boot block file"
+E 2
+D 9
+cat tsboot htboot tmboot mtboot noboot noboot noboot /tmp/tape.$$ | \
+E 9
+I 9
+D 34
+cat tsboot htboot tmboot mtboot utboot noboot noboot /tmp/tape.$$ | \
+E 9
+D 2
+	arpa dd of=/dev/rmt12 bs=512 conv=sync
+E 2
+I 2
+D 7
+	${machine} dd of=/dev/rmt12 bs=512 conv=sync
+E 7
+I 7
+D 19
+	dd of=/dev/rmt12 bs=512 conv=sync
+E 19
+I 19
+D 22
+	$remote dd of=${tape} bs=512 conv=sync
+E 22
+I 22
+	$remote dd of=${tape} obs=512 conv=sync
+E 22
+E 19
+E 7
+E 2
+D 6
+cd /
+E 6
+I 6
+cd /nbsd
+E 6
+sync
+D 2
+dd if=/dev/rhp0a bs=8k count=130 | \
+	arpa dd of=/dev/rmt12 ibs=20b obs=20b
+/etc/rdump 0uf arpa:/dev/rmt12 /
+arpa rewind
+E 2
+I 2
+echo "Add dump of mini-root file system"
+D 6
+dd if=/dev/rhk0a bs=8k count=130 | \
+E 6
+I 6
+D 7
+dd if=/dev/r${miniroot} bs=8k count=130 | \
+E 6
+	${machine} dd of=/dev/rmt12 ibs=20b obs=20b
+E 7
+I 7
+D 19
+dd if=/dev/r${miniroot} of=/dev/rmt12 bs=20b count=205 conv=sync
+E 19
+I 19
+D 21
+dd if=/dev/r${miniroot} ${remote+"$remote dd"} of=${tape} bs=20b count=205 conv=sync
+E 21
+I 21
+D 22
+dd if=/dev/r${miniroot} | ${remote+"$remote dd"} of=${tape} bs=20b count=205 conv=sync
+E 22
+I 22
+D 28
+eval dd if=/dev/r${miniroot} count=205 bs=20b ${remote+"| $remote dd obs=20b"} \
+	of=${tape} conv=sync
+E 28
+I 28
+eval dd if=/dev/r${miniroot} count=205 bs=20b conv=sync ${remote+'|'} \
+	${remote-"of=$tape"} ${remote+'/usr/local/20b ">" $tape'}
+E 34
+I 34
+cat tmscpboot tsboot htboot tmboot mtboot utboot /tmp/tape.$$ | \
+D 38
+	dd of=${tape} obs=512 conv=sync
+E 38
+I 38
+	dd of=${releasedir}/stand obs=512 conv=sync
+E 38
+
+echo "Add image of mini-root file system"
+D 38
+eval dd if=/dev/r${miniroot} count=308 bs=20b conv=sync of=$tape
+E 38
+I 38
+dd if=/dev/r${miniroot} count=308 bs=20b conv=sync of=${releasedir}/miniroot
+E 38
+
+E 34
+E 28
+E 22
+E 21
+E 19
+E 7
+echo "Add full dump of real file system"
+D 6
+/etc/rdump 0uf ${machine}:/dev/rmt12 /
+E 6
+I 6
+D 7
+/etc/rdump 0uf ${machine}:/dev/rmt12 /nbsd
+E 7
+I 7
+D 19
+/etc/dump 0uf /dev/rmt12 /nbsd
+E 19
+I 19
+D 28
+/etc/${remote+r}dump 0uf $remote${remote+:}${tape} /nbsd
+E 28
+I 28
+D 34
+/etc/${remote+r}dump 0uf $remote${remote+:}${tape} /c/nbsd
+E 34
+I 34
+D 36
+/etc/dump 0f ${tape} /nbsd
+E 36
+I 36
+D 38
+/etc/dump 0f ${tape} /dev/rra1a
+E 38
+I 38
+/etc/dump 0f ${releasedir}/rootdump /dev/r${fullroot}
+E 38
+E 36
+
+E 34
+E 28
+E 19
+E 7
+E 6
+D 24
+echo "Add tar image of system sources"
+D 6
+cd /sys; tar cf - . | ${machine} dd of=/dev/rmt12 ibs=20b obs=20b
+I 4
+echo "Add tar image of manuals"
+cd /a/man; tar cf - man* | ${machine} dd of=/dev/rmt12 ibs=20b obs=20b
+E 6
+I 6
+D 7
+cd /nbsd/a/sys; tar cf - . | ${machine} dd of=/dev/rmt12 ibs=20b obs=20b
+E 7
+I 7
+D 19
+cd /nbsd/a/sys; tar cf /dev/rmt12 .
+E 19
+I 19
+D 22
+cd /nbsd/sys; tar cf ${tartape} . \
+	${remote+"| $remote /usr/local/20b > $tape"}
+E 22
+I 22
+cd /nbsd/sys; eval tar cf ${tartape} . \
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+E 24
+E 22
+E 19
+E 7
+echo "Add tar image of /usr"
+D 7
+cd /nbsd/usr; tar cf - adm bill bin dict doc games hosts include ingres lib local man mdec msgs net new preserve pub spool tmp ucb | ${machine} dd of=/dev/rmt12 ibs=20b obs=20b
+E 7
+I 7
+D 10
+cd /nbsd/usr; tar c adm bill bin dict doc games \
+	hosts include ingres lib local man mdec msgs net new \
+E 10
+I 10
+D 11
+cd /nbsd/usr; tar c adm bin dict doc games \
+E 11
+I 11
+D 19
+cd /nbsd/usr; tar cf /dev/rmt12 adm bin dict doc games \
+E 19
+I 19
+D 22
+cd /nbsd/usr; tar cf ${tartape} adm bin dict doc games \
+E 22
+I 22
+D 34
+cd /nbsd/usr; eval tar cf ${tartape} adm bin dict doc games \
+E 22
+E 19
+E 11
+D 13
+	hosts include lib local man mdec msgs new \
+E 13
+I 13
+	guest hosts include lib local man mdec msgs new \
+E 13
+E 10
+D 19
+	preserve pub spool tmp ucb
+E 19
+I 19
+	preserve pub spool tmp ucb \
+D 22
+		${remote+"| $remote /usr/local/20b > $tape"}
+E 22
+I 22
+		${remote+'| $remote /usr/local/20b ">" $tape'}
+E 34
+I 34
+cd /nbsd/usr
+D 37
+tar ${tflag} ${block} ${tape} MAKEHOSTS adm bin dict doc games hosts \
+	include lib local man mdec msgs new preserve pub spool tmp ucb
+E 37
+I 37
+D 38
+tar ${tflag} ${block} ${tape} MAKEHOSTS adm bin dict games hosts \
+E 38
+I 38
+tar ${tflag} ${block} ${releasedir}/usr.tar MAKEHOSTS adm bin dict games hosts \
+E 38
+	include lib local man mdec msgs new old preserve pub spool tmp ucb
+E 37
+
+E 34
+E 22
+E 19
+I 11
+D 12
+echo "Add ingres and varian fonts"
+cd /nbsd/usr; tar cFFf /dev/rmt12 ingres -C /usr/lib vfont
+E 12
+I 12
+D 24
+echo "Add varian fonts"
+D 15
+cd /usr/lib/vfont; tar cFFf /dev/rmt12 .
+E 15
+I 15
+D 19
+cd /usr/lib/vfont; tar cf /dev/rmt12 .
+E 15
+E 12
+echo "Done, rewinding first tape"
+E 11
+I 9
+mt rew
+E 9
+E 7
+E 6
+E 4
+D 11
+echo "Done, rewind"
+E 11
+I 11
+echo "Mount second tape and hit return when ready"; read x
+E 19
+I 19
+D 22
+cd /usr/lib/vfont; tar cf ${tartape} . \
+	${remote+"| $remote /usr/local/20b > $tape"}
+E 22
+I 22
+cd /usr/lib/vfont; eval tar cf ${tartape} . \
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+E 24
+E 22
+D 38
+if [ ${type} != '6250' ]
+then
+	echo "Done, rewinding first tape"
+D 34
+	$remote mt -t ${tape} rew &
+E 34
+I 34
+	rsh $remote mt -t ${tape} rew &
+E 34
+	echo "Mount second tape and hit return when ready"
+	echo "(or type name of next tape drive)"
+	read x
+D 24
+	if [ $x != "" ]
+E 24
+I 24
+	if [ "$x" != "" ]
+E 24
+	then	tape=$x
+	fi
+fi
+I 34
+
+: tape2:
+E 38
+E 34
+I 24
+echo "Add tar image of system sources"
+D 34
+cd /nbsd/sys; eval tar cf ${tartape} . \
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+E 34
+I 34
+cd /nbsd/usr/src/sys
+D 38
+tar ${tflag} ${block} ${tape} .
+E 38
+I 38
+tar ${tflag} ${block} ${releasedir}/srcsys.tar .
+E 38
+
+E 34
+D 26
+echo "Add varian fonts"
+cd /usr/lib/vfont; eval tar cf ${tartape} . \
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+E 26
+E 24
+E 19
+echo "Add user source code"
+D 15
+cd /nbsd/usr/src; tar cFFf /dev/rmt12 .
+E 15
+I 15
+D 19
+cd /nbsd/usr/src; tar cf /dev/rmt12 .
+E 19
+I 19
+D 20
+cd /nbsd/usr/src; tar cf ${tartape} . \
+E 20
+I 20
+D 22
+cd /nbsd/usr/src; tar cfFF ${tartape} . \
+E 20
+	${remote+"| $remote /usr/local/20b > $tape"}
+E 22
+I 22
+D 23
+cd /nbsd/usr/src; eval tar cf ${tartape} . \
+E 23
+I 23
+D 34
+cd /nbsd/usr/src; eval tar cf ${tartape} Makefile bin etc games \
+	include lib local old ucb undoc usr.bin usr.lib \
+I 26
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+echo "Add varian fonts"
+cd /usr/lib/vfont; eval tar cf ${tartape} . \
+E 26
+E 23
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+I 24
+if [ ${type} != '6250' ]
+then
+D 25
+	echo "Done, rewinding first tape"
+E 25
+I 25
+	echo "Done, rewinding second tape"
+E 25
+	$remote mt -t ${tape} rew &
+D 25
+	echo "Mount second tape and hit return when ready"
+E 25
+I 25
+	echo "Mount third tape and hit return when ready"
+E 25
+	echo "(or type name of next tape drive)"
+	read x
+	if [ "$x" != "" ]
+	then	tape=$x
+	fi
+fi
+E 24
+E 22
+E 19
+E 15
+echo "Add user contributed software"
+D 14
+cd /usr/src/new; tar cFFf /dev/rmt12 .
+E 14
+I 14
+D 15
+cd /nbsd/a/new; tar cFFf /dev/rmt12 .
+E 15
+I 15
+D 19
+cd /nbsd/a/new; tar cf /dev/rmt12 .
+E 19
+I 19
+D 22
+cd /nbsd/usr/src/new; tar cf ${tartape} . \
+	${remote+"| $remote /usr/local/20b > $tape"}
+E 22
+I 22
+D 30
+cd /nbsd/usr/src/new; eval tar cf ${tartape} . \
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+E 30
+I 30
+if [ ${type} != '6250' ]
+then
+	cd /nbsd/usr/src/new; eval tar cf ${tartape} \
+I 31
+		README Makefile \
+E 31
+		B X ansi apl bib courier cpm dipress dsh emacs enet help \
+D 31
+		hyper icon jove kermit mh mkmf mmdf.tar.Z news notes \
+E 31
+I 31
+		hyper icon jove kermit mh mkmf mmdf.tar.Z news notes nntp \
+E 31
+		np100 patch pathalias rcs rn spms sumacc.tar.Z sunrpc \
+		tac tools umodem xns \
+		${remote+'| $remote /usr/local/20b ">" $tape'}
+else
+	cd /nbsd/usr/src/new; eval tar cf ${tartape} \
+I 31
+		README Makefile \
+E 31
+		B X ansi apl bib courier cpm dipress dsh emacs enet help \
+D 31
+		hyper icon jove kermit mh mkmf mmdf news notes \
+E 31
+I 31
+		hyper icon jove kermit mh mkmf mmdf news notes nntp \
+E 31
+		np100 patch pathalias rcs rn spms sumacc sunrpc \
+		tac tools umodem xns \
+		${remote+'| $remote /usr/local/20b ">" $tape'}
+fi
+E 30
+E 22
+E 19
+E 15
+E 14
+I 12
+echo "Add ingres source"
+D 15
+cd /nbsd/usr/ingres; tar cFFf /dev/rmt12 .
+E 15
+I 15
+D 19
+cd /nbsd/usr/ingres; tar cf /dev/rmt12 .
+E 15
+E 12
+echo "Done, rewinding second tape"
+mt rew
+E 19
+I 19
+D 22
+cd /nbsd/usr/ingres; tar cf ${tartape} . \
+	${remote+"| $remote /usr/local/20b > $tape"}
+E 22
+I 22
+cd /nbsd/usr/ingres; eval tar cf ${tartape} . \
+	${remote+'| $remote /usr/local/20b ">" $tape'}
+E 22
+echo "Done, rewinding tape"
+$remote mt -t ${tape} rew &
+E 34
+I 34
+D 37
+FILES="Makefile bin cci etc games include lib local man old \
+E 37
+I 37
+FILES="Makefile bin cci doc etc games include lib local man old \
+E 37
+	ucb undoc usr.bin usr.lib"
+cd /nbsd/usr/src
+D 38
+tar ${tflag} ${block} ${tape} ${FILES}
+I 36
+
+echo "Done, rewinding tape"
+mt -t ${tape} rew &
+E 38
+I 38
+tar ${tflag} ${block} ${releasedir}/src.tar ${FILES}
+E 38
+E 36
+E 34
+E 19
+E 11
+D 7
+${machine} rewind
+E 7
+E 2
+E 1

@@ -1,0 +1,145 @@
+h60206
+s 00006/00002/00013
+d D 1.10 85/03/01 17:43:06 edward 11 10
+c changing window size, new struct ww
+e
+s 00004/00004/00011
+d D 1.9 84/04/08 19:23:14 edward 10 9
+c new options to "window": shell, pty, frame
+c and stuff to support them
+e
+s 00005/00003/00010
+d D 1.8 84/04/08 12:08:34 edward 9 7
+c control character expansion in wwwrite()
+c calling of wwupdate() in wwwrite() dependent of ww_noupdate
+c control character handling macros in char.h
+e
+s 00001/00001/00012
+d R 1.8 84/03/03 22:46:01 edward 8 7
+c interrupt driven input
+e
+s 00003/00002/00010
+d D 1.7 84/01/16 15:26:10 edward 7 6
+c new io scheme
+e
+s 00002/00003/00010
+d D 1.6 83/12/02 23:31:52 edward 6 5
+c lost ww_tty
+e
+s 00001/00001/00012
+d D 1.5 83/11/23 16:36:00 edward 5 4
+c New cover scheme
+e
+s 00005/00003/00008
+d D 1.4 83/09/15 10:09:22 edward 4 3
+c Now uses screen address for all buffers.
+e
+s 00002/00000/00009
+d D 1.3 83/09/14 14:15:27 edward 3 2
+c Off screen windows!!!!!!
+e
+s 00003/00002/00006
+d D 1.2 83/08/23 19:30:19 edward 2 1
+c ww_nline and ww_scroll now ints, and ww_fmap added
+e
+s 00008/00000/00000
+d D 1.1 83/08/18 15:31:15 edward 1 0
+c date and time created 83/08/18 15:31:15 by edward
+e
+u
+U
+t
+T
+I 1
+D 9
+./"forw"16t"back"16t"state"8t"wstate"8t"modes"nppbbb
++/"xxx"8t"index"8t"order"nbbb++
+E 9
+I 9
+D 11
+./"forw"16t"back"16t"state"8t"index"8t"order"nppbbb+
+E 11
+I 11
+./"state"8t"oflags"nbb++
++/"forw"16t"back"16t"index"8t"order"nppbb++
+E 11
+E 9
+D 4
++/"w.nr"16t"w.nc"nDDn
+E 4
+I 4
++/"w.nr"16t"w.nc"nDD
+E 4
++/"w.t"16t"w.b"16t"w.l"16t"w.r"nDDDD
+I 3
+D 4
++/"i.nr"16t"i.nc"nDDn
+E 4
+I 4
++/"b.nr"16t"b.nc"nDD
++/"b.t"16t"b.b"16t"b.l"16t"b.r"nDDDD
++/"i.nr"16t"i.nc"nDD
+E 4
++/"i.t"16t"i.b"16t"i.l"16t"i.r"nDDDD
+E 3
+D 2
++/"nline"8t"scroll"8t"cur.r"16t"cur.c"nddDD
++/"win"16t"buf"16t"cov"16t"nvis"npppp
+E 2
+I 2
+D 4
++/"nline"16t"scroll"16t"cur.r"16t"cur.c"nDDDD
+E 4
+I 4
++/"cur.r"16t"cur.c"nDD
+E 4
+D 5
++/"win"16t"buf"16t"cov"16t"fmap"16tnpppp
+E 5
+I 5
+D 6
++/"win"16t"buf"16t"fmap"16tnppp
+E 5
++/"nvis"np
+E 2
++/"pty"16t"tty"16t"pid"16t"ttyname"nDDD11C
+E 6
+I 6
++/"win"16t"buf"16t"fmap"16t"nvis"npppp
+I 9
++/"wstate"8t"modes"8t"insert"8t"mapnl"8t"noupd"n5b
+D 10
++/"unctrl"8t"nointr"8t"hascurs"8t"hasframe"n4b3+
+E 9
+D 7
++/"pty"16t"pid"16t"ttyname"nDD11C
+E 6
++/t
+E 7
+I 7
++/"pty"16t"pid"16t"ttyname"nDD11C+
++/"ob"16t"obe"16t"obp"16t"obc"n3pD
+D 9
++/"stopped"nb
+E 9
+I 9
++/"stopped"nb3+
+E 10
+I 10
++/"unctrl"8t"nointr"8t"hascurs"8t"hasframe"n4b
++/"ispty"8t"stopped"8t"pty"16t"socket"16t"pid"nbb+3D
++/"ttyname"n11C+
++/"ob"16t"obe"16t"obp"16t"obq"n4p
+E 10
+D 11
++/"center"8t"id"8t"label"16t"altpos.r"16t"altpos.c"n2b2+pDD
+E 11
+I 11
++/"center"8t"id"8t"label"nbb++p
++/"alt.nr"16t"alt.nc"nDD
++/"alt.t"16t"alt.b"16t"alt.l"16t"alt.r"nDDDD
++/t
+E 11
+E 9
+E 7
+E 1

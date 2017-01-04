@@ -1,0 +1,13 @@
+; Fake zone for 127.IN-ADDR.ARPA. needed by current 4.3BSD-Quasijarus
+; and likely many other stub resolvers
+
+$ORIGIN 127.IN-ADDR.ARPA.
+
+@		IN	SOA	localhost. root.localhost.  (
+					1		; Serial
+					86400		; Refresh 24 hours
+					3600		; Retry    1 hour
+					5184000		; Expire  60 days
+					86400 )		; Minimum 24 hours
+		IN	NS	localhost.
+1.0.0		IN	PTR	localhost.

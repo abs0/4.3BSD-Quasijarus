@@ -14,7 +14,7 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	7.24 (Berkeley) 11/16/03
+#	@(#)Makefile	7.28 (Berkeley) 2/28/04
 #
 
 DESTDIR=
@@ -28,45 +28,47 @@ LS=	/bin/ls
 # Collections of C options:
 #	COPTS	device drivers/assembler, not optimized
 #	SMOPTS	"small" versions for 7.5K bootxx programs (750 only)
-#	RAOPTS	like SMOPTS, but for bootra, which is 750 + 8200 + MVAXen
+#	RAOPTS	like SMOPTS, but for bootra, which is 750 + 8200
 #	KRAOPTS	like SMOPTS, but for bootkra, which is 8200 only
 #	CFLAGS	everything else
 
 COPTS=	${DEFS} ${MACH} -DCOMPAT_42
 CFLAGS=	-O ${DEFS} ${MACH} -DCOMPAT_42
 SMOPTS=	${DEFS} -DSMALL -DVAX750
-RAOPTS=	${DEFS} -DSMALL -DVAX750 -DVAX8200 -DVAX630 -DVAX650
+RAOPTS=	${DEFS} -DSMALL -DVAX750 -DVAX8200
 KRAOPTS=${DEFS} -DSMALL -DVAX8200
 
 RELOC=	150000
 LIBSA=	libsa.a
 
-SRCS=	autoconf.c boot.c bootxx.c cat.c copy.c dev.c drtest.c format.c \
-	format.c getfile.c gets.c hp.c hpmaptype.c ht.c idc.c kdb.c \
-	machdep.c mba.c mt.c prf.c printn.c qdcons.c qvcons.c qfont.c \
-	rk.c rl.c sys.c tm.c tmscp.c ts.c uba.c uda.c up.c upmaptype.c \
-	ut.c conf.c ../vax/dkbad.c
+SRCS=	autoconf.c boot.c bootdec.c bootxx.c cat.c copy.c dev.c drtest.c \
+	format.c getfile.c gets.c hp.c hpmaptype.c ht.c idc.c kdb.c machdep.c \
+	mba.c mt.c prf.c printn.c rk.c rl.c rom.c sys.c tm.c tmscp.c ts.c \
+	uba.c uda.c up.c upmaptype.c ut.c vmb.c vmberr.c vmbt.c conf.c \
+	confdec.c confhpup.c  ../vax/dkbad.c
 DUMMIES=confxx.c
-DRIVERS=autoconf.o hp.o hpmaptype.o ht.o idc.o kdb.o mba.o mt.o qdcons.o \
-	qvcons.o rk.o rl.o tm.o tmscp.o ts.o up.o upmaptype.o uba.o uda.o \
-	ut.o
-SMOBJ=	bootxx.o sm_sys.o sm_autoconf.o
-RAOBJ=	bootxx.o sm_sys.o ra_autoconf.o sm_uda.o
-KRAOBJ=	bootxx.o sm_sys.o kra_autoconf.o sm_kdb.o
+DRIVERS=autoconf.o hp.o hpmaptype.o ht.o idc.o kdb.o mba.o mt.o rk.o rl.o \
+	tm.o tmscp.o ts.o up.o upmaptype.o uba.o uda.o ut.o
+ASMS=	badaddr.o cons6xx.o qioinit.o romio.o scb.o startvmb.o strcmp.o \
+	strcpy.o strlen.o
+SMOBJ=	bootxx.o sm_sys.o sm_autoconf.o sm_scb.o
+RAOBJ=	bootxx.o sm_sys.o ra_autoconf.o sm_scb.o sm_uda.o
+KRAOBJ=	bootxx.o sm_sys.o kra_autoconf.o sm_scb.o sm_kdb.o
+DECOBJ=	bootdec.o sm_sys.o sm_scb.o
 
 # These drivers don't have ecc correction and bad sector forwarding;
 # they are placed in the file system boot area for 750's.  If your
 # root has bad sectors you can try and squeeze the newer drivers in...
 ODRIVERS=sm_hp.o sm_up.o
 
-MDEC=	boothp boothk bootkra bootup bootra bootrl
+MDEC=	boothp boothk bootkra bootup bootra bootrl bootdec
 ALL=	boot tpboot cat copy tpcopy format tpformat drtest ls \
 	${MDEC}
 
 all: ${ALL}
 
-${LIBSA}: conf.o dev.o dkbad.o getfile.o gets.o machdep.o prf.o printn.o \
-	qfont.o sys.o ${DRIVERS}
+${LIBSA}: conf.o cpuid.o dev.o dkbad.o getfile.o gets.o machdep.o prf.o \
+	printn.o rom.o sys.o vmb.o vmberr.o vmbt.o ${DRIVERS} ${ASMS}
 	ar crv ${LIBSA} $?
 	ranlib ${LIBSA}
 
@@ -75,16 +77,28 @@ ${DRIVERS}:
 	/lib/c2 -i $*.s | as -o $*.o
 	rm -f $*.s
 
+${ASMS}:
+	${CC} -E ${COPTS} $*.c | as -o $*.o
+
+cpuid.o:	../vax/cpuid.s
+	-ln -s ../vax/cpuid.s cpuid.c
+	${CC} -E ${COPTS} cpuid.c | as -o cpuid.o
+	rm -f cpuid.c
+
 # startups
 
 srt0.o: srt0.c ../vax/mtpr.h ../vax/cpu.h
 	${CC} -E -DRELOC=0x${RELOC} ${COPTS} srt0.c | as -o srt0.o
 
-tpsrt0.o: srt0.c ../vax/mtpr.h ../vax/cpu.h
-	${CC} -E -DRELOC=0x${RELOC} -DTP ${COPTS} srt0.c | as -o tpsrt0.o
-
 relsrt0.o: srt0.c ../vax/mtpr.h ../vax/cpu.h
 	${CC} -E -DRELOC=0x${RELOC} -DREL ${COPTS} srt0.c | as -o relsrt0.o
+
+relsrt750.o: srt0.c ../vax/mtpr.h ../vax/cpu.h
+	${CC} -E -DRELOC=0x${RELOC} -DREL -DOLD750BOOT ${RAOPTS} srt0.c \
+	| as -o relsrt750.o
+
+decsrt0.o: decsrt0.c ../vax/mtpr.h ../vax/cpu.h
+	${CC} -E -DRELOC=0x${RELOC} ${COPTS} decsrt0.c | as -o decsrt0.o
 
 # bootable from tape
 
@@ -98,12 +112,12 @@ tpboot.o: boot.o
 	${CC} -c ${CFLAGS} -DJUSTASK $*.c
 	rm -f $*.c
 
-tpcopy: copy.o tpsrt0.o ${LIBSA}
-	ld -N tpsrt0.o copy.o ${LIBSA} -lc
+tpcopy: copy.o srt0.o ${LIBSA}
+	ld -N srt0.o copy.o ${LIBSA} -lc
 	strip a.out; dd if=a.out of=tpcopy ibs=32 skip=1; rm -f a.out
 
-tpformat: tpformat.o tpsrt0.o confhpup.o ${LIBSA}
-	ld -N tpsrt0.o tpformat.o confhpup.o ${LIBSA} -lc
+tpformat: tpformat.o srt0.o confhpup.o ${LIBSA}
+	ld -N srt0.o tpformat.o confhpup.o ${LIBSA} -lc
 	strip a.out; dd if=a.out of=tpformat ibs=32 skip=1; rm -f a.out
 
 tpformat.o: format.o
@@ -144,43 +158,50 @@ drtest: drtest.o srt0.o confhpup.o ${LIBSA}
 
 # getting booted from disc
 
-boothk: relsrt0.o confrk.o ${SMOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confrk.o ${SMOBJ} ${LIBSA} -lc
+boothk: relsrt750.o confrk.o ${SMOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt750.o confrk.o ${SMOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
 	${LS} -l $@
 
-boothp: relsrt0.o confhp.o sm_hp.o ${SMOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confhp.o sm_hp.o ${SMOBJ} ${LIBSA} -lc
+boothp: relsrt750.o confhp.o sm_hp.o ${SMOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt750.o confhp.o sm_hp.o ${SMOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
 	${LS} -l $@
 
-bootkra: relsrt0.o confkra.o ${KRAOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confkra.o ${KRAOBJ} ${LIBSA} -lc
+bootkra: relsrt750.o confkra.o ${KRAOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt750.o confkra.o ${KRAOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
 	${LS} -l $@
 
-bootup: relsrt0.o confup.o sm_up.o ${SMOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confup.o sm_up.o ${SMOBJ} ${LIBSA} -lc
+bootup: relsrt750.o confup.o sm_up.o ${SMOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt750.o confup.o sm_up.o ${SMOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
 	${LS} -l $@
 
-bootra: relsrt0.o confra.o ${RAOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confra.o ${RAOBJ} ${LIBSA} -lc
+bootra: relsrt750.o confra.o ${RAOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt750.o confra.o ${RAOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
 	${LS} -l $@
 
-bootrl: relsrt0.o confrl.o ${SMOBJ} ${LIBSA}
-	ld -N -T ${RELOC} relsrt0.o confrl.o ${SMOBJ} ${LIBSA} -lc
+bootrl: relsrt750.o confrl.o ${SMOBJ} ${LIBSA}
+	ld -N -T ${RELOC} relsrt750.o confrl.o ${SMOBJ} ${LIBSA} -lc
+	size a.out
+	rm -f $@
+	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
+	${LS} -l $@
+
+bootdec: decsrt0.o confdec.o ${DECOBJ} ${LIBSA}
+	ld -N -T ${RELOC} decsrt0.o confdec.o ${DECOBJ} ${LIBSA} -lc
 	size a.out
 	rm -f $@
 	strip a.out;dd if=a.out of=$@ ibs=32 skip=1;rm -f a.out
@@ -240,6 +261,9 @@ kra_autoconf.o: autoconf.o
 	${CC} -S ${KRAOPTS} kra_autoconf.c
 	/lib/c2 -i kra_autoconf.s | as -o kra_autoconf.o
 	rm -f kra_autoconf.s kra_autoconf.c
+
+sm_scb.o: scb.o
+	${CC} -E ${COPTS} -DSMALL scb.c | as -o sm_scb.o
 
 confrk.o: confrk.c confxx.o
 confhp.o: confhp.c confxx.o
@@ -313,8 +337,6 @@ installext: FRC
 	install -c -s -o bin -g bin -m 644 format cat copy drtest ls ${DESTDIR}${STAND}
 	install -c -o bin -g bin -m 644 boot pcs750.bin ${DESTDIR}/
 	install -c -o bin -g bin -m 444 ${MDEC} ${DESTDIR}/usr/mdec
-	rm -f ${DESTDIR}/usr/mdec/bootrd
-	ln ${DESTDIR}/usr/mdec/bootra ${DESTDIR}/usr/mdec/bootrd
 
 lint: ${SRCS}
 	lint ${COPTS} -hxbn boot.c ${SRCS} | \
@@ -327,161 +349,3 @@ tags: ${SRCS}
 FRC:
 # DO NOT DELETE THIS LINE -- mkdep uses it.
 # DO NOT PUT ANYTHING AFTER THIS LINE, IT WILL GO AWAY.
-
-autoconf.o: autoconf.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-autoconf.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-autoconf.o: /usr/include/machine/endian.h ../h/reboot.h ../vax/cpu.h
-autoconf.o: ../vax/nexus.h ../vax/pte.h ../vax/mtpr.h ../vaxuba/ubareg.h
-autoconf.o: ../vaxmba/mbareg.h savax.h
-boot.o: boot.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-boot.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-boot.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../h/vm.h
-boot.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
-boot.o: ../h/vmsystm.h ../h/reboot.h /usr/include/a.out.h
-boot.o: /usr/include/sys/exec.h ../stand/saio.h ../stand/saioctl.h
-boot.o: ../stand/saerrno.h
-bootxx.o: bootxx.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-bootxx.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-bootxx.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../h/vm.h
-bootxx.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
-bootxx.o: ../h/vmsystm.h ../h/reboot.h /usr/include/a.out.h
-bootxx.o: /usr/include/sys/exec.h ../stand/saio.h ../stand/saioctl.h
-bootxx.o: ../stand/saerrno.h
-cat.o: ../stand/cat.c
-copy.o: ../stand/copy.c
-dev.o: ../stand/dev.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-dev.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-dev.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../stand/saio.h
-dev.o: ../stand/saioctl.h ../stand/saerrno.h
-drtest.o: drtest.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-drtest.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-drtest.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../h/disklabel.h
-drtest.o: ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h
-format.o: format.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-format.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-format.o: /usr/include/machine/endian.h ../h/fs.h ../h/inode.h ../h/dkbad.h
-format.o: ../h/vmmac.h ../h/disklabel.h ../vax/cpu.h ../vax/mtpr.h
-format.o: ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h savax.h
-format.o: format.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-format.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-format.o: /usr/include/machine/endian.h ../h/fs.h ../h/inode.h ../h/dkbad.h
-format.o: ../h/vmmac.h ../h/disklabel.h ../vax/cpu.h ../vax/mtpr.h
-format.o: ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h savax.h
-getfile.o: ../stand/getfile.c ../h/param.h /usr/include/sys/types.h
-getfile.o: ../h/signal.h /usr/include/machine/trap.h
-getfile.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-getfile.o: ../h/inode.h ../h/fs.h ../stand/saio.h ../stand/saioctl.h
-getfile.o: ../stand/saerrno.h
-gets.o: ../stand/gets.c
-hp.o: hp.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-hp.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-hp.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../h/dkbad.h
-hp.o: ../h/disklabel.h ../vax/pte.h ../vaxmba/hpreg.h ../vaxmba/mbareg.h
-hp.o: ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h savax.h
-hpmaptype.o: hpmaptype.c
-ht.o: ht.c ../machine/pte.h ../h/param.h /usr/include/sys/types.h ../h/signal.h
-ht.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-ht.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vaxmba/htreg.h
-ht.o: ../vaxmba/mbareg.h ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h
-ht.o: savax.h
-idc.o: idc.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-idc.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-idc.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vax/pte.h
-idc.o: ../vaxuba/idcreg.h ../vaxuba/ubareg.h ../stand/saio.h ../stand/saioctl.h
-idc.o: ../stand/saerrno.h savax.h
-kdb.o: kdb.c ../machine/pte.h ../h/param.h /usr/include/sys/types.h
-kdb.o: ../h/signal.h /usr/include/machine/trap.h
-kdb.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-kdb.o: ../h/inode.h ../h/fs.h ../h/disklabel.h ../stand/saio.h
-kdb.o: ../stand/saioctl.h ../stand/saerrno.h savax.h ../vaxbi/bireg.h
-kdb.o: ../vaxbi/kdbreg.h ../vax/mscp.h
-machdep.o: machdep.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-machdep.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-machdep.o: /usr/include/machine/endian.h ../vax/mtpr.h
-mba.o: mba.c ../machine/pte.h ../h/param.h /usr/include/sys/types.h
-mba.o: ../h/signal.h /usr/include/machine/trap.h
-mba.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h
-mba.o: ../h/inode.h ../h/fs.h ../h/vm.h ../h/vmparam.h
-mba.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
-mba.o: ../vax/mtpr.h ../vaxmba/mbareg.h ../vaxmba/hpreg.h ../stand/saio.h
-mba.o: ../stand/saioctl.h ../stand/saerrno.h savax.h
-mt.o: mt.c ../machine/pte.h ../h/param.h /usr/include/sys/types.h ../h/signal.h
-mt.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-mt.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vaxmba/mtreg.h
-mt.o: ../vaxmba/mbareg.h ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h
-mt.o: savax.h
-prf.o: prf.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-prf.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-prf.o: /usr/include/machine/endian.h ../vax/mtpr.h ../vax/cons.h
-printn.o: ../stand/printn.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-printn.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-printn.o: /usr/include/machine/endian.h
-qdcons.o: qdcons.c ../h/types.h ../vax/cpu.h ../vaxuba/qdioctl.h ../h/ioctl.h
-qdcons.o: ../h/ttychars.h ../h/ttydev.h ../vaxuba/qevent.h ../vaxuba/qduser.h
-qdcons.o: ../vaxuba/qevent.h ../vaxuba/qdreg.h
-qvcons.o: qvcons.c ../h/types.h ../vaxuba/qvioctl.h ../h/ioctl.h
-qvcons.o: ../h/ttychars.h ../h/ttydev.h ../vaxuba/qvreg.h ../vaxuba/qevent.h
-qvcons.o: ../vax/cpu.h
-qfont.o: qfont.c
-rk.o: rk.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-rk.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-rk.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../h/disklabel.h
-rk.o: ../vax/pte.h ../vaxuba/ubareg.h ../vaxuba/rkreg.h ../stand/saio.h
-rk.o: ../stand/saioctl.h ../stand/saerrno.h savax.h
-rl.o: rl.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-rl.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-rl.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vax/pte.h
-rl.o: ../vaxuba/rlreg.h ../vaxuba/ubareg.h ../stand/saio.h ../stand/saioctl.h
-rl.o: ../stand/saerrno.h savax.h
-sys.o: ../stand/sys.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-sys.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-sys.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../h/dir.h
-sys.o: ../h/reboot.h ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h
-tm.o: tm.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-tm.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-tm.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vax/pte.h
-tm.o: ../vaxuba/ubareg.h ../vaxuba/tmreg.h ../stand/saio.h ../stand/saioctl.h
-tm.o: ../stand/saerrno.h savax.h
-tmscp.o: tmscp.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-tmscp.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-tmscp.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vax/pte.h
-tmscp.o: savax.h ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h
-tmscp.o: ../vaxuba/tmscpreg.h ../vaxuba/ubareg.h ../vax/tmscp.h
-ts.o: ts.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-ts.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-ts.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vax/pte.h
-ts.o: ../vaxuba/tsreg.h ../vaxuba/ubareg.h ../stand/saio.h ../stand/saioctl.h
-ts.o: ../stand/saerrno.h savax.h
-uba.o: uba.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-uba.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-uba.o: /usr/include/machine/endian.h ../h/inode.h ../h/vm.h ../h/vmparam.h
-uba.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
-uba.o: ../h/fs.h ../vax/pte.h ../vax/cpu.h ../vaxuba/ubareg.h ../stand/saio.h
-uba.o: ../stand/saioctl.h ../stand/saerrno.h savax.h
-uda.o: uda.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-uda.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-uda.o: /usr/include/machine/endian.h ../h/inode.h ../h/buf.h ../h/fs.h
-uda.o: ../h/disklabel.h ../vax/pte.h ../stand/saio.h ../stand/saioctl.h
-uda.o: ../stand/saerrno.h savax.h ../vaxuba/udareg.h ../vaxuba/ubareg.h
-uda.o: ../vaxuba/ubavar.h ../vax/mscp.h
-up.o: up.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-up.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-up.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../h/dkbad.h
-up.o: ../h/disklabel.h ../vax/pte.h ../vaxuba/upreg.h ../vaxuba/ubareg.h
-up.o: ../stand/saio.h ../stand/saioctl.h ../stand/saerrno.h savax.h
-upmaptype.o: upmaptype.c
-ut.o: ut.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-ut.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-ut.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../vax/pte.h
-ut.o: ../vaxuba/ubareg.h ../vaxuba/utreg.h ../stand/saio.h ../stand/saioctl.h
-ut.o: ../stand/saerrno.h savax.h
-conf.o: conf.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-conf.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-conf.o: /usr/include/machine/endian.h ../h/inode.h ../h/fs.h ../stand/saio.h
-conf.o: ../stand/saioctl.h ../stand/saerrno.h
-dkbad.o: ../vax/dkbad.c ../h/param.h /usr/include/sys/types.h ../h/signal.h
-dkbad.o: /usr/include/machine/trap.h /usr/include/machine/machparam.h
-dkbad.o: /usr/include/machine/endian.h ../h/buf.h ../h/dkbad.h
-confxx.o: confxx.c
-
-# IF YOU PUT ANYTHING HERE IT WILL GO AWAY

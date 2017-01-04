@@ -1,0 +1,321 @@
+h40168
+s 00017/00012/00111
+d D 6.5 86/05/13 10:48:50 karels 8 7
+c add names for the bits, correct old !INSECURE stuff
+e
+s 00011/00006/00112
+d D 6.4 86/02/02 03:08:28 donn 7 6
+c Added description of sticky directories.
+e
+s 00006/00000/00112
+d D 6.3 85/08/26 23:30:32 mckusick 6 4
+c update error messages (mostly from sun!guy)
+e
+s 00000/00007/00105
+d R 6.3 85/06/07 11:51:33 lepreau 5 4
+c writing and chown no longer remove suid bits
+e
+s 00010/00009/00102
+d D 6.2 85/05/22 18:30:21 mckusick 4 3
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00110
+d D 6.1 85/05/09 16:02:35 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00069/00028/00042
+d D 5.1 85/05/09 16:02:23 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00070/00000/00000
+d D 4.1 85/05/09 16:02:14 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHMOD 2 
+E 2
+I 2
+D 3
+.TH CHMOD 2 "2 July 1983"
+E 3
+I 3
+.TH CHMOD 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+chmod \- change mode of file
+.SH SYNOPSIS
+.nf
+D 2
+.B chmod(name, mode)
+.B char *name;
+E 2
+I 2
+.ft B
+chmod(path, mode)
+char *path;
+int mode;
+.PP
+.ft B
+fchmod(fd, mode)
+int fd, mode;
+E 2
+.fi
+.SH DESCRIPTION
+The file whose name
+D 2
+is given as the null-terminated string pointed to by
+.I name
+E 2
+I 2
+is given by \fIpath\fP
+or referenced by the descriptor
+.I fd
+E 2
+has its mode changed to
+.IR mode .
+Modes are constructed by
+D 2
+.IR or ing
+E 2
+I 2
+.IR or 'ing
+E 2
+together some
+D 8
+combination of the following:
+E 8
+I 8
+combination of the following, defined in
+.IR <sys/inode.h> :
+E 8
+.PP
+.RS
+D 8
+ 04000 set user ID on execution
+ 02000 set group ID on execution
+D 7
+ 01000 save text image after execution
+E 7
+I 7
+ 01000 `sticky bit' (see below)
+E 7
+ 00400 read by owner
+ 00200 write by owner
+ 00100 execute (search on directory) by owner
+ 00070 read, write, execute (search) by group
+ 00007 read, write, execute (search) by others
+E 8
+I 8
+.nf
+.ta \w'IWRITE\ \ 'u +\w'04000\ \ \ 'u
+ISUID	04000	set user ID on execution
+ISGID	02000	set group ID on execution
+ISVTX	01000	`sticky bit' (see below)
+IREAD	00400	read by owner
+IWRITE	00200	write by owner
+IEXEC	00100	execute (search on directory) by owner
+	00070	read, write, execute (search) by group
+	00007	read, write, execute (search) by others
+.fi
+E 8
+.RE
+.PP
+If an executable file is set up for sharing (this is the default)
+D 7
+then mode 1000 prevents the system from
+E 7
+I 7
+D 8
+then mode 01000 (the `sticky bit') prevents the system from
+E 8
+I 8
+then mode ISVTX (the `sticky bit') prevents the system from
+E 8
+E 7
+abandoning the swap-space image of the program-text portion
+D 7
+of the file when its last user
+terminates.
+D 2
+Ability to set this bit is restricted to the super-user
+since swap space is consumed
+by the images.
+See
+.IR sticky (8).
+E 2
+I 2
+Ability to set this bit is restricted to the super-user.
+E 7
+I 7
+of the file when its last user terminates.
+Ability to set this bit on executable files is restricted to the super-user.
+E 7
+E 2
+.PP
+I 7
+D 8
+If mode 01000 (the `sticky bit') is set on a directory,
+E 8
+I 8
+If mode ISVTX (the `sticky bit') is set on a directory,
+E 8
+an unprivileged user may not delete or rename
+files of other users in that directory.
+For more details of the properties of the sticky bit, see
+.IR sticky (8).
+.PP
+E 7
+Only the owner of a file (or the super-user) may change the mode.
+D 2
+Only the super-user can set the 1000 mode.
+E 2
+.PP
+D 2
+On some systems,
+writing or changing the owner of a file
+turns off the set-user-id bit.
+E 2
+I 2
+Writing or changing the owner of a file
+D 8
+turns off the set-user-id and set-group-id bits.
+E 8
+I 8
+turns off the set-user-id and set-group-id bits
+unless the user is the super-user.
+E 8
+E 2
+This makes the system somewhat more secure
+D 2
+by protecting set-user-id files
+from remaining set-user-id if they are modified,
+E 2
+I 2
+by protecting set-user-id (set-group-id) files
+from remaining set-user-id (set-group-id) if they are modified,
+E 2
+at the expense of a degree of compatibility.
+I 2
+.SH "RETURN VALUE
+Upon successful completion, a value of 0 is returned.
+Otherwise, a value of \-1 is returned and
+.I errno
+is set to indicate the error.
+.SH "ERRORS
+.I Chmod
+will fail and the file mode will be unchanged if:
+.TP 15
+D 4
+[EPERM]
+The argument contains a byte with the high-order bit set.
+.TP 15
+E 4
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+D 4
+[ENOENT]
+The pathname was too long.
+E 4
+I 4
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+E 4
+.TP 15
+I 4
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+.TP 15
+E 4
+[ENOENT]
+The named file does not exist.
+.TP 15
+[EACCES]
+D 4
+Search permission is denied on a component of the path prefix.
+E 4
+I 4
+Search permission is denied for a component of the path prefix.
+E 4
+.TP 15
+I 4
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+E 4
+[EPERM]
+The effective user ID does not match the owner of the file and
+the effective user ID is not the super-user.
+.TP 15
+[EROFS]
+The named file resides on a read-only file system.
+.TP 15
+[EFAULT]
+.I Path
+points outside the process's allocated address space.
+I 6
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 6
+D 4
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+E 4
+.PP
+.I Fchmod
+will fail if:
+.TP 15
+[EBADF]
+The descriptor is not valid.
+.TP 15
+[EINVAL]
+.I Fd
+refers to a socket, not to a file.
+.TP 15
+[EROFS]
+The file resides on a read-only file system.
+I 6
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+E 6
+E 2
+.SH "SEE ALSO"
+D 2
+chmod(1)
+.SH DIAGNOSTIC
+Zero is returned if the mode is changed;
+\-1 is returned if
+.I name
+cannot be found or if the current user
+is neither the owner of the file nor the super-user.
+.SH "ASSEMBLER (PDP-11)"
+(chmod = 15.)
+.br
+.B sys chmod; name; mode
+E 2
+I 2
+D 7
+open(2), chown(2)
+E 7
+I 7
+chmod(1), open(2), chown(2), stat(2), sticky(8)
+E 7
+E 2
+E 1

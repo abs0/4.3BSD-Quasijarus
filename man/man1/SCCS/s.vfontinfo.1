@@ -1,0 +1,110 @@
+h23112
+s 00001/00001/00056
+d D 6.2 04/10/26 17:51:03 msokolov 4 3
+c changed vpr(1) reference to vtroff(1)
+e
+s 00001/00001/00056
+d D 6.1 85/04/29 15:08:08 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00004/00053
+d D 5.1 85/04/29 15:08:00 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00057/00000/00000
+d D 4.1 85/04/29 15:07:53 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH VFONTINFO 1 4/11/80 1
+E 2
+I 2
+D 3
+.TH VFONTINFO 1 "11 April 1980"
+E 3
+I 3
+.TH VFONTINFO 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+vfontinfo \- inspect and print out information about unix fonts
+E 2
+I 2
+vfontinfo \- inspect and print out information about UNIX fonts
+E 2
+.SH SYNOPSIS
+.br
+.B vfontinfo
+[
+.B \-v
+]
+fontname
+[
+characters
+]
+.SH DESCRIPTION
+.I Vfontinfo
+D 2
+allows you to examine a font in the unix format.
+E 2
+I 2
+allows you to examine a font in the UNIX format.
+E 2
+It prints out
+all the information in the font header and information about every
+non-null (width > 0) glyph.
+This can be used to make sure the font
+is consistent with the format.
+.PP
+The
+.I fontname
+argument is the name of the font you wish to inspect.
+It writes to standard output.
+If it can't find the file in your working directory, it looks in
+D 2
+.B /usr/lib/vfont
+E 2
+I 2
+.I /usr/lib/vfont
+E 2
+(the place most of the fonts are kept).
+.PP
+The
+.IR characters ,
+if given, specify certain characters to show.
+If omitted, the entire font is shown.
+.PP
+If the
+.B \-v
+(verbose)
+flag is used,
+the bits of the glyph itself are shown
+as an array of X's and spaces,
+in addition to the header information.
+.SH "SEE ALSO"
+D 4
+vpr(1), vfont(5)
+E 4
+I 4
+vtroff(1), vfont(5)
+E 4
+.br
+The Berkeley Font Catalog
+.SH AUTHORS
+Mark Horton
+.br
+Andy Hertzfeld
+E 1

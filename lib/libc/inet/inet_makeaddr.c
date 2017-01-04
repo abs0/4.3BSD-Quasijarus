@@ -16,7 +16,7 @@
  */
 
 #if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)inet_makeaddr.c	5.3 (Berkeley) 6/27/88";
+static char sccsid[] = "@(#)inet_makeaddr.c	5.4 (Berkeley) 12/14/07";
 #endif /* LIBC_SCCS and not lint */
 
 #include <sys/types.h>
@@ -32,7 +32,9 @@ inet_makeaddr(net, host)
 {
 	u_long addr;
 
-	if (net < 128)
+	if (net & 0xFF000000)	/* assume subnetted C, do our best */
+		addr = net | (host & IN_CLASSC_HOST);
+	else if (net < 128)
 		addr = (net << IN_CLASSA_NSHIFT) | (host & IN_CLASSA_HOST);
 	else if (net < 65536)
 		addr = (net << IN_CLASSB_NSHIFT) | (host & IN_CLASSB_HOST);

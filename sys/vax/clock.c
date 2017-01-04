@@ -4,7 +4,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)clock.c	7.5 (Berkeley) 3/13/90
+ *	@(#)clock.c	7.6 (Berkeley) 3/18/04
  */
 
 #include "param.h"
@@ -14,6 +14,7 @@
 #include "mtpr.h"
 #include "clock.h"
 #include "cpu.h"
+#include "cpucond.h"
 
 /*
  * Machine-dependent clock routines.
@@ -107,18 +108,20 @@ resettodr()
 }
 
 /*
- * ``Standard'' VAX clock routines.
+ * Standard VAX (DEC STD 032) clock routines.
  */
-#if VAX8600 || VAX8200 || VAX780 || VAX750 || VAX730
 vaxstd_clkstartrt()
 {
 
 	mtpr(NICR, -1000000/hz);
 	mtpr(ICCS, ICCS_RUN+ICCS_IE+ICCS_TRANS+ICCS_INT+ICCS_ERR);
 }
-#endif
 
-#if VAX8600 || VAX780 || VAX750 || VAX730 || VAX650
+uvax_clkstartrt()
+{
+	mtpr(ICCS, ICCS_IE);
+}
+
 vaxstd_clkread(base)
 	time_t base;
 {
@@ -173,12 +176,12 @@ vaxstd_clkwrite()
 	}
 	mtpr(TODR, TODRZERO + yrtime*100);
 }
-#endif
 
-#if VAX8200 || VAX630
+#if NEED_GREGTOY_SUPPORT
 /*
  * This code is defunct after 2099.
- * Will Unix still be here then??
+ * Hopefully by then we will get rid of this Gregorian calendar abomination
+ * and TOY chips based on it, and everyone will implement TODR per DEC STD 032.
  */
 short dayyr[12] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
 

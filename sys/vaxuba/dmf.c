@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dmf.c	7.5 (Berkeley) 1/24/89
+ *	@(#)dmf.c	7.6 (Berkeley) 12/9/04
  */
 
 /*
@@ -217,7 +217,7 @@ dmfopen(dev, flag)
 	}
 	splx(s);
 
-	return (dmxopen(tp, sc));
+	return (dmxopen(tp, sc, flag));
 }
 
 /*

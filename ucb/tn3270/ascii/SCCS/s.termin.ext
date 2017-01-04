@@ -1,0 +1,27 @@
+h20938
+s 00001/00001/00006
+d D 1.2 99/09/12 20:00:48 msokolov 2 1
+c fix SCCS ID keywords
+e
+s 00007/00000/00000
+d D 1.1 87/05/10 11:35:17 minshall 1 0
+c date and time created 87/05/10 11:35:17 by minshall
+e
+u
+U
+t
+T
+I 1
+/*
+D 2
+ *	@(#)termin.ext	3.1  10/29/86
+E 2
+I 2
+ *	%W%  %G%
+E 2
+ */
+
+extern int
+	TerminalIn(),
+	DataFromTerminal();
+E 1

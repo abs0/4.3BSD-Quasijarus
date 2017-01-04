@@ -1,4 +1,20 @@
-h21372
+h14320
+s 00001/00005/00052
+d D 1.13 00/03/27 09:47:17 msokolov 13 12
+c remove unnecessary extra canonicalization hop and fix the special error address
+e
+s 00001/00001/00056
+d D 1.12 00/03/27 09:29:33 msokolov 12 11
+c INTERNET_RELAY, ARPAKLUDGE, and nicregistered.m4 go away, tcp & tcpld => smtp
+e
+s 00000/00000/00057
+d D 1.11 00/03/27 09:02:49 msokolov 11 10
+c bump it up to 1.11
+e
+s 00015/00010/00042
+d D 1.10 00/03/27 09:02:32 msokolov 10 9
+c deltas 1.10-1.11 have apparently been lost, reconstructing from g-file 1.11
+e
 s 00001/00001/00051
 d D 1.9 87/09/01 10:02:51 phil 9 8
 c Change @ to be returned with invalid address.
@@ -43,13 +59,35 @@
 I 1
 divert(10)
 #
+D 10
 #  Sendmail
 #  Copyright (c) 1983  Eric P. Allman
 #  Berkeley, California
+E 10
+I 10
+# Copyright (c) 1983 Eric P. Allman
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
+E 10
 #
+D 10
 #  Copyright (c) 1983 Regents of the University of California.
 #  All rights reserved.  The Berkeley software License Agreement
 #  specifies the terms and conditions for redistribution.
+E 10
+I 10
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 10
 #
 #	%W% (Berkeley) %G%
 #
@@ -67,10 +105,12 @@ divert(0)
 
 S0
 
+D 13
 # first make canonical
 R$*<$*>$*		$1$2$3				defocus
 R$+			$:$>3$1				make canonical
 
+E 13
 D 7
 # handle special cases.....
 E 7
@@ -78,8 +118,18 @@ R$+			$:$>3$1				make canonical
 # handle special cases
 E 7
 I 4
+D 10
 R$*<@[$+]>$*		$:$1<@$[[$2]$]>$3		lookup numeric internet addr
+E 10
+I 10
+R$*<@[$+]>$*		$:$1<@$[[$2]$]>$3		numeric internet addr
+E 10
+D 12
 R$*<@[$+]>$*		$#tcp$@[$2]$:$1@[$2]$3		numeric internet spec
+E 12
+I 12
+R$*<@[$+]>$*		$#smtp$@[$2]$:$1@[$2]$3		numeric internet spec
+E 12
 R$+			$:$>6$1
 E 4
 I 2
@@ -99,7 +149,12 @@ R$-<@$w>		$#local$:$1
 R@			$#local$:$n			handle <> form
 E 9
 I 9
+D 13
 R@			$#error$:Invalid address	handle <> form
+E 13
+I 13
+R@			$#local$:$n			handle <> form
+E 13
 E 9
 D 4
 R$*<@[$+]>$*		$#tcp$@[$2]$:$1@[$2]$3		numeric internet spec
@@ -145,6 +200,7 @@ R$*<@>			$@$>0$1				strip null trash & retry
 R<@$w>:$*		$@$>0$1				@here:... -> ...
 R$*<@$w>		$@$>0$1				...@here -> ...
 E 8
+D 10
 
 # forward around hosts with communication problems
 D 7
@@ -152,6 +208,7 @@ R$*<@$=F.LOCAL>$*	$#tcp$@$F$:$1<@$2.LOCAL>$3	reroute message
 E 7
 I 7
 R$*<@$=F>$*		$#tcp$@$F$:$1<@$2>$3		reroute message
+E 10
 E 7
 
 ##################################

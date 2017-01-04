@@ -1,0 +1,46 @@
+h50071
+s 00002/00008/00009
+d D 5.2 2012/03/10 03:07:51 msokolov 2 1
+c TroffEmu-SuperSpecial => TroffEmu-Supplement
+e
+s 00017/00000/00000
+d D 5.1 2012/03/06 02:52:56 msokolov 1 0
+c date and time created 2012/03/06 02:52:56 by msokolov
+e
+u
+U
+t
+T
+I 1
+# %W% (Berkeley) %E%
+#
+D 2
+# The SS font adds 4 historic troff characters: bs, ci, lh and rh
+E 2
+I 2
+# The SS font provides historic troff characters \(ci and \(lh.
+E 2
+
+D 2
+psname TroffEmu-SuperSpecial
+E 2
+I 2
+psname TroffEmu-Supplement
+E 2
+
+D 2
+namedchar	bs	'B' special
+charwidth	'B'	1139
+
+E 2
+namedchar	ci	'C' special
+charwidth	'C'	750
+
+namedchar	lh	'L' special
+charwidth	'L'	939
+D 2
+
+namedchar	rh	'R' special
+charwidth	'R'	939
+E 2
+E 1

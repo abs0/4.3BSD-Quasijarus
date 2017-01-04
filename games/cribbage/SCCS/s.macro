@@ -1,0 +1,182 @@
+h59275
+s 00010/00005/00127
+d D 5.3 88/06/18 14:39:33 bostic 4 3
+c install approved copyright notice
+e
+s 00008/00002/00124
+d D 5.2 88/03/10 16:28:51 bostic 3 2
+c add Berkeley specific header, Ken Arnold says written @ Berkeley
+e
+s 00004/00001/00122
+d D 5.1 85/05/30 19:50:45 mckusick 2 1
+c Add copyright
+e
+s 00123/00000/00000
+d D 1.1 83/05/19 12:35:02 arnold 1 0
+c date and time created 83/05/19 12:35:02 by arnold
+e
+u
+U
+t
+T
+I 2
+.\" Copyright (c) 1980 Regents of the University of California.
+D 3
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 3
+I 3
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 4
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 4
+I 4
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 4
+E 3
+E 2
+I 1
+.\"
+D 2
+.\" 	%W% (Berkeley) %G%
+E 2
+I 2
+.\"	%W% (Berkeley) %G%
+E 2
+.\"
+.nr  TX  2	\" default line space for text is 2
+.nr  PG  8	\" default paragraph indentation in PG is 8
+.nr  QI  8	\" default indentation for quotes is 8
+.nr  IP  4	\" default indentation for indented paragraph is 4
+.de  TX		\" define text settings
+.ls \\n(TX
+.fi
+..
+.de  NT		\" define non-text setings
+.nf
+.ls 1
+..
+.de  PG		\" define paragraph starter
+.sp
+.ti +\\n(PG
+..
+.de  HD		\" define page header
+'sp 1i
+..
+.de  FO		\" define page footer
+.if \\n%>1 \{\
+'sp 2
+.tl ""- % -""     \}
+'bp
+..
+.wh 0 HD	\" trap invocation of header
+.wh -1i FO	\" trap invocation of footer
+.de  pH		\" define page header
+.ce
+.ul
+\\$1
+.sp 1
+..
+.de  PF		\" define Page header for first page -- no .bp
+.ce
+.ul
+\\$1
+.sp 1
+..
+.de  PH		\" define Page header
+.ce
+.ul
+\\$1
+.sp 1
+..
+.de  HP		\" define paragraph header
+.sp 2
+.ne 4
+.ul
+\\$1
+.PG
+..
+.de  TP		\" define title page
+.ls  1
+   	  
+.sp 3.5i
+.ce
+.ul
+\\$1
+.sp +3i
+.ti +50
+\\$2
+.br
+.ti +50
+\\$3
+.br
+.ti +50
+\\n(mo / \\n(dy  / \\n(yr
+.nr  %  0
+.ls
+..
+.de  KS
+.br
+.di  KB
+..
+.de  KE
+.br
+.di
+.ne  \\n(dnu
+.KB
+..
+.de  QI		\" define indented quote macro
+.sp
+.in +\\n(QI
+.ll -\\n(QI
+.ls 1
+..
+.de  EQ		\" define end quote macro
+.ls
+.sp
+.ll +\\n(QI
+.in -\\n(QI
+..
+.de  IP		\" define indented paragraph macro
+.in +\\n(IP
+.ll -\\n(IP
+.PG
+..
+.de  EP		\" define end indented paragraph macro
+.ll +\\n(IP
+.in -\\n(IP
+..
+.de  IH		\" define indented paragraph header
+.in +\\n(IP
+.ll -\\n(IP
+.sp 2
+.ne 4
+.ul
+\\$1
+.PG
+..
+.de IN
+.in +8
+.br
+.ti -4
+\\$1
+..
+.de NE
+.in -8
+..
+E 1

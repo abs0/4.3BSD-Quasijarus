@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if.h	7.3 (Berkeley) 6/27/88
+ *	@(#)if.h	7.6 (Berkeley) 8/2/02
  */
 
 /*
@@ -89,6 +89,7 @@ struct ifnet {
 /* next two not supported now, but reserved: */
 #define	IFF_PROMISC	0x100		/* receive all packets */
 #define	IFF_ALLMULTI	0x200		/* receive all multicast packets */
+#define	IFF_NOFCS	0x400		/* no frame check sequence at the end */
 /* flags set internally only: */
 #define	IFF_CANTCHANGE	(IFF_BROADCAST | IFF_POINTOPOINT | IFF_RUNNING)
 
@@ -154,6 +155,7 @@ struct ifnet {
 
 #define	IFQ_MAXLEN	50
 #define	IFNET_SLOWHZ	1		/* granularity is 1 second */
+#define	IF_MINMTU	576		/* min we'll allow for variable MTU */
 
 /*
  * The ifaddr structure contains information about one address
@@ -188,6 +190,7 @@ struct	ifreq {
 		struct	sockaddr ifru_broadaddr;
 		short	ifru_flags;
 		int	ifru_metric;
+		short	ifru_mtu;
 		caddr_t	ifru_data;
 	} ifr_ifru;
 #define	ifr_addr	ifr_ifru.ifru_addr	/* address */
@@ -195,6 +198,7 @@ struct	ifreq {
 #define	ifr_broadaddr	ifr_ifru.ifru_broadaddr	/* broadcast address */
 #define	ifr_flags	ifr_ifru.ifru_flags	/* flags */
 #define	ifr_metric	ifr_ifru.ifru_metric	/* metric */
+#define	ifr_mtu		ifr_ifru.ifru_mtu	/* MTU */
 #define	ifr_data	ifr_ifru.ifru_data	/* for use by interface */
 };
 
@@ -220,6 +224,7 @@ struct	ifqueue rawintrq;		/* raw packet input queue */
 struct	ifnet *ifnet;
 struct	ifaddr *ifa_ifwithaddr(), *ifa_ifwithnet();
 struct	ifaddr *ifa_ifwithdstaddr();
+struct	ifnet *ifunit();
 #else KERNEL
 #include <net/if_arp.h>
 #endif KERNEL

@@ -1,0 +1,131 @@
+h18588
+s 00003/00003/00029
+d D 6.4 86/12/03 13:07:43 bostic 6 5
+c correct man page; strings prints decimal offsets, not octal
+e
+s 00012/00024/00020
+d D 6.3 86/11/14 12:34:18 bostic 5 4
+c general fixes
+e
+s 00001/00001/00043
+d D 6.2 86/05/12 09:09:06 anne 4 3
+c punctuation
+e
+s 00001/00001/00043
+d D 6.1 85/04/29 15:02:10 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00043
+d D 5.1 85/04/29 15:01:56 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00044/00000/00000
+d D 4.1 85/04/29 15:01:45 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH STRINGS 1 2/24/79
+E 2
+I 2
+D 3
+.TH STRINGS 1 "24 February 1979"
+E 3
+I 3
+.TH STRINGS 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+D 5
+strings \- find the printable strings in a object, or other binary, file
+E 5
+I 5
+strings \- find the printable strings in a file
+E 5
+.SH SYNOPSIS
+.B strings
+[
+D 5
+.B \-
+E 5
+I 5
+.B \-ao
+E 5
+] [
+D 5
+.B \-o
+] [
+E 5
+\fB\-\fInumber\fR
+D 5
+] file ...
+E 5
+I 5
+] [ file ... ]
+E 5
+.SH DESCRIPTION
+D 5
+.I Strings
+looks for ascii strings in a binary file.
+A string is any sequence of 4 or more printing characters ending with
+a newline or a null.
+Unless the
+.B \-
+flag is given,
+.I strings
+only looks in the initialized data space of object files.
+If the
+.B \-o
+flag is given, then each string is preceded by its offset in the
+file (in octal).
+If the
+\fB\-\fInumber\fR
+flag is given then number is used as the minimum string length
+rather than 4.
+E 5
+I 5
+\fIStrings\fP looks for ascii strings in each of the specified files,
+or from the standard input.  A string is any sequence of 4 or more printing
+characters.  Unless the \fB-a\fP flag is given, \fIstrings\fP only looks
+in the initialized data space of object files.  If the \fB-o\fP flag is
+D 6
+given, then each string is preceded by its offset in the file (in
+octal).  If the \fB-\fInumber\fR flag is given, then \fInumber\fP is
+used as the minimum string length rather than 4.
+E 6
+I 6
+given, then each string is preceded by its decimal offset in the file.
+If the \fB-\fInumber\fR flag is given, then \fInumber\fP is used as the
+minimum string length rather than 4.
+E 6
+E 5
+.PP
+D 5
+.I Strings
+is useful for identifying random object files and many other things.
+E 5
+I 5
+\fIStrings\fP is useful for identifying random object files and
+many other things.
+E 5
+.SH "SEE ALSO"
+od(1)
+.SH BUGS
+D 4
+The algorithm for identifying strings is extremely primitive
+E 4
+I 4
+The algorithm for identifying strings is extremely primitive.
+E 4
+E 1

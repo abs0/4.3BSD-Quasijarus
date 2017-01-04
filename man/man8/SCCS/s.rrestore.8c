@@ -1,0 +1,66 @@
+h28114
+s 00000/00001/00039
+d D 6.2 86/06/03 15:22:14 cuccia 3 2
+c removed hanging BUGS:
+e
+s 00001/00001/00039
+d D 6.1 85/04/27 15:57:38 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00040/00000/00000
+d D 5.1 85/04/27 15:57:21 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RRESTORE 8C "18 January 1983"
+E 2
+I 2
+.TH RRESTORE 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+rrestore \- restore a file system dump across the network
+.SH SYNOPSIS
+.B /etc/rrestore
+[ key [
+name ... ]
+.SH DESCRIPTION
+.I Rrestore
+obtains from magnetic tape files
+saved by a previous
+.IR dump (8).
+The command is identical in operation to
+.IR restore (8)
+except the 
+.I f
+key should be specified and the file
+supplied should be of the form
+.IR machine:device .
+.PP
+.I Rrestore
+creates a remote server,
+.IR /etc/rmt ,
+on the client machine to access the tape
+device.
+.SH "SEE ALSO"
+restore(8),
+rmt(8C)
+.SH DIAGNOSTICS
+Same as 
+.IR restore (8)
+with a few extra related to the network.
+D 3
+.SH BUGS
+E 3
+E 1

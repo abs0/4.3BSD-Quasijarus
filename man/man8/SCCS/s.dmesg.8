@@ -1,0 +1,107 @@
+h38385
+s 00010/00022/00026
+d D 6.2 86/05/19 19:00:28 karels 4 3
+c obsolete
+e
+s 00001/00001/00047
+d D 6.1 85/04/27 13:20:13 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00047
+d D 5.1 85/04/27 13:19:41 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00048/00000/00000
+d D 4.1 85/04/27 13:19:20 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DMESG 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH DMESG 8 "4 February 1983"
+E 3
+I 3
+.TH DMESG 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+dmesg \- collect system diagnostic messages to form error log
+.SH SYNOPSIS
+.B /etc/dmesg
+[ \- ]
+.SH DESCRIPTION
+I 4
+.B N.B.:
+E 4
+.I Dmesg
+I 4
+is obsoleted by
+.IR syslogd (8)
+for maintenance of the system error log.
+.PP
+.I Dmesg
+E 4
+looks in a system buffer for recently printed diagnostic messages
+and prints them on the standard output.
+D 4
+The messages are those printed by the system when device (hardware) errors
+occur and (occasionally) when system tables overflow non-fatally.
+E 4
+I 4
+The messages are those printed or logged
+by the system when errors occur.
+E 4
+If the
+.B \-
+flag is given, then
+.I dmesg
+computes (incrementally) the new messages since the last time it
+was run and places these on the standard output.
+D 4
+This is typically used with
+.IR cron (8)
+to produce the error log
+.I /usr/adm/messages
+by running the command
+.IP
+/etc/dmesg \- >> /usr/adm/messages
+.LP
+every 10 minutes.
+E 4
+.SH FILES
+.ta 2i
+D 4
+/usr/adm/messages	error log (conventional location)
+.br
+E 4
+/usr/adm/msgbuf	scratch file for memory of \- option
+D 4
+.SH BUGS
+The system error message buffer is of small finite size.  As
+.I dmesg
+is run only every few minutes, not all error messages
+are guaranteed to be logged.  This can be construed as a blessing rather
+than a curse.
+.PP
+Error diagnostics generated immediately before a system crash will
+never get logged.
+E 4
+I 4
+.SH SEE ALSO
+syslogd(8)
+E 4
+E 1

@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)Title	6.1 (Berkeley) 5/14/86
+.\"	@(#)Title	6.2 (Berkeley) 11/2/04
 .\"
 .ps 18
 .vs 22
@@ -16,13 +16,13 @@ UNIX User's Supplementary Documents
 .sp |4i
 .ce 2
 4.3 Berkeley Software Distribution
-Virtual VAX\-11 Version
+Harhan Preliminary Edition
 .sp |5.75i
 .ft R
 .pt 12
 .vs 16
 .ce
-April, 1986
+November, 2004
 .sp |8.2i
 .ce 5
 Computer Systems Research Group

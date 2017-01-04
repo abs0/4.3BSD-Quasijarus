@@ -1,4 +1,20 @@
-h52833
+h04703
+s 00000/00007/00046
+d D 1.11 00/03/27 09:33:18 msokolov 12 11
+c INTERNET_RELAY, ARPAKLUDGE, and nicregistered.m4 go away, tcp & tcpld => smtp
+e
+s 00000/00000/00053
+d D 1.10 00/03/27 08:51:41 msokolov 11 10
+c bump it up to 1.10
+e
+s 00000/00000/00053
+d D 1.9 00/03/27 08:51:27 msokolov 10 9
+c bump it up to 1.10
+e
+s 00035/00015/00018
+d D 1.8 00/03/27 08:51:09 msokolov 9 8
+c deltas 1.8-1.10 have apparently been lost, reconstructing from g-file 1.10
+e
 s 00001/00001/00032
 d D 1.7 88/04/08 11:50:29 phil 8 7
 c Fully qualify major relay name.
@@ -38,13 +54,35 @@
 I 1
 divert(10)
 #
+D 9
 #  Sendmail
 #  Copyright (c) 1983  Eric P. Allman
 #  Berkeley, California
+E 9
+I 9
+# Copyright (c) 1983 Eric P. Allman
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
+E 9
 #
+D 9
 #  Copyright (c) 1983 Regents of the University of California.
 #  All rights reserved.  The Berkeley software License Agreement
 #  specifies the terms and conditions for redistribution.
+E 9
+I 9
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 9
 #
 #	%W% (Berkeley) %G%
 #
@@ -53,7 +91,17 @@ divert(0)
 #   General Macros   #
 ######################
 
+D 9
 # our arpanet gateway
+E 9
+I 9
+# local domain name
+ifdef(`DOMAIN',
+DOMAIN,
+`#' YOUR DOMAIN NAME GOES HERE!
+DDYOUR_DOMAIN_NAME)
+
+E 9
 D 5
 DABERKELEY.EDU
 E 5
@@ -62,12 +110,24 @@ DABERKELEY.EDU
 DABerkeley.EDU
 E 7
 I 7
+D 12
 ifdef(`INTERNET_RELAY',
+D 9
 INTERNET_RELAY,
 DAucbvax.Berkeley.EDU)
+E 9
+I 9
+`#' Internet relay host -- machines in our domain that are not
+`#' registered with the NIC will be "hidden" behind this relay machine
+`#' with the % kludge`,' although SMTP delivery will still be performed
+`#' by the sending machine.  Someday this will go away.
+INTERNET_RELAY)
+E 9
 E 7
 E 5
 
+E 12
+D 9
 # local domain names
 D 2
 DDBERKELEY
@@ -82,6 +142,7 @@ DDBerkeley.EDU
 E 2
 
 # major relay host
+E 9
 D 5
 DRUCBVAX
 E 5
@@ -91,12 +152,26 @@ DRucbvax
 E 7
 I 7
 ifdef(`UUCP_RELAY',
+D 9
 UUCP_RELAY,
 D 8
 DRucbvax)
 E 8
 I 8
 DRucbvax.Berkeley.EDU)
+E 9
+I 9
+`#' UUCP relay host
+UUCP_RELAY)
+
+ifdef(`CSNET_RELAY',
+`#' csnet relay host
+CSNET_RELAY)
+
+ifdef(`BITNET_RELAY',
+`#' bitnet relay host
+BITNET_RELAY)
+E 9
 E 8
 E 7
 E 5

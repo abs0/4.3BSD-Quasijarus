@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)bootxx.c	7.4 (Berkeley) 2/4/88
+ *	@(#)bootxx.c	7.5 (Berkeley) 2/26/04
  */
 
 #include "param.h"
@@ -49,8 +49,7 @@ copyunix(howto, devtype, io)
 	i = read(io, (char *)&x, sizeof x);
 	if (i != sizeof x || N_BADMAG(x))
 		_stop("Bad format\n");
-	if ((x.a_magic == ZMAGIC || x.a_magic == NMAGIC) &&
-	    lseek(io, 0x400, L_SET) == -1)
+	if (x.a_magic == ZMAGIC && lseek(io, 0x400, L_SET) == -1)
 		goto shread;
 	if (read(io, (char *)0, x.a_text) != x.a_text)
 		goto shread;

@@ -3,20 +3,20 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.2 (Berkeley) 4/16/86
+#	@(#)Makefile	6.3 (Berkeley) 10/24/04
 #
 SRCS=	intro.me
-DEVICE=	dp
-TROFF=	ditroff -P${DEVICE}
+TROFF=	pstroff
 
-paper:	intro.${DEVICE}
-	lpr -P${DEVICE} -n intro.${DEVICE}
+all:	intro.ps
 
-intro.${DEVICE}: ${SRCS}
-	${TROFF} -me -t ${SRCS} > intro.${DEVICE}
+intro.ps: ${SRCS}
+	${TROFF} -me -t ${SRCS} > intro1.ps
+	psrange intro1.ps 2- > intro.ps
+	rm -f intro1.ps
 
 clean:
-	rm -f intro.${DEVICE} *.spell errs Errs make.out
+	rm -f *.ps *.spell errs Errs make.out
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \

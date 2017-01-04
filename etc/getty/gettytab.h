@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)gettytab.h	5.2 (Berkeley) 1/7/86
+ *	@(#)gettytab.h	5.5 (Berkeley) 12/8/04
  */
 
 /*
@@ -105,6 +105,7 @@ struct gettyflags {
 #define UB	gettyflags[18].value
 #define AB	gettyflags[19].value
 #define DX	gettyflags[20].value
+#define P8	gettyflags[21].value
 
 int	getent();
 long	getnum();

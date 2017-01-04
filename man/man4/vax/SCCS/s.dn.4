@@ -1,0 +1,186 @@
+h56743
+s 00001/00001/00073
+d D 6.1 85/05/15 17:19:09 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00056/00044/00018
+d D 5.1 85/05/15 17:19:00 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00062/00000/00000
+d D 4.1 85/05/15 17:18:52 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DN 4 12/2/81
+E 2
+I 2
+D 3
+.TH DN 4 "27 July 1983"
+E 3
+I 3
+.TH DN 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+dn \- dn-11 automatic calling unit interface
+E 2
+I 2
+dn \- DN-11 autocall unit interface
+E 2
+.SH SYNOPSIS
+D 2
+device dn0 at uba0 csr 0175200 vector dnintr
+E 2
+I 2
+.B "device dn0 at uba? csr 0160020 vector dnintr"
+E 2
+.SH DESCRIPTION
+D 2
+A dn-11 is a controller for an automatic calling unit (ACU).
+With a dn-11, a call unit, and a modem
+a computer may dial a telephone number and establish a data link.
+Hardware supporting this interface includes the DEC DN11 and Able
+Quadracall controllers working with either Bell 801 or Racal/Vadic
+801 or 811 call units.
+E 2
+I 2
+The
+.I dn
+device provides an interface through a DEC DN-11 (or equivalent
+such as the Able Quadracall) to an auto-call unit (ACU).
+To place an outgoing call one forks a sub-process which
+opens the appropriate call unit file,
+.I /dev/cua?
+and writes the phone number on it.  The parent process
+then opens the corresponding modem line
+.IR /dev/cul? .
+When the connection has been
+established, the open on the modem line,
+.I /dev/cul?
+will return and the process will be connected.
+A timer is normally used to timeout the opening of 
+the modem line.
+E 2
+.PP
+D 2
+A dn-11 interface can control as many as four call units.
+In normal operation
+a data link is established by opening the file associated with
+a call unit, sending the desired phone number in a single
+.IR write (2)
+operation, then opening the terminal line attached to the appropriate
+outgoing modem.  If the phone call was successful and the remote host
+presented a carrier signal, the open on the terminal line should be
+successful.  At this point the call unit should be closed and a link
+has been established.  This sequence is normally performed for the user
+by one of 
+.IR cu (1),
+.IR uucp (1),
+or
+.IR dnd (8).
+E 2
+I 2
+The codes for the phone numbers are:
+E 2
+.PP
+D 2
+Each controller/call unit pair has different programming 
+characteristics which
+impact the programmer; the dn-11 interface presents a
+.I "raw interface"
+rather than imbed local dependencies in the device driver.  For
+example, the Racal/Vadic 811 call unit is multiplexed,
+providing the user with the ability to place phones calls on as many as
+64 separate phone lines from a single interface.  This multiplexing
+is carried out based on the first two digits of the phone number presented
+by the user (the first digit selects the modem's rack and modem type, while
+the second digit selects the specific modem in the rack).
+E 2
+I 2
+.nf
+.ta \w'0-9    'u
+0-9	dial 0-9
+*	dial * (`:' is a synonym)
+#	dial # (`;' is a synonym)
+\-	delay 20 milliseconds
+<	end-of-number (`e' is a synonym)
+=	delay for a second dial tone (`w' is a synonym)
+f	force a hangup of any existing connection
+.fi
+E 2
+.PP
+D 2
+The legal dn-11 dial codes are: \fB0-9\fP, \fB*\fP (\fB:\fP is a synonym),
+\fB#\fP (\fB;\fP is a synonym), \fB=\fP (\fBw\fP is a synonym), and \fB\-\fP.
+A phone number may optionally be terminated with a \fB<\fP or \fBe\fP.
+Phone numbers may be no more than 40 characters long.
+E 2
+I 2
+The entire telephone number must be presented in a single
+.I write
+system call.
+E 2
+.PP
+D 2
+By convention /dev/cu[al]0 are connected to a 300 baud interface, while
+/dev/cu[al]1 provides a 1200 baud interface.
+E 2
+I 2
+By convention, even numbered call units are for 300 baud
+modem lines, while odd numbered units are for 1200 baud lines.
+For example,
+.I /dev/cua0
+is associated with a 300 baud modem line,
+.IR /dev/cul0 ,
+while
+.I /dev/cua1
+is associated with a 1200 baud modem line,
+.IR /dev/cul1 .
+For devices such as the Quadracall which simulate multiple DN-11
+units, the minor device indicates which outgoing modem to use.
+E 2
+.SH FILES
+.DT
+D 2
+/dev/cua[0-9]	ACU interfaces
+E 2
+I 2
+/dev/cua?	call units
+E 2
+.br
+D 2
+/dev/cul[0-9]	associated outgoing terminal line
+E 2
+I 2
+/dev/cul?	associated modem lines
+E 2
+.SH "SEE ALSO"
+D 2
+rv(4)
+E 2
+I 2
+tip(1C)
+.SH DIAGNOSTICS
+Two error numbers are of interest at open time.
+.TP 10
+[EBUSY]
+The dialer is in use.
+.TP 
+[ENXIO]
+The device doesn't exist, or there's no power to it.
+E 2
+E 1

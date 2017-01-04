@@ -1,0 +1,124 @@
+h24251
+s 00010/00005/00030
+d D 6.3 88/07/09 11:45:01 bostic 5 4
+c install approved copyright notice
+e
+s 00016/00018/00019
+d D 6.2 87/11/24 18:02:06 bostic 4 3
+c change diagnostics to indicate reality
+e
+s 00001/00001/00036
+d D 6.1 85/04/29 17:50:17 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00003/00032
+d D 5.1 85/04/29 17:50:08 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00035/00000/00000
+d D 4.1 85/04/29 17:49:59 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 4
+.\" Copyright (c) 1987 Regents of the University of California.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 5
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific written prior permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 5
+I 5
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 5
+.\"
+E 4
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MESG 1 
+E 2
+I 2
+D 3
+.TH MESG 1 "18 July 1983"
+E 3
+I 3
+.TH MESG 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+mesg \- permit or deny messages
+.SH SYNOPSIS
+.B mesg
+[
+.B n
+] [
+.B y
+]
+.SH DESCRIPTION
+D 4
+.I Mesg
+with argument
+.B n
+forbids messages via
+D 2
+.IR  write (1)
+E 2
+I 2
+.I  write
+and
+.IR talk (1)
+E 2
+by revoking non-user
+write permission on the user's terminal.
+.I Mesg
+with argument
+.B y
+reinstates permission.
+All by itself,
+.I mesg
+reports the current state without changing it.
+E 4
+I 4
+\fIMesg\fP with argument \fBn\fP forbids messages via \fIwrite\fP
+and \fItalk\fP by revoking non-user write permission on the user's
+terminal.  \fIMesg\fP with argument \fBy\fP reinstates permission.
+\fIMesg\fP without arguments reports the current state without
+changing it.
+E 4
+.SH FILES
+/dev/tty*
+.SH "SEE ALSO"
+D 2
+write(1)
+E 2
+I 2
+write(1), talk(1)
+E 2
+.SH DIAGNOSTICS
+D 4
+Exit status is 0 if messages are receivable,
+1 if not, 2 on error.
+E 4
+I 4
+Exit status is 0 if messages are receivable, 1 if not, -1 on error.
+E 4
+E 1

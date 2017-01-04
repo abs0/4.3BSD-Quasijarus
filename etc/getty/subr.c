@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)subr.c	5.4 (Berkeley) 1/7/86";
+static char sccsid[] = "@(#)subr.c	5.7 (Berkeley) 12/8/04";
 #endif not lint
 
 /*
@@ -142,7 +142,9 @@ setflags(n)
 
 	f = 0;
 
-	if (AP)
+	if (P8)
+		f |= PASS8;
+	else if (AP)
 		f |= ANYP;
 	else if (OP)
 		f |= ODDP;

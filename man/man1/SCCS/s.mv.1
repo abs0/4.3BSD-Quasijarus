@@ -1,0 +1,171 @@
+h14051
+s 00001/00001/00088
+d D 6.1 85/04/29 14:38:50 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00010/00022/00079
+d D 5.1 85/04/29 14:38:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00101/00000/00000
+d D 4.1 85/04/29 14:38:34 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MV 1 4/1/81
+E 2
+I 2
+D 3
+.TH MV 1 "1 April 1981"
+E 3
+I 3
+.TH MV 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+mv \- move or rename files
+.SH SYNOPSIS
+.B mv
+[
+.B \-i
+] [
+.B \-f
+] [
+.B \-
+] file1 file2
+.PP
+.B mv
+[
+.B \-i
+] [
+.B \-f
+] [
+.B \-
+] file ... directory
+.SH DESCRIPTION
+.I Mv
+moves (changes the name of)
+.I file1
+to
+.IR file2 .
+.PP
+If
+.I file2
+D 2
+already exists,
+it is removed before
+E 2
+I 2
+already exists, it is removed before
+E 2
+.I file1
+D 2
+is moved.
+If
+E 2
+I 2
+is moved.  If
+E 2
+.I file2
+has a mode which forbids writing,
+.I mv
+prints the mode (see
+.IR chmod (2))
+D 2
+and
+reads the standard input to obtain a line;
+if the line begins with
+E 2
+I 2
+and reads the standard input to obtain a line; if the line begins with
+E 2
+.B y,
+D 2
+the move takes place;
+if not,
+E 2
+I 2
+the move takes place; if not,
+E 2
+.I mv
+exits.
+.PP
+D 2
+In the second form,
+one or more
+E 2
+I 2
+In the second form, one or more
+E 2
+.I files
+D 2
+are moved to the
+E 2
+I 2
+(plain files or directories) are moved to the
+E 2
+.I directory
+D 2
+with their original
+file-names.
+E 2
+I 2
+with their original file-names.
+E 2
+.PP
+.I Mv
+refuses to move a file onto itself.
+.PP
+Options:
+.TP
+.B \-i
+stands for interactive mode. Whenever a move is to supercede an
+existing file, the user is prompted by the name of the file
+followed by a question mark. If he answers with a line starting
+with 'y', the move continues. Any other reply prevents the move from
+occurring.
+.TP
+.B \-f
+stands for force. This option overrides any mode restrictions or the
+\-i switch.
+.TP
+.B \-
+means interpret all the following arguments to 
+.I mv
+as file names.  This allows file names starting with minus.
+.SH "SEE ALSO"
+cp(1), ln(1)
+.SH BUGS
+If
+.I file1
+and
+.I file2
+lie on different file systems,
+.I mv
+must copy the file and delete the original.
+D 2
+In this case the owner name becomes
+that of the copying process and any
+linking relationship with other files
+is lost.
+.PP
+Directories may only be moved within the same parent
+directory.
+E 2
+I 2
+In this case the owner name becomes that of the copying process and any
+linking relationship with other files is lost.
+E 2
+E 1

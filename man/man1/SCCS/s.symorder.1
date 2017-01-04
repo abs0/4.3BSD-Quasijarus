@@ -1,0 +1,58 @@
+h31949
+s 00001/00001/00028
+d D 6.1 85/04/29 15:04:26 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00028
+d D 5.1 85/04/29 15:04:15 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00029/00000/00000
+d D 4.1 85/04/29 15:04:04 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SYMORDER 1 10/20/79
+E 2
+I 2
+D 3
+.TH SYMORDER 1 "20 October 1979"
+E 3
+I 3
+.TH SYMORDER 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+symorder \- rearrange name list
+.SH SYNOPSIS
+.B symorder
+orderlist symbolfile
+.SH DESCRIPTION
+.I Orderlist
+is a file containing symbols to be found in symbolfile,
+1 symbol per line.
+.PP
+.I Symbolfile
+is updated in place to put the requested symbols first
+in the symbol table, in the order specified.  This is done
+by swapping the old symbols in the required spots with the
+new ones.  If all of the order symbols are not found, an
+error is generated.
+.PP
+This program was specifically designed to cut down on the
+overhead of getting symbols from /vmunix.
+.SH "SEE ALSO"
+nlist(3)
+E 1

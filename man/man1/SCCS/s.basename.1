@@ -1,0 +1,66 @@
+h11655
+s 00001/00001/00031
+d D 6.1 85/04/29 17:39:27 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00030
+d D 5.1 85/04/29 17:39:18 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00032/00000/00000
+d D 4.1 85/04/29 17:39:06 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BASENAME 1 
+E 2
+I 2
+D 3
+.TH BASENAME 1 "1 April 1981"
+E 3
+I 3
+.TH BASENAME 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+basename \- strip filename affixes
+.SH SYNOPSIS
+.B basename
+string [ suffix ]
+.SH DESCRIPTION
+.I Basename
+deletes any prefix ending in `/' and the
+.I suffix,
+if present in
+.I string,
+from
+.I string,
+and prints the result on the standard output.
+It is normally used inside substitution marks \`\ \`
+in shell procedures.
+.PP
+This shell procedure invoked with the argument
+D 2
+.I /usr/src/cmd/cat.c
+E 2
+I 2
+.I /usr/src/bin/cat.c
+E 2
+compiles the named file and moves the output to
+.I cat
+in the current directory:
+.IP "" 15n
+cc $1
+.br
+mv a.out \`basename $1 .c\`
+.SH "SEE ALSO"
+sh(1)
+E 1

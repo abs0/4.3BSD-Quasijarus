@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.27 (Berkeley) 1/25/99
+#	@(#)Makefile	5.28 (Berkeley) 10/21/04
 #
 DESTDIR=
 CFLAGS=	-O
@@ -21,11 +21,11 @@ SCRIPT=	fastboot fasthalt
 
 # C sources that live in the current directory
 #
-SRCS=	ac.c accton.c badsect.c chown.c clri.c comsat.c cron.c dcheck.c \
-	disklabel.c diskpart.c dumpfs.c edquota.c fingerd.c fsdb.c fstat.c \
-	gettable.c halt.c icheck.c ifconfig.c inetd.c mknod.c mkpasswd.c \
-	mkproto.c mount.c ncheck.c quot.c quotacheck.c quotaon.c reboot.c \
-	renice.c repquota.c rexecd.c rlogind.c rmt.c route.c rshd.c \
+SRCS=	ac.c accton.c badsect.c catman.c chown.c clri.c comsat.c cron.c \
+	dcheck.c disklabel.c diskpart.c dumpfs.c edquota.c fingerd.c fsdb.c \
+	fstat.c gettable.c halt.c icheck.c ifconfig.c inetd.c mknod.c \
+	mkpasswd.c mkproto.c mount.c ncheck.c quot.c quotacheck.c quotaon.c \
+	reboot.c renice.c repquota.c rexecd.c rlogind.c rmt.c route.c rshd.c \
 	rwhod.c sa.c savecore.c slattach.c swapon.c syslogd.c telnetd.c \
 	tunefs.c umount.c update.c vipw.c arp.c dmesg.c init.c kgmon.c \
 	ping.c pstat.c shutdown.c trpt.c
@@ -33,7 +33,7 @@ SRCS=	ac.c accton.c badsect.c chown.c clri.c comsat.c cron.c dcheck.c \
 # C programs that live in the current directory and do not need
 # explicit make lines.
 #
-STD=	ac accton badsect chown clri comsat cron dcheck diskpart dumpfs \
+STD=	ac accton badsect catman chown clri comsat cron dcheck diskpart dumpfs \
 	edquota fingerd fsdb gettable halt icheck ifconfig inetd mknod \
 	mkpasswd mkproto mount ncheck quot quotacheck quotaon reboot renice \
 	repquota rexecd rlogind rmt route rshd rwhod sa savecore slattach \
@@ -125,6 +125,9 @@ badsect: /usr/include/machine/trap.h /usr/include/machine/machparam.h
 badsect: /usr/include/machine/endian.h /usr/include/sys/fs.h
 badsect: /usr/include/sys/dir.h /usr/include/sys/stat.h
 badsect: /usr/include/sys/inode.h
+catman: catman.c /usr/include/stdio.h /usr/include/sys/types.h
+catman: /usr/include/sys/stat.h /usr/include/sys/file.h /usr/include/sys/time.h
+catman: /usr/include/time.h /usr/include/sys/dir.h /usr/include/ctype.h
 chown: chown.c /usr/include/sys/param.h /usr/include/sys/types.h
 chown: /usr/include/signal.h /usr/include/machine/trap.h
 chown: /usr/include/machine/machparam.h /usr/include/machine/endian.h
@@ -183,7 +186,7 @@ edquota: /usr/include/machine/machparam.h /usr/include/machine/endian.h
 edquota: /usr/include/sys/stat.h /usr/include/sys/file.h
 edquota: /usr/include/sys/quota.h
 fingerd: fingerd.c /usr/include/sys/types.h /usr/include/netinet/in.h
-fingerd: /usr/include/stdio.h /usr/include/ctype.h
+fingerd: /usr/include/stdio.h /usr/include/ctype.h /usr/include/strings.h
 fsdb: fsdb.c /usr/include/sys/param.h /usr/include/sys/types.h
 fsdb: /usr/include/signal.h /usr/include/machine/trap.h
 fsdb: /usr/include/machine/machparam.h /usr/include/machine/endian.h
@@ -220,10 +223,10 @@ icheck: /usr/include/sys/fs.h
 ifconfig: ifconfig.c /usr/include/sys/types.h /usr/include/sys/socket.h
 ifconfig: /usr/include/sys/ioctl.h /usr/include/sys/ttychars.h
 ifconfig: /usr/include/sys/ttydev.h /usr/include/net/if.h
-ifconfig: /usr/include/net/if_arp.h /usr/include/netinet/in.h
-ifconfig: /usr/include/netns/ns.h /usr/include/netns/ns_if.h
-ifconfig: /usr/include/stdio.h /usr/include/errno.h /usr/include/ctype.h
-ifconfig: /usr/include/netdb.h
+ifconfig: /usr/include/net/if_arp.h /usr/include/net/if_pppvar.h
+ifconfig: /usr/include/netinet/in.h /usr/include/netns/ns.h
+ifconfig: /usr/include/netns/ns_if.h /usr/include/stdio.h /usr/include/errno.h
+ifconfig: /usr/include/ctype.h /usr/include/netdb.h
 inetd: inetd.c /usr/include/sys/param.h /usr/include/sys/types.h
 inetd: /usr/include/signal.h /usr/include/machine/trap.h
 inetd: /usr/include/machine/machparam.h /usr/include/machine/endian.h
@@ -350,6 +353,7 @@ slattach: /usr/include/sys/ioctl.h /usr/include/sys/ttychars.h
 slattach: /usr/include/sys/ttydev.h /usr/include/sys/socket.h
 slattach: /usr/include/netinet/in.h /usr/include/net/if.h
 slattach: /usr/include/net/if_arp.h /usr/include/netdb.h /usr/include/fcntl.h
+slattach: /usr/include/ctype.h
 swapon: swapon.c /usr/include/fstab.h /usr/include/errno.h /usr/include/stdio.h
 syslogd: syslogd.c /usr/include/stdio.h /usr/include/utmp.h
 syslogd: /usr/include/ctype.h /usr/include/strings.h /usr/include/setjmp.h

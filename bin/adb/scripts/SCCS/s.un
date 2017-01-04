@@ -1,0 +1,15 @@
+h15668
+s 00004/00000/00000
+d D 5.1 88/03/30 14:46:18 bostic 1 0
+c date and time created 88/03/30 14:46:18 by bostic
+e
+u
+U
+t
+T
+I 1
+.>h
+$<<ifnet
+<h+0d4/"state"8t"errcnt"8t"restart"n3d
+<h+0da/"maxtime"8t"maxerr"8t"errtime"n2bY
+E 1

@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)lp.h	5.3 (Berkeley) 6/30/88
+ *	@(#)lp.h	5.7 (Berkeley) 9/3/04
  */
 
 /*
@@ -60,6 +60,9 @@ extern char	*DF;		/* name of tex filter (per job) */
 extern char	*GF;		/* name of graph(1G) filter (per job) */
 extern char	*VF;		/* name of raster filter (per job) */
 extern char	*CF;		/* name of cifplot filter (per job) */
+extern char	*BF;		/* name of banner filter */
+extern char	*PP;		/* name of printer prep program */
+extern char	*JP;		/* name of job prep program */
 extern char	*FF;		/* form feed string */
 extern char	*TR;		/* trailer string to be output when Q empties */
 extern short	SC;		/* suppress multiple copies */
@@ -68,10 +71,13 @@ extern short	SH;		/* suppress header page */
 extern short	SB;		/* short banner instead of normal header */
 extern short	HL;		/* print header last */
 extern short	RW;		/* open LP for reading and writing */
+extern short	CT;		/* check printer for readiness with ^T */
 extern short	PW;		/* page width */
 extern short	PX;		/* page width in pixels */
 extern short	PY;		/* page length in pixels */
 extern short	PL;		/* page length */
+extern short	EA;		/* pass extended arguments to filters */
+extern short	PI;		/* input filter incorporates pr functionality */
 extern short	BR;		/* baud rate if lp is a tty */
 extern int	FC;		/* flags to clear if lp is a tty */
 extern int	FS;		/* flags to set if lp is a tty */

@@ -1,0 +1,124 @@
+h06953
+s 00016/00016/00035
+d D 6.2 86/05/16 15:55:18 karels 4 3
+c updates
+e
+s 00001/00001/00050
+d D 6.1 85/05/15 17:23:07 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00003/00047
+d D 5.1 85/05/15 17:22:57 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00050/00000/00000
+d D 4.1 85/05/15 17:22:49 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MEM 4 
+E 2
+I 2
+D 3
+.TH MEM 4 "9 February 1983"
+E 3
+I 3
+.TH MEM 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+mem, kmem \- main memory
+.SH DESCRIPTION
+.lg
+.I Mem
+is a special file that is an image of the main memory
+of the computer.
+It may be used, for example, to examine
+(and even to patch) the system.
+.PP
+Byte addresses in
+.I mem
+are interpreted as physical memory addresses.
+References to non-existent locations cause errors to be returned.
+.PP
+D 4
+Examining and patching device registers is likely
+to lead to unexpected results when read-only or write-only
+bits are present.
+.PP
+E 4
+The file
+.I kmem
+is the same as 
+.I mem
+except that kernel virtual memory
+rather than physical memory is accessed.
+I 4
+Only kernel virtual addresses that are mapped to memory are allowed.
+The file
+.I kUmem
+also refers to kernel virtual memory,
+but may be used to access areas mapped to UNIBUS address space
+and other I/O areas.
+It forces all accesses to use word (short integer) accesses.
+Examining and patching device registers is likely
+to lead to unexpected results when read-only or write-only
+bits are present.
+E 4
+.PP
+D 4
+On PDP11's, the I/O page
+begins at location 0160000 of
+.I kmem
+and per-process data for the current process
+begins at 0140000.
+E 4
+On VAX 11/780 the I/O space begins at physical address 20000000(16);
+D 4
+on an 11/750 I/O space addresses are of the form fxxxxx(16); on all VAX'en
+per-process data f\&or the current process is at virtual
+7f\&f\&f\&f\&000(16).
+E 4
+I 4
+on an 11/750 I/O space addresses are of the form fxxxxx(16).
+On all VAX'en
+per-process data for the current process is UPAGES long, and ends at virtual
+address 80000000(16).
+E 4
+.SH FILES
+D 2
+/dev/mem,
+E 2
+I 2
+/dev/mem
+.br
+E 2
+/dev/kmem
+D 4
+.SH BUGS
+On PDP11's and VAX's, memory files are accessed one byte
+D 2
+at a time, an inappropiate method for some
+E 2
+I 2
+at a time, an inappropriate method for some
+E 2
+device registers.
+E 4
+I 4
+.br
+/dev/kUmem
+E 4
+E 1

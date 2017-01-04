@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ex_temp.h	7.4 (Berkeley) 5/31/85
+ *	@(#)ex_temp.h	7.5 (Berkeley) 4/13/03
  */
 
 /*
@@ -84,9 +84,9 @@ var short	tline;		/* Current temp file ptr */
 var int	tline;
 #endif
 
-var char	ibuff[BUFSIZ];
-var char	ibuff2[BUFSIZ];
-var char	obuff[BUFSIZ];
+var u_char	ibuff[BUFSIZ];
+var u_char	ibuff2[BUFSIZ];
+var u_char	obuff[BUFSIZ];
 
 /*
  * Structure of the descriptor block which resides
@@ -111,7 +111,7 @@ struct 	header {
 #else
 	int	Flines;
 #endif
-	char	Savedfile[FNSIZE];	/* The current file name */
+	u_char	Savedfile[FNSIZE];	/* The current file name */
 	short	Blocks[LBLKS];		/* Blocks where line pointers stashed */
 }; 
 var struct 	header H;

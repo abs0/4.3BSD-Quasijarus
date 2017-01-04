@@ -1,0 +1,298 @@
+h15237
+s 00016/00015/00070
+d D 6.4 86/05/20 09:36:02 karels 6 5
+c bogosity is fixed
+e
+s 00004/00003/00081
+d D 6.3 86/05/17 17:18:31 lepreau 5 4
+c only some fields can be quoted.  what a botch
+e
+s 00022/00010/00062
+d D 6.2 86/05/17 16:39:54 lepreau 4 3
+c ungarble; enumerate flag and window strings
+e
+s 00055/00022/00017
+d D 6.1 85/05/15 18:16:06 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00019/00019/00020
+d D 5.1 85/05/15 18:15:58 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00039/00000/00000
+d D 4.1 85/05/15 18:15:52 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TTYS 5 
+E 2
+I 2
+D 3
+.TH TTYS 5  "18 July 1983"
+E 3
+I 3
+.TH TTYS 5  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+ttys \- terminal initialization data
+.SH DESCRIPTION
+The
+.I ttys
+D 3
+file is read by the
+.I init
+D 2
+program and specifies
+which terminal special files are to have
+a process created for them which will allow people to
+log in.
+It contains one line per special file.
+E 2
+I 2
+program and specifies which terminal special files are to have
+a process created for them so that people can log in.
+E 3
+I 3
+file contains information that is used by various routines to initialize
+and control the use of terminal special files. This information is read
+with the
+.IR getttyent (3)
+library routines.
+E 3
+There is one line in the 
+.I ttys
+file per special file.
+E 2
+D 3
+.PP
+D 2
+The first character of a line is either `0' or `1';
+the former causes the line to be ignored,
+the latter causes it to be effective.
+The second character is used as an argument to
+E 2
+I 2
+The first character of a line in the 
+.I ttys
+file is either `0' or `1'.  If the first character on the line is a `0', the 
+.I init
+program ignores that line.  If the first character on the line is a `1', the
+.I init
+program creates a login process for that line.
+The second character on each line is used as an argument to
+E 3
+I 3
+Fields are separated by tabs and/or spaces.
+D 4
+A field of more than one word may be enclosed by quotes.
+E 4
+I 4
+D 5
+A field of more than one word should be enclosed in double quotes.
+E 5
+I 5
+Some fields may contain more than one word and should be enclosed
+in double quotes.
+E 5
+E 4
+Blank lines and comments can appear anywhere in the file; comments
+D 6
+are delimited by `#' and new line. Unspecified fields default to
+the empty string or zero as appropriate.
+E 6
+I 6
+are delimited by `#' and new line. Unspecified fields default to null.
+E 6
+The first field is the terminal's entry in the device directory, /dev.
+The second field of the file is the command to execute for the line,
+typically
+E 3
+E 2
+.IR getty (8),
+D 2
+which performs such tasks as baud-rate recognition,
+reading the login name,
+E 2
+I 2
+which performs such tasks as baud-rate recognition, reading the login name,
+E 2
+and calling
+D 3
+.I login.
+D 2
+For normal lines,
+the character is `0';
+E 2
+I 2
+For normal lines, the character is `0';
+E 2
+other characters can be used, for example, with hard-wired terminals
+D 2
+where speed recognition is unnecessary
+or which have special characteristics.
+E 2
+I 2
+where speed recognition is unnecessary or which have special characteristics.
+E 2
+.RI ( Getty
+will have to be fixed in such cases.)
+D 2
+The remainder of the line is the terminal's entry
+in the device directory, /dev.
+E 2
+I 2
+The remainder of the line is the terminal's entry in the device directory, /dev.
+E 3
+I 3
+.IR login (1).
+D 6
+It can be, however, any command you wish, for example
+E 6
+I 6
+It can be, however, any desired command, for example
+E 6
+D 4
+the start up for a window system terminal emulator or maintain other
+daemon processes.
+The third field is the type of terminal normally connected to the
+terminal special file as found in the
+E 4
+I 4
+the start up for a window system terminal emulator or some other
+D 5
+daemon process.
+E 5
+I 5
+daemon process, and can contain multiple words if quoted.
+E 5
+The third field is the type of terminal normally connected to that
+tty line, as found in the
+E 4
+.IR termcap (5)
+data base file.
+D 4
+The remaining fields are flags to be set in the
+E 4
+I 4
+The remaining fields set flags in the
+E 4
+.I ty_status
+entry (see
+.IR getttyent (3))
+D 4
+or for a window system process indicated by
+the "window" keyword that
+.IR init(8)
+E 4
+I 4
+or specify a window system process that
+.IR init (8)
+E 4
+will maintain for the terminal line.
+I 4
+As flag values,
+the strings `on' and `off' specify whether
+.I init
+should execute the command
+given in the second field,
+while `secure' in addition to `on' allows root to login on
+D 5
+this line.  Note that these these flag strings should not be quoted.
+E 5
+I 5
+this line.  These flag fields should not be quoted.
+E 5
+The string `window=' is followed by a quoted command
+string which
+.I init
+D 6
+will execute.
+E 6
+I 6
+will execute before starting
+.IR getty .
+E 6
+E 4
+If the line ends in a comment, the comment is included in the
+.I ty_comment
+field of the ttyent structure.
+.PP
+Some examples:
+.PP
+.nf
+D 6
+console "/etc/getty std.1200" vt100 on secure
+ttyd0 "/etc/getty d1200" dialup on
+ttyh0 "/etc/getty std.9600" hp2621-nl on
+D 4
+ttyh1 "/etc/getty std.9600" plugboard on
+E 4
+I 4
+ttyh1 "/etc/getty std.9600" plugboard on John's office
+E 4
+ttyp0 none network
+ttyp1 none network off
+ttyv0 "/etc/xpty -L :0" vs100 on window="/etc/X 0"
+E 6
+I 6
+.ta \w'console\ 'u +\w'"/etc/getty std.9600"\ \ \ 'u +\w'hp2621-nl\ \ \ \ 'u +.7i
+console	"/etc/getty std.1200"	vt100	on secure
+ttyd0	"/etc/getty d1200"	dialup	on	# 555-1234
+ttyh0	"/etc/getty std.9600"	hp2621-nl	on	# 254MC
+ttyh1	"/etc/getty std.9600"	plugboard	on	# John's office
+ttyp0	none	network
+ttyp1	none	network	off
+ttyv0	"/usr/new/xterm -L :0"	vs100	on window="/usr/new/Xvs100 0"
+E 6
+.fi
+.PP
+The first example permits root login on the console at 1200 baud,
+the second allows dialup at 1200 baud without root login,
+the third and fourth allow login at 9600 baud with terminal types of
+"hp2621-nl" and "plugboard" respectively,
+the fifth and sixth line are examples of network pseudo ttys, which
+D 6
+should not have getty enabled on them,
+E 6
+I 6
+should not have
+.I getty
+enabled on them,
+E 6
+and the last example shows a terminal emulator and window system
+startup entry.
+E 3
+E 2
+.SH FILES
+/etc/ttys
+.SH "SEE ALSO"
+D 2
+init(8), getty(8), login(1)
+E 2
+I 2
+D 3
+gettytab(5), init(8), getty(8), login(1)
+E 3
+I 3
+D 6
+getttyent(3), gettytab(5), init(8), getty(8), login(1)
+I 4
+.SH BUGS
+The parsing of the flags, window, and comment fields is stupid.
+E 6
+I 6
+login(1), getttyent(3), gettytab(5), init(8), getty(8)
+E 6
+E 4
+E 3
+E 2
+E 1

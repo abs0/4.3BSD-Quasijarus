@@ -4,7 +4,7 @@
 # include	"../hdr/had.h"
 # include	<sys/dir.h>
 
-static char Sccsid[] = "@(#)get.c	4.10	12/14/99";
+static char Sccsid[] = "@(#)get.c	4.11	7/13/2011";
 
 int	Debug = 0;
 struct packet gpkt;
@@ -392,12 +392,12 @@ register struct packet *pkt;
 		fclose(out);
 }
 
-char	Curdate[18];
+char	Curdate[20];
 char	*Curtime;
-char	Gdate[9];
-char	Chgdate[18];
+char	Gdate[11];
+char	Chgdate[20];
 char	*Chgtime;
-char	Gchgdate[9];
+char	Gchgdate[11];
 char	Qchgdate[30];
 char	Sid[32];
 char	Olddir[MAXPATHLEN+1];
@@ -412,8 +412,8 @@ register struct packet *pkt;
 	register char *p;
 
 	date_ba(&Timenow,Curdate);
-	Curtime = &Curdate[9];
-	Curdate[8] = 0;
+	Curtime = &Curdate[11];
+	Curdate[10] = 0;
 	copy(pkt->p_file,Dir);
 	dname(Dir);
 	if(getwd(Olddir) == 0)
@@ -430,8 +430,8 @@ register struct packet *pkt;
 			break;
 	if (n)
 		date_ba(&pkt->p_idel[n].i_datetime,Chgdate);
-	Chgtime = &Chgdate[9];
-	Chgdate[8] = 0;
+	Chgtime = &Chgdate[11];
+	Chgdate[10] = 0;
 	makgdate(Chgdate,Gchgdate);
 	makqdate(Gchgdate,Qchgdate);
 	sid_ba(&pkt->p_gotsid,Sid);
@@ -445,16 +445,18 @@ register struct packet *pkt;
 makgdate(old,new)
 register char *old, *new;
 {
-	if ((*new = old[3]) != '0')
+	if ((*new = old[5]) != '0')
 		new++;
-	*new++ = old[4];
+	*new++ = old[6];
 	*new++ = '/';
-	if ((*new = old[6]) != '0')
+	if ((*new = old[8]) != '0')
 		new++;
-	*new++ = old[7];
+	*new++ = old[9];
 	*new++ = '/';
 	*new++ = old[0];
 	*new++ = old[1];
+	*new++ = old[2];
+	*new++ = old[3];
 	*new = 0;
 }
 
@@ -477,13 +479,8 @@ register char *old, *new;
 	old++;
 	*new++ = ',';
 	*new++ = ' ';
-	if (*old >= '7') {
-		*new++ = '1';
-		*new++ = '9';
-	} else {
-		*new++ = '2';
-		*new++ = '0';
-	}
+	*new++ = *old++;
+	*new++ = *old++;
 	*new++ = *old++;
 	*new++ = *old++;
 	*new = '\0';

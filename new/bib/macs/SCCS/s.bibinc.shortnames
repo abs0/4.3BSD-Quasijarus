@@ -1,0 +1,393 @@
+h30073
+s 00002/00000/00195
+d D 2.8 87/10/01 12:57:47 garrison 10 9
+c Added CCC86 (Sigplan compiler construction conference)
+e
+s 00038/00003/00157
+d D 2.7 87/03/13 21:52:56 garrison 9 8
+c add a few new journals, conferences, places (mlvdv)
+e
+s 00008/00005/00152
+d D 2.6 87/03/05 16:20:04 garrison 8 7
+c Added POPL14 and OOPS86 conferences, and fixed some of
+c the early POPL conferences in bibinc.shortnames
+e
+s 00021/00001/00136
+d D 2.5 85/03/07 17:55:16 garrison 7 5
+c added IEEESW,JS&S,CHI83,ICSE3-7,PSDE84,TEXT81,IJMMS,TOOIS (mlvdv)
+e
+s 00019/00001/00136
+d R 2.5 85/02/18 19:19:14 garrison 6 5
+c added IEEESW, JS&S, CHI83, ICSE3-7, PSDE84, TEXT81 (mlvdv)
+e
+s 00009/00000/00128
+d D 2.4 84/04/11 14:49:26 garrison 5 4
+c Added POPL1 ... POPL4
+e
+s 00065/00022/00063
+d D 2.3 84/01/06 16:48:57 rrh 4 3
+c update popl's, add ccc conferences, a bunch of new places, a bunch
+c of new publishers
+e
+s 00006/00002/00079
+d D 2.2 83/09/09 21:13:53 garrison 3 2
+c Incorporate changes from Arizona
+e
+s 00003/00000/00078
+d D 2.1 83/06/22 14:57:53 garrison 2 1
+c Add keywords, make new release to send to Arizona
+e
+s 00078/00000/00000
+d D 1.1 83/06/08 15:33:23 garrison 1 0
+c date and time created 83/06/08 15:33:23 by garrison
+e
+u
+U
+t
+T
+I 2
+#
+#	"%W%	%G%";
+I 4
+# short journal names, and other names
+E 4
+#
+E 2
+I 1
+D 4
+# abbreviated journal names, and other names
+#
+E 4
+# journals
+D ACTA Acta Inf.
+D BIT B\&IT
+D BSTJ Bell System Tech. J.
+D 4
+D CACM Comm. ACM
+E 4
+I 4
+D CACM Comm. of the ACM
+E 4
+D COMP Computer
+D COMPJOUR Computer J.
+D COMPLANG J. Computer Lang.
+D COMPSUR Computing Surveys
+I 9
+D HCI Human-Computer Interaction
+D HUMFACT Human Factors
+E 9
+D I&C Inf. and Control
+I 4
+D IBMJRD IBM J. of R&D
+D IBMSJ IBM Systems J.
+I 7
+D IEEESW Software
+E 7
+E 4
+D IEEETSE IEEE Trans. on Software Eng.
+I 9
+D IEEETSMC IEEE Trans. on Systems, Man, and Cybernetics
+E 9
+D IEEETC IEEE Trans. on Computers
+I 3
+D 4
+D IJCIS Int. J. of Computer and Information Sciences
+E 4
+I 4
+D IJCIS Int. J. of Computer and Info. Sciences
+I 7
+D IJMMS Int. J. of Man-Machine Studies
+E 7
+E 4
+E 3
+D IPL Inf. Proc. Letters
+D JACM J. ACM
+D JCSS J. Computer and System Sciences
+I 7
+D JS&S J. of Systems and Software
+E 7
+I 4
+D MATHST Math Systems Theory
+D NMATH Numerical Math.
+E 4
+I 3
+D SIAMJC Siam J. on Computing
+D SIAMJNA Siam J. on Numerical Analysis
+E 3
+D SIGACT S\&IGACT News
+I 9
+D SIGCHI ACM S\&IGCHI Bulletin
+E 9
+D SIGPLAN SI\&GPLAN Notices
+D SIGSOFT Software Eng. Notes
+D 3
+D SP&E Software\*(emPractice & Experience
+E 3
+I 3
+D SP&E Software\(emPractice & Experience
+E 3
+D 4
+D SPE SP&E
+D TODS ACM Trans. Database Systems
+D TOPLAS ACM Trans. Prog. Lang. and Systems
+E 4
+I 4
+D SPE Software\(emPractice & Experience
+D TOCS Trans. Computer Systems
+D TODS Trans. Database Systems
+D TOMS Trans. Math. Software
+I 7
+D TOOIS Trans. on Office Info. Systems
+E 7
+D TOPLAS Trans. Prog. Lang and Systems
+E 4
+#
+D 4
+# conferences
+E 4
+I 4
+# CONFs
+E 4
+#
+D PROC Proc.
+D CONF Conf.
+D SYMP Symp.
+D 4
+D POPL ACM SYMP on Prin. of Programming Languages
+D POPL3 CONF Rec. 3rd POPL
+D POPL4 CONF Rec. 4th POPL
+D POPL5 CONF Rec. 5th POPL
+E 4
+I 4
+D ASPLOS82 PROC of the SYMP on Arch. Support for Prog. Lang. and Operating Systems\
+%D MAR 1982
+D CCC79 PROC SI\&GPLAN 1979 SYMP on Compiler Const.\
+%D AUG 1979
+D CCC82 PROC SI\&GPLAN 1982 SYMP on Compiler Const.\
+%D JUN 1982
+D CCC84 PROC SI\&GPLAN 1984 SYMP on Compiler Const.\
+%D JUN 1984
+I 10
+D CCC86 PROC SI\&GPLAN 1986 SYMP on Compiler Const.\
+%D JUL 1986
+E 10
+I 7
+D CHI83 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%D DEC 1983
+I 9
+D CHI85 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%D APR 1985
+D CHI86 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%D APR 1986
+D CHI87 PROC S\&IGCHI CONF on Human Factors in Computing Systems\
+%D APR 1987
+E 9
+D ICSE Int. CONF on Software Eng.
+D ICSE3 PROC 3rd ICSE\
+%D MAY 1978
+D ICSE4 PROC 4th ICSE\
+%D 1979
+D ICSE5 PROC 5th ICSE\
+%D MAR 1981
+D ICSE6 PROC 6th ICSE\
+%D SEP 1982
+D ICSE7 PROC 7th ICSE\
+%D APR 1984
+I 9
+D ICSE8 PROC 8th ICSE\
+%D AUG 1985
+D ICSE9 PROC 9th ICSE\
+%D MAR 1987
+D IJCAI Int. Joint CONF on AI
+D OIS82 PROC S\&IGOA CONF on Office Info. Systems\
+%D JUN 1982
+D OIS84 PROC Second ACM-S\&IGOA CONF on Office Info. Systems\
+%D JUN 1984
+D OIS86 PROC Third ACM-S\&IGOIS CONF on Office Info. Systems\
+%D OCT 1986
+D OOPS86 OOPSLA '86 Conf. Proc.\
+%D NOV 1986
+D OOPS87 OOPSLA '87 Conf. Proc.\
+%D OCT 1987
+E 9
+E 7
+D PLISS83 PROC SI\&GPLAN 1983 SYMP on Prog. Lang. Issues in Software Systems\
+%D JUN 1983
+D POPL ACM SYMP on Prin. of Prog. Lang.
+I 5
+D 8
+D POPL1 CONF Rec 1th POPL
+D POPL2 CONF Rec 2th POPL
+D POPL3 CONF Rec 3th POPL
+D POPL4 CONF Rec 4th POPL
+E 5
+D POPL5 CONF Rec 5th POPL
+E 8
+I 8
+D POPL1 CONF Rec. 1st POPL
+D POPL2 CONF Rec. 2nd POPL
+D POPL3 CONF Rec. 3rd POPL
+D POPL4 CONF Rec. 4th POPL
+D POPL5 CONF Rec. 5th POPL
+E 8
+E 4
+D POPL6 CONF Rec. 6th POPL
+D POPL7 CONF Rec. 7th POPL
+D POPL8 CONF Rec. 8th POPL
+D POPL9 CONF Rec. 9th POPL
+D POPL10 CONF Rec. 10th POPL
+I 4
+D POPL11 CONF Rec. 11th POPL
+I 5
+D POPL12 CONF Rec. 12th POPL
+D POPL13 CONF Rec. 13th POPL
+D POPL14 CONF Rec. 14th POPL
+D POPL15 CONF Rec. 15th POPL
+D POPL16 CONF Rec. 16th POPL
+I 8
+D 9
+D OOPS86 OOPSLA '86 Conf. Proc.\
+%C Portland, OR\
+%D NOV 1986
+E 9
+E 8
+I 7
+D PSDE84 PROC ACM S\&IGSOFT/S\&IGPLAN Software Eng. SYMP on Practical Software Development Environments\
+%D APR 1984
+I 9
+D PSDE86 PROC ACM S\&IGSOFT/S\&IGPLAN Software Eng. SYMP on Practical Software Development Environments\
+%D DEC 1986
+D SEEPIL Workshop on Software Eng. Environments for\
+Programming-in-the-Large\
+%C Harwichport, MA\
+%D JUN 1985
+E 9
+D TEXT81 PROC ACM S\&IGPLAN S\&IGOA SYMP on Text Manipulation\
+%D JUN 1981
+E 7
+E 5
+E 4
+D STOC Annual ACM SYMP on Theory of Computing
+D FOCS Annual SYMP on Foundations of Computer Science
+D SOSP SYMP on Operating System Prin.
+D 7
+D ICSE Int. CONF on Software Eng.
+E 7
+D 4
+D IFIPS PROC IF\&IPS
+I 3
+D HICSS Hawaii Inter. CONF on System Science
+E 4
+I 4
+D JICAI Joint Int. CONF on Artificial Intelligence
+D HICSS Hawaii Int. CONF on System Science
+D ADA80 PROC of the ACM-SI\&GPLAN SYMO on the Ada Prog. Lang.
+D FJCC Fall Joint Computer Conf.
+I 9
+D SJCC Spring Joint Computer CONF
+E 9
+D JER3 PROC Third Jerusalem CONF on Info. Tech.
+D WJCC PROC Western Joint Computer CONF
+E 4
+E 3
+#
+#  publishers
+#
+I BMACLIB/bibinc.publishers
+#
+# months
+#
+D JAN Jan.
+D FEB Feb.
+D MAR Mar.
+D APR Apr.
+D MAY May
+D JUN June
+D JUL July
+D AUG Aug.
+D SEP Sep.
+D OCT Oct.
+D NOV Nov.
+D DEC Dec.
+#
+#  miscellaneous
+#
+I 4
+D TR Tech. Rep.
+D DISS Diss.
+#
+# Short Places
+#
+E 4
+D CORP Corp.
+D 4
+D DEPT Dept.
+D DIV Div.
+E 4
+I 4
+D DEPT Dpt.
+E 4
+D UNIV Univ.
+D 4
+D UA The UNIV of Arizona
+D TR Tech. Rep.
+D 3
+D UATR TR
+E 3
+I 3
+D UATR UA TR
+E 4
+I 4
+D UATR UNIV of Arizona TR
+E 4
+E 3
+D DCS DEPT of Computer Science
+D 4
+D UADCS DCS, UA
+D DCSUA DCS, UA
+E 4
+D CSD Computer Science DEPT
+D 4
+D DISS Diss.
+E 4
+I 4
+D ERL Electronics Research Lab.
+#
+# Full Places
+#
+D BTLMH Bell Laboratories\
+%C Murray Hill, NJ
+D BTLHO Bell Laboratories\
+%C Holmdel, NJ
+D CMU C\&MU\
+%C Pittsburgh, PA
+D CMUCS CSD, CMU
+I 9
+D CSLI Center for the Study of Language and Information\
+%C Stanford, CA
+E 9
+D DG Data General
+#
+I 9
+D IBMRD IBM CORP, Research Div.
+E 9
+D MITLCS MIT Lab. for Computer Science\
+%C Cambridge, MA
+D MITAI MIT AI Lab.\
+%C Cambridge, MA
+D SUCS CSD, Stanford University
+D SUCSL Computer Systems Lab., Stanford Electronics Lab., Dept. of EECS
+D SUEE EECS, Stanford University
+D TUM Technische Universita\*`t Mu\*`nchen
+D UCB U\&CB
+D UCBCS Computer Science Division, EECS, UCB\
+%C Berkeley, CA
+D UCBERL ERL, EECS, UCB\
+%C Berkeley, CA
+I 9
+D XEROXISL Intelligent Systems Laboratory, XEROXPARC
+D XEROXPARC Xerox Palo Alto Research Center\
+%C Palo Alto, CA
+E 9
+E 4
+E 1

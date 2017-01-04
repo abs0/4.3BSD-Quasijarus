@@ -1,0 +1,346 @@
+h46798
+s 00010/00010/00088
+d D 6.3 86/05/21 22:10:20 mckusick 5 4
+c update citations
+e
+s 00018/00004/00080
+d D 6.2 85/09/12 00:02:23 mckusick 4 3
+c allow specification of optimization preference
+e
+s 00001/00001/00083
+d D 6.1 85/04/27 13:32:26 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00060/00142/00024
+d D 5.1 85/04/27 13:32:03 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00166/00000/00000
+d D 4.1 85/04/27 13:31:41 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MKFS 8 5/10/81
+E 2
+I 2
+D 3
+.TH MKFS 8 5/10/83
+E 3
+I 3
+.TH MKFS 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+mkfs \- construct a file system
+.SH SYNOPSIS
+.B /etc/mkfs
+I 4
+[ \-N ]
+E 4
+D 2
+special size [ m n ]
+.br
+.B /etc/mkfs
+special proto
+E 2
+I 2
+special size
+D 5
+[ nsect ]
+[ ntrack ]
+[ blksize ]
+[ fragsize ]
+[ ncpg ]
+[ minfree ]
+[ rps ]
+I 4
+[ nbpi ]
+[ opt ]
+E 5
+I 5
+[ nsect
+[ ntrack
+[ blksize
+[ fragsize
+[ ncpg
+[ minfree
+[ rps
+[ nbpi
+[ opt ] ] ] ] ] ] ] ] ]
+E 5
+E 4
+E 2
+.SH DESCRIPTION
+I 2
+.B N.B.:
+file system are normally created with the
+.IR newfs (8)
+command.
+.PP
+E 2
+.I Mkfs
+constructs a file system
+by writing on the special file
+D 4
+.I special.
+E 4
+I 4
+.I special
+unless the \-N flag has been specified.
+E 4
+D 2
+In the first form of the command a numeric size is given and
+.I mkfs
+builds a file system with a single empty directory on it.
+The number of i-nodes is calculated as a function of the filesystem size.
+(No boot program is initialized in this form of
+.I mkfs.)
+.PP
+.B N.B.:
+All filesystems should have a
+E 2
+I 2
+The numeric size specifies the number of sectors in the file system.
+.I Mkfs
+builds a file system with a root directory and a
+E 2
+.I lost+found
+D 2
+directory for
+.IR fsck (8);
+this should be created for each file system by running
+.IR mklost+found (8)
+in the root directory of a newly created file system, after
+the file system is first mounted.
+.PP
+In bootstrapping, the second form of
+E 2
+I 2
+directory.
+(see 
+.IR fsck (8))
+The number of i-nodes is calculated as a function of the file system size.
+No boot program is initialized by
+E 2
+.I mkfs
+D 2
+is sometimes used.
+In this form, the file system is constructed according to the directions
+found in the prototype file
+.I proto.
+The prototype file
+contains tokens separated by spaces or
+new lines.
+The first token is the name of a file
+to be copied onto sector zero as
+the bootstrap program.
+The second token is a number specifying the
+size of the created file system.
+Typically it will be the number of blocks on the device,
+perhaps diminished
+by space for swapping.
+The next token is the number of i-nodes
+in the i-list.
+The next set of tokens comprise the specification
+for the root file.
+File specifications consist of tokens
+giving the mode,
+the user-id,
+the group id,
+and the initial contents of the file.
+The syntax of the contents field
+depends on the mode.
+E 2
+I 2
+(see
+.IR newfs (8).)
+E 2
+.PP
+D 2
+The mode token for a file is a 6 character string.
+The first character
+specifies the type of the file.
+(The characters
+.B \-bcd
+specify regular, block special,
+character special and directory files
+respectively.)
+The second character of the type
+is either
+.B u
+or
+.B \-
+to specify set-user-id mode or not.
+The third is
+.B g
+or
+.B \-
+for the set-group-id mode.
+The rest of the mode
+is a three digit octal number giving the
+owner, group, and other read, write, execute
+permissions, see
+.IR chmod (1).
+.PP
+Two decimal number
+tokens come after the mode; they specify the
+user and group ID's of the owner of the file.
+.PP
+If the file is a regular file,
+the next token is a pathname
+whence the contents and size are copied.
+.PP
+If the file is a block or character special file,
+two decimal number tokens
+follow which give the major and minor device numbers.
+.PP
+If the file is a directory,
+.I mkfs
+makes the entries
+.BR . ""
+and
+.B  ..
+and then
+reads a list of names and
+(recursively)
+file specifications for the entries
+in the directory.
+The scan is terminated with the
+token
+.BR $ .
+.PP
+A sample prototype specification follows:
+.PP
+.nf
+.in +5
+/usr/mdec/uboot
+4872 55
+d\-\-777 3 1
+usr	d\-\-777 3 1
+	sh	\-\-\-755 3 1 /bin/sh
+	ken	d\-\-755 6 1
+		$
+	b0	b\-\-644 3 1 0 0
+	c0	c\-\-644 3 1 0 0
+	$
+$
+.in -5
+.fi
+.PP
+The arguments m and n specify the interleave factor.  M should always be 3
+and you should use the following table to choose n.
+as follows.
+.nf
+.ta .5i 2.5i
+	RM03	80
+	RM05	304
+	RM80	217
+	RP06	209
+	RP07	800
+	SI/CDC 9766	304
+	RK07	33
+	EMULEX/AMPEX 300M	304
+	EMULEX/FUJITSU 160M	160
+.fi
+.dt
+E 2
+I 2
+The optional arguments allow fine tune control over the
+parameters of the file system.
+.B Nsect
+specify the number of sectors per track on the disk.
+.B Ntrack 
+specify the number of tracks per cylinder on the disk.
+.B Blksize 
+gives the primary block size for files on the file system.
+It must be a power of two, currently selected from 4096 or 8192.
+.B Fragsize
+gives the fragment size for files on the file system.
+The
+.B fragsize
+represents the smallest amount of disk space that will be allocated to a file.
+It must be a power of two currently selected from the range 512 to 8192.
+.B Ncpg
+specifies the number of disk cylinders per cylinder group.
+This number must be in the range 1 to 32.
+.B Minfree
+specifies the minimum percentage of free disk space allowed.
+Once the file system capacity reaches this threshold, only
+the super-user is allowed to allocate disk blocks.  The default
+value is 10%.
+If a disk does not revolve at 60 revolutions per second, the
+.B rps
+parameter may be specified.
+I 4
+If a file system will have more or less than the average number of
+files the
+.B nbpi
+(number of bytes per inode) can be specified to increase or
+decrease the number of inodes that are created.
+Space or time optimization preference can be specified with
+.B opt
+values of ``s'' for space or ``t'' for time.
+E 4
+Users with special demands for their file systems are referred to
+the paper cited below for a discussion of the tradeoffs in using
+different configurations.
+E 2
+.SH "SEE ALSO"
+D 2
+filsys(5),
+E 2
+I 2
+fs(5),
+E 2
+dir(5),
+fsck(8),
+D 2
+mklost+found(8)
+.SH BUGS
+There should be some way to specify links.
+E 2
+I 2
+newfs(8),
+tunefs(8)
+E 2
+.PP
+I 2
+D 4
+McKusick, Joy, Leffler; "A Fast File System for Unix",
+Computer Systems Research Group, Dept of EECS, Berkeley, CA 94720;
+TR #7, September 1982.
+E 4
+I 4
+M. McKusick, W. Joy, S. Leffler, R. Fabry,
+``A Fast File System for UNIX'',
+\fIACM Transactions on Computer Systems 2\fP, 3.
+pp 181-197, August 1984.
+D 5
+(reprinted in the System Manager's Manual and in Volume 2c)
+E 5
+I 5
+(reprinted in the System Manager's Manual, SMM:14)
+E 5
+E 4
+.SH BUGS
+E 2
+There should be some way to specify bad blocks.
+D 2
+.PP
+Should make
+.I lost+found
+automatically.
+E 2
+E 1

@@ -1,0 +1,112 @@
+.EQ
+delim ``
+.EN
+.KS
+.PS 4.5i
+define Colbx %box "COL"%
+define BLbx %box "BL"%
+define Nbx %box "N"%
+u=1.
+w=6*u; t=11*u
+h = u
+e = .05
+
+line down t from 0,t
+Bot:	line right w
+line up t
+
+Box0:	BLbx wid 4*w/5 ht 3*h/2 with .sw at 0,0
+Box1:	BLbx wid 3*w/4 ht h with .sw at Box0.nw
+Box2:	BLbx wid w/2 +2*e ht 3*h/2 with .sw at Box1.nw
+Line1:	line  right w  from Box2.nw
+
+Col1:	Colbx wid 5*w/12 ht h+e with .ne at Line1.end
+Col2:	Colbx wid w/3+e ht h/4 with .ne at Col1.se
+Col3:	Colbx wid w/5+e ht h+e with .ne at Col2.se
+
+Two1:	BLbx wid w/2-e ht h with .sw at Line1.start
+Two2:	BLbx wid 5*w/12 ht 5*h/8 with .sw at Two1.se
+Two3:	BLbx wid w/3+e ht h with .sw at Two2.nw
+Two4:	BLbx wid w/3+e ht 3*h/4 with .sw at Two1.nw
+Two5:	BLbx wid w/3+e ht h with .sw at Two4.r.x,Two3.t.y
+Line2:	line  right w  from 0,Two5.t.y
+
+Col21:	Colbx wid w/4+2*e ht h/2 with .ne at Line2.end
+Col22:	Colbx wid w/4+e ht h/4+2*e with .ne at Col21.se
+
+Thr1:	BLbx wid w/3-e ht h/2 with .sw at Line2.start
+Thr2:	BLbx wid w/3-e ht 3*h/4 with .sw at Thr1.se
+Thr3:	BLbx wid w/4+e ht h/4 with .sw at Thr2.se
+Thr4:	BLbx wid w/4+e ht h/2 with .sw at Thr3.nw
+Thr5:	BLbx wid w/4+e ht 3*h/2 with .sw at Thr1.nw
+Line3:	line  right w  from Thr5.nw
+
+Col31:	Colbx wid w/4-2*e ht h/2 with .ne at Line3.end
+Col32:	Colbx wid w/5+e ht h/2 with .ne at Col31.se
+
+F1:	BLbx wid w/4-e ht h/4 with .sw at Line3.start
+F2:	BLbx wid w/5+e ht h/2 with .sw at F1.se
+F3:	BLbx wid w/5+e ht 3*h/4 with .sw at F2.se
+F4:	BLbx wid w/5+e ht h/2-2*e with .sw at F3.se
+Line4:	line  right w  from 0,F3.nw.y
+
+	hh = 3*h/2+2*e
+N1:	Nbx wid w/8 ht hh with .sw at Box0.se
+	hh=hh-2*e
+N2:	Nbx wid w/16 ht hh with .sw at N1.se
+	hh = h
+N3:	Nbx wid w/20 ht hh with .sw at Box2.r.x,N1.t.y+hh
+N21:	Nbx wid w/15 ht hh with .sw at Two2.se
+	hh = 3*h/4
+N22:	Nbx wid w/20 ht hh with .sw at Two3.r.x,N21.t.y
+	hh = hh-2*e
+N23:	Nbx wid w/12 ht hh with .sw at N22.se
+N24:	Nbx wid w/35 ht hh with .sw at Two5.r.x,N22.t.y
+
+N31:	Nbx wid w/20 ht hh with .sw at Thr3.se
+N32:	Nbx wid w/40 ht hh with .sw at N31.se
+N33:	Nbx wid w/4 ht hh with .sw at Thr5.r.x,N31.t.y+hh
+N34:	Nbx wid w/8 ht hh-e with .sw at N33.se
+N35:	Nbx wid w/12 ht hh-2*e with .sw at N34.se
+	hh=hh-2*e
+N41:	Nbx wid w/12 ht hh with .sw at F4.se
+N51:	Nbx wid w/5 ht hh with .sw at Line4.start
+N52:	Nbx wid w/12 ht hh with .sw at N51.se
+	hh = hh - e
+N53:	Nbx wid w/5 ht hh with .sw at N52.se
+	hh = hh - e
+N54:	Nbx wid w/6 ht hh with .sw at N53.se
+N55:	Nbx wid w/20 ht hh with .sw at N54.se
+	hh = hh -e
+N56:	Nbx wid w/8 ht hh with .sw at N55.se
+N57:	Nbx wid w/6 ht hh with .sw at N56.se
+	hh = hh-e
+N58:	Nbx wid w/8 ht hh with .sw at N51.nw
+N59:	Nbx wid w/40 ht hh with .sw at N58.se
+	hh = hh-e
+N510:	Nbx wid w/5 ht hh with .sw at N59.se
+Line5:	line right w-N59.r.x dashed from N59.ne
+
+H0:	line right u/2 dashed from Bot.end
+	"  `h sub 0`" at H0.end ljust
+H1:	line right u/2 dashed from Line1.end
+	"  `h sub 1`" at H1.end ljust
+H2:	line right u/2 dashed from Line2.end
+	"  `h sub 2`" at H2.end ljust
+H3:	line right u/2 dashed from Line3.end
+	"  `h sub 3`" at H3.end ljust
+H4:	line right u/2 dashed from Line4.end
+	"  `h sub 4`" at H4.end ljust
+H5:	line right u/2 dashed from Line5.end
+	"  `h sub 5`" at H5.end ljust
+
+R1:	line invis from H0.start to H1.start "  `R sub 1`" ljust
+R2:	line invis from H1.start to H2.start "  `R sub 2`" ljust
+R3:	line invis from H2.start to H3.start "  `R sub 3`" ljust
+R4:	line invis from H3.start to H4.start "  `R sub 4`" ljust
+R5:	line invis from H4.start to H5.start "  `R sub 5`" ljust
+.PE
+.sp
+.ce
+Figure 2.  A UD packing.
+.KE

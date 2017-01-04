@@ -1,0 +1,6 @@
+.PS
+line from 0,184 to 154,184
+line from 36,240 to 36,116
+line from 120,240 to 120,98
+arc cw to 56,0 rad 108
+.PE

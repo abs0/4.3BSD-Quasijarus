@@ -1,0 +1,213 @@
+h31200
+s 00001/00001/00092
+d D 6.5 86/05/16 02:15:37 lepreau 7 6
+c clarify user
+e
+s 00042/00014/00051
+d D 6.4 86/03/24 15:12:58 mckusick 6 5
+c more extensive formatting for time fields (from Dave Yost)
+e
+s 00006/00007/00059
+d D 6.3 86/01/14 16:52:00 donn 5 4
+c Made it clear that the seventh (command) field is not terminated by the
+c usual field separators; took out the confusing and wrong explanation of how
+c the % character affects shell parsing.
+e
+s 00014/00007/00052
+d D 6.2 86/01/10 05:12:40 lepreau 4 3
+c doc crontab.local and "user" field; crontabs are checked on the minute
+e
+s 00001/00001/00058
+d D 6.1 85/04/27 14:15:25 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00058
+d D 5.1 85/04/27 14:14:57 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00059/00000/00000
+d D 4.1 85/04/27 14:14:19 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CRON 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH CRON 8  "4 February 1983"
+E 3
+I 3
+.TH CRON 8 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+cron \- clock daemon
+.SH SYNOPSIS
+.B /etc/cron
+.SH DESCRIPTION
+.I Cron
+executes commands at specified dates and times
+D 4
+according to the instructions in the file
+/usr/lib/crontab.
+E 4
+I 4
+according to the instructions in the files
+/usr/lib/crontab and /usr/lib/crontab.local.
+None, either one, or both of these files may be present.
+E 4
+Since
+.I cron
+never exits,
+it should only be executed once.
+This is best done by running
+.I cron
+from the initialization
+process through the file
+/etc/rc;
+see
+.IR init (8).
+.PP
+D 4
+Crontab
+consists of lines of six fields each.
+E 4
+I 4
+The
+crontab files
+consist of lines of seven fields each.
+E 4
+The fields are separated by spaces or tabs.
+D 6
+The first five are integer patterns to
+specify the
+minute (0-59),
+hour (0-23),
+day of the month (1-31),
+month of the year (1-12),
+and day of the week (1-7 with 1=Monday).
+Each of these patterns may
+contain a number in the range above;
+two numbers separated by
+a minus
+meaning a range inclusive;
+E 6
+I 6
+The first five are integer patterns to specify:
+.in +2m
+.TP 2m
+\(bu
+minute (0-59)
+.nr .0 \n()Pu
+.nr )P 0
+.TP 2m
+\(bu
+hour (0-23)
+.TP 2m
+\(bu
+day of the month (1-31)
+.TP 2m
+\(bu
+month of the year (1-12)
+.TP 2m
+\(bu
+day of the week (1-7 with 1 = Monday)
+.nr )P \n(.0u
+.in -2m
+.LP
+Each of these patterns may contain:
+.in +2m
+.TP 2m
+\(bu
+a number in the range above
+.nr .0 \n()Pu
+.nr )P 0
+.TP 2m
+\(bu
+two numbers separated by a minus
+meaning a range inclusive
+.TP 2m
+\(bu
+E 6
+a list of numbers separated by
+D 6
+commas meaning any of the numbers;
+or an asterisk meaning all legal values.
+E 6
+I 6
+commas meaning any of the numbers
+.TP 2m
+\(bu
+an asterisk meaning all legal values
+.nr )P \n(.0u
+.in -2m
+.LP
+E 6
+D 4
+The sixth field is a string
+E 4
+I 4
+The sixth field is a user name: the
+D 7
+command will be run ``as'' that user.
+E 7
+I 7
+command will be run with that user's uid and permissions.
+E 7
+D 5
+The seventh field is a string
+E 4
+that is executed by the Shell at the
+E 5
+I 5
+The seventh field consists of all the text
+on a line following the sixth field,
+including spaces and tabs;
+this text is treated as a command
+which is executed by the Shell at the
+E 5
+specified times.
+D 5
+A percent character
+E 5
+I 5
+A percent character (``%'')
+E 5
+in this field is translated to a new-line
+character.
+D 5
+Only the first line (up to a % or end of line)
+of the command field is executed by the Shell.
+The other lines are made available to the
+command as standard input.
+E 5
+.PP
+D 4
+Crontab is examined by
+E 4
+I 4
+Both
+crontab files are checked by
+E 4
+.I cron
+D 4
+every minute.
+E 4
+I 4
+every minute, on the minute.
+E 4
+.SH FILES
+/usr/lib/crontab
+I 4
+.br
+/usr/lib/crontab.local
+E 4
+E 1

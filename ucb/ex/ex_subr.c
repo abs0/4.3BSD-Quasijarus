@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_subr.c	7.11 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_subr.c	7.12 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -19,7 +19,7 @@ static char *sccsid = "@(#)ex_subr.c	7.11 (Berkeley) 3/9/87";
 
 any(c, s)
 	int c;
-	register char *s;
+	register u_char *s;
 {
 	register int x;
 
@@ -57,12 +57,12 @@ change()
  * current line.
  */
 column(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	if (cp == 0)
 		cp = &linebuf[LBSIZE - 2];
-	return (qcolumn(cp, (char *) 0));
+	return (qcolumn(cp, (u_char *) 0));
 }
 
 /*
@@ -81,7 +81,7 @@ comment()
 }
 
 Copy(to, from, size)
-	register char *from, *to;
+	register u_char *from, *to;
 	register int size;
 {
 
@@ -114,7 +114,7 @@ ctlof(c)
 	int c;
 {
 
-	return (c == TRIM ? '?' : c | ('A' - 1));
+	return (c == DELETE ? '?' : c | ('A' - 1));
 }
 
 dingdong()
@@ -123,14 +123,14 @@ dingdong()
 	if (VB)
 		putpad(VB);
 	else if (value(ERRORBELLS))
-		putch('\207');
+		putch('\007');
 }
 
 fixindent(indent)
 	int indent;
 {
 	register int i;
-	register char *cp;
+	register u_char *cp;
 
 	i = whitecnt(genbuf);
 	cp = vpastwh(genbuf);
@@ -143,7 +143,7 @@ fixindent(indent)
 }
 
 filioerr(cp)
-	char *cp;
+	u_char *cp;
 {
 	register int oerrno = errno;
 
@@ -152,11 +152,11 @@ filioerr(cp)
 	syserror();
 }
 
-char *
+u_char *
 genindent(indent)
 	register int indent;
 {
-	register char *cp;
+	register u_char *cp;
 
 	for (cp = genbuf; indent >= value(TABSTOP); indent -= value(TABSTOP))
 		*cp++ = '\t';
@@ -185,7 +185,7 @@ getmark(c)
 }
 
 getn(cp)
-	register char *cp;
+	register u_char *cp;
 {
 	register int i = 0;
 
@@ -219,7 +219,7 @@ junk(c)
 
 	if (c && !value(BEAUTIFY))
 		return (0);
-	if (c >= ' ' && c != TRIM)
+	if (c >= ' ' && c != DELETE)
 		return (0);
 	switch (c) {
 
@@ -313,11 +313,11 @@ markreg(c)
  *	'xxx|yyy' -> 'xxx' if terse, else 'yyy'
  * All others map to themselves.
  */
-char *
+u_char *
 mesg(str)
-	register char *str;
+	register u_char *str;
 {
-	register char *cp;
+	register u_char *cp;
 
 	str = strcpy(genbuf, str);
 	for (cp = str; *cp; cp++)
@@ -342,17 +342,17 @@ mesg(str)
 /*VARARGS2*/
 merror(seekpt, i)
 #ifndef EXSTRINGS
-	char *seekpt;
+	u_char *seekpt;
 #else
 # ifdef lint
-	char *seekpt;
+	u_char *seekpt;
 # else
 	int seekpt;
 # endif
 #endif
 	int i;
 {
-	register char *cp = linebuf;
+	register u_char *cp = linebuf;
 
 	if (seekpt == 0)
 		return;
@@ -370,10 +370,10 @@ merror(seekpt, i)
 
 merror1(seekpt)
 #ifndef EXSTRINGS
-	char *seekpt;
+	u_char *seekpt;
 #else
 # ifdef lint
-	char *seekpt;
+	u_char *seekpt;
 # else
 	int seekpt;
 # endif
@@ -442,7 +442,7 @@ netchHAD(cnt)
 netchange(i)
 	register int i;
 {
-	register char *cp;
+	register u_char *cp;
 
 	if (i > 0)
 		notesgn = cp = "more ";
@@ -482,7 +482,7 @@ putmk1(addr, n)
 	*addr = n | oldglobmk;
 }
 
-char *
+u_char *
 plural(i)
 	long i;
 {
@@ -494,7 +494,7 @@ int	qcount();
 short	vcntcol;
 
 qcolumn(lim, gp)
-	register char *lim, *gp;
+	register u_char *lim, *gp;
 {
 	register int x;
 	int (*OO)();
@@ -620,11 +620,11 @@ skipwh()
 /*VARARGS2*/
 smerror(seekpt, cp)
 #ifdef lint
-	char *seekpt;
+	u_char *seekpt;
 #else
 	int seekpt;
 #endif
-	char *cp;
+	u_char *cp;
 {
 
 	if (seekpt == 0)
@@ -639,9 +639,9 @@ smerror(seekpt, cp)
 		putpad(SE);
 }
 
-char *
+u_char *
 strend(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	while (*cp)
@@ -650,7 +650,7 @@ strend(cp)
 }
 
 strcLIN(dp)
-	char *dp;
+	u_char *dp;
 {
 
 	CP(linebuf, dp);
@@ -701,11 +701,11 @@ int col, ts;
 	return (result);
 }
 
-char *
+u_char *
 vfindcol(i)
 	int i;
 {
-	register char *cp;
+	register u_char *cp;
 	register int (*OO)() = Outchar;
 
 	Outchar = qcount;
@@ -718,9 +718,9 @@ vfindcol(i)
 	return (cp);
 }
 
-char *
+u_char *
 vskipwh(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	while (iswhite(*cp) && cp[1])
@@ -729,9 +729,9 @@ vskipwh(cp)
 }
 
 
-char *
+u_char *
 vpastwh(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	while (iswhite(*cp))
@@ -740,7 +740,7 @@ vpastwh(cp)
 }
 
 whitecnt(cp)
-	register char *cp;
+	register u_char *cp;
 {
 	register int i;
 
@@ -763,7 +763,7 @@ whitecnt(cp)
 
 #ifdef lint
 Ignore(a)
-	char *a;
+	u_char *a;
 {
 
 	a = a;
@@ -898,7 +898,7 @@ preserve()
 	if (pid == 0) {
 		close(0);
 		dup(tfile);
-		execl(EXPRESERVE, "expreserve", (char *) 0);
+		execl(EXPRESERVE, "expreserve", (u_char *) 0);
 		ex_exit(1);
 	}
 	waitfor();
@@ -944,7 +944,7 @@ onsusp()
 	vcontin(0);
 	ignore(setty(f));
 	if (!inopen)
-		error((char *) 0);
+		error((u_char *) 0);
 	else {
 #ifdef	TIOCGWINSZ
 		if (ioctl(0, TIOCGWINSZ, &win) >= 0)

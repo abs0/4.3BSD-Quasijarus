@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)init_sysent.c	7.3 (Berkeley) 7/10/87
+ *	@(#)init_sysent.c	7.4 (Berkeley) 1/8/04
  */
 
 /*
@@ -27,6 +27,7 @@ int	getpagesize(),smmap(),msync(),munmap(),mprotect(),madvise(),mincore();
 
 /* 1.3 signals */
 int	sigvec(),sigblock(),sigsetmask(),sigpause(),sigstack(),sigreturn();
+int	sigemu();
 int	kill(), killpg();
 
 /* 1.4 timing and statistics */
@@ -277,9 +278,8 @@ struct sysent sysent[] = {
 	4, qquota,			/* 149 = qquota */
 	3, getsockname,			/* 150 = getsockname */
 	/*
-	 * Syscalls 151-180 inclusive are reserved for vendor-specific
-	 * system calls.  (This includes various calls added for compatibity
-	 * with other Unix variants.)
+	 * Syscalls 151-180 inclusive are Quasijarus extensions to 4.3BSD ABI.
 	 */
+	3, sigemu,			/* 151 = sigemu */
 };
 int	nsysent = sizeof (sysent) / sizeof (sysent[0]);

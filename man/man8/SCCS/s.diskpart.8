@@ -1,0 +1,168 @@
+h10266
+s 00014/00004/00077
+d D 6.4 88/07/12 19:56:38 karels 5 4
+c update
+e
+s 00010/00005/00071
+d D 6.3 86/05/30 18:54:26 karels 4 3
+c change to c partition
+e
+s 00000/00002/00076
+d D 6.2 86/05/21 22:23:57 mckusick 3 2
+c one bug down, one to go
+e
+s 00001/00001/00077
+d D 6.1 85/04/27 14:49:55 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00078/00000/00000
+d D 5.1 85/04/27 14:49:34 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DISKPART 8 "18 July 1983"
+E 2
+I 2
+.TH DISKPART 8 "%Q%"
+E 2
+.UC 4
+.SH NAME
+diskpart \- calculate default disk partition sizes
+.SH SYNOPSIS
+.B /etc/diskpart
+[
+.B \-p
+] [
+.B \-d
+I 5
+] [
+.B \-s
+size
+E 5
+]
+disk-type
+.SH DESCRIPTION
+.I Diskpart
+is used to calculate the disk partition sizes based on the
+default rules used at Berkeley.  If the
+.B \-p
+option is supplied, tables suitable for inclusion in a device driver
+are produced.  If the
+.B \-d
+option is supplied, an entry suitable for inclusion in the disk
+description file
+.I /etc/disktab
+is generated; c.f.
+.IR disktab (5).
+D 4
+Space is always left in the last partition on the disk
+E 4
+I 4
+On disks that use
+.IR bad144 \|-style
+bad-sector forwarding,
+D 5
+space is left in the last partition on the disk
+E 4
+for a bad sector forwarding table.  The space reserved
+E 5
+I 5
+space is normally left in the last partition on the disk
+for a bad sector forwarding table, although this space
+is not reflected in the tables produced.  The space reserved
+E 5
+is one track for the replicated copies of the table and
+sufficient tracks to hold a pool of 126 sectors to which bad sectors
+are mapped.  For more information, see 
+.IR bad144 (8).
+I 5
+The size of the disk may be limited with the
+.B \-s
+option, specifying the amount of the disk to be used.
+This option is intended for other controllers that reserve some space at the end
+of the disk for bad-sector replacements or other control areas,
+even if not a multiple of cylinders.
+E 5
+.PP
+The disk partition sizes are based on the total amount of
+D 4
+space on the disk as give in the table below (all values
+E 4
+I 4
+space on the disk as given in the table below (all values
+E 4
+D 5
+are supplied in units of 512 byte sectors).  The `c' partition
+E 5
+I 5
+are supplied in units of sectors).  The `c' partition
+E 5
+D 4
+is, by convention, used to access the entire physical disk, including
+the space reserved for the bad sector forwarding table.
+E 4
+I 4
+is, by convention, used to access the entire physical disk.
+The device driver tables include
+the space reserved for the bad sector forwarding table in the `c' partition;
+those used in the disktab and default formats exclude reserved tracks.
+E 4
+In normal operation, either the `g' partition is used, or the
+`d', `e', and `f' partitions are used.  The `g' and `f' partitions
+D 4
+are variable sized, occupying whatever space remains after allocation
+E 4
+I 4
+are variable-sized, occupying whatever space remains after allocation
+E 4
+of the fixed sized partitions.
+If the disk is smaller than 20 Megabytes, then
+.I diskpart
+aborts with the message ``disk too small, calculate by hand''.
+.in +0.5i
+.nf
+
+.ta \w'Partition  'u +\w'20-60 MB  'u +\w'61-205 MB  'u +\w'206-355 MB  'u +\w'356+ MB'u
+Partition	20-60 MB	61-205 MB	206-355 MB	356+ MB
+a	15884	15884	15884	15884
+b	10032	33440	33440	66880
+d	15884	15884	15884	15884
+e	unused	55936	55936	307200
+h	unused	unused	291346	291346
+
+.fi
+.in -0.5i
+.PP
+If an unknown disk type is specified, 
+.I diskpart
+will prompt for the required disk geometry information.
+.SH SEE ALSO
+disktab(5),
+bad144(8)
+.SH BUGS
+D 5
+Certain default partition sizes are based on historical artifacts
+E 5
+I 5
+Most default partition sizes are based on historical artifacts
+E 5
+(e.g. RP06), and may result in unsatisfactory layouts.
+.PP
+When using the \-d flag, alternate disk names are not included
+in the output.
+D 3
+.PP
+Does not understand how to handle drives attached to a UDA50.
+E 3
+E 1

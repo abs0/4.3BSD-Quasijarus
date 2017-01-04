@@ -1,0 +1,5 @@
+# This is a FalconDNS NS-anchor file listing the name servers
+# for all domains managed at Harhan/IFCTF.
+
+server	ivan.Harhan.ORG.	208.221.139.1
+server	ifctfvax.Harhan.ORG.	208.221.139.2

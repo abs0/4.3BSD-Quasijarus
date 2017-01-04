@@ -1,0 +1,165 @@
+h49319
+s 00002/00004/00048
+d D 1.10 86/06/17 14:38:10 mckusick 10 9
+c update for reprinting
+e
+s 00003/00000/00049
+d D 1.9 82/03/15 13:57:53 peter 9 8
+c first page whitespace.
+e
+s 00001/00001/00048
+d D 1.8 82/03/14 22:12:50 peter 8 7
+c sunday night sue.
+e
+s 00000/00001/00049
+d D 1.7 82/03/14 22:10:53 peter 7 6
+c no more double spacing.
+e
+s 00003/00003/00047
+d D 1.6 82/03/13 15:57:48 peter 6 5
+c diction.
+e
+s 00005/00006/00045
+d D 1.5 82/03/12 16:04:32 peter 5 4
+c trimming the advertisement.
+e
+s 00007/00000/00044
+d D 1.4 82/03/12 14:43:08 mckusic 4 3
+c highlight some of the conclusions in the introduction
+e
+s 00004/00004/00040
+d D 1.3 82/03/12 13:53:14 peter 3 2
+c sue polish
+e
+s 00001/00001/00043
+d D 1.2 82/03/11 21:39:17 peter 2 1
+c polle change.  tricky.
+e
+s 00044/00000/00000
+d D 1.1 82/03/11 21:13:34 peter 1 0
+c date and time created 82/03/11 21:13:34 by peter
+e
+u
+U
+t
+T
+I 1
+D 10
+\"	%W% %G%
+E 10
+I 10
+.\"	%W% (Berkeley) %G%
+.\"
+E 10
+D 7
+.ls 2
+E 7
+.sh 1 "Programs to be Profiled"
+.pp
+Software research environments
+D 2
+normally use many large programs
+E 2
+I 2
+normally include many large programs
+E 2
+both for  production use and for experimental investigation.
+D 6
+These programs are typically very modular,
+E 6
+I 6
+These programs are typically modular,
+E 6
+in accordance with generally accepted principles
+of good program design.
+Often they consist of numerous small routines
+that implement various abstractions.
+Sometimes such large programs are written
+by one programmer 
+who has understood the requirements for
+these abstractions, and has programmed them
+appropriately.
+D 3
+More frequently, though, the program has
+had multiple authors, and has
+E 3
+I 3
+More frequently the program has
+had multiple authors and has
+E 3
+evolved over time, changing the demands placed
+on the implementation of the abstractions without
+changing the implementation itself.
+Finally, the program may be assembled from a library
+of abstraction implementations 
+unexamined by the programmer.
+I 9
+D 10
+.(z
+.sp 3i
+.)z
+E 10
+E 9
+.pp
+Once a large program is executable,
+it is often desirable to increase its speed,
+especially if small portions of the program 
+are found to dominate its execution time.
+The purpose of the \fBgprof\fP profiling tool is to 
+help the user evaluate alternative implementations
+of abstractions.
+D 6
+In fact, we developed this tool in response to our efforts 
+E 6
+I 6
+We developed this tool in response to our efforts 
+E 6
+D 3
+to improve a locally-written code generator [Graham82].
+E 3
+I 3
+to improve a code generator we were writing [Graham82].
+E 3
+.pp
+D 3
+We take advantage of the fact that the programs
+E 3
+I 3
+The \fBgprof\fP design takes advantage of the fact that the programs
+E 3
+to be measured are large, structured and hierarchical.
+We provide a profile in which the execution time
+for a set of routines that implement an
+abstraction is collected and charged
+to that abstraction.
+The profile can be used to compare and assess the costs of
+various implementations.
+I 4
+.pp
+D 5
+The profiler can be compiled into a program without
+any prior planning on the part of the programmer.
+Depending on the ratio of subroutine calls to computation,
+it adds only five to thirty percent execution overhead to the profiled program.
+Finally, it produces no output until after the program finishes,
+and allows the program to be measured in its actual environment.
+E 5
+I 5
+The profiler can be linked into a program without
+D 6
+special planning on the part of the programmer.
+E 6
+I 6
+special planning by the programmer.
+E 6
+The overhead for using \fBgprof\fP is low;
+D 8
+both in terms of added execution time and the
+E 8
+I 8
+both in terms of added execution time and in the
+E 8
+volume of profiling information recorded.
+E 5
+E 4
+E 1

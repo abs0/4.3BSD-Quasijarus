@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)nexus.h	7.2 (Berkeley) 8/9/86
+ *	@(#)nexus.h	7.3 (Berkeley) 3/6/04
  */
 
 /*
@@ -111,3 +111,14 @@ struct nexus nexus[MAXNNEXUS];
 #define	NEX_MEM256U	0x72		/* 256K chips, non-interleaved, upper */
 #define	NEX_MEM256UI	0x73		/* 256K chips, ext-interleaved, upper */
 #define	NEX_MEM256I	0x74		/* 256K chips, interleaved */
+
+/*
+ * We have extended the notion of nexus beyond SBI and friends to newer VAX
+ * nexus buses, including node-based VAXBI and XMI and amorphous nexus buses
+ * like CDAL.  We introduce the notion of nexus class to distinguish between
+ * these disparate kinds of nexi.
+ */
+#define	NEXCLASS_SBI	1		/* and friends like CMI */
+#define	NEXCLASS_VAXBI	2
+#define	NEXCLASS_XMI	3
+#define	NEXCLASS_AMORPH	4		/* amorphous nexus buses like CDAL */

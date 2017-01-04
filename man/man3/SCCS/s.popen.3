@@ -1,0 +1,152 @@
+h15954
+s 00002/00002/00067
+d D 6.1 85/05/15 15:43:07 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00020/00020/00049
+d D 5.1 85/05/15 15:42:32 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00069/00000/00000
+d D 4.1 85/05/15 15:41:27 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH POPEN 3S
+E 2
+I 2
+D 3
+.TH POPEN 3 "18 July 1983"
+E 3
+I 3
+.TH POPEN 3 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+popen, pclose \- initiate I/O to/from a process
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.SM
+.B FILE
+.B *popen(command, type)
+.br
+.B char *command, *type;
+.PP
+.B pclose(stream)
+.br
+.SM
+.B FILE
+.B *stream;
+.SH DESCRIPTION
+The arguments to 
+.I popen
+D 2
+are pointers to null-terminated strings
+containing respectively a shell command line and an I/O
+mode, either "r" for reading or "w" for
+writing.
+It creates a pipe between
+the calling process and
+the command to be executed.
+The value returned 
+is a stream pointer that
+E 2
+I 2
+are pointers to null-terminated strings containing respectively a
+shell command line and an I/O mode, either "r" for reading or "w" for
+writing.  It creates a pipe between the calling process and
+the command to be executed.  The value returned is a stream pointer that
+E 2
+can be used (as appropriate) to write to the standard input
+of the command or read from its standard output.
+.PP
+A stream opened by
+.I popen
+should be closed by
+D 2
+.I pclose,
+E 2
+I 2
+.IR pclose ,
+E 2
+which waits for the associated process to terminate
+and returns the exit status of the command.
+.PP
+D 2
+Because open files are shared, a type "r" command
+may be used as an input filter,
+and a type "w" as an output filter.
+E 2
+I 2
+Because open files are shared, a type "r" command may be used as an input
+filter, and a type "w" as an output filter.
+E 2
+.SH "SEE ALSO"
+pipe(2),
+D 2
+fopen(3),
+fclose(3),
+E 2
+I 2
+fopen(3S),
+fclose(3S),
+E 2
+system(3),
+D 2
+wait(2)
+E 2
+I 2
+wait(2),
+sh(1)
+E 2
+.SH DIAGNOSTICS
+.I Popen
+D 2
+returns a null pointer
+if files or processes cannot be created, or the Shell 
+E 2
+I 2
+returns a null pointer if files or processes cannot be created, or the shell 
+E 2
+cannot be accessed.
+.PP
+.I Pclose
+returns \-1 if
+.I stream
+is not associated with a `popened' command.
+.SH BUGS
+Buffered reading before opening an input filter
+may leave the standard input of that filter mispositioned.
+Similar problems with an output filter may be
+D 2
+forestalled by careful buffer flushing, e.g. with
+E 2
+I 2
+forestalled by careful buffer flushing, for instance, with
+E 2
+.I fflush,
+see
+D 3
+.IR fclose (3).
+E 3
+I 3
+.IR fclose (3S).
+E 3
+I 2
+.LP
+.I Popen
+always calls
+.IR sh ,
+never calls
+.IR csh .
+E 2
+E 1

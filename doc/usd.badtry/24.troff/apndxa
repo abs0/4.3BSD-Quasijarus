@@ -1,0 +1,430 @@
+.\"	@(#)apndxa	6.3 (Berkeley) 11/5/04
+.\"
+.pn29
+.br
+.ftB
+.ps+2
+.ce 2
+Appendix A
+\*(PS Character Set
+.ftR
+.ps-2
+.sp
+\*(PS is designed for the Roman character set listed in Appendix E of
+the \fIPostScript Language Reference Manual\fR, 2nd ed. and reproduced
+below:
+.sp
+.nf
+.tr &&
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+a b c d e f g h i j k l m n o p q r s t u v w x y z & 0 1 2 3 4 5 6 7 8 9
+\XC6 \XC1 \XC2 \XC4 \XC0 \XC5 \XC3 \XC7 \XD0 \XC9 \XCA \XCB \XC8 \c
+\XCD \XCE \XCF \XCC \X84 \XD1 \X85 \XD3 \XD4 \XD6 \XD2 \XD5 \XD8 \X86 \XDE \XDA
+\XDB \XDC \XD9 \X83 \XDD \X87 \c
+\XE6 \XE1 \XE2 \XE4 \XE0 \XE5 \XE3 \XE7 \XE9 \XEA \XEB \XE8 \XF0 \(fi \(fl \c
+\XED \XEE \XEF \XEC \X90 \XB5 \X8C \XF1 \X8D \XF3 \XF4 \XF6 \XF2 \XF5 \XF8 \c
+\X8E \XFE \XDF
+\XFA \XFB \XFC \XF9 \XFF \XFD \X8F \c
+\XA3 \XA5 \X99 $ \XA2 \XA4 \X06 \XA9 \XAE @ \XAA \XBA \X80 \X81 \XA7 \XB6 * \c
+! \XA1 ? \XBF . , ; : ` ' \X16 \X17 \X18 \X15 \X82 \X19 "
+\X10 \X11 \XAB \XBB ( ) [ ] { } | / \e - \(en \(em _ \X9E \XB8 \c
+\X92 \X93 \X98 \X91 \X9A \X94 \X95 \X96 \X97 \X9F \X9D \X07
+# % \X14 \XBC \XBE \XBD = \- + \XD7 ~ < \XB1 > \XF7 \XAC \XB0 ^ \X9C \c
+\XB7 \XA6 \XB9 \XB2 \XB3
+.sp
+.fi
+\*(PS uses the following encoding vector, called TroffEncoding:
+.ps 8
+.vs 10
+.TS
+box;
+c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c.
+Hex escape	\eX0\fIx\fP	\eX1\fIx\fP	\eX2\fIx\fP	\eX3\fIx\fP	\eX4\fIx\fP	\eX5\fIx\fP	\eX6\fIx\fP	\eX7\fIx\fP	\eX8\fIx\fP	\eX9\fIx\fP	\eXA\fIx\fP	\eXB\fIx\fP	\eXC\fIx\fP	\eXD\fIx\fP	\eXE\fIx\fP	\eXF\fIx\fP
+_
+0		\X10		0	@	P	`	p	\X80	\X90		\XB0	\XC0	\XD0	\XE0	\XF0
+_
+1		\X11	!	1	A	Q	a	q	\X81	\X91	\XA1	\XB1	\XC1	\XD1	\XE1	\XF1
+_
+2		\X12	"	2	B	R	b	r	\X82	\X92	\XA2	\XB2	\XC2	\XD2	\XE2	\XF2
+_
+3		\X13	#	3	C	S	c	s	\X83	\X93	\XA3	\XB3	\XC3	\XD3	\XE3	\XF3
+_
+4		\X14	$	4	D	T	d	t	\X84	\X94	\XA4	\XB4	\XC4	\XD4	\XE4	\XF4
+_
+5		\X15	%	5	E	U	e	u	\X85	\X95	\XA5	\XB5	\XC5	\XD5	\XE5	\XF5
+_
+6	\X06	\X16	&	6	F	V	f	v	\X86	\X96	\XA6	\XB6	\XC6	\XD6	\XE6	\XF6
+_
+7	\X07	\X17	'	7	G	W	g	w	\X87	\X97	\XA7	\XB7	\XC7	\XD7	\XE7	\XF7
+_
+8		\X18	(	8	H	X	h	x	\X88	\X98	\XA8	\XB8	\XC8	\XD8	\XE8	\XF8
+_
+9		\X19	)	9	I	Y	i	y	\X89	\X99	\XA9	\XB9	\XC9	\XD9	\XE9	\XF9
+_
+A		\X1A	*	:	J	Z	j	z	\X8A	\X9A	\XAA	\XBA	\XCA	\XDA	\XEA	\XFA
+_
+B		\X1B	+	;	K	[	k	{	\X8B	\X9B	\XAB	\XBB	\XCB	\XDB	\XEB	\XFB
+_
+C		\X1C	,	<	L	\e	l	|	\X8C	\X9C	\XAC	\XBC	\XCC	\XDC	\XEC	\XFC
+_
+D		\X1D	\-	\&=	M	]	m	}	\X8D	\X9D	\XAD	\XBD	\XCD	\XDD	\XED	\XFD
+_
+E		\X1E	.	>	N	^	n	~	\X8E	\X9E	\XAE	\XBE	\XCE	\XDE	\XEE	\XFE
+_
+F		\X1F	/	?	O	\&_	o		\X8F	\X9F	\XAF	\XBF	\XCF	\XDF	\XEF	\XFF
+.TE
+.ps 10
+.vs 12
+This encoding vector is a superset of Adobe's \%ISOLatin1Encoding, which is
+ISO Latin-1 with the addition of accent marks.
+The following table lists these accent marks and other \%TroffEncoding
+characters that are not \s-1ASCII\s0 or ISO Latin-1 and have no
+two-character names:
+.sp
+.nf
+.ftBI
+.ta .25iC .5i +.45i 3.25iC +.25i +.45i
+		Hex	Character		Hex	Character
+	Char	Escape	Name	Char	Escape	Name
+.ftR
+.sp.2
+.mk
+	\X10	\eX10	guilsinglleft
+	\X11	\eX11	guilsinglright
+	\X14	\eX14	perthousand
+	\X15	\eX15	baseline double quote
+	\X16	\eX16	opening double quote
+	\X17	\eX17	closing double quote
+	\X18	\eX18	baseline single quote
+	\X19	\eX19	single quote
+	\X82	\eX82	ellipsis
+.rt
+.po +3i
+	\X90	\eX90	dotless i
+	\X91	\eX91	grave accent
+	\X92	\eX92	acute accent
+	\X93	\eX93	circumflex accent
+	\X94	\eX94	tilde accent
+	\X96	\eX96	breve
+	\X97	\eX97	dot accent
+	\X98	\eX98	dieresis
+	\X99	\eX99	florin
+	\X9A	\eX9A	ring accent
+	\X9C	\eX9C	fraction
+	\X9D	\eX9D	Hungarian umlaut
+	\X9E	\eX9E	ogonek
+	\X9F	\eX9F	caron
+.po 1i
+.bp
+.fi
+.ps 10
+.vs 12
+The Symbol font contains the following characters:
+.TS
+box;
+c||c|c|c|c|c|c||c|c|c|c|c|c.
+Hex escape	\eS2\fIx\fP	\eS3\fIx\fP	\eS4\fIx\fP	\eS5\fIx\fP	\eS6\fIx\fP	\eS7\fIx\fP	\eSA\fIx\fP	\eSB\fIx\fP	\eSC\fIx\fP	\eSD\fIx\fP	\eSE\fIx\fP	\eSF\fIx\fP
+_
+0	\S20	\S30	\S40	\S50	\S60	\S70		\SB0	\SC0	\SD0	\SE0
+_
+1	\S21	\S31	\S41	\S51	\S61	\S71	\SA1	\SB1	\SC1	\SD1	\SE1	\SF1
+_
+2	\S22	\S32	\S42	\S52	\S62	\S72	\SA2	\SB2	\SC2	\SD2	\SE2	\SF2
+_
+3	\S23	\S33	\S43	\S53	\S63	\S73	\SA3	\SB3	\SC3	\SD3	\SE3	\SF3
+_
+4	\S24	\S34	\S44	\S54	\S64	\S74	\SA4	\SB4	\SC4	\SD4	\SE4	\SF4
+_
+5	\S25	\S35	\S45	\S55	\S65	\S75	\SA5	\SB5	\SC5	\SD5	\SE5	\SF5
+_
+6	\S26	\S36	\S46	\S56	\S66	\S76	\SA6	\SB6	\SC6	\SD6	\SE6	\SF6
+_
+7	\S27	\S37	\S47	\S57	\S67	\S77	\SA7	\SB7	\SC7	\SD7	\SE7	\SF7
+_
+8	\S28	\S38	\S48	\S58	\S68	\S78	\SA8	\SB8	\SC8	\SD8	\SE8	\SF8
+_
+9	\S29	\S39	\S49	\S59	\S69	\S79	\SA9	\SB9	\SC9	\SD9	\SE9	\SF9
+_
+A	\S2A	\S3A	\S4A	\S5A	\S6A	\S7A	\SAA	\SBA	\SCA	\SDA	\SEA	\SFA
+_
+B	\S2B	\S3B	\S4B	\S5B	\S6B	\S7B	\SAB	\SBB	\SCB	\SDB	\SEB	\SFB
+_
+C	\S2C	\S3C	\S4C	\S5C	\S6C	\S7C	\SAC	\SBC	\SCC	\SDC	\SEC	\SFC
+_
+D	\S2D	\S3D	\S4D	\S5D	\S6D	\S7D	\SAD	\SBD	\SCD	\SDD	\SED	\SFD
+_
+E	\S2E	\S3E	\S4E	\S5E	\S6E	\S7E	\SAE	\SBE	\SCE	\SDE	\SEE	\SFE
+_
+F	\S2F	\S3F	\S4F	\S5F	\S6F		\SAF	\SBF	\SCF	\SDF	\SEF
+.TE
+.fi
+The setup file for the \fBS\fR (Symbol) font generated by \fIpreppsfont\fR(1)
+changes the metrics for the radical (\fB\eSD6\fR or \fB\e(sr\fR) and radical
+extension (\fB\eS60\fR or \fB\e(sx\fR) characters.
+Adobe's metrics for these two characters are completely bogus
+(in the opinion of \*(PS author Michael Sokolov).
+The metrics are changed so that the characters connect as one would
+naturally expect.
+The radical extension character's left sidebearing is eliminated and
+the spacing widths of both characters are set to their actual glyph widths.
+.pg
+In addition to characters defined in various Adobe fonts,
+\*(PS provides four line drawing characters of its own creation that
+do not come from Adobe.
+They are accessible only by their names given below and in no other way.
+.pg
+\*(PS recognizes the following named characters:
+.sp
+.de mx
+.nf
+.ftBI
+.ta .25iC .5i +.45i 3.25iC +.25i +.45i
+		Input	Character		Input	Character
+	Char	Name	Name	Char	Name	Name
+.ftR
+.sp.2
+.nr cl 0 1
+.mk
+..
+.de cl
+.ie \\n+(cl<2 \{.po +3.0i
+.rt \}
+.el .sc
+..
+.de sc
+.po 1i
+.nr cl 0
+'bp
+..
+.wh \nmu-\n(.vu-1u cl
+.mx
+.ft BI
+		European letters
+.ft R
+.sp.2
+	\(A`	\e(A\`	A grave
+	\(A'	\e(A\'	A acute
+	\(A^	\e(A^	A with circumflex
+	\(A~	\e(A~	A with tilde
+	\(A"	\e(A"	A with dieresis
+	\(A*	\e(A*	A with ring above
+	\(AE	\e(AE	AE ligature
+	\(C,	\e(C,	C cedilla
+	\(D-	\e(D\-	Eth
+	\(E`	\e(E\`	E grave
+	\(E'	\e(E\'	E acute
+	\(E^	\e(E^	E with circumflex
+	\(E"	\e(E"	E with dieresis
+	\(I`	\e(I\`	I grave
+	\(I'	\e(I\'	I acute
+	\(I^	\e(I^	I with circumflex
+	\(I"	\e(I"	I with dieresis
+	\(L/	\e(L/	L with slash
+	\(N~	\e(N~	N with tilde
+	\(O`	\e(O\`	O grave
+	\(O'	\e(O\'	O acute
+	\(O^	\e(O^	O with circumflex
+	\(O~	\e(O~	O with tilde
+	\(O"	\e(O"	O with dieresis
+	\(O/	\e(O/	O with slash
+	\(OE	\e(OE	OE ligature
+	\(Sv	\e(Sv	S with caron
+	\(TH	\e(TH	Thorn
+	\(U`	\e(U\`	U grave
+	\(U'	\e(U\'	U acute
+	\(U^	\e(U^	U with circumflex
+	\(U"	\e(U"	U with dieresis
+	\(Y'	\e(Y\'	Y acute
+	\(Y"	\e(Y"	Y with dieresis
+	\(Zv	\e(Zv	Z with caron
+	\(a`	\e(a\`	a grave
+	\(a'	\e(a\'	a acute
+	\(a^	\e(a^	a with circumflex
+	\(a~	\e(a~	a with tilde
+	\(a"	\e(a"	a with dieresis
+	\(a*	\e(a*	a with ring above
+	\(ae	\e(ae	ae ligature
+	\(c,	\e(c,	c cedilla
+	\(d-	\e(d\-	eth
+	\(e`	\e(e\`	e grave
+	\(e'	\e(e\'	e acute
+	\(e^	\e(e^	e with circumflex
+	\(e"	\e(e"	e with dieresis
+	\(i`	\e(i\`	i grave
+	\(i'	\e(i\'	i acute
+	\(i^	\e(i^	i with circumflex
+	\(i"	\e(i"	i with dieresis
+	\(l/	\e(l/	l with slash
+	\(n~	\e(n~	n with tilde
+	\(o`	\e(o\`	o grave
+	\(o'	\e(o\'	o acute
+	\(o^	\e(o^	o with circumflex
+	\(o~	\e(o~	o with tilde
+	\(o"	\e(o"	o with dieresis
+	\(o/	\e(o/	o with slash
+	\(oe	\e(oe	oe ligature
+	\(sv	\e(sv	s with caron
+	\(th	\e(th	thorn
+	\(u`	\e(u\`	u grave
+	\(u'	\e(u\'	u acute
+	\(u^	\e(u^	u with circumflex
+	\(u"	\e(u"	u with dieresis
+	\(y'	\e(y\'	y acute
+	\(y"	\e(y"	y with dieresis
+	\(zv	\e(zv	z with caron
+	\(ss	\e(ss	German sharp s
+.sp.2
+.ft BI
+		Other ISO Latin-1 characters
+.ft R
+.sp.2
+	\(!!	\e(!!	inverted !
+	\(ct	\e(ct	cent sign
+	\(sc	\e(sc	section
+	\(hy	\e(hy	hyphen
+	\(de	\e(de	degree
+	\(14	\e(14	1\(sl4
+	\(12	\e(12	1\(sl2
+	\(34	\e(34	3\(sl4
+	\(??	\e(??	inverted ?
+.sp.2
+.ft BI
+		Other base font characters
+.ft R
+.sp.2
+	\(em	\e(em	em dash
+	\(en	\e(en	en dash
+	\(bu	\e(bu	bullet
+	\(fi	\e(fi	fi
+	\(fl	\e(fl	fl
+	\(dg	\e(dg	dagger
+	\(dd	\e(dd	double dagger
+	\(co	\e(co	copyright
+	\(rg	\e(rg	registered
+	\(tm	\e(tm	trademark
+	\(aa	\e(aa	acute accent
+	\(ga	\e(ga	grave accent
+.sp.2
+.ft BI
+		Symbol characters
+.ft R
+.sp.2
+	\(pl	\e(pl	math plus
+	\(mi	\e(mi	math minus
+	\(eq	\e(eq	math equals
+	\(**	\e(**	math star
+	\(sl	\e(sl	slash (on Symbol)
+	\(*a	\e(*a	alpha
+	\(*b	\e(*b	beta
+	\(*g	\e(*g	gamma
+	\(*d	\e(*d	delta
+	\(*e	\e(*e	epsilon
+	\(*z	\e(*z	zeta
+	\(*y	\e(*y	eta
+	\(*h	\e(*h	theta
+	\(*i	\e(*i	iota
+	\(*k	\e(*k	kappa
+	\(*l	\e(*l	lambda
+	\(*m	\e(*m	mu
+	\(*n	\e(*n	nu
+	\(*c	\e(*c	xi
+	\(*o	\e(*o	omicron
+	\(*p	\e(*p	pi
+	\(*r	\e(*r	rho
+	\(*s	\e(*s	sigma
+	\(ts	\e(ts	terminal sigma
+	\(*t	\e(*t	tau
+	\(*u	\e(*u	upsilon
+	\(*f	\e(*f	phi
+	\(*x	\e(*x	chi
+	\(*q	\e(*q	psi
+	\(*w	\e(*w	omega
+	\(*A	\e(*A	Alpha
+	\(*B	\e(*B	Beta
+	\(*G	\e(*G	Gamma
+	\(*D	\e(*D	Delta
+	\(*E	\e(*E	Epsilon
+	\(*Z	\e(*Z	Zeta
+	\(*Y	\e(*Y	Eta
+	\(*H	\e(*H	Theta
+	\(*I	\e(*I	Iota
+	\(*K	\e(*K	Kappa
+	\(*L	\e(*L	Lambda
+	\(*M	\e(*M	Mu
+	\(*N	\e(*N	Nu
+	\(*C	\e(*C	Xi
+	\(*O	\e(*O	Omicron
+	\(*P	\e(*P	Pi
+	\(*R	\e(*R	Rho
+	\(*S	\e(*S	Sigma
+	\(*T	\e(*T	Tau
+	\(*U	\e(*U	Upsilon
+	\(*F	\e(*F	Phi
+	\(*X	\e(*X	Chi
+	\(*Q	\e(*Q	Psi
+	\(*W	\e(*W	Omega
+	\(sr	\e(sr	square root
+	\(sx	\e(sx	square root extender
+	\(>=	\e(>=	>=
+	\(<=	\e(<=	<=
+	\(==	\e(==	identically equal
+	\(~=	\e(~=	approx =
+	\(ap	\e(ap	approximates
+	\(!=	\e(!=	not equal
+	\(->	\e(\->	right arrow
+	\(<-	\e(<\-	left arrow
+	\(ua	\e(ua	up arrow
+	\(da	\e(da	down arrow
+	\(mu	\e(mu	multiply
+	\(di	\e(di	divide
+	\(+-	\e(+\-	plus-minus
+	\(cu	\e(cu	cup (union)
+	\(ca	\e(ca	cap (intersection)
+	\(sb	\e(sb	subset of
+	\(sp	\e(sp	superset of
+	\(ib	\e(ib	improper subset
+	\(ip	\e(ip	improper superset
+	\(if	\e(if	infinity
+	\(pd	\e(pd	partial derivative
+	\(gr	\e(gr	gradient
+	\(no	\e(no	not
+	\(is	\e(is	integral sign
+	\(pt	\e(pt	proportional to
+	\(es	\e(es	empty set
+	\(mo	\e(mo	member of
+	\(Mi	\e(Mi	minute
+	\(Se	\e(Se	second
+	\(lt	\e(lt	left top of big curly bracket
+	\(lb	\e(lb	left bottom
+	\(rt	\e(rt	right top
+	\(rb	\e(rb	right bot
+	\(lk	\e(lk	left center of big curly bracket
+	\(rk	\e(rk	right center of big curly bracket
+	\(bx	\e(bx	big curly bracket extension
+	\(lf	\e(lf	left floor (left bottom of big
+			square bracket)
+	\(rf	\e(rf	right floor (right bottom)
+	\(lc	\e(lc	left ceiling (left top)
+	\(rc	\e(rc	right ceiling (right top)
+	\(lx	\e(lx	left square bracket extension
+	\(rx	\e(rx	right square bracket extension
+.sp.2
+.ft BI
+		Line drawing characters
+.ft R
+.sp.2
+	\(ru	\e(ru	baseline rule
+	\(ul	\e(ul	underrule
+	\(rn	\e(rn	overrule (formerly root en)
+	\(br	\e(br	box vertical rule
+.sp.2
+.ft BI
+		\*(TR compatibility
+.ft R
+.sp.2
+	\(fm	\e(fm	foot mark mapped to \e(Mi minute
+	\(or	\e(or	or mapped to | on Symbol
+	\(bv	\e(bv	bold vertical mapped to big curly
+			bracket extension
+	\(lh	\e(lh	left hand mapped to double arrow
+	\(rh	\e(rh	right hand mapped to double arrow

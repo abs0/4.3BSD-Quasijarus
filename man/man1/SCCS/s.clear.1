@@ -1,0 +1,52 @@
+h05723
+s 00001/00001/00019
+d D 6.1 85/04/29 14:19:13 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00002/00019
+d D 5.1 85/04/29 14:19:06 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00021/00000/00000
+d D 4.1 85/04/29 14:18:59 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CLEAR 1 2/24/79
+E 2
+I 2
+D 3
+.TH CLEAR 1 "24 February 1979"
+E 3
+I 3
+.TH CLEAR 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+clear \- clear terminal screen
+.SH SYNOPSIS
+.B clear
+.SH DESCRIPTION
+.I Clear
+clears your screen if this is possible.
+It looks in the environment for the terminal type and then in
+.I /etc/termcap
+to figure out how to clear the screen.
+.SH FILES
+/etc/termcap	terminal capability data base
+D 2
+.SH BUGS
+E 2
+E 1

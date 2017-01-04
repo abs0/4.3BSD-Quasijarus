@@ -1,0 +1,261 @@
+h64590
+s 00007/00000/00150
+d D 5.3 03/12/04 14:50:32 msokolov 3 2
+c add SMM:23, Bug Fixes and Changes in 4.3BSD-Quasijarus
+e
+s 00029/00021/00121
+d D 5.2 86/06/03 23:27:19 mckusick 2 1
+c update for 4.3BSD organization
+e
+s 00142/00000/00000
+d D 5.1 86/04/15 16:22:10 mckusick 1 0
+c mis original
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.OH '''SMM Contents'
+.EH 'SMM Contents'''
+.TL
+UNIX System Manager's Manual (SMM)
+.sp
+\s-24.3 Berkeley Software Distribution, Virtual \s-2VAX\s+2\-11 Version\s+2
+.sp
+D 2
+\fRFebruary, 1985\fR
+E 2
+I 2
+\fRApril, 1986\fR
+E 2
+.PP
+This volume contains manual pages and supplementary documents useful to system
+administrators.
+The information in these documents applies to
+the Virtual \s-2VAX\s0-11 version of the system as distributed by U.C.
+Berkeley.
+.SH
+Reference Manual \- Section 8
+.tl '''(8)'
+.IP
+Section 8 of the UNIX Programmer's Manual contains information related to
+system operation, administration,  and maintenance.
+.SH
+System Installation and Administration
+.IP
+.tl 'Installing and Operating 4.3BSD on the VAX''SMM:1'
+.QP
+The definitive reference document for those occasions when
+you find you need to start over again.
+
+.IP
+.tl 'Building 4.3BSD UNIX Systems with \fIConfig\fP''SMM:2'
+.QP
+In-depth discussions of the use and operation of the \fIconfig\fP
+program, and how to build your very own Unix kernel.
+
+.IP
+D 2
+.tl 'Disc Quotas in a UNIX Environment''SMM:3'
+E 2
+I 2
+.tl 'Using ADB to Debug the Kernel''SMM:3'
+E 2
+.QP
+D 2
+A light introduction to the care and feeding of the
+facilities for limiting use of disc resources.
+E 2
+I 2
+Techniques for figuring out after the fact why the kernel crashed.
+E 2
+
+.IP
+D 2
+.tl 'Fsck \- The UNIX File System Check Program''SMM:4'
+E 2
+I 2
+.tl 'Disc Quotas in a UNIX Environment''SMM:4'
+E 2
+.QP
+I 2
+A light introduction to the techniques
+for limiting the use of disc resources.
+
+.IP
+.tl 'Fsck \- The UNIX File System Check Program''SMM:5'
+.QP
+E 2
+A reference document for using the \fIfsck\fP program during
+times of file system distress.
+
+.IP
+D 2
+.tl 'Line Printer Spooler Manual''SMM:5'
+E 2
+I 2
+.tl 'Line Printer Spooler Manual''SMM:6'
+E 2
+.QP
+This document describes the structure and installation procedure
+for the line printer spooling system.  
+
+.IP
+D 2
+.tl 'Sendmail Installation and Operation Guide''SMM:6'
+E 2
+I 2
+.tl 'Sendmail Installation and Operation Guide''SMM:7'
+E 2
+.QP
+The last word in installing and operating the \fIsendmail\fP program.
+
+.IP
+D 2
+.tl 'A Dial\-Up Network of UNIX Systems''SMM:7'
+E 2
+I 2
+.tl 'Timed Installation and Operation Guide''SMM:8'
+E 2
+.QP
+D 2
+Describes UUCP, a program for communicating files between UNIX systems.
+E 2
+I 2
+Describes how to maintain time synchronization between machines
+in a local network.
+E 2
+
+.IP
+D 2
+.tl 'UUCP Implementation Description''SMM:8'
+E 2
+I 2
+.tl 'UUCP Implementation Description''SMM:9'
+E 2
+.QP
+Describes the implementation of uucp; for the installer and administrator.
+
+.IP
+D 2
+.tl 'Installing and Maintaining the News system (check title)''SMM:9'
+E 2
+I 2
+.tl 'USENET Version B Installation''SMM:10'
+E 2
+.QP
+D 2
+(supply abstract)
+E 2
+I 2
+How to install and maintain the News system.
+E 2
+
+.IP
+D 2
+.tl 'Installing and Maintaining the Notesfile system''SMM:10'
+.QP
+Contains the sections of the Notesfile Reference Manual (USD:11) applicable
+to installers and maintainers.
+
+.IP
+E 2
+.tl 'Name Server Operations Guide''SMM:11'
+.QP
+If you have a network this will be of interest.
+
+.SH
+Supporting Documentation
+
+.IP
+.tl 'Bug Fixes and Changes in 4.3BSD''SMM:12'
+.QP
+This document summarizes changes visible to the user accustomed to 4.2BSD.
+
+.IP
+.tl 'Changes to the Kernel in 4.3BSD''SMM:13'
+.QP
+A summary for the hard-core of changes in the kernel from 4.2BSD to 4.3BSD.
+
+D 2
+
+E 2
+.IP
+.tl 'A Fast File System for UNIX''SMM:14'
+.QP
+A description of the 4.2BSD file system organization, design and implementation.
+
+.IP
+.tl '4.3BSD Networking Implementation Notes''SMM:15'
+.QP
+A concise description of the system interfaces used within the
+networking subsystem.
+
+.IP
+.tl 'Sendmail \- An Internetwork Mail Router''SMM:16'
+.QP
+An overview document on the design and implementation of \fIsendmail\fP.
+
+.IP
+.tl 'On the Security of UNIX''SMM:17'
+.QP
+Hints on how to break UNIX, and how to avoid your system being broken.
+
+.IP
+.tl 'Password Security \- A Case History''SMM:18'
+.QP
+How the bad guys used to be able to break the password algorithm, and why
+D 2
+they can't now (at least not so easily).
+E 2
+I 2
+they cannot now (at least not so easily).
+E 2
+
+.IP
+.tl 'A Tour Through the Portable C Compiler''SMM:19'
+.QP
+How the portable C compiler works inside.  
+
+.IP
+.tl 'Writing NROFF Terminal Descriptions''SMM:20'
+.QP
+D 2
+An description of how to add a printer with new characteristics
+E 2
+I 2
+A description of how to add a printer with new characteristics
+E 2
+to Version 7 \fInroff\fP.
+
+I 2
+.IP
+.tl 'A Dial\-Up Network of UNIX Systems''SMM:21'
+.QP
+Describes UUCP, a program for communicating files between UNIX systems.
+E 2
+
+I 2
+.IP
+.tl 'The Berkeley UNIX Time Synchronization Protocol''SMM:22'
+.QP
+The protocols and algorithms used by timed,
+the network time synchronization daemon.
+I 3
+
+.IP
+.tl 'Bug Fixes and Changes in 4.3BSD-Quasijarus''SMM:23'
+.QP
+This document briefly describes the changes
+made by Quasijarus Project in each successive 4.3BSD-Quasijarus release
+up to the present.
+E 3
+E 2
+E 1

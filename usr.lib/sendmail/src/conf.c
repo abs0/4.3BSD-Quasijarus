@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)conf.c	5.17 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)conf.c	5.18 (Berkeley) 5/20/06";
 #endif /* not lint */
 
 # include <pwd.h>
@@ -194,7 +194,7 @@ getrgid()
 **		none.
 **
 **	Notes:
-**		The return value is statically allocated.
+**		The return value is permanently allocated and cached.
 */
 
 char *
@@ -214,7 +214,7 @@ username()
 
 			pw = getpwuid(getruid());
 			if (pw != NULL)
-				myname = pw->pw_name;
+				myname = newstr(pw->pw_name);
 		}
 		else
 		{
@@ -224,7 +224,7 @@ username()
 			{
 				pw = getpwuid(getuid());
 				if (pw != NULL)
-					myname = pw->pw_name;
+					myname = newstr(pw->pw_name);
 			}
 		}
 		if (myname == NULL || myname[0] == '\0')

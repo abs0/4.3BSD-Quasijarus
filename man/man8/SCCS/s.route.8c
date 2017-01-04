@@ -1,0 +1,295 @@
+h51993
+s 00060/00031/00096
+d D 6.2 86/05/24 21:09:15 karels 3 2
+c updates
+e
+s 00001/00001/00126
+d D 6.1 85/04/27 15:43:18 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00127/00000/00000
+d D 5.1 85/04/27 15:42:52 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ROUTE 8C "5 May 1983"
+E 2
+I 2
+.TH ROUTE 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+route \- manually manipulate the routing tables
+.SH SYNOPSIS
+.B /etc/route
+[
+.B \-f
+] [
+I 3
+.B \-n
+] [
+E 3
+.I command args
+]
+.SH DESCRIPTION
+.I Route
+is a program used to manually manipulate the network
+routing tables.  It normally is not needed, as the
+system routing table management daemon,
+.IR routed (8C),
+should tend to this task.
+.PP
+.I Route
+D 3
+accepts three commands:
+E 3
+I 3
+accepts two commands:
+E 3
+.IR add ,
+D 3
+to add a route;
+E 3
+I 3
+to add a route, and
+E 3
+.IR delete ,
+D 3
+to delete a route; and
+.IR change ,
+to modify an existing route.
+E 3
+I 3
+to delete a route.
+E 3
+.PP
+All commands have the following syntax:
+.PP
+D 3
+.ti +0.5i
+E 3
+I 3
+.ti +0.25i
+E 3
+.B /etc/route 
+.I command
+D 3
+.B destination gateway
+E 3
+[
+D 3
+.B metric
+E 3
+I 3
+.B net
+|
+.B host
+E 3
+]
+I 3
+.I destination gateway
+[
+.I metric
+]
+E 3
+.PP
+where
+.I destination
+D 3
+is a host or network for which
+the route is ``to'',
+E 3
+I 3
+is the destination host or network,
+E 3
+.I gateway
+D 3
+is the gateway to which packets should be addressed, and
+E 3
+I 3
+is the next-hop gateway to which packets should be addressed, and
+E 3
+.I metric
+D 3
+is an optional count indicating the number of hops to
+E 3
+I 3
+is a count indicating the number of hops to
+E 3
+the
+.IR destination .
+D 3
+If no metric is specified, 
+.I route
+assumes a value of 0.
+E 3
+I 3
+The metric is required for
+.I add
+commands; it must be zero if the destination is on a directly-attached network,
+and nonzero if the route utilizes one or more gateways.
+If adding a route with metric 0,
+the gateway given is the address of this host on the common network,
+indicating the interface to be used for transmission.
+E 3
+Routes to a particular host are distinguished from those to
+a network by interpreting the Internet address associated with
+.IR destination .
+D 3
+If the 
+E 3
+I 3
+The optional keywords
+.B net
+and
+.B host
+force the destination to be interpreted as a network or a host, respectively.
+Otherwise, if the 
+E 3
+.I destination
+D 3
+has a ``local address part'' of INADDR_ANY, then the route is
+E 3
+I 3
+has a ``local address part'' of INADDR_ANY,
+or if the
+.I destination
+is the symbolic name of a network, then the route is
+E 3
+assumed to be to a network; otherwise, it is presumed to be a
+route to a host.  If the route is to a destination connected
+via a gateway, the 
+.I metric
+should be greater than 0.  All symbolic names specified for a
+.I destination 
+or 
+.I gateway
+D 3
+are looked up first in the host name database,
+.IR hosts (5).
+If this lookup fails, the name is then looked for
+in the network name database,
+.IR networks (5).
+E 3
+I 3
+are looked up first as a host name using
+.IR gethostbyname (3N).
+If this lookup fails,
+.IR getnetbyname (3N)
+is then used to interpret the name as that of a network.
+E 3
+.PP
+.I Route
+uses a raw socket and the SIOCADDRT and SIOCDELRT
+.IR ioctl 's
+to do its work.  As such, only the super-user may modify
+the routing tables.
+.PP
+If the 
+.B \-f
+option is specified, 
+.I route
+will ``flush'' the routing tables of all gateway entries.
+If this is used in conjunction with one of the commands
+described above, the tables are flushed prior to the command's
+application.
+I 3
+.PP
+The
+.B \-n
+option prevents attempts to print host and network names symbolically
+when reporting actions.
+E 3
+.SH DIAGNOSTICS
+D 3
+.B ``add %s: gateway %s flags %x''
+E 3
+I 3
+``\fBadd [ host | network ] %s: gateway %s flags %x\fP''
+E 3
+.br
+The specified route is being added to the tables.  The
+values printed are from the routing table entry supplied
+in the 
+.I ioctl
+call.
+I 3
+If the gateway address used was not the primary address of the gateway
+(the first one returned by
+.IR gethostbyname ),
+the gateway address is printed numerically as well as symbolically.
+E 3
+.PP
+D 3
+.B ``delete %s: gateway %s flags %x''
+E 3
+I 3
+``\fBdelete [ host | network ] %s: gateway %s flags %x\fP''
+E 3
+.br
+As above, but when deleting an entry.
+.PP
+D 3
+.B ``%s %s done''
+E 3
+I 3
+``\fB%s %s done\fP''
+E 3
+.br
+When the 
+.B \-f
+flag is specified, each routing table entry deleted
+is indicated with a message of this form.
+.PP
+D 3
+.B  ``not in table''
+E 3
+I 3
+``\fBNetwork is unreachable\fP''
+E 3
+.br
+I 3
+An attempt to add a route failed because the gateway listed was not
+on a directly-connected network.
+The next-hop gateway must be given.
+.PP
+``\fBnot in table\fP''
+.br
+E 3
+A delete operation was attempted for an entry which
+wasn't present in the tables.
+.PP
+D 3
+.B ``routing table overflow''
+E 3
+I 3
+``\fBrouting table overflow\fP''
+E 3
+.br
+An add operation was attempted, but the system was
+low on resources and was unable to allocate memory
+to create the new entry.
+.SH "SEE ALSO"
+intro(4N),
+D 3
+routed(8C)
+.SH BUGS
+The change operation is not implemented, one should add
+the new route, then delete the old one.
+E 3
+I 3
+routed(8C),
+XNSrouted(8C)
+E 3
+E 1

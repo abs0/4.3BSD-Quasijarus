@@ -1,0 +1,45 @@
+h00999
+s 00001/00001/00024
+d D 6.1 85/05/15 16:20:12 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00025/00000/00000
+d D 5.1 85/05/15 16:20:05 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETLOG 3F "13 June 1983"
+E 2
+I 2
+.TH GETLOG 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+getlog \- get user's login name
+.SH SYNOPSIS
+.B subroutine getlog (name)
+.br
+.B character*(*) name
+.sp 1
+.B character*(*) function getlog()
+.SH DESCRIPTION
+.I Getlog
+will return the user's login name or all blanks if
+the process is running detached from a terminal.
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.SH "SEE ALSO"
+getlogin(3)
+E 1

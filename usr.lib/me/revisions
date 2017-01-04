@@ -1,3 +1,6 @@
+2.29	28 Oct 04
+-- Minimal fixes to .sc for pstroff (can still stand lots of improvement).
+
 2.28	12 May 86
 -- Fix footnotes if no -rv flag specified
 

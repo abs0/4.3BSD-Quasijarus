@@ -16,7 +16,7 @@
  */
 
 #if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)inet_addr.c	5.6 (Berkeley) 6/27/88";
+static char sccsid[] = "@(#)inet_addr.c	5.7 (Berkeley) 12/14/07";
 #endif /* LIBC_SCCS and not lint */
 
 #include <sys/types.h>
@@ -71,7 +71,7 @@ again:
 		 *	a.b.c	(with c treated as 16-bits)
 		 *	a.b	(with b treated as 24 bits)
 		 */
-		if (pp >= parts + 4)
+		if (pp >= parts + 3)
 			return (INADDR_NONE);
 		*pp++ = val, cp++;
 		goto again;

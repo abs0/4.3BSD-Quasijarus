@@ -1,0 +1,74 @@
+h08865
+s 00001/00001/00033
+d D 6.2 86/05/27 10:34:24 kjd 4 3
+c fix english
+e
+s 00001/00001/00033
+d D 6.1 85/05/15 15:31:58 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00001/00029
+d D 5.1 85/05/15 15:31:29 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00030/00000/00000
+d D 4.1 85/05/15 15:30:37 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETPW 3  deprecated
+E 2
+I 2
+D 3
+.TH GETPW 3C  "19 January 1983"
+E 3
+I 3
+.TH GETPW 3C  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+getpw \- get name from uid
+.SH SYNOPSIS
+.nf
+.B getpw(uid, buf)
+.B char *buf;
+.fi
+.SH DESCRIPTION
+I 2
+.ft B
+D 4
+Getpw is obsoleted by getpwuid(3).
+E 4
+I 4
+Getpw is made obsolete by getpwuid(3).
+E 4
+.ft R
+.PP
+E 2
+.I Getpw
+searches the password file for
+the (numerical)
+.IR uid ", and fills in " "buf"
+with the corresponding line;
+it returns non-zero if
+.IR uid ""
+could not
+be found.
+The line is null-terminated.
+.SH FILES
+/etc/passwd
+.SH "SEE ALSO"
+getpwent(3),
+passwd(5)
+.SH DIAGNOSTICS
+Non-zero
+return on error.
+E 1

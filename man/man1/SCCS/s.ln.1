@@ -1,0 +1,190 @@
+h18382
+s 00003/00002/00078
+d D 6.3 86/11/26 12:18:44 bostic 5 4
+c documented (slightly) the directory linking capability 
+c of ln
+e
+s 00012/00007/00068
+d D 6.2 86/04/10 19:06:20 mckusick 4 3
+c clarifications from sechrest
+e
+s 00001/00001/00074
+d D 6.1 85/04/29 14:31:20 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00036/00013/00039
+d D 5.1 85/04/29 14:31:07 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00052/00000/00000
+d D 4.1 85/04/29 14:30:58 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LN 1 11/16/79
+E 2
+I 2
+D 3
+.TH LN 1 "17 March 1982"
+E 3
+I 3
+.TH LN 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+ln \- make links
+.SH SYNOPSIS
+.B ln
+I 2
+[
+.B \-s
+]
+E 2
+D 4
+name1 [ name2 ]
+E 4
+I 4
+sourcename [ targetname ]
+E 4
+.br
+.B ln
+D 4
+name ... directory
+E 4
+I 4
+[
+.B \-s
+]
+sourcename1 sourcename2 [ sourcename3 ... ] targetdirectory
+E 4
+.SH DESCRIPTION
+A link is a directory entry referring
+to a file; the same file (together with
+its size, all its protection
+information, etc.)
+may have several links to it.
+D 2
+There is no way to distinguish a link to a file
+from its original directory entry;
+any changes in the
+file are effective
+independently of the name by which the file is known.
+E 2
+I 2
+There are two kinds of links: hard links and symbolic links.
+E 2
+.PP
+I 2
+By default
+.I ln
+makes hard links.
+A hard link to a file is indistinguishable from the
+original directory entry; any changes to a
+file are effective independent of the name used
+D 5
+to reference the file.
+Hard links may not span file systems and may not refer to directories.
+E 5
+I 5
+to reference the file.  Hard links may not refer to directories
+(unless the proper incantations are supplied) and may not span
+file systems.
+E 5
+.PP
+The
+.B \-s
+option causes
+.I ln
+to create symbolic links.
+A symbolic link contains the name of the file to
+which it is linked.  The referenced file is used when an
+.IR open (2)
+operation is performed on the link.
+A
+.IR stat (2)
+on a symbolic link will return the linked-to file; an
+.IR lstat (2)
+must be done to obtain information about the link.
+The
+.IR readlink (2)
+call may be used to read the contents of a symbolic link.
+Symbolic links may span file systems and may refer to directories.
+.PP
+E 2
+Given one or two arguments,
+.I ln
+creates a link to an existing file
+D 4
+.IR name1 .
+E 4
+I 4
+.IR sourcename .
+E 4
+If
+D 4
+.I name2
+E 4
+I 4
+.I targetname
+E 4
+is given, the link has that name;
+D 4
+.I name2
+E 4
+I 4
+.I targetname
+E 4
+may also be a directory in which to place the link;
+otherwise it is placed in the current directory.
+D 2
+If only the directory is specified, the link will be made with
+its name the same as the last component
+of
+E 2
+I 2
+If only the directory is specified, the link will be made
+to the last component of
+E 2
+D 4
+.IR name1 .
+E 4
+I 4
+.IR sourcename .
+E 4
+.PP
+Given more than two arguments,
+.I ln
+D 4
+makes links to all the named files in the named directory.
+E 4
+I 4
+makes links in 
+.I targetdirectory
+to all the named source files.
+E 4
+The links made will have the same name as the files being linked to.
+D 2
+.PP
+It is forbidden to link to a directory
+or to link across file systems.
+E 2
+.SH "SEE ALSO"
+D 2
+rm(1), cp(1), mv(1)
+E 2
+I 2
+rm(1), cp(1), mv(1), link(2), readlink(2), stat(2), symlink(2)
+E 2
+E 1

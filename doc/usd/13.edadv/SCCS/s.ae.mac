@@ -1,0 +1,85 @@
+h19248
+s 00004/00003/00049
+d D 6.1 86/06/02 17:35:00 mckusick 3 2
+c document for 4.3BSD release
+e
+s 00000/00000/00052
+d D 5.1 86/06/02 17:34:55 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00052/00000/00000
+d D 4.1 86/06/02 17:34:49 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.tr _\(em
+.de UL
+.if n .ul
+.if n \\$3\\$1\\$2
+.if t \\$3\f3\\$1\fP\\$2
+..
+.de IT
+.if t \\$3\f2\\$1\fP\\$2
+.if n .ul
+.if n \\$3\\$1\\$2
+..
+.de UI
+\f3\\$1\fI\\$2\fR\\$3
+..
+.de P1
+.if n .ls 1
+.nf
+.if n .ta 5 10 15 20 25 30 35 40 45 50 55 60
+.if t .ta .3i .6i .9i 1.2i 1.5i 1.8i
+.tr -\-
+.		use first argument as indent if present
+.if \\n(.$ .DS I \\$1
+.if !\\n(.$ .DS I 5
+..
+.de P2
+.DE
+.tr --
+.if n .ls 2
+..
+D 3
+.if t .ds B \s6\|\v'.1m'\(sq\v'-.1m'\|\s0
+.if n .ds B []
+E 3
+I 3
+.if t .ds BL \s6\|\v'.1m'\(sq\v'-.1m'\|\s0
+.if n .ds BL []
+E 3
+.if t .ds m \(mi
+.if n .ds m -
+.if t .ds n \(no
+.if n .ds n -
+.if t .ds s \v'.41m'\s+4*\s-4\v'-.41m'
+.if n .ds s *
+.if t .ds S \(sl
+.if n .ds S /
+.if t .ds d \s+4\&.\&\s-4
+.if n .ds d \&.\&
+.if t .ds a \z@@
+.if n .ds a @
+.if t .ds . \s+2\fB.\fP\s-2
+.if n .ds . .
+D 3
+.if t .ds e \z\e\h'2u'\e
+E 3
+I 3
+.if t .ds e \z\e\h'1u'\e
+E 3
+.if n .ds e \e
+.hy 14
+.	2=not last lines; 4= no -xx; 8=no xx-
+.tr *\(**
+I 3
+
+E 3
+E 1

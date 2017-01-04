@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)main.c	5.7 (Berkeley) 10/1/87";
+static char sccsid[] = "@(#)main.c	5.11 (Berkeley) 12/8/04";
 #endif not lint
 
 /*
@@ -136,7 +136,7 @@ main(argc, argv)
 	    strncat(ttyn, argv[2], sizeof(ttyn)-sizeof(dev));
 	    if (strcmp(argv[0], "+") != 0) {
 		chown(ttyn, 0, 0);
-		chmod(ttyn, 0622);
+		chmod(ttyn, 0600);
 		/*
 		 * Delay the open so DTR stays down long enough to be detected.
 		 */
@@ -172,6 +172,7 @@ main(argc, argv)
 		if (OPset || EPset || APset)
 			APset++, OPset++, EPset++;
 		setdefaults();
+		ioctl(0, TIOCSETD, &ldisp);
 		ioctl(0, TIOCFLUSH, 0);		/* clear out the crap */
 		ioctl(0, FIONBIO, &off);	/* turn off non-blocking mode */
 		ioctl(0, FIOASYNC, &off);	/* ditto for asynchronous mode */
@@ -183,11 +184,13 @@ main(argc, argv)
 			tmode.sg_ospeed = speed(OS);
 		else if (SP)
 			tmode.sg_ospeed = speed(SP);
-		tmode.sg_flags = setflags(0);
+		allflags = setflags(0);
+		tmode.sg_flags = allflags & 0xFFFF;
 		ioctl(0, TIOCSETP, &tmode);
+		allflags >>= 16;
+		ioctl(0, TIOCLSET, &allflags);
 		setchars();
 		ioctl(0, TIOCSETC, &tc);
-		ioctl(0, TIOCSETD, &ldisp);
 		if (HC)
 			ioctl(0, TIOCHPCL, 0);
 		if (AB) {
@@ -400,9 +403,11 @@ putchr(cc)
 	char c;
 
 	c = cc;
-	c |= partab[c&0177] & 0200;
-	if (OP)
-		c ^= 0200;
+	if (!P8) {
+		c |= partab[c&0177] & 0200;
+		if (OP)
+			c ^= 0200;
+	}
 	if (!UB) {
 		outbuf[obufcnt++] = c;
 		if (obufcnt >= OBUFSIZ)

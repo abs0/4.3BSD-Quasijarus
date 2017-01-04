@@ -1,0 +1,39 @@
+/usr/src/usr.lib/sendmail/src/SCCS/s.arpadate.c:
+5.10 06/03/31 17:33:08 msokolov 33 32
+generate 4-digit years (RFC 1123)
+/usr/src/usr.lib/sendmail/src/SCCS/s.version.c:
+5.61.1.4 06/03/31 17:33:10 msokolov 488 487
+generate 4-digit years (RFC 1123)
+/usr/src/usr.lib/sendmail/src/SCCS/s.main.c:
+5.20 06/05/19 21:47:16 msokolov 224 223
+implemented alias attributes
+/usr/src/usr.lib/sendmail/src/SCCS/s.sendmail.h:
+5.17 06/05/19 21:47:21 msokolov 166 165
+implemented alias attributes
+/usr/src/usr.lib/sendmail/src/SCCS/s.alias.c:
+5.18 06/05/19 21:47:24 msokolov 93 92
+implemented alias attributes
+/usr/src/usr.lib/sendmail/src/SCCS/s.deliver.c:
+5.25 06/05/19 21:47:27 msokolov 212 211
+implemented alias attributes
+/usr/src/usr.lib/sendmail/src/SCCS/s.alias.c:
+5.19 06/05/20 01:12:23 msokolov 94 93
+brown paper bag
+/usr/src/usr.lib/sendmail/src/SCCS/s.conf.c:
+5.18 06/05/20 16:53:57 msokolov 116 115
+make the return value of username() last forever
+/usr/src/usr.lib/sendmail/src/SCCS/s.version.c:
+5.61.1.5 06/05/20 19:25:43 msokolov 489 488
+alias options for uid/gid and restricted access
+/usr/src/usr.bin/m4/SCCS/s.m4.c:
+1.4 07/02/26 00:12:02 msokolov 4 3
+SAVS can be made much bigger
+/usr/src/usr.bin/m4/SCCS/s.m4.c:
+1.5 07/02/26 04:09:13 msokolov 5 4
+hack for hex argument numbers (15 args max instead of 9)
+/usr/src/usr.bin/m4/SCCS/s.m4.c:
+1.6 07/02/26 04:15:45 msokolov 6 5
+eliminated unnecessary memory variable for LPAR
+/usr/src/usr.bin/m4/SCCS/s.m4.c:
+1.7 07/02/26 04:29:49 msokolov 7 6
+fflush(stdout); before running syscmd so that it can inject output reliably

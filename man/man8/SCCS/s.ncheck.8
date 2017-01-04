@@ -1,0 +1,129 @@
+h36606
+s 00005/00007/00054
+d D 6.2 86/01/13 00:29:22 donn 4 3
+c There is no default filesystem.  More than one filesystem may be specified.
+e
+s 00001/00001/00060
+d D 6.1 85/04/27 13:36:58 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00003/00059
+d D 5.1 85/04/27 13:36:38 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00062/00000/00000
+d D 4.1 85/04/27 13:36:19 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH NCHECK 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH NCHECK 8  "4 February 1983"
+E 3
+I 3
+.TH NCHECK 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+ncheck  \-  generate names from i-numbers
+E 2
+I 2
+D 4
+ncheck \-  generate names from i-numbers
+E 4
+I 4
+ncheck \- generate names from i-numbers
+E 4
+E 2
+.SH SYNOPSIS
+.B /etc/ncheck
+[
+.B \-i
+D 4
+numbers ]  [
+E 4
+I 4
+numbers ] [
+E 4
+.B \-a
+] [
+.B \-s
+D 4
+]  [ filesystem ]
+E 4
+I 4
+] filesystems ...
+E 4
+.SH DESCRIPTION
+.B N.B.:
+For most normal file system maintenance, the function of
+.I ncheck
+is subsumed by
+.IR fsck (8).
+.PP
+.I Ncheck
+D 4
+with no argument
+E 4
+I 4
+with no options
+E 4
+generates a pathname vs. i-number
+list of all files
+D 4
+on a set of default file systems.
+E 4
+I 4
+on every specified filesystem.
+E 4
+Names of directory files are followed by `/\fB.\fR'.
+The
+.B \-i
+option reduces the report to only those files whose i-numbers follow.
+The
+.B \-a
+option
+allows printing of the names
+.RB ` . '
+and
+.RB ` .. ',
+which are ordinarily suppressed.
+D 2
+suppressed.
+E 2
+The
+.B \-s
+option reduces the report to special files
+and files with set-user-ID mode;
+it is intended to discover concealed violations
+of security policy.
+D 4
+.PP
+A file system may be specified.
+E 4
+.PP
+The report is in no useful
+order, and probably should be sorted.
+.SH "SEE ALSO"
+sort(1), dcheck(8), fsck(8), icheck(8)
+.SH DIAGNOSTICS
+When the filesystem structure is improper,
+`??' denotes the `parent' of
+a parentless file and
+a pathname beginning with `...' denotes a loop.
+E 1

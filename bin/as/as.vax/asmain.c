@@ -11,7 +11,7 @@ char copyright[] =
 #endif not lint
 
 #ifndef lint
-static char sccsid[] = "@(#)asmain.c	5.5 (Berkeley) 11/8/03";
+static char sccsid[] = "@(#)asmain.c	5.6 (Berkeley) 2/7/04";
 #endif not lint
 
 #include <stdio.h>
@@ -25,7 +25,7 @@ static char sccsid[] = "@(#)asmain.c	5.5 (Berkeley) 11/8/03";
 
 #include <sys/stat.h>
 
-#define	unix_lang_name "VAX/UNIX Assembler V11/8/03 5.5"
+#define	unix_lang_name "VAX/UNIX Assembler V2/7/04 5.6"
 /*
  *	variables to manage reading the assembly source files
  */
@@ -213,7 +213,7 @@ main(argc, argv)
 	fix_a_out();			/* add in text and data reloc counts */
 
 	if (anyerrs == 0 && orgwarn)
-		yyerror("Caution: absolute origins.\n");
+		yywarning("Caution: absolute origins.\n");
 
 	if (nGHnumbers)
 		yywarning("Caution: G or H format floating point numbers");

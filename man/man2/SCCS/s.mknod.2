@@ -1,0 +1,238 @@
+h38444
+s 00002/00002/00111
+d D 6.4 86/05/23 09:54:52 kjd 6 5
+c clean up for 4.3
+e
+s 00019/00000/00094
+d D 6.3 85/08/26 23:31:42 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00021/00008/00073
+d D 6.2 85/05/22 18:30:55 mckusick 4 3
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00080
+d D 6.1 85/05/09 16:40:10 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00056/00025/00025
+d D 5.1 85/05/09 16:39:58 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00050/00000/00000
+d D 4.1 85/05/09 16:39:48 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MKNOD 2 
+E 2
+I 2
+D 3
+.TH MKNOD 2 "2 July 1983"
+E 3
+I 3
+.TH MKNOD 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+mknod \- make a directory or a special file
+E 2
+I 2
+mknod \- make a special file
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B mknod(name, mode, addr)
+.B char *name;
+.nf
+E 2
+I 2
+.ft B
+mknod(path, mode, dev)
+char *path;
+int mode, dev;
+.fi
+.ft R
+E 2
+.SH DESCRIPTION
+.I Mknod
+creates a new file
+D 2
+whose name is the null-terminated string pointed
+to by
+.IR name .
+E 2
+I 2
+whose name is
+.I path.
+E 2
+The mode of the new file
+D 2
+(including directory and special file bits)
+E 2
+I 2
+(including special file bits)
+E 2
+is initialized from
+.IR mode .
+(The protection part of the mode
+D 6
+is modified by the process's mode mask; see
+.IR umask (2)).
+E 6
+I 6
+is modified by the process's mode mask (see
+.IR umask (2))).
+E 6
+The first block pointer of the i-node
+is initialized from
+D 2
+.IR addr .
+For ordinary files and directories
+.I addr
+is normally zero.
+In the case of a special file,
+.I addr
+specifies which special file.
+E 2
+I 2
+.I dev 
+and is used to specify which device the special file
+refers to.
+E 2
+.PP
+I 2
+If mode indicates a block or character special file,
+.I dev
+is a configuration dependent specification of a character or block
+I/O device.  If
+.I mode
+does not indicate a block special or character special device,
+.I dev
+is ignored.
+.PP
+E 2
+.I Mknod
+may be invoked only by the super-user.
+I 2
+.SH "RETURN VALUE
+Upon successful completion a value of 0 is returned.
+Otherwise, a value of \-1 is returned and \fIerrno\fP
+is set to indicate the error.
+.SH ERRORS
+.I Mknod
+will fail and the file mode will be unchanged if:
+.TP 15
+D 4
+[EPERM]
+The process's effective user ID is not super-user.
+E 4
+I 4
+[ENOTDIR]
+A component of the path prefix is not a directory.
+E 4
+.TP 15
+D 4
+[EPERM]
+E 4
+I 4
+[EINVAL]
+E 4
+The pathname contains a character with the high-order bit set.
+.TP 15
+D 4
+[ENOTDIR]
+A component of the path prefix is not a directory.
+E 4
+I 4
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+E 4
+.TP 15
+[ENOENT]
+A component of the path prefix does not exist.
+.TP 15
+I 4
+[EACCES]
+Search permission is denied for a component of the path prefix.
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+[EPERM]
+The process's effective user ID is not super-user.
+.TP 15
+[EPERM]
+The pathname contains a character with the high-order bit set.
+.TP 15
+[EIO]
+An I/O error occurred while making the directory entry or allocating the inode.
+.TP 15
+I 5
+[ENOSPC]
+The directory in which the entry for the new node is being placed
+cannot be extended because there is no space left on the file
+system containing the directory.
+.TP 15
+[ENOSPC]
+There are no free inodes on the file system on which the
+node is being created.
+.TP 15
+[EDQUOT]
+The directory in which the entry for the new node
+is being placed cannot be extended because the
+user's quota of disk blocks on the file system
+containing the directory has been exhausted.
+.TP 15
+[EDQUOT]
+The user's quota of inodes on the file system on
+which the node is being created has been exhausted.
+.TP 15
+E 5
+E 4
+[EROFS]
+The named file resides on a read-only file system.
+.TP 15
+[EEXIST]
+The named file exists.
+.TP 15
+[EFAULT]
+.I Path
+points outside the process's allocated address space.
+D 4
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+E 4
+E 2
+.SH "SEE ALSO"
+D 2
+mkdir(1), mknod(1), filsys(5)
+.SH DIAGNOSTICS
+Zero is returned if the file has been made; \-1
+if the file already exists
+or if the user is not the super-user.
+.SH "ASSEMBLER (PDP-11)"
+(mknod = 14.)
+.br
+.B sys  mknod; name; mode; addr
+E 2
+I 2
+chmod(2), stat(2), umask(2)
+E 2
+E 1

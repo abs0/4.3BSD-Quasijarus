@@ -1,0 +1,143 @@
+h36750
+s 00001/00001/00028
+d D 4.7.1.1 88/06/14 20:09:19 bostic 8 7
+c branch for tahoe release; address is 4.3BSD-tahoe
+e
+s 00002/00002/00027
+d D 4.7 87/08/24 08:45:10 bostic 7 6
+c add "doc" folder
+e
+s 00001/00001/00028
+d D 4.6 87/05/05 19:22:53 bostic 6 5
+c urge change of Subject line
+e
+s 00008/00004/00021
+d D 4.5 87/04/11 15:41:01 bostic 5 4
+c minor clarification
+e
+s 00017/00006/00008
+d D 4.4 86/11/25 13:42:58 bostic 4 3
+c changed to be more explicit re: the Index line
+e
+s 00003/00003/00011
+d D 4.3 85/06/18 21:05:26 bloom 3 2
+c update for 4.3
+e
+s 00001/00001/00013
+d D 4.2 83/07/09 23:17:20 sam 2 1
+c official name
+e
+s 00014/00000/00000
+d D 4.1 83/05/11 13:55:32 ralph 1 0
+c date and time created 83/05/11 13:55:32 by ralph
+e
+u
+U
+f b 
+t
+T
+I 1
+D 6
+Subject: Short summary of the problem
+E 6
+I 6
+Subject: Short summary of the problem (please make this meaningful!)
+E 6
+D 2
+Index:	<source directory>/<source file> 4.2bsd
+E 2
+I 2
+D 3
+Index:	<source directory>/<source file> 4.2BSD
+E 3
+I 3
+D 4
+Index:	<source directory>/<source file> 4.3BSD
+E 4
+I 4
+D 5
+Index:	folder version
+E 5
+I 5
+D 8
+Index: folder 4.3BSD
+E 8
+I 8
+Index: folder 4.3BSD-tahoe
+E 8
+E 5
+E 4
+E 3
+E 2
+
+Description:
+	Detailed description of the problem, suggestion, or complaint.
+Repeat-By:
+D 4
+	Procedure to repeat the problem.
+E 4
+I 4
+	Describe the sequence of events that causes the problem
+	to occur.
+E 4
+Fix:
+D 4
+	Description of how to fix the problem.
+	If you don't know the fix, don't include this section or "Fix:".
+E 4
+I 4
+	Description of how to fix the problem.  If you don't know a
+	fix for the problem, don't include this section.
+E 4
+
+D 4
+---------- Remove this line and what's below it. (only for reference) ------
+D 3
+<source directory> ::=  bin | etc | games | ideas | lib | local | man |
+			misc | sys | ucb | usr.bin | usr.lib
+E 3
+I 3
+<source directory> ::=  bin | etc | games | ideas | include | lib | local |
+E 4
+I 4
+-------- Remove this line and what's below it, for reference only. --------
+
+To ensure that your bug report is handled correctly by bugfiler(8),
+D 5
+you must replace both "folder" and "version", on the line above
+starting with "Index:", with one of the following values:
+E 5
+I 5
+you must replace "folder" (on the line above starting with "Index:")
+with one of the following values:
+E 5
+
+D 7
+	folder  ::= bin | etc | games | ideas | include | lib | local |
+E 4
+			man | misc | new | sys | ucb | usr.bin | usr.lib
+E 7
+I 7
+	folder  ::= bin | doc | etc | games | ideas | include | lib | local
+			| man | misc | new | sys | ucb | usr.bin | usr.lib
+E 7
+I 5
+
+If you're not running 4.3BSD, you should also replace "4.3BSD" on the
+same line with one of the following values.
+
+E 5
+I 4
+	version ::= V7 | 2BSD | 4.1BSD | 4.2BSD | 4.3BSD
+
+For example, if your bug concerns the program "/usr/bin/file" and you're
+currently running 4.2BSD, you should replace "folder" with "usr.bin", and
+D 5
+"version" with "4.2BSD".  The folder "ideas" is for suggestions.
+E 5
+I 5
+"4.3BSD" with "4.2BSD".  The folder "ideas" is for suggestions.
+E 5
+E 4
+E 3
+E 1

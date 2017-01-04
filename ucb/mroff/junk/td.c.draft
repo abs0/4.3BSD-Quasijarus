@@ -1,0 +1,642 @@
+#ifndef lint
+static char sccsid[] = "%W% (Berkeley) %G%";
+#endif lint
+
+#include <math.h>
+#include "tdef.h"
+
+/*
+ * This module implements the ditroff-like \D vector drawing primitive.
+ * We do most of the work in the front end, i.e., the code in this module
+ * executes as a result of being called from getch() in n1.c.  We parse
+ * all the voodoo between the delimiters and emit a DRAWOP...DRAWFIN
+ * sequence, wherein the middle part ("...") consists of h v LINETO and
+ * h v h v h v CURVETO sequences.  Each h is an ordinary horizontal motion
+ * metacharacter and each v is an ordinary vertical motion, so all code
+ * in the bulk of troff sees it as nothing more than a bunch of local motions.
+ * The back end (t10.c) sees it as motions too, but it also acts on the 4
+ * new metacharacters we've introduced to make these motions emit lineto
+ * and curveto path constructions, and the closing DRAWFIN encodes the
+ * stroke or fill.
+ *
+ * Remember that in the front end positive vertical motion is downward.
+ */
+
+extern int cbuf[];
+extern int *cp;
+extern int ch;
+extern int dfact;
+extern int vflag;
+extern int nonumb;
+extern int pts;
+extern int lss;
+
+static int delim, *dp, gotsome;
+static int defswidth;
+static double pi, quadarc_convfactor;
+static double arctoobig, arctoosmall;
+
+init_curve_conversion()
+{
+	pi = acos(-1.0);
+	quadarc_convfactor = (sqrt(2.0) - 1.0) * 4.0 / 3.0;
+	arctoobig = pi / 2.0;
+	arctoosmall = 0.05 * pi / 180.0;	/* from Adobe's psdit.pro */
+}
+
+drawop_frontend()
+{
+	register int i;
+
+	if((delim = getch()) & MOT)return;
+		else delim &= CMASK;
+	dp = cbuf;
+	*dp++ = DRAWOP;
+	gotsome = 0;
+	defswidth = (pts & 0377) * 3 << 11;
+	i = getch() & CMASK;
+	if (i == delim)
+		return;
+	switch (i) {
+	case 'a':
+	case 'A':
+	case 'l':
+	case 'u':
+		ch = i;
+		drawop_freeform();
+		break;
+	case 'c':
+		drawop_circle();
+		break;
+	case 'e':
+		drawop_ellipse();
+		break;
+	default:
+		eat(delim);
+	}
+	dfact = 1;
+	vflag = 0;
+}
+
+drawop_freeform()
+{
+	register int i, j;
+	int dh1, dv1, dh2, dv2;
+	int contmode, closepath;
+
+	for (contmode = 0; ; ) {
+		skip();
+		i = getch() & CMASK;
+		if (i == delim) {
+			if (gotsome) {
+				*dp++ = DRAWFIN | defswidth;
+				*dp = 0;
+				cp = cbuf;
+			}
+			return;
+		}
+contin:		switch (i) {
+		case 'l':
+			skip();
+			dfact = EM;
+			dh1 = atoi();
+			if (nonumb) {
+				eat(delim);
+				return;
+			}
+			skip();
+			dfact = lss;
+			vflag++;
+			dv1 = atoi();
+			if (nonumb) {
+				eat(delim);
+				return;
+			}
+			vflag = 0;
+			drawelement_line(dh1, dv1);
+			contmode = 'l';
+			continue;
+		case 'u':
+			/* native PostScript curve */
+			for (j = 0; j < 3; j++) {
+				skip();
+				dfact = EM;
+				i = atoi();
+				if (nonumb) {
+					eat(delim);
+					return;
+				}
+				*dp++ = makem(i);
+				skip();
+				dfact = lss;
+				vflag++;
+				i = atoi();
+				if (nonumb) {
+					eat(delim);
+					return;
+				}
+				*dp++ = makem(i);
+				vflag = 0;
+			}
+			*dp++ = CURVETO;
+			gotsome++;
+			contmode = 0;
+			continue;
+		case 'a':
+			/* counter-clockwise arc */
+			contmode = 0;
+			skip();
+			dfact = EM;
+			dh1 = atoi();
+			if (nonumb) {
+				eat(delim);
+				return;
+			}
+			skip();
+			dfact = lss;
+			vflag++;
+			dv1 = atoi();
+			if (nonumb) {
+				eat(delim);
+				return;
+			}
+			vflag = 0;
+			skip();
+			dfact = EM;
+			dh2 = atoi();
+			if (nonumb) {
+				eat(delim);
+				return;
+			}
+			skip();
+			dfact = lss;
+			vflag++;
+			dv2 = atoi();
+			if (nonumb) {
+				eat(delim);
+				return;
+			}
+			vflag = 0;
+			/* weed out degenerate conditions */
+			if (!dh1 && !dv1 && !dh2 && !dv2)
+				continue;
+			if (!dh2 && !dv2) {
+				drawelement_line(dh1, dv1);
+				continue;
+			}
+			if (!dh1 && !dv1) {
+				drawelement_line(dh2, dv2);
+				continue;
+			}
+			/*
+			 * Detect CCW quadrant arcs:
+			 * it'll be hv in Q2 & Q4; vh in Q1 & Q3
+			 */
+#if 0
+			if (!dh1 && dv1 > 0 && dh2 < 0 && !dv2) { /* Q2 */
+				drawelement_hvarc(dh2, dv1);
+				continue;
+			}
+			if (!dh1 && dv1 < 0 && dh2 > 0 && !dv2) { /* Q4 */
+				drawelement_hvarc(dh2, dv1);
+				continue;
+			}
+			if (dh1 < 0 && !dv1 && !dh2 && dv2 < 0) { /* Q1 */
+				drawelement_vharc(dv2, dh1);
+				continue;
+			}
+			if (dh1 > 0 && !dv1 && !dh2 && dv2 > 0) { /* Q3 */
+				drawelement_vharc(dv2, dh1);
+				continue;
+			}
+#endif
+			/* CCW arc general case */
+			drawelement_genarc_ccw(dh1, dv1, dh2, dv2);
+			continue;
+		case 'C':
+		case 'S':
+			if (!gotsome) {
+				eat(delim);
+				return;
+			}
+			if (i == 'C')
+				closepath = 0x200;
+			else
+				closepath = 0;
+			skip();
+			dfact = 1;
+			i = atoi();
+			if (i)
+				*dp++ = DRAWFIN | closepath | (i << 11);
+			else
+				*dp++ = DRAWFIN | closepath | defswidth;
+			*dp = 0;
+			eat(delim);
+			cp = cbuf;
+			return;
+		case 'F':
+			if (!gotsome) {
+				eat(delim);
+				return;
+			}
+			*dp++ = DRAWFIN | 0x400;
+			*dp = 0;
+			eat(delim);
+			cp = cbuf;
+			return;
+		default:
+			if (contmode) {
+				ch = i;
+				i = contmode;
+				contmode = 0;
+				goto contin;
+			}
+			/* garbage */
+			eat(delim);
+			return;
+		}
+	}
+}
+
+drawop_circle()
+{
+	register int i, x;
+
+	skip();
+	dfact = EM;
+	x = atoi();
+	if (!x) {
+		eat(delim);
+		return;
+	}
+	drawelement_ellipse(x, x);
+	if (!gotsome) {
+		eat(delim);
+		return;
+	}
+	skip();
+	i = getch() & CMASK;
+	if (i == delim) {
+		*dp++ = DRAWFIN | 0x200 | defswidth;
+		*dp++ = makem(x);
+		*dp = 0;
+		cp = cbuf;
+		return;
+	}
+	switch (i) {
+	case 'C':
+	case 'S':
+		skip();
+		dfact = 1;
+		i = atoi();
+		if (i)
+			*dp++ = DRAWFIN | 0x200 | (i << 11);
+		else
+			*dp++ = DRAWFIN | 0x200 | defswidth;
+		*dp++ = makem(x);
+		*dp = 0;
+		eat(delim);
+		cp = cbuf;
+		return;
+	case 'F':
+		*dp++ = DRAWFIN | 0x400;
+		*dp++ = makem(x);
+		*dp = 0;
+		eat(delim);
+		cp = cbuf;
+		return;
+	default:
+		/* garbage */
+		eat(delim);
+		return;
+	}
+}
+
+drawop_ellipse()
+{
+	register int i, x, y;
+
+	skip();
+	dfact = EM;
+	x = atoi();
+	if (nonumb) {
+		eat(delim);
+		return;
+	}
+	skip();
+	dfact = lss;
+	vflag++;
+	y = atoi();
+	if (nonumb) {
+		eat(delim);
+		return;
+	}
+	vflag = 0;
+	drawelement_ellipse(x, y);
+	if (!gotsome) {
+		eat(delim);
+		return;
+	}
+	skip();
+	i = getch() & CMASK;
+	if (i == delim) {
+		*dp++ = DRAWFIN | 0x200 | defswidth;
+		*dp++ = makem(x);
+		*dp = 0;
+		cp = cbuf;
+		return;
+	}
+	switch (i) {
+	case 'C':
+	case 'S':
+		skip();
+		dfact = 1;
+		i = atoi();
+		if (i)
+			*dp++ = DRAWFIN | 0x200 | (i << 11);
+		else
+			*dp++ = DRAWFIN | 0x200 | defswidth;
+		*dp++ = makem(x);
+		*dp = 0;
+		eat(delim);
+		cp = cbuf;
+		return;
+	case 'F':
+		*dp++ = DRAWFIN | 0x400;
+		*dp++ = makem(x);
+		*dp = 0;
+		eat(delim);
+		cp = cbuf;
+		return;
+	default:
+		/* garbage */
+		eat(delim);
+		return;
+	}
+}
+
+drawelement_line(dh, dv)
+{
+	if (!dh && !dv)
+		return;
+	drawelement_vector(dh, dv);
+	*dp++ = LINETO;
+	gotsome++;
+}
+
+drawelement_vector(dh, dv)
+{
+	*dp++ = makem(dh);
+	vflag++;
+	*dp++ = makem(dv);
+	vflag = 0;
+}
+
+/*
+ * The following two functions are agnostic to the CW vs CCW direction.
+ * They are intended to be efficient building blocks for implementing
+ * the simple \D'c...' and \D'e...' drawing ops.
+ */
+drawelement_hvarc(dh, dv)
+{
+	int xd, yd;
+
+	if (!dh || !dv) {
+		drawelement_line(dh, dv);
+		return;
+	}
+	xd = dh * quadarc_convfactor;
+	yd = dv * quadarc_convfactor;
+	drawelement_vector(xd, 0);
+	drawelement_vector(dh - xd, dv - yd);
+	drawelement_vector(0, yd);
+	*dp++ = CURVETO;
+	gotsome++;
+}
+
+drawelement_vharc(dv, dh)
+{
+	int xd, yd;
+
+	if (!dh || !dv) {
+		drawelement_line(dh, dv);
+		return;
+	}
+	xd = dh * quadarc_convfactor;
+	yd = dv * quadarc_convfactor;
+	drawelement_vector(0, yd);
+	drawelement_vector(dh - xd, dv - yd);
+	drawelement_vector(xd, 0);
+	*dp++ = CURVETO;
+	gotsome++;
+}
+
+drawelement_ellipse(dh, dv)
+{
+	int xr, yr;
+
+	xr = dh / 2;
+	yr = dv / 2;
+	/*
+	 * Because we use the hvarc and vharc functions,
+	 * we can go either CW or CCW and we don't even have to worry about it.
+	 * The following code arbitrarily uses the CCW direction.
+	 */
+	drawelement_vharc(yr, xr);
+	drawelement_hvarc(xr, -yr);
+	drawelement_vharc(-yr, -xr);
+	drawelement_hvarc(-xr, yr);
+}
+
+/*
+ * Arc to Bezier curve conversion
+ *
+ * Our biggest difficulty is that ditroff's arc specification is poorly
+ * designed.  Each arc is specified by two (x,y) vectors: one from the
+ * starting endpoint to the centre, and another from the centre to the
+ * terminal endpoint.  That is equivalent to placing the centre of a circle
+ * or ellipse at the origin and defining that circle or elliple by the
+ * (x,y) coordinates of two different points thereon.
+ *
+ * It appears that the intent was to support circular arcs only, but if
+ * the two endpoints are at different distances from the specified centre,
+ * the curve obviously can't be a circular arc.  (Remember the definition
+ * of a circle: a set of points that are equidistant from a certain point
+ * called the centre.)  Hence we are trying to generalize it to elliptic
+ * arcs.
+ *
+ * Our problem can thus be stated as follows: given the two endpoint vectors,
+ * figure out exactly what ellipse the user is implicitly asking for (in a
+ * mathematically rigorous sense), and then figure out which part of that
+ * ellipse is the arc we want to draw.
+ *
+ * Let's start with the definition part.  Ignoring translation, specifying
+ * an arbitrary arc of an arbitrary ellipse centered at the origin requires
+ * 5 numbers: 3 to specify the ellipse itself (two axes and the tilt angle)
+ * and 2 to select an arc from that ellipse.  But with our input consisting
+ * of two (x,y) vectors, we only have 4 numbers.
+ *
+ * Our solution begins with arbitrarily restricting ourselves only to ellipses
+ * whose axes are aligned with the coordinate axes of the paper - that's
+ * already more inclusive than the intent behind ditroff's definition.  Our
+ * problem thus turns into one of finding an ellipse of such restricted kind
+ * that fits the two given endpoint vectors.
+ *
+ * The latter determination is generally pretty straightforward: take the
+ * ellipse equation x**2/a**2 + y**2/b**2 = 1, substitute in our given
+ * endpoint vectors, and solve for a and b.  There are two problems that
+ * pop up:
+ *
+ * Problem 1: Consider a request like \D'a 1i 0 1i 0'.  (The general case
+ * is that the two endpoints are equidistant and opposite from the centre.)
+ * In ditroff's sense it is clearly a request for a 180 deg circular arc,
+ * but the general equation solver would punt because there is an infinite
+ * number of different ellipses which all fit the constraint.  We resolve
+ * by fiat-enforcing a circular arc (a==b) in this case.  (There are other,
+ * more subtle cases in which an infinite number of different ellipses are
+ * possible, one of them being a circle.  Our solution is the same: pick
+ * the circle by fiat.)
+ *
+ * Problem 2: Consider a request like \D'a 1i 0 2i 0'.  That is actually
+ * an unsatisfiable request, because there is no possible horizontal-vertical
+ * ellipse that passes through (-1,0) and (2,0).  (Homework exercise:
+ * prove it mathematically.)  As it turns out, there are entire classes
+ * of requests that can be made which cannot be satisfied with any possible
+ * ellipse.  We resolve by punting and drawing a straight line from the
+ * starting endpoint to the terminal endpoint.  In the example given that is
+ * a somewhat reasonable course of action; in other cases, not so much.
+ *
+ * Once the ellipse has been found, we compute the starting and ending angles
+ * lambda1 and lambda2: that is simply a matter of calling atan2().  After
+ * that we follow the algorithm presented in "Drawing an elliptical arc using
+ * polylines, quadratic or cubic Bezier curves" by L. Maisonobe, found on
+ * www.spaceroots.org.  (Actually we go directly to the eta1 and eta2 angles
+ * used in that algorithm, without explicitly computing lambda1 or lambda2.)
+ *
+ * Oh, one more thing: in order to keep my sanity, I'm using the standard
+ * mathematical convention for the direction of axes and angles.  We convert
+ * from and to the troff convention on input and output.
+ */
+
+drawelement_genarc(dh1, dv1, dh2, dv2, cw)
+{
+	double a, b, eta1, eta2;
+	double sweep, halfsweep;
+
+	if (arctobezier_getab(dh1, dv1, dh2, dv2, &a, &b) < 0) {
+		drawelement_line(dh1 + dh2, dv1 + dv2);
+		return;
+	}
+	eta1 = atan2((double) dv1 / b, (double) -dh1 / a);
+	eta2 = atan2((double) -dv2 / b, (double) dh2 / a);
+	sweep = eta2 - eta1;
+	if (cw)
+		sweep = -sweep;
+	if (sweep < 0)
+		sweep += pi * 2.0;
+	if (sweep <= 0 || sweep >= pi * 2.0) {
+		drawelement_line(dh1 + dh2, dv1 + dv2);
+		return;
+	}
+	halfsweep = sweep / 2.0;
+	if (sweep > arctoobig) {
+
+
+	}
+
+
+}
+
+/*
+ * This function computes the axes of the ellipse from the endpoint vectors.
+ * The math has been worked out by Michael Sokolov - so you know whom to blame.
+ */
+arctobezier_getab(dh1, dv1, dh2, dv2, ap, bp)
+	double *ap, *bp;
+{
+	unsigned long x1sq, x2sq, y1sq, y2sq;
+	long diffx, diffy;
+
+	x1sq = (unsigned long)dh1 * dh1;
+	x2sq = (unsigned long)dh2 * dh2;
+	y1sq = (unsigned long)dv1 * dv1;
+	y2sq = (unsigned long)dv2 * dv2;
+	/* detect circles first */
+	if (x1sq + y1sq == x2sq + y2sq) {
+		*ap = *bp = sqrt((double)(x1sq + y1sq));
+		return(0);
+	}
+	/*
+	 * If it isn't a circle, having x1sq==x2sq or y1sq==y2sq
+	 * constitutes an unsatisfiable request (impossible ellipse).
+	 */
+	if (x1sq == x2sq || y1sq == y2sq)
+		return(-1);
+	diffx = x2sq - x1sq;
+	diffy = y1sq - y2sq;
+	/*
+	 * diffx and diffy must have the same sign,
+	 * otherwise it's another impossible ellipse.
+	 */
+	if (diffx > 0 && diffy < 0 || diffx < 0 && diffy > 0)
+		return(-1);
+	*ap = sqrt((double)y1sq * diffx / diffy + x1sq);
+	*bp = sqrt((double)x1sq * diffy / diffx + y1sq);
+	return(0);
+}
+
+/*
+ * The general CCW arc algorithm has been copied from Adobe's
+ * psdit (ditroff->PS) prolog code, translated from PostScript to C.
+ */
+drawelement_genarc_ccw(dh1, dv1, dh2, dv2)
+{
+	double startang, endang, sweep;
+	double halfsweep, controldelt;
+	int x1, y1, x2, y2, x3, y3;
+
+	startang = atan2((double) -dv1, (double) -dh1);
+	endang = atan2((double) dv2, (double) dh2);
+	sweep = startang - endang;	/* CCW with positive vert being down */
+	if (sweep < 0)
+		sweep += pi * 2.0;
+	if (sweep > arctoobig) {
+		drawelement_genarc_ccw_split(dh1, dv1, dh2, dv2, startang,
+						endang, sweep);
+		return;
+	}
+	if (sweep < arctoosmall) {
+		drawelement_line(dh1 + dh2, dv1 + dv2);
+		return;
+	}
+	halfsweep = sweep / 2.0;
+	controldelt = (1.0 - cos(halfsweep)) / (3.0 * sin(halfsweep)) * 4.0;
+	x1 = -dv1 * controldelt;
+	y1 = dh1 * controldelt;
+	x3 = dh1 + dh2;
+	y3 = dv1 + dv2;
+	x2 = x3 - dv2 * controldelt;
+	y2 = y3 + dh2 * controldelt;
+	drawelement_vector(x1, y1);
+	drawelement_vector(x2 - x1, y2 - y1);
+	drawelement_vector(x3 - x2, y3 - y2);
+	*dp++ = CURVETO;
+	gotsome++;
+}
+
+drawelement_genarc_ccw_split(dh1, dv1, dh2, dv2, startang, endang, sweep)
+	double startang, endang, sweep;
+{
+	double cradius, eradius;
+	double midrad, midang;
+	int midx, midy;
+
+	cradius = hypot((double) dh1, (double) dv1);
+	eradius = hypot((double) dh2, (double) dv2);
+	midrad = (cradius + eradius) / 2.0;
+	midang = startang - sweep / 2.0;	/* straight from psdit.pro */
+	midx = midrad * cos(midang);
+	midy = midrad * sin(midang);
+	drawelement_genarc_ccw(dh1, dv1, midx, midy);
+	drawelement_genarc_ccw(-midx, -midy, dh2, dv2);
+}

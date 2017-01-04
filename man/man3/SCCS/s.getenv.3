@@ -1,0 +1,156 @@
+h28493
+s 00013/00003/00034
+d D 6.4 87/03/20 17:11:22 bostic 7 6
+c minor changes
+e
+s 00001/00001/00036
+d D 6.3 87/03/11 00:03:00 bostic 6 5
+c 
+e
+s 00025/00014/00012
+d D 6.2 87/03/10 19:10:16 bostic 5 3
+c added setenv, unsetenv
+e
+s 00025/00014/00012
+d R 6.2 87/03/10 19:05:57 bostic 4 3
+c added setenv and unsetenv
+e
+s 00001/00001/00025
+d D 6.1 85/05/15 14:59:33 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00005/00019
+d D 5.1 85/05/15 14:59:17 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00024/00000/00000
+d D 4.1 85/05/15 14:59:10 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETENV 3
+E 2
+I 2
+D 3
+.TH GETENV 3 "19 January 1983"
+E 3
+I 3
+.TH GETENV 3 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+D 5
+getenv \- value for environment name
+E 5
+I 5
+getenv, setenv, unsetenv \- manipulate environmental variables
+E 5
+.SH SYNOPSIS
+.nf
+.B char *getenv(name)
+.B char *name;
+I 5
+.PP
+.B setenv(name, value, overwrite)
+.B char *name, value;
+.B int overwrite;
+.PP
+.B void unsetenv(name)
+.B char *name;
+E 5
+.fi
+.SH DESCRIPTION
+D 5
+.I Getenv
+.a
+searches the environment list
+(see
+D 2
+.IR environ (5))
+E 2
+I 2
+.IR environ (7))
+E 2
+for a string of the form
+.IB name = value
+D 2
+and returns
+E 2
+I 2
+and returns a pointer to the string
+E 2
+.I value
+D 2
+if such a string is present, otherwise 0 (NULL).
+E 2
+I 2
+if such a string is present, otherwise 
+.I getenv
+returns the value 0 (NULL).
+E 5
+I 5
+\fIGetenv\fP searches the environment list (see \fIenviron\fP(7))
+for a string of the form \fIname\fP\fB=\fP\fIvalue\fP and returns
+a pointer to the string \fIvalue\fP if such a string is present,
+and 0 (NULL) if it is not.
+.PP
+\fISetenv\fP searches the environment list as \fIgetenv\fP does; if
+the string \fIname\fP is not found, a string of the form
+\fIname\fP\fB=\fP\fIvalue\fP is added to the environment.  If it is
+D 7
+found and \fIoverwrite\fP is non-zero, its value is changed to
+\fIvalue\fP.  \fISetenv\fP returns 0 on success and -1 on failure.
+E 7
+I 7
+found, and \fIoverwrite\fP is non-zero, its value is changed to
+\fIvalue\fP.  \fISetenv\fP returns 0 on success and -1 on failure,
+where failure is caused by an inability to allocate space for the
+environment.
+E 7
+.PP
+\fIUnsetenv\fP removes all occurrences of the string \fIname\fP from
+D 7
+the environment.
+E 7
+I 7
+the environment.  There is no library provision for completely removing
+the current environment.  It is suggested that the following code be
+used to do so.
+.PP
+.nf
+	static char	*envinit[1];
+	extern char	**environ;
+	environ = envinit;
+.fi
+E 7
+.PP
+All of these routines permit, but do not require, a trailing equals
+D 6
+(``='') sign on \fIname\fP.
+E 6
+I 6
+(``='') sign on \fIname\fP or a leading equals sign on \fIvalue\fP.
+E 6
+E 5
+E 2
+.SH SEE ALSO
+D 2
+environ(5), exec(2)
+E 2
+I 2
+D 5
+environ(7), execve(2)
+E 5
+I 5
+csh(1), sh(1), execve(2), environ(7)
+E 5
+E 2
+E 1

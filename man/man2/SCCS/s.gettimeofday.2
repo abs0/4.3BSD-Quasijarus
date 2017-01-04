@@ -1,0 +1,378 @@
+h40002
+s 00042/00009/00071
+d D 6.9 2012/06/18 23:09:41 msokolov 11 10
+c Quasijarus system time: philosophical and Y2038 issues
+e
+s 00007/00014/00073
+d D 6.8 87/04/11 12:32:09 bostic 10 9
+c tp or tzp can be NULL
+e
+s 00002/00007/00085
+d D 6.7 86/05/14 10:03:13 karels 9 8
+c fixes and updates
+e
+s 00018/00009/00074
+d D 6.6 86/04/30 10:39:38 lepreau 8 7
+c tv_sec is long not u_long; random cleanup
+e
+s 00003/00000/00080
+d D 6.5 85/08/26 23:32:18 mckusick 7 6
+c update error messages (mostly from sun!guy)
+e
+s 00005/00016/00075
+d D 6.4 85/06/24 13:23:44 gusella 6 5
+c Minor editing because of timed(8)
+e
+s 00004/00005/00087
+d D 6.3 85/06/05 23:50:01 lepreau 5 4
+c was misleading
+e
+s 00016/00006/00076
+d D 6.2 85/06/05 23:42:38 lepreau 4 3
+c explicate zero tzp; correct type of tv_sec; timedaemon changes BUGS
+e
+s 00001/00001/00081
+d D 6.1 85/05/09 17:56:41 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00069/00021/00013
+d D 5.1 85/05/09 17:56:09 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00034/00000/00000
+d D 4.1 85/05/09 17:55:00 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+D 11
+.\"	%W% (Berkeley) %G%
+E 11
+I 11
+.\"	%W% (Berkeley) %E%
+E 11
+.\"
+D 2
+.TH STIME 2 
+E 2
+I 2
+D 3
+.TH GETTIMEOFDAY 2 "27 July 1983"
+E 3
+I 3
+.TH GETTIMEOFDAY 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+stime \- set time
+E 2
+I 2
+gettimeofday, settimeofday \- get/set date and time
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B stime(tp)
+.B long *tp;
+E 2
+I 2
+.ft B
+#include <sys/time.h>
+.PP
+.ft B
+gettimeofday(tp, tzp)
+D 11
+struct timeval *tp;
+E 11
+I 11
+struct utimeval *tp;
+E 11
+struct timezone *tzp;
+.PP
+.ft B
+settimeofday(tp, tzp)
+D 11
+struct timeval *tp;
+E 11
+I 11
+struct utimeval *tp;
+E 11
+struct timezone *tzp;
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+.I Stime
+sets the system's idea of the time and date.
+Time, pointed to by
+.I tp,
+is measured in seconds from 0000 GMT Jan 1, 1970.
+Only the super-user may use this call.
+.SH "SEE ALSO"
+date(1), time(2), ctime(3)
+.SH DIAGNOSTICS
+Zero is returned if the time was set;
+\-1 if user is not the super-user.
+.SH "ASSEMBLER (PDP-11)"
+(stime = 25.)
+.br
+(time in r0-r1)
+.br
+.B sys stime
+E 2
+I 2
+D 8
+.I Gettimeofday
+D 4
+returns the system's notion of the current Greenwich time and
+E 4
+I 4
+D 6
+returns the system's notion of the current Greenwich time,
+and if
+.I tzp
+is nonzero,
+E 6
+I 6
+returns the system's notion of the current Greenwich time and
+E 6
+E 4
+the current time zone.  Time returned is expressed relative
+in seconds and microseconds since midnight January 1, 1970.
+E 8
+I 8
+D 10
+The system's notion of the current Greenwich time and
+the current time zone
+is obtained with the
+.I gettimeofday
+call, and set with the
+.I settimeofday
+call.
+The time is expressed
+in seconds and microseconds since midnight (0 hour), January 1, 1970.
+I 9
+The resolution of the system clock is hardware dependent,
+and the time may be updated continuously or in ``ticks.''
+E 9
+E 8
+I 7
+If
+.I tzp
+D 8
+is NULL, the time zone information will not be returned or set.
+E 8
+I 8
+is zero, the time zone information will not be returned or set.
+E 10
+I 10
+D 11
+The system's notion of the current Greenwich time and the current time
+zone is obtained with the \fIgettimeofday\fP call, and set with the
+\fIsettimeofday\fP call.  The time is expressed in seconds and microseconds
+since midnight (0 hour), January 1, 1970.  The resolution of the system
+clock is hardware dependent, and the time may be updated continuously or
+E 11
+I 11
+The system's notion of the current Earth Mean Solar Time
+and the default user time zone
+are obtained with the \fIgettimeofday\fP call, and set with the
+\fIsettimeofday\fP call.
+The time is reckoned as the Earth's rotation angle relative
+to the mean sun, and is expressed in fractions of the fundamental unit
+(the day) called ``seconds'' and ``microseconds'';
+the total angle of rotation is measured from the instant
+when the Mean Solar Time at the longitude of Greenwich was
+midnight (0 hour), January 1, 1970 \(em see
+.IR unixtime (7)
+for the full details.
+The resolution of the system clock is hardware dependent,
+and the time may be updated continuously or
+E 11
+in ``ticks.''  If \fItp\fP or \fItzp\fP is NULL, the associated time
+information will not be returned or set.
+E 10
+E 8
+E 7
+E 2
+.PP
+I 2
+The structures pointed to by
+.I tp
+and
+.I tzp
+are defined in 
+.I <sys/time.h>
+as:
+.PP
+.nf
+.RS
+.DT
+struct timeval {
+D 4
+	u_long	tv_sec;		/* seconds since Jan. 1, 1970 */
+E 4
+I 4
+D 6
+	long	tv_sec;		/* seconds since Jan. 1, 1970 */
+E 6
+I 6
+D 8
+	u_long	tv_sec;		/* seconds since Jan. 1, 1970 */
+E 8
+I 8
+	long	tv_sec;		/* seconds since Jan. 1, 1970 */
+E 8
+E 6
+E 4
+	long	tv_usec;		/* and microseconds */
+};
+.sp 1
+I 11
+/* Y2038-ready unsigned version */
+struct utimeval {
+	unsigned long	tv_sec;
+	unsigned long	tv_usec;
+};
+.sp 1
+E 11
+struct timezone {
+	int	tz_minuteswest;	/* of Greenwich */
+	int	tz_dsttime;	/* type of dst correction to apply */
+};
+.RE
+.fi
+.PP
+The 
+.I timezone
+structure indicates the local time zone
+(measured in minutes of time westward from Greenwich),
+and a flag that, if nonzero, indicates that
+Daylight Saving time applies locally during
+the appropriate part of the year.
+.PP
+I 4
+D 5
+If
+.I tzp
+is zero
+E 5
+I 5
+D 6
+Only the super-user may issue the
+E 5
+.I settimeofday
+D 5
+does not change the current time zone.
+E 4
+Only the super-user may set the time of day.
+E 5
+I 5
+call.  If
+.I tzp
+is zero the current time zone is not changed.
+E 6
+I 6
+D 8
+Only the super-user may set the time of day.
+E 8
+I 8
+Only the super-user may set the time of day or time zone.
+I 11
+.SH Y2038
+The original signed \fItimeval\fP structure will no longer be able
+to provide a correct representation of the absolute Earth time
+when that value exceeds
+.BR 2\(**\(**31\(mi1 ,
+which will happen in early A.D. 2038.
+An unsigned interpretation is needed in order to represent
+correct absolute time values after that point for another 68 years.
+.PP
+Redefining \fIstruct timeval\fP as unsigned was deemed too
+problematic, as there exists at least one API
+.RI ( adjtime (2))
+which legitimately uses these structures to represent both
+positive and negative time deltas.
+Therefore, the chosen approach of least disruption is to define
+the unsigned version under a different name (\fIutimeval\fP),
+and to direct users to use the new structure when the correct
+unsigned interpretation of absolute time is important.
+E 11
+E 8
+E 6
+E 5
+.SH RETURN
+A 0 return value indicates that the call succeeded.
+A \-1 return value indicates an error occurred, and in this
+case an error code is stored into the global variable \fIerrno\fP.
+.SH "ERRORS
+The following error codes may be set in \fIerrno\fP:
+.TP 15
+[EFAULT]
+An argument address referenced invalid memory.
+.TP 15
+[EPERM]
+A user other than the super-user attempted to set the time.
+.SH "SEE ALSO"
+D 4
+date(1), ctime(3)
+E 4
+I 4
+D 6
+date(1), netdate(1), adjtime(2), ctime(3), timedaemon(8)
+E 6
+I 6
+D 8
+date(1), ctime(3)
+E 8
+I 8
+D 11
+date(1), adjtime(2), ctime(3), timed(8)
+E 11
+I 11
+date(1), adjtime(2), ctime(3), time(3), unixtime(7)
+E 11
+E 8
+E 6
+E 4
+D 9
+.SH BUGS
+Time is never correct enough to believe the microsecond
+D 4
+values.  There should a mechanism by which, at least,
+local clusters of systems might synchronize their clocks
+to millisecond granularity.
+E 4
+I 4
+D 6
+values, although the
+.I timedaemon
+mechanism allows
+local clusters of systems to synchronize their clocks
+to within a few milliseconds.
+E 6
+I 6
+D 8
+values.
+E 8
+I 8
+values, although the
+.IR timed (8)
+mechanism does enable
+clusters of systems to synchronize their clocks
+to within a few milliseconds.
+E 9
+E 8
+E 6
+E 4
+E 2
+E 1

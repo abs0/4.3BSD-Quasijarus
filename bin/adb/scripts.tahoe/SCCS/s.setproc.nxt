@@ -1,0 +1,17 @@
+h15499
+s 00006/00000/00000
+d D 5.1 88/03/30 15:58:48 bostic 1 0
+c date and time created 88/03/30 15:58:48 by bostic
+e
+u
+U
+t
+T
+I 1
+(*(<f+0t52))&0xffff="pid "D
+,#((*(<f+0t52)&0xffff)-<4)$<setproc.done
+<l-1>l
+<f+0t168>f
+,#<l$<
+$<setproc.nxt
+E 1

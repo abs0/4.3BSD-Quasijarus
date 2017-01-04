@@ -1,0 +1,28 @@
+h36853
+s 00001/00001/00007
+d D 1.2 85/04/08 11:45:51 ralph 2 1
+c changes due to pcc restructuring for common header files.
+e
+s 00008/00000/00000
+d D 1.1 82/08/30 13:15:53 rrh 1 0
+c date and time created 82/08/30 13:15:53 by rrh
+e
+u
+U
+t
+T
+I 1
+
+/*
+ *	%W%	(Berkeley)	%G%
+ */
+Most of lint's source files are shared with the portable
+D 2
+compiler: they are found in /usr/src/cmd/mip.
+E 2
+I 2
+compiler: they are found in /usr/src/lib/mip.
+E 2
+The files here are only those which are unique to lint.
+
+E 1

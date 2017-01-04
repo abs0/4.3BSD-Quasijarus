@@ -1,7 +1,8 @@
 #ifndef lint
-static char sccsid[] = "@(#)m4.c	1.3 (Berkeley) 8/11/83";
+static char sccsid[] = "@(#)m4.c	1.7 (Berkeley) 2/26/07";
 #endif
 
+#include <ctype.h>
 #include <stdio.h>
 #include <signal.h>
 
@@ -10,8 +11,7 @@ static char sccsid[] = "@(#)m4.c	1.3 (Berkeley) 8/11/83";
 #define	WRITE	"w"
 
 #define	EOS	0
-int	lpar	= '(';
-#define	LPAR	lpar
+#define	LPAR	'('
 #define	RPAR	')'
 #define	COMMA	','
 #define	GRAVE	'`'
@@ -32,7 +32,7 @@ char	rquote	= ACUTE;
 
 #define	HSHSIZ	199	/* prime */
 #define	STACKS	50
-#define	SAVS	4096
+#define	SAVS	65536
 #define	TOKS	128
 
 #define	putbak(c)	*ip++ = c;
@@ -450,8 +450,14 @@ register char **a1;
 		while (*dp++);
 		for (dp--; dp>a1[-1]; ) {
 			if (--dp>a1[-1] && dp[-1]=='$') {
-				n = *dp-'0';
-				if (n>=0 && n<=9) {
+				n = *dp;
+				if (isxdigit(n)) {
+					if (isdigit(n))
+						n -= '0';
+					else if (isupper(n))
+						n = n - 'A' + 10;
+					else
+						n = n - 'a' + 10;
 					if (n <= c)
 						pbstr(a1[n]);
 					dp--;
@@ -676,8 +682,10 @@ char **ap;
 dosyscmd(ap, c)
 char **ap;
 {
-	if (c > 0)
+	if (c > 0) {
+		fflush(stdout);
 		system(ap[1]);
+	}
 }
 
 domake(ap, c)

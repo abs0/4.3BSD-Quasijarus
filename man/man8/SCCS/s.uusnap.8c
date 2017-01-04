@@ -1,0 +1,75 @@
+h60043
+s 00007/00007/00025
+d D 6.2 86/04/24 22:23:10 mckusick 3 2
+c update from rfg
+e
+s 00001/00001/00031
+d D 6.1 85/04/27 16:01:22 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00032/00000/00000
+d D 5.1 85/04/27 16:01:13 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH UUSNAP 8C "7 July 1983"
+E 2
+I 2
+.TH UUSNAP 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+uusnap \- show snapshot of the UUCP system
+.SH SYNOPSIS
+.B uusnap
+.SH DESCRIPTION
+D 3
+Uusnap displays in tabular format a synopsis of the current UUCP
+E 3
+I 3
+.I Uusnap
+displays in tabular format a synopsis of the current UUCP
+E 3
+situation.  The format of each line is as follows:
+.PP
+.ti +10
+site   N Cmds   N Data   N Xqts   Message
+.PP
+Where "site" is the name of the site with work, "N" is a count of
+each of the three possible types of work (command, data, or remote execute),
+and "Message" is the current status message for that
+site as found in the STST file.
+.PP
+Included in "Message" may be the time left before UUCP can re-try the
+D 3
+call, and the count of the number of times that UUCP has tried to
+reach the site.
+E 3
+I 3
+call, and the count of the number of times that UUCP has tried
+(unsuccessfully) to reach the site.
+E 3
+.SH SEE ALSO
+D 3
+uucp(1C),
+UUCP Implementation Guide
+.SH AUTHOR
+Randy King
+E 3
+I 3
+uucp(1C), uux(1C), uuq(1C), uucico(8C)
+.br
+.I "UUCP Implementation Guide"
+E 3
+E 1

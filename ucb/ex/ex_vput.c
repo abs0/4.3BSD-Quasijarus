@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vput.c	7.5 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_vput.c	7.6 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -38,7 +38,7 @@ vclear()
  * Clear memory.
  */
 vclrbyte(cp, i)
-	register char *cp;
+	register u_char *cp;
 	register int i;
 {
 
@@ -70,7 +70,7 @@ vclrlin(l, tp)
 vclreol()
 {
 	register int i, j;
-	register char *tp;
+	register u_char *tp;
 
 	if (destcol == WCOLS)
 		return;
@@ -90,8 +90,8 @@ vclreol()
 	}
 	if (*tp == 0)
 		return;
-	while (i > 0 && (j = *tp & (QUOTE|TRIM))) {
-		if (j != ' ' && (j & QUOTE) == 0) {
+	while (i > 0 && (j = *tp)) {
+		if (j != ' ' && !isC1(j)) {
 			destcol = WCOLS - i;
 			vputchar(' ');
 		}
@@ -174,7 +174,7 @@ fixech()
  * Put the cursor ``before'' cp.
  */
 vcursbef(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	if (cp <= linebuf)
@@ -187,7 +187,7 @@ vcursbef(cp)
  * Put the cursor ``at'' cp.
  */
 vcursat(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	if (cp <= linebuf && linebuf[0] == 0)
@@ -200,7 +200,7 @@ vcursat(cp)
  * Put the cursor ``after'' cp.
  */
 vcursaft(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	vgotoCL(column(cp));
@@ -221,7 +221,7 @@ vfixcurs()
  * and move the cursor there.
  */
 vsetcurs(nc)
-	register char *nc;
+	register u_char *nc;
 {
 	register int col;
 
@@ -285,7 +285,7 @@ vigotoCL(x)
 vgoto(y, x)
 	register int y, x;
 {
-	register char *tp;
+	register u_char *tp;
 	register int c;
 
 	/*
@@ -319,8 +319,11 @@ vgoto(y, x)
 			if (outcol < x) {
 				if (*tp == 0)
 					*tp = ' ';
-				c = *tp++ & TRIM;
-				vputc(c && (!OS || EO) ? c : ' '), outcol++;
+				c = *tp++;
+				if (c == TABLANK)
+					c = ' ';
+				vputc(c != TABSPC && (!OS || EO) ? c : ' ');
+				outcol++;
 			} else {
 				if (BC)
 					vputp(BC, 0);
@@ -421,7 +424,7 @@ vgoto(y, x)
 /*
  * Routine to expand a tab, calling the normal Outchar routine
  * to put out each implied character.  Note that we call outchar
- * with a QUOTE.  We use QUOTE internally to represent a position
+ * with a TABSPC.  We use TABSPC internally to represent a position
  * which is part of the expansion of a tab.
  */
 vgotab()
@@ -429,7 +432,7 @@ vgotab()
 	register int i = tabcol(destcol, value(TABSTOP)) - destcol;
 
 	do
-		(*Outchar)(QUOTE);
+		(*Outchar)(TABSPC);
 	while (--i);
 }
 
@@ -455,7 +458,7 @@ int	slakused;		/* This much of tabslack will be used up */
 vprepins()
 {
 	register int i;
-	register char *cp = vtube0;
+	register u_char *cp = vtube0;
 
 	for (i = 0; i < DEPTH(vcline); i++) {
 		vmaktop(LINE(vcline) + i, cp);
@@ -465,10 +468,10 @@ vprepins()
 
 vmaktop(p, cp)
 	register int p;
-	char *cp;
+	u_char *cp;
 {
 	register int i;
-	char temp[TUBECOLS];
+	u_char temp[TUBECOLS];
 
 	if (p < 0 || vtube[p] == cp)
 		return;
@@ -495,7 +498,7 @@ vinschar(c)
 	int c;		/* mjm: char --> int */
 {
 	register int i;
-	register char *tp;
+	register u_char *tp;
 
 	if ((!IM || !EI) && ((hold & HOLDQIK) || !value(REDRAW) || value(SLOWOPEN))) {
 		/*
@@ -566,11 +569,11 @@ vinschar(c)
 		/*
 		 * Characters inserted from a tab must be
 		 * remembered as being part of a tab, but we can't
-		 * use QUOTE here since we really need to print blanks.
-		 * QUOTE|' ' is the representation of this.
+		 * use TABSPC here since we really need to print blanks.
+		 * TABLANK is the representation of this.
 		 */
 		inssiz = tabcol(inscol, value(TABSTOP)) - inscol;
-		c = ' ' | QUOTE;
+		c = TABLANK;
 	} else
 		inssiz = 1;
 
@@ -597,18 +600,16 @@ vinschar(c)
 	 * so we can tell how much it will squish.
 	 */
 	tp = vtube0 + inscol;
-	for (i = inscol; i < linend; i++)
-		if (*tp++ & QUOTE) {
-			--tp;
+	for (i = inscol; i < linend; i++, tp++)
+		if (isC1(*tp))
 			break;
-		}
 	tabstart = tabend = i;
 	tabslack = 0;
 	while (tabend < linend) {
 		i = *tp++;
-		if ((i & QUOTE) == 0)
+		if (!isC1(i))
 			break;
-		if ((i & TRIM) == 0)
+		if (i == TABSPC)
 			tabslack++;
 		tabsize++;
 		tabend++;
@@ -676,13 +677,13 @@ vinschar(c)
 vrigid()
 {
 	register int col;
-	register char *tp = vtube0 + tabend;
+	register u_char *tp = vtube0 + tabend;
 
 	for (col = tabend; col < linend; col++)
-		if ((*tp++ & TRIM) == 0) {
+		if ((*tp++ & TRIM7) == 0) {
 			endim();
 			vgotoCL(col);
-			vputchar(' ' | QUOTE);
+			vputchar(TABLANK);
 		}
 }
 
@@ -745,8 +746,8 @@ vishft()
 	int tshft = 0;
 	int j;
 	register int i;
-	register char *tp = vtube0;
-	register char *up;
+	register u_char *tp = vtube0;
+	register u_char *up;
 	short oldhold = hold;
 
 	shft = value(TABSTOP);
@@ -779,7 +780,7 @@ vishft()
 			vgotoCL(tabend);
 			goim();
 			do
-				vputchar(' ' | QUOTE);
+				vputchar(TABLANK);
 			while (--i);
 		}
 	} else {
@@ -827,7 +828,7 @@ vishft()
 	if (IN && tshft) {
 		i = tshft;
 		do
-			*--up = ' ' | QUOTE;
+			*--up = TABLANK;
 		while (--i);
 	}
 	hold = oldhold;
@@ -839,7 +840,7 @@ vishft()
 viin(c)
 	int c;		/* mjm: char --> int */
 {
-	register char *tp, *up;
+	register u_char *tp, *up;
 	register int i, j;
 	register bool noim = 0;
 	int remdoom;
@@ -918,7 +919,7 @@ viin(c)
 		hold = oldhold;
 		vigotoCL(tabstart + inssiz - doomed);
 		for (i = tabsize - (inssiz - doomed) + shft; i > 0; i--)
-			vputchar(' ' | QUOTE);
+			vputchar(TABLANK);
 	} else {
 		if (!IN) {
 			/*
@@ -948,12 +949,12 @@ viin(c)
 			 */
 			tp = vtube0 + tabend;
 			for (i = tabsize - (inssiz - doomed); i >= 0; i--) {
-				if ((*--tp & (QUOTE|TRIM)) == QUOTE) {
+				if (*--tp == TABSPC) {
 					--tabslack;
 					if (tabslack >= slakused)
 						continue;
 				}
-				*tp = ' ' | QUOTE;
+				*tp = TABLANK;
 			}
 		}
 		/*
@@ -962,8 +963,8 @@ viin(c)
 		if (shft) {
 			tp = vtube0 + tabend + shft;
 			for (i = tabsize - (inssiz - doomed) + shft; i > 0; i--)
-				if ((*--tp & QUOTE) == 0)
-					*tp = ' ' | QUOTE;
+				if (--tp, !isC1(*tp))
+					*tp = TABLANK;
 		}
 	}
 
@@ -1044,7 +1045,7 @@ endim()
  * This routine handles wraparound and scrolling and understands not
  * to roll when splitw is set, i.e. we are working in the echo area.
  * There is a bunch of hacking here dealing with the difference between
- * QUOTE, QUOTE|' ', and ' ' for CONCEPT-100 like terminals, and also
+ * TABSPC, TABLANK, and ' ' for CONCEPT-100 like terminals, and also
  * code to deal with terminals which overstrike, including CRT's where
  * you can erase overstrikes with some work.  CRT's which do underlining
  * implicitly which has to be erased (like CONCEPTS) are also handled.
@@ -1052,10 +1053,16 @@ endim()
 vputchar(c)
 	register int c;
 {
-	register char *tp;
+	register u_char *tp;
 	register int d;
+	register int ct, dt;
 
-	c &= (QUOTE|TRIM);
+	/* TABSPC used to be QUOTE and TABLANK used to be QUOTE|' ' */
+	if (c == QUOTE)
+		c = TABSPC;
+	if (c == (QUOTE|' '))
+		c = TABLANK;
+	c &= TRIM8;
 #ifdef TRACE
 	if (trace)
 		tracec(c);
@@ -1086,20 +1093,20 @@ vputchar(c)
 		 * in all cases, that nothing has ever been displayed
 		 * at this position.  Ugh.
 		 */
-		if (!insmode && !IN && (state != HARDOPEN || OS) && (*tp&TRIM) == 0) {
+		if (!insmode && !IN && (state != HARDOPEN || OS) && (*tp&TRIM7) == 0) {
 			*tp = ' ';
 			destcol++;
 			return;
 		}
 		goto def;
 
-	case QUOTE:
+	case TABSPC:
 		if (insmode) {
 			/*
 			 * When in insert mode, tabs have to expand
 			 * to real, printed blanks.
 			 */
-			c = ' ' | QUOTE;
+			c = TABLANK;
 			goto def;
 		}
 		if (*tp == 0) {
@@ -1107,29 +1114,31 @@ vputchar(c)
 			 * A ``space''.
 			 */
 			if ((hold & HOLDPUPD) == 0)
-				*tp = QUOTE;
+				*tp = TABSPC;
 			destcol++;
 			return;
 		}
 		/*
 		 * A ``space'' ontop of a part of a tab.
 		 */
-		if (*tp & QUOTE) {
+		if (isC1(*tp)) {
 			destcol++;
 			return;
 		}
-		c = ' ' | QUOTE;
+		c = TABLANK;
 		/* fall into ... */
 
 def:
 	default:
-		d = *tp & TRIM;
+		d = *tp;
+		ct = c != TABLANK ? c : ' ';
+		dt = d != TABLANK ? d : ' ';
 		/*
 		 * Now get away with doing nothing if the characters
 		 * are the same, provided we are not in insert mode
 		 * and if we are in hardopen, that the terminal has overstrike.
 		 */
-		if (d == (c & TRIM) && !insmode && (state != HARDOPEN || OS)) {
+		if (dt == ct && !insmode && (state != HARDOPEN || OS)) {
 			if ((hold & HOLDPUPD) == 0)
 				*tp = c;
 			destcol++;
@@ -1166,7 +1175,7 @@ def:
 		 * output), and remembering, in hardcopy mode,
 		 * that we have overstruct something.
 		 */
-		if (!insmode && d && d != ' ' && d != (c & TRIM)) {
+		if (!insmode && !isC1(d) && d != ' ' && d != c) {
 			if (EO && (OS || UL && (c == '_' || d == '_'))) {
 				vputc(' ');
 				outcol++, destcol++;
@@ -1192,7 +1201,7 @@ def:
 		 */
 		if (insmode)
 			vputp(IC, DEPTH(vcline));
-		vputc(c & TRIM);
+		vputc(ct);
 
 		/*
 		 * In insert mode, IP is a post insert pad.
@@ -1222,8 +1231,8 @@ def:
 physdc(stcol, endcol)
 	int stcol, endcol;
 {
-	register char *tp, *up;
-	char *tpe;
+	register u_char *tp, *up;
+	u_char *tpe;
 	register int i;
 	register int nc = endcol - stcol;
 
@@ -1243,14 +1252,15 @@ physdc(stcol, endcol)
 		up = vtube0 + stcol;
 		i = nc;
 		do
-			if ((*up++ & (QUOTE|TRIM)) == QUOTE)
+			if (*up++ == TABSPC)
 				return;
 		while (--i);
 		i = 2 * nc;
-		do
-			if (*up == 0 || (*up++ & QUOTE) == QUOTE)
+		do {
+			if (*up == 0 || isC1(*up))
 				return;
-		while (--i);
+			up++;
+		} while (--i);
 		vgotoCL(stcol);
 	} else {
 		/*
@@ -1294,7 +1304,7 @@ physdc(stcol, endcol)
 		up = vtube0 + stcol;
 		tp = vtube0 + endcol;
 		while (i = *tp++) {
-			if ((i & (QUOTE|TRIM)) == QUOTE)
+			if (i == TABSPC)
 				break;
 			*up++ = i;
 		}
@@ -1344,8 +1354,8 @@ tracec(c)
 		trubble = 1;
 	if (c == ESCAPE)
 		fprintf(trace, "$");
-	else if (c & QUOTE)	/* mjm: for 3B (no sign extension) */
-		fprintf(trace, "~%c", ctlof(c&TRIM));
+	else if (isC1(c))
+		fprintf(trace, "~%c", ctlof(c&TRIM7));
 	else if (c < ' ' || c == DELETE)
 		fprintf(trace, "^%c", ctlof(c));
 	else

@@ -1,0 +1,74 @@
+h28869
+s 00006/00002/00032
+d D 6.2 86/01/07 14:04:00 mckusick 3 2
+c int => gid_t
+e
+s 00001/00001/00033
+d D 6.1 85/05/15 11:54:50 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00034/00000/00000
+d D 5.1 85/05/15 11:54:44 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETGID 2 "12 February 1983"
+E 2
+I 2
+.TH GETGID 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+getgid, getegid \- get group identity
+.SH SYNOPSIS
+.nf
+.ft B
+I 3
+#include <sys/types.h>
+.PP
+.nf
+.ft B
+E 3
+gid = getgid()
+D 3
+int gid;
+E 3
+I 3
+gid_t gid;
+E 3
+.PP
+.ft B
+egid = getegid()
+D 3
+int egid;
+E 3
+I 3
+gid_t egid;
+E 3
+.fi
+.SH DESCRIPTION
+.I Getgid
+returns the real group ID of the current process,
+.I getegid
+the effective group ID.
+.PP
+The real group ID is specified at login time.
+.PP
+The effective group ID is more transient, and determines
+additional access permission during execution of a
+``set-group-ID'' process, and it is for such processes
+that \fIgetgid\fP is most useful.
+.SH "SEE ALSO"
+getuid(2), setregid(2), setgid(3)
+E 1

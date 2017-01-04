@@ -1,0 +1,21 @@
+h23500
+s 00010/00000/00000
+d D 1.1 2013/08/05 05:43:16 msokolov 1 0
+c pic version from Final-CSRG /usr/src/local/ditroff/pic; 1988-04-13 file dates
+e
+u
+U
+t
+T
+I 1
+.de PS	\" start picture
+.	\" $1 is height, $2 is width, both in inches
+.if \\$1>0 .sp .35
+.in (\\n(.lu-\\$2)/2u
+.ne \\$1
+..
+.de PE	\" end of picture
+.in
+.if \\$1>0 .sp .65
+..
+E 1

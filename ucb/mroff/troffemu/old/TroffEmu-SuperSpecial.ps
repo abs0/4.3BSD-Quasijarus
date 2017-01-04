@@ -1,0 +1,62 @@
+%!PS-Adobe-3.0 Resource-Font
+%%Title: @(#)TroffEmu-SuperSpecial.ps	5.1 (Berkeley) 2010/10/06
+%%DocumentNeededResources: font TroffEmu-Symbol ZapfDingbats
+%%BeginResource: font TroffEmu-SuperSpecial
+15 dict begin
+/FontName /TroffEmu-SuperSpecial def
+/FontType 3 def
+/FontMatrix [.001 0 0 .001 0 0] readonly def
+/FontBBox [0 0 0 0] readonly def
+/Encoding 256 array
+0 1 255 {1 index exch /.notdef put} for
+dup 66 /bellsystem put
+dup 67 /circle put
+dup 76 /lefthand put
+dup 82 /righthand put
+readonly def
+/BuildChar {
+	1 index /Encoding get exch get
+	1 index /BuildGlyph get exec
+} bind def
+/BuildGlyph {
+	exch begin
+	CharProcs 1 index known {
+		CharProcs 1 index get
+	} {
+		CharProcs /.notdef get
+	} ifelse
+	exec
+	end
+} bind def
+5 dict begin
+	/.notdef {
+		pop 0 0 0 0 0 0 setcachedevice
+	} bind def
+	/circle {
+		pop 750 0 0 0 680 680 setcachedevice
+		newpath 340 dup 315 0 360 arc closepath
+		0 setlinejoin 50 setlinewidth {} 0 setdash stroke
+	} bind def
+	/righthand {
+		pop 939 0 35 134 904 559 setcachedevice
+		ZDF setfont 0 0 moveto c2B show
+	} bind def
+	/lefthand {
+		pop 939 0 35 134 904 559 setcachedevice
+		ZDF setfont FlipMatrix concat -939 0 moveto c2B show
+	} bind def
+	/bellsystem {
+		pop 1139 0 63 -201 1087 824 setcachedevice
+		TSF setfont bsMatrix concat 0 17 moveto cFF show
+	} bind def
+currentdict end
+readonly /CharProcs exch def
+/TSF /TroffEmu-Symbol findfont 1000 scalefont def
+/ZDF /ZapfDingbats findfont 1000 scalefont def
+/FlipMatrix [-1 0 0 1 0 0] readonly def
+/bsMatrix [1.482928 0 0 1.482928 0 -200] readonly def
+/c2B (+) readonly def
+/cFF <FF> readonly def
+FontName currentdict end
+definefont pop
+%%EndResource

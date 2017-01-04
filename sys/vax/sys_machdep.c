@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)sys_machdep.c	7.1 (Berkeley) 6/5/86
+ *	@(#)sys_machdep.c	7.2 (Berkeley) 3/18/04
  */
 
 #include "param.h"
@@ -24,12 +24,17 @@
 #include "../vaxuba/ubareg.h"
 #include "../vaxuba/ubavar.h"
 
+#include "uba.h"
+
 resuba()
 {
-
+#if NUBA
 	if (suser())
 	if (u.u_arg[0] < numuba)
 		ubareset(u.u_arg[0]);
+#else
+	u.u_error = ENXIO;
+#endif
 }
 
 #ifdef TRACE

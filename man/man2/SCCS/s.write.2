@@ -1,0 +1,374 @@
+h33227
+s 00014/00001/00157
+d D 6.5 86/05/14 11:11:20 karels 7 6
+c nonblocking I/O, fcntl, select
+e
+s 00066/00010/00092
+d D 6.4 86/02/24 03:33:20 lepreau 6 5
+c lseek doesn't mind negative offsets, read & write do;
+c bring write.2 up to read.2 stds.
+e
+s 00011/00000/00091
+d D 6.3 85/08/26 23:31:18 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00001/00001/00090
+d D 6.2 85/06/30 17:09:12 sechrest 4 3
+c improved english
+e
+s 00001/00001/00090
+d D 6.1 85/05/09 16:08:28 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00069/00062/00022
+d D 5.1 85/05/09 16:08:18 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00084/00000/00000
+d D 4.1 85/05/09 16:08:12 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH WRITE 2 
+E 2
+I 2
+D 3
+.TH WRITE 2 "27 July 1983"
+E 3
+I 3
+.TH WRITE 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+write \- write on a file
+E 2
+I 2
+D 6
+write, writev \- write on a file
+E 6
+I 6
+write, writev \- write output
+E 6
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B write(fildes, buffer, nbytes)
+.B char *buffer;
+E 2
+I 2
+.ft B
+D 6
+write(d, buf, nbytes)
+int d;
+E 6
+I 6
+cc = write(d, buf, nbytes)
+int cc, d;
+E 6
+char *buf;
+int nbytes;
+.PP
+.ft B
+#include <sys/types.h>
+#include <sys/uio.h>
+.PP
+.ft B
+D 6
+writev(d, iov, ioveclen)
+int d;
+E 6
+I 6
+cc = writev(d, iov, iovcnt)
+int cc, d;
+E 6
+struct iovec *iov;
+D 6
+int ioveclen;
+E 6
+I 6
+int iovcnt;
+E 6
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+A file descriptor is a word returned from a
+successful
+.I open,
+.I creat,
+.I dup,
+or
+.IR pipe (2)
+call.
+.PP
+.I Buffer
+is the address of
+E 2
+I 2
+.I Write
+attempts to write
+E 2
+.I nbytes
+D 2
+contiguous
+bytes which are written on the output file.
+The number of characters actually written is returned.
+It should be regarded as an error
+if this is not the same as requested.
+E 2
+I 2
+of data to the object referenced by the descriptor
+.I d
+from the buffer pointed to by
+.IR buf .
+.I Writev
+performs the same action, but gathers the output data
+D 6
+from the \fIiovlen\fP buffers specified by the members
+of the \fIiovec\fP array: iov[0], iov[1], etc.
+E 6
+I 6
+from the 
+.I iovcnt
+buffers specified by the members of the
+.I iov
+array: iov[0], iov[1], ..., iov[iovcnt\|\-\|1].
+E 6
+E 2
+.PP
+I 6
+For 
+.IR writev ,
+the 
+.I iovec
+structure is defined as
+.PP
+.nf
+.RS
+.DT
+struct iovec {
+	caddr_t	iov_base;
+	int	iov_len;
+};
+.RE
+.fi
+.PP
+Each 
+.I iovec
+entry specifies the base address and length of an area
+in memory from which data should be written.
+.I Writev
+will always write a complete area before proceeding
+to the next.
+.PP
+E 6
+D 2
+Writes which are multiples
+of 1024 characters long and begin on a 1024-byte boundary
+in the file
+are more efficient than any others.
+E 2
+I 2
+On objects capable of seeking, the \fIwrite\fP starts at a position
+given by the pointer associated with
+.IR d ,
+see
+.IR lseek (2).
+Upon return from
+.IR write ,
+the pointer is incremented by the number of bytes actually written.
+E 2
+.PP
+D 2
+.IR Write s
+to the control terminal by a process
+which is not in the process group of the termainl
+and which is not ignoring or holding SIGTTOU signals
+cause the writer's process group
+to receive a SIGTTOU signal
+(See
+.IR jobs (3)
+and the description of the LTOSTOP option in
+.IR tty (4)
+for details).
+E 2
+I 2
+Objects that are not capable of seeking always write from the current
+position.  The value of the pointer associated with such an object
+is undefined.
+E 2
+.PP
+D 2
+On some systems
+E 2
+I 2
+If the real user is not the super-user, then
+E 2
+.I write
+clears the set-user-id bit on a file.
+This prevents penetration of system security
+by a user who
+D 2
+\*(lqcaptures\*(rq a writeable set-user-id file
+E 2
+I 2
+\*(lqcaptures\*(rq a writable set-user-id file
+E 2
+owned by the super-user.
+I 7
+.PP
+When using non-blocking I/O on objects such as sockets that are subject
+to flow control,
+.I write
+and
+.I writev
+may write fewer bytes than requested;
+the return value must be noted,
+and the remainder of the operation should be retried when possible.
+E 7
+I 2
+.SH "RETURN VALUE
+D 6
+Upon successful completion the number of bytes actually writen
+is returned.  Otherwise a \-1 is returned and
+E 6
+I 6
+Upon successful completion the number of bytes actually written
+is returned.  Otherwise a \-1 is returned and the global variable
+E 6
+.I errno
+is set to indicate the error.
+.SH ERRORS
+.I Write
+I 6
+and
+.I writev
+E 6
+will fail and the file pointer will remain unchanged if one or more
+of the following are true:
+.TP 15
+[EBADF]
+\fID\fP is not a valid descriptor open for writing.
+.TP 15
+[EPIPE]
+An attempt is made to write to a pipe that is not open
+for reading by any process.
+.TP 15
+[EPIPE]
+An attempt is made to write to a socket of type SOCK_STREAM
+D 4
+which is not connected to a peer socket.
+E 4
+I 4
+that is not connected to a peer socket.
+E 4
+.TP 15
+[EFBIG]
+An attempt was made to write a file that exceeds the process's
+file size limit or the maximum file size.
+.TP 15
+[EFAULT]
+Part of \fIiov\fP or data to be written to the file
+points outside the process's allocated address space.
+I 5
+.TP 15
+I 6
+[EINVAL]
+The pointer associated with
+.I d
+was negative.
+.TP 15
+E 6
+[ENOSPC]
+There is no free space remaining on the file system
+containing the file.
+.TP 15
+[EDQUOT]
+The user's quota of disk blocks on the file system
+containing the file has been exhausted.
+.TP 15
+[EIO]
+An I/O error occurred while reading from or writing to the file system.
+I 7
+.TP 15
+[EWOULDBLOCK]
+The file was marked for non-blocking I/O,
+and no data could be written immediately.
+E 7
+I 6
+.PP
+In addition, 
+.I writev
+may return one of the following errors:
+.TP 15
+[EINVAL]
+.I Iovcnt
+was less than or equal to 0, or greater than 16.
+.TP 15
+[EINVAL]
+One of the
+.I iov_len
+values in the
+.I iov
+array was negative.
+.TP 15
+[EINVAL]
+The sum of the
+.I iov_len
+values in the
+.I iov
+array overflowed a 32-bit integer.
+E 6
+E 5
+E 2
+.SH "SEE ALSO"
+D 2
+creat(2), open(2), pipe(2)
+.SH DIAGNOSTICS
+Returns
+\-1 on error: bad descriptor, buffer address, or
+count; physical I/O errors.
+.SH "ASSEMBLER (PDP-11)"
+(write = 4.)
+.br
+(file descriptor in r0)
+.br
+.B sys  write; buffer; nbytes
+.br
+(byte count in r0)
+.SH BUGS
+It would be nice to be able to call write and have the call return
+with an error indication if there was no buffer space for the written
+data, rather than blocking the process.
+.PP
+Processes which have been orphaned by their parents
+and have been inherited by
+.IR init (8)
+never receive SIGTTOU signals.
+Output by such a process
+is permitted even when they are not in the process group
+of the control terminal.
+E 2
+I 2
+D 7
+lseek(2), open(2), pipe(2)
+E 7
+I 7
+fcntl(2), lseek(2), open(2), pipe(2), select(2)
+E 7
+E 2
+E 1

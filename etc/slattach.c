@@ -25,7 +25,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)slattach.c	4.3 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)slattach.c	4.5 (Berkeley) 7/19/02";
 #endif /* not lint */
 
 #include <stdio.h>
@@ -36,32 +36,44 @@ static char sccsid[] = "@(#)slattach.c	4.3 (Berkeley) 6/30/88";
 #include <net/if.h>
 #include <netdb.h>
 #include <fcntl.h>
+#include <ctype.h>
 
 #define DEFAULT_BAUD	9600
-int	slipdisc = SLIPDISC;
 
 char	devname[32];
-char	hostname[MAXHOSTNAMELEN];
 
 main(argc, argv)
 	int argc;
 	char *argv[];
 {
 	register int fd;
-	register char *dev = argv[1];
+	register char *dev = argv[2];
+	char *ifname = argv[1];
 	struct sgttyb sgtty;
+	int	ifnum;
 	int	speed;
 
-	if (argc < 2 || argc > 3) {
-		fprintf(stderr, "usage: %s ttyname [baudrate]\n", argv[0]);
+	if (argc < 3 || argc > 4) {
+		fprintf(stderr, "usage: %s ifname ttyname [baudrate]\n",
+			argv[0]);
 		exit(1);
 	}
-	speed = argc == 3 ? findspeed(atoi(argv[2])) : findspeed(DEFAULT_BAUD);
+	if (ifname[0] == 's' && ifname[1] == 'l' && isdigit(ifname[2]))
+		ifnum = atoi(ifname + 2);
+	else if (ifname[0] == 'p' && ifname[1] == 'p' && ifname[2] == 'p' &&
+		 isdigit(ifname[3]))
+		ifnum = atoi(ifname + 3);
+	else {
+		fprintf(stderr, "%s is not a valid interface for %s\n", ifname,
+			argv[0]);
+		exit(1);
+	}
+	speed = argc == 4 ? findspeed(atoi(argv[3])) : findspeed(DEFAULT_BAUD);
 	if (speed == 0) {
-		fprintf(stderr, "unknown speed %s", argv[2]);
+		fprintf(stderr, "unknown speed %s\n", argv[3]);
 		exit(1);
 	}
-	if (strncmp("/dev/", dev, 5)) {
+	if (!index(dev, '/')) {
 		(void)sprintf(devname, "/dev/%s", dev);
 		dev = devname;
 	}
@@ -75,8 +87,12 @@ main(argc, argv)
 		perror("ioctl(TIOCSETP)");
 		exit(1);
 	}
-	if (ioctl(fd, TIOCSETD, &slipdisc) < 0) {
-		perror("ioctl(TIOCSETD)");
+	if (ifname[0] == 's' && ioctl(fd, TIOCSLATTACH, &ifnum) < 0) {
+		perror("ioctl(TIOCSLATTACH)");
+		exit(1);
+	}
+	if (ifname[0] == 'p' && ioctl(fd, TIOCPPPATTACH, &ifnum) < 0) {
+		perror("ioctl(TIOCPPPATTACH)");
 		exit(1);
 	}
 

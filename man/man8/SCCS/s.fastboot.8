@@ -1,0 +1,59 @@
+h18554
+s 00001/00001/00038
+d D 6.1 85/04/27 14:56:20 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00039/00000/00000
+d D 5.1 85/04/27 14:56:00 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FASTBOOT 8 "4 March 1983"
+E 2
+I 2
+.TH FASTBOOT 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+fastboot, fasthalt \- reboot/halt the system without checking the disks
+.SH SYNOPSIS
+.B /etc/fastboot
+[
+.I boot-options
+]
+.br
+.B /etc/fasthalt
+[
+.I halt-options
+]
+.SH DESCRIPTION
+.I Fastboot
+and
+.I fasthalt
+are shell scripts which reboot and halt the system without
+checking the file systems.  This is done by creating a
+file 
+.IR /fastboot ,
+then invoking the 
+.I reboot
+program.  The system startup script,
+.IR /etc/rc ,
+looks for this file and, if present, skips the normal
+invocation of
+.IR fsck (8).
+.SH "SEE ALSO"
+halt(8),
+reboot(8),
+rc(8)
+E 1

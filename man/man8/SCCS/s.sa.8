@@ -1,0 +1,278 @@
+h03477
+s 00001/00000/00148
+d D 6.2 85/07/29 18:17:38 bloom 4 3
+c fix format
+e
+s 00018/00004/00130
+d D 6.1 85/04/27 13:49:01 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00015/00028/00119
+d D 5.1 85/04/27 13:48:34 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00147/00000/00000
+d D 4.1 85/04/27 13:48:12 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SA 8 4/20/80
+E 2
+I 2
+D 3
+.TH SA 8 4/20/83
+E 3
+I 3
+.TH SA 8 "%Q%"
+E 3
+E 2
+.UC 4
+I 4
+.SH NAME
+E 4
+D 2
+.SH NAME
+E 2
+sa, accton \- system accounting
+.SH SYNOPSIS
+.B /etc/sa
+[
+.B \-abcdDfijkKlnrstuv
+D 3
+] [ file ]
+E 3
+I 3
+] [
+.B \-S
+savacctfile ] [
+.B \-U
+usracctfile ] [ file ]
+E 3
+.PP
+.B /etc/accton 
+[ file ]
+.SH DESCRIPTION
+With an argument naming an existing
+.I file,
+.I accton
+causes system accounting information for
+every process executed to be placed at the end of the file.
+If no argument is given, accounting is turned off.
+.PP
+.I Sa
+D 2
+reports on, cleans up, and generally maintains
+accounting files.
+E 2
+I 2
+reports on, cleans up, and generally maintains accounting files.
+E 2
+.PP
+.I Sa
+D 2
+is able to condense
+the information in
+E 2
+I 2
+is able to condense the information in
+E 2
+.I /usr/adm/acct
+into a summary file
+.I /usr/adm/savacct
+which contains a count of the
+D 2
+number of times each command was called and the time resources
+consumed.
+E 2
+I 2
+number of times each command was called and the time resources consumed.
+E 2
+This condensation is desirable because on a large system
+.I /usr/adm/acct
+can grow by 100 blocks per day.
+The summary file is normally read before the accounting file,
+so the reports include all available information.
+.PP
+D 2
+If a file name is given as the last argument,
+that file will be treated
+E 2
+I 2
+If a file name is given as the last argument, that file will be treated
+E 2
+as the accounting file;
+.I /usr/adm/acct
+is the default.
+.PP
+D 2
+Output fields are labelled: \*(lqcpu\*(rq for the sum of user+system time
+E 2
+I 2
+Output fields are labeled: \*(lqcpu\*(rq for the sum of user+system time
+E 2
+(in minutes), \*(lqre\*(rq for real time (also in minutes),
+\*(lqk\*(rq for cpu-time averaged core usage (in 1k units),
+\*(lqavio\*(rq for average number of i/o operations per execution.
+D 2
+With options fields labelled \*(lqtio\*(rq for total i/o operations,
+E 2
+I 2
+With options fields labeled \*(lqtio\*(rq for total i/o operations,
+E 2
+\*(lqk*sec\*(rq for cpu storage integral (kilo-core seconds), \*(lqu\*(rq and \*(lqs\*(rq
+D 2
+for user and system cpu time alone (both in minutes) will sometimes
+appear.
+E 2
+I 2
+for user and system cpu time alone (both in minutes) will sometimes appear.
+E 2
+.PP
+There are near a googol of options:
+.PP
+.TP
+a
+D 3
+Place all command names containing unprintable characters
+and those used only once under the name `***other.'
+E 3
+I 3
+Print all command names, even those containing unprintable characters
+and those used only once.  By default, those are placed under the
+name `***other.'
+E 3
+.TP
+b
+D 2
+Sort output by sum of user and system time divided by number of
+calls.
+E 2
+I 2
+Sort output by sum of user and system time divided by number of calls.
+E 2
+Default sort is by sum of user and system times.
+.TP
+c
+Besides total user, system, and real time for each command print percentage
+of total time over all commands.
+.TP
+d
+Sort by average number of disk i/o operations.
+.TP
+D
+Print and sort by total number of disk i/o operations.
+.TP
+f
+Force no interactive threshold compression with \-v flag.
+.TP
+i
+Don't read in summary file.
+.TP
+j
+D 2
+Instead of total minutes time for each category,
+give seconds per call.
+E 2
+I 2
+Instead of total minutes time for each category, give seconds per call.
+E 2
+.TP
+k
+Sort by cpu-time average memory usage.
+.TP
+K
+Print and sort by cpu-storage integral.
+.TP
+l
+Separate system and user time; normally they are combined.
+.TP
+m
+Print number of processes and number of CPU minutes for each user.
+.TP
+n
+Sort by number of calls.
+.TP
+r
+Reverse order of sort.
+.TP
+s
+Merge accounting file into summary file
+.I /usr/adm/savacct
+when done.
+.TP
+t
+D 2
+For each command report ratio of real time to the sum of user and
+system times.
+E 2
+I 2
+For each command report ratio of real time to the sum of user and system times.
+E 2
+.TP
+u
+D 2
+Superseding all other flags,
+print for each command in the accounting file the
+E 2
+I 2
+Superseding all other flags, print for each command in the accounting file the
+E 2
+user ID and command name.
+.TP
+v
+Followed by a number
+.I n,
+D 2
+types the name of
+each command used
+E 2
+I 2
+types the name of each command used
+E 2
+.I n
+times or fewer.
+D 2
+Await a reply from the terminal;
+if it begins with `y', add the command to
+the category `**junk**.'
+This is used to strip out garbage.
+E 2
+I 2
+Await a reply from the terminal; if it begins with `y', add the command to
+the category `**junk**.' This is used to strip out garbage.
+I 3
+.TP
+S
+The following filename is used as the command summary file instead of
+.I /usr/adm/savacct.
+.TP
+U
+The following filename is used instead of
+.I /usr/adm/usracct
+to accumulate the per-user statistics printed by the \-m option.
+E 3
+E 2
+.dt
+.SH FILES
+.ta 2i
+/usr/adm/acct	raw accounting
+.br
+/usr/adm/savacct	summary
+.br
+/usr/adm/usracct	per-user summary
+.SH "SEE ALSO"
+ac(8), acct(2)
+.SH BUGS
+The number of options to this program is absurd.
+E 1

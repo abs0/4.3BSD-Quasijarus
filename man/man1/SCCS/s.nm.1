@@ -1,0 +1,162 @@
+h64855
+s 00006/00003/00074
+d D 6.1 85/04/29 14:40:10 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00020/00070
+d D 5.1 85/04/29 14:40:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00090/00000/00000
+d D 4.1 85/04/29 14:39:52 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH NM 1 
+E 2
+I 2
+D 3
+.TH NM 1 "7 February 1983"
+E 3
+I 3
+.TH NM 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+nm \- print name list
+.SH SYNOPSIS
+.B nm
+[
+D 2
+.B \-agnopru
+E 2
+I 2
+D 3
+.B \-gnopru
+E 3
+I 3
+.B \-agnopru
+E 3
+E 2
+]
+[ file ... ]
+.SH DESCRIPTION
+.I Nm
+prints the name list (symbol table) of each object
+.I file
+D 2
+in the argument list.
+If an argument
+is an archive, a listing for each object
+file in the archive will be produced.
+If no
+E 2
+I 2
+in the argument list.  If an argument is an archive, a listing for each object
+file in the archive will be produced.  If no
+E 2
+.I file
+D 2
+is given, the symbols in
+`a.out'
+are listed.
+E 2
+I 2
+is given, the symbols in "a.out" are listed.
+E 2
+.PP
+Each symbol name is preceded by its value (blanks if undefined)
+and one of the letters
+.SM
+.B U
+(undefined),
+.SM
+.B A
+(absolute),
+.SM
+.B  T
+(text segment symbol),
+.SM
+.B D
+(data segment symbol),
+.SM
+.B B
+(bss segment symbol),
+.SM
+.B C
+(common symbol),
+.SM
+.B f
+file name,
+or
+.B \-
+D 3
+for sdb symbol table entries (see
+E 3
+I 3
+for debugger symbol table entries (see
+E 3
+.B \-a
+below).
+D 2
+If the symbol is local (non-external) the type letter is in
+lower case.
+E 2
+I 2
+If the symbol is local (non-external) the type letter is in lower case.
+E 2
+The output is sorted alphabetically.
+.PP
+Options are:
+I 3
+.TP
+.B  \-a
+Print symbol table entries inserted for use by debuggers.
+E 3
+.TP
+D 2
+.B \-a
+Include all symbols in candidates for printing; normally
+symbols destined for
+.IR sdb (1)
+are excluded.
+.TP
+E 2
+.B  \-g
+Print only global (external) symbols.
+.TP
+.B \-n
+Sort numerically rather than alphabetically.
+.TP
+.B  \-o
+D 2
+Prepend file or archive element name to each
+output line rather than only once.
+E 2
+I 2
+Prepend file or archive element name to each output line rather than only once.
+E 2
+.TP
+.B  \-p
+Don't sort; print in symbol-table order.
+.TP
+.B  \-r
+Sort in reverse order.
+.TP
+.B  \-u
+Print only undefined symbols.
+.SH SEE ALSO
+ar(1), ar(5), a.out(5), stab(5)
+E 1

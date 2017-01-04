@@ -1,0 +1,27 @@
+.PS
+ellipse wid 1i ht .1i
+.PE
+.PS
+ellipse wid 1i ht .25i
+.PE
+.PS
+ellipse wid 1i ht .5i
+.PE
+.PS
+ellipse wid 1i ht .75i
+.PE
+.PS
+ellipse wid 1i ht 1i
+.PE
+.PS
+ellipse wid .1i ht 1i
+.PE
+.PS
+ellipse wid .25i ht 1i
+.PE
+.PS
+ellipse wid .5i ht 1i
+.PE
+.PS
+ellipse wid .75i ht 1i
+.PE

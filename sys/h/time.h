@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)time.h	7.2 (Berkeley) 4/10/00
+ *	@(#)time.h	7.3 (Berkeley) 2012/06/16
  */
 
 #ifndef _TIME_
@@ -16,6 +16,15 @@
 struct timeval {
 	long	tv_sec;		/* seconds */
 	long	tv_usec;	/* and microseconds */
+};
+
+/*
+ * Unsigned version of struct timeval created in preparation
+ * for the upcoming Y2038 crisis.
+ */
+struct utimeval {
+	unsigned long	tv_sec;
+	unsigned long	tv_usec;
 };
 
 struct timezone {

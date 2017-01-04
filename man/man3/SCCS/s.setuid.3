@@ -1,0 +1,100 @@
+h63745
+s 00001/00001/00052
+d D 6.3 86/05/12 19:58:33 karels 4 3
+c typo
+e
+s 00015/00006/00038
+d D 6.2 86/01/07 14:10:37 mckusick 3 2
+c int => uid_t and int => gid_t
+e
+s 00001/00001/00043
+d D 6.1 85/05/15 16:29:04 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00044/00000/00000
+d D 5.1 85/05/15 16:28:58 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SETUID 3 "1 April 1983" 
+E 2
+I 2
+.TH SETUID 3 "%Q%" 
+E 2
+.UC 5
+.SH NAME
+setuid, seteuid, setruid, setgid, setegid, setrgid \- set user and group ID
+.SH SYNOPSIS
+.nf
+D 3
+.B setuid(uid)
+.B seteuid(euid)
+.B setruid(ruid)
+E 3
+I 3
+.ft B
+#include <sys/types.h>
+E 3
+.PP
+D 3
+.B setgid(gid)
+.B setegid(egid)
+.B setrgid(rgid)
+E 3
+I 3
+.ft B
+.nf
+setuid(uid)
+seteuid(euid)
+setruid(ruid)
+uid_t uid, euid, ruid;
+.PP
+.ft B
+.nf
+setgid(gid)
+setegid(egid)
+setrgid(rgid)
+gid_t gid, egid, rgid;
+E 3
+.fi
+.SH DESCRIPTION
+.I Setuid
+.RI ( setgid )
+sets both the real and effective
+user ID (group ID) of the current process to
+as specified.
+.PP
+.I Seteuid
+.RI ( setegid )
+sets the effective user ID (group ID) of the
+current process.
+.PP
+.I Setruid
+D 4
+.RI ( setruid )
+E 4
+I 4
+.RI ( setrgid )
+E 4
+sets the real user ID (group ID) of the
+current process.
+.PP
+These calls are only permitted to the super-user
+or if the argument is the real or effective ID.
+.SH "SEE ALSO"
+setreuid(2), setregid(2), getuid(2), getgid(2)
+.SH DIAGNOSTICS
+Zero is returned if the user (group) ID is set;
+\-1 is returned otherwise.
+E 1

@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ex_argv.h	7.3 (Berkeley) 5/31/85
+ *	@(#)ex_argv.h	7.4 (Berkeley) 4/13/03
  */
 
 /*
@@ -13,22 +13,22 @@
  * space.  The statically allocated glob structure could be replaced
  * by a dynamically allocated argument area space.
  */
-var char	**argv;
-var char	**argv0;
-var char	*args;
-var char	*args0;
+var u_char	**argv;
+var u_char	**argv0;
+var u_char	*args;
+var u_char	*args0;
 var short	argc;
 var short	argc0;
 var short	morargc;		/* Used with "More files to edit..." */
 
 var int	firstln;		/* From +lineno */
-var char	*firstpat;		/* From +/pat	*/
+var u_char	*firstpat;		/* From +/pat	*/
 
 /* Yech... */
 struct	glob {
 	short	argc;			/* Index of current file in argv */
 	short	argc0;			/* Number of arguments in argv */
-	char	*argv[NARGS + 1];	/* WHAT A WASTE! */
-	char	argspac[NCARGS + sizeof (int)];
+	u_char	*argv[NARGS + 1];	/* WHAT A WASTE! */
+	u_char	argspac[NCARGS + sizeof (int)];
 };
 var struct	glob frob;

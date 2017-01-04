@@ -1,0 +1,1580 @@
+h41624
+s 00001/00001/00551
+d D 6.5 86/05/12 09:27:06 anne 17 16
+c grammar
+e
+s 00001/00001/00551
+d D 6.4 86/04/20 05:24:41 lepreau 16 15
+c spelling
+e
+s 00001/00001/00551
+d D 6.3 85/12/03 18:19:49 edward 15 14
+c \f changed to \fI
+e
+s 00028/00032/00524
+d D 6.2 85/06/07 13:58:49 edward 14 13
+c don't have time to really fix this
+e
+s 00008/00007/00548
+d D 6.1 85/04/29 21:53:06 mckusick 13 12
+c manual page first distributed with 4.3BSD
+e
+s 00005/00000/00550
+d D 3.8 85/04/24 16:14:49 edward 12 11
+c copyright messages
+e
+s 00404/00189/00146
+d D 3.7 85/04/07 22:17:02 edward 11 10
+c good enough for government work
+e
+s 00001/00001/00334
+d D 3.6 84/05/23 01:57:59 edward 10 9
+c new sccs id
+e
+s 00036/00022/00299
+d D 3.5 84/04/05 01:01:57 edward 9 8
+c work on this later
+e
+s 00077/00011/00244
+d D 3.4 84/03/02 14:50:16 edward 8 7
+c attempt
+e
+s 00019/00004/00236
+d D 3.3 83/08/25 18:00:43 edward 7 6
+c new user settable buffer size and explanation about SHELL.
+e
+s 00077/00028/00163
+d D 3.2 83/08/22 15:55:51 edward 6 5
+c changed for new commands and command line flags.
+e
+s 00000/00000/00191
+d D 3.1 83/08/09 18:50:20 edward 5 4
+i
+c new version number
+e
+s 00001/00001/00190
+d D 1.4 83/08/09 17:56:58 edward 4 3
+c spelling error
+e
+s 00029/00026/00162
+d D 1.3 83/08/02 13:45:48 edward 3 2
+c Karen's changes
+e
+s 00084/00055/00104
+d D 1.2 83/07/29 18:26:43 edward 2 1
+c new commands
+e
+s 00159/00000/00000
+d D 1.1 83/07/28 18:03:20 edward 1 0
+c date and time created 83/07/28 18:03:20 by edward
+e
+u
+U
+f b 
+t
+T
+I 1
+D 10
+.\" %W% %E%
+E 10
+I 10
+D 13
+.\" %W% %G%
+I 12
+
+.\" Copyright (c) 1983 Regents of the University of California,
+.\" All rights reserved.  Redistribution permitted subject to
+.\" the terms of the Berkeley Software License Agreement.
+
+E 12
+E 10
+D 11
+.TH WINDOW 1 local
+E 11
+I 11
+.TH WINDOW 1 "2 April 1985"
+E 13
+I 13
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH WINDOW 1 "%Q%"
+.UC 6
+E 13
+E 11
+.SH NAME
+D 11
+window \- multiple window shell
+E 11
+I 11
+window \- window environment
+E 11
+.SH SYNOPSIS
+D 6
+window
+E 6
+I 6
+.B window
+[
+.B \-t
+] [
+.B \-f
+] [
+.B \-d
+] [
+D 11
+.B -e escape-char
+E 11
+I 11
+.B \-e escape-char
+] [
+.B \-c command
+E 11
+]
+E 6
+.SH DESCRIPTION
+D 11
+\fIWindow\fP provides a window oriented working environment
+E 11
+I 11
+D 14
+\fIWindow\fP provides a window oriented environment
+E 11
+on ordinary CRT terminals.
+E 14
+I 14
+\fIWindow\fP implements a window environment on
+ASCII terminals.
+E 14
+.PP
+D 11
+Windows are rectangular partitions on the physical terminal screen
+D 2
+that resemble real terminals to all programs running in
+E 2
+I 2
+that are indistinguishable from real terminals to processes running in
+E 2
+D 6
+them.  Their sizes and placement are determined at creation
+E 6
+I 6
+them.  Their sizes are determined at creation
+E 6
+time.  They are framed as necessary to mark the boundaries between
+windows.  Each window, like terminals, has a cursor and a set of
+control functions.  Most intelligent terminal functions such as line and
+D 2
+character deletion and insertion are supported.  A termcap(5)
+entry is created for each window and passed on to its processes
+in the environment (see environ(8)).  The windows are labeled
+with the digits ``1'' through ``9''.  There are a maximum of nine windows.
+E 2
+I 2
+D 6
+character deletion and insertion are supported.  A \fItermcap (5)\fP
+entry tailored to each window is passed on to its processes
+in the environment (see \fIenviron (8)\fP).  A pseudo-terminal
+device (\fIpty (4)\fP) is allocated for each window.  This becomes
+the standard input, output, and diagnostic output of the processes.
+D 3
+Initially, a shell, usually \fIcsh (1)\fP, is placed in the window.
+E 3
+I 3
+Initially a shell, usually \fIcsh (1)\fP, is placed in the window.
+E 6
+I 6
+character deletion and insertion are supported.  Display modes
+such as underlining and reverse video are supported if the terminal
+allows them.
+E 11
+I 11
+A window is a rectangular portion of the physical terminal
+D 14
+screen associated with a set of processes.  These processes
+communicate with the window in the same way they normally
+interact with a terminal.  The window program handles the
+E 14
+I 14
+screen associated with a set of processes.  Its size and
+position can be changed by the user at any time.  Processes
+communicate with their window in the same way they normally
+interact with a terminal--through their standard input, output,
+and diagnostic file descriptors.  The window program handles the
+E 14
+details of redirecting input an output to and from the
+windows.  At any one time, only one window can receive
+input from the keyboard, but all windows can simultaneously send output
+to the display.
+E 11
+E 6
+E 3
+.PP
+I 7
+D 11
+Each window has a text buffer which can be larger than the window.
+Different parts of the buffer can be made visible through scrolling.
+E 11
+I 11
+Windows can overlap and are framed as necessary.  Each window
+is named by one of the digits ``1'' to ``9''.  This one character
+identifier, as well as a user definable label string, are displayed
+with the window on the top edge of its frame.  A window can be
+designated to be in the \fIforeground\fP, in which case it will always be
+on top of all normal, non-foreground windows, and can be covered
+D 14
+only by other foreground windows.
+E 14
+I 14
+only by other foreground windows.  A window need not be completely
+within the edges of the terminal screen.  Thus a large window
+(possibly larger than the screen) may be positioned to show only
+a portion of its full size.
+E 14
+E 11
+.PP
+E 7
+D 3
+Windows are labeled with the digits ``1'' through ``9''.
+Thus a maximum of nine are supported.
+E 3
+I 3
+D 11
+Windows are labeled with the digits ``1'' through ``9'',
+D 6
+thus a maximum of nine windows are supported.
+E 6
+I 6
+thus a maximum of nine windows can exist at the same time.
+E 6
+E 3
+E 2
+One window, the current window, is treated specially.
+D 2
+This window is indicated by showing its label in reverse video.  Windows
+can overlap.  Some can be completely obscured by others.
+E 2
+I 2
+D 6
+This window is indicated by displaying its label in reverse video.
+E 6
+I 6
+This window is indicated by displaying its labels in reverse video.
+E 11
+I 11
+D 14
+A window need not be completely within the edges of the terminal screen.
+Thus a large window (possibly larger than the screen)
+can be positioned to show only a portion of its full size.  In addition,
+both the size and the position of a window can be changed by
+the user at any time.
+E 11
+E 6
+.PP
+D 11
+Windows can overlap.  Some can be completely obscured by others.
+E 2
+D 4
+The current window is alway on top of all others.
+E 4
+I 4
+The current window is always on top of all others.
+E 4
+.PP
+I 8
+Windows need not be completely within the edges of the terminal screen.
+Thus a large window (possibly larger than the physical screen)
+can be placed to show only a portion of its full size.  This
+feature can in some situations replace the ability to change
+window sizes which is not supported.
+.PP
+E 8
+I 6
+With each newly created window, a shell program is spawned with its
+process environment tailored to that window.  In particular,
+a pseudo-terminal device (\fIpty (4)\fP) is allocated, and becomes
+D 8
+the standard input, output and diagnostic output of the shell.  It's
+E 8
+I 8
+the standard input, output and diagnostic output of the shell.  Its
+E 8
+special characters and modes (see \fIstty (1)\fP) are copied from
+the user's real terminal.  Also,
+a \fItermcap (5)\fP entry for this window is created
+and passed to the shell as \fIenviron (8)\fP
+variable \fBTERMCAP\fP.  This \fItermcap\fP entry contains the window's
+size and characteristics as well as information about
+the real terminal, such as the existence of underline, reverse
+video and other display modes, and the codes produced by the terminal's
+D 7
+keypad (if any).
+E 7
+I 7
+keypad (if any).  The name of the shell program used is obtained from
+the environment variable \fBSHELL\fP.
+E 7
+.PP
+E 11
+I 11
+Windows are designed to have the appearance of real terminals
+both to the user and to the processes running in them.  Each window
+has a cursor and a set of control functions.  Most intelligent
+terminal functions such as line and
+E 14
+I 14
+Each window has a cursor and a set of control functions.  Most intelligent
+terminal operations such as line and
+E 14
+character deletion and insertion are supported.  Display modes
+D 14
+such as underlining and reverse video are available if the terminal
+allows them.  Also, similar to terminals with multiple pages of memory,
+each window has a text buffer which can be larger than the window.
+Different parts of the buffer can be displayed by scrolling.
+E 14
+I 14
+such as underlining and reverse video are available if they are
+supported by the terminal.  In addition,
+similar to terminals with multiple pages of memory,
+D 16
+each window has a text buffer which can have more lines then the window
+E 16
+I 16
+each window has a text buffer which can have more lines than the window
+E 16
+itself.
+E 14
+.SH OPTIONS
+E 11
+D 14
+When \fIwindow\fP starts up, the file \fI.windowrc\fP in the
+user's home directory is checked.  If it exists, then the
+commands contained in it are executed (see \fIsource\fP command below).
+D 11
+If \fI.windowrc\fP does not exist, then two
+equal sized windows are created by default.
+E 11
+I 11
+Otherwise, two equal sized windows are created by default.
+E 14
+I 14
+When \fIwindow\fP starts up, the commands (see long commands below)
+contained in the file \fI.windowrc\fP in the user's home directory are
+executed.  If it does not exist, two equal sized windows spanning
+the terminal screen are created by default.
+E 14
+E 11
+.PP
+D 14
+The command line arguments are
+E 14
+I 14
+The command line options are
+E 14
+.TP
+D 11
+.B -t
+E 11
+I 11
+.B \-t
+E 11
+Turn on terse mode (see \fIterse\fP command below).
+.TP
+D 11
+.B -f
+E 11
+I 11
+.B \-f
+E 11
+D 14
+Don't perform any startup action.
+E 14
+I 14
+Fast.  Don't perform any startup action.
+E 14
+.TP
+D 11
+.B -d
+E 11
+I 11
+.B \-d
+E 11
+Ignore \fI.windowrc\fP and create the two default
+windows instead.
+.TP
+D 11
+.B -e escape-char
+Set the escape character to \fIescape-char\fP.
+E 11
+I 11
+.B \-e escape-char
+Set the escape character to \fIescape-char\fP.  \fIEscape-char\fP
+can be a single character, or in the form \fI^X\fP where \fIX\fP
+is any character, meaning control-\fIX\fP.
+.TP
+.B \-c command
+Execute the string \fIcommand\fP as a long command (see below)
+before doing anything else.
+.SH "PROCESS ENVIRONMENT"
+With each newly created window, a shell program is spawned with its
+process environment tailored to that window.  Its standard input,
+output, and diagnostic file descriptors are bound to one end of either
+a pseudo-terminal (\fIpty\fP (4)) or a UNIX domain socket
+(\fIsocketpair\fP (4)).  If a pseudo-terminal is used, then its special
+characters and modes (see \fIstty\fP (1)) are copied from the physical
+terminal.  A \fItermcap\fP (5) entry tailored to this window is created
+and passed as environment (\fIenviron\fP (5)) variable
+\fITERMCAP\fP.  The termcap entry contains the window's size and
+characteristics as well as information from the physical terminal,
+such as the existence of underline, reverse video, and other display
+modes, and the codes produced by the terminal's function keys,
+D 14
+if any.  In addition to the termcap entry, a window size structure is
+associated with the pseudo-terminal (and indeed with any terminal).  It
+is initialized by \fIwindow\fP at creation time, and updated whenever the
+size of the window changes, using the \fIioctl\fP (2) call
+\fITIOCSWINSZ\fP.  In particular, the editor \fIvi\fP (1) uses
+E 14
+I 14
+if any.  In addition, the window size attributes of the pseudo-terminal
+are set to reflect the size of this window, and updated whenever
+it is changed by the user.  In particular, the editor \fIvi\fP (1) uses
+E 14
+this information to redraw its display.
+.SH OPERATION
+E 11
+.PP
+E 6
+D 2
+The \fIwindow\fP program has two basic modes of operation:  command mode
+and conversation mode.  In conversation mode, the terminal's
+E 2
+I 2
+D 11
+The \fIwindow\fP program has two functional modes:  command mode
+and conversation mode.
+D 3
+.PP
+E 3
+In conversation mode, the terminal's
+E 2
+real cursor is placed at the cursor position of the current
+window and all keyboard input is sent to the process in that
+window.  Output from windows is displayed at all times,
+even in command mode.
+D 3
+.PP
+E 3
+D 2
+Typing \fIwindow\fP's escape character (initially ^P)
+in conversation mode switches the program into
+E 2
+I 2
+Typing \fIwindow\fP's escape character (normally ^P)
+in conversation mode switches \fIwindow\fP into
+E 2
+command mode.  In command mode, the top line of the
+D 3
+terminal screen becomes the command prompt window.
+And the cursor in the current window is replaced by a
+E 3
+I 3
+D 6
+terminal screen becomes the command prompt window,
+and the cursor in the current window is replaced by a
+E 3
+D 2
+reverse video blinking block.
+E 2
+I 2
+blinking reverse video block (if these functions are supported
+by the terminal).
+E 6
+I 6
+terminal screen becomes the command prompt window.
+E 11
+I 11
+D 14
+During normal execution, \fIwindow\fP can be in one of two modes:
+E 14
+I 14
+During normal execution, \fIwindow\fP can be in one of two states:
+E 14
+conversation mode and command mode.  In conversation mode, the
+terminal's real cursor is placed at the cursor position of a particular
+window--called the current window--and input from the keyboard is sent
+to the process in that window.  The current window is always
+on top of all other windows, except those in foreground.  In addition,
+it is set apart by highlighting its identifier and label in reverse video.
+E 11
+E 6
+E 2
+.PP
+D 2
+The available commands are:
+E 2
+I 2
+D 3
+The commands are
+E 3
+I 3
+D 11
+There are two types of commands.  Short commands are
+D 9
+usually one or two key strokes.  Long commands are entered
+in the command window and terminated with carriage return
+D 8
+or line feed (see the ``:'' command below).  They consist
+of words separated by spaces or tabs.  Words can be quoted
+to include the spacing characters.  The ``\\'' convention
+of \fIC\fP applies.  Alternately, long commands can be read
+in from files and executed (see \fIsource\fP below).
+E 8
+I 8
+or line feed (see the ``:'' command below).  They are parsed
+much like conventional programming languages.  Arithematic
+and some string expressions are supported, as well as
+conditional statements.  The syntax is described below.  Alternately,
+long commands can be read in from files and executed (see \fIsource\fP below).
+E 9
+I 9
+usually one or two key strokes.  Long commands are
+in the command window (see the ``:'' command below),
+or read from a file (see \fIsource\fP below).  They are parsed
+much like conventional programming languages, with a syntax
+similar to that of C.  Numeric and string expressions and variables
+are supported, as well as
+conditional statements (if . . .).  The grammar is described below.
+E 11
+I 11
+Typing \fIwindow\fP's escape character (normally ^P) in conversation
+mode switches it into command mode.  In command mode, the top line of
+the terminal screen becomes the command prompt window, and \fIwindow\fP
+interprets input from the keyboard as commands to manipulate windows.
+E 11
+E 9
+E 8
+.PP
+D 9
+The short commands are
+E 9
+I 9
+D 11
+The short commands.  Below, \fI[1-9]\fP represents one of the
+keys ``1'' through ``9,'' used to select the correponding window
+``1'' through ``9.''
+E 11
+I 11
+There are two types of commands: short commands are usually one or two
+key strokes; long commands are strings either typed by the user in the
+command window (see the ``:'' command below), or read from a file (see
+\fIsource\fP below).
+.SH "SHORT COMMANDS"
+Below, \fI#\fP represents one of the digits ``1'' to ``9''
+corresponding to the windows 1 to 9.  \fI^X\fP means control-\fIX\fP,
+where \fPX\fP is any character.  In particular, \fI^^\fP is
+D 15
+control-^.  \fIEscape\fP is the escape key, or \f^[\fP.
+E 15
+I 15
+control-^.  \fIEscape\fP is the escape key, or \fI^[\fP.
+E 15
+E 11
+E 9
+E 3
+E 2
+.TP
+D 11
+.B [1-9]
+D 2
+Select window [1-9] and return to conversation mode.
+E 2
+I 2
+Select window \fI[1-9]\fP as the current window
+E 11
+I 11
+.B #
+Select window \fI#\fP as the current window
+E 11
+and return to conversation mode.
+E 2
+.TP
+D 11
+.B %[1-9]
+D 2
+Select window [1-9] but stay in command mode.
+E 2
+I 2
+Select window \fI[1-9]\fP but stay in command mode.
+E 11
+I 11
+.B %#
+Select window \fI#\fP but stay in command mode.
+E 11
+E 2
+.TP
+D 11
+.B ?
+List a short summary of commands.
+E 11
+I 11
+.B ^^
+Select the previous window and return to conversation
+mode.  This is useful for toggling between two windows.
+E 11
+.TP
+I 2
+D 11
+.B ^L
+Redraw the screen.
+.TP
+E 11
+E 2
+.B escape
+Return to conversation mode.
+.TP
+.B ^P
+Return to conversation mode and write ^P to the
+current window.  Thus, typing two ^P's in conversation
+mode sends one to the current window.  If the \fIwindow\fP
+escape is changed to some other character, that
+D 2
+character takes the place of ^P.
+E 2
+I 2
+character takes the place of ^P here.
+E 2
+.TP
+I 8
+D 11
+.B ^^
+Select the previous current window and return to conversation
+mode.  This is useful for toggling between two windows.
+E 11
+I 11
+.B ?
+List a short summary of commands.
+E 11
+.TP
+I 11
+.B ^L
+Redraw the screen.
+.TP
+E 11
+E 8
+D 2
+.B .
+Exit \fIwindow\fP.  You are asked to confirm this.
+E 2
+I 2
+.B q
+Exit \fIwindow\fP.  Confirmation is requested.
+E 2
+.TP
+I 6
+.B ^Z
+Suspend \fIwindow\fP.
+.TP
+E 6
+.B w
+D 2
+Create a new window.  You are prompted for the position
+and size of the window.  The cursor is placed on the screen
+and the keys ``h,j,k,l''
+E 2
+I 2
+D 11
+Create a new window.  You are prompted for the positions
+E 11
+I 11
+Create a new window.  The user is prompted for the positions
+E 11
+of the upper left and lower right corners of the window.
+D 3
+The cursor is placed on the screen and the keys ``h,j,k,l''
+E 2
+moves the cursor left, down, up, and right, respectively.
+D 2
+And the keys ``H,J,K,L'' moves the cursor to the respective
+E 2
+I 2
+The keys ``H,J,K,L'' moves the cursor to the respective
+E 2
+limits of the screen.  Typing a number before the movement keys
+E 3
+I 3
+The cursor is placed on the screen and the keys ``h'', ``j'',
+``k'', and ``l''
+move the cursor left, down, up, and right, respectively.
+The keys ``H'', ``J'', ``K'', and ``L'' move the cursor to the respective
+D 6
+limits of the screen.  Number before the movement keys
+E 6
+I 6
+limits of the screen.  Typing a number before the movement keys
+E 6
+E 3
+D 2
+repeats the movement the appropriate number of times.
+Return enters the cursor position
+E 2
+I 2
+D 11
+repeats the movement that number of times.
+D 3
+Typing return enters the cursor position
+E 3
+I 3
+Return enters the cursor position
+E 11
+I 11
+repeats the movement that number of times.  Return enters the cursor position
+E 11
+E 3
+E 2
+as the upper left corner of the window.  The lower right corner
+D 9
+is entered in the same manner.  Typing escape (or ^[) at any
+D 3
+point returns you to command mode.
+E 3
+I 3
+point cancels this command.
+E 9
+I 9
+is entered in the same manner.  During this process,
+D 11
+the position and size of the new window are indicated by a rectangular
+box drawn on the screen.  Typing escape (or ^[) at any point
+E 11
+I 11
+the placement of the new window is indicated by a rectangular
+box drawn on the screen, corresponding to where the new window
+will be framed.  Typing escape at any point
+E 11
+cancels this command.
+E 9
+E 3
+.IP
+D 2
+A pseudo-terminal device (pty(5)) is allocated for the window and
+the terminal modes and special characters (see stty(1)) made
+identical to the real terminal.  A shell is then started with
+the pseudo-terminal as the standard input, output and diagnostic
+output.  The environment variable SHELL is checked to find the
+name of the shell program.  \fICsh\fP(1) is used by default.
+E 2
+I 2
+D 6
+The environment variable SHELL is checked to find the
+name of the shell program to place in the window.
+\fICsh\fP (1) is used by default.
+E 2
+.IP
+This window is given the first available label.
+E 6
+I 6
+This window becomes the current window,
+D 7
+and is given the first available label.
+E 7
+I 7
+D 11
+and is given the first available label.  The default buffer size
+is used (see \fIbuffer\fP command below).
+E 11
+I 11
+and is given the first available ID.  The default buffer size
+is used (see \fInline\fP command below).
+E 11
+D 8
+The
+E 8
+I 8
+.IP
+D 9
+Note, only fully visible windows can be created this way.
+E 9
+I 9
+Only fully visible windows can be created this way.
+E 9
+E 8
+E 7
+E 6
+.TP
+D 11
+.B c[1-9]
+D 2
+Close the window [1-9].  The process in the window is sent
+the hangup signal (see kill(1,2)).  \fICsh\fP(1) should
+E 2
+I 2
+D 6
+Close the window \fI[1-9]\fP.  The process in the window is sent
+E 6
+I 6
+Close window \fI[1-9]\fP.  The process in the window is sent
+E 6
+the hangup signal (see \fIkill (1)\fP).  \fICsh (1)\fP should
+E 11
+I 11
+.B c#
+Close window \fI#\fP.  The process in the window is sent
+the hangup signal (see \fIkill\fP (1)).  \fICsh\fP (1) should
+E 11
+E 2
+handle this signal correctly and cause no problems.
+.TP
+D 11
+.B C
+D 2
+Close all windows with no processes.
+.TP
+.B Z
+E 2
+Close all windows.
+.TP
+I 8
+.B m[1-9]
+D 9
+Move window \fI[1-9]\fP to another location.  The same keys as
+those for the ``w'' command are used to input the new position.  The
+E 9
+I 9
+Move window \fI[1-9]\fP to another location.  A box in the shape
+E 11
+I 11
+.B m#
+Move window \fI#\fP to another location.  A box in the shape
+E 11
+of the window is drawn on
+the screen to indicate the new position of the window, and the same keys as
+D 11
+those for the ``w'' command are used to position the box.  The
+E 11
+I 11
+those for the \fIw\fP command are used to position the box.  The
+E 11
+E 9
+window can be moved partially off-screen.
+.TP
+D 11
+.B M[1-9]
+Move window \fI[1-9]\fP to its previous position.
+E 11
+I 11
+.B M#
+Move window \fI#\fP to its previous position.
+E 11
+.TP
+E 8
+D 2
+.B Q
+E 2
+I 2
+D 11
+.B S
+E 2
+Show all windows.  Each window is brought to the top in sequence,
+with the terminal cursor placed on its label.  Typing escape
+D 3
+at this point will select this window as the current window.
+Return will let you see the next one.  This command is useful
+E 3
+I 3
+at this point will select the displayed window as the current window.
+D 9
+Return will display the next one.  This command is useful
+E 3
+when there are a large number of windows and some are completely
+E 9
+I 9
+Return will display the next one.  This command is sometimes confusing,
+but useful when there are a large number of windows and some are completely
+E 9
+D 2
+obscured by others.
+E 2
+I 2
+hidden by others.
+E 11
+I 11
+.B s#
+Change the size of window \fI#\fP.  The user is prompted
+to enter the new lower right corner of the window.  A box
+is drawn to indicate the new window size.  The same
+keys used in \fIw\fP and \fIm\fP are used to enter the position.
+E 11
+E 2
+.TP
+I 6
+D 11
+.B L
+D 9
+List all windows.  A special window is opened and all user windows are
+listed in it with their labels.
+E 9
+I 9
+List all windows with their labels and the states of their shell processes.
+E 11
+I 11
+.B S#
+Change window \fI#\fP to its previous size.
+E 11
+E 9
+.TP
+.B ^Y
+Scroll the current window up by one line.
+.TP
+.B ^E
+Scroll the current window down by one line.
+.TP
+E 6
+D 2
+.B e
+Set the escape character.
+.TP
+.B R
+Normally, windows are updated only when all keyboard inputs and
+program outputs are processed.  This command forces the
+current window to refresh after every new line and every
+line deletion and insertion.  In this mode, the window
+will operates in a more terminal like manner, but considerably
+more CPU time will be consumed.
+.TP
+.B r
+Cancels the \fB``R''\fP command on the current window.
+.TP
+E 2
+.B ^U
+Scroll the current window up by half the window size.
+.TP
+.B ^D
+Scroll the current window down by half the window size.
+.TP
+.B ^B
+Scroll the current window up by the full window size.
+.TP
+.B ^F
+Scroll the current window down by the full window size.
+.TP
+.B h
+Move the cursor of the current window left by one column.
+.TP
+.B j
+Move the cursor of the current window down by one line.
+.TP
+.B k
+Move the cursor of the current window up by one line.
+.TP
+.B l
+Move the cursor of the current window right by one column.
+.TP
+I 8
+D 11
+.B v
+List all variables.  All currently defined variables are listed
+with their values.
+E 11
+I 11
+.B ^S
+Stop output in the current window.
+E 11
+.TP
+I 11
+.B ^Q
+Start output in the current window.
+.TP
+E 11
+E 8
+D 2
+.B ^L
+Redraw the screen.
+E 2
+I 2
+.B :
+D 8
+Enter a long command.
+E 8
+I 8
+D 9
+Enter a line of long command statements.
+E 9
+I 9
+Enter a line to be executed as long commands.  Normal line
+editing characters (erase character, erase word, erase line) are
+supported.
+I 11
+.SH "LONG COMMANDS"
+Long commands are a sequence of statements
+parsed much like a programming language, with a syntax
+similar to that of C.  Numeric and string expressions and variables
+are supported, as well as conditional statements.
+E 11
+E 9
+E 8
+.PP
+I 8
+D 9
+The simple long command consists of a command name followed by
+a list of arguments, terminated with newline or ``;''.  The arguments
+can be numeric or string expressions.  Boolean values are represented
+by a numeric value not equal to zero.  The supported operators in increasing
+E 9
+I 9
+D 11
+Long commands.  A long command is either a conditional statement
+or a simple command.  The simple long command consists of a
+command name followed by
+a list of arguments, terminated with newline or ``;''.  A command can
+be continued on the next line by ending the first line with ``\\''. The
+arguments can be numeric or string expressions.  Window supports both numeric
+and string values.  A string is any word beginning with a letter or
+``_'', followed by letters, digits, or ``_''.  Alternately, strings
+can be quoted in ``"'' to include non-alphanumeric characters.  Numeric
+values are simple strings of digits.  Boolean
+values are represented by a numeric value not equal to zero.  The supported operators in increasing
+E 9
+precedence are
+E 11
+I 11
+There are two data types: string and number.  A string is a sequence
+of letters or digits beginning with a letter.  ``_'' and ``.'' are
+considered letters.  Alternately, non-alphanumeric characters can
+be included in strings by quoting them in ``"'' or escaping them
+with ``\\''.  In addition, the ``\\'' sequences of C are supported,
+both inside and outside quotes (e.g., ``\\n'' is a new line,
+``\\r'' a carriage return).  For example, these are legal strings:
+abcde01234, "&#$^*&#", ab"$#"cd, ab\\$\\#cd, "/usr/ucb/window".
+.PP
+A number is an integer value in one of three forms:
+a decimal number, an octal number preceded by ``0'',
+or a hexadecimal number preceded by ``0x'' or ``0X''.  The natural
+machine integer size is used (i.e., the signed integer type
+of the C compiler).  As in C, a non-zero number represents
+a boolean true.
+.PP
+The character ``#'' begins a comment which terminates at the
+end of the line.
+.PP
+A statement is either a conditional or an expression.  Expression
+statements are terminated with a new line or ``;''.  To continue
+an expression on the next line, terminate the first line with ``\\''.
+.SH "CONDITIONAL STATEMENT"
+\fIWindow\fP has a single control structure:
+the fully bracketed if statement in the form
+.nf
+	if <expr> then
+		<statement>
+		. . .
+	elsif <expr> then
+		<statement>
+		. . .
+	else
+		<statement>
+		. . .
+	endif
+.fi
+The \fIelse\fP and \fIelsif\fP parts are optional, and the latter can
+be repeated any number of times.  \fI<Expr>\fP must be numeric.
+.SH EXPRESSIONS
+Expressions in \fIwindow\fP are similar to those in the
+C language, with most C operators supported on numeric
+operands.  In addition, some are overloaded to operate on strings.
+.PP
+When an expression is used as a statement, its value is discarded
+after evaluation.  Therefore, only expressions with side
+effects (assignments and function calls) are useful as statements.
+.PP
+Single valued (no arrays) variables are supported, of both
+numeric and string values.  Some variables are predefined.  They
+are listed below.
+.PP
+The operators in order of increasing precedence:
+E 11
+.TP
+D 11
+.B "boolean_expr ? expr1 : expr2"
+Returns \fIexpr1\fP
+if \fIboolean_expr\fP is true, \fIexpr2\fP otherwise.
+E 11
+I 11
+.B <expr1> = <expr2>
+Assignment.  The variable of name \fI<expr1>\fP, which must be string valued,
+is assigned the result of \fI<expr2>\fP.  Returns the value of \fI<expr2>\fP.
+E 11
+.TP
+D 11
+.B boolean_expr1 || boolean_expr2
+Logical or.  Short circuit evaluation is supported.
+E 11
+I 11
+.B <expr1> ? <expr2> : <expr3>
+Returns the value of \fI<expr2>\fP if \fI<expr1>\fP evaluates true
+(non-zero numeric value); returns the value of \fI<expr3>\fP otherwise.  Only
+one of \fI<expr2>\fP and \fI<expr3>\fP is evaluated.  \fI<Expr1>\fP must
+be numeric.
+E 11
+.TP
+D 11
+.B boolean_expr1 && boolean_expr2
+Logical and, with short circuit evaluation.
+E 11
+I 11
+.B <expr1> || <expr2>
+Logical or.  Numeric values only.  Short circuit evaluation is supported
+(i.e., if \fI<expr1>\fP evaluates true, then \fI<expr2>\fP is not evaluated).
+E 11
+.TP
+D 11
+.B numeric_expr1 | numeric_expr2
+Bitwise or.
+E 11
+I 11
+.B <expr1> && <expr2>
+Logical and with short circuit evaluation.  Numeric values only.
+E 11
+.TP
+D 11
+.B numeric_expr1 ^ numeric_expr2
+Bitwise exclusive-or.
+E 11
+I 11
+.B <expr1> | <expr2>
+Bitwise or.  Numeric values only.
+E 11
+.TP
+D 11
+.B numeric_expr1 & numeric_expr2
+Bitwise and.
+E 11
+I 11
+.B <expr1> ^ <expr2>
+Bitwise exclusive or.  Numeric values only.
+E 11
+.TP
+D 11
+.B expr1 == expr2, expr1 != expr2
+Comparison (equal and not-equal, respectively).  The boolean
+result of the comparison is returned.  The arguments can be numeric
+or strings.
+E 11
+I 11
+.B <expr1> & <expr2>
+Bitwise and.  Numeric values only.
+E 11
+.TP
+D 11
+.B expr1 < expr2, expr1 > expr2, expr1 <= expr2, expr1 >= expr2
+Less than, greater than, less than or equal to, greater than or equal to.
+E 11
+I 11
+.B <expr1> == <expr2>, <expr1> != <expr2>
+Comparison (equal and not equal, respectively).  The boolean
+result (either 1 or 0) of the comparison is returned.  The
+operands can be numeric or string valued.  One string operand
+forces the other to be converted to a string in necessary.
+E 11
+.TP
+D 11
+.B numeric_expr1 << numeric_expr2, numeric_expr1 >> numeric_expr2,
+\fINumeric_expr1\fP is bit shifted left (or right) by \fInumeric_expr2\fP
+bits.
+E 11
+I 11
+.B <expr1> < <expr2>, <expr1> > <expr2>, <expr1> <= <expr2>, <expr1> >= <expr2>
+Less than, greater than, less than or equal to,
+greater than or equal to.  Both numeric and string values, with
+automatic conversion as above.
+E 11
+.TP
+D 11
+.B numeric_expr1 + numeric_expr2, numeric_expr1 - numeric_expr2
+Addition, subtraction.
+E 11
+I 11
+.B <expr1> << <expr2>, <expr1> >> <expr2>
+If both operands are numbers, \fI<expr1>\fP is bit
+shifted left (or right) by \fI<expr2>\fP bits.  If \fI<expr1>\fP is
+a string, then its first (or last) \fI<expr2>\fP characters are
+returns (if \fI<expr2>\fP is also a string, then its length is used
+in place of its value).
+E 11
+.TP
+D 11
+.B numeric_expr1 * numeric_expr2, numeric_expr1 / numeric_expr2, numeric_expr1 % numeric_expr2
+Multiplication, division, modulo.
+E 11
+I 11
+.B <expr1> + <expr2>, <expr1> - <expr2>
+Addition and subtraction on numbers.  For ``+'', if one
+argument is a string, then the other is converted to a string,
+and the result is the concatenation of the two strings.
+E 11
+.TP
+D 11
+.B - numeric_expr, + numeric_expr, ~ numeric_expr, ! boolean_expr
+Unary minus, unary plus, bitwise complement, logical complement.
+.PP
+E 8
+D 3
+A long command consists of a command name followed by zero
+or more arguments, separated by spaces or tabs.  They can
+be read in from files and executed (see the \fIsource\fP
+command below), or entered interactively with the \fB``:''\fP
+command.
+E 3
+I 3
+The long commands:
+E 11
+I 11
+.B <expr1> * <expr2>, <expr1> / <expr2>, <expr1> % <expr2>
+Multiplication, division, modulo.  Numbers only.
+E 11
+E 3
+.TP
+D 11
+.B escape C
+Set the escape character to \fIC\fP.
+E 11
+I 11
+.B -<expr>, ~<expr>, !<expr>, $<expr>, $?<expr>
+The first three are unary minus, bitwise complement and logical complement
+on numbers only.  The operator, ``$'', takes \fI<expr>\fP and returns
+the value of the variable of that name.  If \fI<expr>\fP is numeric
+with value \fIn\fP and it appears within an alias macro (see below),
+then it refers to the nth argument of the alias invocation.  ``$?''
+tests for the existence of the variable \fI<expr>\fP, and returns 1
+if it exists or 0 otherwise.
+E 11
+.TP
+D 11
+.B terse [off]
+Turn on (or off) terse mode.  In terse mode, the command window
+stays hidden even in command mode, and errors are reported by
+sounding the terminal's bell.
+E 11
+I 11
+.B <expr>(<arglist>)
+Function call.  \fI<Expr>\fP must be a string that is the unique
+prefix of the name of a builtin \fIwindow\fP function
+or the full name of a user defined alias macro.  In the case of a builtin
+function, \fI<arglist>\fP can be in one of two forms:
+.br
+	<expr1>, <expr2>, . . .
+.br
+	argname1 = <expr1>, argname2 = <expr2>, . . .
+.br
+The two forms can in fact be intermixed, but the result is
+unpredictable.  Most arguments can be omitted; default values will
+be supplied for them.  The \fIargnames\fP can be unique prefixes
+of the the argument names.  The commas separating
+arguments are used only to disambiguate, and can usually be omitted.
+.IP
+Only the first argument form is valid for user defined aliases.  Aliases
+are defined using the \fIalias\fP builtin function (see below).  Arguments
+are accessed via a variant of the variable mechanism (see ``$'' operator
+above).
+.IP
+Most functions return value, but some are used for side effect
+only and so must be used as statements.  When a function or an alias is used
+as a statement, the parenthesis surrounding
+the argument list may be omitted.  Aliases return no value.
+.SH "BUILTIN FUNCTIONS"
+The arguments are listed by name in their natural
+order.  Optional arguments are in square brackets (``[ ]'').  Arguments
+that have no names are in angle brackets (``<>'').
+E 11
+.TP
+D 7
+.B window row col nrow ncol
+E 7
+I 7
+D 11
+.B window row col nrow ncol [nline]
+E 7
+Open a window with upper left corner at \fIrow\fP, \fIcol\fP
+D 7
+and size \fInrow\fP, \fIncol\fP.
+E 7
+I 7
+and size \fInrow\fP, \fIncol\fP.  If \fInline\fP is specified,
+then that many lines is allocated for the text buffer.  Otherwise,
+the default buffer size is used.  Using a \fB``*''\fP in place of
+\fIrow\fP, \fIcol\fP, \fInrow\fP, or \fIncol\fP gives, respectively,
+the up, left, down, or right extremes of the screen.
+E 11
+I 11
+.B alias([<string>], [<string-list>])
+If no argument is given, all currently defined alias macros are
+listed.  Otherwise, \fI<string>\fP is defined as an alias,
+with expansion \fI<string-list>\fP.  The previous definition of
+\fI<string>\fP, if any, is returned.  Default for \fI<string-list>\fP
+is no change.
+E 11
+.TP
+D 11
+.B buffer nline
+E 11
+I 11
+.B close(<window-list>)
+Close the windows specified in \fI<window-list>\fP.  If \fI<window-list>\fP
+is the word \fIall\fP, than all windows are closed.  No value is returned.
+.TP
+.B cursormodes([modes])
+Set the window cursor to \fImodes\fP.  \fIModes\fP is the bitwise
+or of the mode bits defined as the variables \fIm_ul\fP (underline),
+\fIm_rev\fP (reverse video), \fIm_blk\fP (blinking),
+and \fIm_grp\fP (graphics, terminal dependent).  Return
+value is the previous modes.  Default is no change.
+For example, cursor($m_rev|$m_blk) sets the window cursors to blinking
+reverse video.
+.TP
+.B echo([window], [<string-list>])
+Write the list of strings, \fI<string-list>\fP, to \fIwindow\fP, separated
+by spaces and terminated with a new line.  The strings are only
+D 17
+displayed in the window, the process in the window are not
+E 17
+I 17
+displayed in the window, the processes in the window are not
+E 17
+involved (see \fIwrite\fP below).  No value is returned.  Default
+is the current window.
+.TP
+.B escape([escapec])
+Set the escape character to \fIescape-char\fP.  Returns the old
+escape character as a one character string.  Default is no
+change.  \fPEscapec\fP can be a string of a single character, or
+in the form \fI^X\fP, meaning control-\fIX\fP.
+.TP
+.B foreground([window], [flag])
+Move \fIwindow\fP in or out of foreground.  \fIFlag\fP
+can be one of \fIon\fP, \fIoff\fP,
+\fIyes\fP, \fIno\fP, \fItrue\fP, or \fIfalse\fP, with obvious
+meanings, or it can be a numeric expression, in which case
+a non-zero value is true.  Returns the old foreground flag
+as a number.  Default for \fIwindow\fP is the current window,
+default for \fIflag\fP is no change.
+.TP
+.B label([window], [label])
+Set the label of \fIwindow\fP to \fIlabel\fP.  Returns the old
+label as a string.  Default for \fIwindow\fP is the current
+window, default for \fIlabel\fP is no change.  To turn
+off a label, set it to an empty string ("").
+.TP
+.B list()
+No arguments.  List the identifiers and labels of all windows.  No
+value is returned.
+.TP
+.B nline([nline])
+E 11
+Set the default buffer size to \fInline\fP.  Initially, it is
+D 11
+48 lines.  Using a very large buffer can slow the program down
+E 11
+I 11
+48 lines.  Returns the old default buffer size.  Default is
+no change.  Using a very large buffer can slow the program down
+E 11
+considerably.
+E 7
+.TP
+D 11
+.B label [1-9] string
+D 6
+Label the window \fI[1-9]\fP with \fIstring\fP.  This is in addition
+E 6
+I 6
+Label window \fI[1-9]\fP with \fIstring\fP.  This is in addition
+E 6
+D 3
+to the numeric label which is always displayed.
+E 3
+I 3
+to the numeric label that is always displayed.
+E 11
+I 11
+.B select([window])
+Make \fIwindow\fP the current window.  The previous current window
+is returned.  Default is no change.
+E 11
+E 3
+.TP
+D 11
+.B %[1-9]
+Make window \fI[1-9]\fP the current window.
+E 11
+I 11
+.B shell([<string-list>])
+Set the default window shell program to \fI<string-list>\fP.  Returns
+the first string in the old shell setting.  Default is no change.  Initially,
+the default shell is taken from the environment variable \fISHELL\fP.
+E 11
+.TP
+I 6
+D 11
+.B write [1-9] string
+Write \fIstring\fP to window \fI[1-9]\fP.
+E 11
+I 11
+.B source(filename)
+Read and execute the long commands in \fIfilename\fP.  Returns
+-1 if the file cannot be read, 0 otherwise.
+E 11
+.TP
+D 11
+.B close [1-9] ...
+Close window \fI[1-9]\fP.  More than one window can be specified.
+If no window is given, then all windows are closed.
+E 11
+I 11
+.B terse([flag])
+Set terse mode to \fIflag\fP.  In terse mode, the command window
+stays hidden even in command mode, and errors are reported by
+sounding the terminal's bell.  \fIFlag\fP can take on the same
+values as in \fIforeground\fP above.  Returns the old terse flag.
+Default is no change.
+E 11
+.TP
+E 6
+D 11
+.B source file
+D 3
+Execute the commands in \fIfile\fP.  Recursive
+E 3
+I 3
+Read and execute the long commands in \fIfile\fP.  Recursive
+E 3
+\fIsource\fP is not allowed.
+E 11
+I 11
+.B unalias(alias)
+Undefine \fIalias\fP.  Returns -1 if \fIalias\fP does not exist,
+0 otherwise.
+.TP
+.B unset(variable)
+Undefine \fIvariable\fP.  Returns -1 if \fIvariable\fP does not exist,
+0 otherwise.
+.TP
+.B variables()
+No arguments.  List all variables.  No value is returned.
+.TP
+.B window([row], [column], [nrow], [ncol], [nline], [frame],
+.B [pty], [mapnl], [shell])
+.br
+Open a window with upper left corner at \fIrow\fP, \fIcolumn\fP
+and size \fInrow\fP, \fIncol\fP.  If \fInline\fP is specified,
+then that many lines are allocated for the text buffer.  Otherwise,
+the default buffer size is used.  Default values for
+\fIrow\fP, \fIcolumn\fP, \fInrow\fP, and \fIncol\fP are, respectively,
+the upper, left-most, lower, or right-most extremes of the
+screen.  \fIFrame\fP, \fIpty\fP, and \fImapnl\fP are flag values
+interpreted in the same way as the argument to \fIforeground\fP (see above);
+they mean, respectively, put a frame around this window (default true),
+allocate pseudo-terminal for this window rather than socketpair (default
+true), and map new line characters in this window to carriage return
+and line feed (default true if socketpair is used, false otherwise).
+\fIShell\fP is a list of strings that will be used as the shell
+program to place in the window (default is the program specified
+by \fIshell\fP, see below).  The created window's identifier
+is returned as a number.
+.TP
+.B write([window], [<string-list>])
+Send the list of strings, \fI<string-list>\fP, to \fIwindow\fP, separated
+by spaces but not terminated with a new line.  The strings are actually
+given to the window as input.  No value is returned.  Default
+is the current window.
+.SH "PREDEFINED VARIABLES"
+These variables are for information only.  Redefining them does
+not affect the internal operation of \fIwindow\fP.
+.TP
+.B baud
+The baud rate as a number between 50 and 38400.
+.TP
+.B modes
+The display modes (reverse video, underline, blinking, graphics)
+supported by the physical terminal.  The value of \fImodes\fP is
+the bitwise or of some of the one bit values, \fIm_blk\fP, \fIm_grp\fP,
+\fIm_rev\fP, and \fIm_ul\fP (see below).  These values are useful
+in setting the window cursors' modes (see \fIcursormodes\fP above).
+.TP
+.B m_blk
+The blinking mode bit.
+.TP
+.B m_grp
+The graphics mode bit (not very useful).
+.TP
+.B m_rev
+The reverse video mode bit.
+.TP
+.B m_ul
+The underline mode bit.
+.TP
+.B ncol
+The number of columns on the physical screen.
+.TP
+.B nrow
+The number of rows on the physical screen.
+.TP
+.B term
+The terminal type.  The standard name, found in the second name
+field of the terminal's \fITERMCAP\fP entry, is used.
+E 11
+D 6
+.PP
+When \fIwindow\fP starts up, the file \fI.windowrc\fP in the
+user's home directory is checked.  If it exists, then the
+D 3
+commands contained in it are executed.  All long commands
+are legal.  If \fI.windowrc\fP does not exist, then two
+E 3
+I 3
+commands contained in it are executed (using \fIsource\fP).
+If \fI.windowrc\fP does not exist, then two
+E 3
+equal sized windows are created by default.
+E 6
+E 2
+.SH FILES
+.ta 15
+D 2
+~/.windowcf	startup configuration file.
+E 2
+I 2
+~/.windowrc	startup command file.
+.br
+E 2
+D 11
+/dev/ptyp?	pseudo-terminal devices.
+E 11
+I 11
+/dev/[pt]ty[pq]?	pseudo-terminal devices.
+E 11
+D 3
+.SH SEE ALSO
+E 3
+.SH DIAGNOSTICS
+Should be self explanatory.
+.SH BUGS
+D 8
+When all pseudo-terminal devices are used, the \fB``w''\fP
+D 2
+command will fail mysteriously.
+E 2
+I 2
+command fails mysteriously.
+E 2
+.PP
+E 8
+D 11
+When a window is scrolled or the cursor moved, output from
+the process in the window will be displayed at the new cursor
+position.  This is consistent with real terminals but
+not always desirable.
+E 11
+E 1

@@ -4,7 +4,7 @@
  * specifies the terms and conditions for redistribution.
  */
 
-/* "@(#)hpboot.c	7.2 (Berkeley) 8/28/86" */
+/* "@(#)hpboot.c	7.3 (Berkeley) 2/28/04" */
 #include <sys/disklabel.h>
 
 
@@ -62,8 +62,8 @@ start:
 	extzv	$13,$2,r1,r4		/* get MBA number from R1 */
 	insv	r4,$24,$8,r10		/* set MBA number */
 	insv	r3,$16,$8,r10		/* drive number */
-	extzv	$12,$4,r5,r4		/* get partition from r5 */
-	bicw2	$0xf000,r5		/* remove from r5 */
+	extzv	$28,$4,r5,r4		/* get partition from r5 */
+	bicl2	$0xf0000000,r5		/* remove from r5 */
 	insv	r4,$8,$4,r10		/* set partition */
 	movl	r5,r11
 	movl	r1,r9			/* save adaptor address */

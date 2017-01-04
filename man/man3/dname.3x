@@ -1,0 +1,444 @@
+.\"	@(#)dname.3x	1.5 (IFCTF) 2011/12/28
+.\"
+.TH DNAME 3X "December 28, 2011" MSDNS "MSDNS Internals Manual"
+.SH NAME
+struct dname \- representation of Internet domain names
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/types.h>
+#include <msdns/dname.h>
+.PP
+.ft B
+struct dname {
+	int dn_nlabels;
+	int dn_stringlen;
+	u_char *dn_labels[128];
+	u_char dn_buf[256];
+};
+.PP
+.ft B
+dn_spaceneeded(dn)
+struct dname *dn;
+.PP
+.ft B
+dname_compare(dn1, dn2)
+struct dname *dn1, *dn2;
+.PP
+.ft B
+dname_copy(src, dest)
+struct dname *src;
+u_char *dest;
+.PP
+.ft B
+dname_copy_discontig(src, dest)
+struct dname *src;
+u_char *dest;
+.PP
+.ft B
+dname_emit_bstring(dn, strbuf)
+struct dname *dn;
+u_char *strbuf;
+.PP
+.ft B
+dname_is_under(dn1, dn2)
+struct dname *dn1, *dn2;
+.PP
+.ft B
+parse_ascii_dname(asc, dn)
+char *asc;
+struct dname *dn;
+.PP
+.ft B
+#include <stdio.h>
+.PP
+.ft B
+print_dname(dn, stream)
+struct dname *dn;
+FILE *stream;
+.PP
+.ft B
+read_dname_from_file(dn, stream)
+struct dname *dn;
+FILE *stream;
+.fi
+.SH BACKGROUND
+For the purpose of DNS protocol messages, RFC\ 1035 section 3.1 defines a
+domain name as a concatenated binary string of labels, each label consisting
+of a length octet immediately followed by 1 to 63 octets of label body;
+each label body octet is allowed to be equal to any of the possible 256
+binary octet values.
+The binary string of labels is terminated by a zero octet in the position
+where a label length octet would be expected, meaning a special zero-length
+label which indicates the root of the domain name tree.
+.ft I
+Note that even though every valid domain name ends with a zero octet, merely
+searching for a zero octet is \fBnot\fP an acceptable way to find the end
+of a domain name in a DNS protocol message or any other context using
+the canonical binary representation: zero octets are perfectly legal in
+label bodies.
+.PP
+The total length of a domain name in the canonical binary form is limited to
+255 octets, but RFC\ 1035 is unclear as to whether or not this limit includes
+the final zero octet.
+Following the principle of ``be liberal in what you accept'', the MSDNS
+data structure which holds domain names (described in the following
+section) has been sized to allow a domain name to be up to 256 octets
+long including the final zero octet, and this is the limit enforced by all
+functions which parse domain names from external sources into this structure.
+.ft I
+Note that this limit applies only to the canonical binary form of
+domain names.
+There is no standards-defined limit on the length of a domain name in
+ASCII text representation except for the implied requirement that it needs to
+correspond to a legal domain name in the binary string form.
+.PP
+The standard does not explicitly state a limit on the number of labels
+in a domain name, but this limit can be derived from the specified maximum
+length of a total domain name.
+Whether it includes the final zero octet or not, the limit of 255 octets
+implies the maximum of 127 non-null labels, or 128 labels total including
+the final null label for the root.
+.SH "DATA STRUCTURE"
+The MSDNS data structure for storing domain names has been designed to:
+.IP "1." .5i
+Store domain names in the canonical binary string form,
+allowing efficient output into DNS protocol messages and eliminating
+unnecessary conversions between binary and text or other forms;
+.IP "2." .5i
+Store the label count explicitly, such that it can be accessed
+without having to reparse the binary string to count the labels;
+.IP "3." .5i
+Store a pointer to each label, such that these pointers together with
+the label count can be used to scan a domain name label by label
+from right to left.
+Such right-to-left processing is needed any time a domain name
+is sought in a domain name tree structure, which is a very frequent
+operation in a domain name server.
+Because natural parsing of a concatenated string of variable-size labels
+can only proceed from left to right, efficient right-to-left processing
+requires saving an array of pointers to labels.
+.PP
+The implemented solution is a variable-length structure along with some C
+tricks that allow it to be accessed as if it were a normal struct.
+Structure fields have the following meaning:
+.HP .5i
+.B dn_nlabels
+.br
+Number of labels in the domain name \fInot\fP counting the final null label.
+.HP .5i
+.B dn_stringlen
+.br
+Total length of the canonical binary string which is either directly
+contained in or indirectly represented by the structure (see below),
+\fIincluding\fP the final zero octet.
+.HP .5i
+.B dn_labels
+array of pointers
+.br
+Functions taking
+.B struct dname
+as input must access the binary string and/or its labels only through the
+.B dn_labels
+pointers and in no other way.
+If \fIdn\fP is a pointer to
+.BR "struct dname" ,
+then
+.I dn\->dn_labels[0]
+points to the length octet of the leftmost label, whereas
+.I dn\->dn_labels[dn\->dn_nlabels]
+points to the final zero octet (the zero length of the terminating root label).
+Array indices outside of this range must not be used as the corresponding
+array elements may not exist when the dname has been compacted
+as described below.
+.IP \& .5i
+If the dname is known to be contiguous (see below), then
+.B dn_labels[0]
+and
+.B dn_stringlen
+may be used to access the complete binary string.
+.HP .5i
+.B dn_buf
+octet buffer
+.br
+Functions taking
+.B struct dname
+as input must not access this struct member at all.
+It does not exist as such in the compacted dname representation,
+and is present in the struct definition only to be used by functions
+which create dname objects by parsing from ASCII form or by reading
+from a file as explained below.
+.PP
+.B struct dname
+objects are normally created by functions which parse incoming domain names
+from various external data sources, which may be either local or remote.
+All external data sources are treated as untrusted, hence all such parsing
+functions must perform stringent checks.
+.PP
+A dname object normally begins its life in a
+.B struct dname
+allocated in the stack frame of some function, where
+it is a full struct with all of its members.
+A parsing function is called with a pointer to this full structure-sized
+buffer and asked to fill it in.
+The strategy then depends on the data source from which the domain name
+is to be parsed.
+If the domain name is being parsed from ASCII form or read from a file,
+the canonical binary string is read into or formed in the
+.B dn_buf
+member of the structure, and the
+.B dn_labels
+pointers are set to point to labels stored in that buffer.
+A dname object created in this manner will always be contiguous.
+.PP
+However, if a dname object is created by parsing from a DNS protocol message
+that has already been received into memory, or from some other in-memory
+structure that stores domain name labels in their canonical binary form
+(label length octet followed by label body octets), then it is more
+efficient to simply fill in the
+.B dn_labels
+array of pointers, pointing to the actual labels stored elsewhere,
+thus avoiding string copying operations.
+A dname object created in this manner may be contiguous or discontiguous
+depending on where and how the actual labels are stored.
+Parsing from a DNS protocol message produces a contiguous dname if the
+domain name being extracted was sent without compression, otherwise
+it may be discontiguous.
+.PP
+Each function that takes dname objects as input must be documented
+whether or not input dnames are required to be contiguous;
+each function that fills a blank
+.B struct dname
+must be documented whether or not the produced dname may be discontiguous.
+Furthermore, there is a convention that the
+.B dn_stringlen
+member is always expected to be valid, even for discontiguous dnames.
+Functions which take dname objects as input ``have the right'' to make
+use of this value whenever it is convenient.
+This requirement is not expected to be burdensome on the domain name
+reading or parsing functions which fill dname structures: these functions
+are required to perform stringent checks as their input may be coming from
+a malicious source, and that includes enforcing the maximum total domain name
+length to prevent any possibility of buffer overflows anywhere down the line.
+Maintaining
+.B dn_stringlen
+for all dname objects, contiguous or discontiguous,
+is an easy way to implement the maximum total length check.
+.PP
+A full
+.B struct dname
+can represent any domain name that is legal under RFC\ 1035,
+but it isn't very efficient.
+On a typical 32-bit machine the structure as declared to the C compiler
+will normally occupy 776 bytes, or even worse on a machine
+with 64-bit pointers.
+However, most common domain names can be stored using significantly less
+memory.
+The solution is to store dname objects in a compacted form.
+.PP
+Once the number of labels
+.RB ( dn_nlabels )
+and the total binary string length
+.RB ( dn_stringlen )
+are known,
+a dname can be compacted by truncating the
+.B dn_labels
+array to just the required size and storing the binary string octets
+immediately after the last pointer which points to the terminating
+null label.
+The
+.I dn_spaceneeded
+macro computes (using
+.B dn_nlabels
+and
+.BR dn_stringlen )
+and returns the number of bytes needed to store a dname in the compacted form.
+The normal usage is to use this macro as part of chunk size calculation
+for
+.IR malloc (3),
+then use
+.I dname_copy
+or
+.I dname_copy_discontig
+to store the dname object in the dynamically-allocated chunk
+in the compacted form.
+.SH FUNCTIONS
+.I Dname_compare
+compares two domain names for equality and returns 1 if they are
+equal, 0 otherwise.
+Domain names are compared in a case-insensitive manner
+as required by RFC\ 1035.
+Dname arguments may be either contiguous or discontiguous.
+.PP
+.I Dname_copy
+and
+.I dname_copy_discontig
+copy a dname object, storing the new copy in the compacted form.
+The source dname must be contiguous for
+.I dname_copy
+and may be either contiguous or discontiguous for
+.IR dname_copy_discontig ;
+the two functions are otherwise identical.
+(If the source dname is known to be contiguous,
+.I dname_copy
+is more efficient.)
+The second argument must point to a memory buffer of size indicated
+by the
+.I dn_spaceneeded
+macro for the source dname.
+The new compacted copy is always contiguous.
+.PP
+.I Dname_emit_bstring
+takes a potentially discontiguous dname and emits the full domain name
+(binary label string) represented thereby in contiguous uncompressed form
+into a byte buffer provided by the caller.
+The number of bytes written into the buffer is equal to the full string
+length of the source dname (which will be recorded in
+.B dn_stringlen
+in a correctly-formed
+.BR "struct dname" ),
+256 bytes maximum in the general case.
+.PP
+.I Dname_is_under
+returns 1 if the first argument is equal to or a subdomain of the
+second argument, 0 otherwise.
+Label comparisons are case-insensitive as with
+.IR dname_compare .
+Dname arguments may be either contiguous or discontiguous.
+.PP
+.I Parse_ascii_dname
+takes a domain name in the standard ASCII text form specified
+in RFC\ 1035, parses it, enforces RFC\ 1035 limits on the length of every
+label and of the total domain name, converts it into the binary string form
+and stores it in a
+.BR "struct dname" .
+This function supports all backslash quoting forms allowed by RFC\ 1035,
+but is not quite suitable for parsing RFC\ 1035 master files because
+it doesn't provide any way to specify an origin.
+All ASCII domain names given to this function are treated as absolute
+even when they don't end in a dot.
+This function is used quite liberally in the
+.IR msdns (8)
+core daemon to grok domain names appearing in class definition files,
+\%NS-anchor definition files and various control socket commands.
+The second argument must point to a full
+.B struct dname
+such that
+.I parse_ascii_dname
+can write up to 256 octets into the
+.B dn_buf
+buffer and up to 128 label pointers into the
+.B dn_labels
+array.
+The function returns 0 on success or \-1 if the ASCII domain name
+argument violates some RFC\ 1035 rule.
+The resulting dname object is always contiguous.
+.PP
+.I Print_dname
+emits a dname in printable ASCII form to a
+.IR stdio (3)
+stream.
+The dname to be printed can contain any binary octets, yet the ASCII output
+is guaranteed to be safe by using RFC\ 1035 backslash decimal escapes
+for all octets that aren't safe printable ASCII characters, as well as
+more readable backslash-character escapes for those characters that are
+printable ASCII, but may have special meaning in an RFC\ 1035 master file
+or some other reasonable context.
+The output of this function is guaranteed to be valid in an RFC\ 1035
+master file, producing the original domain name when parsed correctly,
+and always ends with a dot to indicate an absolute domain name.
+No white space or any other filler is emitted before or after the domain name,
+hence the terminating dot is the last character printed.
+The dname argument may be either contiguous or discontiguous.
+.PP
+.I Read_dname_from_file
+reads a domain name in uncompressed binary string form from a
+.IR binzone (5)
+file via a
+.IR stdio (3)
+stream and stores it in a
+.BR "struct dname" .
+Compression pointers and non-RFC1035 label types are disallowed,
+and the limit of 256 bytes maximum including the terminating null is enforced.
+The dname argument must point to a full
+.B struct dname
+such that
+.I read_dname_from_file
+can write up to 256 octets into the
+.B dn_buf
+buffer and up to 128 label pointers into the
+.B dn_labels
+array.
+The function returns 0 on success, \-1 on an
+.SM
+.B EOF
+encountered upfront, \-2 on an
+.SM
+.B EOF
+encountered in the middle of the domain name,
+\-3 if the total length limit was exceeded,
+\-4 if high bits are set in a label length octet.
+The resulting dname object is always contiguous.
+.SH "SEE ALSO"
+dnamelabels(3x), libmsdns(3x), RFC 1035
+.SH BUGS
+While MSDNS is being liberal in what it accepts by allowing a binary string
+domain name to be up to 256 octets long in total including the final zero
+octet,
+the principle of maximum interoperability also says ``be conservative in what
+you send'', and one could argue that MSDNS violates this rule because
+once such a domain name has been accepted on input, it will get sent back
+out at some point.
+Other implementations may have set the limit one octet lower
+based on an alternate interpretation of the ambiguous standard.
+However, a domain name server never generates any domain names of its own,
+it merely regurgitates domain names originating from a variety of sources,
+some under the control of the local administrator, others completely
+external.
+External sources have to be treated as potentially malicious, but that
+merely means ensuring that no possible incoming packet or combination of
+packets can ever cause the server to crash, overflow a buffer, corrupt
+internal data structures or the like.
+If we do send out a domain name which others consider to be over the legal
+limit, the worst thing that can happen is some RFC purist shaking a finger
+at us, and our defense would be that we aren't the origin of that domain
+name, we've merely passed it along.
+.PP
+While most places in MSDNS avoid the inefficiency of a full
+.B struct dname
+by storing compacted copies with
+.I dname_copy
+or
+.I dname_copy_discontig
+in dynamically-allocated right-sized chunks,
+such that a full
+.B struct dname
+persists only for a single iteration of the great
+.IR select (2)
+loop, living in the stack frame of the responsible function,
+there are some places where full-sized structures have to be used
+in longer-lived contexts.
+The main instance is the query state structure, which has to statically
+allocate room for enough maximum-length dnames to handle the longest
+.B CNAME
+chain supported by the compile-time configuration.
+Increasing the maximum supported
+.B CNAME
+chain length by one currently adds 784 bytes to the size of the structure
+that has to be allocated for every single query.
+.B CNAME
+chains are evil.
+.PP
+Even in the stack-allocated contexts, the
+.B dn_buf
+member of
+.B struct dname
+is known for certain to be unnecessary wasted storage when the domain name
+is being extracted from a DNS protocol message or from other MSDNS internal
+data structures such that the
+.B dn_labels
+array is filled with pointers to somewhere else.
+.PP
+On the bright side, it is believed with a very high level of confidence
+that all logic documented in this manual page is free from the kind of bugs
+that could open an exploitable security vulnerability.

@@ -1,0 +1,133 @@
+.PS 3i
+.ps 8
+box invis wid .5i ht .3i "System" at 0,0
+box invis wid .2i ht .3i "User" at 2i, 3.5i
+box invis ht .3i "Builder" at 4i,0
+
+line -> from 1st box.t - .05i, 0 to 2nd box.sw - 0.05i, 0
+box invis "user" "learning" with .se at last line.c
+
+line <- from 1st box.t + .05i, 0 to 2nd box.sw + 0.05i, 0
+box invis " personalized" " uses" with .nw at last line.c
+
+line -> from 2nd box.se + .05i, 0 to 3rd box.t + .05i,0
+box invis "middle-out" "design" with .sw at last line.c
+
+line <- from 2nd box.se - .05i, 0 to 3rd box.t - .05i,0
+box invis "facilitates" "implementation" with .ne at last line.c
+
+line -> from 1st box.e + 0,0.05i to 3rd box.w + 0,0.05i \
+	"pressure for evolution" above
+
+line <- from 1st box.e - 0,0.05i to 3rd box.w - 0,0.05i \
+	"evolution of system function" below
+.ps
+.PE
+.PS
+box invis "System" ht .25i wid .4i
+move up .5i right .5i
+box invis "User" ht .25i wid .4i
+arc cw -> from top of 1st box to left of last box
+arc cw -> from bottom of last box to east of 1st box
+move to bottom of last box down .25i left .2i
+right; line right .25i
+.PE
+.PS
+circlerad = .1i
+movewid = .4i
+circle invis "S"; move; circle invis "  U"
+arc cw -> from top of 1st circle to top of 2nd circle
+arc cw -> from bottom of 2nd circle to bottom of 1st circle
+move to last circle.e + .6i,0
+circle invis "U"; move; circle invis "  B"; A:;
+arc cw -> from top of 2nd last circle to top of last circle
+arc cw -> from bottom of last circle to bottom of 2nd last circle
+move to last circle.e + .6i,0
+circle invis "S"; move; circle invis "  B"
+arc cw -> from top of 2nd last circle to top of last circle
+arc cw -> from bottom of last circle to bottom of 2nd last circle
+.PE
+.PS
+circlerad = .1i
+movewid = .4i
+circle invis "S"; move; circle invis "  U"
+arc cw -> from top of 1st circle to top of 2nd circle
+arc cw -> from bottom of 2nd circle to bottom of 1st circle
+.PE
+.PS
+circlerad = .1i
+movewid = .4i
+circle invis "U"; move; circle invis "  B"
+arc cw -> from top of 1st circle to top of 2nd circle
+arc cw -> from bottom of 2nd circle to bottom of 1st circle
+.PE
+.PS
+circlerad = .1i
+movewid = .4i
+circle invis "S"; move; circle invis "  B"
+arc cw -> from top of 1st circle to top of 2nd circle
+arc cw -> from bottom of 2nd circle to bottom of 1st circle
+.PE
+.PS
+circlerad = .1i
+movewid = .4i
+circle invis "U"; move; circle invis "  S"
+arc cw -> from top of 1st circle to top of 2nd circle
+arc cw -> from bottom of 2nd circle to bottom of 1st circle
+.PE
+.PS 3.5i
+.ps 8
+arcrad = 4i
+box invis wid .45i ht .3i "System" at 0,0
+box invis wid .4i ht .2i "User" at 2i, 3.5i
+box invis wid .45i ht .3i "Builder" at 4i,0
+box invis ht .4i "Task" "Representation" at 2i, 2i
+
+arc cw -> from 1st box.t - .05i, 0 to 2nd box.sw - 0.05i, 0
+arc cw <- from 1st box.t + .05i, 0 to 2nd box.sw + 0.05i, 0
+arc cw -> from 2nd box.se + .05i, 0 to 3rd box.t + .05i,0
+arc cw <- from 2nd box.se - .05i, 0 to 3rd box.t - .05i,0
+arc  -> from 1st box.e + 0,0.05i to 3rd box.w + 0,0.05i
+arc  <- from 1st box.e - 0,0.05i to 3rd box.w - 0,0.05i
+
+line <- from 2nd box.b to 4th box.t
+box invis "Descriptive map of" "user processes" at last line.c
+arrow from 4th box.sw to 1st box.ne
+box invis "design of" "DSS functions" "commands" with .nw at last arrow.c
+
+arrow from 4th box.se to 3rd box.nw
+box invis "Prescriptive map " "of task performance" with .ne at last arrow.c
+.ps
+.PE
+.PS 4i
+.ps 8
+arcrad = 4i
+box invis wid .5i ht .3i "System" at 0,0
+box invis wid .4i ht .25i "User" at 2i, 3.5i
+box invis ht .3i "Builder" at 4i,0
+box invis "Task" "Representation" at 2i, 2i
+box invis ht .4i "Organization's" "Technology (T)" at -1i, -1i
+arrow dashed from last box.t - .1i,0 to 1st box.b - .1i,0
+arrow dashed from 1st box.b + .1i,0 to last box.t + .1i, 0
+
+box invis ht .7i "Organizational" "Procedures and" "Systems (O)" at 2i, 4.5i
+arrow dashed from last box.b - .1i,0 to 2nd box.t - .1i, 0
+arrow <- dashed from last box.b + .1i,0 to 2nd box.t + .1i, 0
+
+box invis ht .75i "Organization" "Charter and" "Location" at 5i, -1i
+arrow dashed from last box.t - .1i,0 to 3rd box.b - .1i,0
+arrow dashed <- from last box.t + .1i,0 to 3rd box.b + .1i,0
+
+arc cw -> from 1st box.t - .05i, 0 to 2nd box.sw - 0.05i, 0
+arc cw <- from 1st box.t + .05i, 0 to 2nd box.sw + 0.05i, 0
+arc cw -> from 2nd box.se + .05i, 0 to 3rd box.t + .05i,0
+arc cw <- from 2nd box.se - .05i, 0 to 3rd box.t - .05i,0
+arc  -> from 1st box.e + 0,0.05i to 3rd box.w + 0,0.05i
+arc  <- from 1st box.e - 0,0.05i to 3rd box.w - 0,0.05i
+
+line from 2nd box.b to 4th box.t
+arrow from 4th box.sw to 1st box.ne
+
+arrow from 4th box.se to 3rd box.nw
+.ps
+.PE

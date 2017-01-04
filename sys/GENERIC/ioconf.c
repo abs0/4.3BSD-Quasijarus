@@ -150,10 +150,6 @@ struct uba_ctlr ubminit[] = {
 
 struct uba_device ubdinit[] = {
 	/* driver,  unit, ctlr,  ubanum, slave,   intr,    addr,    dk, flags*/
-	{ &kdbdriver,   0,     0,    0,     0,        0, C 00     ,  1,  0x0 },
-	{ &kdbdriver,   1,     0,    0,     1,        0, C 00     ,  1,  0x0 },
-	{ &kdbdriver,   2,     0,    0,     2,        0, C 00     ,  1,  0x0 },
-	{ &kdbdriver,   3,     0,    0,     3,        0, C 00     ,  1,  0x0 },
 	{ &hkdriver,   0,     0,  '?',     0,        0, C 00     ,  1,  0x0 },
 	{ &hkdriver,   1,     0,  '?',     1,        0, C 00     ,  1,  0x0 },
 	{ &hkdriver,   2,     0,  '?',     2,        0, C 00     ,  1,  0x0 },
@@ -199,5 +195,20 @@ struct uba_device ubdinit[] = {
 	{ &ildriver,   0,    -1,  '?',    -1,   ilint0, C 0164000,  0,  0x0 },
 	{ &exdriver,   0,    -1,  '?',    -1,   exint0, C 0164344,  0,  0x0 },
 	{ &qedriver,   0,    -1,  '?',    -1,   qeint0, C 0174440,  0,  0x0 },
+	0
+};
+
+struct uba_ctlr pnexminit[] = {
+/*	 driver,	ctlr,	tie,	alive,	intr */
+	{ &kdbdriver,	0,	-1,	0,	kdbint0 },
+	0
+};
+
+struct uba_device pnexdinit[] = {
+	/* driver,  unit, ctlr,  tie, slave,   intr,    addr,    dk, flags*/
+	{ &kdbdriver,   0,     0,  -1,     0,        0, C 0x0,  1,  0x0 },
+	{ &kdbdriver,   1,     0,  -1,     1,        0, C 0x0,  1,  0x0 },
+	{ &kdbdriver,   2,     0,  -1,     2,        0, C 0x0,  1,  0x0 },
+	{ &kdbdriver,   3,     0,  -1,     3,        0, C 0x0,  1,  0x0 },
 	0
 };

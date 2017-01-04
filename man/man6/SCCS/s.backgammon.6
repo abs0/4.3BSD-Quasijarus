@@ -1,0 +1,268 @@
+h50742
+s 00010/00005/00179
+d D 6.4 88/07/09 11:35:14 bostic 6 5
+c install approved copyright notice
+e
+s 00008/00002/00176
+d D 6.3 88/02/26 16:35:25 bostic 5 4
+c add Berkeley specific copyright
+e
+s 00172/00005/00006
+d D 6.2 88/02/02 12:07:37 mckusick 4 3
+c update manual page to reflect the actual games being shipped
+e
+s 00001/00001/00010
+d D 6.1 85/05/20 17:10:05 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00010
+d D 5.1 85/05/20 17:09:55 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00011/00000/00000
+d D 4.1 85/05/20 17:09:45 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 4
+.\" Copyright (c) 1980 Regents of the University of California.
+D 5
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 5
+I 5
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 6
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 6
+I 6
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 6
+E 5
+.\"
+E 4
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BACKGAMMON 6 
+E 2
+I 2
+D 3
+.TH BACKGAMMON 6  "1 February 1983"
+E 3
+I 3
+.TH BACKGAMMON 6  "%Q%"
+E 3
+E 2
+D 4
+.AT 3
+E 4
+I 4
+.UC 5
+E 4
+.SH NAME
+D 4
+backgammon \- the game
+E 4
+I 4
+backgammon \- the game of backgammon
+E 4
+.SH SYNOPSIS
+D 4
+.B /usr/games/backgammon
+E 4
+I 4
+.B backgammon
+[ - ] [ n r w b pr pw pb t\c
+.I term
+s\c
+.I file
+]
+E 4
+.SH DESCRIPTION
+D 4
+This program does what you expect.
+It will ask whether you need instructions.
+E 4
+I 4
+This program lets you play backgammon against the computer
+or against a "friend".
+All commands only are one letter,
+so you don't need to type a carriage return,
+except at the end of a move.
+The program is mostly self documenting,
+so that a question mark (?) will usually get some help.
+If you answer `y' when the program asks if you want the rules,
+you will get text explaining the rules of the game,
+some hints on strategy,
+instruction on how to use the program,
+and a tutorial consisting of a practice game against the computer.
+A description of how to use the program can be
+obtained by answering `y' when it asks if you want instructions.
+.PP
+The possible arguments for backgammon
+(most are unnecessary but some are very convenient)
+consist of:
+.ne 11
+.PP
+.na
+.TP 8
+.B n
+don't ask for rules or instructions
+.TP 8
+.B r
+player is red (implies n)
+.TP 8
+.B w
+player is white (implies n)
+.TP 8
+.B b
+two players, red and white (implies n)
+.TP 8
+.B pr
+print the board before red's turn
+.TP 8
+.B pw
+print the board before white's turn
+.TP 8
+.B pb
+print the board before both player's turn
+.TP 8
+.B t\fiterm
+terminal is type
+.IR term ,
+uses /etc/termcap
+.TP 8
+.B s\fifile
+recover previously saved game from
+.IR file .
+(This can also be done by executing the saved file,
+i.e., typing its name in as a command)
+.ad
+.PP
+Arguments may be optionally preceded by a `-'.
+Several arguments may be concatenated together,
+but not after `s' or `t' arguments,
+since they can be followed by an arbitrary string.
+Any unrecognized arguments are ignored.
+An argument of a lone `-' gets a description of possible arguments.
+.PP
+If
+.IR term
+has capabilities for direct cursor movement (see
+.IR termcap (5))
+.IR backgammon
+``fixes'' the board after each move,
+so the board does not need to be reprinted,
+unless the screen suffers some horrendous malady.
+Also, any `p' option will be ignored.
+(The `t' option is not necessary unless the terminal type does not match
+the entry in the /etc/termcap data base.)
+.SH QUICK\ REFERENCE
+When the program prompts by typing only your color,
+type a space or carriage return to roll, or
+.ne 5
+.PP
+.na
+.TP 8
+.B d
+to double
+.TP 8
+.B p
+to print the board
+.TP 8
+.B q
+to quit
+.TP 8
+.B s
+to save the game for later
+.PP
+.i0
+.ad
+When the program prompts with 'Move:', type
+.ne 4
+.PP
+.na
+.TP 8
+.B p
+to print the board
+.TP 8
+.B q
+to quit
+.TP 8
+.B s
+to save the game
+.ad
+.i0
+.PP
+or a
+.IR move ,
+which is a sequence of
+.ne 4
+.PP
+.na
+.TP 8
+.B s-f
+move from
+.BR s
+to
+.BR f
+.TP 8
+.B s/r
+move one man on
+.BR s
+the roll
+.BR r
+.ad
+.PP
+separated by commas or spaces and ending with a newline.
+Available abbreviations are
+.ne 4
+.PP
+.na
+.TP 10
+.B s-f1-f2
+means
+.BR s-f1,f1-f2
+.TP 10
+.B s/r1r2
+means
+.BR s/r1,s/r2
+.ad
+.PP
+Use `b' for bar and `h' for home,
+or 0 or 25 as appropriate.
+.SH AUTHOR
+Alan Char
+.SH FILES
+.TP 25
+/usr/games/teachgammon
+\- rules and tutorial
+.br
+.TP 25
+/etc/termcap
+\- terminal capabilities
+.SH BUGS
+.PP
+The program's strategy needs much work.
+E 4
+E 1

@@ -1,0 +1,441 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/2004
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)bdprocset.ps	5.1 (Berkeley) 2012/07/21
+%%LanguageLevel: 1
+%%BeginResource: procset (troff procedures for .bd) 1.0 0
+$troff begin
+/saveMatrix matrix def
+/idMatrix matrix def
+/bd {	% <num> bd
+	dup /bdx exch def
+	0 dtransform ceiling /bdY exch def ceiling /bdX exch def
+	saveMatrix currentmatrix pop
+} bind def
+/Pbd {	% like P, but with bd applied
+	3 1 roll moveto idMatrix setmatrix currentpoint round exch round exch
+	2 copy moveto saveMatrix setmatrix bdx 0 4 index ashow
+	idMatrix setmatrix moveto bdX bdY rmoveto
+	saveMatrix setmatrix bdx 0 3 -1 roll ashow
+} bind def
+end
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/setstrokeadjust where {pop true setstrokeadjust} if
+/fontset [
+/TroffEmu-Times-Roman findfont
+/TroffEmu-Times-Italic findfont
+/TroffEmu-Times-Bold findfont
+/TroffEmu-Symbol findfont
+/TroffEmu-Special1 findfont
+/ZapfDingbats findfont
+/TroffEmu-Supplement findfont
+] def
+%%EndSetup
+%%Page: 30 1
+save $troff begin Sc
+0 10 SF
+4320 45504(USD:24\25530)P
+25234 45504(N)P
+0 8 SF
+25667 45504(ROFF)P
+0 10 SF
+26868 45504(/T)P
+0 8 SF
+27402 45504(ROFF)P
+0 10 SF
+28803 45504(User's)P
+30568 45504(Manual)P
+2 12 SF
+17220 42792(Table)P
+19220 42792(I)P
+15140 41112(Font)P
+16820 41112(Style)P
+18580 41112(Examples)P
+0 10 SF
+4320 38232(The)P
+5453 38232(following)P
+7987 38232(fonts)P
+9387 38232(are)P
+10319 38232(printed)P
+12219 38232(in)P
+12886 38232(12\255point,)P
+15270 38232(with)P
+16537 38232(a)P
+17003 38232(vertical)P
+19002 38232(spacing)P
+21034 38232(of)P
+21734 38232(14\255point,)P
+24118 38232(and)P
+25184 38232(with)P
+26451 38232(non\255alphanumeric)P
+31016 38232(char\255)P
+4320 37512(acters)P
+5918 37512(separated)P
+8382 37512(by)P
+9182 37512(\274)P
+9732 37512(em)P
+10665 37512(space)P
+12196 37512(\(all)P
+13196 37512(measurements)P
+16827 37512(on)P
+17627 37512(8.5)P
+3 10 SF
+18577 37512(\264)P
+0 10 SF
+19106 37512(11)P
+19906 37512(inch)P
+21139 37512(paper)P
+22671 37512(prior)P
+24038 37512(to)P
+24705 37512(photoreduction\).)P
+1 10 SF
+29088 37512(The)P
+30188 37512(present)P
+4320 36792(emulation)P
+6920 36792(of)P
+7587 36792(the)P
+8520 36792(historic)P
+1 9 SF
+10533 36792(TROFF)P
+1 10 SF
+12413 36792(character)P
+14944 36792(set)P
+15810 36792(displayed)P
+18309 36792(here)P
+19574 36792(has)P
+20607 36792(been)P
+21939 36792(produced)P
+24404 36792(by)P
+25170 36792(4.3BSD\255Quasijarus)P
+4320 36072(pstroff)P
+6087 36072(-T.)P
+0 12 SF
+4320 33072(Times)P
+6360 33072(Roman)P
+4320 31812(abcdefghijklmnopqrstuvwxyz)P
+4320 30972(ABCDEFGHIJKLMNOPQRSTUVWXYZ)P
+4320 30132(1234567890)P
+4320 29292(!)P
+4740 29292($)P
+5280 29292(%)P
+6060 29292(&)P
+6800 29292(\()P
+7220 29292(\))P
+7640 29292(`)P
+8060 29292(')P
+8480 29292(*)P
+9020 29292(+)P
+9606 29292(-)P
+10192 29292(.)P
+10552 29292(,)P
+10912 29292(/)P
+11292 29292(:)P
+11672 29292(;)P
+12052 29292(=)P
+12638 29292(?)P
+13138 29292([)P
+13558 29292(])P
+13978 29292(|)P
+4320 28452(\007)P
+4812 28452(\037)P
+5592 28452(\210)P
+6552 28452(\255)P
+7032 28452 12 0 1 L
+7632 28452(\274)P
+8412 28452(\275)P
+9192 28452(\276)P
+9972 28452(\212)P
+10612 28452(\213)P
+11252 28452(\034)P
+11894 28452(\035)P
+12703 28452(\036)P
+13511 28452(\260)P
+14039 28452(\200)P
+3 12 SF
+14639 28452(\242)P
+0 12 SF
+15057 28452(\242)P
+15657 28452(\256)P
+16444 28452(\251)P
+1 12 SF
+4320 26772(Times)P
+6280 26772(Italic)P
+4320 25512(abcdefghijklmnopqrstuvwxyz)P
+4320 24672(ABCDEFGHIJKLMNOPQRSTUVWXYZ)P
+4320 23832(1234567890)P
+4320 22992(!)P
+4740 22992($)P
+5280 22992(%)P
+6060 22992(&)P
+6800 22992(\()P
+7220 22992(\))P
+7640 22992(`)P
+8060 22992(')P
+8480 22992(*)P
+9020 22992(+)P
+9686 22992(-)P
+10352 22992(.)P
+10712 22992(,)P
+11072 22992(/)P
+11452 22992(:)P
+11872 22992(;)P
+12292 22992(=)P
+12958 22992(?)P
+13498 22992([)P
+13958 22992(])P
+14418 22992(|)P
+4320 22152(\007)P
+4812 22152(\037)P
+5592 22152(\210)P
+6552 22152(\255)P
+7032 22152 12 0 1 L
+7632 22152(\274)P
+8412 22152(\275)P
+9192 22152(\276)P
+9972 22152(\212)P
+10572 22152(\213)P
+11172 22152(\034)P
+11775 22152(\035)P
+12552 22152(\036)P
+13319 22152(\260)P
+13847 22152(\200)P
+3 12 SF
+14447 22152(\242)P
+1 12 SF
+14865 22152(\242)P
+15465 22152(\256)P
+16252 22152(\251)P
+2 12 SF
+4320 20472(Times)P
+6440 20472(Bold)P
+4320 19212(abcdefghijklmnopqrstuvwxyz)P
+4320 18372(ABCDEFGHIJKLMNOPQRSTUVWXYZ)P
+4320 17532(1234567890)P
+4320 16692(!)P
+4740 16692($)P
+5280 16692(%)P
+6180 16692(&)P
+6960 16692(\()P
+7380 16692(\))P
+7800 16692(`)P
+8220 16692(')P
+8640 16692(*)P
+9180 16692(+)P
+9770 16692(-)P
+10360 16692(.)P
+10720 16692(,)P
+11080 16692(/)P
+11460 16692(:)P
+11880 16692(;)P
+12300 16692(=)P
+12890 16692(?)P
+13430 16692([)P
+13850 16692(])P
+14270 16692(|)P
+4320 15852(\007)P
+4812 15852(\037)P
+5592 15852(\210)P
+6552 15852(\255)P
+7032 15852 12 0 1 L
+7632 15852(\274)P
+8412 15852(\275)P
+9192 15852(\276)P
+9972 15852(\212)P
+10612 15852(\213)P
+11252 15852(\034)P
+11918 15852(\035)P
+12767 15852(\036)P
+13616 15852(\260)P
+14144 15852(\200)P
+3 12 SF
+14744 15852(\242)P
+2 12 SF
+15162 15852(\242)P
+15762 15852(\256)P
+16540 15852(\251)P
+0 12 SF
+4320 14172(Special)P
+6680 14172(Mathematical)P
+10880 14172(Font)P
+4320 12912(")P
+4794 12912(\222)P
+5214 12912(\\)P
+5594 12912(^)P
+6112 12912 12 -100 1 L
+6652 12912(\221)P
+7072 12912(~)P
+7642 12912(/)P
+8022 12912(<)P
+8608 12912(>)P
+9194 12912({)P
+9720 12912(})P
+10246 12912(#)P
+10786 12912(@)P
+3 12 SF
+11629 12912(+)P
+12204 12912(-)P
+12779 12912(=)P
+13354 12912(*)P
+4320 12072(a)P
+4954 12072(b)P
+5529 12072(g)P
+6005 12072(d)P
+6541 12072(e)P
+7037 12072(z)P
+7573 12072(h)P
+8187 12072(q)P
+8742 12072(i)P
+9159 12072(k)P
+9734 12072(l)P
+10309 12072(m)P
+10904 12072(n)P
+11459 12072(x)P
+11994 12072(o)P
+12569 12072(p)P
+13144 12072(r)P
+13719 12072(s)P
+14333 12072(V)P
+14829 12072(t)P
+15325 12072(u)P
+15920 12072(f)P
+16475 12072(c)P
+17050 12072(y)P
+17724 12072(w)P
+4320 11232(G)P
+4934 11232(D)P
+5555 11232(Q)P
+6269 11232(L)P
+6943 11232(X)P
+7587 11232(P)P
+8320 11232(S)P
+8926 11232(\241)P
+9552 11232(F)P
+10281 11232(Y)P
+11033 11232(W)P
+4320 10392(\326)P
+4871 10392 12 900 1 L
+5411 10392(\263)P
+5986 10392(\243)P
+6561 10392(\272)P
+7136 10392(~)P
+4 12 SF
+7711 10392(=)P
+3 12 SF
+8286 10392(\271)P
+8861 10392(\256)P
+9752 10392(\254)P
+10643 10392(\255)P
+11257 10392(\257)P
+11871 10392(\264)P
+12446 10392(\270)P
+13021 10392(\261)P
+13596 10392(\310)P
+14329 10392(\307)P
+15062 10392(\314)P
+15755 10392(\311)P
+16448 10392(\315)P
+17141 10392(\312)P
+17834 10392(\245)P
+18527 10392(\266)P
+0 12 SF
+4320 9552(\247)P
+3 12 SF
+4860 9552(\321)P
+5553 9552(\330)P
+6246 9552(\362)P
+6623 9552(\265)P
+7316 9552(\306)P
+8089 9552(\316)P
+0 12 SF
+8782 9552(\201)P
+5 12 SF
+9322 9552(+)P
+6 12 SF
+10178 9552(L)P
+3 12 SF
+11034 9552(\360)P
+12034 9552(|)P
+6 12 SF
+12358 9552(C)P
+4 12 SF
+13078 9552(P)P
+13438 9552(Q)P
+13798 9552(R)P
+14158 9552(S)P
+14518 9552(T)P
+14878 9552(U)P
+15238 9552(V)P
+15598 9552(W)P
+15958 9552(X)P
+16318 9552(Y)P
+16678 9552(Z)P
+17038 9552 12 br
+end restore showpage
+%%Trailer
+%%Pages: 1
+%%EOF

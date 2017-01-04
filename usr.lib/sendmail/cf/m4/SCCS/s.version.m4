@@ -1,4 +1,38 @@
-h13442
+h19596
+s 00000/00000/00026
+d D 1.36 00/03/27 10:04:57 msokolov 36 35
+c The prophecy has come true. HOSTS.TXT is gone, everyone uses DNS, and there are
+c no more NIC-registered hosts to worry about. The old tcp mailer goes away and
+c tcpld becomes smtp. Also some minor nits.
+e
+s 00000/00000/00026
+d D 1.35 00/03/27 09:58:10 msokolov 35 34
+c bump it up to 1.35
+e
+s 00000/00000/00026
+d D 1.34 00/03/27 09:58:09 msokolov 34 33
+c bump it up to 1.35
+e
+s 00000/00000/00026
+d D 1.33 00/03/27 09:58:07 msokolov 33 32
+c bump it up to 1.35
+e
+s 00000/00000/00026
+d D 1.32 00/03/27 09:58:06 msokolov 32 31
+c bump it up to 1.35
+e
+s 00000/00000/00026
+d D 1.31 00/03/27 09:58:05 msokolov 31 30
+c bump it up to 1.35
+e
+s 00000/00000/00026
+d D 1.30 00/03/27 09:58:03 msokolov 30 29
+c bump it up to 1.35
+e
+s 00015/00006/00011
+d D 1.29 00/03/27 09:57:23 msokolov 29 28
+c deltas 1.29-1.35 have apparently been lost, reconstructing from g-file 1.35
+e
 s 00000/00000/00017
 d D 1.28 88/04/08 11:30:29 phil 28 27
 c Don't hide outgoing hosts unless we're talking to a host.arpa. 
@@ -124,15 +158,40 @@
 I 1
 divert(10)
 #
+D 29
 #  Sendmail
 #  Copyright (c) 1983  Eric P. Allman
 #  Berkeley, California
+E 29
+I 29
+# Copyright (c) 1983 Eric P. Allman
+# Copyright (c) 1988 The Regents of the University of California.
+# All rights reserved.
+E 29
 #
+D 29
 #  Copyright (c) 1983 Regents of the University of California.
 #  All rights reserved.  The Berkeley software License Agreement
 #  specifies the terms and conditions for redistribution.
+E 29
+I 29
+# Redistribution and use in source and binary forms are permitted
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 29
 #
 #	%W% (Berkeley) %G%
+I 29
+#
+E 29
 divert(0)
 ######################
 #   Version Number   #

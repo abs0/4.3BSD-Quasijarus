@@ -1,0 +1,144 @@
+h04729
+s 00016/00006/00085
+d D 6.2 86/05/20 16:39:51 karels 2 1
+c updates, trailers
+e
+s 00091/00000/00000
+d D 6.1 85/04/27 16:14:37 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH ARP 8C "%Q%"
+.UC 6
+.SH NAME
+arp \- address resolution display and control
+.SH SYNOPSIS
+.B arp
+.I hostname
+.br
+.B arp -a
+[
+.I vmunix
+] [
+.I kmem
+]
+.br
+.B arp -d
+.I hostname
+.br
+.B arp -s
+.I hostname ether_addr
+[
+.B temp
+] [
+.B pub
+I 2
+] [
+.B trail
+E 2
+]
+.br
+.B arp -f
+.I filename
+.SH DESCRIPTION
+The
+.I arp
+program displays and modifies the Internet-to-Ethernet address translation
+D 2
+tables used by the address resolution protocol (
+.IR arp (4p)).
+E 2
+I 2
+tables used by the address resolution protocol
+.RI ( arp (4p)).
+E 2
+.LP
+With no flags, the program displays the current ARP entry for
+.I hostname.
+I 2
+The host may be specified by name or by number,
+using Internet dot notation.
+E 2
+With the
+.B -a
+flag, the program displays all of the current ARP entries by reading the table
+from the file
+.I kmem
+(default /dev/kmem) based on the kernel file 
+.I vmunix 
+(default /vmunix).
+.LP
+With the
+.B -d
+flag, a super-user may delete an entry for the host called
+.I hostname.
+.LP
+The
+.B -s
+flag is given to create an ARP entry for the host called
+.I hostname
+with the Ethernet address 
+.I ether_addr.
+The Ethernet address is given as six hex bytes separated by colons.
+The entry will be permanent unless the word
+.B temp
+is given in the command. 
+If the word
+.B pub
+D 2
+is given, the entry will be "published", e.g., this system will
+respond to ARP requests for 
+E 2
+I 2
+is given, the entry will be "published"; i.e., this system will
+act as an ARP server,
+responding to requests for 
+E 2
+.I hostname
+D 2
+even though the hostname is not its own.
+E 2
+I 2
+even though the host address is not its own.
+The word
+.B trail
+indicates that trailer encapsulations may be sent to this host.
+E 2
+.LP
+The 
+.B -f
+flag causes the file
+.I filename
+to be read and multiple entries to be set in the ARP tables.  Entries
+in the file should be of the form
+.IP
+.I hostname ether_addr
+[
+.B temp
+] [
+.B pub
+I 2
+] [
+.B trail
+E 2
+]
+.LP
+with argument meanings as given above.
+.SH "SEE ALSO"
+D 2
+arp(4p), ifconfig(8c)
+E 2
+I 2
+inet(3N), arp(4P), ifconfig(8C)
+E 2
+E 1

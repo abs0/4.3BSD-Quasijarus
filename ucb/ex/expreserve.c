@@ -11,7 +11,7 @@ char *copyright =
 #endif not lint
 
 #ifndef lint
-static char *sccsid = "@(#)expreserve.c	7.13 (Berkeley) 1/22/86";
+static char *sccsid = "@(#)expreserve.c	7.14 (Berkeley) 4/13/03";
 #endif not lint
 
 #include <stdio.h>
@@ -30,7 +30,7 @@ static char *sccsid = "@(#)expreserve.c	7.13 (Berkeley) 1/22/86";
 #define HBLKS	1
 #endif
 
-char xstr[1];			/* make loader happy */
+u_char xstr[1];			/* make loader happy */
 
 /*
  * Expreserve - preserve a file in usrpath(preserve)
@@ -64,7 +64,7 @@ struct 	header {
 #else
 	int	Flines;
 #endif
-	char	Savedfile[FNSIZE];	/* The current file name */
+	u_char	Savedfile[FNSIZE];	/* The current file name */
 	short	Blocks[LBLKS];		/* Blocks where line pointers stashed */
 } H;
 
@@ -93,7 +93,7 @@ main(argc)
 	 * If only one argument, then preserve the standard input.
 	 */
 	if (argc == 1) {
-		if (copyout((char *) 0))
+		if (copyout((u_char *) 0))
 			exit(1);
 		exit(0);
 	}
@@ -137,22 +137,22 @@ main(argc)
 	exit(0);
 }
 
-char	pattern[] =	usrpath(preserve/Exaa`XXXXX);
+u_char	pattern[] =	usrpath(preserve/Exaa`XXXXX);
 
 /*
  * Copy file name into usrpath(preserve)/...
- * If name is (char *) 0, then do the standard input.
+ * If name is (u_char *) 0, then do the standard input.
  * We make some checks on the input to make sure it is
  * really an editor temporary, generate a name for the
  * file (this is the slowest thing since we must stat
  * to find a unique name), and finally copy the file.
  */
 copyout(name)
-	char *name;
+	u_char *name;
 {
 	int i;
 	static int reenter;
-	char buf[BUFSIZ];
+	u_char buf[BUFSIZ];
 
 	/*
 	 * The first time we put in the digits of our
@@ -181,7 +181,7 @@ copyout(name)
 	 * Get the header block.
 	 */
 	ignorl(lseek(0, 0l, 0));
-	if (read(0, (char *) &H, sizeof H) != sizeof H) {
+	if (read(0, (u_char *) &H, sizeof H) != sizeof H) {
 format:
 		if (name == 0)
 			fprintf(stderr, "Buffer format error\t");
@@ -222,7 +222,7 @@ format:
 	 */
 	if (H.Savedfile[0] == 0) {
 		strcpy(H.Savedfile, "LOST");
-		ignore(write(0, (char *) &H, sizeof H));
+		ignore(write(0, (u_char *) &H, sizeof H));
 		H.Savedfile[0] = 0;
 		lseek(0, 0l, 0);
 	}
@@ -273,7 +273,7 @@ format:
  * Blast the last 5 characters of cp to be the process number.
  */
 mkdigits(cp)
-	char *cp;
+	u_char *cp;
 {
 	register int i, j;
 
@@ -287,9 +287,9 @@ mkdigits(cp)
  * Mktemp gets weird names too quickly to be useful here.
  */
 mknext(cp)
-	char *cp;
+	u_char *cp;
 {
-	char *dcp;
+	u_char *dcp;
 	struct stat stb;
 
 	dcp = cp + strlen(cp) - 1;
@@ -316,20 +316,21 @@ whoops:
  */
 notify(uid, fname, flag, time)
 	int uid;
-	char *fname;
+	u_char *fname;
 	time_t	time;
 {
 	struct passwd *pp = getpwuid(uid);
 	register FILE *mf;
-	char	cmd[BUFSIZ];
-	char	hostname[128];
-	char	croak[128];
-	char	*timestamp, *ctime();
+	u_char	cmd[BUFSIZ];
+	u_char	hostname[128];
+	u_char	croak[128];
+	u_char	*timestamp;
+	char	*ctime();
 
 	if (pp == NULL)
 		return;
 	gethostname(hostname, sizeof(hostname));
-	timestamp = ctime(&time);
+	timestamp = (u_char *) ctime(&time);
 	timestamp[16] = 0;	/* blast from seconds on */
 	sprintf(cmd, "/bin/mail %s", pp->pw_name);
 	setuid(getuid());

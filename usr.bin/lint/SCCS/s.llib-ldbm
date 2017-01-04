@@ -1,0 +1,23 @@
+h36166
+s 00012/00000/00000
+d D 1.1 86/03/13 19:24:35 donn 1 0
+c date and time created 86/03/13 19:24:35 by donn
+e
+u
+U
+t
+T
+I 1
+/*	%W% (Berkeley) %G% */
+
+/* LINTLIBRARY */
+
+#include <dbm.h>
+
+int	dbminit(file) char *file; { return 0; }
+datum	fetch(key) datum key; { return key; }
+int	store(key, content) datum key, content; { return 0; }
+int	delete(key) datum key; { return 0; }
+datum	firstkey() { datum item; return item; }
+datum	nextkey(key) datum key; { return key; }
+E 1

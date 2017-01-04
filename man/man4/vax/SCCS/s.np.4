@@ -1,0 +1,157 @@
+h58132
+s 00003/00003/00092
+d D 6.3 86/05/21 15:50:07 anne 3 2
+c spelling corrections
+e
+s 00005/00008/00090
+d D 6.2 86/05/16 15:55:38 karels 2 1
+c updates
+e
+s 00098/00000/00000
+d D 6.1 86/02/17 17:28:02 sklower 1 0
+c Manual Pages for MICOM interlan NP100 unibus 10MB/s intelligent ethernet controller for downloading (np) and operation(ix)
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH NP 4 "%Q%"
+.UC 5
+.SH NAME
+np \- Interlan Np100 10 Mb/s Ethernet interface
+.SH SYNOPSIS
+.B "device np0 at uba0 csr 166000 vector npintr"
+.SH DESCRIPTION
+The
+.I NP
+D 2
+device provides access to an Interlan Np100 ethernet interface
+E 2
+I 2
+device provides access to an Interlan Np100 Ethernet interface
+E 2
+for control functions.
+.PP
+This interface is unusual in that it requires loading firmware
+D 2
+into the controller before it may be used as a network interface.
+E 2
+I 2
+into the controller before it may be used as a network link-level interface.
+E 2
+This is accomplished by opening a character special device,
+and writing data to it.
+It is also possible to do post-mortem debugging of firmware failures
+by reading the local memory of the device.
+.PP
+A program to load the image is provided in /usr/src/new/np100.
+The sequence of commands would be:
+.nf
+
+	# ./npload np.image [/dev/np00]
+	# sleep 10
+	# ifconfig ix0 ...
+.fi
+.PP
+D 2
+Multiple control process are allowed by opening separate
+E 2
+I 2
+Multiple control processes are allowed by opening separate
+E 2
+minor devices; secondary interfaces are specified by shifting
+the interface number by 4 bits.
+.PP
+The device also responds to commands passed through the driver
+by the following ioctls:
+.TP
+NPRESET
+.br
+D 2
+kills off all active network process.
+E 2
+I 2
+kills off all active network processes.
+E 2
+.TP
+NPSTART
+.br
+begins execution of the board at the specified address (usually 0x400).
+.TP
+NPNETBOOT
+.br
+downloads the image from a server on the network.
+[Contact MICOM-INTERLAN for details.]
+.SH DIAGNOSTICS
+\fBnp%d: Bad Maintenance command: %x!\fP.
+An invalid ioctl was passed to the np driver.
+.PP
+\fBnp%d: Panic NP100 bad buffer chain\fP.
+An error occurred in an read or write operation causing it to
+run out of buffers before it finished the operation.
+This indicates a kernel failure rather than a device failure.
+.PP
+\fBNP100 unit %d not found!\fP.
+D 3
+A failure occured during initialization, such that the unibus
+E 3
+I 3
+A failure occurred during initialization, such that the unibus
+E 3
+address expected for the board was found to be bad.
+Probably indicates hardware problems with the board, as do the following:
+\fB
+.nf
+
+NP100 Unit %d timed out!
+
+NP100 Unit %d Failed diagnostics!
+Status from CSR0: %x.\fP
+.fi
+.PP
+\fBPanic from NP100 unit %d!\\nPanic Message: %s\fP.
+D 3
+An occurance on the board was deemed serious enough
+E 3
+I 3
+An occurrence on the board was deemed serious enough
+E 3
+to have the vax print it out.  
+.PP
+\fBNP100 unit #%d available!\fP.
+D 3
+The board was succesfully loaded and started.
+E 3
+I 3
+The board was successfully loaded and started.
+E 3
+.PP
+\fBnp%d: Bad Req: %x.\fP.
+The board made a maintenance request to the vax that it did not
+understand.
+.PP
+\fBnp%d: No more room on Command Queue!\fP.
+The np driver allowed an internal resource to be exhausted.
+This should never happen.
+.PP
+There are 110 other diagnostic messages that can be enabled
+by setting bits in a debugging mask.
+Consult the driver for details.
+.SH SEE ALSO
+D 2
+intro(4N), inet(4F), arp(4P), ix(4).
+.SH BUGS
+There should be a direct path to an intelligent controller
+via a protocol family using the socket mechanism.
+E 2
+I 2
+intro(4N), inet(4F), arp(4P), ix(4)
+E 2
+E 1

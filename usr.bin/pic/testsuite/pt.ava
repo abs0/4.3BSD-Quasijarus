@@ -1,0 +1,20 @@
+.EQ
+delim $$
+.EN
+Pictures from the dragon book.
+.sp
+Page 96:
+.nf
+.sp
+.nf
+.PS
+w = 1.; h = .75;	# for the ellipse
+Center: circle rad 0.025;
+move left .375;		# left ellipse
+ellipse wid w ht h;
+move up .1; "$N sub 1$"; move down .1;
+move left .25; circle diam .2; "$i$";
+move to Center + .375,0;	# right ellipse
+move up .1; "$N sub 2$"; move down .1;
+move right .25; circle diam .2; circle diam .25; "$f$";
+.PE

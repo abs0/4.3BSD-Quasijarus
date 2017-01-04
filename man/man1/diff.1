@@ -2,9 +2,9 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)diff.1	6.4 (Berkeley) 5/19/86
+.\"	@(#)diff.1	6.5 (Berkeley) 7/10/03
 .\"
-.TH DIFF 1 "May 19, 1986"
+.TH DIFF 1 "July 10, 2003"
 .UC 4
 .SH NAME
 diff \- differential file and directory comparator
@@ -19,21 +19,21 @@ diff \- differential file and directory comparator
 ] [
 \fB\-cefhn\fR
 ] [
-.B \-biwt
+.B \-abiwt
 ] dir1 dir2
 .br
 .B diff
 [
 \fB\-cefhn
 ] [
-\fB\-biwt\fR
+\fB\-abiwt\fR
 ] file1 file2
 .br
 .B diff
 [
 .BI \-D string
 ] [
-.B \-biw
+.B \-abiw
 ]
 file1 file2
 .SH DESCRIPTION
@@ -140,7 +140,7 @@ then all the lines that are affected in the second file
 flagged by `>'.
 .PP
 Except for
-\fB\-b, -w, -i\fP or \fB-t\fP
+\fB\-a, \-b, \-w, \-i\fP or \fB\-t\fP
 which may be given with any of the others,
 the following options are mutually exclusive:
 .TP 9
@@ -236,6 +236,12 @@ while defining
 .I string
 will yield
 .I file2.
+.TP 9
+.B \-a
+disables the check for binary files.
+All files are treated as text and compared line by line.
+All 255 possible characters except newline are treated as regular characters
+making up the lines.
 .TP 9
 .B \-b
 causes trailing blanks (spaces and tabs) to be ignored, and other

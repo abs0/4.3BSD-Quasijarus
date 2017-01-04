@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)if_imp.c	7.8 (Berkeley) 6/29/88
+ *	@(#)if_imp.c	7.9 (Berkeley) 8/2/02
  */
 
 #include "imp.h"
@@ -50,6 +50,8 @@
 /* define IMPLEADERS here to get leader printing code */
 #include "if_imp.h"
 #include "if_imphost.h"
+
+#include "netmon.h"
 
 struct	imp_softc imp_softc[NIMP];
 #ifndef lint
@@ -135,6 +137,9 @@ impinit(unit)
 	if ((*sc->imp_cb.ic_init)(sc->imp_cb.ic_hwunit) == 0)
 		sc->imp_if.if_flags &= ~IFF_UP;
 	impintrq.ifq_maxlen = impqmaxlen;
+#if NNETMON > 0
+	netmon_ifevent(&sc->imp_if);
+#endif
 	splx(s);
 }
 
@@ -264,6 +269,9 @@ impinput(unit, m)
 			    (u_int)impmessage[type], when * IMPDOWN_WHENUNIT);
 		else
 			impmsg(sc, "going down %s", (u_int)impmessage[type]);
+#if NNETMON > 0
+		netmon_ifevent(ifp);
+#endif
 		if (sc->imp_state != IMPS_UP)
 			break;
 		if (type == IMPDOWN_GOING) {
@@ -302,6 +310,9 @@ impinput(unit, m)
 					(u_int)cp->dl_host,
 					ntohs(cp->dl_imp));
 				sin->sin_addr.s_addr = leader_addr.s_addr;
+#if NNETMON > 0
+				netmon_ifevent(ifp);
+#endif
 			}
 		}
 		break;
@@ -389,6 +400,9 @@ impinput(unit, m)
 				log(imppri, "IMP UP\n");
 #endif
 		}
+#if NNETMON > 0
+		netmon_ifevent(ifp);
+#endif
 		break;
 
 	default:
@@ -449,6 +463,9 @@ impdown(sc)
 #ifdef IMPINIT
 	else if (imptraceinit)
 		log(imppri, "impdown, state now %d (ignored)\n", sc->imp_state);
+#endif
+#if NNETMON > 0
+	netmon_ifevent(&sc->imp_if);
 #endif
 	splx(s);
 }

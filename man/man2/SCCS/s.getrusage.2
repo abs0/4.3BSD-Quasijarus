@@ -1,0 +1,344 @@
+h43587
+s 00003/00005/00152
+d D 6.6 87/04/03 15:52:25 bostic 8 7
+c bug report 4.1BSD/sys/14
+e
+s 00002/00002/00155
+d D 6.5 87/01/05 10:43:59 bostic 7 6
+c spelling fix, outblock to oublock
+e
+s 00011/00010/00146
+d D 6.4 86/05/13 16:38:23 karels 6 5
+c updates
+e
+s 00014/00000/00142
+d D 6.3 85/08/26 23:32:23 mckusick 5 4
+c update error messages (mostly from sun!guy)
+e
+s 00003/00003/00139
+d D 6.2 85/06/28 17:05:09 sechrest 4 3
+c Improved English
+e
+s 00001/00001/00141
+d D 6.1 85/05/09 18:02:25 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00126/00027/00016
+d D 5.1 85/05/09 18:02:00 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00043/00000/00000
+d D 4.1 85/05/09 18:01:22 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TIMES 2 
+E 2
+I 2
+D 3
+.TH GETRUSAGE 2 "18 July 1983"
+E 3
+I 3
+.TH GETRUSAGE 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+times \- get process times
+E 2
+I 2
+getrusage \- get information about resource utilization
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B "#include <sys/types.h>
+.B "#include <sys/times.h>
+E 2
+I 2
+.ft B
+#include <sys/time.h>
+#include <sys/resource.h>
+E 2
+.PP
+D 2
+.B times(buffer)
+.B struct tms *buffer;
+E 2
+I 2
+.ft B
+.ta \w'#define 'u +\w'RUSAGE_CHILDREN  'u +\w'-1        'u
+#define	RUSAGE_SELF	0	/* calling process */
+#define	RUSAGE_CHILDREN	-1	/* terminated child processes */
+.DT
+.PP
+.ft B
+getrusage(who, rusage)
+int who;
+struct rusage *rusage;
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+.I Times
+returns time-accounting information
+for the current process
+and for the terminated child processes
+of the current process.
+All times are in 1/HZ seconds, where HZ is either 50 or 60
+depending on your locality.
+E 2
+I 2
+.I Getrusage
+returns information describing the resources utilized by the current
+process, or all its terminated child processes.
+The
+.I who
+D 6
+parameter is one of RUSAGE_SELF and RUSAGE_CHILDREN.
+If
+E 6
+I 6
+parameter is one of RUSAGE_SELF or RUSAGE_CHILDREN.
+The buffer to which
+E 6
+.I rusage
+D 6
+is non-zero, the buffer it points to will be filled in with
+E 6
+I 6
+points will be filled in with
+E 6
+the following structure:
+E 2
+.PP
+D 2
+This is the structure returned by
+.IR times :
+.PP
+E 2
+.nf
+D 2
+.so /usr/include/sys/times.h
+.PP
+E 2
+I 2
+.RS
+.ta \w'struct  'u +\w'struct  'u +3u*\w'struct  'u
+struct	rusage {
+	struct timeval ru_utime;	/* user time used */
+	struct timeval ru_stime;	/* system time used */
+	int	ru_maxrss;
+D 6
+	int	ru_ixrss;	/* integral shared memory size */
+E 6
+I 6
+	int	ru_ixrss;	/* integral shared text memory size */
+E 6
+	int	ru_idrss;	/* integral unshared data size */
+	int	ru_isrss;	/* integral unshared stack size */
+	int	ru_minflt;	/* page reclaims */
+	int	ru_majflt;	/* page faults */
+	int	ru_nswap;	/* swaps */
+	int	ru_inblock;	/* block input operations */
+	int	ru_oublock;	/* block output operations */
+	int	ru_msgsnd;	/* messages sent */
+	int	ru_msgrcv;	/* messages received */
+	int	ru_nsignals;	/* signals received */
+	int	ru_nvcsw;	/* voluntary context switches */
+	int	ru_nivcsw;	/* involuntary context switches */
+};
+.RE
+.DT
+E 2
+.fi
+D 2
+The children times are the sum
+of the children's process times and
+their children's times.
+.SH "SEE ALSO"
+time(1), time(2), vtimes(2)
+.SH "ASSEMBLER (PDP-11)"
+(times = 43.)
+.br
+.B sys times; buffer
+E 2
+I 2
+.PP
+The fields are interpreted as follows:
+.TP 15
+ru_utime
+the total amount of time spent executing in user mode.
+.TP 15
+ru_stime
+the total amount of time spent in the system executing on behalf
+of the process(es).
+.TP 15
+ru_maxrss
+the maximum resident set size utilized (in kilobytes).
+.TP 15
+ru_ixrss
+an \*(lqintegral\*(rq value indicating the amount of memory used
+I 6
+by the text segment
+E 6
+D 4
+which was also shared among other processes.  This value is expressed
+E 4
+I 4
+that was also shared among other processes.  This value is expressed
+E 4
+D 8
+in units of kilobytes * seconds-of-execution and is calculated by
+summing the number of shared memory pages in use each time the internal
+system clock ticks and then averaging over 1 second intervals.
+E 8
+I 8
+in units of kilobytes * ticks-of-execution.
+E 8
+.TP 15
+ru_idrss
+an integral value of the amount of unshared memory residing in the
+data segment of a process (expressed in units of
+D 8
+kilobytes * seconds-of-execution).
+E 8
+I 8
+kilobytes * ticks-of-execution).
+E 8
+.TP 15
+ru_isrss
+an integral value of the amount of unshared memory residing in the
+stack segment of a process (expressed in units of
+D 8
+kilobytes * seconds-of-execution).
+E 8
+I 8
+kilobytes * ticks-of-execution).
+E 8
+.TP 15
+ru_minflt
+D 6
+the number of page faults serviced without any i/o activity; here
+i/o activity is avoided by \*(lqreclaiming\*(rq a page frame from
+E 6
+I 6
+the number of page faults serviced without any I/O activity; here
+I/O activity is avoided by \*(lqreclaiming\*(rq a page frame from
+E 6
+the list of pages awaiting reallocation.
+.TP 15
+ru_majflt
+D 4
+the number of page faults serviced which required i/o activity.
+E 4
+I 4
+D 6
+the number of page faults serviced that required i/o activity.
+E 6
+I 6
+the number of page faults serviced that required I/O activity.
+E 6
+E 4
+.TP 15
+ru_nswap
+the number of times a process was \*(lqswapped\*(rq out of main
+memory.
+.TP 15
+ru_inblock
+the number of times the file system had to perform input.
+.TP 15
+D 7
+ru_outblock
+E 7
+I 7
+ru_oublock
+E 7
+the number of times the file system had to perform output.
+.TP 15
+ru_msgsnd
+D 6
+the number of ipc messages sent.
+E 6
+I 6
+the number of IPC messages sent.
+E 6
+.TP 15
+ru_msgrcv
+D 6
+the number of ipc messages received.
+E 6
+I 6
+the number of IPC messages received.
+E 6
+.TP 15
+ru_nsignals
+the number of signals delivered.
+.TP 15
+ru_nvcsw
+the number of times a context switch resulted due to a process
+voluntarily giving up the processor before its time slice was
+completed (usually to await availability of a resource).
+.TP 15
+ru_nivcsw
+the number of times a context switch resulted due to a higher
+priority process becoming runnable or because the current process
+exceeded its time slice.
+.SH NOTES
+The numbers 
+.I ru_inblock
+and 
+D 7
+.I ru_outblock
+E 7
+I 7
+.I ru_oublock
+E 7
+account only for real
+D 6
+i/o; data supplied by the cacheing mechanism is charged only
+E 6
+I 6
+I/O; data supplied by the caching mechanism is charged only
+E 6
+to the first process to read or write the data.
+I 5
+.SH ERRORS
+The possible errors for
+.I getrusage
+are:
+.TP 15
+[EINVAL]
+The
+.I who
+parameter is not a valid value.
+.TP 15
+[EFAULT]
+The address specified by the
+.I rusage
+parameter is not in a valid part of the process address space.
+E 5
+.SH SEE ALSO
+gettimeofday(2), wait(2)
+.SH BUGS
+There is no way to obtain information about a child process
+D 4
+which has not yet terminated.
+E 4
+I 4
+that has not yet terminated.
+E 4
+E 2
+E 1

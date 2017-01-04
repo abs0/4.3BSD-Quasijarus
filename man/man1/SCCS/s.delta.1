@@ -1,0 +1,397 @@
+h61438
+s 00001/00001/00362
+d D 6.3 04/10/21 06:30:21 msokolov 3 2
+c use \- in NAME
+e
+s 00002/00002/00361
+d D 6.2 03/11/09 19:12:31 msokolov 2 1
+c help => sccshelp
+e
+s 00363/00000/00000
+d D 6.1 99/05/14 12:39:15 msokolov 1 0
+c date and time created 99/05/14 12:39:15 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.tr ~
+.tr $%
+.if t .tr #\fB\(em\fP
+.if n .tr #-
+.if n .ds D " -- 
+.if t .ds D _
+.tr @|
+.nr f 0
+.bd S B 3
+.de SP
+.if n .ul
+\%[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+\%[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de ZZ
+.hc ^
+\fB^...\fR
+.hc
+..
+.de AR
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\\fR
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de C1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\\$1
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fR[\fI\\$2\fR]
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fI\\$2\fR
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de FI
+.PP
+.TP 30
+\\$1
+\\$2
+.i0
+..
+.ds F)  \fB\s-1FILES\s0\fR
+.ds W)  \fB\s-1WARNINGS\s0\fR
+.ds X)  \fB\s-1EXAMPLES\s0\fR
+.ds T)  \fB\s-1TABLE\s0\fR
+.ds K)  \fB\s-1DATA KEYWORDS\s0\fR
+.ds D)  \fB\s-1DDDDD\s0\fR
+.ds M)  \fB\s-1MR\s0\fR
+.ds R)  \fB\s-1RELEASE NUMBER\s0\fR
+.ds S)  \fB\s-1SCCS\s0\fR
+.ds I)  \fB\s-1SID\s0\fR
+.de F1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1\fI\\$2\fR
+\\$3
+.nr f 1
+..
+.de F2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1[\fI\\$2\fR]
+\\$3
+.nr f 1
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.TH DELTA 1 "%Q%"
+.SH NAME
+D 3
+delta \(em make a delta (change) to an \s-1SCCS\s0 file
+E 3
+I 3
+delta \- make a delta (change) to an \s-1SCCS\s0 file
+E 3
+.SH SYNOPSIS
+.B delta
+.SP r SID ]
+.SF s
+.SF n
+.SP g list]
+.SP m \%[mrlist] ]
+.SP y \%[comment] ]
+.SF p
+file
+.ZZ
+.ad
+.SH DESCRIPTION
+.I Delta
+is used to permanently introduce into
+the named \*(S) file changes that were made to the file retrieved by
+.IR get\^ (1)
+(called the
+.I g-file,
+or generated file).
+.PP
+.I Delta
+makes a delta to each named \*(S) file.
+If a directory is named,
+.I delta
+behaves as though each file in the directory were
+specified as a named file,
+except that non-\*(S) files
+(last component of the pathname does not begin with \fBs.\fR)
+and unreadable files
+are silently ignored.
+If a name of \fB\(em\fR is given, the standard input is read
+(see \*(W));
+each line of the standard input is taken to be the name of an \*(S) file
+to be processed.
+.PP
+.I Delta
+may issue prompts on the standard output depending upon
+certain keyletters specified and flags
+(see
+.IR admin\^ (1))
+that may be
+present in the \*(S) file
+(see
+.B \(emm
+and
+.B \(emy
+keyletters below).
+.PP
+Keyletter arguments
+apply independently
+to each named file.
+.A2 r SID Uniquely
+identifies which delta is to be made to the \*(S) file.
+The use of this keyletter is necessary only if two or more
+outstanding
+.IR get\^ s
+for editing (\fIget\fP
+.B \(eme\c
+)
+on the same \*(S) file were done by the same person
+(login name).
+The \*(I) value specified with the
+.B \(emr
+keyletter can be either the \*(I) specified on the
+.I get
+command line or the \*(I) to be made as reported by the
+.I get
+command
+(see
+.IR get\^ ).
+A diagnostic results if the specified \*(I) is ambiguous, or,
+if necessary and omitted on the command line.
+.AR s Suppresses
+the issue, on the standard output, of the created delta's \*(I),
+as well as the number of lines inserted, deleted and unchanged in the
+\*(S) file.
+.AR n Specifies retention of the edited
+.I g-file
+(normally removed at completion of delta processing).
+.A2 g list Specifies
+a \fIlist\fR (see
+.IR get\^ (1)
+for the definition of <\fIlist\fR>)
+of deltas which are to be
+.I ignored
+when the file is accessed at the change level (\*(I))
+created by this delta.
+.A1 m mrlist If
+the \*(S) file has the
+.B v
+flag set
+(see
+.IR admin\^ (1))
+then a Modification Request (\*(M)) number \fImust\fR be
+supplied as the reason for creating the new delta.
+.C1 ~ If
+.B \(emm
+is not used and the standard input is a terminal, the prompt
+``\*(M)s?'' is issued on the standard output before the standard input
+is read; if the standard input is not a terminal, no prompt is issued.
+\fIThe\fB ``\fR\s-1MR\s0s\fB?''\fI prompt always precedes the \fB``\fRcomments\fB?''\fI prompt\fR
+(see
+.B \(emy
+keyletter).
+.PP
+.C1 ~ \*(M)s
+in a list are separated by blanks and/or tab characters.
+An unescaped new line character terminates the \*(M) list.
+.C1 ~ Note
+that if the
+.B v
+flag has a value
+(see
+.IR admin\^ (1)),
+it is taken to be the name of a program (or shell procedure) which will validate
+the correctness of the \*(M) numbers.
+If a non-zero exit status is returned from \*(M) number validation program,
+.I delta
+terminates
+(it is assumed that the \*(M) numbers were not all valid).
+.A1 y comment Arbitrary
+text
+used to describe the reason for making the delta.
+A null string is considered a valid \fIcomment\fR.
+.C1 ~ If
+.B \(emy
+is not specified and the standard input is a terminal, the prompt
+\fB``\fRcomments\fB?''\fR is issued on the standard output before the standard
+input is read; if the standard input is not a terminal, no
+prompt is issued.
+An unescaped new line character terminates the comment text.
+.AR p Causes
+.I delta
+to print (on the standard output) the \*(S) file
+differences before and after the delta is applied
+in a
+.IR diff\^ (1)
+format
+.RE
+.SH FILES
+All files of the form
+.I ?-file
+are explained in the
+\fISource Code Control System User's Guide\fP.
+The naming convention for these files is also described there.
+.RE
+.TP "\w`/usr/bin/bdiff\ \ \ `u"
+g-file
+Existed
+before the execution of
+.I delta;
+removed after completion of
+.I delta.
+.TP
+p-file
+Existed
+before the execution of
+.I delta;
+may exist after completion of
+.I delta.
+.TP
+q-file
+Created during the execution of
+.I delta;
+removed after completion of
+.I delta.
+.TP
+x-file
+Created during the execution of
+.I delta;
+renamed to \*(S) file after completion of
+.I delta.
+.TP
+z-file
+Created during the execution of
+.I delta;
+removed during the execution of
+.I delta.
+.TP
+d-file
+Created during the execution of
+.I delta;
+removed after completion of
+.I delta.
+.TP
+/usr/bin/bdiff
+Program to compute differences
+between the ``gotten'' file and the
+.I g-file.
+.ad
+.PP
+.SH WARNINGS
+No lines beginning with an \s-1SOH ASCII\s0 character (binary 001)
+can be placed in the \*(S) file unless it is escaped.
+The character has special meaning to \*(S)
+(see
+.I sccsfile\c
+(5)) and will cause an error.
+.PP
+A
+.I get
+of many \*(S) files,
+followed by a
+.I delta
+of those files, should be avoided when the
+.I get
+generates a large amount of data.
+Instead,
+multiple
+.I "get/delta"
+sequences should be used.
+.PP
+If the standard input
+(\fB\(em\fR)
+is specified on the
+.I delta
+command line,
+the
+.B \(emm
+(if necessary)
+and
+.B \(emy
+keyletters
+.I must
+also be present.
+Omission of these keyletters causes an error to occur.
+.SH "SEE ALSO"
+.na
+get(1),
+admin(1),
+prs(1),
+D 2
+help(1),
+E 2
+I 2
+sccshelp(1),
+E 2
+sccsfile(5),
+bdiff(1)
+.br
+.ad
+.I "Source Code Control System User's Guide"
+by L. E. Bonanni and C. A. Salemi.
+.SH DIAGNOSTICS
+Use
+D 2
+.IR help\^ (1)
+E 2
+I 2
+.IR sccshelp\^ (1)
+E 2
+for explanations.
+.tr ~~
+.tr $$
+.tr @@
+E 1

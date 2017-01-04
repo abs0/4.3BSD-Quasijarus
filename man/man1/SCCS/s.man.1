@@ -1,0 +1,395 @@
+h59684
+s 00003/00001/00131
+d D 6.9 04/10/20 23:00:04 msokolov 11 10
+c originates from 3BSD, restore credit to William Joy
+e
+s 00000/00000/00132
+d D 6.8 04/10/20 21:31:19 msokolov 10 9
+x 9 8
+c old man is back!
+e
+s 00004/00001/00065
+d D 6.7 88/04/19 12:17:12 bostic 9 8
+c new option, -a, displays all manual pages
+e
+s 00034/00100/00032
+d D 6.6 87/06/30 20:37:18 bostic 8 7
+c new manual structure; remove apropos(1), whatis(1), document 
+c various environmental variables.
+e
+s 00001/00001/00131
+d D 6.5 86/05/09 08:30:45 anne 7 6
+c grammar
+e
+s 00000/00011/00132
+d D 6.4 86/05/05 15:48:35 mckusick 6 5
+c -t is gone (sorry Jay)
+e
+s 00005/00001/00138
+d D 6.3 86/03/21 00:26:04 lepreau 5 4
+c doc MANPATH
+e
+s 00011/00000/00128
+d D 6.2 85/08/07 18:39:05 mckusick 4 3
+c allow systems to maintain only cat? version (from ks@purdue)
+e
+s 00045/00023/00083
+d D 6.1 85/04/29 14:35:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00009/00099
+d D 5.1 85/04/29 14:35:41 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00108/00000/00000
+d D 4.1 85/04/29 14:35:31 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MAN 1
+E 2
+I 2
+D 3
+.TH MAN 1 "18 January 1983"
+E 3
+I 3
+.TH MAN 1 "%Q%"
+E 3
+E 2
+D 11
+.UC 4
+E 11
+I 11
+.UC 3
+E 11
+.SH NAME
+D 8
+man \- find manual information by keywords; print out the manual
+E 8
+I 8
+man \- print out the manual
+E 8
+.SH SYNOPSIS
+.br
+.B man
+D 3
+.B \-k
+keyword ...
+.br
+.B man
+.B \-f
+file ...
+.br
+.B man
+E 3
+[
+.B \-
+] [
+I 9
+.B -a
+] [
+E 9
+D 6
+.B \-t
+] [
+E 6
+I 3
+.B \-M
+.I path
+] [
+E 3
+section
+]
+title ...
+I 3
+D 8
+.br
+.B man
+.B \-k
+keyword ...
+.br
+.B man
+.B \-f
+file ...
+E 8
+E 3
+.SH DESCRIPTION
+D 8
+.I Man
+is a program which gives information from the programmers manual.
+D 2
+It can be asked form one line descriptions of commands specified by
+E 2
+I 2
+It can be asked for one line descriptions of commands specified by
+E 2
+name, or for all commands whose description contains any of a set of
+keywords.  It can also provide on-line access to the sections of the
+printed manual.
+E 8
+I 8
+\fIMan\fP is the program which provides on-line access to the UNIX manual.
+If a \fIsection\fP specifier is given, \fIman\fP looks in that section of
+the manual for the given \fItitle\fP(s).  \fISection\fP is either an Arabic
+section number (``3'' for example), or one of the words ``local'', ``new,''
+or ``old''.  (The abbreviations ``l'', ``n'', and ``o'' are also allowed.)
+If \fIsection\fP is omitted, \fIman\fP searches all sections of the manual,
+giving preference to commands over library subroutines, and displays the
+D 9
+first manual page it finds, if any.
+E 9
+I 9
+first manual page it finds, if any.  If the \fI-a\fP option is supplied,
+\fIman\fP displays all applicable manual pages.
+E 9
+E 8
+.PP
+D 8
+When given the option
+.B \-k
+and a set of keywords,
+.I man
+prints out a one line synopsis of each manual sections whose
+D 3
+listing in the table of contents contains that keyword.
+E 3
+I 3
+listing in the table of contents contains one of those keywords.
+E 8
+I 8
+Normally \fIman\fP checks in standard locations (/usr/man and /usr/local/man)
+for manual information.  This can be changed by supplying a search path (a
+la the Bourne shell) with the \fB-M\fP flag.  The search path is a colon
+(``:'') separated list of directories in which \fIman\fP expects to find
+the standard manual subdirectories.  This search path can also be set with
+the environmental variable \fIMANPATH\fP.
+E 8
+E 3
+.PP
+D 8
+When given the option
+.B \-f
+and a list of file names, \fIman\fR attempts to locate manual
+sections related to those files, printing out the table of contents
+lines for those sections.
+E 8
+I 8
+Since some manual pages are intended for use only on certain machines,
+\fIman\fP only searches those directories applicable to the current
+machine.  \fIMan\fP's determination of the current machine type can
+be overridden by setting the environmental variable \fIMACHINE\fP.
+E 8
+.PP
+D 8
+When neither
+.B \-k
+nor
+.B \-f
+is specified,
+.I man
+formats a specified set of manual pages.
+If a section specifier is given
+.I man
+looks in the that section of the manual for the given
+.I titles.
+.I Section
+D 2
+is an arabic section number, i.e. 3,
+which may be followed by a single letter classifier, i.e. 1g
+indicating a graphics program in section 1.
+If
+E 2
+I 2
+D 3
+is an Arabic section number (3 for instance).  The number may followed by
+a single letter classifier (1g for instance)
+indicating a graphics program in section 1.  If
+E 3
+I 3
+is either
+an Arabic section number (3 for instance), or one of the words ``new,''
+``local,'' ``old,'' or ``public.''
+D 7
+A section number may followed by
+E 7
+I 7
+A section number may be followed by
+E 7
+a single letter classifier (for instance, 1g,
+indicating a graphics program in section 1).  If
+E 3
+E 2
+.I section
+is omitted,
+.I man
+searches all sections of the manual, giving preference to commands
+over subroutines in system libraries, and printing the first section
+it finds, if any.
+E 8
+I 8
+If the standard output is a teletype, and the \fB-\fP flag is not provided,
+\fIman\fP uses \fImore\fP(1), or the pager provided by the environmental
+variable \fIPAGER\fP, to display the manual page.
+E 8
+.PP
+D 8
+If the standard output is a teletype, or if the flag
+.B \-
+D 2
+is given, then
+E 2
+I 2
+is given,
+E 2
+.I man
+pipes its output through
+D 3
+.IR cat (1)
+E 3
+I 3
+.IR more (1)
+E 3
+with the option
+.B \-s
+D 3
+to crush out useless blank lines,
+.IR ul (1)
+D 2
+to create proper underlines for different terminals,
+and through
+E 2
+I 2
+to create proper underlines for different terminals, and through
+E 2
+.IR more (1)
+to stop after each page on the screen.
+E 3
+I 3
+to crush out useless blank lines
+and to stop after each page on the screen.
+E 3
+Hit a space to continue,
+a control-D to scroll 11 more lines when the output stops.
+D 6
+.PP
+The
+.B \-t
+flag causes
+.I man
+to arrange for the specified section to be
+.I troff'ed
+to a suitable raster output device; see
+.IR vtroff (1).
+E 6
+I 3
+.PP
+Normally
+.I man
+checks in a standard location for manual
+information (/usr/man).  This can be changed by supplying a search
+path (a la the shell) with the
+.B \-M
+flag.  The search path is a colon (`:') separated list
+of directories in which manual subdirectories may be found;
+D 5
+e.g. ``/usr/local:/usr/man''.  If a search path is supplied
+E 5
+I 5
+e.g. ``/usr/local:/usr/man''.  
+.hw MANPATH
+If the environment variable `MANPATH' is set,
+its value is used for the default path.
+If a search path is supplied
+E 5
+with the 
+.B \-k
+or
+.B \-f
+options, it must be specified first.
+I 4
+.PP
+.I Man
+will look for the manual page in either of two forms, the nroff source or
+preformatted pages.
+If either version is available, the manual page will be displayed.
+If the preformatted version is available, and it has a more recent modify
+time than the nroff source,  it will be promptly displayed.
+Otherwise, the manual page will be formatted with nroff and displayed.
+If the user has permission, the formatted manual page will be deposited
+in the proper place, so that later invocations of man will not need to
+format the page again.
+E 8
+I 8
+The FORTRAN version of section 3 of the manual may be specified by supplying
+\fIman\fP with the \fIsection\fP ``3f''.  Also, a specific section of the
+local manual may be specified by appending a number to the \fIsection\fP,
+i.e. ``l5'' would indicate section 5 of the local manual.
+E 8
+E 4
+E 3
+.SH FILES
+D 3
+/usr/man/man?/*
+.br
+/usr/man/cat?/*
+E 3
+I 3
+.nf
+D 8
+.ta \w'/usr/man/man?/*   'u
+E 8
+I 8
+.ta \w'/usr/local/man/man?/*   'u
+E 8
+/usr/man	standard manual area
+D 8
+/usr/man/man?/*	directories containing source for manuals
+/usr/man/cat?/*	directories containing preformatted pages
+/usr/man/whatis	keyword database
+E 8
+I 8
+/usr/man/cat?/*	directories containing standard manual pages
+/usr/local/man/cat?/*	directories containing local manual pages
+/usr/src/man	directories containing unformatted manual pages
+E 8
+.fi
+E 3
+.SH SEE\ ALSO
+D 3
+more(1), ul(1), whereis(1), catman(8)
+E 3
+I 3
+D 8
+apropos(1), more(1), whereis(1), catman(8)
+E 8
+I 8
+apropos(1), more(1), whatis(1), whereis(1)
+E 8
+E 3
+.SH BUGS
+D 8
+The manual is supposed to be reproducible either on the phototypesetter
+or on a typewriter.
+However, on a typewriter some information is necessarily lost.
+I 11
+.SH AUTHOR
+William Joy
+E 11
+E 8
+I 8
+The manual is supposed to be reproducible either on the
+phototypesetter or on a typewriter, however, on a typewriter,
+some information is necessarily lost.
+E 8
+E 1

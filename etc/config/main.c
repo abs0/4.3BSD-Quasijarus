@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)main.c	5.9 (Berkeley) 6/18/88";
+static char sccsid[] = "@(#)main.c	5.10 (Berkeley) 3/2/04";
 #endif /* not lint */
 
 #include <sys/types.h>
@@ -89,6 +89,7 @@ usage:		fputs("usage: config [-p] sysname\n", stderr);
 	switch (machine) {
 
 	case MACHINE_VAX:
+		vax_flatten_nexi();
 		vax_ioconf();		/* Print ioconf.c */
 		ubglue();		/* Create ubglue.s */
 		break;

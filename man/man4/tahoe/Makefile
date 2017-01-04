@@ -14,28 +14,20 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.2 (Berkeley) 7/9/88
+#	@(#)Makefile	5.3 (Berkeley) 10/20/04
 #
-MDIR=	/usr/man/cat4/tahoe
-SRCS=	ace.4 autoconf.4 cons.4 cy.4 dr.4 enp.4 ik.4 intro.4 lp.4 mem.4 \
-	mpcc.4 mpcctab.4 mtio.4 vd.4 vx.4
-OBJS=	ace.0 autoconf.0 cons.0 cy.0 dr.0 enp.0 ik.0 intro.0 lp.0 mem.0 \
-	mpcc.0 mpcctab.0 mtio.0 vd.0 vx.0
-LINKS=	kmem.0
+MDIR=	/usr/man/man4
 
-.SUFFIXES: .4 .0
+all:
 
-.4.0:
-	${DESTDIR}/usr/man/manroff $*.4 > $*.0
-
-all: ${OBJS}
+psman: FRC
+	for i in *.4; do echo $$i; pstroff -man $$i > $$i.ps; done
 
 clean: FRC
-	rm -f ${OBJS}
+	rm -f *.ps
 
 install: FRC
-	cd ${DESTDIR}${MDIR}; rm -f *.0
-	install -c -o bin -g bin -m 444 ${OBJS} ${DESTDIR}${MDIR}
-	ln ${DESTDIR}${MDIR}/mem.0 ${DESTDIR}${MDIR}/kmem.0
+	install -c -o bin -g bin -m 444 *.4 ${DESTDIR}${MDIR}
+	install -c -o bin -g bin -m 444 links/*.4 ${DESTDIR}${MDIR}
 
 FRC:

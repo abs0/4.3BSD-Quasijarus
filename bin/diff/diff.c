@@ -1,4 +1,4 @@
-static	char sccsid[] = "@(#)diff.c 4.6 4/3/86";
+static	char sccsid[] = "@(#)diff.c 4.7 7/10/03";
 
 #include "diff.h"
 /*
@@ -60,6 +60,9 @@ main(argc, argv)
 		case 'n':
 			opt = D_NREVERSE;
 			continue;
+		case 'a':
+			aflag = 1;
+			continue;
 		case 'b':
 			bflag = 1;
 			continue;
@@ -106,6 +109,9 @@ main(argc, argv)
 			continue;
 		case 'l':
 			lflag++;
+			continue;
+		case 'J':
+			Jflag++;
 			continue;
 		default:
 			fprintf(stderr, "diff: -%s: unknown option\n",

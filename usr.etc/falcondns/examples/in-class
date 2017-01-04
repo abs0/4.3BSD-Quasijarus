@@ -1,0 +1,50 @@
+# This file, called a class definition file, tells FalconDNS
+# what services it should provide for the standard IN class.
+# You can list zones for which your name server should be
+# authoritative, and/or enable full-service resolver (FSR)
+# functionality by providing a pointer to the root name servers.
+
+# List your zones like this:
+zone	example.com		example-com.zone.bin
+zone	example.org		example-org.zone.bin
+#
+# The UNIX filename listed after the domain name for each zone
+# is the name of the BINARY zone file in the format invented for
+# FalconDNS, *not* the standard ASCII text zone file.  These binary
+# zone files are created by zonecomp which compiles them from
+# standard RFC 1035 master files, or by zonexfer which pulls a zone
+# from another name server via AXFR.  They can be disassembled
+# back into text form with zonedump.
+#
+# The convention adopted by the author is to name RFC 1035 master files
+# ending in .zone; the zonecomp utility adds the .bin suffix to its
+# binary output by default, producing the example zone file names
+# seen above.
+
+# fake zones needed for the localhost kludge
+zone	localhost.			localhost.zone.bin
+zone	127.IN-ADDR.ARPA		localrev.zone.bin
+
+# Location of the standard root name servers:
+NS-anchor . root.anchor
+
+# The NS-anchor mechanism isn't limited to just the root of the domain
+# tree: you can install an NS-anchor at any domain node, telling your
+# FalconDNS to go to the specified set of servers for all domain names
+# falling under that node, accepting both answers and referrals from
+# those servers.  Thus you can anchor your resolving servers to your
+# authoritative ones, or to those of your friends, ensuring that your own
+# local names or those of your friends will continue to resolve even
+# if your external Internet connection goes down or the delegation of
+# the domain(s) in question from the root/TLD servers gets compromised.
+#
+# Example:
+#
+NS-anchor	Harhan.ORG	harhan.anchor
+NS-anchor	Harhan.COM	harhan.anchor
+NS-anchor	IFCTF.ORG	harhan.anchor
+#
+# Because an NS-anchor definition file like root.anchor or harhan.anchor
+# lists the hostnames of name servers and their IP addresses, but not
+# what domain(s) they are authoritative for, one can use the same
+# definition file for multiple anchors like the above example shows.

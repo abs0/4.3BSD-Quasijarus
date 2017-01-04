@@ -1,0 +1,138 @@
+h40574
+s 00001/00001/00093
+d D 1.3 2012/07/16 06:30:08 msokolov 3 2
+c -wig constructed from \(mi & \(ap to look like old troff's \(~=
+e
+s 00004/00004/00090
+d D 1.2 2012/02/16 05:56:34 msokolov 2 1
+c touch-up
+e
+s 00094/00000/00000
+d D 1.1 2012/02/16 05:24:39 msokolov 1 0
+c date and time created 2012/02/16 05:24:39 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %E%
+.\"
+.\" This version of the eqnchar file
+.\" has been modified for the pstroff character set.
+.EQ
+tdefine ciplus % \(a+ %
+ndefine ciplus % O+ %
+tdefine citimes % \(ax %
+ndefine citimes % Ox %
+tdefine =wig % \S40 %
+ndefine =wig % ="~" %
+tdefine bigstar % "\o'\(pl\(mu'" %
+ndefine bigstar % X|- %
+tdefine =dot % "\z\(eq\v'-.6m'\h'.2m'\s+2.\s-2\v'.6m'\h'.1m'" %
+ndefine =dot % = dot %
+tdefine orsign % \(lo %
+ndefine orsign % \e/ %
+tdefine andsign % \(la %
+ndefine andsign % /\e %
+tdefine =del % "\v'.3m'\z=\v'-.6m'\h'.3m'\s-1\(*D\s+1\v'.3m'" %
+ndefine =del % = to DELTA %
+tdefine oppA % \(fa %
+ndefine oppA % V- %
+tdefine oppE % \(te %
+ndefine oppE % E/ %
+tdefine incl % "\s-1\z\(or\h'-.1m'\v'-.45m'\z\(em\v'.7m'\z\(em\v'.2m'\(em\v'-.45m'\s+1" %
+ndefine incl % C_ %
+tdefine nomem % \(!m %
+ndefine nomem % C-/ %
+D 2
+tdefine angstrom % \(A* %
+E 2
+I 2
+tdefine angstrom % roman \(A* %
+E 2
+ndefine angstrom % A to o %
+D 2
+tdefine star %{ roman "\v'.5m'\s+3*\s-3\v'-.5m'"}%
+E 2
+I 2
+tdefine star %{ roman "\s+3\v'.25m'*\v'-.25m'\s-3"}%
+E 2
+ndefine star % * %
+define || % \(or\(or %
+tdefine <wig % "\z<\v'.4m'\(ap\v'-.4m'" %
+ndefine <wig %{ < from "~" }%
+tdefine >wig % "\z>\v'.4m'\(ap\v'-.4m'" %
+ndefine >wig %{ > from "~" }%
+tdefine langle % \SE1 %
+ndefine langle %<%
+tdefine rangle % \SF1 %
+ndefine rangle %>%
+D 2
+tdefine hbar % "\zh\v'-.6m'\h'.05m'\(ru\v'.6m'" %
+E 2
+I 2
+tdefine hbar % "\zh\v'-.55m'\h'.05m'\D'l .45m 0 S .035m'\v'.55m'" %
+E 2
+ndefine hbar % h\u-\d %
+ndefine ppd % _| %
+tdefine ppd % \(bt %
+tdefine <-> % \(<> %
+ndefine <-> % "<-->" %
+tdefine <=> % \SDB %
+ndefine <=> % "<=>" %
+tdefine |< % "\o'<\(or'" %
+ndefine |< % <| %
+tdefine |> % "\o'>\(or'" %
+ndefine |> % |> %
+tdefine ang % \(ag %
+ndefine ang % /_ %
+D 2
+tdefine rang % "\z\(or\h'.15m'\(ru" %
+E 2
+I 2
+tdefine rang % "\v'-.673m'\D'l 0 .673m .6m 0'" %
+E 2
+ndefine rang % L %
+tdefine 3dot % "\v'-.8m'\z.\v'.5m'\z.\v'.5m'.\v'-.2m'" %
+ndefine 3dot % .\u.\u.\d\d %
+tdefine thf % \(tf %
+ndefine thf % ..\u.\d %
+tdefine quarter % roman \(14 %
+ndefine quarter % 1/4 %
+tdefine 3quarter % roman \(34 %
+ndefine 3quarter % 3/4 %
+tdefine degree % \(de %
+ndefine degree % nothing sup o %
+tdefine square % "\D'l 0 -.64m .64m 0 0 .64m C'" %
+ndefine square % [] %
+tdefine circle % "\v'-.32m'\D'c .64m'\v'.32m'" %
+ndefine circle % O %
+tdefine blot % "\D'l 0 -.68m .68m 0 0 .68m F'" %
+ndefine blot % HIX %
+tdefine bullet % \(bu %
+ndefine bullet % oxe %
+D 3
+tdefine -wig % "\(~=" %
+E 3
+I 3
+tdefine -wig % "\v'.098m'\z\(mi\v'-.098m'\v'-.087m'\(ap\v'.087m'" %
+E 3
+ndefine -wig % - to "~" %
+tdefine wig % \(ap %
+ndefine wig % "~" %
+tdefine prop % \(pt %
+ndefine prop % oc %
+tdefine empty % \(es %
+ndefine empty % O/ %
+tdefine member % \(mo %
+ndefine member % C- %
+tdefine cup % \(cu %
+ndefine cup % U %
+define cap % \(ca %
+define subset % \(sb %
+define supset % \(sp %
+define !subset % \(ib %
+define !supset % \(ip %
+.EN
+E 1

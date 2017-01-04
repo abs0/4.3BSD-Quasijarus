@@ -1,0 +1,337 @@
+h28530
+s 00001/00001/00116
+d D 4.6 86/05/25 16:19:07 mckusick 6 5
+c update for 4.3
+e
+s 00001/00003/00116
+d D 4.5 86/05/10 20:14:48 mckusick 5 4
+c format
+e
+s 00002/00002/00117
+d D 4.4 85/09/10 12:37:00 mckusick 4 3
+c bmac moves to /usr/new/lib
+e
+s 00020/00013/00099
+d D 4.3 83/09/09 21:09:06 garrison 3 2
+c add changes from new version from Arizona
+e
+s 00027/00026/00085
+d D 4.2 83/09/09 21:07:18 nicklin 2 1
+c 
+e
+s 00111/00000/00000
+d D 4.1 83/07/03 19:40:43 sam 1 0
+c date and time created 83/07/03 19:40:43 by sam
+e
+u
+U
+t
+T
+I 3
+.\"	"%W%	%G%";
+E 3
+I 1
+D 2
+.TH bib/listrefs 1 local
+E 2
+I 2
+D 6
+.TH BIB 1 "28 July 1983"
+E 6
+I 6
+.TH BIB 1 "%Q%" "Univ of Arizona"
+E 6
+.UC 4
+E 2
+.SH NAME
+D 2
+bib - bibliographic formatter
+E 2
+I 2
+D 5
+bib \- bibliographic formatter
+E 2
+.br
+D 2
+listrefs - list bibliographic reference items
+E 2
+I 2
+listrefs \- list bibliographic reference items
+E 5
+I 5
+bib, listrefs \- bibliographic formatter; list bibliographic reference items
+E 5
+E 2
+.SH SYNOPSIS
+\fBbib\fP [options] ...
+.br
+\fBlistrefs\fP [options] ...
+.SH DESCRIPTION
+\fIBib\fP is a preprocessor for \fInroff\fP or \fItroff\fP(1) that
+formats citations and bibliographies.  The input files (standard input
+default) are copied to the standard output, except for text between [. and .]
+pairs, which are assumed to be keywords for searching a bibliographic database.
+If a matching reference is found a citation is generated replacing the text.
+References are collected, optionally sorted, and written out at a location
+specified by the user.
+D 2
+Citation and reference formats are controlled by the -t option.
+E 2
+I 2
+Citation and reference formats are controlled by the \-t option.
+E 2
+.PP
+Reference databases are created using the \fIinvert\fP utility.
+.PP
+The following options are available.
+D 2
+Note that standard format styles (see the -t option) set options automatically.
+E 2
+I 2
+Note that standard format styles (see the \-t option) set options automatically.
+E 2
+D 3
+Thus if a standard format style is used, the user need not indicate any
+E 3
+I 3
+Thus if a standard format style is used the user need not indicate any
+E 3
+further options for most documents.
+D 2
+.IP -aa 8m
+E 2
+I 2
+.IP \-aa 8m
+E 2
+reduce author\*(CQs first names to abbreviations.
+D 2
+.IP -ar\fInum\fP
+E 2
+I 2
+.IP \-ar\fInum\fP
+E 2
+D 3
+reverse the first \fInum\fP author\*(CQs names
+E 3
+I 3
+reverse the first \fInum\fP author's names.
+If a number is not given all authors names are reversed.
+E 3
+D 2
+.IP -ax
+E 2
+I 2
+.IP \-ax
+E 2
+print authors last names in Caps-Small Caps style.  For example Budd becomes
+B\s-2UDD\s+2.  This style is used by certain ACM publications.
+D 2
+.IP -ea 8m
+E 2
+I 2
+D 3
+.IP \-ea 8m
+E 2
+reduce editor\*(CQs first names to abbreviations.
+D 2
+.IP -er\fInum\fP
+E 2
+I 2
+.IP \-er\fInum\fP
+E 2
+reverse the first \fInum\fP editor\*(CQs names
+D 2
+.IP -ex
+E 2
+I 2
+.IP \-ex
+E 2
+print editors last names in Caps-Small Caps style.
+E 3
+D 2
+.IP -c\fIstr\fP
+E 2
+I 2
+.IP \-c\fIstr\fP
+E 2
+build citations according to the template \fIstr\fP.  See the reference
+format designer\*(CQs guide for more information on templates.
+I 3
+.IP \-ea
+reduce editors first names to abbreviations.
+.IP \-ex
+print editors last names in Caps-Small Caps style (see \-ax option).
+.IP \-er\fInum\fP
+reverse the first \fInum\fP editors names.  If a number is not given all
+editors names are reversed.
+E 3
+D 2
+.IP -f
+E 2
+I 2
+.IP \-f
+E 2
+instead of collecting references, dump each
+reference immediately following the line on which the citation is placed
+(used for footnoted references).
+D 2
+.IP "-i \fIfile\fP"
+E 2
+I 2
+.IP "\-i \fIfile\fP"
+E 2
+.ns
+D 2
+.IP  -i\fIfile\fP
+E 2
+I 2
+.IP  \-i\fIfile\fP
+E 2
+process the indicated file, such as a file of definitions.
+(see technical report for a description of file format).
+D 2
+.IP -h
+E 2
+I 2
+.IP \-h
+E 2
+replace citations to three or more adjacent reference items with
+a hyphenated string (eg 2,3,4,5 becomes 2-5).
+I 3
+This option implies the \-o option.
+E 3
+D 2
+.IP -n\fIstr\fP
+E 2
+I 2
+.IP \-n\fIstr\fP
+E 2
+turn off indicated options.  \fIstr\fP must be composed of the letters afhosx.
+D 2
+.IP -o
+E 2
+I 2
+.IP \-o
+E 2
+contiguous citations are ordered according the the reference list before
+being printed (default).
+D 2
+.IP "-p \fIfile\fP"
+E 2
+I 2
+.IP "\-p \fIfile\fP"
+E 2
+.ns
+D 2
+.IP  -p\fIfile\fP
+E 2
+I 2
+.IP  \-p\fIfile\fP
+E 2
+instead of searching the file INDEX,
+D 3
+search the indicated reference file before searching the system file.
+E 3
+I 3
+search the indicated reference files before searching the system file.
+\fIfiles\fP is a comma separated list of inverted indices, created using
+the \fIinvert\fP utility.
+E 3
+D 2
+.IP -s\fIstr\fP
+E 2
+I 2
+.IP \-s\fIstr\fP
+E 2
+sort references according to the template \fIstr\fP.
+D 2
+.IP "-t \fItype\fP"
+E 2
+I 2
+.IP "\-t \fItype\fP"
+E 2
+.ns
+D 2
+.IP -t\fItype\fP
+E 2
+I 2
+.IP \-t\fItype\fP
+E 2
+use the standard macros and switch settings for the indicated style
+to generate citations and references.
+D 3
+There are a number of standard styles provided.  In addition the user
+E 3
+I 3
+There are a number of standard styles provided.  In addition users
+E 3
+can generate their own style macros.  See the format designers guide for
+D 3
+more details.
+E 3
+I 3
+details.
+E 3
+.PP
+D 3
+\fIListrefs\fP formats an entire format file.  Options to \fIlistrefs\fP
+are the same as for \fIbib\fP.  Items in the format file are not sorted.
+E 3
+I 3
+\fIListrefs\fP formats an entire reference database file.
+Options to \fIlistrefs\fP
+are the same as for \fIbib\fP.
+E 3
+.PP
+D 2
+\fIBib\fP was designed initially for use with the -ms macros, and
+uses a couple of the -ms macros (.ip and .lp) in its macro definitions.
+To use it with the -me macros, prefix the file being sent to nroff/troff
+E 2
+I 2
+\fIBib\fP was designed initially for use with the \-ms macros, and
+uses a couple of the \-ms macros (.ip and .lp) in its macro definitions.
+To use it with the \-me macros, prefix the file being sent to nroff/troff
+E 2
+with the following macro definitions:
+.nf
+.in +1.0i
+\&.de IP
+\&.ip \\$1 \\$2
+\&..
+\&.de LP
+\&.lp
+\&..
+.fi
+.in -1.0i
+.PP
+A file "bibmac.me" containing these macro
+D 4
+definitions may be found in /usr/lib/bmac.
+E 4
+I 4
+definitions may be found in /usr/new/lib/bmac.
+E 4
+.SH FILES
+.ta 2i
+INDEX	inverted index for reference database
+.br
+/usr/dict/papers/INDEX	default system index
+.br
+D 4
+/usr/lib/bmac/bmac.*	formatting macro packages
+E 4
+I 4
+/usr/new/lib/bmac/bmac.*	formatting macro packages
+E 4
+.br
+/usr/tmp/bibr*	scratch file for collecting references
+.br
+/usr/tmp/bibp*	output of pass one of bib
+.SH SEE ALSO
+\fIA UNIX Bibliographic Database Facility\fP, Timothy A. Budd and Gary M. Levin,
+University of Arizona Technical Report 82-1, 1982.
+(includes format designers guide).
+.br
+invert(1), troff(1)
+E 1

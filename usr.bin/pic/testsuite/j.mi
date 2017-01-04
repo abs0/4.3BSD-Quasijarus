@@ -1,0 +1,5 @@
+.PS
+arc cw from 13,223 to 136,220 rad 252
+arc cw from 24,136 to 119,132 rad 255
+arc cw from 0,24 to 154,0 rad 256
+.PE

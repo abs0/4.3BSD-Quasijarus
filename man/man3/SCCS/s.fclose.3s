@@ -1,0 +1,90 @@
+h29226
+s 00001/00001/00049
+d D 6.1 85/05/15 14:56:29 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00004/00004/00046
+d D 5.1 85/05/15 14:56:19 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00050/00000/00000
+d D 4.1 85/05/15 14:56:08 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FCLOSE 3S 
+E 2
+I 2
+D 3
+.TH FCLOSE 3S  "19 January 1983"
+E 3
+I 3
+.TH FCLOSE 3S  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+fclose, fflush \- close or flush a stream
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.B fclose(stream)
+.br
+.SM
+.B FILE
+.B *stream;
+.PP
+.B fflush(stream)
+.br
+.SM
+.B FILE
+.B *stream;
+.SH DESCRIPTION
+.I Fclose
+causes any buffers for the named
+.I stream
+to be emptied, and the file to be closed.
+Buffers allocated by the standard input/output system
+are freed.
+.PP
+.I Fclose
+is performed automatically upon
+calling
+D 2
+.IR  exit (2).
+E 2
+I 2
+.IR  exit (3).
+E 2
+.PP
+.I Fflush
+causes any buffered data for the named output
+.I stream
+to be written to that file.
+The stream remains open.
+.SH "SEE ALSO"
+close(2),
+D 2
+fopen(3),
+setbuf(3)
+E 2
+I 2
+fopen(3S),
+setbuf(3S)
+E 2
+.SH DIAGNOSTICS
+These routines return
+.SM
+.B EOF
+if
+.I stream
+is not associated with an output file, or
+if buffered data cannot be transferred to that file.
+E 1

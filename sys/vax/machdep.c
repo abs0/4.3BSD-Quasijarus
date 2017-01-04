@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)machdep.c	7.18 (Berkeley) 5/3/03
+ *	@(#)machdep.c	7.22 (Berkeley) 8/25/05
  */
 
 #include "param.h"
@@ -35,6 +35,7 @@
 #include "clock.h"
 #include "cons.h"
 #include "cpu.h"
+#include "cpucond.h"
 #include "mem.h"
 #include "mtpr.h"
 #include "rpb.h"
@@ -43,6 +44,8 @@
 
 #include "../vaxuba/ubavar.h"
 #include "../vaxuba/ubareg.h"
+
+#include "../mdec/vmb.h"
 
 /*
  * Declare these as initialized data so we can patch them.
@@ -61,6 +64,14 @@ int	bufpages = 0;
 int	msgbufmapped;		/* set when safe to use msgbuf */
 
 /*
+ * Set up when using the VMB boot path for CI support and dump support
+ */
+int	*ci_ucode = 0;		/* If present, points to CI ucode */
+int	ci_ucodesz = 0;		/* If present, size of CI ucode */
+int	*vmbinfo = 0;		/* gets a physical address set in locore
+				   which is passed in by the VMB boot path */
+
+/*
  * Machine-dependent startup code
  */
 startup(firstaddr)
@@ -72,6 +83,21 @@ startup(firstaddr)
 	int mapaddr, j, n;
 	register caddr_t v;
 	int maxbufs, base, residual;
+	int vmbinfosz;
+
+	if (vmbinfo) {
+		mapaddr = btop(vmbinfo);
+		vmbinfosz = MAX(physmem - mapaddr, 128);
+		pte = vmbinfomap;
+		for (i=0; i<vmbinfosz; i++)
+			*(int *) pte++ = PG_V | PG_KW | (mapaddr + i);
+		mtpr(TBIA, 0);
+		if (vmb_info.ciucodebas && vmb_info.ciucodesiz) {
+			ci_ucode = (int *)&vmb_info +
+				(vmb_info.ciucodebas - vmbinfo);
+			ci_ucodesz = vmb_info.ciucodesiz;
+		}
+	}
 
 	/*
 	 * Initialize error message buffer (at end of core).
@@ -98,6 +124,16 @@ startup(firstaddr)
 	 */
 	qdcons_init();
 #endif
+#endif
+
+#if NEED_BABYVAX_SUPPORT
+	switch (cpu) {
+	case VAX_410:
+	case VAX_3100:
+		/* establishes BabyVAX console among other early init */
+		babyvax_early_init();
+		break;
+	}
 #endif
 
 #ifdef KADB
@@ -276,8 +312,27 @@ startup(firstaddr)
 	/*
 	 * Clear restart inhibit flags.
 	 */
-	tocons(TXDB_CWSI);
-	tocons(TXDB_CCSI);
+	switch (cpu) {
+#if VAX630
+	case VAX_630:
+		ka630clock.cpmbx &= ~(KA630CLK_RSTRT | KA630CLK_BOOT);
+		break;
+#endif
+#if VAX650
+	case VAX_650:
+		ka650ssc.ssc_cpmbx &= ~(CPMB650_RIP | CPMB650_BIP);
+		break;
+#endif
+#if NEED_BABYVAX_SUPPORT
+	case VAX_410:
+	case VAX_3100:
+		babyvax_clear_biprip();
+		break;
+#endif
+	default:
+		tocons(TXDB_CWSI);
+		tocons(TXDB_CCSI);
+	}
 }
 
 #ifdef PGINPROF
@@ -466,6 +521,52 @@ osigcleanup()
 }
 /* XXX - END 4.2 COMPATIBILITY */
 
+/*
+ * Emulate exception signal.  Reset the process to the specified state like
+ * sigreturn and then simulate the occurrence of an exception causing the
+ * specified signal with the specified code.  Only SIGILL and SIGFPE supported
+ * currently, this may change in the future.
+ */
+sigemu()
+{
+	struct a {
+		struct sigcontext *sigcntxp;
+		int sig;
+		int code;
+	};
+	register struct sigcontext *scp;
+	register int sig;
+	register int *regs = u.u_ar0;
+
+	scp = ((struct a *)(u.u_ap))->sigcntxp;
+	if (useracc((caddr_t)scp, sizeof (*scp), B_READ) == 0)
+		return;
+	if ((scp->sc_ps & (PSL_MBZ|PSL_IPL|PSL_IS)) != 0 ||
+	    (scp->sc_ps & (PSL_PRVMOD|PSL_CURMOD)) != (PSL_PRVMOD|PSL_CURMOD) ||
+	    ((scp->sc_ps & PSL_CM) &&
+	     (!cpu_has_compat_mode ||
+	      (scp->sc_ps & (PSL_FPD|PSL_DV|PSL_FU|PSL_IV)) != 0))) {
+		u.u_error = EINVAL;
+		return;
+	}
+	sig = ((struct a *)(u.u_ap))->sig;
+	if (sig != SIGILL && sig != SIGFPE) {
+		u.u_error = EINVAL;
+		return;
+	}
+	u.u_eosys = JUSTRETURN;
+	u.u_onstack = scp->sc_onstack & 01;
+	u.u_procp->p_sigmask = scp->sc_mask &~
+	    (sigmask(SIGKILL)|sigmask(SIGCONT)|sigmask(SIGSTOP));
+	regs[FP] = scp->sc_fp;
+	regs[AP] = scp->sc_ap;
+	regs[SP] = scp->sc_sp;
+	regs[PC] = scp->sc_pc;
+	regs[PS] = scp->sc_ps;
+	u.u_code = ((struct a *)(u.u_ap))->code;
+	psignal(u.u_procp, sig);
+}
+
 #ifdef notdef
 dorti()
 {
@@ -600,12 +701,20 @@ boot(howto)
 	if (howto&RB_HALT) {
 		switch (cpu) {
 
-		/* 630 can be told to halt, but how? */
+#if VAX630
+		case VAX_630:
+			ka630clock.cpmbx |= KA630CLK_HALT;
+			asm("halt");
+#endif
 #if VAX650
 		case VAX_650:
-			ka650ssc.ssc_cpmbx &= ~CPMB650_HALTACT;
 			ka650ssc.ssc_cpmbx |= CPMB650_HALT;
 			asm("halt");
+#endif
+#if NEED_BABYVAX_SUPPORT
+		case VAX_410:
+		case VAX_3100:
+			babyvax_halt();
 #endif
 		}
 		printf("halting (in tight loop); hit\n\t^P\n\tHALT\n\n");
@@ -644,11 +753,26 @@ vaxboot()
 		break;
 #endif
 
-#ifdef VAX650
+#if VAX630
+	case VAX_630:
+		/* set boot-on-halt flag in "console mailbox" */
+		ka630clock.cpmbx &= ~KA630CLK_HLTACT;
+		ka630clock.cpmbx |= KA630CLK_REBOOT;
+		break;
+#endif
+
+#if VAX650
 	case VAX_650:
 		/* set boot-on-halt flag in "console mailbox" */
 		ka650ssc.ssc_cpmbx &= ~CPMB650_HALTACT;
 		ka650ssc.ssc_cpmbx |= CPMB650_REBOOT;
+		break;
+#endif
+
+#if NEED_BABYVAX_SUPPORT
+	case VAX_410:
+	case VAX_3100:
+		babyvax_set_haltact(2);
 		break;
 #endif
 
@@ -792,6 +916,18 @@ char *mc780750[16] = {
 };
 #endif
 
+#if NEED_UV2_SUPPORT
+/*
+ * These strings are shared between ka630.c and ka410.c.  Since both use
+ * the same 78032 CPU chip, machine checks are obviously identical.
+ */
+char *mcuv2[] = {
+	0,		"immcr (fsd)",	"immcr (ssd)",	"fpu err 0",
+	"fpu err 7",	"mmu st(tb)",	"mmu st(m=0)",	"pte in p0",
+	"pte in p1",	"un intr id",
+};
+#endif
+
 /*
  * Return the best possible estimate of the time in the timeval
  * to which tvp points.  We do this by reading the interval count
@@ -815,13 +951,13 @@ microtime(tvp)
 	if (t < -tick / 2 && (mfpr(ICCS) & ICCS_INT))
 		t += tick;
 	tvp->tv_usec += tick + t;
-	if (tvp->tv_usec > 1000000) {
+	if (tvp->tv_usec >= 1000000) {
 		tvp->tv_sec++;
 		tvp->tv_usec -= 1000000;
 	}
 	if (tvp->tv_sec == lasttime.tv_sec &&
 	    tvp->tv_usec <= lasttime.tv_usec &&
-	    (tvp->tv_usec = lasttime.tv_usec + 1) > 1000000) {
+	    (tvp->tv_usec = lasttime.tv_usec + 1) >= 1000000) {
 		tvp->tv_sec++;
 		tvp->tv_usec -= 1000000;
 	}

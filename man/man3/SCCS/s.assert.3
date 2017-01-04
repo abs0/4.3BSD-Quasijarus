@@ -1,0 +1,90 @@
+h26376
+s 00001/00001/00039
+d D 6.2 86/05/12 17:40:26 karels 4 3
+c move from 3X to 3
+e
+s 00001/00001/00039
+d D 6.1 85/05/15 14:53:05 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00005/00037
+d D 5.1 85/05/15 14:52:57 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00042/00000/00000
+d D 4.1 85/05/15 14:52:49 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ASSERT 3X
+E 2
+I 2
+D 3
+.TH ASSERT 3X "19 January 1983"
+E 3
+I 3
+D 4
+.TH ASSERT 3X "%Q%"
+E 4
+I 4
+.TH ASSERT 3 "%Q%"
+E 4
+E 3
+E 2
+.AT 3
+.SH NAME
+assert \- program verification
+.SH SYNOPSIS
+.B #include <assert.h>
+.PP
+.B assert(expression)
+.SH DESCRIPTION
+.PP
+.I Assert
+is a macro that indicates
+.I expression
+is expected to be true at this point in the program.
+It causes an
+.IR exit (2)
+D 2
+with a diagnostic comment on the standard output
+when
+E 2
+I 2
+with a diagnostic comment on the standard output when
+E 2
+.I expression
+is false (0).
+Compiling with the 
+.IR cc (1)
+option
+.SM
+.B \-DNDEBUG
+effectively deletes
+.I assert
+from the program.
+.SH DIAGNOSTICS
+`Assertion failed: file
+.I f
+line
+.I n.'
+.I F
+is the source file and
+.I n
+D 2
+the source line number
+of the
+E 2
+I 2
+the source line number of the
+E 2
+.I assert
+statement.
+E 1

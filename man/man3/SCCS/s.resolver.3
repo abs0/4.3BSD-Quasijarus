@@ -1,0 +1,475 @@
+h45873
+s 00000/00000/00203
+d D 6.1 87/11/21 14:54:48 karels 9 8
+c bring up to rev 6
+e
+s 00044/00022/00159
+d D 1.8 87/11/21 14:54:25 karels 8 7
+c add RES_DNSRCH
+e
+s 00003/00003/00178
+d D 1.7 86/05/27 11:25:39 kjd 7 6
+c clean up
+e
+s 00004/00004/00177
+d D 1.6 86/04/10 14:36:38 kjd 6 5
+c fix calls to dn_expand
+e
+s 00012/00009/00169
+d D 1.5 86/03/21 22:19:03 kjd 5 4
+c Add stayopen 
+e
+s 00002/00002/00176
+d D 1.4 86/02/03 14:16:42 kjd 4 3
+c Add msglen to dn_expand
+e
+s 00002/00009/00176
+d D 1.3 86/01/07 13:38:37 kjd 3 2
+c add resolver(5)
+e
+s 00017/00010/00168
+d D 1.2 85/10/30 09:56:56 kjd 2 1
+c chane include forles and add resolv.conf information
+e
+s 00178/00000/00000
+d D 1.1 85/10/06 17:29:36 kjd 1 0
+c date and time created 85/10/06 17:29:36 by kjd
+e
+u
+U
+t
+T
+I 1
+D 2
+.\" Copyright (c) 1980 Regents of the University of California.
+E 2
+I 2
+.\" Copyright (c) 1985 Regents of the University of California.
+E 2
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RESOLVER 3 "25 March 1985"
+E 2
+I 2
+D 8
+.TH RESOLVER 3 "15 November 1985"
+E 8
+I 8
+.TH RESOLVER 3 "%Q%"
+E 8
+E 2
+.UC 4
+.SH NAME
+res_mkquery, res_send, res_init, dn_comp, dn_expand \- resolver routines
+.SH SYNOPSIS
+.B #include <sys/types.h>
+.br
+.B #include <netinet/in.h>
+.br
+D 2
+.B #include <nameser.h>
+E 2
+I 2
+.B #include <arpa/nameser.h>
+E 2
+.br
+D 2
+.B #include <resolv.h>
+E 2
+I 2
+D 5
+.B #include <arpa/resolv.h>
+E 5
+I 5
+.B #include <resolv.h>
+E 5
+E 2
+.PP
+.B "res_mkquery(op, dname, class, type, data, datalen, newrr, buf, buflen)"
+.br
+.B int op;
+.br
+.B char *dname;
+.br
+.B int class, type;
+.br
+.B char *data;
+.br
+.B int datalen;
+.br
+.B struct rrec *newrr;
+.br
+.B char *buf;
+.br
+.B int buflen;
+.PP
+.B res_send(msg, msglen, answer, anslen)
+.br
+.B char *msg;
+.br
+.B int msglen;
+.br
+.B char *answer;
+.br
+.B int anslen;
+.PP
+.B res_init()
+.PP
+.B dn_comp(exp_dn, comp_dn, length, dnptrs, lastdnptr)
+.br
+.B char *exp_dn, *comp_dn;
+.br
+.B int length;
+.br
+.B char **dnptrs, **lastdnptr;
+.PP
+D 4
+.B dn_expand(msg, comp_dn, exp_dn, length)
+E 4
+I 4
+D 6
+.B dn_expand(msg, msglen, comp_dn, exp_dn, length)
+E 6
+I 6
+.B dn_expand(msg, eomorig, comp_dn, exp_dn, length)
+E 6
+E 4
+.br
+D 5
+.SM
+E 5
+D 6
+.B char *msg, *comp_dn, exp_dn;
+E 6
+I 6
+.B char *msg, *eomorig, *comp_dn, exp_dn;
+E 6
+.br
+D 4
+.B int length;
+E 4
+I 4
+D 6
+.B int  msglen, length;
+E 6
+I 6
+.B int  length;
+E 6
+E 4
+.SH DESCRIPTION
+D 8
+These routines are used for making, sending and interpreting packets to
+Internet domain name servers. Global information that is used by the
+E 8
+I 8
+These routines are used for making, sending and interpreting packets
+for use with Internet domain name servers.
+Global information that is used by the
+E 8
+resolver routines is kept in the variable
+.IR _res .
+D 8
+Most of the values have reasonable defaults and can be ignored. Options
+E 8
+I 8
+Most of the values have reasonable defaults and can be ignored.
+Options
+E 8
+stored in
+.I _res.options
+are defined in
+.I resolv.h
+D 8
+and are as follows. Options are a simple bit mask and are or'ed in to
+enable.
+E 8
+I 8
+and are as follows.
+Options are stored a simple bit mask containing the bitwise ``or''
+of the options enabled.
+E 8
+.IP RES_INIT
+True if the initial name server address and default domain name are
+initialized (i.e.,
+.I res_init
+has been called).
+.IP RES_DEBUG
+Print debugging messages.
+.IP RES_AAONLY
+Accept authoritative answers only.
+D 8
+.I Res_send
+will continue until it finds an authoritative answer or finds an error.
+E 8
+I 8
+With this option,
+.I res_send
+should continue until it finds an authoritative answer or finds an error.
+E 8
+Currently this is not implemented.
+.IP RES_USEVC
+D 8
+Use TCP connections for queries instead of UDP.
+E 8
+I 8
+Use TCP connections for queries instead of UDP datagrams.
+E 8
+D 5
+.IP RES_PRIMARY
+Unused currently.
+E 5
+I 5
+.IP RES_STAYOPEN
+Used with RES_USEVC to keep the TCP connection open between
+queries.
+This is useful only in programs that regularly do many queries.
+UDP should be the normal mode used.
+E 5
+.IP RES_IGNTC
+Unused currently (ignore truncation errors, i.e., don't retry with TCP).
+.IP RES_RECURSE
+D 8
+Set the recursion desired bit in queries. This is the default.
+E 8
+I 8
+Set the recursion-desired bit in queries.
+This is the default.
+E 8
+(
+.I res_send
+D 2
+does not currently perform iterative queries and expects the nameserver
+E 2
+I 2
+D 5
+does not currently perform iterative queries and expects the name server
+E 2
+to handle recursion. This should be fixed.)
+E 5
+I 5
+does not do iterative queries and expects the name server
+to handle recursion.)
+E 5
+.IP RES_DEFNAMES
+D 8
+Append the default domain name to single label queries. This is the default.
+E 8
+I 8
+If set,
+.I res_mkquery
+will append the default domain name to single-component names
+(those that do not contain a dot).
+This is the default.
+.IP RES_DNSRCH
+If this option is set,
+the standard host lookup routine
+.IR gethostbyname (3)
+will search for host names in the current domain and in parent domains; see
+.IR hostname (7).
+E 8
+.PP
+.I Res_init
+.PP
+D 2
+reads the the first line of the initialization file to get the default
+domain name. The second line is the Internet address of the initial host
+E 2
+I 2
+reads the initialization file to get the default
+domain name and the Internet address of the initial hosts
+E 2
+D 8
+running the name server. If this line does not exist, the host running
+E 8
+I 8
+running the name server.
+If this line does not exist, the host running
+E 8
+D 2
+the resolver is tried (only works in 4.3 BSD).
+E 2
+I 2
+the resolver is tried.
+E 2
+.I Res_mkquery
+D 5
+is used to make a standard query message and places it in
+E 5
+I 5
+makes a standard query message and places it in
+E 5
+.IR buf .
+.I Res_mkquery
+will return the size of the query or \-1 if the query is
+larger than
+.IR buflen .
+.I Op
+is usually QUERY but can be any of the query types defined in
+.IR nameser.h .
+.I Dname
+D 8
+is the domain name. If
+E 8
+I 8
+is the domain name.
+If
+E 8
+.I dname
+consists of a single label and the RES_DEFNAMES flag is enabled
+D 8
+(the default),
+.I dname
+will be appended with the current domain name. The current
+domain name is defined in a system file and can be overridden
+E 8
+I 8
+(the default), the current domain name will be appended to
+.IR dname .
+The current domain name is defined by the hostname
+or is specified in a system file; it can be overridden
+E 8
+by the environment variable LOCALDOMAIN.
+.I Newrr
+is currently unused but is intended for making update messages.
+.PP
+.I Res_send
+D 5
+is used to send a query to name servers and return an answer.
+E 5
+I 5
+sends a query to name servers and returns an answer.
+E 5
+It will call
+.I res_init
+D 2
+if RES_INIT is not set, send the query to the local nameserver, and
+E 2
+I 2
+if RES_INIT is not set, send the query to the local name server, and
+E 2
+D 8
+handle timeouts and retries. The length of the message is returned or
+E 8
+I 8
+handle timeouts and retries.
+The length of the message is returned, or
+E 8
+\-1 if there were errors.
+.PP
+.I Dn_expand
+D 7
+Expands the compressed domain name
+E 7
+I 7
+expands the compressed domain name
+E 7
+.I comp_dn
+to a full domain name.  Expanded names are converted to upper case.
+.I Msg
+is a pointer to the beginning of the message,
+.I exp_dn
+is a pointer to a buffer of size
+.I length
+for the result.
+The size of compressed name is returned or -1 if there was an error.
+.PP
+.I Dn_comp
+D 7
+Compresses the domain name
+E 7
+I 7
+compresses the domain name
+E 7
+.I exp_dn
+and stores it in
+.IR comp_dn .
+The size of the compressed name is returned or -1 if there were errors.
+.I length is the size of the array pointed to by
+.IR comp_dn .
+.I Dnptrs
+is a list of pointers to previously compressed names in the current message.
+The first pointer points to
+to the beginning of the message and the list ends with NULL.
+.I lastdnptr
+is a pointer to the end of the array pointed to
+.IR dnptrs .
+A side effect is to update the list of pointers for
+labels inserted into the message by
+.I dn_comp
+as the name is compressed.
+If
+.I dnptr
+D 8
+is NULL, we don't try to compress names. If
+E 8
+I 8
+is NULL, names are not compressed.
+If
+E 8
+.I lastdnptr
+D 8
+is NULL, we don't update the list.
+E 8
+I 8
+is NULL, the list of labels is not updated.
+E 8
+.SH FILES
+D 2
+resolv.conf	default resolver information
+E 2
+I 2
+D 3
+resolv.conf	Contains the default resolver information read by res_init.
+There are two types of records in this file, domain and name server.
+The domain record specifies the default domain for the resolver to use.
+You can have multiple name server records to designate the name servers 
+addresses you would like the resolver to try. By using this 
+file you don't have to have a name server actually running on your system
+and you can have a back up name server to try in the event your local server 
+is not responsive.
+E 3
+I 3
+D 8
+/etc/resolv.conf see resolver(5)
+E 8
+I 8
+/etc/resolv.conf	see resolver(5)
+E 8
+E 3
+E 2
+.SH "SEE ALSO"
+D 3
+named(8), RFC882, RFC883
+E 3
+I 3
+D 5
+named(8), resolver(5), RFC882, RFC883
+E 5
+I 5
+D 8
+named(8), resolver(5), RFC882, RFC883, RFC973, RFC974,
+E 8
+I 8
+gethostbyname(3), named(8), resolver(5), hostname(7),
+.br
+RFC882, RFC883, RFC973, RFC974,
+.br
+E 8
+D 6
+BIND - Operations Guide
+E 6
+I 6
+D 7
+Name Server Operations Guide for BIND
+E 7
+I 7
+SMM:11 Name Server Operations Guide for BIND
+E 7
+E 6
+E 5
+E 3
+E 1

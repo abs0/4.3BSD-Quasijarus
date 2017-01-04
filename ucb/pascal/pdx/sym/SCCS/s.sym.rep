@@ -1,0 +1,89 @@
+h49623
+s 00002/00004/00041
+d D 5.2 85/06/07 20:36:34 mckusick 4 3
+c fix copyright
+e
+s 00008/00002/00037
+d D 5.1 85/06/07 20:20:54 mckusick 3 2
+c Add copyright
+e
+s 00001/00001/00038
+d D 1.2 82/01/18 22:07:16 linton 2 1
+c sccsid
+e
+s 00039/00000/00000
+d D 1.1 82/01/18 19:21:21 linton 1 0
+c date and time created 82/01/18 19:21:21 by linton
+e
+u
+U
+t
+T
+I 1
+D 3
+/* Copyright (c) 1982 Regents of the University of California */
+E 3
+I 3
+/*
+ * Copyright (c) 1982 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
+I 4
+ *
+ *	%W% (Berkeley) %G%
+E 4
+ */
+E 3
+D 4
+
+D 2
+static char sccsid[] = "%Z%%M% %I% %G%";
+E 2
+I 2
+D 3
+/* static char sccsid[] = "%Z%%M% %I% %G%"; */
+E 3
+I 3
+#ifndef lint
+static char sccsid[] = "%W% (Berkeley) %G%";
+#endif not lint
+E 4
+E 3
+E 2
+
+/*
+ * This file contains the definition of the representation of the SYM type.
+ */
+
+struct sym {
+	char *symbol;
+	char class;
+	char blkno;
+	SYM *type;
+	SYM *chain;
+	union {
+		int offset;		/* variable address */
+		long iconval;		/* integer constant value */
+		double fconval;		/* floating constant value */
+		struct {		/* range bounds */
+			long lower;
+			long upper;
+		} rangev;
+		struct {		/* address of function value, code */
+			int offset;
+			ADDRESS codeloc;
+		} funcv;
+		struct {		/* variant record info */
+			int size;
+			SYM *vtorec;
+			SYM *vtag;
+		} varnt;
+		struct {		/* information for reserved words */
+			int toknum;
+			int tokval;
+		} token;
+	} symvalue;
+	SYM *func;
+	SYM *next_sym;
+};
+E 1

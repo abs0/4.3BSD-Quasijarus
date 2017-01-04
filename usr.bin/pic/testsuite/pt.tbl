@@ -1,0 +1,23 @@
+.EQ
+delim $$
+.EN
+xxxx
+.TS
+center, expand, doublebox;
+c c c.
+box	circle	ellipse
+T{
+.PS
+box "$b sub 1$"
+.PE
+T}	T{
+.PS
+circle "$c sub 1$"
+.PE
+T}	T{
+.PS
+ellipse "$e sub 1$"
+.PE
+T}
+.TE
+yyyy

@@ -1,0 +1,160 @@
+h15715
+s 00001/00001/00075
+d D 6.2 86/04/14 16:02:17 karels 4 3
+c fix example
+e
+s 00001/00001/00075
+d D 6.1 85/04/29 17:48:45 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00032/00023/00044
+d D 5.1 85/04/29 17:48:36 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00067/00000/00000
+d D 4.1 85/04/29 17:48:28 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LEX 1 
+E 2
+I 2
+D 3
+.TH LEX 1 "7 February 1983"
+E 3
+I 3
+.TH LEX 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+lex \- generator of lexical analysis programs
+.SH SYNOPSIS
+.B lex
+[
+.B \-tvfn
+] [ file ] ...
+.SH DESCRIPTION
+.I Lex
+generates programs to be used in simple lexical analyis of text.
+The input
+.I files
+D 2
+(standard input default)
+contain regular expressions
+E 2
+I 2
+(standard input default) contain regular expressions
+E 2
+to be searched for, and actions written in C to be executed when
+expressions are found.
+.PP
+D 2
+A C source program, `lex.yy.c' is generated, to be compiled thus:
+E 2
+I 2
+A C source program, 'lex.yy.c' is generated, to be compiled thus:
+E 2
+.IP
+cc lex.yy.c \-ll
+.LP
+This program, when run, copies unrecognized portions of
+D 2
+the input to the output,
+and executes the associated
+E 2
+I 2
+the input to the output, and executes the associated
+E 2
+C action for each regular expression that is recognized.
+.PP
+D 2
+The following 
+.I lex
+program converts upper case to lower,
+removes blanks at the end of lines,
+and replaces multiple blanks by single blanks.
+.IP ""
+.nf
+.ta \w'[A\-Z] 'u
+%%
+[A\-Z]	putchar(yytext[0]+\'a\'\-\'A\');
+[ ]+$
+[ ]+	putchar(\' \');
+.fi
+.PP
+E 2
+The options have the following meanings.
+.TP
+.B \-t
+D 2
+Place the result on the standard output instead of in file
+`lex.yy.c'.
+E 2
+I 2
+Place the result on the standard output instead of in file "lex.yy.c".
+E 2
+.TP
+.B \-v
+Print a one-line summary of statistics of the generated analyzer.
+.TP
+.B \-n
+Opposite of
+.BR \-v ;
+.B \-n
+is default.
+.TP
+.B \-f
+D 2
+`Faster' compilation: don't bother to pack
+E 2
+I 2
+"Faster" compilation: don't bother to pack
+E 2
+the resulting tables; limited to small programs.
+I 2
+.SH EXAMPLE
+.IP
+lex lexcommands
+.PP
+would draw
+.I lex
+instructions from the file
+.I lexcommands,
+and place the output in
+.I lex.yy.c
+.IP ""
+.nf
+.ta \w'[A\-Z] 'u
+%%
+[A\-Z]	putchar(yytext[0]+\'a\'\-\'A\');
+D 4
+[ ]+$
+E 4
+I 4
+[ ]+$	;
+E 4
+[ ]+	putchar(\' \');
+.fi
+.PP
+is an example of a
+.I lex
+program that would be put into a
+.I lex
+command file.  This program converts upper case to lower,
+removes blanks at the end of lines,
+and replaces multiple blanks by single blanks.
+E 2
+.SH "SEE ALSO"
+yacc(1), sed(1)
+.br
+M. E. Lesk and E. Schmidt,
+.I LEX \- Lexical Analyzer Generator
+E 1

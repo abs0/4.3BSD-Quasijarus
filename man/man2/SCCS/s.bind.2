@@ -1,0 +1,167 @@
+h20638
+s 00002/00002/00098
+d D 6.6 86/05/22 11:51:29 anne 7 6
+c grammar
+e
+s 00000/00005/00100
+d D 6.5 86/05/13 10:25:54 karels 6 5
+c remove unix domain change notices
+e
+s 00001/00001/00104
+d D 6.4 86/03/29 05:08:45 lepreau 5 4
+c spelling
+e
+s 00001/00001/00104
+d D 6.3 85/06/28 16:19:25 sechrest 4 3
+c Improved English
+e
+s 00028/00000/00077
+d D 6.2 85/05/22 18:31:40 mckusick 3 2
+c update the error return codes to reflect those in 4.3BSD
+e
+s 00001/00001/00076
+d D 6.1 85/05/15 11:52:50 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00077/00000/00000
+d D 5.1 85/05/15 11:52:44 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH BIND 2 "27 July 1983"
+E 2
+I 2
+.TH BIND 2 "%Q%"
+E 2
+.UC 5
+.SH NAME
+bind \- bind a name to a socket
+.SH SYNOPSIS
+.nf
+.ft B
+#include <sys/types.h>
+#include <sys/socket.h>
+.PP
+.ft B
+bind(s, name, namelen)
+int s;
+struct sockaddr *name;
+int namelen;
+.fi
+.SH DESCRIPTION
+.I Bind
+assigns a name to an unnamed socket.
+When a socket is created 
+with
+.IR socket (2)
+it exists in a name space (address family)
+but has no name assigned.
+.I Bind
+D 7
+requests the
+.IR name ,
+E 7
+I 7
+requests that
+.IR name 
+E 7
+be assigned to the socket.
+.SH NOTES
+Binding a name in the UNIX domain creates a socket in the file
+D 4
+system which must be deleted by the caller when it is no longer
+E 4
+I 4
+system that must be deleted by the caller when it is no longer
+E 4
+needed (using
+.IR unlink (2)).
+D 6
+The file created
+is a side-effect of the current implementation,
+and will not be created in future versions
+of the UNIX ipc domain.
+E 6
+.PP
+The rules used in name binding vary between communication domains.
+Consult the manual entries in section 4 for detailed information.
+.SH "RETURN VALUE
+If the bind is successful, a 0 value is returned.
+A return value of \-1 indicates an error, which is
+further specified in the global \fIerrno\fP.
+.SH ERRORS
+The \fIbind\fP call will fail if:
+.TP 20
+[EBADF]
+\fIS\fP is not a valid descriptor.
+.TP 20
+[ENOTSOCK]
+\fIS\fP is not a socket.
+.TP 20
+[EADDRNOTAVAIL]
+The specified address is not available from the local machine.
+.TP 20
+[EADDRINUSE]
+The specified address is already in use.
+.TP 20
+[EINVAL]
+The socket is already bound to an address.
+.TP 20
+D 5
+[EACCESS]
+E 5
+I 5
+[EACCES]
+E 5
+The requested address is protected, and the current user
+has inadequate permission to access it.
+.TP 20
+[EFAULT]
+The \fIname\fP parameter is not in a valid part of the user
+address space.
+I 3
+.PP
+The following errors are specific to binding names in the UNIX domain.
+D 6
+These errors may not apply in future versions of the UNIX ipc domain.
+E 6
+.TP 15
+[ENOTDIR]
+A component of the path prefix is not a directory.
+.TP 15
+[EINVAL]
+The pathname contains a character with the high-order bit set.
+.TP 15
+[ENAMETOOLONG]
+A component of a pathname exceeded 255 characters,
+or an entire path name exceeded 1023 characters.
+.TP 15
+[ENOENT]
+A prefix component of the path name does not exist.
+.TP 15
+[ELOOP]
+Too many symbolic links were encountered in translating the pathname.
+.TP 15
+[EIO]
+An I/O error occurred while making the directory entry or allocating the inode.
+.TP 15
+[EROFS]
+The name would reside on a read-only file system.
+.TP 15
+[EISDIR]
+A null pathname was specified.
+E 3
+.SH SEE ALSO
+connect(2), listen(2), socket(2), getsockname(2)
+E 1

@@ -1,0 +1,14 @@
+; Authoritative data for Harhan.COM (ORIGIN assumed Harhan.COM)
+;
+@		IN	SOA	ivan.Harhan.ORG. hostmaster.ivan.Harhan.ORG.  (
+					2005000003	; Serial
+					10800		; Refresh 3 hours
+					1200		; Retry   20 min
+					5184000		; Expire  60 days
+					86400 )		; Minimum 24 hours
+		IN	NS	ivan.Harhan.ORG.
+		IN	NS	ifctfvax.Harhan.ORG.
+		IN	MX	10 hec1
+hec1		IN	A	208.221.139.13
+		IN	HINFO	ULTRA-5 LINUX
+www		IN	CNAME	hec1

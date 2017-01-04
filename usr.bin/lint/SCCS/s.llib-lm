@@ -1,0 +1,101 @@
+h53907
+s 00001/00001/00044
+d D 1.4 87/04/13 16:38:14 bostic 4 3
+c typo
+e
+s 00003/00000/00042
+d D 1.3 87/04/06 15:25:42 bostic 3 2
+c bug report 4.3BSD/usr.bin/47
+e
+s 00012/00000/00030
+d D 1.2 86/03/14 02:12:31 donn 2 1
+c installed lint entries for several new (and old) functions
+e
+s 00030/00000/00000
+d D 1.1 85/06/19 18:10:56 mckusick 1 0
+c date and time created 85/06/19 18:10:56 by mckusick
+e
+u
+U
+t
+T
+I 1
+/*	%M%	%I%	%E%	*/
+    /* LINTLIBRARY */
+double	acos(x) double x; { return x; }
+I 3
+D 4
+double	acosh(x) doublex; { return x; }
+E 4
+I 4
+double	acosh(x) double x; { return x; }
+E 4
+E 3
+double	asin(x) double x; { return x; }
+I 3
+double	asinh(x) double x; { return x; }
+E 3
+double	atan(x) double x; { return x; }
+I 3
+double	atanh(x) double x; { return x; }
+E 3
+double	atan2(x,y) double x,y; { return x; }
+double	cabs(z) struct {double x, y;} z; { return z.x; }
+I 2
+double	cbrt(x) double x; { return x; }
+E 2
+double	ceil(x) double x; { return x; }
+I 2
+double	copysign(x,y) double x,y; { return x; }
+E 2
+double	cos(x) double x; { return x; }
+double	cosh(x) double x; { return x; }
+I 2
+double	drem(x,y) double x,y; { return x; }
+E 2
+double	erf(x) double x; { return x; }
+double	erfc(x) double x; { return x; }
+double	exp(x) double x; { return x; }
+I 2
+double	expm1(x) double x; { return x; }
+E 2
+double	fabs(x) double x; { return x; }
+I 2
+int	finite(x) double x; { return 0; }
+E 2
+double	floor(x) double x; { return x; }
+double	gamma(x) double x; { return x; }
+double	hypot(x,y) double x,y; { return x; }
+I 2
+double	infnan(i) { return 1.0; };
+E 2
+double	j0(x) double x; { return x; }
+double	j1(x) double x; { return x; }
+double	jn(n,x) double x; { return x; }
+I 2
+double	lgamma(x) double x; { return x; }
+E 2
+double	log(x) double x; { return x; }
+I 2
+double	logb(x) double x; { return x; }
+E 2
+double	log10(x) double x; { return x; }
+I 2
+double	log1p(x) double x; { return x; }
+E 2
+double	pow(x,y) double x,y; { return x; }
+I 2
+double	rint(x) double x; { return x; }
+double	scalb(x,n) double x; { return x; }
+E 2
+double	sin(x) double x; { return x; }
+double	sinh(x) double x; { return x; }
+double	sqrt(x) double x; { return x; }
+I 2
+double	tan(x) double x; { return x; }
+E 2
+double	tanh(x) double x; { return x; }
+double	y0(x) double x; { return x; }
+double	y1(x) double x; { return x; }
+double	yn(n,x) double x; { return x; }
+E 1

@@ -1,0 +1,52 @@
+h22310
+s 00000/00000/00029
+d D 6.1 85/04/29 19:11:49 mckusick 4 2
+c 4.3BSD beta release manual page
+e
+s 00000/00021/00008
+d R 6.1 85/04/27 12:51:34 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00000/00000/00029
+d D 5.1 85/04/27 12:50:18 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00029/00000/00000
+d D 4.1 85/04/27 12:50:01 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH ARCV 8 "%G%"
+.UC 4
+.SH NAME
+arcv \- convert archives to new format
+.SH SYNOPSIS
+.B /etc/arcv
+file ...
+.SH DESCRIPTION
+.I Arcv
+converts archive files
+(see
+.IR ar (1),
+.IR ar (5))
+from 32v and Third Berkeley editions to a new portable format.
+The conversion is done in place, and the command
+refuses to alter a file not in old archive format.
+.PP
+Old archives are marked with a magic number of 0177545 at the start;
+new archives have a first line ``!<arch>''.
+.SH FILES
+/tmp/v*, temporary copy
+.SH SEE ALSO
+ar(1), ar(5)
+E 1

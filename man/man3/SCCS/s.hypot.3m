@@ -1,0 +1,197 @@
+h55943
+s 00002/00002/00074
+d D 6.5 86/05/12 17:11:00 karels 7 6
+c intro(3M) => math(3M), move see also's to end
+e
+s 00007/00001/00069
+d D 6.4 85/09/11 18:52:41 mckusick 6 5
+c new from Kahan
+e
+s 00054/00012/00016
+d D 6.3 85/08/21 15:09:14 miriam 5 4
+c Revision by Prof. Kahan.
+e
+s 00007/00008/00021
+d D 6.2 85/05/24 15:06:28 miriam 4 3
+c From Prof. Kahan
+e
+s 00001/00001/00028
+d D 6.1 85/05/15 15:01:32 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00027
+d D 5.1 85/05/15 15:01:26 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00029/00000/00000
+d D 4.1 85/05/15 15:01:20 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+D 4
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH HYPOT 3M 
+E 2
+I 2
+D 3
+.TH HYPOT 3M  "19 January 1983"
+E 3
+I 3
+.TH HYPOT 3M  "%Q%"
+E 3
+E 2
+.AT 3
+E 4
+I 4
+D 5
+.TH HYPOT 3M  "8 May 1985"
+E 5
+I 5
+D 6
+.TH HYPOT 3M  "7 August 1985"
+E 6
+I 6
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH HYPOT 3M  "%Q%"
+E 6
+E 5
+.UC 4
+I 5
+.ds up \fIulp\fR
+.ds nn \fINaN\fR
+E 5
+E 4
+.SH NAME
+D 4
+hypot, cabs \- Euclidean distance
+E 4
+I 4
+hypot, cabs \- Euclidean distance, complex absolute value
+E 4
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+D 5
+.B double hypot(x, y)
+.B double x, y;
+E 5
+I 5
+.B double hypot(x,y)
+.B double x,y;
+E 5
+.PP
+.B double cabs(z)
+D 5
+.B struct { double x, y;} z;
+E 5
+I 5
+.B struct {double x,y;} z;
+E 5
+.fi
+.SH DESCRIPTION
+D 5
+.I Hypot
+and
+.I cabs
+return
+E 5
+I 5
+Hypot(x,y) and cabs(x,y) return sqrt(x\(**x+y\(**y)
+computed in such a way that underflow will not happen, and overflow
+occurs only if the final result deserves it.
+E 5
+.PP
+D 5
+.IP
+D 4
+sqrt(x*x + y*y),
+E 4
+I 4
+.I sqrt(x*x+y*y),
+E 4
+.LP
+taking precautions against unwarranted overflows.
+E 5
+I 5
+.if n \
+hypot(infinity,v) = hypot(v,infinity) = +infinity for all v, 
+.if t \
+hypot(\(if,v) = hypot(v,\(if) = +\(if for all v, 
+including \*(nn.
+E 5
+D 7
+.SH SEE ALSO
+D 2
+exp(3) for
+E 2
+I 2
+D 4
+exp(3M) for
+E 2
+.I sqrt
+E 4
+I 4
+intro(3M), sqrt(3M)
+E 7
+I 5
+.SH ERROR (due to Roundoff, etc.)
+Below 0.97 \*(ups.  Consequently hypot(5.0,12.0)\0=\013.0 exactly;
+in general, hypot and cabs return an integer whenever an
+integer might be expected.
+.PP
+The same cannot be said for the shorter and faster version of hypot
+and cabs that is provided in the comments in cabs.c; its error can
+exceed 1.2 \*(ups.
+.SH NOTES
+As might be expected, hypot(v,\*(nn) and hypot(\*(nn,v) are \*(nn for all
+\fIfinite\fR v; with "reserved operand" in place of "\*(nn", the
+same is true on a VAX.  But programmers on machines other than a VAX
+(it has no
+.if n \
+infinity)
+.if t \
+\(if)
+might be surprised at first to discover that
+.if n \
+hypot(\(+-infinity,\*(nn) = +infinity.
+.if t \
+hypot(\(+-\(if,\*(nn) = +\(if.
+This is intentional; it happens because
+.if n \
+hypot(infinity,v) = +infinity
+.if t \
+hypot(\(if,v) = +\(if
+for \fIall\fR v, finite or infinite.
+Hence
+.if n \
+hypot(infinity,v)
+.if t \
+hypot(\(if,v)
+is independent of v.
+Unlike the reserved operand on a VAX, the IEEE \*(nn is designed to
+disappear when it turns out to be irrelevant, as it does in
+.if n \
+hypot(infinity,\*(nn).
+.if t \
+hypot(\(if,\*(nn).
+I 7
+.SH SEE ALSO
+math(3M), sqrt(3M)
+E 7
+E 5
+.SH AUTHOR
+W. Kahan
+E 4
+E 1

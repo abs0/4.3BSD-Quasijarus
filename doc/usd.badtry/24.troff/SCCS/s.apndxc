@@ -1,0 +1,81 @@
+h35447
+s 00001/00000/00054
+d D 6.3 05/06/26 03:11:45 msokolov 3 2
+c need to undo .tr &.
+e
+s 00001/00001/00053
+d D 6.2 04/10/28 00:59:31 msokolov 2 1
+c Appendix A lengthened by one page
+e
+s 00054/00000/00000
+d D 6.1 04/10/26 16:51:57 msokolov 1 0
+c date and time created 04/10/26 16:51:57 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.pn35
+E 2
+I 2
+.pn36
+E 2
+.br
+.ftB
+.ps+2
+.ce 2
+Appendix C
+Historic \*(TR Roman Fonts
+.ftR
+.ps-2
+.sp
+Historic \*(TR expects Roman fonts to contain 26 uppercase and lowercase
+letters, digits,
+opening and closing single quotes (as in `quoted word'),
+\s-1ASCII\s0 characters
+.ft CB
+I 3
+.tr &&
+E 3
+! $ % & ( ) * + \- . , / : ; = ? [ ] |
+.ft R
+(note that this is \fInot\fR the complete \s-1ASCII\s0 set)
+and the following named non-\s-1ASCII\s0 characters:
+.sp
+.nf
+.ftBI
+.ta .25iC .5i +.45i 3.25iC +.25i +.45i
+		Input	Character		Input	Character
+		Name	Description		Name	Description
+.ftR
+.sp.2
+.mk
+.lg 0
+		\e(em	\(34 em dash
+		\e(hy	hyphen -
+		\e(bu	bullet \(bu
+		\e(sq	square (hollow or filled
+			depending on typesetter and font)
+		\e(ru	baseline rule
+		\e(14	\(14
+		\e(12	\(12
+		\e(34	\(34
+		\e(fi	fi ligature
+.rt
+.po +3i
+		\e(fl	fl ligature
+		\e(ff	ff ligature
+		\e(Fi	ffi ligature
+		\e(Fl	ffl ligature
+		\e(de	degree \(de
+		\e(dg	dagger \(dg
+		\e(fm	foot mark
+		\e(ct	cent sign \(ct
+		\e(rg	registered \(rg
+		\e(co	copyright \(co
+.po 1i
+E 1

@@ -1,0 +1,485 @@
+. :
+ NS type 3:
+  cached NS expires Sun Jan 20 02:58:06 2013
+  server A.ROOT-SERVERS.NET.
+   A 198.41.0.4
+   cached A expires Sun Feb 24 18:58:06 2013
+  server B.ROOT-SERVERS.NET.
+   A 192.228.79.201
+   cached A expires Sun Feb 24 18:58:06 2013
+  server C.ROOT-SERVERS.NET.
+   A 192.33.4.12
+   cached A expires Sun Feb 24 18:58:06 2013
+  server D.ROOT-SERVERS.NET.
+   A 199.7.91.13
+   cached A expires Sun Feb 24 18:58:06 2013
+  server E.ROOT-SERVERS.NET.
+   A 192.203.230.10
+   cached A expires Sun Feb 24 18:58:06 2013
+  server F.ROOT-SERVERS.NET.
+   A 192.5.5.241
+   cached A expires Sun Feb 24 18:58:06 2013
+  server G.ROOT-SERVERS.NET.
+   A 192.112.36.4
+   cached A expires Sun Feb 24 18:58:06 2013
+  server H.ROOT-SERVERS.NET.
+   A 128.63.2.53
+   cached A expires Sun Feb 24 18:58:06 2013
+  server I.ROOT-SERVERS.NET.
+   A 192.36.148.17
+   cached A expires Sun Feb 24 18:58:06 2013
+  server J.ROOT-SERVERS.NET.
+   A 192.58.128.30
+   cached A expires Sun Feb 24 18:58:07 2013
+  server K.ROOT-SERVERS.NET.
+   A 193.0.14.129
+   cached A expires Sun Feb 24 18:58:07 2013
+  server L.ROOT-SERVERS.NET.
+   A 199.7.83.42
+   cached A expires Sun Feb 24 18:58:07 2013
+  server M.ROOT-SERVERS.NET.
+   A 202.12.27.33
+   cached A expires Sun Feb 24 18:58:07 2013
+
+COM. (non-zone child):
+ included in the cache sweep list
+ NS type 4:
+  cached NS expires Wed Jan 16 03:03:16 2013
+  server j.gtld-servers.net.
+   A 192.48.79.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server k.gtld-servers.net.
+   A 192.52.178.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server b.gtld-servers.net.
+   A 192.33.14.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server m.gtld-servers.net.
+   A 192.55.83.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server i.gtld-servers.net.
+   A 192.43.172.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server c.gtld-servers.net.
+   A 192.26.92.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server f.gtld-servers.net.
+   A 192.35.51.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server g.gtld-servers.net.
+   A 192.42.93.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server a.gtld-servers.net.
+   A 192.5.6.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server l.gtld-servers.net.
+   A 192.41.162.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server d.gtld-servers.net.
+   A 192.31.80.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server h.gtld-servers.net.
+   A 192.54.112.30
+   cached A expires Wed Jan 16 03:03:16 2013
+  server e.gtld-servers.net.
+   A 192.12.94.30
+   cached A expires Wed Jan 16 03:03:16 2013
+
+Harhan.COM. (non-zone child):
+ Node is a zone head
+ Local zone-head SOA:
+  MNAME=ivan.Harhan.ORG.
+  RNAME=hostmaster.ivan.Harhan.ORG.
+  serial=2005000003
+  refresh=10800
+  retry=1200
+  expire=5184000
+  minimum=86400
+ NS type 1:
+  NS TTL 0
+  server ivan.Harhan.ORG.
+  server ifctfvax.Harhan.ORG.
+ RRs from the zone:
+  MX (class 1) 10 hec1.harhan.com.
+
+www.Harhan.COM. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  CNAME (class 1) hec1.harhan.com.
+
+hec1.Harhan.COM. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 0D
+  HINFO (class 1)
+    07 55 4C 54 52 41 2D 35 05 4C 49 4E 55 58
+
+google.COM. (non-zone child):
+ included in the cache sweep list
+ NS type 4:
+  cached NS expires Wed Jan 16 03:03:16 2013
+  server ns2.google.com.
+   A 216.239.34.10
+   cached A expires Wed Jan 16 03:03:16 2013
+  server ns1.google.com.
+   A 216.239.32.10
+   cached A expires Wed Jan 16 03:03:16 2013
+  server ns3.google.com.
+   A 216.239.36.10
+   cached A expires Wed Jan 16 03:03:16 2013
+  server ns4.google.com.
+   A 216.239.38.10
+   cached A expires Wed Jan 16 03:03:16 2013
+
+www.google.COM. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 14 03:08:16 2013
+  A (class 1) 4A 7D E0 F1
+    expires Mon Jan 14 03:08:16 2013
+  A (class 1) 4A 7D E0 F3
+    expires Mon Jan 14 03:08:16 2013
+  A (class 1) 4A 7D E0 F2
+    expires Mon Jan 14 03:08:16 2013
+  A (class 1) 4A 7D E0 F4
+    expires Mon Jan 14 03:08:16 2013
+  A (class 1) 4A 7D E0 F0
+    expires Mon Jan 14 03:08:16 2013
+
+NET. (non-zone child):
+ included in the cache sweep list
+
+ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+
+B.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C0 E4 4F C9
+    expires Mon Jan 21 02:58:06 2013
+
+M.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:07 2013
+  A (class 1) CA 0C 1B 21
+    expires Mon Jan 21 02:58:07 2013
+
+A.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C6 29 00 04
+    expires Mon Jan 21 02:58:06 2013
+
+K.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:07 2013
+  A (class 1) C1 00 0E 81
+    expires Mon Jan 21 02:58:07 2013
+
+H.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) 80 3F 02 35
+    expires Mon Jan 21 02:58:06 2013
+
+I.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C0 24 94 11
+    expires Mon Jan 21 02:58:06 2013
+
+L.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:07 2013
+  A (class 1) C7 07 53 2A
+    expires Mon Jan 21 02:58:07 2013
+
+C.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C0 21 04 0C
+    expires Mon Jan 21 02:58:06 2013
+
+F.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C0 05 05 F1
+    expires Mon Jan 21 02:58:06 2013
+
+E.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C0 CB E6 0A
+    expires Mon Jan 21 02:58:06 2013
+
+J.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:07 2013
+  A (class 1) C0 3A 80 1E
+    expires Mon Jan 21 02:58:07 2013
+
+G.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C0 70 24 04
+    expires Mon Jan 21 02:58:06 2013
+
+D.ROOT-SERVERS.NET. (non-zone child):
+ included in the cache sweep list
+ Cached QTYPE 1 (A):
+  expires Mon Jan 21 02:58:06 2013
+  A (class 1) C7 07 5B 0D
+    expires Mon Jan 21 02:58:06 2013
+
+ORG. (non-zone child):
+ included in the cache sweep list
+ NS type 4:
+  cached NS expires Wed Jan 16 03:02:29 2013
+  server a2.org.afilias-nst.info.
+   A 199.249.112.1
+   cached A expires Wed Jan 16 03:02:29 2013
+  server b0.org.afilias-nst.org.
+   A 199.19.54.1
+   cached A expires Wed Jan 16 03:02:29 2013
+  server c0.org.afilias-nst.info.
+   A 199.19.53.1
+   cached A expires Wed Jan 16 03:02:29 2013
+  server b2.org.afilias-nst.org.
+   A 199.249.120.1
+   cached A expires Wed Jan 16 03:02:29 2013
+  server d0.org.afilias-nst.org.
+   A 199.19.57.1
+   cached A expires Wed Jan 16 03:02:29 2013
+  server a0.org.afilias-nst.info.
+   A 199.19.56.1
+   cached A expires Wed Jan 16 03:02:29 2013
+
+ifctf.ORG. (non-zone child):
+ included in the cache sweep list
+ NS type 4:
+  cached NS expires Tue Jan 15 03:02:29 2013
+  server ivan.harhan.org.
+   A 208.221.139.1
+   cached A expires Wed Jan 16 03:02:29 2013
+  server ifctfvax.harhan.org.
+   A 208.221.139.2
+   cached A expires Wed Jan 16 03:02:29 2013
+
+www.ifctf.ORG. (non-zone child):
+ included in the cache sweep list
+ Cached NXDOMAIN:
+  expires Tue Jan 15 03:02:29 2013
+  negative SOA:
+    owner=IFCTF.ORG.
+    ifctfvax.Harhan.ORG. hostmaster.ivan.Harhan.ORG.
+    2050000001 10800 1200 5184000 86400
+
+Harhan.ORG. (non-zone child):
+ Node is a zone head
+ Local zone-head SOA:
+  MNAME=ivan.Harhan.ORG.
+  RNAME=hostmaster.ivan.Harhan.ORG.
+  serial=2050011004
+  refresh=10800
+  retry=1200
+  expire=5184000
+  minimum=86400
+ NS type 1:
+  NS TTL 0
+  server ivan.Harhan.ORG.
+  server ifctfvax.Harhan.ORG.
+
+GUEST.Harhan.ORG. (zone child):
+ Node is part of a zone
+
+member-laptop2.GUEST.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 11
+
+enpower1.GUEST.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 10
+
+fmc.GUEST.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 0F
+
+fieldunit2.GUEST.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 12
+
+atlantis.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 03
+  HINFO (class 1)
+    0D 4D 49 43 52 4F 56 41 58 2D 33 31 30 30 06 55
+    4C 54 52 49 58
+
+WKST.Harhan.ORG. (zone child):
+ Node is part of a zone
+
+issxt1.WKST.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 09
+  HINFO (class 1)
+    0E 53 50 41 52 43 73 74 61 74 69 6F 6E 2D 35 05
+    49 53 53 58 54
+
+eureka.WKST.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 0A
+  HINFO (class 1)
+    06 50 45 45 43 45 45 05 4C 49 4E 55 58
+
+NEXUS.Harhan.ORG. (zone child):
+ Node is part of a zone
+
+harhan-gw.NEXUS.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 0E
+  A (class 1) CE 72 E7 B7
+  HINFO (class 1)
+    0A 43 69 73 63 6F 2D 32 35 30 33 03 49 4F 53
+
+hp5si.NEXUS.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 89
+
+temphost3.NEXUS.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 84
+
+temphost1.NEXUS.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 82
+
+temphost2.NEXUS.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 83
+
+dosdev.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 04
+  HINFO (class 1)
+    09 49 42 4D 2D 50 43 2F 41 54 03 44 4F 53
+
+ivan.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 01
+  HINFO (class 1)
+    0C 4D 49 43 52 4F 56 41 58 2D 36 35 35 04 55 4E
+    49 58
+
+LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+
+ce200.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 85
+
+d50.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 87
+
+am3517.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 8B
+
+tr3b.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 88
+  HINFO (class 1)
+    0A 43 69 73 63 6F 2D 33 36 34 30 03 49 4F 53
+
+uws1.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 08
+  HINFO (class 1)
+    07 55 4C 54 52 41 2D 35 05 4C 49 4E 55 58
+
+tr1.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 86
+  HINFO (class 1)
+    0A 43 69 73 63 6F 2D 32 35 30 31 03 49 4F 53
+
+demi1.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 8A
+
+testmvax.LAB.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 0C
+  HINFO (class 1)
+    0C 4D 49 43 52 4F 56 41 58 2D 36 35 30 04 55 4E
+    49 58
+
+ifctfvax.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 02
+  HINFO (class 1)
+    0C 4D 49 43 52 4F 56 41 58 2D 36 35 30 04 55 4E
+    49 58
+
+luthien.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 05
+  HINFO (class 1)
+    0C 4D 49 43 52 4F 56 41 58 2D 36 35 35 04 55 4E
+    49 58
+
+dyndns.Harhan.ORG. (zone child):
+ Node is part of a zone
+ NS type 2:
+  NS TTL 0
+  server ivan.Harhan.ORG.
+
+helium.Harhan.ORG. (zone child):
+ Node is part of a zone
+ RRs from the zone:
+  A (class 1) D0 DD 8B 06
+  HINFO (class 1)
+    06 50 45 45 43 45 45 05 4C 49 4E 55 58
+
+TAS.Harhan.ORG. (zone child):
+ Node is part of a zone
+ NS type 2:
+  NS TTL 0
+  server sword.svetaleks.uz.
+

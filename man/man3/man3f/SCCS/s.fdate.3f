@@ -1,0 +1,69 @@
+h36979
+s 00001/00001/00039
+d D 6.2 86/05/27 10:22:26 kjd 3 2
+c fix quote
+e
+s 00001/00001/00039
+d D 6.1 85/05/15 16:17:30 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00040/00000/00000
+d D 5.1 85/05/15 16:17:23 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FDATE 3F "13 June 1983"
+E 2
+I 2
+.TH FDATE 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+fdate \- return date and time in an ASCII string
+.SH SYNOPSIS
+.B subroutine fdate (string)
+.br
+.B character*(*) string
+.sp 1
+.B character*(*) function fdate()
+.SH DESCRIPTION
+.I Fdate
+returns the current date and time as a 24 character string
+in the format described under
+.IR ctime (3).
+D 3
+Neither 'newline' nor NULL will be included.
+E 3
+I 3
+Neither `newline' nor NULL will be included.
+E 3
+.PP
+.I Fdate
+can be called either as a function or as a subroutine.
+If called as a function, the calling routine must define
+its type and length. For example:
+.nf
+
+	character*24   fdate
+	external       fdate
+
+	write(*,*) fdate()
+
+.fi
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.SH "SEE ALSO"
+ctime(3), time(3F), itime(3F), idate(3F), ltime(3F)
+E 1

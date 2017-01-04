@@ -1,0 +1,32 @@
+h26274
+s 00001/00001/00011
+d D 1.2 99/09/12 20:19:05 msokolov 2 1
+c fix SCCS ID keywords
+e
+s 00012/00000/00000
+d D 1.1 86/11/11 22:53:56 minshall 1 0
+c date and time created 86/11/11 22:53:56 by minshall
+e
+u
+U
+t
+T
+I 1
+/*
+D 2
+ *	@(#)options.ext	3.1  10/29/86
+E 2
+I 2
+ *	%W%  %G%
+E 2
+ */
+
+/*
+ * Definitions for external routines from options.c.
+ */
+
+extern void
+	OptInit();
+extern int
+	OptOrder();
+E 1

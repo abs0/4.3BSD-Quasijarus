@@ -1,0 +1,1729 @@
+/usr/src/man/man1/SCCS/s.gzcompat.1:
+6.2 04/01/01 12:09:31 msokolov 2 1
+use .UC 8, it's a 4.3BSD-Quasijarus addition
+/usr/src/man/man7/SCCS/s.Makefile:
+5.3 04/01/02 10:55:09 msokolov 3 2
+add koi(7)
+/usr/src/man/man1/SCCS/s.cat.1:
+6.4 04/01/02 10:56:15 msokolov 6 5
+document -7 and -8
+/usr/src/man/man4/SCCS/s.tty.4:
+6.8 04/01/02 11:26:05 msokolov 10 9
+document 8-bit and KOI terminal support
+/usr/src/sys/vax/SCCS/s.cpu.h:
+7.8 04/01/03 18:07:34 msokolov 23 22
+new CPU ID logic
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.18 04/01/03 18:07:36 msokolov 168 167
+new CPU ID logic
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.21 04/01/03 18:11:18 msokolov 104 103
+new CPU ID logic
+move printing of "MicroVAX ..." banner to cpu_init routines in ka6??.c
+/usr/src/sys/vax/SCCS/s.ka630.c:
+7.7 04/01/03 18:11:23 msokolov 8 7
+new CPU ID logic
+move printing of "MicroVAX ..." banner to cpu_init routines in ka6??.c
+/usr/src/sys/vax/SCCS/s.ka650.c:
+7.6 04/01/03 18:11:24 msokolov 6 5
+new CPU ID logic
+move printing of "MicroVAX ..." banner to cpu_init routines in ka6??.c
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.13 04/01/03 18:12:10 msokolov 49 48
+add vax/cpuid.s
+/usr/src/sys/vax/SCCS/s.mtpr.h:
+7.6 04/01/04 01:45:07 msokolov 18 17
+CADR is known as CCR on SOC
+/usr/src/sys/vax/SCCS/s.ka650.h:
+7.5 04/01/04 01:46:44 msokolov 5 4
+CVAX definitions separated out into cvax.h
+/usr/src/sys/vax/SCCS/s.ka650.c:
+7.7 04/01/04 01:51:25 msokolov 7 6
+handle 650/640/660 cache differences
+while there correct read and write error machine check messages
+/usr/src/sys/conf/SCCS/s.Makefile.vax:
+7.9 04/01/04 10:41:06 msokolov 45 44
+move emulate.s from special handling in Makefile.vax and config to files.vax
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.14 04/01/04 10:41:07 msokolov 50 49
+move emulate.s from special handling in Makefile.vax and config to files.vax
+/usr/src/etc/config/SCCS/s.mkmakefile.c:
+5.22 04/01/04 10:45:31 msokolov 58 57
+VAX do_systemspec: take out emulate.o, it's now listed regularly in files.vax
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.22 04/01/04 11:19:14 msokolov 105 104
+be more informative when punting that a cpu is unknown or unsupported
+/usr/src/sys/sys/SCCS/s.sys_process.c:
+7.5 04/01/04 21:42:46 msokolov 21 20
+also need to check if the VAX CPU has compatibility mode at all!
+/usr/src/sys/sys/SCCS/s.init_sysent.c:
+7.4 04/01/08 05:35:47 msokolov 66 65
+add sigemu syscall
+/usr/src/sys/vax/SCCS/s.machdep.c:
+7.19 04/01/08 05:36:01 msokolov 187 186
+add sigemu syscall
+/usr/src/sys/h/SCCS/s.syscall.h:
+5.5 04/01/08 11:17:10 msokolov 21 20
+add sigemu
+/usr/src/sys/vax/SCCS/s.cpucond.h:
+7.2 04/01/10 22:27:08 msokolov 2 1
+#define our symbols to 1 so they can be used in #if
+/usr/src/sys/vax/SCCS/s.genassym.c:
+7.4 04/01/11 11:32:34 msokolov 17 16
+add U_ONSTACK for the new same mode emulator
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.19 04/01/11 11:33:31 msokolov 169 168
+same mode emulation vectors moved to emul/emul_samemode.s
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.15 04/01/11 11:35:17 msokolov 51 50
+new instruction emulation code
+/usr/src/sys/h/SCCS/s.signal.h:
+7.4 04/01/11 11:39:57 msokolov 21 20
+make it usable by assembly code, it's used by the new same mode emulator
+/usr/src/sys/vax/emul/SCCS/s.emul_samemode.s:
+7.2 04/01/12 20:49:41 msokolov 2 1
+faults clear TP per VARM
+correct comment about kernel use of the emulator
+/usr/src/sys/vax/emul/SCCS/s.emul_cvtpl.s:
+7.2 04/01/12 20:50:06 msokolov 2 1
+faults clear TP per VARM
+/usr/src/sys/vax/emul/SCCS/s.emul_string.s:
+7.2 04/01/12 21:55:27 msokolov 2 1
+MOVTC:	handle overlap as required by VARM
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.Makefile:
+1.2 04/01/22 14:21:37 msokolov 2 1
+add FP MOV/MNEG zero canonicalisation test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.main.c:
+1.2 04/01/22 14:21:38 msokolov 2 1
+add FP MOV/MNEG zero canonicalisation test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substestsup.s:
+1.2 04/01/22 16:28:23 msokolov 2 1
+brown paper bag
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substesttab:
+1.2 04/01/22 16:29:23 msokolov 2 1
+add character string instructions
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.main.c:
+1.3 04/01/22 16:30:12 msokolov 3 2
+define zerobuf here, a generic buffer of 256 zeros (in bss)
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substesttab:
+1.3 04/01/22 21:38:57 msokolov 3 2
+add decimal string instructions
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substestsup.s:
+1.3 04/01/22 21:38:58 msokolov 3 2
+add decimal string instructions
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substesttab:
+1.4 04/01/22 22:01:08 msokolov 4 3
+add POLYx
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substestsup.s:
+1.4 04/01/22 22:01:09 msokolov 4 3
+add POLYx
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substesttab:
+1.5 04/01/22 22:12:21 msokolov 5 4
+add ACBx
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substestcmp.c:
+1.2 04/01/22 22:12:23 msokolov 2 1
+add ACBx
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.main.c:
+1.4 04/01/22 23:08:17 msokolov 4 3
+sigill() moved into a separate module
+add compatibility mode test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.Makefile:
+1.3 04/01/22 23:08:35 msokolov 3 2
+add compatmode.s and signals.c
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.main.c:
+1.5 04/01/23 02:41:36 msokolov 5 4
+add unpredictable PC addressing modes test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.Makefile:
+1.4 04/01/23 02:41:48 msokolov 4 3
+add pcunpred.s
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.signals.c:
+1.2 04/01/23 02:42:17 msokolov 2 1
+add support for unpredictable PC addressing modes test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.pcunpred.s:
+1.2 04/01/23 23:54:13 msokolov 2 1
+add (PC) and -(PC) tests
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.main.c:
+1.6 04/01/23 23:54:35 msokolov 6 5
+add signal support for (PC) and -(PC) tests
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.signals.c:
+1.3 04/01/23 23:54:37 msokolov 3 2
+add signal support for (PC) and -(PC) tests
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.main.c:
+1.7 04/01/24 00:42:17 msokolov 7 6
+add immediate addressing mode quirks test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.signals.c:
+1.4 04/01/24 00:43:26 msokolov 4 3
+add support for immediate addressing mode quirks test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.Makefile:
+1.5 04/01/24 00:43:53 msokolov 5 4
+add immquirks.s
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substestcmp.c:
+1.3 04/01/24 10:46:09 msokolov 3 2
+write magic into -164(sp) to catch Ultrix float emulator
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substestsup.s:
+1.5 04/01/24 10:46:10 msokolov 5 4
+write magic into -164(sp) to catch Ultrix float emulator
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.Makefile:
+1.6 04/01/24 14:24:25 msokolov 6 5
+run immquirks.s and pcunpred.s through cpp and use mksigasm to capture
+sc_pc and sc_ps offsets
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.immquirks.s:
+1.2 04/01/24 14:24:26 msokolov 2 1
+run immquirks.s and pcunpred.s through cpp and use mksigasm to capture
+sc_pc and sc_ps offsets
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.pcunpred.s:
+1.3 04/01/24 14:24:28 msokolov 3 2
+run immquirks.s and pcunpred.s through cpp and use mksigasm to capture
+sc_pc and sc_ps offsets
+/usr/src/include/arpa/SCCS/s.nameser.h:
+5.19 04/01/25 00:13:30 msokolov 24 23
+add T_TXT from RFC 1035
+/usr/src/include/arpa/SCCS/s.nameser.h:
+5.20 04/01/25 17:30:39 msokolov 25 24
+bring back historical C_CS and add C_HS
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.substesttab:
+1.6 04/01/27 11:48:15 msokolov 6 5
+better comments
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.immquirks.s:
+1.3 04/01/27 12:35:55 msokolov 3 2
+add immediate indexed addressing mode test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.signals.c:
+1.5 04/01/27 12:35:57 msokolov 5 4
+add immediate indexed addressing mode test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.Makefile:
+1.7 04/01/27 13:22:10 msokolov 7 6
+add lasts1.s
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.main.c:
+1.8 04/01/27 13:22:52 msokolov 8 7
+add S1 reserved region last 16 addresses test
+/fs1/home/msokolov/hack/vaxtest/SCCS/s.signals.c:
+1.6 04/01/27 13:23:21 msokolov 6 5
+add signal support for S1 reserved region last 16 addresses test
+/usr/src/sys/vax/emul/SCCS/s.emul_string.s:
+7.3 04/01/27 21:37:37 msokolov 3 2
+CMPC3, CMPC5, LOCC, SKPC, SCANC, SPANC are now in base subset
+emulation needed only on MV II
+/usr/src/sys/vax/emul/SCCS/s.emul_samemode.s:
+7.3 04/01/27 21:37:38 msokolov 3 2
+CMPC3, CMPC5, LOCC, SKPC, SCANC, SPANC are now in base subset
+emulation needed only on MV II
+/usr/src/sys/vax/SCCS/s.cpucond.h:
+7.3 04/01/27 22:25:40 msokolov 3 2
+add VARM 2nd ed. logic
+/usr/src/sys/vax/emul/SCCS/s.emul_opspec.s:
+7.2 04/02/03 11:03:36 msokolov 2 1
+correct comment
+/usr/src/sys/vax/emul/SCCS/s.emul_cvtpl.s:
+7.3 04/02/03 11:12:57 msokolov 3 2
+fix PANIC macro to use 0: instead of 1: to reduce interference
+/usr/src/sys/vax/emul/SCCS/s.emul_decarith.s:
+7.2 04/02/03 11:12:59 msokolov 2 1
+fix PANIC macro to use 0: instead of 1: to reduce interference
+/usr/src/sys/vax/emul/SCCS/s.emul_samemode.s:
+7.4 04/02/03 11:13:04 msokolov 4 3
+fix PANIC macro to use 0: instead of 1: to reduce interference
+/usr/src/sys/vax/emul/SCCS/s.emul_fflt.s:
+7.2 04/02/03 12:04:52 msokolov 2 1
+leftover inappropriate instruction in do_addsubf subroutine
+/usr/src/sys/vax/emul/SCCS/s.emul_fflt.s:
+7.3 04/02/03 17:00:23 msokolov 3 2
+fixes and optimisations caught on review
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.16 04/02/03 18:30:11 msokolov 52 51
+add F & D floating point instruction emulator
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.20 04/02/03 18:39:03 msokolov 170 169
+hook in floating point instruction emulator
+/usr/src/sys/vax/SCCS/s.scb.s:
+7.5 04/02/04 20:22:40 msokolov 29 28
+we now don't have _Xemulate and _XemulateFPD at all when not supporting
+same mode emulation
+/usr/src/sys/vaxuba/SCCS/s.qd.c:
+1.12 04/02/05 00:38:34 msokolov 14 13
+q_key and q_shift_key tables back to char, since we don't implement compose
+we have no 8-bit keyboard input
+/usr/src/sys/vaxuba/SCCS/s.qfont.c:
+1.4 04/02/05 00:38:46 msokolov 4 3
+q_key and q_shift_key tables back to char, since we don't implement compose
+we have no 8-bit keyboard input
+/usr/src/sys/vaxuba/SCCS/s.qv.c:
+1.10 04/02/05 00:38:51 msokolov 10 9
+q_key and q_shift_key tables back to char, since we don't implement compose
+we have no 8-bit keyboard input
+/usr/src/sys/vax/SCCS/s.cpu.h:
+7.9 04/02/06 21:59:04 msokolov 24 23
+contrary to BSD and Ultrix cpu.h files MicroVAX II SID does NOT have
+hardware rev or ucode rev fields
+/usr/src/sys/vax/SCCS/s.ka630.c:
+7.8 04/02/06 21:59:06 msokolov 9 8
+contrary to BSD and Ultrix cpu.h files MicroVAX II SID does NOT have
+hardware rev or ucode rev fields
+/usr/src/bin/as/as.vax/SCCS/s.asmain.c:
+5.6 04/02/07 05:22:56 msokolov 21 20
+"Caution: absolute origins" is a warning, don't screw people with yyerror
+/usr/src/sys/mdec/SCCS/s.Makefile:
+7.9 04/02/07 06:55:45 msokolov 16 15
+decboot replaces rdboot
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.25 04/02/07 11:35:15 msokolov 83 82
+started standalone system revamping
+/usr/src/sys/vaxstand/SCCS/s.autoconf.c:
+7.14 04/02/07 11:35:18 msokolov 24 23
+started standalone system revamping
+/usr/src/sys/vaxstand/SCCS/s.prf.c:
+7.7 04/02/07 11:35:20 msokolov 18 17
+started standalone system revamping
+/usr/src/sys/vaxstand/SCCS/s.srt0.c:
+7.9 04/02/07 11:35:21 msokolov 30 29
+started standalone system revamping
+/usr/src/sys/vaxstand/SCCS/s.vmb.c:
+7.2 04/02/07 17:14:48 msokolov 2 1
+oops, can't use sprintf
+/usr/src/sys/vaxstand/SCCS/s.vmberr.c:
+7.2 04/02/07 17:14:49 msokolov 2 1
+oops, can't use sprintf
+/usr/src/sys/vaxstand/SCCS/s.vmbt.c:
+7.2 04/02/07 17:14:50 msokolov 2 1
+oops, can't use sprintf
+/usr/src/sys/mdec/SCCS/s.vmb.h:
+7.2 04/02/07 18:34:40 msokolov 2 1
+complete RPB definitions, make a C struct
+/usr/src/sys/vaxstand/SCCS/s.vmberr.c:
+7.3 04/02/07 18:35:00 msokolov 3 2
+vmb.h requires types.h now
+/usr/src/sys/vaxstand/SCCS/s.decsrt0.c:
+7.2 04/02/07 18:57:16 msokolov 2 1
+oops, missed .globl for _bootdev and _boothowto
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.26 04/02/07 19:01:28 msokolov 84 83
+implemented bootdec and tons of VMB and ROM stuff to go with it
+/usr/src/sys/vaxstand/SCCS/s.conf.c:
+7.7 04/02/07 19:01:31 msokolov 31 30
+implemented bootdec and tons of VMB and ROM stuff to go with it
+/usr/src/etc/etc.vax/SCCS/s.arff.c:
+5.7 04/02/14 17:56:15 msokolov 28 27
+c option directory initialization:	since Berkeley chose to allocate 4
+directory segments, only 480 blocks are available for data, not 486
+/usr/src/etc/etc.vax/SCCS/s.arff.c:
+5.8 04/02/14 18:42:02 msokolov 29 28
+RT-11 V5.5 year extensions to 2099
+display dates in ISO 8601 format
+/usr/src/sys/vaxstand/SCCS/s.srt0.c:
+7.8.1.1 04/02/14 19:02:09 msokolov 31 29
+fix 4.3-QJ0b blunder for 4.3-QJ0c
+/usr/src/sys/conf/SCCS/s.files:
+7.9 04/02/23 21:40:54 msokolov 35 34
+add lk201 module
+/usr/src/sys/vaxstand/SCCS/s.scb.c:
+7.2 04/02/26 18:02:18 msokolov 2 1
+oops, need movl, not moval
+/usr/src/sys/vaxstand/SCCS/s.bootxx.c:
+7.5 04/02/26 18:30:45 msokolov 12 11
+fix ancient bug breaking NMAGIC images (only lseek to 0x400 for ZMAGIC)
+/usr/src/sys/vaxstand/SCCS/s.bootdec.c:
+7.2 04/02/26 18:30:46 msokolov 2 1
+fix ancient bug breaking NMAGIC images (only lseek to 0x400 for ZMAGIC)
+/usr/src/sys/sys/SCCS/s.tty_lk201.c:
+7.2 04/02/26 18:52:29 msokolov 2 1
+check LKMODE_FORCEASCII before allowing Compose or RUS/META
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.16 04/02/27 02:02:19 msokolov 83 82
+add LK201DISC
+/usr/src/sys/h/SCCS/s.lk201sc.h:
+7.2 04/02/27 02:02:41 msokolov 2 1
+add ioctls
+/usr/src/sys/sys/SCCS/s.tty_conf.c:
+7.5 04/02/27 02:03:01 msokolov 17 16
+add LK201DISC
+/usr/src/sys/sys/SCCS/s.tty_lk201.c:
+7.3 04/02/27 02:03:34 msokolov 3 2
+add line discipline functions
+/usr/src/sys/h/SCCS/s.lk201sc.h:
+7.3 04/02/28 21:18:24 msokolov 3 2
+add lk_ctlxmitstart member to struct lk201_softc
+/usr/src/sys/sys/SCCS/s.tty_lk201.c:
+7.4 04/02/28 21:19:56 msokolov 4 3
+fixes on first round of testing
+/usr/src/sys/vaxstand/SCCS/s.bootdec.c:
+7.3 04/02/28 22:25:45 msokolov 3 2
+move to using R5<31:28> instead of <15:12> for partition
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.27 04/02/28 22:48:09 msokolov 85 84
+add startvmb.c
+/usr/src/sys/vaxstand/SCCS/s.bootdec.c:
+7.4 04/02/28 23:02:31 msokolov 4 3
+added ROM boot support code
+/usr/src/sys/mdec/SCCS/s.hkboot.c:
+7.3 04/02/28 23:38:15 msokolov 8 7
+move to using R5<31:28> instead of <15:12> for partition
+/usr/src/sys/mdec/SCCS/s.hpboot.c:
+7.3 04/02/28 23:38:16 msokolov 9 8
+move to using R5<31:28> instead of <15:12> for partition
+/usr/src/sys/mdec/SCCS/s.kraboot.c:
+7.2 04/02/28 23:38:17 msokolov 2 1
+move to using R5<31:28> instead of <15:12> for partition
+/usr/src/sys/mdec/SCCS/s.raboot.c:
+7.3 04/02/28 23:38:18 msokolov 11 10
+move to using R5<31:28> instead of <15:12> for partition
+/usr/src/sys/mdec/SCCS/s.rlboot.c:
+7.4 04/02/28 23:38:19 msokolov 12 11
+move to using R5<31:28> instead of <15:12> for partition
+/usr/src/sys/mdec/SCCS/s.upboot.c:
+7.4 04/02/28 23:38:21 msokolov 9 8
+move to using R5<31:28> instead of <15:12> for partition
+/usr/src/sys/mdec/SCCS/s.Makefile:
+7.10 04/02/28 23:48:43 msokolov 17 16
+vmb.exe now needs to live in /, so install it
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.28 04/02/28 23:50:39 msokolov 86 85
+decboot/bootdec are here now, no more bootrd link
+/usr/src/sys/vaxstand/SCCS/s.boot.c:
+7.13 04/02/29 00:08:50 msokolov 38 37
+pass vmb_info along to the kernel
+/usr/src/sys/mdec/SCCS/s.Makefile:
+7.11 04/03/01 15:09:10 msokolov 18 17
+add tpdecboot
+/usr/src/etc/config/SCCS/s.Makefile:
+5.8 04/03/02 17:48:22 msokolov 23 22
+add vaxflatten.c
+/usr/src/etc/config/SCCS/s.config.h:
+5.9 04/03/02 17:49:22 msokolov 23 22
+redesign handling of VAXBI and peripheral nexus devices
+/usr/src/etc/config/SCCS/s.config.l:
+5.6 04/03/02 17:49:24 msokolov 20 19
+redesign handling of VAXBI and peripheral nexus devices
+/usr/src/etc/config/SCCS/s.config.y:
+5.9 04/03/02 17:49:25 msokolov 28 27
+redesign handling of VAXBI and peripheral nexus devices
+/usr/src/etc/config/SCCS/s.main.c:
+5.10 04/03/02 17:49:28 msokolov 21 20
+redesign handling of VAXBI and peripheral nexus devices
+/usr/src/etc/config/SCCS/s.mkglue.c:
+5.7 04/03/02 17:49:29 msokolov 7 6
+redesign handling of VAXBI and peripheral nexus devices
+/usr/src/etc/config/SCCS/s.mkioconf.c:
+5.11 04/03/02 17:49:30 msokolov 20 19
+redesign handling of VAXBI and peripheral nexus devices
+/usr/src/sys/vaxuba/SCCS/s.ubavar.h:
+7.7 04/03/06 01:47:34 msokolov 45 44
+pnexus device autoconfiguration support
+/usr/src/sys/vax/SCCS/s.nexus.h:
+7.3 04/03/06 01:48:21 msokolov 25 24
+nexus notion extended to VAXBI, XMI, CDAL, etc.
+/usr/src/sys/vaxbi/SCCS/s.bi.c:
+7.3 04/03/06 01:49:40 msokolov 3 2
+start knocking some sanity into VAXBI support
+/usr/src/sys/vaxbi/SCCS/s.bireg.h:
+7.3 04/03/06 01:49:41 msokolov 3 2
+start knocking some sanity into VAXBI support
+/usr/src/sys/vaxbi/SCCS/s.bivar.h:
+7.3 04/03/06 01:49:42 msokolov 3 2
+start knocking some sanity into VAXBI support
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.23 04/03/06 01:50:50 msokolov 106 105
+start knocking some sanity into VAXBI support
+/usr/src/sys/vax/SCCS/s.cpudata.c:
+7.7 04/03/06 01:50:55 msokolov 23 22
+start knocking some sanity into VAXBI support
+/usr/src/sys/vax/SCCS/s.cpu.h:
+7.10 04/03/06 01:50:57 msokolov 25 24
+start knocking some sanity into VAXBI support
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.17 04/03/06 01:51:39 msokolov 53 52
+VAXBI changes
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.24 04/03/06 20:22:25 msokolov 107 106
+pnexus devices:	on further thought, munge ui_ctlr before calling ud_slave
+just like before
+/usr/src/sys/vaxbi/SCCS/s.kdb.c:
+7.12 04/03/06 20:22:55 msokolov 12 11
+convert to new autoconf for VAXBI (pnexus)
+/usr/src/etc/config/SCCS/s.config.y:
+5.10 04/03/06 21:34:49 msokolov 29 28
+introduce isadapter() function to tell if something is an adapter
+we have too many adapters now, need to centralise the list
+/usr/src/etc/config/SCCS/s.mkioconf.c:
+5.12 04/03/06 21:34:51 msokolov 21 20
+introduce isadapter() function to tell if something is an adapter
+we have too many adapters now, need to centralise the list
+/usr/src/etc/config/SCCS/s.mkheaders.c:
+5.6 04/03/06 21:35:11 msokolov 20 19
+count pnexus controllers
+/usr/src/sys/vax/SCCS/s.swapgeneric.c:
+7.10 04/03/06 22:46:53 msokolov 25 24
+kdb is now a pnexus device
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.25 04/03/18 19:12:52 msokolov 108 107
+need to provide a dummy uba_hd[] for sans-UBA machines since vaxuba/ubavar.h
+externs it and we use that header everywhere
+/usr/src/sys/vax/SCCS/s.sys_machdep.c:
+7.2 04/03/18 19:15:25 msokolov 9 8
+make resuba return ENXIO on sans-UBA machines instead of stopping kernel
+build with an unresolved external
+/usr/src/sys/vax/SCCS/s.cpu.h:
+7.11 04/03/18 19:19:11 msokolov 26 25
+add BabyVAX support (beginnings thereof)
+a few other todo closures and fixes along the way
+/usr/src/sys/vax/SCCS/s.cpudata.c:
+7.8 04/03/18 19:19:13 msokolov 24 23
+add BabyVAX support (beginnings thereof)
+a few other todo closures and fixes along the way
+/usr/src/sys/vax/SCCS/s.cpuid.s:
+7.2 04/03/18 19:19:14 msokolov 2 1
+add BabyVAX support (beginnings thereof)
+a few other todo closures and fixes along the way
+/usr/src/sys/vax/SCCS/s.cpucond.h:
+7.4 04/03/18 19:19:15 msokolov 4 3
+add BabyVAX support (beginnings thereof)
+a few other todo closures and fixes along the way
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.21 04/03/18 19:19:16 msokolov 171 170
+add BabyVAX support (beginnings thereof)
+a few other todo closures and fixes along the way
+/usr/src/sys/vax/SCCS/s.machdep.c:
+7.20 04/03/18 19:19:22 msokolov 188 187
+add BabyVAX support (beginnings thereof)
+a few other todo closures and fixes along the way
+/usr/src/sys/vax/SCCS/s.ka630.h:
+7.4 04/03/18 19:21:23 msokolov 5 4
+add declarations for ka630clock and ka630cpu
+/usr/src/sys/vax/SCCS/s.mtpr.h:
+7.7 04/03/18 19:23:21 msokolov 19 18
+generalise a few conditionals from VAX650 to CVAX
+DEC STD 032 IPRs like TODR should not be conditionalised
+/usr/src/sys/vax/SCCS/s.pte.h:
+7.5 04/03/18 19:23:58 msokolov 26 25
+add declarations for Babyvaxmap and vmbinfomap
+/usr/src/sys/vax/SCCS/s.scb.s:
+7.6 04/03/18 19:24:48 msokolov 30 29
+BabyVAX interrupt vector page
+/usr/src/sys/vax/SCCS/s.clock.c:
+7.6 04/03/18 19:25:30 msokolov 11 10
+Long live DEC STD 032!
+/usr/src/sys/vax/SCCS/s.ka630.c:
+7.9 04/03/18 19:26:43 msokolov 10 9
+a lot of crud went away thanks to generalisation
+/usr/src/sys/vax/SCCS/s.ka650.c:
+7.8 04/03/18 19:26:44 msokolov 8 7
+a lot of crud went away thanks to generalisation
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.18 04/03/18 19:27:30 msokolov 54 53
+add vax/ka410.c and babyvax/babyvax.c
+/usr/src/sys/babyvax/SCCS/s.bvreg.h:
+7.2 04/03/18 23:23:51 msokolov 2 1
+better serial register definitions
+/usr/src/sys/babyvax/SCCS/s.babyvax.c:
+7.2 04/03/18 23:25:16 msokolov 2 1
+wrote early serial console code, compiles
+/usr/src/sys/babyvax/SCCS/s.bvreg.h:
+7.3 04/03/19 00:35:10 msokolov 3 2
+brown paper bag
+after fixing the blunder we have console output!
+/usr/src/sys/vax/SCCS/s.cpu.h:
+7.12 04/03/19 17:45:52 msokolov 27 26
+add definitions for VVAX and 78R32 SID codes for completeness
+/usr/src/sys/vax/SCCS/s.cpuid.s:
+7.3 04/03/19 17:47:31 msokolov 3 2
+change some comments regarding unassigned SID codes
+/usr/src/sys/vax/SCCS/s.cvax.h:
+7.2 04/03/19 22:47:03 msokolov 2 1
+move CACR and machine check definitions here
+/usr/src/sys/vax/SCCS/s.ka650.h:
+7.6 04/03/19 22:48:07 msokolov 6 5
+move CACR definitions to cvax.h, other CVAX-based boards use the same CACR
+don't need #ifdef VAX650 since this is just a header with definitions
+/usr/src/sys/vax/SCCS/s.ka650.c:
+7.9 04/03/19 22:50:22 msokolov 9 8
+start using newly common cvax.c code
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.22 04/03/19 22:51:11 msokolov 172 171
+kludge: KA42 uses KA650 maps for L2 cache
+/usr/src/sys/babyvax/SCCS/s.bvreg.h:
+7.4 04/03/19 22:52:16 msokolov 4 3
+some more 3100 definitions
+/usr/src/sys/vax/SCCS/s.cpudata.c:
+7.9 04/03/19 22:53:43 msokolov 25 24
+KA42 CPU support code is here
+/usr/src/sys/babyvax/SCCS/s.bvreg.h:
+7.5 04/03/20 00:00:11 msokolov 5 4
+add CPMBX definitions
+/usr/src/sys/babyvax/SCCS/s.babyvax.c:
+7.3 04/03/20 00:00:34 msokolov 3 2
+add CPMBX functions
+/usr/src/sys/vax/SCCS/s.machdep.c:
+7.21 04/03/20 00:01:16 msokolov 189 188
+BabyVAX CPMBX functions
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.19 04/03/20 01:54:42 msokolov 55 54
+add vax/cvax.c and vax/ka42.c
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.26 04/03/20 02:15:16 msokolov 109 108
+add BabyVAX probing
+/usr/src/etc/config/SCCS/s.config.h:
+5.10 04/03/20 02:15:59 msokolov 24 23
+add bva virtual bus support
+/usr/src/etc/config/SCCS/s.config.y:
+5.11 04/03/20 02:16:01 msokolov 30 29
+add bva virtual bus support
+/usr/src/etc/config/SCCS/s.mkioconf.c:
+5.13 04/03/20 02:16:03 msokolov 22 21
+add bva virtual bus support
+/usr/src/sys/babyvax/SCCS/s.bvreg.h:
+7.6 04/03/22 17:46:10 msokolov 6 5
+add interrupt controller definitions
+/usr/src/sys/babyvax/SCCS/s.ssreg.h:
+7.2 04/03/22 17:46:41 msokolov 2 1
+add RBUF register and vector definitions
+/usr/src/sys/vax/SCCS/s.locore.s:
+7.23 04/03/22 17:47:51 msokolov 173 172
+add ssdma a la dzdma
+/usr/src/sys/vax/SCCS/s.conf.c:
+7.15 04/03/22 17:48:18 msokolov 119 118
+add ss
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.20 04/03/22 17:48:43 msokolov 56 55
+add babyvax/ss.c
+/usr/src/ucb/Mail/SCCS/s.fmt.c:
+5.6 04/03/31 21:30:18 msokolov 12 11
+allow ISO-compliant 8-bit characters
+/usr/src/ucb/SCCS/s.20b.c:
+5.6 04/04/07 11:44:22 msokolov 6 5
+print error messages on read/write errors
+/usr/src/usr.lib/sendmail/src/SCCS/s.sendmail.h:
+5.15 04/04/23 15:28:51 msokolov 164 163
+add R option to disable relaying service for Internet senders
+/usr/src/usr.lib/sendmail/src/SCCS/s.readcf.c:
+5.15 04/04/23 15:28:54 msokolov 91 90
+add R option to disable relaying service for Internet senders
+/usr/src/usr.lib/sendmail/src/SCCS/s.daemon.c:
+5.30 04/04/23 15:28:56 msokolov 100 99
+add R option to disable relaying service for Internet senders
+/usr/src/usr.lib/sendmail/src/SCCS/s.srvrsmtp.c:
+5.24 04/04/23 15:28:59 msokolov 89 88
+add R option to disable relaying service for Internet senders
+/usr/src/usr.lib/sendmail/src/SCCS/s.srvrsmtp.c:
+5.25 04/04/23 16:00:35 msokolov 90 89
+don't needlessly duplicate numeric IP address in the comment if it didn't
+resolve in the first place
+/usr/src/sys/vaxstand/SCCS/s.vmb.c:
+7.3 04/07/01 20:15:42 msokolov 3 2
+QIO arguments in the wrong order
+/usr/src/sys/vaxstand/SCCS/s.vmbt.c:
+7.3 04/07/01 20:15:43 msokolov 3 2
+QIO arguments in the wrong order
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.30 04/07/02 16:28:23 msokolov 32 31
+decboot/bootdec
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.7 04/07/29 19:06:58 msokolov 33 32
+beware that when opening a not-ready tty line it'll hang and wait
+rather than return an error
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.8 04/07/29 19:35:31 msokolov 34 33
+adopt some filter-related fixes from CSRG's 1995 work
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.lppsjf.c:
+5.2 04/07/30 02:44:14 msokolov 2 1
+accept -c and -i to be usable as if, now works
+added openlog so we can syslog if necessary
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.lppsjf.c:
+5.3 04/07/30 02:45:26 msokolov 3 2
+dammit
+/usr/src/usr.lib/lpr/SCCS/s.common.c:
+5.5 04/07/30 08:31:35 msokolov 14 13
+new ct boolen capability to ensure printer readiness with ^T
+/usr/src/usr.lib/lpr/SCCS/s.lp.h:
+5.4 04/07/30 08:31:37 msokolov 13 12
+new ct boolen capability to ensure printer readiness with ^T
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.9 04/07/30 08:31:38 msokolov 35 34
+new ct boolen capability to ensure printer readiness with ^T
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.lppsjf.c:
+5.4 04/07/31 05:19:55 msokolov 4 3
+a few improvements in feedback message processing
+/usr/src/ucb/SCCS/s.txtps.c:
+5.7 04/08/04 04:20:54 msokolov 7 6
+on further thought, there is no point in trimming lines unless doing
+wraparound, since going past the edge of paper is harmless on PostScript
+printers.
+replace -m<number> and -W with -w<number>
+/usr/src/ucb/SCCS/s.txtps.c:
+5.8 04/08/04 05:19:24 msokolov 8 7
+add -r option to generate pr-like headers
+/usr/src/usr.lib/lpr/SCCS/s.common.c:
+5.6 04/08/04 06:08:20 msokolov 15 14
+add ea and pi capabilities to support smarter filters
+/usr/src/usr.lib/lpr/SCCS/s.lp.h:
+5.5 04/08/04 06:08:22 msokolov 14 13
+add ea and pi capabilities to support smarter filters
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.10 04/08/04 06:08:23 msokolov 36 35
+add ea and pi capabilities to support smarter filters
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.Makefile:
+5.2 04/08/04 07:24:38 msokolov 2 1
+add lppsif
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.lppsif.c:
+5.2 04/08/21 07:05:57 msokolov 2 1
+don't make txtps a child of lppsjf, spin both off as children instead
+and wait for status
+/usr/src/usr.lib/lpr/SCCS/s.common.c:
+5.7 04/08/21 19:19:33 msokolov 16 15
+implement bf (banner filter) capability
+/usr/src/usr.lib/lpr/SCCS/s.lp.h:
+5.6 04/08/21 19:19:34 msokolov 15 14
+implement bf (banner filter) capability
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.11 04/08/21 19:19:35 msokolov 37 36
+implement bf (banner filter) capability
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.Makefile:
+5.3 04/08/21 20:01:02 msokolov 3 2
+banner filter is here
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.banner.ps:
+5.2 04/08/22 21:11:04 msokolov 2 1
+don't leave garbage on the operand stack
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.12 04/08/22 21:19:44 msokolov 38 37
+ea capability adds -x and -y arguments to the Fortran filter too
+/usr/src/man/man5/SCCS/s.printcap.5:
+6.5 04/08/23 01:33:28 msokolov 6 5
+document new bf, ct, ea and pi capabilities
+a few fixes along the way
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.lppsjf.c:
+5.5 04/08/23 08:03:13 msokolov 5 4
+implement accounting using the printer's page count
+/usr/src/doc/smm/06.lpd/SCCS/s.0.t:
+6.5 04/08/24 20:23:22 msokolov 6 5
+document Quasijarus PostScript support
+/usr/src/doc/smm/06.lpd/SCCS/s.1.t:
+6.4 04/08/24 20:23:23 msokolov 5 4
+document Quasijarus PostScript support
+/usr/src/doc/smm/06.lpd/SCCS/s.4.t:
+6.5 04/08/24 20:23:24 msokolov 6 5
+document Quasijarus PostScript support
+/usr/src/doc/smm/06.lpd/SCCS/s.5.t:
+6.5 04/08/24 20:23:25 msokolov 6 5
+document Quasijarus PostScript support
+/usr/src/doc/smm/06.lpd/SCCS/s.Makefile:
+6.2 04/08/24 20:24:35 msokolov 2 1
+add a.t
+/usr/src/usr.lib/lpr/SCCS/s.lpr.c:
+5.5 04/09/03 19:01:50 msokolov 37 36
+lpr -O mechanism for specifying processing options for advanced printers
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.13 04/09/03 19:02:24 msokolov 39 38
+lpr -O mechanism for specifying processing options for advanced printers
+/usr/src/usr.lib/lpr/SCCS/s.common.c:
+5.8 04/09/03 21:49:54 msokolov 17 16
+pp and jp capabilities for printer prep and job prep
+/usr/src/usr.lib/lpr/SCCS/s.lp.h:
+5.7 04/09/03 21:49:55 msokolov 16 15
+pp and jp capabilities for printer prep and job prep
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.14 04/09/03 21:50:25 msokolov 40 39
+pp and jp capabilities for printer prep and job prep
+job prep implemented
+/usr/src/usr.lib/lpr/psutils/SCCS/s.Makefile:
+5.2 04/09/04 08:26:00 msokolov 2 1
+add TroffEncoding.ps, fix install
+/usr/src/ucb/mroff/SCCS/s.preppsfont.c:
+5.2 04/09/08 16:50:34 msokolov 2 1
+TroffEncoding.ps moved from /usr/lib/psutils to /usr/lib/pstroff
+fix head comment
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.2 04/09/08 16:51:50 msokolov 2 1
+TroffEncoding.ps moved from /usr/lib/psutils to /usr/lib/pstroff
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.2 04/09/08 16:59:23 msokolov 2 1
+add preppsfont
+/usr/src/usr.lib/lpr/psutils/SCCS/s.Makefile:
+5.3 04/09/08 17:02:43 msokolov 3 2
+TroffEncoding.ps moved to pstroff source directory
+/usr/src/usr.bin/roff/nroff_term/SCCS/s.Makefile:
+5.1 04/09/08 17:08:25 msokolov 8 7
+add tablpr8
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.2 04/09/09 08:07:23 msokolov 2 1
+do box drawing characters by adding line-drawn chars to Symbol
+(Type3-like chars added to a Type1 font)
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.2 04/09/09 08:07:25 msokolov 2 1
+do box drawing characters by adding line-drawn chars to Symbol
+(Type3-like chars added to a Type1 font)
+/usr/src/ucb/mroff/SCCS/s.n9.c:
+5.2 04/09/09 08:07:26 msokolov 2 1
+do box drawing characters by adding line-drawn chars to Symbol
+(Type3-like chars added to a Type1 font)
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.2 04/09/09 08:07:28 msokolov 2 1
+do box drawing characters by adding line-drawn chars to Symbol
+(Type3-like chars added to a Type1 font)
+/usr/src/ucb/mroff/SCCS/s.preppsfont.c:
+5.3 04/09/09 08:07:29 msokolov 3 2
+do box drawing characters by adding line-drawn chars to Symbol
+(Type3-like chars added to a Type1 font)
+/usr/src/ucb/mroff/SCCS/s.n9.c:
+5.3 04/09/09 17:58:51 msokolov 3 2
+use the new line drawing characters for \l and \L
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.2 04/09/09 17:59:42 msokolov 2 1
+handling of Symbol chars in width() was broken
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.3 04/09/09 18:20:05 msokolov 3 2
+width:	need to translate through trtab before checking for space
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.3 04/09/09 18:49:04 msokolov 3 2
+install Symbolextend.ps
+/usr/src/doc/usd/24.troff/SCCS/s.Makefile:
+6.4 04/09/09 18:54:36 msokolov 4 3
+ditroff => pstroff
+/usr/src/usr.bin/roff/nroff_term/SCCS/s.tablpr8.c:
+5.2 04/09/09 19:15:01 msokolov 2 1
+add renditions for new line drawing characters
+/usr/src/ucb/mroff/SCCS/s.n7.c:
+5.2 04/09/11 08:36:47 msokolov 2 1
+use INT_MAX instead of 32767
+with smaller units the page length exceeds 32767 and was giving us trap botches
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.4 04/09/11 10:31:32 msokolov 4 3
+setps:	don't lose bits when putting unwanted chars back in ch
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.3 04/09/11 10:32:36 msokolov 3 2
+call mchbits() after ptinit() as the latter reads the width tables
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.3 04/09/11 18:22:28 msokolov 3 2
+oops, not equal was mapped to the wrong code
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.3 04/09/11 22:44:04 msokolov 3 2
+too few bits were allotted for TMASK, not enough for our smaller units
+take advantage of 32 bits
+/usr/src/ucb/mroff/SCCS/s.n4.c:
+5.2 04/09/13 01:19:11 msokolov 2 1
+add .C read-only number reg to identify what character set incarnation
+of [nt]roff this is
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.4 04/09/13 01:20:00 msokolov 4 3
+\Xxx and \Sxx are here
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.5 04/09/13 01:21:49 msokolov 5 4
+had to revert the \sN mechanism back to the historic 4-39 range
+for arbitrary point sizes the new mechanism is \s'N'
+/usr/src/doc/usd/28.tbl/SCCS/s.tbl:
+6.2 04/09/13 01:24:35 msokolov 4 3
+T in a circle doesn't work with the mroff character set
+/usr/src/ucb/SCCS/s.Makefile:
+5.29 04/09/13 01:37:37 msokolov 29 28
+add mroff
+/usr/src/usr.bin/SCCS/s.Makefile:
+5.3 04/09/13 01:54:02 msokolov 3 2
+add col8
+/usr/src/usr.bin/roff/nroff_term/SCCS/s.tablpr8.c:
+5.3 04/09/13 02:13:55 msokolov 3 2
+compile with -DCOL8 to get tabcol8
+/usr/src/usr.bin/roff/nroff_term/SCCS/s.Makefile:
+5.2 04/09/13 02:14:13 msokolov 9 8
+add tabcol8
+/usr/src/usr.bin/roff/nroff/SCCS/s.n10.c:
+4.4 04/09/13 02:58:34 msokolov 4 3
+don't emit a "bold backspace" as 3 backspaces
+/usr/src/ucb/mroff/SCCS/s.n10.c:
+5.2 04/09/13 03:00:43 msokolov 2 1
+don't emit a "bold backspace" as 3 backspaces
+/usr/src/doc/smm/01.setup/SCCS/s.Makefile:
+5.3 04/09/13 03:04:57 msokolov 3 2
+pstroff and nroff8 are here!
+/usr/src/doc/smm/23.qjchanges/SCCS/s.Makefile:
+6.2 04/09/13 03:11:39 msokolov 2 1
+pstroff and nroff8 are here!
+/usr/src/doc/smm/03.kdebug/SCCS/s.Makefile:
+6.2 04/09/13 03:23:05 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/ps1/10.adb/SCCS/s.Makefile:
+6.2 04/09/13 03:41:01 msokolov 2 1
+ditroff => pstroff
+/usr/src/ucb/mroff/SCCS/s.preppsfont.c:
+5.4 04/09/13 09:18:29 msokolov 4 3
+we are now changing the metrics of radical and radicalex in Symbol
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.4 04/09/13 20:58:56 msokolov 4 3
+add square root, big curly bracket and big square bracket extensions
+/usr/src/usr.lib/lpr/psutils/SCCS/s.Makefile:
+5.4 04/09/14 05:54:01 msokolov 4 3
+add cHexEncoding.ps
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.5 04/09/14 21:42:41 msokolov 5 4
+finally know what \(ap is, add it back
+axe \(bv
+/usr/src/ucb/catemu/SCCS/s.SpecialFont.ps:
+5.2 04/09/14 21:54:16 msokolov 2 1
+better handling of approximates and bold vertical
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.4 04/09/14 23:04:03 msokolov 4 3
+cttab.c
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.6 04/09/14 23:04:35 msokolov 6 5
+reimplement the ct register functionality
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.6 04/09/15 04:09:44 msokolov 6 5
+add \(Mi for minute and \(Se for second (Symbol)
+/usr/src/usr.bin/eqn/common_source/SCCS/s.diacrit.c:
+4.4 04/09/15 04:22:04 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.e.h:
+4.3 04/09/15 04:22:06 msokolov 3 2
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.funny.c:
+4.4 04/09/15 04:22:07 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.integral.c:
+4.4 04/09/15 04:22:08 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.io.c:
+4.5 04/09/15 04:22:09 msokolov 5 4
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.lookup.c:
+4.3 04/09/15 04:22:10 msokolov 3 2
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.move.c:
+4.4 04/09/15 04:22:11 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.over.c:
+4.4 04/09/15 04:22:12 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.paren.c:
+4.4 04/09/15 04:22:13 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.pile.c:
+4.4 04/09/15 04:22:14 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.shift.c:
+4.4 04/09/15 04:22:15 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.sqrt.c:
+4.4 04/09/15 04:22:17 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/common_source/SCCS/s.text.c:
+4.4 04/09/15 04:22:18 msokolov 4 3
+PostScript mode added, compiles
+/usr/src/usr.bin/eqn/eqn/SCCS/s.Makefile:
+5.2 04/09/15 04:23:06 msokolov 2 1
+the CAT version now needs to be compiled with -DCAT
+/usr/src/ucb/mroff/SCCS/s.n2.c:
+5.2 04/09/15 07:03:38 msokolov 2 1
+replace the LX/HX pair of 16-bit metacharacters with one 32-bit metacharacter
+/usr/src/ucb/mroff/SCCS/s.n6.c:
+5.2 04/09/15 07:03:39 msokolov 2 1
+replace the LX/HX pair of 16-bit metacharacters with one 32-bit metacharacter
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.7 04/09/15 07:03:40 msokolov 7 6
+replace the LX/HX pair of 16-bit metacharacters with one 32-bit metacharacter
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.4 04/09/15 07:03:41 msokolov 4 3
+replace the LX/HX pair of 16-bit metacharacters with one 32-bit metacharacter
+/usr/src/ucb/mroff/SCCS/s.n9.c:
+5.4 04/09/15 19:09:04 msokolov 4 3
+setline: add square root extension and horizontal arrow extension to the list
+of overlappable characters
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.5 04/09/16 07:45:08 msokolov 5 4
+support -t option for troff compatibility
+/usr/src/ucb/mroff/SCCS/s.n10.c:
+5.3 04/09/16 07:46:18 msokolov 3 2
+implement conversion of 7-bit terminal tables if they support our extended
+character set
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.7 04/09/16 08:17:05 msokolov 7 6
+\(ru and \(fm are now officially compatibility approximation entries
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.5 04/09/16 08:32:18 msokolov 5 4
+create /usr/lib/pstroff if it doesn't already exist
+strip comments when installing Symbolextend.ps
+/usr/src/man/man1/SCCS/s.Makefile:
+5.10 04/09/16 22:48:05 msokolov 10 9
+add pstroff(1) and preppsfont(1)
+for eqn(1) use neqn before nroff, not eqn!
+/usr/src/man/man1/SCCS/s.troff.1:
+6.2 04/09/16 22:49:28 msokolov 4 3
+add pstroff(1) to SEE ALSO
+/usr/src/ucb/SCCS/s.Makefile:
+5.30 04/09/16 23:22:39 msokolov 30 29
+add catemu and vfont2ps
+/usr/src/ucb/vfont2ps/SCCS/s.vfont2ps.c:
+5.2 04/09/16 23:27:00 msokolov 2 1
+added %%Creator: DSC comment
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.8 04/09/17 08:44:17 msokolov 8 7
+broke down and added baseline rule to the line drawing chars
+/usr/src/ucb/mroff/SCCS/s.n10.c:
+5.4 04/09/17 08:44:19 msokolov 4 3
+broke down and added baseline rule to the line drawing chars
+/usr/src/ucb/mroff/SCCS/s.n9.c:
+5.5 04/09/17 08:44:20 msokolov 5 4
+broke down and added baseline rule to the line drawing chars
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.5 04/09/17 08:44:21 msokolov 5 4
+broke down and added baseline rule to the line drawing chars
+/usr/src/ucb/mroff/SCCS/s.preppsfont.c:
+5.5 04/09/17 08:44:22 msokolov 5 4
+broke down and added baseline rule to the line drawing chars
+/usr/src/ucb/mroff/SCCS/s.Symbolextend.ps:
+5.2 04/09/17 08:44:24 msokolov 2 1
+broke down and added baseline rule to the line drawing chars
+/usr/src/usr.bin/roff/nroff_term/SCCS/s.tablpr8.c:
+5.4 04/09/17 08:51:44 msokolov 4 3
+add baseline rule (mapped to '_')
+/usr/src/usr.bin/eqn/common_source/SCCS/s.eqnbox.c:
+4.3 04/09/17 22:12:44 msokolov 3 2
+only do the italic padding on CAT, not needed on PS with Adobe fonts
+/usr/src/usr.bin/eqn/common_source/SCCS/s.shift.c:
+4.5 04/09/17 22:12:45 msokolov 5 4
+only do the italic padding on CAT, not needed on PS with Adobe fonts
+/usr/src/usr.bin/eqn/common_source/SCCS/s.text.c:
+4.5 04/09/17 22:12:46 msokolov 5 4
+only do the italic padding on CAT, not needed on PS with Adobe fonts
+/usr/src/usr.bin/eqn/common_source/SCCS/s.diacrit.c:
+4.5 04/09/17 22:13:00 msokolov 5 4
+some fixes for PS
+/usr/src/usr.bin/eqn/SCCS/s.Makefile:
+5.2 04/09/17 22:13:48 msokolov 2 1
+add pseqn
+/usr/src/doc/usd/24.troff/SCCS/s.m.mac:
+6.2 04/09/19 03:49:48 msokolov 4 3
+first round of changes for pstroff
+/usr/src/doc/usd/24.troff/SCCS/s.Makefile:
+6.5 04/09/19 03:50:09 msokolov 5 4
+we are now using the BoldItalic font for headers
+/usr/src/ucb/mroff/SCCS/s.n2.c:
+5.3 04/09/21 22:22:35 msokolov 3 2
+do not translate through trtab in transparent mode
+/usr/src/usr.bin/eqn/common_source/SCCS/s.io.c:
+4.6 04/09/23 07:41:30 msokolov 6 5
+only do the italic padding on CAT, not needed on PS with Adobe fonts
+/usr/src/etc/SCCS/s.fingerd.c:
+5.2 04/10/01 23:37:35 msokolov 5 4
+plug the infamous Morris hole
+/usr/src/ucb/SCCS/s.Makefile:
+5.31 04/10/05 03:36:27 msokolov 31 30
+add text conversion utilities (UNIX<->RT-11, KOI8-E<->ISO, Russian UNIX<->DOS)
+/usr/src/ucb/SCCS/s.rusunix2dos.c:
+5.2 04/10/05 04:07:36 msokolov 2 1
+convert a few KOI8-E characters too
+/usr/src/ucb/SCCS/s.rusdos2unix.c:
+5.2 04/10/05 04:12:15 msokolov 2 1
+convert Russian IO too
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.6 04/10/20 00:18:33 msokolov 6 5
+add pstmerge
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.2 04/10/20 00:21:32 msokolov 2 1
+compiles
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.3 04/10/20 01:23:39 msokolov 3 2
+works
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.4 04/10/20 01:25:04 msokolov 4 3
+remove the ugly #ifdef DEBUG's
+/usr/src/man/man1/SCCS/s.Makefile:
+5.11 04/10/20 03:58:39 msokolov 11 10
+PostScript
+/usr/src/man/man2/SCCS/s.Makefile:
+5.4 04/10/20 05:09:47 msokolov 4 3
+PostScript
+/usr/src/man/man1/SCCS/s.Makefile:
+5.12 04/10/20 07:54:17 msokolov 12 11
+back to 4.3BSD /usr/man format
+/usr/src/man/man2/SCCS/s.Makefile:
+5.5 04/10/20 08:07:13 msokolov 5 4
+back to 4.3BSD /usr/man format
+/usr/src/man/man3/SCCS/s.Makefile:
+5.8 04/10/20 16:47:30 msokolov 8 7
+back to 4.3BSD /usr/man format
+/usr/src/man/man3/SCCS/s.Makefile:
+5.9 04/10/20 16:48:30 msokolov 9 8
+clean man3f too
+/usr/src/man/man4/SCCS/s.intro.4n:
+6.6 04/10/20 17:04:59 msokolov 7 6
+back to intro(4N)!
+/usr/src/man/man4/SCCS/s.Makefile:
+5.3 04/10/20 17:27:55 msokolov 3 2
+back to 4.3BSD /usr/man format
+/usr/src/man/man4/tahoe/SCCS/s.Makefile:
+5.3 04/10/20 17:28:09 msokolov 3 2
+back to 4.3BSD /usr/man format
+/usr/src/man/man4/vax/SCCS/s.Makefile:
+5.4 04/10/20 17:28:23 msokolov 4 3
+back to 4.3BSD /usr/man format
+/usr/src/man/man5/SCCS/s.Makefile:
+5.5 04/10/20 17:39:09 msokolov 5 4
+back to 4.3BSD /usr/man format
+/usr/src/man/man6/SCCS/s.Makefile:
+5.8 04/10/20 18:06:04 msokolov 8 7
+back to 4.3BSD /usr/man format
+/usr/src/man/man7/SCCS/s.Makefile:
+5.4 04/10/20 19:08:31 msokolov 4 3
+back to 4.3BSD /usr/man format
+/usr/src/man/man8/vax/SCCS/s.drtest.8v:
+6.3 04/10/20 19:41:39 msokolov 4 3
+it should be 8V too!
+/usr/src/man/man8/SCCS/s.Makefile:
+5.8 04/10/20 20:02:13 msokolov 9 8
+back to 4.3BSD /usr/man format
+/usr/src/man/man8/tahoe/SCCS/s.Makefile:
+5.3 04/10/20 20:02:31 msokolov 3 2
+back to 4.3BSD /usr/man format
+/usr/src/man/man8/vax/SCCS/s.Makefile:
+5.4 04/10/20 20:02:44 msokolov 4 3
+back to 4.3BSD /usr/man format
+/usr/src/man/SCCS/s.Makefile:
+5.5 04/10/20 20:15:30 msokolov 5 4
+back to 4.3BSD /usr/man format
+/usr/src/ucb/man/SCCS/s.man.c:
+5.14 04/10/20 20:53:23 msokolov 31 30
+remove bogus unlink
+/usr/src/ucb/man/SCCS/s.Makefile:
+5.6 04/10/20 20:57:54 msokolov 7 6
+old man is back!
+/usr/src/man/man1/SCCS/s.man.1:
+6.8 04/10/20 21:31:19 msokolov 10 9
+old man is back!
+/usr/src/man/man1/SCCS/s.apropos.1:
+6.6 04/10/20 21:38:40 msokolov 8 7
+restore useful examples, note about being part of man and credit to Bill Joy
+/usr/src/man/man1/SCCS/s.man.1:
+6.9 04/10/20 23:00:04 msokolov 11 10
+originates from 3BSD, restore credit to William Joy
+/usr/src/man/man1/SCCS/s.apropos.1:
+6.7 04/10/20 23:01:15 msokolov 9 8
+originates from 3BSD, .AT 3 => .UC 3
+/usr/src/man/man1/SCCS/s.whatis.1:
+6.5 04/10/20 23:06:00 msokolov 7 6
+originates from 3BSD, restore credit to William Joy
+restore note about whatis being part of man
+/usr/src/man/man1/SCCS/s.eqn.1:
+6.3 04/10/20 23:26:27 msokolov 5 4
+refer readers to the full manual for equation format and examples
+as we can't eqn man pages
+/usr/src/man/man7/SCCS/s.eqnchar.7:
+6.2 04/10/20 23:59:53 msokolov 4 3
+point readers to the external reference card and politely explain why we can't
+print it here
+/usr/src/usr.lib/SCCS/s.Makefile:
+5.17 04/10/21 01:03:58 msokolov 30 29
+add makewhatis
+/usr/src/man/SCCS/s.Makefile:
+5.6 04/10/21 01:16:34 msokolov 6 5
+back to 4.3BSD whatis database
+/usr/src/etc/SCCS/s.Makefile:
+5.28 04/10/21 01:26:11 msokolov 28 27
+add back catman
+/usr/src/man/man6/SCCS/s.bcd.6:
+6.4 04/10/21 05:42:34 msokolov 6 5
+a separate man page for ppt will work better
+/usr/src/man/man1/SCCS/s.hostid.1:
+6.5 04/10/21 06:10:23 msokolov 6 5
+don't use bold in the NAME section
+/usr/src/man/man1/SCCS/s.hostname.1:
+6.4 04/10/21 06:10:24 msokolov 5 4
+don't use bold in the NAME section
+/usr/src/man/man1/SCCS/s.admin.1:
+6.3 04/10/21 06:13:46 msokolov 3 2
+use \- rather than \(em in NAME
+/usr/src/man/man1/SCCS/s.cpio.1:
+5.4 04/10/21 06:30:16 msokolov 4 3
+use \- in NAME
+/usr/src/man/man1/SCCS/s.what.1:
+6.3 04/10/21 06:30:17 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.bdiff.1:
+6.3 04/10/21 06:30:18 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.chghist.1:
+6.3 04/10/21 06:30:19 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.comb.1:
+6.3 04/10/21 06:30:20 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.delta.1:
+6.3 04/10/21 06:30:21 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.get.1:
+6.3 04/10/21 06:30:23 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.prt.1:
+6.3 04/10/21 06:30:25 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.rmdel.1:
+6.3 04/10/21 06:30:27 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.sccsdiff.1:
+6.3 04/10/21 06:30:28 msokolov 3 2
+use \- in NAME
+/usr/src/man/man1/SCCS/s.sccshelp.1:
+6.3 04/10/21 06:30:29 msokolov 3 2
+use \- in NAME
+/usr/src/man/man5/SCCS/s.cpio.5:
+5.3 04/10/21 06:32:50 msokolov 3 2
+use \- in NAME
+/usr/src/man/man5/SCCS/s.sccsfile.5:
+6.2 04/10/21 06:32:51 msokolov 2 1
+use \- in NAME
+/usr/src/man/man8/SCCS/s.inetd.8:
+6.5 04/10/21 06:34:50 msokolov 5 4
+"super-server" should be spelled with a hyphen, not a minus
+/usr/src/man/man3/SCCS/s.getgrent.3:
+6.3 04/10/21 06:56:03 msokolov 6 5
+missing comma in the NAME line
+/usr/src/man/man0/SCCS/s.tocrc:
+6.3 04/10/21 07:10:34 msokolov 5 4
+update for Quasijarus
+/usr/src/man/man0/SCCS/s.title.prm:
+6.3 04/10/21 07:30:45 msokolov 3 2
+remove full paths from toc inclusions
+/usr/src/man/man0/SCCS/s.Makefile:
+6.3 04/10/21 08:00:40 msokolov 3 2
+ditroff => pstroff
+/usr/src/man/man0/SCCS/s.title.urm:
+6.3 04/10/21 08:03:15 msokolov 5 4
+label it as 4.3BSD-Quasijarus1 preliminary version
+/usr/src/man/man0/SCCS/s.title.prm:
+6.4 04/10/21 08:03:16 msokolov 4 3
+label it as 4.3BSD-Quasijarus1 preliminary version
+/usr/src/man/SCCS/s.Makefile:
+5.7 04/10/21 08:24:56 msokolov 7 6
+finish psman
+/usr/src/ucb/SCCS/s.Makefile:
+5.32 04/10/22 05:58:48 msokolov 32 31
+add psrange
+/usr/src/ucb/SCCS/s.psrange.c:
+5.2 04/10/22 06:04:47 msokolov 2 1
+doh, forgot to initialise an automatic variable; works now
+/usr/src/man/psman/SCCS/s.Makefile:
+5.2 04/10/22 06:48:08 msokolov 2 1
+generate book covers
+/usr/src/man/SCCS/s.Makefile:
+5.8 04/10/22 06:50:51 msokolov 8 7
+clean man0 and psman too
+/usr/src/usr.lib/ms/SCCS/s.tmac.s:
+1.8 04/10/22 08:16:10 msokolov 8 7
+increase width from 6i to 6.5i; paper is 8.5i wide
+define MH
+/usr/src/doc/usd/02.learn/SCCS/s.Makefile:
+6.2 04/10/22 08:42:39 msokolov 2 1
+ditroff => pstroff
+/usr/src/ucb/SCCS/s.psrange.c:
+5.3 04/10/23 03:46:43 msokolov 3 2
+don't need malloc
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.9 04/10/23 04:10:16 msokolov 9 8
+delete logicaland and logicalor
+\(or was apparently meant as a fancy '|', so make it that
+/usr/src/doc/usd/04.csh/SCCS/s.csh.1:
+6.2 04/10/23 05:14:40 msokolov 4 3
+change .UX to \s-2UNIX\s0 like it uses everywhere else
+while the famous footnote is very cool, it causes the title page to spill
+by one line...
+/usr/src/doc/usd/07.Mail/SCCS/s.Makefile:
+6.2 04/10/23 05:44:41 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/09.newsread/SCCS/s.Makefile:
+6.2 04/10/23 06:00:04 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/10.etiq/SCCS/s.Makefile:
+6.2 04/10/23 06:12:59 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/11.notes/SCCS/s.macros:
+6.2 04/10/23 06:34:36 msokolov 2 1
+Y2K
+/usr/src/doc/usd/11.notes/SCCS/s.Makefile:
+6.2 04/10/23 07:51:31 msokolov 2 1
+convert to pstroff and nroff8
+/usr/src/doc/usd/14.edit/SCCS/s.Makefile:
+6.2 04/10/23 08:46:22 msokolov 2 1
+ditroff => pstroff
+also edittut.ms is already tbl'ed!
+/usr/src/doc/usd/14.edit/SCCS/s.edittut.ms:
+6.2 04/10/23 08:46:52 msokolov 4 3
+don't mess with the line length, keep the -ms default
+/usr/src/doc/usd/15.vi/SCCS/s.Makefile:
+6.2 04/10/23 09:06:59 msokolov 2 1
+ditroff => pstroff
+/usr/src/ucb/rdist/SCCS/s.lookup.c:
+5.5 04/10/23 22:02:34 msokolov 11 10
+buffer overflow fix from nivenh, adapted by msokolov
+/usr/src/doc/usd/16.ex/SCCS/s.Makefile:
+6.2 04/10/23 23:58:01 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/17.jove/SCCS/s.Makefile:
+6.2 04/10/24 00:14:20 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/21.msdiffs/SCCS/s.Makefile:
+6.2 04/10/24 00:56:26 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/21.msdiffs/SCCS/s.ms.diffs:
+6.2 04/10/24 01:06:55 msokolov 3 2
+get rid of the raised underscore stupidity
+/usr/src/doc/usd/22.memacros/SCCS/s.Makefile:
+6.3 04/10/24 01:43:04 msokolov 3 2
+ditroff => pstroff
+/usr/src/doc/usd/23.meref/SCCS/s.Makefile:
+6.3 04/10/24 01:59:41 msokolov 3 2
+ditroff => pstroff
+/usr/src/doc/usd/29.refer/SCCS/s.Makefile:
+6.2 04/10/24 02:22:52 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/33.rogue/SCCS/s.Makefile:
+6.2 04/10/24 03:13:25 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/24.troff/SCCS/s.m0:
+6.2 04/10/24 05:56:44 msokolov 4 3
+elucidate the differences between DITROFF and PSTROFF
+/usr/src/doc/usd/24.troff/SCCS/s.m0a:
+6.4 04/10/24 18:28:23 msokolov 6 5
+pstroff formatting fixes
+/usr/src/doc/usd/24.troff/SCCS/s.m0:
+6.3 04/10/24 18:29:19 msokolov 5 4
+"device-independent" doesn't need to be capitalized
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.6 04/10/24 20:19:51 msokolov 6 5
+use mkstemp for the temp file
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.8 04/10/24 20:25:58 msokolov 8 7
+use done3() for initialization errors
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.3 04/10/24 20:25:59 msokolov 3 2
+use done3() for initialization errors
+/usr/src/ucb/mroff/SCCS/s.n10.c:
+5.5 04/10/24 20:26:01 msokolov 5 4
+use done3() for initialization errors
+/usr/src/usr.bin/roff/common_source/SCCS/s.n1.c:
+4.10 04/10/24 20:36:59 msokolov 10 9
+use mkstemp for the temp file
+save original argc and argv for nroff exec'ing nroff8
+/usr/src/usr.bin/roff/nroff/SCCS/s.n10.c:
+4.5 04/10/24 21:07:50 msokolov 5 4
+exec nroff8 if an 8-bit terminal table is used
+if the user-specified table can't be opened, complain, don't silently switch
+to the default
+minor fixes
+/usr/src/ucb/mroff/SCCS/s.n10.c:
+5.6 04/10/24 21:24:57 msokolov 6 5
+oops, the 7-bit terminal table conversion was busted
+/usr/src/doc/usd/24.troff/SCCS/s.m0a:
+6.5 04/10/25 00:47:32 msokolov 7 6
+document pstroff escape sequences and .C register
+/usr/src/doc/usd/24.troff/SCCS/s.Makefile:
+6.6 04/10/25 00:48:33 msokolov 6 5
+have to cut tutor.ps with psrange (see explanation inside)
+/usr/src/doc/usd/24.troff/SCCS/s.m1:
+6.2 04/10/25 05:58:37 msokolov 4 3
+update for new realities
+/usr/src/doc/usd/24.troff/SCCS/s.m2:
+6.3 04/10/25 06:11:10 msokolov 5 4
+7.54" width limit is a CAT rather than TROFF limitation
+change page reference (number reg tables are now on page 8)
+/usr/src/doc/usd/24.troff/SCCS/s.m3:
+6.3 04/10/25 07:44:06 msokolov 5 4
+update for new realities
+/usr/src/doc/usd/24.troff/SCCS/s.m4:
+6.3 04/10/25 07:58:47 msokolov 5 4
+pstroff formatting fixes
+/usr/src/doc/usd/24.troff/SCCS/s.m4:
+6.4 04/10/25 08:07:35 msokolov 6 5
+fix description of overflow markers
+/usr/src/doc/usd/24.troff/SCCS/s.m1:
+6.3 04/10/25 08:27:20 msokolov 5 4
+\(ae does not exist, not even in classic troff
+don't split hyphenated words in the source!
+/usr/src/doc/usd/24.troff/SCCS/s.m3:
+6.4 04/10/25 18:44:34 msokolov 6 5
+can actually show PostScript ligatures
+/usr/src/doc/usd/24.troff/SCCS/s.Makefile:
+6.7 04/10/26 16:53:34 msokolov 7 6
+new appendix structure
+/usr/src/ucb/SCCS/s.Makefile:
+5.33 04/10/26 17:29:42 msokolov 33 32
+add vtroff and vtools
+/usr/src/ucb/vtools/fed/SCCS/s.Makefile:
+4.3 04/10/26 17:33:46 msokolov 3 2
+revive from the ashes
+/usr/src/ucb/vtools/SCCS/s.Makefile:
+6.3 04/10/26 17:39:23 msokolov 3 2
+revive from the ashes
+/usr/src/man/man1/SCCS/s.vfontinfo.1:
+6.2 04/10/26 17:51:03 msokolov 4 3
+changed vpr(1) reference to vtroff(1)
+/usr/src/man/man1/SCCS/s.vtroff.1:
+6.2 04/10/26 17:51:20 msokolov 4 3
+changed vpr(1) reference to lpr(1)
+/usr/src/man/psman/SCCS/s.Makefile:
+5.3 04/10/26 17:55:54 msokolov 3 2
+add fed(1), vfontinfo(1), vtroff(1), vwidth(1)
+/usr/src/doc/usd/24.troff/SCCS/s.fwVS.c:
+6.2 04/10/26 21:19:56 msokolov 2 1
+using S.18 now, slightly different widths
+/usr/src/doc/usd/24.troff/SCCS/s.apndxd:
+6.2 04/10/26 21:42:03 msokolov 2 1
+embed the VarianSpecial font inside the page
+/usr/src/doc/usd/24.troff/SCCS/s.m5:
+6.2 04/10/26 21:42:40 msokolov 4 3
+starts on page 37 now
+/usr/src/doc/usd/24.troff/SCCS/s.Makefile:
+6.8 04/10/26 21:51:45 msokolov 8 7
+build Appendix D and the full manual
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.5 04/10/26 22:40:17 msokolov 5 4
+don't strip leading zeros, it can break the spilled last byte of hex data
+/usr/src/doc/usd/24.troff/SCCS/s.Makefile:
+6.9 04/10/27 19:56:48 msokolov 9 8
+use pipes instead of intermediate files
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.10 04/10/28 00:06:28 msokolov 10 9
+added all accented letters and a bunch of other ISO characters
+/usr/src/doc/usd/24.troff/SCCS/s.apndxa:
+6.2 04/10/28 00:58:03 msokolov 2 1
+document the new named escapes for most ISO Latin-1 characters
+/usr/src/doc/usd/24.troff/SCCS/s.apndxb:
+6.2 04/10/28 00:59:30 msokolov 2 1
+Appendix A lengthened by one page
+/usr/src/doc/usd/24.troff/SCCS/s.apndxc:
+6.2 04/10/28 00:59:31 msokolov 2 1
+Appendix A lengthened by one page
+/usr/src/doc/usd/24.troff/SCCS/s.apndxd:
+6.3 04/10/28 00:59:32 msokolov 3 2
+Appendix A lengthened by one page
+/usr/src/doc/usd/24.troff/SCCS/s.m5:
+6.3 04/10/28 00:59:33 msokolov 5 4
+Appendix A lengthened by one page
+/usr/src/doc/usd/24.troff/SCCS/s.m1:
+6.4 04/10/28 01:03:12 msokolov 6 5
+most ISO Latin-1 chars now have names, so mention this input method
+/usr/src/usr.lib/lpr/psfilters/SCCS/s.Makefile:
+5.4 04/10/28 01:08:32 msokolov 4 3
+fix install:	must double the $'s
+/usr/src/doc/usd/20.msmacros/SCCS/s.ms:
+6.2 04/10/28 01:42:07 msokolov 4 3
+don't cheat, demonstrate the accent strings by actually using them!
+/usr/src/usr.lib/ms/SCCS/s.tmac.s:
+1.9 04/10/28 02:08:02 msokolov 9 8
+old accent marks:	use non-ascii circumflex and tilde in pstroff
+to make them look just a little less ugly
+/usr/src/usr.lib/ms/SCCS/s.acc.ms:
+1.4 04/10/28 02:10:28 msokolov 4 3
+pstroff:	use non-ascii circumflex and tilde
+for those chars that are now in ISO Latin-1, define the strings to the latter
+more work is needed
+/usr/src/doc/usd/21.msdiffs/SCCS/s.ms.diffs:
+6.3 04/10/28 02:26:05 msokolov 4 3
+don't lower the ASCII ^ and ~ when demonstrating accent strings
+add note that in pstroff real accented letters are always better
+/usr/src/usr.lib/me/SCCS/s.chars.me:
+2.5 04/10/28 02:51:13 msokolov 8 7
+pstroff:	use non-ASCII circumflex and tilde
+there exists and for all are Symbol characters
+/usr/src/usr.lib/me/SCCS/s.chars.me:
+2.6 04/10/28 03:07:03 msokolov 9 8
+dammit!
+/usr/src/doc/usd/31.bib/SCCS/s.Makefile:
+6.2 04/10/28 08:56:15 msokolov 2 1
+ditroff => pstroff
+/usr/src/ucb/SCCS/s.Makefile:
+5.34 04/10/30 00:32:36 msokolov 34 33
+psrange and txtps moved into psutils subdirectory
+/usr/src/ucb/psutils/SCCS/s.Makefile:
+5.5 04/10/30 00:36:35 msokolov 5 4
+management utils separated, psrange and txtps joined us instead
+/usr/src/ucb/psutils/SCCS/s.Makefile:
+5.6 04/10/30 00:39:29 msokolov 6 5
+include t1csasm from IFCTF's t1free package
+/usr/src/ucb/psutils/SCCS/s.Makefile:
+5.7 04/10/30 00:43:04 msokolov 7 6
+oops, need to install binaries in /usr/ucb, not /usr/lib
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.4 04/10/30 03:42:17 msokolov 4 3
+some improvements
+using a real procset
+line drawing chars done via the procset, no more raping of Symbol
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.9 04/10/30 03:42:18 msokolov 9 8
+some improvements
+using a real procset
+line drawing chars done via the procset, no more raping of Symbol
+/usr/src/ucb/mroff/SCCS/s.preppsfont.c:
+5.6 04/10/30 03:42:20 msokolov 6 5
+some improvements
+using a real procset
+line drawing chars done via the procset, no more raping of Symbol
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.7 04/10/30 03:45:09 msokolov 7 6
+Symbolextend.ps is gone, TroffProcset.ps is here
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.6 04/10/30 03:53:38 msokolov 6 5
+pstroff now uses a real procset!
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.11 04/10/30 03:58:12 msokolov 11 10
+map hands to double arrows
+/usr/src/man/man1/SCCS/s.preppsfont.1:
+6.2 04/10/30 04:16:10 msokolov 2 1
+we are no longer raping Symbol, just fixing the radical metrics
+remove the BUGS note since it's fixed!
+/usr/src/man/man1/SCCS/s.pstroff.1:
+6.2 04/10/30 04:20:09 msokolov 2 1
+add TroffProcset.ps to FILES
+/usr/src/doc/ps1/17.m4/SCCS/s.Makefile:
+6.2 04/10/30 04:38:11 msokolov 2 1
+ditroff => pstroff
+/usr/src/ucb/mroff/troffemu/SCCS/s.troffemu.m4:
+5.2 04/10/30 17:40:38 msokolov 2 1
+square implemented
+/usr/src/ucb/mroff/troffemu/SCCS/s.bold.m4:
+5.2 04/10/30 18:07:30 msokolov 2 1
+set a real font bounding box
+/usr/src/ucb/mroff/troffemu/SCCS/s.italic.m4:
+5.2 04/10/30 18:07:30 msokolov 2 1
+set a real font bounding box
+/usr/src/ucb/mroff/troffemu/SCCS/s.roman.m4:
+5.2 04/10/30 18:07:31 msokolov 2 1
+set a real font bounding box
+/usr/src/ucb/mroff/troffemu/SCCS/s.troffemu.m4:
+5.3 04/10/30 18:07:32 msokolov 3 2
+set a real font bounding box
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.2 04/10/30 19:55:15 msokolov 2 1
+generate TroffEmu-Symbol.ps
+/usr/src/ucb/mroff/troffemu/SCCS/s.TroffEmu-Symbol.asm:
+5.2 04/10/31 04:45:07 msokolov 2 1
+bellsystem implemented
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.3 04/10/31 05:37:30 msokolov 3 2
+pstroff files are here
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.8 04/10/31 05:47:12 msokolov 8 7
+add troffemu subdirectory
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.10 04/10/31 05:55:49 msokolov 10 9
+recognise St as an alternative special font
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.12 04/10/31 05:56:18 msokolov 12 11
+add the troffemu font characters
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.4 04/10/31 08:25:13 msokolov 4 3
+use a different font directory instead of different font names
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.7 04/10/31 08:46:16 msokolov 7 6
+troffemu support
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.11 04/10/31 08:47:50 msokolov 11 10
+use a different font directory instead of different font names
+for troffemu, so no St
+/usr/src/ucb/mroff/SCCS/s.n5.c:
+5.2 04/11/02 00:44:27 msokolov 2 1
+chget:	allow characters with bit 8 set
+/usr/src/doc/usd/25.trofftut/SCCS/s.tt00:
+6.2 04/11/02 01:50:48 msokolov 4 3
+editor's notes for 4.3BSD-Quasijarus
+/usr/src/doc/usd/25.trofftut/SCCS/s.ttack:
+6.2 04/11/02 01:51:17 msokolov 4 3
+updated references
+/usr/src/doc/usd/25.trofftut/SCCS/s.ttcharset:
+6.2 04/11/02 01:51:48 msokolov 4 3
+tell them it's a PSTROFF approximation
+/usr/src/doc/usd/34.trek/SCCS/s.Makefile:
+6.2 04/11/02 19:25:16 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/usd/28.tbl/SCCS/s.tbl:
+6.3 04/11/02 21:38:49 msokolov 5 4
+corrected page numbers
+/usr/src/doc/usd/SCCS/s.Title:
+6.2 04/11/02 23:37:42 msokolov 2 1
+Harhan preliminary edition
+/usr/src/doc/usd/SCCS/s.00.contents:
+5.2 04/11/02 23:37:43 msokolov 2 1
+Harhan preliminary edition
+/usr/src/doc/usd/24.troff/SCCS/s.apndxa:
+6.3 04/11/05 02:12:35 msokolov 3 2
+don't show unused Symbol code points
+line drawing chars no longer need S in the font list
+document \(lh and \)rh
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.8 04/11/05 02:46:55 msokolov 8 7
+added -S option to work around the PostScript interpreter bug
+that breaks our use of Symbol with altered metrics
+/usr/src/doc/usd/SCCS/s.Makefile:
+6.2 04/11/05 02:49:05 msokolov 2 1
+run pstmerge with -STs so we can print USD on the DocuTech 6135 with that
+bug in its PostScript interpreter
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.5 04/11/05 05:52:24 msokolov 5 4
+symlink /usr/lib/pstroff/f[ws][RIBS]t to troffemu/f[ws][RIBS]
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.12 04/11/05 05:54:34 msokolov 12 11
+recognise St after all
+/usr/src/doc/usd/27.eqnguide/SCCS/s.Makefile:
+6.2 04/11/05 06:11:30 msokolov 2 1
+use St font for \(bs
+/usr/src/doc/usd/SCCS/s.Makefile:
+6.3 04/11/05 06:12:57 msokolov 3 2
+use eqnguide1.ps for USD:27 as it now uses the St font
+/usr/src/doc/smm/19.porttour/SCCS/s.Makefile:
+6.2 04/11/17 04:23:26 msokolov 2 1
+bump it up to 6.2
+/usr/src/doc/smm/19.porttour/SCCS/s.Makefile:
+6.3 04/11/17 07:53:53 msokolov 3 2
+format with pstroff and nroff8
+/usr/src/doc/ps1/14.sccs/SCCS/s.Makefile:
+6.2 04/11/18 01:53:58 msokolov 2 1
+format with pstroff and nroff8
+/usr/src/usr.lib/sendmail/src/SCCS/s.collect.c:
+5.5 04/11/21 08:41:34 msokolov 84 83
+implement ability to globally limit message size in collect phase (l option)
+/usr/src/usr.lib/sendmail/src/SCCS/s.sendmail.h:
+5.16 04/11/21 08:41:36 msokolov 165 164
+implement ability to globally limit message size in collect phase (l option)
+/usr/src/usr.lib/sendmail/src/SCCS/s.readcf.c:
+5.16 04/11/21 08:41:39 msokolov 92 91
+implement ability to globally limit message size in collect phase (l option)
+/usr/src/usr.lib/sendmail/src/SCCS/s.version.c:
+5.61.1.3 04/11/21 08:43:03 msokolov 487 486
+added options to globally limit message size in collect phase and to
+disallow Internet relaying
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.harhantcp.mc:
+1.3 04/11/21 08:55:24 msokolov 3 2
+set new R and l policy options
+/usr/src/doc/ps1/01.Clang/SCCS/s.Makefile:
+6.2 04/11/22 05:09:54 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/ps1/01.Clang/SCCS/s.Clang.ms:
+6.4 04/11/22 05:20:09 msokolov 4 3
+fix spelling of "exceptions"
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.13 04/11/22 23:44:05 msokolov 13 12
+make it possible to print space like all other characters using its true width
+with .ss 0 (very useful for Courier)
+/usr/src/doc/ps1/06.sysman/SCCS/s.Makefile:
+6.2 04/11/28 22:18:48 msokolov 2 1
+ditroff => pstroff
+/usr/src/doc/ps1/06.sysman/SCCS/s.2.3.t:
+6.4 04/11/28 22:24:51 msokolov 5 4
+description of pipe(2) was the wrong way around
+/usr/src/doc/ps1/06.sysman/SCCS/s.2.4.t:
+6.3 04/11/28 22:31:23 msokolov 4 3
+long live sgtty!
+/usr/src/doc/ps1/06.sysman/SCCS/s.Makefile:
+6.3 04/11/28 23:32:29 msokolov 3 2
+add plain text version
+/usr/src/doc/ps1/06.sysman/SCCS/s.0.t:
+6.7 04/11/28 23:33:06 msokolov 8 7
+Quasijarus working draft
+/usr/src/sys/vax/emul/SCCS/s.emul_opspec.h:
+7.2 04/12/01 22:45:32 msokolov 2 1
+fix SCCS keyword line
+/usr/src/etc/getty/SCCS/s.Makefile:
+5.4 04/12/07 20:01:21 msokolov 7 6
+add smgetty
+/usr/src/etc/getty/SCCS/s.main.c:
+5.9 04/12/07 22:07:50 msokolov 16 15
+tighten up security a little: make ttys mode 600 while in getty
+/usr/src/etc/getty/SCCS/s.gettytab:
+5.11 04/12/07 23:43:19 msokolov 18 17
+smart modem support
+/usr/src/etc/getty/SCCS/s.gettytab.h:
+5.4 04/12/07 23:43:20 msokolov 8 7
+smart modem support
+/usr/src/etc/getty/SCCS/s.init.c:
+5.4 04/12/07 23:43:21 msokolov 9 8
+smart modem support
+/usr/src/etc/getty/SCCS/s.main.c:
+5.10 04/12/07 23:43:22 msokolov 17 16
+smart modem support
+/usr/src/etc/getty/SCCS/s.subr.c:
+5.6 04/12/07 23:43:24 msokolov 10 9
+smart modem support
+/usr/src/etc/getty/SCCS/s.smgetty.c:
+5.2 04/12/08 01:51:46 msokolov 2 1
+mostly works correctly
+/usr/src/sys/h/SCCS/s.tty.h:
+7.4 04/12/08 04:06:26 msokolov 26 25
+exception select for modem status changes
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.20 04/12/08 04:06:45 msokolov 119 118
+exception select for modem status changes
+/usr/src/sys/vaxuba/SCCS/s.dhu.c:
+7.8 04/12/08 04:07:06 msokolov 18 17
+exception select for modem status changes
+/usr/src/etc/getty/SCCS/s.smgetty.c:
+5.3 04/12/08 04:08:44 msokolov 3 2
+go by RS-232 RI signal instead of RING in-band message
+/usr/src/etc/getty/SCCS/s.gettytab:
+5.12 04/12/08 04:15:10 msokolov 19 18
+I wrote all this code only to find out that the modem does not after all behave
+the way I thought. Back to smgetty.
+/usr/src/etc/getty/SCCS/s.gettytab.h:
+5.5 04/12/08 04:15:11 msokolov 9 8
+I wrote all this code only to find out that the modem does not after all behave
+the way I thought. Back to smgetty.
+/usr/src/etc/getty/SCCS/s.init.c:
+5.5 04/12/08 04:15:11 msokolov 10 9
+I wrote all this code only to find out that the modem does not after all behave
+the way I thought. Back to smgetty.
+/usr/src/etc/getty/SCCS/s.main.c:
+5.11 04/12/08 04:15:12 msokolov 18 17
+I wrote all this code only to find out that the modem does not after all behave
+the way I thought. Back to smgetty.
+/usr/src/etc/getty/SCCS/s.subr.c:
+5.7 04/12/08 04:15:13 msokolov 11 10
+I wrote all this code only to find out that the modem does not after all behave
+the way I thought. Back to smgetty.
+/usr/src/sys/h/SCCS/s.disklabel.h:
+7.11 04/12/08 07:43:37 msokolov 11 10
+ioctl debostication
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.17 04/12/08 07:43:38 msokolov 84 83
+ioctl debostication
+/usr/src/sys/h/SCCS/s.lk201sc.h:
+7.4 04/12/08 07:43:40 msokolov 4 3
+ioctl debostication
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.21 04/12/08 07:45:10 msokolov 120 119
+CTRL macro debostication
+/usr/src/sys/vaxuba/SCCS/s.qd.c:
+1.13 04/12/08 07:47:33 msokolov 15 14
+CTRL macro debostication
+/usr/src/sys/vaxuba/SCCS/s.qdioctl.h:
+1.5 04/12/08 07:48:09 msokolov 5 4
+ioctl debostication
+/usr/src/sys/vaxuba/SCCS/s.qvioctl.h:
+1.5 04/12/08 07:48:10 msokolov 5 4
+ioctl debostication
+/usr/src/sys/vaxif/SCCS/s.if_hy.h:
+7.4 04/12/08 07:48:47 msokolov 9 8
+ioctl debostication
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.18 04/12/09 01:19:07 msokolov 85 84
+document TIOCMOD[GS] as forever unimplemented V7 relics
+move TIOCM_* bit definitions down under TIOCM{SET,BIS,BIC,GET}
+/usr/src/sys/vaxuba/SCCS/s.dh.c:
+7.9 04/12/09 23:50:00 msokolov 105 104
+implemented TIOCM{SET,BIS,BIC,GET} ioctls
+support for selecting for modem status change
+/usr/src/sys/vaxuba/SCCS/s.dmx.c:
+7.3 04/12/09 23:50:17 msokolov 3 2
+support for selecting for modem status change
+/usr/src/sys/vaxuba/SCCS/s.dmx.c:
+7.4 04/12/09 23:56:25 msokolov 4 3
+FNDELAY support
+/usr/src/sys/vaxuba/SCCS/s.dmf.c:
+7.6 04/12/09 23:56:27 msokolov 47 46
+FNDELAY support
+/usr/src/sys/vaxuba/SCCS/s.dmz.c:
+7.5 04/12/09 23:56:29 msokolov 14 13
+FNDELAY support
+/usr/src/sys/vaxuba/SCCS/s.dz.c:
+7.4 04/12/09 23:56:31 msokolov 85 84
+FNDELAY support
+/usr/src/sys/vaxuba/SCCS/s.tmscp.c:
+7.9 04/12/09 23:59:35 msokolov 17 16
+stop emitting old Ultrix SCCS ID in the binary
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.boilerplate.m4:
+1.5 04/12/25 05:16:19 msokolov 5 4
+add msmlm to trusted users
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.22 04/12/26 04:05:55 msokolov 121 120
+rub out the escaping \ only if CRTBS (totally inappropriate for printers)

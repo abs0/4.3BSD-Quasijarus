@@ -1,0 +1,289 @@
+h04948
+s 00037/00002/00076
+d D 6.4 04/01/02 10:56:15 msokolov 6 5
+c document -7 and -8
+e
+s 00001/00007/00077
+d D 6.3 87/09/29 20:45:10 bostic 5 4
+c list all options; bug report 4.3BSD/man/22
+e
+s 00003/00002/00081
+d D 6.2 86/05/05 15:27:05 mckusick 4 3
+c fix description of buffering
+e
+s 00001/00001/00082
+d D 6.1 85/04/29 14:16:48 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00023/00029/00060
+d D 5.1 85/04/29 14:16:40 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00089/00000/00000
+d D 4.1 85/04/29 14:16:34 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CAT 1 
+E 2
+I 2
+D 3
+.TH CAT 1 "18 January 1983"
+E 3
+I 3
+.TH CAT 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+cat \- catenate and print
+.SH SYNOPSIS
+.B cat
+[
+D 5
+.B \-u
+] [
+.B \-n
+] [
+.B \-s
+] [
+.B \-v
+E 5
+I 5
+D 6
+.B \-benstuv
+E 6
+I 6
+.B \-78benstuv
+E 6
+E 5
+]
+file ...
+.br
+.SH DESCRIPTION
+.I Cat
+reads each
+.I file
+D 2
+in sequence
+and writes it on the standard output.
+Thus
+E 2
+I 2
+in sequence and displays it on the standard output.  Thus
+E 2
+.PP
+.ti+15n
+cat file
+.PP
+D 2
+prints the file, and
+E 2
+I 2
+displays the file on the standard output, and
+E 2
+.PP
+.ti+15n
+cat file1 file2 >file3
+.PP
+concatenates the first two files and places the result on the third.
+.PP
+D 2
+If no input file is given,
+or if the argument `\-' is encountered,
+E 2
+I 2
+If no input file is given, or if the argument `\-' is encountered,
+E 2
+.I cat
+D 2
+reads from the standard
+input file.
+E 2
+I 2
+reads from the standard input file.
+E 2
+D 4
+Output is buffered in 1024-byte blocks unless the standard
+D 2
+output is a terminal, in which case it is line buffered.
+The
+E 2
+I 2
+output is a terminal, in which case it is line buffered.  The
+E 4
+I 4
+Output is buffered in the block size recommended by \fIstat\fP(2)
+unless the standard output is a terminal,
+when it is line buffered.  The
+E 4
+E 2
+.B \-u
+D 2
+option causes the output to be completely unbuffered.
+E 2
+I 2
+option makes the output completely unbuffered.
+E 2
+.PP
+D 2
+The option
+E 2
+I 2
+The
+E 2
+.B \-n
+D 2
+causes the output lines to be numbered sequentially from 1.
+Giving
+E 2
+I 2
+option displays the output lines preceded by lines numbers, numbered
+sequentially from 1.  Specifying the 
+E 2
+.B \-b
+D 2
+with
+E 2
+I 2
+option with the
+E 2
+.B \-n
+D 2
+causes numbers to be omitted from blank lines.
+E 2
+I 2
+option omits the line numbers from blank lines.
+E 2
+.PP
+D 2
+The option
+E 2
+I 2
+The
+E 2
+.B \-s
+D 2
+causes the output to be single spaced by crushing out multiple adjacent
+empty lines.
+E 2
+I 2
+option crushes out multiple adjacent empty lines so that the
+output is displayed single spaced.
+E 2
+.PP
+D 2
+The option
+E 2
+I 2
+The
+E 2
+.B \-v
+D 2
+causes non-printing characters to be printed in a visible way.
+E 2
+I 2
+option displays non-printing characters so that they are visible.
+E 2
+Control characters print like ^X for control-x; the delete character
+(octal 0177) prints as ^?.
+Non-ascii characters (with the high bit set) are printed as M-
+D 2
+(for meta) followed by the character of the low 7 bits.
+A
+E 2
+I 2
+(for meta) followed by the character of the low 7 bits.  A
+E 2
+.B \-e
+D 2
+option may be given with
+E 2
+I 2
+option may be given with the
+E 2
+.B \-v
+D 2
+and causes the ends of lines to be followed by the character `$';
+the
+E 2
+I 2
+option, which displays a `$' character at the end of each line.
+Specifying the 
+E 2
+.B \-t
+D 2
+option with
+E 2
+I 2
+option with the
+E 2
+.B \-v
+D 2
+causes tabs to be printed as ^I.
+E 2
+I 2
+option displays tab characters as ^I.
+E 2
+.PP
+I 6
+The
+.B \-7
+option converts the catted character stream from KOI-8 to KOI-7
+by clearing the high bit of every character and inserting SO and SI
+(octal 016 and 017) control characters as necessary so that Russian letters
+in the input (octal 0300 through 0377 inclusive) can be distinguished
+from their Latin (ASCII) counterparts.
+The
+.B \-8
+option performs the opposite conversion by setting the high bit of
+characters between 0100 and 0177 octal (inclusive) that are preceded by SO
+(016 octal).
+While it will seem counterintuitive, the
+.B \-7
+transformation includes the
+.B \-8
+transformation as its first step.
+This is done so that if the input files contain a mixture of KOI-7 and KOI-8,
+the output of
+.I cat
+.B \-7
+will be in KOI-7 with the minimum necessary number of SO and SI control
+characters.
+The
+.B \-7
+and
+.B \-8
+options are incompatible with
+.BR \-v .
+.PP
+E 6
+.SH "SEE ALSO"
+D 6
+cp(1), ex(1), more(1), pr(1), tail(1)
+E 6
+I 6
+cp(1), ex(1), more(1), pr(1), tail(1), koi(7)
+E 6
+.SH BUGS
+Beware of `cat a b >a' and `cat a b >b', which destroy
+the input files before reading them.
+I 6
+.PP
+.B \-7
+option does not convert C1 high control characters to their equivalent
+7-bit two-character escape sequences by ISO rules, instead
+it merely clears the high bit.
+E 6
+E 1

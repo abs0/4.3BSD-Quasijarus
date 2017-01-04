@@ -1,0 +1,373 @@
+h10195
+s 00036/00004/00139
+d D 6.6 87/10/01 13:01:13 mckusick 7 6
+c add remainder of tunable parmeters (-a, -d, -e); 
+c rename old -a to -x, old -d to -u so above can have same values as `tunefs'
+e
+s 00007/00003/00136
+d D 6.5 87/01/14 19:50:46 mckusick 6 5
+c spelling diction
+e
+s 00075/00058/00064
+d D 6.4 87/01/14 16:47:22 mckusick 5 4
+c update to reflect options brought on by disk labels
+e
+s 00001/00001/00121
+d D 6.3 86/05/21 22:10:27 mckusick 4 3
+c update citations
+e
+s 00019/00003/00103
+d D 6.2 85/09/12 00:02:19 mckusick 3 2
+c allow specification of optimization preference
+e
+s 00001/00001/00105
+d D 6.1 85/04/27 15:36:54 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00106/00000/00000
+d D 5.1 85/04/27 15:36:34 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+D 6
+.\" Copyright (c) 1983 Regents of the University of California.
+E 6
+I 6
+.\" Copyright (c) 1983, 1987 Regents of the University of California.
+E 6
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH NEWFS 8 "20 February 1983"
+E 2
+I 2
+.TH NEWFS 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+newfs \- construct a new file system
+.SH SYNOPSIS
+.B /etc/newfs
+[
+I 3
+.B \-N
+] [
+E 3
+D 5
+.B \-v
+] [
+.B \-n
+] [
+E 5
+.B mkfs-options
+]
+D 5
+.B special disk-type
+E 5
+I 5
+.B special
+E 5
+.SH DESCRIPTION
+.I Newfs
+D 5
+is a ``friendly'' front-end to the
+E 5
+I 5
+replaces the more obtuse
+E 5
+.IR mkfs (8)
+program.
+I 5
+Before running 
+.IR newfs ,
+the disk must be labeled using 
+.IR disklabel (8).
+E 5
+.I Newfs
+D 5
+will look up the type of disk a file system is
+being created on in the disk description
+file
+.IR /etc/disktab ,
+calculate the appropriate
+parameters to use in calling
+.IR mkfs ,
+then build the file system by forking 
+.I mkfs 
+and, if the file system is a root partition,
+install the necessary bootstrap programs
+in the initial 8 sectors of the device.
+E 5
+I 5
+builds a file system on the specified special device
+basing its defaults on the information in the disk label.
+Typically the defaults are reasonable, however
+.I newfs
+has numerous options to allow the defaults to be selectively overridden.
+E 5
+The
+D 5
+.B \-n
+option prevents the 
+bootstrap programs from being installed.
+I 3
+The
+E 5
+.B \-N
+option causes the file system parameters to be printed out
+D 6
+without actually creating the file system.
+E 6
+I 6
+without really creating the file system.
+E 6
+E 3
+.PP
+D 5
+If the 
+.B \-v
+option is supplied, 
+.I newfs
+will print out its actions, including
+the parameters passed to
+.IR mkfs .
+.PP
+Options which may be used to override default
+parameters passed to
+.I mkfs
+are:
+E 5
+I 5
+The following options define the general layout policies.
+E 5
+.TP 10
+D 5
+.B \-s size
+The size of the file system in sectors.
+.TP 10
+E 5
+.B \-b block-size
+The block size of the file system in bytes.  
+.TP 10
+.B \-f frag-size
+The fragment size of the file system in bytes.
+.TP 10
+D 5
+.B \-t #tracks/cylinder
+.TP 10
+.B \-c #cylinders/group
+The number of cylinders per cylinder group in a file system.
+The default value used is 16.
+.TP 10
+E 5
+.B \-m free space %
+The percentage of space reserved from normal users; the minimum
+D 6
+free space threshhold.  The default value used is 10%.
+E 6
+I 6
+free space threshold.  The default value used is 10%.
+I 7
+See
+.IR tunefs (8)
+for more details on how to set this option.
+E 7
+E 6
+.TP 10
+I 3
+.B \-o optimization preference (``space'' or ``time'')
+The file system can either be instructed to try to minimize the time spent
+allocating blocks, or to try to minimize the space fragmentation on the disk.
+If the value of minfree (see above) is less than 10%,
+the default is to optimize for space;
+if the value of minfree greater than or equal to 10%,
+the default is to optimize for time.
+I 7
+See
+.IR tunefs (8)
+for more details on how to set this option.
+E 7
+.TP 10
+I 7
+.B \-a maxcontig
+This specifies the maximum number of contiguous blocks that will
+be laid out before forcing a rotational delay (see \-d below).
+The default value is one.
+See
+.IR tunefs (8)
+for more details on how to set this option.
+.TP 10
+.B \-d rotdelay
+This specifies the expected time (in milliseconds)
+to service a transfer completion
+interrupt and initiate a new transfer on the same disk.
+The default is 4 milliseconds.
+See
+.IR tunefs (8)
+for more details on how to set this option.
+.TP 10
+.B \-e maxbpg
+This indicates the maximum number of blocks any single file can
+allocate out of a cylinder group before it is forced to begin
+allocating blocks from another cylinder group.
+The default is about one quarter of the total blocks in a cylinder group.
+See
+.IR tunefs (8)
+for more details on how to set this option.
+.TP 10
+E 7
+E 3
+D 5
+.B \-r revolutions/minute
+The speed of the disk in revolutions per minute (normally 3600).
+.TP 10
+.B \-S sector-size
+The size of a sector in bytes (almost never anything but 512).
+.TP 10
+E 5
+.B \-i number of bytes per inode
+This specifies the density of inodes in the file system.
+The default is to create an inode for each 2048 bytes of data space.
+If fewer inodes are desired, a larger number should be used;
+to create more inodes a smaller number should be given.
+D 5
+.SH FILES
+/etc/disktab	for disk geometry and file system partition information 
+.br
+/etc/mkfs	to actually build the file system
+.br
+/usr/mdec	for boot strapping programs
+E 5
+I 5
+.TP 10
+.B \-c #cylinders/group
+The number of cylinders per cylinder group in a file system.
+The default value used is 16.
+.TP 10
+.B \-s size
+The size of the file system in sectors.
+.PP
+The following options override the standard sizes for the disk geometry. 
+Their default values are taken from the disk label.
+Changing these defaults is useful only when using
+.I newfs
+to build a file system whose raw image will eventually be used
+on a different type of disk than the one on which it is initially
+created (for example on a write-once disk).
+I 6
+Note that changing any of these values from their
+defaults will make it impossible for 
+.I fsck
+to find the alternate superblocks if the standard super block is lost.
+E 6
+.TP 10
+.B \-r revolutions/minute
+The speed of the disk in revolutions per minute.
+.TP 10
+.B \-S sector-size
+The size of a sector in bytes (almost never anything but 512).
+.TP 10
+D 7
+.B \-d sectors/track
+E 7
+I 7
+.B \-u sectors/track
+E 7
+The number of sectors/track available for data
+allocation by the file system.
+This does not include sectors reserved at the end of each track for
+bad block replacement (see \fB\-p\fP below).
+.TP 10
+.B \-t #tracks/cylinder
+The number of tracks/cylinder available for data
+allocation by the file system.
+.TP 10
+.B \-p spare sectors per track
+Spare sectors (bad sector replacements) are physical sectors
+that occupy space at the end of each track.
+D 7
+They are not counted as part of the sectors/track (\fB\-d\fP)
+E 7
+I 7
+They are not counted as part of the sectors/track (\fB\-u\fP)
+E 7
+since they are not available to the file system for data allocation.
+.TP 10
+D 7
+.B \-a spare sectors per cylinder
+E 7
+I 7
+.B \-x spare sectors per cylinder
+E 7
+Spare sectors (bad sector replacements) are physical sectors
+that occupy space at the end of the last track in the cylinder.
+D 7
+They are deducted from the sectors/track (\fB\-d\fP)
+E 7
+I 7
+They are deducted from the sectors/track (\fB\-u\fP)
+E 7
+of the last track of each cylinder
+since they are not available to the file system for data allocation.
+.TP 10
+.B \-l hardware sector interleave
+Used to describe perturbations in the media format to
+compensate for a slow controller.
+Interleave is physical sector interleave on each track,
+specified as the denominator of the ratio:
+.nf
+	sectors read / sectors passed over
+.fi
+Thus an interleave of 1/1 implies contiguous layout, while 1/2
+implies logical sector 0 is separated by one sector from logical
+sector 1.
+.TP 10
+.B \-k sector 0 skew, per track
+Used to describe perturbations in the media format to
+compensate for a slow controller.
+Track skew is the offset of sector 0 on track N
+relative to sector 0 on track N-1 on the same cylinder.
+E 5
+.SH "SEE ALSO"
+disktab(5),
+fs(5),
+I 5
+disklabel(8),
+E 5
+diskpart(8),
+fsck(8),
+format(8),
+D 5
+mkfs(8),
+E 5
+tunefs(8)
+.PP
+D 3
+McKusick, Joy, Leffler; "A Fast File System for Unix",
+Computer Systems Research Group, Dept of EECS, Berkeley, CA 94720;
+TR #7, September 1982.
+E 3
+I 3
+M. McKusick, W. Joy, S. Leffler, R. Fabry,
+``A Fast File System for UNIX'',
+\fIACM Transactions on Computer Systems 2\fP, 3.
+pp 181-197, August 1984.
+D 4
+(reprinted in the System Manager's Manual and in Volume 2c)
+E 4
+I 4
+(reprinted in the System Manager's Manual, SMM:14)
+E 4
+E 3
+D 5
+.SH BUGS
+Should figure out the type of the disk without the user's help.
+E 5
+E 1

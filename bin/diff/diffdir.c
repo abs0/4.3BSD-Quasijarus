@@ -1,4 +1,4 @@
-static	char *sccsid = "@(#)diffdir.c	4.11 (Berkeley) 10/22/87";
+static	char *sccsid = "@(#)diffdir.c	4.12 (Berkeley) 7/10/03";
 
 #include "diff.h"
 /*
@@ -288,7 +288,7 @@ same:
 	goto closem;
 notsame:
 	dirstatus |= 1;
-	if (!ascii(f1) || !ascii(f2)) {
+	if (!aflag && (!ascii(f1) || !ascii(f2))) {
 		if (lflag)
 			dp->d_flags |= DIFFER;
 		else if (opt == D_NORMAL || opt == D_CONTEXT)

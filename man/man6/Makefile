@@ -14,39 +14,21 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.7 (Berkeley) 9/29/99
+#	@(#)Makefile	5.8 (Berkeley) 10/20/04
 #
-MDIR=	/usr/man/cat6
-SRCS=	aardvark.6 adventure.6 arithmetic.6 atc.6 backgammon.6 banner.6 \
-	battlestar.6 bcd.6 boggle.6 canfield.6 chess.6 ching.6 cribbage.6 \
-	fish.6 fortune.6 hack.6 hangman.6 hunt.6 \
-	mille.6 monop.6 number.6 phantasia.6 quiz.6 rain.6 robots.6 \
-	rogue.6 sail.6 snake.6 trek.6 worm.6 worms.6 wump.6 zork.6
-OBJS=	aardvark.0 adventure.0 arithmetic.0 atc.0 backgammon.0 banner.0 \
-	battlestar.0 bcd.0 boggle.0 canfield.0 chess.0 ching.0 cribbage.0 \
-	fish.0 fortune.0 hack.0 hangman.0 hunt.0 \
-	mille.0 monop.0 number.0 phantasia.0 quiz.0 rain.0 robots.0 \
-	rogue.0 sail.0 snake.0 trek.0 worm.0 worms.0 wump.0 zork.0
-LINKS=	snscore.0 cfscores.0 ppt.0
+MDIR=	/usr/man/man6
 
-.SUFFIXES: .6 .0
+all:
 
-.6.0:
-	${DESTDIR}/usr/man/manroff $*.6 > $*.0
-
-all: ${OBJS}
-
-phantasia.0:
-	tbl -TX phantasia.6 | ${DESTDIR}/usr/man/manroff > $@
+psman: FRC
+	for i in *.6; do echo $$i; pstroff -man $$i > $$i.ps; done
 
 clean: FRC
-	rm -f ${OBJS}
+	rm -f *.ps
 
 install: FRC
-	cd ${DESTDIR}${MDIR}; rm -f *.0
-	install -c -o bin -g bin -m 444 ${OBJS} ${DESTDIR}${MDIR}
-	ln ${DESTDIR}${MDIR}/snake.0 ${DESTDIR}${MDIR}/snscore.0
-	ln ${DESTDIR}${MDIR}/canfield.0 ${DESTDIR}${MDIR}/cfscores.0
-	ln ${DESTDIR}${MDIR}/bcd.0 ${DESTDIR}${MDIR}/ppt.0
+	cd ${DESTDIR}${MDIR}; rm -f *
+	install -c -o bin -g bin -m 444 *.6 ${DESTDIR}${MDIR}
+	install -c -o bin -g bin -m 444 links/*.6 ${DESTDIR}${MDIR}
 
 FRC:

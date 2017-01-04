@@ -1,0 +1,55 @@
+.\"	Miscellaneous macros for some of the documents
+.\"	Mostly to set off program text
+.\"
+.\"	@(#)~mac	1.2 (Berkeley) 2013/08/05
+.\"
+.if n .nr DV 0
+.\"		set up Printout font
+.if "\*(pf"" .ds pf C
+.nr dP 1	\" delta point size for program
+.nr dV 1	\" delta vertical for programs
+.ps \n(PS
+.vs \n(VS
+.if n .nr DV 0	\" extra space before diverted text
+.if n .nr NH 1	\" space after NH or SH heading
+.if t .nr NH .5v
+.if n .ls 2
+.de UC
+\&\\$3\s-1\\$1\\s0\&\\$2
+..
+.de IT
+.if n .ul
+\&\\$3\f2\\$1\f1\^\&\\$2
+..
+.de UL
+.lg 0
+.if n .ul
+.\" was \%\&\\$3\f(\\*(pf\\$1\f1\&\\$2 for 2-char font name
+\%\&\\$3\f\\*(pf\\$1\f1\&\\$2
+.lg
+..
+.nr ds .5i	\" default indent for programs
+.de P1
+.ie \\n(.$ .DS I \\$1
+.el .DS I \\n(dsu
+.nf
+.lg 0
+.if n .ls 1
+.if n .ta 5 10 15 20 25 30 35 40 45 50 55 60
+.if t .ps -\\n(dP
+.if t .vs -\\n(dV
+.ft \\*(pf
+.nr t 5*\\w'x'u
+.if t .ta 1u*\\ntu 2u*\\ntu 3u*\\ntu 4u*\\ntu 5u*\\ntu 6u*\\ntu 7u*\\ntu 8u*\\ntu 9u*\\ntu 10u*\\ntu 11u*\\ntu 12u*\\ntu 13u*\\ntu 14u*\\ntu
+..
+.de P2
+.ps \\n(PS
+.vs \\n(VSp
+.ft 1
+.if n .ls 2
+.fi
+.DE
+.lg
+.if n .sp
+..
+.hy 14	\"2=not last lines; 4= no -xx; 8=no xx-

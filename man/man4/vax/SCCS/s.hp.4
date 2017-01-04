@@ -1,0 +1,535 @@
+h37125
+s 00045/00018/00249
+d D 6.4 88/06/13 18:00:03 karels 6 5
+c disklabel xref's in hp, uda; new error formats with diskerr
+e
+s 00014/00001/00253
+d D 6.3 86/06/01 00:47:23 mis 5 4
+c added fujitsu2361.
+e
+s 00003/00003/00251
+d D 6.2 86/05/16 15:51:43 karels 4 3
+c add 9775
+e
+s 00001/00001/00253
+d D 6.1 85/05/15 17:21:16 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00148/00051/00106
+d D 5.1 85/05/15 17:20:58 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00157/00000/00000
+d D 4.1 85/05/15 17:20:49 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+D 6
+.\" Copyright (c) 1980 Regents of the University of California.
+E 6
+I 6
+.\" Copyright (c) 1980,1988 Regents of the University of California.
+E 6
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH HP 4 5/10/81
+E 2
+I 2
+D 3
+.TH HP 4 "27 July 1983"
+E 3
+I 3
+.TH HP 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+hp \- RP06, RM03, RM05, RM80, RP07 MASSBUS moving-head disk
+E 2
+I 2
+hp \- MASSBUS disk interface
+E 2
+.SH SYNOPSIS
+D 2
+disk hp0 at mba0 drive 0
+E 2
+I 2
+.B "disk hp0 at mba0 drive 0"
+E 2
+.SH DESCRIPTION
+Files with minor device numbers 0 through 7 refer to various portions
+of drive 0;
+minor devices 8 through 15 refer to drive 1, etc.
+The standard device names begin with ``hp'' followed by
+the drive number and then a letter a-h for partitions 0-7 respectively.
+The character ? stands here for a drive number in the range 0-7.
+.PP
+D 2
+The origin and size of the pseudo-disks on each drive are
+as follows:
+E 2
+I 2
+The block file's access the disk via the system's normal
+buffering mechanism and may be read and written without regard to
+physical disk records.  There is also a `raw' interface
+which provides for direct transmission between the disk
+and the user's read or write buffer.
+A single read or write call results in exactly one I/O operation
+and therefore raw I/O is considerably more efficient when
+many words are transmitted.  The names of the raw files
+conventionally begin with an extra `r.'
+E 2
+.PP
+I 2
+In raw I/O counts should be a multiple of 512 bytes (a disk sector).
+Likewise
+.I seek
+calls should specify a multiple of 512 bytes.
+I 6
+.PP
+The first sector of each disk contains both a first-stage bootstrap program
+and a disk label containing geometry information and partition layouts (see
+.IR disklabel (5).
+This sector is normally write-protected, and disk-to-disk copies should
+avoid copying this sector.
+The label may be updated with
+.IR disklabel (8),
+which can also be used to write-enable and write-disable the sector.
+The next 15 sectors contain a second-stage bootstrap program.
+E 6
+.SH "DISK SUPPORT"
+This driver handles both standard DEC controllers and Emulex
+D 6
+SC750 and SC780 controllers.  Standard DEC drive types are
+recognized according to the MASSBUS drive type register.  For
+the Emulex controller the drive type register should be configured
+E 6
+I 6
+SC750 and SC780 controllers.
+During autoconfiguration or whenever a drive comes on line for the first time,
+as well as when a drive is opened after all partitions are closed,
+the first sector of the drive is examined for a disk label.
+If a label is found, the geometry of the drive and the partition tables
+are taken from it.
+If no label is found,
+standard DEC drive types are
+recognized according to the MASSBUS drive type register,
+and default partitions are used.
+For the Emulex controller the drive type register should be configured
+E 6
+to indicate the drive is an RM02.  When this is encountered,
+the driver checks the holding register to find out
+the disk geometry and, based on this information, decides what
+the drive type is.  The following disks are supported: RM03,
+RM05, RP06, RM80, RP05, RP07, ML11A, ML11B, CDC 9775, CDC 9730,
+AMPEX Capricorn (32 sectors/track), FUJITSU Eagle (48 sectors/track),
+I 5
+Fujitsu 2361, 
+E 5
+D 6
+and AMPEX 9300.  The origin and size (in sectors) of the pseudo-disks
+E 6
+I 6
+and AMPEX 9300.  The default origin and size (in sectors) of the pseudo-disks
+E 6
+on each drive are as follows:
+.PP
+E 2
+.nf
+.ta .5i +\w'000000    'u +\w'000000    'u +\w'000000    'u +\w'000000    'u
+D 2
+RP06 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-37
+	hp?b	15884	33440	38-117
+	hp?c	0	340670	0-814
+	hp?g	49324	291280	118-814	
+E 2
+.PP
+D 2
+.nf
+E 2
+RM03 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-99
+	hp?b	16000	33440	100-309
+	hp?c	0	131680	0-822
+D 2
+	hp?g	49600	81984	310-822
+E 2
+I 2
+	hp?d	49600	15884	309-408
+	hp?e	65440	55936	409-758
+	hp?f	121440	10080	759-822
+	hp?g	49600	82080	309-822
+E 2
+.PP
+D 2
+.nf
+E 2
+RM05 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-26
+	hp?b	16416	33440	27-81
+	hp?c	0	500384	0-822
+	hp?d	341696	15884	562-588
+	hp?e	358112	55936	589-680
+D 2
+	hp?f	414048	86240	681-822
+	hp?g	341696	158592	562-822
+E 2
+I 2
+	hp?f	414048	86176	681-822
+	hp?g	341696	158528	562-822
+E 2
+	hp?h	49856	291346	82-561
+.PP
+D 2
+.nf
+E 2
+I 2
+RP06 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-37
+	hp?b	15884	33440	38-117
+	hp?c	0	340670	0-814
+	hp?d	49324	15884	118-155
+	hp?e	65208	55936	156-289
+	hp?f	121220	219296	290-814
+	hp?g	49324	291192	118-814	
+.PP
+E 2
+RM80 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-36
+	hp?b	16058	33440	37-114
+	hp?c	0	242606	0-558
+D 2
+	hp?g	49910	82080	115-304
+	hp?h	132370	110143	305-558
+E 2
+I 2
+	hp?d	49910	15884	115-151
+	hp?e	68096	55936	152-280
+	hp?f	125888	120466	281-558
+	hp?g	49910	192510	115-558
+E 2
+.PP
+D 2
+.nf
+E 2
+I 2
+RP05 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-37
+	hp?b	15884	33440	38-117
+	hp?c	0	171798	0-410
+	hp?d	2242	15884	118-155
+	hp?e	65208	55936	156-289
+	hp?f	121220	50424	290-410
+	hp?g	2242	122320	118-410
+.PP
+E 2
+RP07 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-9
+D 2
+	hp?b	16000	64000	10-49
+E 2
+I 2
+	hp?b	16000	66880	10-51
+E 2
+	hp?c	0	1008000	0-629
+D 2
+	hp?d	528000	15884	330-339
+	hp?e	544000	258000	340-499
+	hp?f	800000	207850	500-629
+	hp?g	528000	479850	330-629
+	hp?h	80000	448000	50-329
+.fi
+E 2
+I 2
+	hp?d	376000	15884	235-244
+	hp?e	392000	307200	245-436
+	hp?f	699200	308600	437-629
+	hp?g	376000	631800	235-629
+	hp?h	83200	291346	52-234
+.PP
+CDC 9775 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-12
+	hp?b	16640	66880	13-65
+D 4
+	hp?c	0	1079040	0-842
+E 4
+I 4
+	hp?c	0	1077760	0-841
+E 4
+	hp?d	376320	15884	294-306
+	hp?e	392960	307200	307-546
+D 4
+	hp?f	700160	378720	547-842
+	hp?g	376320	702560	294-842
+E 4
+I 4
+	hp?f	700160	377440	547-841
+	hp?g	376320	701280	294-841
+E 4
+	hp?h	84480	291346	66-293
+.PP
+CDC 9730 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-49
+	hp?b	16000	33440	50-154
+	hp?c	0	263360	0-822
+	hp?d	49600	15884	155-204
+	hp?e	65600	55936	205-379
+	hp?f	121600	141600	380-822
+	hp?g	49600	213600	155-822
+.PP
+AMPEX Capricorn partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-31
+	hp?b	16384	33440	32-97
+	hp?c	0	524288	0-1023
+	hp?d	342016	15884	668-699
+	hp?e	358400	55936	700-809
+	hp?f	414720	109408	810-1023
+	hp?g	342016	182112	668-1023
+	hp?h	50176	291346	98-667
+.PP
+FUJITSU Eagle partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-16
+	hp?b	16320	66880	17-86
+	hp?c	0	808320	0-841
+	hp?d	375360	15884	391-407
+	hp?e	391680	55936	408-727
+	hp?f	698880	109248	728-841
+	hp?g	375360	432768	391-841
+	hp?h	83520	291346	87-390
+.PP
+I 5
+FUJITSU 2361 partitions
+	disk	start	length	cyls
+	hp?a	0	15884	0-12
+	hp?b	16640	66880	13-65
+	hp?c	0	1077760	0-841
+	hp?d	376320	15884	294-306
+	hp?e	392960	307200	307-546
+	hp?f	700160	377408	547-841
+	hp?g	363520	701248	294-841
+	hp?h	84480	291346	66-293
+.PP
+E 5
+AMPEX 9300 partitions
+	disk	start	length	cyl
+	hp?a	0	15884	0-26
+	hp?b	16416	33440	27-81
+	hp?c	0	495520	0-814
+	hp?d	341696	15884	562-588
+	hp?e	358112	55936	589-680
+	hp?f	414048	81312	681-814
+	hp?g	341696	153664	562-814
+	hp?h	49856	291346	82-561
+E 2
+.DT
+I 2
+.fi
+E 2
+.PP
+It is unwise for all of these files to be present in one installation,
+since there is overlap in addresses and protection becomes
+a sticky matter.
+The hp?a partition is normally used for the root file system,
+the hp?b partition as a paging area,
+and the hp?c partition for pack-pack copying (it maps the entire disk).
+D 2
+On rp06's and rm03's the hp?g partition maps the rest of the pack.
+On rm80's, rm05's and rp07's, both hp?g and hp?h are used to map the
+remaining cylinders.
+.PP
+The block files access the disk via the system's normal
+buffering mechanism and may be read and written without regard to
+physical disk records.  There is also a `raw' interface
+which provides for direct transmission between the disk
+and the user's read or write buffer.
+A single read or write call results in exactly one I/O operation
+and therefore raw I/O is considerably more efficient when
+many words are transmitted.  The names of the raw files
+conventionally begin with an extra `r.'
+.PP
+In raw I/O counts should be a multiple of 512 bytes (a disk sector).
+Likewise
+.I seek
+calls should specify a multiple of 512 bytes.
+E 2
+I 2
+On disks larger than about 205 Megabytes, the hp?h partition
+is inserted prior to the hp?d or hp?g partition;
+the hp?g partition then maps the remainder of the pack.
+All disk partition tables are calculated using the
+.IR diskpart (8)
+program.
+E 2
+.SH FILES
+.ta 2i
+/dev/hp[0-7][a-h]	block files
+.br
+/dev/rhp[0-7][a-h]	raw files
+.SH SEE ALSO
+D 2
+hk(4), up(4)
+E 2
+I 2
+D 6
+hk(4),
+uda(4),
+up(4)
+E 6
+I 6
+up(4),
+disklabel(5), disklabel(8)
+E 6
+E 2
+.SH DIAGNOSTICS
+D 6
+\fBhp%d%c: hard error sn%d mbsr=%b er1=%b er2=%b\fR.  An unrecoverable
+D 2
+error occured during transfer of the specified sector of the specified
+E 2
+I 2
+error occurred during transfer of the specified sector of the specified
+E 2
+disk partition.  The MASSBUS status register is printed in hexadecimal and
+E 6
+I 6
+\fBhp%d%c: hard error %sing fsbn %d [of %d-%d] (hp%d bn %d cn %d tn %d sn %d)
+mbsr=%b er1=%b er2=%b\fR.
+An unrecoverable error occurred during transfer of the specified
+filesystem block number,
+which is a logical block number on the indicated partition.
+If the transfer involved multiple blocks, the block range is printed as well.
+The parenthesized fields list the actual disk sector number
+relative to the beginning of the drive,
+as well as the cylinder, track and sector number of the block.
+The MASSBUS status register is printed in hexadecimal and
+E 6
+with the error bits decoded if any error bits other than MBEXC and DTABT
+are set.  In any case the contents of the two error registers are also printed
+in octal and symbolically with bits decoded.
+D 6
+(Note that er2 is what old rp06 manuals would call er3; the terminology
+is that of the rm disks).
+E 6
+I 6
+(Note that er2 is what old RP06 manuals would call RPER3; the terminology
+is that of the RM disks).
+E 6
+The error was either unrecoverable, or a large number of retry attempts
+(including offset positioning and drive recalibration) could not
+recover the error.
+.PP
+\fBhp%d: write locked\fR.  The write protect switch was set on the drive
+when a write was attempted.  The write operation is not recoverable.
+.PP
+\fBhp%d: not ready\fR.  The drive was spun down or off line when it was
+D 5
+accessed.  The i/o operation is not recoverable.
+E 5
+I 5
+accessed.  The I/O operation is not recoverable.
+E 5
+.PP
+D 6
+\fBhp%d%c: soft ecc sn%d\fR.  A recoverable ECC error occurred on the
+E 6
+I 6
+\fBhp%d%c: soft ecc reading fsbn %d [of %d-%d] (hp%d bn %d cn %d tn %d sn %d)\fP.
+A recoverable ECC error occurred on the
+E 6
+D 2
+specified sector of the specified disk partition.  This happens normally
+E 2
+I 2
+specified sector of the specified disk partition. 
+I 6
+If the transfer involved multiple blocks, the block range is printed as well.
+The parenthesized fields list the actual disk sector number
+relative to the beginning of the drive,
+as well as the cylinder, track and sector number of the block.
+E 6
+This happens normally
+E 2
+a few times a week.  If it happens more frequently than
+D 2
+this the sectors where the errors are occuring should be checked to see
+E 2
+I 2
+this the sectors where the errors are occurring should be checked to see
+E 2
+if certain cylinders on the pack, spots on the carriage of the drive
+or heads are indicated.
+I 2
+.PP
+During autoconfiguration one of the following messages may appear
+on the console indicating the appropriate drive type was recognized.
+The last message indicates the drive is of a unknown type.
+I 6
+In this case, the correct geometry is set, and one partition is created
+that contains the entire drive.
+E 6
+.PP
+.nf
+.BR "hp%d: 9775 (direct)" .
+.BR "hp%d: 9730 (direct)" .
+.BR "hp%d: 9300" .
+.BR "hp%d: 9762" .
+.BR "hp%d: capricorn" .
+.BR "hp%d: eagle" .
+I 5
+.BR "hp%d: 2361" .
+E 5
+.BR "hp%d: ntracks %d, nsectors %d: unknown device" .
+.fi
+E 2
+.SH BUGS
+In raw I/O
+.I read
+and
+.IR write (2)
+truncate file offsets to 512-byte block boundaries,
+and
+.I write
+scribbles on the tail of incomplete blocks.
+Thus,
+in programs that are likely to access raw devices,
+.I read, write
+and
+.IR lseek (2)
+should always deal in 512-byte multiples.
+.PP
+DEC-standard error logging should be supported.
+D 2
+.PP
+Bad block forwarding is not yet supported on RP06's.
+E 2
+.PP
+A program to analyze the logged error information (even in its
+present reduced form) is needed.
+D 6
+.PP
+The partition tables for the file systems should be read off of each
+pack, as they are never quite what any single installation would prefer,
+and this would make packs more portable.
+E 6
+E 1

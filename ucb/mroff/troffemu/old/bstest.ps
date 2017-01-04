@@ -1,0 +1,11 @@
+%!
+%%IncludeFile: TroffEmu-Symbol.ps
+%%IncludeFile: TroffEmu-BellSystem.ps
+/TroffEmu-BellSystem findfont 1000 scalefont setfont
+/prt {=string cvs print} bind def
+(Width: ) print (B) stringwidth pop =
+(BBox:) print
+newpath 0 0 moveto (B) false charpath flattenpath pathbbox
+/spc ( ) def
+3 -1 0 {spc print index prt} for pop pop pop pop
+(\n) print flush

@@ -1,0 +1,17 @@
+h25211
+s 00006/00000/00000
+d D 5.1 88/03/30 15:42:30 bostic 1 0
+c date and time created 88/03/30 15:42:30 by bostic
+e
+u
+U
+t
+T
+I 1
+./"next"16t"back"16t"nspcb"16t"flg/stt"8t"mtu"n3X2xn
++$<<idp
++$<<spp
++$<<spp
++/"rack"8t"rallo"8t"snt"8t"idle"8t"rxmt"8t"prsst"8t"keep"8t"2msl"n8xn
++/"rxshft"8t"rtseq"8t"rtt"8t"avrtt"8t"flg/frc"8t"0/obc"8t"want"n7xn
+E 1

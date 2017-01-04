@@ -1,0 +1,109 @@
+.\"	@(#)apndxb	6.2 (Berkeley) 10/28/04
+.\"
+.pn33
+.ds H B
+.br
+.ftB
+.ps+2
+.ce 2
+Appendix B
+PostScript Standard Fonts
+.ftR
+.ps-2
+.tr &&
+.sp
+Copied from
+\fIPostScript Language Reference Manual\fR, 2nd ed., Appendix E:
+.pg
+(The font samples are printed in point size 10 with a 12 point vertical
+spacing.)
+.sp
+.ns
+.mh
+Times Family
+.pg
+In 1931 \fIThe Times\fR of London commissioned Monotype corporation,
+under the direction of Stanley Morison, to design a newspaper typeface.
+Times New Roman\(rg was the result.
+The Linotype version called Times Roman is standard in PostScript printers.
+It continues to be popular for both newspaper and business applications,
+such as reports and correspondence.
+It is the default and most commonly used font family in \*(TR.
+.sp
+.nr o 4c
+.ta \nou-0.5cR \nou
+.de FS
+.nf
+.in \nou
+.ti 0-\nou
+	\\$1	\c
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+a b c d e f g h i j k l m n o p q r s t u v w x y z & 0 1 2 3 4 5 6 7 8 9
+\XC6 \XC1 \XC2 \XC4 \XC0 \XC5 \XC3 \XC7 \XD0 \XC9 \XCA \XCB \XC8 \c
+\XCD \XCE \XCF \XCC \X84 \XD1 \X85 \XD3 \XD4 \XD6 \XD2 \XD5 \XD8 \X86 \XDE \XDA
+\XDB \XDC \XD9 \X83 \XDD \X87 \c
+\XE6 \XE1 \XE2 \XE4 \XE0 \XE5 \XE3 \XE7 \XE9 \XEA \XEB \XE8 \XF0 \(fi \(fl \c
+\XED \XEE \XEF \XEC \X90 \XB5 \X8C \XF1 \X8D \XF3 \XF4 \XF6 \XF2 \XF5 \XF8 \c
+\X8E \XFE \XDF
+\XFA \XFB \XFC \XF9 \XFF \XFD \X8F \c
+\XA3 \XA5 \X99 $ \XA2 \XA4 \X06 \XA9 \XAE @ \XAA \XBA \X80 \X81 \XA7 \XB6 * \c
+! \XA1 ? \XBF . , ; : ` ' \X16 \X17 \X18 \X15 \X82 \X19 "
+\X10 \X11 \XAB \XBB ( ) [ ] { } | / \e - \(en \(em _ \X9E \XB8 \c
+\X92 \X93 \X98 \X91 \X9A \X94 \X95 \X96 \X97 \X9F \X9D \X07
+# % \X14 \XBC \XBE \XBD = \- + \XD7 ~ < \XB1 > \XF7 \XAC \XB0 ^ \X9C \c
+\XB7 \XA6 \XB9 \XB2 \XB3
+.in 0
+.fi
+..
+.ft R
+.FS Times-Roman
+.sp
+.ft I
+.FS Times-Italic
+.sp
+.ft B
+.FS Times-Bold
+.sp
+.ft BI
+.FS Times-BoldItalic
+.bp
+.mh
+Helvetica Family
+.pg
+One of the most popular typefaces of all times, Helvetica was designed
+by Max Miedinger in 1957 for the Hass foundry in Switzerland.
+The name is derived from \fIHelvetia\fR, the Swiss name for Switzerland.
+Helvetica's range of styles allows a variety of uses, including headlines,
+packaging, posters, and short text blocks, such as captions.
+.sp
+.ft H
+.FS Helvetica
+.sp
+.ft HO
+.FS Helvetica-Oblique
+.sp
+.ft HB
+.FS Helvetica-Bold
+.sp
+.ft HQ
+.FS Helvetica-BoldOblique
+.bp
+.mh
+Courier Family
+.pg
+Courier was originally designed as a typewriter face for IBM in 1952 by
+Howard Kettler.
+Courier is a monospaced, or fixed-pitch, font suitable for use in tabular
+material, program listings, or word processing.
+.sp
+.ft C
+.FS Courier
+.sp
+.ft CO
+.FS Courier-Oblique
+.sp
+.ft CB
+.FS Courier-Bold
+.sp
+.ft CQ
+.FS Courier-BoldOblique

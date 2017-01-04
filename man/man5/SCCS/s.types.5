@@ -1,0 +1,77 @@
+h52421
+s 00001/00001/00037
+d D 6.1 85/05/15 18:13:09 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00003/00035
+d D 5.1 85/05/15 18:13:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00038/00000/00000
+d D 4.1 85/05/15 18:12:55 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TYPES 5
+E 2
+I 2
+D 3
+.TH TYPES 5 "1 April 1983"
+E 3
+I 3
+.TH TYPES 5 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+types \- primitive system data types
+.SH SYNOPSIS
+.B #include <sys/types.h>
+.SH DESCRIPTION
+The data types defined in the include file
+are used in UNIX system code;
+some data of these types are accessible to user code:
+.PP
+.nf
+.ta \w'typedef\ \ 'u +\w'minor(x)\ \ 'u +\w' short\ \ 'u
+.so /usr/include/sys/types.h
+.fi
+.PP
+The form
+.I daddr_t
+is used for disk addresses except in an
+i-node on disk, see
+D 2
+.IR filsys (5).
+E 2
+I 2
+.IR fs (5).
+E 2
+Times are encoded in seconds since 00:00:00 GMT, January 1, 1970.
+The major and minor parts of a device code
+specify kind and unit number of a device
+and are installation-dependent.
+Offsets are measured in bytes from the beginning of a file.
+The
+.I label_t
+variables are used to save the processor state
+while another process is running.
+.SH SEE ALSO
+D 2
+filsys(5), time(2), lseek(2), adb(1)
+E 2
+I 2
+fs(5), time(3), lseek(2), adb(1)
+E 2
+E 1

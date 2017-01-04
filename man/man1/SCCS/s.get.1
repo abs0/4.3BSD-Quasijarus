@@ -1,0 +1,1440 @@
+h14725
+s 00001/00001/01405
+d D 6.3 04/10/21 06:30:23 msokolov 3 2
+c use \- in NAME
+e
+s 00002/00002/01404
+d D 6.2 03/11/09 19:12:33 msokolov 2 1
+c help => sccshelp
+e
+s 01406/00000/00000
+d D 6.1 99/05/14 12:46:32 msokolov 1 0
+c date and time created 99/05/14 12:46:32 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.tr ~
+.tr $%
+.if t .tr #\fB\(em\fP
+.if n .tr #-
+.if n .ds D " -- 
+.if t .ds D _
+.tr @|
+.nr f 0
+.bd S B 3
+.de SP
+.if n .ul
+\%[\fB\(em\\$1\fR\\c
+.if n .ul 0
+\\$2\\$3
+..
+.de SF
+.if n .ul
+\%[\fB\(em\\$1\fR]
+.if n .ul 0
+..
+.de ZZ
+.hc ^
+\fB^...\fR
+.hc
+..
+.de AR
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\\fR
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de C1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\\$1
+\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fR[\fI\\$2\fR]
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de A2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 5
+.TP 15
+\fB\(em\\$1\fI\\$2\fR
+\\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9
+.nr f 1
+..
+.de FI
+.PP
+.TP 30
+\\$1
+\\$2
+.i0
+..
+.ds F)  \fB\s-1FILES\s0\fR
+.ds W)  \fB\s-1WARNINGS\s0\fR
+.ds X)  \fB\s-1EXAMPLES\s0\fR
+.ds T)  \fB\s-1TABLE\s0\fR
+.ds K)  \fB\s-1DATA KEYWORDS\s0\fR
+.ds D)  \fB\s-1DDDDD\s0\fR
+.ds M)  \fB\s-1MR\s0\fR
+.ds R)  \fB\s-1RELEASE NUMBER\s0\fR
+.ds S)  \fB\s-1SCCS\s0\fR
+.ds I)  \fB\s-1SID\s0\fR
+.de F1
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1\fI\\$2\fR
+\\$3
+.nr f 1
+..
+.de F2
+.if \\nf \{ \
+.    RE
+.    nr f 0 \}
+.PP
+.RS 13
+.TP 7
+\fB\\$1[\fI\\$2\fR]
+\\$3
+.nr f 1
+..
+.if n .ds )Q '
+.if n .ds )G `
+.if t .ds )Q \\(aa
+.if t .ds )G \\(ga
+.if t .ds )S \\|
+.TH GET 1 "%Q%"
+.SH NAME
+D 3
+get \(em get a version of an \s-1SCCS\s+1 file
+E 3
+I 3
+get \- get a version of an \s-1SCCS\s+1 file
+E 3
+.SH SYNOPSIS
+.na
+.B get
+.SP r SID ]
+.SP c cutoff ]
+.SP i list ]
+.SP x list ]
+.SP a seq~no. ]
+.SF k
+.SF e
+.if n .ul
+[#l[p]]
+.if n .ul 0
+.SF p
+.SF m
+.SF n
+.SF s
+.SF b
+.SF g
+.SF t
+file
+.ZZ
+.ad
+.SH DESCRIPTION
+.I Get
+generates creates an \s-1ASCII\s0 text file from
+each named \*(S) file according to the specifications given
+by its keyletter arguments,
+which begin with \fB\(em\fR.
+The arguments
+may be specified in any order,
+but all keyletter arguments apply to all named \*(S) files.
+If a directory is named,
+.I get
+behaves as though each file in the directory were
+specified as a named file,
+except that non-\*(S) files
+(last component of the pathname does not begin with \fBs.\fR)
+and unreadable files
+are silently ignored.
+If a name of \fB\(em\fR is given, the standard input is read;
+each line of the standard input is taken to be the name of an \*(S) file
+to be processed.
+Again, non-\*(S) files and unreadable files are silently ignored.
+.PP
+The generated text is normally written into a file called the
+.I g-file
+whose name is derived from the \*(S) file name by simply
+removing the leading \fBs.\fR
+(See also \*(F), below).
+.PP
+Each of the keyletter arguments is explained below
+as though only one named \*(S) file is to be processed,
+but the effects of any keyletter argument applies independently to
+each named file.
+.A2 r SID The
+.IR \s-1S "CCS " ID\s0 entification
+string (\*(I)) of the version (delta)
+of an \*(S) file to be retrieved.
+\*(T) 1 shows, for the most useful cases, what version
+of an \*(S) file is retrieved (as well as the \*(I)
+of the version to be eventually created by
+.IR delta\^ (1)
+if the
+.B \(eme
+keyletter is also used),
+as a function of the \*(I) specified.
+.A2 c cutoff \fICutoff\fR
+date-time,
+in the form
+\s-1YY[MM[DD[HH[MM[SS]]]]]\s0.
+No changes (deltas) to the \*(S) file which were created after
+the specified \fIcutoff\fR date-time are included in the generated
+\s-1ASCII\s0 text file.
+Units omitted from the date-time default
+to their maximum possible values;
+that is,
+``\fB#c\fR7502''
+is equivalent to
+``\fB#c\fR750228235959''.
+Any number of non-numeric characters may separate
+the various 2 digit pieces of the \fIcutoff\fR date-time.
+This feature allows one to specify a \fIcutoff\fR date in the form:
+``"\fB#c\fR77/2/2 9:22:25"''.
+Note that this implies that one may use the
+$E$ and $U$ identification keywords
+(see below)
+for nested
+.I gets
+within,
+say
+the input to a
+.IR send\^ (1)
+command\fB:\fR
+.PP
+.if t .ti +10
+.ie n .ti +20
+.tr ~~
+~!get  "#c$E$  $U$"  s\*.file
+.br
+.tr ~
+.AR e Indicates
+that the
+.I get
+is for the purpose of editing or making a change
+(delta) to the \*(S) file via a subsequent use of
+.IR delta\^ (1).
+The
+.B \(eme
+keyletter used in a
+.I get
+for a particular version (\*(I)) of the \*(S) file prevents
+further
+.I get\c
+s for editing on the same \*(I) until
+.I delta
+is executed or the
+.B j
+(joint edit) flag is set in the \*(S) file
+(see
+.IR admin\^ (1)).
+Concurrent use of the
+.B \(eme
+keyletter in
+.I get\c
+s
+for different \*(I)s is always allowed.
+.C1 ~ If
+the
+.I g-file
+generated by
+.I get
+with an
+.B \(eme
+keyletter is accidentally ruined in the process of editing it,
+it may be regenerated by re-executing the
+.I get
+command with the
+.B \(emk
+keyletter
+in place of the \fB\(eme\fP keyletter.
+.C1 ~ \*(S)
+file protection specified via the
+ceiling, floor, and authorized user list
+stored in the \*(S) file
+(see
+.IR admin\^ (1))
+are enforced when the
+.B \(eme
+keyletter is used.
+.AR b Used
+with the
+.B \(eme
+keyletter to indicate that the new delta should have an \*(I) in a new branch
+as shown in \*(T) 1.
+This keyletter is allowed only if the
+.B b
+flag exists in the file
+(see
+.IR admin\^ (1),
+\*(T) 1).
+.A2 i list A
+\fIlist\fR of deltas to be included
+(forced to be applied)
+in the creation of the generated file.
+The \fIlist\fR has the following syntax:
+.F1 ~ ~ <list>
+::= <range> \(or <list> , <range>
+.br
+<range> ::= \*(I) \(or \*(I) - \*(I)
+.C1 ~ \*(I),
+the \*(S) Identification of a delta, may
+be in any form shown in the ``\*(I) Specified'' column of
+\*(T) 1.
+Partial \*(I)s are interpreted as shown in the ``\*(I) Retrieved''
+column of \*(T) 1.
+.A2 x list A
+\fIlist\fR of deltas to be excluded
+(forced not to be applied)
+in the creation of the generated file.
+See the
+.B \(emi
+keyletter for the \fIlist\fR format.
+.AR k Suppresses
+replacement of identification keywords
+(see below)
+in the retrieved text
+by their value.
+The
+.B \(emk
+keyletter
+is implied by the
+.B \(emi\fR,\fB
+.B \(emx
+and
+.B \(eme
+keyletters.
+.A1 l \fBp\fR Causes
+a delta
+summary to be written into an
+.I l-file.
+If
+.B #lp
+is used
+then an
+.I l-file
+is not created;
+the delta summary is written on the standard output instead.
+See \*(F) for the format of the
+.I l-file.
+.AR p Causes
+the text retrieved
+from the \*(S) file to
+be written on the standard output.
+No
+.I g-file
+is created.
+All output which normally goes to the standard output
+goes to file descriptor 2 instead,
+unless the
+.B \(ems
+keyletter is used,
+in which case it disappears.
+.AR s Suppresses
+all output normally written on the
+standard output.
+However,
+fatal error messages (which always go to file descriptor
+2) remain unaffected.
+.AR m Causes
+each text line retrieved from the \*(S) file
+to be preceded by the
+\*(I)
+of the delta that inserted the text line in the \*(S) file.
+The format is:
+\*(I),
+followed by a horizontal tab, followed by the text line.
+.AR n Causes
+each generated text line to be preceded with the
+$M$ identification keyword value
+(see below).
+The format is:
+$M$ value,
+followed by a horizontal tab,
+followed by the text line.
+When both the
+.B \(emm
+and
+.B \(emn
+keyletters are used,
+the format is:
+$M$ value,
+followed by a horizontal tab,
+followed by the
+.B \(emm
+keyletter generated format.
+.AR g Suppresses
+the actual retrieval of text from the \*(S) file.
+It is primarily used to generate an
+.I l-file,
+or to verify the existence of a particular \*(I).
+.AR t Used
+to access the most recently created
+(``top'')
+delta in a given release
+(e\fB.\fR g\fB.,\fR
+.B \(emr\c
+1)\fB,\fR or
+release and level
+(e\fB.\fR g\fB.,\fR
+.B \(emr\c
+1\fB.\fR2)\fB.\fR
+.A2 a seq\~no. The
+delta sequence number of the \*(S) file delta (version) to be retrieved
+(see
+.I sccsfile\c
+(5)).
+This keyletter is used by the
+.IR comb\^ (1)
+command;
+it is not a generally useful keyletter,
+and users should not use it.
+If both the
+.B \(emr
+and
+.B \(ema
+keyletters are specified,
+the
+.B \(ema
+keyletter is used.
+Care should be taken when using the
+.B \(ema
+keyletter in conjunction with the
+.B \(eme
+keyletter,
+as the \*(I) of the delta to be created
+may not be what one expects.
+The
+.B \(emr
+keyletter can be used with the
+.B \(ema
+and
+.B \(eme
+keyletters to control the naming of the \*(I) of the delta to
+be created.
+.i0
+.PP
+For each file processed,
+.I get
+responds (on the standard output) with the
+\*(I)
+being accessed and
+with the number of lines retrieved from the \*(S) file.
+If the
+.B \(eme
+keyletter is used, the
+\*(I)
+of the delta to be made appears
+after the
+\*(I)
+accessed and before the number of lines generated.
+If there is more than one named file
+or if a directory or standard input is named,
+each file name is printed
+(preceded by a newline)
+before it is processed.
+If the
+.B \(emi
+keyletter is used included deltas are listed following the
+notation ``Included'';
+if the
+.B \(emx
+keyletter is used excluded deltas are listed following the
+notation ``Excluded''.
+.i0
+.PP
+.ds f. gett
+.nr Pt 0
+.nr Hs 3
+.nr Hi 0
+.nr Hu 1
+.nr Hb 3
+.if n .ds d " -- 
+.if t .ds d \(em
+.ds s \s-1SCCS\s0
+.ds s) S\s-1CCS\s0
+.ds p \s-1PWB/UNIX\s0
+.ds p) P\s-1WB/UNIX\s0
+.ds i \s-1SID\s0
+.ds i) S\s-1ID\s0
+.ds k \s-1ID\s0
+.ds k) I\s-1D\s0
+.ds u \s-1UNIX\s0
+.ds u) U\s-1NIX\s0
+.ds s] \s-1SCCS/PWB\s0
+.ds s} S\s-1CCS/PWB\s0
+.ds a \s-1ASCII\s0
+.tr ~
+.ds . \fB.\fP
+.de dT
+.cc :
+\*.
+:cc .
+..
+.ds HP +1 +1
+.DF
+.sp 3p
+.TS
+.if \n+(b.=1 .nr d. \n(.c-\n(c.-1
+.de 35
+.ps \n(.s
+.vs \n(.vu
+.in \n(.iu
+.if \n(.u .fi
+.if \n(.j .ad
+.if \n(.j=0 .na
+..
+.nf
+.nr #~ 0
+.if n .nr #~ 0.6n
+.ds #d .d
+.if \(ts\n(.z\(ts\(ts .ds #d nl
+.fc
+.nr 33 \n(.s
+.rm 80 81 82 83 84
+.nr 80 0
+.nr 38 \w\*i
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wSpecified\|\fR*\fP
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wnone\(dd
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wnone\(dd
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR\*.L
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR\*.L
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR\*.L
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR\*.L\*.B
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR.L\*.B
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR\*.L\*.B\*.S
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR\*.L\*.B\*.S
+.if \n(80<\n(38 .nr 80 \n(38
+.nr 38 \wR\*.L\*.B\*.S
+.if \n(80<\n(38 .nr 80 \n(38
+.80
+.rm 80
+.nr 81 0
+.nr 38 \w\fB\(emb\fP Keyletter
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wUsed\|\fR\(dg\fP
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wno
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wyes
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wno
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wno
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wyes
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wyes
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w\(em
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w\(em
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wno
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wyes
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w\(em
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wno
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wyes
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wno
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \wyes
+.if \n(81<\n(38 .nr 81 \n(38
+.nr 38 \w\(em
+.if \n(81<\n(38 .nr 81 \n(38
+.81
+.rm 81
+.nr 82 0
+.nr 38 \wOther
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wConditions
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR defaults to mR
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR defaults to mR
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR > mR
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR = mR
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR > mR
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR = mR
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR < mR and
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wR does \fInot\fP exist
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wTrunk successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \win release > R
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wand R exists
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wNo trunk successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wNo trunk successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wTrunk successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \win release \(>= R
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wNo branch successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wNo branch successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wNo branch successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wNo branch successor
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 38 \wBranch successor
+.if \n(82<\n(38 .nr 82 \n(38
+.82
+.rm 82
+.nr 38 1.5in
+.if \n(82<\n(38 .nr 82 \n(38
+.nr 83 0
+.nr 38 \w\*i
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wRetrieved
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wmR\*.mL
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wmR\*.mL
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wmR\*.mL
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wmR\*.mL
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wmR\*.mL
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wmR\*.mL
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \whR\*.mL**
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.mL
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L\*.B\*.mS
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L\*.B\*.mS
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L\*.B\*.S
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L\*.B\*.S
+.if \n(83<\n(38 .nr 83 \n(38
+.nr 38 \wR\*.L\*.B\*.S
+.if \n(83<\n(38 .nr 83 \n(38
+.83
+.rm 83
+.nr 84 0
+.nr 38 \w\*i of Delta
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wto be Created
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wmR\*.(mL\|+1)
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wmR\*.mL\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.1***
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wmR\*.(mL\|+1)
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wmR\*.mL\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wmR\*.mL\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \whR\*.mL\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.mL\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.(L\|+1)
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.L\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.L\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.L\*.B\*.(mS\|+1)
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.L\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.L\*.B\*.(S\|+1)
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.L\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wR\*.L\*.(mB\|+1)\*.1
+.if \n(84<\n(38 .nr 84 \n(38
+.84
+.rm 84
+.nr 38 1.5in
+.if \n(84<\n(38 .nr 84 \n(38
+.nr 38 \wTABLE 1. Determination of \*s Identification String-\n(80-1n-\n(81-1n-\n(82-3n-\n(83-1n-\n(84
+.if \n(38>0 .nr 38 \n(38/4
+.if \n(38<0 .nr 38 0
+.nr 81 +\n(38
+.nr 82 +\n(38
+.nr 83 +\n(38
+.nr 84 +\n(38
+.nr 38 1n
+.nr 79 0
+.nr 40 \n(79+(0*\n(38)
+.nr 80 +\n(40
+.nr 41 \n(80+(1*\n(38)
+.nr 81 +\n(41
+.nr 42 \n(81+(1*\n(38)
+.nr 82 +\n(42
+.nr 43 \n(82+(3*\n(38)
+.nr 83 +\n(43
+.nr 44 \n(83+(1*\n(38)
+.nr 84 +\n(44
+.nr TW \n(84
+.if t .if (\n(TW+\n(.o)>7.65i .tm Table at line 79 file gett is too wide - \n(TW units
+.nr #I \n(.i
+.in +(\n(.lu-\n(TWu-\n(.iu)/2u
+.fc  
+.nr #T 0-1
+.nr #a 0-1
+.eo
+.de T#
+.ds #d .d
+.if \(ts\n(.z\(ts\(ts .ds #d nl
+.mk ##
+.nr ## -1v
+.ls 1
+.ls
+..
+.ec
+.ta \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'TABLE 1. Determination of \*s Identification String
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\v'-1p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'2p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'-1p'
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\*i\h'|\n(41u'\fB\(emb\fP Keyletter\h'|\n(42u'Other\h'|\n(43u'\*i\h'|\n(44u'\*i of Delta
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'Specified\|\fR*\fP\h'|\n(41u'Used\|\fR\(dg\fP\h'|\n(42u'Conditions\h'|\n(43u'Retrieved\h'|\n(44u'to be Created
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\v'-1p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'2p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'-1p'
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'none\(dd\h'|\n(41u'no\h'|\n(42u'R defaults to mR\h'|\n(43u'mR\*.mL\h'|\n(44u'mR\*.(mL\|+1)
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'none\(dd\h'|\n(41u'yes\h'|\n(42u'R defaults to mR\h'|\n(43u'mR\*.mL\h'|\n(44u'mR\*.mL\*.(mB\|+1)\*.1
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\v'-1p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'2p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'-1p'
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\h'|\n(41u'no\h'|\n(42u'R > mR\h'|\n(43u'mR\*.mL\h'|\n(44u'R\*.1***
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\h'|\n(41u'no\h'|\n(42u'R = mR\h'|\n(43u'mR\*.mL\h'|\n(44u'mR\*.(mL\|+1)
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\h'|\n(41u'yes\h'|\n(42u'R > mR\h'|\n(43u'mR\*.mL\h'|\n(44u'mR\*.mL\*.(mB\|+1)\*.1
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\h'|\n(41u'yes\h'|\n(42u'R = mR\h'|\n(43u'mR\*.mL\h'|\n(44u'mR\*.mL\*.(mB\|+1)\*.1
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.nr #^ \n(\*(#du
+.nr #- \n(#^
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\h'|\n(41u'\h'|\n(42u'R < mR and\h'|\n(43u'\h'|\n(44u'
+.nr ^a \n(#^u
+.nr ^b \n(#^u
+.nr ^d \n(#^u
+.nr ^e \n(#^u
+.nr #^ \n(\*(#du
+.nr #- \n(#^
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\v'-(\n(\*(#du-\n(^au-((\n(#-u-\n(^au)/2u)'R\h'|\n(41u'\(em\v'(\n(\*(#du-\n(^bu-((\n(#-u-\n(^bu)/2u)'\h'|\n(42u'R does \fInot\fP exist\h'|\n(43u'\v'-(\n(\*(#du-\n(^du-((\n(#-u-\n(^du)/2u)'hR\*.mL**\h'|\n(44u'hR\*.mL\*.(mB\|+1)\*.1\v'(\n(\*(#du-\n(^eu-((\n(#-u-\n(^eu)/2u)'
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.nr #^ \n(\*(#du
+.nr #- \n(#^
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\h'|\n(41u'\h'|\n(42u'Trunk successor\h'|\n(43u'\h'|\n(44u'
+.nr ^a \n(#^u
+.nr ^b \n(#^u
+.nr ^d \n(#^u
+.nr ^e \n(#^u
+.nr #^ \n(\*(#du
+.nr #- \n(#^
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\v'-(\n(\*(#du-\n(^au-((\n(#-u-\n(^au)/2u)'\h'|\n(41u'\v'(\n(\*(#du-\n(^bu-((\n(#-u-\n(^bu)/2u)'\h'|\n(42u'in release > R\h'|\n(43u'\v'-(\n(\*(#du-\n(^du-((\n(#-u-\n(^du)/2u)'\h'|\n(44u'\v'(\n(\*(#du-\n(^eu-((\n(#-u-\n(^eu)/2u)'
+.nr #^ \n(\*(#du
+.nr #- \n(#^
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\v'-(\n(\*(#du-\n(^au-((\n(#-u-\n(^au)/2u)'R\h'|\n(41u'\(em\v'(\n(\*(#du-\n(^bu-((\n(#-u-\n(^bu)/2u)'\h'|\n(42u'and R exists\h'|\n(43u'\v'-(\n(\*(#du-\n(^du-((\n(#-u-\n(^du)/2u)'R\*.mL\h'|\n(44u'R\*.mL\*.(mB\|+1)\*.1\v'(\n(\*(#du-\n(^eu-((\n(#-u-\n(^eu)/2u)'
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\v'-1p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'2p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'-1p'
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\*.L\h'|\n(41u'no\h'|\n(42u'No trunk successor\h'|\n(43u'R\*.L\h'|\n(44u'R\*.(L\|+1)
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\*.L\h'|\n(41u'yes\h'|\n(42u'No trunk successor\h'|\n(43u'R\*.L\h'|\n(44u'R\*.L\*.(mB\|+1)\*.1
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.nr #^ \n(\*(#du
+.nr #- \n(#^
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\h'|\n(41u'\h'|\n(42u'Trunk successor\h'|\n(43u'\h'|\n(44u'
+.nr ^a \n(#^u
+.nr ^b \n(#^u
+.nr ^d \n(#^u
+.nr ^e \n(#^u
+.nr #^ \n(\*(#du
+.nr #- \n(#^
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'\v'-(\n(\*(#du-\n(^au-((\n(#-u-\n(^au)/2u)'R\*.L\h'|\n(41u'\(em\v'(\n(\*(#du-\n(^bu-((\n(#-u-\n(^bu)/2u)'\h'|\n(42u'in release \(>= R\h'|\n(43u'\v'-(\n(\*(#du-\n(^du-((\n(#-u-\n(^du)/2u)'R\*.L\h'|\n(44u'R\*.L\*.(mB\|+1)\*.1\v'(\n(\*(#du-\n(^eu-((\n(#-u-\n(^eu)/2u)'
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\v'-1p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'2p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'-1p'
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\*.L\*.B\h'|\n(41u'no\h'|\n(42u'No branch successor\h'|\n(43u'R\*.L\*.B\*.mS\h'|\n(44u'R\*.L\*.B\*.(mS\|+1)
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R.L\*.B\h'|\n(41u'yes\h'|\n(42u'No branch successor\h'|\n(43u'R\*.L\*.B\*.mS\h'|\n(44u'R\*.L\*.(mB\|+1)\*.1
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\v'-1p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'2p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'-1p'
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\*.L\*.B\*.S\h'|\n(41u'no\h'|\n(42u'No branch successor\h'|\n(43u'R\*.L\*.B\*.S\h'|\n(44u'R\*.L\*.B\*.(S\|+1)
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\*.L\*.B\*.S\h'|\n(41u'yes\h'|\n(42u'No branch successor\h'|\n(43u'R\*.L\*.B\*.S\h'|\n(44u'R\*.L\*.(mB\|+1)\*.1
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0
+.vs \n(36u
+.ta \n(80u \n(81u \n(82u \n(83u \n(84u 
+.nr 31 \n(.f
+.nr 35 1m
+\&\h'|\n(40u'R\*.L\*.B\*.S\h'|\n(41u'\(em\h'|\n(42u'Branch successor\h'|\n(43u'R\*.L\*.B\*.S\h'|\n(44u'R\*.L\*.(mB\|+1)\*.1
+.nr 36 \n(.v
+.vs \n(.vu-\n(.sp
+\v'-1p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'2p'\h'|0'\s\n(33\l'|\n(TWu\(ul'\s0\v'-1p'
+.vs \n(36u
+.fc
+.nr T. 1
+.T# 1
+.in \n(#Iu
+.35
+.TE
+.if \n-(b.=0 .nr c. \n(.c-\n(d.-48
+.ft R
+.in 2m
+.ps 8
+.vs 9.5p
+.TP "\w`***\ \ \ `u"
+*
+``R'', ``L'', ``B'', and ``S'' are the ``release'', ``level'',
+``branch'', and ``sequence'' components of the \*i, respectively;
+``m'' means ``maximum''.
+Thus, for example, ``R\*.mL'' means ``the maximum
+level number within release R'';
+``R\*.L\*.(mB+1)\*.1'' means
+``the first sequence number on the
+.I new
+branch (i.e., maximum branch number plus
+one) of level L within release R''.
+Note that if the \*i specified is of the form ``R\*.L'',
+``R\*.L\*.B'', or ``R\*.L\*.B\*.S'', each of the
+specified components
+.I must
+exist.
+.TP
+\(dg
+The
+.B \(emb
+keyletter is effective only if the
+.B b
+flag (see
+.IR admin\^ (1))
+is present in the file.
+An entry of \fB\(em\fR means ``irrelevant''.
+.TP
+\(dd
+This case applies if the
+.B d
+(default \*i) flag is
+.I not
+present in the file.
+If the
+.B d
+flag
+.I is
+present in the file, then the
+\*i obtained from the
+.B d
+flag is interpreted as if it had been specified on the command line.
+Thus, one of the other cases in this table applies.
+.TP
+***
+This is used to force creation of the
+.I first
+delta in a
+.I new
+release.
+.TP
+**
+``hR'' is the highest
+.I existing
+release that is lower than
+the specified,
+.I nonexistent,
+release\ R.
+.br
+\l'\n(.lu'
+.br
+.ps 10
+.RE
+.DE
+.br
+.vs 12p
+.ps 10
+.RE
+.DE
+.if t .bp
+.SH "IDENTIFICATION KEYWORDS"
+Identifying information
+is inserted into the text retrieved from the \*(S) file by replacing
+.I "identification keywords"
+with their value wherever they occur.
+The following keywords may be used in the text stored in an \*(S) file:
+.na
+.PP
+.ul
+.RE
+.RS 10
+.TP 10
+Keyword	Value
+.vs 9.5p
+.PP
+.RE
+.RS 10
+.TP 10
+  \fB$M%\fR
+Module name:
+either the value of the
+.B m
+flag in the file
+(see
+.IR admin\^ (1)),
+or if absent,
+the name of the \*(S) file with the
+leading \fBs.\fR removed.
+.RE
+.RS 10
+.TP 10
+  \fB$I$\fR
+\*(S) identification (\*(I)) (\fB$R$.$L$.$B$.$S$\fP) of the retrieved text.
+.RE
+.RS 10
+.TP 10
+  \fB$R%\fR
+Release.
+.RE
+.RS 10
+.TP 10
+  \fB$L%\fR
+Level.
+.RE
+.RS 10
+.TP 10
+  \fB$B%\fR
+Branch.
+.RE
+.RS 10
+.TP 10
+  \fB$S%\fR
+Sequence.
+.RE
+.RS 10
+.TP 10
+  \fB$D%\fR
+Current date (\s-1YY\fB/\fRMM\fB/\fRDD\s0).
+.RE
+.RS 10
+.TP 10
+  \fB$H%\fR
+Current date (\s-1MM\fB/\fRDD\fB/\fRYY\s0).
+.RE
+.RS 10
+.TP 10
+  \fB$T%\fR
+Current time (\s-1HH\fB:\fRMM\fB:\fRSS\s0).
+.RE
+.RS 10
+.TP 10
+  \fB$E%\fR
+Date newest applied delta was created (\s-1YY\fB/\fRMM\fB/\fRDD\s0).
+.RE
+.RS 10
+.TP 10
+  \fB$G%\fR
+Date newest applied delta was created (\s-1MM\fB/\fRDD\fB/\fRYY\s0).
+.RE
+.RS 10
+.TP 10
+  \fB$U%\fR
+Time newest applied delta was created (\s-1HH\fB:\fRMM\fB:\fRSS\s0).
+.RE
+.RS 10
+.TP 10
+  \fB$Y%\fR
+Module type:
+value of the
+.B t
+flag in the \*(S) file
+(see
+.IR admin\^ (1)).
+.RE
+.RS 10
+.TP 10
+  \fB$F%\fR
+\*(S) file name.
+.RE
+.RS 10
+.TP 10
+  \fB$P%\fR
+Fully qualified \*(S) file name.
+.RE
+.RS 10
+.TP 10
+  \fB$Q%\fR
+The
+value of the
+.B q
+flag in the file
+(see
+.IR admin\^ (1)).
+.RE
+.RS 10
+.TP 10
+  \fB$C%\fR
+Current line number.
+This keyword is intended for identifying messages
+output by the program such as ``this shouldn't have happened'' type errors.
+It is
+.I not
+intended to be used on every line to provide
+sequence numbers.
+.RE
+.RS 10
+.TP 10
+.tr +@
+.tr ?#
+  \fB$Z%\fR
+The 4 characters \fB+(?)\fR
+used to
+construct strings recognizable by
+.IR what\^ (1).
+.if n .tr @|
+.if t .tr @\(or
+.if n .tr #-
+.if t .tr #\(em
+.RE
+.RS 10
+.TP 10
+  \fB$W%\fR
+A shorthand notation for constructing
+.IR what\^ (1)
+strings
+for \s-1UNIX\s0 program files.
+\fB$W$~\fR=\fB~$Z$$M$\fR<horizontal-tab>\fB$I$\fR
+.RE
+.RS 10
+.TP 10
+  \fB$A%\fR
+Another shorthand notation for constructing
+.IR what\^ (1)
+strings
+for non-\s-1UNIX\s0 program files.
+\fB$A$~\fR=\fB~$Z$$Y$~$M$~$I$$Z$\fR
+.ad
+.vs 12p
+.RE
+.SH FILES
+Several auxiliary files may be created by
+.I get.
+These files are known generically as the
+.I g-file\c
+,
+.I l-file\c
+,
+.I p-file\c
+,
+and
+.I z-file.
+The letter before the hyphen is called the tag.
+An auxiliary file name is formed from the \*(S) file name:
+the last component of
+all \*(S) file names must be of the form ``\fBs.\fP\fImodulename\fP'',
+the auxiliary files are named by replacing the leading \fBs\fR
+with the tag.
+The
+.I g-file
+is an exception to this scheme:
+the
+.I g-file
+is named by removing
+the \fBs.\fR.
+For example,
+if the \*(S) file name is ``s.xyz.c'',
+the auxiliary file names would be ``xyz.c'',
+``l.xyz.c'',
+``p.xyz.c'',
+and
+``z.xyz.c'',
+respectively.
+.PP
+The
+.I g-file\c
+,
+which contains the generated text,
+is created
+in the current directory
+(unless the
+.B \(emp
+keyletter is used).
+A
+.I g-file
+is created in all cases, whether or not any lines of text
+were generated by the
+.I get.
+It is owned by the real user.
+If the
+.B \(emk
+keyletter is used or implied its mode is 644;
+otherwise its mode is 444.
+Only the real user need have
+write permission in the current
+directory.
+.PP
+The
+.I l-file
+contains
+a table showing which deltas were applied
+in generating the retrieved text.
+The
+.I l-file
+is created
+in the current directory
+if the
+.B \(eml
+keyletter is used;
+its mode is 444 and it is owned by the real user.
+Only the real user need have
+write permission in the
+current directory.
+.PP
+Lines in the
+.I l-file
+have the following format:
+.PP
+.nr a 0 1
+.af a a
+.na
+.in +10
+.ti -3
+\n+a)~A blank character if the delta was applied;
+\fB\(**\fR otherwise.
+.ti -3
+\n+a)~A blank character if the delta was applied or wasn't applied and ignored;
+.ti -3
+~~~\fB\(**\fR if the delta wasn't applied and wasn't ignored.
+.ti -3
+\n+a)~A code indicating a ``special'' reason
+why the delta was or was not applied:
+.in +3
+.br
+``I'': Included.
+.br
+``X'': Excluded.
+.br
+``C'': Cut off (by a
+.B \(emc
+keyletter).
+.in -3
+.ti -3
+\n+a)~Blank.
+.ti -3
+\n+a)~\*(S) identification (\*(I)).
+.ti -3
+\n+a)~Tab character.
+.ti -3
+\n+a)~Date and time (in the form
+\s-1YY\fB/\fRMM\fB/\fRDD~HH\fB:\fRMM\fB:\fRSS\s0)
+of creation.
+.ti -3
+\n+a)~Blank.
+.ti -3
+\n+a)~Login name of person who created \fIdelta\fP.
+.br
+.in -3
+.sp
+The
+.ad
+comments and \*(M) data follow on subsequent lines,
+indented one horizontal tab character.
+A blank line terminates each entry.
+.PP
+The
+.I p-file
+is used to
+pass information resulting from a
+.I get
+with an
+.B \(eme
+keyletter along to
+.I delta.
+Its contents are also used to prevent a subsequent
+execution of
+.I get
+with an
+.B \(eme
+keyletter
+for the same \*(I) until
+.I delta
+is executed
+or the joint edit flag
+(\c
+.B j,
+see
+.IR admin\^ (1))
+is set in the \*(S) file.
+The
+.I p-file
+is created in the directory containing the \*(S) file
+and the effective user must have
+write permission
+in that directory.
+Its mode is 644 and it is owned by the effective user.
+The format of the
+.I p-file
+is:
+the gotten \*(I),
+followed by a blank,
+followed by the \*(I) that the new delta will have when it is made,
+followed by a blank,
+followed by the login name of the real user,
+followed by a blank,
+followed by the date-time
+the
+.I get
+was executed,
+followed by a blank and the
+.B #i
+keyletter argument if it was present,
+followed by a blank and the
+.B #x
+keyletter argument if it was present,
+followed by a newline.
+There can be an arbitrary number of lines in the
+.I p-file
+at any time;
+no two lines can have the same new delta \*(I).
+.PP
+The
+.I z-file
+serves as a
+.I lock-out
+mechanism against simultaneous updates.
+Its contents are
+the binary (2 bytes) process \fB\s-1ID\s0\fR of the
+command
+(i.e.,
+.I get\c
+)
+that created it.
+The
+.I z-file
+is created in the directory containing the \*(S) file for the duration of 
+.I get.
+The same protection restrictions as those for the
+.I p-file
+apply for the
+.I z-file.
+The
+.I z-file
+is
+created mode 444.
+.SH "SEE ALSO"
+.na
+admin(1),
+delta(1),
+prs(1),
+what(1),
+D 2
+help(1),
+E 2
+I 2
+sccshelp(1),
+E 2
+sccsfile(5),
+.br
+.I "Source Code Control System User's Guide"
+by L. E. Bonanni and C. A. Salemi.
+.SH DIAGNOSTICS
+Use
+D 2
+.IR help\^ (1)
+E 2
+I 2
+.IR sccshelp\^ (1)
+E 2
+for explanations.
+.SH BUGS
+If the effective user has
+write permission (either explicitly or implicitly) in the directory
+containing the \*(S) files,
+but the real user doesn't,
+then only one file may be named when the
+.B \(eme
+keyletter is used.
+.tr ~~
+.tr $$
+.tr @@
+E 1

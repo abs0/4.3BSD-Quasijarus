@@ -1,0 +1,44 @@
+h02354
+s 00001/00001/00023
+d D 6.1 85/05/15 16:21:50 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00024/00000/00000
+d D 5.1 85/05/15 16:21:45 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH HOSTNM 3F "13 June 1983"
+E 2
+I 2
+.TH HOSTNM 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+hostnm \- get name of current host
+.SH SYNOPSIS
+.B integer function hostnm (name)
+.br
+.B character*(*) name
+.SH DESCRIPTION
+This function puts the name of the current host into
+character string
+.IR name .
+The return value should be 0; any other value indicates an error.
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.SH "SEE ALSO"
+gethostname(2)
+E 1

@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_io.c	7.17 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_io.c	7.18 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -175,8 +175,8 @@ filename(comm)
 getargs()
 {
 	register int c;
-	register char *cp, *fp;
-	static char fpatbuf[32];	/* hence limit on :next +/pat */
+	register u_char *cp, *fp;
+	static u_char fpatbuf[32];	/* hence limit on :next +/pat */
 
 	pastwh();
 	if (peekchar() == '+') {
@@ -248,15 +248,15 @@ glob(gp)
 	struct glob *gp;
 {
 	int pvec[2];
-	register char **argv = gp->argv;
-	register char *cp = gp->argspac;
+	register u_char **argv = gp->argv;
+	register u_char *cp = gp->argspac;
 	register int c;
-	char ch;
+	u_char ch;
 	int nleft = NCARGS;
 
 	gp->argc0 = 0;
 	if (gscan() == 0) {
-		register char *v = genbuf + 5;		/* strlen("echo ") */
+		register u_char *v = genbuf + 5;		/* strlen("echo ") */
 
 		for (;;) {
 			while (isspace(*v))
@@ -303,7 +303,7 @@ glob(gp)
 				close(io);
 				c = -1;
 			} else
-				c = ch & TRIM;
+				c = ch & TRIM7;
 			if (c <= 0 || isspace(c))
 				break;
 			*cp++ = c;
@@ -331,7 +331,7 @@ glob(gp)
 gscan()
 {
 #ifndef	vms			/* Never have meta-characters in vms */
-	register char *cp;
+	register u_char *cp;
 
 	for (cp = genbuf; *cp; cp++)
 		if (any(*cp, "~{[*?$`'\"\\"))
@@ -346,7 +346,7 @@ gscan()
 struct glob G;
 getone()
 {
-	register char *str;
+	register u_char *str;
 
 	if (getargs() == 0)
 		error("Missing filename");
@@ -414,7 +414,7 @@ rop(c)
 		if (xflag)
 			break;
 #endif
-		i = read(io, (char *)&head, sizeof(head));
+		i = read(io, (u_char *)&head, sizeof(head));
 		(void)lseek(io, 0L, L_SET);
 		if (i != sizeof(head))
 			break;
@@ -446,7 +446,7 @@ rop(c)
 
 		default:
 			{
-				char *bp = (char *)&head;
+				u_char *bp = (u_char *)&head;
 				if ((u_char)bp[0] == (u_char)'\037' &&
 				    (u_char)bp[1] == (u_char)'\235')
 					error(" Compressed file");
@@ -575,7 +575,7 @@ rop3(c)
 			if (addr > dol)
 				addr = dol;
 			if (firstpat) {
-				globp = (*firstpat) ? firstpat : "$";
+				globp = (*firstpat) ? firstpat : (u_char*)"$";
 				commands(1,1);
 				firstpat = 0;
 			} else if (addr >= one) {
@@ -605,7 +605,7 @@ other:
  */
 samei(sp, cp)
 	struct stat *sp;
-	char *cp;
+	u_char *cp;
 {
 	struct stat stb;
 
@@ -809,12 +809,12 @@ edfile()
 /*
  * Extract the next line from the io stream.
  */
-char *nextip;
+u_char *nextip;
 
 getfile()
 {
 	register short c;
-	register char *lp, *fp;
+	register u_char *lp, *fp;
 
 	lp = linebuf;
 	fp = nextip;
@@ -852,9 +852,9 @@ getfile()
 			cntnull++;
 			continue;
 		}
-		if (c & QUOTE) {
+		if (!value(EIGHTBIT) && !isascii(c)) {
 			cntodd++;
-			c &= TRIM;
+			c &= TRIM7;
 			if (c == 0)
 				continue;
 		}
@@ -874,7 +874,7 @@ putfile(isfilter)
 int isfilter;
 {
 	line *a1;
-	register char *fp, *lp;
+	register u_char *fp, *lp;
 	register int nib;
 	struct stat statb;
 
@@ -947,12 +947,12 @@ short slevel;
 short ttyindes;
 
 source(fil, okfail)
-	char *fil;
+	u_char *fil;
 	bool okfail;
 {
 	jmp_buf osetexit;
 	register int saveinp, ointty, oerrno;
-	char *saveglobp;
+	u_char *saveglobp;
 	short savepeekc;
 
 	signal(SIGINT, SIG_IGN);
@@ -1061,13 +1061,13 @@ iostats()
 #endif
 
 checkmodeline(l)
-char *l;
+u_char *l;
 {
-	char *beg, *end;
-	char cmdbuf[1024];
+	u_char *beg, *end;
+	u_char cmdbuf[1024];
 	char *index(), *rindex(), *strncpy();
 
-	beg = index(l, ':');
+	beg = (u_char*)index(l, ':');
 	if (beg == NULL)
 		return;
 	if (&beg[-3] < l)
@@ -1079,7 +1079,7 @@ char *l;
 	        && beg[-2] == 'v'
 		&& beg[-1] == 'i'))) return;
 	strncpy(cmdbuf, beg+1, sizeof cmdbuf);
-	end = rindex(cmdbuf, ':');
+	end = (u_char*)rindex(cmdbuf, ':');
 	if (end == NULL)
 		return;
 	*end = 0;

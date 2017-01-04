@@ -1,0 +1,175 @@
+h09461
+s 00076/00044/00036
+d R 6.1 85/04/29 14:18:29 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00061/00040/00019
+d D 5.1 85/04/29 14:18:20 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00059/00000/00000
+d D 4.1 85/04/29 14:18:13 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHFN 1 deprecated
+E 2
+I 2
+.TH CHFN 1 "17 March 1982 deprecated"
+E 2
+.UC 4
+.SH NAME
+D 2
+chfn \- change full name of user
+E 2
+I 2
+chfn \- change finger entry
+E 2
+.SH SYNOPSIS
+.B chfn
+D 2
+name
+string
+E 2
+I 2
+[loginname]
+E 2
+.SH DESCRIPTION
+.I Chfn
+D 2
+is a command similar to
+.IR passwd (1)
+except that it is used to change the gcos field of the password
+file rather than the password entry.
+Note that the string specified will replace the entire gecos field of the
+specified user.
+If (as on the UCB system) this field contains information in addition
+to the user's full name, this information must be included in string
+or it will be deleted.
+Hence chfn can be used to fix phone numbers, offices, etc.
+E 2
+I 2
+is used to change information about users.  This information is used
+by the finger program, among others.
+It consists of the user's
+"real life" name, office room number, office phone number, and home
+phone number.
+.I Chfn
+prompts the user for each field.
+Included in the prompt is a default value,
+which is enclosed between brackets.
+The default value is accepted simply by typing <return>.
+To enter a blank field,
+type the word 'none'.
+Below is a sample run:
+.IP
+.B "Name [Biff Studsworth II]:"
+.br
+.B "Room number (Exs: 597E or 197C) []:"
+521E
+.br
+.B "Office Phone (Ex: 1632) []:"
+1863
+.br
+.B "Home Phone (Ex: 987532) [5771546]:"
+none
+.sp
+E 2
+.PP
+D 2
+An example use of this command would be
+E 2
+I 2
+.I Chfn
+allows phone numbers to be entered with or without hyphens.
+Because 
+.I finger
+only knows about UCB extensions,
+.I chfn
+will insist upon a four digit number (after the hyphens are removed) 
+for office phone numbers.
+Also, room numbers must be in Evans or Cory;
+again, this is because of 
+.IR finger .
+E 2
+.PP
+D 2
+.DT
+	chfn mark \'& Horton,508E,7686,5240633\'
+.PP
+Note that the string must in general be quoted to shield blanks
+and special characters from the shell.
+The field should consist of the users name,
+followed by their office number,
+followed by the last 4 digits of their office extension
+and finally their home phone number.
+Any of these can be omitted.
+At UCB, offices can be given as ``508E'' for 508 Evans, and ``187MC'' for
+187M Cory.
+There should be no spaces in the entry except for those in your name.
+.PP
+It is a good idea to run 
+.IR finger (1)
+on the user before and after
+E 2
+I 2
+It is a good idea to run finger after running
+E 2
+.I chfn
+D 2
+to make sure you have formatted the data correctly.
+E 2
+I 2
+to make sure everything is the way you want it.
+.PP
+The optional argument
+.B loginname
+is used to change another person's finger information.
+This can only be done by the super-user.
+.SH FILES
+/etc/passwd, /etc/ptmp
+E 2
+.SH SEE\ ALSO
+D 2
+finger(1), passwd(5), chsh(1), passwd(1)
+.SH AUTHOR
+Mark Horton
+E 2
+I 2
+finger(1), passwd(5)
+E 2
+.SH BUGS
+The encoding of the office and extension information is installation dependent.
+.PP
+D 2
+A new user-information data base is in the works which will supplant
+this program;
+.I chfn's
+days are numbered.
+E 2
+I 2
+For historical reasons, the user's name, etc are stored in the passwd file.
+This is a bad place to store the information. 
+Rumors are that a data base is being developed to store this information,
+but don't hold your breath.
+.PP
+Because two users may try to write the passwd file at once, a synchronization
+method was developed.
+On rare occasions, a message that the password file
+is "busy" will be printed.
+In this case,
+.I chfn
+sleeps for a while and then tries to write to the passwd file again.
+E 2
+E 1

@@ -1,0 +1,94 @@
+h31329
+s 00002/00002/00037
+d D 6.2 85/06/30 17:08:09 sechrest 4 3
+c improved english
+e
+s 00001/00001/00038
+d D 6.1 85/05/09 18:23:44 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00005/00034
+d D 5.1 85/05/09 18:23:09 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00039/00000/00000
+d D 4.1 85/05/09 18:22:38 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH VHANGUP 2V
+E 2
+I 2
+D 3
+.TH VHANGUP 2 "12 Febuary 1983"
+E 3
+I 3
+.TH VHANGUP 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+vhangup \- virtually ``hangup'' the current control terminal
+.SH SYNOPSIS
+.B vhangup()
+.SH DESCRIPTION
+.I Vhangup
+is used by the initialization process
+.IR init (8)
+D 2
+to arrange that users are given \*(lqclean\*(rq' terminals at login,
+E 2
+I 2
+(among others) to arrange that users are given
+\*(lqclean\*(rq' terminals at login,
+E 2
+by revoking access of the previous users' processes to the terminal.
+To effect this,
+.I vhangup
+searches the system tables for references to the control terminal
+of the invoking process, revoking access permissions
+D 4
+on each instance of the terminal which it finds.
+E 4
+I 4
+on each instance of the terminal that it finds.
+E 4
+Further attempts to access the terminal by the affected processes
+will yield i/o errors (EBADF).
+Finally,
+a hangup signal (SIGHUP) is sent to the process group of the
+control terminal.
+.SH SEE ALSO
+init (8)
+.SH BUGS
+Access to
+the control terminal via
+.B /dev/tty
+is still possible.
+.PP
+D 2
+This call is peculiar to this version of UNIX.
+The options and specifications of this system call and even the call itself
+are subject to change.
+E 2
+I 2
+D 4
+This call should be replaced by an automatic mechanism which
+E 4
+I 4
+This call should be replaced by an automatic mechanism that
+E 4
+takes place on process exit.
+E 2
+E 1

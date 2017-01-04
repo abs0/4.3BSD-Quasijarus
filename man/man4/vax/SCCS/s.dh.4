@@ -1,0 +1,148 @@
+h32371
+s 00009/00012/00050
+d D 6.2 86/05/16 15:58:37 karels 4 3
+c new silo handling
+e
+s 00001/00001/00061
+d D 6.1 85/05/15 17:18:43 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00008/00011/00054
+d D 5.1 85/05/15 17:18:32 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00065/00000/00000
+d D 4.1 85/05/15 17:18:24 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DH 4 4/1/81
+E 2
+I 2
+D 3
+.TH DH 4 "27 July 1983"
+E 3
+I 3
+.TH DH 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+dh, dm \- DH-11/DM-11 communications multiplexer
+E 2
+I 2
+dh \- DH-11/DM-11 communications multiplexer
+E 2
+.SH SYNOPSIS
+D 2
+device dh0 at uba0 csr 0160020 vector dhrint dhxint
+E 2
+I 2
+.B "device dh0 at uba0 csr 0160020 vector dhrint dhxint"
+E 2
+.br
+D 2
+device dm0 at uba0 csr 0170500 vector dmintr
+E 2
+I 2
+.B "device dm0 at uba0 csr 0170500 vector dmintr"
+E 2
+.SH DESCRIPTION
+A dh-11 provides 16 communication lines; dm-11's may be optionally
+paired with dh-11's to provide modem control for the lines.
+.PP
+Each line attached to the DH-11 communications multiplexer
+behaves as described in
+.IR tty (4).
+Input and output for each line may independently
+be set to run at any of 16 speeds;
+see
+.IR tty (4)
+for the encoding.
+.PP
+Bit
+.I i
+of flags may be specified for a dh to say that a line is not properly
+connected, and that the line should be treated as hard-wired with carrier
+always present.  Thus specifying ``flags 0x0004'' in the specification of dh0
+would cause line ttyh2 to be treated in this way.
+.PP
+D 2
+If the Berknet line driver
+.IR bk (4)
+is included in the system, then the dh driver will use its input silos
+and poll for input at each clock tick (normally 1/50'th or 1/60'th of a
+second) rather than taking an interrupt on each input character.
+E 2
+I 2
+D 4
+The dh driver normally uses input silos
+and polls for input at each clock tick (10 milliseconds)
+rather than taking an interrupt on each input character.
+E 4
+I 4
+The
+.I dh
+driver monitors the rate of input on each board,
+and switches between the use of character-at-a-time interrupts
+and input silos.
+While the silo is enabled during periods of high-speed input,
+the driver polls for input 30 times per second.
+E 4
+E 2
+.SH FILES
+D 4
+/dev/tty[hi][0-9a-f]
+E 4
+I 4
+/dev/tty[h-o][0-9a-f]
+E 4
+.br
+/dev/ttyd[0-9a-f]
+.SH "SEE ALSO"
+tty(4)
+.SH DIAGNOSTICS
+\fBdh%d: NXM\fR.  No response from UNIBUS on a dma transfer
+within a timeout period.  This is often followed by a UNIBUS adapter
+error.  This occurs most frequently when the UNIBUS is heavily loaded
+and when devices which hog the bus (such as rk07's) are present.
+It is not serious.
+.PP
+D 2
+\fBdh%d: silo overflow\fR.  The 64 character input silo overflowed
+E 2
+I 2
+\fBdh%d: silo overflow\fR.  The character input silo overflowed
+E 2
+before it could be serviced.  This can happen if a hard error occurs
+when the CPU is running with elevated priority, as the system will
+D 4
+then print a message on the console with interrupts disabled.  If the
+Berknet
+D 2
+.IR net (1)
+E 2
+is running on a
+.I dh
+line at high speed (e.g. 9600 baud), there is only 1/15th of a second of
+buffering capacity in the silo, and overrun is possible.  This may
+cause a few input characters to be lost to users and a network
+packet is likely to be corrupted, but the network will recover.
+E 4
+I 4
+then print a message on the console with interrupts disabled.
+E 4
+It is not serious.
+E 1

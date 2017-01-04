@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)boot.c	7.12 (Berkeley) 3/21/89
+ *	@(#)boot.c	7.13 (Berkeley) 2/29/04
  */
 
 #include "param.h"
@@ -14,6 +14,7 @@
 
 #include <a.out.h>
 #include "saio.h"
+#include "../mdec/vmb.h"
 
 /*
  * Boot program... arguments passed in r10 and r11 determine
@@ -24,6 +25,7 @@
 char line[100];
 
 extern	unsigned opendev;
+extern	struct vmb_info *vmb_info;
 
 main()
 {
@@ -123,7 +125,7 @@ copyunix(howto, devtype, aio)
 		*addr++ = 0;
 	x.a_entry &= 0x7fffffff;
 	printf(" start 0x%x\n", x.a_entry);
-	(*((int (*)()) x.a_entry))();
+	(*((int (*)()) x.a_entry))(vmb_info);
 	return;
 shread:
 	printf("Short read\n");

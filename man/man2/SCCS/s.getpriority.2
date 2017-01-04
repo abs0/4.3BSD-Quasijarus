@@ -1,0 +1,225 @@
+h29959
+s 00000/00005/00095
+d D 6.5 86/05/22 12:27:26 anne 9 8
+c removed 3 lines
+e
+s 00002/00003/00098
+d D 6.4 86/05/13 15:30:44 karels 8 7
+c update
+e
+s 00003/00000/00098
+d D 6.3 85/06/06 03:59:06 lepreau 7 4
+c zero `who' means current one
+e
+s 00003/00000/00098
+d R 6.3 85/06/06 03:56:56 lepreau 6 4
+c doc what a 0 `who' means
+e
+s 00003/00000/00098
+d R 6.3 85/06/06 03:50:18 lepreau 5 4
+c doc what a 0 `who' means
+e
+s 00001/00001/00097
+d D 6.2 85/05/22 16:14:41 mckusick 4 3
+c return EPERM when non-super-user try to set another process's priority
+e
+s 00001/00001/00097
+d D 6.1 85/05/09 17:41:09 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00083/00031/00015
+d D 5.1 85/05/09 17:40:31 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00046/00000/00000
+d D 4.1 85/05/09 17:37:37 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH NICE 2 
+E 2
+I 2
+D 3
+.TH GETPRIORITY 2 "18 July 1983"
+E 3
+I 3
+.TH GETPRIORITY 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+nice \- set program priority
+E 2
+I 2
+getpriority, setpriority \- get/set program scheduling priority
+E 2
+.SH SYNOPSIS
+D 2
+.B nice(incr)
+E 2
+I 2
+.nf
+.ft B
+#include <sys/resource.h>
+.PP
+.ft B
+D 9
+#define PRIO_PROCESS	0	/* process */
+#define PRIO_PGRP		1	/* process group */
+#define PRIO_USER		2	/* user id */
+.PP
+.ft B
+E 9
+prio = getpriority(which, who)
+int prio, which, who;
+.PP
+.ft B
+setpriority(which, who, prio)
+int which, who, prio;
+.fi
+E 2
+.SH DESCRIPTION
+The scheduling
+D 2
+priority of the process is augmented by
+.IR incr .
+Positive priorities get less
+service than normal.
+Priority 10 is recommended to users
+who wish to execute long-running programs
+without flak from the administration.
+E 2
+I 2
+priority of the process, process group, or user, as indicated by
+.I which
+and
+.I who
+is obtained with the
+.I getpriority
+call and set with the
+.I setpriority
+call.
+.I Which
+is one of PRIO_PROCESS, PRIO_PGRP, or PRIO_USER, and 
+.I who
+is interpreted relative to 
+.I which
+(a process identifier for PRIO_PROCESS, process group
+identifier for PRIO_PGRP, and a user ID for PRIO_USER).
+I 7
+A zero value of
+.I who
+denotes the current process, process group, or user.
+E 7
+.I Prio
+is a value in the range \-20 to 20.  The default priority is 0;
+lower priorities cause more favorable scheduling.
+E 2
+.PP
+D 2
+Negative increments are ignored except on behalf of 
+the super-user.
+The priority is limited to the range
+\-20 (most urgent) to 20 (least).
+E 2
+I 2
+The
+.I getpriority
+call returns the highest priority (lowest numerical value)
+enjoyed by any of the specified processes.  The
+.I setpriority
+call sets the priorities of all of the specified processes
+to the specified value.  Only the super-user may lower priorities.
+.SH "RETURN VALUE
+Since
+.I getpriority
+can legitimately return the value \-1, it is necessary
+to clear the external variable \fIerrno\fP prior to the
+call, then check it afterward to determine
+if a \-1 is an error or a legitimate value.
+The
+.I setpriority
+call returns 0 if there is no error, or
+\-1 if there is.
+.SH ERRORS
+.I Getpriority
+and
+.I setpriority
+may return one of the following errors:
+.TP 15
+[ESRCH]
+D 8
+No process(es) were located using the 
+E 8
+I 8
+No process was located using the 
+E 8
+.I which
+and
+.I who
+values specified.
+.TP 15
+[EINVAL]
+.I Which
+was not one of PRIO_PROCESS, PRIO_PGRP, or PRIO_USER.
+E 2
+.PP
+D 2
+The priority of a process is
+passed to a child process by
+.IR fork (2).
+For a privileged process to return to normal priority
+from an unknown state,
+.I nice
+should be called successively with arguments
+\-40 (goes to priority \-20 because of truncation),
+20 (to get to 0),
+then 0 (to maintain compatibility with previous versions
+of this call).
+E 2
+I 2
+In addition to the errors indicated above,
+.I setpriority
+may fail with one of the following errors returned:
+.TP 15
+D 4
+[EACCES]
+E 4
+I 4
+[EPERM]
+E 4
+A process was located, but neither its effective nor real user
+ID matched the effective user ID of the caller.
+.TP 15
+[EACCES]
+D 8
+A non super-user attempted to change a process
+priority to a negative value.
+E 8
+I 8
+A non super-user attempted to lower a process priority.
+E 8
+E 2
+.SH "SEE ALSO"
+nice(1), fork(2), renice(8)
+D 2
+.SH "ASSEMBLER (PDP-11)"
+(nice = 34.)
+.br
+(priority in r0)
+.br
+.B sys nice
+E 2
+E 1

@@ -1,0 +1,90 @@
+.KS
+.PS
+scale = 225;
+"$e$";
+line <- from Here + 20,20 up 60 right 60;
+"\f4upd\fP" at Here + 20,20;
+{
+   line -> from Here + 0,-20 down 60 right 20;
+   "\f2L2\fP" at Here + 0,-20;
+}
+{
+   line -> from Here + 20,-20 down 60 right 60;
+   "\f4app\fP" at Here + 20,-20;
+   {   line -> from Here + 20,-20 down 60 right 60; "\f2L2\fP" at Here + 20,-20;   }
+   line -> from Here + -20,-20 down 60 left 60;
+   "$e sub m$" at Here + -20,-20;
+}
+line <- from Here + 20,20 up 60 right 60;
+"\f4upd\fP" at Here + 20,20;
+{
+   line -> from Here + 0,-20 down 60 right 20;
+   "\f2L1\fP" at Here + 0,-20;
+}
+{
+   line -> from Here + 20,-20 down 160 right 60;
+   "\f4app\fP" at Here + 20,-20;
+   {   line -> from Here + 20,-20 down 60 right 60; "\f2L1\fP" at Here + 20,-20;   }
+   line -> from Here + -20,-20 down 60 left 160;
+}
+move to Here + 500,200;
+{
+   "$a sub 1$";
+   line -> from Here + 0,-20 down 60;
+   "$a sub 2$" at Here + 0,-20;
+   line -> from Here + 0,-20 down 60;
+   "$b sub 1$" at Here + 0,-20;
+   {
+      line -> from Here + -20,-20 down 60 left 60;
+      "\f4app\fP" at Here + -20,-20;
+      {
+         line -> from Here + 20,-20 down 60 right 60;
+         "\f2L1\fP" at Here + 20,-20;
+      }
+      spline -> from Here + -20,-20 to Here + -100,-100 to Here + -200,200 to Here + -380,120;
+   }
+   line -> from Here + 20,-20 down 60 right 60;
+   "$a sub 3$" at Here + 20,-20;
+   line -> from Here + 0,-20 down 60;
+   "$b sub 2$" at Here + 0,-20;
+   {
+      line -> from Here + -20,-20 down 60 left 60;
+      "\f4app\fP" at Here + -20,-20;
+      {
+         line -> from Here + 20,-20 down 60 right 60;
+         "\f2L2\fP" at Here + 20,-20;
+      }
+      spline -> from Here + -20,-20 to Here + -100,-100 to Here + -300,100 to Here + -400,400 to Here + -480,320;
+   }
+   line -> from Here + 20,-20 down 60 right 60;
+   "$I$" at Here + 20,-20;
+}
+arc <- from Here + 0,20 to Here + -80,180 radius 200;
+"\f4upd\fP" at Here + -20,20;
+{
+   {
+      line -> from Here + 0,-20 down 60 right 20;
+      "\f2L1\fP" at Here + 0,-20;
+   }
+   line -> from Here + -20,-20 down 60 left 60;
+   "\f4upd\fP" at Here + -20,-20;
+   {
+      line -> from Here + 0,-20 down 60 right 20;
+      "\f2L2\fP" at Here + 0,-20;
+   }
+   {   line -> from Here + 20,-20 down 160 right 160;   }
+   line -> from Here + -20,-20 down 60 left 60;
+   "\f4nil\fP" at Here + -20,-20;
+}
+line dashed from Here + -40,0 left 640;
+arc to Here + -20,-20 rad 20;
+line dashed down 660;
+arc to Here + 20,-20 rad 20;
+line dashed to Here + 160,0;
+.PE
+.sp 2
+.FI 5
+The dashed line connects vertices that are merged when an
+instance of the least fixed point operator is eliminated, as in
+Figure 2.
+.KE

@@ -1,0 +1,90 @@
+h11462
+s 00001/00001/00055
+d D 6.1 85/04/27 13:09:10 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00054
+d D 5.1 85/04/27 13:07:41 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00056/00000/00000
+d D 4.1 85/04/27 13:07:24 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CLRI 8 "4/3/81"
+E 2
+I 2
+D 3
+.TH CLRI 8  "4 February 1983"
+E 3
+I 3
+.TH CLRI 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+clri \- clear i-node
+.SH SYNOPSIS
+.B /etc/clri
+filesystem i-number ...
+.SH DESCRIPTION
+.B N.B.:
+.I Clri
+is obsoleted for normal file system repair work by
+.IR fsck (8).
+.PP
+.I Clri
+writes zeros on the i-nodes
+with the decimal
+.I i-numbers
+on the
+.I filesystem.
+After
+.I clri,
+any blocks
+in the affected file
+will show up as `missing' in an
+D 2
+.IR icheck (1)
+E 2
+I 2
+.IR icheck (8)
+E 2
+of the
+.I filesystem.
+.PP
+Read and write permission is required on the specified
+file system device.
+The i-node becomes allocatable.
+.PP
+The primary purpose of this routine
+is to remove a file which
+for some reason appears in no
+directory.
+If it is used to zap an i-node
+which does appear in a directory, care should be taken to track down
+the entry and remove it.
+Otherwise, when the i-node is reallocated to some new file,
+the old entry will still point to that file.
+At that point removing the old entry will destroy the new file.
+The new entry will again point to an unallocated i-node,
+so the whole cycle is likely to be repeated again and again.
+.SH "SEE ALSO"
+icheck(8)
+.SH BUGS
+If the file is open,
+.I clri
+is likely to be ineffective.
+E 1

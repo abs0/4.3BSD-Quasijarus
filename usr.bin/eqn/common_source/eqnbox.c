@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)eqnbox.c	4.2 8/11/83";
+static char sccsid[] = "@(#)eqnbox.c	4.3 9/17/04";
 #endif
 
 # include "e.h"
@@ -15,9 +15,11 @@ eqnbox(p1, p2, lu) {
 	ebase[yyval] = b;
 	if(dbg)printf(".\te:eb: S%d <- S%d S%d; b=%d, h=%d\n", 
 		yyval, p1, p2, b, h);
+#ifdef CAT
 	if (rfont[p1] == ITAL && lfont[p2] == ROM)
 		sh = "\\|";
 	else
+#endif
 		sh = "";
 	if (lu) {
 		printf(".nr %d \\w'\\s%d\\*(%d%s'\n", p1, ps, p1, sh);

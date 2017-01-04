@@ -1,0 +1,19 @@
+.po .3i
+.fp 8 US
+.ft US
+.ps 20
+.PS
+circlerad = .8i
+circle
+arrow right 3i
+circle
+arc -> from top of last circle to top of last circle + -1.5i,1.5i rad 3i
+left
+circle
+arc -> to top of 1st circle rad 3i
+.ps 60
+"d" at 1st circle.c
+"D" at 2nd circle.c
+"v" at 3rd circle.c
+.ps
+.PE

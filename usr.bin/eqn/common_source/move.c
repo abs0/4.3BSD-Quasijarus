@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)move.c	4.3 8/11/83";
+static char sccsid[] = "@(#)move.c	4.4 9/15/04";
 #endif
 
 # include "e.h"
@@ -9,11 +9,15 @@ move(dir, amt, p) int dir, amt, p; {
 	int a;
 
 	yyval = p;
-#ifndef NEQN
+#ifdef CAT
 	a = VERT( (EFFPS(ps) * 6 * amt) / 100);
-#else NEQN
+#endif
+#ifdef PS
+	a = VERT( (EFFPS(ps) * 6 * amt) / 10);
+#endif
+#ifdef NEQN
 	a = VERT( (amt+49)/50 );	/* nearest number of half-lines */
-#endif NEQN
+#endif
 	printf(".ds %d ", yyval);
 	if( dir == FWD || dir == BACK )	/* fwd, back */
 		printf("\\h'%s%du'\\*(%d\n", (dir==BACK) ? "-" : "", a, p);

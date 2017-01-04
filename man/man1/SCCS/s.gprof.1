@@ -1,0 +1,335 @@
+h37967
+s 00030/00025/00195
+d D 6.3 87/09/30 08:52:11 mckusick 4 3
+c update to reflect current order of listing
+e
+s 00013/00000/00207
+d D 6.2 87/04/27 17:41:29 mckusick 3 2
+c add description of -k flag
+e
+s 00001/00002/00206
+d D 6.1 85/04/29 21:22:36 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00208/00000/00000
+d D 5.1 85/04/29 21:21:54 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+\"	@(#)gprof.1	1.9 (Berkeley) 10/12/82
+.TH GPROF 1 "18 January 1983"
+E 2
+I 2
+.TH GPROF 1 "%Q%"
+E 2
+.UC 5
+.SH NAME
+gprof \- display call graph profile data
+.SH SYNOPSIS
+.B gprof
+[ options ] [ a.out [ gmon.out ... ] ]
+.SH DESCRIPTION
+.I gprof
+produces an execution profile of C, Pascal, or Fortran77 programs.
+The effect of called routines is incorporated in the profile of each caller.
+The profile data is taken from the call graph profile file
+.RI ( gmon.out
+default) which is created by programs
+D 4
+which are compiled with the 
+E 4
+I 4
+that are compiled with the 
+E 4
+.B \-pg
+option of 
+.IR cc ,
+.IR pc ,
+and
+.IR f77 .
+D 4
+That option also links in versions of the library routines 
+which are compiled for profiling.
+The symbol table in the
+named object file
+E 4
+I 4
+The
+.B \-pg
+option also links in versions of the library routines 
+that are compiled for profiling.
+The symbol table in the named object file
+E 4
+.RI ( a.out
+default)
+D 4
+is read and correlated with the
+call graph profile file.
+E 4
+I 4
+is read and correlated with the call graph profile file.
+E 4
+If more than one profile file is specified,
+the
+.I gprof
+output shows the sum of the profile information in the given profile files.
+.PP
+D 4
+First, a flat profile is given,
+similar to that provided by
+.IR prof (1).
+This listing gives the total execution times
+and call counts for each of the functions
+in the program, sorted by decreasing time.
+.PP
+E 4
+I 4
+.I Gprof
+calculates the amount of time spent in each routine.
+E 4
+Next, these times are propagated along the edges of the call graph.
+Cycles are discovered, and calls into a cycle are made to share the time 
+of the cycle.
+D 4
+A second listing shows the functions
+E 4
+I 4
+The first listing shows the functions
+E 4
+sorted according to the time they represent
+including the time of their call graph descendents.
+Below each function entry is shown its (direct) call graph children,
+and how their times are propagated to this function.
+A similar display above the function shows how this function's time and the
+time of its descendents is propagated to its (direct) call graph parents.
+.PP
+Cycles are also shown, with an entry for the cycle as a whole and
+a listing of the members of the cycle and their contributions to the
+time and call counts of the cycle.
+.PP
+I 4
+Second, a flat profile is given,
+similar to that provided by
+.IR prof (1).
+This listing gives the total execution times, the call counts,
+the number of milliseconds per call in the routine itself, and
+the number of milliseconds per call in the routine itself including
+its descendents.
+.PP
+Finally, an index of the function names is provided.
+.PP
+E 4
+The following options are available:
+.TP
+.B \-a
+suppresses the printing of statically declared functions.
+If this option is given, all relevant information about the static function
+.RI ( e.g.,
+time samples, calls to other functions, calls from other functions)
+belongs to the function loaded just before the static function in the
+.I a.out
+file.
+.TP
+.B \-b
+D 4
+supresses the printing of a description of each field in the profile.
+E 4
+I 4
+suppresses the printing of a description of each field in the profile.
+E 4
+.TP
+.B \-c
+the static call graph of the program is discovered by a heuristic
+D 4
+which examines the text space of the object file.
+Static-only parents or children are indicated
+E 4
+I 4
+that examines the text space of the object file.
+Static-only parents or children are shown
+E 4
+with call counts of 0.
+.TP
+.BI \-e " name"
+suppresses the printing of the graph profile entry for routine
+.I name
+and all its descendants
+(unless they have other ancestors that aren't suppressed).
+More than one
+.B \-e
+option may be given.
+Only one
+.I name
+may be given with each
+.B \-e
+option.
+.TP
+.BI \-E " name"
+suppresses the printing of the graph profile entry for routine
+.I name
+(and its descendants) as 
+.BR \-e ,
+above, and also excludes the time spent in
+.I name
+(and its descendants) from the total and percentage time computations.
+(For example,
+.B \-E
+.I mcount
+.B \-E
+.I mcleanup
+is the default.)
+.TP
+.BI \-f " name"
+prints the graph profile entry of only the specified routine
+.I name
+and its descendants.
+More than one
+.B \-f
+option may be given.
+Only one
+.I name
+may be given with each
+.B \-f
+option.
+.TP
+.BI \-F " name"
+prints the graph profile entry of only the routine
+.I name
+and its descendants (as 
+.BR \-f,
+above) and also uses only the times of the printed routines
+in total time and percentage computations.
+More than one
+.B \-F
+option may be given.
+Only one
+.I name
+may be given with each
+.B \-F
+option.
+The
+.B \-F
+option
+overrides
+the
+.B \-E
+option.
+.TP
+I 3
+.BI \-k " fromname toname"
+will delete any arcs from routine
+.I fromname
+to routine
+.IR toname .
+This can be used to break undesired cycles.
+More than one
+.B \-k
+option may be given.
+Only one pair of routine names may be given with each
+.B \-k
+option.
+.TP
+E 3
+.B \-s
+a profile file
+.I gmon.sum
+D 4
+is produced which represents
+E 4
+I 4
+is produced that represents
+E 4
+the sum of the profile information in all the specified profile files.
+D 4
+This summary profile file may be given to subsequent
+E 4
+I 4
+This summary profile file may be given to later
+E 4
+executions of gprof (probably also with a
+.BR \-s )
+to accumulate profile data across several runs of an
+.I a.out
+file.
+.TP
+.B \-z
+D 4
+displays routines which have zero usage (as indicated by call counts
+E 4
+I 4
+displays routines that have zero usage (as shown by call counts
+E 4
+and accumulated time).
+D 4
+This is useful in conjunction with the 
+E 4
+I 4
+This is useful with the 
+E 4
+.B \-c
+option for discovering which routines were never called.
+.SH FILES
+.ta 1.5i
+.I a.out	
+the namelist and text space.
+.br
+.I gmon.out	
+dynamic call graph and profile.
+.br
+.I gmon.sum	
+summarized dynamic call graph and profile.
+.SH "SEE ALSO"
+monitor(3), profil(2), cc(1), prof(1)
+.br
+``gprof: A Call Graph Execution Profiler'', by
+Graham, S.L., Kessler, P.B., McKusick, M.K.;
+.IR "Proceedings of the SIGPLAN '82 Symposium on Compiler Construction" ,
+SIGPLAN Notices, Vol. 17, No. 6, pp. 120-126, June 1982.
+.SH BUGS
+Beware of quantization errors.
+The granularity of the sampling is shown, but remains
+statistical at best.
+We assume that the time for each execution of a function
+can be expressed by the total time for the function divided
+by the number of times the function is called.
+D 4
+Thus the time propagated along the call graph arcs to parents of that
+function is directly proportional to the number of times that
+E 4
+I 4
+Thus the time propagated along the call graph arcs to the function's
+parents is directly proportional to the number of times that
+E 4
+arc is traversed.
+.PP
+D 4
+Parents which are not themselves profiled will have the time of 
+E 4
+I 4
+Parents that are not themselves profiled will have the time of 
+E 4
+their profiled children propagated to them, but they will appear
+to be spontaneously invoked in the call graph listing, and will
+not have their time propagated further.
+Similarly, signal catchers, even though profiled, will appear
+to be spontaneous (although for more obscure reasons).
+Any profiled children of signal catchers should have their times
+propagated properly, unless the signal catcher was invoked during 
+the execution of the profiling routine, in which case all is lost.
+.PP
+The profiled program must call 
+.IR exit (2)
+or return normally for the profiling information to be saved
+in the gmon.out file.
+E 1

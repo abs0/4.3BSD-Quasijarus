@@ -1,0 +1,14 @@
+Times-Roman		R	-r
+Times-Italic		I	-r
+Times-Bold		B	-r
+Times-BoldItalic	BI	-r
+Helvetica		H	-r
+Helvetica-Oblique	HO	-r
+Helvetica-Bold		HB	-r
+Helvetica-BoldOblique	HQ	-r
+Courier			C	-r
+Courier-Oblique		CO	-r
+Courier-Bold		CB	-r
+Courier-BoldOblique	CQ	-r
+Symbol			S
+ZapfDingbats		ZD

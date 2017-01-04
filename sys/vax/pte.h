@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)pte.h	7.4 (Berkeley) 5/2/88
+ *	@(#)pte.h	7.5 (Berkeley) 3/18/04
  */
 
 /*
@@ -92,4 +92,8 @@ extern	struct pte Nexmap[][16];
 #if VAX8600
 extern	struct pte Ioamap[][1];
 #endif
+#if NEED_BABYVAX_SUPPORT
+extern	struct pte Babyvaxmap[];
+#endif
+extern	struct pte vmbinfomap[];
 #endif /* defined(KERNEL) && !defined(LOCORE) */

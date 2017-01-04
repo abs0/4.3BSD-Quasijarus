@@ -1,0 +1,27 @@
+h39159
+s 00016/00000/00000
+d D 1.1 86/03/13 20:11:22 donn 1 0
+c date and time created 86/03/13 20:11:22 by donn
+e
+u
+U
+t
+T
+I 1
+/*	%W% (Berkeley) %G% */
+
+/* LINTLIBRARY */
+
+
+char	PC;
+char	*BC;
+char	*UP;
+short	ospeed;
+
+int	tgetent(bp, name) char *bp, *name; { return 1; }
+int	tgetnum(id) char *id; { return -1; }
+int	tgetflag(id) char *id; { return 1; }
+char *	tgetstr(id, area) char *id, **area; { return *area; }
+char *	tgoto(cm, destcol, destline) char *cm; { return cm; }
+	tputs(cp, affcnt, outc) char *cp; int (*outc)(); { ; }
+E 1

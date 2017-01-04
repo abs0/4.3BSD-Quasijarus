@@ -2,9 +2,9 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)gettimeofday.2	6.8 (Berkeley) 4/11/87
+.\"	@(#)gettimeofday.2	6.9 (Berkeley) 2012/06/18
 .\"
-.TH GETTIMEOFDAY 2 "April 11, 1987"
+.TH GETTIMEOFDAY 2 "June 18, 2012"
 .UC 4
 .SH NAME
 gettimeofday, settimeofday \- get/set date and time
@@ -15,20 +15,29 @@ gettimeofday, settimeofday \- get/set date and time
 .PP
 .ft B
 gettimeofday(tp, tzp)
-struct timeval *tp;
+struct utimeval *tp;
 struct timezone *tzp;
 .PP
 .ft B
 settimeofday(tp, tzp)
-struct timeval *tp;
+struct utimeval *tp;
 struct timezone *tzp;
 .fi
 .SH DESCRIPTION
-The system's notion of the current Greenwich time and the current time
-zone is obtained with the \fIgettimeofday\fP call, and set with the
-\fIsettimeofday\fP call.  The time is expressed in seconds and microseconds
-since midnight (0 hour), January 1, 1970.  The resolution of the system
-clock is hardware dependent, and the time may be updated continuously or
+The system's notion of the current Earth Mean Solar Time
+and the default user time zone
+are obtained with the \fIgettimeofday\fP call, and set with the
+\fIsettimeofday\fP call.
+The time is reckoned as the Earth's rotation angle relative
+to the mean sun, and is expressed in fractions of the fundamental unit
+(the day) called ``seconds'' and ``microseconds'';
+the total angle of rotation is measured from the instant
+when the Mean Solar Time at the longitude of Greenwich was
+midnight (0 hour), January 1, 1970 \(em see
+.IR unixtime (7)
+for the full details.
+The resolution of the system clock is hardware dependent,
+and the time may be updated continuously or
 in ``ticks.''  If \fItp\fP or \fItzp\fP is NULL, the associated time
 information will not be returned or set.
 .PP
@@ -48,6 +57,12 @@ struct timeval {
 	long	tv_usec;		/* and microseconds */
 };
 .sp 1
+/* Y2038-ready unsigned version */
+struct utimeval {
+	unsigned long	tv_sec;
+	unsigned long	tv_usec;
+};
+.sp 1
 struct timezone {
 	int	tz_minuteswest;	/* of Greenwich */
 	int	tz_dsttime;	/* type of dst correction to apply */
@@ -64,6 +79,24 @@ Daylight Saving time applies locally during
 the appropriate part of the year.
 .PP
 Only the super-user may set the time of day or time zone.
+.SH Y2038
+The original signed \fItimeval\fP structure will no longer be able
+to provide a correct representation of the absolute Earth time
+when that value exceeds
+.BR 2\(**\(**31\(mi1 ,
+which will happen in early A.D. 2038.
+An unsigned interpretation is needed in order to represent
+correct absolute time values after that point for another 68 years.
+.PP
+Redefining \fIstruct timeval\fP as unsigned was deemed too
+problematic, as there exists at least one API
+.RI ( adjtime (2))
+which legitimately uses these structures to represent both
+positive and negative time deltas.
+Therefore, the chosen approach of least disruption is to define
+the unsigned version under a different name (\fIutimeval\fP),
+and to direct users to use the new structure when the correct
+unsigned interpretation of absolute time is important.
 .SH RETURN
 A 0 return value indicates that the call succeeded.
 A \-1 return value indicates an error occurred, and in this
@@ -77,4 +110,4 @@ An argument address referenced invalid memory.
 [EPERM]
 A user other than the super-user attempted to set the time.
 .SH "SEE ALSO"
-date(1), adjtime(2), ctime(3), timed(8)
+date(1), adjtime(2), ctime(3), time(3), unixtime(7)

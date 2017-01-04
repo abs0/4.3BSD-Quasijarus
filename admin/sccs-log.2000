@@ -1,0 +1,264 @@
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.30 00/02/09 15:26:17 msokolov 83 82
+Workaround for broken controllers that return zeros for the geometry
+/usr/src/sys/vaxif/SCCS/s.if_dmc.c:
+7.6 00/03/12 12:40:41 msokolov 49 48
+interface must be UP and RUNNING to send packets, not just UP
+/usr/src/sys/vaxif/SCCS/s.if_dmv.c:
+7.9 00/03/12 12:40:44 msokolov 9 8
+interface must be UP and RUNNING to send packets, not just UP
+/usr/src/sys/conf/SCCS/s.files.vax:
+7.12 00/03/25 15:42:55 msokolov 48 47
+add dsv
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.smtpm.m4:
+1.11 00/03/27 08:39:47 msokolov 12 11
+The prophecy has come true. HOSTS.TXT is gone, everyone uses DNS, and there are
+no more NIC-registered hosts to worry about. The old tcp mailer goes away and
+tcpld becomes smtp.
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.rule0.m4:
+1.12 00/03/27 09:29:33 msokolov 12 11
+INTERNET_RELAY, ARPAKLUDGE, and nicregistered.m4 go away, tcp & tcpld => smtp
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.nsmacros.m4:
+1.11 00/03/27 09:33:18 msokolov 12 11
+INTERNET_RELAY, ARPAKLUDGE, and nicregistered.m4 go away, tcp & tcpld => smtp
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.proto.mc:
+1.22 00/03/27 09:36:21 msokolov 23 22
+INTERNET_RELAY, ARPAKLUDGE, and nicregistered.m4 go away, tcp & tcpld => smtp
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.Makefile:
+1.21 00/03/27 09:36:22 msokolov 21 20
+INTERNET_RELAY, ARPAKLUDGE, and nicregistered.m4 go away, tcp & tcpld => smtp
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.smtpm.m4:
+1.12 00/03/27 09:40:39 msokolov 13 12
+use the same ruleset for S and R instead of two identical ones
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.smtpm.m4:
+1.13 00/03/27 09:43:33 msokolov 14 13
+remove the C flag, it's totally unusable with the current cf file architecture
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.smtpuucpm.m4:
+1.3 00/03/27 09:43:34 msokolov 3 2
+remove the C flag, it's totally unusable with the current cf file architecture
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.rule0.m4:
+1.13 00/03/27 09:47:17 msokolov 13 12
+remove unnecessary extra canonicalization hop and fix the special error address
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.smtpm.m4:
+1.14 00/03/27 09:47:18 msokolov 15 14
+remove unnecessary extra canonicalization hop and fix the special error address
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.boilerplate.m4:
+1.4 00/03/27 09:48:32 msokolov 4 3
+me too!
+/usr/src/usr.lib/sendmail/cf/m4/SCCS/s.version.m4:
+1.36 00/03/27 10:04:57 msokolov 36 35
+The prophecy has come true. HOSTS.TXT is gone, everyone uses DNS, and there are
+no more NIC-registered hosts to worry about. The old tcp mailer goes away and
+tcpld becomes smtp. Also some minor nits.
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.tcpproto.mc:
+1.3 00/03/27 10:14:26 msokolov 3 2
+ARPAKLUDGE is gone
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.Makefile:
+1.22 00/03/27 10:24:10 msokolov 22 21
+Don't built Berkeley cf files, just the protos
+add baretcpproto to the latter
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.Makefile:
+1.23 00/03/27 10:28:28 msokolov 23 22
+add install target installing baretcpproto.cf as /usr/lib/sendmail.cf
+/usr/src/usr.lib/sendmail/SCCS/s.Makefile:
+4.14 00/03/27 10:29:45 msokolov 25 24
+build and install the cf files too
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.Makefile:
+1.24 00/03/27 10:33:35 msokolov 24 23
+missing backslash
+/usr/src/lib/cpp/SCCS/s.cpp.c:
+1.18 00/04/02 08:57:48 msokolov 18 17
+bump symsiz to 4000, people are compiling things with that many defines...
+/usr/src/usr.lib/sendmail/src/SCCS/s.deliver.c:
+5.24 00/04/03 09:51:30 msokolov 211 210
+Check the sender address for a null string and change it to "<>" if it is,
+as we can't handle null strings very well.
+/usr/src/usr.lib/sendmail/src/SCCS/s.envelope.c:
+5.17 00/04/03 09:51:36 msokolov 44 43
+Check the sender address for a null string and change it to "<>" if it is,
+as we can't handle null strings very well.
+/usr/src/lib/mip/SCCS/s.config.h:
+4.4 00/04/10 19:11:43 msokolov 4 3
+bump PARAMSZ to 600, it was limiting some huge enums...
+/usr/src/sys/h/SCCS/s.time.h:
+7.2 00/04/10 20:33:42 msokolov 10 9
+put in multiple inclusion guards, this header file is far too common
+/usr/src/lib/mip/SCCS/s.config.h:
+4.5 00/04/13 22:51:48 msokolov 5 4
+bump SYMTSZ to 6000, people started bumping into the limit...
+/usr/src/lib/cpp/SCCS/s.cpp.c:
+1.19 00/04/17 14:15:59 msokolov 19 18
+let people put up to 16 -I's on the command line instead of 8
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.Makefile:
+1.25 00/05/26 23:46:12 msokolov 25 24
+add Harhan cf files
+have all cf files listed in $(ALL), not just the ones we build by default
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.14 00/06/27 10:10:55 msokolov 52 51
+make reply() and lreply() take up to 6 parameters.
+5 was too few for the PASV response!
+/usr/src/usr.lib/libz/SCCS/s.Makefile:
+5.3 00/08/04 10:49:23 msokolov 3 2
+correct comment
+/usr/src/lib/pcc/pcc.vax/SCCS/s.code.c:
+1.11 00/08/04 11:20:41 msokolov 11 10
+(genswitch direct switch case): clean up redundant construct
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.25 00/08/07 22:28:50 msokolov 26 25
+(bflow): clean up the send directly to destination optimisation
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.26 00/08/07 22:40:17 msokolov 27 26
+donn, your fix (sid 4.23) is wrong. We must look at the instruction a second
+time to take note of the new source operand and the registers it may use,
+including deferred and indexed addressing modes. I'm reverting your incorrect
+fix and replacing it with the correct one, which is to explicitly disable the
+inappropriate dead store elimination.
+/usr/src/usr.lib/libz/SCCS/s.Makefile:
+5.4 00/08/07 22:51:02 msokolov 4 3
+The c2 bug is fixed! Now compile everything with -O! Yay! (dancing...)
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.27 00/08/07 23:45:50 msokolov 28 27
+(bmove small negative constant CMP optimisation): Make the handling of perm
+regs just copied from temp ones actually work.
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.28 00/08/07 23:47:31 msokolov 29 28
+(bmove): clearuse() for CASE just like for JMP
+/usr/src/lib/c2/c2.vax/SCCS/s.c20.c:
+4.11 00/08/08 01:07:28 msokolov 12 11
+remove unneeded clearreg()
+/usr/src/lib/c2/c2.vax/SCCS/s.c20.c:
+4.12 00/08/08 01:12:17 msokolov 13 12
+(iterate): don't do xjump() and codemove() if we threw the jump out
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.29 00/08/08 20:46:48 msokolov 30 29
+(rmove case TST): Don't do a bogus setcc() after throwing out a redundant TST
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.30 00/08/08 20:48:21 msokolov 31 30
+(rmove case CBR): don't clear ccloc
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.31 00/08/08 20:51:55 msokolov 32 31
+(redunbr) doing a savereg() on RT2 is totally bogus
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.32 00/08/09 19:26:46 msokolov 33 32
+Fix catastrophic breakage from my delta 4.28. Now this will teach me to test
+code at least minimally before checking it in... (red face)
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.33 00/08/09 19:40:50 msokolov 34 33
+(addsob): Thorough cleanup. Reformat, fix minor bugs and deficiencies, get
+ready for the upcoming addition of SOB, AOB, and ACB relaxation to as.
+/usr/src/bin/as/as.vax/SCCS/s.Makefile:
+5.6 00/08/28 10:07:03 msokolov 14 13
+remove astoks.h on make clean, it's a generated file
+/usr/src/lib/c2/c2.vax/SCCS/s.Makefile:
+4.7 00/08/29 19:17:42 msokolov 7 6
+remove instrs.c2 on make clean, it's a generated file
+/usr/src/lib/c2/c2.vax/SCCS/s.Makefile:
+4.8 00/08/29 19:21:54 msokolov 8 7
+oops, make depend must depend on instrs.c2
+/usr/src/lib/c2/c2.vax/SCCS/s.c2.h:
+4.11 00/08/29 20:42:51 msokolov 11 10
+remove JCC and JCS, they are aliases for JHIS and JLO respectively
+/usr/src/bin/as/as.vax/SCCS/s.as.h:
+5.4 00/08/29 22:10:39 msokolov 27 26
+Complete jxxx relaxation overhaul. We now relax three-way without -J!
+-J is now ignored. We now also relax SOBs, AOBs, and ACBs. See the comments in
+addsob() in c2 for the motivation.
+As a side effect, we now require -d4.
+As yet another side effect, the handling of branches in instrs has been
+significantly cleaned up for c2.
+/usr/src/bin/as/as.vax/SCCS/s.ascode.c:
+5.2 00/08/29 22:10:41 msokolov 14 13
+Complete jxxx relaxation overhaul. We now relax three-way without -J!
+-J is now ignored. We now also relax SOBs, AOBs, and ACBs. See the comments in
+addsob() in c2 for the motivation.
+As a side effect, we now require -d4.
+As yet another side effect, the handling of branches in instrs has been
+significantly cleaned up for c2.
+/usr/src/bin/as/as.vax/SCCS/s.asjxxx.c:
+5.5 00/08/29 22:10:43 msokolov 15 14
+Complete jxxx relaxation overhaul. We now relax three-way without -J!
+-J is now ignored. We now also relax SOBs, AOBs, and ACBs. See the comments in
+addsob() in c2 for the motivation.
+As a side effect, we now require -d4.
+As yet another side effect, the handling of branches in instrs has been
+significantly cleaned up for c2.
+/usr/src/bin/as/as.vax/SCCS/s.aspseudo.c:
+5.2 00/08/29 22:10:46 msokolov 7 6
+Complete jxxx relaxation overhaul. We now relax three-way without -J!
+-J is now ignored. We now also relax SOBs, AOBs, and ACBs. See the comments in
+addsob() in c2 for the motivation.
+As a side effect, we now require -d4.
+As yet another side effect, the handling of branches in instrs has been
+significantly cleaned up for c2.
+/usr/src/bin/as/as.vax/SCCS/s.asmain.c:
+5.4 00/08/29 22:10:47 msokolov 19 18
+Complete jxxx relaxation overhaul. We now relax three-way without -J!
+-J is now ignored. We now also relax SOBs, AOBs, and ACBs. See the comments in
+addsob() in c2 for the motivation.
+As a side effect, we now require -d4.
+As yet another side effect, the handling of branches in instrs has been
+significantly cleaned up for c2.
+/usr/src/bin/as/as.vax/SCCS/s.instrs:
+5.2 00/08/29 22:10:49 msokolov 11 10
+Complete jxxx relaxation overhaul. We now relax three-way without -J!
+-J is now ignored. We now also relax SOBs, AOBs, and ACBs. See the comments in
+addsob() in c2 for the motivation.
+As a side effect, we now require -d4.
+As yet another side effect, the handling of branches in instrs has been
+significantly cleaned up for c2.
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.34 00/08/29 22:18:47 msokolov 35 34
+(addsob): SOB, AOB, and ACB relaxation is here! Take advantage of it.
+/usr/src/bin/adb/adb.vax/SCCS/s.Makefile:
+5.2 00/08/29 22:22:44 msokolov 10 9
+remove instrs.adb on make clean, it's a generated file
+/usr/src/lib/pcc/pcc.vax/SCCS/s.code.c:
+1.12 00/08/30 01:41:28 msokolov 12 11
+generate long switch tables without word displacement limits if -J is given
+/usr/src/bin/SCCS/s.cc.c:
+4.16 00/08/30 02:10:44 msokolov 21 20
+pass -J along to ccom and as
+/usr/src/lib/pcc/pcc.vax/SCCS/s.code.c:
+1.13 00/08/30 10:33:10 msokolov 13 12
+change -J to -XJ
+/usr/src/bin/SCCS/s.cc.c:
+4.17 00/08/30 10:34:44 msokolov 22 21
+pass -J to ccom as -XJ
+/usr/src/bin/as/as.vax/SCCS/s.asjxxx.c:
+5.6 00/08/30 22:54:11 msokolov 16 15
+Raise a red flag on a JXACTIVE over a JXALIGN only when it's actually
+dangerous. Also don't carry over this flag from previous iterations.
+/usr/src/bin/as/as.vax/SCCS/s.asjxxx.c:
+5.7 00/08/31 12:53:45 msokolov 17 16
+Reimplement tunneling. We no longer try to maintain the tunnel location, which
+never worked right. Instead, we actively seek a tunnel when we want one. There
+we do our best to find one, looking both backward and forward. We also make
+sure that future expansions can't break it.
+/usr/src/bin/as/as.vax/SCCS/s.asjxxx.c:
+5.8 00/08/31 13:09:59 msokolov 18 17
+Correct .align handling. On the first pass set the fear value to one byte less
+because we guess 1 byte initially, not 0. Correct the expansion accordingly.
+Also reject bogus .align 0.
+/usr/src/lib/c2/c2.vax/SCCS/s.c2.h:
+4.12 00/08/31 22:43:06 msokolov 12 11
+break up into routines on .word's (procedure entry points) instead of .globl's
+so that it doesn't depend on whether functions are static or not
+/usr/src/lib/c2/c2.vax/SCCS/s.c21.c:
+4.35 00/08/31 22:44:03 msokolov 36 35
+.globl is now called GLOBL, not EROU
+/usr/src/bin/as/as.vax/SCCS/s.instrs:
+5.3 00/08/31 22:44:37 msokolov 12 11
+(for c2): .globl is now called GLOBL, not EROU
+/usr/src/sys/sys/SCCS/s.vm_page.c:
+7.8 00/12/14 20:56:03 msokolov 8 7
+Guard DFLSSIZ and DFLDSIZ against maxdmap just like MAXSSIZ and MAXDSIZ,
+as they are also overridable.
+/usr/src/ucb/compress/SCCS/s.gzcompat.c:
+5.2 00/12/21 22:37:52 msokolov 2 1
+allow the input file to be specified on the command line
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.15 00/12/21 22:46:30 msokolov 53 52
+add automatic gzcompat of compressed files on downloads
+/usr/src/lib/mip/SCCS/s.config.h:
+4.6 00/12/22 19:42:06 msokolov 6 5
+bump TREESZ to 2000, people started bumping into the limit...

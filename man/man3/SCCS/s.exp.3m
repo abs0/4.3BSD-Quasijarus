@@ -1,0 +1,688 @@
+h10049
+s 00001/00001/00127
+d D 6.9 86/05/27 10:21:19 kjd 11 10
+c add comma
+e
+s 00002/00002/00126
+d D 6.8 86/05/12 17:10:47 karels 10 9
+c intro(3M) => math(3M), move see also's to end
+e
+s 00016/00006/00112
+d D 6.7 85/09/11 18:52:25 mckusick 9 8
+c new from Kahan
+e
+s 00086/00263/00032
+d D 6.6 85/08/21 14:58:32 miriam 8 7
+c Revision by Prof. Kahan
+e
+s 00218/00004/00077
+d D 6.5 85/06/19 11:01:20 miriam 7 6
+c Add a Notes section.
+e
+s 00001/00001/00080
+d D 6.4 85/06/06 15:33:27 miriam 6 5
+c Add E and L to descriptor line
+e
+s 00003/00000/00078
+d D 6.3 85/05/24 14:33:51 miriam 5 4
+c .if for screen verses typesetter
+e
+s 00032/00027/00046
+d D 6.2 85/05/24 12:00:59 miriam 4 3
+c From Prof. Kahan
+e
+s 00003/00003/00070
+d D 6.1 85/05/15 14:55:58 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00010/00066
+d D 5.1 85/05/15 14:55:42 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00076/00000/00000
+d D 4.1 85/05/15 14:55:28 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+D 4
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH EXP 3M 
+E 2
+I 2
+D 3
+.TH EXP 3M  "18 July 1983"
+E 3
+I 3
+.TH EXP 3M  "%Q%"
+E 3
+E 2
+.AT 3
+E 4
+I 4
+D 8
+.TH EXP 3M  "8 May 1985"
+E 8
+I 8
+D 9
+.TH EXP 3M  "19 August 1985"
+E 9
+I 9
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH EXP 3M  "%Q%"
+E 9
+E 8
+.UC 4
+I 8
+.ds nn \fINaN\fR
+I 9
+.ds up \fIulp\fR
+E 9
+E 8
+E 4
+.SH NAME
+D 4
+exp, log, log10, pow, sqrt \- exponential, logarithm, power, square root
+E 4
+I 4
+D 6
+exp, log, log10, pow \- exponential, logarithm, power
+E 6
+I 6
+D 8
+E, L, exp, log, log10, pow \- exponential, logarithm, power
+E 8
+I 8
+exp, expm1, log, log10, log1p, pow \- exponential, logarithm, power
+E 8
+E 6
+E 4
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+I 4
+D 8
+.B double E(x)
+E 8
+I 8
+.B double exp(x)
+E 8
+.B double x;
+.PP
+D 8
+.B double L(x)
+E 8
+I 8
+.B double expm1(x)
+E 8
+.B double x;
+.PP
+E 4
+D 8
+.B double exp(x)
+.B double x;
+.PP
+E 8
+.B double log(x)
+.B double x;
+.PP
+.B double log10(x)
+.B double x;
+.PP
+D 8
+.B double pow(x, y)
+.B double x, y;
+E 8
+I 8
+.B double log1p(x)
+.B double x;
+.PP
+.B double pow(x,y)
+.B double x,y;
+E 8
+D 4
+.PP
+.B double sqrt(x)
+.B double x;
+E 4
+.fi
+.SH DESCRIPTION
+I 4
+D 8
+.I E
+returns
+.I exp(x)\-1
+accurately (even if
+.I x
+D 7
+is close to 0).
+E 7
+I 7
+is close to
+.I 0
+).
+E 8
+E 7
+.PP
+D 8
+.I L
+returns
+.I log(1+x)
+accurately (even if
+.I x
+D 7
+is close to 0).
+E 7
+I 7
+is close to
+.I 0
+).
+E 8
+I 8
+Exp returns the exponential function of x.
+E 8
+E 7
+.PP
+E 4
+D 8
+.I Exp
+returns the exponential function of 
+.I x.
+E 8
+I 8
+Expm1 returns exp(x)\-1 accurately even for tiny x.
+E 8
+.PP
+D 8
+.I Log
+returns the natural logarithm of 
+.IR x ;
+.I log10
+D 7
+returns the base 10 logarithm.
+E 7
+I 7
+returns the base
+.I 10
+logarithm.
+E 8
+I 8
+Log returns the natural logarithm of x.
+E 8
+E 7
+.PP
+D 8
+.I Pow
+returns
+E 8
+I 8
+Log10 returns the logarithm of x to base 10.
+.PP
+Log1p returns log(1+x) accurately even for tiny x.
+.PP
+Pow(x,y) returns
+E 8
+I 5
+.if n \
+D 8
+.I  x**y.
+E 8
+I 8
+x**y.
+E 8
+.if t \
+E 5
+D 8
+.I  x\u\s8y\s10\d.
+E 8
+I 8
+x\u\s8y\s10\d.
+E 8
+D 4
+.PP
+.I Sqrt
+returns the square root of 
+.I x.
+E 4
+D 10
+.SH SEE ALSO
+D 2
+hypot(3),
+sinh(3),
+intro(2)
+E 2
+I 2
+D 4
+hypot(3M),
+sinh(3M),
+E 4
+D 8
+intro(3M)
+E 8
+I 8
+intro(3M), infnan(3M)
+E 10
+.SH ERROR (due to Roundoff etc.)
+exp(x), log(x), expm1(x) and log1p(x) are accurate to within 
+D 9
+an \fIulp\fR, and log10(x) to within about 2 \fIulp\fRs;
+an \fIulp\fR is one \fIU\fRnit in the \fIL\fRast \fIP\fRlace.
+The error in pow(x,y) is below about 2 \fIulp\fRs when its
+E 9
+I 9
+an \*(up, and log10(x) to within about 2 \*(ups;
+an \*(up is one \fIU\fRnit in the \fIL\fRast \fIP\fRlace.
+The error in pow(x,y) is below about 2 \*(ups when its
+E 9
+magnitude is moderate, but increases as pow(x,y) approaches
+D 9
+the over/underflow thresholds until almost as many bits are
+E 9
+I 9
+the over/underflow thresholds until almost as many bits could be
+E 9
+lost as are occupied by the floating\-point format's exponent
+field; that is 8 bits for VAX D and 11 bits for IEEE 754 Double.
+I 9
+No such drastic loss has been exposed by testing; the worst
+errors observed have been below 20 \*(ups for VAX D,
+300 \*(ups for IEEE 754 Double.
+E 9
+Moderate values of pow are accurate enough that pow(integer,integer)
+D 9
+is exact until it is bigger than 2**56 on a VAX, 2**53 for IEEE.
+E 9
+I 9
+is exact until it is bigger than 2**56 on a VAX, 2**53 for IEEE 754.
+E 9
+E 8
+E 2
+.SH DIAGNOSTICS
+D 4
+.I Exp
+E 4
+I 4
+D 8
+.I E,
+.I L,
+.I exp
+E 4
+and
+.I pow
+D 2
+return a huge value when the correct value would
+overflow;
+E 2
+I 2
+D 4
+return a huge value when the correct value would overflow;
+E 4
+I 4
+return the reserved operand on the VAX when the correct value would overflow;
+E 4
+E 2
+.I errno
+is set to ERANGE.
+.I Pow
+D 4
+returns 0 and sets
+E 4
+I 4
+returns the reserved operand on the VAX and sets
+E 4
+.I errno
+D 2
+to
+EDOM when the second argument is negative and non-integral and
+when
+both arguments are 0.
+E 2
+I 2
+D 3
+to EDOM when the second argument is negative and non-integral and
+when both arguments are 0.
+E 3
+I 3
+D 4
+to EDOM when the first argument is negative and the second is non-integral or
+when first argument is 0 and the second is less than or equal to 0.
+E 4
+I 4
+to EDOM when the first argument is negative and the second is non-integral.
+E 8
+I 8
+Exp, expm1 and pow return the reserved operand on a VAX when the correct
+value would overflow, and they set \fIerrno\fR to ERANGE.
+Pow(x,y) returns the reserved operand on a VAX and sets \fIerrno\fR
+to EDOM when x < 0 and y is not an integer.
+E 8
+E 4
+E 3
+E 2
+.PP
+D 8
+.I Log
+D 4
+returns 0 when
+E 4
+I 4
+returns the reserved operand on the VAX when
+E 4
+.I x
+is zero or negative;
+.I errno
+is set to EDOM.
+E 8
+I 8
+On a VAX, \fIerrno\fR is set to EDOM and the reserved operand is returned
+by log unless x > 0, by log1p unless x > \-1.
+E 8
+I 7
+.SH NOTES
+D 8
+.I Pow
+defines
+.if n\
+.I x**0
+.if t\
+.I x\u\s80\s10\d
+=
+.I 1
+for all
+.I x,
+including
+.I zero,
+.if n\
+.I infinity
+.if t\
+E 8
+I 8
+The functions exp(x)\-1 and log(1+x) are called expm1
+and logp1 in BASIC on the Hewlett\-Packard HP\-71B and APPLE
+Macintosh, EXP1 and LN1 in Pascal, exp1 and log1 in C
+on APPLE Macintoshes, where they have been provided to make
+sure financial calculations of ((1+x)**n\-1)/x, namely
+expm1(n\(**log1p(x))/x, will be accurate when x is tiny.
+They also provide accurate inverse hyperbolic functions.
+.PP
+Pow(x,0) returns x**0 = 1 for all x including x = 0,
+.if n \
+Infinity
+.if t \
+E 8
+\(if
+D 8
+(not applicable on the VAX) and
+.I NaN
+(the reserved operand on the VAX).
+Previous implementations of
+.I pow
+may have defined
+.if n\
+.I x**0
+.if t\
+.I  x\u\s80\s10\d
+to be
+.I undefined
+in some or all of those cases.
+The reasons for setting
+.if n\
+.I x**0
+.if t\
+.I  x\u\s80\s10\d
+=
+.I 1
+in all cases are these:
+.IP (1)
+Any program that already tests whether
+.I x
+is
+.I 0
+(or
+.if n\
+.I infinity
+.if t\
+\(if
+or
+.I NaN\fR)
+before computing
+.if n\
+.I x**0
+.if t\
+.I  x\u\s80\s10\d
+will be indifferent to whether
+.if n\
+.I 0**0
+.if t\
+.I  0\u\s80\s10\d
+=
+.I 1
+or not.
+Any program that expects
+.if n\
+.I 0**0
+.if t\
+.I  0\u\s80\s10\d
+to be invalid is dubious anyway since that
+expectation is bound to be contradicted by some
+computer systems.
+.IP (2)
+Some Algebra texts (e.g. Sigler's) define
+.if n\
+.I x**0
+.if t\
+.I  x\u\s80\s10\d
+=
+.I 1
+for all
+.I x,
+including
+.I x
+=
+.I 0.
+This is compatible with the convention for polynomials
+that accepts
+.br
+.I p(x) =
+.if n \{\
+.I a[0]*x**0
++
+.I a[1]*x**1
++ ... +
+.I a[n]*x**n \}
+.if t \{\
+.I a\d\s80\s10\u\(**x\u\s80\s10\d
++
+.I a\d\s81\s10\u\(**x\u\s81\s10\d
++ ... +
+.I a\d\s8n\s10\u\(**x\u\s8n\s10\d \}
+and evaluates 
+.I p(0)
+=
+.if n\
+.I a[0]
+.if t\
+.I a\d\s80\s10\u
+rather than reject
+.if n\
+.I a[0]*0**0
+.if t\
+.I a\d\s80\s10\u\(**0\u\s80\s10\d
+as invalid.
+.IP (3)
+Analysts will accept
+.if n\
+.I 0**0
+.if t\
+.I  0\u\s80\s10\d
+=
+.I 1
+despite that
+.if n\
+.I x**y
+.if t\
+.I  x\u\s8y\s10\d
+can approach anything or nothing as
+.I x
+and
+.I y
+approach
+.I zero
+E 8
+I 8
+(not found on a VAX), and \*(nn (the reserved
+operand on a VAX).  Previous implementations of pow may
+have defined x**0 to be undefined in some or all of these
+cases.  Here are reasons for returning x**0 = 1 always:
+.IP (1) \w'\0\0\0\0'u
+Any program that already tests whether x is zero (or
+infinite or \*(nn) before computing x**0 cannot care
+whether 0**0 = 1 or not. Any program that depends
+upon 0**0 to be invalid is dubious anyway since that
+expression's meaning and, if invalid, its consequences 
+vary from one computer system to another.
+.IP (2) \w'\0\0\0\0'u
+Some Algebra texts (e.g. Sigler's) define x**0 = 1 for 
+all x, including x = 0.
+This is compatible with the convention that accepts a[0]
+as the value of polynomial
+.ce
+p(x) = a[0]\(**x**0 + a[1]\(**x**1 + a[2]\(**x**2 +...+ a[n]\(**x**n
+.IP
+at x = 0 rather than reject a[0]\(**0**0 as invalid.
+.IP (3) \w'\0\0\0\0'u
+Analysts will accept 0**0 = 1 despite that x**y can
+approach anything or nothing as x and y approach 0
+E 8
+independently.
+D 8
+The reason for setting
+.if n\
+.I 0**0
+.if t\
+.I  0\u\s80\s10\d
+=
+.I 1
+anyway is this:
+.br
+If
+.I x(z)
+and
+.I y(z)
+are
+.I any
+functions analytic (expressible as power series) in
+.I z
+at
+.I z
+=
+.I 0,
+and if
+.I x(0)
+=
+.I y(0)
+=
+.I 0,
+then
+.if n\
+.I x(z)**y(z)
+.if t\
+.I x(z)\u\s8y(z)\s10\d
+\(->
+.I 1
+as
+.I z
+\(->
+.I 0.
+.IP (4)
+If
+.if n\
+.I 0**0
+.if t\
+.I  0\u\s80\s10\d
+=
+.I 1,
+then
+.if n\
+.I infinity**0
+.if t\
+\(if\u\s8\fI0\fR\s10\d
+=
+.if t\
+.I  1/0\u\s80\s10\d
+.if n\
+.I 1/0**0
+=
+.I 1
+too; and then
+.if n\
+.I NaN**0
+.if t\
+.I  NaN\u\s80\s10\d
+=
+.I 1
+because
+.if n\
+.I x**0
+.if t\
+.I  x\u\s80\s10\d
+=
+.I 1
+for all finite and infinite
+.I x.
+E 8
+I 8
+The reason for setting 0**0 = 1 anyway is this:
+.IP
+If x(z) and y(z) are \fIany\fR functions analytic (expandable
+in power series) in z around z = 0, and if there 
+x(0) = y(0) = 0, then x(z)**y(z) \(-> 1 as z \(-> 0.
+.IP (4) \w'\0\0\0\0'u
+If 0**0 = 1, then
+.if n \
+infinity**0 = 1/0**0 = 1 too; and
+.if t \
+\(if**0 = 1/0**0 = 1 too; and
+then \*(nn**0 = 1 too because x**0 = 1 for all finite
+D 11
+and infinite x, i.e. independently of x.
+E 11
+I 11
+and infinite x, i.e., independently of x.
+E 11
+I 10
+.SH SEE ALSO
+math(3M), infnan(3M)
+E 10
+E 8
+E 7
+D 4
+.PP
+.I Sqrt
+returns 0 when 
+.I x
+is negative;
+.I errno
+is set to EDOM.
+E 4
+I 4
+.SH AUTHOR
+D 7
+Kwok-Choi Ng
+E 7
+I 7
+Kwok\-Choi Ng, W. Kahan
+E 7
+E 4
+E 1

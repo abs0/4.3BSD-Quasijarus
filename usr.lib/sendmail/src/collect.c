@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)collect.c	5.4 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)collect.c	5.6 (Berkeley) 9/19/07";
 #endif /* not lint */
 
 # include <errno.h>
@@ -49,6 +49,7 @@ collect(sayok)
 	char buf[MAXFIELD+2];
 	register char *p;
 	extern char *hvalue();
+	bool oversize = FALSE;
 
 	/*
 	**  Create the temp file name and create the file.
@@ -129,6 +130,20 @@ collect(sayok)
 			(void) ungetc(c, InChannel);
 
 		CurEnv->e_msgsize += strlen(buf);
+		if (MaxMessageSize != 0 && CurEnv->e_msgsize > MaxMessageSize)
+		{
+			nmessage("552",
+			"Messages longer than %ld bytes are not allowed",
+				MaxMessageSize);
+			Errors++;
+			if (OpMode != MD_SMTP)
+				CurEnv->e_flags |= EF_FATALERRS;
+			else
+				CurEnv->e_flags &= ~EF_FATALERRS;
+			if (ExitStat == EX_OK)
+				ExitStat = EX_UNAVAILABLE;
+			finis();
+		}
 
 		/*
 		**  Snarf header away.
@@ -170,9 +185,18 @@ collect(sayok)
 		**  file, and insert a newline if missing.
 		*/
 
-		CurEnv->e_msgsize += strlen(bp) + 1;
-		fputs(bp, tf);
-		fputs("\n", tf);
+		if (!oversize && MaxMessageSize != 0 &&
+			CurEnv->e_msgsize >= MaxMessageSize)
+		{
+			oversize = TRUE;
+			fputs("\n*** Oversize message trimmed ***\n", tf);
+		}
+		if (!oversize)
+		{
+			CurEnv->e_msgsize += strlen(bp) + 1;
+			fputs(bp, tf);
+			putc('\n', tf);
+		}
 		if (ferror(tf))
 			tferror(tf);
 	} while (sfgets(buf, MAXFIELD, InChannel) != NULL);

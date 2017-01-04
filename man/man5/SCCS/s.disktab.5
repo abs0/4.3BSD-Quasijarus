@@ -1,0 +1,192 @@
+h15412
+s 00043/00017/00055
+d D 6.5 87/06/18 21:29:48 karels 6 5
+c disklabels
+e
+s 00001/00001/00071
+d D 6.4 86/05/17 09:38:31 lepreau 5 4
+c add a see also
+e
+s 00002/00002/00070
+d D 6.3 86/05/13 18:22:51 karels 4 3
+c tabs
+e
+s 00002/00000/00070
+d D 6.2 86/03/27 15:33:59 mckusick 3 2
+c add "sf" and "so" descriptions
+e
+s 00001/00001/00069
+d D 6.1 85/05/15 18:58:10 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00070/00000/00000
+d D 5.1 85/05/15 18:58:04 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DISKTAB 5 "2 March 1983"
+E 2
+I 2
+.TH DISKTAB 5 "%Q%"
+E 2
+.UC 5
+.SH NAME
+disktab \- disk description file
+.SH SYNOPSIS
+.B #include <disktab.h>
+.SH DESCRIPTION
+.I Disktab
+D 6
+is a simple date base which describes disk geometries and
+disk partition characteristics.  The format is patterned
+E 6
+I 6
+is a simple database which describes disk geometries and
+disk partition characteristics.
+It is used
+.\"by the formatter(\c
+.\"IR format (8))
+.\"to determine how to format the disk, and
+to initialize the disk label on the disk.
+The format is patterned
+E 6
+after the
+.IR termcap (5)
+terminal data base.  Entries in 
+.I disktab
+consist of a number of `:' separated fields.  The
+first entry for each disk gives the names which are
+known for the disk, separated by `|' characters.  The
+last name given should be a long name fully identifying
+the disk. 
+.PP
+The following list indicates the normal values
+stored for each disk entry.
+.nf
+
+D 6
+.ta \w'Name  'u +\w'Type  'u
+E 6
+I 6
+.ta \w'd[0-4] 'u +\w'Type  'u
+E 6
+\fBName	Type	Description\fP
+I 6
+
+ty	str	Type of disk (e.g. removable, winchester)
+dt	str	Type of controller (e.g. SMD, ESDI, floppy)
+E 6
+ns	num	Number of sectors per track
+nt	num	Number of tracks per cylinder
+nc	num	Total number of cylinders on the disk
+I 6
+sc	num	Number of sectors per cylinder, nc*nt default
+su	num	Number of sectors per unit, sc*nc default
+se	num	Sector size in bytes, DEV_BSIZE default
+sf	bool	Controller supports bad144-style bad sector forwarding
+rm	num	Rotation speed, rpm, 3600 default
+sk	num	Sector skew per track, default 0
+cs	num	Sector skew per cylinder, default 0
+hs	num	Headswitch time, usec, default 0
+ts	num	One-cylinder seek time, usec, default 0
+il	num	Sector interleave (n:1), 1 default
+d[0-4]	num	Drive-type-dependent parameters
+bs	num	Boot block size, default BBSIZE
+sb	num	Superblock size, default SBSIZE
+E 6
+ba	num	Block size for partition `a' (bytes)
+bd	num	Block size for partition `d' (bytes)
+be	num	Block size for partition `e' (bytes)
+bf	num	Block size for partition `f' (bytes)
+bg	num	Block size for partition `g' (bytes)
+bh	num	Block size for partition `h' (bytes)
+fa	num	Fragment size for partition `a' (bytes)
+fd	num	Fragment size for partition `d' (bytes)
+D 6
+fe	num	Fragment size for partition `e' (bytes)
+E 6
+I 6
+fe	num	Fragment size or partition `e' (bytes)
+E 6
+ff	num	Fragment size for partition `f' (bytes)
+fg	num	Fragment size for partition `g' (bytes)
+fh	num	Fragment size for partition `h' (bytes)
+I 6
+oa	num	Offset of partition `a' in sectors
+ob	num	Offset of partition `b' in sectors
+oc	num	Offset of partition `c' in sectors
+od	num	Offset of partition `d' in sectors
+oe	num	Offset of partition `e' in sectors
+of	num	Offset of partition `f' in sectors
+og	num	Offset of partition `g' in sectors
+oh	num	Offset of partition `h' in sectors
+E 6
+pa	num	Size of partition `a' in sectors
+pb	num	Size of partition `b' in sectors
+pc	num	Size of partition `c' in sectors
+pd	num	Size of partition `d' in sectors
+pe	num	Size of partition `e' in sectors
+pf	num	Size of partition `f' in sectors
+pg	num	Size of partition `g' in sectors
+ph	num	Size of partition `h' in sectors
+D 6
+se	num	Sector size in bytes
+I 3
+D 4
+sf      bool	supports bad144-style bad sector forwarding
+so      bool	partition offsets in sectors
+E 4
+I 4
+sf	bool	supports bad144-style bad sector forwarding
+so	bool	partition offsets in sectors
+E 4
+E 3
+ty	str	Type of disk (e.g. removable, winchester)
+E 6
+I 6
+ta	str	Partition type of partition `a' (4.2BSD filesystem, swap, etc)
+tb	str	Partition type of partition `b'
+tc	str	Partition type of partition `c'
+td	str	Partition type of partition `d'
+te	str	Partition type of partition `e'
+tf	str	Partition type of partition `f'
+tg	str	Partition type of partition `g'
+th	str	Partition type of partition `h'
+E 6
+.fi
+D 6
+.PP
+.I Disktab
+entries may be automatically generated with the
+.I diskpart
+program.
+E 6
+.SH FILES
+/etc/disktab
+.SH "SEE ALSO"
+D 5
+newfs(8), diskpart(8)
+E 5
+I 5
+D 6
+newfs(8), diskpart(8), getdiskbyname(3)
+E 5
+.SH BUGS
+This file shouldn't exist, the information should be
+stored on each disk pack.
+E 6
+I 6
+getdiskbyname(3), disklabel(5), disklabel(8), newfs(8)
+E 6
+E 1

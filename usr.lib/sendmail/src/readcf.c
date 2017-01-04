@@ -17,7 +17,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)readcf.c	5.14 (Berkeley) 9/20/88";
+static char sccsid[] = "@(#)readcf.c	5.16 (Berkeley) 11/21/04";
 #endif /* not lint */
 
 # include "sendmail.h"
@@ -814,6 +814,10 @@ setoption(opt, val, safe, sticky)
 		LogLevel = atoi(val);
 		break;
 
+	  case 'l':		/* collect message size limit */
+		MaxMessageSize = atol(val);
+		break;
+
 	  case 'M':		/* define macro */
 		define(val[0], newstr(&val[1]), CurEnv);
 		sticky = FALSE;
@@ -853,6 +857,10 @@ setoption(opt, val, safe, sticky)
 			QueueDir = "mqueue";
 		else
 			QueueDir = newstr(val);
+		break;
+
+	  case 'R':		/* do not relay mail coming from Inet */
+		NoInetRelay = atobool(val);
 		break;
 
 	  case 'r':		/* read timeout */

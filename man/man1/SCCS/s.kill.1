@@ -1,0 +1,142 @@
+h28193
+s 00007/00004/00063
+d D 6.2 86/04/20 02:43:10 lepreau 4 3
+c bring up to date with negative pid kernel code; missing words.
+e
+s 00001/00001/00066
+d D 6.1 85/04/29 14:27:24 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00014/00064
+d D 5.1 85/04/29 14:27:16 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00078/00000/00000
+d D 4.1 85/04/29 14:27:08 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH KILL 1 
+E 2
+I 2
+D 3
+.TH KILL 1 "18 January 1983"
+E 3
+I 3
+.TH KILL 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+kill \- terminate a process with extreme prejudice
+.SH SYNOPSIS
+.B kill
+[
+.BR \- sig
+]
+processid ...
+.br
+.B kill
+.B \-l
+.SH DESCRIPTION
+.I Kill
+sends the TERM (terminate, 15) signal to the specified processes.
+If a signal name or number preceded by `\-' is given
+as first argument, that signal is sent instead of
+terminate
+(see
+D 2
+.IR  signal (2)).
+E 2
+I 2
+.IR  sigvec (2)).
+E 2
+The signal names are listed by
+`kill \-l', and are as given in
+.I /usr/include/signal.h,
+stripped of the common SIG prefix.
+.PP
+The terminate signal will kill processes that do not catch the signal;
+`kill \-9 ...' is a sure kill, as the KILL (9) signal cannot be caught.
+By convention, if process number 0 is specified, all members
+in the process group (i.e. processes resulting from 
+the current login) are signaled (but beware: this works only
+if you use
+.IR sh (1);
+not if you use
+.IR csh (1).)
+I 4
+Negative process numbers also have special meanings; see
+.IR kill (2)
+for details.
+.PP
+E 4
+The killed processes must belong
+to the current user unless
+he is the super-user.
+.PP
+D 2
+To shut the system down and bring it up single user
+the super-user may send the initialization process a TERM (terminate)
+signal by `kill 1'; see
+.IR init (8).
+To force
+.I init
+to close and open terminals
+according to what is currently in
+/etc/ttys
+use `kill \-HUP 1' (sending a hangup, signal 1).
+.PP
+E 2
+The process number of an asynchronous process
+started with `&' is reported by the shell.
+Process numbers can also be found by using
+I 4
+.IR ps (1).
+E 4
+.I Kill
+is a built-in to
+.IR csh (1);
+D 4
+it allows job specifiers ``%...''
+E 4
+I 4
+it allows job specifiers of the form ``%...'' as arguments
+E 4
+so process id's are not as often used as
+.I kill
+arguments.
+See
+.IR csh (1)
+for details.
+.SH "SEE ALSO"
+D 2
+csh(1), ps(1), kill(2), signal(2)
+E 2
+I 2
+csh(1), ps(1), kill(2), sigvec(2)
+E 2
+.SH BUGS
+D 4
+An option to kill process groups ala
+.IR killpg (2)
+should be provided; a replacement for ``kill 0''
+E 4
+I 4
+A replacement for ``kill 0''
+E 4
+for
+.IR csh (1)
+users should be provided.
+E 1

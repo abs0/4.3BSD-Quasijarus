@@ -1,0 +1,139 @@
+h16384
+s 00001/00001/00066
+d D 6.1 85/05/20 20:33:23 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00024/00018/00043
+d D 5.1 85/05/20 20:33:08 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00061/00000/00000
+d D 4.1 85/05/20 20:32:56 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TERM 7 
+E 2
+I 2
+D 3
+.TH TERM 7 "1 February 1983"
+E 3
+I 3
+.TH TERM 7 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+terminals \- conventional names
+E 2
+I 2
+term \- conventional names for terminals
+E 2
+.SH DESCRIPTION
+D 2
+These names
+are used by certain commands and are maintained 
+as part of the shell environment
+(see
+.IR sh (1), environ (5)).
+E 2
+I 2
+Certain commands use these terminal names. They are maintained 
+as part of the shell environment (see
+.IR sh (1), environ (7)).
+E 2
+.LP
+.nf
+.ta \w'450\-12\-8  'u
+adm3a	Lear Seigler Adm-3a
+2621	Hewlett-Packard HP262? series terminals
+hp	Hewlett-Packard HP264? series terminals
+c100	Human Designed Systems Concept 100
+h19	Heathkit H19
+mime	Microterm mime in enhanced ACT IV mode
+1620	DIABLO 1620 (and others using HyType II)
+300	DASI/DTC/GSI 300 (and others using HyType I)
+33	TELETYPE\*R Model 33
+37	TELETYPE Model 37
+43	TELETYPE Model 43
+735	Texas Instruments TI735 (and TI725)
+745	Texas Instruments TI745
+dumb	terminals with no special features
+I 2
+dialup	a terminal on a phone line with no known characteristics
+network	a terminal on a network connection with no known characteristics
+E 2
+4014	Tektronix 4014
+vt52	Digital Equipment Corp. VT52
+.fi
+.PP
+The list goes on and on.
+D 2
+Consult /etc/termcap
+(see
+E 2
+I 2
+Consult /etc/termcap (see
+E 2
+.IR termcap (5))
+for an up-to-date and locally correct list.
+.PP
+D 2
+Commands whose behavior may depend on the terminal
+either consult TERM in the environment,
+or accept arguments of the form
+E 2
+I 2
+Commands whose behavior may depend on the terminal either consult TERM in
+the environment, or accept arguments of the form
+E 2
+.BR \-Tterm,
+where
+.I term
+is one of the names given above.
+.SH SEE ALSO
+D 2
+stty(1), tabs(1), plot(1),
+sh(1), environ(5)
+ex(1), clear(1), more(1), ul(1), tset(1),
+termcap(5), termlib(3), ttytype(5)
+E 2
+I 2
+stty(1),
+tabs(1),
+plot(1G),
+sh(1),
+environ(7)
+ex(1),
+clear(1),
+more(1),
+ul(1),
+tset(1),
+termcap(5),
+termcap(3X),
+ttytype(5)
+E 2
+.br
+troff(1) for
+.I nroff
+.SH BUGS
+D 2
+The programs that ought to adhere to this nomenclature
+do so only fitfully.
+E 2
+I 2
+The programs that ought to adhere to this nomenclature do so only fitfully.
+E 2
+E 1

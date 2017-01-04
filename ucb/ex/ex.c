@@ -11,7 +11,7 @@ char *copyright =
 #endif not lint
 
 #ifndef lint
-static char *sccsid = "@(#)ex.c	7.6 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex.c	7.7 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -21,9 +21,9 @@ static char *sccsid = "@(#)ex.c	7.6 (Berkeley) 3/9/87";
 
 #ifdef TRACE
 #ifdef	vms
-char	tttrace[]	= { 't','r','a','c','e','.','l','i','s' };
+u_char	tttrace[]	= { 't','r','a','c','e','.','l','i','s' };
 #else
-char	tttrace[]	= { '/','d','e','v','/','t','t','y','x','x',0 };
+u_char	tttrace[]	= { '/','d','e','v','/','t','t','y','x','x',0 };
 #endif
 #endif
 
@@ -88,12 +88,12 @@ char	tttrace[]	= { '/','d','e','v','/','t','t','y','x','x',0 };
  */
 main(ac, av)
 	register int ac;
-	register char *av[];
+	register u_char *av[];
 {
 #ifdef EXSTRINGS
-	char *erpath = EXSTRINGS;
+	u_char *erpath = EXSTRINGS;
 #endif
-	register char *cp;
+	register u_char *cp;
 	register int c;
 	bool recov = 0;
 	bool ivis;
@@ -106,10 +106,10 @@ main(ac, av)
 	extern char *malloc();
 #endif
 #ifdef TRACE
-	register char *tracef;
+	register u_char *tracef;
 #endif
 #ifdef	vms
-	char termtype[20];
+	u_char termtype[20];
 #endif
 
 	/*
@@ -489,11 +489,11 @@ init()
 /*
  * Return last component of unix path name p.
  */
-char *
+u_char *
 tailpath(p)
-register char *p;
+register u_char *p;
 {
-	register char *r;
+	register u_char *r;
 
 	for (r=p; *p; p++)
 		if (*p == '/')
@@ -506,7 +506,7 @@ register char *p;
  * user or the option sourceany is used
  */
 iownit(file)
-char *file;
+u_char *file;
 {
 	struct stat sb;
 

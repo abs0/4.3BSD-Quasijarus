@@ -1,0 +1,4 @@
+/usr/src/usr.lib/ms/SCCS/s.tmac.s:
+1.10 09/04/29 06:18:50 msokolov 10 9
+finally figured out how to disable the damn cut marks
+axed Berkeley's "local" ditroff-only letterhead stuff while at it

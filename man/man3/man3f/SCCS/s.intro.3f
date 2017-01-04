@@ -1,0 +1,327 @@
+h42299
+s 00001/00001/00162
+d D 6.6 86/05/27 11:08:25 kjd 7 6
+c fix spelling
+e
+s 00007/00001/00156
+d D 6.5 86/04/30 15:07:12 mckusick 6 5
+c update for bit functions from jerry@opal
+e
+s 00014/00000/00143
+d D 6.4 86/04/23 17:29:25 mckusick 5 4
+c move Fortran references out of .3m into .3f
+e
+s 00014/00015/00129
+d D 6.3 85/09/07 12:31:25 mckusick 4 3
+c update from jerry
+e
+s 00019/00003/00125
+d D 6.2 85/06/07 20:45:59 kre 3 2
+c From Jerry Berkman
+e
+s 00007/00001/00121
+d D 6.1 85/05/15 16:23:27 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00122/00000/00000
+d D 5.1 85/05/15 16:23:19 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH INTRO 3F "26 July 1983"
+E 2
+I 2
+.TH INTRO 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+intro \- introduction to FORTRAN library functions
+.SH DESCRIPTION
+.PP
+D 3
+This section describes those functions that are in the FORTRAN run time
+E 3
+I 3
+This section describes those functions that are in the Fortran run time
+E 3
+library.  The functions listed here provide an interface from \fIf77\fP
+programs to the system in the same manner as the C library does for C
+programs.  They are automatically loaded as needed by the Fortran compiler
+D 3
+.IR f77 (1).
+E 3
+I 3
+.IR f77 (1),
+except for the graphics interface routines.
+Those must be explicitly requested, see
+.IR plot (3f).
+E 3
+.PP
+I 5
+The math intrinsics required by the 1977 Fortran standard are
+available, although not described here.  In addition, the
+\fIabs\fP, \fIsqrt\fP, \fIexp\fP, \fIlog\fP, \fIsin\fP, and \fIcos\fP 
+intrinsics have been extended for double complex values.
+They may be referenced using the generic names listed above,
+or they may be referenced using their specific names that
+consist of the generic names preceded by either \fIcd\fP or
+\fIz\fP.  For example, if \fIzz\fP is double complex, then
+\fIsqrt(zz)\fP, \fIzsqrt(zz)\fP, or \fIcdsqrt(zz)\fP compute
+the square root of \fIzz\fP.  The \fIdcmplx\fP intrinsic
+forms a double complex value from two double precision variables
+or expressions, and the name of the specific function for the conjugate
+of a double complex value is \fIdconjg\fP.
+.PP
+E 5
+Most of these functions are in libU77.a. 
+Some are in libF77.a or libI77.a.
+A few intrinsic functions are described for the sake of completeness.
+.PP
+For efficiency, the SCCS ID strings are not normally included in the
+.I a.out
+file. To include them, simply declare
+.nf
+
+	external f77lid
+
+.fi
+in any
+.I f77
+module.
+.SH "LIST OF FUNCTIONS"
+.sp 2
+.nf
+.ta \w'system'u+2n +\w'access.3f'u+10n
+\fIName\fP	\fIAppears on Page\fP	\fIDescription\fP
+.ta \w'system'u+4n +\w'access.3f'u+4n
+.sp 5p
+D 3
+abort	abort.3f	terminate abruptly with memory image
+E 3
+I 3
+abort	abort.3f	abnormal termination
+E 3
+D 7
+access	access.3f	determine accessability of a file
+E 7
+I 7
+access	access.3f	determine accessibility of a file
+E 7
+I 3
+D 4
+arc	plot.3f	graphics interface
+E 4
+E 3
+alarm	alarm.3f	execute a subroutine after a specified time
+I 6
+and	bit.3f	bitwise and
+E 6
+D 4
+bessel	bessel.3f	of two kinds for integer orders
+E 4
+I 4
+arc	plot.3f	f77 interface to plot(3x)
+bessel	bessel.3f	bessel functions of two kinds for integer orders
+E 4
+D 6
+bit	bit.3f	and, or, xor, not, rshift, lshift bitwise functions
+E 6
+I 3
+D 4
+box	plot.3f	graphics interface
+E 4
+I 4
+box	plot.3f	f77 interface to plot(3x)
+E 4
+E 3
+chdir	chdir.3f	change default directory
+chmod	chmod.3f	change mode of a file
+I 3
+D 4
+circle	plot.3f	graphics interface
+clospl	plot.3f	graphics interface
+cont	plot.3f	graphics interface
+E 4
+I 4
+circle	plot.3f	f77 interface to plot(3x)
+clospl	plot.3f	f77 interface to plot(3x)
+cont	plot.3f	f77 interface to plot(3x)
+E 4
+E 3
+ctime	time.3f	return system time
+dffrac	flmin.3f	return extreme values
+dflmax	flmin.3f	return extreme values
+dflmin	flmin.3f	return extreme values
+drand	rand.3f	return random values
+I 2
+drandm	random.3f	better random number generator
+E 2
+dtime	etime.3f	return elapsed execution time
+I 3
+D 4
+erase	plot.3f	graphics interface
+E 4
+I 4
+erase	plot.3f	f77 interface to plot(3x)
+E 4
+E 3
+etime	etime.3f	return elapsed execution time
+exit	exit.3f	terminate process with status
+I 2
+falloc	malloc.3f	memory allocator
+E 2
+fdate	fdate.3f	return date and time in an ASCII string
+ffrac	flmin.3f	return extreme values
+fgetc	getc.3f	get a character from a logical unit
+flmax	flmin.3f	return extreme values
+flmin	flmin.3f	return extreme values
+flush	flush.3f	flush output to a logical unit
+fork	fork.3f	create a copy of this process
+fpecnt	trpfpe.3f	trap and repair floating point faults
+fputc	putc.3f	write a character to a fortran logical unit
+I 2
+free	malloc.3f	memory allocator
+E 2
+fseek	fseek.3f	reposition a file on a logical unit
+fstat	stat.3f	get file status
+ftell	fseek.3f	reposition a file on a logical unit
+gerror	perror.3f	get system error messages
+getarg	getarg.3f	return command line arguments
+getc	getc.3f	get a character from a logical unit
+getcwd	getcwd.3f	get pathname of current working directory
+getenv	getenv.3f	get value of environment variables
+getgid	getuid.3f	get user or group ID of the caller
+getlog	getlog.3f	get user's login name
+getpid	getpid.3f	get process id
+getuid	getuid.3f	get user or group ID of the caller
+gmtime	time.3f	return system time
+hostnm	hostnm.3f	get name of current host
+iargc	getarg.3f	return command line arguments
+idate	idate.3f	return date or time in numerical form
+ierrno	perror.3f	get system error messages
+index	index.3f	tell about character objects
+inmax	flmin.3f	return extreme values
+D 4
+intro	intro.3f	introduction to FORTRAN library functions
+E 4
+ioinit	ioinit.3f	change f77 I/O initialization
+irand	rand.3f	return random values
+I 2
+irandm	random.3f	better random number generator
+E 2
+isatty	ttynam.3f	find name of a terminal port
+itime	idate.3f	return date or time in numerical form
+kill	kill.3f	send a signal to a process
+I 3
+D 4
+label	plot.3f	graphics interface
+E 4
+I 4
+label	plot.3f	f77 interface to plot(3x)
+E 4
+E 3
+len	index.3f	tell about character objects
+I 3
+D 4
+line	plot.3f	graphics interface
+linemd	plot.3f	graphics interface
+E 4
+I 4
+line	plot.3f	f77 interface to plot(3x)
+linemd	plot.3f	f77 interface to plot(3x)
+E 4
+E 3
+link	link.3f	make a link to an existing file
+lnblnk	index.3f	tell about character objects
+loc	loc.3f	return the address of an object
+long	long.3f	integer object conversion
+I 6
+lshift	bit.3f	left shift
+E 6
+lstat	stat.3f	get file status
+ltime	time.3f	return system time
+I 2
+malloc	malloc.3f	memory allocator
+I 3
+D 4
+move	plot.3f	graphics interface
+openpl	plot.3f	graphics interface
+E 4
+I 4
+move	plot.3f	f77 interface to plot(3x)
+I 6
+not	bit.3f	bitwise complement
+E 6
+openpl	plot.3f	f77 interface to plot(3x)
+I 6
+or	bit.3f	bitwise or
+E 6
+E 4
+E 3
+E 2
+perror	perror.3f	get system error messages
+I 3
+D 4
+point	plot.3f	graphics interface
+E 4
+I 4
+point	plot.3f	f77 interface to plot(3x)
+E 4
+E 3
+putc	putc.3f	write a character to a fortran logical unit
+qsort	qsort.3f	quick sort
+rand	rand.3f	return random values
+I 2
+random	random.3f	better random number generator
+E 2
+rename	rename.3f	rename a file
+rindex	index.3f	tell about character objects
+I 6
+rshift	bit.3f	right shift
+E 6
+short	long.3f	integer object conversion
+signal	signal.3f	change the action for a signal
+sleep	sleep.3f	suspend execution for an interval
+I 3
+D 4
+space	plot.3f	graphics interface
+E 4
+I 4
+space	plot.3f	f77 interface to plot(3x)
+E 4
+E 3
+stat	stat.3f	get file status
+I 6
+symlnk	symlnk.3f	make a symbolic link
+E 6
+system	system.3f	execute a \s-2UNIX\s0 command
+tclose	topen.3f	f77 tape I/O
+time	time.3f	return system time
+topen	topen.3f	f77 tape I/O
+traper	traper.3f	trap arithmetic errors
+trapov	trapov.3f	trap and repair floating point overflow
+tread	topen.3f	f77 tape I/O
+trewin	topen.3f	f77 tape I/O
+trpfpe	trpfpe.3f	trap and repair floating point faults
+tskipf	topen.3f	f77 tape I/O
+tstate	topen.3f	f77 tape I/O
+ttynam	ttynam.3f	find name of a terminal port
+twrite	topen.3f	f77 tape I/O
+unlink	unlink.3f	remove a directory entry
+wait	wait.3f	wait for a process to terminate
+I 6
+xor	bit.3f	bitwise exclusive or
+E 6
+.fi
+E 1

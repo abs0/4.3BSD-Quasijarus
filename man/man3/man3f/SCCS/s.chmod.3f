@@ -1,0 +1,57 @@
+h20217
+s 00001/00001/00036
+d D 6.1 85/05/15 16:15:54 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00037/00000/00000
+d D 5.1 85/05/15 16:15:46 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHMOD 3F "18 July 1983"
+E 2
+I 2
+.TH CHMOD 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+chmod \- change mode of a file
+.SH SYNOPSIS
+.B integer function chmod (name, mode)
+.br
+.B character*(*) name, mode
+.SH DESCRIPTION
+This function changes the filesystem
+.I mode
+of file
+.IR name .
+.I Mode
+can be any specification recognized by
+.IR chmod (1).
+.I Name
+must be a single pathname.
+.PP
+The normal returned value is 0.
+Any other value will be a system error number.
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.br
+/bin/chmod		exec'ed to change the mode.
+.SH "SEE ALSO"
+chmod(1)
+.SH BUGS
+Pathnames can be no longer than MAXPATHLEN as defined in
+.RI < sys/param.h >.
+E 1

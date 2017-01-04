@@ -1,0 +1,256 @@
+h16693
+s 00001/00001/00150
+d D 6.3 87/11/24 17:00:49 bostic 5 4
+c DEC Gigi is -lplotgigi, not -lplot; bug report 4.3BSD/man/29
+e
+s 00041/00001/00110
+d D 6.2 86/05/15 13:02:51 mckusick 4 3
+c add newly supported terminals
+e
+s 00031/00003/00080
+d D 6.1 85/05/15 15:02:32 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00009/00017/00074
+d D 5.1 85/05/15 15:02:25 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00091/00000/00000
+d D 4.1 85/05/15 15:02:18 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PLOT 3X 
+E 2
+I 2
+D 3
+.TH PLOT 3X  "19 January 1983"
+E 3
+I 3
+.TH PLOT 3 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+D 2
+plot: openpl et al. \- graphics interface
+E 2
+I 2
+plot: openpl, erase, label, line, circle, arc, move, cont, point, linemod, space, closepl \- graphics interface
+E 2
+.SH SYNOPSIS
+.nf
+.B openpl()
+.PP
+.B erase()
+.PP
+.B label(s)
+.B char s[];
+.PP
+.B line(x1, y1, x2, y2)
+.PP
+.B circle(x, y, r)
+.PP
+.B arc(x, y, x0, y0, x1, y1)
+.PP
+.B move(x, y)
+.PP
+.B cont(x, y)
+.PP
+.B point(x, y)
+.PP
+.B linemod(s)
+.B char s[];
+.PP
+.B space(x0, y0, x1, y1)
+.PP
+.B closepl()
+.fi
+.PP
+.ft R
+.SH DESCRIPTION
+D 2
+These subroutines
+generate
+graphic output in a relatively
+device-independent manner.
+See
+E 2
+I 2
+These subroutines generate graphic output in a relatively
+device-independent manner.  See
+E 2
+.IR  plot (5)
+D 2
+for a description
+of their effect.
+E 2
+I 2
+for a description of their effect.
+E 2
+.I Openpl
+D 2
+must be used before any of the others to open the
+device for writing.
+E 2
+I 2
+must be used before any of the others to open the device for writing.
+E 2
+.I Closepl
+flushes the output.
+.PP
+String arguments to
+.I label
+and
+.I linemod
+are null-terminated, and do not contain newlines.
+.PP
+D 2
+Various flavors of these functions exist for different
+output devices. 
+E 2
+I 2
+Various flavors of these functions exist for different output devices. 
+E 2
+They are obtained by the following
+.IR ld (1)
+options:
+.TP 8n
+.B \-lplot
+D 2
+device-independent
+graphics stream on standard
+output for 
+E 2
+I 2
+device-independent graphics stream on standard output for 
+E 2
+.IR plot (1)
+filters
+.br
+.ns
+.TP
+.B \-l300
+GSI 300 terminal
+.br
+.ns
+.TP
+.B \-l300s
+GSI 300S terminal
+.br
+.ns
+.TP
+.B \-l450
+D 4
+DASI 450 terminal
+E 4
+I 4
+GSI 450 terminal
+E 4
+.br
+.ns
+.TP
+I 3
+.B \-l4013
+Tektronix 4013 terminal
+.br
+.ns
+.TP
+E 3
+.B \-l4014
+D 3
+Tektronix 4014 terminal
+E 3
+I 3
+Tektronix 4014 and 4015 terminals with the Enhanced Graphics Module (Use
+.B \-l4013
+for 4014's or 4015's without the Enhanced Graphics Module)
+I 4
+.br
+.ns
+.TP
+.B \-lplotaed
+AED 512 color graphics terminal
+.br
+.ns
+.TP
+.B \-lplotbg
+BBN bitgraph graphics terminal
+.br
+.ns
+.TP
+.B \-lplotdumb
+Dumb terminals without cursor addressing or line printers
+.br
+.ns
+.TP
+D 5
+.B \-lplot
+E 5
+I 5
+.B \-lplotgigi
+E 5
+DEC Gigi terminals
+.br
+.ns
+.TP
+.B \-lvt0
+DEC vt100 terminals
+.br
+.ns
+.TP
+.B \-lplot2648
+Hewlett Packard 2648 graphics terminal
+.br
+.ns
+.TP
+.B \-lplot7221
+Hewlett Packard 7221 graphics terminal
+.br
+.ns
+.TP
+.B \-lplotimagen
+Imagen laser printer (default 240 dots-per-inch resolution).
+E 4
+.PP
+On many devices, it is necessary to pause after
+.IR erase (),
+otherwise plotting commands are lost.
+The pause is normally done by the tty driver if at login time,
+.I tset
+found a
+.I df
+field in the
+.IR termcap (5)
+entry for the terminal.
+If a pause is needed but not automatically being generated,
+add
+.RS
+.nf
+flush(stdout);
+sleep(1);
+.fi
+.RE
+after each
+.IR erase ().
+E 3
+.SH "SEE ALSO"
+D 2
+plot(5), plot(1), graph(1)
+E 2
+I 2
+D 3
+plot(5), plot(1G), graph(1G)
+E 3
+I 3
+plot(5), plot(1G), plot(3F), graph(1G)
+E 3
+E 2
+E 1

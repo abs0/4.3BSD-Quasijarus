@@ -1,0 +1,252 @@
+h60776
+s 00010/00005/00109
+d D 1.5 88/07/07 11:58:16 bostic 5 4
+c install approved copyright notice
+e
+s 00066/00061/00048
+d D 1.4 88/06/15 11:01:12 bostic 4 3
+c get rid of lists of files
+e
+s 00001/00000/00108
+d D 1.3 88/02/29 15:41:13 bostic 3 2
+c add bin/ed to list; it's nice to be able to edit things
+e
+s 00001/00000/00107
+d D 1.2 87/04/09 16:44:05 karels 2 1
+c stop xtr on err
+e
+s 00107/00000/00000
+d D 1.1 87/04/07 19:51:14 karels 1 0
+c date and time created 87/04/07 19:51:14 by karels
+e
+u
+U
+t
+T
+I 1
+D 4
+#!/bin/sh -e
+E 4
+I 4
+#!/bin/sh -
+E 4
+#
+D 4
+# Copyright (c) 1983 Regents of the University of California.
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+E 4
+I 4
+# Copyright (c) 1988 Regents of the University of California.
+# All rights reserved.
+E 4
+#
+I 4
+# Redistribution and use in source and binary forms are permitted
+D 5
+# provided that this notice is preserved and that due credit is given
+# to the University of California at Berkeley. The name of the University
+# may not be used to endorse or promote products derived from this
+# software without specific prior written permission. This software
+# is provided ``as is'' without express or implied warranty.
+E 5
+I 5
+# provided that the above copyright notice and this paragraph are
+# duplicated in all such forms and that any documentation,
+# advertising materials, and other materials related to such
+# distribution and use acknowledge that the software was developed
+# by the University of California, Berkeley.  The name of the
+# University may not be used to endorse or promote products derived
+# from this software without specific prior written permission.
+# THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+# WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 5
+#
+E 4
+#	%W% (Berkeley) %G%
+#
+D 4
+# Shell script to build a mini-root file system
+# in preparation for building a distribution tape.
+# The file system created here is image copied onto
+# tape, then image copied onto disk as the "first"
+# step in a cold boot of 4.3 systems.
+E 4
+I 4
+# Shell script to build a mini-root file system in preparation for building
+# a distribution tape.  The file system created here is image copied onto
+# tape, then image copied onto disk as the "first" step in a cold boot of
+# 4.3BSD systems.
+E 4
+#
+DISTROOT=/nbsd
+#
+if [ `pwd` = '/' ]
+then
+	echo You just '(almost)' destroyed the root
+	exit
+fi
+I 4
+
+# copy in kernel
+E 4
+cp $DISTROOT/sys/GENERIC/vmunix .
+D 4
+rm -rf bin; mkdir bin
+rm -rf etc; mkdir etc
+rm -rf a; mkdir a
+rm -rf tmp; mkdir tmp
+rm -rf stand; mkdir stand
+cp $DISTROOT/etc/disklabel etc
+cp $DISTROOT/etc/disktab etc
+cp $DISTROOT/etc/newfs etc
+cp $DISTROOT/etc/restore etc
+cp $DISTROOT/etc/rrestore etc
+cp $DISTROOT/etc/init etc
+cp $DISTROOT/etc/mount etc
+cp $DISTROOT/etc/mknod etc
+cp $DISTROOT/etc/fsck etc
+cp $DISTROOT/etc/umount etc
+cp $DISTROOT/etc/ifconfig etc
+cp $DISTROOT/bin/dd bin
+I 3
+cp $DISTROOT/bin/ed bin
+E 3
+cp $DISTROOT/bin/mt bin
+cp $DISTROOT/bin/ls bin
+cp $DISTROOT/bin/sh bin
+cp $DISTROOT/bin/mv bin
+cp $DISTROOT/bin/sync bin
+cp $DISTROOT/bin/cat bin
+cp $DISTROOT/bin/mkdir bin
+cp $DISTROOT/bin/stty bin; ln bin/stty bin/STTY
+cp $DISTROOT/bin/echo bin
+cp $DISTROOT/bin/rm bin
+cp $DISTROOT/bin/cp bin
+cp $DISTROOT/bin/expr bin
+cp $DISTROOT/bin/[ bin
+cp $DISTROOT/bin/awk bin
+cp $DISTROOT/bin/make bin
+cp $DISTROOT/bin/rcp bin
+cp $DISTROOT/stand/copy stand
+cp $DISTROOT/stand/vdformat stand
+cp $DISTROOT/boot .
+cp $DISTROOT/wcs .
+#cp $DISTROOT/fppwcs .
+#cp $DISTROOT/poc .
+#cp $DISTROOT/poc1 .
+#cp $DISTROOT/poc2 .
+#cp $DISTROOT/fppoc .
+cp $DISTROOT/.profile .profile
+E 4
+I 4
+
+# create necessary directories
+DIRLIST="bin dev etc a tmp stand"
+rm -rf $DIRLIST
+mkdir $DIRLIST
+
+# copy in files from /etc
+ETCFILE="disklabel disktab fsck ifconfig init mknod mount newfs restore \
+	rrestore umount"
+for i in $ETCFILE; do
+	cp $DISTROOT/etc/$i etc/$i
+done
+
+# copy in files from /bin
+BINFILE="[ awk cat cp dd echo ed expr ls make mkdir mt mv rcp rm sh stty \
+	sync"
+for i in $BINFILE; do
+	cp $DISTROOT/bin/$i bin/$i
+done
+ln bin/stty bin/STTY
+
+# copy in files from /stand
+STANDFILE="copy vdformat"
+for i in $STANDFILE; do
+	cp $DISTROOT/stand/$i stand/$i
+done
+
+# copy in files from /
+#DOTFILE=".profile boot fppoc fppwcs poc poc1 poc2 wcs"
+DOTFILE=".profile boot wcs"
+for i in $DOTFILE; do
+	cp $DISTROOT/$i $i
+done
+
+# initialize /dev
+cp $DISTROOT/dev/MAKEDEV dev/MAKEDEV
+chmod +x dev/MAKEDEV
+cp /dev/null dev/MAKEDEV.local
+(cd dev; ./MAKEDEV std dk0; ./MAKEDEV cy0; mv rmt12 cy0; rm *mt*)
+
+# initialize /etc/passwd
+E 4
+cat >etc/passwd <<EOF
+root::0:10::/:/bin/sh
+EOF
+I 4
+
+# initialize /etc/group
+E 4
+cat >etc/group <<EOF
+wheel:*:0:
+staff:*:10:
+EOF
+I 4
+
+# initialize /etc/fstab
+E 4
+cat >etc/fstab <<EOF
+/dev/xfd0a:/a:xx:1:1
+/dev/dk0a:/a:xx:1:1
+EOF
+I 4
+
+# create xtr script
+E 4
+cat >xtr <<'EOF'
+I 2
+#!/bin/sh -e
+E 2
+: ${disk?'Usage: disk=xx0 tape=yy xtr'}
+: ${tape?'Usage: disk=xx0 tape=yy xtr'}
+echo 'Build root file system'
+newfs ${disk}a
+sync
+echo 'Check the file system'
+fsck /dev/r${disk}a
+mount /dev/${disk}a /a
+cd /a
+echo 'Rewind tape'
+mt -f /dev/${tape}0 rew
+echo 'Restore the dump image of the root'
+restore rsf 3 /dev/${tape}0
+cd /
+sync
+umount /dev/${disk}a
+sync
+fsck /dev/r${disk}a
+echo 'Root filesystem extracted'
+EOF
+I 4
+
+# make xtr script executable
+E 4
+chmod +x xtr
+D 4
+rm -rf dev; mkdir dev
+cp $DISTROOT/dev/MAKEDEV dev
+chmod +x dev/MAKEDEV
+cp /dev/null dev/MAKEDEV.local
+cd dev
+./MAKEDEV std dk0
+./MAKEDEV cy0; mv rmt12 cy0; rm *mt*;
+cd ..
+E 4
+I 4
+
+E 4
+sync
+E 1

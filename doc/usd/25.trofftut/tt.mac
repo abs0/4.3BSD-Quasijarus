@@ -1,4 +1,5 @@
 .\"	@(#)tt.mac	6.1 (Berkeley) 5/23/86
+.\"	patched for the PostScript reprint
 .\"
 .tr _\(em
 .tr *\(**
@@ -65,6 +66,9 @@
 .ds ^ \\k:\h'-\\n(.fu+1u/2u*2u+\\n(.fu-1u*0.13m+0.06m'\z^\h'|\\n:u'
 .ds ~ \\k:\h'-\\n(.fu+1u/2u*2u+\\n(.fu-1u*0.13m+0.06m'\z~\h'|\\n:u'
 .de BD
-\&\\$3\f1\\$1\h\(ts-\w\(ts\\$1\(tsu+1u\(ts\\$1\fP\\$2\&
+\&\\$3\f1\\$1\h\(ts-\w\(ts\\$1\(tsu+9u\(ts\\$1\fP\\$2\&
 ..
+.\" the above originally was:
+.\" \&\\$3\f1\\$1\h\(ts-\w\(ts\\$1\(tsu+1u\(ts\\$1\fP\\$2\&
+.\" See the colophon for the explanation.
 .hw semi-colon

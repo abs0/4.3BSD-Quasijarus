@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)subr_prf.c	7.12 (Berkeley) 7/25/88
+ *	@(#)subr_prf.c	7.13 (Berkeley) 8/2/02
  */
 
 #include "param.h"
@@ -26,9 +26,10 @@
 #include "../machine/kdbparam.h"
 #endif
 
-#define TOCONS	0x1
-#define TOTTY	0x2
-#define TOLOG	0x4
+#define	TOCONS	0x1
+#define	TOTTY	0x2
+#define	TOLOG	0x4
+#define	TOSTR	0x8
 
 /*
  * In case console is off,
@@ -184,6 +185,21 @@ addlog(fmt, x1)
 	if (!log_open)
 		prf(fmt, &x1, TOCONS, (struct tty *)0);
 	logwakeup();
+}
+
+/*
+ * Basically standard sprintf.
+ * NON-REENTRANT!
+ */
+static char *sprintf_ptr;
+/*VARARGS2*/
+sprintf(str, fmt, x1)
+	char *str, *fmt;
+	unsigned x1;
+{
+	sprintf_ptr = str;
+	prf(fmt, &x1, TOSTR, (struct tty *)0);
+	*sprintf_ptr = '\0';
 }
 
 prf(fmt, adx, flags, ttyp)
@@ -387,4 +403,6 @@ putchar(c, flags, tp)
 	}
 	if ((flags & TOCONS) && constty == 0 && c != '\0')
 		(*v_putc)(c);
+	if (flags & TOSTR)
+		*sprintf_ptr++ = c;
 }

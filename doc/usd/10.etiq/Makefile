@@ -1,13 +1,14 @@
-#	@(#)Makefile	6.1 (Berkeley) 5/26/86
+#	@(#)Makefile	6.4 (Berkeley) 2012/03/12
 #
 # make the various documents
 
-FMT=ditroff
-PRINTER=-Pdp
-FMTOPTS=
-LPR=
+FMT=pstroff
+FMTOPTS=-fR,I,B,S,ZD
 
-manner: manner.mn tmac.n
-	$(FMT) $(PRINTER) $(FMTOPTS) tmac.n manner.mn
-manner.aps: manner.mn tmac.n
-	$(FMT) $(PRINTER) $(FMTOPTS) tmac.n manner.mn | $(LPR)
+all:	manner.ps
+
+manner.ps: manner.mn tmac.n
+	$(FMT) $(FMTOPTS) tmac.n manner.mn | pstfinish -l USD:10-%l > $@
+
+clean:
+	rm -f *.ps errs

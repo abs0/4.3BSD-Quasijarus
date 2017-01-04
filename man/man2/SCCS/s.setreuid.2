@@ -1,0 +1,121 @@
+h47317
+s 00005/00001/00038
+d R 6.2 86/01/07 14:03:28 donn 4 3
+c int => uid_t
+e
+s 00004/00005/00035
+d D 6.1 85/05/09 17:49:00 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00029/00026/00011
+d D 5.1 85/05/09 17:48:36 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00037/00000/00000
+d D 4.1 85/05/09 17:48:07 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SETUID 2 
+E 2
+I 2
+D 3
+.TH SETREUID 2 "12 February 1983"
+E 3
+I 3
+.TH SETREUID 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+setuid, setgid \- set user and group ID
+E 2
+I 2
+setreuid \- set real and effective user ID's
+E 2
+.SH SYNOPSIS
+D 2
+.B setuid(uid)
+.PP
+.B setgid(gid)
+E 2
+I 2
+.ft B
+.nf
+setreuid(ruid, euid)
+int ruid, euid;
+.fi
+.ft R
+E 2
+.SH DESCRIPTION
+D 2
+The user ID (group ID) of the current process is set to
+the argument.
+Both the effective and the real ID are set.
+These calls are only permitted to the super-user
+or if the argument is the real or effective ID.
+E 2
+I 2
+The real and effective user ID's of the
+current process are set according to the arguments.
+If
+.I ruid
+or 
+.I euid
+is \-1, the current uid is filled in by the system.
+D 3
+Only the super-user may modify the real uid of
+a process.  Users other than the super-user may
+change the effective uid of a process only to the
+real uid.
+E 3
+I 3
+Unprivileged users may change the real user
+ID to the effective user ID and vice-versa; only the super-user may
+make other changes.
+E 3
+.SH "RETURN VALUE
+Upon successful completion, a value of 0 is returned.  Otherwise,
+a value of \-1 is returned and \fIerrno\fP is set to indicate the error.
+.SH "ERRORS
+.TP 15
+[EPERM]
+The current process is not the super-user and a change
+other than changing the effective user-id to the real user-id
+was specified.
+E 2
+.SH "SEE ALSO"
+D 2
+getuid(2)
+.SH DIAGNOSTICS
+Zero is returned if the user (group) ID is set;
+\-1 is returned otherwise.
+.SH "ASSEMBLER (PDP-11)"
+(setuid = 23.)
+.br
+(user ID in r0)
+.br
+.B sys setuid
+.PP
+(setgid = 46.)
+.br
+(group ID in r0)
+.br
+.B sys  setgid
+E 2
+I 2
+getuid(2), setregid(2), setuid(3)
+E 2
+E 1

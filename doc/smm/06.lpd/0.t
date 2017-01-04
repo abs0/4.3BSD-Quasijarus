@@ -2,7 +2,7 @@
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
 .\"
-.\"	@(#)0.t	6.4 (Berkeley) 5/14/86
+.\"	@(#)0.t	6.5 (Berkeley) 8/24/04
 .\"
 .if n .ND
 .TL
@@ -31,7 +31,7 @@ of the UNIX* operating system.
 ..
 .sp 2
 .LP
-.D? May 14, 1986
+.D? August 24, 2004
 .AE
 .de IR
 \fI\\$1\fP\\$2

@@ -1,0 +1,65 @@
+h05104
+s 00004/00003/00023
+d D 6.2 86/04/28 17:32:49 mckusick 4 3
+c fix up page numbering
+e
+s 00000/00002/00026
+d D 6.1 86/04/23 23:51:55 mckusick 3 2
+c Ken Arnold edits for document distributed with 4.3BSD
+e
+s 00000/00000/00028
+d D 5.1 86/04/23 23:51:51 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00028/00000/00000
+d D 4.1 86/04/23 23:51:46 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.ds Ln Screen Package
+.so macros
+.so intro.0
+I 4
+.pn 3
+E 4
+D 3
+.	\" .bp
+.	\" .so disclaim
+E 3
+.bp
+.so intro.1
+.so intro.2.tbl
+.so intro.3
+.so intro.4
+.so intro.5
+.so appen.A.tbl
+.so c_macros
+.so appen.B
+.so appen.C
+D 4
+.he ''\*(Ln''
+E 4
+I 4
+.pn 2
+.oh '\*(Ln''PS1:18-%'
+.eh 'PS1:18-%''\*(Ln'
+E 4
+.bp
+D 4
+.nr % 1
+.af % i
+E 4
+.bi Contents
+.sp
+.xp
+E 1

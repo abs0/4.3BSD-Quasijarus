@@ -1,0 +1,69 @@
+h47224
+s 00001/00001/00048
+d D 6.1 85/05/15 16:30:44 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00049/00000/00000
+d D 5.1 85/05/15 16:30:38 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TIME 3F "13 June 1983"
+E 2
+I 2
+.TH TIME 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+time, ctime, ltime, gmtime \- return system time
+.SH SYNOPSIS
+.B integer function time()
+.sp 1
+.B character*(*) function ctime (stime)
+.br
+.B integer stime
+.sp 1
+.B subroutine ltime (stime, tarray)
+.br
+.B integer stime, tarray(9)
+.sp 1
+.B subroutine gmtime (stime, tarray)
+.br
+.B integer stime, tarray(9)
+.SH DESCRIPTION
+.I Time
+returns the time since 00:00:00 GMT, Jan. 1, 1970, measured in seconds.
+This is the value of the UNIX system clock.
+.PP
+.I Ctime
+converts a system time to a 24 character ASCII string.
+The format is described under
+.IR ctime (3).
+No 'newline' or NULL will be included.
+.PP
+.I Ltime
+and
+.I gmtime
+disect a UNIX time into month, day, etc., either for the local time zone
+or as GMT.
+The order and meaning of each element returned in
+.I tarray
+is described under
+.IR ctime (3).
+.SH FILES
+.ie \nM /usr/ucb/lib/libU77.a
+.el /usr/lib/libU77.a
+.SH "SEE ALSO"
+ctime(3), itime(3F), idate(3F), fdate(3F)
+E 1

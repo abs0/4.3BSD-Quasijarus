@@ -1,0 +1,102 @@
+h05895
+s 00010/00005/00029
+d D 6.3 88/07/09 11:45:07 bostic 3 2
+c install approved copyright notice
+e
+s 00022/00017/00012
+d D 6.2 88/05/04 15:27:23 bostic 2 1
+c update; add verification capability; Berkeley header
+e
+s 00029/00000/00000
+d D 6.1 85/12/11 18:54:49 bloom 1 0
+c date and time created 85/12/11 18:54:49 by bloom
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+D 2
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 2
+I 2
+.\" All rights reserved.
+E 2
+.\"
+I 2
+.\" Redistribution and use in source and binary forms are permitted
+D 3
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 3
+I 3
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 3
+.\"
+E 2
+.\"	%W% (Berkeley) %G%
+.\"
+.TH TCOPY 1 "%Q%"
+.UC 6
+.SH NAME
+D 2
+tcopy \- copy a mag tape
+E 2
+I 2
+tcopy \- copy and/or verify mag tapes
+E 2
+.SH SYNOPSIS
+D 2
+.B tcopy src
+[
+.B dest
+]
+E 2
+I 2
+.B tcopy
+[ -cv ] [ -s maxblk ] [src [ dest ]]
+E 2
+.br
+.SH DESCRIPTION
+D 2
+.I Tcopy
+is designed to copy magnetic tapes.  The only assumption made about
+the tape is that there are two tape marks at the end.
+.I Tcopy
+with only a source tape specified will print information about the
+sizes of records and tape files.  If a destination is specified,
+then, a copy will be made of the source tape.  The blocking on the
+destination tape will be identical to that used on the source tape.
+Copying a tape will yield the same output as if just printing the
+sizes.
+E 2
+I 2
+\fITcopy\fP is designed to copy magnetic tapes.  The only assumption made
+about the tape is that there are two tape marks at the end.  \fITcopy\fP
+with only a source tape (\fBrmt0\fP by default) specified will print
+information about the sizes of records and tape files.  If a destination
+is specified a copy will be made of the source tape.  The blocking on the
+destination tape will be identical to that used on the source tape.  Copying
+a tape will yield the same output as if just printing the sizes.
+.PP
+The \fB-s\fP option allows you to specify a maximum block size.  The \fB-v\fP
+option verifies that two tapes are identical.  The \fB-c\fP option does
+the copy and then verifies that the two tapes are identical.
+E 2
+.SH "SEE ALSO"
+mtio(4)
+E 1

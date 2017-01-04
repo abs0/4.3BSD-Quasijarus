@@ -14,17 +14,17 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	4.20 (Berkeley) 6/27/88
+#	@(#)Makefile	5.3 (Berkeley) 2012/06/19
 #
 DEFS=	-DLIBC_SCCS
 FLAGS=	-I../../vax ${DEFS}
 CFLAGS=	-O ${FLAGS}
-SRCS=	_setjmp.s abs.s alloca.s atof.s bcmp.s bcopy.s bzero.s fabs.s \
-	ffs.s frexp.s index.s insque.s ldexp.s modf.s nargs.s remque.s \
+SRCS=	_setjmp.s abs.s alloca.s atof.s bcmp.s bcopy.s bzero.s emul.s fabs.s \
+	ffs.s frexp.s index.s insque.s ldexp.s modf.s mul64.s nargs.s remque.s \
 	rindex.s setjmp.s strcat.s strcmp.s strcpy.s strlen.s strncat.s \
 	strncmp.s strncpy.s udiv.s urem.s
-OBJS=	_setjmp.o abs.o alloca.o atof.o bcmp.o bcopy.o bzero.o fabs.o \
-	ffs.o frexp.o index.o insque.o ldexp.o modf.o nargs.o remque.o \
+OBJS=	_setjmp.o abs.o alloca.o atof.o bcmp.o bcopy.o bzero.o emul.o fabs.o \
+	ffs.o frexp.o index.o insque.o ldexp.o modf.o mul64.o nargs.o remque.o \
 	rindex.o setjmp.o strcat.o strcmp.o strcpy.o strlen.o strncat.o \
 	strncmp.o strncpy.o udiv.o urem.o
 TAGSFILE=tags
@@ -66,6 +66,7 @@ atof.o: atof.s ../../vax/DEFS.h
 bcmp.o: bcmp.s ../../vax/DEFS.h
 bcopy.o: bcopy.s ../../vax/DEFS.h
 bzero.o: bzero.s ../../vax/DEFS.h
+emul.o: emul.s ../../vax/DEFS.h
 fabs.o: fabs.s ../../vax/DEFS.h
 ffs.o: ffs.s ../../vax/DEFS.h
 frexp.o: frexp.s ../../vax/DEFS.h
@@ -73,6 +74,7 @@ index.o: index.s ../../vax/DEFS.h
 insque.o: insque.s ../../vax/DEFS.h
 ldexp.o: ldexp.s ../../vax/DEFS.h /usr/include/errno.h
 modf.o: modf.s ../../vax/DEFS.h
+mul64.o: mul64.s ../../vax/DEFS.h
 nargs.o: nargs.s ../../vax/DEFS.h
 remque.o: remque.s ../../vax/DEFS.h
 rindex.o: rindex.s ../../vax/DEFS.h

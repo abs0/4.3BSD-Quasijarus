@@ -1,0 +1,250 @@
+/usr/src/ucb/mroff/5lig/SCCS/s.b.asm:
+1.2 10/08/22 20:50:50 msokolov 2 1
+threequartersemdash also accessible as emdash
+so that TroffEncoding can get to it
+/usr/src/ucb/mroff/5lig/SCCS/s.i.asm:
+1.2 10/08/22 20:50:52 msokolov 2 1
+threequartersemdash also accessible as emdash
+so that TroffEncoding can get to it
+/usr/src/ucb/mroff/5lig/SCCS/s.r.asm:
+1.2 10/08/22 20:50:53 msokolov 2 1
+threequartersemdash also accessible as emdash
+so that TroffEncoding can get to it
+/usr/src/ucb/mroff/5lig/SCCS/s.r.asm:
+1.3 10/08/22 23:01:23 msokolov 3 2
+Subrs array compacted
+/usr/src/ucb/mroff/5lig/SCCS/s.i.asm:
+1.3 10/08/22 23:10:36 msokolov 3 2
+Subrs array compacted
+/usr/src/ucb/mroff/5lig/SCCS/s.b.asm:
+1.3 10/08/22 23:19:24 msokolov 3 2
+Subrs array compacted
+/usr/src/ucb/mroff/5lig/SCCS/s.Makefile:
+1.2 10/08/22 23:56:44 msokolov 2 1
+header comment fix
+/usr/src/ucb/mroff/troffemu/SCCS/s.bold.m4:
+5.3 10/08/23 01:05:38 msokolov 3 2
+switch to using the new 5lig expert fonts
+/usr/src/ucb/mroff/troffemu/SCCS/s.italic.m4:
+5.3 10/08/23 01:05:39 msokolov 3 2
+switch to using the new 5lig expert fonts
+/usr/src/ucb/mroff/troffemu/SCCS/s.boldmetrics.m4:
+5.2 10/08/23 01:05:40 msokolov 2 1
+switch to using the new 5lig expert fonts
+/usr/src/ucb/mroff/troffemu/SCCS/s.roman.m4:
+5.3 10/08/23 01:05:41 msokolov 3 2
+switch to using the new 5lig expert fonts
+/usr/src/ucb/mroff/troffemu/SCCS/s.italicmetrics.m4:
+5.2 10/08/23 01:05:42 msokolov 2 1
+switch to using the new 5lig expert fonts
+/usr/src/ucb/mroff/troffemu/SCCS/s.romanmetrics.m4:
+5.2 10/08/23 01:05:43 msokolov 2 1
+switch to using the new 5lig expert fonts
+/usr/src/ucb/mroff/5lig/SCCS/s.Makefile:
+1.3 10/08/23 01:34:21 msokolov 3 2
+fonts now go into /usr/lib/pstroff/specialfonts
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.6 10/08/23 01:34:45 msokolov 6 5
+fonts now go into /usr/lib/pstroff/specialfonts
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.9 10/08/23 06:56:33 msokolov 9 8
+overhaul of special font handling
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.10 10/08/23 17:52:25 msokolov 10 9
+should now handle merge chains with embedded resources
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.9 10/08/23 18:50:47 msokolov 9 8
+5lig and pstfinish added
+/usr/src/ucb/mroff/5lig/SCCS/s.Makefile:
+1.4 10/08/23 19:06:46 msokolov 4 3
+use local preppsfont for ease of bootstrapping
+/usr/src/ucb/mroff/SCCS/s.pstfinish.c:
+5.2 10/08/23 20:07:39 msokolov 2 1
+guard against extra child processes from the shell
+/usr/src/doc/usd/SCCS/s.Makefile:
+6.4 10/08/23 21:18:45 msokolov 4 3
+new pstmerge/pstfinish
+/usr/src/doc/usd/25.trofftut/SCCS/s.Makefile:
+6.2 10/08/23 21:19:00 msokolov 2 1
+new pstmerge/pstfinish
+/usr/src/doc/usd/27.eqnguide/SCCS/s.Makefile:
+6.3 10/08/23 21:19:18 msokolov 3 2
+new pstmerge/pstfinish
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.15 10/08/24 03:51:42 msokolov 15 14
+.lg 5 mode implemented
+/usr/src/ucb/mroff/SCCS/s.n7.c:
+5.3 10/08/25 06:47:18 msokolov 3 2
+ancient bug: the old troff hyphen code was still there
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.10 10/08/29 03:35:16 msokolov 10 9
+drawing operations added to pstroff
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.7 10/08/29 03:35:17 msokolov 7 6
+drawing operations added to pstroff
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.6 10/08/29 03:35:19 msokolov 6 5
+drawing operations added to pstroff
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.6 10/08/29 03:35:20 msokolov 6 5
+drawing operations added to pstroff
+/usr/src/ucb/mroff/SCCS/s.td.c:
+5.2 10/08/29 04:46:16 msokolov 2 1
+silly \D'e...' parsing bug
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.7 10/09/04 04:50:36 msokolov 7 6
+do vertical local motion compensation like troff has done all along
+it turns out that pic depends on it
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.16 10/09/05 23:52:32 msokolov 16 15
+have .ss w/o argument restore the default
+/usr/src/ucb/mroff/SCCS/s.td.c:
+5.3 10/09/06 22:28:27 msokolov 3 2
+it looks like we've finally got elliptic arcs right
+/usr/src/ucb/mroff/SCCS/s.td.c:
+5.4 10/09/07 07:00:04 msokolov 4 3
+non-quadrant elliptic arcs should be correct now too
+CW arcs still aren't right though
+/usr/src/ucb/mroff/SCCS/s.td.c:
+5.5 10/09/07 07:08:34 msokolov 5 4
+generic arc code now works for both CW and CCW directions
+/usr/src/ucb/mroff/SCCS/s.td.c:
+5.6 10/09/07 07:20:01 msokolov 6 5
+the arc code should now be final!
+/usr/src/ucb/mroff/troffemu/SCCS/s.troffemu.m4:
+5.4 10/09/08 06:27:39 msokolov 4 3
+new square metrics that make bwk's nested box example look pretty
+/usr/src/doc/usd/25.trofftut/SCCS/s.tt04:
+6.2 10/09/08 07:03:28 msokolov 4 3
+fix the stupid Paternoster example for the more compact fonts
+used in the PostScript world
+/usr/src/ucb/mroff/SCCS/s.td.c:
+5.7 10/09/13 00:17:53 msokolov 7 6
+B-spline conversion implemented like in the original psdit
+/usr/src/ucb/mroff/5lig/SCCS/s.b.asm:
+1.4 10/09/13 01:06:19 msokolov 4 3
+make these characters accessible at their original expert code points as well
+/usr/src/ucb/mroff/5lig/SCCS/s.i.asm:
+1.4 10/09/13 01:06:21 msokolov 4 3
+make these characters accessible at their original expert code points as well
+/usr/src/ucb/mroff/5lig/SCCS/s.r.asm:
+1.4 10/09/13 01:06:23 msokolov 4 3
+make these characters accessible at their original expert code points as well
+/usr/src/ucb/mroff/5lig/SCCS/s.b.afm:
+1.2 10/09/13 01:26:14 msokolov 2 1
+reflect the alternate code point mapping
+/usr/src/ucb/mroff/5lig/SCCS/s.i.afm:
+1.2 10/09/13 01:26:16 msokolov 2 1
+reflect the alternate code point mapping
+/usr/src/ucb/mroff/5lig/SCCS/s.r.afm:
+1.2 10/09/13 01:26:16 msokolov 2 1
+reflect the alternate code point mapping
+/usr/src/ucb/mroff/troffemu/SCCS/s.romanmetrics.m4:
+5.3 10/09/13 01:52:59 msokolov 3 2
+expand the bounding boxes of the expert ligatures a little bit
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.13 10/09/22 03:33:40 msokolov 13 12
+\(ci reimplemented via the procset
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.8 10/09/22 03:33:41 msokolov 8 7
+\(ci reimplemented via the procset
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.17 10/09/22 03:33:42 msokolov 17 16
+\(ci reimplemented via the procset
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.7 10/09/22 03:33:44 msokolov 7 6
+\(ci reimplemented via the procset
+/usr/src/ucb/mroff/SCCS/s.TroffProcset.ps:
+5.2 10/09/22 03:33:45 msokolov 2 1
+\(ci reimplemented via the procset
+/usr/src/ucb/mroff/troffemu/SCCS/s.troffemu.m4:
+5.5 10/09/28 01:43:25 msokolov 5 4
+\(em should now be rendered like in the olden fonts
+/usr/src/ucb/mroff/troffemu/SCCS/s.fwI.c:
+5.2 10/09/28 01:54:23 msokolov 2 1
+make the spacing width of \(em always 1 em like it was in historic troff
+/usr/src/ucb/mroff/troffemu/SCCS/s.TroffEmu-BellSystem.ps:
+5.2 10/09/28 06:43:53 msokolov 2 1
+lower it a bit
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.7 10/09/28 15:22:04 msokolov 7 6
+changes for the new handling of \(bs
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.14 10/09/28 18:59:08 msokolov 14 13
+additions from the ditroff community circa 1985
+/usr/src/usr.bin/eqn/common_source/SCCS/s.font.c:
+4.4 10/10/05 04:21:46 msokolov 4 3
+fat kludge scaled appropriately for pstroff
+/usr/src/ucb/vfont2ps/SCCS/s.buildchar.ps:
+5.2 10/10/05 05:21:04 msokolov 2 1
+more correct handling of missing characters
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.8 10/10/06 06:53:05 msokolov 8 7
+s/BS/SS/
+/usr/src/ucb/mroff/SCCS/s.chtab.c:
+5.15 10/10/07 01:29:41 msokolov 15 14
+the SuperSpecial font is here
+/usr/src/ucb/mroff/SCCS/s.t10.c:
+5.9 10/10/07 01:29:43 msokolov 9 8
+the SuperSpecial font is here
+/usr/src/ucb/mroff/SCCS/s.t6.c:
+5.18 10/10/07 01:29:44 msokolov 18 17
+the SuperSpecial font is here
+/usr/src/ucb/mroff/SCCS/s.tdef.h:
+5.8 10/10/07 01:29:46 msokolov 8 7
+the SuperSpecial font is here
+/usr/src/ucb/mroff/troffemu/SCCS/s.Makefile:
+5.9 10/10/07 01:57:48 msokolov 9 8
+yet another rethinking of the f[ws] file arrangement
+/usr/src/ucb/mroff/SCCS/s.n1.c:
+5.8 10/10/07 02:11:35 msokolov 8 7
+-T option: the new way to invoke the extra compatibility fonts
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.11 10/10/07 03:37:02 msokolov 11 10
+support for TroffEmu-SuperSpecial
+/usr/src/ucb/mroff/SCCS/s.pstmerge.c:
+5.12 10/10/07 05:31:56 msokolov 12 11
+preliminary implementation of -L and -p
+/usr/src/ucb/mroff/SCCS/s.pstfinish.c:
+5.3 10/10/07 05:31:59 msokolov 3 2
+preliminary implementation of -L and -p
+/usr/src/ucb/mroff/SCCS/s.Makefile:
+5.11 10/10/08 07:04:11 msokolov 11 10
+pstmerge and pstfinish have moved into finish+merge subdir
+/usr/src/ucb/mroff/finish+merge/SCCS/s.main.c:
+5.2 10/10/09 04:30:37 msokolov 2 1
+added -F option (font embedding)
+/usr/src/ucb/mroff/finish+merge/SCCS/s.output.c:
+5.2 10/10/09 04:30:38 msokolov 2 1
+added -F option (font embedding)
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass1.c:
+5.2 10/10/09 04:30:39 msokolov 2 1
+added -F option (font embedding)
+/usr/src/ucb/mroff/finish+merge/SCCS/s.struct.h:
+5.2 10/10/09 04:30:40 msokolov 2 1
+added -F option (font embedding)
+/usr/src/ucb/mroff/finish+merge/SCCS/s.Makefile:
+5.2 10/10/09 04:30:41 msokolov 2 1
+added -F option (font embedding)
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pstfinish.c:
+5.4 10/10/09 04:38:20 msokolov 4 3
+-F option added
+suck_in_stdin() reimplemented more efficiently
+/usr/src/ucb/psutils/SCCS/s.Makefile:
+5.9 10/10/09 19:07:54 msokolov 9 8
+fontlist.* library files added
+/usr/src/doc/usd/25.trofftut/SCCS/s.Makefile:
+6.3 10/10/10 00:50:26 msokolov 3 2
+use the new pstroff -T option
+/usr/src/doc/usd/27.eqnguide/SCCS/s.Makefile:
+6.4 10/10/10 00:52:09 msokolov 4 3
+use the new SS font
+/usr/src/ucb/pstpipe/SCCS/s.readheader.c:
+5.2 10/10/10 01:22:55 msokolov 2 1
+fgets arguments: brown paper bag
+/usr/src/ucb/SCCS/s.Makefile:
+5.36 10/10/10 01:34:41 msokolov 36 35
+pstpipe added
+/usr/src/ucb/mroff/finish+merge/SCCS/s.pass2.c:
+5.2 11/03/05 20:32:34 msokolov 2 1
+support for L2 << and >> tokens/operators

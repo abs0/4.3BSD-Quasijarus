@@ -1,5 +1,5 @@
 #ifndef lint
-static char sccsid[] = "@(#)font.c	4.3 8/11/83";
+static char sccsid[] = "@(#)font.c	4.4 10/5/10";
 #endif
 
 # include "e.h"
@@ -39,7 +39,11 @@ fatbox(p) int p; {
 	int sh;
 
 	yyval = p;
+#ifdef PS
+	sh = ps * 10 / 4;
+#else
 	sh = ps / 4;
+#endif
 	nrwid(p, ps, p);
 	printf(".ds %d \\*(%d\\h'-\\n(%du+%du'\\*(%d\n", p, p, p, sh, p);
 	if(dbg)printf(".\tfat %d, sh=%d\n", p, sh);

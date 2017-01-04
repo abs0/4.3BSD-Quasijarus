@@ -1,5 +1,5 @@
 #ifndef lint
-static char *sccsid ="@(#)pftn.c	1.27 (Berkeley) 12/10/87";
+static char *sccsid ="@(#)pftn.c	1.28 (Berkeley) 2011/10/19";
 #endif lint
 
 # include "pass1.h"
@@ -1444,6 +1444,7 @@ types( t1, t2, t3 ) TWORD t1, t2, t3; {
 
 	TWORD t[3], noun, adj, unsg;
 	register i;
+	int longlong = 0;
 
 	t[0] = t1;
 	t[1] = t2;
@@ -1470,6 +1471,11 @@ types( t1, t2, t3 ) TWORD t1, t2, t3; {
 			continue;
 
 		case LONG:
+			if( adj == LONG ){
+				longlong = 1;
+				continue;
+				}
+			/* FALL THRU */
 		case SHORT:
 			if( adj != INT ) goto bad;
 			adj = t[i];
@@ -1494,6 +1500,11 @@ types( t1, t2, t3 ) TWORD t1, t2, t3; {
 
 	/* now, noun is INT or CHAR */
 	if( adj != INT ) noun = adj;
+#ifdef LONGLONG
+	if( noun == LONG && !longlong ) noun = INT;
+#else
+	if( longlong ) uerror( "this machine has no long long int support" );
+#endif
 	if( unsg == UNSIGNED ) return( noun + (UNSIGNED-INT) );
 	else return( noun );
 	}

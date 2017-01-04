@@ -1,0 +1,275 @@
+h19954
+s 00001/00001/00085
+d D 7.1 86/06/05 00:58:24 mckusick 17 16
+c 4.3BSD release version
+e
+s 00007/00001/00079
+d D 4.9 85/06/08 13:58:59 mckusick 16 15
+c Add copyright
+e
+s 00000/00001/00080
+d D 4.8 83/05/03 18:47:20 sam 15 14
+c delete hosts, dependent on imp being configured
+e
+s 00023/00001/00058
+d D 4.7 83/03/10 22:02:36 sam 14 13
+c stuff for netstat mostly, but a few lost items from ps
+e
+s 00001/00001/00058
+d D 4.6 82/11/13 22:58:54 sam 13 12
+c merge of 4.1b with 4.1c
+e
+s 00002/00002/00057
+d D 4.5 81/11/07 11:18:55 wnj 12 11
+c no more dz, dh so symorder wont bitch
+e
+s 00002/00002/00057
+d D 4.4 81/05/03 19:17:44 root 11 10
+c take away dh11 and ndh11 to prevent confusing complaints
+e
+s 00000/00001/00059
+d D 4.3 81/03/15 03:47:20 wnj 10 9
+c SCCS sucks
+e
+s 00001/00001/00059
+d D 4.2 81/03/09 01:49:11 wnj 9 8
+c lint and a few minor fixed
+e
+s 00000/00000/00060
+d D 4.1 80/11/09 16:46:33 bill 8 7
+c stamp for distribution
+e
+s 00006/00004/00054
+d D 3.7 80/10/16 10:53:39 bill 7 6
+c add/subtract symbols for new iostat
+e
+s 00011/00006/00047
+d D 3.6 80/10/11 19:12:19 bill 6 5
+c new symbols ala %cpu
+e
+s 00001/00006/00052
+d D 3.5 80/09/14 13:17:16 bill 5 4
+c long names
+e
+s 00002/00002/00056
+d D 3.4 80/09/09 20:03:57 bill 4 3
+c misc typos
+e
+s 00000/00002/00058
+d D 3.3 80/07/04 20:16:25 bill 3 2
+c remove _swplo
+e
+s 00001/00001/00059
+d D 3.2 80/06/07 02:53:41 bill 2 1
+c %H%->%G%
+e
+s 00060/00000/00000
+d D 3.1 80/04/09 23:14:43 bill 1 0
+c date and time created 80/04/09 23:14:43 by bill
+e
+u
+U
+t
+T
+I 1
+D 2
+# %M% %I% %H%
+E 2
+I 2
+D 9
+# %M% %I% %G%
+E 9
+I 9
+D 16
+# %M% %I% %E%
+E 16
+I 16
+#
+D 17
+# Copyright (c) 1980 Regents of the University of California.
+E 17
+I 17
+# Copyright (c) 1980, 1986 Regents of the University of California.
+E 17
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	%W% (Berkeley) %G%
+#
+E 16
+E 9
+E 2
+	_version
+#dmesg
+	_msgbuf
+D 10
+	_msgbufp
+E 10
+#iostat
+	_dk_busy
+	_dk_time
+D 7
+	_dk_numb
+E 7
+I 7
+	_dk_xfer
+E 7
+I 6
+	_dk_wds
+E 6
+	_tk_nin
+	_tk_nout
+I 7
+	_dk_seek
+	_cp_time
+	_dk_mspw
+E 7
+#	_io_info
+D 6
+	_cnt
+	_rate
+E 6
+#ps
+	_proc
+D 6
+	_swapdev
+E 6
+D 3
+	_swplo
+E 3
+D 4
+	_Usrptma
+E 4
+I 4
+	_Usrptmap
+E 4
+	_usrpt
+	_text
+	_nswap
+I 6
+	_maxslp
+	_ccpu
+	_ecmx
+I 14
+	_nproc
+	_ntext
+E 14
+E 6
+#pstat
+	_inode
+	_text
+	_proc
+D 12
+	_dz_tty
+	_dz_cnt
+E 12
+I 12
+#	_dz_tty
+#	_dz_cnt
+E 12
+	_cons
+	_file
+D 5
+#	_mpx_cha
+#	_mpx_mac
+#	_mptbc
+#	_mptbuf
+#	_mpsn
+E 5
+D 6
+#uptime
+	_bootime
+	_avenrun
+E 6
+I 6
+	_Usrptmap
+	_usrpt
+	_nswap
+	_swapmap
+D 11
+	_dh11
+	_ndh11
+E 11
+I 11
+#	_dh11
+#	_ndh11
+E 11
+E 6
+#vmstat
+D 7
+	_dk_busy
+	_dk_time
+	_dk_numb
+E 7
+I 7
+	_cp_time
+E 7
+	_rate
+	_total
+	_deficit
+	_forkstat
+	_sum
+D 4
+	_firstfre
+E 4
+I 4
+	_firstfree
+E 4
+	_maxfree
+#	_rectime
+#	_pgintime
+I 7
+	_dk_xfer
+E 7
+I 6
+D 13
+	_bootime
+E 13
+I 13
+	_boottime
+E 13
+E 6
+#w
+	_proc
+	_swapdev
+D 3
+	_swplo
+E 3
+D 5
+	_Usrptma
+E 5
+I 5
+	_Usrptmap
+E 5
+	_usrpt
+	_nswap
+	_avenrun
+D 14
+	_bootime
+E 14
+I 14
+	_boottime
+#netstat
+	_mbstat
+	_ipstat
+	_tcb
+	_tcpstat
+	_udb
+	_udpstat
+	_rawcb
+	_Sysmap
+	_Syssize
+	_ifnet
+D 15
+	_hosts
+E 15
+	_rthost
+	_rtnet
+	_icmpstat
+#routed
+	_ifnet
+#rwho
+	_avenrun
+	_boottime
+E 14
+E 1

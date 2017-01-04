@@ -1,0 +1,491 @@
+/usr/src/ucb/SCCS/s.w.c:
+5.10 03/01/01 15:17:12 msokolov 27 26
+fix login time printing (Y2K and axe the stupid American 12 hour abomination)
+also it's better IMO to say 0 users than 0 user if that's the case
+/usr/src/sys/vaxif/SCCS/s.if_qe.c:
+7.12 03/01/19 23:03:38 msokolov 17 16
+fix uba reset bug and other goo
+/usr/src/man/man8/SCCS/s.Makefile:
+5.7 03/01/24 17:40:19 msokolov 8 7
+OOPS
+/usr/src/ucb/compress/SCCS/s.compress.c:
+5.11 03/01/30 09:50:38 msokolov 12 11
+clean up the strong compression code
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.16 03/03/16 04:01:20 msokolov 115 114
+PASS8 mode acts on output as well as input
+/usr/src/sys/vaxuba/SCCS/s.dh.c:
+7.8 03/03/16 04:03:04 msokolov 104 103
+Don't interpret output high chars as delays in PASS8 mode
+/usr/src/sys/vaxuba/SCCS/s.dhu.c:
+7.7 03/03/16 04:03:07 msokolov 17 16
+Don't interpret output high chars as delays in PASS8 mode
+/usr/src/sys/vaxuba/SCCS/s.dmx.c:
+7.2 03/03/16 04:03:09 msokolov 2 1
+Don't interpret output high chars as delays in PASS8 mode
+/usr/src/sys/vaxuba/SCCS/s.dz.c:
+7.3 03/03/16 04:03:10 msokolov 84 83
+Don't interpret output high chars as delays in PASS8 mode
+/usr/src/sys/vax/SCCS/s.cons.c:
+7.6 03/03/16 04:03:58 msokolov 37 36
+Don't interpret output high chars as delays in PASS8 mode
+/usr/src/etc/termcap/SCCS/s.termcap.src:
+5.39 03/03/22 09:45:50 msokolov 91 90
+add VT300 series
+/usr/src/etc/termcap/SCCS/s.reorder:
+5.5 03/03/22 09:47:26 msokolov 12 11
+vt100, vt220, and vt320 are the most common now
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.17 03/03/22 10:29:39 msokolov 116 115
+Oops! fix CRT rubout of \^? broken by last delta
+/usr/src/etc/termcap/SCCS/s.termcap.src:
+5.40 03/03/22 15:19:05 msokolov 92 91
+vt200, vt300: axe jump/smooth scroll, make am/nam, make them nice
+/usr/src/etc/getty/SCCS/s.gettytab.h:
+5.3 03/03/22 18:44:20 msokolov 7 6
+Add PASS8 support (p8 boolean flag)
+This is necessary for 8-bit terminals as the default parity will screw them
+/usr/src/etc/getty/SCCS/s.init.c:
+5.3 03/03/22 18:44:21 msokolov 8 7
+Add PASS8 support (p8 boolean flag)
+This is necessary for 8-bit terminals as the default parity will screw them
+/usr/src/etc/getty/SCCS/s.main.c:
+5.8 03/03/22 18:44:22 msokolov 15 14
+Add PASS8 support (p8 boolean flag)
+This is necessary for 8-bit terminals as the default parity will screw them
+/usr/src/etc/getty/SCCS/s.subr.c:
+5.5 03/03/22 18:44:24 msokolov 9 8
+Add PASS8 support (p8 boolean flag)
+This is necessary for 8-bit terminals as the default parity will screw them
+/usr/src/etc/getty/SCCS/s.gettytab:
+5.10 03/03/22 18:53:13 msokolov 17 16
+add 8-bit entries
+/usr/src/bin/SCCS/s.login.c:
+5.21 03/03/22 19:30:38 msokolov 64 63
+don't reset local tty modes, we need to keep PASS8 from getty
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.14 03/03/29 16:26:25 msokolov 81 80
+add KOI mode
+/usr/src/sys/h/SCCS/s.tty.h:
+7.2 03/03/29 16:26:27 msokolov 24 23
+add KOI mode
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.18 03/03/29 16:26:49 msokolov 117 116
+add KOI mode
+/usr/src/bin/SCCS/s.stty.c:
+5.6 03/03/29 16:28:09 msokolov 25 24
+add koi mode
+/usr/src/usr.lib/libcurses/SCCS/s.cr_put.c:
+5.4 03/03/29 17:43:34 msokolov 11 10
+don't randomly spit out 8-bit chars as a side effect of cursor motion
+/usr/src/sys/h/SCCS/s.tty.h:
+7.3 03/04/07 00:41:39 msokolov 25 24
+add flag for tty kb hacks (TS_KBHACKS)
+/usr/src/sys/h/SCCS/s.ioctl.h:
+7.15 03/04/07 00:42:18 msokolov 82 81
+add tty kb hacks ioctls
+/usr/src/sys/sys/SCCS/s.tty.c:
+7.19 03/04/07 00:45:54 msokolov 118 117
+add tty kb hacks
+/usr/src/sys/conf/SCCS/s.files:
+7.8 03/04/07 00:47:22 msokolov 34 33
+add sys/tty_kbhacks.c
+/usr/src/ucb/ex/SCCS/s.ex.c:
+7.7 03/04/13 15:18:39 msokolov 23 21
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex.h:
+7.10 03/04/13 15:18:41 msokolov 21 19
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_addr.c:
+7.5 03/04/13 15:18:43 msokolov 14 13
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_argv.h:
+7.4 03/04/13 15:18:44 msokolov 12 11
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_cmds.c:
+7.13 03/04/13 15:18:46 msokolov 27 26
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_cmds2.c:
+7.7 03/04/13 15:18:48 msokolov 15 14
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_cmdsub.c:
+7.10 03/04/13 15:18:49 msokolov 18 17
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_data.c:
+7.7 03/04/13 15:18:52 msokolov 15 14
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_get.c:
+7.9 03/04/13 15:18:53 msokolov 17 16
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_io.c:
+7.18 03/04/13 15:18:55 msokolov 37 35
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_put.c:
+7.12 03/04/13 15:18:57 msokolov 24 23
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_re.c:
+7.7 03/04/13 15:19:00 msokolov 16 15
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_re.h:
+7.4 03/04/13 15:19:02 msokolov 12 11
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_set.c:
+7.6 03/04/13 15:19:04 msokolov 16 15
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_subr.c:
+7.12 03/04/13 15:19:05 msokolov 22 21
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_tagio.c:
+7.5 03/04/13 15:19:07 msokolov 5 4
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_temp.c:
+7.7 03/04/13 15:19:09 msokolov 19 17
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_temp.h:
+7.5 03/04/13 15:19:11 msokolov 13 12
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_tty.c:
+7.13 03/04/13 15:19:12 msokolov 22 21
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_tty.h:
+7.8 03/04/13 15:19:13 msokolov 16 15
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_unix.c:
+7.8 03/04/13 15:19:16 msokolov 15 14
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_v.c:
+7.10 03/04/13 15:19:17 msokolov 18 17
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vadj.c:
+7.11 03/04/13 15:19:19 msokolov 20 19
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vars.h:
+7.7 03/04/13 15:19:21 msokolov 14 13
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vget.c:
+6.11 03/04/13 15:19:22 msokolov 18 17
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vis.h:
+7.6 03/04/13 15:19:24 msokolov 15 14
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vmain.c:
+7.10 03/04/13 15:19:26 msokolov 22 21
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_voper.c:
+7.7 03/04/13 15:19:28 msokolov 16 15
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vops.c:
+7.9 03/04/13 15:19:31 msokolov 19 18
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vops2.c:
+6.11 03/04/13 15:19:33 msokolov 18 17
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vops3.c:
+7.5 03/04/13 15:19:35 msokolov 13 12
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vput.c:
+7.6 03/04/13 15:19:37 msokolov 13 12
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.ex_vwind.c:
+7.5 03/04/13 15:19:40 msokolov 12 11
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.expreserve.c:
+7.14 03/04/13 15:19:41 msokolov 22 21
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.exrecover.c:
+7.10 03/04/13 15:19:43 msokolov 18 17
+8-bit ex
+/usr/src/ucb/ex/SCCS/s.printf.c:
+7.5 03/04/13 15:19:46 msokolov 13 12
+8-bit ex
+/usr/src/ucb/Mail/SCCS/s.Makefile:
+5.6 03/04/14 20:15:50 msokolov 37 36
+I've dropped our own flsbuf and popen until someone can explain exactly how
+does FILE's _cnt get corrupt and just why do we have to launch more via csh
+/usr/src/ucb/Mail/SCCS/s.send.c:
+5.6 03/04/15 17:55:19 msokolov 29 28
+support KOI-8 message bodies on input (to be sent in KOI-7)
+/usr/src/ucb/Mail/SCCS/s.send.c:
+5.7 03/04/15 18:30:27 msokolov 30 29
+Make the KOI-8 to KOI-7 conversion more conservative.
+Make it an identity transformation whenever there are no 8-bit chars on input,
+even if there are SO/SI. This way one can always send any valid 7-bit RFC 822
+message without interference.
+/usr/src/ucb/Mail/SCCS/s.cmd1.c:
+5.6 03/04/15 18:49:23 msokolov 31 30
+safer handling of SO/SI switch chars in the Subject: line
+/usr/src/ucb/Mail/SCCS/s.cmd3.c:
+5.6 03/04/15 18:49:24 msokolov 36 35
+safer handling of SO/SI switch chars in the Subject: line
+/usr/src/ucb/Mail/SCCS/s.collect.c:
+5.7 03/04/15 19:00:37 msokolov 33 32
+add koi8edit option to convert interpolated messages from KOI-7 to KOI-8 for
+ease of editing
+/usr/src/ucb/Mail/SCCS/s.version.c:
+5.4 03/04/15 19:08:31 msokolov 23 22
+Nice support for KOI-7 (Russian) mail in a KOI-8 leaning UNIX environment
+/usr/src/ucb/Mail/SCCS/s.cmd1.c:
+5.7 03/04/19 09:53:47 msokolov 32 31
+oops, missed a space
+/usr/src/sys/vax/SCCS/s.emulate.s:
+7.5 03/04/27 17:10:48 msokolov 7 6
+CRC, MATCHC: set registers and condition codes correctly for null input strings
+MOVTUC:      opmitize and set V on escape termination
+remove notdef'ed locore.s code
+/usr/src/sys/vax/SCCS/s.cpu.h:
+7.7 03/05/03 13:30:26 msokolov 22 21
+teach the kernel which CPUs have compatibility mode and which don't
+/usr/src/sys/vax/SCCS/s.cpudata.c:
+7.6 03/05/03 13:30:28 msokolov 22 21
+teach the kernel which CPUs have compatibility mode and which don't
+/usr/src/sys/vax/SCCS/s.autoconf.c:
+7.20 03/05/03 13:30:29 msokolov 103 102
+teach the kernel which CPUs have compatibility mode and which don't
+/usr/src/sys/vax/SCCS/s.machdep.c:
+7.18 03/05/03 13:35:42 msokolov 186 185
+sigreturn:	don't allow PSL<CM> on CPUs w/o compat mode (res op fault)
+also sigreturn and osigcleanup need only user read access to arguments
+/usr/src/etc/talkd/SCCS/s.process.c:
+5.7 03/05/09 21:21:43 msokolov 10 9
+Support poor hosts with hosed DNS that don't reverse-resolve
+/usr/src/etc/talkd/SCCS/s.process.c:
+5.8 03/05/09 21:23:24 msokolov 11 10
+arghh, have to #include <arpa/inet.h> to pacify cc
+/usr/src/ucb/talk/SCCS/s.get_addrs.c:
+5.5 03/05/09 21:36:32 msokolov 7 6
+allow remote host specification by numeric IP address
+/usr/src/sys/vaxstand/SCCS/s.srt0.c:
+7.7 03/05/11 11:03:22 msokolov 28 27
+keep normal standalone programs with their stacks below 0x70000 like in 4.3
+even as RELOC is moved up for boot*
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.13 03/06/10 16:45:02 msokolov 26 25
+handle ~-pathnames by hand, don't bring in glob
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.17 03/06/10 21:05:18 msokolov 55 54
+restore LIST/NLST <glob pattern> support, but make it sensible this time
+/usr/src/etc/ftpd/SCCS/s.ftpcmd.y:
+5.14 03/06/10 21:05:22 msokolov 27 26
+restore LIST/NLST <glob pattern> support, but make it sensible this time
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.18 03/06/10 21:10:59 msokolov 56 55
+make auto gzcompat feature conditional on -DGZCOMPAT for portability
+/usr/src/etc/ftpd/SCCS/s.Makefile:
+5.8 03/06/10 21:11:02 msokolov 11 10
+make auto gzcompat feature conditional on -DGZCOMPAT for portability
+/usr/src/ucb/ftp/SCCS/s.cmds.c:
+5.9 03/06/12 20:11:19 msokolov 20 19
+ls/dir: heuristics to guess when a single arg meant local, not remote
+/usr/src/man/man1/SCCS/s.ftp.1:
+6.10 03/06/12 20:38:09 msokolov 11 10
+document the new heuristics for ls/dir with only one argument
+/usr/src/man/man1/SCCS/s.Makefile:
+5.8 03/06/12 22:54:13 msokolov 8 7
+add gzcompat
+/usr/src/man/man1/SCCS/s.sccshelp.1:
+6.2 03/06/12 23:38:32 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.Makefile:
+5.9 03/06/12 23:42:38 msokolov 9 8
+help => sccshelp
+/usr/src/bin/diff/SCCS/s.diff.c:
+4.7 03/07/10 23:03:11 msokolov 7 6
+add -a option to disable the check for binary files
+add -J debug option to report the "jackpot"
+/usr/src/bin/diff/SCCS/s.diff.h:
+4.8 03/07/10 23:03:12 msokolov 8 7
+add -a option to disable the check for binary files
+add -J debug option to report the "jackpot"
+/usr/src/bin/diff/SCCS/s.diffdir.c:
+4.12 03/07/10 23:03:13 msokolov 13 12
+add -a option to disable the check for binary files
+add -J debug option to report the "jackpot"
+/usr/src/bin/diff/SCCS/s.diffreg.c:
+4.18 03/07/10 23:03:14 msokolov 18 17
+add -a option to disable the check for binary files
+add -J debug option to report the "jackpot"
+/usr/src/man/man1/SCCS/s.diff.1:
+6.5 03/07/10 23:24:11 msokolov 8 7
+document new -a option
+/usr/src/sys/netinet/SCCS/s.tcp_usrreq.c:
+7.11 03/08/01 18:10:15 msokolov 109 108
+tcp_ctloutput crash fix: catch attempts to operate on reset sockets (no inpcb)
+from 4.4BSD
+/usr/src/sys/netinet/SCCS/s.tcp_usrreq.c:
+7.12 03/08/01 18:16:22 msokolov 110 109
+fix mbuf leak when tcp_usrreq catches and stops an attempt to operate on a
+reset socket (no inpcb), from CSRG's 1995 work
+/usr/src/etc/ftpd/SCCS/s.ftpd.c:
+5.19 03/11/06 20:24:13 msokolov 57 56
+fix auto gzcompat
+/usr/src/man/man1/SCCS/s.date.1:
+6.7 03/11/08 13:34:04 msokolov 9 8
+document Y2K change
+/usr/src/man/man1/SCCS/s.as.1:
+6.4 03/11/08 16:23:31 msokolov 6 5
+document 3-way relaxation
+/usr/src/man/man1/SCCS/s.cc.1:
+6.3 03/11/08 19:05:44 msokolov 5 4
+document -J
+/usr/src/bin/as/as.vax/SCCS/s.as.h:
+5.5 03/11/08 22:33:59 msokolov 28 27
+bring back -d124, without affecting 3-way relaxing of branches
+/usr/src/bin/as/as.vax/SCCS/s.asjxxx.c:
+5.9 03/11/08 22:34:01 msokolov 19 18
+bring back -d124, without affecting 3-way relaxing of branches
+/usr/src/bin/as/as.vax/SCCS/s.asmain.c:
+5.5 03/11/08 22:34:03 msokolov 20 19
+bring back -d124, without affecting 3-way relaxing of branches
+/usr/src/man/man1/SCCS/s.as.1:
+6.5 03/11/08 22:35:25 msokolov 7 6
+-d124 works again!
+/usr/src/doc/usd/24.troff/SCCS/s.m0a:
+6.3 03/11/09 18:14:45 msokolov 5 4
+document \n(cn
+/usr/src/man/man1/SCCS/s.prt.1:
+6.2 03/11/09 18:26:17 msokolov 2 1
+document -n
+help => sccshelp
+/usr/src/man/man1/SCCS/s.what.1:
+6.2 03/11/09 19:12:25 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.admin.1:
+6.2 03/11/09 19:12:27 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.bdiff.1:
+6.2 03/11/09 19:12:28 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.chghist.1:
+6.2 03/11/09 19:12:29 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.comb.1:
+6.2 03/11/09 19:12:30 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.delta.1:
+6.2 03/11/09 19:12:31 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.get.1:
+6.2 03/11/09 19:12:33 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.rmdel.1:
+6.2 03/11/09 19:12:35 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.sccsdiff.1:
+6.2 03/11/09 19:12:35 msokolov 2 1
+help => sccshelp
+/usr/src/man/man1/SCCS/s.sccs.1:
+2.6 03/11/09 19:44:11 msokolov 31 30
+help => sccshelp
+/usr/src/sys/vaxstand/SCCS/s.srt0.c:
+7.8 03/11/15 17:15:45 msokolov 29 28
+we don't have to force unit 0 on MicroVAXen, we can take the unit from VMB
+/usr/src/sys/vaxstand/SCCS/s.Makefile:
+7.24 03/11/16 14:30:31 msokolov 82 81
+say hello to one more console medium: rx50
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.26 03/11/16 21:04:52 msokolov 28 27
+reinstate 4.3BSD RD52 and RD53
+add correct RD54
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.33 03/11/16 21:19:37 msokolov 86 85
+reinstate 4.3BSD RD52 and RD53
+add correct RD54
+/usr/src/sys/vaxstand/SCCS/s.uda.c:
+7.15 03/11/16 21:32:05 msokolov 30 29
+reinstate 4.3BSD RD52 and RD53
+add correct RD54
+/usr/src/doc/smm/01.setup/SCCS/s.0.t:
+6.4 03/11/18 22:18:02 msokolov 4 3
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.1.t:
+6.3 03/11/18 22:18:03 msokolov 3 2
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.2.t:
+6.3 03/11/18 22:18:05 msokolov 3 2
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.3.t:
+6.7 03/11/18 22:18:08 msokolov 8 7
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.4.t:
+6.5 03/11/18 22:18:10 msokolov 6 5
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.6.t:
+6.4 03/11/18 22:18:15 msokolov 5 4
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.a.t:
+6.4 03/11/18 22:18:17 msokolov 4 3
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.b.t:
+6.3 03/11/18 22:18:18 msokolov 3 2
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.c.t:
+6.3 03/11/18 22:18:20 msokolov 3 2
+update for 4.3BSD-Quasijarus
+/usr/src/doc/smm/01.setup/SCCS/s.4.t:
+6.6 03/11/18 22:32:25 msokolov 7 6
+VAX/Tahoe conditional logic was breaking tables
+/usr/src/doc/smm/01.setup/SCCS/s.5.t:
+6.3 03/11/18 22:32:28 msokolov 4 3
+VAX/Tahoe conditional logic was breaking tables
+/usr/src/doc/smm/01.setup/SCCS/s.Makefile:
+5.2 03/11/18 22:33:14 msokolov 2 1
+VAX rules!
+/usr/src/doc/smm/01.setup/SCCS/s.2.t:
+6.4 03/11/18 22:53:14 msokolov 4 3
+document how to load standalone programs from floppy on 8200
+/usr/src/doc/smm/01.setup/SCCS/s.6.t:
+6.5 03/11/18 22:56:33 msokolov 6 5
+document default boot device setting on MicroVAXen
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.27 03/11/23 14:59:45 msokolov 29 28
+add RF35, RF36, and RF74
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.28 03/11/24 01:09:54 msokolov 30 29
+on further thought these new disks, huge by Berkeley standards, would be
+better off with partitions significantly larger than diskpart's.
+Let's use these large disk rules for disks over 1.5 GB or so:
+RA/RF73, RF35, RF74
+/usr/src/sys/vaxdist/SCCS/s.disktab:
+4.29 03/11/24 01:39:05 msokolov 31 30
+screwed up the math for RA/RF73 partitions
+/usr/src/sys/vaxuba/SCCS/s.uda.c:
+7.34 03/11/24 01:49:42 msokolov 87 86
+add RF35, RF36, and RF74
+new partitions for RA/RF73
+/usr/src/sys/vaxbi/SCCS/s.kdb.c:
+7.11 03/11/24 01:53:34 msokolov 11 10
+new partitions for RA73
+/usr/src/sys/vaxstand/SCCS/s.uda.c:
+7.16 03/11/24 02:01:00 msokolov 31 30
+add RF35, RF36, and RF74
+new partitions for RA/RF73
+/usr/src/sys/vaxstand/SCCS/s.kdb.c:
+7.7 03/11/24 02:05:09 msokolov 7 6
+new partitions for RA73
+/usr/src/doc/smm/01.setup/SCCS/s.1.t:
+6.4 03/11/24 22:46:23 msokolov 4 3
+document support for RF35, RF36, and RF74
+/usr/src/doc/smm/23.qjchanges/SCCS/s.0a.t:
+6.2 03/12/04 14:33:06 msokolov 2 1
+add SCCS ID keywords
+/usr/src/doc/smm/23.qjchanges/SCCS/s.0b.t:
+6.2 03/12/04 14:33:07 msokolov 2 1
+add SCCS ID keywords
+/usr/src/doc/smm/SCCS/s.00.contents:
+5.3 03/12/04 14:50:32 msokolov 3 2
+add SMM:23, Bug Fixes and Changes in 4.3BSD-Quasijarus
+/usr/src/usr.lib/sendmail/cf/cf/SCCS/s.Makefile:
+1.26 03/12/04 18:28:14 msokolov 26 25
+dummy depend target to satisfy Sendmail global Makefile
+/usr/src/sys/vaxdist/SCCS/s.maketape:
+4.36 03/12/06 23:11:28 msokolov 38 37
+we now generate tape images rather than an actual tape
+/usr/src/doc/smm/01.setup/SCCS/s.a.t:
+6.5 03/12/06 23:37:01 msokolov 5 4
+quote and document new release making scripts
+/usr/src/usr.lib/man/SCCS/s.tmac.an.new:
+6.7 03/12/31 00:59:10 msokolov 9 8
+define .UC 8 for 4.3BSD-Quasijarus
+/usr/src/ucb/Mail/SCCS/s.send.c:
+5.8 03/12/31 13:32:42 msokolov 31 30
+koi7line:	oops, must account for the terminating NUL too!

@@ -1,0 +1,115 @@
+h18916
+s 00010/00005/00071
+d D 6.3 88/07/09 11:38:35 bostic 3 2
+c install approved copyright notice
+e
+s 00008/00002/00068
+d D 6.2 87/12/23 14:39:58 bostic 2 1
+c add Berkeley header; NASA wants a copy
+e
+s 00070/00000/00000
+d D 6.1 86/05/16 15:53:50 karels 1 0
+c first version, for 4.3
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1986 Regents of the University of California.
+D 2
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 2
+I 2
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 3
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 3
+I 3
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 3
+E 2
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH ICMP 4P "%Q%"
+.UC 6
+.SH NAME
+icmp \- Internet Control Message Protocol
+.SH SYNOPSIS
+.B #include <sys/socket.h>
+.br
+.B #include <netinet/in.h>
+.PP
+.B s = socket(AF_INET, SOCK_RAW, proto);
+.SH DESCRIPTION
+ICMP is the error and control message protocol used
+by IP and the Internet protocol family.  It may be accessed
+through a \*(lqraw socket\*(rq for network monitoring
+and diagnostic functions.
+The
+.I proto
+parameter to the socket call to create an ICMP socket
+is obtained from
+.IR getprotobyname (3N).
+ICMP sockets are connectionless,
+and are normally used with the
+.I sendto 
+and
+.I recvfrom 
+calls, though the
+.IR connect (2)
+call may also be used to fix the destination for future
+packets (in which case the 
+.IR read (2)
+or
+.IR recv (2)
+and 
+.IR write (2)
+or
+.IR send (2)
+system calls may be used).
+.PP
+Outgoing packets automatically have an IP header prepended to
+them (based on the destination address).
+Incoming packets are received with the IP header and options intact.
+.SH DIAGNOSTICS
+A socket operation may fail with one of the following errors returned:
+.TP 15
+[EISCONN]
+when trying to establish a connection on a socket which
+already has one, or when trying to send a datagram with the destination
+address specified and the socket is already connected;
+.TP 15
+[ENOTCONN]
+when trying to send a datagram, but
+no destination address is specified, and the socket hasn't been
+connected;
+.TP 15
+[ENOBUFS]
+when the system runs out of memory for
+an internal data structure;
+.TP 15
+[EADDRNOTAVAIL]
+when an attempt is made to create a 
+socket with a network address for which no network interface
+exists.
+.SH SEE ALSO
+send(2), recv(2), intro(4N), inet(4F), ip(4P)
+E 1

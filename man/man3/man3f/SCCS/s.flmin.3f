@@ -1,0 +1,82 @@
+h08053
+s 00002/00001/00051
+d D 6.2 85/06/07 20:38:20 kre 3 2
+c From Jerry Berkman
+e
+s 00001/00001/00051
+d D 6.1 85/05/15 16:17:42 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00052/00000/00000
+d D 5.1 85/05/15 16:17:36 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FLMIN 3F "13 June 1983"
+E 2
+I 2
+.TH FLMIN 3F "%Q%"
+E 2
+.UC 5
+.SH NAME
+flmin, flmax, ffrac, dflmin, dflmax, dffrac, inmax \- return extreme values
+.SH SYNOPSIS
+.B function flmin()
+.sp 1
+.B function flmax()
+.sp 1
+.B function ffrac()
+.sp 1
+.B double precision function dflmin()
+.sp 1
+.B double precision function dflmax()
+.sp 1
+.B double precision function dffrac()
+.sp 1
+.B function inmax()
+.SH DESCRIPTION
+Functions
+.I flmin
+and
+.I flmax
+return the minimum and maximum positive floating point values respectively.
+Functions
+.I dflmin
+and
+.I dflmax
+return the minimum and maximum positive double precision floating point values.
+Function
+.I inmax
+returns the maximum positive integer value.
+.PP
+The functions
+.I ffrac
+and
+.I dffrac
+return the fractional accuracy of single and double precision
+floating point numbers respectively.
+D 3
+These are the smallest numbers that can be added to 1.0 without being lost.
+E 3
+I 3
+This is the difference between 1.0 and the
+smallest real number greater than 1.0.
+E 3
+.PP
+These functions can be used by programs that must scale algorithms
+to the numerical range of the processor.
+.SH FILES
+.ie \nM /usr/ucb/lib/libF77.a
+.el /usr/lib/libF77.a
+E 1

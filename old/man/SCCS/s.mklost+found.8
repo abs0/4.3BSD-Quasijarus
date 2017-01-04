@@ -1,0 +1,67 @@
+h37057
+s 00001/00001/00026
+d D 6.1 85/04/27 13:33:54 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00009/00008/00018
+d D 5.1 85/04/27 13:33:21 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00026/00000/00000
+d D 4.1 85/04/27 13:32:59 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MKLOST+FOUND 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH MKLOST+FOUND 8 "25 February 1983"
+E 3
+I 3
+.TH MKLOST+FOUND 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+mklost+found \- make a lost+found directory for fsck
+.SH SYNOPSIS
+.B /etc/mklost+found
+.SH DESCRIPTION
+A directory
+.I lost+found
+is created in the current directory and a number of empty files
+are created therein and then removed so that there will be
+empty slots for
+.IR fsck (8).
+D 2
+This command should be run immediately after first mounting a newly
+created file system.
+.SH SEE\ ALSO
+fsck(8), mkfs(8)
+.SH BUGS
+Should be done automatically by
+.I mkfs.
+E 2
+I 2
+This command should not normally be needed since 
+.IR mkfs (8)
+automatically creates the
+.I lost+found
+directory when a new file system is created.
+.SH "SEE ALSO"
+fsck(8),
+mkfs(8)
+E 2
+E 1

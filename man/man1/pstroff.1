@@ -1,0 +1,156 @@
+.\"	@(#)pstroff.1	6.2 (Berkeley) 10/30/04
+.\"
+.TH PSTROFF 1 "October 30, 2004"
+.UC 8
+.SH NAME
+pstroff \- format text into PostScript
+.SH SYNOPSIS
+.B pstroff
+[ option ] ...
+[ file ] ...
+.SH DESCRIPTION
+.I Pstroff
+is a variant of
+.IR troff (1)
+that
+formats text in the named
+.I files
+into the world standard PostScript page description language.
+Its capabilities are described in the
+.I Nroff/Troff user's manual.
+.PP
+If no
+.I file
+argument is present, the standard input is read.
+An argument consisting of a single minus
+.RB ( \- )
+is taken to be a file name corresponding to the standard input.
+The options, which may appear in any order so long as they appear
+before the files, are:
+.TP "\w'\f3\-m\f1name 'u"
+.BI \-o list
+Print only pages whose page numbers appear in the comma-separated
+.I list
+of numbers and ranges.
+A range
+.IB N \- M
+means pages
+.I N
+through
+.IR M ;
+an initial
+.I \-N
+means from the beginning to page
+.IR N ;
+and a final
+.IR N \-
+means from
+.I N
+to the end.
+.TP
+.BI \-n N
+Number first generated page
+.IR N .
+.TP
+.BI \-m name
+Prepend the macro file
+.BI /usr/lib/tmac/tmac. name
+to the input
+.IR files .
+.TP
+.BI \-r aN
+Set register
+.I a
+(one-character) to
+.IR N .
+.TP
+.B \-i
+Read standard input after the input files are exhausted.
+.TP
+.B \-q
+Invoke the simultaneous input-output mode of the
+.B rd
+request.
+.TP
+.B \-t
+Does nothing, exists only for compatibility with
+.IR troff (1).
+PostScript output is always sent to the standard output in this version.
+.TP
+.BI \-f fontlist
+Declares the list of fonts to be used in the document.
+See the
+.I Nroff/Troff user's manual
+for details.
+.TP
+.BI \-F fontdir
+Look for font description files in
+.I fontdir
+instead of the default directory /usr/lib/pstroff.
+This option is useful for non-privileged users who want to use their
+own fonts but do not have write permission to /usr/lib/pstroff.
+.TP
+.B \-N
+Do not emit TroffEncoding.ps in the document prolog.
+The Roman fonts used with
+.I pstroff
+use the \%\fBTroffEncoding\fP
+encoding vector, which was specifically designed for
+.IR pstroff ,
+and its definition normally needs to be emitted in the document prolog
+since it is not a standard resource.
+You can omit it with the
+.B \-N
+option if the \%\fBTroffEncoding\fP
+vector is already present in the printer's VM
+or if the entire document uses fonts other than the standard Roman fonts
+(e.g., Cyrillic fonts) and the standard Roman fonts are excluded from
+the font list declared with
+.BR \-f .
+.TP
+.B \-e
+8-bit characters are OK in strings.
+The full character set is always available, but by default
+without this option 8-bit characters are emitted as octal escapes in strings,
+so the PostScript output meets the Clean7Bit spec.
+This enhances portability at little cost when there are only a few
+8-bit characters in mostly 7-bit text.
+It is very inefficient for 8-bit text, however, and
+.B \-e
+or
+.B \-h
+should be used for the latter.
+Note that characters falling on code points normally used for control
+characters, both C0 and C1, are always output as octal escapes.
+.TP
+.B \-h
+Emit all strings in hex instead of plain text.
+This allows the entire character set to be used while keeping the output
+to the Clean7Bit spec at the cost of 2x expansion.
+It is the most efficient option, however, when 8-bit text must be formatted
+into Clean7Bit PostScript or when the document uses a lot of characters
+falling on C0 and C1 code points that would always requires octal escapes.
+.SH FILES
+.ta 5n +\w'TroffEncoding.ps  'u
+/tmp/ta*	temporary file
+.br
+/usr/lib/tmac/tmac.*	standard macro files
+.br
+/usr/lib/pstroff/	directory containing:
+.br
+	fw*	font width tables
+.br
+	fs*	font setup files
+.br
+	TroffEncoding.ps	encoding vector definition
+.br
+	TroffProcset.ps	procset code
+.SH "SEE ALSO"
+J. F. Ossanna,
+.I Nroff/Troff user's manual
+.br
+B. W. Kernighan,
+.I
+A TROFF Tutorial
+.br
+troff(1), eqn(1), tbl(1), ms(7), me(7), man(7)

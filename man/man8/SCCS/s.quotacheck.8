@@ -1,0 +1,158 @@
+h45567
+s 00010/00005/00090
+d D 6.4 88/07/09 11:32:04 bostic 5 4
+c install approved copyright notice
+e
+s 00008/00002/00087
+d D 6.3 88/05/20 12:23:50 bostic 4 3
+c add Berkeley specific header
+e
+s 00012/00001/00077
+d D 6.2 85/09/15 16:29:50 serge 3 2
+c added -p flag (from ulysses!amw)
+e
+s 00001/00001/00077
+d D 6.1 85/04/27 15:38:22 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00078/00000/00000
+d D 5.1 85/04/27 15:38:05 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+D 4
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 4
+I 4
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 5
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 5
+I 5
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 5
+E 4
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH QUOTACHECK 8  "18 July 1983"
+E 2
+I 2
+.TH QUOTACHECK 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+quotacheck \- file system quota consistency checker
+.SH SYNOPSIS
+.B /etc/quotacheck
+[
+.B \-v
+I 3
+] [
+.B \-p
+E 3
+]
+filesystem...
+.br
+.B /etc/quotacheck
+[
+.B \-v
+I 3
+] [
+.B \-p
+E 3
+]
+.B \-a
+.SH DESCRIPTION
+.I Quotacheck
+examines each file system,
+builds a table of current disc usage,
+and compares this table against that stored
+in the disc quota file for the file system.
+If any inconsistencies are detected, both the
+quota file and the current system copy of the
+incorrect quotas are updated (the latter only
+occurs if an active file system is checked).
+.PP
+If the
+.B \-a
+flag is supplied in place of any file system
+names,
+.I quotacheck
+will check all the file systems indicated in
+.I /etc/fstab
+to be read-write with disc quotas.
+.PP
+Normally
+.I quotacheck
+reports only those quotas modified.  If the
+.B \-v
+option is supplied,
+.I quotacheck
+will indicate the calculated disc quotas for each
+user on a particular file system.
+.PP
+I 3
+If the
+.B \-p
+flag is supplied then parallel passes will be run on
+the filesystems required, using the pass numbers in
+/etc/fstab in an identical fashion to
+.IR fsck (8).
+.PP
+E 3
+.I Quotacheck
+expects each file system to be checked to have a
+quota file named
+.I quotas
+in the root directory.  If none is present, 
+.I quotacheck
+will ignore the file system.
+.PP
+.I Quotacheck 
+is normally run at boot time from the
+.I /etc/rc.local
+file, see
+.IR rc (8),
+before enabling disc quotas with
+.IR quotaon (8).
+.PP
+.I Quotacheck
+accesses the raw device in calculating the actual
+disc usage for each user.  Thus, the file systems
+checked should be quiescent while
+.I quotacheck
+is running.
+.SH FILES
+.DT
+/etc/fstab	default file systems
+.SH "SEE ALSO"
+D 3
+quota(2), setquota(2), quotaon(8)
+E 3
+I 3
+quota(2), setquota(2), quotaon(8), fsck(8)
+E 3
+E 1

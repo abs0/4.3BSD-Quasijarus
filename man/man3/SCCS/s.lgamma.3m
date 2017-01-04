@@ -1,0 +1,171 @@
+h01631
+s 00003/00003/00084
+d D 6.2 86/05/12 17:11:46 karels 4 3
+c intro(3M) => math(3M), move see also's to end
+e
+s 00075/00018/00012
+d D 6.1 85/09/11 18:52:34 mckusick 3 2
+c new from Kahan
+e
+s 00002/00001/00028
+d D 1.2 85/08/22 19:55:54 miriam 2 1
+c Update diagnastics to reflect the return of reserve operan for
+c negative numbers.
+e
+s 00029/00000/00000
+d D 1.1 85/08/22 12:02:40 miriam 1 0
+c date and time created 85/08/22 12:02:40 by miriam
+e
+u
+U
+t
+T
+I 1
+D 3
+.TH GAMMA 3M  "19 January 1983"
+E 3
+I 3
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH LGAMMA 3M  "%Q%"
+.UC 6
+E 3
+.SH NAME
+D 3
+gamma \- log gamma function
+E 3
+I 3
+lgamma \- log gamma function
+E 3
+.SH SYNOPSIS
+.nf
+.B #include <math.h>
+.PP
+D 3
+.B double gamma(x)
+E 3
+I 3
+.B double lgamma(x)
+E 3
+.B double x;
+.fi
+.SH DESCRIPTION
+D 3
+.I Gamma
+returns ln \||\|\(*G(\||\|\fIx\fR\||\|)\||\|.
+The sign of \(*G(\||\|\fIx\fR\||\|) is returned in the external integer
+.IR signgam .
+The following C program might be used to calculate \(*G:
+E 3
+I 3
+.nf
+.ta \w'Lgamma returns ln\||\(*G(x)| where'u+1n +1.7i
+.if t \{\
+Lgamma returns ln\||\(*G(x)| where	\(*G(x) = \(is\d\s8\z0\s10\u\u\s8\(if\s10\d t\u\s8x\-1\s10\d e\u\s8\-t\s10\d dt	for x > 0 and
+.br
+	\(*G(x) = \(*p/(\(*G(1\-x)\|sin(\(*px))	for x < 1.  \}
+.if n \
+Lgamma returns ln\||\(*G(x)|.
+.ta
+.fi
+E 3
+.PP
+I 3
+The external integer signgam returns the sign of
+\(*G(x) .
+.SH IDIOSYNCRASIES
+Do \fBnot\fR use the expression signgam\(**exp(lgamma(x))
+to compute g := \(*G(x).  Instead use a program like this (in C):
+.RS
+lg = lgamma(x); g = signgam\(**exp(lg);
+.RE
+.PP
+Only after lgamma has returned can signgam be correct.
+Note too that \(*G(x) must overflow when x is large enough,
+underflow when \-x is large enough, and spawn a division by zero
+when x is a nonpositive integer.
+.PP
+Only in the UNIX math library for C was the name gamma ever attached
+to ln\(*G.  Elsewhere, for instance in IBM's FORTRAN library, the name
+GAMMA belongs to \(*G and the name ALGAMA to ln\(*G in single precision;
+in double the names are DGAMMA and DLGAMA.  Why should C be different?
+.PP
+Archaeological records suggest that C's gamma originally delivered
+ln(\(*G(|x|)).  Later, the program gamma was changed to
+cope with negative arguments x in a more conventional way, but
+the documentation did not reflect that change correctly.  The most
+recent change corrects inaccurate values when x is almost a
+negative integer, and lets \(*G(x) be computed without
+conditional expressions.  Programmers should not assume that
+lgamma has settled down.
+.PP
+At some time in the future, the name \fIgamma\fR will be rehabilitated
+and used for the gamma function, just as is done in FORTRAN.
+The reason for this is not so much compatibility with FORTRAN as a
+desire to achieve greater speed for smaller values of |x| and greater
+accuracy for larger values.
+.PP
+Meanwhile, programmers who have to use the name \fIgamma\fR in its former
+sense, for what is now \fIlgamma\fR, have two choices:
+.IP 1) \w'1)\0'u
+Use the old math library, \fIlibom\fR.
+.IP 2) \w'1)\0'u
+Add the following program to your others:
+.RS
+E 3
+.nf
+D 3
+	y = gamma(x);
+	if (y > 88.0)
+		error();
+	y = exp(y);
+	if(signgam)
+		y = \-y;
+E 3
+I 3
+\fB#include <math.h>
+double gamma(x)
+double x;
+{
+.RS
+\fBreturn (lgamma(x));
+.RE
+}\fR
+.RE
+E 3
+.fi
+I 3
+D 4
+.SH SEE ALSO
+intro(3M), infnan(3M)
+E 4
+E 3
+.SH DIAGNOSTICS
+D 2
+A huge value is returned for negative integer arguments.
+E 2
+I 2
+D 3
+The reserved operand is returned on a VAX for negative integer
+arguments, \fIerrno\fR is set to ERANGE.
+E 2
+.SH BUGS
+There should be a positive indication of error.
+E 3
+I 3
+The reserved operand is returned on a VAX for negative integer arguments,
+\fIerrno\fR is set to ERANGE; for very large arguments over/underflows will
+D 4
+occur inside the program lgamma.
+E 4
+I 4
+occur inside the \fIlgamma\fP routine.
+.SH SEE ALSO
+math(3M), infnan(3M)
+E 4
+E 3
+E 1

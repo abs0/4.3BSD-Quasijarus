@@ -1,0 +1,60 @@
+h16493
+s 00001/00001/00030
+d D 6.1 85/04/29 15:10:07 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00030
+d D 5.1 85/04/29 15:10:00 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00031/00000/00000
+d D 4.1 85/04/29 15:09:52 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH WALL 1
+E 2
+I 2
+D 3
+.TH WALL 1 "18 January 1983"
+E 3
+I 3
+.TH WALL 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+wall \- write to all users
+.SH SYNOPSIS
+.B wall
+.SH DESCRIPTION
+.I Wall
+reads its standard input until an end-of-file.
+It then sends this message,
+preceded by
+`Broadcast Message ...',
+to all logged in users.
+.PP
+The sender should be super-user to override
+any protections the users may have invoked.
+.SH FILES
+/dev/tty?
+.br
+/etc/utmp
+.SH "SEE ALSO"
+mesg(1), write(1)
+.SH DIAGNOSTICS
+`Cannot send to ...' when the open on
+a user's tty file fails.
+E 1

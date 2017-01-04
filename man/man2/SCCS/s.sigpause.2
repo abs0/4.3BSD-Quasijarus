@@ -1,0 +1,119 @@
+h35738
+s 00001/00001/00040
+d D 6.2 86/05/15 15:24:21 anne 4 3
+c spelling
+e
+s 00004/00002/00037
+d D 6.1 85/05/09 17:43:04 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00028/00020/00011
+d D 5.1 85/05/09 17:42:38 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00031/00000/00000
+d D 4.1 85/05/09 17:42:00 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH PAUSE 2 
+E 2
+I 2
+D 3
+.TH SIGPAUSE 2 "7 July 1983"
+E 3
+I 3
+.TH SIGPAUSE 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+pause \- stop until signal
+E 2
+I 2
+sigpause \- atomically release blocked signals and wait for interrupt
+E 2
+.SH SYNOPSIS
+D 2
+.B pause()
+E 2
+I 2
+.ft B
+sigpause(sigmask)
+.br
+int sigmask;
+.ft R
+E 2
+.SH DESCRIPTION
+D 2
+.I Pause
+never returns normally.
+It is used to give up control while waiting for
+a signal from
+.IR kill (2)
+or
+.IR alarm (2).
+Upon termination of a signal handler started during a
+.I pause,
+the
+.I pause
+call will return.
+E 2
+I 2
+.I Sigpause
+assigns 
+.I sigmask
+to the set of masked signals
+and then waits for a signal to arrive;
+on return the set of masked signals is restored.
+.I Sigmask
+is usually 0 to indicate that no
+signals are now to be blocked.
+.I Sigpause
+D 3
+always terminates by being interrupted, returning EINTR.
+E 3
+I 3
+always terminates by being interrupted, returning \-1 with
+.I errno
+set to EINTR.
+E 3
+.PP
+In normal usage, a signal is blocked using
+.IR sigblock (2),
+D 4
+to begin a critical section, variables modified on the occurance
+E 4
+I 4
+to begin a critical section, variables modified on the occurrence
+E 4
+of the signal are examined to determine that there is no work
+to be done, and the process pauses awaiting work by using
+.I sigpause
+with the mask returned by
+.IR sigblock .
+E 2
+.SH SEE ALSO
+D 2
+kill(1), kill(2), alarm(2), sigsys(2), signal(2), sigset(3), setjmp(3)
+.SH "ASSEMBLER (PDP-11)"
+(pause = 29.)
+.br
+.B sys pause
+E 2
+I 2
+sigblock(2), sigvec(2)
+E 2
+E 1

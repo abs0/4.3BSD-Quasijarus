@@ -1,0 +1,52 @@
+.\"	@(#)eqnchar.refcard	1.1 (Berkeley) 2012/02/16
+.sp 1i
+.nf
+.ta \w'angstrom  'u \n(.lu/3u +\w'angstrom  'u \n(.lu*2u/3u +\w'angstrom  'u
+.EQ
+"ciplus"	ciplus	"|\||"	||	"square"	square
+.EN
+.EQ
+"citimes"	citimes	"langle"	langle	"circle"	circle
+.EN
+.EQ
+"wig"	wig	"rangle"	rangle	"blot"	blot
+.EN
+.EQ
+"-wig"	-wig	"hbar"	hbar	"bullet"	bullet
+.EN
+.EQ
+">wig"	>wig	"ppd"	ppd	"prop"	prop
+.EN
+.EQ
+"<wig"	<wig	"<->"	<->	"empty"	empty
+.EN
+.EQ
+"=wig"	=wig	"<=>"	<=>	"member"	member
+.EN
+.EQ
+"star"	star	"|\|<"	|<	"nomem"	nomem
+.EN
+.EQ
+"bigstar"	bigstar	"|\|>"	|>	"cup"	cup
+.EN
+.EQ
+"=dot"	=dot	"ang"	ang	"cap"	cap
+.EN
+.EQ
+"orsign"	orsign	"rang"	rang	"incl"	incl
+.EN
+.EQ
+"andsign"	andsign	"3dot"	3dot	"subset"	subset
+.EN
+.EQ
+"=del"	=del	"thf"	thf	"supset"	supset
+.EN
+.EQ
+"oppA"	oppA	"quarter"	quarter	"!subset"	!subset
+.EN
+.EQ
+"oppE"	oppE	"3quarter"	3quarter	"!supset"	!supset
+.EN
+.EQ
+"angstrom"	angstrom	"degree"	degree
+.EN

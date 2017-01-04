@@ -1,0 +1,75 @@
+MAN1=	../man1/intro.1.ps ../man1/adb.1.ps ../man1/addbib.1.ps \
+	../man1/admin.1.ps ../man1/apply.1.ps ../man1/apropos.1.ps \
+	../man1/ar.1.ps ../man1/as.1.ps ../man1/at.1.ps ../man1/atq.1.ps \
+	../man1/atrm.1.ps ../man1/awk.1.ps ../man1/basename.1.ps \
+	../man1/bc.1.ps ../man1/bdiff.1.ps ../man1/biff.1.ps \
+	../man1/binmail.1.ps ../man1/cal.1.ps ../man1/calendar.1.ps \
+	../man1/cat.1.ps ../man1/cb.1.ps ../man1/cc.1.ps ../man1/cd.1.ps \
+	../man1/checknr.1.ps ../man1/chghist.1.ps ../man1/chgrp.1.ps \
+	../man1/chmod.1.ps ../man1/clear.1.ps ../man1/cmp.1.ps \
+	../man1/col.1.ps ../man1/colcrt.1.ps ../man1/colrm.1.ps \
+	../man1/comb.1.ps ../man1/comm.1.ps ../man1/compress.1.ps \
+	../man1/cp.1.ps ../man1/cpio.1.ps ../man1/crypt.1.ps ../man1/csh.1.ps \
+	../man1/ctags.1.ps ../man1/date.1.ps ../man1/dbx.1.ps ../man1/dc.1.ps \
+	../man1/dd.1.ps ../man1/delta.1.ps ../man1/deroff.1.ps ../man1/df.1.ps \
+	../man1/diction.1.ps ../man1/diff.1.ps ../man1/diff3.1.ps \
+	../man1/du.1.ps ../man1/echo.1.ps ../man1/ed.1.ps ../man1/efl.1.ps \
+	../man1/eqn.1.ps ../man1/error.1.ps ../man1/ex.1.ps \
+	../man1/expand.1.ps ../man1/expr.1.ps ../man1/f77.1.ps \
+	../man1/false.1.ps ../man1/file.1.ps ../man1/find.1.ps \
+	../man1/finger.1.ps ../man1/fmt.1.ps ../man1/fold.1.ps ../man1/fp.1.ps \
+	../man1/fpr.1.ps ../man1/from.1.ps ../man1/fsplit.1.ps \
+	../man1/ftp.1c.ps ../man1/gcore.1.ps ../man1/get.1.ps \
+	../man1/gprof.1.ps ../man1/graph.1g.ps ../man1/grep.1.ps \
+	../man1/groups.1.ps ../man1/gzcompat.1.ps ../man1/head.1.ps \
+	../man1/hostid.1.ps ../man1/hostname.1.ps ../man1/indent.1.ps \
+	../man1/install.1.ps ../man1/iostat.1.ps ../man1/join.1.ps \
+	../man1/kill.1.ps ../man1/last.1.ps ../man1/lastcomm.1.ps \
+	../man1/ld.1.ps ../man1/learn.1.ps ../man1/leave.1.ps ../man1/lex.1.ps \
+	../man1/lint.1.ps ../man1/ln.1.ps ../man1/lock.1.ps \
+	../man1/logger.1.ps ../man1/login.1.ps ../man1/look.1.ps \
+	../man1/lookbib.1.ps ../man1/lorder.1.ps ../man1/lpq.1.ps \
+	../man1/lpr.1.ps ../man1/lprm.1.ps ../man1/lptest.1.ps ../man1/ls.1.ps \
+	../man1/m4.1.ps ../man1/mail.1.ps ../man1/make.1.ps ../man1/man.1.ps \
+	../man1/mesg.1.ps ../man1/mkdep.1.ps ../man1/mkdir.1.ps \
+	../man1/mkstr.1.ps ../man1/more.1.ps ../man1/mset.1.ps \
+	../man1/msgs.1.ps ../man1/mt.1.ps ../man1/mv.1.ps ../man1/netstat.1.ps \
+	../man1/newaliases.1.ps ../man1/nice.1.ps ../man1/nm.1.ps \
+	../man1/nroff.1.ps ../man1/od.1.ps ../man1/pagesize.1.ps \
+	../man1/passwd.1.ps ../man1/pc.1.ps ../man1/pdx.1.ps ../man1/pi.1.ps \
+	../man1/pix.1.ps ../man1/plot.1g.ps ../man1/pmerge.1.ps \
+	../man1/pr.1.ps ../man1/preppsfont.1.ps ../man1/printenv.1.ps \
+	../man1/prof.1.ps ../man1/prt.1.ps ../man1/ps.1.ps \
+	../man1/pstroff.1.ps ../man1/ptx.1.ps ../man1/pwd.1.ps ../man1/px.1.ps \
+	../man1/pxp.1.ps ../man1/pxref.1.ps ../man1/quota.1.ps \
+	../man1/ranlib.1.ps ../man1/ratfor.1.ps ../man1/rcp.1c.ps \
+	../man1/rdist.1.ps ../man1/refer.1.ps ../man1/rev.1.ps \
+	../man1/rlogin.1c.ps ../man1/rm.1.ps ../man1/rmail.1.ps \
+	../man1/rmdel.1.ps ../man1/rmdir.1.ps ../man1/roffbib.1.ps \
+	../man1/rsh.1c.ps ../man1/ruptime.1c.ps ../man1/rwho.1c.ps \
+	../man1/sccs.1.ps ../man1/sccsdiff.1.ps ../man1/sccshelp.1.ps \
+	../man1/script.1.ps ../man1/sed.1.ps ../man1/sendbug.1.ps \
+	../man1/sh.1.ps ../man1/size.1.ps ../man1/sleep.1.ps \
+	../man1/soelim.1.ps ../man1/sort.1.ps ../man1/sortbib.1.ps \
+	../man1/spell.1.ps ../man1/spline.1g.ps ../man1/split.1.ps \
+	../man1/strings.1.ps ../man1/strip.1.ps ../man1/struct.1.ps \
+	../man1/stty.1.ps ../man1/style.1.ps ../man1/su.1.ps ../man1/sum.1.ps \
+	../man1/symorder.1.ps ../man1/sysline.1.ps ../man1/systat.1.ps \
+	../man1/tabs.1.ps ../man1/tail.1.ps ../man1/talk.1.ps ../man1/tar.1.ps \
+	../man1/tbl.1.ps ../man1/tc.1.ps ../man1/tcopy.1.ps ../man1/tee.1.ps \
+	../man1/telnet.1c.ps ../man1/test.1.ps ../man1/tftp.1c.ps \
+	../man1/time.1.ps ../man1/tip.1c.ps ../man1/tk.1.ps \
+	../man1/tn3270.1.ps ../man1/touch.1.ps ../man1/tp.1.ps ../man1/tr.1.ps \
+	../man1/troff.1.ps ../man1/true.1.ps ../man1/tset.1.ps \
+	../man1/tsort.1.ps ../man1/tty.1.ps ../man1/ul.1.ps \
+	../man1/unifdef.1.ps ../man1/uniq.1.ps ../man1/units.1.ps \
+	../man1/uptime.1.ps ../man1/users.1.ps ../man1/uucp.1c.ps \
+	../man1/uuencode.1c.ps ../man1/uulog.1c.ps ../man1/uuname.1c.ps \
+	../man1/uuq.1c.ps ../man1/uusend.1c.ps ../man1/uux.1c.ps \
+	../man1/vacation.1.ps ../man1/vgrind.1.ps ../man1/vi.1.ps \
+	../man1/vmstat.1.ps ../man1/w.1.ps ../man1/wait.1.ps ../man1/wall.1.ps \
+	../man1/wc.1.ps ../man1/what.1.ps ../man1/whatis.1.ps \
+	../man1/whereis.1.ps ../man1/which.1.ps ../man1/who.1.ps \
+	../man1/whoami.1.ps ../man1/whois.1.ps ../man1/window.1.ps \
+	../man1/write.1.ps ../man1/xsend.1.ps ../man1/xstr.1.ps \
+	../man1/yacc.1.ps ../man1/yes.1.ps

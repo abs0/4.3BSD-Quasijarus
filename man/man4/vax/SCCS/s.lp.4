@@ -1,0 +1,118 @@
+h44836
+s 00001/00001/00066
+d D 6.1 85/05/15 17:22:43 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00006/00009/00061
+d D 5.1 85/05/15 17:22:35 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00070/00000/00000
+d D 4.1 85/05/15 17:22:27 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LP 4 4/1/81
+E 2
+I 2
+D 3
+.TH LP 4 "27 July 1983"
+E 3
+I 3
+.TH LP 4 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+lp \- line printer
+.SH SYNOPSIS
+D 2
+device lp0 at uba0 csr 0177514 vector lpintr
+E 2
+I 2
+.B "device lp0 at uba0 csr 0177514 vector lpintr"
+E 2
+.SH DESCRIPTION
+.I Lp
+provides the interface to any of the standard
+D 2
+DEC line printers.
+E 2
+I 2
+DEC line printers on an LP-11 parallel interface.
+E 2
+When it is opened or closed, a suitable number
+of page ejects is generated.
+Bytes written are printed.
+.PP
+The unit number of the printer is specified by the minor device
+after removing the low 3 bits, which act as per-device parameters.
+Currently only the lowest of the low three bits is interpreted:
+if it is set, the device is treated as having a 64-character set,
+rather than a full 96-character set.
+In the resulting half-ASCII mode, lower case letters are turned
+into upper case and certain characters are escaped according to
+the following table:
+.PP
+.br
+.ns
+.TP 10
+{
+\o"-("
+.br
+.ns
+.TP 10
+}
+\o"-)"
+.br
+.ns
+.TP 10
+\`
+\o"-\'"
+.br
+.ns
+.TP 10
+|
+\o"\-!"
+.br
+.ns
+.TP 10
+~
+\o"\-^"
+..
+.PP
+The driver correctly interprets
+carriage returns, backspaces, tabs, and form feeds.
+D 2
+Lines longer than 132 characters are truncated
+(This is a parameter in the driver).
+E 2
+I 2
+Lines longer than the maximum page width are truncated.
+The default page width is 132 columns.
+This may be overridden by specifying, for example, ``flags 256'' .
+E 2
+.SH FILES
+/dev/lp
+.SH "SEE ALSO"
+lpr(1)
+.SH DIAGNOSTICS
+None.
+D 2
+.SH BUGS
+Although the driver supports multiple printers this has never
+been tried.  In any case user-level software support for multiple printers
+is not available.
+E 2
+E 1

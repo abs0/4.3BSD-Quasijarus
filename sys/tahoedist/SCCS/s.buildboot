@@ -1,0 +1,71 @@
+h39002
+s 00014/00013/00017
+d D 1.2 88/07/09 15:45:54 bostic 2 1
+c minor clean;macro for where mounted
+e
+s 00030/00000/00000
+d D 1.1 87/04/07 19:51:13 karels 1 0
+c date and time created 87/04/07 19:51:13 by karels
+e
+u
+U
+t
+T
+I 1
+#!/bin/sh
+#
+# Copyright (c) 1986 Regents of the University of California.
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	%W% (Berkeley) %G%
+#
+D 2
+boot=dk5a
+boottype=eagle
+E 2
+I 2
+boot=dk2a
+boottype=xfd
+bootmnt=/tmp/mini
+E 2
+DISTROOT=/nbsd
+
+date
+umount /dev/${boot}
+D 2
+newfs -s 500 -i 32000 ${boot} ${boottype}
+E 2
+I 2
+newfs -s 1200 ${boot} ${boottype}
+E 2
+fsck /dev/r${boot}
+D 2
+mount /dev/${boot} /mnt
+cp $DISTROOT/stand/copy /mnt
+#cp $DISTROOT/stand/vdformat /mnt
+cp $DISTROOT/boot /mnt
+cp $DISTROOT/wcs /mnt
+cp $DISTROOT/fppwcs /mnt
+#cp $DISTROOT/poc /mnt
+#cp $DISTROOT/poc1 /mnt
+#cp $DISTROOT/poc2 /mnt
+#cp $DISTROOT/fppoc /mnt
+E 2
+I 2
+mount /dev/${boot} ${bootmnt}
+cp $DISTROOT/stand/copy ${bootmnt}
+#cp $DISTROOT/stand/vdformat ${bootmnt}
+cp $DISTROOT/boot ${bootmnt}
+cp $DISTROOT/wcs ${bootmnt}
+cp $DISTROOT/fppwcs ${bootmnt}
+#cp $DISTROOT/poc ${bootmnt}
+#cp $DISTROOT/poc1 ${bootmnt}
+#cp $DISTROOT/poc2 ${bootmnt}
+#cp $DISTROOT/fppoc ${bootmnt}
+E 2
+sync
+umount /dev/${boot}
+fsck /dev/${boot}
+date
+E 1

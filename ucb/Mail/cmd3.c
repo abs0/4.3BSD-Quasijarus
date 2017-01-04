@@ -11,7 +11,7 @@
  */
 
 #ifdef notdef
-static char sccsid[] = "@(#)cmd3.c	5.5 (Berkeley) 2/18/88";
+static char sccsid[] = "@(#)cmd3.c	5.6 (Berkeley) 4/15/03";
 #endif /* notdef */
 
 #include "rcv.h"
@@ -294,23 +294,48 @@ _respond(msgvec)
 /*
  * Modify the subject we are replying to to begin with Re: if
  * it does not already.
+ *
+ * If the subject contains any SO/SI control characters, we convert it to
+ * KOI-8. This function is called when composing replies, i.e., new messages,
+ * and the user may play with the new message headers with ~h. There we use
+ * TIOCSTI and unless the user has a KOI-7 terminal we definitely don't want
+ * ^N and ^O in TIOCSTI.
  */
 
 char *
 reedit(subj)
-	char *subj;
+	register char *subj;
 {
 	char sbuf[10];
-	register char *newsubj;
+	register char *newsubj, *cp, *dp;
+	register int ch, rus;
+	int hasre;
 
 	if (subj == NOSTR)
 		return(NOSTR);
 	strncpy(sbuf, subj, 3);
 	sbuf[3] = 0;
-	if (icequal(sbuf, "re:"))
+	hasre = icequal(sbuf, "re:");
+	if (hasre && !index(subj, '\016') && !index(subj, '\017'))
 		return(subj);
-	newsubj = salloc(strlen(subj) + 6);
-	sprintf(newsubj, "Re: %s", subj);
+	dp = newsubj = salloc(strlen(subj) + 6);
+	if (!hasre) {
+		strcpy(newsubj, "Re: ");
+		dp += 4;
+	}
+	for (cp = subj, rus = 0; ch = *cp++; ) {
+		if (ch == '\016') {
+			rus = 1;
+			continue;
+		}
+		if (ch == '\017') {
+			rus = 0;
+			continue;
+		}
+		if (ch >= 0100 && ch <= 0177 && rus)
+			ch |= 0200;
+		*dp++ = ch;
+	}
 	return(newsubj);
 }
 

@@ -1,0 +1,125 @@
+h10440
+s 00005/00003/00038
+d D 6.1 85/05/15 15:11:28 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00009/00024/00032
+d D 5.1 85/05/15 15:11:19 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00056/00000/00000
+d D 4.1 85/05/15 15:11:13 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH NLIST 3 
+E 2
+I 2
+D 3
+.TH NLIST 3  "19 January 1983"
+E 3
+I 3
+.TH NLIST 3  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+nlist \- get entries from name list
+.SH SYNOPSIS
+.nf
+.B #include <nlist.h>
+I 2
+.PP
+E 2
+.B nlist(filename, nl)
+.B char *filename;
+.B struct nlist nl[];
+.fi
+.SH DESCRIPTION
+.I Nlist
+D 2
+examines the name list in
+the given executable output file
+and selectively extracts a
+list of values.
+The name list consists of
+an array of structures containing names,
+E 2
+I 2
+examines the name list in the given executable output file
+and selectively extracts a list of values.
+The name list consists of an array of structures containing names,
+E 2
+types and values.
+The list is terminated with a null name.
+D 2
+Each name is looked up in the name list of
+the file.
+E 2
+I 2
+Each name is looked up in the name list of the file.
+E 2
+If the name is found, the type and value of the
+name are inserted in the next two fields.
+If the name is not found, both entries are set to 0.
+See
+.IR a.out (5)
+for the structure declaration.
+.PP
+D 2
+This subroutine is useful for
+examining the system name list kept in
+the file
+E 2
+I 2
+This subroutine is useful for examining the system name list kept in the file
+E 2
+.BR /vmunix .
+D 2
+In this way programs can obtain system addresses
+that are up to date.
+E 2
+I 2
+In this way programs can obtain system addresses that are up to date.
+E 2
+.SH "SEE ALSO"
+a.out(5)
+.SH DIAGNOSTICS
+D 2
+All
+type entries are set to 0 if the file cannot be found
+E 2
+I 2
+D 3
+All type entries are set to 0 if the file cannot be found
+E 2
+or if it is not a valid namelist.
+E 3
+I 3
+If the file cannot be found or if it is not a valid namelist \-1 is returned;
+otherwise, the number of unfound namelist entries is returned.
+.PP
+The type entry is set to 0 if the symbol is not found.
+E 3
+D 2
+.SH BUGS
+On other versions of UNIX you must include <a.out.h> rather than <nlist.h>;
+this is unfortunate, but
+.I <a.out.h>
+can't be used on the
+VAX because it contains a
+.B union
+which can't be initialized.
+E 2
+E 1

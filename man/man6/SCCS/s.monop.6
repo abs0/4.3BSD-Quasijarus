@@ -1,0 +1,329 @@
+h23703
+s 00003/00003/00161
+d D 6.2 86/05/06 14:13:43 anne 4 3
+c grammar, spelling, diction
+e
+s 00001/00001/00163
+d D 6.1 85/05/20 19:53:51 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00024/00050/00140
+d D 5.1 85/05/20 19:53:20 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00190/00000/00000
+d D 4.1 85/05/20 19:52:41 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.de Sc		\" start command list macro
+.ie n .PD 0
+.el .PD 0.5
+.sp
+..
+.de Cm		\" define command macro
+.TP 10
+.ie t .BR "\\$1" :
+.el .IR "\\$1" :
+..
+.de Ec		\" end command macro
+.PD 1
+..
+D 2
+.TH MONOP 6
+E 2
+I 2
+D 3
+.TH MONOP 6 "1 February 1983"
+E 3
+I 3
+.TH MONOP 6 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+monop \- Monopoly game
+.SH SYNOPSIS
+.B /usr/games/monop
+[ file ]
+.SH DESCRIPTION
+.I Monop
+D 2
+is reminiscent of the Parker Brother's game Monopoly,
+and
+E 2
+I 2
+is reminiscent of the Parker Brother's game Monopoly, and
+E 2
+monitors a game between 1 to 9 users.
+It is assumed that the rules of Monopoly are known.
+D 2
+The game follows the standard rules,
+with the exception that,
+if a property would go up for auction
+and there are only two solvent players,
+E 2
+I 2
+The game follows the standard rules, with the exception that,
+D 4
+if a property would go up for auction and there are only two solvent players,
+E 4
+I 4
+if a property goes up for auction and there are only two solvent players,
+E 4
+E 2
+no auction is held and the property remains unowned.
+.PP
+D 2
+The game, in effect,
+lends the player money,
+E 2
+I 2
+The game, in effect, lends the player money,
+E 2
+so it is possible to buy something which you cannot afford.
+However, as soon as a person goes into debt,
+he must \*(lqfix the problem\*(rq,
+.IR i.e. ,
+D 2
+make himself solvent,
+before play can continue.
+If this is not possible,
+the player's property reverts to his debtee,
+E 2
+I 2
+make himself solvent, before play can continue.
+If this is not possible, the player's property reverts to his debtee,
+E 2
+either a player or the bank.
+D 2
+A player can resign at any time to any person
+or the bank,
+E 2
+I 2
+A player can resign at any time to any person or the bank,
+E 2
+which puts the property back on the board, unowned.
+.PP
+Any time that the response to a question is a
+.IR string ,
+D 2
+e.g., a name, place or person,
+you can type `?'
+to get a list of valid answers.
+It is not possible to input a negative number,
+nor is it ever necessary.
+E 2
+I 2
+e.g., a name, place or person, you can type `?' to get a list of valid answers.
+It is not possible to input a negative number, nor is it ever necessary.
+E 2
+.Sc
+.IR "A Summary of Commands" :
+.Cm quit
+D 2
+quit game:
+This allows you to quit the game.
+It asks you if you're sure.
+E 2
+I 2
+quit game: This allows you to quit the game.  It asks you if you're sure.
+E 2
+.Cm print
+D 2
+print board:
+This prints out the current board.
+The columns have the following meanings
+(column headings are the same for the
+E 2
+I 2
+print board: This prints out the current board.
+The columns have the following meanings (column headings are the same for the
+E 2
+.BR where ,
+.BR "own holdings" ,
+and
+.B holdings
+commands):
+.PP
+.RS 10
+.TP "\w'Name\ \ 'u"
+Name
+The first ten characters of the name of the square
+.TP
+Own
+The \fInumber\fR of the owner of the property.
+.TP
+Price
+The cost of the property (if any)
+.TP
+Mg
+This field has a `*' in it if the property is mortgaged
+.TP
+#
+If the property is a Utility or Railroad, this is the number
+of such owned by the owner.
+If the property is land, this is the number of houses on it.
+.TP
+Rent
+D 2
+Current rent on the property.
+If it is not owned, there is no rent.
+E 2
+I 2
+Current rent on the property.  If it is not owned, there is no rent.
+E 2
+.RE
+.Cm where
+D 2
+where players are:
+Tells you where all the players are.
+E 2
+I 2
+where players are: Tells you where all the players are.
+E 2
+A `*' indicates the current player.
+.Cm "own\ holdings"
+List your own holdings,
+.IR i.e. ,
+money, get-out-of-jail-free cards, and property.
+.Cm holdings
+D 2
+holdings list:
+Look at anyone's holdings.
+E 2
+I 2
+holdings list: Look at anyone's holdings.
+E 2
+It will ask you whose holdings you wish to look at.
+When you are finished, type \*(lqdone\*(rq.
+.Cm shell
+D 2
+shell escape:
+Escape to a shell.
+When the shell dies,
+E 2
+I 2
+shell escape: Escape to a shell.  When the shell dies,
+E 2
+the program continues where you left off.
+.Cm mortgage
+mortgage property:
+D 2
+Sets up a list of mortgageable property,
+and asks which you wish to mortgage.
+E 2
+I 2
+Sets up a list of mortgageable property, and asks which you wish to mortgage.
+E 2
+.Cm unmortgage
+unmortgage property:
+Unmortgage mortgaged property.
+.Cm buy
+buy houses:
+Sets up a list of monopolies on which you can buy houses.
+If there is more than one, it asks you which you want to buy for.
+It then asks you how many for each piece of property,
+giving the current amount in parentheses after the property name.
+If you build in an unbalanced manner
+(a disparity of more than one house within the same monopoly),
+it asks you to re-input things.
+.Cm sell
+sell houses:
+Sets up a list of monopolies from which you can sell houses.
+D 4
+it operates in an analogous manner to
+.I buy
+E 4
+I 4
+It operates in an analogous manner to
+.I buy.
+E 4
+.Cm card
+card for jail:
+Use a get-out-of-jail-free card to get out of jail.
+D 2
+If you're not in jail,
+or you don't have one,
+it tells you so.
+E 2
+I 2
+If you're not in jail, or you don't have one, it tells you so.
+E 2
+.Cm pay
+pay for jail:
+D 2
+Pay $50 to get out of jail,
+from whence you are put on Just Visiting.
+Difficult to do if you're not there.
+E 2
+I 2
+Pay $50 to get out of jail, from whence you are put on Just Visiting.
+Difficult to do if you're not there.
+E 2
+.Cm trade
+This allows you to trade with another player.
+It asks you whom you wish to trade with,
+and then asks you what each wishes to give up.
+D 2
+You can get a summary at the end,
+and, in all cases,
+E 2
+I 2
+You can get a summary at the end, and, in all cases,
+E 2
+it asks for confirmation of the trade before doing it.
+.Cm resign
+Resign to another player or the bank.
+D 2
+If you resign to the bank,
+all property reverts to its virgin state,
+E 2
+I 2
+If you resign to the bank, all property reverts to its virgin state,
+E 2
+and get-out-of-jail free cards revert to the deck.
+.Cm save
+save game:
+Save the current game in a file for later play.
+You can continue play after saving,
+either by adding the file in which you saved the game after the
+.I monop
+D 2
+command,
+or by using the
+E 2
+I 2
+command, or by using the
+E 2
+.I restore
+command (see below).
+It will ask you which file you wish to save it in,
+and, if the file exists, confirm that you wish to overwrite it.
+.Cm restore
+restore game:
+Read in a previously saved game from a file.
+It leaves the file intact.
+.Cm roll
+Roll the dice and move forward to your new location.  
+If you simply hit the <RETURN> key instead of a command,
+it is the same as typing
+.IR roll .
+.Ec
+.SH AUTHOR
+Ken Arnold
+.SH FILES
+/usr/games/lib/cards.pck	Chance and Community Chest cards
+.SH BUGS
+No command can be given an argument instead of a response to a query.
+E 1

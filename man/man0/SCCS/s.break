@@ -1,0 +1,26 @@
+h20916
+s 00000/00000/00005
+d D 6.1 86/05/12 15:23:29 mckusick 3 2
+c document distributed with 4.3BSD
+e
+s 00002/00000/00003
+d D 5.1 86/05/12 15:23:20 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00003/00000/00000
+d D 4.1 86/05/12 15:23:11 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+
+;
+:
+I 2
+.
+,
+E 2
+E 1

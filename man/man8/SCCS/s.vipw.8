@@ -1,0 +1,90 @@
+h04152
+s 00001/00001/00029
+d D 6.2 86/05/19 20:35:48 karels 4 3
+c update
+e
+s 00001/00001/00029
+d D 6.1 85/04/27 13:54:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00012/00011/00018
+d D 5.1 85/04/27 13:54:36 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00029/00000/00000
+d D 4.1 85/04/27 13:54:17 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH VIPW 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH VIPW 8 "4 July 1983"
+E 3
+I 3
+.TH VIPW 8 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+vipw \- edit the password file with vi
+E 2
+I 2
+vipw \- edit the password file
+E 2
+.SH SYNOPSIS
+.B vipw
+.SH DESCRIPTION
+.I Vipw
+edits the password file while setting the appropriate locks,
+and does any necessary processing after the password file is unlocked.
+If the password file is already being edited, then you will be told
+D 2
+to try again later
+E 2
+I 2
+to try again later.  The 
+.I vi
+editor will be used unless the environment variable EDITOR indicates
+an alternate editor.  
+.I Vipw
+performs a number of consistency checks on the password entry for
+.IR root ,
+and will not allow a password file with a ``mangled'' root entry
+to be installed.
+E 2
+.SH SEE ALSO
+D 4
+chfn(1), chsh(1), passwd(1), passwd(5), adduser(8)
+E 4
+I 4
+passwd(1), passwd(5), adduser(8), mkpasswd(8)
+E 4
+.SH FILES
+D 2
+/etc/vipw.lock
+.SH BUGS
+.I Vipw
+does not remove the vipw.lock file; this is not a bug, but people tend
+to think it is.
+.PP
+No one deals with left-over /etc/ptmp (the real lock) files after a system
+crash.
+E 2
+I 2
+/etc/ptmp
+E 2
+E 1

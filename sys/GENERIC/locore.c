@@ -37,6 +37,7 @@
 #define	MSGBUFPTECNT 8
 #define	NMBCLUSTERS 256
 #define	U_PROCP 128
+#define	U_ONSTACK 1296
 #define	U_RU 1640
 #define	RU_MINFLT 32
 #else
@@ -66,9 +67,10 @@ erpb:
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)scb.s	7.4 (Berkeley) 5/14/88
+ *	@(#)scb.s	7.6 (Berkeley) 3/18/04
  */
 
+#include "cpucond.h"
 #include "uba.h"
 
 /*
@@ -103,7 +105,11 @@ _scb:	.globl	_scb
 /* 090 */	STRAY(0x90);	STRAY(0x94);	STRAY(0x98);	STRAY(0x9c);
 /* 0a0 */	IS(softclock);	STRAY(0xa4);	STRAY(0xa8);	STRAY(0xac);
 /* 0b0 */	IS(netintr);	STRAY(0xb4);	STRAY(0xb8);	IS(kdbintr);
+#if NEED_SAMEMODE_EMU
 /* 0c0 */	IS(hardclock);	STRAY(0xc4);	KS(emulate);	KS(emulateFPD);
+#else
+/* 0c0 */	IS(hardclock);	STRAY(0xc4);	STRAY(0xc8);	STRAY(0xcc);
+#endif
 /* 0d0 */	STRAY(0xd0);	STRAY(0xd4);	STRAY(0xd8);	STRAY(0xdc);
 /* 0e0 */	STRAY(0xe0);	STRAY(0xe4);	STRAY(0xe8);	STRAY(0xec);
 /* 0f0 */	IS(consdin);	IS(consdout);	IS(cnrint);	IS(cnxint);
@@ -123,11 +129,15 @@ _scb:	.globl	_scb
  * An additional page is provided for UBA jump tables if the second
  * scb might be present.  Other CPUs with additional scbs should expand
  * this area as needed.
+ *
+ * BabyVAX note: we treat the BabyVAX interrupt vector page as the second page
+ * of the main SCB a la 8600.  Since no BabyVAX has interrupts at 300, 340, 380
+ * or 3C0 the nex1zvec initialisation won't cause a problem.
  */
 	.globl	_UNIvec
 	.globl	_eUNIvec
 _UNIvec:
-#if VAX8600
+#if VAX8600 || NEED_BABYVAX_SUPPORT
 /* 200 */	STRAY16(0x200);		/* unused (?) */
 /* 240 */	STRAY16(0x240);		/* sbi1fail etc. set at boot time */
 /* 280 */	STRAY16(0x280);		/* unused (?) */
@@ -161,7 +171,7 @@ _eUNIvec:
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)locore.s	7.16 (Berkeley) 1/10/99
+ *	@(#)locore.s	7.23 (Berkeley) 3/22/04
  */
 
 #include "psl.h"
@@ -173,6 +183,7 @@ _eUNIvec:
 #include "mtpr.h"
 #include "trap.h"
 #include "cpu.h"
+#include "cpucond.h"
 #include "nexus.h"
 #include "cons.h"
 #include "clock.h"
@@ -181,8 +192,10 @@ _eUNIvec:
 #include "ka650.h"
 #include "ka820.h"
 #include "../vaxuba/ubareg.h"
+#include "../mdec/vmb.h"
 
 #include "dz.h"
+#include "ss.h"
 #include "uu.h"
 #include "ps.h"
 #include "mba.h"
@@ -272,8 +285,9 @@ SCBVEC(machcheck):
 	.word	1f-0b		# 6 is 8800 (unsupported)
 	.word	1f-0b		# 7 is 610  (unsupported)
 	.word	1f-0b		# 8 is 630
-	.word	1f-0b		# 9 is ???
-	.word	9f-0b		# 10 is 650
+	.word	1f-0b		# 9 is 410
+	.word	9f-0b		# 0A is 650
+	.word	1f-0b		# 0B is 3100
 5:
 #if defined(VAX8200) || defined(VAX750) || defined(VAX730)
 	mtpr	$0xf,$MCESR
@@ -411,7 +425,7 @@ _scbstray: .globl _scbstray
 	PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ
 	PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ
 	PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ
-#if VAX8600
+#if VAX8600 || NEED_BABYVAX_SUPPORT
 	/* and another 128, for the second SBIA's scb */
 	PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ
 	PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ;PJ
@@ -540,6 +554,10 @@ SCBVEC(netintr):
 #ifdef NS
 	bbcc	$NETISR_NS,_netisr,1f; calls $0,_nsintr; 1:
 #endif
+#include "ppp.h"
+#if NPPP > 0
+	bbcc	$NETISR_PPPCTL,_netisr,1f; calls $0,_pppctlintr; 1:
+#endif
 	bbcc	$NETISR_RAW,_netisr,1f; calls $0,_rawintr; 1:
 	POPR
 	incl	_cnt+V_SOFT
@@ -632,6 +650,44 @@ dzpcall:
 	calls	$1,*(r0)		# call interrupt rtn
 	movl	(sp)+,r3
 	brb 	dzploop			# check for another line
+#endif
+
+#if NSS > 0
+/*
+ * ss pseudo dma routine:
+ *	r0 - controller number (ignored since there is only one ss)
+ */
+	.align	1
+	.globl	ssdma
+ssdma:
+	movab	_sspdma,r3		# pdma structure base
+					# for this controller
+ssploop:
+	movl	r3,r0	
+	movl	(r0)+,r1		# device register address
+	movzbl	1(r1),r2		# get line number
+	bitb	$0x80,r2		# TRDY on?
+	beql	ssprei			# no	
+	bicb2	$0xf8,r2		# clear garbage bits
+	mull2	$20,r2
+	addl2	r2,r0			# point at line's pdma structure
+	movl	(r0)+,r2		# p_mem
+	cmpl	r2,(r0)+		# p_mem < p_end ?
+	bgequ	sspcall			# no, go call dzxint
+	movb	(r2)+,0xC(r1)		# dztbuf = *p_mem++
+	movl	r2,-8(r0)
+	brb 	ssploop			# check for another line
+ssprei:
+	POPR
+	incl	_cnt+V_PDMA
+	rei
+
+sspcall:
+	pushl	r3
+	pushl	(r0)+			# push tty address
+	calls	$1,*(r0)		# call interrupt rtn
+	movl	(sp)+,r3
+	brb 	ssploop			# check for another line
 #endif
 
 #if NUU > 0 && defined(UUDMA)
@@ -851,35 +907,6 @@ SCBVEC(ustray):
 	POPR
 	rei
 
-#if VAX630 || VAX650
-/*
- * Emulation OpCode jump table:
- *	ONLY GOES FROM 0xf8 (-8) TO 0x3B (59)
- */
-#define EMUTABLE	0x43
-#define NOEMULATE	.long noemulate
-#define	EMULATE(a)	.long _EM/**/a
-	.globl	_emJUMPtable
-_emJUMPtable:
-/* f8 */	EMULATE(ashp);	EMULATE(cvtlp);	NOEMULATE;	NOEMULATE
-/* fc */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 00 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 04 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 08 */	EMULATE(cvtps);	EMULATE(cvtsp);	NOEMULATE;	EMULATE(crc)
-/* 0c */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 10 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 14 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 18 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 1c */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 20 */	EMULATE(addp4);	EMULATE(addp6);	EMULATE(subp4);	EMULATE(subp6)
-/* 24 */	EMULATE(cvtpt);	EMULATE(mulp);	EMULATE(cvttp);	EMULATE(divp)
-/* 28 */	NOEMULATE;	EMULATE(cmpc3);	EMULATE(scanc);	EMULATE(spanc)
-/* 2c */	NOEMULATE;	EMULATE(cmpc5);	EMULATE(movtc);	EMULATE(movtuc)
-/* 30 */	NOEMULATE;	NOEMULATE;	NOEMULATE;	NOEMULATE
-/* 34 */	EMULATE(movp);	EMULATE(cmpp3);	EMULATE(cvtpl);	EMULATE(cmpp4)
-/* 38 */	EMULATE(editpc); EMULATE(matchc); EMULATE(locc); EMULATE(skpc)
-#endif
-
 /*
  * Trap and fault vector routines
  */ 
@@ -890,8 +917,13 @@ _emJUMPtable:
  */
 SCBVEC(astflt):
 	pushl $0; TRAP(ASTFLT)
+
 SCBVEC(privinflt):
+#if EMULFFLT || EMULDFLT || EMULGFLT || EMULHFLT
+	jsb	_Resinstr_check_emul
+#endif
 	pushl $0; TRAP(PRIVINFLT)
+
 SCBVEC(xfcflt):
 	pushl $0; TRAP(XFCFLT)
 SCBVEC(resopflt):
@@ -914,62 +946,6 @@ SCBVEC(protflt):
 segflt:
 	TRAP(SEGFLT)
 
-/*
- * The following is called with the stack set up as follows:
- *
- *	  (sp):	Opcode
- *	 4(sp):	Instruction PC
- *	 8(sp):	Operand 1
- *	12(sp):	Operand 2
- *	16(sp):	Operand 3
- *	20(sp):	Operand 4
- *	24(sp):	Operand 5
- *	28(sp):	Operand 6
- *	32(sp):	Operand 7 (unused)
- *	36(sp):	Operand 8 (unused)
- *	40(sp):	Return PC
- *	44(sp):	Return PSL
- *	48(sp): TOS before instruction
- *
- * Each individual routine is called with the stack set up as follows:
- *
- *	  (sp):	Return address of trap handler
- *	 4(sp):	Opcode (will get return PSL)
- *	 8(sp):	Instruction PC
- *	12(sp):	Operand 1
- *	16(sp):	Operand 2
- *	20(sp):	Operand 3
- *	24(sp):	Operand 4
- *	28(sp):	Operand 5
- *	32(sp):	Operand 6
- *	36(sp):	saved register 11
- *	40(sp):	saved register 10
- *	44(sp):	Return PC
- *	48(sp):	Return PSL
- *	52(sp): TOS before instruction
- */
-
-SCBVEC(emulate):
-#if VAX630 || VAX650
-	movl	r11,32(sp)		# save register r11 in unused operand
-	movl	r10,36(sp)		# save register r10 in unused operand
-	cvtbl	(sp),r10		# get opcode
-	addl2	$8,r10			# shift negative opcodes
-	subl3	r10,$EMUTABLE,r11	# forget it if opcode is out of range
-	bcs	noemulate
-	movl	_emJUMPtable[r10],r10	# call appropriate emulation routine
-	jsb	(r10)		# routines put return values into regs 0-5
-	movl	32(sp),r11		# restore register r11
-	movl	36(sp),r10		# restore register r10
-	insv	(sp),$0,$4,44(sp)	# and condition codes in Opcode spot
-	addl2	$40,sp			# adjust stack for return
-	rei
-noemulate:
-	addl2	$48,sp			# adjust stack for
-#endif
-	.word	0xffff			# "reserved instruction fault"
-SCBVEC(emulateFPD):
-	.word	0xffff			# "reserved instruction fault"
 SCBVEC(transflt):
 	bitl	$2,(sp)+
 	bnequ	tableflt
@@ -1024,6 +1000,7 @@ _/**/mname:	.globl	_/**/mname;		\
 #ifdef	GPROF
 	SYSMAP(profmap	,profbase	,600*CLSIZE	)
 #endif
+	SYSMAP(vmbinfomap,vmb_info	,128		)
 	SYSMAP(ekmempt	,kmemlimit	,0		)
 
 	SYSMAP(UMBAbeg	,umbabeg	,0		)
@@ -1058,11 +1035,20 @@ _/**/mname:	.globl	_/**/mname;		\
 	SYSMAP(Ka630map	,ka630cpu	,1		)
 #endif
 #if VAX650
- 	SYSMAP(KA650MERRmap	,ka650merr	,1		)
- 	SYSMAP(KA650CBDmap	,ka650cbd	,1		)
- 	SYSMAP(KA650SSCmap	,ka650ssc	,3		)
- 	SYSMAP(KA650IPCRmap	,ka650ipcr	,1		)
- 	SYSMAP(KA650CACHEmap	,ka650cache	,KA650_CACHESIZE/NBPG )
+	SYSMAP(KA650MERRmap	,ka650merr	,1		)
+	SYSMAP(KA650SSCmap	,ka650ssc	,3		)
+	SYSMAP(KA650IPCRmap	,ka650ipcr	,1		)
+#endif
+#if VAX650 || VAX3100
+	/*
+	 * XXX This is a kludge - using KA650 structures for a different CPU
+	 * But KA42's L2 cache is close enough to the 650's
+	 */
+	SYSMAP(KA650CBDmap	,ka650cbd	,1		)
+	SYSMAP(KA650CACHEmap	,ka650cache	,KA650_CACHESIZE/NBPG )
+#endif
+#if NEED_BABYVAX_SUPPORT
+	SYSMAP(Babyvaxmap,bv_regs	,8		)
 #endif
 #ifdef QBA
 	/*
@@ -1088,15 +1074,26 @@ eSysmap:
  * Initialization
  *
  * ipl 0x1f; mapen 0; scbb, pcbb, sbr, slr, isp, ksp not set
+ *
+ * We are called as a procedure with 0 or 1 arguments.
+ * The optional argument is a pointer to vmb_info for the VMB boot path.
+ * This argument may be 0, which is equivalent to not passing it at all.
  */
 	.data
 	.globl	_cpu
 _cpu:	.long	0
+	.globl	_cpusid
+_cpusid: .long	0
+	.globl	_cpusie
+_cpusie: .long	0
 	.text
 	.globl	start
 start:
 	.word	0
-	mtpr	$0,$ICCS
+	tstl	(ap)			# arg present?
+	beql	1f			# if not, skip ahead
+	movl	4(ap),_vmbinfo		# otherwise, save the address passed
+1:	mtpr	$0,$ICCS
 /* set system control block base and system page table params */
 	mtpr	$_scb-0x80000000,$SCBB
 	mtpr	$_Sysmap-0x80000000,$SBR
@@ -1106,9 +1103,7 @@ start:
 	mtpr	$_Syssize,$P0LR
 /* set ISP and get cpu type */
 	movl	$_intstack+NISP*NBPG,sp
-	mfpr	$SID,r0
-	movab	_cpu,r1
-	extzv	$24,$8,r0,(r1)
+	calls	$0,_cpuid
 /* init RPB */
 	movab	_rpb,r0
 	movl	r0,(r0)+			# rp_selfref
@@ -1118,23 +1113,35 @@ start:
 	clrl	r3
 1:	addl2	(r1)+,r3; sobgtr r2,1b
 	movl	r3,(r0)+			# rp_chksum
-/* count up memory */
-	clrl	r7
-1:	pushl	$4; pushl r7; calls $2,_badaddr; tstl r0; bneq 9f
+/*
+ * Did we boot in the traditional BSD way?  If we did, count up memory.
+ * But if we booted via VMB, take physmem from the vmb_info structure and
+ * set maxmem to protect it.
+ *
+ * Note that counting up memory may not work on all machines and VMB booting
+ * may be required for some.  On the KA410 BabyVAX, for example, the cheap
+ * hardware (standard cell) has no NXM indication at all (!).
+ */
+	movl	_vmbinfo,r8
+	beql	1f
+	movl	INFO_MEMSIZ(r8),r7
+	jbr	9f
+1:	clrl	r7
+1:	pushl	$4; pushl r7; calls $2,_badaddr; tstl r0; bneq 2f
 	acbl	$MAXMEM*1024-1,$64*1024,r7,1b
-9:
+2:	movl	r7,r8
 #if  VAX630 || VAX650
 /* reserved area at top of memory for processor specific use */
 	cmpb	_cpu,$VAX_630
 	beql	1f
 	cmpb	_cpu,$VAX_650
-	bneq	2f
+	bneq	9f
 	subl2	$32768,r7	# space for Qbus map registers
-	brb	2f
+	brb	9f
 1:
-	subl2   $4096,r7	# space for console scratchpad
-2:
+	subl2   $4096,r8	# space for console scratchpad
 #endif
+9:
 /* clear memory from kernel bss and pages for proc 0 u. and page table */
 	movab	_edata,r6; bicl2 $SYSTEM,r6
 	movab	_end,r5; bicl2 $SYSTEM,r5
@@ -1175,8 +1182,8 @@ start:
 /* now go to mapped mode */
 	mtpr	$0,$TBIA; mtpr $1,$MAPEN; jmp *$0f; 0:
 /* init mem sizes */
-	ashl	$-PGSHIFT,r7,_maxmem
-	movl	_maxmem,_physmem
+	ashl	$-PGSHIFT,r7,_physmem
+	ashl	$-PGSHIFT,r8,_maxmem
 	movl	_maxmem,_freemem
 /* setup context for proc[0] == Scheduler */
 	bicl3	$SYSTEM|(NBPG-1),r9,r6	# make phys, page boundary

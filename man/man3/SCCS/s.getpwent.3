@@ -1,0 +1,197 @@
+h38418
+s 00024/00017/00077
+d D 6.3 86/05/15 13:23:48 mckusick 5 4
+c note use of ndbm
+e
+s 00008/00005/00086
+d D 6.2 85/10/30 17:35:49 mckusick 4 3
+c update return values for endpwent and setpwent
+e
+s 00016/00002/00075
+d D 6.1 85/05/15 15:00:52 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00076
+d D 5.1 85/05/15 15:00:45 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00077/00000/00000
+d D 4.1 85/05/15 15:00:39 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETPWENT 3 
+E 2
+I 2
+D 3
+.TH GETPWENT 3  "19 January 1983"
+E 3
+I 3
+.TH GETPWENT 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+D 3
+getpwent, getpwuid, getpwnam, setpwent, endpwent \- get password file entry
+E 3
+I 3
+getpwent, getpwuid, getpwnam, setpwent, endpwent, setpwfile \- get password file entry
+E 3
+.SH SYNOPSIS
+.nf
+.B #include <pwd.h>
+.PP
+D 5
+.B struct passwd *getpwent()
+.PP
+E 5
+.B struct passwd *getpwuid(uid)
+.B int uid;
+.PP
+.B struct passwd *getpwnam(name)
+.B char *name;
+.PP
+I 5
+.B struct passwd *getpwent()
+.PP
+E 5
+D 4
+.B int setpwent()
+E 4
+I 4
+.B setpwent()
+E 4
+.PP
+D 4
+.B int endpwent()
+E 4
+I 4
+.B endpwent()
+E 4
+I 3
+.PP
+.B setpwfile(name)
+.B char *name;
+E 3
+.fi
+.SH DESCRIPTION
+.I Getpwent,
+.I getpwuid
+and
+.I getpwnam
+each return a pointer to an object with the
+following structure
+containing the broken-out
+fields of a line in the password file.
+.RS
+.PP
+.nf
+.so /usr/include/pwd.h
+.ft R
+.ad
+.fi
+.RE
+.PP
+The fields
+.I pw_quota
+and
+.I pw_comment
+are unused; the others have meanings described in
+.IR passwd (5).
+.PP
+D 5
+.I Getpwent
+reads the next
+line (opening the file if necessary);
+.I setpwent
+rewinds the file;
+E 5
+I 5
+Searching of the password file is done using the \fIndbm\fP
+database access routines.
+.I Setpwent
+opens the database;
+E 5
+.I endpwent
+closes it.
+I 5
+.I Getpwuid
+and
+.I getpwnam
+search the database (opening it if necessary) for a matching
+.I uid
+or
+.IR name .
+EOF is returned if there is no entry.
+E 5
+I 3
+.PP
+I 5
+For programs wishing to read the entire database,
+.I getpwent
+reads the next
+line (opening the database if necessary).
+In addition to opening the database,
+.I setpwent
+can be used to make
+.I getpwent
+begin its search from the beginning of the database.
+.PP
+E 5
+.I Setpwfile
+changes the default password file to
+.I name
+thus allowing alternate password files to be used.
+Note that it does
+.I not
+close the previous file.
+If this is desired,
+.I endpwent
+should be called prior to it.
+E 3
+D 5
+.PP
+.I Getpwuid
+and
+.I getpwnam
+search from the beginning until a matching
+.I uid
+or
+.I name
+is found
+(or until EOF is encountered).
+E 5
+.SH FILES
+/etc/passwd
+.SH "SEE ALSO"
+getlogin(3), getgrent(3), passwd(5)
+.SH DIAGNOSTICS
+D 4
+Null pointer
+(0) returned on EOF or error.
+E 4
+I 4
+The routines
+.IR getpwent ,
+.IR getpwuid ,
+and
+.IR getpwnam ,
+return a null pointer (0) on EOF or error.
+E 4
+.SH BUGS
+All information
+is contained in a static area
+so it must be copied if it is
+to be saved.
+D 4
+.br
+E 4
+E 1

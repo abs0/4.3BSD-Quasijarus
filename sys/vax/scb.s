@@ -3,9 +3,10 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)scb.s	7.4 (Berkeley) 5/14/88
+ *	@(#)scb.s	7.6 (Berkeley) 3/18/04
  */
 
+#include "cpucond.h"
 #include "uba.h"
 
 /*
@@ -40,7 +41,11 @@ _scb:	.globl	_scb
 /* 090 */	STRAY(0x90);	STRAY(0x94);	STRAY(0x98);	STRAY(0x9c);
 /* 0a0 */	IS(softclock);	STRAY(0xa4);	STRAY(0xa8);	STRAY(0xac);
 /* 0b0 */	IS(netintr);	STRAY(0xb4);	STRAY(0xb8);	IS(kdbintr);
+#if NEED_SAMEMODE_EMU
 /* 0c0 */	IS(hardclock);	STRAY(0xc4);	KS(emulate);	KS(emulateFPD);
+#else
+/* 0c0 */	IS(hardclock);	STRAY(0xc4);	STRAY(0xc8);	STRAY(0xcc);
+#endif
 /* 0d0 */	STRAY(0xd0);	STRAY(0xd4);	STRAY(0xd8);	STRAY(0xdc);
 /* 0e0 */	STRAY(0xe0);	STRAY(0xe4);	STRAY(0xe8);	STRAY(0xec);
 /* 0f0 */	IS(consdin);	IS(consdout);	IS(cnrint);	IS(cnxint);
@@ -60,11 +65,15 @@ _scb:	.globl	_scb
  * An additional page is provided for UBA jump tables if the second
  * scb might be present.  Other CPUs with additional scbs should expand
  * this area as needed.
+ *
+ * BabyVAX note: we treat the BabyVAX interrupt vector page as the second page
+ * of the main SCB a la 8600.  Since no BabyVAX has interrupts at 300, 340, 380
+ * or 3C0 the nex1zvec initialisation won't cause a problem.
  */
 	.globl	_UNIvec
 	.globl	_eUNIvec
 _UNIvec:
-#if VAX8600
+#if VAX8600 || NEED_BABYVAX_SUPPORT
 /* 200 */	STRAY16(0x200);		/* unused (?) */
 /* 240 */	STRAY16(0x240);		/* sbi1fail etc. set at boot time */
 /* 280 */	STRAY16(0x280);		/* unused (?) */

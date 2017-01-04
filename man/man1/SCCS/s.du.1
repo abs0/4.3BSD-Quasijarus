@@ -1,0 +1,99 @@
+h43399
+s 00001/00002/00047
+d D 6.1 85/04/29 20:03:43 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00007/00006/00042
+d D 5.1 85/04/29 20:03:24 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00048/00000/00000
+d D 4.1 85/04/29 20:03:08 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DU 1 
+E 2
+I 2
+D 3
+.TH DU 1 "17 March 1982"
+E 3
+I 3
+.TH DU 1 "%Q%"
+E 3
+E 2
+.AT 3
+I 2
+D 3
+.UC 4
+E 3
+E 2
+.SH NAME
+du \- summarize disk usage
+.SH SYNOPSIS
+.B du
+[
+.B \-s
+] [
+.B \-a
+] [ name ... ]
+.SH DESCRIPTION
+.I Du
+D 2
+gives the number of blocks contained in all files
+and (recursively) directories within each specified directory or
+file
+E 2
+I 2
+gives the number of kilobytes contained in all files
+and, recursively, directories within each specified
+directory or file
+E 2
+.IR name .
+If
+.I name
+is missing,
+`\fB.\fR'
+is used.
+.PP
+D 2
+The optional argument
+E 2
+I 2
+The argument
+E 2
+.B \-s
+causes only the grand total to
+be given.
+D 2
+The optional argument
+E 2
+I 2
+The argument
+E 2
+.B \-a
+causes an entry to be generated
+for each file.
+Absence of either causes an entry to be generated for
+each directory only.
+.PP
+A file which has two links to it is only counted once.
+.SH "SEE ALSO"
+df(1), quot(8)
+.SH BUGS
+Non-directories
+given as arguments (not under
+.B \-a
+option) are not listed.
+.br
+If there are too many distinct linked files,
+.I du
+counts the excess files multiply.
+E 1

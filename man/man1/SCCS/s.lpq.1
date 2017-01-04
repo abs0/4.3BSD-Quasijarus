@@ -1,0 +1,161 @@
+h28419
+s 00008/00021/00068
+d D 6.4 87/04/30 18:07:26 bostic 5 4
+c removed '+' flag documentation
+e
+s 00004/00006/00085
+d D 6.3 87/04/29 15:56:48 bostic 4 3
+c mention the + default
+e
+s 00002/00002/00089
+d D 6.2 86/06/05 18:29:59 bloom 3 2
+c fix plus because cfo decided to change things
+e
+s 00001/00001/00090
+d D 6.1 85/04/29 21:11:43 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00091/00000/00000
+d D 5.1 85/04/29 21:11:34 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH LPQ 1 "18 July 1983"
+E 2
+I 2
+.TH LPQ 1 "%Q%"
+E 2
+.UC 5
+.SH NAME
+lpq \- spool queue examination program
+.SH SYNOPSIS
+.B lpq
+D 5
+[ +[ n ] ] [ -l ] [ \-Pprinter ] [ job # ... ] [ user ... ]
+E 5
+I 5
+[ -l ] [ \-Pprinter ] [ job # ... ] [ user ... ]
+E 5
+.SH DESCRIPTION
+.I lpq
+examines the spooling area used by
+.IR lpd (8)
+D 5
+for printing
+files on the line printer, and reports the status of the specified jobs or
+all jobs associated with a user. 
+.I lpq
+invoked without any arguments
+reports on any jobs currently in the queue.  A
+E 5
+I 5
+for printing files on the line printer, and reports the status of the
+specified jobs or all jobs associated with a user.  \fIlpq\fP invoked
+without any arguments reports on any jobs currently in the queue.  A
+E 5
+.B \-P
+D 5
+flag may be used
+to specify a particular printer, otherwise the default line printer
+is used (or the value of the PRINTER variable in the environment).
+If a
+D 3
+.B \+
+E 3
+I 3
+.B \(pl
+E 3
+argument is supplied,
+.I lpq
+displays the spool queue until it empties.  Supplying a number
+immediately after the
+D 3
+.B \+
+E 3
+I 3
+.B \(pl
+E 3
+D 4
+sign indicates that
+.I lpq
+should sleep \fIn\fR seconds in between scans of the queue.
+All other arguments supplied are
+interpreted as user names or job numbers to filter out only those
+jobs of interest.
+E 4
+I 4
+sign changes the number of seconds that \fIlpq\fP should sleep inbetween
+scans of the queue, from the default, 30, to \fIn\fP.  All other arguments
+supplied are interpreted as user names or job numbers to filter out only
+those jobs of interest.
+E 5
+I 5
+flag may be used to specify a particular printer, otherwise the default
+line printer is used (or the value of the PRINTER variable in the
+environment). All other arguments supplied are interpreted as user
+names or job numbers to filter out only those jobs of interest.
+E 5
+E 4
+.PP
+For each job submitted (i.e. invocation of 
+.IR lpr (1))
+.I lpq
+reports the user's name, current rank in the queue, the
+names of files comprising the job, the job identifier (a number which
+may be supplied to
+.IR lprm (1)
+for removing a specific job), and the total size in bytes.
+The
+.B \-l
+option causes information about each of the files comprising the job
+to be printed.
+Normally, only as much information as will fit on one line is displayed.
+Job ordering is dependent on
+the algorithm used to scan the spooling directory and is supposed
+to be FIFO (First in First Out).
+File names comprising a job may be unavailable
+(when
+.IR lpr (1)
+is used as a sink in a pipeline) in which case the file
+is indicated as ``(standard input)".
+.PP
+If
+.I lpq
+warns that there is no daemon present (i.e. due to some malfunction),
+the
+.IR lpc (8)
+command can be used to restart the printer daemon.
+.SH FILES
+.nf
+.ta \w'/etc/termcap            'u
+/etc/termcap	for manipulating the screen for repeated display
+/etc/printcap	to determine printer characteristics
+/usr/spool/*	the spooling directory, as determined from printcap
+/usr/spool/*/cf*	control files specifying jobs
+/usr/spool/*/lock	the lock file to obtain the currently active job 
+.fi
+.SH "SEE ALSO"
+lpr(1),
+lprm(1),
+lpc(8),
+lpd(8)
+.SH BUGS
+Due to the dynamic nature of the information in the spooling directory
+lpq may report unreliably.
+Output formatting is sensitive to the line length of the terminal;
+this can results in widely spaced columns.
+.SH DIAGNOSTICS
+Unable to open various files.  The lock file being malformed.  Garbage
+files when there is no daemon active, but files in the spooling directory.
+E 1

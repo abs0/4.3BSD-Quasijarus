@@ -9,17 +9,16 @@
 # software without specific prior written permission. This software
 # is provided ``as is'' without express or implied warranty.
 #
-#	@(#)Makefile	5.5 (Berkeley) 2/18/88
+#	@(#)Makefile	5.6 (Berkeley) 4/14/03
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
 SRCS=	aux.c cmd1.c cmd2.c cmd3.c cmdtab.c collect.c config.c edit.c fio.c \
 	getname.c head.c v7.local.c lex.c list.c main.c names.c optim.c \
-	popen.c quit.c send.c strings.c temp.c tty.c vars.c version.c
+	quit.c send.c strings.c temp.c tty.c vars.c version.c
 OBJS=	version.o aux.o cmd1.o cmd2.o cmd3.o cmdtab.o collect.o config.o \
 	edit.o fio.o getname.o head.o v7.local.o lex.o list.o main.o \
-	names.o optim.o popen.o quit.o send.o strings.o temp.o tty.o \
-	vars.o str.o flsbuf.o
+	names.o optim.o quit.o send.o strings.o temp.o tty.o vars.o str.o
 
 #
 # Special massaging of C files for sharing of strings
@@ -207,10 +206,6 @@ optim.o: /usr/include/sys/signal.h /usr/include/stdio.h /usr/include/sgtty.h
 optim.o: /usr/include/sys/ioctl.h /usr/include/sys/ttychars.h
 optim.o: /usr/include/sys/ttydev.h /usr/include/ctype.h /usr/include/strings.h
 optim.o: local.h v7.local.h glob.h /usr/include/setjmp.h configdefs.h
-popen.o: popen.c /usr/include/stdio.h /usr/include/sys/signal.h
-popen.o: /usr/include/machine/trap.h /usr/include/sys/types.h
-popen.o: /usr/include/sys/wait.h /usr/include/machine/endian.h
-popen.o: /usr/include/errno.h
 quit.o: quit.c rcv.h def.h /usr/include/sys/param.h /usr/include/sys/types.h
 quit.o: /usr/include/signal.h /usr/include/machine/trap.h
 quit.o: /usr/include/machine/machparam.h /usr/include/machine/endian.h

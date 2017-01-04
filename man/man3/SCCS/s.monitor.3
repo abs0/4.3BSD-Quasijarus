@@ -1,0 +1,269 @@
+h30775
+s 00001/00001/00141
+d D 6.1 85/05/15 15:36:26 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00093/00043/00049
+d D 5.1 85/05/15 15:36:06 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00092/00000/00000
+d D 4.1 85/05/15 15:35:49 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH MONITOR 3 
+E 2
+I 2
+D 3
+.TH MONITOR 3  "19 January 1983"
+E 3
+I 3
+.TH MONITOR 3  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+monitor \- prepare execution profile
+E 2
+I 2
+monitor, monstartup, moncontrol \- prepare execution profile
+E 2
+.SH SYNOPSIS
+.nf
+.B monitor(lowpc, highpc, buffer, bufsize, nfunc)
+.B int (*lowpc)(), (*highpc)();
+.B short buffer[];
+I 2
+.sp
+.B monstartup(lowpc, highpc)
+.B int (*lowpc)(), (*highpc)();
+.sp
+.B moncontrol(mode)
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+An executable program created by
+`cc \-p' automatically includes calls for
+.I monitor
+E 2
+I 2
+There are two different forms of monitoring available:
+An executable program created by:
+.IP  "	cc \-p . . ."
+.LP
+automatically includes calls for the 
+.IR prof (1)
+monitor and includes an initial call to its start-up routine
+.I monstartup
+E 2
+with default parameters;
+.I monitor
+D 2
+needn't be called explicitly
+except to gain fine control over profiling.
+E 2
+I 2
+need not be called explicitly except to gain fine control over profil 
+buffer allocation.
+An executable program created by:
+.IP  "	cc \-pg . . ."
+.LP
+automatically includes calls for the
+.IR gprof (1)
+monitor.
+E 2
+.PP
+D 2
+.I Monitor
+is an interface to
+E 2
+I 2
+.I Monstartup
+is a high level interface to
+E 2
+.IR profil (2).
+.I Lowpc
+and
+.I highpc
+D 2
+are the addresses of two functions;
+.I buffer
+is the address of a (user supplied)
+array of
+.I bufsize
+short integers.
+.I Monitor
+arranges to record a histogram of
+periodically sampled values of the program counter,
+and of counts of calls
+of certain functions, in the buffer.
+The lowest address sampled
+E 2
+I 2
+specify the address range that is to be sampled; the lowest address sampled
+E 2
+is that of
+.I lowpc
+D 2
+and the highest is
+just below
+E 2
+I 2
+and the highest is just below
+E 2
+.IR highpc .
+D 2
+At most
+.I nfunc
+call counts can be kept; only calls of functions
+compiled with the profiling option
+E 2
+I 2
+.I Monstartup
+allocates space using 
+.IR sbrk (2)
+and passes it to
+.I monitor
+(see below) to record a histogram of periodically sampled values of
+the program counter, and of counts of calls of certain functions, in the buffer.
+Only calls of functions compiled with the profiling option
+E 2
+.B \-p
+of
+.IR cc (1)
+are recorded.
+D 2
+For the results to be significant,
+especially where there are small, heavily
+used routines,
+it is suggested that the buffer be no more
+than a few times smaller than the range
+of locations sampled.
+E 2
+.PP
+D 2
+To profile the entire program,
+it is sufficient to use
+E 2
+I 2
+To profile the entire program, it is sufficient to use
+E 2
+.PP
+.nf
+	extern etext();
+	. . .
+D 2
+	monitor((int) 2, etext, buf, bufsize, nfunc);
+E 2
+I 2
+	monstartup((int) 2, etext);
+E 2
+.fi
+.PP
+.I Etext
+D 2
+lies just above all the
+program text, see
+E 2
+I 2
+lies just above all the program text, see
+E 2
+.IR end (3).
+.PP
+D 2
+To stop execution monitoring and write the results
+on the file
+E 2
+I 2
+To stop execution monitoring and write the results on the file
+E 2
+.I mon.out,
+use
+.PP
+	monitor(0);
+.LP
+then
+.IR prof (1)
+D 2
+can be used
+to examine the results.
+E 2
+I 2
+can be used to examine the results.
+.PP
+.I Moncontrol
+is used to selectively control profiling within a program.
+This works with either 
+.IR prof (1)
+or
+.IR gprof (1)
+type profiling.
+When the program starts, profiling begins.
+To stop the collection of histogram ticks and call counts use
+.IR moncontrol (0);
+to resume the collection of histogram ticks and call counts use
+.IR moncontrol (1).
+This allows the cost of particular operations to be measured.
+Note that an output file will be produced upon program exit
+irregardless of the state of 
+.I moncontrol.
+.PP
+.I Monitor
+is a low level interface to
+.IR profil (2).
+.I Lowpc
+and
+.I highpc
+are the addresses of two functions;
+.I buffer
+is the address of a (user supplied) array of
+.I bufsize
+short integers.  At most
+.I nfunc
+call counts can be kept.
+For the results to be significant, especially where there are small, heavily
+used routines, it is suggested that the buffer be no more
+than a few times smaller than the range of locations sampled.
+.I Monitor
+divides the buffer into space to record the histogram
+of program counter samples over the range
+.I lowpc
+to
+.IR highpc ,
+and space to record call counts of functions compiled with the 
+.B \-p
+option to
+.IR cc (1).
+.PP
+To profile the entire program, it is sufficient to use
+.PP
+.nf
+	extern etext();
+	. . .
+	monitor((int) 2, etext, buf, bufsize, nfunc);
+.fi
+E 2
+.SH FILES
+mon.out
+.SH "SEE ALSO"
+D 2
+prof(1), profil(2), cc(1)
+E 2
+I 2
+cc(1), prof(1), gprof(1), profil(2), sbrk(2)
+E 2
+E 1

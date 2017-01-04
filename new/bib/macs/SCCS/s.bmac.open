@@ -1,0 +1,283 @@
+h50970
+s 00001/00000/00175
+d D 2.4 87/04/27 18:05:51 garrison 6 5
+c defined e] to be \fIet al.\fP
+e
+s 00000/00001/00175
+d D 2.3 84/07/26 17:00:57 garrison 5 4
+c remove extraneous blank lines in all three files, an
+c duplicate lines in bib.supn
+e
+s 00007/00008/00169
+d D 2.2 83/09/09 21:13:46 garrison 4 3
+c Incorporate changes from Arizona
+e
+s 00001/00000/00176
+d D 2.1 83/06/22 14:57:58 garrison 3 2
+c Add keywords, make new release to send to Arizona
+e
+s 00036/00007/00140
+d D 1.2 83/06/11 16:37:04 garrison 2 1
+c Fixed bug in bib.stda line defining sort order.
+c Changed macros so that editors are handled more sanely, and in more places.
+c Changed macros to correspond to changes in format specifications (for
+c authors and editors) made in bib.
+e
+s 00147/00000/00000
+d D 1.1 83/06/06 11:50:37 garrison 1 0
+c date and time created 83/06/06 11:50:37 by garrison
+e
+u
+U
+t
+T
+I 3
+.\"	"%W%	%G%";
+E 3
+I 1
+.\" open format troff macros
+.\" citation formatting strings
+.ds [[ [
+.ds ]] ]
+.ds ], ,\|
+.ds ]- -
+.ds [. " \&
+.ds .] .
+.ds [, " \&
+.ds ,] ,
+I 2
+.ds [? " \&
+.ds ?] ?
+.ds [: " \&
+.ds :] :
+.ds [; " \&
+.ds ;] ;
+.ds [! " \&
+.ds !] !
+.ds [" " \&
+.ds "] \&"
+.ds [' " \&
+.ds '] '
+E 2
+.ds [< " \&
+.ds >]
+D 2
+.\" reference formmating strings
+E 2
+I 2
+.\" reference formating strings
+I 4
+.ds a] " \&
+.ds b] , \&
+E 4
+E 2
+.ds c] , \&
+.ds n] "" and \&
+.ds m] "" and \&
+I 6
+.ds e] \\fIet al.\\fP
+E 6
+D 4
+.ds a] " \&
+E 4
+I 4
+.ds p] .
+E 4
+.\" reference formatting macros
+.de s[   \" start reference
+.nh
+.IP [\\*([F]\0
+..
+.de e[   \" end reference
+.[-
+..
+.de []   \" start to display collected references
+D 2
+.SH
+References
+E 2
+.LP
+..
+.de ][   \" choose format
+.ie !"\\*([J""     .nr t[ 1    \" journal
+.el .ie !"\\*([B"" .nr t[ 3    \" article in book
+.el .ie !"\\*([R"" .nr t[ 4    \" technical report
+.el .ie !"\\*([I"" .nr t[ 2    \" book
+.el                .nr t[ 0    \" other
+.\\n(t[[
+..
+.de 0[   \" other
+.s[
+.if !~\\*(]A~.~ .as [A .
+.if !~\\*([A~~ \\*([A
+.br
+I 2
+.if !~\\*([E~~ \{\
+.       ie \\n([E-1 \\*([E, editors.
+.       el \\*([E, editor.\}
+.br
+D 4
+.if !~\\*(]A~.~ .as [A .
+.if !~\\*([A~~ \\*([A
+.br
+E 4
+E 2
+.if !~\\*(]T~.~ .as [T .
+.if !~\\*([T~~ \\*([T
+.br
+.if !~\\*([O~~ \\*([O\c
+.if !~\\*([D~~ , \\*([D\c
+\&.
+.e[
+..
+.de 1[ \" journal article
+.s[
+.if !~\\*(]A~.~ .as [A .
+.if !~\\*([A~~ \\*([A
+.br
+I 2
+.if !~\\*([E~~ \{\
+.       ie \\n([E-1 \\*([E, editors.
+.       el \\*([E, editor.\}
+.br
+E 2
+.if !~\\*(]T~.~ .as [T .
+.if !~\\*([T~~ \\*([T
+.br
+.ds a[ \\fI\\*([J\\fP
+.ie !"\\*([V"" \{\
+.       as a[ , \\*([V
+.       if !~\\*([N~~ .as a[ (\\*([N)
+.       if !~\\*([P~~ .as a[ :\\*([P\}
+D 2
+.el .if !~\\*([P~~ .as a[ , pages \\*([P
+E 2
+I 2
+D 4
+.el .if !~\\*([P~~ .as a[ , pp. \\*([P
+E 4
+I 4
+.el .if !~\\*([P~~ .as a[ , pages \\*([P
+E 4
+E 2
+.if !~\\*([I~~ .as a[ , \\*([I
+.if !~\\*([D~~ .as a[ , \\*([D
+\\*(a[.
+.br
+.if !~\\*([O~~ \\*([O
+.e[
+..
+.de 2[ \" book
+.s[
+.if !~\\*(]A~.~ .as [A .
+D 2
+.ie !"\\*([A"" \\*([A
+.el .if !~\\*([E~~ \{\
+E 2
+I 2
+.if !"\\*([A"" \\*([A
+.br
+.if !~\\*([E~~ \{\
+E 2
+.       ie \\n([E-1 \\*([E, editors.
+.       el \\*([E, editor.\}
+.br
+.if !~\\*(]T~.~ .as [T .
+.if !~\\*([T~~ \\fI\\*([T\\fP
+.br
+.rm a[
+.if !~\\*([I~~ .ds a[ \\*([I
+.if !~\\*([C~~ \{\
+.       if !~\\*(a[~~ .as a[ , \&
+.       as a[ \\*([C\}
+.if !~\\*([D~~ \{\
+.       if !~\\*(a[~~ .as a[ , \&
+.       as a[ \\*([D\}
+\\*(a[.
+.br
+.if !~\\*([G~~ Government ordering number \\*([G.
+.br
+.if !~\\*([O~~ \\*([O.
+.e[
+..
+.de 3[ \" article in book
+.s[
+.if !~\\*(]A~.~ .as [A .
+.if !~\\*([A~~ \\*([A
+.br
+.if !~\\*(]T~.~ .as [T .
+.if !~\\*([T~~ \\*([T
+.br
+.if !~\\*([P~~ pp. \\*([P \c
+in \\fI\\*([B\\fP\c
+.if !~\\*([V~~ , Vol \\*([V\c
+D 2
+.if !~\\*([E~~ , ed. \\*([E\c
+E 2
+I 2
+.if !~\\*([E~~ \{\
+.       ie \\n([E-1 , \\*([E, editors.
+D 4
+.       el , \\*([E, editor.\}
+E 4
+I 4
+.       el \\*([E, editor.\}
+E 4
+.br
+E 2
+\&.
+.br
+.if !~\\*([I~~ \\*([I\c
+.if !~\\*([C~~ , \\*([C\c
+.if !~\\*([D~~ , \\*([D\c
+\&.
+D 4
+.if !~\\*([O~~ \\*([O.
+E 4
+I 4
+.if !~\\*([O~~ , \\*([O.
+E 4
+.e[
+..
+.de 4[ \" report
+.s[
+.if !~\\*(]A~.~ .as [A .
+.if !~\\*([A~~ \\*([A
+I 2
+.br
+.if !~\\*([E~~ \{\
+D 4
+.       ie \\n([E-1 \\*([E, editors.
+E 4
+I 4
+.       ie \\n([E-1 , \\*([E, editors.
+E 4
+.       el \\*([E, editor.\}
+E 2
+.br
+.if !~\\*(]T~.~ .as [T .
+\\*([T
+.br
+\\*([R\c
+.if !~\\*([G~~ \& (\\*([G)\c
+.if !~\\*([I~~ , \\*([I\c
+.if !~\\*([C~~ , \\*([C\c
+.if !~\\*([D~~ , \\*([D\c
+\&.
+.br
+.if !~\\*([O~~ \\*([O.
+.e[
+..
+.de [-   \" clean up after yourself
+.rm [A [B [C [D
+.rm [E [F [G
+.rm [I [J [K
+.rm [N [O [P
+.rm [R [T
+.rm [V [W
+.rm ]A ]T
+..
+D 5
+
+E 5
+E 1

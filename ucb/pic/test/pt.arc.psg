@@ -1,0 +1,415 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 1
+%%DocumentSuppliedResources: encoding TroffEncoding
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/04
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/fontset [
+/Times-Roman findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Roman-troff exch definefont
+/Times-Italic findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Italic-troff exch definefont
+/Times-Bold findfont
+dup length dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Encoding TroffEncoding def
+	currentdict
+end
+/Times-Bold-troff exch definefont
+/Symbol findfont
+dup length 1 add dict begin
+	{1 index /FID ne {def} {pop pop} ifelse} forall
+	/Metrics 2 dict
+	dup /radical 515 put
+	dup /radicalex [0 610] put
+	def
+	currentdict
+end
+/Symbol-troff exch definefont
+] def
+%%EndSetup
+%%Page: 1 1
+save $troff begin Sc
+0 10 SF
+4320 44640 (This) P
+5587 44640 (should) P
+7387 44640 (be) P
+8153 44640 (a) P
+8619 44640 (circle) P
+5400 41760 moveto
+5996 41760 6480 42243 6480 42840 curveto
+30 setlinewidth stroke
+6480 42840 moveto
+6480 43436 5997 43920 5400 43920 curveto
+stroke
+5400 43920 moveto
+4804 43920 4320 43437 4320 42840 curveto
+stroke
+4320 42840 moveto
+4320 42244 4803 41760 5400 41760 curveto
+stroke
+4320 41040 (This) P
+5587 41040 (should) P
+7387 41040 (be) P
+8153 41040 (a) P
+8619 41040 (wave) P
+4320 38160 moveto
+4916 38160 5400 38643 5400 39240 curveto
+stroke
+6480 40320 moveto
+5884 40320 5400 39837 5400 39240 curveto
+stroke
+7560 39240 moveto
+7560 39836 7077 40320 6480 40320 curveto
+stroke
+7560 39240 moveto
+7560 38644 8043 38160 8640 38160 curveto
+stroke
+4320 37440 (This) P
+5587 37440 (should) P
+7387 37440 (be) P
+8153 37440 (an) P
+8919 37440 (oval) P
+7560 34560 moveto
+8156 34560 8640 35043 8640 35640 curveto
+stroke
+8640 35640 moveto
+8640 36236 8157 36720 7560 36720 curveto
+stroke
+7560 36720 moveto
+5400 36720 lineto
+stroke
+5400 36720 moveto
+4804 36720 4320 36237 4320 35640 curveto
+stroke
+4320 35640 moveto
+4320 35044 4803 34560 5400 34560 curveto
+stroke
+5400 34560 moveto
+7560 34560 lineto
+stroke
+4320 33840 (This) P
+5587 33840 (should) P
+7387 33840 (be) P
+8153 33840 (a) P
+8619 33840 (\(\)) P
+4898 28800 moveto
+5669 30136 5669 31783 4898 33120 curveto
+stroke
+4898 33120 moveto
+4127 31784 4127 30137 4898 28800 curveto
+stroke
+4320 28080 (This) P
+5587 28080 (ought) P
+7154 28080 (to) P
+7821 28080 (be) P
+8587 28080 (the) P
+9520 28080 (same) P
+4898 23040 moveto
+5669 24376 5669 26023 4898 27360 curveto
+stroke
+4898 27360 moveto
+4127 26024 4127 24377 4898 23040 curveto
+stroke
+4320 22320 (Arc) P
+5419 22320 (down) P
+6952 22320 (with) P
+8219 22320 (arrow) P
+5209 20922 moveto
+5399 20521 lineto
+stroke
+5421 20965 moveto
+5400 20521 lineto
+stroke
+5400 20520 moveto
+5400 21116 4917 21600 4320 21600 curveto
+stroke
+4320 19800 (Arc) P
+5419 19800 (up) P
+6219 19800 (with) P
+7486 19800 (arrow) P
+4320 18000 moveto
+4916 18000 5400 18483 5400 19080 curveto
+stroke
+5421 18636 moveto
+5400 19080 lineto
+stroke
+5209 18679 moveto
+5399 19080 lineto
+stroke
+end restore showpage
+%%Page: 2 2
+save $troff begin Sc
+0 18 SF
+6500 41544 (A) P
+4730 41760 moveto
+4730 40568 5698 39600 6890 39600 curveto
+8082 39600 9050 40568 9050 41760 curveto
+9050 42952 8082 43920 6890 43920 curveto
+5698 43920 4730 42952 4730 41760 curveto
+closepath 54 setlinewidth stroke
+5162 41760 moveto
+5162 40806 5936 40032 6890 40032 curveto
+7844 40032 8618 40806 8618 41760 curveto
+8618 42714 7844 43488 6890 43488 curveto
+5936 43488 5162 42714 5162 41760 curveto
+closepath stroke
+19490 41544 (B) P
+17690 41760 moveto
+17690 40568 18658 39600 19850 39600 curveto
+21042 39600 22010 40568 22010 41760 curveto
+22010 42952 21042 43920 19850 43920 curveto
+18658 43920 17690 42952 17690 41760 curveto
+closepath stroke
+19490 30744 (C) P
+17690 30960 moveto
+17690 29768 18658 28800 19850 28800 curveto
+21042 28800 22010 29768 22010 30960 curveto
+22010 32152 21042 33120 19850 33120 curveto
+18658 33120 17690 32152 17690 30960 curveto
+closepath stroke
+6500 30744 (D) P
+4730 30960 moveto
+4730 29768 5698 28800 6890 28800 curveto
+8082 28800 9050 29768 9050 30960 curveto
+9050 32152 8082 33120 6890 33120 curveto
+5698 33120 4730 32152 4730 30960 curveto
+closepath stroke
+17245 42227 moveto
+17689 42193 lineto
+stroke
+17314 42430 moveto
+17689 42193 lineto
+stroke
+17690 42192 moveto
+14895 43180 11846 43180 9050 42192 curveto
+stroke
+13130 43152 (a) P
+9495 41294 moveto
+9051 41328 lineto
+stroke
+9426 41091 moveto
+9051 41328 lineto
+stroke
+9050 41328 moveto
+11845 40340 14894 40340 17690 41328 curveto
+stroke
+13130 40801 (a) P
+17245 31427 moveto
+17689 31393 lineto
+stroke
+17314 31630 moveto
+17689 31393 lineto
+stroke
+17690 31392 moveto
+14895 32380 11846 32380 9050 31392 curveto
+stroke
+13130 32352 (a) P
+9495 30494 moveto
+9051 30528 lineto
+stroke
+9426 30291 moveto
+9051 30528 lineto
+stroke
+9050 30528 moveto
+11845 29540 14894 29540 17690 30528 curveto
+stroke
+13130 30001 (a) P
+5594 39600 moveto
+5046 37475 5046 35246 5594 33120 curveto
+stroke
+5391 33514 moveto
+5598 33121 lineto
+stroke
+5598 33565 moveto
+5594 33121 lineto
+stroke
+4050 36144 (b) P
+8186 33120 moveto
+8734 35245 8734 37474 8186 39600 curveto
+stroke
+8393 39207 moveto
+8186 39600 lineto
+stroke
+8182 39156 moveto
+8186 39600 lineto
+stroke
+9195 36144 (b) P
+18554 39600 moveto
+18006 37475 18006 35246 18554 33120 curveto
+stroke
+18351 33514 moveto
+18558 33121 lineto
+stroke
+18558 33565 moveto
+18554 33121 lineto
+stroke
+17010 36144 (b) P
+21146 33120 moveto
+21694 35245 21694 37474 21146 39600 curveto
+stroke
+21353 39207 moveto
+21146 39600 lineto
+stroke
+21142 39156 moveto
+21146 39600 lineto
+stroke
+22155 36144 (b) P
+5783 25291 (A) P
+4320 25507 moveto
+4320 24485 5149 23656 6171 23656 curveto
+7193 23656 8022 24485 8022 25507 curveto
+8022 26529 7193 27358 6171 27358 curveto
+5149 27358 4320 26529 4320 25507 curveto
+closepath stroke
+8796 26011 (i) P
+8022 25507 moveto
+9875 25507 lineto
+stroke
+9504 25416 moveto
+9875 25506 lineto
+stroke
+9504 25602 moveto
+9875 25512 lineto
+stroke
+11364 25291 (B) P
+9875 25507 moveto
+9875 24485 10704 23656 11726 23656 curveto
+12748 23656 13577 24485 13577 25507 curveto
+13577 26529 12748 27358 11726 27358 curveto
+10704 27358 9875 26529 9875 25507 curveto
+closepath stroke
+14232 26011 (g) P
+13577 25507 moveto
+15430 25507 lineto
+stroke
+15059 25416 moveto
+15430 25506 lineto
+stroke
+15059 25602 moveto
+15430 25512 lineto
+stroke
+16920 25291 (C) P
+15426 25507 moveto
+15426 24485 16255 23656 17277 23656 curveto
+18299 23656 19128 24485 19128 25507 curveto
+19128 26529 18299 27358 17277 27358 curveto
+16255 27358 15426 26529 15426 25507 curveto
+closepath stroke
+19817 26011 (e) P
+19133 25507 moveto
+20986 25507 lineto
+stroke
+20610 25416 moveto
+20981 25506 lineto
+stroke
+20610 25602 moveto
+20981 25512 lineto
+stroke
+22445 25291 (D) P
+20982 25507 moveto
+20982 24485 21811 23656 22833 23656 curveto
+23855 23656 24684 24485 24684 25507 curveto
+24684 26529 23855 27358 22833 27358 curveto
+21811 27358 20982 26529 20982 25507 curveto
+closepath stroke
+25193 26011 (\\n) P
+24684 25507 moveto
+26537 25507 lineto
+stroke
+26166 25416 moveto
+26537 25506 lineto
+stroke
+26166 25602 moveto
+26537 25512 lineto
+stroke
+28056 25291 (E) P
+26537 25507 moveto
+26537 24485 27366 23656 28388 23656 curveto
+29410 23656 30239 24485 30239 25507 curveto
+30239 26529 29410 27358 28388 27358 curveto
+27366 27358 26537 26529 26537 25507 curveto
+closepath stroke
+26909 25507 moveto
+26909 24690 27573 24026 28390 24026 curveto
+29207 24026 29871 24690 29871 25507 curveto
+29871 26324 29207 26988 28390 26988 curveto
+27573 26988 26909 26324 26909 25507 curveto
+closepath stroke
+end restore showpage
+%%Trailer
+%%Pages: 2
+%%EOF

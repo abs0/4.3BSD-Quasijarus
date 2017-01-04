@@ -1,0 +1,270 @@
+h30480
+s 00001/00001/00095
+d D 2.8 88/05/21 15:12:33 bostic 11 10
+c don't strip copyright notice
+e
+s 00012/00001/00084
+d D 2.7 88/05/19 17:21:24 bostic 10 9
+c written by Eric Allman; add Berkeley specific header
+e
+s 00002/00002/00083
+d D 2.6 86/03/10 11:50:07 eric 9 8
+c drop "u" scaling factor on .sz and .ps requests; this confuses some
+c versions of troff
+e
+s 00001/00001/00084
+d D 2.5 84/08/11 12:49:38 eric 8 7
+c fix botch causing occasional page overflows; thanks to peter kessler
+e
+s 00011/00002/00074
+d D 2.4 80/09/23 18:47:42 eric 7 6
+c fixed bug in footnotes & indexes in filled keeps
+e
+s 00001/00001/00075
+d D 2.3 80/08/20 22:26:00 eric 6 5
+c fix footnote-in-keep fix
+e
+s 00052/00044/00024
+d D 2.2 80/08/18 12:56:16 eric 5 4
+c have indexes & footnotes suspended until final output
+e
+s 00000/00000/00068
+d D 2.1 80/08/18 11:43:16 eric 4 3
+c RELEASE 2
+e
+s 00002/00005/00066
+d D 1.3 80/08/18 11:33:30 eric 3 2
+c allow ".nr fi 0"; add id keywords
+e
+s 00071/00000/00000
+d D 1.2 80/05/12 22:46:21 eric 2 1
+c base version
+e
+s 00000/00000/00000
+d D 1.1 80/05/12 22:12:26 eric 1 0
+e
+u
+U
+t
+T
+I 2
+.nr _0 \n(c.
+I 3
+D 10
+.\"	%W%	%G%
+E 10
+I 10
+.\"	%W% (Berkeley) %G%
+E 10
+D 11
+.\"	%beginstrip%
+E 11
+I 10
+.\"
+.\" Copyright (c) 1988 Regents of the University of California.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+I 11
+.\"	%beginstrip%
+E 11
+.\"
+E 10
+E 3
+.de (f			\" *** begin footnote
+.ec
+.if "\\n(.z"|f" .tm Line \\n(c. -- Illegal footnote nesting
+D 5
+.nr _D \\n(dn
+.nr _0 1v+\\n(nlu
+.ev 2
+.da |f
+.in 0
+.xl \\n($lu-\\n(fuu
+.@F \\n(ff
+.sz \\n(fpu
+.vs \\n(.su*\\n($Ru
+.if !\\n(?f \
+E 5
+I 5
+.ie "\\n(.z"" \
+E 5
+\{\
+D 5
+.	nr _b +2u*\n(.Vu	\" fudge factor
+.	$s
+.\}
+.br
+.if \\n(.p-\\n(_b-\\n(_0-\\n(.h-1v-\\n(fs<0 \
+\{\
+.	da\"			\" won't fit on page at all
+.	bc
+.	if !\\n(?f \
+.		rm |f
+E 5
+I 5
+.	nr _D \\n(dn
+.	nr _0 1v+\\n(nlu
+.	ev 2
+E 5
+.	da |f
+D 5
+.\" next five lines could be dropped if headers had their own environment
+.	in 0			\" reset everything from .bc
+E 5
+I 5
+.	in 0
+E 5
+.	xl \\n($lu-\\n(fuu
+.	@F \\n(ff
+D 9
+.	sz \\n(fpu
+E 9
+I 9
+.	sz \\n(fp
+E 9
+.	vs \\n(.su*\\n($Ru
+.	if !\\n(?f \
+I 5
+\{\
+D 8
+.		nr _b +2u*\n(.Vu	\" fudge factor
+E 8
+I 8
+.		nr _b +1v	\" allow space for $s
+E 8
+E 5
+.		$s
+I 5
+.	\}
+E 5
+.	br
+I 5
+.	if \\n(.p-\\n(_b-\\n(_0-\\n(.h-1v-\\n(fs<0 \
+\{\
+.		da\"		\" won't fit on page at all
+.		bc
+.		if !\\n(?f \
+.			rm |f
+.		da |f
+.\" next five lines could be dropped if headers had their own environment
+.		in 0		\" reset everything from .bc
+.		xl \\n($lu-\\n(fuu
+.		@F \\n(ff
+D 9
+.		sz \\n(fpu
+E 9
+I 9
+.		sz \\n(fp
+E 9
+.		vs \\n(.su*\\n($Ru
+.		if !\\n(?f \
+.			$s
+.		br
+.	\}
+.	rr _0
+.	sp \\n(fsu
+.	nr ?f 1
+.	fi
+.	if !"\\$1"_" \
+.		ti \\n(fiu
+.	if \n@>2 .tm	<< (f $f=\\n($f
+E 5
+.\}
+D 5
+.rr _0
+.sp \\n(fsu
+.nr ?f 1
+.fi
+.if !"\\$1"_" \
+.	ti \\n(fiu
+.if \n@>2 .tm	<< (f $f=\\n($f
+E 5
+I 5
+D 7
+.el \!.(f \\$1
+E 7
+I 7
+.el \
+\{\
+.	ev 2
+\!.(f \\$1
+.\}
+E 7
+E 5
+..
+.de )f			\" *** end footnote
+D 5
+.if \\n* \
+.	nr $f +1
+.ds * \\*[\\n($f\\*]\k*
+.rr *
+.in 0
+.da
+.ev
+.if \\n(_w<\\n(dl \
+.	nr _w \\n(dl		\" compute maximum fn width
+.nr _b +\\n(dn
+.ch @f -\\n(_bu
+.if \\n(.p-\\n(_b<=\\n(nl \
+.	ch @f \\n(nlu+\n(.Vu
+.nr dn _D
+.rr _D
+E 5
+I 5
+D 6
+.ie !"\\n(.z"|f" \
+E 6
+I 6
+.ie "\\n(.z"|f" \
+E 6
+\{\
+.	if \\n* \
+.		nr $f +1
+.	ds * \\*[\\n($f\\*]\k*
+.	rr *
+.	in 0
+.	da
+.	ev
+.	if \\n(_w<\\n(dl \
+.		nr _w \\n(dl	\" compute maximum fn width
+.	nr _b +\\n(dn
+.	ch @f -\\n(_bu
+.	if \\n(.p-\\n(_b<=\\n(nl \
+.		ch @f \\n(nlu+\n(.Vu
+.	nr dn _D
+.	rr _D
+.\}
+D 7
+.el \!.)f
+E 7
+I 7
+.el \
+\{\
+.	br
+\!.)f
+.	ev
+.\}
+E 7
+E 5
+..
+.if \n(ff<=0 \
+.	nr ff 1			\" footnote font: Times Roman
+.if \n(fp<=0 \
+.	nr fp 8			\" footnote pointsize
+D 3
+.if \n(fi<=0 \
+\{\
+.	if n .nr fi 3n		\" footnote indent
+.	if t .nr fi 0.3i
+.\}
+E 3
+.nr c. \n(_0
+E 2
+I 1
+E 1

@@ -1,0 +1,37 @@
+Chapter 0: Introduction
+Chapter 1: Basic usage
+Chapter 2: All about fonts
+	- charset model, \Xhh and \Shh
+	- cover the font list
+	- font info files and their search path
+	- mkfont and grokafm
+	- cover the constant width font support
+	- cover the 5lig fonts in this chapter
+Chapter 3: -T mode and the special fonts
+	- cover bd emulation here
+Chapter 4: Preprocessors and macro packages
+	- cover retuned eqn, unchanged tbl
+	- cover eqnchar
+	- ditroff-compatible \D'...' and pic
+	- fixes to -ms and -me (accented letters,
+		native Thorn/Eth/ae/oe/etc, no more cut marks,
+		other -ms fixes like 6.5i)
+	- cover the Y2K fix here
+Chapter 5: PS output, pstmerge and pstfinish
+	- explain general qualities of the PS output:
+		L1 compatible, needs not-too-old fonts, DSC-conforming
+		leave the nitty-gritty details to Appendix B
+	- cover pstmerge and pstfinish
+Chapter 6: New stuff
+	- ISO Latin-1
+	- Cyrillic fonts
+	- extended \D'...'
+	- the power of \! and .cf PostScript inclusion
+Appendix A: Character set
+Appendix B: PS output documentation for hackers
+Appendix C: Internals
+	- explain the internal character representation
+	- relation to nroff
+Appendix D: Deficiencies
+	- like the BUGS section of man pages
+	- be honest

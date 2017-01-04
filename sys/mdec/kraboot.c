@@ -4,7 +4,7 @@
  * specifies the terms and conditions for redistribution.
  */
 
-/* "@(#)kraboot.c	7.1 (Berkeley) 9/5/99" */
+/* "@(#)kraboot.c	7.2 (Berkeley) 2/28/04" */
 #include <sys/disklabel.h>
 
 	.set	MAJOR,16		/* major("/dev/kra0a") */
@@ -26,8 +26,8 @@ init:
 start:
 	movl	$MAJOR,r10		/* major("/dev/xx0a") */
 	insv	r3,$16,$8,r10		/* drive number */
-	extzv	$12,$4,r5,r4		/* get partition from r5 */
-	bicw2	$0xf000,r5		/* remove from r5 */
+	extzv	$28,$4,r5,r4		/* get partition from r5 */
+	bicl2	$0xf0000000,r5		/* remove from r5 */
 	insv	r4,$8,$8,r10		/* set partition */
 	movl	r5,r11			/* boot flags */
 	movl	r1,r9			/* UNIBUS I/O page address */

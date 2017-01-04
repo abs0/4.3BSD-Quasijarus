@@ -1,0 +1,131 @@
+h45492
+s 00010/00005/00068
+d D 6.3 88/07/09 11:45:00 bostic 3 2
+c install approved copyright notice
+e
+s 00010/00011/00063
+d D 6.2 88/05/24 10:16:13 bostic 2 1
+c add Berkeley specific header; clarify what gets logged
+e
+s 00074/00000/00000
+d D 6.1 85/09/17 20:24:07 eric 1 0
+c enter messages in system log -- new with 4.3 Beta release
+e
+u
+U
+f b 
+f i 
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+D 2
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 2
+I 2
+.\" All rights reserved.
+E 2
+.\"
+I 2
+.\" Redistribution and use in source and binary forms are permitted
+D 3
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 3
+I 3
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 3
+.\"
+E 2
+.\"	%W% (Berkeley) %G%
+.\"
+.TH LOGGER 1 "%Q%"
+.UC 6
+.SH NAME
+logger \- make entries in the system log
+.SH SYNOPSIS
+.B logger
+[
+.B \-t
+tag
+] [
+.B \-p
+pri
+] [
+.B \-i
+] [
+.B \-f
+file
+] [
+message ...
+]
+.SH ARGUMENTS
+.TP 12n
+.BI \-t \ tag
+Mark every line in the log with the specified
+.IR tag .
+.TP
+.BI \-p \ pri
+Enter the message with the specified priority.
+The priority may be specified numerically
+or as a ``facility.level''
+pair.
+For example, ``\-p local3.info''
+logs the message(s) as
+.IR info rmational
+level in the
+.I local3
+facility.
+The default is ``user.notice.''
+.TP
+.B \-i
+Log the process id of the logger process
+with each line.
+.TP
+.BI \-f \ file
+Log the specified file.
+.TP
+message
+D 2
+The message to log;
+if not specified,
+the
+.B \-f
+file or standard input is logged.
+E 2
+I 2
+The message to log; if not specified, and the \fB-f\fP flag is not
+provided, standard input is logged.
+E 2
+.SH DESCRIPTION
+.I Logger
+provides a program interface to the
+.IR syslog (3)
+system log module.
+D 2
+.PP
+A message can be given on the command line,
+which is logged immediately,
+or a file is read and each line is logged.
+E 2
+.SH EXAMPLES
+logger System rebooted
+.PP
+logger \-p local0.notice \-t HOSTIDM \-f /dev/idmc
+.SH SEE ALSO
+syslog(3),
+syslogd(8)
+E 1

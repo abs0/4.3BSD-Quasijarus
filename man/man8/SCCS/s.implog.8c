@@ -1,0 +1,128 @@
+h61885
+s 00007/00002/00081
+d D 6.3 88/04/21 10:42:51 karels 4 3
+c add -F
+e
+s 00006/00000/00077
+d D 6.2 86/05/05 19:37:43 karels 3 2
+c add -r
+e
+s 00001/00001/00076
+d D 6.1 85/04/27 14:59:41 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00077/00000/00000
+d D 5.1 85/04/27 14:59:24 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH IMPLOG 8C "2 April 1983"
+E 2
+I 2
+.TH IMPLOG 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+implog \- IMP log interpreter
+.SH SYNOPSIS
+.B /etc/implog
+[
+.B \-D
+] [
+.B \-f
+] [
+I 4
+.B \-F
+] [
+E 4
+.B \-c
+] [
+I 3
+.B \-r
+] [
+E 3
+.B \-l
+[
+.I link
+] ] [
+.B \-h
+.I host#
+] [
+.B \-i
+.I imp#
+] [
+.B \-t
+.I message-type
+]
+.SH DESCRIPTION
+.I Implog
+is program which interprets the message log produced by
+.IR implogd (8C).
+.PP
+If no arguments are specified, 
+.I implog
+interprets and prints every message present in the message
+file.  Options may be specified to force printing only a
+subset of the logged messages.
+.TP
+.B \-D
+Do not show data messages. 
+.TP
+.B \-f
+Follow the logging process in action.  This flags causes
+.I implog
+to print the current contents of the log file, then
+check for new logged messages every 5 seconds. 
+.TP
+I 4
+.B \-F
+Follow the logging process in action as with
+.B \-f ,
+but skip all previous messages.
+.TP
+E 4
+.B \-c
+In addition to printing any data messages logged, show the
+contents of the data in hexadecimal bytes.
+I 3
+.TP
+.B \-r
+Print the raw imp leader, showing all fields,
+in addition to the formatted interpretation according to type.
+E 3
+.TP
+\fB\-l\fP [ \fIlink\fP# ]
+Show only those messages received on the specified ``link''.  If
+no value is given for the link, the link number of the IP protocol
+is assumed.
+.TP
+\fB\-h\fP \fIhost\fP#
+Show only those messages received from the specified host.
+(Usually specified in conjunction with an imp.)
+.TP
+\fB\-i\fP \fIimp\fP#
+Show only those messages received from the specified imp.
+.TP
+\fB\-t\fP \fImessage-type\fP
+Show only those messages received of the specified message type.
+.SH "SEE ALSO"
+imp(4P),
+implogd(8C)
+.SH BUGS
+Can not specify multiple hosts, imps, etc.
+D 4
+Can not follow reception of messages without looking at
+those currently in the file.
+E 4
+E 1

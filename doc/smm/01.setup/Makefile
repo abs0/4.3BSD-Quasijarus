@@ -14,27 +14,25 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.2 (Berkeley) 11/18/03
+#	@(#)Makefile	5.3 (Berkeley) 9/13/04
 #
-PRINTER=-Plz
-TROFF=	ditroff ${PRINTER}
-EQN=	deqn ${PRINTER}
-TBL=	dtbl ${PRINTER}
-LPR=	lpr -n ${PRINTER}
+TROFF=	pstroff
+NROFF=	nroff8 -Tcol8
+TBL=	tbl
+COL=	col8 -b
 
 SRC=	0.t 1.t 2.t 3.t 4.t 5.t 6.t a.t b.t c.t
 
-setup.out: ${SRC}
-	${EQN} ${SRC} | ${TBL} | ${TROFF} -t -ms > setup.out
+all:	setup.ps setup.txt
+
+setup.ps: ${SRC}
+	${TBL} ${SRC} | ${TROFF} -ms > $@
 
 setup.txt: ${SRC}
-	neqn ${SRC} | tbl | nroff -ms | colcrt - > setup.txt
-
-setup: setup.out
-	${LPR} setup.out
+	${TBL} ${SRC} | ${NROFF} -ms | ${COL} > $@
 
 clean:
-	rm -f setup.out setup.txt ?.t.spell errs Errs
+	rm -f setup.ps setup.txt ?.t.spell errs Errs
 
 spell:	${SRC}
 	@for i in ${SRC}; do \

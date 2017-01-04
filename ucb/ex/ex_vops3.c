@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vops3.c	7.4 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_vops3.c	7.5 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -51,7 +51,7 @@ lfind(pastatom, cnt, f, limit)
 {
 	register int c;
 	register int rc = 0;
-	char save[LBSIZE];
+	u_char save[LBSIZE];
 
 	/*
 	 * Initialize, saving the current line buffer state
@@ -83,7 +83,7 @@ lfind(pastatom, cnt, f, limit)
 #else
 	else {
 #endif
-		char *icurs;
+		u_char *icurs;
 		line *idot;
 
 		if (linebuf[0] == 0) {
@@ -227,7 +227,7 @@ ret:
 endsent(pastatom)
 	bool pastatom;
 {
-	register char *cp = wcursor;
+	register u_char *cp = wcursor;
 	register int d;
 
 	/*
@@ -274,12 +274,12 @@ lindent(addr)
 	line *addr;
 {
 	register int i;
-	char *swcurs = wcursor;
+	u_char *swcurs = wcursor;
 	line *swdot = wdot;
 
 again:
 	if (addr > one) {
-		register char *cp;
+		register u_char *cp;
 		register int cnt = 0;
 
 		addr--;
@@ -307,7 +307,7 @@ again:
 	else if (wcursor == linebuf)
 		i = 2;
 	else {
-		register char *wp = wcursor;
+		register u_char *wp = wcursor;
 
 		dir = 1;
 		llimit = wdot;
@@ -330,7 +330,7 @@ lmatchp(addr)
 	line *addr;
 {
 	register int i;
-	register char *parens, *cp;
+	register u_char *parens, *cp;
 
 	for (cp = cursor; !any(*cp, "({[)}]");)
 		if (*cp++ == 0)
@@ -355,11 +355,11 @@ lmatchp(addr)
 }
 
 lsmatch(cp)
-	char *cp;
+	u_char *cp;
 {
-	char save[LBSIZE];
-	register char *sp = save;
-	register char *scurs = cursor;
+	u_char save[LBSIZE];
+	register u_char *sp = save;
+	register u_char *scurs = cursor;
 
 	wcursor = cp;
 	strcpy(sp, linebuf);
@@ -399,9 +399,9 @@ ltosolid()
 }
 
 ltosol1(parens)
-	register char *parens;
+	register u_char *parens;
 {
-	register char *cp;
+	register u_char *cp;
 
 	if (*parens && !*wcursor && !lnext())
 		return (0);
@@ -418,7 +418,7 @@ ltosol1(parens)
 }
 
 lskipbal(parens)
-	register char *parens;
+	register u_char *parens;
 {
 	register int level = dir;
 	register int c;
@@ -444,7 +444,7 @@ lskipatom()
 }
 
 lskipa1(parens)
-	register char *parens;
+	register u_char *parens;
 {
 	register int c;
 
@@ -541,7 +541,7 @@ lbrack(c, f)
 }
 
 isa(cp)
-	register char *cp;
+	register u_char *cp;
 {
 
 	if (linebuf[0] != '.')

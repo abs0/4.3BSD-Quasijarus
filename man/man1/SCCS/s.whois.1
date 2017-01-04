@@ -1,0 +1,75 @@
+h01347
+s 00003/00007/00036
+d D 6.2 85/06/06 04:31:33 lepreau 2 1
+c cleanup a bit
+e
+s 00043/00000/00000
+d D 6.1 85/04/29 21:49:45 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH whois 1 "%Q%"
+E 2
+I 2
+.TH WHOIS 1 "%Q%"
+E 2
+.UC 6
+.SH NAME
+whois \- DARPA Internet user name directory service
+.SH SYNOPSIS
+.B whois
+name
+.SH DESCRIPTION
+.TP
+whois help
+Produces a helpful message similar to the following:
+.PP
+Please enter a name or a handle (``ident"), such as ``Smith"
+or ``SRI-NIC".
+Starting with a period forces a name-only search;
+starting with exclamation point forces handle-only.
+Examples:
+.nf
+	Smith			[looks for name or handle SMITH	]
+D 2
+	!SRI-NIC		[looks for handle SRI-NIC only	]
+E 2
+I 2
+	!SRI-NIC			[looks for handle SRI-NIC only	]
+E 2
+	.Smith, John		[looks for name JOHN SMITH only	]
+.fi
+Adding ``..." to the argument will match anything from that point,
+e.g. ``ZU..." will match ZUL, ZUM, etc.
+.PP
+To have the ENTIRE membership list of a group or organization,
+if you are asking about a group or org, shown with the record, use
+an asterisk character `*' directly preceding the given argument.
+[CAUTION: If there are a lot of members this will take a long time!]
+You may of course use exclamation point and asterisk, or a period
+and asterisk together.
+D 2
+.SH FILES
+/usr/doc/local/netinfo/rfc812
+E 2
+.SH SEE ALSO
+D 2
+RFC 812:  NICNAME/WHOIS
+.SH DIAGNOSTICS
+.SH BUGS
+E 2
+I 2
+RFC 812:  Nicname/Whois
+E 2
+E 1

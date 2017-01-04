@@ -3,7 +3,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	5.1	(Berkeley)	12/12/87
+#	@(#)Makefile	5.2	(Berkeley)	2012/02/16
 #
 COMMON=	../common_source
 CFLAGS=	-O -DVMUNIX -I${COMMON}
@@ -33,6 +33,7 @@ depend: ${SRCS} FRC
 
 install: FRC
 	install -s -o bin -g bin -m 755 troff ${DESTDIR}/usr/bin/troff
+	cd ${DESTDIR}/usr/bin; rm -f otroff; ln troff otroff
 
 lint: ${SRCS} FRC
 	lint ${CFLAGS} ${SRCS}

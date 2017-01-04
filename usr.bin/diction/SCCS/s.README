@@ -1,0 +1,179 @@
+h08044
+s 00005/00006/00058
+d D 4.3 99/06/11 13:07:28 msokolov 3 2
+c Berkeley chose to stick with explain, so change suggest back to explain
+e
+s 00036/00024/00028
+d D 4.2 82/11/06 14:35:15 rrh 2 1
+c Bill Jolitz @ Berkeley received this version from Lorindia Cherry
+c around September 1981, as the ``most recent version''.  Deltas 
+c seem to be progressive, rather than regressive, although the BTL sid for
+c deroff.c is retrograde; this is probably a case of parallel development
+e
+s 00052/00000/00000
+d D 4.1 82/11/06 13:48:43 rrh 1 0
+c Oldest available version at Berkeley
+e
+u
+U
+t
+T
+I 1
+D 3
+%W%	(Berkeley)	%E%"
+E 3
+I 3
+%W%	(Berkeley)	%E%
+E 3
+
+The writing tools package contains 3 command files,
+D 2
+	style, diction, and explain.
+E 2
+I 2
+D 3
+	style, diction, and suggest.
+E 3
+I 3
+	style, diction, and explain.
+E 3
+E 2
+``style'' reads a document and analyzes the surface
+	characteristics of the writing style of the document.
+``diction'' locates all sentences in a document containing
+	commonly misused or wordy phrases.
+D 2
+``explain'' is an interactive thesaures for the phrases found by diction.
+E 2
+I 2
+D 3
+``suggest'' is an interactive thesaures for the phrases found by diction.
+	suggest was originally named ``explain''.
+E 3
+I 3
+``explain'' is an interactive thesaures for the phrases found by diction.
+E 3
+E 2
+
+D 2
+The manual pages are in files style.1 and diction.1 - see the enclosed documentation
+	for more details.
+E 2
+I 2
+The manual pages are in files style.1 and diction.1 - see the enclosed
+	documentation for more details.
+E 2
+
+``style'' is a runcom that runs 4 programs, style1, style2, style3, and deroff.
+D 2
+	style1, style2, style3 are included on the tape, you should not need to
+	make them, but if you do -
+E 2
+
+D 2
+To make style1, style2, style3:
+	set BIN in Makefile to the directory where the object files
+		are to be stored.
+E 2
+I 2
+To make style:
+	set LIB in Makefile to the directory where the object files
+		are to be stored. (probably /usr/lib/style)
+	set BIN in Makefile to the directory for the shell programs
+		(usually /usr/bin)
+	in the file ``style'' set L to the same directory as LIB above.
+		the same is needed in ``topic'', which is installed
+		when you make style
+	if you wish to collect data on the documents run, also define SCATCH
+		otherwise delete the definition of SCATCH in Makefile
+		if you are collecting data, the file must exist and be writeable
+		by everyone
+E 2
+	then run ``make style''
+D 2
+	in the file ``style'' set B to the same directory as BIN above.
+E 2
+I 2
+		this will compile and install all of the programs in both
+		LIB and BIN
+E 2
+
+``diction'' is a runcom that runs 2 programs, dprog and deroff.
+D 2
+	dprog has been included on the tape, but you will need to make it
+	to include the full path name of dict.d
+E 2
+
+To make dprog:
+	set DICT in Makefile to the full path name of diction's data
+		file ``dict.d''
+I 2
+	the file ``diction'' also needs L set to the same directory as LIB
+E 2
+	the program ``dprog'' will get put in the same place as
+D 2
+		the object files for style (BIN).
+E 2
+I 2
+		the object files for style (LIB).
+	if you wish to collect data on the documents run, also define CATCH
+		otherwise delete the definition of CATCH in Makefile
+		the collection file must exist and be writeable by everyone
+E 2
+	then run ``make diction''
+D 2
+	the file ``diction'' also needs B set to the same directory as BIN
+		above
+E 2
+
+D 2
+The file ``explain'' needs D set to the full path name of the file
+	explain.d
+E 2
+I 2
+D 3
+The file ``suggest'' needs D set to the full path name of the file
+	suggest.d
+E 3
+I 3
+The file ``explain'' needs D set to the full path name of the file
+	explain.d
+E 3
+E 2
+
+Both ``style'' and ``diction'' expect the document to contain formatting
+	commands.  A new version of deroff is included that knows about
+	the standard UNIX formatting macro packages.
+D 2
+	the command ``make deroff'' will install deroff in BIN mentioned
+	above.  You may wish to install this version of deroff in /usr/bin
+	in which case the path names to it in files ``style'' and
+	``diction'' should be changed accordingly.
+E 2
+I 2
+	the source for getopt.c is included just in case you don't have it.
+	if the loader complains about not finding getopt, compile & load
+		it with deroff.c
+	typing
+		make deroff
+	will compile and install it in /usr/bin
+E 2
+
+D 2
+The default flag passed to deroff (either -ms or -ml) in both
+E 2
+I 2
+The default flag passed to deroff (either -ms or -mm) in both
+E 2
+	style and diction should be set to the proper one for your installation.
+
+D 2
+These programs will not compile under UNIX version 6 or PWB 1.2 due
+	to size limitations on these systems.
+E 2
+I 2
+These programs will not compile under UNIX version 6 or PWB 1.2
+	because of size limitations on these systems.
+
+E 2
+E 1

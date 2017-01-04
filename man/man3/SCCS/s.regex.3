@@ -1,0 +1,159 @@
+h33474
+s 00001/00001/00069
+d D 6.2 88/05/19 18:14:10 bostic 4 3
+c add regexp to SEE ALSO list
+e
+s 00001/00001/00069
+d D 6.1 85/05/15 15:11:56 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00022/00020/00048
+d D 5.1 85/05/15 15:11:46 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00068/00000/00000
+d D 4.1 85/05/15 15:11:36 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH REGEX 3 2/29/80
+E 2
+I 2
+D 3
+.TH REGEX 3 "29 February 1980"
+E 3
+I 3
+.TH REGEX 3 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+re_comp, re_exec \- regular expression handler
+.SH SYNOPSIS
+D 2
+.nf
+E 2
+.B char *re_comp(s)
+I 2
+.br
+E 2
+.B char *s;
+.PP
+.B re_exec(s)
+I 2
+.br
+E 2
+.B char *s;
+D 2
+.fi
+E 2
+.SH DESCRIPTION
+.I Re_comp
+D 2
+compiles a string into an internal form suitable for 
+pattern matching. 
+E 2
+I 2
+compiles a string into an internal form suitable for pattern matching. 
+E 2
+.I Re_exec 
+checks the argument string against the last string passed to
+.I re_comp.
+.PP
+.I Re_comp
+returns 0 if the string
+.I s
+was compiled successfully; otherwise a string containing an
+error message is returned. If 
+.I re_comp
+is passed 0 or a null string, it returns without changing the currently
+compiled regular expression.
+.PP
+.I Re_exec
+returns 1 if the string
+.I s
+matches the last compiled regular expression, 0 if the string
+.I s
+D 2
+failed to match the last compiled regular expression, and
+-1 if the compiled regular expression was invalid (indicating an
+internal error).
+E 2
+I 2
+failed to match the last compiled regular expression, and \-1 if the compiled
+regular expression was invalid (indicating an internal error).
+E 2
+.PP
+The strings passed to both
+.I re_comp
+and
+.I re_exec
+may have trailing or embedded newline characters; 
+they are terminated by nulls.
+D 2
+The regular expressions recognized are described in the manual entry
+for 
+.I ed
+(1), given the above difference.
+E 2
+I 2
+The regular expressions recognized are described in the manual entry for 
+.IR ed (1),
+given the above difference.
+E 2
+.SH "SEE ALSO"
+D 2
+ed(1), ex(1)
+E 2
+I 2
+D 4
+ed(1), ex(1), egrep(1), fgrep(1), grep(1)
+E 4
+I 4
+ed(1), ex(1), egrep(1), fgrep(1), grep(1), regexp(3)
+E 4
+E 2
+.SH DIAGNOSTICS
+.I Re_exec
+D 2
+returns -1 for an internal error.
+E 2
+I 2
+returns \-1 for an internal error.
+E 2
+.PP
+.I Re_comp
+returns one of the following strings if an error occurs:
+D 2
+"No previous regular expression",
+"Regular expression too long",
+"unmatched \e(",
+"missing ]",
+"too many \e(\e) pairs",
+"unmatched \e)".
+E 2
+I 2
+.PP
+.nf
+.in +0.5i
+\fINo previous regular expression,
+Regular expression too long,
+unmatched \e(,
+missing ],
+too many \e(\e) pairs,
+unmatched \e).\fP
+.in -0.5i
+.fi
+E 2
+E 1

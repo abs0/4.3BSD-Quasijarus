@@ -1,0 +1,173 @@
+h43725
+s 00006/00003/00067
+d D 6.3 86/05/14 18:21:18 karels 5 4
+c document sticky EOF
+e
+s 00003/00002/00067
+d D 6.2 85/06/06 00:08:46 lepreau 4 3
+c clearerr resets eof and is not now a macro
+e
+s 00002/00002/00067
+d D 6.1 85/05/15 15:25:53 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00009/00008/00060
+d D 5.1 85/05/15 15:25:35 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00068/00000/00000
+d D 4.1 85/05/15 15:25:16 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FERROR 3S 
+E 2
+I 2
+D 3
+.TH FERROR 3S  "19 January 1983"
+E 3
+I 3
+.TH FERROR 3S  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+feof, ferror, clearerr, fileno \- stream status inquiries
+E 2
+I 2
+ferror, feof, clearerr, fileno \- stream status inquiries
+E 2
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.B feof(stream)
+.br
+.SM
+.B FILE
+.B *stream;
+.PP
+.B ferror(stream)
+.br
+.SM
+.B FILE
+.B *stream
+.PP
+.B clearerr(stream)
+.br
+.SM
+.B FILE
+.B *stream
+.PP
+.B fileno(stream)
+.br
+.SM
+.B FILE
+.B *stream;
+.SH DESCRIPTION
+.I Feof
+returns non-zero when end of file is read on the named input
+D 2
+.I stream,
+E 2
+I 2
+.IR stream ,
+E 2
+otherwise zero.
+I 5
+Unless cleared by
+.IR clearerr ,
+the end-of-file indication lasts until
+the stream is closed.
+E 5
+.PP
+.I Ferror
+returns non-zero when an error has occurred reading or writing
+the named
+D 2
+.I stream,
+E 2
+I 2
+.IR stream ,
+E 2
+otherwise zero.
+Unless cleared by
+D 2
+.I clearerr,
+E 2
+I 2
+.IR clearerr ,
+E 2
+the error indication lasts until
+the stream is closed.
+.PP
+D 3
+.I Clrerr
+E 3
+I 3
+.I Clearerr
+E 3
+D 4
+resets the error indication on the named
+E 4
+I 4
+resets the error and end-of-file indicators on the named
+E 4
+D 2
+.I stream.
+E 2
+I 2
+.IR stream .
+E 2
+.PP
+.I Fileno
+returns the integer file descriptor
+associated with the
+D 2
+.I stream,
+E 2
+I 2
+.IR stream ,
+E 2
+see
+D 5
+.IR  open (2).
+E 5
+I 5
+.IR open (2).
+E 5
+.PP
+D 4
+These functions
+E 4
+I 4
+D 5
+Currently all of these functions except
+.I clearerr
+E 5
+I 5
+Currently all of these functions
+E 5
+E 4
+are implemented as macros;
+they cannot be redeclared.
+.SH "SEE ALSO"
+D 2
+fopen(3), open(2)
+E 2
+I 2
+fopen(3S),
+open(2)
+E 2
+E 1

@@ -1,0 +1,112 @@
+h54578
+s 00002/00000/00039
+d D 2.4 87/03/13 21:50:12 garrison 6 4
+c add ERLBAUM (mlvdv)
+e
+s 00002/00000/00039
+d R 2.4 87/03/13 21:49:00 garrison 5 4
+c 
+e
+s 00007/00000/00032
+d D 2.3 84/01/06 16:48:54 rrh 4 3
+c update popl's, add ccc conferences, a bunch of new places, a bunch
+c of new publishers
+e
+s 00006/00005/00026
+d D 2.2 83/09/09 21:13:50 garrison 3 2
+c Incorporate changes from Arizona
+e
+s 00002/00000/00029
+d D 2.1 83/06/22 14:57:47 garrison 2 1
+c Add keywords, make new release to send to Arizona
+e
+s 00029/00000/00000
+d D 1.1 83/06/08 15:32:14 garrison 1 0
+c date and time created 83/06/08 15:32:14 by garrison
+e
+u
+U
+t
+T
+I 1
+#
+I 2
+#	"%W%	%G%";
+#
+I 3
+#
+E 3
+E 2
+#  publishers
+#
+D 3
+D NYC New York, NY
+E 3
+I 3
+D NYC New York, N\&Y
+E 3
+D ACPRESS Academic Press\
+%C NYC
+D ACADEMIC ACPRESS
+D ADDISON Addison Wesley\
+D 3
+%C Reading, MA
+E 3
+I 3
+%C Reading, M\&A
+I 4
+D ANSI American National Standards Institute
+E 4
+E 3
+D FREEMAN W. H. Freeman and Company\
+%C San Francisco, CA
+D CSPRESS Computer Science Press\
+%C Woodland Hills, CA
+I 4
+D DIGITAL Digital Press
+E 4
+D ELSEVIER American Elsevier
+I 6
+D ERLBAUM Lawrence Erlbaum Associates\
+%C Hillsdale, NJ
+E 6
+D 3
+D IEEEP IEEE\
+E 3
+I 3
+D IEEEP IEEE Press\
+E 3
+%C Montvale, NJ
+I 4
+D GPO U. S. Government Printing Office
+D HOLT Holt, Rinehart, and Winston
+E 4
+D MGHILL McGraw-Hill\
+%C NYC
+I 4
+D MCGRAW McGraw-Hill
+E 4
+D MITP MIT Press\
+D 3
+%C Cambridge, MA
+D NHALL North-Holland\
+E 3
+I 3
+%C Cambridge, M\&A
+D NHOLL North-Holland\
+E 3
+%C NYC
+D PRHALL Prentice Hall\
+%C Englewood Cliffs, NJ
+I 4
+D PRENTICE PRHALL
+E 4
+D WILEY John Wiley & Sons\
+%C NYC
+D SPRINGER Springer Verlag
+D SRA Science Research Associates
+D WINTH Winthrop Publishers
+I 4
+#
+E 4
+E 1

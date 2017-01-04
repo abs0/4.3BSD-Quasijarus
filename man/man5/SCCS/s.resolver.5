@@ -1,0 +1,171 @@
+h08347
+s 00001/00001/00053
+d D 5.6 87/09/14 15:54:44 bostic 6 5
+c fix NAME entry
+e
+s 00023/00005/00031
+d D 5.5 86/05/15 11:25:37 bloom 5 4
+c fix defaults and mention that this is not needed
+e
+s 00001/00001/00035
+d D 5.4 86/04/10 14:38:12 kjd 4 3
+c Change paper title
+e
+s 00011/00011/00025
+d D 5.3 86/03/21 22:20:24 kjd 3 2
+c clean up
+e
+s 00000/00006/00036
+d D 5.2 86/01/07 13:35:31 kjd 2 1
+c Remove bugs section
+e
+s 00042/00000/00000
+d D 5.1 86/01/07 13:30:55 kjd 1 0
+c date and time created 86/01/07 13:30:55 by kjd
+e
+u
+U
+t
+T
+I 5
+.\" Copyright (c) 1986 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+E 5
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 5
+.TH RESOLVER 5 "1 January 1986"
+E 5
+I 5
+.TH RESOLVER 5 "%Q%"
+E 5
+.UC 4
+.SH NAME
+D 6
+resolver configuration file
+E 6
+I 6
+resolver \- resolver configuration file
+E 6
+I 5
+.SH SYNOPSIS
+/etc/resolv.conf
+E 5
+.SH DESCRIPTION
+.LP
+The resolver configuration file contains information that is read
+D 5
+by the resolver routines the first time they are invoked in a process.
+E 5
+I 5
+by the resolver routines the first time they are invoked by a process.
+E 5
+The file is designed to be human readable and contains a list of
+D 3
+name-value pairs which provide various types of resolver information.
+E 3
+I 3
+name-value pairs that provide various types of resolver information.
+E 3
+.LP
+I 5
+On a normally configured system this file should not be necessary.
+The only name server to be queried will be on the local machine and 
+the domain name is retrieved from the system.
+.LP
+E 5
+The different configuration options are:
+.TP
+\fBnameserver\fP
+D 3
+followed by the Internet address (in dot notation) of a nameserver
+that the resolver should query.  At least one nameserver should be
+listed.  Up to MAXNS (currently 3) nameservers may be listed, in which
+E 3
+I 3
+followed by the Internet address (in dot notation) of a name server
+that the resolver should query.  At least one name server should be
+listed.  Up to MAXNS (currently 3) name servers may be listed, in that
+E 3
+case the resolver library queries tries them in the order listed.
+I 5
+If no \fBnameserver\fP entries are present,
+the default is to use the name server on the local machine.
+E 5
+D 3
+(The algorithm used is to try a nameserver, and if the query times out,
+try the next, until out of nameservers, then repeat trying all the nameservers
+until a maximum number of retries has been made).
+E 3
+I 3
+(The algorithm used is to try a name server, and if the query times out,
+D 5
+try the next, until out of name servers, then repeat trying all the name servers
+E 5
+I 5
+try the next, until out of name servers,
+then repeat trying all the name servers
+E 5
+until a maximum number of retries are made).
+E 3
+.TP
+\fBdomain\fP
+D 3
+followed by a domain name, which is
+the default domain to append to names which do not have a dot in them.
+E 3
+I 3
+followed by a domain name, that is
+the default domain to append to names that do not have a dot in them.
+E 3
+D 5
+This defaults to empty (the root domain).
+E 5
+I 5
+If no \fBdomain\fP entries are present, the domain returned by
+\fIgethostname\fP\|(2) is used (everything after the first `.').
+Finally, if the host name does not contain a domain part, the root
+domain is assumed.
+E 5
+.LP
+The name value pair must appear on a single line, and the keyword
+(e.g. \fBnameserver\fP) must start the line.  The value follows
+D 3
+the keyword, separated by whitespace.
+E 3
+I 3
+the keyword, separated by white space.
+E 3
+.SH FILES
+.I /etc/resolv.conf
+.SH SEE ALSO
+D 3
+gethostent(3n), resolver(3), named(8)
+E 3
+I 3
+D 4
+gethostent(3n), resolver(3), named(8), BIND - Operations Guide
+E 4
+I 4
+D 5
+gethostent(3n), resolver(3), named(8), Name Server Operations Guide for BIND
+E 5
+I 5
+gethostbyname(3N), resolver(3), named(8)
+.br
+Name Server Operations Guide for BIND
+E 5
+E 4
+E 3
+D 2
+.SH BUGS
+.LP
+There is currently no way to indicate that one address for a host
+is preferred over another.  (Solutions are being considered).
+
+
+E 2
+E 1

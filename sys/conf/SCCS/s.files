@@ -1,0 +1,583 @@
+h44908
+s 00001/00000/00127
+d D 7.11 08/02/18 04:17:59 msokolov 37 36
+c welcome net/if_pppaux.c
+e
+s 00001/00000/00126
+d D 7.10 07/05/18 19:49:26 msokolov 36 35
+c add netinet/ip_gre.c
+e
+s 00001/00000/00125
+d D 7.9 04/02/23 21:40:54 msokolov 35 34
+c add lk201 module
+e
+s 00001/00000/00124
+d D 7.8 03/04/07 00:47:22 msokolov 34 33
+c add sys/tty_kbhacks.c
+e
+s 00001/00000/00123
+d D 7.7 02/08/02 22:12:28 msokolov 33 32
+c add netmon
+e
+s 00006/00000/00117
+d D 7.6 02/07/19 22:09:40 msokolov 32 31
+c add net/if_fcs16* and net/if_ppp*
+e
+s 00013/00013/00104
+d D 7.5 88/05/14 11:28:39 karels 31 30
+c rename kdb to kadb
+e
+s 00001/00000/00116
+d D 7.4 87/06/21 21:50:39 mckusick 30 29
+c add kern_malloc.c
+e
+s 00001/00001/00115
+d D 7.3 87/04/02 15:58:19 karels 29 28
+c rename ufs_dsort
+e
+s 00013/00000/00103
+d D 7.2 86/11/25 16:49:18 sam 28 27
+c kdb additions
+e
+s 00000/00000/00103
+d D 7.1 86/06/05 01:46:34 mckusick 27 26
+c 4.3BSD release version
+e
+s 00001/00000/00102
+d D 6.13 86/02/10 08:42:17 karels 26 25
+c add if_sl
+e
+s 00000/00026/00102
+d D 6.12 85/12/19 16:07:08 karels 25 24
+c rm bbnnet
+e
+s 00004/00004/00124
+d D 6.11 85/09/17 23:02:36 karels 24 23
+c remove inet dependencies, allow multiple dependencies for if_uba
+e
+s 00040/00041/00088
+d D 6.10 85/09/16 23:34:56 karels 23 22
+c one or the other
+e
+s 00002/00001/00127
+d D 6.9 85/08/26 15:10:45 karels 22 19
+c move if_loop.c to net
+e
+s 00002/00001/00127
+d R 6.9 85/08/26 15:02:43 karels 21 19
+c mv if_loop.c to net
+e
+s 00002/00001/00127
+d R 6.9 85/08/26 14:59:41 karels 20 19
+c move if_loop.c to net
+e
+s 00001/00001/00127
+d D 6.8 85/08/23 11:17:04 walsh 19 18
+c fix rdp assembler junk
+e
+s 00040/00014/00088
+d D 6.7 85/08/21 15:37:46 walsh 18 17
+c updated so that could configure either bbn or berkeley networking
+e
+s 00010/00005/00092
+d D 6.6 85/06/19 09:09:01 sklower 17 16
+c add xns stuff
+e
+s 00000/00001/00097
+d D 6.5 85/05/06 12:15:42 karels 16 15
+c uipc_pipe is gone
+e
+s 00001/00001/00097
+d D 6.4 84/12/20 12:02:45 karels 15 14
+c rename log to subr_log
+e
+s 00001/00007/00097
+d D 6.3 84/07/19 14:36:50 karels 14 13
+c add log.c; rm decnet
+e
+s 00001/00001/00103
+d D 6.2 84/07/08 15:35:41 sam 13 12
+c ufs_nami.c -> ufs_namei.c and nami.h -> namei.h 
+e
+s 00000/00000/00104
+d D 6.1 83/07/29 07:41:15 sam 12 11
+c 4.2 distribution
+e
+s 00013/00008/00091
+d D 1.10 83/05/27 14:21:25 sam 11 10
+c yet another reorganization from wnj
+e
+s 00003/00003/00096
+d D 1.9 83/05/21 16:04:02 sam 10 9
+c no more mush; break quotas up
+e
+s 00003/00003/00096
+d D 1.8 83/05/18 03:09:40 sam 9 8
+c from kre
+e
+s 00001/00000/00098
+d D 1.7 83/04/02 12:41:25 sam 8 6
+c ARP ARP
+e
+s 00001/00001/00097
+d R 1.7 83/03/15 18:18:27 sam 7 6
+c ARP ARP
+e
+s 00001/00000/00097
+d D 1.6 83/01/20 19:58:04 sam 6 5
+c network disk must be defined so make works
+e
+s 00000/00001/00097
+d D 1.5 83/01/20 16:54:10 sam 5 4
+c in_cksum.c is now machine dependent
+e
+s 00001/00000/00097
+d D 1.4 82/12/13 17:57:53 sam 4 3
+c random ioctl's associated with the system
+e
+s 00001/00001/00096
+d D 1.3 82/12/05 22:04:39 sam 3 2
+c mcount is really optional
+e
+s 00010/00006/00087
+d D 1.2 82/10/31 16:54:18 root 2 1
+c fixes via sun
+e
+s 00093/00000/00000
+d D 1.1 82/10/28 10:40:46 root 1 0
+c date and time created 82/10/28 10:40:46 by root
+e
+u
+U
+t
+T
+I 28
+D 31
+kdb/kdb_access.c	optional kdb
+kdb/kdb_command.c	optional kdb
+kdb/kdb_ctype.c		optional kdb
+kdb/kdb_expr.c		optional kdb
+kdb/kdb_format.c	optional kdb
+kdb/kdb_input.c		optional kdb
+kdb/kdb_message.c	optional kdb
+kdb/kdb_output.c	optional kdb
+kdb/kdb_pcs.c		optional kdb
+kdb/kdb_print.c		optional kdb
+kdb/kdb_runpcs.c	optional kdb
+kdb/kdb_sym.c		optional kdb
+kdb/kdb_trap.c		optional kdb
+E 31
+I 31
+kdb/kdb_access.c	optional kadb
+kdb/kdb_command.c	optional kadb
+kdb/kdb_ctype.c		optional kadb
+kdb/kdb_expr.c		optional kadb
+kdb/kdb_format.c	optional kadb
+kdb/kdb_input.c		optional kadb
+kdb/kdb_message.c	optional kadb
+kdb/kdb_output.c	optional kadb
+kdb/kdb_pcs.c		optional kadb
+kdb/kdb_print.c		optional kadb
+kdb/kdb_runpcs.c	optional kadb
+kdb/kdb_sym.c		optional kadb
+kdb/kdb_trap.c		optional kadb
+E 31
+E 28
+I 22
+D 23
+conf/%M%	optional %W% (Berkeley) %G%
+E 23
+E 22
+I 1
+D 2
+# %M% %I% %E%
+net/af.c		optional inet
+net/if.c		optional inet
+net/raw_cb.c		optional inet
+net/raw_usrreq.c	optional inet
+net/route.c		optional inet
+E 2
+I 2
+net/af.c		standard
+net/if.c		standard
+I 32
+net/if_fcs16.c		optional ppp
+net/if_fcs16.c		optional sl
+E 32
+I 22
+net/if_loop.c		optional loop
+I 32
+net/if_ppp.c		optional ppp
+net/if_pppasync.c	optional ppp
+I 37
+net/if_pppaux.c		optional pppaux
+E 37
+net/if_ppplcp.c		optional ppp
+net/if_pppipcp.c	optional ppp inet
+E 32
+I 26
+net/if_sl.c		optional sl
+I 33
+net/netmon.c		optional netmon
+E 33
+E 26
+E 22
+net/raw_cb.c		standard
+net/raw_usrreq.c	standard
+net/route.c		standard
+E 2
+D 14
+netdecnet/nsp_input.c	optional decnet
+netdecnet/nsp_output.c	optional decnet
+netdecnet/nsp_subr.c	optional decnet
+netdecnet/nsp_usrreq.c	optional decnet
+netdecnet/tp_input.c	optional decnet
+netdecnet/tp_output.c	optional decnet
+netdecnet/tp_usrreq.c	optional decnet
+E 14
+D 24
+netimp/if_imp.c		optional imp inet
+netimp/if_imphost.c	optional imp inet
+I 11
+netimp/raw_imp.c	optional imp inet
+E 11
+I 8
+netinet/if_ether.c	optional ether inet
+E 24
+I 24
+netimp/if_imp.c		optional imp
+netimp/if_imphost.c	optional imp
+netimp/raw_imp.c	optional imp
+netinet/if_ether.c	optional ether
+E 24
+E 8
+D 9
+netinet/if_loop.c	optional loop inet device-driver
+E 9
+I 9
+D 22
+netinet/if_loop.c	optional loop inet
+E 22
+E 9
+D 18
+netinet/in.c		optional inet
+D 5
+netinet/in_cksum.c	optional inet
+E 5
+netinet/in_pcb.c	optional inet
+I 2
+netinet/in_proto.c	optional inet
+E 2
+netinet/ip_icmp.c	optional inet
+netinet/ip_input.c	optional inet
+netinet/ip_output.c	optional inet
+D 11
+netimp/raw_imp.c	optional imp inet
+E 11
+netinet/raw_ip.c	optional inet
+netinet/tcp_debug.c	optional inet
+netinet/tcp_input.c	optional inet
+netinet/tcp_output.c	optional inet
+netinet/tcp_subr.c	optional inet
+netinet/tcp_timer.c	optional inet
+netinet/tcp_usrreq.c	optional inet
+netinet/udp_usrreq.c	optional inet
+E 18
+I 18
+D 23
+netinet/in.c		optional inet berktcp
+netinet/in_pcb.c	optional inet berktcp
+netinet/in_proto.c	optional inet berktcp
+netinet/ip_icmp.c	optional inet berktcp
+netinet/ip_input.c	optional inet berktcp
+netinet/ip_output.c	optional inet berktcp
+netinet/raw_ip.c	optional inet berktcp
+netinet/tcp_debug.c	optional inet berktcp
+netinet/tcp_input.c	optional inet berktcp
+netinet/tcp_output.c	optional inet berktcp
+netinet/tcp_subr.c	optional inet berktcp
+netinet/tcp_timer.c	optional inet berktcp
+netinet/tcp_usrreq.c	optional inet berktcp
+netinet/udp_usrreq.c	optional inet berktcp
+E 23
+I 23
+netinet/in.c		optional inet
+netinet/in_pcb.c	optional inet
+netinet/in_proto.c	optional inet
+I 36
+netinet/ip_gre.c	optional inet
+E 36
+netinet/ip_icmp.c	optional inet
+netinet/ip_input.c	optional inet
+netinet/ip_output.c	optional inet
+netinet/raw_ip.c	optional inet
+netinet/tcp_debug.c	optional inet
+netinet/tcp_input.c	optional inet
+netinet/tcp_output.c	optional inet
+netinet/tcp_subr.c	optional inet
+netinet/tcp_timer.c	optional inet
+netinet/tcp_usrreq.c	optional inet
+netinet/udp_usrreq.c	optional inet
+E 23
+E 18
+D 17
+netpup/pup.c		optional pup
+I 2
+netpup/pup_proto.c	optional pup
+E 2
+netpup/raw_pup.c	optional pup
+E 17
+I 17
+netns/idp_usrreq.c	optional ns
+netns/ns.c		optional ns
+netns/ns_error.c	optional ns
+netns/ns_ip.c		optional ns
+netns/ns_input.c	optional ns
+netns/ns_output.c	optional ns
+netns/ns_pcb.c		optional ns
+netns/ns_proto.c	optional ns
+netns/spp_debug.c	optional ns
+netns/spp_usrreq.c	optional ns
+E 17
+sys/init_main.c		standard
+sys/init_sysent.c	standard
+I 11
+sys/kern_acct.c		standard
+E 11
+sys/kern_clock.c	standard
+sys/kern_descrip.c	standard
+I 11
+sys/kern_exec.c		standard
+sys/kern_exit.c		standard
+sys/kern_fork.c		standard
+I 30
+sys/kern_malloc.c	standard
+E 30
+E 11
+sys/kern_mman.c		standard
+D 11
+sys/kern_process.c	standard
+E 11
+I 11
+sys/kern_proc.c		standard
+E 11
+sys/kern_prot.c		standard
+sys/kern_resource.c	standard
+sys/kern_sig.c		standard
+I 11
+sys/kern_subr.c		standard
+E 11
+sys/kern_synch.c	standard
+sys/kern_time.c		standard
+I 11
+sys/kern_xxx.c		standard
+I 14
+D 15
+sys/log.c		standard
+E 15
+E 14
+E 11
+D 10
+sys/quota_charges.c	standard
+sys/quota_share.c	standard
+E 10
+I 10
+sys/quota_kern.c	standard
+sys/quota_subr.c	standard
+E 10
+sys/quota_sys.c		standard
+I 10
+sys/quota_ufs.c		standard
+I 15
+sys/subr_log.c		standard
+E 15
+E 10
+I 2
+D 3
+sys/subr_mcount.c	standard profiling-routine
+E 3
+I 3
+sys/subr_mcount.c	optional profiling-routine
+E 3
+E 2
+sys/subr_prf.c		standard
+sys/subr_rmap.c		standard
+sys/subr_xxx.c		standard
+D 11
+sys/sys_directory.c	standard
+sys/sys_domain.c	standard
+sys/sys_file.c		standard
+E 11
+sys/sys_generic.c	standard
+I 11
+sys/sys_inode.c		standard
+E 11
+sys/sys_process.c	standard
+sys/sys_socket.c	standard
+D 11
+sys/sys_xxx.c		standard
+E 11
+sys/tty.c		standard
+D 9
+sys/tty_bk.c		optional bk device-driver
+E 9
+I 9
+sys/tty_bk.c		optional bk
+E 9
+sys/tty_conf.c		standard
+I 34
+sys/tty_kbhacks.c	standard
+I 35
+sys/tty_lk201.c		optional lk
+E 35
+E 34
+sys/tty_pty.c		optional pty
+sys/tty_subr.c		standard
+D 9
+sys/tty_tb.c		optional tb device-driver
+E 9
+I 9
+sys/tty_tb.c		optional tb
+E 9
+sys/tty_tty.c		standard
+I 4
+D 11
+sys/tty_xxx.c		standard
+E 11
+E 4
+sys/ufs_alloc.c		standard
+sys/ufs_bio.c		standard
+sys/ufs_bmap.c		standard
+D 29
+sys/ufs_dsort.c		standard
+E 29
+I 29
+sys/ufs_disksubr.c	standard
+E 29
+I 2
+D 17
+sys/ufs_efs.c		optional efs device-driver
+E 17
+E 2
+sys/ufs_fio.c		standard
+sys/ufs_inode.c		standard
+I 11
+sys/ufs_mount.c		standard
+E 11
+D 13
+sys/ufs_nami.c		standard
+E 13
+I 13
+sys/ufs_namei.c		standard
+E 13
+I 6
+D 17
+sys/ufs_nd.c		optional nd device-driver
+E 17
+E 6
+sys/ufs_subr.c		standard
+sys/ufs_syscalls.c	standard
+sys/ufs_tables.c	standard
+sys/ufs_xxx.c		standard
+I 11
+sys/uipc_domain.c	standard
+E 11
+sys/uipc_mbuf.c		standard
+D 10
+sys/uipc_mu_msg.c	standard
+E 10
+D 16
+sys/uipc_pipe.c		standard
+E 16
+sys/uipc_proto.c	standard
+sys/uipc_socket.c	standard
+sys/uipc_socket2.c	standard
+I 11
+sys/uipc_syscalls.c	standard
+E 11
+I 2
+sys/uipc_usrreq.c	standard
+E 2
+sys/vm_drum.c		standard
+sys/vm_mem.c		standard
+sys/vm_mon.c		standard
+sys/vm_page.c		standard
+sys/vm_proc.c		standard
+sys/vm_pt.c		standard
+sys/vm_sched.c		standard
+sys/vm_subr.c		standard
+sys/vm_sw.c		standard
+D 11
+sys/vm_swp.c		standard
+E 11
+sys/vm_swap.c		standard
+I 11
+sys/vm_swp.c		standard
+E 11
+sys/vm_text.c		standard
+I 18
+D 23
+bbnnet/icmp.c		optional inet bbnnet
+bbnnet/ic_output.c	optional inet bbnnet
+bbnnet/in.c		optional inet bbnnet
+bbnnet/in_pcb.c		optional inet bbnnet
+bbnnet/in_proto.c	optional inet bbnnet
+bbnnet/ip_input.c	optional inet bbnnet
+bbnnet/ip_output.c	optional inet bbnnet
+bbnnet/ip_usrreq.c	optional inet bbnnet
+bbnnet/raw_input.c	optional inet bbnnet
+bbnnet/tcp_input.c	optional inet bbnnet
+bbnnet/tcp_prim.c	optional inet bbnnet
+bbnnet/tcp_procs.c	optional inet bbnnet
+bbnnet/tcp_states.c	optional inet bbnnet
+bbnnet/tcp_usrreq.c	optional inet bbnnet
+bbnnet/udp_usrreq.c	optional inet bbnnet
+bbnnet/udp.c		optional inet bbnnet
+bbnnet/hmp.c		optional inet bbnnet hmp
+bbnnet/hmp_subr.c	optional inet bbnnet hmp
+bbnnet/hmp_traps.c	optional inet bbnnet hmp
+bbnnet/rdp_fsm.c	optional inet bbnnet rdp
+D 19
+bbnnet/rdp_cksum.c	optional inet bbnnet
+E 19
+I 19
+bbnnet/rdp_cksum.s	optional inet bbnnet
+E 19
+bbnnet/rdp_input.c	optional inet bbnnet rdp
+bbnnet/rdp_prim.c	optional inet bbnnet rdp
+bbnnet/rdp_states.c	optional inet bbnnet rdp
+bbnnet/rdp_subr.c	optional inet bbnnet rdp
+bbnnet/rdp_usrreq.c	optional inet bbnnet rdp
+E 23
+I 23
+D 25
+bbnnet/icmp.c		optional bbnnet
+bbnnet/ic_output.c	optional bbnnet
+bbnnet/in.c		optional bbnnet
+bbnnet/in_pcb.c		optional bbnnet
+bbnnet/in_proto.c	optional bbnnet
+bbnnet/ip_input.c	optional bbnnet
+bbnnet/ip_output.c	optional bbnnet
+bbnnet/ip_usrreq.c	optional bbnnet
+bbnnet/raw_input.c	optional bbnnet
+bbnnet/tcp_input.c	optional bbnnet
+bbnnet/tcp_prim.c	optional bbnnet
+bbnnet/tcp_procs.c	optional bbnnet
+bbnnet/tcp_states.c	optional bbnnet
+bbnnet/tcp_usrreq.c	optional bbnnet
+bbnnet/udp_usrreq.c	optional bbnnet
+bbnnet/udp.c		optional bbnnet
+bbnnet/hmp.c		optional bbnnet hmp
+bbnnet/hmp_subr.c	optional bbnnet hmp
+bbnnet/hmp_traps.c	optional bbnnet hmp
+bbnnet/rdp_fsm.c	optional bbnnet rdp
+bbnnet/rdp_cksum.s	optional bbnnet
+bbnnet/rdp_input.c	optional bbnnet rdp
+bbnnet/rdp_prim.c	optional bbnnet rdp
+bbnnet/rdp_states.c	optional bbnnet rdp
+bbnnet/rdp_subr.c	optional bbnnet rdp
+bbnnet/rdp_usrreq.c	optional bbnnet rdp
+E 25
+E 23
+E 18
+E 1

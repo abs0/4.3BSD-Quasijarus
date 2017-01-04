@@ -1,0 +1,76 @@
+h65368
+s 00000/00004/00043
+d D 6.1 86/04/23 23:51:08 mckusick 3 2
+c Ken Arnold edits for document distributed with 4.3BSD
+e
+s 00004/00004/00043
+d D 5.1 86/04/23 23:51:03 mckusick 2 1
+c document distributed with 4.2BSD
+e
+s 00047/00000/00000
+d D 4.1 86/04/23 23:50:58 mckusick 1 0
+c document distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+'ie t 'ds _ \d\(mi\u
+'el 'ds _ _
+'tr *\(**
+'ps 9p
+'vs 10p
+'ds - \(mi
+'ds /* \\h'\\w' 'u-\\w'/'u'/*
+'bd B 3
+'bd S B 3
+'nr cm 0
+'nf
+'de ()
+'pn 1
+..
+'de +C
+'nr cm 1
+'ft 2
+'ds +K
+'ds -K
+..
+'de -C
+'nr cm 0
+'ft 1
+.ie t 'ds +K \f3
+.el 'ds +K \fI
+'ds -K \fP
+..
+'+C
+'-C
+'am +C
+'ne 3
+..
+D 2
+'de FN
+\\$1\c
+'ds =f \&...\\$1
+..
+E 2
+I 2
+D 3
+.\"'de FN
+.\"\\$1\c
+.\"'ds =f \&...\\$1
+.\"..
+E 3
+E 2
+'de -F
+'rm =f
+..
+'ft 1
+'lg 0
+E 1

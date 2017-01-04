@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)mkglue.c	5.6 (Berkeley) 6/18/88";
+static char sccsid[] = "@(#)mkglue.c	5.7 (Berkeley) 3/2/04";
 #endif /* not lint */
 
 /*
@@ -29,11 +29,13 @@ static char sccsid[] = "@(#)mkglue.c	5.6 (Berkeley) 6/18/88";
 
 /*
  * Create the UNIBUS interrupt vector glue file.
+ * (Though it isn't just for UNIBUS any more, but for all devices with vectors.)
  */
 ubglue()
 {
 	register FILE *fp, *gp;
 	register struct device *dp, *mp;
+	register struct idlst *id, *id2;
 
 	fp = fopen(path("ubglue.s"), "w");
 	if (fp == 0) {
@@ -46,41 +48,27 @@ ubglue()
 		exit(1);
 	}
 	for (dp = dtab; dp != 0; dp = dp->d_next) {
-		mp = dp->d_conn;
-		if (mp != 0 && mp != (struct device *)-1 &&
-		    !eq(mp->d_name, "mba")) {
-			struct idlst *id, *id2;
-
-			for (id = dp->d_vec; id; id = id->id_next) {
-				for (id2 = dp->d_vec; id2; id2 = id2->id_next) {
-					if (id2 == id) {
-						dump_ubavec(fp, id->id,
-						    dp->d_unit);
-						break;
-					}
-					if (!strcmp(id->id, id2->id))
-						break;
+		for (id = dp->d_vec; id; id = id->id_next) {
+			for (id2 = dp->d_vec; id2; id2 = id2->id_next) {
+				if (id2 == id) {
+					dump_ubavec(fp, id->id, dp->d_unit);
+					break;
 				}
+				if (!strcmp(id->id, id2->id))
+					break;
 			}
 		}
 	}
 	dump_std(fp, gp);
 	for (dp = dtab; dp != 0; dp = dp->d_next) {
-		mp = dp->d_conn;
-		if (mp != 0 && mp != (struct device *)-1 &&
-		    !eq(mp->d_name, "mba")) {
-			struct idlst *id, *id2;
-
-			for (id = dp->d_vec; id; id = id->id_next) {
-				for (id2 = dp->d_vec; id2; id2 = id2->id_next) {
-					if (id2 == id) {
-						dump_intname(fp, id->id,
-							dp->d_unit);
-						break;
-					}
-					if (!strcmp(id->id, id2->id))
-						break;
+		for (id = dp->d_vec; id; id = id->id_next) {
+			for (id2 = dp->d_vec; id2; id2 = id2->id_next) {
+				if (id2 == id) {
+					dump_intname(fp, id->id, dp->d_unit);
+					break;
 				}
+				if (!strcmp(id->id, id2->id))
+					break;
 			}
 		}
 	}

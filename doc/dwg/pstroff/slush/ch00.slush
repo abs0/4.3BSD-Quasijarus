@@ -1,0 +1,147 @@
+.SH
+Objectives
+.LP
+The present version of troff has been designed to fulfill two quite different
+use cases at the same time:
+.IP 1.
+On the one hand, the new troff needs to function as a fully compatible
+successor to the previous troff setups used at UCB, implementing
+the ``standard troff functionality'', however that may be defined,
+no worse than they did.
+In this use case the goal is to take some original troff document sources
+and produce a paper printout that looks no worse than those produced
+Back In The Day.
+.IP \&
+Troff compatibility is the end goal in this use case, and all
+\*(PS implementation details are means to that end.
+.IP 2.
+The other objective was and is to make the new troff a useful tool
+in its own right, one that can be used to fulfill the document
+preparation needs of the present day.
+.IP \&
+To me that means \*(PS \(em whenever I use my troff to produce
+a flyer for an event, a snail mail letter, a TPS report of some kind,
+or any other paper product, I view my ultimate task as the creation
+of a \*(PS page description that looks the way I want and uses the fonts,
+characters and \*(PS graphics features of my choosing.
+In this view, troff becomes merely a handy tool for creating
+such PS page descriptions without having to resort to hand-coding
+the whole thing in raw PS.
+Thus the roles are reversed relative to the old troff compatibility
+mode \(em now \*(PS is the end goal, and troff is a means to it.
+.LP
+These two objectives are very different, and have been quite
+difficult to reconcile oftentimes.
+On the one hand, I feel that in order to bear the name \*(Tr,
+my version needs to emulate the historical versions so well
+that it would be difficult to tell from a printed copy whether
+it was troffed last week or 30 years ago.
+On the other hand, I have to keep reminding myself of the
+very non-negligible cost involved in such faithful emulation.
+Efficiency and adaptability to diverse hardware environments have always been
+the hallmarks of the Unix culture, and it doesn't seem to me that
+incurring a great overhead cost just to make the minute
+details of printed document appearance match the ``old'' look
+is the right Unix way.
+Especially considering that the Unix culture has always emphasized
+the useful information content over minute differences
+in graphic appearance.
+.PP
+The high cost involved is that of special custom fonts.
+It is relatively easy to produce a modern reprint of a historical
+troff document using the standard Adobe fonts which are included
+``for free'' in all \*(PS printers,
+and in most cases there will be absolutely nothing wrong with the
+new rendition from an abstract and impartial point of view.
+However, it will be clearly distinguishable from a historic print
+made Back In The Day on one of the historical troff setups.
+If one wishes to make a reprint that replicates the original
+appearance so well that it would be difficult to tell which
+is which,
+one must forego the ``standard'' Adobe fonts and create a set
+of special custom ones which replicate the graphic appearance
+and metrics of those that have been used the requisite number of decades ago.
+Custom font design is hard work.
+
+
+
+
+twisting over backwards to reproduce every quirk of the historical
+troff character set
+
+
+.SH
+It's all in the fonts
+.PP
+The area where the two objectives stated above come into direct conflict
+is the choice of fonts.
+The graphics capabilities of \*(PS are certainly powerful enough to
+produce a 100% faithful emulation of the graphic appearance of
+anything printed with any of the older technologies, if one so desires,
+but doing so generally requires that whoever is doing such an emulation
+must create or procure a set of specially-designed fonts
+which emulate the graphic appearance and metrics of the original.
+.PP
+The fonts which come standard with \*(PS printers make no pretense
+of exactly matching those of any other system, and are only good
+for ``new'' documents in the sense that they make no attempt to
+replicate the exact appearance of any historical print.
+
+
+
+is responsible for creating
+or procuring th custom
+
+
+
+.LP
+By far the easiest way to meet Objective\ 1 as stated above,
+and nothing else,
+would have been to write a converter that took unmodified machine codes
+for the C/A/T (or the APS-5, or whichever other historical troff
+output device is chosen as the golden reference to be emulated)
+and turned them into a \*(PS page description.
+Doing it properly would require designing a set of custom fonts
+which replicate the graphic appearance and metrics of those
+in the original device, which would be a good chunk of hard work,
+made even harder by the lack of an authoritative reference,
+but the rest would have been trivial:
+the graphics model of \*(PS fully supercedes the capabilities
+of primitive devices like the C/A/T, hence providing an \fIexact\fP
+emulation of the latter in terms of the former is mostly a piece of cake.
+.PP
+But such a machine emulator approach would fail to meet Objective\ 2,
+as well as the general goal of embracing \*(PS and adopting it as a standard
+part of the ``Unix way of doing things'' \(em only \fInative\fP support
+for \*(PS can qualify for the latter status.
+Thus a direct troff-to-\*(PS reimplementation was called for,
+nothing less.
+.SH
+It's all in the fonts
+.PP
+As surprising as it may be to hear at first,
+the area of fonts is the only major one in which the two goals
+listed above come into direct conflict.
+The graphics model of \*(PS is versatile and powerful enough
+that implementing the graphics command set (the positioning,
+definition and painting of any text or graphic shapes) of any
+pre-\*(PS printing device or application (such as troff)
+in terms of \*(PS graphics operators is mostly a piece of cake.
+It is usually trivial to emulate the graphics functionality of some legacy
+system with 100% fidelity, and to do so in a manner that
+doesn't stand in the way of writing new documents which make use
+of the new functionality.
+.PP
+But a faithful PS emulation of
+
+
+
+
+with the following 4
+main goals in mind:
+.IP \(bu
+Produce \*(PS output that is as clean and bloat-free as possible,
+making native use of the standard PS facilities as much as possible.
+That means using the standard Adobe fonts, the ones already included
+in all PS printers, rather than special ones of our own creation,
+whenever possible.

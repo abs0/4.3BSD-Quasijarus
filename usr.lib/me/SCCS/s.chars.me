@@ -1,0 +1,176 @@
+h63757
+s 00002/00002/00082
+d D 2.6 04/10/28 03:07:03 msokolov 9 8
+c dammit!
+e
+s 00014/00002/00070
+d D 2.5 04/10/28 02:51:13 msokolov 8 7
+c pstroff:	use non-ASCII circumflex and tilde
+c there exists and for all are Symbol characters
+e
+s 00001/00001/00071
+d D 2.4 88/05/21 15:12:28 bostic 7 6
+c don't strip copyright notice
+e
+s 00012/00001/00060
+d D 2.3 88/05/19 17:21:17 bostic 6 5
+c written by Eric Allman; add Berkeley specific header
+e
+s 00003/00003/00058
+d D 2.2 80/08/29 15:25:04 eric 5 4
+c changed umlaut to not be so tricky (it seems to backfire)
+e
+s 00000/00000/00061
+d D 2.1 80/08/18 11:42:59 eric 4 3
+c RELEASE 2
+e
+s 00002/00000/00059
+d D 1.3 80/08/18 11:35:37 eric 3 2
+c added id keywords
+e
+s 00059/00000/00000
+d D 1.2 80/05/12 22:46:06 eric 2 1
+c base version
+e
+s 00000/00000/00000
+d D 1.1 80/05/12 22:12:24 eric 1 0
+e
+u
+U
+t
+T
+I 2
+.nr _0 \n(c.
+I 3
+D 6
+.\"	%W%	%G%
+E 6
+I 6
+.\"	%W% (Berkeley) %G%
+E 6
+D 7
+.\"	%beginstrip%
+E 7
+I 6
+.\"
+.\" Copyright (c) 1988 Regents of the University of California.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+I 7
+.\"	%beginstrip%
+E 7
+.\"
+E 6
+E 3
+.\"	*** special characters ***
+.\" this file uses temp strings of the form #x.
+.if n \
+\{\
+.	ds #[ \f1
+.	ds #] \fP
+.	ds #h 0
+.	ds #v 0.8m
+D 5
+.	ds #f +0.3m
+E 5
+I 5
+.	ds #f 0.3m
+E 5
+.\}
+.if t \
+\{\
+.	ds #[ \&
+.	ds #] \&
+.	ds #h ((1u-(\\\\n(.fu%2u))*0.13m)
+.	ds #v 0.6m
+D 5
+.	ds #f "\"
+E 5
+I 5
+.	ds #f 0
+E 5
+.\}
+.\"			\" accents
+.ds ' \k_\h'-(\\n(.wu*8/10-\*(#h)'\*(#[\(aa\h'|\\n_u'\*(#]
+.ds ` \k_\h'-(\\n(.wu*7/10-\*(#h)'\*(#[\(ga\h'|\\n_u'\*(#]
+.\"			\" umlaut
+D 5
+.ds : \k_\h'-(\\n(.wu*8/10-\*(#h+0.1m\*(#f)'\v'-\*(#v'\*(#[\z.\h'0.2m\*(#f'.\h'|\\n_u'\v'\*(#v'\*(#]
+E 5
+I 5
+.ds : \k_\h'-(\\n(.wu*8/10-\*(#h+0.1m+\*(#f)'\v'-\*(#v'\*(#[\z.\h'0.2m+\*(#f'.\h'|\\n_u'\v'\*(#v'\*(#]
+E 5
+.\"			\" circumflex and tilde
+D 8
+.ds ^ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[^\h'|\\n_u'\*(#]
+.ds ~ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[~\h'|\\n_u'\*(#]
+E 8
+I 8
+D 9
+.if \n(.C \{\
+E 9
+I 9
+.ie \n(.C \{\
+E 9
+.	ds ^ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[\X93\h'|\\n_u'\*(#]
+.	ds ~ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[\X94\h'|\\n_u'\*(#]
+.\}
+D 9
+.ie \{\
+E 9
+I 9
+.el \{\
+E 9
+.	ds ^ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[^\h'|\\n_u'\*(#]
+.	ds ~ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[~\h'|\\n_u'\*(#]
+.\}
+E 8
+.\"			\" cedilla and czech
+.ds , \k_\h'-(\\n(.wu)'\*(#[,\h'|\\n_u'\*(#]
+.ds v \k_\h'-(\\n(.wu*9/10-\*(#h)'\v'-\*(#v'\*(#[\s-4v\s0\v'\*(#v'\h'|\\n_u'\*(#]
+.\"			\" Norwegian A or angstrom
+.ds o \k_\h'-(\\n(.wu+\w'\(de'u-\*(#h)/2u'\v'-0.4n'\*(#[\z\(de\v'0.4n'\h'|\\n_u'\*(#]
+.\"			\" there exists, for all
+.ds qe \*(#[\v'0.5m'\z\(em\v'-0.65m'\z\(em\v'-0.65m'\z\(em\v'0.8m'\h'0.3m'|\h'-0.3m'\*(#]
+.ds qa \*(#[\h'-0.24m'\z\e\h'0.48m'\z\(sl\h'-0.24m'\v'-0.15m'\(em\v'0.15m'\*(#]
+.if t \
+\{\
+.	ds qe \s-2\v'0.45m'\z\(em\v'-0.625m'\z\(em\v'-0.625m'\(em\v'0.8m'\s0\h'-0.1m'\v'-0.05m'\(br\v'0.05m'\h'0.1m'
+.	ds qa \z\e\h'0.35m'\z\(sl\h'-0.33m'\v'-0.3m'\s-4\(em\s0\v'0.3m'\h'0.15m'
+.\}
+.if \n($T \
+\{\
+.	ds ' \*(#[\h'-1'\(aa\*(#]
+.	ds ` \*(#[\h'-1'\(ga\*(#]
+.	ds : \&
+.	ds ^ \*(#[\h'-1'^\*(#]
+.	ds ~ \*(#[\h'-1'~\*(#]
+.	ds , \*(#[\h'-1',\*(#]
+.	ds v \&
+.	ds o \&
+.	ds qe EXISTS
+.	ds qa FORALL
+I 8
+.\}
+.\"			\" there exists and for all are Symbol characters
+.if \n(.C \
+\{\
+.	ds qe \S24
+.	ds qa \S22
+E 8
+.\}
+.rm #[
+.rm #]
+.rm #h
+.rm #v
+.rm #f
+.nr c. \n(_0
+E 2
+I 1
+E 1

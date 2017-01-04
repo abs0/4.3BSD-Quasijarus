@@ -11,7 +11,7 @@
  */
 
 #ifdef notdef
-static char sccsid[] = "@(#)cmd1.c	5.5 (Berkeley) 2/18/88";
+static char sccsid[] = "@(#)cmd1.c	5.7 (Berkeley) 4/19/03";
 #endif /* notdef */
 
 #include "rcv.h"
@@ -181,7 +181,8 @@ printhead(mesg)
 	char headline[LINESIZE], wcount[LINESIZE], *subjline, dispc, curind;
 	char pbuf[BUFSIZ];
 	struct headline hl;
-	int subjlen;
+	register int subjlen, i, c, rus;
+	register char *cp;
 
 	mp = &message[mesg-1];
 	readline(setinput(mp), headline);
@@ -205,13 +206,34 @@ printhead(mesg)
 	parse(headline, &hl, pbuf);
 	sprintf(wcount, "%3d/%-4ld", mp->m_lines, mp->m_size);
 	subjlen = screenwidth - 50 - strlen(wcount);
-	if (subjline == NOSTR || subjlen < 0)		/* pretty pathetic */
-		printf("%c%c%3d %-20.20s  %16.16s %s\n",
-			curind, dispc, mesg, nameof(mp, 0), hl.l_date, wcount);
-	else
-		printf("%c%c%3d %-20.20s  %16.16s %s \"%.*s\"\n",
-			curind, dispc, mesg, nameof(mp, 0), hl.l_date, wcount,
-			subjlen, subjline);
+	printf("%c%c%3d %-20.20s  %16.16s %s", curind, dispc, mesg,
+		nameof(mp, 0), hl.l_date, wcount);
+	/*
+	 * Print the subject line. The trick here is that it may be in KOI-7
+	 * with SO/SI codes, and we must ensure that the tty is back in ASCII
+	 * mode when we are done. Good manners require that there be an SI code
+	 * at the end of a Russian subject line, but we may cut it off if the
+	 * subject is too long. Therefore we send an SI at the end ourselves if
+	 * the subject line is Russian. Also we recognise the SO/SI codes as
+	 * non-spacing.
+	 */
+	if (subjline != NOSTR && subjlen > 0) {
+		putchar(' ');
+		putchar('"');
+		for (cp=subjline, i=0, rus=0; (c = *cp++) && i < subjlen; ) {
+			if (c == '\016')
+				rus = 1;
+			else if (c == '\017')
+				rus = 0;
+			else
+				i++;
+			putchar(c);
+		}
+		if (rus)
+			putchar('\017');
+		putchar('"');
+	}
+	putchar('\n');
 }
 
 /*

@@ -1,0 +1,21 @@
+h24215
+s 00010/00000/00000
+d D 6.1 86/05/14 17:33:59 mckusick 1 0
+c document received from AT&T
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.so /k3/unx/MACROS/cmac1.1
+.VM 20 20
+.P
+UNIX is a trademark of AT&T Bell Laboratories
+.P
+3B is a trademark of AT&T Technologies.
+.P
+PDP and VAX are trademarks of Digital Equipment Corporation.
+E 1

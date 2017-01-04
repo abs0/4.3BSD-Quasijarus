@@ -1,0 +1,99 @@
+h27337
+s 00001/00001/00052
+d D 6.1 85/04/29 20:00:21 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00011/00006/00042
+d D 5.1 85/04/29 19:59:58 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00048/00000/00000
+d D 4.1 85/04/29 19:59:34 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CALENDAR 1 4/1/81
+E 2
+I 2
+D 3
+.TH CALENDAR 1  "29 March 1982"
+E 3
+I 3
+.TH CALENDAR 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+calendar \- reminder service
+.SH SYNOPSIS
+.B calendar
+[ \- ]
+.SH DESCRIPTION
+.I Calendar 
+consults the file `calendar' in the current directory
+and prints out lines that contain today's or
+tomorrow's date anywhere in the line.
+Most reasonable month-day dates such as `Dec. 7,'
+`december 7,' `12/7,' etc., are recognized, but not
+`7 December' or `7/12'.
+D 2
+If you give just a date, i.e. ``1'', that day in any month will do.
+E 2
+I 2
+If you give the month as ``*''
+with a date, i.e. ``* 1'', that day in any month will do.
+E 2
+On weekends `tomorrow' extends through Monday.
+.PP
+When 
+an argument is present,
+.I calendar
+does its job for every user
+who has a file `calendar' in his login directory
+and sends him any positive results by
+.IR mail (1).
+Normally this is done daily in the wee hours under control of
+.IR cron (8).
+I 2
+.PP
+The file `calendar' is first run through the ``C'' preprocessor,
+.IR /lib/cpp ,
+to include any other calendar files
+specified with the usual ``#include'' syntax.
+Included calendars will usually be shared by all users,
+maintained and documented by the local administration.
+E 2
+.SH FILES
+calendar
+.br
+/usr/lib/calendar to figure out today's and tomorrow's dates
+.br
+/etc/passwd
+.br
+/tmp/cal*
+.br
+D 2
+egrep, sed, mail subprocesses
+E 2
+I 2
+/lib/cpp, egrep, sed, mail as subprocesses
+E 2
+.SH "SEE ALSO"
+at(1), cron(8), mail(1)
+.SH BUGS
+D 2
+Your calendar must be public information for you
+to get reminder service.
+.br
+E 2
+.I Calendar's
+extended idea of `tomorrow' doesn't account for
+holidays.
+E 1

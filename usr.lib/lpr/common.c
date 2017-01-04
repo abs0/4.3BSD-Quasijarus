@@ -16,7 +16,7 @@
  */
 
 #ifndef lint
-static char sccsid[] = "@(#)common.c	5.4 (Berkeley) 6/30/88";
+static char sccsid[] = "@(#)common.c	5.9 (Berkeley) 2/13/06";
 #endif /* not lint */
 
 /*
@@ -46,6 +46,9 @@ char	*GF;		/* name of graph(1G) filter (per job) */
 char	*VF;		/* name of vplot filter (per job) */
 char	*CF;		/* name of cifplot filter (per job) */
 char	*PF;		/* name of vrast filter (per job) */
+char	*BF;		/* name of banner filter */
+char	*PP;		/* name of printer prep program */
+char	*JP;		/* name of job prep program */
 char	*FF;		/* form feed string */
 char	*TR;		/* trailer string to be output when Q empties */
 short	SC;		/* suppress multiple copies */
@@ -54,10 +57,13 @@ short	SH;		/* suppress header page */
 short	SB;		/* short banner instead of normal header */
 short	HL;		/* print header last */
 short	RW;		/* open LP for reading and writing */
+short	CT;		/* check printer for readiness with ^T */
 short	PW;		/* page width */
 short	PL;		/* page length */
 short	PX;		/* page width in pixels */
 short	PY;		/* page length in pixels */
+short	EA;		/* pass extended arguments to filters */
+short	PI;		/* input filter incorporates pr functionality */
 short	BR;		/* baud rate if lp is a tty */
 int	FC;		/* flags to clear if lp is a tty */
 int	FS;		/* flags to set if lp is a tty */
@@ -74,11 +80,13 @@ char	host[32];	/* host machine name */
 char	*from = host;	/* client's machine name */
 
 /*
- * Create a connection to the remote printer server.
+ * Create a TCP connection to host "rhost" at port "rport".
+ * If rport == 0, then use the printer service port.
  * Most of this code comes from rcmd.c.
  */
-getport(rhost)
+getport(rhost, rport)
 	char *rhost;
+	int rport;
 {
 	struct hostent *hp;
 	struct servent *sp;
@@ -91,16 +99,24 @@ getport(rhost)
 	 */
 	if (rhost == NULL)
 		fatal("no remote host to connect to");
-	hp = gethostbyname(rhost);
-	if (hp == NULL)
-		fatal("unknown host %s", rhost);
-	sp = getservbyname("printer", "tcp");
-	if (sp == NULL)
-		fatal("printer/tcp: unknown service");
 	bzero((char *)&sin, sizeof(sin));
-	bcopy(hp->h_addr, (caddr_t)&sin.sin_addr, hp->h_length);
-	sin.sin_family = hp->h_addrtype;
-	sin.sin_port = sp->s_port;
+	sin.sin_addr.s_addr = inet_addr(rhost);
+	if (sin.sin_addr.s_addr != INADDR_NONE)
+		sin.sin_family = AF_INET;
+	else {
+		hp = gethostbyname(rhost);
+		if (hp == NULL)
+			fatal("unknown host %s", rhost);
+		bcopy(hp->h_addr, (caddr_t)&sin.sin_addr, hp->h_length);
+		sin.sin_family = hp->h_addrtype;
+	}
+	if (rport == 0) {
+		sp = getservbyname("printer", "tcp");
+		if (sp == NULL)
+			fatal("printer/tcp: unknown service");
+		sin.sin_port = sp->s_port;
+	} else
+		sin.sin_port = htons(rport);
 
 	/*
 	 * Try connecting to the server.

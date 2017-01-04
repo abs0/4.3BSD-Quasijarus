@@ -16,7 +16,7 @@ divert(10)
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)boilerplate.m4	1.4 (Berkeley) 3/27/00
+#	@(#)boilerplate.m4	1.5 (Berkeley) 12/25/04
 #
 divert(0)
 ######################
@@ -99,6 +99,7 @@ Pjunk=-100
 Troot
 Tdaemon
 Tuucp
+Tmsmlm
 
 #########################
 #   Format of headers   #

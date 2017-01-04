@@ -17,7 +17,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)bi.c	7.2 (Berkeley) 7/9/88
+ *	@(#)bi.c	7.3 (Berkeley) 3/6/04
  */
 
 /*
@@ -71,14 +71,18 @@ bi_buserr(binum)
 {
 	register struct bi_node *bi;
 	register int node;
+#if 0
 	extern int bi_nodes;
+#endif
 	extern int cold;
 
 	printf("vaxbi%d: bus error\n", binum);
 	bi = (struct bi_node *) &nexus[binum * NNODEBI];/* XXX */
 	for (node = 0; node < 16; node++, bi++) {
+#if 0
 		if ((bi_nodes & (1 << node)) == 0)	/* XXX crude */
 			continue;
+#endif
 		printf("node %x: ber=%b\n", node, bi->biic.bi_ber, BIBER_BITS);
 	}
 	panic("bi_buserr");

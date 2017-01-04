@@ -1,0 +1,96 @@
+h57825
+s 00002/00007/00063
+d D 6.2 04/10/30 04:16:10 msokolov 2 1
+c we are no longer raping Symbol, just fixing the radical metrics
+c remove the BUGS note since it's fixed!
+e
+s 00070/00000/00000
+d D 6.1 04/09/16 22:40:13 msokolov 1 0
+c date and time created 04/09/16 22:40:13 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.TH PREPPSFONT 1 "%Q%"
+.UC 8
+.SH NAME
+preppsfont \- prepare PostScript fonts for pstroff
+.SH SYNOPSIS
+.B preppsfont
+[ \fB\-r\fP ] [ \fB\-s\fP ] afmfile fn
+.SH DESCRIPTION
+.I Preppsfont
+prepares the PostScript font described by the Adobe Font Metrics file
+.I afmfile
+for use with
+.IR pstroff (1).
+It generates a simple
+binary file with 256 character widths for the font as it will be used, and a
+text file with PostScript code that will fetch the font, make any
+desired modifications to it, and leave the font dictionary on the
+operand stack.
+These files are generated in the current directory, which should be
+.B /usr/lib/pstroff
+to install the font system-wide.
+.PP
+.I fn
+is the one or two character name by which the font will be known in
+.IR pstroff (1).
+The generated width and setup files are named
+.BI fw fn
+and
+.BI fs fn
+respectively.
+.PP
+The
+.B \-r
+option indicates that the font is a Roman font and should be recoded to
+\%\fBTroffEncoding\fP.
+All Roman fonts must be prepared with this option to use the full
+character set described in the
+.I Nroff/Troff user's manual.
+.PP
+The
+.B \-s
+option should be used to prepare the Symbol font.
+D 2
+This adds code to the setup file to extend the Symbol font with a few
+extra line drawing characters (documented in the
+\fINroff/Troff user's manual\fP) and to change the metrics of the
+E 2
+I 2
+This adds code to the setup file
+to change the metrics of the
+E 2
+.I radical
+and
+.I radicalex
+characters to make them more useful.
+The width file is adjusted accordingly as well.
+.SH FILES
+.ta 5n +\w'TroffEncoding.ps  'u
+/usr/lib/pstroff/	directory containing:
+.br
+	fw*	font width tables
+.br
+	fs*	font setup files
+.br
+	TroffEncoding.ps	encoding vector for Roman fonts
+D 2
+.br
+	Symbolextend.ps	code to extend the Symbol font
+E 2
+.SH SEE ALSO
+J. F. Ossanna,
+.I Nroff/Troff user's manual
+.br
+pstroff(1)
+D 2
+.SH BUGS
+Too much tweaking is applied to the standard fonts.
+E 2
+E 1

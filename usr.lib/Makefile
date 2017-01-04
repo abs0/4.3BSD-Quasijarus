@@ -9,7 +9,7 @@
 # software without specific prior written permission. This software
 # is provided ``as is'' without express or implied warranty.
 #
-#	@(#)Makefile	5.16 (Berkeley) 5/24/02
+#	@(#)Makefile	5.18 (Berkeley) 7/13/11
 #
 CFLAGS=	-O
 LIBC=	/lib/libc.a
@@ -23,7 +23,7 @@ TAGSDIR=libcurses libdbm libln libm libmp libpc libtermlib
 
 # Programs that live in subdirectories, and have makefiles of their own.
 #
-SUBDIR=	learn lib2648 libF77 libI77 libU77 libcurses libdbm libg libln \
+SUBDIR=	learn lib2648 libF77 libI77 libU77 libctsl libcurses libdbm libg libln \
 	libm libmp libpc libplot libtermlib liby libz lpr man me ms sendmail
 
 # C source that lives in the current directory
@@ -55,6 +55,8 @@ install: FRC
 		(install -s -o bin -g bin -m 755 $$i ${DESTDIR}/usr/lib/$$i); \
 	done
 	install -c -o bin -g bin -m 755 lib.b ${DESTDIR}/usr/lib/lib.b
+	install -c -o bin -g bin -m 755 makewhatis.sh \
+		${DESTDIR}/usr/lib/makewhatis
 
 tags: FRC
 	-for i in ${TAGSDIR}; do \

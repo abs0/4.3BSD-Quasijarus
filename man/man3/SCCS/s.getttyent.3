@@ -1,0 +1,187 @@
+h48812
+s 00009/00006/00100
+d D 6.4 86/05/20 09:18:02 karels 4 3
+c last-minute corrections
+e
+s 00007/00005/00099
+d D 6.3 86/05/17 16:41:10 lepreau 3 2
+c the window strings is NOT quoted at this point; other cleanups
+e
+s 00002/00002/00102
+d D 6.2 86/04/27 01:31:55 donn 2 1
+c setttyent() and endttyent() don't return anything (not even errors!).
+e
+s 00104/00000/00000
+d D 6.1 85/05/15 16:46:06 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH GETTTYENT 3  "%Q%"
+.UC 6
+.SH NAME
+getttyent, getttynam, setttyent, endttyent \- get ttys file entry
+.SH SYNOPSIS
+.nf
+.B #include <ttyent.h>
+.PP
+.B struct ttyent *getttyent()
+.PP
+.B struct ttyent *getttynam(name)
+.B char *name;
+.PP
+D 2
+.B int setttyent()
+E 2
+I 2
+.B setttyent()
+E 2
+.PP
+D 2
+.B int endttyent()
+E 2
+I 2
+.B endttyent()
+E 2
+.fi
+.SH DESCRIPTION
+.I Getttyent,
+and
+.I getttynam
+each return a pointer to an object with the
+following structure
+containing the broken-out
+fields of a line from the tty description file.
+.RS
+.PP
+.nf
+.so /usr/include/ttyent.h
+.ft R
+.ad
+.fi
+.RE
+.PP
+.IP ty_name \w'ty_comment'u+3
+is the name of the character-special file in the directory ``/dev".
+For various reasons, it must reside in the directory ``/dev".
+.IP ty_getty
+is the command (usually
+.IR getty (8))
+which is invoked by
+.I init
+to initialize tty line characteristics.
+In fact, any arbitrary command can be used;
+a typical use is to initiate a terminal emulator in a window system.
+.IP ty_type
+is the name of the default terminal type connected to this tty line. This
+is typically a name from the
+.IR termcap (5)
+data base.
+The environment variable `TERM' is initialized with this name by
+I 4
+.IR getty (8)
+or
+E 4
+.IR login (1).
+.IP ty_status
+is a mask of bit fields which indicate various actions to be allowed on this
+tty line. The following is a description of each flag.
+.RS
+.IP TTY_ON \w'TTY_SECURE'u+3
+D 4
+Enables logins. (i.e.,
+E 4
+I 4
+Enables logins (i.e.,
+E 4
+.IR init (8)
+will start the specified ``getty" command
+D 4
+on this entry.)
+E 4
+I 4
+on this entry).
+E 4
+.IP TTY_SECURE
+Allows root to login on this terminal. Note that `TTY_ON' must be included
+for this to be useful.
+.RE
+.IP ty_window
+D 3
+is the quoted string of a command to execute for a window system
+associated with the line.
+If none is specified, this will be a null string.
+E 3
+I 3
+is the command to execute for a window system
+associated with the line.  The window system will be started before
+the command specified in the
+.I ty_getty
+entry is executed.
+D 4
+If none is specified, this will be the null string.
+E 4
+I 4
+If none is specified, this will be null.
+E 4
+E 3
+.IP ty_comment
+D 3
+Currently unused; could be used by finger to determine the location
+of a terminal.
+E 3
+I 3
+D 4
+is the trailing comment field, if any.
+E 4
+I 4
+is the trailing comment field, if any; a leading delimiter and white space
+will be removed.
+E 4
+E 3
+.PP
+.I Getttyent
+reads the next
+D 4
+line (opening the file if necessary);
+E 4
+I 4
+line from the ttys file, opening the file if necessary;
+E 4
+.I setttyent
+rewinds the file;
+.I endttyent
+closes it.
+.PP
+.I Getttynam
+searches from the beginning of the file until a matching
+.I name
+is found
+(or until EOF is encountered).
+.SH FILES
+/etc/ttys
+.SH "SEE ALSO"
+D 4
+ttys(5), init(8), getty(8), login(1), gettytab(5), termcap(5), ttyslot(3)
+E 4
+I 4
+login(1), ttyslot(3), ttys(5), gettytab(5), termcap(5), getty(8), init(8)
+E 4
+.SH DIAGNOSTICS
+Null pointer
+(0) returned on EOF or error.
+.SH BUGS
+All information
+is contained in a static area
+so it must be copied if it is
+to be saved.
+E 1

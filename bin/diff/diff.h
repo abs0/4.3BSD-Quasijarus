@@ -1,4 +1,4 @@
-/*	diff.h	4.7	85/08/16	*/
+/*	diff.h	4.8	03/07/10	*/
 
 /*
  * diff - common declarations
@@ -55,6 +55,12 @@ int	inifdef;
  * Variables for -c context option.
  */
 int	context;		/* lines of context to be printed */
+
+/*
+ * Hacks
+ */
+int	aflag;			/* skip the check for binary files */
+int	Jflag;			/* report any "jackpot" (debug option) */
 
 /*
  * State for exit status.

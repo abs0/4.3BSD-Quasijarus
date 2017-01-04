@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)conf.c	7.6 (Berkeley) 6/29/88
+ *	@(#)conf.c	7.7 (Berkeley) 2/7/04
  */
 
 #include "param.h"
@@ -122,6 +122,21 @@ int	krastrategy(), kraopen();
 #define	kraopen		nodev
 #endif
 
+int	vmbopen(), vmbstrategy();
+#ifdef BOOT
+#define	VMBT		0
+#define	vmbtopen	nodev
+#define	vmbtclose	nodev
+#else
+#define	VMBT		"vmbt"
+int	vmbtopen(), vmbtclose();
+#endif
+
+/*
+ * We overload major numbers 12 and 13 for vmb and vmbt standalone-only drivers.
+ * The kernel uses these major numbers for uu and rx, which are not used or
+ * supported by the standalone system.
+ */
 struct devsw devsw[] = {
 	{ HP,	hpstrategy,	hpopen,	nullsys, hpioctl },  /*  0 = hp */
 	{ HT,	htstrategy,	htopen,	htclose, noioctl },  /*  1 = ht */
@@ -135,8 +150,8 @@ struct devsw devsw[] = {
 	{ "ra",	rastrategy,	raopen,	nullsys, noioctl },  /*  9 = ra */
 	{ UT,	utstrategy,	utopen,	utclose, noioctl },  /* 10 = ut */
 	{ RB,	idcstrategy,	idcopen,nullsys, noioctl },  /* 11 = rb */
-	{ 0,	nodev,		nodev,	nullsys, noioctl },  /* 12 = uu */
-	{ 0,	nodev,		nodev,	nullsys, noioctl },  /* 13 = rx */
+	{ "vmb",vmbstrategy,	vmbopen,nullsys, noioctl },  /* 12 = uu */
+	{ VMBT,	vmbstrategy,	vmbtopen,vmbtclose,noioctl}, /* 13 = rx */
 	{ "rl",	rlstrategy,	rlopen,	nullsys, noioctl },  /* 14 = rl */
 	{ TMSCP,tmscpstrategy,tmscpopen,tmscpclose,noioctl}, /* 15 = tmscp */
 	{ KRA,	krastrategy,	kraopen,nullsys, noioctl},   /* 16 = kra */

@@ -1,0 +1,91 @@
+h14011
+s 00000/00000/00042
+d D 6.1 86/02/17 17:01:59 karels 3 2
+c rev 6
+e
+s 00007/00010/00035
+d D 1.2 86/02/17 17:01:37 karels 2 1
+c rm address setting, let ifconfig deal with it
+e
+s 00045/00000/00000
+d D 1.1 86/02/17 16:49:37 karels 1 0
+c from Torek
+e
+u
+U
+t
+T
+I 1
+D 2
+.TH SLATTACH 8C "20 September 1984"
+E 2
+I 2
+.\"	%W% (Berkeley) %G%
+.TH SLATTACH 8C "%Q%"
+E 2
+.UC 6
+.SH NAME
+slattach \- attach serial lines as network interfaces
+.SH SYOPNSIS
+.B /etc/slattach
+D 2
+ttyname source destination [
+E 2
+I 2
+ttyname [
+E 2
+.I baudrate
+]
+.SH DESCRIPTION
+.I Slattach
+is used to assign a tty line to a network interface,
+and to define the network source and destination addresses. The
+.I ttyname
+D 2
+parameter is a string of the form ``ttyXX'', or ``/dev/ttyXX'', while
+the source and destination are either host names present
+in the host name data base,
+.IR hosts (5),
+or DARPA Internet addresses expressed in the Internet standard
+``dot notation''.  The optional
+E 2
+I 2
+parameter is a string of the form ``ttyXX'', or ``/dev/ttyXX''.
+The optional
+E 2
+.I baudrate
+parameter is used to set the speed of the connection. If not specified, the
+default of 9600 is used.
+.PP
+Only the super-user may attach a network interface.
+.PP
+To detach the interface, use `ifconfig
+.I interface-name
+down' after killing off the
+.I slattach
+process.
+.I interface-name
+is the name that is shown by
+.B netstat(1)
+.SH EXAMPLES
+.ta 8
+D 2
+	/etc/slattach ttyh8 seismo osg3
+E 2
+I 2
+	/etc/slattach ttyh8
+E 2
+.br
+D 2
+	/etc/slattach /dev/tty01 hugo dahl 4800
+E 2
+I 2
+	/etc/slattach /dev/tty01 4800
+E 2
+.SH DIAGNOSTICS
+Messages indicating the specified interface does not exit, the
+requested address is unknown, the user is not privileged and
+tried to alter an interface's configuration.
+.SH "SEE ALSO"
+rc(8), intro(4N), netstat(1), ifconfig(8C)
+E 1

@@ -1,0 +1,522 @@
+h29650
+s 00000/00000/00137
+d D 5.12 04/12/08 04:15:10 msokolov 19 18
+x 18
+c I wrote all this code only to find out that the modem does not after all behave
+c the way I thought. Back to smgetty.
+e
+s 00022/00008/00129
+d D 5.11 04/12/07 23:43:19 msokolov 18 17
+c smart modem support
+e
+s 00010/00000/00127
+d D 5.10 03/03/22 18:53:13 msokolov 17 16
+c add 8-bit entries
+e
+s 00016/00014/00111
+d D 5.9 86/12/22 09:44:23 karels 16 15
+c flushes on plugboard, consistency on dialup names
+e
+s 00002/00002/00123
+d D 5.8 86/08/06 13:48:49 bloom 15 14
+c not all high speed terminals have tabs
+e
+s 00001/00001/00124
+d D 5.7 86/02/16 15:52:39 lepreau 14 13
+c typo in last delta
+e
+s 00004/00002/00121
+d D 5.6 85/10/23 12:01:52 bloom 13 12
+c add D2400 for faster dialups
+e
+s 00004/00002/00119
+d D 5.5 85/10/18 17:39:38 mckusick 12 11
+c update for 19200 baud (from Keith Muller)
+e
+s 00003/00000/00118
+d D 5.4 85/09/04 18:39:20 mckusick 11 10
+c add X window support
+e
+s 00003/00003/00115
+d D 5.3 85/08/27 10:05:57 bloom 10 9
+c include terminal line in default
+e
+s 00003/00003/00115
+d D 5.2 85/06/02 12:55:39 sam 9 8
+c it's 4.3 after all
+e
+s 00006/00002/00112
+d D 5.1 85/04/29 12:25:24 dist 8 7
+c Add copyright
+e
+s 00012/00001/00102
+d D 4.7 85/02/05 08:48:46 ralph 7 6
+c added autobaud detection.
+e
+s 00005/00002/00098
+d D 4.6 84/03/26 14:24:58 karels 6 5
+c add 1200-baud console, device names on dialups
+e
+s 00001/00002/00099
+d D 4.5 83/08/08 18:41:59 sam 5 4
+c clean up after robert
+e
+s 00001/00001/00100
+d D 4.4 83/07/23 00:48:03 sam 4 3
+c remove ridiculous robert crap
+e
+s 00001/00001/00100
+d D 4.3 83/07/07 09:27:05 sam 3 2
+c this ain't mo's machine yet
+e
+s 00077/00032/00024
+d D 4.2 83/07/07 03:29:19 kre 2 1
+c convert Melbourne table to standard old getty one
+e
+s 00056/00000/00000
+d D 4.1 83/07/07 02:48:27 kre 1 0
+c date and time created 83/07/07 02:48:27 by kre
+e
+u
+U
+t
+T
+I 1
+D 8
+#	%W% (Berkeley) %E%
+I 2
+
+E 8
+I 8
+# Copyright (c) 1980 Regents of the University of California.
+# All rights reserved.  The Berkeley software License Agreement
+# specifies the terms and conditions for redistribution.
+#
+#	%W% (Berkeley) %G%
+#
+E 8
+E 2
+#
+I 2
+# Most of the table entries here are just copies of the
+# old getty table, it is by no means certain, or even likely,
+# then any of them are optimal for any purpose whatever.
+# Nor is it likely that more than a couple are even correct
+#
+
+#
+E 2
+# The default gettytab entry, used to set defaults for all other
+# entries, and in cases where getty is called with no table name
+#
+default:\
+D 2
+	:ap:fd#1000:im=\r\n\r\n4.2 BSD UNIX (%)\r\n\r\r\n\r:sp#1200:
+8|crt.9600:\
+	:cb:ce:ck:sp#9600:
+E 2
+I 2
+D 5
+	:ap:fd#1000:im=\r\n\r\n4.2 BSD UNIX (%h)\r\n\r\r\n\r:sp#1200:\
+D 3
+	:er=^H:kl=@:in=\177:
+E 3
+I 3
+	:er=#:kl=@:in=\177:
+E 5
+I 5
+D 9
+	:ap:fd#1000:im=\r\n\r\n4.2 BSD UNIX (%h)\r\n\r\r\n\r:sp#1200:
+E 9
+I 9
+D 10
+	:ap:fd#1000:im=\r\n\r\n4.3 BSD UNIX (%h)\r\n\r\r\n\r:sp#1200:
+E 10
+I 10
+	:ap:fd#1000:im=\r\n\r\n4.3 BSD UNIX (%h) (%t)\r\n\r\r\n\r:sp#1200:
+E 10
+E 9
+E 5
+E 3
+
+E 2
+#
+D 2
+# Gandalf service 41, 9600, 300, 1200, 2400 rotation
+E 2
+I 2
+# Fixed speed entries
+E 2
+#
+D 2
+0|Gand.41.9600:\
+	:cb:ce:ck:sp#9600:cl=60\033d\033v\030\f:nx=Gand.41.300:
+E 2
+I 2
+D 7
+#	the "std.NNN" names are known to the special case
+E 7
+I 7
+#	The "std.NNN" names are known to the special case
+E 7
+#	portselector code in getty, however they can
+#	be assigned to any table desired.
+I 7
+#	The "NNN-baud" names are known to the special case
+#	autobaud code in getty, and likewise can
+#	be assigned to any table desired (hopefully the same speed).
+I 18
+#	The "sm-NNN" names are known to the smart modem code in getty
+#	(yadda yadda yadda).
+E 18
+E 7
+#
+a|std.110|110-baud:\
+	:nd#1:cd#1:uc:sp#110:
+b|std.134|134.5-baud:\
+	:ep:nd#1:cd#2:ff#1:td#1:sp#134:ht:nl:
+1|std.150|150-baud:\
+	:ep:nd#1:cd#2:td#1:fd#1:sp#150:ht:nl:lm=\E\72\6\6\17login\72 :
+D 18
+c|std.300|300-baud:\
+E 18
+I 18
+c|std.300|300-baud|sm-300:\
+E 18
+	:nd#1:cd#1:sp#300:
+D 18
+d|std.600|600-baud:\
+E 18
+I 18
+d|std.600|600-baud|sm-600:\
+E 18
+	:nd#1:cd#1:sp#600:
+D 18
+f|std.1200|1200-baud:\
+E 18
+I 18
+f|std.1200|1200-baud|sm-1200:\
+E 18
+	:fd#1:sp#1200:
+D 18
+6|std.2400|2400-baud:\
+E 18
+I 18
+6|std.2400|2400-baud|sm-2400:\
+E 18
+D 15
+	:sp#2400:ht:
+E 15
+I 15
+	:sp#2400:
+E 15
+D 18
+7|std.4800|4800-baud:\
+E 18
+I 18
+7|std.4800|4800-baud|sm-4800:\
+E 18
+D 15
+	:sp#4800:ht:
+E 15
+I 15
+	:sp#4800:
+E 15
+D 18
+2|std.9600|9600-baud:\
+E 18
+I 18
+2|std.9600|9600-baud|sm-9600:\
+E 18
+	:sp#9600:
+I 12
+D 18
+g|std.19200|19200-baud:\
+E 18
+I 18
+g|std.19200|19200-baud|sm-19200:\
+E 18
+	:sp#19200:
+I 17
+D 18
+h|std.38400|38400-baud:\
+E 18
+I 18
+h|std.38400|38400-baud|sm-38400:\
+E 18
+	:sp#38400:
+
+# 8-bit terminals
+8bit.9600:\
+	:p8:sp#9600:bd#0:cd#0:fd#0:nd#0:td#0:
+8bit.19200:\
+	:p8:sp#19200:bd#0:cd#0:fd#0:nd#0:td#0:
+8bit.38400:\
+	:p8:sp#38400:bd#0:cd#0:fd#0:nd#0:td#0:
+E 17
+E 12
+E 2
+
+D 2
+Gand.41.300:\
+	:pe:sp#300:fd#0:cl=\n\n\n:nx=Gand.41.1200:
+E 2
+I 2
+#
+# Dial in rotary tables, speed selection via 'break'
+#
+0|d300|Dial-300:\
+	:nx=d1200:cd#2:sp#300:
+d1200|Dial-1200:\
+	:nx=d150:fd#1:sp#1200:
+d150|Dial-150:\
+	:nx=d110:lm@:tc=150-baud:
+d110|Dial-110:\
+	:nx=d300:tc=300-baud:
+E 2
+
+D 2
+Gand.41.1200:\
+	:sp#1200:nx=Gand.41.2400:tc=Gand.41.9600:
+
+Gand.41.2400:\
+	:sp#2400:nx=Gand.41.9600:tc=Gand.41.9600:
+
+E 2
+#
+I 16
+# Fast dialup terminals, 2400/1200/300 rotary (can start either way)
+#
+D2400|d2400|Fast-Dial-2400:\
+	:nx=D1200:tc=2400-baud:
+3|D1200|Fast-Dial-1200:\
+	:nx=D300:tc=1200-baud:
+5|D300|Fast-Dial-300:\
+	:nx=D2400:tc=300-baud:
+I 18
+
+#
+# Dialup with the extremely smart Courier V.Everything modems.
+# The modem automatically negotiates the connection speed and modulation
+# scheme (from 300 to 33600 bps), tells us what speed it connected at,
+# and sets a matching RS-232 baud rate.
+# Special code in getty will switch this out
+# to one of the sm-NNN entries.
+# No more breaks!
+#
+courier|USR Courier V.Everything:\
+	:sm:sp#9600:f0#040:
+E 18
+
+#
+E 16
+D 2
+# Gandalf service 01, 1200, 300, 110 rotation
+E 2
+I 2
+# Odd special case terminals
+E 2
+#
+D 2
+2|Gand.01.1200:\
+	:nx=Gand.01.1200:tc=Gand.41.1200:
+E 2
+I 2
+-|tty33|asr33|Pity the poor user of this beast:\
+	:tc=110-baud:
+E 2
+
+D 2
+3|Gand.01.300:\
+	:nx=Gand.01.110:tc=Gand.41.300:
+E 2
+I 2
+4|Console|Console Decwriter II:\
+D 4
+	:co:nd@:cd@:rw:tc=300-baud:
+E 4
+I 4
+	:nd@:cd@:rw:tc=300-baud:
+E 4
+E 2
+
+I 6
+e|Console-1200|Console Decwriter III:\
+	:fd@:nd@:cd@:rw:tc=1200-baud:
+
+E 6
+D 2
+Gand.01.110:\
+	:nx=Gand.01.1200:sp#110:nd#1:cd#1:fd#1:pe:cl=\n\n:
+E 2
+I 2
+i|Interdata console:\
+	:uc:sp#0:
+E 2
+
+I 2
+l|lsi chess terminal:\
+	:sp#300:
+
+I 11
+X|Xwindow|X window system:\
+	:fd@:nd@:cd@:rw:sp#9600:
+
+E 11
+E 2
+#
+D 2
+# Console, direct line, decwriter at 300
+E 2
+I 2
+D 13
+# Fast dialup terminals, 1200/300 rotary (can start either way)
+E 13
+I 13
+D 16
+# Fast dialup terminals, 2400/1200/300 rotary (can start either way)
+E 13
+E 2
+#
+I 13
+D 14
+D2400|Fast-Dial-1200:\
+E 14
+I 14
+D2400|Fast-Dial-2400:\
+E 14
+	:nx=D1200:tc=2400-baud:
+E 13
+D 2
+4|Console:\
+	:sp#300:fd#1:pe:tt=dw:co:rw:
+E 2
+I 2
+3|D1200|Fast-Dial-1200:\
+D 6
+	:nx=D300:tc=1200-baud:
+E 6
+I 6
+D 9
+	:nx=D300:im=\r\n\r\n4.2 BSD UNIX (%h) (%t)\r\n\r\r\n\r:tc=1200-baud:
+E 9
+I 9
+D 10
+	:nx=D300:im=\r\n\r\n4.3 BSD UNIX (%h) (%t)\r\n\r\r\n\r:tc=1200-baud:
+E 10
+I 10
+	:nx=D300:tc=1200-baud:
+E 10
+E 9
+E 6
+5|D300|Fast-Dial-300:\
+D 6
+	:nx=D1200:tc=300-baud:
+E 6
+I 6
+D 9
+	:nx=D1200:im=\r\n\r\n4.2 BSD UNIX (%h) (%t)\r\n\r\r\n\r:tc=300-baud:
+E 9
+I 9
+D 10
+	:nx=D1200:im=\r\n\r\n4.3 BSD UNIX (%h) (%t)\r\n\r\r\n\r:tc=300-baud:
+E 10
+I 10
+D 13
+	:nx=D1200:tc=300-baud:
+E 13
+I 13
+	:nx=D2400:tc=300-baud:
+E 13
+E 10
+E 9
+E 6
+E 2
+
+#
+E 16
+D 2
+# Csironet, multiplexed line
+E 2
+I 2
+# Wierdo special case for fast crt's with hardcopy devices
+E 2
+#
+D 2
+N|csironet:\
+	:sp#1200:lm=login\072  ^H:ec:im=Melb Uni Comp Sci VM/UNIX:to#120:
+E 2
+I 2
+8|T9600|CRT with hardcopy:\
+	:nx=T300:tc=9600-baud:
+9|T300|CRT with hardcopy (300):\
+	:nx=T9600:tc=300-baud:
+E 2
+
+#
+D 2
+# direct line to 3240
+E 2
+I 2
+# Plugboard, and misc other terminals
+E 2
+#
+D 2
+P|3240.1200|3240 line:\
+	:sp#1200:cb:ce:ck:nx=3240.300:
+E 2
+I 2
+D 16
+p|P9600|Plugboard-9600:\
+	:nx=P300:tc=9600-baud:
+E 16
+I 16
+plug-9600|Plugboard-9600:\
+	:pf#1:tc=9600-baud:
+p|P9600|Plugboard-9600-rotary:\
+	:pf#1:nx=P300:tc=9600-baud:
+E 16
+q|P300|Plugboard-300:\
+D 16
+	:nx=P1200:tc=300-baud:
+E 16
+I 16
+	:pf#1:nx=P1200:tc=300-baud:
+E 16
+r|P1200|Plugboard-1200:\
+D 16
+	:nx=P9600:tc=1200-baud:
+E 16
+I 16
+	:pf#1:nx=P9600:tc=1200-baud:
+E 16
+E 2
+
+D 2
+3240.300|Slow 3240 line:\
+	:sp#300:pe:nx=3240.1200:
+E 2
+I 2
+#
+# XXXX Port selector
+#
+D 12
+s|Port Selector:\
+	:ps:sp#1200:
+E 12
+I 12
+s|DSW|Port Selector:\
+	:ps:sp#2400:
+E 12
+I 7
+
+#
+# Auto-baud speed detect entry for Micom 600.
+# Special code in getty will switch this out
+# to one of the NNN-baud entries.
+#
+A|Auto-baud:\
+	:ab:sp#2400:f0#040:
+E 7
+E 2
+E 1

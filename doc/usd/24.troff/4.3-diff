@@ -1,0 +1,206 @@
+No differences encountered
+No differences encountered
+*** /fs1/4.3man/doc/usd/24.troff/m0a	Mon Apr 21 22:33:06 1986
+--- m0a	Sat Oct  9 21:59:26 2010
+***************
+*** 217,229 ****
+  .mh
+  Conditional Acceptance of Input
+  .bt
+! \fB&if\fI|c|anything\fR	-	-	If condition \fIc\fR true, accept \fIanything\fR as input,
+  .b1
+  				for multi-line use \fI\e{anything\|\e}\fR.
+  .b1
+  \fB&if|!\fIc|anything\fR	-	-	If condition \fIc\fR false, accept \fIanything\fR.
+  .b1
+! \fB&if\fI|N|anything\fR	-	\fBu\fR	If expression \fIN\fR > 0, accept \fIanything\fR.
+  .b1
+  \fB&if|!\fIN|anything\fR	-	\fBu\fR	If expression \fIN\fR \(<= 0, accept \fIanything\fR.
+  .b1
+--- 217,229 ----
+  .mh
+  Conditional Acceptance of Input
+  .bt
+! \fB&if\fI|c|anything\fR		-	-	If condition \fIc\fR true, accept \fIanything\fR as input,
+  .b1
+  				for multi-line use \fI\e{anything\|\e}\fR.
+  .b1
+  \fB&if|!\fIc|anything\fR	-	-	If condition \fIc\fR false, accept \fIanything\fR.
+  .b1
+! \fB&if\fI|N|anything\fR		-	\fBu\fR	If expression \fIN\fR > 0, accept \fIanything\fR.
+  .b1
+  \fB&if|!\fIN|anything\fR	-	\fBu\fR	If expression \fIN\fR \(<= 0, accept \fIanything\fR.
+  .b1
+***************
+*** 233,239 ****
+  \fB&if|!\fI\|\'string1\|\'string2\|\'|anything\fR	-	If \fIstring1\fR not identical to \fIstring2\fR,
+  accept \fIanything\fR.
+  .b1
+! \fB&ie\fI|c|anything\fR	-	\fBu\fR	If portion of if-else; all above forms (like \fBif\fR).
+  .b1
+  \fB&el\fI|anything\fR		-	-	Else portion of if-else.
+  .mh
+--- 233,239 ----
+  \fB&if|!\fI\|\'string1\|\'string2\|\'|anything\fR	-	If \fIstring1\fR not identical to \fIstring2\fR,
+  accept \fIanything\fR.
+  .b1
+! \fB&ie\fI|c|anything\fR		-	\fBu\fR	If portion of if-else; all above forms (like \fBif\fR).
+  .b1
+  \fB&el\fI|anything\fR		-	-	Else portion of if-else.
+  .mh
+***************
+*** 243,249 ****
+  .mh
+  Insertions from the Standard Input
+  .bt
+! \fB&rd\fI|prompt\fR\fR	-	\fIprompt=\s-1\fRBEL\s+1	Read insertion.
+  .b1
+  \fB&ex\fR	-	-	-	\
+  Exit from \*(NR\(sl\*(TR.
+--- 243,249 ----
+  .mh
+  Insertions from the Standard Input
+  .bt
+! \fB&rd\fI|prompt\fR\fR	-	\fIprompt=\s-1\fRBEL\s+1		Read insertion.
+  .b1
+  \fB&ex\fR	-	-	-	\
+  Exit from \*(NR\(sl\*(TR.
+No differences encountered
+No differences encountered
+No differences encountered
+*** /fs1/4.3man/doc/usd/24.troff/m4	Mon Apr 21 22:33:13 1986
+--- m4	Sat Oct  9 22:12:57 2010
+***************
+*** 150,161 ****
+  \fIanything\fR represents what is conditionally accepted.
+  .h1
+  .bt
+! \fB&if\fI|c|anything\fR	-	-	If condition \fIc\fR true, accept \fIanything\fR as input;
+  in multi-line case use \fI\e{anything\|\e}\fR.
+  .bt
+  \fB&if|!\fIc|anything\fR	-	-	If condition \fIc\fR false, accept \fIanything\fR.
+  .bt
+! \fB&if\fI|N|anything\fR	-	\fBu\fR	If expression \fIN\fR > 0, accept \fIanything\fR.
+  .bt
+  \fB&if|!\fIN|anything\fR	-	\fBu\fR	If expression \fIN\fR \(<= 0, accept \fIanything\fR.
+  .bt
+--- 150,161 ----
+  \fIanything\fR represents what is conditionally accepted.
+  .h1
+  .bt
+! \fB&if\fI|c|anything\fR		-	-	If condition \fIc\fR true, accept \fIanything\fR as input;
+  in multi-line case use \fI\e{anything\|\e}\fR.
+  .bt
+  \fB&if|!\fIc|anything\fR	-	-	If condition \fIc\fR false, accept \fIanything\fR.
+  .bt
+! \fB&if\fI|N|anything\fR		-	\fBu\fR	If expression \fIN\fR > 0, accept \fIanything\fR.
+  .bt
+  \fB&if|!\fIN|anything\fR	-	\fBu\fR	If expression \fIN\fR \(<= 0, accept \fIanything\fR.
+  .bt
+***************
+*** 165,171 ****
+  \fB&if|!\fI\|\'string1\|\'string2\|\'|anything\fR	-	If \fIstring1\fR not identical to \fIstring2\fR,
+  accept \fIanything\fR.
+  .bt
+! \fB&ie\fI|c|anything\fR	-	\fBu\fR	If portion of if-else; all above forms (like \fBif\fR).
+  .bt
+  \fB&el\fI|anything\fR		-	-	Else portion of if-else.
+  .pg
+--- 165,171 ----
+  \fB&if|!\fI\|\'string1\|\'string2\|\'|anything\fR	-	If \fIstring1\fR not identical to \fIstring2\fR,
+  accept \fIanything\fR.
+  .bt
+! \fB&ie\fI|c|anything\fR		-	\fBu\fR	If portion of if-else; all above forms (like \fBif\fR).
+  .bt
+  \fB&el\fI|anything\fR		-	-	Else portion of if-else.
+  .pg
+***************
+*** 251,257 ****
+  a \fIpipe\fR, or a \fIfile\fR.
+  .h1
+  .bt
+! \fB&rd\fI|prompt\fR	-	\fIprompt=\fR\s-1BEL\s+1	\
+  Read insertion from the standard input until two newlines in a row are found.
+  If the standard input is the user's keyboard, \fIprompt\fR (or a \s-1BEL\s+1)
+  is written onto the user's terminal.
+--- 251,257 ----
+  a \fIpipe\fR, or a \fIfile\fR.
+  .h1
+  .bt
+! \fB&rd\fI|prompt\fR	-	\fIprompt=\fR\s-1BEL\s+1		\
+  Read insertion from the standard input until two newlines in a row are found.
+  If the standard input is the user's keyboard, \fIprompt\fR (or a \s-1BEL\s+1)
+  is written onto the user's terminal.
+*** /fs1/4.3man/doc/usd/24.troff/m5	Thu Apr 17 21:09:35 1986
+--- m5	Sat Oct  9 21:54:12 2010
+***************
+*** 1,6 ****
+  .\"	@(#)m5	6.1 (Berkeley) 4/17/86
+  .\"
+! .pn 28
+  .ds H T
+  .tr |
+  .tr ~|
+--- 1,6 ----
+  .\"	@(#)m5	6.1 (Berkeley) 4/17/86
+  .\"
+! .pn 26
+  .ds H T
+  .tr |
+  .tr ~|
+*** /fs1/4.3man/doc/usd/24.troff/table1	Thu Apr 17 21:09:51 1986
+--- table1	Tue Jul 24 07:28:10 2012
+***************
+*** 1,6 ****
+  .\"	@(#)table1	6.1 (Berkeley) 4/17/86
+  .\"
+! .pn 32
+  .rm mx
+  .br
+  .tr &&
+--- 1,6 ----
+  .\"	@(#)table1	6.1 (Berkeley) 4/17/86
+  .\"
+! .pn 30
+  .rm mx
+  .br
+  .tr &&
+***************
+*** 63,70 ****
+  and with
+  non-alphanumeric characters separated by \(14\|em space (all measurements
+  on 8.5 \(mu 11 inch paper prior to photoreduction).
+! This font sample is printed on an APS-5 phototypesetter at University of California,
+! Berkeley.
+  .sp.5i
+  .ps12
+  .vs14p
+--- 63,73 ----
+  and with
+  non-alphanumeric characters separated by \(14\|em space (all measurements
+  on 8.5 \(mu 11 inch paper prior to photoreduction).
+! .ft I
+! The present emulation of the historic \*(TR character set displayed here
+! has been produced by 4.3BSD-Quasijarus
+! .br
+! pstroff \-T.
+  .sp.5i
+  .ps12
+  .vs14p
+*** /fs1/4.3man/doc/usd/24.troff/table2	Thu Apr 17 21:10:09 1986
+--- table2	Sat Oct  9 21:54:22 2010
+***************
+*** 1,6 ****
+  .\"	@(#)table2	6.1 (Berkeley) 4/17/86
+  .\"
+! .pn33
+  .sp 100
+  .br
+  .de mx
+--- 1,6 ----
+  .\"	@(#)table2	6.1 (Berkeley) 4/17/86
+  .\"
+! .pn31
+  .sp 100
+  .br
+  .de mx

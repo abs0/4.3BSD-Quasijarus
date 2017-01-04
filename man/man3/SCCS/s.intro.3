@@ -1,0 +1,1134 @@
+h34407
+s 00006/00006/00380
+d D 6.8 86/05/27 12:11:46 kjd 10 9
+c fix list
+e
+s 00017/00016/00369
+d D 6.7 86/05/15 14:16:19 mckusick 9 8
+c correct explanation of error handling by the math library
+e
+s 00101/00198/00284
+d D 6.6 86/05/13 00:33:11 mckusick 8 7
+c reorganize and integrate in intro's 3C, 3N, and 3X
+e
+s 00000/00000/00482
+d D 6.5 86/05/12 17:11:31 karels 7 6
+c intro(3M) => math(3M), move see also's to end
+e
+s 00001/00001/00481
+d D 6.4 86/05/10 19:23:31 mckusick 6 5
+c change heading name
+e
+s 00007/00001/00475
+d D 6.3 86/04/30 15:07:01 mckusick 5 4
+c update for bit functions from jerry@opal
+e
+s 00021/00007/00455
+d D 6.2 85/09/07 12:30:46 mckusick 4 3
+c update from jerry
+e
+s 00003/00002/00459
+d D 6.1 85/05/15 15:10:18 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00414/00062/00047
+d D 5.1 85/05/15 15:09:56 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00109/00000/00000
+d D 4.1 85/05/15 15:09:47 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH INTRO 3
+E 2
+I 2
+D 3
+.TH INTRO 3 "2 April 1983"
+E 3
+I 3
+.TH INTRO 3 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 6
+intro \- introduction to library functions
+E 6
+I 6
+intro \- introduction to C library functions
+E 6
+D 2
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.B #include <math.h>
+E 2
+.SH DESCRIPTION
+This section describes functions that may be found
+D 2
+in various libraries, other than those functions
+that directly invoke UNIX system primitives,
+which are described in section 2.
+Functions are divided into various libraries distinguished
+by the section number at the top of the page:
+E 2
+I 2
+D 8
+in various libraries.  The library functions are those other than the
+E 8
+I 8
+in various libraries.
+The library functions are those other than the
+E 8
+functions which directly invoke UNIX system primitives, described in section 2.
+D 8
+This section has the libraries physically grouped together.  This is a
+departure from older versions of the UNIX Programmer's Reference Manual,
+which did not group functions by library.
+The functions described in this section are grouped into various libraries:
+E 2
+.TP 6n
+D 2
+(3)
+These functions, together with those of section 2 and those
+marked (3S), constitute library
+.I libc,
+E 2
+I 2
+(3) and (3S)
+The straight ``3'' functions are the standard C library functions.  The
+C library also includes all the functions described in section 2.  The
+3S functions comprise the standard I/O library.  Together with the
+(3N), (3X), and (3C) routines, these functions constitute
+library \fIlibc\fP,
+E 8
+I 8
+Most of these functions are accessible from the C library,
+.IR libc ,
+E 8
+E 2
+which is automatically loaded by the C compiler
+D 2
+.IR cc (1)
+E 2
+I 2
+.IR cc (1),
+D 8
+the Pascal compiler
+.IR pc (1),
+E 2
+and the Fortran compiler
+.IR f77 (1).
+E 8
+I 8
+and the Pascal compiler
+.IR pc (1).
+E 8
+The link editor
+.IR ld (1)
+searches this library under the `\-lc' option.
+D 8
+Declarations for some of these functions may be obtained
+from include files indicated on the appropriate pages.
+E 8
+I 8
+The C library also includes all the functions described in section 2.
+.PP
+A subset of these functions are available from Fortran;
+they are described separately in
+.IR intro (3F).
+.PP
+The functions described in this section are grouped into various sections:
+E 8
+.TP
+D 2
+(3J)
+These functions are part of the job control facilities,
+contained in the library
+.RB \*(lq \-ljobs .\*(rq
+The job control facilities
+are outlined in
+.IR jobs (3).
+E 2
+I 2
+D 8
+(3F)
+The 3F functions are all functions callable from FORTRAN.  These
+functions perform the same jobs as do the straight ``3'' functions.
+E 8
+I 8
+(3)
+The straight ``3'' functions are the standard C library functions.
+E 8
+E 2
+.TP
+D 8
+(3M)
+These functions constitute the math library,
+D 2
+.I libm.
+They are automatically loaded as needed by the Fortran compiler
+E 2
+I 2
+.IR libm .
+They are automatically loaded as needed by the Pascal
+compiler
+.IR pc (1)
+and the Fortran compiler
+E 2
+.IR f77 (1).
+The link editor searches this library under the `\-lm' option.
+D 2
+Declarations for these functions may be obtained from
+the include file <math.h>.
+E 2
+I 2
+Declarations for these functions may be obtained from the include file
+.RI < math.h >.
+.TP
+E 8
+(3N)
+D 8
+These functions constitute the internet network library,
+E 8
+I 8
+These functions constitute the internet network library.
+E 8
+E 2
+.TP 
+(3S)
+D 2
+These functions constitute the
+`standard I/O package',
+see
+.IR stdio (3).
+E 2
+I 2
+These functions constitute the `standard I/O package', see
+D 8
+.IR intro (3S).
+E 2
+These functions are in the library
+.I libc
+D 2
+already mentioned.
+Declarations for these functions may be obtained from
+the include file <stdio.h>.
+E 2
+I 2
+already mentioned.  Declarations for these functions may be obtained from
+E 8
+I 8
+.IR stdio (3S)
+for more details.
+Declarations for these functions may be obtained from
+E 8
+the include file
+.RI < stdio.h >.
+E 2
+.TP
+D 8
+(3X)
+D 2
+Various
+specialized libraries have not been given distinctive
+captions.
+Files in which such libraries are found are named
+on appropriate pages.
+E 2
+I 2
+Various specialized libraries have not been given distinctive captions.
+Files in which such libraries are found are named on appropriate pages.
+.TP
+E 8
+(3C)
+D 8
+Routines included for compatibility with other systems.  In particular,
+E 8
+I 8
+These routines are included for compatibility with other systems.
+In particular,
+E 8
+a number of system call interfaces provided in previous releases of
+D 8
+4BSD have been included for source code compatibility.  The manual page
+entry for each compatibility routine indicates the proper interface to use. 
+E 2
+.SH FILES
+.nf
+/lib/libc.a
+D 2
+/lib/libm.a, /usr/lib/libm.a (one or the other)
+/usr/lib/libjobs.a
+E 2
+I 2
+/usr/lib/libm.a
+/usr/lib/libc_p.a
+/usr/lib/libm_p.a
+E 2
+.fi
+.SH SEE ALSO
+D 2
+stdio(3),
+nm(1), ld(1), cc(1), f77(1), intro(2)
+E 2
+I 2
+intro(3C),
+intro(3S),
+intro(3F),
+intro(3M),
+intro(3N),
+nm(1),
+ld(1),
+cc(1),
+f77(1),
+intro(2)
+E 2
+.SH DIAGNOSTICS
+Functions in the math library (3M) may return
+conventional values when the function is undefined for the
+given arguments or when the value is not representable.
+E 8
+I 8
+4BSD have been included for source code compatibility.
+Use of these routines should, for the most part, be avoided.
+The manual page entry for each compatibility routine
+indicates the proper interface to use. 
+.TP
+(3M)
+These functions constitute the math library,
+.IR libm .
+D 9
+Functions in the math library (see
+E 9
+I 9
+When functions in the math library (see
+E 9
+.IR math (3M))
+D 9
+may return conventional values when the function is undefined
+for the given arguments or when the value is not representable.
+E 8
+In these cases the external variable
+.I errno
+(see
+.IR intro (2))
+D 2
+is set to the value EDOM
+or ERANGE.
+The values of EDOM and ERANGE are defined in
+the include file
+.I <math.h>.
+.SH "ASSEMBLER (PDP-11)"
+In assembly language these functions may be accessed
+by simulating the C calling sequence.
+For example,
+.IR ecvt (3)
+might be called this way:
+.IP ""
+.globl	_ecvt
+E 2
+I 2
+is set to the value EDOM (domain error) or ERANGE (range error).
+The values of EDOM and ERANGE are defined in the include file
+.RI < math.h >.
+E 9
+I 9
+are passed values that are undefined or would generate
+answers that are out of range,
+they call the \fIinfnan\fP routine.
+By default this routine returns the VAX reserved floating point value
+which causes the process to get a floating point exception (see
+.IR sigvec (2)).
+Programs that wish to take other action should define their own
+version of \fIinfnan\fP (see
+.IR infnan (3M)
+for details).
+E 9
+I 8
+The math library is loaded as needed by the Pascal compiler
+.IR pc (1).
+D 9
+The link editor searches this library under the `\-lm' option.
+E 9
+I 9
+C programs that wish to use this library need to specify the ``\-lm'' option.
+E 9
+.TP
+(3X)
+These functions constitute minor libraries and other miscellaneous
+run-time facilities.  Most are available only when programming in C.
+These functions include libraries that provide
+device independent plotting functions,
+terminal independent screen management routines
+for two dimensional non-bitmap display terminals, 
+and functions for managing data bases with inverted indexes.
+These functions are located in separate libraries
+indicated in each manual entry.
+.SH FILES
+.nf
+D 10
+/lib/libc.a	the C library
+/usr/lib/libm.a	the math library
+/usr/lib/libc_p.a	the C library compiled for profiling
+/usr/lib/libm_p.a	the math library compiled for profiling
+E 10
+I 10
+/lib/libc.a		the C library
+/usr/lib/libm.a		the math library
+/usr/lib/libc_p.a		the C library compiled for profiling
+/usr/lib/libm_p.a		the math library compiled for profiling
+E 10
+.fi
+.SH SEE ALSO
+stdio(3S),
+math(3M),
+intro(2),
+cc(1),
+ld(1),
+nm(1)
+E 8
+.SH "LIST OF FUNCTIONS"
+.sp 2
+E 2
+.nf
+D 2
+setd
+mov	$sign,\-(sp)
+mov	$decpt,\-(sp)
+mov	ndigit,\-(sp)
+movf	value,\-(sp)
+jsr	pc,_ecvt
+add	$14.,sp
+E 2
+I 2
+D 10
+.ta \w'getprotobynumber'u+2n +\w'getprotoent'u+10n
+E 10
+I 10
+.ta \w'getprotobynumber'u+2n +\w'gethostbyname.3n'u+10n
+E 10
+\fIName\fP	\fIAppears on Page\fP	\fIDescription\fP
+D 10
+.ta \w'getprotobynumber'u+4n +\w'getprotoent'u+4n
+E 10
+I 10
+.ta \w'getprotobynumber'u+4n +\w'gethostbyname.3n'u+4n
+E 10
+.sp 5p
+abort	abort.3	generate a fault
+D 4
+abort	abort.3f	terminate abruptly with memory image
+E 4
+I 4
+D 8
+abort	abort.3f	abnormal termination
+E 8
+E 4
+abs	abs.3	integer absolute value
+D 8
+access	access.3f	determine accessability of a file
+acos	sin.3m	trigonometric functions
+E 8
+I 8
+acos	sin.3m	inverse trigonometric function
+acosh	asinh.3m	inverse hyperbolic function
+E 8
+alarm	alarm.3c	schedule signal after specified time
+D 8
+alarm	alarm.3f	execute a subroutine after a specified time
+E 8
+alloca	malloc.3	memory allocator
+I 5
+D 8
+and	bit.3f	bitwise and
+E 5
+I 4
+arc	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+arc	plot.3x	graphics interface
+asctime	ctime.3	convert date and time to ASCII
+D 8
+asin	sin.3m	trigonometric functions
+E 8
+I 8
+asin	sin.3m	inverse trigonometric function
+asinh	asinh.3m	inverse hyperbolic function
+E 8
+assert	assert.3x	program verification
+D 8
+atan	sin.3m	trigonometric functions
+atan2	sin.3m	trigonometric functions
+E 8
+I 8
+atan	sin.3m	inverse trigonometric function
+atanh	asinh.3m	inverse hyperbolic function
+atan2	sin.3m	inverse trigonometric function
+E 8
+atof	atof.3	convert ASCII to numbers
+atoi	atof.3	convert ASCII to numbers
+atol	atof.3	convert ASCII to numbers
+bcmp	bstring.3	bit and byte string operations
+bcopy	bstring.3	bit and byte string operations
+D 4
+bessel	bessel.3f	of two kinds for integer orders
+E 4
+I 4
+D 8
+bessel	bessel.3f	bessel functions of two kinds for integer orders
+E 4
+D 5
+bit	bit.3f	and, or, xor, not, rshift, lshift bitwise functions
+E 5
+I 4
+box	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+bzero	bstring.3	bit and byte string operations
+D 8
+cabs	hypot.3m	Euclidean distance
+E 8
+I 8
+cabs	hypot.3m	complex absolute value
+E 8
+calloc	malloc.3	memory allocator
+D 8
+ceil	floor.3m	absolute value, floor, ceiling functions
+chdir	chdir.3f	change default directory
+chmod	chmod.3f	change mode of a file
+I 4
+circle	plot.3f	f77 interface to plot(3x)
+E 8
+I 8
+cbrt	sqrt.3m	cube root
+ceil	floor.3m	integer no less than
+E 8
+E 4
+circle	plot.3x	graphics interface
+clearerr	ferror.3s	stream status inquiries
+closedir	directory.3	directory operations
+closelog	syslog.3	control system log
+closepl	plot.3x	graphics interface
+I 4
+D 8
+clospl	plot.3f	f77 interface to plot(3x)
+cont	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+cont	plot.3x	graphics interface
+D 8
+cos	sin.3m	trigonometric functions
+cosh	sinh.3m	hyperbolic functions
+E 8
+I 8
+copysign	ieee.3m	copy sign bit
+cos	sin.3m	trigonometric function
+cosh	sinh.3m	hyperbolic function
+E 8
+crypt	crypt.3	DES encryption
+ctime	ctime.3	convert date and time to ASCII
+D 8
+ctime	time.3f	return system time
+E 8
+curses	curses.3x	screen functions with ``optimal'' cursor motion
+dbminit	dbm.3x	data base subroutines
+delete	dbm.3x	data base subroutines
+D 8
+dffrac	flmin.3f	return extreme values
+dflmax	flmin.3f	return extreme values
+D 4
+dflmax	range.3f	return extreme values
+E 4
+dflmin	flmin.3f	return extreme values
+D 4
+dflmin	range.3f	return extreme values
+E 4
+drand	rand.3f	return random values
+I 4
+drandm	random.3f	better random number generator
+E 4
+dtime	etime.3f	return elapsed execution time
+E 8
+I 8
+drem	ieee.3m	remainder
+E 8
+ecvt	ecvt.3	output conversion
+edata	end.3	last locations in program
+encrypt	crypt.3	DES encryption
+end	end.3	last locations in program
+endfsent	getfsent.3x	get file system descriptor file entry
+endgrent	getgrent.3	get group file entry
+D 9
+endhostent	gethostent.3n	get network host entry
+E 9
+I 9
+endhostent	gethostbyname.3n	get network host entry
+E 9
+endnetent	getnetent.3n	get network entry
+endprotoent	getprotoent.3n	get protocol entry
+endpwent	getpwent.3	get password file entry
+endservent	getservent.3n	get service entry
+environ	execl.3	execute a file
+I 4
+D 8
+erase	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+erase	plot.3x	graphics interface
+I 8
+erf	erf.3m	error function
+erfc	erf.3m	complementary error function
+E 8
+etext	end.3	last locations in program
+D 8
+etime	etime.3f	return elapsed execution time
+E 8
+exec	execl.3	execute a file
+exece	execl.3	execute a file
+execl	execl.3	execute a file
+execle	execl.3	execute a file
+execlp	execl.3	execute a file
+exect	execl.3	execute a file
+execv	execl.3	execute a file
+execvp	execl.3	execute a file
+exit	exit.3	terminate a process after flushing any pending output
+D 8
+exit	exit.3f	terminate process with status
+exp	exp.3m	exponential, logarithm, power, square root
+fabs	floor.3m	absolute value, floor, ceiling functions
+I 4
+falloc	malloc.3f	memory allocator
+E 8
+I 8
+exp	exp.3m	exponential
+expm1	exp.3m	exp(x)\-1
+fabs	floor.3m	absolute value
+E 8
+E 4
+fclose	fclose.3s	close or flush a stream
+fcvt	ecvt.3	output conversion
+D 8
+fdate	fdate.3f	return date and time in an ASCII string
+E 8
+feof	ferror.3s	stream status inquiries
+ferror	ferror.3s	stream status inquiries
+fetch	dbm.3x	data base subroutines
+fflush	fclose.3s	close or flush a stream
+D 8
+ffrac	flmin.3f	return extreme values
+E 8
+ffs	bstring.3	bit and byte string operations
+D 8
+fgetc	getc.3f	get a character from a logical unit
+E 8
+fgetc	getc.3s	get character or word from stream
+fgets	gets.3s	get a string from a stream
+fileno	ferror.3s	stream status inquiries
+firstkey	dbm.3x	data base subroutines
+D 8
+flmax	flmin.3f	return extreme values
+D 4
+flmax	range.3f	return extreme values
+E 4
+flmin	flmin.3f	return extreme values
+D 4
+flmin	range.3f	return extreme values
+E 4
+floor	floor.3m	absolute value, floor, ceiling functions
+flush	flush.3f	flush output to a logical unit
+E 8
+I 8
+floor	floor.3m	integer no greater than
+E 8
+I 3
+fopen	fopen.3s	open a stream
+E 3
+D 8
+fork	fork.3f	create a copy of this process
+fpecnt	trpfpe.3f	trap and repair floating point faults
+E 8
+fprintf	printf.3s	formatted output conversion
+D 8
+fputc	putc.3f	write a character to a fortran logical unit
+E 8
+fputc	putc.3s	put character or word on a stream
+fputs	puts.3s	put a string on a stream
+fread	fread.3s	buffered binary input/output
+free	malloc.3	memory allocator
+I 4
+D 8
+free	malloc.3f	memory allocator
+E 8
+E 4
+frexp	frexp.3	split into mantissa and exponent
+fscanf	scanf.3s	formatted input conversion
+D 8
+fseek	fseek.3f	reposition a file on a logical unit
+E 8
+fseek	fseek.3s	reposition a stream
+D 8
+fstat	stat.3f	get file status
+ftell	fseek.3f	reposition a file on a logical unit
+E 8
+ftell	fseek.3s	reposition a stream
+ftime	time.3c	get date and time
+fwrite	fread.3s	buffered binary input/output
+D 8
+gamma	gamma.3m	log gamma function
+E 8
+gcvt	ecvt.3	output conversion
+D 8
+gerror	perror.3f	get system error messages
+getarg	getarg.3f	return command line arguments
+getc	getc.3f	get a character from a logical unit
+E 8
+getc	getc.3s	get character or word from stream
+getchar	getc.3s	get character or word from stream
+D 8
+getcwd	getcwd.3f	get pathname of current working directory
+E 8
+getdiskbyname	getdisk.3x	get disk description by its name
+getenv	getenv.3	value for environment name
+D 8
+getenv	getenv.3f	get value of environment variables
+E 8
+getfsent	getfsent.3x	get file system descriptor file entry
+getfsfile	getfsent.3x	get file system descriptor file entry
+getfsspec	getfsent.3x	get file system descriptor file entry
+getfstype	getfsent.3x	get file system descriptor file entry
+D 8
+getgid	getuid.3f	get user or group ID of the caller
+E 8
+getgrent	getgrent.3	get group file entry
+getgrgid	getgrent.3	get group file entry
+getgrnam	getgrent.3	get group file entry
+D 9
+gethostbyaddr	gethostent.3n	get network host entry
+gethostbyname	gethostent.3n	get network host entry
+gethostent	gethostent.3n	get network host entry
+E 9
+I 9
+gethostbyaddr	gethostbyname.3n	get network host entry
+gethostbyname	gethostbyname.3n	get network host entry
+gethostent	gethostbyname.3n	get network host entry
+E 9
+D 8
+getlog	getlog.3f	get user's login name
+E 8
+getlogin	getlogin.3	get login name
+getnetbyaddr	getnetent.3n	get network entry
+getnetbyname	getnetent.3n	get network entry
+getnetent	getnetent.3n	get network entry
+getpass	getpass.3	read a password
+D 8
+getpid	getpid.3f	get process id
+E 8
+getprotobyname	getprotoent.3n	get protocol entry
+getprotobynumber	getprotoent.3n	get protocol entry
+getprotoent	getprotoent.3n	get protocol entry
+getpw	getpw.3	get name from uid
+getpwent	getpwent.3	get password file entry
+getpwnam	getpwent.3	get password file entry
+getpwuid	getpwent.3	get password file entry
+gets	gets.3s	get a string from a stream
+getservbyname	getservent.3n	get service entry
+getservbyport	getservent.3n	get service entry
+getservent	getservent.3n	get service entry
+D 8
+getuid	getuid.3f	get user or group ID of the caller
+E 8
+getw	getc.3s	get character or word from stream
+getwd	getwd.3	get current working directory pathname
+gmtime	ctime.3	convert date and time to ASCII
+D 8
+gmtime	time.3f	return system time
+E 8
+gtty	stty.3c	set and get terminal state (defunct)
+D 8
+hostnm	hostnm.3f	get name of current host
+E 8
+htonl	byteorder.3n	convert values between host and network byte order
+htons	byteorder.3n	convert values between host and network byte order
+hypot	hypot.3m	Euclidean distance
+D 8
+iargc	getarg.3f	return command line arguments
+idate	idate.3f	return date or time in numerical form
+ierrno	perror.3f	get system error messages
+index	index.3f	tell about character objects
+E 8
+index	string.3	string operations
+inet_addr	inet.3n	Internet address manipulation routines
+inet_lnaof	inet.3n	Internet address manipulation routines
+inet_makeaddr	inet.3n	Internet address manipulation routines
+inet_netof	inet.3n	Internet address manipulation routines
+inet_network	inet.3n	Internet address manipulation routines
+I 8
+infnan	infnan.3m	signals exceptions
+E 8
+initgroups	initgroups.3x	initialize group access list
+initstate	random.3	better random number generator
+D 8
+inmax	flmin.3f	return extreme values
+E 8
+D 4
+inmax	range.3f	return extreme values
+E 4
+insque	insque.3	insert/remove element from a queue
+D 8
+ioinit	ioinit.3f	change f77 I/O initialization
+irand	rand.3f	return random values
+I 4
+irandm	random.3f	better random number generator
+E 8
+E 4
+isalnum	ctype.3	character classification macros
+isalpha	ctype.3	character classification macros
+isascii	ctype.3	character classification macros
+D 8
+isatty	ttynam.3f	find name of a terminal port
+E 8
+isatty	ttyname.3	find name of a terminal
+iscntrl	ctype.3	character classification macros
+isdigit	ctype.3	character classification macros
+islower	ctype.3	character classification macros
+isprint	ctype.3	character classification macros
+ispunct	ctype.3	character classification macros
+isspace	ctype.3	character classification macros
+isupper	ctype.3	character classification macros
+D 8
+itime	idate.3f	return date or time in numerical form
+j0	j0.3m	bessel functions
+j1	j0.3m	bessel functions
+jn	j0.3m	bessel functions
+kill	kill.3f	send a signal to a process
+I 4
+label	plot.3f	f77 interface to plot(3x)
+E 8
+I 8
+j0	j0.3m	bessel function
+j1	j0.3m	bessel function
+jn	j0.3m	bessel function
+E 8
+E 4
+label	plot.3x	graphics interface
+ldexp	frexp.3	split into mantissa and exponent
+D 8
+len	index.3f	tell about character objects
+E 8
+I 8
+lgamma	lgamma.3m	log gamma function; (formerly gamma.3m)
+E 8
+lib2648	lib2648.3x	subroutines for the HP 2648 graphics terminal
+I 4
+D 8
+line	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+line	plot.3x	graphics interface
+I 4
+D 8
+linemd	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+linemod	plot.3x	graphics interface
+D 8
+link	link.3f	make a link to an existing file
+lnblnk	index.3f	tell about character objects
+loc	loc.3f	return the address of an object
+E 8
+localtime	ctime.3	convert date and time to ASCII
+D 8
+log	exp.3m	exponential, logarithm, power, square root
+log10	exp.3m	exponential, logarithm, power, square root
+long	long.3f	integer object conversion
+E 8
+I 8
+log	exp.3m	natural logarithm
+logb	ieee.3m	exponent extraction
+log10	exp.3m	logarithm to base 10
+log1p	exp.3m	log(1+x)
+E 8
+longjmp	setjmp.3	non-local goto
+I 5
+D 8
+lshift	bit.3f	left shift
+E 5
+lstat	stat.3f	get file status
+ltime	time.3f	return system time
+E 8
+malloc	malloc.3	memory allocator
+I 4
+D 8
+malloc	malloc.3f	memory allocator
+E 8
+E 4
+mktemp	mktemp.3	make a unique file name
+modf	frexp.3	split into mantissa and exponent
+moncontrol	monitor.3	prepare execution profile
+monitor	monitor.3	prepare execution profile
+monstartup	monitor.3	prepare execution profile
+I 4
+D 8
+move	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+move	plot.3x	graphics interface
+nextkey	dbm.3x	data base subroutines
+nice	nice.3c	set program priority
+nlist	nlist.3	get entries from name list
+I 5
+D 8
+not	bit.3f	bitwise complement
+E 8
+E 5
+ntohl	byteorder.3n	convert values between host and network byte order
+ntohs	byteorder.3n	convert values between host and network byte order
+opendir	directory.3	directory operations
+openlog	syslog.3	control system log
+I 4
+D 8
+openpl	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+I 3
+openpl	plot.3x	graphics interface
+I 5
+D 8
+or	bit.3f	bitwise or
+E 8
+E 5
+E 3
+pause	pause.3c	stop until signal
+pclose	popen.3	initiate I/O to/from a process
+perror	perror.3	system error messages
+D 8
+perror	perror.3f	get system error messages
+I 4
+point	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+D 3
+plot: openpl	plot.3x	graphics interface
+E 3
+point	plot.3x	graphics interface
+popen	popen.3	initiate I/O to/from a process
+D 8
+pow	exp.3m	exponential, logarithm, power, square root
+E 8
+I 8
+pow	exp.3m	exponential x**y
+E 8
+printf	printf.3s	formatted output conversion
+psignal	psignal.3	system signal messages
+D 8
+putc	putc.3f	write a character to a fortran logical unit
+E 8
+putc	putc.3s	put character or word on a stream
+putchar	putc.3s	put character or word on a stream
+puts	puts.3s	put a string on a stream
+putw	putc.3s	put character or word on a stream
+qsort	qsort.3	quicker sort
+D 8
+qsort	qsort.3f	quick sort
+E 8
+rand	rand.3c	random number generator
+D 8
+rand	rand.3f	return random values
+E 8
+random	random.3	better random number generator
+I 4
+D 8
+random	random.3f	better random number generator
+E 8
+E 4
+rcmd	rcmd.3x	routines for returning a stream to a remote command
+re_comp	regex.3	regular expression handler
+re_exec	regex.3	regular expression handler
+readdir	directory.3	directory operations
+realloc	malloc.3	memory allocator
+remque	insque.3	insert/remove element from a queue
+D 8
+rename	rename.3f	rename a file
+E 8
+rewind	fseek.3s	reposition a stream
+rewinddir	directory.3	directory operations
+rexec	rexec.3x	return stream to a remote command
+D 8
+rindex	index.3f	tell about character objects
+E 8
+rindex	string.3	string operations
+I 8
+rint	floor.3m	round to nearest integer
+E 8
+rresvport	rcmd.3x	routines for returning a stream to a remote command
+I 5
+D 8
+rshift	bit.3f	right shift
+E 8
+E 5
+ruserok	rcmd.3x	routines for returning a stream to a remote command
+I 8
+scalb	ieee.3m	exponent adjustment
+E 8
+scandir	scandir.3	scan a directory
+scanf	scanf.3s	formatted input conversion
+seekdir	directory.3	directory operations
+setbuf	setbuf.3s	assign buffering to a stream
+setbuffer	setbuf.3s	assign buffering to a stream
+setegid	setuid.3	set user and group ID
+seteuid	setuid.3	set user and group ID
+setfsent	getfsent.3x	get file system descriptor file entry
+setgid	setuid.3	set user and group ID
+setgrent	getgrent.3	get group file entry
+D 9
+sethostent	gethostent.3n	get network host entry
+E 9
+I 9
+sethostent	gethostbyname.3n	get network host entry
+E 9
+setjmp	setjmp.3	non-local goto
+setkey	crypt.3	DES encryption
+setlinebuf	setbuf.3s	assign buffering to a stream
+setnetent	getnetent.3n	get network entry
+setprotoent	getprotoent.3n	get protocol entry
+setpwent	getpwent.3	get password file entry
+setrgid	setuid.3	set user and group ID
+setruid	setuid.3	set user and group ID
+setservent	getservent.3n	get service entry
+setstate	random.3	better random number generator
+setuid	setuid.3	set user and group ID
+D 8
+short	long.3f	integer object conversion
+E 8
+signal	signal.3	simplified software signal facilities
+D 8
+signal	signal.3f	change the action for a signal
+sin	sin.3m	trigonometric functions
+sinh	sinh.3m	hyperbolic functions
+E 8
+I 8
+sin	sin.3m	trigonometric function
+sinh	sinh.3m	hyperbolic function
+E 8
+sleep	sleep.3	suspend execution for interval
+D 8
+sleep	sleep.3f	suspend execution for an interval
+I 4
+space	plot.3f	f77 interface to plot(3x)
+E 8
+E 4
+space	plot.3x	graphics interface
+sprintf	printf.3s	formatted output conversion
+D 8
+sqrt	exp.3m	exponential, logarithm, power, square root
+E 8
+I 8
+sqrt	sqrt.3m	square root
+E 8
+srand	rand.3c	random number generator
+srandom	random.3	better random number generator
+sscanf	scanf.3s	formatted input conversion
+D 8
+stat	stat.3f	get file status
+E 8
+stdio	intro.3s	standard buffered input/output package
+store	dbm.3x	data base subroutines
+strcat	string.3	string operations
+strcmp	string.3	string operations
+strcpy	string.3	string operations
+strlen	string.3	string operations
+strncat	string.3	string operations
+strncmp	string.3	string operations
+strncpy	string.3	string operations
+stty	stty.3c	set and get terminal state (defunct)
+I 5
+D 8
+symlnk	symlnk.3f	make a symbolic link
+E 8
+E 5
+swab	swab.3	swap bytes
+sys_errlist	perror.3	system error messages
+sys_nerr	perror.3	system error messages
+sys_siglist	psignal.3	system signal messages
+syslog	syslog.3	control system log
+system	system.3	issue a shell command
+D 8
+system	system.3f	execute a \s-2UNIX\s0 command
+tan	sin.3m	trigonometric functions
+tanh	sinh.3m	hyperbolic functions
+tclose	topen.3f	f77 tape I/O
+E 8
+I 8
+tan	sin.3m	trigonometric function
+tanh	sinh.3m	hyperbolic function
+E 8
+telldir	directory.3	directory operations
+tgetent	termcap.3x	terminal independent operation routines
+tgetflag	termcap.3x	terminal independent operation routines
+tgetnum	termcap.3x	terminal independent operation routines
+tgetstr	termcap.3x	terminal independent operation routines
+tgoto	termcap.3x	terminal independent operation routines
+time	time.3c	get date and time
+D 8
+time	time.3f	return system time
+E 8
+times	times.3c	get process times
+timezone	ctime.3	convert date and time to ASCII
+D 8
+topen	topen.3f	f77 tape I/O
+E 8
+tputs	termcap.3x	terminal independent operation routines
+D 8
+traper	traper.3f	trap arithmetic errors
+trapov	trapov.3f	trap and repair floating point overflow
+tread	topen.3f	f77 tape I/O
+trewin	topen.3f	f77 tape I/O
+trpfpe	trpfpe.3f	trap and repair floating point faults
+tskipf	topen.3f	f77 tape I/O
+tstate	topen.3f	f77 tape I/O
+ttynam	ttynam.3f	find name of a terminal port
+E 8
+ttyname	ttyname.3	find name of a terminal
+ttyslot	ttyname.3	find name of a terminal
+D 8
+twrite	topen.3f	f77 tape I/O
+E 8
+ungetc	ungetc.3s	push character back into input stream
+D 8
+unlink	unlink.3f	remove a directory entry
+E 8
+utime	utime.3c	set file times
+valloc	valloc.3	aligned memory allocator
+varargs	varargs.3	variable argument list
+vlimit	vlimit.3c	control maximum system resource consumption
+vtimes	vtimes.3c	get information about resource utilization
+D 8
+wait	wait.3f	wait for a process to terminate
+I 5
+xor	bit.3f	bitwise exclusive or
+E 5
+y0	j0.3m	bessel functions
+y1	j0.3m	bessel functions
+yn	j0.3m	bessel functions
+E 8
+I 8
+y0	j0.3m	bessel function
+y1	j0.3m	bessel function
+yn	j0.3m	bessel function
+E 8
+E 2
+.fi
+E 1

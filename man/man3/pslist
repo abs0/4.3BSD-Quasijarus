@@ -1,0 +1,37 @@
+MAN3=	../man3/intro.3.ps ../man3/abort.3.ps ../man3/abs.3.ps \
+	../man3/alarm.3c.ps ../man3/asinh.3m.ps ../man3/assert.3.ps \
+	../man3/atof.3.ps ../man3/bstring.3.ps ../man3/byteorder.3n.ps \
+	../man3/compat-sys5.3.ps ../man3/crypt.3.ps ../man3/ctime.3.ps \
+	../man3/ctype.3.ps ../man3/curses.3x.ps ../man3/dbm.3x.ps \
+	../man3/directory.3.ps ../man3/ecvt.3.ps ../man3/end.3.ps \
+	../man3/erf.3m.ps ../man3/execl.3.ps ../man3/exit.3.ps \
+	../man3/exp.3m.ps ../man3/fclose.3s.ps ../man3/ferror.3s.ps \
+	../man3/floor.3m.ps ../man3/fopen.3s.ps ../man3/fread.3s.ps \
+	../man3/frexp.3.ps ../man3/fseek.3s.ps ../man3/getc.3s.ps \
+	../man3/getdiskbyname.3.ps ../man3/getenv.3.ps ../man3/getfsent.3.ps \
+	../man3/getgrent.3.ps ../man3/gethostbyname.3n.ps \
+	../man3/getlogin.3.ps ../man3/getnetent.3n.ps ../man3/getopt.3.ps \
+	../man3/getpass.3.ps ../man3/getprotoent.3n.ps ../man3/getpw.3c.ps \
+	../man3/getpwent.3.ps ../man3/gets.3s.ps ../man3/getservent.3n.ps \
+	../man3/getttyent.3.ps ../man3/getusershell.3.ps ../man3/getwd.3.ps \
+	../man3/hypot.3m.ps ../man3/ieee.3m.ps ../man3/inet.3n.ps \
+	../man3/infnan.3m.ps ../man3/initgroups.3.ps ../man3/insque.3.ps \
+	../man3/j0.3m.ps ../man3/lgamma.3m.ps ../man3/lib2648.3x.ps \
+	../man3/malloc.3.ps ../man3/math.3.ps ../man3/mktemp.3.ps \
+	../man3/monitor.3.ps ../man3/mp.3x.ps ../man3/ndbm.3.ps \
+	../man3/nice.3c.ps ../man3/nlist.3.ps ../man3/ns.3n.ps \
+	../man3/pause.3c.ps ../man3/perror.3.ps ../man3/plot.3.ps \
+	../man3/popen.3.ps ../man3/printf.3s.ps ../man3/psignal.3.ps \
+	../man3/putc.3s.ps ../man3/puts.3s.ps ../man3/qsort.3.ps \
+	../man3/rand.3c.ps ../man3/random.3.ps ../man3/rcmd.3.ps \
+	../man3/regex.3.ps ../man3/regexp.3.ps ../man3/resolver.3.ps \
+	../man3/rexec.3.ps ../man3/scandir.3.ps ../man3/scanf.3s.ps \
+	../man3/setbuf.3s.ps ../man3/setjmp.3.ps ../man3/setuid.3.ps \
+	../man3/siginterrupt.3.ps ../man3/signal.3c.ps ../man3/sin.3m.ps \
+	../man3/sinh.3m.ps ../man3/sleep.3.ps ../man3/sqrt.3m.ps \
+	../man3/stdio.3s.ps ../man3/string.3.ps ../man3/stty.3c.ps \
+	../man3/swab.3.ps ../man3/syslog.3.ps ../man3/system.3.ps \
+	../man3/termcap.3x.ps ../man3/time.3c.ps ../man3/times.3c.ps \
+	../man3/ttyname.3.ps ../man3/ualarm.3.ps ../man3/ungetc.3s.ps \
+	../man3/usleep.3.ps ../man3/utime.3c.ps ../man3/valloc.3c.ps \
+	../man3/varargs.3.ps ../man3/vlimit.3c.ps ../man3/vtimes.3c.ps

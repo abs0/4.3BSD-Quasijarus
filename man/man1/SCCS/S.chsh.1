@@ -1,0 +1,79 @@
+h31091
+s 00096/00024/00016
+d R 6.1 85/04/29 14:18:53 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00004/00035
+d D 5.1 85/04/29 14:18:45 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00039/00000/00000
+d D 4.1 85/04/29 14:18:38 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CHSH 1
+E 2
+I 2
+.TH CHSH 1 "21 October 1980"
+E 2
+.UC 4
+.SH NAME
+chsh \- change default login shell
+.SH SYNOPSIS
+.B chsh
+name
+[
+shell
+]
+.SH DESCRIPTION
+.I Chsh
+is a command similar to
+.IR  passwd (1)
+except that it is used to change the login shell field of the password
+file rather than the password entry.
+If no
+.I shell
+is specified
+then the shell reverts to the default login shell
+.I /bin/sh.
+Otherwise only
+D 2
+.I /bin/csh
+E 2
+I 2
+.IR /bin/csh,
+.IR /bin/oldcsh,
+E 2
+or
+D 2
+.I /bin/oldcsh
+E 2
+I 2
+.I /usr/new/csh
+E 2
+can be specified as the shell unless you are the super-user.
+.PP
+An example use of this command would be
+.PP
+.DT
+	chsh bill /bin/csh
+D 2
+.SH SEE\ ALSO
+E 2
+I 2
+.SH "SEE ALSO"
+E 2
+csh(1), passwd(1), passwd(5)
+E 1

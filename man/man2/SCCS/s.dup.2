@@ -1,0 +1,221 @@
+h57689
+s 00005/00001/00077
+d D 6.3 86/05/13 14:03:38 karels 5 4
+c close-on-exec
+e
+s 00003/00003/00075
+d D 6.2 85/06/28 16:31:57 sechrest 4 3
+c Improved english
+e
+s 00001/00001/00077
+d D 6.1 85/05/09 16:38:33 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00062/00059/00016
+d D 5.1 85/05/09 16:38:22 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00075/00000/00000
+d D 4.1 85/05/09 16:38:16 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DUP 2 
+E 2
+I 2
+D 3
+.TH DUP 2 "12 February 1983"
+E 3
+I 3
+.TH DUP 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+dup, dup2 \- duplicate an open file descriptor
+E 2
+I 2
+dup, dup2 \- duplicate a descriptor
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B dup(fildes)
+.B int fildes;
+E 2
+I 2
+.ft B
+newd = dup(oldd)
+int newd, oldd;
+E 2
+.PP
+D 2
+.B dup2(fildes, fildes2)
+.B int fildes, fildes2;
+E 2
+I 2
+.ft B
+dup2(oldd, newd)
+int oldd, newd;
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+Given
+a file descriptor returned from
+an
+.I open,
+.I pipe,
+or
+.I creat
+call,
+.I dup
+allocates another file descriptor
+synonymous
+with
+the original.
+The new file descriptor is returned.
+E 2
+I 2
+.I Dup
+duplicates an existing object descriptor.
+The argument \fIoldd\fP is a small non-negative integer index in
+the per-process descriptor table.  The value must be less
+than the size of the table, which is returned by
+.IR getdtablesize (2).
+D 4
+The new descriptor
+.I newd
+returned by the call is the lowest numbered descriptor which is
+E 4
+I 4
+The new descriptor returned by the call,
+.I newd,
+is the lowest numbered descriptor that is
+E 4
+not currently in use by the process.
+E 2
+.PP
+D 2
+In the second form of the call,
+.I fildes
+is a file descriptor referring to an open file, and
+.I fildes2
+is a non-negative integer less than the maximum value
+allowed for file descriptors (approximately 19).
+.I Dup2
+causes
+.I fildes2
+to refer to the same file as
+.I fildes.
+If
+.I fildes2
+already referred to an open file, it is closed first.
+.SH "SEE ALSO"
+creat(2), open(2), close(2), pipe(2)
+.SH DIAGNOSTICS
+The value \-1 is returned if:
+the given file descriptor is invalid;
+there are already too many open files.
+.SH "ASSEMBLER (PDP-11)"
+(dup = 41.)
+.br
+(file descriptor in r0)
+.br
+(new file descriptor in r1)
+.br
+.B sys dup
+.br
+(file descriptor in r0)
+E 2
+I 2
+The object referenced by the descriptor does not distinguish
+between references using \fIoldd\fP and \fInewd\fP in any way.
+Thus if \fInewd\fP and \fIoldd\fP are duplicate references to an open
+file,
+.IR read (2),
+.IR write (2)
+and
+.IR lseek (2)
+D 5
+calls all move a single pointer into the file.
+E 5
+I 5
+calls all move a single pointer into the file,
+and append mode, non-blocking I/O and asynchronous I/O options
+are shared between the references.
+E 5
+If a separate pointer into the file is desired, a different
+object reference to the file must be obtained by issuing an
+additional
+.IR open (2)
+call.
+I 5
+The close-on-exec flag on the new file descriptor is unset.
+E 5
+E 2
+.PP
+D 2
+The
+E 2
+I 2
+In the second form of the call, the value of
+.IR newd
+desired is specified.  If this descriptor is already
+in use, the descriptor is first deallocated as if a
+.IR close (2)
+call had been done first.
+.SH "RETURN VALUE
+The value \-1 is returned if an error occurs in either call.
+The external variable
+.I errno
+indicates the cause of the error.
+.SH "ERRORS
+.I Dup
+and
+E 2
+.I dup2
+D 2
+entry is implemented by adding 0100 to
+.I fildes.
+.SH BUGS
+Dup2 fails if
+.I fildes2
+was
+.I vread
+from and some of the pages have not been referenced.
+E 2
+I 2
+fail if:
+.TP 15
+[EBADF]
+\fIOldd\fP or
+\fInewd\fP is not a valid active descriptor
+.TP 15
+[EMFILE]
+Too many descriptors are active.
+.SH "SEE ALSO"
+accept(2),
+open(2),
+close(2),
+I 5
+fcntl(2),
+E 5
+pipe(2),
+socket(2),
+socketpair(2),
+getdtablesize(2)
+E 2
+E 1

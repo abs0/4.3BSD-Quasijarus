@@ -1,0 +1,98 @@
+.\"	@(#)koi.7	6.1 (Berkeley) 1/2/04
+.\"
+.TH KOI 7 "January 2, 2004"
+.UC 8
+.SH NAME
+koi \- support for KOI (Soviet ASCII)
+.SH DESCRIPTION
+KOI is the Soviet version of ASCII.
+In KOI each character from 0100 through 0177 (0x40 through 0x7F) inclusive
+has two different graphic renditions, Latin and Russian, and
+0177 (0x7F) can be a printable character in Russian mode.
+KOI thus provides 64 code points for Russian letters by overlaying them on top
+of last 64 characters of the ASCII set.
+These 64 code points support 32 letters of the Russian alphabet in both
+lower and upper case.
+The 33rd letter of the Russian alphabet, e with two dots above,
+was sacrificed in the original KOI (but see below).
+KOI overlays lowercase Russian letters on top of uppercase ASCII letters and
+vice-versa.
+This is done so that if KOI characters are rendered in the wrong mode
+(see below) it is visually obvious.
+.PP
+How does one select between Latin and Russian graphic renditions of an
+ASCII/KOI character?
+There are two versions of KOI: KOI-7 for 7-bit environments and
+KOI-8 for 8-bit environments.
+In KOI-7 SO (016 or 0x0E) and SI (017 or 0x0F) control characters are used as
+locking shifts.  SO selects the Russian graphic rendition until the next
+occurrence of SI, and SI selects the Latin graphic rendition until the next
+occurrence of SO.
+These locking shifts only affect characters from 0100 through 0177
+(0x40 through 0x7F) inclusive.
+Control characters and graphic characters from 040 through 077
+(0x20 through 0x3F) are not affected.
+In KOI-8 the high bit is used to select between Latin and Russian graphic
+renditions.  High bit clear selects the Latin graphic rendition and
+high bit set selects the Russian graphic rendition.
+.PP
+Being an 8-bit character set KOI-8 has 256 code points.
+0 through 0177 (0x7F) are identical to ASCII and
+0300 through 0377 (0xC0 through 0xFF) are Russian characters as
+described above.
+Code points 0240 through 0277 (0xA0 through 0xBF) are available for
+extra graphic characters that are not available in KOI-7.
+These code points were not defined by the original KOI-8 standard, but
+were later defined to a set of Eastern European characters by the
+European Computer Manufacturers Association (ECMA).
+This set includes e with two dots above, both lower and upper case.
+KOI-8 with extra graphic characters defined by ECMA is sometimes called KOI8-E.
+.PP
+Code points 0200 through 0237 (0x80 through 0x9F) are control characters with
+the high bit set.  They are called C1 control characters by ISO standards.
+They are not available in 7-bit character sets like ASCII and KOI-7,
+but by ISO standards each C1 control character has an equivalent two-character
+escape sequence using only 7 bits.
+.SS UNIX support
+.PP
+UNIX fully supports working with Russian text in both KOI-7 and KOI-8.
+KOI-8 is preferred for UNIX since it is more efficient on
+8-bit byte computer architectures UNIX runs on.
+The
+.IR tty (4)
+driver supports both KOI-7 and KOI-8 terminals.
+.IR Cat (1)
+has options to convert between KOI-7 and KOI-8.
+.IR Ex (1)
+supports editing 8-bit text, and various utilities are being gradually
+fixed to be 8-bit clean.
+.SS KOI and mail
+.PP
+While UNIX runs only on computer architectures with 8-bit bytes,
+making KOI-8 the natural choice for UNIX,
+worldwide network mail systems have always traditionally been 7-bit.
+It is entirely legitimate for a network mail message between two UNIX systems
+to pass through some other systems that do not use 8-bit bytes (such as PDP-10)
+and which support only 7-bit characters, i.e., ASCII or KOI-7.
+Therefore, the International Free Computing Task Force (IFCTF) has adopted
+KOI-7 as the standard for Russian electronic mail.
+.IR Mail (1)
+automatically converts outgoing messages to KOI-7 if fed KOI-8 input.
+.SH FILES
+.DT
+/usr/pub/koi8	a map of the KOI-8 character set
+.SH SEE ALSO
+cat(1), tty(4), ascii(7)
+.SH BUGS
+In KOI-7 Russian capital hard sign falls on code point 0177 (0x7F), which
+is control character delete in ASCII.
+There is no universal agreement on whether it is acceptable or not
+to represent capital hard sign in KOI-7 by 0177 in Russian (SO) mode.
+When KOI-7 N1 (Russian mode of KOI-7) was registered with ISO
+it was registered as a 94-character set (ISO 5427), meaning that if one
+strictly follows ISO standards 0177 in KOI-7 Russian mode is still the delete
+control character rather than capital hard sign.
+This is less of a problem with KOI-8 since code point 0377 (0xFF) has no
+other useful function besides the capital hard sign, and KOI8-E, the only
+KOI-8 variant registered with ISO, is registered as a 96-character set.
+(It is in fact ISO's very first 96-character set!  ISO 8859-1 is next.)

@@ -1,0 +1,51 @@
+h59714
+s 00040/00000/00000
+d D 6.1 2011/10/18 02:55:50 msokolov 1 0
+c date and time created 2011/10/18 02:55:50 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %E%
+.\"
+.TH MUL64 3 "%Q%"
+.UC 8
+.SH NAME
+mul64 \- multiply two 64-bit integers
+.SH SYNOPSIS
+.nf
+.B long long mul64(m1, m2)
+.B long long m1, m2;
+.fi
+.SH DESCRIPTION
+This helper function is being defined in preparation for adding 64-bit integer
+arithmetic support to the 4.3BSD-Quasijarus C programming environment.
+The plan is to make the standard C compiler implement
+.I "long long"
+and
+.I "unsigned long long"
+data types representing signed and unsigned 64-bit integers, respectively,
+and implement all standard C arithmetic operators on these types.
+.PP
+It is expected that the operation of multiplying two 64-bit multiplicands
+to yield a 64-bit product (the standard \fB*\fP operator applied to
+.I "long long"
+types)
+will be implemented by calling a helper function.
+.I Mul64
+defined here is that helper function.
+.PP
+Because the bit width of the product is equal to that of the multiplicands,
+the function is the same whether the input and output values are viewed
+as signed or unsigned.
+.SH "RETURN VALUE"
+The least significant half of the product is returned in register R0
+and the most significant half is returned in register R1 on the VAX.
+This arrangement matches what is natural for the VAX architecture
+and will be the standard convention for functions returning
+.IR "long long" .
+.SH "SEE ALSO"
+emul(3)
+E 1

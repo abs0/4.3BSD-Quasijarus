@@ -1,0 +1,141 @@
+h56826
+s 00019/00003/00032
+d D 6.2 85/05/03 20:32:48 mckusick 4 3
+c add -t option (arnold@ucsfcgl)
+e
+s 00001/00001/00034
+d D 6.1 85/04/29 17:52:24 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00016/00021/00019
+d D 5.1 85/04/29 17:52:13 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00040/00000/00000
+d D 4.1 85/04/29 17:52:05 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH RANLIB 1
+E 2
+I 2
+D 3
+.TH RANLIB 1 "8 February 1983"
+E 3
+I 3
+.TH RANLIB 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+ranlib \- convert archives to random libraries
+.SH SYNOPSIS
+.B ranlib
+D 4
+archive ...
+E 4
+I 4
+[
+.B \-t
+] archive ...
+E 4
+.SH DESCRIPTION
+.I Ranlib
+converts each
+.I archive
+D 2
+to a form which can be loaded
+more rapidly by the loader,
+by adding a table of contents named
+.B _\^_.SYMDEF
+E 2
+I 2
+to a form which the loader can load more rapidly.
+.I Ranlib
+does this by adding a table of contents called 
+D 4
+.B _.SYMDEF
+E 4
+I 4
+.B __.SYMDEF
+E 4
+E 2
+to the beginning of the archive.
+D 2
+It uses
+E 2
+I 2
+.I Ranlib
+uses 
+E 2
+.IR ar (1)
+D 2
+to reconstruct the archive,
+so that sufficient temporary file space must
+be available in the file system containing the
+current directory.
+.SH SEE ALSO
+E 2
+I 2
+to reconstruct the archive, so that sufficient temporary file space must
+be available in the file system which contains the current directory.
+I 4
+.PP
+If given the
+.B \-t
+option,
+ranlib only "touches" the archives and does not modify them.
+This is useful after copying an archive
+or using the
+.B \-t
+option of
+.IR make (1)
+in order to avoid having
+.IR ld (1)
+complain about
+an \*(lqout of date\*(rq symbol table.
+E 4
+.SH "SEE ALSO"
+E 2
+D 4
+ld(1), ar(1), lorder(1)
+E 4
+I 4
+ld(1), ar(1), lorder(1), make(1)
+E 4
+.SH BUGS
+Because generation of a library by
+.I ar
+D 2
+and randomization by
+E 2
+I 2
+and randomization of the library by
+E 2
+.I ranlib
+D 2
+are separate,
+phase errors are possible.
+The loader
+.I ld
+warns when the modification date of
+a library is more recent than
+the creation of its dictionary;
+but this means you get the warning even if you
+only copy the library.
+E 2
+I 2
+are separate processes, phase errors are possible.  The loader,
+.IR ld ,
+warns when the modification date of a library is more recent than the
+creation date of its dictionary;  but this means that you get the
+warning even if you only copy the library.
+E 2
+E 1

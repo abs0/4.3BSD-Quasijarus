@@ -1,0 +1,194 @@
+h23669
+s 00002/00009/00084
+d D 6.3 87/12/10 13:01:25 mckusick 6 4
+c update for new version from Tim Stoehr
+e
+s 00003/00003/00090
+d D 6.2 86/05/06 14:13:40 anne 4 3
+c grammar, spelling, diction
+e
+s 00003/00002/00090
+d D 6.1 85/05/20 17:02:38 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00042/00007/00050
+d D 5.1 85/05/20 17:02:28 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00057/00000/00000
+d D 4.1 85/05/20 17:02:20 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ROGUE 6 4/1/81
+E 2
+I 2
+D 3
+.TH ROGUE 6 "3 April 1983"
+E 3
+I 3
+.TH ROGUE 6 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+rogue \- exploring The Dungeons of Doom
+.SH SYNOPSIS
+D 2
+.B rogue
+E 2
+I 2
+.B /usr/games/rogue
+E 2
+[
+I 2
+.B \-r
+]
+[
+E 2
+.I save_file
+]
+I 2
+[
+.B \-s
+]
+[
+.B \-d
+]
+E 2
+.SH DESCRIPTION
+.PP
+.I Rogue
+is a computer fantasy game with a new twist.  It is crt oriented and the
+object of the game is to survive the attacks of various monsters and get
+a lot of gold, rather than the puzzle solving orientation of most computer
+fantasy games.
+.PP
+To get started you really only need to know two commands.  The command
+.B ?
+will give you a list of the available commands and the command
+.B /
+will identify the things you see on the screen.
+.PP
+D 4
+To win the game (as opposed to merely playing to beat other people high
+E 4
+I 4
+To win the game (as opposed to merely playing to beat other people's high
+E 4
+scores) you must locate the Amulet of Yendor which is somewhere below
+the 20th level of the dungeon and get it out.  Nobody has achieved this
+yet and if somebody does, they will probably go down in history as a hero
+D 4
+among heros.
+E 4
+I 4
+among heroes.
+E 4
+.PP
+When the game ends, either by your death, when you quit, or if you (by
+some miracle) manage to win,
+.I rogue
+D 4
+will give you alist of the top-ten scorers.  The scoring is based entirely
+E 4
+I 4
+will give you a list of the top-ten scorers.  The scoring is based entirely
+E 4
+upon how much gold you get.  There is a 10% penalty for getting yourself
+killed.
+.PP
+I 2
+If
+.I save_file
+is specified,
+rogue will be restored from the specified saved game file.
+D 6
+If the
+.B \-r
+option is used, the save game file is presumed to be the default.
+E 6
+.PP
+The
+.B \-s
+option will print out the list of scores.
+.PP
+D 6
+The
+.B \-d
+option will kill you and try to add you to the score file.
+.PP
+E 6
+E 2
+For more detailed directions, read the document
+.I "A Guide to the Dungeons of Doom."
+I 2
+.SH AUTHORS
+I 6
+Timothy Stoehr,
+E 6
+Michael C. Toy,
+Kenneth C. R. C. Arnold,
+Glenn Wichman
+E 2
+.SH FILES
+.DT
+I 2
+.ta \w'/usr/games/lib/rogue_roll\ \ \ 'u
+E 2
+/usr/games/lib/rogue_roll	Score file
+.br
+D 2
+~/rogue.sav	Default save file
+E 2
+I 2
+\fB~\fP/rogue.save	Default save file
+E 2
+.SH SEE ALSO
+D 2
+Michael C. Toy,
+E 2
+I 2
+Michael C. Toy
+and
+Kenneth C. R. C. Arnold,
+E 2
+.I "A guide to the Dungeons of Doom"
+.SH BUGS
+.PP
+D 2
+Probably infinite.  Currently known bugs are: Sometimes you are still hungry
+even after you eat food and sometimes you get a monster on the screen in
+reverse video which may or may not cause a core dump.
+E 2
+I 2
+D 3
+Probably infinite.
+E 3
+I 3
+D 6
+Probably infinite
+(although countably infinite).
+E 6
+I 6
+Probably infinite, although none are known.
+E 6
+E 3
+However,
+that Ice Monsters sometimes transfix you permanently is
+.I not
+a bug.
+It's a feature.
+E 2
+E 1

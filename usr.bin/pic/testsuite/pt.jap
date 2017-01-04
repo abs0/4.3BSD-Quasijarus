@@ -1,0 +1,404 @@
+!<arch>
+j.a             323723756   9     1     100666  132       `
+.PS
+line from 0,220 to 116,220
+arc cw to 140,152 rad 38
+arc cw to 63,108 rad 134
+line from 63,168 to 63,58
+arc cw to 7,0 rad 60
+.PE
+j.cdot          323887266   9     1     100666  82        `
+.PS
+line from 52,137 to 52,103
+line to 102,103
+line to 102,137
+line to 52,137
+.PE
+j.chi           323885532   9     1     100666  120       `
+.PS
+arc cw from 144,240 to 8,219 rad 402
+line from 0,131 to 154,131
+line from 88,225 to 88,89
+arc cw to 28,0 rad 97
+.PE
+j.circle        323989443   9     3     100666  32        `
+.PS
+circle at 51,189 rad 51
+.PE
+j.comma         323887201   9     1     100666  94        `
+.PS
+line from 24,-51 to 84,49
+line to 124,49
+line to 124,39
+line to 34,-51
+line to 24,-51
+.PE
+j.ddot          323887068   9     1     100666  62        `
+.PS
+line from 0,240 to 46,144
+line from 80,234 to 126,140
+.PE
+j.e             323883213   9     1     100666  86        `
+.PS
+line from 9,170 to 145,170
+line from 77,170 to 77,12
+line from 0,12 to 154,12
+.PE
+j.elong         323887237   9     1     100666  79        `
+.PS
+line from 7,125 to 7,115
+line to 147,115
+line to 147,125
+line to 7,125
+.PE
+
+j.fu            323886062   9     1     100666  83        `
+.PS
+line from 0,224 to 120,224
+arc cw to 148,196 rad 28
+arc cw to 32,0 rad 228
+.PE
+
+j.ha            323885981   9     1     100666  94        `
+.PS
+arc cw from 28,198 to 0,0 rad 426
+arc cw from 108,228 to 154,44 rad 424
+line to 154,0
+.PE
+j.he            323886097   9     1     100666  83        `
+.PS
+line from 0,144 to 23,197
+arc cw to 72,204 rad 28
+arc cw to 154,13 rad 400
+.PE
+
+j.hi            323958989   9     1     100666  116       `
+.PS
+line from 23,176 to 154,176
+line from 23,240 to 23,37
+arc to 60,0 rad 37
+line to 78,0
+arc to 154,20 rad 160
+.PE
+j.ho            323886148   9     1     100666  133       `
+.PS
+line from 0,184 to 154,184
+line from 77,240 to 77,0
+arc cw from 20,122 to 0,27 rad 258
+arc cw from 136,115 to 154,26 rad 255
+.PE
+
+j.i             323724624   9     1     100666  70        `
+.PS
+arc cw from 154,240 to 0,130 rad 352
+line from 92,179 to 92,0
+.PE
+j.ka            323883396   9     1     100666  169       `
+.PS
+line from 0,184 to 130,184
+arc cw to 154,160 rad 24
+line to 154,30
+arc cw to 124,0 rad 30
+arc cw to 89,8 rad 70
+line from 55,240 to 55,185
+arc cw to 0,8 rad 332
+.PE
+
+j.ke            323958345   9     1     100666  122       `
+.PS
+arc cw from 34,240 to 0,136 rad 176
+line from 23,178 to 154,178
+line from 105,178 to 105,89
+arc cw to 16,0 rad 89
+.PE
+j.ki            323883440   9     1     100666  87        `
+.PS
+line from 8,184 to 145,184
+line from 0,104 to 154,104
+line from 73,240 to 83,0
+.PE
+
+j.ko            323958455   9     1     100666  88        `
+.PS
+line from 4,203 to 108,203
+arc cw to 136,175 rad 28
+line to 136,14
+line to 0,14
+.PE
+j.ku            323958154   9     1     100666  104       `
+.PS
+arc from 0,136 to 46,224 rad 146
+line to 132,224
+arc cw to 154,202 rad 22
+arc cw to 0,6 rad 247
+.PE
+j.lquote        323887297   9     1     100666  63        `
+.PS
+line from 47,240 to 47,100
+line from 47,240 to 154,240
+.PE
+
+j.ma            323886194   9     1     100666  108       `
+.PS
+line from 0,227 to 124,227
+arc cw to 148,179 rad 30
+line to 65,63
+arc cw from 0,96 to 108,0 rad 153
+.PE
+j.me            323886329   9     1     100666  80        `
+.PS
+arc cw from 122,232 to 0,0 rad 252
+arc cw from 32,146 to 144,58 rad 243
+.PE
+j.mi            323886246   9     1     100666  118       `
+.PS
+arc cw from 13,223 to 136,220 rad 252
+arc cw from 24,136 to 119,132 rad 255
+arc cw from 0,24 to 154,0 rad 256
+.PE
+j.mo            323886381   9     1     100666  130       `
+.PS
+line from 8,226 to 143,226
+line from 0,142 to 154,142
+line from 68,226 to 68,36
+arc to 104,0 rad 36
+arc to 154,12 rad 108
+.PE
+j.mu            323959801   9     1     100666  102       `
+.PS
+line from 79,228 to 3,41
+arc to 22,8 rad 22
+line to 133,8
+arc to 152,39 rad 21
+line to 132,83
+.PE
+j.n             323970403   9     1     100666  118       `
+.PS
+arc cw from 6,185 to 82,178 rad 204
+line from 3,24 to 0,0
+line to 30,0
+arc to 154,124 rad 124
+line to 154,144
+.PE
+j.na            323885746   9     1     100666  83        `
+.PS
+line from 0,180 to 154,180
+line from 91,240 to 91,80
+arc cw to 22,0 rad 80
+.PE
+
+j.ne            323885877   9     1     100666  163       `
+.PS
+line from 77,240 to 77,196
+line from 12,196 to 116,196
+arc cw to 131,152 rad 25
+line to 0,44
+line from 77,107 to 77,0
+arc cw from 95,122 to 154,62 rad 211
+.PE
+
+j.ni            323885775   9     1     100666  65        `
+.PS
+line from 12,186 to 142,186
+line from 0,12 to 154,12
+.PE
+.PE
+
+j.no            323885910   9     1     100666  43        `
+.PS
+arc cw from 145,218 to 0,0 rad 270
+.PE
+
+j.nu            323958864   9     1     100666  108       `
+.PS
+line from 10,231 to 120,231
+arc cw to 140,191 rad 25
+line to 0,0
+arc cw from 0,146 to 154,0 rad 244
+.PE
+j.o             323958066   9     1     100666  98        `
+.PS
+line from 0,182 to 154,182
+line from 100,240 to 100,0
+arc cw from 100,169 to 0,49 rad 384
+.PE
+j.period        323887158   9     1     100666  75        `
+.PS
+line from 52,34 to 52,0
+line to 102,0
+line to 102,34
+line to 52,34
+.PE
+
+j.ra            323886583   9     1     100666  111       `
+.PS
+line from 12,228 to 142,228
+line from 0,158 to 135,158
+arc cw to 154,139 rad 19
+arc cw to 36,0 rad 143
+.PE
+
+j.re            323886707   9     1     100666  85        `
+.PS
+line from 12,230 to 12,0
+line to 26,0
+arc to 154,128 rad 128
+line to 154,144
+.PE
+
+j.ri            323886611   9     1     100666  87        `
+.PS
+line from 30,222 to 30, 94
+line from 120,228 to 120,80
+arc cw to 84, 0 rad 108
+.PE
+
+j.ro            323962149   9     1     100666  127       `
+.PS
+line from 12,12 to 4,162
+arc cw to 26,184 rad 22
+line to 128,184
+arc cw to 150,162 rad 22
+line to 142,12
+line to 12,12
+.PE
+
+j.rquote        323887313   9     1     100666  47        `
+.PS
+line from 107,140 to 107,0
+line to 0,0
+.PE
+
+j.ru            323886674   9     1     100666  116       `
+.PS
+line from 7,230 to 7,51
+arc cw to 0,0 rad 192
+line from 77,232 to 77,0
+arc to 154,90 rad 90
+line to 154,131
+.PE
+j.sa            323883672   9     1     100666  113       `
+.PS
+line from 0,184 to 154,184
+line from 36,240 to 36,116
+line from 120,240 to 120,98
+arc cw to 56,0 rad 108
+.PE
+
+j.se            323883897   9     1     100666  154       `
+.PS
+line from 0,184 to 124,184
+arc cw to 140,129 rad 30
+arc cw to 106,107 rad 165
+line from 41,240 to 41, 38
+arc to 78,0 rad 38
+arc to 150,14 rad 151
+.PE
+j.shi           323883758   9     1     100666  154       `
+.PS
+line from 6,211 to 68,211
+line from 0,136 to 63,136
+line from 0,34 to 0,15
+arc to 15,0 rad 15
+line to 22,0
+arc to 154,132 rad 132
+line to 154,164
+.PE
+j.so            323885362   9     1     100666  86        `
+.PS
+line from 0,206 to 34,139
+line from 154,240 to 154,207
+arc cw to 40,0 rad 245
+.PE
+j.su            323883820   9     1     100666  107       `
+.PS
+line from 8,232 to 97,232
+arc cw to 117,196 rad 24
+line to 0,0
+arc cw from 79,131 to 154,0 rad 164
+.PE
+
+j.ta            323885470   9     1     100666  156       `
+.PS
+arc from 0,140 to 40,231 rad 90
+line to 138,231
+arc cw to 154,215 rad 16
+line to 154,196
+arc cw to 0,0 rad 202
+arc cw from 68,136 to 150,62 rad 172
+.PE
+j.te            323958735   9     1     100666  111       `
+.PS
+line from 10,221 to 144,221
+line from 0,156 to 154,156
+line from 88,156 to 88,80
+arc cw to 20,0 rad 81
+.PE
+
+j.to            323885716   9     1     100666  71        `
+.PS
+line from 48,240 to 48,0
+arc cw from 48,157 to 143,111 rad 122
+.PE
+
+j.tsu           323885569   9     1     100666  113       `
+.PS
+line from 0,222 to 12,146
+line from 68,229 to 78,160
+line from 154,234 to 154,161
+arc cw to 32,0 rad 167
+.PE
+
+j.u             323725379   9     1     100666  149       `
+.PS
+line from 77,240 to 77,184
+line from 0,116 to 0, 160
+arc cw to 24,184 rad 24
+line to 130,184
+arc cw to 154,160 rad 24
+arc cw to 46,0 rad 148
+.PE
+
+j.wa            323886797   9     1     100666  137       `
+.PS
+line from 0,128 to 0,198
+arc cw to 24,222 rad 24
+line to 130,222
+arc cw to 154,198 rad 24
+line to 154,124
+arc cw to 85,0 rad 146
+.PE
+
+j.wo            323886893   9     1     100666  127       `
+.PS
+line from 0,226 to 134,226
+arc cw to 146,214 rad 12
+line to 146,165
+arc cw to 54,0 rad 195
+line from 21,128 to 143,128
+.PE
+
+j.ya            323886415   9     1     100666  101       `
+.PS
+line from 0,184 to 124,184
+arc cw to 143,130 rad 30
+line to 116,105
+line from 44,240 to 64,0
+.PE
+
+j.yo            323886530   9     1     100666  128       `
+.PS
+line from 6,209 to 126,209
+arc cw to 150,185 rad 24
+line to 150,12
+line from 12,119 to 150,119
+line from 0,12 to 150,12
+.PE
+j.yu            323960001   9     3     100666  99        `
+.PS
+line from 14,207 to 82,207
+arc cw to 108,168 rad 28
+line to 68,12
+line from 0,12 to 154,12
+.PE
+

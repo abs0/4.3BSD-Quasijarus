@@ -21,9 +21,9 @@
 
 #ifndef lint
 #ifdef DAEMON
-static char sccsid[] = "@(#)daemon.c	5.29 (Berkeley) 5/29/02 (with daemon mode)";
+static char sccsid[] = "@(#)daemon.c	5.30 (Berkeley) 4/23/04 (with daemon mode)";
 #else
-static char sccsid[] = "@(#)daemon.c	5.29 (Berkeley) 5/29/02 (without daemon mode)";
+static char sccsid[] = "@(#)daemon.c	5.30 (Berkeley) 4/23/04 (without daemon mode)";
 #endif
 #endif /* not lint */
 
@@ -34,6 +34,8 @@ static char sccsid[] = "@(#)daemon.c	5.29 (Berkeley) 5/29/02 (without daemon mod
 # include <sys/wait.h>
 # include <sys/time.h>
 # include <sys/resource.h>
+# include <sys/ioctl.h>
+# include <net/if.h>
 
 /*
 **  DAEMON.C -- routines to use when running as a daemon.
@@ -88,6 +90,10 @@ struct sockaddr_in	SendmailAddress;/* internet address of sendmail */
 int	DaemonSocket	= -1;		/* fd describing socket */
 char	*NetName;			/* name of home (local?) network */
 
+#define	ADDRLISTSZ	32
+static	struct ifreq	myaddrlist[ADDRLISTSZ];
+static	struct ifconf	ifconf;
+
 getrequests()
 {
 	int t;
@@ -131,6 +137,11 @@ getrequests()
 # endif LOG
 		finis();
 	}
+
+	/* get the list of this host's addresses */
+	ifconf.ifc_len = sizeof(myaddrlist);
+	ifconf.ifc_req = myaddrlist;
+	(void) ioctl(DaemonSocket, SIOCGIFCONF, &ifconf);
 
 #ifdef DEBUG
 	/* turn on network debugging? */
@@ -253,6 +264,8 @@ getrequests()
 			}
 
 			/* should we check for illegal connection here? XXX */
+			/* We do set FromInet here. */
+			FromInet = !ismyaddr(&otherend.sin_addr);
 
 			(void) close(DaemonSocket);
 			InChannel = fdopen(t, "r");
@@ -272,6 +285,35 @@ getrequests()
 		(void) close(t);
 	}
 	/*NOTREACHED*/
+}
+/*
+**  ISMYADDR -- assistant routine for getrequests to test if an IP address is
+**		one of ours.
+**
+**	Parameters:
+**		ipaddr -- IP address (struct in_addr) to check.
+**
+**	Returns:
+**		A Boolean indication of whether ipaddr is one of ours.
+**
+**	Side Effects:
+**		none.
+*/
+
+static
+ismyaddr(ipaddr)
+	register struct in_addr *ipaddr;
+{
+	register struct ifreq *ifr, *ifrend;
+
+	for (ifr = myaddrlist,
+	     ifrend = (struct ifreq *)((caddr_t)ifr + ifconf.ifc_len);
+	     ifr < ifrend; ifr++)
+		if (ifr->ifr_addr.sa_family == AF_INET &&
+		    !bcmp(&((struct sockaddr_in *)&ifr->ifr_addr)->sin_addr,
+			  ipaddr, sizeof(struct in_addr)))
+			return (TRUE);
+	return (FALSE);
 }
 /*
 **  CLRDAEMON -- reset the daemon connection

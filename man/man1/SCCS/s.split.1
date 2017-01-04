@@ -1,0 +1,100 @@
+h07725
+s 00013/00028/00010
+d D 6.2 86/11/20 15:23:06 bostic 4 3
+c bug report 4.3BSD/usr.bin/13; fix max # of files bug; complete rewrite
+e
+s 00001/00001/00037
+d D 6.1 85/04/29 17:58:33 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00037
+d D 5.1 85/04/29 17:58:25 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00038/00000/00000
+d D 4.1 85/04/29 17:58:18 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH SPLIT 1 
+E 2
+I 2
+D 3
+.TH SPLIT 1  "18 January 1983"
+E 3
+I 3
+.TH SPLIT 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+split \- split a file into pieces
+.SH SYNOPSIS
+D 4
+.B split
+[
+.B \-\fIn
+]
+[ file [ name ] ]
+E 4
+I 4
+\fBsplit\fP [ -\fBn\fP ] [ -\fBb\fP byte_cnt ] [ file [ name ] ]
+E 4
+.SH DESCRIPTION
+D 4
+.I Split
+reads
+.I file
+and writes
+it in
+E 4
+I 4
+\fISplit\fP reads \fIfile\fP and writes it in
+E 4
+.IR n -line
+D 4
+pieces
+(default 1000), as many as necessary,
+onto
+a set of output files.  The name of the first output
+file is
+.I name
+with
+.B aa
+appended, and so on
+lexicographically.
+If no output name is given,
+.B x
+is default.
+E 4
+I 4
+pieces or in \fIbyte_cnt\fP byte pieces to a set of output
+files.  The default is in 1000 line pieces.  The name of the
+first output file is \fIname\fP with "aa" appended, and so
+on, lexicographically, to "zz".  If no output name is given,
+"x" is the default, in which case \fIsplit\fP will create
+files from "xaa" to "zzz".
+E 4
+.PP
+D 4
+If no input file is given, or
+if
+.B \-
+is given in its stead,
+then the standard input file is used.
+E 4
+I 4
+If no input file is given, or if \fB-\fP is given in its stead, then
+the standard input file is used.
+.SH BUGS
+If you provide \fIname\fP, \fIsplit\fP can only create 676 separate
+files.  The default naming convention allows 2028 separate files.
+E 4
+E 1

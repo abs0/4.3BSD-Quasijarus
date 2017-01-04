@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)tty_conf.c	7.2 (Berkeley) 5/26/88
+ *	@(#)tty_conf.c	7.5 (Berkeley) 2/27/04
  */
 
 #include "param.h"
@@ -28,11 +28,22 @@ int	bkopen(),bkclose(),bkread(),bkinput(),bkioctl();
 #if NTB > 0
 int	tbopen(),tbclose(),tbread(),tbinput(),tbioctl();
 #endif
+
 #include "sl.h"
 #if NSL > 0
-int	slopen(),slclose(),slinput(),sltioctl(),slstart();
+int	slopen(),slclose(),slinput(),sltioctl(),slstart(),slmodem();
 #endif
 
+#include "ppp.h"
+#if NPPP > 0
+int	pppasync_topen(), pppasync_tclose(), pppasync_input();
+int	pppasync_tioctl(), pppasync_start(), pppasync_modem();
+#endif
+
+#include "lk.h"
+#if NLK > 0
+int	lk201_lopen(), lk201_lclose(), lk201_input(), lk201_ioctl();
+#endif
 
 struct	linesw linesw[] =
 {
@@ -56,7 +67,22 @@ struct	linesw linesw[] =
 #endif
 #if NSL > 0
 	slopen, slclose, nodev, nodev, sltioctl,
-	slinput, nodev, nulldev, slstart, nullmodem,	/* 4- SLIPDISC */
+	slinput, nodev, nulldev, slstart, slmodem,	/* 4- SLIPDISC */
+#else
+	nodev, nodev, nodev, nodev, nodev,
+	nodev, nodev, nodev, nodev, nodev,
+#endif
+#if NPPP > 0
+	pppasync_topen, pppasync_tclose, nodev, nodev, pppasync_tioctl,
+	pppasync_input, nodev, nulldev, pppasync_start, /* 5- PPPDISC */
+	pppasync_modem,
+#else
+	nodev, nodev, nodev, nodev, nodev,
+	nodev, nodev, nodev, nodev, nodev,
+#endif
+#if NLK > 0
+	lk201_lopen, lk201_lclose, ttread, ttwrite, lk201_ioctl,
+	lk201_input, nodev, nulldev, ttstart, nullmodem,/* 6- LK201DISC */
 #else
 	nodev, nodev, nodev, nodev, nodev,
 	nodev, nodev, nodev, nodev, nodev,

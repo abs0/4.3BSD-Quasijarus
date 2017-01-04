@@ -3,10 +3,10 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 4/17/86
+#	@(#)Makefile	6.2 (Berkeley) 8/24/04
 #
-SRCS=	0.t 1.t 2.t 3.t 4.t 5.t 6.t 7.t
-MACROS=	-msU
+SRCS=	0.t 1.t 2.t 3.t 4.t 5.t 6.t 7.t a.t
+MACROS=	-ms
 PRINTER=Pdp
 EQN=	deqn -${PRINTER}
 TBL=	dtbl -${PRINTER}

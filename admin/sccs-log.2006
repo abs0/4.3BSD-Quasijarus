@@ -1,0 +1,21 @@
+/usr/src/usr.etc/bootpd/SCCS/s.bootpd.c:
+5.6 06/02/08 10:08:05 msokolov 6 5
+send all IP numbers in RFC 1048 vendor information in network byte order!
+/usr/src/usr.etc/bootpd/SCCS/s.version.c:
+5.3 06/02/08 10:08:08 msokolov 3 2
+send all IP numbers in RFC 1048 vendor information in network byte order!
+/usr/src/usr.lib/lpr/SCCS/s.common.c:
+5.9 06/02/13 03:58:13 msokolov 18 17
+support for Ethernet-attached printers
+/usr/src/usr.lib/lpr/SCCS/s.displayq.c:
+5.9 06/02/13 03:58:14 msokolov 22 21
+support for Ethernet-attached printers
+/usr/src/usr.lib/lpr/SCCS/s.printjob.c:
+5.15 06/02/13 03:58:16 msokolov 41 40
+support for Ethernet-attached printers
+/usr/src/usr.lib/lpr/SCCS/s.rmjob.c:
+5.4 06/02/13 03:58:19 msokolov 14 13
+support for Ethernet-attached printers
+/usr/src/usr.lib/lpr/SCCS/s.Makefile:
+5.10 06/02/13 04:07:46 msokolov 32 31
+generalized subdir handling, include psfilters and psmgmt

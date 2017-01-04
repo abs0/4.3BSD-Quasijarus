@@ -1,0 +1,74 @@
+h56700
+s 00001/00001/00044
+d D 6.1 85/04/29 14:25:16 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00001/00044
+d D 5.1 85/04/29 14:25:08 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00045/00000/00000
+d D 4.1 85/04/29 14:25:02 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FMT 1 2/24/79
+E 2
+I 2
+D 3
+.TH FMT 1 "24 February 1979"
+E 3
+I 3
+.TH FMT 1 "%Q%"
+E 3
+E 2
+.UC
+.SH NAME
+fmt \- simple text formatter
+.SH SYNOPSIS
+.B fmt
+[
+name ...
+]
+.SH DESCRIPTION
+.I Fmt
+is a simple text formatter which reads the concatenation of input
+files (or standard input if none are given) and produces on
+standard output a version of its input with lines as close to
+72 characters long as possible.  The spacing at the beginning
+of the input lines is preserved in the output, as are blank lines
+and interword spacing.
+.PP
+.I Fmt
+is meant to format mail messages prior to sending, but may also be useful
+for other simple tasks.
+For instance,
+within visual mode of the
+.I ex
+editor (e.g.
+.IR vi )
+the command
+.br
+	!}fmt
+.br
+will reformat a paragraph,
+evening the lines.
+.SH "SEE ALSO"
+nroff(1), mail(1)
+.SH AUTHOR
+Kurt Shoens
+.SH BUGS
+The program was designed to be simple and fast \- for more complex
+operations, the standard text processors are likely to be more appropriate.
+E 1

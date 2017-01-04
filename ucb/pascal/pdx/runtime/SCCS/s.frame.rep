@@ -1,0 +1,84 @@
+h15216
+s 00002/00004/00036
+d D 5.2 85/06/07 20:37:56 mckusick 4 3
+c fix copyright
+e
+s 00008/00002/00032
+d D 5.1 85/06/07 20:14:57 mckusick 3 2
+c Add copyright
+e
+s 00001/00001/00033
+d D 1.2 82/01/18 22:03:31 linton 2 1
+c sccsid
+e
+s 00034/00000/00000
+d D 1.1 82/01/18 19:21:06 linton 1 0
+c date and time created 82/01/18 19:21:06 by linton
+e
+u
+U
+t
+T
+I 1
+D 3
+/* Copyright (c) 1982 Regents of the University of California */
+E 3
+I 3
+/*
+ * Copyright (c) 1982 Regents of the University of California.
+ * All rights reserved.  The Berkeley software License Agreement
+ * specifies the terms and conditions for redistribution.
+I 4
+ *
+ *	%W% (Berkeley) %G%
+E 4
+ */
+E 3
+D 4
+
+D 2
+static char sccsid[] = "%Z%%M% %I% %G%";
+E 2
+I 2
+D 3
+/* static char sccsid[] = "%Z%%M% %I% %G%"; */
+E 3
+I 3
+#ifndef lint
+static char sccsid[] = "%W% (Berkeley) %G%";
+#endif not lint
+E 4
+E 3
+E 2
+
+/*
+ * Definitions for accessing stack frames.
+ */
+
+#define MAINBLK		1
+
+/*
+ * Structure of an activation record's block mark.  See the
+ * PX implementation notes for more details.
+ */
+
+struct frame {
+	ADDRESS stackref;	/* for px self-checking */
+	ADDRESS file;		/* current file information */
+	ADDRESS blockp;		/* pointer to current block name */
+	ADDRESS *save_loc;	/* saved local variable pointer */
+	ADDRESS *save_disp;	/* saved dp contents */
+	ADDRESS *save_dp;	/* saved dp */
+	ADDRESS save_pc;	/* saved location counter */
+	int save_lino;		/* saved source line number (never used) */
+};
+
+FRAME *curframe();		/* get the currently active frame */
+FRAME *nextframe();		/* go up the stack */
+FRAME *findframe();		/* find the frame for a given function */
+ADDRESS entry();		/* get the entry address for a frame */
+ADDRESS *dispval();		/* display associated with a given block */
+ADDRESS *curdp();		/* return current display pointer */
+ADDRESS *contents();		/* return the contents of display pointer */
+ADDRESS stkaddr();		/* stack address associated with a frame */
+E 1

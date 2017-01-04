@@ -1,0 +1,143 @@
+h41945
+s 00009/00005/00029
+d D 6.2 86/05/09 23:22:43 lepreau 4 3
+c make explicit what happens when ctty but no utmp entry; don't make
+c extravagent claims; purge v6 cruft.
+e
+s 00001/00001/00033
+d D 6.1 85/05/15 15:00:16 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00010/00021/00024
+d D 5.1 85/05/15 15:00:09 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00045/00000/00000
+d D 4.1 85/05/15 15:00:02 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETLOGIN 3 
+E 2
+I 2
+D 3
+.TH GETLOGIN 3  "19 January 1983"
+E 3
+I 3
+.TH GETLOGIN 3  "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+getlogin \- get login name
+.SH SYNOPSIS
+.B char *getlogin()
+.SH DESCRIPTION
+.I Getlogin
+D 2
+returns a pointer to
+the login name
+as found in
+E 2
+I 2
+returns a pointer to the login name as found in
+E 2
+.IR /etc/utmp .
+D 2
+It may be used
+in conjunction
+with
+E 2
+I 2
+It may be used in conjunction with
+E 2
+.I getpwnam
+D 2
+to locate the correct
+password file entry
+when the same userid
+is shared by several
+login names.
+E 2
+I 2
+to locate the correct password file entry when the same userid
+is shared by several login names.
+E 2
+.PP
+If
+.I getlogin
+D 2
+is called within a process
+that is not attached to a
+E 2
+I 2
+is called within a process that is not attached to a
+E 2
+D 4
+typewriter, it returns NULL.
+D 2
+The correct procedure
+for determining the login name
+is to first call
+E 2
+I 2
+The correct procedure for determining the login name is to first call
+E 4
+I 4
+terminal, or if there is no entry in
+.I /etc/utmp
+for the process's terminal,
+E 4
+E 2
+.I getlogin
+I 4
+returns a NULL pointer (0).
+A reasonable procedure for determining the login name is to first call
+.I getlogin
+E 4
+D 2
+and if it fails,
+to call
+.IR getpwuid .
+E 2
+I 2
+and if it fails, to call
+D 4
+.IR getpw ( getuid ()).
+E 4
+I 4
+.IR getpwuid ( getuid ()).
+E 4
+E 2
+.SH FILES
+/etc/utmp
+.SH "SEE ALSO"
+D 2
+getpwent(3), getgrent(3), utmp(5)
+E 2
+I 2
+D 4
+getpwent(3), getgrent(3), utmp(5), getpw(3)
+E 4
+I 4
+getpwent(3), utmp(5), ttyslot(3)
+E 4
+E 2
+.SH DIAGNOSTICS
+D 4
+Returns NULL (0) if name not found.
+E 4
+I 4
+Returns a NULL pointer (0) if name not found.
+E 4
+.SH BUGS
+The return values point to static data
+whose content is overwritten by each call.
+E 1

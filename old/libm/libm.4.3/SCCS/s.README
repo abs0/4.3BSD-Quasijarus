@@ -1,0 +1,1015 @@
+h38567
+s 00054/00054/00210
+d D 1.6 85/09/12 17:14:03 mckusick 6 5
+c update from zliu
+e
+s 00171/00176/00093
+d D 1.5 85/09/11 17:56:54 mckusick 5 4
+c new from Kahan
+e
+s 00011/00014/00258
+d D 1.4 85/08/22 13:47:21 miriam 4 3
+c Use old gamma.
+e
+s 00094/00083/00178
+d D 1.3 85/08/21 14:07:23 miriam 3 2
+c Revision by Prof. Kahan.
+e
+s 00005/00001/00256
+d D 1.2 85/06/05 16:54:14 miriam 2 1
+c Set up pointer to old routines
+e
+s 00257/00000/00000
+d D 1.1 85/06/03 16:12:41 miriam 1 0
+c date and time created 85/06/03 16:12:41 by miriam
+e
+u
+U
+t
+T
+I 5
+***************************************************************************
+*                                                                         * 
+* Copyright (c) 1985 Regents of the University of California.             *
+*                                                                         * 
+* Use and reproduction of this software are granted  in  accordance  with *
+* the terms and conditions specified in  the  Berkeley  Software  License *
+* Agreement (in particular, this entails acknowledgement of the programs' *
+* source, and inclusion of this notice) with the additional understanding *
+* that  all  recipients  should regard themselves as participants  in  an *
+* ongoing  research  project and hence should  feel  obligated  to report *
+* their  experiences (good or bad) with these elementary function  codes, *
+* using "sendbug 4bsd-bugs@BERKELEY", to the authors.                     *
+*                                                                         *
+* K.C. Ng, with Z-S. Alex Liu, S. McDonald, P. Tang, W. Kahan.            *
+D 6
+* Revised on 5/10/85, 5/13/85, 6/14/85, 8/20/85, 8/27/85.                 *
+E 6
+I 6
+* Revised on 5/10/85, 5/13/85, 6/14/85, 8/20/85, 8/27/85, 9/11/85.        *
+E 6
+*                                                                         *
+***************************************************************************
+E 5
+I 2
+
+D 3
+-1.  The machine-independent routines for the functions found in the subdirectory
+     VAX are now in /usr/lib/libom.  To compile with these routines use -lom.
+E 3
+I 3
+D 5
+-1.  The machine-independent Version 7 math library found in 4.2BSD
+     is now /usr/lib/libom.a.  To compile with these routines use -lom.
+E 5
+I 5
+/*	%W% (Berkeley) %G%	*/
+E 5
+E 3
+
+E 2
+I 1
+D 3
+K.C. Ng, March 7, 1985
+Revised on 5/10/85, 5/13/85.
+E 3
+I 3
+D 5
+K.C. Ng, March 7, 1985, with Z-S. Liu,  S. McDonald,  P. Tang,  W. Kahan.
+Revised on 5/10/85, 5/13/85, 6/14/85, 8/20/85.
+E 5
+I 5
+NB.  The machine-independent Version 7 math library found in 4.2BSD
+     is now /usr/lib/libom.a.  To compile with those routines use -lom.
+E 5
+E 3
+
+******************************************************************************
+*  This is a description of the upgraded elementary functions (listed in 1). *
+D 3
+*  Bessel functions (j0, j1, jn, y0, y1, yn), gamma function (gamma), error  *
+*  functions (erf, erfc), floor, and fabs are passed over from 4.2BSD        *
+*  without change. They will not be discussed here.                          *
+E 3
+I 3
+*  Bessel functions (j0, j1, jn, y0, y1, yn), floor, and fabs passed over    *
+D 4
+*  from 4.2BSD without change. The name of the log-gamma program was changed *
+*  from gamma to lgama to prevent collisions with customary usage everywhere *
+*  else, and a minor inaccuracy at negative arguments was corrected. Three   *
+*  lines that contain "errno" in erf.c (error function erf, erfc) have been  *
+*  deleted to prevent overwriting the system "errno". No more is said about  *
+*  lgama.c and erf.c herein.               				     *
+E 4
+I 4
+D 5
+*  from 4.2BSD without change. Three lines that contain "errno in erf.c      *
+*  (error function erf, erfc) have been deleted to prevent overwriting the   *
+*  system "errno". 							     *
+E 5
+I 5
+*  from 4.2BSD without change except perhaps for the way floating point      *
+D 6
+*  exception is signaled on a VAX.  Three lines that contain "errno in erf.c *
+*  (error function erf, erfc) have been deleted to prevent overriding the    *
+E 6
+I 6
+*  exception is signaled on a VAX.  Three lines that contain "errno" in erf.c*
+*  (error functions erf, erfc) have been deleted to prevent overriding the   *
+E 6
+*  system "errno".                                                           *
+E 5
+E 4
+E 3
+******************************************************************************
+
+D 3
+0. Total number of files: 34
+E 3
+I 3
+0. Total number of files: 40
+E 3
+
+D 3
+  ( unchanges files from 4.2BSD, total 6 )
+    erf.c    floor.c    gamma.c         j0.c      j1.c      jn.c
+E 3
+I 3
+D 5
+  ( unchanges files from 4.2BSD, total 4 )
+D 4
+    floor.c
+E 4
+I 4
+    floor.c	gamma.c
+E 5
+I 5
+        IEEE/Makefile   VAX/Makefile    VAX/support.s   erf.c       lgamma.c
+        IEEE/atan2.c    VAX/argred.s    VAX/tan.s       exp.c       log.c
+        IEEE/cabs.c     VAX/atan2.s     acosh.c         exp__E.c    log10.c
+        IEEE/cbrt.c     VAX/cabs.s      asincos.c       expm1.c     log1p.c
+        IEEE/support.c  VAX/cbrt.s      asinh.c         floor.c     log__L.c
+        IEEE/trig.c     VAX/infnan.s    atan.c          j0.c        pow.c
+        Makefile        VAX/sincos.s    atanh.c         j1.c        sinh.c
+        README          VAX/sqrt.s      cosh.c          jn.c        tanh.c
+E 5
+E 4
+E 3
+
+D 3
+  ( new files for 4.3BSD, total 27 )
+D 2
+    E.c			Read_me		atanh.c		pow.c
+E 2
+I 2
+    E.c			README		atanh.c		pow.c
+E 2
+    IEEE/atan2.c	VAX/atan2.s	atrig.c		sinh.c
+    IEEE/cabs.c		VAX/cabs.s	cosh.c		tanh.c
+    IEEE/cbrt.c		VAX/cbrt.s	exp.c
+    IEEE/support.c	VAX/support.s	exp__E.c
+    IEEE/trig.c		VAX/trig.s	log.c
+    L.c			acosh.c		log10.c
+    Makefile		asinh.c		log__L.c
+E 3
+I 3
+D 5
+  ( new files for 4.3BSD, total 36 )
+    IEEE/Makefile	VAX/cabs.s	asinh.c		jn.c
+D 4
+    IEEE/atan2.c	VAX/cbrt.s	atan.c		lgama.c
+    IEEE/cabs.c		VAX/infnan.s	cosh.c		log.c
+    IEEE/cbrt.c		VAX/support.s	erf.c		log__L.c
+    IEEE/trig.c		VAX/sincos.s	exp.c		log1p.c
+    Makefile		VAX/tan.s	exp__E.c	pow.c
+    README		VAX/argred.s	expm1.c		sinh.c
+    VAX/Makefile	acosh.c		j0.c		tanh.c
+E 4
+I 4
+    IEEE/atan2.c	VAX/cbrt.s	atan.c		log.c
+    IEEE/cabs.c		VAX/infnan.s	cosh.c		log__L.c
+    IEEE/cbrt.c		VAX/support.s	erf.c		log1p.c
+    IEEE/trig.c		VAX/sincos.s	exp.c		pow.c
+    Makefile		VAX/tan.s	exp__E.c	sinh.c
+    README		VAX/argred.s	expm1.c		tanh.c
+    VAX/Makefile	acosh.c		j0.c
+E 4
+    VAX/atan2.s		asincos.c	j1.c
+E 3
+
+E 5
+D 3
+
+1. Functions implemented (total 22):
+    (A). Standard elementary functions:
+	acos(x)		...in file  atrig.c 
+	asin(x)		...in file  atrig.c
+	atan(x)		...in file  atrig.c
+	atan2(x,y)	...in files IEEE/atan2.c, VAX/atan2.s
+	sin(x)		...in files IEEE/trig.c , VAX/trig.s
+	cos(x)		...in files IEEE/trig.c , VAX/trig.s
+	tan(x)		...in files IEEE/trig.c , VAX/trig.s
+	cabs(x,y)	...in files IEEE/cabs.c , VAX/cabs.s
+	hypot(x,y)	...in file  IEEE/cabs.c , VAX/cabs.s
+	cbrt(x)		...in files IEEE/cbrt.c , VAX/cbrt.s
+	exp(x)		...in file  exp.c
+	E(x):=exp(x)-1	...in file  E.c
+	log(x)		...in file  log.c
+	L(x):=log(1+x)	...in file  L.c
+	log10(x)	...in file  log10.c
+	pow(x,y)	...in file  pow.c
+	sinh(x)		...in file  sinh.c
+	cosh(x)		...in file  cosh.c
+	tanh(x)		...in file  cosh.c
+	asinh(x)	...in file  asinh.c
+	acosh(x) 	...in file  acosh.c
+	atanh(x)	...in file  atanh.c
+E 3
+I 3
+1. Functions implemented :
+    (A). Standard elementary functions (total 22) :
+D 5
+	acos(x)			...in file  asincos.c 
+	asin(x)			...in file  asincos.c
+	atan(x)			...in file  atan.c
+	atan2(x,y)		...in files IEEE/atan2.c, VAX/atan2.s
+	sin(x)			...in files IEEE/trig.c , VAX/sincos.s
+	cos(x)			...in files IEEE/trig.c , VAX/sincos.s
+	tan(x)			...in files IEEE/trig.c , VAX/tan.s
+	cabs(x,y)		...in files IEEE/cabs.c , VAX/cabs.s
+	hypot(x,y)		...in files IEEE/cabs.c , VAX/cabs.s
+	cbrt(x)			...in files IEEE/cbrt.c , VAX/cbrt.s
+	exp(x)			...in file  exp.c
+	expm1(x):=exp(x)-1	...in file  expm1.c
+	log(x)			...in file  log.c
+	log10(x)		...in file  log10.c
+	log1p(x):=log(1+x)	...in file  log1p.c
+	pow(x,y)		...in file  pow.c
+	sinh(x)			...in file  sinh.c
+	cosh(x)			...in file  cosh.c
+	tanh(x)			...in file  cosh.c
+	asinh(x)		...in file  asinh.c
+	acosh(x) 		...in file  acosh.c
+	atanh(x)		...in file  atanh.c
+E 3
+			
+E 5
+I 5
+        acos(x)                 ...in file  asincos.c 
+        asin(x)                 ...in file  asincos.c
+        atan(x)                 ...in file  atan.c
+        atan2(x,y)              ...in files IEEE/atan2.c, VAX/atan2.s
+D 6
+        sin(x)                  ...in files IEEE/trig.c , VAX/sincos.s
+        cos(x)                  ...in files IEEE/trig.c , VAX/sincos.s
+        tan(x)                  ...in files IEEE/trig.c , VAX/tan.s
+        cabs(x,y)               ...in files IEEE/cabs.c , VAX/cabs.s
+        hypot(x,y)              ...in files IEEE/cabs.c , VAX/cabs.s
+        cbrt(x)                 ...in files IEEE/cbrt.c , VAX/cbrt.s
+E 6
+I 6
+        sin(x)                  ...in files IEEE/trig.c,  VAX/sincos.s
+        cos(x)                  ...in files IEEE/trig.c,  VAX/sincos.s
+        tan(x)                  ...in files IEEE/trig.c,  VAX/tan.s
+        cabs(x,y)               ...in files IEEE/cabs.c,  VAX/cabs.s
+        hypot(x,y)              ...in files IEEE/cabs.c,  VAX/cabs.s
+        cbrt(x)                 ...in files IEEE/cbrt.c,  VAX/cbrt.s
+E 6
+        exp(x)                  ...in file  exp.c
+        expm1(x):=exp(x)-1      ...in file  expm1.c
+        log(x)                  ...in file  log.c
+        log10(x)                ...in file  log10.c
+        log1p(x):=log(1+x)      ...in file  log1p.c
+        pow(x,y)                ...in file  pow.c
+        sinh(x)                 ...in file  sinh.c
+        cosh(x)                 ...in file  cosh.c
+D 6
+        tanh(x)                 ...in file  cosh.c
+E 6
+I 6
+        tanh(x)                 ...in file  tanh.c
+E 6
+        asinh(x)                ...in file  asinh.c
+        acosh(x)                ...in file  acosh.c
+        atanh(x)                ...in file  atanh.c
+                        
+E 5
+    (B). Kernel functions :
+D 3
+	sin__S(y)   ...in file IEEE/trig.c, used by sin/cos/tan in IEEE/trig.c
+	cos__C(y)   ...in file IEEE/trig.c, used by sin/cos/tan in IEEE/trig.c 
+	exp__E(x,c) ...in file exp__E.c, used by E/exp/pow/cosh
+	log__L(s)   ...in file log__L.c, used by L/log/pow
+E 3
+I 3
+D 5
+	exp__E(x,c) ...in file exp__E.c, used by expm1/exp/pow/cosh
+	log__L(s)   ...in file log__L.c, used by log1p/log/pow
+	libm$argred ...in file VAX/argred.s, used by VAX/tan.s and VAX/sincos.s
+E 5
+I 5
+        exp__E(x,c) ...in file exp__E.c, used by expm1/exp/pow/cosh
+        log__L(s)   ...in file log__L.c, used by log1p/log/pow
+D 6
+        libm$argred ...in file VAX/argred.s, used by VAX/tan.s and VAX/sincos.s
+E 6
+I 6
+        libm$argred ...in file VAX/argred.s, used by VAX version of sin/cos/tan
+E 6
+E 5
+E 3
+
+    (C). System supported functions :
+I 3
+D 5
+	sqrt()	    ...in files IEEE/support.c , VAX/sqrt.s
+E 3
+	drem()	    ...in files IEEE/support.c , VAX/support.s
+D 3
+	sqrt()	    ...in files IEEE/support.c , VAX/support.s
+E 3
+	finite()    ...in files IEEE/support.c , VAX/support.s
+	logb()      ...in files IEEE/support.c , VAX/support.s
+	scalb()     ...in files IEEE/support.c , VAX/support.s
+	copysign()  ...in files IEEE/support.c , VAX/support.s
+E 5
+I 5
+D 6
+        sqrt()      ...in files IEEE/support.c , VAX/sqrt.s
+        drem()      ...in files IEEE/support.c , VAX/support.s
+        finite()    ...in files IEEE/support.c , VAX/support.s
+        logb()      ...in files IEEE/support.c , VAX/support.s
+        scalb()     ...in files IEEE/support.c , VAX/support.s
+        copysign()  ...in files IEEE/support.c , VAX/support.s
+E 6
+I 6
+        sqrt()      ...in files IEEE/support.c, VAX/sqrt.s
+        drem()      ...in files IEEE/support.c, VAX/support.s
+        finite()    ...in files IEEE/support.c, VAX/support.s
+        logb()      ...in files IEEE/support.c, VAX/support.s
+        scalb()     ...in files IEEE/support.c, VAX/support.s
+        copysign()  ...in files IEEE/support.c, VAX/support.s
+E 6
+        rint()      ...in file  floor.c
+E 5
+
+
+   Notes: 
+D 6
+       i. The codes in files ending with .s are written in VAX assembly 
+E 6
+I 6
+       i. The codes in files ending with ".s" are written in VAX assembly 
+E 6
+D 5
+	  language. They are intended for VAX computers.
+E 5
+I 5
+          language. They are intended for VAX computers.
+E 5
+
+D 5
+	  Files that end with .c are written in C. They are intended
+	  for either a VAX or a machine that conforms to the IEEE 
+	  standard 754 for (double-precision) floating-point arithmetic.
+E 5
+I 5
+D 6
+          Files that end with .c are written in C. They are intended
+E 6
+I 6
+          Files that end with ".c" are written in C. They are intended
+E 6
+          for either a VAX or a machine that conforms to the IEEE 
+D 6
+          standard 754 for (double-precision) floating-point arithmetic.
+E 6
+I 6
+          standard 754 for double precision floating-point arithmetic.
+E 6
+E 5
+
+      ii. On other than VAX or IEEE machines, run the original math 
+D 3
+	  library, formerly libm.a, now olibm.a, if nothing better
+E 3
+I 3
+D 5
+	  library, formerly libm.a, now libom.a, if nothing better
+E 3
+	  is available.
+E 5
+I 5
+D 6
+          library, formerly libm.a, now libom.a, if nothing better
+          is available.
+E 6
+I 6
+          library, formerly "/usr/lib/libm.a", now "/usr/lib/libom.a", if
+	  nothing better is available.
+E 6
+E 5
+
+I 3
+     iii. The trigonometric functions sin/cos/tan/atan2 in files "VAX/sincos.s",
+D 5
+	  "VAX/tan.s" and "VAX/atan2.s" are different from those in
+	  "IEEE/trig.c" and "IEEE/atan2.c".  The VAX assembler code uses the
+	  true value of pi to perform argument reduction, while the C code uses
+	  a machine value of PI (see "IEEE/trig.c").
+E 5
+I 5
+          "VAX/tan.s" and "VAX/atan2.s" are different from those in
+          "IEEE/trig.c" and "IEEE/atan2.c".  The VAX assembler code uses the
+          true value of pi to perform argument reduction, while the C code uses
+          a machine value of PI (see "IEEE/trig.c").
+E 5
+E 3
+
+D 3
+     iii. The trigonometric functions sin/cos/tan/atan2 in files "VAX/trig.s" 
+	  and "VAX/atan2.s" are different from those in "IEEE/trig.c" and
+	  "IEEE/atan2.c".  The VAX assembler code uses the true value of pi to
+	  perform argument reduction, while the C code uses a machine value of
+	  PI (see "IEEE/trig.c").
+E 3
+
+D 3
+
+E 3
+2. A computer system that conforms to IEEE standard 754 should provide 
+D 5
+		sqrt(x),
+		drem(x,p), (double precision remainder function)
+		copysign(x,y),
+		finite(x),
+		scalb(x,N),
+		logb(x) .
+E 5
+I 5
+                sqrt(x),
+                drem(x,p), (double precision remainder function)
+                copysign(x,y),
+                finite(x),
+                scalb(x,N),
+                logb(x) and
+                rint(x).
+E 5
+D 6
+   These functions are required or recommended by the standard.
+E 6
+I 6
+   These functions are either required or recommended by the standard.
+E 6
+   For convenience, a (slow) C implementation of these functions is 
+D 6
+   provided in the file IEEE/support.c.
+E 6
+I 6
+   provided in the file "IEEE/support.c".
+E 6
+
+   Warning: The functions in IEEE/support.c are somewhat machine dependent.
+   Some modifications may be necessary to run them on a different machine.
+D 6
+   Currently, if compiled with a suitable flag, IEEE/support.c will work on a 
+   National 32000, a Zilog 8000, a VAX, and a SUN (cf. the "Makefile" in
+   this directory). Invoke the C compiler thus:
+E 6
+I 6
+   Currently, if compiled with a suitable flag, "IEEE/support.c" will work
+   on a National 32000, a Zilog 8000, a VAX, and a SUN (cf. the "Makefile"
+   in this directory). Invoke the C compiler thus:
+E 6
+
+D 5
+	cc -c -DVAX IEEE/support.c		... on a VAX, D-format
+	cc -c -DNATIONAL IEEE/support.c		... on a National 32081
+	cc -c  IEEE/support.c			... on other IEEE machines,
+						    we hope.
+E 5
+I 5
+        cc -c -DVAX IEEE/support.c              ... on a VAX, D-format
+D 6
+        cc -c -DNATIONAL IEEE/support.c         ... on a National 32081
+E 6
+I 6
+        cc -c -DNATIONAL IEEE/support.c         ... on a National 32000
+E 6
+        cc -c  IEEE/support.c                   ... on other IEEE machines,
+                                                    we hope.
+E 5
+
+   Notes: 
+      1. Faster versions of "drem" and "sqrt" for IEEE double precision
+D 5
+	 (coded in C but intended for assembly language) are given at the
+	 end of support.c but commented out since they require certain
+	 machine-dependent functions.
+E 5
+I 5
+         (coded in C but intended for assembly language) are given at the
+D 6
+         end of support.c but commented out since they require certain
+E 6
+I 6
+         end of "IEEE/support.c" but commented out since they require certain
+E 6
+         machine-dependent functions.
+E 5
+
+D 3
+      2. A fast VAX assembler version of IEEE/support.c (copysign(), logb(), 
+	 scalb(), finite(), drem() and sqrt()) appears in file VAX/support.s. 
+E 3
+I 3
+      2. A fast VAX assembler version of the system supported functions
+D 5
+	 copysign(), logb(), scalb(), finite(), and drem() appears in file 
+	 VAX/support.s.  A fast VAX assembler version of sqrt() is in
+	 file sqrt.s .
+E 5
+I 5
+         copysign(), logb(), scalb(), finite(), and drem() appears in file 
+D 6
+         VAX/support.s.  A fast VAX assembler version of sqrt() is in
+         file sqrt.s .
+E 6
+I 6
+         "VAX/support.s".  A fast VAX assembler version of sqrt() is in
+         file "VAX/sqrt.s".
+E 6
+E 5
+E 3
+
+3. Two formats are supported by all the standard elementary functions: 
+D 6
+   the VAX D-format (56 bits' precision), and the IEEE double format 
+   (53 bits' precision).  The cbrt() in IEEE/cbrt.c is for IEEE machines 
+E 6
+I 6
+   the VAX D-format (56-bit precision), and the IEEE double format 
+   (53-bit precision).  The cbrt() in "IEEE/cbrt.c" is for IEEE machines 
+E 6
+   only. The functions in files that end with ".s" are for VAX computers 
+D 6
+   only. The functions in files that end with ".c" (except IEEE/cbrt.c) are
+   for VAX and IEEE machines. To use the VAX D-format, compile the code 
+E 6
+I 6
+   only. The functions in files that end with ".c" (except "IEEE/cbrt.c")
+   are for VAX and IEEE machines. To use the VAX D-format, compile the code 
+E 6
+   with -DVAX; to use IEEE double format on various IEEE machines, see 
+D 6
+   Makefile in this directory). 
+E 6
+I 6
+   "Makefile" in this directory). 
+E 6
+
+    Example:
+D 5
+	cc -c -DVAX sin.c		... for VAX D-format
+E 5
+I 5
+        cc -c -DVAX sin.c               ... for VAX D-format
+E 5
+
+D 3
+       Warning: The values of floating constants used in the code are given 
+		in both hexadecimal and decimal.  The hexadecimal values are 
+		the intended ones. The decimal values may be use provided 
+E 3
+I 3
+       Warning: The values of floating-point constants used in the code are
+D 5
+		given in both hexadecimal and decimal.  The hexadecimal values
+		are the intended ones. The decimal values may be use provided 
+E 3
+		that the compiler converts from decimal to binary accurately
+		enough to produce the hexadecimal values shown. If the
+		conversion is inaccurate, then one must know the exact machine 
+		representation of the constants and alter the assembly-
+		language output from the compiler, or apply tricks like 
+		the following in a C program.
+E 5
+I 5
+                given in both hexadecimal and decimal.  The hexadecimal values
+D 6
+                are the intended ones. The decimal values may be use provided 
+E 6
+I 6
+                are the intended ones. The decimal values may be used provided 
+E 6
+                that the compiler converts from decimal to binary accurately
+                enough to produce the hexadecimal values shown. If the
+                conversion is inaccurate, then one must know the exact machine 
+D 6
+                representation of the constants and alter the assembly-
+                language output from the compiler, or apply tricks like 
+E 6
+I 6
+                representation of the constants and alter the assembly
+                language output from the compiler, or play tricks like
+E 6
+                the following in a C program.
+E 5
+
+D 3
+ 			Example: to store the floating point constant 
+E 3
+I 3
+D 5
+ 			Example: to store the floating-point constant 
+E 5
+I 5
+                        Example: to store the floating-point constant 
+E 5
+E 3
+
+D 5
+			     p1= 2^-6 * .F83ABE67E1066A (Hexadecimal)
+E 5
+I 5
+                             p1= 2^-6 * .F83ABE67E1066A (Hexadecimal)
+E 5
+
+D 5
+   		        on a VAX in C, we use two long word to store its 
+			machine value and define p1 to be the double constant 
+			at the location of these two long words:
+E 5
+I 5
+D 6
+                        on a VAX in C, we use two long word to store its 
+E 6
+I 6
+                        on a VAX in C, we use two longwords to store its 
+E 6
+                        machine value and define p1 to be the double constant 
+D 6
+                        at the location of these two long words:
+E 6
+I 6
+                        at the location of these two longwords:
+E 6
+E 5
+
+D 5
+		        static long  p1x[] = { 0x3abe3d78, 0x066a67e1};
+		        #define      p1      (*(double*)p1x)
+E 5
+I 5
+                        static long  p1x[] = { 0x3abe3d78, 0x066a67e1};
+                        #define      p1      (*(double*)p1x)
+E 5
+
+D 3
+    Note:  On a VAX, some functions have two set of codes. For example,
+	   cabs() has one implementation in cabs.c, and another in
+	   VAX/cabs.s. In this case, the assembly version is preferred.
+E 3
+I 3
+D 6
+    Note:  On a VAX, some functions have two codes. For example, cabs() 
+D 5
+	   has one implementation in cabs.c, and another in VAX/cabs.s. 
+	   In this case, the assembly version is preferred.
+E 5
+I 5
+           has one implementation in cabs.c, and another in VAX/cabs.s. 
+           In this case, the assembly version is preferred.
+E 6
+I 6
+    Note:  On a VAX, some functions have two codes. For example, cabs() has
+	   one implementation in "IEEE/cabs.c", and another in "VAX/cabs.s". 
+           In this case, the assembly language version is preferred.
+E 6
+E 5
+E 3
+
+
+4. Accuracy. 
+
+D 3
+            The errors in E(), L(), exp(), log(), cabs(), hypot(), and cbrt()
+	    are below 1 ULP (Unit in the Last Place).
+E 3
+I 3
+            The errors in expm1(), log1p(), exp(), log(), cabs(), hypot()
+D 5
+	    and cbrt() are below 1 ULP (Unit in the Last Place).
+E 5
+I 5
+            and cbrt() are below 1 ULP (Unit in the Last Place).
+E 5
+E 3
+
+D 5
+	    The error in pow(x,y) grows with the size of y. Nevertheless,
+	    for integers x and y, pow(x,y) returns the correct integer value 
+	    on all tested machines (VAX, SUN, NATIONAL, ZILOG), provided that 
+	    x to the power of y is representable exactly.
+E 5
+I 5
+            The error in pow(x,y) grows with the size of y. Nevertheless,
+            for integers x and y, pow(x,y) returns the correct integer value 
+            on all tested machines (VAX, SUN, NATIONAL, ZILOG), provided that 
+            x to the power of y is representable exactly.
+E 5
+
+D 5
+	    cosh, sinh, acosh, asinh, tanh, atanh and log10 have errors below
+	    about 3 ULPs. 
+E 5
+I 5
+            cosh, sinh, acosh, asinh, tanh, atanh and log10 have errors below
+            about 3 ULPs. 
+E 5
+
+D 3
+	    For trig and atrig functions: 
+E 3
+I 3
+D 5
+	    For trigonometric and inverse trigonometric functions: 
+E 5
+I 5
+            For trigonometric and inverse trigonometric functions: 
+E 5
+E 3
+
+D 5
+		Let [trig(x)] denote the value actually computed for trig(x),
+E 5
+I 5
+                Let [trig(x)] denote the value actually computed for trig(x),
+E 5
+
+D 3
+		1) Those using machine value PI (true pi rounded):
+		   (source codes: IEEE/trig.c, IEEE/atan2.c and atrig.c)
+E 3
+I 3
+D 5
+		1) Those codes using the machine's value PI (true pi rounded):
+		   (source codes: IEEE/{trig.c,atan2.c}, asincos.c and atan.c)
+E 5
+I 5
+                1) Those codes using the machine's value PI (true pi rounded):
+                   (source codes: IEEE/{trig.c,atan2.c}, asincos.c and atan.c)
+E 5
+E 3
+
+D 5
+	           The errors in [sin(x)], [cos(x)], and [atan(x)] are below 
+		   1 ULP compared with sin(x*pi/PI), cos(x*pi/PI), and 
+		   atan(x)*PI/pi respectively, where PI is the machine's
+		   value of pi rounded. [Tan(x)] returns tan(x*pi/PI) within
+		   about 2 ULPs; [acos(x)], [asin(x)], and [atan2(y,x)] 
+		   return acos(x)*PI/pi, asin(x)*PI/pi, and atan2(y,x)*PI/pi
+		   respectively to similar accuracy.
+E 5
+I 5
+                   The errors in [sin(x)], [cos(x)], and [atan(x)] are below 
+                   1 ULP compared with sin(x*pi/PI), cos(x*pi/PI), and 
+                   atan(x)*PI/pi respectively, where PI is the machine's
+D 6
+                   value of pi rounded. [Tan(x)] returns tan(x*pi/PI) within
+E 6
+I 6
+                   value of pi rounded. [tan(x)] returns tan(x*pi/PI) within
+E 6
+                   about 2 ULPs; [acos(x)], [asin(x)], and [atan2(y,x)] 
+                   return acos(x)*PI/pi, asin(x)*PI/pi, and atan2(y,x)*PI/pi
+                   respectively to similar accuracy.
+E 5
+
+
+D 5
+		2) Those using true pi (for VAX D-format only)
+D 3
+		   (source codes: VAX/trig.s, VAX/atan2.s and atrig.c)
+E 3
+I 3
+		   (source codes: VAX/{sincos.s,tan.s,atan2.s}, asincos.c and
+		   atan.c)
+E 5
+I 5
+D 6
+                2) Those using true pi (for VAX D-format only)
+E 6
+I 6
+                2) Those using true pi (for VAX D-format only):
+E 6
+                   (source codes: VAX/{sincos.s,tan.s,atan2.s}, asincos.c and
+                   atan.c)
+E 5
+E 3
+
+D 5
+		   The errors in [sin(x)], [cos(x)], and [atan(x)] are below
+		   1 ULP. [Tan(x)], [atan2(y,x)], [acos(x)], and [asin(x)] 
+		   have errors below about 2 ULPs. 
+E 5
+I 5
+                   The errors in [sin(x)], [cos(x)], and [atan(x)] are below
+D 6
+                   1 ULP. [Tan(x)], [atan2(y,x)], [acos(x)], and [asin(x)] 
+E 6
+I 6
+                   1 ULP. [tan(x)], [atan2(y,x)], [acos(x)], and [asin(x)] 
+E 6
+                   have errors below about 2 ULPs. 
+E 5
+
+
+D 5
+	    Here are the results of some test runs to find worst errors on 
+	    the VAX :
+E 5
+I 5
+            Here are the results of some test runs to find worst errors on 
+            the VAX :
+E 5
+
+D 3
+    tan   :  2.08 ULPs		...1,024,000 random arguments (machine PI)
+E 3
+I 3
+D 5
+    tan   :  2.09 ULPs		...1,024,000 random arguments (machine PI)
+E 3
+    sin   :  .861 ULPs		...1,024,000 random arguments (machine PI)
+    cos   :  .857 ULPs		...1,024,000 random arguments (machine PI)
+E 5
+I 5
+    tan   :  2.09 ULPs          ...1,024,000 random arguments (machine PI)
+    sin   :  .861 ULPs          ...1,024,000 random arguments (machine PI)
+    cos   :  .857 ULPs          ...1,024,000 random arguments (machine PI)
+E 5
+    (compared with tan, sin, cos of (x*pi/PI))
+
+D 5
+    acos  :  2.07 ULPs		.....200,000 random arguments (machine PI)
+    asin  :  2.06 ULPs		.....200,000 random arguments (machine PI)
+    atan2 :  1.41 ULPs		.....356,000 random arguments (machine PI)
+    atan  :  0.86 ULPs		...1,536,000 random arguments (machine PI)
+E 5
+I 5
+    acos  :  2.07 ULPs          .....200,000 random arguments (machine PI)
+    asin  :  2.06 ULPs          .....200,000 random arguments (machine PI)
+    atan2 :  1.41 ULPs          .....356,000 random arguments (machine PI)
+    atan  :  0.86 ULPs          ...1,536,000 random arguments (machine PI)
+E 5
+    (compared with (PI/pi)*(atan, asin, acos, atan2 of x))
+
+D 5
+    tan   :  2.15 ULPs		...1,024,000 random arguments (true pi)
+    sin   :  .814 ULPs		...1,024,000 random arguments (true pi)
+    cos   :  .792 ULPs		...1,024,000 random arguments (true pi)
+    acos  :  2.15 ULPs		...1,024,000 random arguments (true pi)
+    asin  :  1.99 ULPs		...1,024,000 random arguments (true pi)
+    atan2 :  1.48 ULPs		...1,024,000 random arguments (true pi)
+    atan  :  .850 ULPs		...1,024,000 random arguments (true pi)
+E 5
+I 5
+    tan   :  2.15 ULPs          ...1,024,000 random arguments (true pi)
+    sin   :  .814 ULPs          ...1,024,000 random arguments (true pi)
+    cos   :  .792 ULPs          ...1,024,000 random arguments (true pi)
+    acos  :  2.15 ULPs          ...1,024,000 random arguments (true pi)
+    asin  :  1.99 ULPs          ...1,024,000 random arguments (true pi)
+    atan2 :  1.48 ULPs          ...1,024,000 random arguments (true pi)
+    atan  :  .850 ULPs          ...1,024,000 random arguments (true pi)
+E 5
+
+D 3
+    acosh :  3.20 ULPs		.....500,000 random arguments
+    asinh :  1.58 ULPs		..... 52,000 random arguments
+    atanh :  1.45 ULPs		.....200,000 random arguments
+E 3
+I 3
+D 5
+    acosh :  3.30 ULPs		.....512,000 random arguments
+    asinh :  1.58 ULPs		.....512,000 random arguments
+    atanh :  1.71 ULPs		.....512,000 random arguments  
+E 3
+    cosh  :  1.23 ULPs		.....768,000 random arguments
+    sinh  :  1.93 ULPs		...1,024,000 random arguments
+    tanh  :  2.22 ULPs		...1,024,000 random arguments
+    log10 :  1.74 ULPs		...1,536,000 random arguments
+    pow   :  1.79 ULPs		.....100,000 random arguments, 0 < x, y < 20.
+	
+    exp   :  .768 ULPs		...1,156,000 random arguments
+D 3
+    E     :  .844 ULPs		...1,166,000 random arguments
+    L     :  .846 ULPs		...1,536,000 random arguments
+E 3
+I 3
+    expm1 :  .844 ULPs		...1,166,000 random arguments
+    log1p :  .846 ULPs		...1,536,000 random arguments
+E 3
+    log   :  .826 ULPs		...1,536,000 random arguments
+    cabs  :  .959 ULPs		.....500,000 random arguments
+E 5
+I 5
+    acosh :  3.30 ULPs          .....512,000 random arguments
+    asinh :  1.58 ULPs          .....512,000 random arguments
+    atanh :  1.71 ULPs          .....512,000 random arguments  
+    cosh  :  1.23 ULPs          .....768,000 random arguments
+    sinh  :  1.93 ULPs          ...1,024,000 random arguments
+    tanh  :  2.22 ULPs          ...1,024,000 random arguments
+    log10 :  1.74 ULPs          ...1,536,000 random arguments
+    pow   :  1.79 ULPs          .....100,000 random arguments, 0 < x, y < 20.
+        
+    exp   :  .768 ULPs          ...1,156,000 random arguments
+    expm1 :  .844 ULPs          ...1,166,000 random arguments
+    log1p :  .846 ULPs          ...1,536,000 random arguments
+    log   :  .826 ULPs          ...1,536,000 random arguments
+    cabs  :  .959 ULPs          .....500,000 random arguments
+E 5
+    cbrt  :  .666 ULPs          ...5,120,000 random arguments
+
+
+5. Speed.
+
+D 3
+	The functions coded in VAX assembly language (sin, cos, tan, atan2,
+	cabs, hypot, sqrt, cbrt) are significantly faster than the
+	corresponding ones in 4.2BSD.  In general, to improve performance,
+	all functions in IEEE/support.c should be written in assembler and,
+	whenever possible, should be called via short subroutine calls.
+E 3
+I 3
+D 5
+	Some functions coded in VAX assembly language (cabs, hypot, sqrt)
+	are significantly faster than the corresponding ones in 4.2BSD.
+	In general, to improve performance, all functions in IEEE/support.c
+	should be written in assembler and, whenever possible, should be
+	called via short subroutine calls.
+E 5
+I 5
+D 6
+        Some functions coded in VAX assembly language (cabs, hypot, sqrt)
+        are significantly faster than the corresponding ones in 4.2BSD.
+        In general, to improve performance, all functions in IEEE/support.c
+        should be written in assembler and, whenever possible, should be
+        called via short subroutine calls.
+E 6
+I 6
+        Some functions coded in VAX assembly language (cabs(), hypot() and
+	sqrt()) are significantly faster than the corresponding ones in 4.2BSD.
+        In general, to improve performance, all functions in "IEEE/support.c"
+        should be written in assembly language and, whenever possible, should
+	be called via short subroutine calls.
+E 6
+E 5
+E 3
+
+
+D 3
+6. Copyright notice and Miscellaneous.
+E 3
+I 3
+D 6
+6. j0,j1,jn.
+E 6
+I 6
+6. j0, j1, jn.
+E 6
+
+D 5
+	The modications to these routines were only in how an invalide
+	floating point operations is signaled.
+
+
+7. Copyright notice, and Disclaimer:
+E 3
+
+***************************************************************************
+*									  * 
+* Copyright (c) 1985 Regents of the University of California.		  *
+*									  * 
+* Use and reproduction of this software are granted  in  accordance  with *
+* the terms and conditions specified in  the  Berkeley  Software  License *
+* Agreement (in particular, this entails acknowledgement of the programs' *
+* source, and inclusion of this notice) with the additional understanding *
+* that  all  recipients  should regard themselves as participants  in  an *
+* ongoing  research  project and hence should  feel  obligated  to report *
+* their  experiences (good or bad) with these elementary function  codes, *
+* using "sendbug 4bsd-bugs@BERKELEY", to the authors.			  *
+*									  *
+***************************************************************************
+
+E 5
+I 5
+D 6
+        The modications to these routines were only in how an invalide
+E 6
+I 6
+        The modifications to these routines were only in how an invalid
+E 6
+        floating point operations is signaled.
+E 5
+E 1

@@ -1,0 +1,27 @@
+h29127
+s 00016/00000/00000
+d D 1.1 86/03/13 19:47:33 donn 1 0
+c date and time created 86/03/13 19:47:33 by donn
+e
+u
+U
+t
+T
+I 1
+/*	%W% (Berkeley) %G% */
+
+/* LINTLIBRARY */
+
+	openpl() { ; }
+	erase() { ; }
+	label(s) char s[]; { ; }
+	line(x1, y1, x2, y2) { ; }
+	circle(x, y, r) { ; }
+	arc(x, y, x0, y0, x1, y1) { ; }
+	move(x, y) { ; }
+	cont(x, y) { ; }
+	point(x, y) { ; }
+	linemod(s) char s[]; { ; }
+	space(x0, y0, x1, y1) { ; }
+	closepl() { ; }
+E 1

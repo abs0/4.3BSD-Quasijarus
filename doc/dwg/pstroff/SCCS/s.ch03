@@ -1,0 +1,285 @@
+h56530
+s 00117/00000/00151
+d D 1.2 2012/09/10 01:41:39 msokolov 2 1
+c \(sc3.2 started
+e
+s 00151/00000/00000
+d D 1.1 2012/09/09 21:20:33 msokolov 1 0
+c date and time created 2012/09/09 21:20:33 by msokolov
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Falcon) %E%
+.\"
+.\" The following tps instructions are used only when
+.\" troffing this chapter separately (editing drafts).
+.\"
+.\" Fonts: R,I,B,BI,S,S1,Lr,Li,Lb,C
+.\" Macros: -ms defs
+.\" Preproc: tbl
+.\" Pstfinish: full
+.\"
+.Ch "Chapter 3" "Extended troff compatibility and special fonts"
+.PP
+Some historical troff document sources, particularly those that
+describe the troff toolchain itself, exercise the old troff character
+set to the max, including those characters which just happen to lack
+exact counterparts in the standard Adobe fonts.
+However, being able to format those old documents and render all of
+those troublesome characters has been one of the design goals for
+this version of troff, therefore,
+a number of special fonts have been created which make
+these additional characters available.
+This chapter lists the special fonts and the characters
+they provide.
+.PP
+The special fonts listed in this chapter can be used in two ways:
+one can either add the fonts of interest to the font list (\fB\-f\fP
+option, see \(sc2.2) on an individual basis, or one can use the \fB\-T\fP
+option described below.
+Either way, the \*(PS output from each troff session that uses
+any of the special fonts must be run through one of the finishing
+tools described in Chapter\ 5.
+This requirement is clearly a deficiency in the present implementation,
+but we are stuck with it for now: the ``font set merging'' code in the
+\fIpstmerge\fP and \fIpstfinish\fP tools (see Chapter\ 5) is where some of the
+``black magic'' of special fonts is implemented.
+.\"
+.Sc "3.1" "Extended ligature fonts"
+.PP
+While Adobe unfortunately chose to exclude the \f(Lb\(ff\fP,
+\f(Lb\(Fi\fP and \f(Lb\(Fl\fP ligatures from their standard Roman font
+character set, they do include these ligatures in their so-called
+expert fonts.
+The latter are \fInot\fP directly usable as regular text fonts:
+they don't contain any of the ordinary uppercase or lowercase letters,
+and have very few characters in common with the regular text fonts in general.
+Instead, their intended use is to supplement the regular text fonts:
+for example, if one uses Adobe Garamond Regular to set some text,
+that text can be enriched with some extra characters from
+Adobe Garamond Regular Expert.
+The ``expert'' characters are small capitals, old-style figures,
+and some other special characters we aren't concerned with
+at this point, as there is no precedent of their use in any
+historical \s-1UNIX\s0 troff version.
+.PP
+But what makes these expert fonts interesting for us
+is that they do contain all 5 f-ligatures.
+For example, their renditions in the Adobe Garamond family of
+expert fonts look like this:
+.TS
+center;
+l10 cfLr cfLr cfLr cfLr cfLr
+l10 cfLi cfLi cfLi cfLi cfLi
+l10 cfLb cfLb cfLb cfLb cfLb.
+Regular	V	W	X	Y	Z
+Italic	V	W	X	Y	Z
+Bold	V	W	X	Y	Z
+.TE
+.PP
+I have picked Adobe Garamond because back in 2004, when I wrote
+the first version of \fIpstroff\fP and made the first crude attempt
+at emulating the old C/A/T character set, these were the only
+expert fonts I knew \(em and I knew them only thanks to a mention
+in the \*(PL, 2nd ed., Appendix\ E: Standard Character Sets
+and Encoding Vectors.
+Not having access to a pirate copy,
+I had bought the ``Adobe Garamond Expert Volume'' from fonts.com,
+and immediately liberated it via my FTP site, so that no one else
+ever has to pay for it.
+Then a year later the International Free Computing Task Force
+received a liberated copy of what appears to be the complete
+\fIAdobe Type Library\fP as of somewhere around 1992, and
+that one contains some more expert fonts.
+However, we (the IFCTF) do not currently have any expert fonts
+which are designed to match the standard Times family,
+and I don't even know for certain whether or not such expert fonts exist.
+.PP
+To make the long story short, I've adopted the Adobe Garamond Expert
+fonts for the purpose of ``illustrating'' the f-ligatures, i.e.,
+for exhibiting them in documents like this one.
+Furthermore, as the next section explains, the \fIpstroff\fP suite
+includes a set of special Type\ 3 fonts which extend the standard
+Times fonts with these not-perfectly-matching ligatures
+originating from Adobe Garamond.
+In order to facilitate both functions,
+it was deemed desirable to create a set of
+very small ``expert subset'' fonts, based on Adobe Garamond Expert,
+but reduced to just the 6 characters of interest: the 5 f-ligatures
+and \&\fCthreequartersemdash\fP.
+These Troff5lig fonts, as they've been named,
+are included in the \fIpstroff\fP distribution:
+.TS
+center box;
+c s s || cfI s
+c|c|c||c|c
+l|a|n||l|n.
+Troff5lig font	Based on
+_
+\*(PS name	\*(Tr name	Bytes	Adobe font	Bytes
+_
+Troff5lig-Regular	Lr	8999	AGaramondExp-Regular	80980
+Troff5lig-Italic	Li	9214	AGaramondExp-Italic	49355
+Troff5lig-Bold	Lb	9332	AGaramondExp-Bold	47015
+.TE
+.PP
+Each of these Troff5lig fonts has been created by taking the original
+expert font from Adobe, cracking it open (stripping both \fBeexec\fP
+and charstring encryption, then disassembling the charstrings), removing
+all character definitions except the tiny subset of interest to us,
+removing those subroutines which became unused as a result,
+renumbering the remaining subroutines to compact the \fBSubrs\fP array,
+and reassembling the result into a valid \*(PS font.
+Each font thus provides a total of 6 characters, each mapped
+at two alternate code points:
+.TS
+center box;
+cfBI | c    | c    | c    | c  s  | c  s
+^    | ^    | ^    | ^    | c  s  | c  s
+^    | ^    | ^    | ^    | cI|cI | cI|cI
+lfC  | cfLr | cfLi | cfLb | n | cB | n | aB.
+Character	Lr	Li	Lb	Original expert	Alternate code point
+				code point	for mnemonic \fB\e(\fIxx\fR access
+_
+				Decimal	Enter as	Decimal	Enter as
+_
+ff	V	V	V	86	V	28	\e(ff
+fi	W	W	W	87	W	138	\e(fi
+fl	X	X	X	88	X	139	\e(fl
+ffi	Y	Y	Y	89	Y	29	\e(Fi
+ffl	Z	Z	Z	90	Z	30	\e(Fl
+threequartersemdash	\&=	\&=	\&=	61	\&=	136	\e(em
+.TE
+.PP
+Whichever code points one chooses to use, if one wishes to use any
+of these Troff5lig fonts directly, without going through the Type\ 3
+fonts described in the next section, one needs to do two things:
+.IP 1.
+Explicitly add Lr, Li and/or Lb to the font list \(em see \(sc2.2;
+.IP 2.
+Invoke the requisite special font explicitly to produce the desired
+character: for example, to produce \f(LbY\fP, one needs to enter
+\fB\ef(LbY\efP\fP or \fB\ef(Lb\e(Fi\efP\fP.
+I 2
+.\"
+.Sc "3.2" "TroffEmu font set"
+.PP
+The method of invoking special characters explicitly
+from the Lr/Li/Lb fonts works only for new documents such as this one.
+Getting the present version of troff to produce a nice-looking
+and semantically correct rendition of the original \*(Mn without ``cheating''
+requires a different technique, which is the subject of this section.
+.PP
+Let us recall from \(sc1.3.5 that there are 8 characters in the
+historical troff character set which have no counterparts in the
+``standard'' Adobe font set of
+{Times-Roman, Times-Italic, Times-Bold, Symbol}:
+\fB\e(sq\fP, \fB\e(ff\fP, \fB\e(Fi\fP, \fB\e(Fl\fP,
+\fB\e(rh\fP, \fB\e(lh\fP, \fB\e(bs\fP and \fB\e(ci\fP.
+The first 4 of these were base font characters in the original C/A/T troff,
+the remaining 4 were Special Font characters.
+.PP
+The present version of troff allows one to regain the 4 missing
+base font characters by using a set of special ``base'' text fonts
+which implement the 4 characters in question, in addition
+to the standard Roman character set defined by Adobe.
+Specifically, the compiled-in table of \fB\e(\fIxx\fR named characters
+maps the foursome to base font code points in an otherwise-unused range,
+and the TroffEncoding vector in turns maps them to \*(PS character names
+as follows:
+.TS
+center box;
+cfBI | cfI | cfR
+cfBI | cfI | cfR
+cfB | cfB | afC .
+Named	Compiled-in	TroffEncoding
+Character	table mapping	maps to
+_
+\e(ff	\eX1C	ff
+\e(Fi	\eX1D	ffi
+\e(Fl	\eX1E	ffl
+\e(sq	\eX1F	square
+.TE
+.PP
+None of the \*(PS character names in the right column of the above table
+appear in any of the standard text fonts from Adobe, thus in normal usage
+all occurrences of \fB\e(\fIxx\fR characters in the left column
+will be caught and blocked by the mechanism of \(sc2.4.3.
+However, the provision is made for adding the 4 characters in question
+to a standard text font by assigning them the listed PS character names.
+.PP
+So where does one get a set of standard text fonts
+(i.e., versions of Times-Roman, Times-Italic and Times-Bold)
+that have the 4 extra characters in each?
+In the opinion of this author, the best solution would be to create
+a set of custom Type\ 1 fonts.
+Disassembling (``cracking'') the standard Times fonts, adding a few
+characters and reassembling the result back into a valid Type\ 1 font
+would not be difficult at all from the technical standpoint,
+but I found it to be a task beyond my own skills in terms of the
+artistic design issues.
+The square character would obviously be trivial, but the 3 missing
+f-ligatures are not: drawing them in such a way that would match
+the rest of the font (the basic `f', `i' and `l' letterforms,
+as well as the existing fi and fl ligatures) properly and perfectly
+is a task that calls for a professional font designer.
+.PP
+Unless we find someone who is in love with the original troff
+to the point of being willing to put up some cash to hire a professional
+font designer to create a set of Type\ 1 fonts which would capture
+the letter shapes of the historical C/A/T or APS-5 version of the
+Times family, including the full set of f-ligatures, we make do
+by pulling in the 3 missing ligatures from a not-perfectly-matching
+font: currently, it is the Troff5lig subset of the Adobe Garamond
+Expert family.
+.PP
+I have considered the approach of extracting the \&\fCff\fP,
+\&\fCffi\fP and \&\fCffl\fP charstrings from the AGaramondExp fonts
+and adding them, along with the necessary subroutines, to disassembled
+Times fonts.
+However, I've been discouraged from doing so by the differences
+in the font-wide hints and other differences between the fonts
+to be mixed in that manner.
+Therefore, as early as my first \fIpstroff\fP effort back in 2004
+I had settled on the Type\ 3 kludge which is still in use in the
+present version with only minor changes.
+.PP
+The present kludge is a set of Type\ 3 fonts, called the TroffEmu fonts,
+which implement almost every character by invoking the \fBshow\fP
+operator recursively to draw that character from another underlying font.
+The 3 TroffEmu fonts included in the \fIpstroff\fP distribution
+are structured as follows:
+.TS
+center box;
+c|c|c
+a|a|a.
+TroffEmu font	Pulls regular chars from	Pulls {\fCff\fP,\fCffi\fP,\fCffl\fP} from
+_
+TroffEmu-Times-Roman	Times-Roman	Troff5lig-Regular
+TroffEmu-Times-Italic	Times-Italic	Troff5lig-Italic
+TroffEmu-Times-Bold	Times-Bold	Troff5lig-Bold
+.TE
+.LP
+Each of these 3 fonts implements the full TroffEncoding
+character set as follows:
+.IP \(bu
+All ``regular'' characters, i.e., those not mentioned specifically below,
+are drawn from the underlying standard Times family font.
+.IP \(bu
+The 3 extended ligature characters \&\fCff\fP, \&\fCffi\fP and \&\fCffl\fP
+are drawn from the associated Troff5lig font.
+Note, however, that the basic \fBfi\fP and \fBfl\fP ligatures
+are drawn from the Times family font, \fInot\fP from Troff5lig.
+.IP \(bu
+The \&\fCemdash\fP (\fB\e(em\fP) character is drawn as a \(34 em dash glyph
+(the \&\fCthreequartersemdash\fP character from the appropriate Troff5lig
+font) centered within a spacing width of 1 em, like it was drawn
+in the olden days.
+.IP \(bu
+The \&\fCsquare\fP (\fB\e(sq\fP) character is drawn directly
+by the TroffEmu fonts themselves.
+E 2
+E 1

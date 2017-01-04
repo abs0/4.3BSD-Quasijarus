@@ -22,7 +22,7 @@ char copyright[] =
 #endif /* not lint */
 
 #ifndef lint
-static char sccsid[] = "@(#)ifconfig.c	4.21 (Berkeley) 7/1/88";
+static char sccsid[] = "@(#)ifconfig.c	4.24 (Berkeley) 7/22/02";
 #endif /* not lint */
 
 #include <sys/types.h>
@@ -30,6 +30,7 @@ static char sccsid[] = "@(#)ifconfig.c	4.21 (Berkeley) 7/1/88";
 #include <sys/ioctl.h>
 
 #include <net/if.h>
+#include <net/if_pppvar.h>
 #include <netinet/in.h>
 
 #define	NSIP
@@ -49,6 +50,7 @@ struct	sockaddr_in netmask = { AF_INET };
 struct	sockaddr_in ipdst = { AF_INET };
 char	name[30];
 int	flags;
+int	mtu;
 int	metric;
 int	setaddr;
 int	setmask;
@@ -58,7 +60,8 @@ int	s;
 extern	int errno;
 
 int	setifflags(), setifaddr(), setifdstaddr(), setifnetmask();
-int	setifmetric(), setifbroadaddr(), setifipdst();
+int	setifmtu(), setifmetric(), setifbroadaddr(), setifipdst();
+int	pppreset(), pppsetrecov();
 
 #define	NEXTARG		0xffffff
 
@@ -73,6 +76,8 @@ struct	cmd {
 	{ "-trailers",	IFF_NOTRAILERS,	setifflags },
 	{ "arp",	-IFF_NOARP,	setifflags },
 	{ "-arp",	IFF_NOARP,	setifflags },
+	{ "fcs",	-IFF_NOFCS,	setifflags },
+	{ "-fcs",	IFF_NOFCS,	setifflags },
 	{ "debug",	IFF_DEBUG,	setifflags },
 	{ "-debug",	-IFF_DEBUG,	setifflags },
 #ifdef notdef
@@ -81,9 +86,12 @@ struct	cmd {
 	{ "-swabips",	-EN_SWABIPS,	setifflags },
 #endif
 	{ "netmask",	NEXTARG,	setifnetmask },
+	{ "mtu",	NEXTARG,	setifmtu },
 	{ "metric",	NEXTARG,	setifmetric },
 	{ "broadcast",	NEXTARG,	setifbroadaddr },
 	{ "ipdst",	NEXTARG,	setifipdst },
+	{ "pppreset",	0,		pppreset },
+	{ "ppprecov",	NEXTARG,	pppsetrecov },
 	{ 0,		0,		setifaddr },
 	{ 0,		0,		setifdstaddr },
 };
@@ -121,6 +129,7 @@ main(argc, argv)
 		fprintf(stderr, "usage: ifconfig interface\n%s%s%s%s%s",
 		    "\t[ af [ address [ dest_addr ] ] [ up ] [ down ]",
 			    "[ netmask mask ] ]\n",
+		    "\t[ mtu n ]\n",
 		    "\t[ metric n ]\n",
 		    "\t[ trailers | -trailers ]\n",
 		    "\t[ arp | -arp ]\n");
@@ -151,8 +160,12 @@ main(argc, argv)
 	}
 	strncpy(ifr.ifr_name, name, sizeof ifr.ifr_name);
 	flags = ifr.ifr_flags;
+	if (ioctl(s, SIOCGIFMTU, (caddr_t)&ifr) < 0)
+		Perror("ioctl (SIOCGIFMTU)");
+	else
+		mtu = ifr.ifr_mtu;
 	if (ioctl(s, SIOCGIFMETRIC, (caddr_t)&ifr) < 0)
-		perror("ioctl (SIOCGIFMETRIC)");
+		Perror("ioctl (SIOCGIFMETRIC)");
 	else
 		metric = ifr.ifr_metric;
 	if (argc == 0) {
@@ -279,18 +292,66 @@ setifflags(vname, value)
 		Perror(vname);
 }
 
+setifmtu(val)
+	char *val;
+{
+	strncpy(ifr.ifr_name, name, sizeof (ifr.ifr_name));
+	ifr.ifr_mtu = atoi(val);
+	if (ioctl(s, SIOCSIFMTU, (caddr_t)&ifr) < 0)
+		Perror("ioctl (set MTU)");
+}
+
 setifmetric(val)
 	char *val;
 {
 	strncpy(ifr.ifr_name, name, sizeof (ifr.ifr_name));
 	ifr.ifr_metric = atoi(val);
 	if (ioctl(s, SIOCSIFMETRIC, (caddr_t)&ifr) < 0)
-		perror("ioctl (set metric)");
+		Perror("ioctl (set metric)");
+}
+
+pppreset()
+{
+	ifr.ifr_data = (caddr_t) PPPACT_RESET;
+	if (ioctl(s, SIOCPPPSPECACT, (caddr_t)&ifr) < 0)
+		Perror("ioctl (SIOCPPPSPECACT PPPACT_RESET)");
+}
+
+pppsetrecov(val)
+	char *val;
+{
+	if (val && !strcmp(val, "persist")) {
+		ifr.ifr_data = (caddr_t) PPPACT_RECOVPERSIST;
+		if (ioctl(s, SIOCPPPSPECACT, (caddr_t)&ifr) < 0)
+			Perror("ioctl (SIOCPPPSPECACT PPPACT_RECOVPERSIST)");
+	} else if (val && !strcmp(val, "passive")) {
+		ifr.ifr_data = (caddr_t) PPPACT_RECOVPASSIVE;
+		if (ioctl(s, SIOCPPPSPECACT, (caddr_t)&ifr) < 0)
+			Perror("ioctl (SIOCPPPSPECACT PPPACT_RECOVPASSIVE)");
+	} else {
+		ifr.ifr_data = (caddr_t) PPPACT_RECOVDEFAULT;
+		if (ioctl(s, SIOCPPPSPECACT, (caddr_t)&ifr) < 0)
+			Perror("ioctl (SIOCPPPSPECACT PPPACT_RECOVDEFAULT)");
+	}
 }
 
 #define	IFFBITS \
 "\020\1UP\2BROADCAST\3DEBUG\4LOOPBACK\5POINTOPOINT\6NOTRAILERS\7RUNNING\10NOARP\
+\13NOFCS\
 "
+
+char *ppp_states[] = {
+	"INITIAL",
+	"STARTING",
+	"CLOSED",
+	"STOPPED",
+	"CLOSING",
+	"STOPPING",
+	"REQSENT",
+	"ACKRCVD",
+	"ACKSENT",
+	"OPENED"
+};
 
 /*
  * Print the status of the interface.  If an address family was
@@ -300,11 +361,32 @@ status()
 {
 	register struct afswtch *p = afp;
 	short af = ifr.ifr_addr.sa_family;
+	int i;
 
 	printf("%s: ", name);
 	printb("flags", flags, IFFBITS);
+	if (mtu)
+		printf(" MTU %d", mtu);
 	if (metric)
 		printf(" metric %d", metric);
+	if (!strncmp(name, "ppp", 3)) {
+		if (ioctl(s, SIOCPPPGETSTATE, (caddr_t)&ifr) >= 0)
+			i = (int) ifr.ifr_data;
+		else
+			i = -1;
+		if (i >= 0 && i < sizeof(ppp_states)/sizeof(char *))
+			printf(" %s", ppp_states[i]);
+		else
+			printf(" (unknown state)");
+		if (ioctl(s, SIOCPPPGETFLAGS, (caddr_t)&ifr) >= 0)
+			i = (int) ifr.ifr_data;
+		else
+			i = 0;
+		if (i & PPP_FLAGS_PERSIST)
+			printf(",PERSIST");
+		if (i & PPP_FLAGS_PASSIVE)
+			printf(",PASSIVE");
+	}
 	putchar('\n');
 	if ((p = afp) != NULL) {
 		(*p->af_status)(1);
@@ -327,14 +409,14 @@ in_status(force)
 				return;
 			bzero((char *)&ifr.ifr_addr, sizeof(ifr.ifr_addr));
 		} else
-			perror("ioctl (SIOCGIFADDR)");
+			Perror("ioctl (SIOCGIFADDR)");
 	}
 	sin = (struct sockaddr_in *)&ifr.ifr_addr;
 	printf("\tinet %s ", inet_ntoa(sin->sin_addr));
 	strncpy(ifr.ifr_name, name, sizeof (ifr.ifr_name));
 	if (ioctl(s, SIOCGIFNETMASK, (caddr_t)&ifr) < 0) {
 		if (errno != EADDRNOTAVAIL)
-			perror("ioctl (SIOCGIFNETMASK)");
+			Perror("ioctl (SIOCGIFNETMASK)");
 		bzero((char *)&ifr.ifr_addr, sizeof(ifr.ifr_addr));
 	} else
 		netmask.sin_addr =
@@ -344,7 +426,7 @@ in_status(force)
 			if (errno == EADDRNOTAVAIL)
 			    bzero((char *)&ifr.ifr_addr, sizeof(ifr.ifr_addr));
 			else
-			    perror("ioctl (SIOCGIFDSTADDR)");
+			    Perror("ioctl (SIOCGIFDSTADDR)");
 		}
 		strncpy(ifr.ifr_name, name, sizeof (ifr.ifr_name));
 		sin = (struct sockaddr_in *)&ifr.ifr_dstaddr;
@@ -356,7 +438,7 @@ in_status(force)
 			if (errno == EADDRNOTAVAIL)
 			    bzero((char *)&ifr.ifr_addr, sizeof(ifr.ifr_addr));
 			else
-			    perror("ioctl (SIOCGIFADDR)");
+			    Perror("ioctl (SIOCGIFADDR)");
 		}
 		strncpy(ifr.ifr_name, name, sizeof (ifr.ifr_name));
 		sin = (struct sockaddr_in *)&ifr.ifr_addr;
@@ -386,7 +468,7 @@ xns_status(force)
 				return;
 			bzero((char *)&ifr.ifr_addr, sizeof(ifr.ifr_addr));
 		} else
-			perror("ioctl (SIOCGIFADDR)");
+			Perror("ioctl (SIOCGIFADDR)");
 	}
 	strncpy(ifr.ifr_name, name, sizeof ifr.ifr_name);
 	sns = (struct sockaddr_ns *)&ifr.ifr_addr;

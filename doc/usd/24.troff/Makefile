@@ -1,9 +1,6 @@
 #
-# Copyright (c) 1986 Regents of the University of California.
-# All rights reserved.  The Berkeley software License Agreement
-# specifies the terms and conditions for redistribution.
-#
-#	@(#)Makefile	6.3 (Berkeley) 4/21/86
+# Special Makefile for formatting the historic 4.3BSD version of USD:24
+# with Quasijarus pstroff tools.
 #
 INTRO=	m0
 TUTOR=	m0a
@@ -12,44 +9,45 @@ APNDX1=	m5
 APNDX2=	table1
 APNDX3=	table2
 MACROS=	m.mac
-PRINTER=Pdp
-TBL=	dtbl -${PRINTER}
-TROFF=	ditroff -${PRINTER}
-LPR=	lpr -n -${PRINTER}
+ALLSRC=	${MACROS} ${INTRO} ${TUTOR} ${PAPER} ${APNDX1} ${APNDX2} ${APNDX3}
+ORIGSRC=/fs1/4.3man/doc/usd/24.troff
+TBL=	tbl
+TROFF=	pstroff -T '-b*6,S-'
+PARTS=	intro.ps tutor.ps paper.ps apndx1.ps apndx2.ps apndx3.ps
 
-paper:	intro.${PRINTER} tutor.${PRINTER} paper.${PRINTER}
-paper:	apndx1.${PRINTER} apndx2.${PRINTER} apndx3.${PRINTER} 
-	${LPR} intro.${PRINTER}
-	${LPR} tutor.${PRINTER}
-	${LPR} paper.${PRINTER}
-	${LPR} apndx1.${PRINTER}
-	${LPR} apndx2.${PRINTER}
-	${LPR} apndx3.${PRINTER}
+all:	fulldoc.ps
 
-intro.${PRINTER}: ${INTRO}
-	${TROFF} -t ${MACROS} ${INTRO} > intro.${PRINTER}
+fulldoc.ps: ${PARTS}
+	pstmerge ${PARTS} > $@
 
-tutor.${PRINTER}: ${TUTOR}
-	${TBL} ${TUTOR} | ${TROFF} -t ${MACROS} - > tutor.${PRINTER}
+# The psrange in each of the following stanzas is necessary because
+# troff is producing an extra page for each part.
 
-paper.${PRINTER}: ${PAPER}
-	${TBL} ${PAPER} | ${TROFF} -t ${MACROS} - > paper.${PRINTER}
+intro.ps: ${INTRO}
+	${TROFF} -t ${MACROS} ${INTRO} | psrange 1-2 > intro.ps
 
-apndx1.${PRINTER}: ${APNDX1}
-	${TROFF} -t ${MACROS} ${APNDX1} > apndx1.${PRINTER}
+tutor.ps: ${TUTOR}
+	${TBL} ${TUTOR} | ${TROFF} -t ${MACROS} - | psrange 1-5 > tutor.ps
 
-apndx2.${PRINTER}: ${APNDX2}
-	${TROFF} -t ${MACROS} ${APNDX2} > apndx2.${PRINTER}
+paper.ps: ${PAPER}
+	${TBL} ${PAPER} | ${TROFF} -t ${MACROS} - | psrange 1-18 > paper.ps
 
-apndx3.${PRINTER}: ${APNDX3}
-	${TROFF} -t ${MACROS} ${APNDX3} > apndx3.${PRINTER}
+apndx1.ps: ${APNDX1}
+	${TROFF} -t ${MACROS} ${APNDX1} | psrange 1-4 > apndx1.ps
+
+apndx2.ps: ${APNDX2}
+	${TROFF} -t ${MACROS} ${APNDX2} | psrange 1 > apndx2.ps
+
+apndx3.ps: ${APNDX3}
+	${TROFF} -t ${MACROS} ${APNDX3} | psrange 1-2 > apndx3.ps
 
 clean:
-	rm -f intro.${PRINTER} tutor.${PRINTER} paper.${PRINTER} \
-		apndx1.${PRINTER} apndx2.${PRINTER} apndx3.${PRINTER} \
-		*.spell errs Errs make.out
+	rm -f *.ps *.spell errs Errs make.out
 
 spell:	${INTRO} ${TUTOR} ${PAPER} ${APNDX1} ${APNDX2} ${APNDX3}
 	@for i in ${INTRO} ${TUTOR} ${PAPER} ${APNDX1} ${APNDX2} ${APNDX3}; do \
 		echo $$i; spell $$i | sort | comm -23 - spell.ok > $$i.spell; \
 	done
+
+diff:
+	-for i in ${ALLSRC}; do diff -c ${ORIGSRC}/$$i $$i; done > 4.3-diff

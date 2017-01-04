@@ -1,0 +1,294 @@
+QNAME=tas.harhan.org.
+QCLASS=1 QTYPE=2 RD=1 RA=1
+q_flags=4001
+Entering query 0 stage 0
+QNAME=tas.harhan.org.
+NOA is TAS.Harhan.ORG. type 2
+looking in the cache
+recursive query, asking foreign NS
+trying server sword.svetaleks.uz.
+NS has no attached A, need a subquery
+nested query #1 spawned from #0
+Entering query 1 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is . type 3
+recursive query, asking foreign NS
+trying server B.ROOT-SERVERS.NET.
+Sending UDP query to B.ROOT-SERVERS.NET. at 192.228.79.201
+got RCODE 0 from 192.228.79.201
+parsing foreign response: RCODE=0 ANCOUNT=0 NSCOUNT=6 ARCOUNT=6
+no answer
+auth RR #0: type=2 class=1
+creating new CACHEDREF
+NS RR accepted
+auth RR #1: type=2 class=1
+NS RR accepted
+auth RR #2: type=2 class=1
+NS RR accepted
+auth RR #3: type=2 class=1
+NS RR accepted
+auth RR #4: type=2 class=1
+NS RR accepted
+auth RR #5: type=2 class=1
+NS RR accepted
+accepting A 91.212.89.8 for server ns.uz.
+accepting A 81.95.224.158 for server ns2.uz.
+accepting A 195.158.1.22 for server ns3.uz.
+accepting A 87.139.105.60 for server ns4.uz.
+accepting A 217.12.81.129 for server ns5.uz.
+accepting A 83.69.129.4 for server ns6.uz.
+referral: new NOA is uz.
+resubmitting to askforns layer
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+got RCODE 3 from 83.69.129.4
+parsing foreign response: RCODE=3 ANCOUNT=0 NSCOUNT=1 ARCOUNT=0
+no answer
+auth RR #0: type=6 class=1
+no referral, AA set, accepting NXDOMAIN/NOREC
+subquery 1 finished: result from stage 0: code 1, flags 8000
+subquery result is not ANSWER, treating as failure, going to next NS
+trying server sword.svetaleks.uz.
+NS has no attached A, need a subquery
+nested query #2 spawned from #0
+got A for server sword.svetaleks.uz.
+intquery_extract_A_answer: 0 answer RRs to examine
+got 0 A record(s)
+intquery_extract_A_answer returned 0!
+trying server sword.svetaleks.uz.
+NS has no attached A, need a subquery
+nested query #3 spawned from #0
+Sending UDP query to sword.svetaleks.uz. at 0.0.0.0
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+Entering query 3 stage 0
+QNAME=sword.svetaleks.uz.
+NOA is uz. type 4
+recursive query, asking foreign NS
+trying server ns6.uz.
+Sending UDP query to ns6.uz. at 83.69.129.4
+got RCODE 3 from 83.69.129.4
+parsing foreign response: RCODE=3 ANCOUNT=0 NSCOUNT=1 ARCOUNT=0
+no answer
+auth RR #0: type=6 class=1
+no referral, AA set, accepting NXDOMAIN/NOREC
+subquery 3 finished: result from stage 0: code 1, flags 8000
+subquery result is not ANSWER, treating as failure, going to next NS
+q_retrycnt=4, giving up
+askforns layer returned error indication
+got A for server sword.svetaleks.uz.
+intquery_extract_A_answer: 0 answer RRs to examine
+got 0 A record(s)
+intquery_extract_A_answer returned 0!
+q_retrycnt=5, giving up
+askforns layer returned error indication
+Sending UDP query to sword.svetaleks.uz. at 0.0.0.0
+got RCODE 3 from 83.69.129.4
+parsing foreign response: RCODE=3 ANCOUNT=0 NSCOUNT=1 ARCOUNT=0
+no answer
+auth RR #0: type=6 class=1
+no referral, AA set, accepting NXDOMAIN/NOREC
+got RCODE 3 from 83.69.129.4
+parsing foreign response: RCODE=3 ANCOUNT=0 NSCOUNT=1 ARCOUNT=0
+no answer
+auth RR #0: type=6 class=1
+no referral, AA set, accepting NXDOMAIN/NOREC
+got RCODE 3 from 83.69.129.4
+parsing foreign response: RCODE=3 ANCOUNT=0 NSCOUNT=1 ARCOUNT=0
+no answer
+auth RR #0: type=6 class=1
+no referral, AA set, accepting NXDOMAIN/NOREC
+subquery 3 finished: result from stage 0: code 1, flags 8000
+subquery result is not ANSWER, treating as failure, going to next NS
+q_retrycnt=6, giving up
+askforns layer returned error indication

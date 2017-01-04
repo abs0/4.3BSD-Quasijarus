@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_re.c	7.6 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_re.c	7.7 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -19,13 +19,13 @@ static char *sccsid = "@(#)ex_re.c	7.6 (Berkeley) 3/9/87";
 global(k)
 	bool k;
 {
-	register char *gp;
+	register u_char *gp;
 	register int c;
 	register line *a1;
-	char globuf[GBSIZE], *Cwas;
+	u_char globuf[GBSIZE], *Cwas;
 	int lines = lineDOL();
 	int oinglobal = inglobal;
-	char *oglobp = globp;
+	u_char *oglobp = globp;
 
 	Cwas = Command;
 	/*
@@ -280,9 +280,9 @@ compsub(ch)
 comprhs(seof)
 	int seof;
 {
-	register char *rp, *orp;
+	register u_char *rp, *orp;
 	register int c;
-	char orhsbuf[RHSSIZE];
+	u_char orhsbuf[RHSSIZE];
 
 	rp = rhsbuf;
 	CP(orhsbuf, rp);
@@ -330,6 +330,15 @@ magic:
 				goto magic;
 			break;
 		}
+		if ((c&TRIM8) == RHSQUOTE) {
+			*rp = 0;
+			error("~@ is not allowed in replacement patterns");
+		}
+		if (c & QUOTE) {
+			if (rp >= &rhsbuf[RHSSIZE - 1])
+				goto toobig;
+			*rp++ = RHSQUOTE;
+		}
 		if (rp >= &rhsbuf[RHSSIZE - 1]) {
 toobig:
 			*rp = 0;
@@ -343,7 +352,7 @@ endrhs:
 
 getsub()
 {
-	register char *p;
+	register u_char *p;
 
 	if ((p = linebp) == 0)
 		return (EOF);
@@ -395,15 +404,6 @@ again:
 	return (ch == 'y');
 }
 
-getch()
-{
-	char c;
-
-	if (read(2, &c, 1) != 1)
-		return (EOF);
-	return (c & TRIM);
-}
-
 ugo(cnt, with)
 	int with;
 	int cnt;
@@ -420,7 +420,7 @@ bool	destuc;
 
 dosub()
 {
-	register char *lp, *sp, *rp;
+	register u_char *lp, *sp, *rp;
 	int c;
 
 	lp = linebuf;
@@ -429,13 +429,16 @@ dosub()
 	while (lp < loc1)
 		*sp++ = *lp++;
 	casecnt = 0;
-	while (c = *rp++) {
+	while (c = *rp++ & TRIM8) {
 		/* ^V <return> from vi to split lines */
 		if (c == '\r')
 			c = '\n';
 
+		if (c == RHSQUOTE)
+			c = QUOTE | *rp++ & TRIM8;
+
 		if (c & QUOTE)
-			switch (c & TRIM) {
+			switch (c & TRIM8) {
 
 			case '&':
 				sp = place(sp, loc1, loc2);
@@ -468,16 +471,16 @@ dosub()
 				casecnt = 0;
 				continue;
 			}
-		if (c < 0 && (c &= TRIM) >= '1' && c < nbra + '1') {
+		if ((c & QUOTE) && (c &= TRIM8) >= '1' && c < nbra + '1') {
 			sp = place(sp, braslist[c - '1'], braelist[c - '1']);
 			if (sp == 0)
 				goto ovflo;
 			continue;
 		}
 		if (casecnt)
-			*sp++ = fixcase(c & TRIM);
+			*sp++ = fixcase(c & TRIM8);
 		else
-			*sp++ = c & TRIM;
+			*sp++ = c & TRIM8;
 		if (sp >= &genbuf[LBSIZE])
 ovflo:
 			error("Line overflow@in substitute");
@@ -506,9 +509,9 @@ fixcase(c)
 	return (c);
 }
 
-char *
+u_char *
 place(sp, l1, l2)
-	register char *sp, *l1, *l2;
+	register u_char *sp, *l1, *l2;
 {
 
 	while (l1 < l2) {
@@ -537,9 +540,9 @@ compile(eof, oknl)
 	int oknl;
 {
 	register int c;
-	register char *ep;
-	char *lastep;
-	char bracket[NBRA], *bracketp, *rhsp;
+	register u_char *ep;
+	u_char *lastep;
+	u_char bracket[NBRA], *bracketp, *rhsp;
 	int cclcnt;
 
 	if (isalpha(eof) || isdigit(eof))
@@ -641,8 +644,8 @@ magic:
 			case '~':
 				rhsp = rhsbuf;
 				while (*rhsp) {
-					if (*rhsp & QUOTE) {
-						c = *rhsp & TRIM;
+					if ((*rhsp&TRIM8) == RHSQUOTE) {
+						c = *++rhsp & TRIM8;
 						if (c == '&')
 error("Replacement pattern contains &@- cannot use in re");
 						if (c >= '1' && c <= '9')
@@ -651,7 +654,7 @@ error("Replacement pattern contains \\d@- cannot use in re");
 					if (ep >= &expbuf[ESIZE-2])
 						goto complex;
 					*ep++ = CCHR;
-					*ep++ = *rhsp++ & TRIM;
+					*ep++ = *rhsp++;
 				}
 				continue;
 
@@ -660,8 +663,10 @@ error("Replacement pattern contains \\d@- cannot use in re");
 					break;
 				if (*lastep == CBRA || *lastep == CKET)
 cerror("Illegal *|Can't * a \\( ... \\) in regular expression");
+/*
 				if (*lastep == CCHR && (lastep[1] & QUOTE))
 cerror("Illegal *|Can't * a \\n in regular expression");
+*/
 				*lastep |= STAR;
 				continue;
 
@@ -678,7 +683,7 @@ cerror("Illegal *|Can't * a \\n in regular expression");
 cerror("Bad character class|Empty character class '[]' or '[^]' cannot match");
 				while (c != ']') {
 					if (c == '\\' && any(peekchar(), "]-^\\"))
-						c = ex_getchar() | QUOTE;
+						c = ex_getchar();
 					if (c == '\n' || c == EOF)
 						cerror("Missing ]");
 					*ep++ = c;
@@ -743,7 +748,7 @@ defchar:
 }
 
 cerror(s)
-	char *s;
+	u_char *s;
 {
 
 	expbuf[0] = 0;
@@ -758,13 +763,13 @@ same(a, b)
 	   ((islower(a) && toupper(a) == b) || (islower(b) && toupper(b) == a)));
 }
 
-char	*locs;
+u_char	*locs;
 
 /* VARARGS1 */
 execute(gf, addr)
 	line *addr;
 {
-	register char *p1, *p2;
+	register u_char *p1, *p2;
 	register int c;
 
 	if (gf) {
@@ -811,9 +816,9 @@ execute(gf, addr)
 #define	uletter(c)	(isalpha(c) || c == '_')
 
 advance(lp, ep)
-	register char *lp, *ep;
+	register u_char *lp, *ep;
 {
-	register char *curlp;
+	register u_char *curlp;
 
 	for (;;) switch (*ep++) {
 
@@ -921,7 +926,7 @@ star:
 }
 
 cclass(set, c, af)
-	register char *set;
+	register u_char *set;
 	register int c;
 	int af;
 {
@@ -934,12 +939,12 @@ cclass(set, c, af)
 	n = *set++;
 	while (--n)
 		if (n > 2 && set[1] == '-') {
-			if (c >= (set[0] & TRIM) && c <= (set[2] & TRIM))
+			if (c >= set[0] && c <= set[2])
 				return (af);
 			set += 3;
 			n -= 2;
 		} else
-			if ((*set++ & TRIM) == c)
+			if (*set++ == c)
 				return (af);
 	return (!af);
 }

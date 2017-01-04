@@ -1,0 +1,218 @@
+h05041
+s 00002/00002/00119
+d D 6.3 86/05/27 10:25:15 kjd 5 4
+c fix quotes
+e
+s 00014/00001/00107
+d D 6.2 86/05/14 18:12:19 karels 4 3
+c document internal memory allocation, how to avoid
+e
+s 00001/00001/00107
+d D 6.1 85/05/15 15:09:14 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00009/00016/00099
+d D 5.1 85/05/15 15:09:02 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00115/00000/00000
+d D 4.1 85/05/15 15:08:53 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH FOPEN 3S  4/1/81
+E 2
+I 2
+D 3
+.TH FOPEN 3S  "1 April 1981"
+E 3
+I 3
+.TH FOPEN 3S  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+fopen, freopen, fdopen \- open a stream
+.SH SYNOPSIS
+.B #include <stdio.h>
+.PP
+.SM
+.B FILE
+.B *fopen(filename, type)
+.br
+.B char *filename, *type;
+.PP
+.SM
+.B FILE
+.B *freopen(filename, type, stream)
+.br
+.B char *filename, *type;
+.br
+.SM
+.B FILE
+.B *stream;
+.PP
+.SM
+.B FILE
+.B *fdopen(fildes, type)
+.br
+.B char *type;
+.SH DESCRIPTION
+.I Fopen
+opens the file named by
+.I filename
+and associates a stream with it.
+.I Fopen
+D 2
+returns a pointer to be used to identify
+the stream in subsequent operations.
+E 2
+I 2
+returns a pointer to be used to identify the stream in subsequent operations.
+E 2
+.PP
+.I Type
+is a character string having one of the following values:
+.TP 5
+"r"
+open for reading
+.ns
+.TP 5
+"w"
+create for writing
+.ns
+.TP 5
+"a"
+D 2
+append: open for writing at end
+of file, or create for writing
+E 2
+I 2
+append: open for writing at end of file, or create for writing
+E 2
+.PP
+In addition, each
+.I type
+D 2
+may be followed by a '+' to have the file opened for
+reading and writing.  "r+" positions the 
+stream at the beginning of the file, "w+" creates
+E 2
+I 2
+D 5
+may be followed by a '+' to have the file opened for reading and writing.
+E 5
+I 5
+may be followed by a "+" to have the file opened for reading and writing.
+E 5
+"r+" positions the stream at the beginning of the file, "w+" creates
+E 2
+or truncates it, and "a+" positions it at the end.  Both reads and writes
+may be used on read/write streams, with the limitation that an
+.I fseek, rewind,
+D 2
+or reading an end-of-file must be used between a read and a write or
+vice-versa.
+E 2
+I 2
+or reading an end-of-file must be used between a read and a write or vice-versa.
+E 2
+.PP
+.I Freopen
+D 2
+substitutes the named file in place
+of the open
+E 2
+I 2
+substitutes the named file in place of the open
+E 2
+.IR stream .
+It returns the original value of
+.IR stream .
+The original stream is closed.
+.PP
+.I Freopen
+D 2
+is typically used to attach the preopened
+constant names,
+E 2
+I 2
+is typically used to attach the preopened constant names,
+E 2
+.B stdin, stdout, stderr,
+to specified files.
+.PP
+.I Fdopen
+associates a stream with a file descriptor obtained from
+.I open, dup, creat,
+or
+.IR pipe (2).
+The
+.I type
+of the stream must agree with the mode of the open file.
+.SH "SEE ALSO"
+open(2),
+fclose(3)
+.SH DIAGNOSTICS
+.I Fopen
+and 
+.I freopen
+return the pointer
+.SM
+.B NULL
+if
+.I filename
+D 4
+cannot be accessed.
+E 4
+I 4
+cannot be accessed,
+if too many files are already open,
+or if other resources needed cannot be allocated.
+E 4
+.SH BUGS
+.I Fdopen
+is not portable to systems other than UNIX.
+.PP
+The read/write 
+.I types
+do not exist on all systems.  Those systems without
+read/write modes will probably treat the 
+.I type
+D 2
+as if the '+' was not
+present.
+E 2
+I 2
+D 5
+as if the '+' was not present.  These are unreliable in any event.
+E 5
+I 5
+as if the "+" was not present.  These are unreliable in any event.
+E 5
+I 4
+.PP
+In order to support the same number of open files as does the system,
+.I fopen
+must allocate additional memory for data structures using
+.I calloc
+after 20 files have been opened.
+This confuses some programs which use their own memory allocators.
+An undocumented routine,
+.IR f_prealloc ,
+may be called to force immediate allocation of all internal memory
+except for buffers.
+E 4
+E 2
+E 1

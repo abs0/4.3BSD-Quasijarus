@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)tty.c	7.12 (Berkeley) 5/26/88
+ *	@(#)tty.c	7.22 (Berkeley) 12/26/04
  */
 
 #include "../machine/reg.h"
@@ -20,6 +20,9 @@
 #include "dkstat.h"
 #include "uio.h"
 #include "kernel.h"
+#include "malloc.h"
+#include "sl.h"
+#include "ppp.h"
 
 /*
  * Table giving parity for characters and indicating
@@ -47,28 +50,31 @@ char partab[] = {
 	0000,0200,0200,0000,0200,0000,0000,0201,
 
 	/*
-	 * 7 bit ascii ends with the last character above,
-	 * but we contine through all 256 codes for the sake
-	 * of the tty output routines which use special vax
-	 * instructions which need a 256 character trt table.
+	 * 7 bit ascii ends with the last character above.
+	 * 8-bit characters follow. These are classified into
+	 * C1 and GR (high control and high printable) sets.
+	 * We assume a 96-character GR set, i.e., 0377 is
+	 * treated as printable. Bit 6 in this table is set
+	 * if the original char had its bit 7 set. There is
+	 * no parity for 8-bit characters.
 	 */
 
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007,
-	0007,0007,0007,0007,0007,0007,0007,0007
+	0101,0101,0101,0101,0101,0101,0101,0101,
+	0101,0101,0101,0101,0101,0101,0101,0101,
+	0101,0101,0101,0101,0101,0101,0101,0101,
+	0101,0101,0101,0101,0101,0101,0101,0101,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100,
+	0100,0100,0100,0100,0100,0100,0100,0100
 };
 
 /*
@@ -156,7 +162,7 @@ ttyflush(tp, rw)
 	}
 	if (rw & FWRITE) {
 		wakeup((caddr_t)&tp->t_outq);
-		tp->t_state &= ~TS_TTSTOP;
+		tp->t_state &= ~(TS_TTSTOP|TS_OUTKOI7TO8|TS_OUTKOI8TO7);
 		(*cdevsw[major(tp->t_dev)].d_stop)(tp, rw);
 		while (getc(&tp->t_outq) >= 0)
 			;
@@ -259,6 +265,8 @@ ttioctl(tp, com, data, flag)
 	case TIOCLSET:
 	case TIOCSTI:
 	case TIOCSWINSZ:
+	case TIOCSLATTACH:
+	case TIOCPPPATTACH:
 		while (tp->t_line == NTTYDISC &&
 		   u.u_procp->p_pgrp != tp->t_pgrp && tp == u.u_ttyp &&
 		   (u.u_procp->p_flag&SVFORK) == 0 &&
@@ -514,6 +522,69 @@ ttioctl(tp, com, data, flag)
 			constty = NULL;
 		break;
 
+#ifdef TTYKBHACKS
+	case TIOCKBHACKS:
+	case TIOCKBSFSTYLE:
+	case TIOCKBGFSTYLE:
+	case TIOCKBSF11MOD:
+	case TIOCKBGF11MOD:
+	case TIOCKBSFKEYS:
+	case TIOCKBGFKEYS:
+	case TIOCKBSRUSMAP:
+	case TIOCKBGRUSMAP:
+	case TIOCKBRESET:
+		return(ttykbhacks_ioctl(tp, com, data, flag));
+#endif
+
+	/* attach sl<n> and set SLIPDISC */
+	case TIOCSLATTACH:
+#if NSL > 0
+	{
+		register int nsl = *(int *)data;
+		int error = 0;
+
+		s = spltty();
+		(*linesw[tp->t_line].l_close)(tp);
+		error = sltattach(dev, tp, nsl);
+		if (error) {
+			(void) (*linesw[tp->t_line].l_open)(dev, tp);
+			splx(s);
+			return (error);
+		}
+		splx(s);
+		break;
+	}
+#else
+		return (ENXIO);
+#endif
+
+	/* attach ppp<n> and set PPPDISC */
+	case TIOCPPPATTACH:
+#if NPPP > 0
+	{
+		register int nppp = *(int *)data;
+		int error = 0;
+
+		s = spltty();
+		(*linesw[tp->t_line].l_close)(tp);
+		error = pppasync_attach(dev, tp, nppp);
+		if (error) {
+			(void) (*linesw[tp->t_line].l_open)(dev, tp);
+			splx(s);
+			return (error);
+		}
+		splx(s);
+		break;
+	}
+#else
+		return (ENXIO);
+#endif
+
+	case TIOCSOFTCAR:
+		tp->t_state |= TS_CARR_ON;
+		wakeup((caddr_t)&tp->t_rawq);
+		break;
+
 	default:
 		return (-1);
 	}
@@ -547,7 +618,7 @@ ttselect(dev, rw)
 		nread = ttnread(tp);
 		if (nread > 0 || (tp->t_state & TS_CARR_ON) == 0)
 			goto win;
-		if (tp->t_rsel && tp->t_rsel->p_wchan == (caddr_t)&selwait)
+rsel:		if (tp->t_rsel && tp->t_rsel->p_wchan == (caddr_t)&selwait)
 			tp->t_state |= TS_RCOLL;
 		else
 			tp->t_rsel = u.u_procp;
@@ -561,6 +632,12 @@ ttselect(dev, rw)
 		else
 			tp->t_wsel = u.u_procp;
 		break;
+
+	case 0:
+		if (tp->t_state & TS_MODEMCHG)
+			goto win;
+		else
+			goto rsel;
 	}
 	splx(s);
 	return (0);
@@ -608,6 +685,12 @@ ttylclose(tp)
 
 	ttywflush(tp);
 	tp->t_line = 0;
+#ifdef TTYKBHACKS
+	if (tp->t_state & TS_KBHACKS) {
+		tp->t_state &= ~TS_KBHACKS;
+		free(tp->T_LINEP, M_PCB);
+	}
+#endif
 }
 
 /*
@@ -774,6 +857,28 @@ ttyinput(c, tp)
 			tp->t_state |= TS_LNCH;
 			goto endcase;
 		}
+#ifdef TTYKBHACKS
+		if (tp->t_state & TS_KBHACKS) {
+			c = ttykbhacks(c, tp);
+			if (c < 0)
+				goto endcase;
+		} else
+#endif
+		if ((tp->t_flags & (KOI|PASS8)) == KOI) {
+			if (c == 016) {
+				tp->t_state |= TS_KOI7INRUS;
+				ttyoutput(c, tp);
+				goto endcase;
+			}
+			if (c == 017) {
+				tp->t_state &= ~TS_KOI7INRUS;
+				ttyoutput(c, tp);
+				goto endcase;
+			}
+			if ((tp->t_state & TS_KOI7INRUS) &&
+			    c >= 0100 && c <= 0176)
+				c |= 0200;
+		}
 		if (c == tp->t_flushc) {
 			if (t_flags&FLUSHO)
 				tp->t_flags &= ~FLUSHO;
@@ -824,7 +929,9 @@ ttyinput(c, tp)
 
 	if (tp->t_flags & LCASE && c <= 0177) {
 		if (tp->t_state&TS_BKSL) {
-			ttyrub(unputc(&tp->t_rawq), tp);
+			i = unputc(&tp->t_rawq);
+			if (t_flags & CRTBS)
+				ttyrub(i, tp);
 			if (maptab[c])
 				c = maptab[c];
 			c |= 0200;
@@ -843,7 +950,7 @@ ttyinput(c, tp)
 		if (tp->t_rawq.c_cc > TTYHOG) {
 			if (tp->t_outq.c_cc < TTHIWAT(tp) &&
 			    tp->t_line == NTTYDISC)
-				(void) ttyoutput(CTRL('g'), tp);
+				(void) ttyoutput(CTRL(g), tp);
 		} else if (putc(c, &tp->t_rawq) >= 0) {
 			ttwakeup(tp);
 			ttyecho(c, tp);
@@ -857,7 +964,9 @@ ttyinput(c, tp)
 	 */
 	if ((tp->t_state&TS_QUOT) &&
 	    (c == tp->t_erase || c == tp->t_kill)) {
-		ttyrub(unputc(&tp->t_rawq), tp);
+		i = unputc(&tp->t_rawq);
+		if (t_flags & CRTBS)
+			ttyrub(i, tp);
 		c |= 0200;
 	}
 	if (c == tp->t_erase) {
@@ -877,7 +986,7 @@ ttyinput(c, tp)
 				;
 			tp->t_rocount = 0;
 		}
-		tp->t_state &= ~TS_LOCAL;
+		tp->t_state &= ~(TS_LOCAL|TS_OUTKOI7TO8);
 		goto endcase;
 	}
 
@@ -917,7 +1026,7 @@ ttyinput(c, tp)
 	 */
 	if (tp->t_rawq.c_cc+tp->t_canq.c_cc >= TTYHOG) {
 		if (tp->t_line == NTTYDISC)
-			(void) ttyoutput(CTRL('g'), tp);
+			(void) ttyoutput(CTRL(g), tp);
 		goto endcase;
 	}
 
@@ -989,11 +1098,43 @@ ttyoutput(c, tp)
 		return (-1);
 	}
 
+	if (tp->t_flags & KOI) {
+		if (tp->t_flags & PASS8) {
+			if (c == 016) {
+				tp->t_state |= TS_OUTKOI7TO8;
+				return(-1);
+			}
+			if (c == 017) {
+				tp->t_state &= ~TS_OUTKOI7TO8;
+				return(-1);
+			}
+			if (c & 0200)
+				tp->t_state &= ~TS_OUTKOI7TO8;
+			if ((tp->t_state & TS_OUTKOI7TO8) &&
+			    c >= 0100 && c <= 0177)
+				c |= 0200;
+		} else {
+			if (c >= 0300 && !(tp->t_state & TS_OUTKOI8TO7)) {
+				if (ttyoutput(016, tp) >= 0)
+					return(c);
+				tp->t_state |= TS_OUTKOI8TO7;
+			}
+			if (c == 016 || c == 017)
+				tp->t_state &= ~TS_OUTKOI8TO7;
+			if ((tp->t_state & TS_OUTKOI8TO7) &&
+			    c >= 0100 && c <= 0177) {
+				if (ttyoutput(017, tp) >= 0)
+					return(c);
+				tp->t_state &= ~TS_OUTKOI8TO7;
+			}
+		}
+	}
+	if (!(tp->t_flags & PASS8))
+		c &= 0177;
 	/*
 	 * Ignore EOT in normal mode to avoid
 	 * hanging up certain terminals.
 	 */
-	c &= 0177;
 	if (c == CEOT && (tp->t_flags&CBREAK) == 0)
 		return (-1);
 	/*
@@ -1050,6 +1191,11 @@ ttyoutput(c, tp)
 	 * The delays are indicated by characters above 0200.
 	 * In raw mode there are no delays and the
 	 * transmission path is 8 bits wide.
+	 *
+	 * BUG: in non-raw PASS8 mode this code will try to
+	 * insert delays if they are enabled, but the driver
+	 * will output the high codes instead. Do not enable
+	 * any delays on 8-bit terminals.
 	 *
 	 * SHOULD JUST ALLOW USER TO SPECIFY DELAYS
 	 */
@@ -1236,7 +1382,7 @@ loop:
 		/*
 		 * Give user character.
 		 */
- 		error = ureadc(t_flags&PASS8 ? c : c & 0177, uio);
+ 		error = ureadc(t_flags&(PASS8|KOI) ? c : c & 0177, uio);
 		if (error)
 			break;
  		if (uio->uio_resid == 0)
@@ -1362,7 +1508,7 @@ loop:
 		 * then we've got to look at each character, so
 		 * just feed the stuff to ttyoutput...
 		 */
-		if (tp->t_flags & (LCASE|TILDE)) {
+		if (tp->t_flags & (LCASE|TILDE|KOI)) {
 			while (cc > 0) {
 				c = *cp++;
 				tp->t_rocount = 0;
@@ -1399,7 +1545,8 @@ loop:
 				ce = cc;
 			else {
 				ce = cc - scanc((unsigned)cc, (u_char *)cp,
-				   (u_char *)partab, 077);
+				   (u_char *)partab,
+				   (tp->t_flags & PASS8) ? 077 : 0177);
 				/*
 				 * If ce is zero, then we're processing
 				 * a special character through ttyoutput.
@@ -1509,9 +1656,9 @@ ttyrub(c, tp)
 			ttyretype(tp);
 			return;
 		}
-		if (c == ('\t'|0200) || c == ('\n'|0200))
-			ttyrubo(tp, 2);
-		else switch (partab[c&=0177]&0177) {
+		if (c == 0377 && !(tp->t_flags & PASS8))
+			c = 0177;
+		switch (partab[c]&077) {
 
 		case ORDINARY:
 			if (tp->t_flags&LCASE && c >= 'A' && c <= 'Z')
@@ -1602,7 +1749,7 @@ ttyretype(tp)
 		ttyecho(*cp, tp);
 	for (cp = tp->t_rawq.c_cf; cp; cp = nextc(&tp->t_rawq, cp))
 		ttyecho(*cp, tp);
-	tp->t_state &= ~TS_ERASE;
+	tp->t_state &= ~(TS_ERASE|TS_OUTKOI7TO8);
 	splx(s);
 	tp->t_rocount = tp->t_rawq.c_cc;
 	tp->t_rocol = 0;
@@ -1620,6 +1767,7 @@ ttyecho(c, tp)
 		tp->t_flags &= ~FLUSHO;
 	if ((tp->t_flags&ECHO) == 0)
 		return;
+	tp->t_state &= ~TS_OUTKOI7TO8;
 	c &= 0377;
 	if (tp->t_flags&RAW) {
 		(void) ttyoutput(c, tp);
@@ -1628,7 +1776,8 @@ ttyecho(c, tp)
 	if (c == '\r' && tp->t_flags&CRMOD)
 		c = '\n';
 	if (tp->t_flags&CTLECH) {
-		if ((c&0177) <= 037 && c!='\t' && c!='\n' || (c&0177)==0177) {
+		if ((c&0177) <= 037 && c!='\t' && c!='\n' || c==0177 ||
+		    c==0377 && !(tp->t_flags&PASS8)) {
 			(void) ttyoutput('^', tp);
 			c &= 0177;
 			if (c == 0177)
@@ -1639,7 +1788,7 @@ ttyecho(c, tp)
 				c += 'A' - 1;
 		}
 	}
-	(void) ttyoutput(c&0177, tp);
+	(void) ttyoutput(c, tp);
 }
 
 /*

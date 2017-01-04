@@ -1,0 +1,213 @@
+h28141
+s 00010/00005/00107
+d D 5.4 88/07/09 11:32:02 bostic 4 3
+c install approved copyright notice
+e
+s 00027/00025/00085
+d D 5.3 87/12/12 18:26:32 marc 3 2
+c Berkeley version, remove user interface garbadge
+e
+s 00004/00001/00106
+d D 5.2 87/10/11 00:00:33 marc 2 1
+c Initial checkin to sccs.  Revamp -f flag.
+e
+s 00107/00000/00000
+d D 5.1 87/10/10 23:53:08 marc 1 0
+c date and time created 87/10/10 23:53:08 by marc
+e
+u
+U
+t
+T
+I 1
+D 3
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 3
+I 3
+.\" Copyright (c) 1987 Regents of the University of California.
+.\" All rights reserved.
+E 3
+.\"
+I 3
+.\" Redistribution and use in source and binary forms are permitted
+D 4
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 4
+I 4
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 4
+.\"
+E 3
+.\"	%W% (Berkeley) %G%
+.\"
+.TH FSTAT 8 "%Q%"
+.UC 4
+.SH NAME
+fstat \- file status
+.SH SYNOPSIS
+.B fstat
+[
+.B \-u
+user ] [
+.B \-p
+pid ] [
+D 3
+.B \-f
+filename ]
+.br
+D 2
+.B fstat filename
+E 2
+I 2
+.B fstat filename [ filename... ]
+E 3
+I 3
+.B filename... 
+]
+E 3
+E 2
+.SH DESCRIPTION
+.I Fstat
+identifies open files.
+A file is considered open if a process has it open,
+if it is the working directory for a process,
+or if it is an active pure text file.
+If no options are specified,
+.I fstat
+reports on all open files.
+.PP
+Options:
+.TP 6
+.B  \-u
+Report all files open by a specified user.
+.TP 6
+.B  \-p
+Report all files open by a specified process id.
+.TP 6
+D 3
+.B  \-f
+Restrict reports to the specified file.
+E 3
+I 3
+.B filename...
+Restrict reports to the specified files.
+E 3
+If the file is a block special file,
+.I fstat
+additionally reports on any open files on that device,
+treating it as a mounted file system.  
+.PP
+D 3
+If more than one type of option is specified, files
+must match the criteria of each option specified.
+I 2
+More than one file flag may be present.  In particular,
+one may say "fstat foo* bar*" and the right thing will
+happen.
+E 2
+.PP
+E 3
+The following fields are printed
+.TP 6
+.B  USER
+The username of the owner of the process.
+.TP 6
+.B CMD
+The command name of the process.
+.TP 6
+.B PID
+The process id.
+.TP 6
+.B FD
+The file number in the per-process open file table.  The special
+names "text" and "wd" mean that the file is the pure text inode
+or the working directory for the process.  If the file number is
+followed by an asterick (*), then the file is not an inode, but
+either a socket, fifo, or has an error of some kind. In this case
+the rest of the entry is variable format, doesn't correspond
+to the rest of the
+headings, and is
+enclosed in parenthesis.
+The following paragraph describing sockets will explain the
+variable format.
+.TP 6
+.B DEVICE
+Major minor number of the device this file exists on.
+.TP 6
+.B INODE
+The inode number of the file.
+.TP 6
+.B SIZE
+The size in bytes of the file.
+.TP 6
+.B TYPE
+The type of the file. (see stat(2))
+.PP
+Sockets
+.sp1 6
+D 3
+The variable formatting of open sockets depends on the protocol domain of the socket.  In
+all cases the first field is the name of the domain, the second field
+E 3
+I 3
+The formating of open sockets depends on the protocol domain.  In
+all cases the first field is the domain name, the second field
+E 3
+is the socket type (stream, dgram, etc), and the third is the socket
+D 3
+flags (in hex).  The rest are protocol dependent.  For tcp,
+it is the address of the tcpcb, for udp,
+the inpcb (socket pcb).  For unix domain, its the address of the socket
+E 3
+I 3
+flags field (in hex).  The remaining fields are protocol dependent.  For tcp,
+it is the address of the tcpcb, and for udp,
+the inpcb (socket pcb).  For unix domain sockets, its the address of the socket
+E 3
+pcb and the address of the connected pcb (if connected).  Otherwise
+the protocol number and address of the socket itself are printed. The
+idea is not to duplicate netstat, but to make available enough
+information for further analysis.  For example, the addresses mentioned
+above are the addresses which the "netstat -A" command would print for
+tcp, udp, and unixdomain.  Note that since pipe(2) is implemented
+D 3
+with sockets, a pipe appears as a connected unixdomain stream socket.
+E 3
+I 3
+with sockets, a pipe appears as a connected unix domain stream socket.
+A unidirectional unix domain socket indicates the direction of
+flow with an arrow ("<-" or "->"), and a full duplex socket shows
+a double arrow ("<->").
+E 3
+.dt
+D 3
+.SH "BUGS"
+Socket information clutters the output.  It should be possible
+to specify more than one of each type of argument. A logical or
+connective would be nice.
+E 3
+I 3
+.SH BUGS
+Socket information clutters the output.
+.PP
+Since \fIfstat\fP takes a snapshot of the system, it is only correct for
+a very short period of time.
+E 3
+.SH "SEE ALSO"
+ps(1), stat(2), pstat(8)
+E 1

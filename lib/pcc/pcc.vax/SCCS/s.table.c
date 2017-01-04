@@ -1,0 +1,2035 @@
+h43718
+s 00001/00001/00757
+d D 1.33 88/05/11 00:29:54 donn 34 33
+c Fix problem with OREGs placed INTEMP.
+e
+s 00001/00001/00757
+d D 1.32 88/03/22 13:05:07 donn 33 32
+c Fixed bug with unsigned short/unsigned char assigned to float/double --
+c share with rhs, not lhs.
+e
+s 00015/00000/00743
+d D 1.31 87/12/11 00:59:36 donn 32 31
+c utah rcsid 1.25 87/12/10 19:48:54: Fortran also needs implicit float to
+c double conversions before comparisons; passed on by Jim McKie.
+e
+s 00015/00000/00728
+d D 1.30 87/12/11 00:59:24 donn 31 30
+c utah rcsid 1.24 87/09/21 16:44:54: Quick hack to save f77 -- perform
+c automatic float-to-double promotion in OPFLOAT but only for f77.
+e
+s 00007/00013/00721
+d D 1.29 87/12/11 00:59:11 donn 30 29
+c utah rcsid 1.23 87/08/25 00:00:20: Some SCONV templates were removed in
+c favor of hacking in sconv().  Since it's tough to predict which FORARG
+c conversions will require a temporary register, we just assume that all
+c will.  The conversion from UCHAR or USHORT to floating is now done in
+c sconv() so that e.g. ZG can take advantage of it; since this conversion
+c requires a temporary register, a new ASSIGN template was added specifically
+c to handle it.
+e
+s 00000/00000/00734
+d D 1.28 87/12/11 00:58:58 donn 29 28
+c CC templates were collapsed into two ZZ entries for ease of optimization.
+c (7) Some redundant RESCCs were removed from templates which had no FORCC
+c goal.
+e
+s 00052/00283/00682
+d D 1.27 87/12/11 00:58:48 donn 28 27
+c utah rcsid 1.22 87/08/24 02:42:48: (1) Many, many redundant or useless
+c templates were deleted.  (2) Conversions to FLOAT now go to the effort of
+c trimming excess precision from DOUBLE and INT operands.  (3) DOUBLE to
+c DOUBLE conversions introduced by reclaim() are disposed of.  (4) 'Fortran'
+c GOTOs are now conditionally compiled on FORT.  (5) A few movd's were turned
+c into movq's.  More work needs to be done on this, I think.  (6) The AND for
+e
+s 00012/00019/00953
+d D 1.26 87/12/11 00:58:37 donn 27 26
+c utah rcsid 1.21 87/07/16 19:39:42: Better handling of stack pushes with the
+c ZV macro.
+e
+s 00008/00008/00964
+d D 1.25 87/12/11 00:58:24 donn 26 25
+c utah rcsid 1.20 87/07/07 20:33:08: Hack the INCR and DECR templates to take
+c a NAME increment operand, so that FLOAT and DOUBLE operations can be
+c handled (floating constants are NAMEs).
+e
+s 00007/00001/00965
+d D 1.24 87/12/11 00:58:11 donn 25 24
+c utah rcsid 1.19 87/05/15 17:01:21: Fix UCHAR/USHORT complements.
+e
+s 00010/00009/00956
+d D 1.23 87/12/11 00:58:03 donn 24 23
+c utah rcsid 1.18 87/05/14 19:11:17: Hacks for handling UCHAR/USHORT div/mod
+c ops.
+e
+s 00000/00037/00965
+d D 1.22 87/12/11 00:57:48 donn 23 22
+c utah rcsid 1.17 87/05/01 13:46:29: Deleted a large number of redundant
+c table entries in the new unsigned div/mod code.
+e
+s 00037/00000/00965
+d D 1.21 87/12/11 00:57:34 donn 22 21
+c utah rcsid 1.16 87/04/24 19:26:03: Bleah -- double the number of ASG DIV
+c and ASG MOD entries so that we can handle unsigned rhs's.
+e
+s 00026/00014/00939
+d D 1.20 87/12/11 00:57:18 donn 21 20
+c utah rcsid 1.15 87/04/24 18:59:25: (1) OPLOG templates were modified to
+c compare only like against like for short integral types with constant rhs's
+c -- an unsigned char can't be compared directly with a char constant since
+c the latter will be sign- extended and converted to unsigned by C's type
+c promotion rules.  (2) Constant shift counts, increments and decrements may
+c have unsigned type.
+e
+s 00006/00006/00947
+d D 1.19 87/12/11 00:57:06 donn 20 19
+c utah rcsid 1.14 87/04/20 16:58:25: Fix stupidity with use of ediv
+c instructions -- the order is 'divisor, dividend' not 'dividend,divisor'.
+c Argh.
+e
+s 00078/00012/00875
+d D 1.18 87/12/11 00:56:54 donn 19 18
+c utah rcsid 1.13 87/04/19 23:51:15: New templates for handling unsigned
+c division and modulus inline when the divisor is a constant.
+e
+s 00028/00004/00859
+d D 1.17 87/12/11 00:56:40 donn 18 17
+c utah rcsid 1.12 87/04/13 20:09:27: Speed up ASG OPSIMP operations with
+c narrow lhs's by punning the type of the rhs.  We have to be careful about
+c rhs side effects...
+e
+s 00007/00001/00856
+d D 1.16 87/12/11 00:56:28 donn 17 16
+c utah rcsid 1.11 87/03/08 19:55:07: Distinguish between signed and unsigned
+c fields in the lhs of assignments whose value is used.
+e
+s 00012/00000/00845
+d D 1.15 87/12/11 00:56:13 donn 16 15
+c utah rcsid 1.10 87/02/08 22:45:04: Add INTEMP templates for OREG nodes --
+c OREGs which are too complex must be pushed on the stack.
+e
+s 00008/00002/00837
+d D 1.14 87/12/11 00:56:02 donn 15 14
+c utah rcsid 1.9 86/09/18 17:12:43: A (revised) fix for bit-field assignments
+c -- the result is the value of the field, not the value of the rhs.
+e
+s 00011/00001/00828
+d D 1.13 86/01/08 01:54:01 donn 14 13
+c (1) Delete SPRECC table stuff for unsigned => float; this is done in
+c zzzcode() now.  (2) Add a table entry for assignment ops with unbalanced
+c types (integer *= float).
+e
+s 00001/00001/00828
+d D 1.12 85/12/10 13:33:19 bloom 13 12
+c fix problem with type casts on assignments and comparison of results 
+c from donn
+e
+s 00002/00024/00827
+d D 1.11 85/08/23 15:03:29 mckusick 12 11
+c update from donn@utah-cs
+e
+s 00001/00001/00850
+d D 1.10 85/06/09 10:08:21 mckusick 11 10
+c from donn@utah-cs.ARPA
+e
+s 00044/00004/00807
+d D 1.9 85/05/03 20:55:43 mckusick 10 8
+c sign-extension corrections (from donn@utah-cs)
+e
+s 00037/00004/00807
+d R 1.9 85/05/01 14:56:16 mckusick 9 8
+c sign-extension corrections (from donn@utah-cs)
+e
+s 00001/00001/00810
+d D 1.8 85/04/02 11:53:13 ralph 8 7
+c use common header file for intermediate language defs.
+e
+s 00000/00016/00811
+d D 1.7 85/01/24 10:57:18 ralph 7 6
+c removed redundant CALL entries.
+e
+s 00011/00008/00816
+d D 1.6 85/01/18 15:23:52 ralph 6 5
+c changes for single precision floats; lint cleanups
+e
+s 00002/00002/00822
+d D 1.5 84/09/20 16:54:11 ralph 5 4
+c NASR & NASL needed because p->type == INT but want double reg.
+e
+s 00008/00011/00816
+d D 1.4 84/08/13 15:31:08 ralph 4 3
+c convert float->double for float op float expressions not after op.
+e
+s 00000/00006/00827
+d D 1.3 84/04/27 09:58:53 ralph 3 2
+c fix structure arguments. don't map OREG to REG for STASG (match fails)
+e
+s 00048/00046/00785
+d D 1.2 84/03/14 15:42:30 ralph 2 1
+c merge f1 and c1; fix type casting conversion bugs.
+e
+s 00831/00000/00000
+d D 1.1 82/12/15 13:24:03 linton 1 0
+c date and time created 82/12/15 13:24:03 by linton
+e
+u
+U
+t
+T
+I 6
+#ifndef lint
+E 6
+I 1
+static char *sccsid ="%W% (Berkeley) %G%";
+I 6
+#endif lint
+
+E 6
+D 8
+# include "mfile2"
+E 8
+I 8
+# include "pass2.h"
+E 8
+
+# define WPTR TPTRTO|TINT|TLONG|TFLOAT|TDOUBLE|TPOINT|TUNSIGNED|TULONG
+# define AWD SNAME|SOREG|SCON|STARNM|STARREG
+/* tbl */
+# define ANYSIGNED TPOINT|TINT|TLONG|TSHORT|TCHAR
+# define ANYUSIGNED TUNSIGNED|TULONG|TUSHORT|TUCHAR
+# define ANYFIXED ANYSIGNED|ANYUSIGNED
+# define TWORD TINT|TUNSIGNED|TPOINT|TLONG|TULONG
+# define NIAWD SNAME|SCON|STARNM
+/* tbl */
+
+struct optab  table[] = {
+
+D 28
+PCONV,	INAREG|INTAREG,
+	SAREG|AWD,	TCHAR|TSHORT,
+	SANY,	TPOINT,
+		NAREG|NASL,	RESC1,
+		"	cvtZLl	AL,A1\n",
+
+PCONV,	INAREG|INTAREG,
+	SAREG|AWD,	TUCHAR|TUSHORT,
+	SANY,	TPOINT,
+		NAREG|NASL,	RESC1,
+		"	movzZLl	AL,A1\n",
+
+E 28
+	/* the following entry is to fix a problem with
+	   the manner that the first pass handles the
+	   type of a shift expression                 */
+PCONV,	INAREG|INTAREG,
+	SAREG|AWD,	TINT|TUNSIGNED,
+	SANY,	TPOINT,
+		NAREG|NASL,	RLEFT,
+		"",
+
+I 2
+D 6
+#ifdef FORT
+E 6
+I 6
+#if defined(FORT) || defined(SPRECC)
+E 6
+E 2
+SCONV,	INTAREG|FORCC,
+D 2
+	SAREG,	TDOUBLE,
+	SANY,	TDOUBLE,
+		0,	RLEFT,
+		"",
+E 2
+I 2
+	SAREG|AWD,	TDOUBLE,
+	SANY,	TFLOAT,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtdf	AL,A1\n",
+E 2
+
+D 2
+#ifdef FORT
+E 2
+SCONV,	INTAREG|FORCC,
+D 4
+	SAREG|AWD,	ANYSIGNED|TUNSIGNED|TULONG|TFLOAT,
+E 4
+I 4
+D 14
+	SAREG|AWD,	ANYSIGNED|TUNSIGNED|TULONG,
+E 14
+I 14
+	SAREG|AWD,	ANYSIGNED,
+E 14
+E 4
+	SANY,	TFLOAT,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtZLf	AL,TA1\n",
+D 28
+
+SCONV,	INTAREG|FORCC,
+	SAREG|AWD,	TUCHAR|TUSHORT,
+E 28
+I 28
+D 30
+#else
+SCONV,	INTAREG|FORCC,		/* rub some bits off that mantissa... */
+	SAREG|AWD,	TWORD|TDOUBLE,
+E 28
+	SANY,	TFLOAT,
+		NAREG|NASL,	RESC1|RESCC,
+D 28
+		"	movzZLl	AL,A1\n	cvtlf	A1,TA1\n",
+E 28
+I 28
+		"	cvtZLf	AL,A1\n	clrl	U1\n",
+E 30
+E 28
+#endif
+
+D 28
+SCONV,	INTAREG|FORCC,
+D 2
+	SAREG|AWD,	ANYSIGNED|TUNSIGNED|TULONG|TFLOAT,
+	SANY,	TFLOAT|TDOUBLE,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtZLd	AL,A1\n",
+
+SCONV,	INTAREG|FORCC,
+E 2
+	SAREG|AWD,	TUCHAR|TUSHORT,
+	SANY,	TFLOAT|TDOUBLE,
+		NAREG|NASL,	RESC1|RESCC,
+		"	movzZLl	AL,A1\n	cvtld	A1,A1\n",
+
+E 28
+I 10
+D 12
+/* char -> ushort, result in reg (forced to int type by reclaim()) */
+SCONV,	INTAREG|INAREG,
+	SAREG|AWD,	TCHAR,
+	SANY,	TUSHORT,
+		NAREG|NASL,	RESC1,
+		"	cvtbw	AL,A1\n	movzwl	A1,A1\n",
+
+/* uchar, ushort -> wider */
+SCONV,	INTAREG|INAREG,
+	SAREG|AWD,	TUCHAR|TUSHORT,
+	SANY,	TSHORT|TUSHORT|TINT|TUNSIGNED|TLONG|TULONG,
+		NAREG|NASL,	RESC1,
+		"	movzZLl	AL,A1\n",
+
+/* char, short -> wider */
+SCONV,	INTAREG|INAREG,
+	SAREG|AWD,	TCHAR|TSHORT,
+	SANY,	TSHORT|TUSHORT|TINT|TUNSIGNED|TLONG|TULONG,
+		NAREG|NASL,	RESC1,
+		"	cvtZLl	AL,A1\n",
+
+E 12
+/* take care of redundant conversions introduced by reclaim() */
+SCONV,	INTAREG,
+	STAREG,	TWORD,
+	SANY,	TWORD,
+		0,	RLEFT,
+		"",
+
+I 28
+SCONV,	INTAREG,
+	STAREG,	TDOUBLE,
+	SANY,	TDOUBLE,
+		0,	RLEFT,
+		"",
+
+E 28
+E 10
+SCONV,	INTAREG|FORCC,
+D 2
+	SAREG|AWD,	TFLOAT|TDOUBLE,
+	SANY,	ANYFIXED,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtZLZF	AL,A1\n",
+
+SCONV,	INTAREG|FORCC,
+	SAREG|SNAME|SCON|STARNM,	TANY,
+	SANY,	ANYUSIGNED,
+		NAREG|NASL,	RESC1|RESCC,
+		"	movzZRl	AL,A1\n",
+
+SCONV,	INTAREG|FORCC,
+	SSOREG,	TANY,
+	SANY,	ANYUSIGNED,
+		NAREG|NASL,	RESC1|RESCC,
+		"	movzZRl	AL,A1\n",
+
+SCONV,	INTAREG|FORCC,
+	SAREG|SNAME|SCON|STARNM,	TANY,
+E 2
+I 2
+	SAREG|AWD,	TANY,
+E 2
+	SANY,	TANY,
+		NAREG|NASL,	RESC1|RESCC,
+D 2
+		"	cvtZRl	AL,A1\n",
+E 2
+I 2
+		"	ZA\n",
+E 2
+
+I 27
+SCONV,	FORARG,
+D 28
+	SAREG|AWD,	TWORD,
+	SANY,	TWORD,
+		0,	RNULL,
+		"	pushl	AL\n",
+E 28
+I 28
+D 30
+	SAREG|AWD,	TWORD|TDOUBLE,
+	SANY,	TFLOAT,
+		NAREG|NASL,	RNULL,
+		"	cvtZLf	AL,A1\n	cvtfd	A1,-(sp)\n",
+E 28
+E 27
+D 2
+SCONV,	INTAREG|FORCC,
+	SSOREG,	TANY,
+	SANY,	TANY,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtZRl	AL,A1\n",
+E 2
+
+I 27
+SCONV,	FORARG,
+E 30
+	SAREG|AWD,	TANY,
+	SANY,	TANY,
+D 30
+		0,	RNULL,
+E 30
+I 30
+		NAREG|NASL,	RNULL,
+E 30
+		"	ZV\n",
+
+E 27
+D 2
+
+E 2
+INIT,	FOREFF,
+	SCON,	TANY,
+	SANY,	TWORD,
+		0,	RNOP,
+		"	.long	CL\n",
+
+INIT,	FOREFF,
+	SCON,	TANY,
+	SANY,	TSHORT|TUSHORT,
+		0,	RNOP,
+		"	.word	CL\n",
+
+INIT,	FOREFF,
+	SCON,	TANY,
+	SANY,	TCHAR|TUCHAR,
+		0,	RNOP,
+		"	.byte	CL\n",
+
+I 28
+#ifdef FORT
+E 28
+	/* for the use of fortran only */
+
+GOTO,	FOREFF,
+	SCON,	TANY,
+	SANY,	TANY,
+		0,	RNOP,
+		"	jbr	CL\n",
+I 28
+#endif
+E 28
+
+GOTO,	FOREFF,
+D 6
+	AWD,	TANY,
+E 6
+I 6
+	SNAME|SOREG,	TANY,
+E 6
+	SANY,	TANY,
+		0,	RNOP,
+		"	jmp	*AL\n",
+
+GOTO,	FOREFF,
+	SAREG,	TANY,
+	SANY,	TANY,
+		0,	RNOP,
+		"	jmp	(AL)\n",
+
+STARG,	FORARG,
+	SCON|SOREG,	TANY,
+	SANY,	TANY,
+D 3
+		NTEMP+2*NAREG,	RESC3,
+		"ZS",
+
+STASG,	FORARG,
+	SNAME|SOREG,	TANY,
+	SCON|SAREG,	TANY,
+E 3
+		0,	RNULL,
+		"	subl2	ZT,sp\nZS",
+
+STASG,	FOREFF,
+	SNAME|SOREG,	TANY,
+	SCON|SAREG,	TANY,
+		0,	RNOP,
+		"ZS",
+
+STASG,	INAREG,
+	SNAME|SOREG,	TANY,
+	SCON,	TANY,
+		NAREG,	RESC1,
+		"ZS	movl	AR,A1\n",
+
+STASG,	INAREG,
+	SNAME|SOREG,	TANY,
+	SAREG,	TANY,
+		0,	RRIGHT,
+		"	pushl	AR\nZS	movl	(sp)+,AR\n",
+
+FLD,	INAREG|INTAREG,
+	SANY,	TANY,
+	SFLD,	ANYSIGNED,
+		NAREG|NASR,	RESC1,
+		"	extv	$H,$S,AR,A1\n",
+
+FLD,	INAREG|INTAREG,
+	SANY,	TANY,
+	SFLD,	ANYUSIGNED,
+		NAREG|NASR,	RESC1,
+		"	extzv	$H,$S,AR,A1\n",
+
+FLD,	FORARG,
+	SANY,	TANY,
+	SFLD,	ANYSIGNED,
+		0,	RNULL,
+		"	extv	$H,$S,AR,-(sp)\n",
+
+FLD,	FORARG,
+	SANY,	TANY,
+	SFLD,	ANYUSIGNED,
+		0,	RNULL,
+		"	extzv	$H,$S,AR,-(sp)\n",
+
+OPLOG,	FORCC,
+	SAREG|AWD,	TWORD,
+	SAREG|AWD,	TWORD,
+		0,	RESCC,
+		"	cmpl	AL,AR\nZP",
+
+OPLOG,	FORCC,
+D 10
+	SAREG|AWD,	TSHORT|TUSHORT,
+	SAREG|AWD,	TSHORT|TUSHORT,
+E 10
+I 10
+	SAREG|AWD,	TSHORT,
+	SAREG|AWD,	TSHORT,
+E 10
+		0,	RESCC,
+		"	cmpw	AL,AR\nZP",
+
+OPLOG,	FORCC,
+D 10
+	SAREG|AWD,	TCHAR|TUCHAR,
+	SAREG|AWD,	TCHAR|TUCHAR,
+E 10
+I 10
+	SAREG|AWD,	TUSHORT,
+	SAREG|AWD,	TUSHORT,
+		0,	RESCC,
+		"	cmpw	AL,AR\nZP",
+
+OPLOG,	FORCC,
+	SAREG|AWD,	TCHAR,
+	SAREG|AWD,	TCHAR,
+		0,	RESCC,
+		"	cmpb	AL,AR\nZP",
+
+OPLOG,	FORCC,
+	SAREG|AWD,	TUCHAR,
+	SAREG|AWD,	TUCHAR,
+E 10
+		0,	RESCC,
+		"	cmpb	AL,AR\nZP",
+
+I 28
+/* optim2() handles degenerate comparisons with constants */
+E 28
+OPLOG,	FORCC,
+D 21
+	SAREG|AWD,	TSHORT|TUSHORT,
+	SSCON,	TANY,
+E 21
+I 21
+D 28
+	SAREG|AWD,	TSHORT,
+	SSCON,	ANYSIGNED,
+E 28
+I 28
+	SAREG|AWD,	TCHAR|TUCHAR|TSHORT|TUSHORT,
+	SCON,	ANYFIXED,
+E 28
+E 21
+		0,	RESCC,
+D 28
+		"	cmpw	AL,AR\nZP",
+E 28
+I 28
+		"	cmpZL	AL,AR\nZP",
+E 28
+
+OPLOG,	FORCC,
+D 21
+	SAREG|AWD,	TCHAR|TUCHAR,
+	SCCON,	TANY,
+E 21
+I 21
+D 28
+	SAREG|AWD,	TUSHORT,
+	SSCON,	ANYUSIGNED,
+E 21
+		0,	RESCC,
+I 21
+		"	cmpw	AL,AR\nZP",
+
+OPLOG,	FORCC,
+	SAREG|AWD,	TCHAR,
+	SCCON,	ANYSIGNED,
+		0,	RESCC,
+E 21
+		"	cmpb	AL,AR\nZP",
+
+OPLOG,	FORCC,
+I 21
+	SAREG|AWD,	TUCHAR,
+	SCCON,	ANYUSIGNED,
+		0,	RESCC,
+		"	cmpb	AL,AR\nZP",
+
+OPLOG,	FORCC,
+E 28
+E 21
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TDOUBLE,
+		0,	RESCC,
+		"	cmpd	AL,AR\nZP",
+
+OPLOG,	FORCC,
+D 28
+	SAREG|AWD,	TDOUBLE,
+E 28
+	SAREG|AWD,	TFLOAT,
+D 2
+		NAREG|NASR,	RESCC,
+E 2
+I 2
+D 5
+		NAREG,	RESCC,
+E 5
+I 5
+D 28
+		NAREG|NASR,	RESCC,
+E 5
+E 2
+		"	cvtfd	AR,A1\n	cmpd	AL,A1\nZP",
+
+OPLOG,	FORCC,
+E 28
+	SAREG|AWD,	TFLOAT,
+D 28
+	SAREG|AWD,	TDOUBLE,
+D 2
+		NAREG|NASL,	RESCC,
+E 2
+I 2
+D 5
+		NAREG,	RESCC,
+E 5
+I 5
+		NAREG|NASL,	RESCC,
+E 5
+E 2
+		"	cvtfd	AL,A1\n	cmpd	A1,AR\nZP",
+
+OPLOG,	FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TFLOAT,
+E 28
+		0,	RESCC,
+		"	cmpf	AL,AR\nZP",
+
+I 32
+#ifdef FORT
+/* this really ought to be taken care of farther upstream... XXX */
+OPLOG,	FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TDOUBLE,
+		NAREG|NASL,	RESCC,
+		"	cvtfd	AL,A1\n	cmpd	A1,AR\nZP",
+
+OPLOG,	FORCC,
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TFLOAT,
+		NAREG|NASR,	RESCC,
+		"	cvtfd	AR,A1\n	cmpd	AL,A1\nZP",
+#endif
+
+E 32
+CCODES,	INAREG|INTAREG,
+	SANY,	TANY,
+	SANY,	TANY,
+		NAREG,	RESC1,
+		"	movl	$1,A1\nZN",
+
+I 2
+D 6
+#ifdef FORT
+E 6
+I 6
+D 7
+#if defined(FORT) || defined(SPRECC)
+E 7
+E 6
+E 2
+UNARY CALL,	INTAREG,
+	SCON,	TANY,
+D 2
+	SANY,	TWORD|TCHAR|TUCHAR|TSHORT|TUSHORT|TFLOAT|TDOUBLE,
+E 2
+I 2
+D 7
+	SANY,	TFLOAT,
+		NAREG|NASL,	RESC1,
+		"	calls	ZC,CL\n",
+
+UNARY CALL,	INTAREG,
+	SCON,	TANY,
+	SANY,	TWORD|TCHAR|TUCHAR|TSHORT|TUSHORT|TDOUBLE,
+E 2
+		NAREG|NASL,	RESC1, /* should be register 0 */
+		"	calls	ZC,CL\n",
+
+I 2
+#else
+
+E 2
+UNARY CALL,	INTAREG,
+I 2
+	SCON,	TANY,
+E 7
+	SANY,	TWORD|TCHAR|TUCHAR|TSHORT|TUSHORT|TFLOAT|TDOUBLE,
+		NAREG|NASL,	RESC1,
+		"	calls	ZC,CL\n",
+D 7
+#endif
+E 7
+
+UNARY CALL,	INTAREG,
+E 2
+	SAREG,	TANY,
+	SANY,	TWORD|TCHAR|TUCHAR|TSHORT|TUSHORT|TFLOAT|TDOUBLE,
+		NAREG|NASL,	RESC1,	/* should be 0 */
+		"	calls	ZC,(AL)\n",
+
+UNARY CALL,	INAREG|INTAREG,
+	SNAME,	TANY,
+	SANY,	TANY,
+		NAREG|NASL,	RESC1,	/* really reg 0 */
+		"	calls	ZC,*AL\n",
+
+UNARY CALL,	INAREG|INTAREG,
+	SSOREG,	TANY,
+	SANY,	TANY,
+		NAREG|NASL,	RESC1,	/* really reg 0 */
+		"	calls	ZC,*AL\n",
+
+ASG RS,	INAREG|FOREFF|FORCC,
+	SAREG,	TWORD,
+D 21
+	SCON,	TINT,
+E 21
+I 21
+	SCON,	TINT|TUNSIGNED,
+E 21
+		0,	RLEFT|RESCC,
+		"	extzv	AR,ZU,AL,AL\n",
+
+ASG RS,	INAREG|FOREFF|FORCC,
+	SAREG,	TWORD,
+	SAREG,	ANYFIXED,
+		NAREG,	RLEFT|RESCC,
+		"	subl3	AR,$32,A1\n	extzv	AR,A1,AL,AL\n",
+
+ASG RS,	INAREG|FOREFF|FORCC,
+	SAREG,	TWORD,
+	SAREG|AWD,	TWORD,
+		NAREG,	RLEFT|RESCC,
+		"	subl3	AR,$32,A1\n	extzv	AR,A1,AL,AL\n",
+
+RS,	INAREG|INTAREG|FORCC,
+	SAREG,	TWORD,
+D 21
+	SCON,	TINT,
+E 21
+I 21
+	SCON,	TINT|TUNSIGNED,
+E 21
+		NAREG|NASL,	RESC1|RESCC,
+		"	extzv	AR,ZU,AL,A1\n",
+
+ASG LS,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TWORD,
+	SAREG|NIAWD,	ANYSIGNED|ANYUSIGNED,
+		0,	RLEFT|RESCC,
+		"	ashl	AR,AL,AL\n",
+
+ASG LS,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TWORD,
+	SSOREG,	ANYSIGNED|ANYUSIGNED,
+		0,	RLEFT|RESCC,
+		"	ashl	AR,AL,AL\n",
+
+ASG LS,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TWORD,
+	SOREG,	ANYSIGNED|ANYUSIGNED,
+		NAREG,	RLEFT|RESCC,
+		"	ZB	AR,A1\n	ashl	A1,AL,AL\n",
+
+LS,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TWORD,
+	SAREG|NIAWD,	ANYSIGNED|ANYUSIGNED,
+		NAREG|NASL|NASR,	RESC1|RESCC,
+		"	ashl	AR,AL,A1\n",
+
+LS,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TWORD,
+	SSOREG,	ANYSIGNED|ANYUSIGNED,
+		NAREG|NASL|NASR,	RESC1|RESCC,
+		"	ashl	AR,AL,A1\n",
+
+LS,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TWORD,
+	SOREG,	ANYSIGNED|ANYUSIGNED,
+		NAREG|NASR,	RESC1|RESCC,
+		"	ZB	AR,A1\n	ashl	A1,AL,A1\n",
+
+INCR,	FOREFF,
+D 28
+	AWD,	TANY,
+E 28
+I 28
+	SAREG|AWD,	TANY,
+E 28
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		0,	RLEFT,
+		"	ZE\n",
+
+DECR,	FOREFF,
+D 28
+	AWD,	TANY,
+E 28
+I 28
+	SAREG|AWD,	TANY,
+E 28
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		0,	RLEFT,
+		"	ZE\n",
+
+D 28
+INCR,	FOREFF,
+	SAREG,	TWORD,
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		0,	RLEFT,
+		"	ZE\n",
+
+DECR,	FOREFF,
+	SAREG,	TWORD,
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		0,	RLEFT,
+		"	ZE\n",
+
+/* jwf INCR and DECR for SAREG TCHAR|TSHORT matched by ASG PLUS etc */
+
+E 28
+INCR,	INAREG|INTAREG,
+D 28
+	AWD,	TANY,
+E 28
+I 28
+	SAREG|AWD,	TANY,
+E 28
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		NAREG,	RESC1,
+		"	ZD\n",
+
+DECR,	INAREG|INTAREG,
+D 28
+	AWD,	TANY,
+E 28
+I 28
+	SAREG|AWD,	TANY,
+E 28
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		NAREG,	RESC1,
+		"	ZD\n",
+I 30
+
+ASSIGN,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TFLOAT|TDOUBLE,
+	SAREG|AWD,	TUCHAR|TUSHORT,
+D 33
+		NAREG|NASL,	RLEFT|RESCC,
+E 33
+I 33
+		NAREG|NASR,	RLEFT|RESCC,
+E 33
+		"	ZA\n",
+E 30
+
+D 28
+INCR,	INAREG|INTAREG,
+	SAREG,	TWORD,
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		NAREG,	RESC1,
+		"	ZD\n",
+
+DECR,	INAREG|INTAREG,
+	SAREG,	TWORD,
+D 26
+	SCON,	TANY,
+E 26
+I 26
+	SCON|SNAME,	TANY,
+E 26
+		NAREG,	RESC1,
+		"	ZD\n",
+
+E 28
+ASSIGN,	INAREG|FOREFF|FORCC,
+I 2
+D 28
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TUCHAR|TUSHORT,
+		NAREG|NASR,	RLEFT|RESCC,
+		"	movzZRl	AR,A1\n	cvtld	A1,AL\n",
+
+ASSIGN,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TUCHAR|TUSHORT,
+		NAREG|NASR,	RLEFT|RESCC,
+		"	movzZRl	AR,A1\n	cvtlf	A1,AL\n",
+
+ASSIGN,	INAREG|FOREFF|FORCC,
+E 28
+E 2
+	SAREG|AWD,	TANY,
+	SAREG|AWD,	TANY,
+D 13
+		0,	RLEFT|RRIGHT|RESCC,
+E 13
+I 13
+		0,	RLEFT|RESCC,
+E 13
+		"	ZA\n",
+
+D 15
+ASSIGN,	INAREG|FOREFF,
+E 15
+I 15
+ASSIGN,	FOREFF,
+E 15
+	SFLD,	TANY,
+	SAREG|AWD,	TWORD,
+D 15
+		0,	RRIGHT,
+E 15
+I 15
+		0,	RNOP,
+E 15
+		"	insv	AR,$H,$S,AL\n",
+I 15
+
+ASSIGN,	INAREG,
+D 17
+	SFLD,	TANY,
+E 17
+I 17
+	SFLD,	ANYSIGNED,
+E 17
+	SAREG|AWD,	TWORD,
+		NAREG,	RESC1,
+		"	insv	AR,$H,$S,AL\n	extv	$H,$S,AL,A1\n",
+I 17
+
+ASSIGN,	INAREG,
+	SFLD,	ANYUSIGNED,
+	SAREG|AWD,	TWORD,
+		NAREG,	RESC1,
+		"	insv	AR,$H,$S,AL\n	extzv	$H,$S,AL,A1\n",
+E 17
+E 15
+
+ASSIGN,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TWORD,
+	SFLD,	ANYSIGNED,
+		0,	RLEFT|RESCC,
+		"	extv	$H,$S,AR,AL\n",
+
+ASSIGN,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TWORD,
+	SFLD,	ANYUSIGNED,
+		0,	RLEFT|RESCC,
+		"	extzv	$H,$S,AR,AL\n",
+
+/* dummy UNARY MUL entry to get U* to possibly match OPLTYPE */
+UNARY MUL,	FOREFF,
+	SCC,	TANY,
+	SCC,	TANY,
+		0,	RNULL,
+		"	HELP HELP HELP\n",
+
+I 16
+OREG,	INTEMP,
+	SANY,	TANY,
+	SOREG,	TDOUBLE,
+		2*NTEMP,	RESC1,
+D 28
+		"	movd	AR,A1\n",
+E 28
+I 28
+		"	movq	AR,A1\n",
+E 28
+
+OREG,	INTEMP,
+	SANY,	TANY,
+	SOREG,	TANY,
+		NTEMP,	RESC1,
+D 34
+		"	movZF	AR,A1\n",
+E 34
+I 34
+		"	movZR	AR,A1\n",
+E 34
+
+E 16
+REG,	INTEMP,
+	SANY,	TANY,
+	SAREG,	TDOUBLE,
+		2*NTEMP,	RESC1,
+D 28
+		"	movd	AR,A1\n",
+E 28
+I 28
+		"	movq	AR,A1\n",
+E 28
+
+REG,	INTEMP,
+	SANY,	TANY,
+	SAREG,	TANY,
+		NTEMP,	RESC1,
+		"	movZF	AR,A1\n",
+
+D 6
+#ifdef FORT
+ REG,	FORARG,
+E 6
+I 6
+#if defined(FORT) || defined(SPRECC)
+REG,	FORARG,
+E 6
+	SANY,	TANY,
+	SAREG,	TFLOAT,
+		0,	RNULL,
+		"	cvtfd	AR,-(sp)\n",
+
+REG,	FORARG,
+	SANY,	TANY,
+	SAREG,	TDOUBLE,
+		0,	RNULL,
+D 28
+		"	movZR	AR,-(sp)\n",
+E 28
+I 28
+		"	movq	AR,-(sp)\n",
+E 28
+#endif
+
+OPLEAF,	FOREFF,
+	SANY,	TANY,
+	SAREG|AWD,	TANY,
+		0,	RLEFT,
+		"",
+
+OPLTYPE,	INAREG|INTAREG,
+	SANY,	TANY,
+D 2
+	SANY,	TFLOAT|TDOUBLE,
+		2*NAREG|NASR,	RESC1,
+		"	ZA\n",
+
+OPLTYPE,	INAREG|INTAREG,
+E 2
+	SANY,	TANY,
+D 2
+	SANY,	TANY,
+E 2
+		NAREG|NASR,	RESC1,
+		"	ZA\n",
+
+OPLTYPE,	FORCC,
+	SANY,	TANY,
+	SANY,	TANY,
+		0,	RESCC,
+		"	tstZR	AR\n",
+
+OPLTYPE,	FORARG,
+	SANY,	TANY,
+D 28
+	SANY,	TWORD,
+		0,	RNULL,
+		"	pushl	AR\n",
+
+OPLTYPE,	FORARG,
+E 28
+	SANY,	TANY,
+D 27
+	SANY,	TCHAR|TSHORT,
+		0,	RNULL,
+		"	cvtZRl	AR,-(sp)\n",
+
+OPLTYPE,	FORARG,
+E 27
+D 28
+	SANY,	TANY,
+E 28
+D 27
+	SANY,	TUCHAR|TUSHORT,
+E 27
+		0,	RNULL,
+D 27
+		"	movzZRl	AR,-(sp)\n",
+
+OPLTYPE,	FORARG,
+	SANY,	TANY,
+	SANY,	TDOUBLE,
+		0,	RNULL,
+		"	movd	AR,-(sp)\n",
+
+OPLTYPE,	FORARG,
+	SANY,	TANY,
+	SANY,	TFLOAT,
+		0,	RNULL,
+		"	cvtfd	AR,-(sp)\n",
+E 27
+I 27
+		"	ZV\n",
+E 27
+
+I 2
+D 6
+#ifdef FORT
+E 6
+I 6
+#if defined(FORT) || defined(SPRECC)
+E 6
+E 2
+UNARY MINUS,	INTAREG|FORCC,
+I 2
+D 12
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG|TFLOAT|TDOUBLE,
+E 12
+I 12
+	SAREG|AWD,	TFLOAT,
+E 12
+	SANY,	TANY,
+		NAREG|NASL,	RESC1|RESCC,
+		"	mnegZL	TAL,A1\n",
+
+D 12
+#else
+E 12
+I 12
+#endif
+E 12
+
+UNARY MINUS,	INTAREG|FORCC,
+E 2
+D 28
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG|TDOUBLE,
+E 28
+I 28
+	SAREG|AWD,	TWORD|TDOUBLE,
+E 28
+	SANY,	TANY,
+		NAREG|NASL,	RESC1|RESCC,
+		"	mnegZL	AL,A1\n",
+I 2
+D 12
+#endif
+E 12
+E 2
+
+COMPL,	INTAREG|FORCC,
+D 11
+	SAREG|AWD,	TINT|TUNSIGNED,
+E 11
+I 11
+D 28
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+E 28
+I 28
+	SAREG|AWD,	TWORD,
+E 28
+E 11
+	SANY,	TANY,
+		NAREG|NASL,	RESC1|RESCC,
+		"	mcomZL	AL,A1\n",
+
+D 28
+COMPL,	INTAREG|FORCC,
+D 25
+	SAREG|AWD,	ANYSIGNED|ANYUSIGNED,
+E 25
+I 25
+	SAREG|AWD,	ANYSIGNED,
+E 25
+	SANY,	TANY,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtZLl	AL,A1\n	mcoml	A1,A1\n",
+I 25
+
+COMPL,	INTAREG|FORCC,
+	SAREG|AWD,	ANYUSIGNED,
+	SANY,	TANY,
+		NAREG|NASL,	RESC1|RESCC,
+		"	movzZLl	AL,A1\n	mcoml	A1,A1\n",
+E 25
+
+E 28
+AND,	FORCC,
+D 28
+	SAREG|AWD,	TWORD,
+	SCON,	TWORD,
+		0,	RESCC,
+		"	bitl	ZZ,AL\n",
+E 28
+I 28
+	SAREG|AWD,	TCHAR|TSHORT,
+	SCON,	ANYFIXED,
+		NAREG|NASL,	RESCC,
+		"	ZZ\n",
+E 28
+
+AND,	FORCC,
+D 28
+	SAREG|AWD,	TSHORT|TUSHORT,
+	SSCON,	TWORD,
+E 28
+I 28
+	SAREG|AWD,	TWORD|ANYUSIGNED,
+	SCON,	ANYFIXED,
+E 28
+		0,	RESCC,
+D 28
+		"	bitw	ZZ,AL\n",
+E 28
+I 28
+		"	ZZ\n",
+E 28
+
+D 28
+AND,	FORCC,
+	SAREG|AWD,	TCHAR|TUCHAR,
+	SCCON,	TWORD,
+		0,	RESCC,
+		"	bitb	ZZ,AL\n",
+
+E 28
+ASG AND,	INAREG|FOREFF|FORCC,
+	SAREG,	TWORD,
+	SCON,	TWORD,
+		0,	RLEFT|RESCC,
+		"	bicl2	AR,AL\n",
+
+I 28
+/* General cases for DIV and ASG DIV are handled below with OPMUL */
+/* Some special cases are handled in optim2() */
+
+E 28
+I 19
+DIV,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TUNSIGNED|TULONG,
+D 24
+	SCON,	TANY,
+E 24
+I 24
+	SCON,	ANYUSIGNED,
+E 24
+		NAREG|NEVEN,	RESC1|RESCC,
+D 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	A1,AR,A1,U1\n",
+E 20
+I 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,A1,U1\n",
+E 20
+
+ASG DIV,	INAREG|FOREFF|FORCC,
+D 28
+	SAREG|AWD,	TUNSIGNED|TULONG,
+E 28
+I 28
+	SAREG|AWD,	TINT|TLONG|TUNSIGNED|TULONG,
+E 28
+D 24
+	SMCON,	TANY,
+E 24
+I 24
+	SMCON,	ANYUSIGNED,
+E 24
+		0,	RLEFT|RESCC,
+		"	ZJ\n",
+
+ASG DIV,	INAREG|FOREFF|FORCC,
+D 28
+	SAREG|AWD,	TUNSIGNED|TULONG,
+E 28
+I 28
+	SAREG|AWD,	TINT|TLONG|TUNSIGNED|TULONG,
+E 28
+D 24
+	SCON,	TANY,
+E 24
+I 24
+	SCON,	ANYUSIGNED,
+E 24
+		NAREG|NEVEN,	RLEFT|RESCC,
+D 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	A1,AR,AL,U1\n",
+E 20
+I 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,AL,U1\n",
+E 20
+
+I 22
+D 28
+ASG DIV,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TINT|TLONG,
+	SMCON,	ANYUSIGNED,
+		0,	RLEFT|RESCC,
+		"	ZJ\n",
+
+ASG DIV,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TINT|TLONG,
+	SCON,	ANYUSIGNED,
+		NAREG|NEVEN,	RLEFT|RESCC,
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,AL,U1\n",
+
+E 28
+E 22
+MOD,	INAREG|INTAREG,
+	SAREG|AWD,	TINT|TLONG,
+	SAREG|AWD,	TINT|TLONG,
+		NAREG,	RESC1,
+		"	divl3	AR,AL,A1\n	mull2	AR,A1\n	subl3	A1,AL,A1\n",
+
+MOD,	INAREG|FOREFF,
+	SAREG|AWD,	TUNSIGNED|TULONG,
+D 24
+	SMCON,	TANY,
+E 24
+I 24
+	SMCON,	ANYUSIGNED,
+E 24
+		NAREG|NASL,	RLEFT|RESC1,
+		"	ZJ\n",
+
+D 23
+MOD,	FORCC,
+	SAREG|AWD,	TUNSIGNED|TULONG,
+	SMCON,	TANY,
+		NAREG|NASL,	RESCC,
+		"	ZJ\n	tstl	A1\n",
+
+E 23
+MOD,	INAREG|FOREFF,
+	SAREG|AWD,	TUNSIGNED|TULONG,
+D 24
+	SCON,	TANY,
+E 24
+I 24
+	SCON,	ANYUSIGNED,
+E 24
+D 28
+		NAREG|NEVEN,	RESC1|RESCC,
+E 28
+I 28
+		NAREG|NEVEN,	RESC1,
+E 28
+D 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	A1,AR,U1,A1\n",
+E 20
+I 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,U1,A1\n",
+E 20
+
+D 23
+MOD,	FORCC,
+	SAREG|AWD,	TUNSIGNED|TULONG,
+	SCON,	TANY,
+		NAREG|NEVEN,	RESC1|RESCC,
+D 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	A1,AR,U1,A1\n	tstl	A1\n",
+E 20
+I 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,U1,A1\n	tstl	A1\n",
+E 20
+
+E 23
+D 24
+ASG MOD,	INAREG|INTAREG|FOREFF|FORCC,
+	SAREG,	TINT|TLONG,
+E 24
+I 24
+/* should only see UNSIGNED lhs here if converted from UCHAR/USHORT lhs */
+ASG MOD,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TINT|TLONG|TUNSIGNED|TULONG,
+E 24
+	SAREG|AWD,	TINT|TLONG,
+		NAREG,	RLEFT|RESCC,
+		"	divl3	AR,AL,A1\n	mull2	AR,A1\n	subl2	A1,AL\n",
+
+ASG MOD,	INAREG|FOREFF,
+D 28
+	SAREG|AWD,	TUNSIGNED|TULONG,
+E 28
+I 28
+	SAREG|AWD,	TINT|TLONG|TUNSIGNED|TULONG,
+E 28
+D 24
+	SMCON,	TANY,
+E 24
+I 24
+	SMCON,	ANYUSIGNED,
+E 24
+D 28
+		0,	RLEFT|RESCC,
+E 28
+I 28
+		0,	RLEFT,
+E 28
+		"	ZJ\n",
+
+D 23
+ASG MOD,	FORCC,
+	SAREG|AWD,	TUNSIGNED|TULONG,
+	SMCON,	TANY,
+		0,	RLEFT|RESCC,
+		"	ZJ\n	tstl	AL\n",
+
+E 23
+ASG MOD,	INAREG|FOREFF,
+D 28
+	SAREG|AWD,	TUNSIGNED|TULONG,
+E 28
+I 28
+	SAREG|AWD,	TINT|TLONG|TUNSIGNED|TULONG,
+E 28
+D 24
+	SCON,	TANY,
+E 24
+I 24
+	SCON,	ANYUSIGNED,
+E 24
+D 28
+		NAREG|NEVEN,	RLEFT|RESCC,
+E 28
+I 28
+		NAREG|NEVEN,	RLEFT,
+E 28
+D 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	A1,AR,A1,AL\n",
+E 20
+I 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,A1,AL\n",
+E 20
+
+D 23
+ASG MOD,	FORCC,
+	SAREG|AWD,	TUNSIGNED|TULONG,
+	SCON,	TANY,
+I 22
+		NAREG|NEVEN,	RLEFT|RESCC,
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,A1,AL\n	tstl	AL\n",
+
+
+E 23
+D 28
+ASG MOD,	INAREG|FOREFF,
+	SAREG|AWD,	TINT|TLONG,
+	SMCON,	ANYUSIGNED,
+		0,	RLEFT|RESCC,
+		"	ZJ\n",
+
+D 23
+ASG MOD,	FORCC,
+	SAREG|AWD,	TINT|TLONG,
+	SMCON,	ANYUSIGNED,
+		0,	RLEFT|RESCC,
+		"	ZJ\n	tstl	AL\n",
+
+E 23
+ASG MOD,	INAREG|FOREFF,
+	SAREG|AWD,	TINT|TLONG,
+	SCON,	ANYUSIGNED,
+		NAREG|NEVEN,	RLEFT|RESCC,
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,A1,AL\n",
+D 23
+
+ASG MOD,	FORCC,
+	SAREG|AWD,	TINT|TLONG,
+	SCON,	ANYUSIGNED,
+E 22
+		NAREG|NEVEN,	RLEFT|RESCC,
+D 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	A1,AR,A1,AL\n	tstl	AL\n",
+E 20
+I 20
+		"	movl	AL,A1\n	clrl	U1\n	ediv	AR,A1,A1,AL\n	tstl	AL\n",
+E 23
+E 20
+
+E 28
+E 19
+ASG OPMUL,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+		0,	RLEFT|RESCC,
+		"	OL2	AR,AL\n",
+
+OPMUL,	INAREG|INTAREG|FORCC,
+	STAREG,	TINT|TUNSIGNED|TLONG|TULONG,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+		0,	RLEFT|RESCC,
+		"	OL2	AR,AL\n",
+
+OPMUL,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+		NAREG|NASL|NASR,	RESC1|RESCC,
+		"	OL3	AR,AL,A1\n",
+D 19
+
+ASG MOD,	INAREG|INTAREG|FOREFF|FORCC,
+	SAREG,	TINT|TUNSIGNED|TLONG|TULONG,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+		NAREG,	RLEFT|RESCC,
+		"	divl3	AR,AL,A1\n	mull2	AR,A1\n	subl2	A1,AL\n",
+
+MOD,	INAREG|INTAREG,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+	SAREG|AWD,	TINT|TUNSIGNED|TLONG|TULONG,
+		NAREG,	RESC1,
+		"	divl3	AR,AL,A1\n	mull2	AR,A1\n	subl3	A1,AL,A1\n",
+E 19
+
+ASG PLUS,	INAREG|FOREFF|FORCC,
+D 28
+	SAREG,	TPOINT|TINT|TLONG|TUNSIGNED|TULONG,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 28
+I 28
+	SAREG|AWD,	ANYFIXED,
+	SONE,	TANY,
+E 28
+E 21
+		0,	RLEFT|RESCC,
+		"	incZL	AL\n",
+
+D 28
+ASG PLUS,	INAREG|FOREFF|FORCC,
+	AWD,	ANYSIGNED|ANYUSIGNED,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 21
+		0,	RLEFT|RESCC,
+		"	incZL	AL\n",
+
+ASG PLUS,	INAREG|FOREFF|FORCC,
+	SAREG,	TSHORT|TCHAR,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 21
+		0,	RLEFT|RESCC,
+		"	incZL	AL\n	cvtZLl	AL,AL\n",
+
+ASG PLUS,	INAREG|FOREFF|FORCC,
+	SAREG,	TUSHORT|TUCHAR,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 21
+		0,	RLEFT|RESCC,
+		"	incZL	AL\n	movzZLl	AL,AL\n",
+
+E 28
+ASG MINUS,	INAREG|FOREFF|FORCC,
+D 28
+	SAREG,	TPOINT|TINT|TLONG|TUNSIGNED|TULONG,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 28
+I 28
+	SAREG|AWD,	ANYFIXED,
+	SONE,	TANY,
+E 28
+E 21
+		0,	RLEFT|RESCC,
+		"	decZL	AL\n",
+
+D 28
+ASG MINUS,	INAREG|FOREFF|FORCC,
+	AWD,	ANYSIGNED|ANYUSIGNED,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 21
+		0,	RLEFT|RESCC,
+		"	decZL	AL\n",
+
+ASG MINUS,	INAREG|FOREFF|FORCC,
+	SAREG,	TSHORT|TCHAR,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 21
+		0,	RLEFT|RESCC,
+		"	decZL	AL\n	cvtZLl	AL,AL\n",
+
+ASG MINUS,	INAREG|FOREFF|FORCC,
+	SAREG,	TUSHORT|TUCHAR,
+D 21
+	SONE,	TINT|TLONG,
+E 21
+I 21
+	SONE,	TINT|TUNSIGNED|TLONG|TULONG,
+E 21
+		0,	RLEFT|RESCC,
+		"	decZL	AL\n	movzZLl	AL,AL\n",
+
+E 28
+PLUS,	INAREG|INTAREG|FORCC,
+	STAREG,	TWORD,
+	SONE,	TWORD,
+		0,	RLEFT|RESCC,
+		"	incZL	AL\n",
+
+D 28
+PLUS,	INAREG|INTAREG|FORCC,
+	STAREG,	TSHORT|TCHAR,
+	SONE,	TWORD,
+		0,	RLEFT|RESCC,
+		"	incZL	AL\n	cvtZLl	AL,AL\n",
+
+PLUS,	INAREG|INTAREG|FORCC,
+	STAREG,	TUSHORT|TUCHAR,
+	SONE,	TWORD,
+		0,	RLEFT|RESCC,
+		"	incZL	AL\n	movzZLl	AL,AL\n",
+
+E 28
+MINUS,	INAREG|INTAREG|FORCC,
+	STAREG,	TWORD,
+	SONE,	TWORD,
+		0,	RLEFT|RESCC,
+		"	decZL	AL\n",
+
+D 28
+MINUS,	INAREG|INTAREG|FORCC,
+	STAREG,	TSHORT|TCHAR,
+	SONE,	TWORD,
+		0,	RLEFT|RESCC,
+		"	decZL	AL\n	cvtZLl	AL,AL\n",
+
+MINUS,	INAREG|INTAREG|FORCC,
+	STAREG,	TUSHORT|TUCHAR,
+	SONE,	TWORD,
+		0,	RLEFT|RESCC,
+		"	decZL	AL\n	movzZLl	AL,AL\n",
+
+E 28
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TWORD,
+	SAREG|AWD,	TWORD,
+		0,	RLEFT|RESCC,
+		"	OL2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+D 28
+	SAREG,	TWORD,
+	SAREG,	TSHORT|TUSHORT|TCHAR|TUCHAR,
+		0,	RLEFT|RESCC,
+		"	OL2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+E 28
+	AWD,	TSHORT|TUSHORT,
+D 18
+	SAREG|AWD,	TSHORT|TUSHORT,
+E 18
+I 18
+D 28
+	SSOREG,	TSHORT|TUSHORT|TINT|TUNSIGNED,
+E 28
+I 28
+	SAREG|SNAME|STARNM,	TSHORT|TUSHORT|TINT|TUNSIGNED|TLONG|TULONG,
+E 28
+E 18
+		0,	RLEFT|RESCC,
+		"	OW2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	AWD,	TSHORT|TUSHORT,
+D 18
+	SSCON,	TWORD,
+E 18
+I 18
+D 28
+	SAREG|SNAME|STARNM,	TSHORT|TUSHORT|TINT|TUNSIGNED,
+E 28
+I 28
+	SSOREG,	TSHORT|TUSHORT|TINT|TUNSIGNED|TLONG|TULONG,
+E 28
+E 18
+		0,	RLEFT|RESCC,
+		"	OW2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+I 18
+	AWD,	TSHORT|TUSHORT,
+	SSCON,	ANYFIXED,
+		0,	RLEFT|RESCC,
+		"	OW2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	AWD,	TSHORT|TUSHORT,
+	AWD,	TSHORT|TUSHORT,
+		0,	RLEFT|RESCC,
+		"	OW2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+E 18
+	AWD,	TCHAR|TUCHAR,
+D 18
+	SAREG|AWD,	TCHAR|TUCHAR,
+E 18
+I 18
+	SSOREG,	ANYFIXED,
+E 18
+		0,	RLEFT|RESCC,
+		"	OB2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	AWD,	TCHAR|TUCHAR,
+D 18
+	SCCON,	TWORD,
+E 18
+I 18
+	SAREG|SNAME|STARNM,	ANYFIXED,
+		0,	RLEFT|RESCC,
+		"	OB2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	AWD,	TCHAR|TUCHAR,
+	SCCON,	ANYFIXED,
+		0,	RLEFT|RESCC,
+		"	OB2	AR,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	AWD,	TCHAR|TUCHAR,
+	AWD,	TCHAR|TUCHAR,
+E 18
+		0,	RLEFT|RESCC,
+		"	OB2	AR,AL\n",
+
+D 28
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	SAREG,	TSHORT,
+	SAREG|AWD,	ANYFIXED,
+		0,	RLEFT|RESCC,
+		"	OW2	AR,AL\n	cvtZLl	AL,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	SAREG,	TUSHORT,
+	SAREG|AWD,	ANYFIXED,
+		0,	RLEFT|RESCC,
+		"	OW2	AR,AL\n	movzZLl	AL,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	SAREG,	TCHAR,
+	SAREG|AWD,	ANYFIXED,
+		0,	RLEFT|RESCC,
+		"	OB2	AR,AL\n	cvtZLl	AL,AL\n",
+
+ASG OPSIMP,	INAREG|FOREFF|FORCC,
+	SAREG,	TUCHAR,
+	SAREG|AWD,	ANYFIXED,
+		0,	RLEFT|RESCC,
+		"	OB2	AR,AL\n	movzZLl	AL,AL\n",
+
+E 28
+OPSIMP,	INAREG|INTAREG|FORCC,
+	STAREG,	ANYFIXED,
+	SAREG|AWD,	TWORD,
+		0,	RLEFT|RESCC,
+		"	OL2	AR,AL\n",
+
+OPSIMP,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TWORD,
+	SAREG|AWD,	TWORD,
+		NAREG|NASL|NASR,	RESC1|RESCC,
+		"	OL3	AR,AL,A1\n",
+
+ASG OPFLOAT,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TDOUBLE,
+		0,	RLEFT|RESCC,
+		"	OD2	AR,AL\n",
+
+ASG OPFLOAT,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TFLOAT,
+		0,	RLEFT|RESCC,
+I 4
+D 6
+#ifdef FORT
+E 6
+I 6
+#if defined(FORT) || defined(SPRECC)
+E 6
+		"	OF2	AR,TAL\n",
+#else
+E 4
+		"	OF2	AR,AL\n",
+I 4
+#endif
+E 4
+
+D 28
+ASG OPFLOAT,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TFLOAT,
+		NAREG|NASR,	RLEFT|RESCC,
+		"	cvtfd	AR,A1\n	OD2	A1,AL\n",
+
+E 28
+ASG OPFLOAT,	INAREG|INTAREG|FOREFF|FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TDOUBLE,
+		NAREG,	RLEFT|RESC1|RESCC,
+		"	cvtfd	AL,A1\n	OD2	AR,A1\n	cvtdf	A1,AL\n",
+I 14
+
+ASG OPFLOAT,	INAREG|FOREFF|FORCC,
+	SAREG|AWD,	ANYFIXED,
+#ifndef SPRECC
+	SAREG|AWD,	TDOUBLE,		/* force FLOAT to register */
+#else
+	SAREG|AWD,	TFLOAT|TDOUBLE,
+#endif
+		NAREG,	RLEFT|RESCC,	/* usable() knows we need a reg pair */
+		"	ZG\n",
+E 14
+
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	STAREG,	TDOUBLE,
+	SAREG|AWD,	TDOUBLE,
+		0,	RLEFT|RESCC,
+		"	OD2	AR,AL\n",
+
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TDOUBLE,
+		NAREG|NASL|NASR,	RESC1|RESCC,
+		"	OD3	AR,AL,A1\n",
+
+D 28
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TDOUBLE,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtfd	AL,A1\n	OD2	AR,A1\n",
+
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TFLOAT,
+		NAREG|NASR,	RESC1|RESCC,
+		"	cvtfd	AR,A1\n	OD3	A1,AL,A1\n",
+
+E 28
+D 6
+#ifdef FORT
+E 6
+I 6
+#if defined(FORT) || defined(SPRECC)
+E 6
+OPFLOAT,	INAREG|INTAREG|FORCC,
+D 4
+	STAREG,	TFLOAT,
+    SAREG|AWD,  TFLOAT,
+E 4
+I 4
+	STAREG,		TFLOAT,
+	SAREG|AWD,	TFLOAT,
+E 4
+		0,	RLEFT|RESCC,
+D 4
+		"	OF2	TAR,AL\n",
+E 4
+I 4
+		"	OF2	AR,TAL\n",
+E 4
+
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TFLOAT,
+		NAREG|NASL|NASR,	RESC1|RESCC,
+		"	OF3	AR,AL,TA1\n",
+D 4
+
+#else
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TFLOAT,
+		NAREG|NASL|NASR,	RESC1|RESCC,
+		"	OF3	AR,AL,A1\n	cvtfd	A1,A1\n",
+E 4
+#endif
+
+I 31
+#ifdef FORT
+/* perform some implicit conversions XXX SHOULD FIX f77 FRONT END */
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TFLOAT,
+	SAREG|AWD,	TDOUBLE,
+		NAREG|NASL,	RESC1|RESCC,
+		"	cvtfd	AL,A1\n	OD2	AR,A1\n",
+
+OPFLOAT,	INAREG|INTAREG|FORCC,
+	SAREG|AWD,	TDOUBLE,
+	SAREG|AWD,	TFLOAT,
+		NAREG|NASR,	RESC1|RESCC,
+		"	cvtfd	AR,A1\n	OD3	A1,AL,A1\n",
+#endif
+
+E 31
+	/* Default actions for hard trees ... */
+
+# define DF(x) FORREW,SANY,TANY,SANY,TANY,REWRITE,x,""
+
+UNARY MUL, DF( UNARY MUL ),
+
+INCR, DF(INCR),
+
+DECR, DF(INCR),
+
+ASSIGN, DF(ASSIGN),
+
+STASG, DF(STASG),
+
+FLD, DF(FLD),
+
+OPLEAF, DF(NAME),
+
+OPLOG,	FORCC,
+	SANY,	TANY,
+	SANY,	TANY,
+		REWRITE,	BITYPE,
+		"",
+
+OPLOG,	DF(NOT),
+
+COMOP, DF(COMOP),
+
+INIT, DF(INIT),
+
+OPUNARY, DF(UNARY MINUS),
+D 28
+
+E 28
+
+ASG OPANY, DF(ASG PLUS),
+
+OPANY, DF(BITYPE),
+
+FREE,	FREE,	FREE,	FREE,	FREE,	FREE,	FREE,	FREE,	"help; I'm in trouble\n" };
+E 1

@@ -1,0 +1,72 @@
+h22584
+s 00001/00001/00017
+d D 6.3 86/05/27 10:07:18 kjd 5 4
+c fix quote
+e
+s 00001/00001/00017
+d D 6.2 86/05/12 18:26:00 karels 4 3
+c correct error message
+e
+s 00001/00001/00017
+d D 6.1 85/05/15 14:52:14 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00005/00002/00013
+d D 5.1 85/05/15 14:52:03 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00015/00000/00000
+d D 4.1 85/05/15 14:51:54 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH ABORT 3
+E 2
+I 2
+D 3
+.TH ABORT 3 "18 January 1983"
+E 3
+I 3
+.TH ABORT 3 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+abort \- generate a fault
+.SH DESCRIPTION
+.I Abort
+executes an instruction which is illegal in user mode.
+This causes a signal that normally terminates
+the process with a core dump, which may be used for debugging.
+.SH SEE ALSO
+D 2
+adb(1), signal(2), exit(2)
+E 2
+I 2
+adb(1), sigvec(2), exit(2)
+E 2
+.SH DIAGNOSTICS
+D 4
+Usually `IOT trap \- core dumped' from the shell.
+E 4
+I 4
+D 5
+Usually `Illegal instruction \- core dumped' from the shell.
+E 5
+I 5
+Usually ``Illegal instruction \- core dumped'' from the shell.
+E 5
+E 4
+I 2
+.SH BUGS
+The abort() function does not flush standard I/O buffers.  Use
+\fIfflush\fP\|(3S).
+E 2
+E 1

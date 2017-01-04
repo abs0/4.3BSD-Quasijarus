@@ -1,0 +1,119 @@
+h03282
+s 00010/00005/00057
+d D 6.4 88/07/09 11:31:57 bostic 5 4
+c install approved copyright notice
+e
+s 00008/00002/00054
+d D 6.3 88/05/20 12:22:46 bostic 4 3
+c add Berkeley specific header
+e
+s 00001/00001/00055
+d D 6.2 86/05/19 19:15:02 karels 3 2
+c spelling
+e
+s 00001/00001/00055
+d D 6.1 85/04/27 14:55:35 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00056/00000/00000
+d D 5.1 85/04/27 14:55:19 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+D 4
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 4
+I 4
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 5
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 5
+I 5
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 5
+E 4
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH EDQUOTA 8 "18 July 1983"
+E 2
+I 2
+.TH EDQUOTA 8 "%Q%"
+E 2
+.UC 5
+.SH NAME
+edquota \- edit user quotas
+.SH SYNOPSIS
+.B edquota
+[
+.B \-p
+.I proto-user
+]
+.IR users ...
+.SH DESCRIPTION
+.I Edquota
+is a quota editor.  One or more users
+may be specified on the command line.
+For each user a temporary file is created
+with an ASCII representation of the current
+disc quotas for that user and an editor is
+then invoked on the file.  The quotas may then
+be modified, new quotas added, etc.  Upon
+leaving the editor,
+.I edquota
+reads the temporary file and modifies the binary
+quota files to reflect the changes made.
+.PP
+If the 
+.B \-p
+option is specified,
+.I edquota
+will duplicate the quotas of the prototypical user
+specified for each user specified.  This is the normal
+mechanism used to initialize quotas for groups
+of users.
+.PP
+The editor invoked is 
+.IR vi (1)
+unless the environment variable EDITOR specifies otherwise.
+.PP
+Only the super-user may edit quotas.
+.SH FILES
+.DT
+\fIquotas\fP		at the root of each file system with quotas
+.br
+/etc/fstab	to find file system names and locations
+.SH SEE ALSO
+quota(1), quota(2), quotacheck(8), quotaon(8), repquota(8)
+.SH DIAGNOSTICS
+Various messages about inaccessible files; self-explanatory.
+.SH BUGS
+D 3
+The format of the temporary file is inscruitable.
+E 3
+I 3
+The format of the temporary file is inscrutable.
+E 3
+E 1

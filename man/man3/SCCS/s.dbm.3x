@@ -1,0 +1,308 @@
+h18972
+s 00006/00000/00121
+d D 6.3 86/05/12 17:59:47 karels 5 4
+c refer to ndbm
+e
+s 00002/00000/00119
+d D 6.2 86/03/14 04:02:49 donn 4 3
+c document include file
+e
+s 00001/00001/00118
+d D 6.1 85/05/15 15:08:40 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00029/00063/00090
+d D 5.1 85/05/15 15:08:28 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00153/00000/00000
+d D 4.1 85/05/15 15:08:16 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH DBM 3X 
+E 2
+I 2
+D 3
+.TH DBM 3X  "19 January 1983"
+E 3
+I 3
+.TH DBM 3X  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+dbminit, fetch, store, delete, firstkey, nextkey \- data base subroutines
+.SH SYNOPSIS
+.nf
+.PP
+I 4
+.B "#include <dbm.h>"
+.PP
+E 4
+.B typedef struct {
+.B "	char *dptr;"
+.B "	int dsize;"
+.B } datum;
+.PP
+.B dbminit(file)
+.B char *file;
+.PP
+.B datum fetch(key)
+.B datum key;
+.PP
+.B store(key, content)
+.B datum key, content;
+.PP
+.B delete(key)
+.B datum key;
+.PP
+.B datum firstkey()
+.PP
+.B datum nextkey(key)
+.B datum key;
+.SH DESCRIPTION
+I 5
+.ft B
+Note: the dbm library has been superceded by ndbm(3),
+and is now implemented using ndbm.
+.ft R
+E 5
+D 2
+These functions maintain
+key/content pairs in a data base.
+The functions will handle very large
+(a billion blocks)
+databases and will access a keyed item
+in one or two file system accesses.
+E 2
+I 2
+These functions maintain key/content pairs in a data base.
+The functions will handle very large (a billion blocks)
+databases and will access a keyed item in one or two file system accesses.
+E 2
+The functions are obtained with the loader option
+.BR \-ldbm .
+.PP
+.IR Key s
+and
+.IR content s
+D 2
+are
+described by the
+E 2
+I 2
+are described by the
+E 2
+.I datum
+D 2
+typedef.
+A
+E 2
+I 2
+typedef.  A
+E 2
+.I datum
+specifies a string of
+.I dsize
+bytes pointed to by
+.I dptr.
+D 2
+Arbitrary binary data, as well as normal
+ASCII strings, are allowed.
+E 2
+I 2
+Arbitrary binary data, as well as normal ASCII strings, are allowed.
+E 2
+The data base is stored in two files.
+D 2
+One file is a directory containing a bit map
+and has `.dir' as its suffix.
+The second file contains all data and
+has `.pag' as its suffix.
+E 2
+I 2
+One file is a directory containing a bit map and has `.dir' as its suffix.
+The second file contains all data and has `.pag' as its suffix.
+E 2
+.PP
+D 2
+Before a database can be accessed,
+it must be opened by
+E 2
+I 2
+Before a database can be accessed, it must be opened by
+E 2
+.I dbminit.
+D 2
+At the time of this call,
+the files
+E 2
+I 2
+At the time of this call, the files
+E 2
+.IB file .dir
+and
+.IB file .pag
+must exist.
+D 2
+(An empty database is created by
+creating zero-length
+E 2
+I 2
+(An empty database is created by creating zero-length
+E 2
+`.dir' and `.pag' files.)
+.PP
+D 2
+Once open,
+the data stored under a key is
+accessed by
+E 2
+I 2
+Once open, the data stored under a key is accessed by
+E 2
+.I fetch
+D 2
+and data is placed under a key
+by
+E 2
+I 2
+and data is placed under a key by
+E 2
+.IR store .
+D 2
+A key (and its associated contents)
+is deleted by
+E 2
+I 2
+A key (and its associated contents) is deleted by
+E 2
+.IR delete .
+D 2
+A linear pass through all keys in a database
+may be made,
+in an (apparently) random order,
+by use of
+E 2
+I 2
+A linear pass through all keys in a database may be made,
+in an (apparently) random order, by use of
+E 2
+.I firstkey
+and
+.IR nextkey .
+.I Firstkey
+D 2
+will return the first key
+in the database.
+With any key
+E 2
+I 2
+will return the first key in the database.  With any key
+E 2
+.I nextkey
+will return the next key in the database.
+This code will traverse the data base:
+.IP
+.B for
+(key = firstkey(); key.dptr != NULL; key = nextkey(key))
+.SH DIAGNOSTICS
+All functions that return an
+.I int
+D 2
+indicate errors with negative values.
+A zero return indicates ok.
+E 2
+I 2
+indicate errors with negative values.  A zero return indicates ok.
+E 2
+Routines that return a
+.I datum
+indicate errors with a null (0)
+.I dptr.
+I 5
+.SH SEE ALSO
+ndbm(3)
+E 5
+.SH BUGS
+D 2
+The
+`.pag'
+file will contain holes so
+that its apparent size is about
+four times its actual content.
+Older UNIX systems may create real
+file blocks for these holes when touched.
+These files cannot be copied
+by normal means (cp, cat, tp, tar, ar)
+without filling in the holes.
+E 2
+I 2
+The `.pag' file will contain holes so that its apparent size is about
+four times its actual content.  Older UNIX systems may create real
+file blocks for these holes when touched.  These files cannot be copied
+by normal means (cp, cat, tp, tar, ar) without filling in the holes.
+E 2
+.PP
+.I Dptr
+D 2
+pointers returned
+by these subroutines
+point into static storage
+E 2
+I 2
+pointers returned by these subroutines point into static storage
+E 2
+that is changed by subsequent calls.
+.PP
+D 2
+The sum of the sizes of
+a
+key/content pair must not exceed
+the internal block size
+(currently 1024 bytes).
+Moreover all key/content pairs that hash
+together must fit on a single block.
+E 2
+I 2
+The sum of the sizes of a key/content pair must not exceed
+the internal block size (currently 1024 bytes).
+Moreover all key/content pairs that hash together must fit on a single block.
+E 2
+.I Store
+D 2
+will return an error in the event that
+a disk block fills with inseparable data.
+E 2
+I 2
+will return an error in the event that a disk block fills with inseparable data.
+E 2
+.PP
+.I Delete
+does not physically reclaim file space,
+although it does make it available for reuse.
+.PP
+The order of keys presented by
+.I firstkey
+and
+.I nextkey
+D 2
+depends on a hashing function, not on anything
+interesting.
+E 2
+I 2
+depends on a hashing function, not on anything interesting.
+E 2
+E 1

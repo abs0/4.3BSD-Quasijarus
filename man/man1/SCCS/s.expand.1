@@ -1,0 +1,99 @@
+h24111
+s 00002/00002/00051
+d D 6.2 86/05/09 08:16:08 anne 4 3
+c grammar
+e
+s 00001/00001/00052
+d D 6.1 85/04/29 14:24:04 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00001/00002/00052
+d D 5.1 85/04/29 14:23:57 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00054/00000/00000
+d D 4.1 85/04/29 14:23:50 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH EXPAND 1
+E 2
+I 2
+D 3
+.TH EXPAND 1 "18 January 1983"
+E 3
+I 3
+.TH EXPAND 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+expand, unexpand \- expand tabs to spaces, and vice versa
+.SH SYNOPSIS
+.B expand
+[
+\-tabstop
+] [
+\-tab1,tab2,...,tabn
+] [
+file ...
+]
+.br
+.B unexpand
+[
+.B \-a
+] [
+file ...
+]
+.SH DESCRIPTION
+.I Expand
+processes the named files or the standard input writing
+the standard output with tabs changed into blanks.
+Backspace characters are preserved into the output and decrement
+the column count for tab calculations.
+.I Expand
+is useful for pre-processing character files
+(before sorting, looking at specific columns, etc.) that
+contain tabs.
+.PP
+If a single
+.I tabstop
+D 4
+argument is given then tabs are set
+E 4
+I 4
+argument is given, then tabs are set
+E 4
+.I tabstop
+spaces apart instead of the default 8.
+If multiple tabstops are given then the tabs are set at those
+specific columns.
+.PP
+.I Unexpand
+puts tabs back into the data from the standard input or the named
+files and writes the result on the standard output.
+D 4
+By default only leading blanks and tabs
+E 4
+I 4
+By default, only leading blanks and tabs
+E 4
+are reconverted to maximal strings of tabs.  If the
+.B \-a
+option is given, then tabs are inserted whenever they would compress the
+resultant file by replacing two or more characters.
+D 2
+.SH BUGS
+E 2
+E 1

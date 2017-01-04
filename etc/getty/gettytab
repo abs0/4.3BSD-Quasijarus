@@ -2,7 +2,7 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)gettytab	5.9 (Berkeley) 12/22/86
+#	@(#)gettytab	5.12 (Berkeley) 12/8/04
 #
 #
 # Most of the table entries here are just copies of the
@@ -48,6 +48,16 @@ f|std.1200|1200-baud:\
 	:sp#9600:
 g|std.19200|19200-baud:\
 	:sp#19200:
+h|std.38400|38400-baud:\
+	:sp#38400:
+
+# 8-bit terminals
+8bit.9600:\
+	:p8:sp#9600:bd#0:cd#0:fd#0:nd#0:td#0:
+8bit.19200:\
+	:p8:sp#19200:bd#0:cd#0:fd#0:nd#0:td#0:
+8bit.38400:\
+	:p8:sp#38400:bd#0:cd#0:fd#0:nd#0:td#0:
 
 #
 # Dial in rotary tables, speed selection via 'break'

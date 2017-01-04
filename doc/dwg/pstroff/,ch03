@@ -1,0 +1,151 @@
+.\"	%W% (Falcon) %E%
+.\"
+.\" The following tps instructions are used only when
+.\" troffing this chapter separately (editing drafts).
+.\"
+.\" Fonts: R,I,B,BI,S,S1,Lr,Li,Lb,C
+.\" Macros: -ms defs
+.\" Preproc: tbl
+.\" Pstfinish: full
+.\"
+.Ch "Chapter 3" "Extended troff compatibility and special fonts"
+.PP
+Some historical troff document sources, particularly those that
+describe the troff toolchain itself, exercise the old troff character
+set to the max, including those characters which just happen to lack
+exact counterparts in the standard Adobe fonts.
+However, being able to format those old documents and render all of
+those troublesome characters has been one of the design goals for
+this version of troff, therefore,
+a number of special fonts have been created which make
+these additional characters available.
+This chapter lists the special fonts and the characters
+they provide.
+.PP
+The special fonts listed in this chapter can be used in two ways:
+one can either add the fonts of interest to the font list (\fB\-f\fP
+option, see \(sc2.2) on an individual basis, or one can use the \fB\-T\fP
+option described below.
+Either way, the \*(PS output from each troff session that uses
+any of the special fonts must be run through one of the finishing
+tools described in Chapter\ 5.
+This requirement is clearly a deficiency in the present implementation,
+but we are stuck with it for now: the ``font set merging'' code in the
+\fIpstmerge\fP and \fIpstfinish\fP tools (see Chapter\ 5) is where some of the
+``black magic'' of special fonts is implemented.
+.\"
+.Sc "3.1" "Extended ligature fonts"
+.PP
+While Adobe unfortunately chose to exclude the \f(Lb\(ff\fP,
+\f(Lb\(Fi\fP and \f(Lb\(Fl\fP ligatures from their standard Roman font
+character set, they do include these ligatures in their so-called
+expert fonts.
+The latter are \fInot\fP directly usable as regular text fonts:
+they don't contain any of the ordinary uppercase or lowercase letters,
+and have very few characters in common with the regular text fonts in general.
+Instead, their intended use is to supplement the regular text fonts:
+for example, if one uses Adobe Garamond Regular to set some text,
+that text can be enriched with some extra characters from
+Adobe Garamond Regular Expert.
+The ``expert'' characters are small capitals, old-style figures,
+and some other special characters we aren't concerned with
+at this point, as there is no precedent of their use in any
+historical \s-1UNIX\s0 troff version.
+.PP
+But what makes these expert fonts interesting for us
+is that they do contain all 5 f-ligatures.
+For example, their renditions in the Adobe Garamond family of
+expert fonts look like this:
+.TS
+center;
+l10 cfLr cfLr cfLr cfLr cfLr
+l10 cfLi cfLi cfLi cfLi cfLi
+l10 cfLb cfLb cfLb cfLb cfLb.
+Regular	V	W	X	Y	Z
+Italic	V	W	X	Y	Z
+Bold	V	W	X	Y	Z
+.TE
+.PP
+I have picked Adobe Garamond because back in 2004, when I wrote
+the first version of \fIpstroff\fP and made the first crude attempt
+at emulating the old C/A/T character set, these were the only
+expert fonts I knew \(em and I knew them only thanks to a mention
+in the \*(PL, 2nd ed., Appendix\ E: Standard Character Sets
+and Encoding Vectors.
+Not having access to a pirate copy,
+I had bought the ``Adobe Garamond Expert Volume'' from fonts.com,
+and immediately liberated it via my FTP site, so that no one else
+ever has to pay for it.
+Then a year later the International Free Computing Task Force
+received a liberated copy of what appears to be the complete
+\fIAdobe Type Library\fP as of somewhere around 1992, and
+that one contains some more expert fonts.
+However, we (the IFCTF) do not currently have any expert fonts
+which are designed to match the standard Times family,
+and I don't even know for certain whether or not such expert fonts exist.
+.PP
+To make the long story short, I've adopted the Adobe Garamond Expert
+fonts for the purpose of ``illustrating'' the f-ligatures, i.e.,
+for exhibiting them in documents like this one.
+Furthermore, as the next section explains, the \fIpstroff\fP suite
+includes a set of special Type\ 3 fonts which extend the standard
+Times fonts with these not-perfectly-matching ligatures
+originating from Adobe Garamond.
+In order to facilitate both functions,
+it was deemed desirable to create a set of
+very small ``expert subset'' fonts, based on Adobe Garamond Expert,
+but reduced to just the 6 characters of interest: the 5 f-ligatures
+and \&\fCthreequartersemdash\fP.
+These Troff5lig fonts, as they've been named,
+are included in the \fIpstroff\fP distribution:
+.TS
+center box;
+c s s || cfI s
+c|c|c||c|c
+l|a|n||l|n.
+Troff5lig font	Based on
+_
+\*(PS name	\*(Tr name	Bytes	Adobe font	Bytes
+_
+Troff5lig-Regular	Lr	8999	AGaramondExp-Regular	80980
+Troff5lig-Italic	Li	9214	AGaramondExp-Italic	49355
+Troff5lig-Bold	Lb	9332	AGaramondExp-Bold	47015
+.TE
+.PP
+Each of these Troff5lig fonts has been created by taking the original
+expert font from Adobe, cracking it open (stripping both \fBeexec\fP
+and charstring encryption, then disassembling the charstrings), removing
+all character definitions except the tiny subset of interest to us,
+removing those subroutines which became unused as a result,
+renumbering the remaining subroutines to compact the \fBSubrs\fP array,
+and reassembling the result into a valid \*(PS font.
+Each font thus provides a total of 6 characters, each mapped
+at two alternate code points:
+.TS
+center box;
+cfBI | c    | c    | c    | c  s  | c  s
+^    | ^    | ^    | ^    | c  s  | c  s
+^    | ^    | ^    | ^    | cI|cI | cI|cI
+lfC  | cfLr | cfLi | cfLb | n | cB | n | aB.
+Character	Lr	Li	Lb	Original expert	Alternate code point
+				code point	for mnemonic \fB\e(\fIxx\fR access
+_
+				Decimal	Enter as	Decimal	Enter as
+_
+ff	V	V	V	86	V	28	\e(ff
+fi	W	W	W	87	W	138	\e(fi
+fl	X	X	X	88	X	139	\e(fl
+ffi	Y	Y	Y	89	Y	29	\e(Fi
+ffl	Z	Z	Z	90	Z	30	\e(Fl
+threequartersemdash	\&=	\&=	\&=	61	\&=	136	\e(em
+.TE
+.PP
+Whichever code points one chooses to use, if one wishes to use any
+of these Troff5lig fonts directly, without going through the Type\ 3
+fonts described in the next section, one needs to do two things:
+.IP 1.
+Explicitly add Lr, Li and/or Lb to the font list \(em see \(sc2.2;
+.IP 2.
+Invoke the requisite special font explicitly to produce the desired
+character: for example, to produce \f(LbY\fP, one needs to enter
+\fB\ef(LbY\efP\fP or \fB\ef(Lb\e(Fi\efP\fP.

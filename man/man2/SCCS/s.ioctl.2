@@ -1,0 +1,255 @@
+h49087
+s 00002/00001/00063
+d D 6.3 86/03/04 22:13:07 donn 5 4
+c Change ioctl request parameter to type unsigned long to avoid lint complaints.
+e
+s 00001/00001/00063
+d D 6.2 85/06/28 17:15:21 sechrest 4 3
+c Improved English
+e
+s 00001/00001/00063
+d D 6.1 85/05/09 16:04:45 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00044/00112/00020
+d D 5.1 85/05/09 16:04:35 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00132/00000/00000
+d D 4.1 85/05/09 16:04:26 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH IOCTL 2 
+E 2
+I 2
+D 3
+.TH IOCTL 2 "7 July 1983"
+E 3
+I 3
+.TH IOCTL 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+ioctl, stty, gtty \- control device
+E 2
+I 2
+ioctl \- control device
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B #include <sgtty.h>
+E 2
+I 2
+.ft B
+#include <sys/ioctl.h>
+E 2
+.PP
+D 2
+.B ioctl(fildes, request, argp)
+.B struct sgttyb *argp;
+.PP
+.B stty(fildes, argp)
+.B struct sgttyb *argp;
+.PP
+.B gtty(fildes, argp)
+.B struct sgttyb *argp;
+E 2
+I 2
+.ft B
+ioctl(d, request, argp)
+D 5
+int d, request;
+E 5
+I 5
+int d;
+unsigned long request;
+E 5
+char *argp;
+E 2
+.fi
+I 2
+.ft R
+E 2
+.SH DESCRIPTION
+.I Ioctl
+performs a variety of functions
+D 2
+on character special files (devices).
+The writeups of various devices
+in section 4 discuss how
+E 2
+I 2
+on open descriptors.  In particular, many operating
+characteristics of character special files (e.g. terminals)
+may be controlled with
+E 2
+.I ioctl
+I 2
+requests.
+The writeups of various devices in section 4 discuss how
+.I ioctl
+E 2
+applies to them.
+.PP
+D 2
+For certain status setting and status inquiries
+about terminal devices, the functions
+.I stty
+and
+.I gtty
+are equivalent to
+.RS
+.B ioctl(fildes, TIOCSETP, argp)
+.br
+.B ioctl(fildes, TIOCGETP, argp)
+.RE
+.LP
+respectively; see
+.IR tty (4).
+.PP
+The following two standard calls, however, apply to any open file:
+.PP
+.RS
+.B ioctl(fildes, FIOCLEX, NULL);
+.br
+.B ioctl(fildes, FIONCLEX, NULL);
+.RE
+.LP
+The first causes the file to be closed automatically during
+a successful
+.I exec
+operation;
+the second reverses the effect of the first.
+.PP
+The following call is peculiar to the Berkeley implementation, and
+also applies to any open file:
+.PP
+.RS
+.B ioctl(fildes, FIONREAD, &count)
+.RE
+.LP
+returning, in the longword
+.I count
+the number of characters available for reading from
+.I fildes.
+.SH "SEE ALSO"
+stty(1), tty(4), exec(2)
+.SH DIAGNOSTICS
+Zero is returned if the call was successful;
+\-1 if the file descriptor does not refer to
+the kind of file for which it was intended,
+or if
+E 2
+I 2
+An  ioctl
+E 2
+.I request
+D 2
+attempts to modify the state of a terminal
+when
+.I fildes
+is not writeable.
+.PP
+E 2
+I 2
+has encoded in it whether the argument is an \*(lqin\*(rq parameter
+or \*(lqout\*(rq parameter, and the size of the argument \fIargp\fP in bytes.
+Macros and defines used in specifying an ioctl
+.I request
+are located in the file
+.IR <sys/ioctl.h> .
+.SH "RETURN VALUE
+If an error has occurred, a value of \-1 is returned and
+.I errno
+is set to indicate the error.
+.SH ERRORS
+E 2
+.I Ioctl
+D 2
+calls which attempt to modify the state of a process control terminal
+while a process is not in the process group of the control terminal
+will cause a SIGTTOU signal to be sent to the process' process group.
+Such
+.IR ioctl s
+are allowed,
+however,
+if SIGTTOU is being held,
+ignored,
+if the process is an orphan which has been inherited by
+.IR init ,
+or is the child in an incomplete
+.I vfork
+(see
+.IR jobs (3))
+.SH BUGS
+Strictly speaking,
+since 
+.I ioctl
+may be extended in different ways to devices with
+different properties,
+.I argp
+should have an open-ended declaration like
+.IP
+.B union { struct sgttyb
+.RB ... ;
+\&...
+.B } *argp;
+.PP
+The important thing is that the size is fixed by `struct sgttyb'.
+.SH "ASSEMBLER (PDP-11)"
+(ioctl = 54.)
+.br
+.B sys ioctl; fildes; request; argp
+.PP
+(stty = 31.)
+.br
+(file descriptor in r0)
+.br
+.B stty; argp
+.PP
+(gtty = 32.)
+.br
+(file descriptor in r0)
+.br
+.B sys gtty; argp
+E 2
+I 2
+will fail if one or more of the following are true:
+.TP 15
+[EBADF]
+\fID\fP is not a valid descriptor.
+.TP 15
+[ENOTTY]
+\fID\fP is not associated with a character
+special device.
+.TP 15
+[ENOTTY]
+The specified request does not apply to the kind
+D 4
+of object which the descriptor \fId\fP references.
+E 4
+I 4
+of object that the descriptor \fId\fP references.
+E 4
+.TP 15
+[EINVAL]
+\fIRequest\fP or \fIargp\fP is not valid.
+.SH "SEE ALSO"
+execve(2), fcntl(2), mt(4), tty(4), intro(4N)
+E 2
+E 1

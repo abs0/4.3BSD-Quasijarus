@@ -1,0 +1,388 @@
+h62412
+s 00001/00001/00153
+d D 6.1 85/04/29 17:49:47 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00050/00066/00104
+d D 5.1 85/04/29 17:49:32 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00170/00000/00000
+d D 4.1 85/04/29 17:49:22 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH M4 1 
+E 2
+I 2
+D 3
+.TH M4 1  "18 January 1983"
+E 3
+I 3
+.TH M4 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+m4 \- macro processor
+.SH SYNOPSIS
+.B m4
+[ files ]
+.SH DESCRIPTION
+.I M4
+D 2
+is a macro processor
+intended as a front end for Ratfor, C, and other languages.
+E 2
+I 2
+is a macro processor intended as a front end for Ratfor, C, and other languages.
+E 2
+Each of the argument files is processed in order;
+if there are no arguments, or if an argument is `\-',
+the standard input is read.
+The processed text is written on the standard output.
+.PP
+D 2
+Macro calls
+have the form
+E 2
+I 2
+Macro calls have the form
+E 2
+.PP
+	name(arg1,arg2, . . . , argn)
+.br
+.PP
+The `(' must immediately follow the name of the macro.
+If a defined macro name is not followed by a `(',
+it is deemed to have no arguments.
+D 2
+Leading unquoted blanks, tabs, and newlines are ignored while collecting arguments.
+Potential macro names consist of alphabetic letters,
+E 2
+I 2
+Leading unquoted blanks, tabs, and newlines are ignored while collecting
+arguments.  Potential macro names consist of alphabetic letters,
+E 2
+digits, and underscore `\_', where the first character is not a digit.
+.PP
+Left and right single quotes (\`\|\') are used to quote strings.
+The value of a quoted string is the string stripped of the quotes.
+.PP
+D 2
+When a macro name is recognized,
+its arguments are collected by searching for a matching right
+parenthesis.
+E 2
+I 2
+When a macro name is recognized, its arguments are collected by searching
+for a matching right parenthesis.
+E 2
+Macro evaluation proceeds normally during the collection of the arguments,
+D 2
+and any commas or right parentheses
+which happen to turn up within the value of a nested
+call are as effective as those in the original input text.
+After argument collection,
+the value of the macro is pushed back onto the input stream
+and rescanned.
+E 2
+I 2
+and any commas or right parentheses which happen to turn up within the value
+of a nested call are as effective as those in the original input text.
+After argument collection, the value of the macro is pushed back onto the
+input stream and rescanned.
+E 2
+.PP
+.I M4
+makes available the following built-in macros.
+They may be redefined, but once this is done the original meaning is lost.
+Their values are null unless otherwise stated.
+.TP 10
+D 2
+define
+E 2
+I 2
+.B define
+E 2
+The second argument is installed as the value of the macro
+whose name is the first argument.
+D 2
+Each occurrence of $\fIn\fR in the replacement text,
+where
+E 2
+I 2
+Each occurrence of $\fIn\fR in the replacement text, where
+E 2
+.I n
+D 2
+is a digit,
+is replaced by the
+E 2
+I 2
+is a digit, is replaced by the
+E 2
+.IR n -th
+D 2
+argument.
+Argument 0 is the name of the macro;
+E 2
+I 2
+argument.  Argument 0 is the name of the macro;
+E 2
+missing arguments are replaced by the null string.
+.TP
+D 2
+undefine
+E 2
+I 2
+.B undefine
+E 2
+removes the definition of the macro named in its argument.
+.TP
+D 2
+ifdef
+If the first argument is defined, the value is the second argument, otherwise the third.
+If there is no third argument, the value is null.
+E 2
+I 2
+.B ifdef
+If the first argument is defined, the value is the second argument,
+otherwise the third.  If there is no third argument, the value is null.
+E 2
+The word
+.I unix
+is predefined on UNIX versions of
+.IR m4 .
+.TP
+D 2
+changequote
+E 2
+I 2
+.B changequote
+E 2
+Change quote characters to the first and second arguments.
+.I Changequote
+D 2
+without arguments restores the original values
+(i.e., \`\|\').
+E 2
+I 2
+without arguments restores the original values (i.e., \`\|\').
+E 2
+.TP
+D 2
+divert
+E 2
+I 2
+.B divert
+E 2
+.I M4
+D 2
+maintains 10 output streams,
+numbered 0-9.
+The final output is the concatenation of the streams
+in numerical order;
+initially stream 0 is the current stream.
+The
+E 2
+I 2
+maintains 10 output streams, numbered 0-9.
+The final output is the concatenation of the streams in numerical order;
+initially stream 0 is the current stream.  The
+E 2
+.I divert
+D 2
+macro changes the current output stream to its (digit-string)
+argument.
+Output diverted to a stream other than 0 through 9
+is discarded.
+E 2
+I 2
+macro changes the current output stream to its (digit-string) argument.
+Output diverted to a stream other than 0 through 9 is discarded.
+E 2
+.TP
+D 2
+undivert
+E 2
+I 2
+.B undivert
+E 2
+causes immediate output of text from diversions named as
+arguments, or all diversions if no argument.
+Text may be undiverted into another diversion.
+Undiverting discards the diverted text.
+.TP
+D 2
+divnum
+E 2
+I 2
+.B divnum
+E 2
+returns the value of the current output stream.
+.TP
+D 2
+dnl
+E 2
+I 2
+.B dnl
+E 2
+reads and discards characters up to and including the next newline.
+.TP
+D 2
+ifelse
+E 2
+I 2
+.B ifelse
+E 2
+has three or more arguments.
+If the first argument is the same string as the second,
+then the value is the third argument.
+If not, and if there are more than four arguments, the process is repeated with arguments 4, 5, 6 and 7.
+Otherwise, the value is either the fourth string, or, if it is not present,
+null.
+.TP
+D 2
+incr
+E 2
+I 2
+.B incr
+E 2
+returns the value of its argument incremented by 1.
+The value of the argument is calculated
+by interpreting an initial digit-string as a decimal number.
+.TP
+D 2
+eval
+E 2
+I 2
+.B eval
+E 2
+evaluates its argument as an arithmetic expression, using 32-bit arithmetic.
+D 2
+Operators include +, \-, \(**, /, %, ^ (exponentiation); relationals; parentheses.
+E 2
+I 2
+Operators include +, \-, \(**, /, %, ^ (exponentiation); relationals;
+parentheses.
+E 2
+.TP
+D 2
+len
+E 2
+I 2
+.B len
+E 2
+returns the number of characters in its argument.
+.TP
+D 2
+index
+returns the position in its first argument where the second argument begins (zero origin),
+or \-1 if the second argument does not occur.
+E 2
+I 2
+.B index
+returns the position in its first argument where the second argument
+begins (zero origin), or \-1 if the second argument does not occur.
+E 2
+.TP
+D 2
+substr
+E 2
+I 2
+.B substr
+E 2
+returns a substring of its first argument.
+D 2
+The second argument is a zero origin
+number selecting the first character;
+E 2
+I 2
+The second argument is a zero origin number selecting the first character;
+E 2
+the third argument indicates the length of the substring.
+A missing third argument is taken to be large enough to extend to
+the end of the first string.
+.TP
+D 2
+translit
+E 2
+I 2
+.B translit
+E 2
+transliterates the characters in its first argument
+from the set given by the second argument to the set given by the third.
+No abbreviations are permitted.
+.TP
+D 2
+include
+E 2
+I 2
+.B include
+E 2
+returns the contents of the file named in the argument.
+.TP
+D 2
+sinclude
+E 2
+I 2
+.B sinclude
+E 2
+is identical to
+.I include,
+D 2
+except that it
+says nothing if the file is inaccessible.
+E 2
+I 2
+except that it says nothing if the file is inaccessible.
+E 2
+.TP
+D 2
+syscmd
+E 2
+I 2
+.B syscmd
+E 2
+executes the UNIX command given in the first argument.
+No value is returned.
+.TP
+D 2
+maketemp
+E 2
+I 2
+.B maketemp
+E 2
+fills in a string of XXXXX in its argument with the current process id.
+.TP
+D 2
+errprint
+prints its argument
+on the diagnostic output file.
+E 2
+I 2
+.B errprint
+prints its argument on the diagnostic output file.
+E 2
+.TP
+D 2
+dumpdef
+E 2
+I 2
+.B dumpdef
+E 2
+prints current names and definitions,
+for the named items, or for all if no arguments are given.
+.dt
+.SH "SEE ALSO"
+B. W. Kernighan and D. M. Ritchie,
+.I The M4 Macro Processor
+E 1

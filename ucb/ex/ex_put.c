@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_put.c	7.11 (Berkeley) 1/2/88";
+static char *sccsid = "@(#)ex_put.c	7.12 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -64,7 +64,7 @@ listchar(c)
 	register short c;
 {
 
-	c &= (TRIM|QUOTE);
+	c &= (QUOTE|TRIM8);
 	switch (c) {
 
 	case '\t':
@@ -85,6 +85,8 @@ listchar(c)
 			break;
 		if (c < ' ' && c != '\n' || c == DELETE)
 			outchar('^'), c = ctlof(c);
+		if (isC1(c))
+			outchar('~'), c = ctlof(c & TRIM7);
 		break;
 	}
 	normchar(c);
@@ -97,9 +99,9 @@ listchar(c)
 normchar(c)
 	register short c;
 {
-	register char *colp;
+	register u_char *colp;
 
-	c &= (TRIM|QUOTE);
+	c &= (QUOTE|TRIM8);
 	if (c == '~' && HZ) {
 		normchar('\\');
 		c = '^';
@@ -115,10 +117,12 @@ normchar(c)
 			return;
 
 		default:
-			c &= TRIM;
+			c &= TRIM8;
 		}
 	else if (c < ' ' && (c != '\b' || !OS) && c != '\n' && c != '\t' || c == DELETE)
 		ex_putchar('^'), c = ctlof(c);
+	else if (isC1(c))
+		ex_putchar('~'), c = ctlof(c & TRIM7);
 	else if (UPPERCASE)
 		if (isupper(c)) {
 			outchar('\\');
@@ -153,7 +157,7 @@ numbline(i)
  */
 normline()
 {
-	register char *cp;
+	register u_char *cp;
 
 	if (shudclob)
 		slobber(linebuf[0]);
@@ -200,11 +204,11 @@ slobber(c)
 }
 
 /*
- * The output buffer is initialized with a useful error
- * message so we don't have to keep it in data space.
+ * linb stores shorts rather than chars now because we have to preserve QUOTE
+ * without mangling 8-bit chars.
  */
-static	char linb[66];
-char *linp = linb;
+static	short linb[66];
+static	short *linp = linb;
 
 /*
  * Phadnl records when we have already had a complete line ending with \n.
@@ -261,8 +265,8 @@ flush()
  */
 flush1()
 {
-	register char *lp;
-	register short c;
+	register short *lp;
+	register int c;
 
 	*linp = 0;
 	lp = linb;
@@ -299,7 +303,7 @@ flush1()
 			for (;;) {
 				if (AM == 0 && outcol == COLUMNS)
 					fgoto();
-				c &= TRIM;
+				c &= TRIM8;
 				putch(c);
 				if (c == '\b') {
 					outcol--;
@@ -693,9 +697,7 @@ dontcr:
 			 * random chars we use space for instead, too.
 			 */
 			if (!inopen || vtube[outline]==NULL ||
-				(i=vtube[outline][outcol]) < ' ')
-				i = ' ';
-			if(i & QUOTE)	/* mjm: no sign extension on 3B */
+			    (i=vtube[outline][outcol]&TRIM8) < ' ' || isC1(i))
 				i = ' ';
 			if (insmode && ND)
 				tputs(ND, 0, plodput);
@@ -759,7 +761,7 @@ termreset()
  * Low level buffering, with the ability to drain
  * buffered output without printing it.
  */
-char	*obp = obuf;
+u_char	*obp = obuf;
 
 draino()
 {
@@ -787,7 +789,7 @@ putnl()
 }
 
 ex_putS(cp)
-	char *cp;
+	u_char *cp;
 {
 
 	if (cp == NULL)
@@ -805,7 +807,7 @@ putch(c)
 	if(c == '\n')	/* mjm: Fake "\n\r" for '\n' til fix in 3B firmware */
 		putch('\r');	/* mjm: vi does "stty -icanon" => -onlcr !! */
 #endif
-	*obp++ = c & 0177;
+	*obp++ = c;
 	if (obp >= &obuf[sizeof obuf])
 		flusho();
 }
@@ -818,7 +820,7 @@ putch(c)
  * Put with padding
  */
 putpad(cp)
-	char *cp;
+	u_char *cp;
 {
 
 	flush();
@@ -839,7 +841,7 @@ setoutt()
  */
 /*VARARGS1*/
 lprintf(cp, dp)
-	char *cp, *dp;
+	u_char *cp, *dp;
 {
 	register int (*P)();
 
@@ -945,7 +947,7 @@ tostart()
 	putpad(KS);
 	if (!value(MESG)) {
 		if (ttynbuf[0] == 0) {
-			register char *tn;
+			register u_char *tn;
 			if ((tn=ttyname(2)) == NULL &&
 			    (tn=ttyname(1)) == NULL &&
 			    (tn=ttyname(0)) == NULL)
@@ -1115,15 +1117,15 @@ ex_gTTY(i)
 #ifndef USG3TTY
 	ignore(gtty(i, &tty));
 # ifdef TIOCGETC
-	ioctl(i, TIOCGETC, (char *) &ottyc);
+	ioctl(i, TIOCGETC, (u_char *) &ottyc);
 	nttyc = ottyc;
 # endif
 # ifdef TIOCGLTC
-	ioctl(i, TIOCGLTC, (char *) &olttyc);
+	ioctl(i, TIOCGLTC, (u_char *) &olttyc);
 	nlttyc = olttyc;
 # endif
 #else
-	ioctl(i, TCGETA, (char *) &tty);
+	ioctl(i, TCGETA, (u_char *) &tty);
 #endif
 }
 
@@ -1144,7 +1146,7 @@ ex_sTTY(i)
 
 # ifdef TIOCSETN
 	/* Don't flush typeahead if we don't have to */
-	ioctl(i, TIOCSETN, (char *) &tty);
+	ioctl(i, TIOCSETN, (u_char *) &tty);
 # else
 	/* We have to.  Too bad. */
 	stty(i, &tty);
@@ -1152,15 +1154,15 @@ ex_sTTY(i)
 
 # ifdef TIOCGETC
 	/* Update the other random chars while we're at it. */
-	ioctl(i, TIOCSETC, (char *) &nttyc);
+	ioctl(i, TIOCSETC, (u_char *) &nttyc);
 # endif
 # ifdef TIOCSLTC
-	ioctl(i, TIOCSLTC, (char *) &nlttyc);
+	ioctl(i, TIOCSLTC, (u_char *) &nlttyc);
 # endif
 
 #else
 	/* USG 3 very simple: just set everything */
-	ioctl(i, TCSETAW, (char *) &tty);
+	ioctl(i, TCSETAW, (u_char *) &tty);
 #endif
 }
 

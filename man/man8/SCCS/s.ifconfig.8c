@@ -1,0 +1,362 @@
+h45959
+s 00001/00001/00177
+d D 6.5 87/09/30 08:06:02 bostic 6 5
+c dstaddr to dest_address; bug report 4.3BSD/man/21
+e
+s 00030/00015/00148
+d D 6.4 86/05/22 20:35:14 karels 5 4
+c 
+e
+s 00041/00008/00122
+d D 6.3 86/02/06 16:55:12 karels 4 3
+c add metric, update netmask
+e
+s 00045/00002/00085
+d D 6.2 85/09/16 17:54:20 sklower 3 2
+c more xns support
+e
+s 00012/00003/00075
+d D 6.1 85/04/27 14:59:07 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00078/00000/00000
+d D 5.1 85/04/27 14:58:46 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1983 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH IFCONFIG 8C "28 August 1983"
+E 2
+I 2
+.TH IFCONFIG 8C "%Q%"
+E 2
+.UC 5
+.SH NAME
+ifconfig \- configure network interface parameters
+.SH SYOPNSIS
+.B /etc/ifconfig
+D 3
+interface
+E 3
+I 3
+interface address_family
+E 3
+[
+.I address
+D 2
+] [
+E 2
+I 2
+[
+.I dest_address
+] ] [
+E 2
+.I parameters
+]
+I 3
+.br
+.B /etc/ifconfig
+interface
+[
+protocol_family
+]
+E 3
+.SH DESCRIPTION
+.I Ifconfig
+is used to assign an address
+to a network interface and/or configure
+network interface parameters.
+.I Ifconfig
+must be used at boot time to define the network address
+of each interface present on a machine; it may also be used at
+D 5
+a later time to redefine an interface's address.  The
+E 5
+I 5
+a later time to redefine an interface's address
+or other operating parameters.  The
+E 5
+.I interface
+D 3
+parameter is a string of the form ``name unit'', e.g. ``en0'', while
+E 3
+I 3
+parameter is a string of the form ``name unit'', e.g. ``en0''.
+.LP
+Since an interface may receive transmissions in differing protocols,
+D 5
+each of which may required separate naming schemes, it is necessary
+E 5
+I 5
+each of which may require separate naming schemes, it is necessary
+E 5
+to specify the
+D 5
+.IR protocol_family ,
+E 5
+I 5
+.IR address_family ,
+E 5
+which may change the interpretation of the remaining parameters.
+D 5
+The address protocols current supported are ``inet'' and ``ns''.
+E 5
+I 5
+The address families currently supported are ``inet'' and ``ns''.
+E 5
+.LP
+For the DARPA-Internet family,
+E 3
+the address is either a host name present in the host name data
+base, 
+.IR hosts (5),
+or a DARPA Internet address expressed in the Internet standard
+``dot notation''.
+I 3
+For the Xerox Network Systems(tm) family,
+addresses are 
+.IR net:a.b.c.d.e.f ,
+where
+.I net
+is the assigned network number (in decimal),
+D 5
+and each of the six bytes are specified in hexadecimal.
+E 5
+I 5
+and each of the six bytes of the host number,
+.I a
+through
+.IR f ,
+are specified in hexadecimal.
+The host number may be omitted on 10Mb/s Ethernet interfaces,
+which use the hardware physical address,
+and on interfaces other than the first.
+E 5
+E 3
+.PP
+The following parameters may be set with 
+.IR ifconfig :
+.TP 15
+.B up
+Mark an interface ``up''. 
+I 4
+This may be used to enable an interface after an ``ifconfig down.''
+It happens automatically when setting the first address on an interface.
+If the interface was reset when previously marked down,
+the hardware will be re-initialized.
+E 4
+.TP 15
+.B down
+Mark an interface ``down''.  When an interface is
+marked ``down'', the system will not attempt to
+transmit messages through that interface. 
+I 4
+If possible, the interface will be reset to disable reception as well.
+I 5
+This action does not automatically disable routes using the interface.
+E 5
+E 4
+.TP 15
+.B trailers
+D 4
+Enable the use of a ``trailer'' link level encapsulation when
+E 4
+I 4
+Request the use of a ``trailer'' link level encapsulation when
+E 4
+sending (default).
+If a network interface supports
+.IR trailers ,
+the system will, when possible, encapsulate outgoing
+messages in a manner which minimizes the number of
+memory to memory copy operations performed by the receiver.
+I 4
+On networks that support the Address Resolution Protocol (see
+.IR arp (4P);
+currently, only 10 Mb/s Ethernet),
+this flag indicates that the system should request that other
+systems use trailers when sending to this host.
+Similarly, trailer encapsulations will be sent to other
+hosts that have made such requests.
+I 5
+Currently used by Internet protocols only.
+E 5
+E 4
+.TP 15
+.B \-trailers
+Disable the use of a ``trailer'' link level encapsulation.
+.TP 15
+.B arp
+Enable the use of the Address Resolution Protocol in mapping
+between network level addresses and link level addresses (default). 
+This is currently implemented for mapping between DARPA Internet
+D 2
+addreses and 10Mb/s Ethernet addresses.
+E 2
+I 2
+addresses and 10Mb/s Ethernet addresses.
+E 2
+.TP 15
+.B \-arp
+Disable the use of the Address Resolution Protocol.
+I 2
+.TP 15
+I 4
+.BI metric " n"
+Set the routing metric of the interface to
+.IR n ,
+default 0.
+The routing metric is used by the routing protocol
+.RI ( routed (8c)).
+Higher metrics have the effect of making a route
+less favorable; metrics are counted as addition hops
+to the destination network or host.
+.TP 15
+E 4
+.B debug
+Enable driver dependent debugging code; usually, this turns on
+extra console error logging.
+.TP 15
+.B \-debug
+Disable driver dependent debugging code.
+I 3
+.TP 15
+D 4
+.B netmask
+Specify how much of the address you wish to reserve for subdiving
+Class A and B networks into sub-networks.
+(Inet only).
+E 4
+I 4
+.BI netmask " mask"
+(Inet only)
+D 5
+Specify how much of the address you wish to reserve for subdividing
+E 5
+I 5
+Specify how much of the address to reserve for subdividing
+E 5
+networks into sub-networks.
+I 5
+The mask includes the network part of the local address
+and the subnet part, which is taken from the host field of the address.
+E 5
+The mask can be specified as a single hexadecimal number
+D 5
+with a leading 0x, in the style of a dot-notation Internet address,
+or as a pseudo-network name.
+The mask contains 1's for the positions in the 32-bit address
+E 5
+I 5
+with a leading 0x, with a dot-notation Internet address,
+or with a pseudo-network name listed in the network table
+.IR networks (5).
+The mask contains 1's for the bit positions in the 32-bit address
+E 5
+which are to be used for the network and subnet parts,
+and 0's for the host part.
+The mask should contain at least the standard network portion,
+D 5
+and the subnet field should normally be contiguous with the network
+E 5
+I 5
+and the subnet field should be contiguous with the network
+E 5
+portion.
+E 4
+.TP 15
+D 6
+.B dstaddr
+E 6
+I 6
+.B dest_address
+E 6
+D 4
+Specify the correspondent on the other end of a point to point link
+E 4
+I 4
+Specify the address of the correspondent on the other end
+of a point to point link.
+E 4
+.TP 15
+.B broadcast
+I 4
+(Inet only)
+E 4
+D 5
+Specify the address you wish to use to represent broadcasts to the
+E 5
+I 5
+Specify the address to use to represent broadcasts to the
+E 5
+network.
+I 5
+The default broadcast address is the address with a host part of all 1's.
+E 5
+.TP 15
+.B ipdst
+D 5
+This is used to specify an internet host who is willing to receive
+E 5
+I 5
+(NS only)
+This is used to specify an Internet host who is willing to receive
+E 5
+D 4
+ip packets encapsulating ns packets bound for a remote network.
+E 4
+I 4
+ip packets encapsulating NS packets bound for a remote network.
+E 4
+In this case, an apparent point to point link is constructed, and
+D 4
+the address you specify will be taken as the ns address and network
+E 4
+I 4
+D 5
+the address you specify will be taken as the NS address and network
+E 5
+I 5
+the address specified will be taken as the NS address and network
+E 5
+E 4
+of the destinee.
+E 3
+E 2
+.PP
+.I Ifconfig
+displays the current configuration for a network interface
+when no optional parameters are supplied.
+I 3
+If a protocol family is specified,
+Ifconfig will report only the details specific to that protocol family.
+E 3
+.PP
+Only the super-user may modify the configuration of a network interface.
+.SH DIAGNOSTICS
+Messages indicating the specified interface does not exit, the
+D 5
+requested address is unknown, the user is not privileged and
+E 5
+I 5
+requested address is unknown, or the user is not privileged and
+E 5
+tried to alter an interface's configuration.
+.SH "SEE ALSO"
+D 5
+rc(8), intro(4N), netstat(1)
+E 5
+I 5
+netstat(1), intro(4N), rc(8)
+E 5
+E 1

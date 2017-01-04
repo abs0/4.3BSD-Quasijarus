@@ -1,0 +1,347 @@
+h07003
+s 00001/00001/00159
+d D 6.2 04/09/16 22:49:28 msokolov 4 3
+c add pstroff(1) to SEE ALSO
+e
+s 00003/00002/00157
+d D 6.1 85/04/29 18:05:31 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00021/00077/00138
+d D 5.1 85/04/29 18:05:02 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00215/00000/00000
+d D 4.1 85/04/29 18:04:47 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH TROFF 1 
+E 2
+I 2
+D 3
+.TH TROFF 1 "7 February 1983"
+E 3
+I 3
+.TH TROFF 1 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+troff, nroff \- text formatting and typesetting
+.SH SYNOPSIS
+.B troff
+[ option ] ...
+[ file ] ...
+.PP
+.B nroff
+[ option ] ...
+[ file ] ...
+.SH DESCRIPTION
+.I Troff
+formats text in the named
+.I files
+D 2
+for
+printing on a Graphic Systems C/A/T phototypesetter;
+E 2
+I 2
+for printing on a Graphic Systems C/A/T phototypesetter;
+E 2
+.I nroff
+D 2
+for typewriter-like devices.
+E 2
+I 2
+is used for for typewriter-like devices.
+E 2
+Their capabilities are described in the
+.I Nroff/Troff user's manual.
+.PP
+If no
+.I file
+argument is present, the standard input is read.
+An argument consisting of a single minus
+.RB ( \- )
+D 2
+is taken to be
+a file name corresponding to the standard input.
+E 2
+I 2
+is taken to be a file name corresponding to the standard input.
+E 2
+The options, which may appear in any order so long as they appear
+before the files, are:
+.TP "\w'\f3\-m\f1name 'u"
+.BI \-o list
+D 2
+Print only pages whose page numbers appear in
+the comma-separated
+E 2
+I 2
+Print only pages whose page numbers appear in the comma-separated
+E 2
+.I list
+of numbers and ranges.
+A range
+.IB N \- M
+means pages
+.I N
+through
+.IR M ;
+an initial
+.I \-N
+D 2
+means
+from the beginning to page
+E 2
+I 2
+means from the beginning to page
+E 2
+.IR N ;
+and a final
+.IR N \-
+D 2
+means
+from
+E 2
+I 2
+means from
+E 2
+.I N
+to the end.
+.TP
+.BI \-n N
+Number first generated page
+.IR N .
+.TP
+.BI \-s N
+Stop every
+.I N
+pages.
+.I Nroff
+will halt prior to every
+.I N
+pages (default
+.IR N =1)
+D 2
+to allow paper loading or
+changing, and will resume upon receipt of a newline.
+E 2
+I 2
+to allow paper loading or changing, and will resume upon receipt of a newline.
+E 2
+.I Troff
+will stop the phototypesetter every
+.I N
+D 2
+pages,
+produce a trailer to allow changing cassettes,
+E 2
+I 2
+pages, produce a trailer to allow changing cassettes,
+E 2
+and resume when the typesetter's start button is pressed.
+.TP
+.BI \-m name
+Prepend the macro file
+.BI /usr/lib/tmac/tmac. name
+to the input
+.IR files .
+.TP
+.BI \-r aN
+Set register
+.I a
+(one-character) to
+.IR N .
+.TP
+.B \-i
+Read standard input after the input files are exhausted.
+.TP
+.B \-q
+Invoke the simultaneous input-output mode of the
+.B rd
+request.
+.HP
+.bd I 3
+D 2
+.I Nroff only
+.br
+.bd I
+.TP
+.BI \-T name
+Prepare output for specified terminal.
+Known
+.I names
+are
+.B 37
+for the (default) 
+Teletype Corporation Model 37 terminal,
+.B tn300
+for the GE TermiNet\ 300 (or any terminal without half-line
+capability),
+.B 300S
+for the \s-1DASI\s+1-300S,
+.B 300
+for the \s-1DASI\s+1-300,
+and
+.B 450
+for the \s-1DASI\s+1-450
+(Diablo Hyterm).
+.TP
+.B \-e
+Produce equally-spaced words in adjusted
+lines, using full terminal resolution.
+.TP
+.B \-h
+Use output tabs during horizontal spacing
+to speed output and reduce output character count.
+Tab settings are assumed to be every
+8 nominal character widths.
+.HP
+.bd I 3
+E 2
+.I Troff only
+.br
+.bd I
+.TP
+.B \-t
+D 2
+Direct output to the standard output instead
+of the phototypesetter.
+E 2
+I 2
+Direct output to the standard output instead of the phototypesetter.
+E 2
+.TP
+.B \-f
+Refrain from feeding out paper and stopping
+phototypesetter at the end of the run.
+.TP
+.B \-w
+D 2
+Wait until phototypesetter is available, if
+currently busy.
+E 2
+I 2
+Wait until phototypesetter is available, if currently busy.
+E 2
+.TP
+.B \-b
+D 2
+Report whether the phototypesetter
+is busy or available.
+E 2
+I 2
+Report whether the phototypesetter is busy or available.
+E 2
+No text processing is done.
+.TP
+.B \-a
+D 2
+Send a printable ASCII approximation
+of the results to the standard output.
+E 2
+I 2
+Send a printable ASCII approximation of the results to the standard output.
+E 2
+.TP
+.BR \-p N
+Print all characters in point size
+.I  N
+while retaining all prescribed spacings and motions,
+D 2
+to reduce phototypesetter elasped time.
+E 2
+I 2
+to reduce phototypesetter elapsed time.
+E 2
+.TP
+D 2
+.B \-g
+Prepare output for a GCOS
+phototypesetter and direct it to the standard output
+(see
+.IR gcat (1)).
+E 2
+I 2
+.BI \-F fontdir
+The directory
+D 3
+.I fontdir contains the font width tables instead of the default directory
+E 3
+I 3
+.I fontdir
+contains the font width tables instead of the default directory
+E 3
+/usr/lib/fonts. This option can be used to produce output for devices
+besides the phototypesetter.
+E 2
+.PP
+If the file
+.I /usr/adm/tracct
+is writable,
+.I troff
+keeps phototypesetter accounting records there.
+The integrity of that file may be secured by making
+.I troff
+D 2
+a `set user-id' program.
+E 2
+I 2
+a 'set user-id' program.
+E 2
+.SH FILES
+.ta \w'/usr/lib/tmac/tmac.*  'u
+D 2
+/usr/lib/suftab	suffix hyphenation tables
+.br
+E 2
+/tmp/ta*	temporary file
+.br
+/usr/lib/tmac/tmac.*	standard macro files
+.br
+/usr/lib/term/*	terminal driving tables for
+.I nroff
+.br
+/usr/lib/font/*	font width tables for
+.I troff
+.br
+/dev/cat	phototypesetter
+.br
+/usr/adm/tracct	accounting statistics for /dev/cat
+.SH "SEE ALSO"
+J. F. Ossanna,
+.I Nroff/Troff user's manual
+.br
+B. W. Kernighan,
+.I
+A TROFF Tutorial
+.br
+D 2
+vtroff(1), eqn(1), tbl(1), pti(1), ms(7), me(7), man(7), soelim(1)
+.br
+col(1), tk(1)
+.RI ( nroff
+only)
+.br
+tc(1)
+.RI ( troff
+only)
+E 2
+I 2
+D 4
+eqn(1), tbl(1), ms(7), me(7), man(7), col(1)
+E 4
+I 4
+pstroff(1), eqn(1), tbl(1), ms(7), me(7), man(7), col(1)
+E 4
+E 2
+E 1

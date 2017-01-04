@@ -1,0 +1,68 @@
+h22829
+s 00019/00030/00000
+d D 1.2 87/09/19 14:23:56 bostic 2 1
+c Format it so it doesn't scroll off.
+e
+s 00030/00000/00000
+d D 1.1 87/09/19 14:22:15 bostic 1 0
+c date and time created 87/09/19 14:22:15 by bostic
+e
+u
+U
+t
+T
+I 1
+D 2
+To play backgammon, you must type the numbers
+of the points from which pieces are to be
+moved. For example, if the roll was '2  6',
+typing '12 15' will move a piece from point
+12 two spaces to point 14 and a piece from
+point 15 six spaces to point 21. If the moves
+must be made in the opposite order, you must
+prepend the first number with a minus ('-').
+Thus, typing '-12 15' will move a piece from
+point 12 six spaces and a piece from point 15
+two spaces. If you want to move a single piece
+several times the sequence of points from
+which it is to be moved must be typed. For 
+example, if the roll is '3  5', typing
+'14  17' will move a piece from point 14 to
+point 17 and then to point 22. If a double
+is rolled, you should enter four numbers.
+
+Brown pieces that have been removed from the
+board after being hit by white are on point 0
+and must be brought in before any other moves
+can be made. White pieces that are hit are 
+removed to point 25.
+
+Illegal or excessive moves are detected, however
+if you choose to skip part or all of your turn
+you may do so. Type a '?' when you are asked
+for your move and a list of available actions 
+will be printed. Good luck!!!
+
+E 2
+I 2
+	To play backgammon, you must type the numbers of the points from
+which pieces are to be moved.  For example, if the roll was '2  6', typing
+'12 15' will move a piece from point 12 two spaces to point 14 and a piece
+from point 15 six spaces to point 21.  If the moves must be made in the
+opposite order, you must prepend the first number with a minus ('-').  Thus,
+typing '-12 15' will move a piece from point 12 six spaces and a piece from
+point 15 two spaces.
+	If you want to move a single piece several times the sequence of
+points from which it is to be moved must be typed.  For example, if the
+roll is '3  5', typing '14  17' will move a piece from point 14 to point
+17 and then to point 22.  If a double is rolled, you should enter four numbers.
+	Brown pieces that have been removed from the board after being hit
+by white are on point 0 and must be brought in before any other moves can be
+made.  White pieces that are hit are removed to point 25.
+	Illegal or excessive moves are detected, however if you choose to skip
+part or all of your turn you may do so.
+	Type a '?' when you are asked for your move and a list of available
+actions will be printed.
+	Good luck!!!
+E 2
+E 1

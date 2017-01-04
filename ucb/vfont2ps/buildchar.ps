@@ -1,0 +1,23 @@
+% @(#)buildchar.ps	5.2 (Berkeley) 10/5/10
+/BuildChar {
+	1 index /Encoding get exch get
+	1 index /BuildGlyph get exec
+} bind def
+/BuildGlyph {
+	exch begin
+	CharMetrics 1 index known {
+		CharMetrics 1 index get dup cvx exec setcachedevice
+		CharImages 2 index known {
+			CharImages 2 index get
+			1 index 2 get 2 index 3 get translate
+			1 index 4 get 2 index 2 get sub
+			2 index 5 get 3 index 3 get sub
+			true IdMatrix {dup} imagemask
+			pop
+		} if
+		pop
+	} {0 0 0 0 0 0 setcachedevice} ifelse
+	pop
+	end
+} bind def
+/IdMatrix [1 0 0 1 0 0] readonly def

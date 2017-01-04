@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)dhu.c	7.6 (Berkeley) 7/30/02
+ *	@(#)dhu.c	7.8 (Berkeley) 12/8/04
  */
 
 /*
@@ -335,6 +335,12 @@ dhurint(dhu)
 			else if ((dhusoftCAR[dhu] & (1<<line)) == 0 &&
 			    (*linesw[tp->t_line].l_modem)(tp, 0) == 0)
 				(void) dhumctl((dhu<<4)|line, DHU_OFF, DMSET);
+			tp->t_state |= TS_MODEMCHG;
+			if (tp->t_rsel) {
+				selwakeup(tp->t_rsel, tp->t_state & TS_RCOLL);
+				tp->t_rsel = 0;
+				tp->t_state &= ~TS_RCOLL;
+			}
 			continue;
 		}
 		if ((tp->t_state&TS_ISOPEN) == 0) {
@@ -381,7 +387,7 @@ dhuioctl(dev, cmd, data, flag)
 {
 	register struct tty *tp;
 	register int unit = UNIT(dev);
-	int error;
+	int error, s;
 
 	tp = &dhu_tty[unit];
 	error = (*linesw[tp->t_line].l_ioctl)(tp, cmd, data, flag);
@@ -425,6 +431,9 @@ dhuioctl(dev, cmd, data, flag)
 		break;
 
 	case TIOCMGET:
+		s = spltty();
+		tp->t_state &= ~TS_MODEMCHG;
+		splx(s);
 		*(int *)data = dhutodm(dhumctl(dev, 0, DMGET));
 		break;
 	default:
@@ -595,7 +604,7 @@ dhustart(tp)
 	 */
 	if (tp->t_outq.c_cc == 0)
 		goto out;
-	if (tp->t_flags & (RAW|LITOUT))
+	if (tp->t_flags & (RAW|LITOUT|PASS8))
 		nch = ndqb(&tp->t_outq, 0);
 	else {
 		nch = ndqb(&tp->t_outq, 0200);

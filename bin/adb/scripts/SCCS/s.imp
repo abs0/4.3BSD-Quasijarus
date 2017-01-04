@@ -1,0 +1,14 @@
+h26133
+s 00003/00000/00000
+d D 5.1 88/03/30 15:48:52 bostic 1 0
+c date and time created 88/03/30 15:48:52 by bostic
+e
+u
+U
+t
+T
+I 1
+$<<ifnet
++/"hwunit"16t"hwname"16t"oactive"nDXb+++n"init"16t"output"16t"down"n3p
++/"state"16t"dropcnt"16t"hosts"n2DXn"hostq"16t"hostent"16t"msgready"nX2Dn"block"16t"lostrfnm"16t"badrfnm"16t"incomplete"n4D"garbage"nD
+E 1

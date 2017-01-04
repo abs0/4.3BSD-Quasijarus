@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)types.h	7.3 (Berkeley) 6/20/87
+ *	@(#)types.h	7.4 (Berkeley) 2012/06/16
  */
 
 #ifndef _TYPES_
@@ -40,7 +40,7 @@ typedef	long *	qaddr_t;	/* should be typedef quad * qaddr_t; */
 typedef	u_long	ino_t;
 typedef	long	swblk_t;
 typedef	long	size_t;
-typedef	long	time_t;
+typedef	u_long	time_t;
 typedef	short	dev_t;
 typedef	long	off_t;
 typedef	u_short	uid_t;

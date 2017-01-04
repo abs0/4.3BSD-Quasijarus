@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)cpudata.c	7.6 (Berkeley) 5/3/03
+ *	@(#)cpudata.c	7.9 (Berkeley) 3/19/04
  */
 
 #include "pte.h"
@@ -11,6 +11,7 @@
 #include "param.h"
 
 #include "cpu.h"
+#include "cpucond.h"
 #include "nexus.h"
 #include "ioa.h"
 #include "../vaxbi/bireg.h"
@@ -73,16 +74,13 @@ short	nexty730[NNEX730] = {
 #endif
 
 #if VAX8800
-/* I think this is how the thing is shaped: */
-struct bibus bi8800[] = {
-	{ BI_BASE(0) },
-	{ BI_BASE(1) },
-};
+/* According to VARM implementation blurb, this is the structure: */
 struct iobus io8800 = {
-	{ IO_BIA, somewhere, somesize, (caddr_t)&bi8800[0] },
-	{ IO_BIA, somewhere, somesize, (caddr_t)&bi8800[1] },
+	{ IO_BI, 0, 0, (caddr_t) 0 },
+	{ IO_BI, 0, 0, (caddr_t) 1 },
+	{ IO_BI, 0, 0, (caddr_t) 2 },
+	{ IO_BI, 0, 0, (caddr_t) 3 },
 };
-/* but you will have to make it work yourself (sorry) */
 #endif
 
 #if VAX8600
@@ -97,12 +95,8 @@ struct iobus io8600[] = {
 #endif
 
 #if VAX8200
-/* BEWARE, this is all limited to one BI for now */
-struct bibus bi8200[] = {
-	{ BI_BASE(0) },
-};
 struct iobus io8200[] = {
-	{ IO_BI, 0, 0, (caddr_t)&bi8200[0] },
+	{ IO_BI, 0, 0, (caddr_t) 0 },
 };
 #endif
 
@@ -126,11 +120,18 @@ struct nexusconnect xxx730 = {
 };
 struct iobus io730[] = { IO_XXX730, 0, 0, (caddr_t)&xxx730 };
 #endif
+
 #if VAX630 || VAX650
 struct qbus qbus630 = {
 	QBA, QBAPAGES, QBAMAP630, (caddr_t)QMEM630, (caddr_t)QIOPAGE630
 };
 struct iobus io630[] = { IO_QBUS, 0, 0, (caddr_t)&qbus630 };
+#endif
+
+#if NEED_BABYVAX_SUPPORT
+struct iobus iobabyvax[] = {
+	{ IO_BABYVAX, 0, 0, (caddr_t) 0 },
+};
 #endif
 
 /*
@@ -151,16 +152,23 @@ struct clockops ka820_clockops = {
 #endif
 
 #if VAX630
-int ka630_clkstartrt(), ka630_clkread(), ka630_clkwrite();
+int uvax_clkstartrt(), ka630_clkread(), ka630_clkwrite();
 struct clockops ka630_clockops = {
-	ka630_clkstartrt, ka630_clkread, ka630_clkwrite
+	uvax_clkstartrt, ka630_clkread, ka630_clkwrite
 };
 #endif
 
 #if VAX650
-int ka650_clkstartrt(), vaxstd_clkread(), vaxstd_clkwrite();
+int uvax_clkstartrt(), vaxstd_clkread(), vaxstd_clkwrite();
 struct clockops ka650_clockops = {
-	ka650_clkstartrt, vaxstd_clkread, vaxstd_clkwrite
+	uvax_clkstartrt, vaxstd_clkread, vaxstd_clkwrite
+};
+#endif
+
+#if NEED_BABYVAX_SUPPORT
+int uvax_clkstartrt(), babyvax_clkread(), babyvax_clkwrite();
+struct clockops babyvax_clockops = {
+	uvax_clkstartrt, babyvax_clkread, babyvax_clkwrite
 };
 #endif
 
@@ -216,6 +224,20 @@ struct	cpuops ka650_ops = {
 };
 #endif
 
+#if VAX410
+int	ka410_memnop(), ka410_mchk(), ka410_init();
+struct	cpuops ka410_ops = {
+	&babyvax_clockops, ka410_memnop, ka410_memnop, ka410_mchk, ka410_init
+};
+#endif
+
+#if VAX3100
+int	ka42_memnop(), ka42_memerr(), ka42_mchk(), ka42_init();
+struct	cpuops ka42_ops = {
+	&babyvax_clockops, ka42_memnop, ka42_memerr, ka42_mchk, ka42_init
+};
+#endif
+
 struct percpu percpu[] = {
 #if VAX8600
 	{ VAX_8600, 6, 1, 2, io8600, &ka860_ops },
@@ -237,6 +259,12 @@ struct percpu percpu[] = {
 #endif
 #if VAX650
 	{ VAX_650, 4, 0, 1, io630, &ka650_ops },
+#endif
+#if VAX410
+	{ VAX_410, 2, 0, 1, iobabyvax, &ka410_ops },
+#endif
+#if VAX3100
+	{ VAX_3100, 4, 0, 1, iobabyvax, &ka42_ops },
 #endif
 	0,
 };

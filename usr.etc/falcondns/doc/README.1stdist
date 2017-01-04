@@ -1,0 +1,359 @@
+Welcome to MSDNS: Michael Sokolov's Domain Name Server
+
+MSDNS is a DNS server implementation written from scratch by Michael Sokolov
+in year 50 of Space Era (2011 on A.D. calendar) with the following most
+essential features:
+
+* Combines the functionality of an authoritative name server and a
+  full-service resolver providing recursive service.  The two functions
+  are combined in one UNIX daemon process, listening on the same UDP and
+  TCP sockets for port 53 and sharing common data structures.
+
+* Written in K&R C and runs under 4.3BSD-Quasijarus, a 1980s-style version
+  of UNIX.  The essential quality here is non-use of any "modern OS"
+  functionality, i.e., MSDNS code uses only those standard UNIX features
+  which have been available since the 1980s and are expected to be
+  basically the same in all UNIX versions and UNIX-like operating systems,
+  be they ancient or modern.  No attempt has been made as of this writing
+  to compile MSDNS under anything other than 4.3BSD-Quasijarus, but porting
+  to other 1980s-style UNIX versions or even to somewhat recent Slackware
+  Linux is expected to be relatively painless.
+
+* Replaces BIND version 4.8 from 1988 which has been in operational use
+  here at Harhan up until the last days of Gregorian year 2011.  (No,
+  that is neither a typo nor a joke.)  People say that these ancient
+  versions of BIND are a gaping security hole, not only in the sense of
+  DNS database poisoning, but also in the sense of exploitable bugs
+  (buffer overflows or whatever) that could enable a remote attacker
+  to hack into the server machine itself.  (That ancient BIND also ran
+  as root, i.e., couldn't bother to drop its root privileges after binding
+  to port 53.  MSDNS does *not* imitate that practice, i.e., it does
+  switch to a less privileged uid after creating and binding the
+  necessary UDP and TCP server sockets.)  Getting a "modern" version of
+  BIND or some other "modern" DNS server implementation to compile and
+  run under 4.3BSD would have been hopeless, hence writing a new
+  4.3BSD-oriented K&R C implementation was the only way to migrate away
+  from BIND 4.8, which is why it took so long.
+
+The author's view of DNS security
+
+If you are looking for a DNS server implementation (authoritative,
+recursive or both) with DNSSEC, I have to disappoint you: DNSSEC is an
+OPTIONAL extension to DNS, and I have chosen to opt out.  MSDNS does
+not contain any support for DNSSEC, and it interoperates with the
+present-day DNSSEC-enabled Internet in the backward compatibility mode.
+In other words, MSDNS implements classic RFC 1034+1035 DNS: answers
+incoming DNS queries (UDP and TCP) in the classic RFC 1034+1035 manner,
+ignoring any OPT pseudo-RR in the query message, and the queries sent
+to foreign authoritative name servers by MSDNS full-service resolver
+function are classic DNS UDP queries with RD=0 and no OPT.
+
+I've chosen to opt out of DNSSEC because:
+
+a) I have worthier things to do with my life than writing massive amounts
+   of complex code to implement DNSSEC.  (No existing code for such
+   modernities could be made to compile and run under 4.3BSD, hence if I
+   wanted it, I would have to write it myself from scratch.)
+
+b) I have worthier uses for the precious CPU cycles of my VAXen than
+   computing all those cryptographic operations for DNSSEC.
+
+c) I have worthier uses for my precious network bandwidth than constantly
+   retrieving all those useless DNSSEC signatures and public keys.
+
+As it is certain that someone is going to jump up and scream that something
+horrible is going to happen to me as a result of my choice to opt out of
+DNSSEC, I shall now proceed to demonstrate how that is most certainly
+*not* the case.
+
+Let's begin with how I use DNS, i.e., what I use it for.  I use DNS for
+the following 3 functions, in this order of importance:
+
+1. Different machines within my sovereign fiefdom use DNS to resolve
+   each other's hostnames and IP addresses.  This is the most critical
+   function: a query for ivan.Harhan.ORG MUST always return 208.221.139.1,
+   a query for ifctfvax.Harhan.ORG MUST always return 208.221.139.2, etc.,
+   and this requirement is especially critical for queries originating
+   from *within* my fiefdom, in isolation from the external Nastynet.
+   MSDNS design is such that absolutely no IP-borne nastiness of any kind
+   can ever disrupt this function in any way: it loads its authoritative
+   configuration and zones from local files and accepts local admin
+   control commands only via a UNIX domain socket on the local machine,
+   and it will continue to respond to queries for its configured
+   authoritative zones with the proper valid answers no matter what
+   nastiness arrives in packets over the network.
+
+2. Externally-facing authoritative DNS service: I use my own DNS servers
+   to make my domains reachable from the outside, i.e., the authoritative
+   name servers listed on my domain name registrations are my own servers
+   which now run my own MSDNS instead of BIND 4.8.  The security
+   considerations are the same as for use case 1: even though I combine
+   the authoritative and recursive server functions in the same daemon,
+   MSDNS has been very carefully designed such that no activity on the
+   part of the full-service resolver function can ever affect the
+   authoritative name service, i.e., the response from MSDNS for any
+   domain name for which it is authoritative can never change as a result
+   of any FSR activity or any malicious queries or answers sent to it.
+
+3. External domain name resolution: on rare occasions I do peek out
+   on the external Dirtynet (also known as the Internet), e.g., to look
+   something up on Wikipedia.  In that case my Lynx browser would make
+   a DNS query for en.wikipedia.org, and it would send that query to
+   my local MSDNS with RD=1 via the standard stub resolver in 4.3BSD-Quasijarus
+   libc.  MSDNS then takes up the task of iteratively asking public
+   Internet authoritative name servers from the root down, looking for
+   en.wikipedia.org or whatever other external domain name a local client
+   is interested in.  And yes, my MSDNS does this full-service resolver
+   function without bothering with DNSSEC validation.  It is very carefully
+   designed such that an answer received in response to a query pertaining
+   to a given domain name is used and cached in such a way that it can only
+   affect that domain or its subdomains, *never* anything outside of that
+   "bailiwick" or anything that would fall under a local authority zone:
+   e.g., if someone managed to spoof the entire ORG. TLD, they could
+   successfully spoof wikipedia.org, but never Harhan.ORG.
+
+Yes, it's possible that someone could spoof wikipedia.org or the entire ORG.
+TLD and direct my Lynx session to a forged Wikipedia instead of the real one.
+But is it a real problem?  Not for me.  Everyone should know that Wikipedia
+shouldn't be relied upon as an utmost-authoritative source of knowledge,
+and I extend that principle to the *entire* Dirtynet aka Internet.  My
+fundamental principle is that if something is outside of my fiefdom, it is
+inherently untrustworthy and hence untrusted.  Having or not having DNSSEC
+doesn't change that, hence I am just fine without it and will spend my
+coding time on other pursuits of greater interest and subjective value to me.
+
+Because my isolationist lifestyle is very inward-oriented, I am much more
+concerned with correct and reliable resolution of internal hostnames and
+IP addresses than external ones.  While most DNS experts will preach
+non-stop how bad it is to combine the authoritative and recursive name server
+functions into one, for my lifestyle that is actually an advantage: because
+my "recursive" (or full-service resolver in more proper terminology) servers
+listed in my /etc/resolv.conf are also authoritative for my zones (Harhan.ORG,
+Harhan.COM, 139.221.208.IN-ADDR.ARPA, etc), all internal resolution between
+hostnames and IP addresses in either direction becomes 100% spoof-proof.
+
+The only reason I might ever want to separate my authoritative and FSR
+name server functions onto different physical machines and/or different IP
+addresses would be if the workload on my DNS servers ever exceeds what one
+VAX can comfortably handle.  Right now that is nowhere close to being the
+case, my MicroVAXen purr along just fine.  But MSDNS is perfectly capable
+of being configured to be authoritative-only or FSR-only: just because it's
+designed to do both at the same time doesn't mean that one has to actually
+*use* this capability.
+
+Security from bugs
+
+The other dimension of DNS server security, entirely orthogonal to the issues
+of DNSSEC and cache poisoning and whatnot, is the possibility of buffer
+overflows or other outright bugs in a DNS server implementation that
+would allow an attacker to seize control of the daemon process, allowing
+the possibility of further e-vandalism against the server machine.
+
+The only effective defense against these kinds of vulnerabilities is careful
+and disciplined coding, and MSDNS has been coded very carefully in this
+regard.  All incoming protocol messages (queries and responses) are parsed
+with stringent checks, and no data are ever copied into a buffer (be it of
+a static or dynamic size, stack or heap-allocated) without careful
+consideration of size limits and what should be the proper action if some
+limit is exceeded.
+
+MSDNS doesn't make any use of the libc functions beginning with res_ or dn_,
+functions of questionable security.  In particular, MSDNS does *not* make use
+of dn_comp() or dn_expand(), functions which seem to have been added to
+4.3BSD libc by BIND folks with the intent of using them in name server
+implementations.  I see no good reason why any DNS server should apply such
+transformations to domain names in the first place: it is surely much more
+efficient to maintain all domain names end-to-end in the same binary form in
+which they appear in protocol messages, and that's what MSDNS does, using only
+its own functions which strictly follow RFC 1035 rules as to what is legal and
+what isn't, perform stringent checks, and are provably secure.
+
+MSDNS uses traditional zone files in the RFC 1035 master file format, but
+it doesn't read them directly.  Instead the core daemon only reads MSDNS
+binary zone files (which contain RRs in the standard over-the-wire binary
+format, but disallow compressed domain names), which are created by one of
+two external utilities: zonecomp compiles a standard RFC 1035 master file
+into binary; zonexfer pulls a zone from another DNS server via AXFR and
+stores it in the same binary zone file format.  Secondary zones thus spend
+their whole lives in binary form without ever being converted to text,
+although one can use the external zonedump utility to disassemble an MSDNS
+binary zone file back into RFC 1035 text form.
+
+The only ASCII text files read directly by the MSDNS core daemon are the
+master configuration file msdns.conf, class definition files and NS-anchor
+files such as root.anchor listing the root name servers.  These text files
+are read using fopen(3) and fgets(3), and they are parsed with code that
+gracefully handles any possible badness thrown at it.  Class and NS-anchor
+definition files contain domain names; they are parsed from text into binary
+form by an MSDNS function (not libc) which obeys all RFC 1035 rules, i.e.,
+accepts all valid quoting forms and enforces all limits and restrictions.
+Conversion of domain names in the opposite direction (from binary into text
+form) happens only as part of debug dump and trace operations which must be
+commanded by the local administrator via a UNIX domain control socket, and
+the functions used to perform this job carefully and correctly handle every
+possible domain name under RFC 1035 rules, quoting any binary octets safely.
+(These functions can safely assume that all domain names they operate on
+comply with RFC 1035 rules because if a domain name comes in that doesn't,
+that invalid domain name will never get admitted into any internal data
+structures.)
+
+MSDNS uses stdio(3) functions to read text configuration files and binary
+zone files, and to write debug dump and trace files.  Some zealots (*cough*
+djb *cough*) would say that is insecure, but I disagree.  I don't speak
+for any other UNIX version or UNIX-like OS, but at least in the case of
+4.3BSD-Quasijarus I've looked at the stdio code in libc many times, it's
+very simple and easy to understand, and I am confident that it does not
+present any security vulnerabilities *when used properly* by an application.
+Proper use means watching buffer sizes, gracefully handling lines or records
+that are shorter or longer than expected, and staying cool if a zero octet
+is encountered; MSDNS does all of that.
+
+Zero octets are a normal and expected occurrence in binary zone files, hence
+there is no concern about them causing any surprises.  The code that reads
+these files lives in zoneload.c, and any doubters are invited to look at
+that code and see for themselves that: (a) the label length octets of RR
+owner names (which include the first octet of every RR) are read with getc(3)
+and every possible return value including EOF is handled correctly, and (b)
+all other reads from these binary zone files are done with fread(3) into
+appropriately-sized buffers, and the number of bytes read is enforced to
+be equal to the number of bytes requested, otherwise it's an error.
+
+All text configuration files are read with fgets(3), calling that function
+repeatedly (once per iteration of the select(2) loop for all files except
+msdns.conf which is read in one swoop) until it returns NULL.  The code that
+parses the buffer filled by fgets(3) treats '\0' as the end-of-line indicator,
+whereas '\n' is treated as just another white space character no different
+from ' ' or '\t'.  The security implication is that if the text file being
+read contains a line longer than the buffer passed to fgets() or an imbedded
+zero octet, the only effect will be that what the parses sees as "lines" will
+differ from the strict theoretical definition of what a text file line is,
+the most likely practical result being an error message about invalid syntax,
+and no further badness will occur.
+
+No libc functions or other code that treats zero octets as terminators is
+used in the processing of DNS protocol messages or any other work besides
+reading and parsing ASCII text configuration files and control commands
+received on the local UNIX domain socket.  ASCII domain and file names read
+from text-based configuration files are sometimes stored in internal data
+structures for subsequent use in syslog(3) message reporting, in which case
+the null-terminated string convention is used, but the strings stored in
+this manner have already been validated, and their long-term storage accounts
+for the terminating null when dynamically allocating memory or enforcing the
+limit of a fixed-size buffer.
+
+Hence I conclude this section by saying that I have every reason to
+believe that MSDNS is free of any security vulnerabilities aside from the
+inherent un-trustworthiness of all DNS data received over the external
+Internet connection.  As a final line of defense against exploitable code
+bugs, MSDNS is designed to drop root privileges by switching to a less
+privileged uid right after it has created its UDP and TCP server sockets
+and bound them to port 53, before it reads any local domain data files
+and before it starts accepting any UDP packets or TCP connections.
+However, the local administrator is responsible for configuring this mechanism
+properly by placing the uid line in msdns.conf in the right order: after
+the udpserv and tcpserv lines binding to port 53 and before all other
+configuration lines.
+
+MSDNS documentation
+
+An operator's or administrator's guide to MSDNS explaining how it works
+and what goes into what configuration files remains to be written.
+(The rather lengthy security section above has been written ahead of the
+rest on the anticipation that insecurity will be the first accusation
+made against MSDNS by the nay-sayers.)  The present tarball is the
+initial code release whose only purpose is to let the code out into
+the wild.  In my belief system it is a moral crime for any person or entity
+to hoard any code or technical documentation, i.e., to possess something
+and not share it.  If I were to withhold MSDNS source code from release
+until I find the time to write the documentation, I would be guilty of a
+heinous crime, hence I am releasing it as-is, sans documentation.
+(I'm not withholding the documentation, I simply haven't written it yet:
+one can't hoard something that doesn't exist.)
+
+If anyone is actually considering using MSDNS (perhaps after making it
+compile and run under something more "modern" than 4.3BSD), I strongly
+urge you to wait until a follow-up release that adds documentation, or
+perhaps make a donation to help with the cost of time needed to write
+that documentation.
+
+Why not djbdns?
+
+I have a high degree of respect for djb and his software, even though we
+disagree on some points such as the use of libc functions.  When I got
+fed up with BIND and had decided resolutely against even looking at newer
+versions of that Buggy Internet Name Daemon, djbdns was the natural
+alternative I had looked at, aside from the option of writing my own
+implementation from scratch as I've ended up doing.  Although I haven't
+taken any close look at what it would take to get djbdns to compile and run
+under 4.3BSD, I suspect it would be a little easier than trying the same
+with BIND 8 or 9: djb seems to share some of my disdain for "modern OS"
+facilities, sticking to more basic UNIX fundamentals, and djbdns seems
+to be free from DNSSEC, TSIG etc and hence from the massive library
+dependencies that stuff entails.  However, the main fundamental reason
+why djbdns isn't for me is because I really need the authoritative and FSR
+("recursive" or "caching") name server functions to be combined into one
+integrated whole, whereas keeping them separate is a key design aspect
+in djbdns (split between tinydns and dnscache which can't coexist on the
+same machine on the same port 53 on the same IP address).
+
+Why is it so important for me to combine the authoritative and FSR functions
+into one?  Well, for one, that's how the environment at Harhan has been set
+up all these years, and changing it would entail an incredible amount of
+pain for no gain.  Putting an authoritative-only name server (i.e., one
+that can't provide FSR service even to clients on the same machine) on any
+of Harhan's machines would cripple that machine: local users on that machine
+would no longer be able to resolve external Internet hostnames.  (The
+environment here at Harhan is very informal and we almost never dedicate
+a whole machine to do just one and only one thing.)  Having a local DNS
+resolver like dnscache that is incapable of holding Harhan's own authoritative
+zones at least as a "stealth secondary" would be even worse: it is simply
+unacceptable for any machine at Harhan to have to go out to the external
+Nastynet to learn from root/TLD servers that Harhan.ORG is right here at home.
+I require that all local functions continue to work 100% even when the
+external Internet connection goes down, and should our domains ever fall
+victim to some governmental/etc tampering with the delegation from the TLD
+servers to ours, it is absolutely unacceptable to allow that to affect our
+internal operations.
+
+Yes, I realize that there are workarounds for all of these problems.  A
+machine running an authoritative-only name server can have an /etc/resolv.conf
+file directing its local users to a different name server that offers
+FSR service, and a local FSR-only server that's incapable of loading a zone
+file and acting as authoritative can have an NS-anchor pointing to the local
+authoritative name servers, removing the dependency on access to and intact
+delegation from the root/TLD servers.  (NS-anchor is an MSDNS term; I've
+heard that equivalent capability is available in djb's dnscache as well.)
+One could even put the separate authoritative server and FSR daemons on the
+same physical machine if one gives that machine two or more IP addresses.
+
+But these workarounds would be quite cumbersome.  For example, I could put
+an authoritative-only name server on ivan.Harhan.ORG at 208.221.139.1, and
+run a separate FSR daemon bound to port 53 on 127.0.0.1.  But then no other
+machine at Harhan could use that FSR, and having a separate independent FSR
+on each machine, going out to the external Internet independently for
+iterative domain name resolution without a shared cache, would be just plain
+bad netizenship.  I could give ivan a 2nd non-local IP address, but then
+I would have to either add more physical hardware (a separate physical network
+interface), or do some massive kernel work to support multiple IP addresses
+on one physical network interface.  The authoritative and FSR name servers
+could run on different physical machines with administrative linkages between
+them (/etc/resolv.conf pointing to the FSRs, NS-anchors pointing to the
+authoritative servers), but that would introduce new unnecessary inter-machine
+dependencies.  Having some machines down temporarily for hardware maintenance
+is a normal occurrence here, and the philosophy is to design the computing
+environment such that when some machines are up while others are down, the
+ones that are up retain 100% of their functionality.
+
+All in all, it was easier for me to write my own DNS server implementation
+from scratch that provides the combined authoritative and FSR functions I
+need and runs under my rustic OS of choice than to jump through all those
+contortions to separate the two functions for no benefit.
+
+Well, this is all I have for now.  I invite you to study the code if you
+are curious, otherwise I encourage all interested parties to stay tuned
+for the next release which will hopefully include some documentation.
+
+Michael Sokolov
+SE 50 Niv 9
+(that means day 9 of month Nivose of year 50 of Space Era,
+ Terran Revolutionary Calendar)

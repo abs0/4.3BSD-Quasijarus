@@ -3,7 +3,7 @@
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  *
- *	@(#)ka630.c	7.6 (Berkeley) 11/8/88
+ *	@(#)ka630.c	7.9 (Berkeley) 3/18/04
  */
 
 #ifdef VAX630
@@ -16,6 +16,7 @@
 #include "cpu.h"
 #include "clock.h"
 #include "pte.h"
+#include "78032.h"
 #include "ka630.h"
 
 /*
@@ -28,7 +29,7 @@ struct ka630cpu ka630cpu;
 
 ka630_init()
 {
-
+	printf("MicroVAX II (KA630)\n");
 	/*
 	 * Map in the clock and the CPU.
 	 */
@@ -36,21 +37,9 @@ ka630_init()
 	ioaccess((caddr_t)0x20080000, &Ka630map[0], sizeof(struct ka630cpu));
 
 	/*
-	 * Clear restart and boot in progress flags in the CPMBX.
-	 */
-	ka630clock.cpmbx = (ka630clock.cpmbx & KA630CLK_LANG) | KA630CLK_REBOOT;
-
-	/*
 	 * Enable memory parity error detection.
 	 */
 	ka630cpu.ka630_mser = KA630MSER_PAREN;
-}
-
-/* Start the real-time clock */
-ka630_clkstartrt()
-{
-
-	mtpr(ICCS, ICCS_IE);
 }
 
 /* init system time from tod clock */
@@ -119,35 +108,20 @@ ka630_memnop()
 	/* void */
 }
 
-#define NMC630	10
-char *mc630[] = {
-	0,		"immcr (fsd)",	"immcr (ssd)",	"fpu err 0",
-	"fpu err 7",	"mmu st(tb)",	"mmu st(m=0)",	"pte in p0",
-	"pte in p1",	"un intr id",
-};
-
-struct mc630frame {
-	int	mc63_bcnt;		/* byte count == 0xc */
-	int	mc63_summary;		/* summary parameter */
-	int	mc63_mrvaddr;		/* most recent vad */
-	int	mc63_istate;		/* internal state */
-	int	mc63_pc;		/* trapped pc */
-	int	mc63_psl;		/* trapped psl */
-};
-
 ka630_mchk(cmcf)
 	caddr_t cmcf;
 {
 	register struct ka630cpu *ka630addr = &ka630cpu;
-	register struct mc630frame *mcf = (struct mc630frame *)cmcf;
-	register u_int type = mcf->mc63_summary;
+	register struct mcuv2frame *mcf = (struct mcuv2frame *)cmcf;
+	register u_int type = mcf->mcuv2_summary;
+	extern char *mcuv2[];
 
 	printf("machine check %x", type);
-	if (type < NMC630 && mc630[type])
-		printf(": %s", mc630[type]);
+	if (type < NMCUV2 && mcuv2[type])
+		printf(": %s", mcuv2[type]);
 	printf("\n\tvap %x istate %x pc %x psl %x\n",
-	    mcf->mc63_mrvaddr, mcf->mc63_istate,
-	    mcf->mc63_pc, mcf->mc63_psl);
+	    mcf->mcuv2_mrvaddr, mcf->mcuv2_istate,
+	    mcf->mcuv2_pc, mcf->mcuv2_psl);
 	if (ka630addr->ka630_mser & KA630MSER_MERR) {
 		printf("\tmser=0x%x ", ka630addr->ka630_mser);
 		if (ka630addr->ka630_mser & KA630MSER_CPUER)

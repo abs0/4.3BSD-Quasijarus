@@ -5,7 +5,7 @@
  */
 
 #ifndef lint
-static char *sccsid = "@(#)ex_vops.c	7.8 (Berkeley) 3/9/87";
+static char *sccsid = "@(#)ex_vops.c	7.9 (Berkeley) 4/13/03";
 #endif not lint
 
 #include "ex.h"
@@ -34,8 +34,8 @@ static char *sccsid = "@(#)ex_vops.c	7.8 (Berkeley) 3/9/87";
  * low level optimization routines (which don't look for winning
  * via insert/delete character) will not lose too badly.
  */
-char	*vUA1, *vUA2;
-char	*vUD1, *vUD2;
+u_char	*vUA1, *vUA2;
+u_char	*vUD1, *vUD2;
 
 ex_vUndo()
 {
@@ -68,8 +68,8 @@ bool show;	/* if true update the screen */
 {
 	register int cnt;
 	register line *addr;
-	register char *cp;
-	char temp[LBSIZE];
+	register u_char *cp;
+	u_char temp[LBSIZE];
 	bool savenote;
 	int (*OO)();
 	short oldhold = hold;
@@ -180,8 +180,8 @@ vmacchng(fromvis)
 bool fromvis;
 {
 	line *savedot, *savedol;
-	char *savecursor;
-	char savelb[LBSIZE];
+	u_char *savecursor;
+	u_char savelb[LBSIZE];
 	int nlines, more;
 	int copyw(), copywR();
 
@@ -322,7 +322,7 @@ vmove()
 	 * if we let it get more out of sync since column() won't work right.
 	 */
 	if (state == HARDOPEN) {
-		register char *cp;
+		register u_char *cp;
 		if (rubble) {
 			register int c;
 			int oldhold = hold;
@@ -338,7 +338,7 @@ vmove()
 		} else if (wcursor > cursor) {
 			vfixcurs();
 			for (cp = cursor; *cp && cp < wcursor;) {
-				register int c = *cp++ & TRIM;
+				register int c = *cp++;
 
 				ex_putchar(c ? c : ' ');
 			}
@@ -356,9 +356,9 @@ vmove()
  * to a full line range delete.)
  */
 vdelete(c)
-	char c;
+	u_char c;
 {
-	register char *cp;
+	register u_char *cp;
 	register int i;
 
 	if (wdot) {
@@ -416,9 +416,9 @@ vdelete(c)
  * and sync then append (but one operation for undo).
  */
 vchange(c)
-	char c;
+	u_char c;
 {
-	register char *cp;
+	register u_char *cp;
 	register int i, ind, cnt;
 	line *addr;
 
@@ -705,7 +705,7 @@ voOpen(c, cnt)
  * Note that =, which aligns lisp, is just a ragged sort of shift,
  * since it never distributes text between lines.
  */
-char	vshnam[2] = { 'x', 0 };
+u_char	vshnam[2] = { 'x', 0 };
 
 vshftop()
 {
@@ -734,7 +734,7 @@ vfilter()
 {
 	register line *addr;
 	register int cnt;
-	char *oglobp;
+	u_char *oglobp;
 	short d;
 
 	if ((cnt = xdw()) < 0)
@@ -790,7 +790,7 @@ vfilter()
  */
 xdw()
 {
-	register char *cp;
+	register u_char *cp;
 	register int cnt;
 /*
 	register int notp = 0;

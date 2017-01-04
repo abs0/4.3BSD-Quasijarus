@@ -1,0 +1,147 @@
+h33741
+s 00005/00002/00056
+d D 6.2 86/03/09 18:53:32 karels 4 3
+c machine/param.h is gone
+e
+s 00001/00001/00057
+d D 6.1 85/05/15 18:23:18 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00034/00018/00024
+d D 5.1 85/05/15 18:23:01 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00042/00000/00000
+d D 4.1 85/05/15 18:22:49 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH CORE 5 
+E 2
+I 2
+D 3
+.TH CORE 5  "27 July 1983"
+E 3
+I 3
+.TH CORE 5  "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+core \- format of memory image file
+I 2
+.SH SYNOPSIS
+D 4
+.B #include <machine/param.h>
+E 4
+I 4
+.B #include <sys/param.h>
+E 4
+E 2
+.SH DESCRIPTION
+D 2
+UNIX
+writes out a memory image of a terminated
+process when any of various errors occur.
+See
+.IR signal (2)
+for the list of reasons;
+the most common are memory violations, illegal
+instructions, bus errors, and user-generated
+quit signals.
+E 2
+I 2
+The UNIX System writes out a memory image of a terminated
+process when any of various errors occur.  See
+.IR sigvec (2)
+for the list of reasons; the most common are memory violations, illegal
+instructions, bus errors, and user-generated quit signals.
+E 2
+The memory image is called `core' and is written in the process's
+D 2
+working directory (provided it can be; normal
+access controls apply).
+E 2
+I 2
+working directory (provided it can be; normal access controls apply).
+E 2
+.PP
+The maximum size of a
+.I core
+file is limited by
+D 2
+.IR vlimit (2) .
+E 2
+I 2
+.IR setrlimit (2).
+E 2
+Files which would be larger than the limit are not created.
+.PP
+D 2
+The core file consists of the \fIu.\fR area, which currently consists
+of 6 pages, beginning with a \fIuser\fR structure as given in
+/usr/include/sys/user.h.
+The kernel stack grows from the end of this 6 page region.
+E 2
+I 2
+The core file consists of the
+.I u.
+area, whose size (in pages) is
+defined by the UPAGES manifest in the
+D 4
+.RI < machine/param.h >
+E 4
+I 4
+.RI < sys/param.h >
+E 4
+file.  The 
+.I u.
+area starts with a 
+.I user
+structure as given in
+.RI < sys/user.h >.
+E 2
+The remainder of the core file consists first of the data pages and then
+the stack pages of the process image.
+I 2
+The amount of data space image in the core file is given (in pages) by the
+variable
+.I u_dsize
+in the
+.I u.
+area.
+The amount of stack image in the core file is given (in pages) by the
+variable 
+.I u_ssize
+in the 
+.I u.
+area.
+I 4
+The size of a ``page'' is given by the constant NBPG
+(also from
+.RI < sys/param.h >).
+E 4
+E 2
+.PP
+In general the debugger
+.IR adb (1)
+is sufficient to deal with core images.
+.SH "SEE ALSO"
+D 2
+adb(1), signal(2), vlimit(2)
+E 2
+I 2
+adb(1), dbx(1), sigvec(2), setrlimit(2)
+E 2
+E 1

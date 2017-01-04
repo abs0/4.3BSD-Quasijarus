@@ -1,0 +1,1001 @@
+%!PS-Adobe-3.0
+%%Creator: 4.3BSD-Quasijarus PostScript troff
+%%DocumentData: Clean7Bit
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)TroffProcset.ps	5.1 (Berkeley) 10/30/2004
+%%LanguageLevel: 1
+%%BeginResource: procset (4.3BSD-Quasijarus PostScript troff procedures) 1.0 0
+30 dict begin
+/scalefactor 1 60 div def
+/Sc {scalefactor dup scale} bind def
+/SF {exch fontset exch get exch 60 mul scalefont setfont} bind def
+/P {3 1 roll moveto show} bind def
+/L {	% line drawing, x y ps shift cnt L
+	gsave 5 -2 roll translate 3 -1 roll .06 mul dup scale
+	exch 0 exch moveto 500 mul 0 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+/br {	% \(br character, x y ps br
+	gsave 3 1 roll translate .06 mul dup scale
+	0 -100 moveto 0 1000 rlineto
+	50 setlinewidth stroke grestore
+} bind def
+currentdict end
+/$troff exch def
+%%EndResource
+%!PS-Adobe-3.0 Resource-ProcSet
+%%Title: @(#)bdprocset.ps	5.1 (Berkeley) 2012/07/21
+%%LanguageLevel: 1
+%%BeginResource: procset (troff procedures for .bd) 1.0 0
+$troff begin
+/saveMatrix matrix def
+/idMatrix matrix def
+/bd {	% <num> bd
+	dup /bdx exch def
+	0 dtransform ceiling /bdY exch def ceiling /bdX exch def
+	saveMatrix currentmatrix pop
+} bind def
+/Pbd {	% like P, but with bd applied
+	3 1 roll moveto idMatrix setmatrix currentpoint round exch round exch
+	2 copy moveto saveMatrix setmatrix bdx 0 4 index ashow
+	idMatrix setmatrix moveto bdX bdY rmoveto
+	saveMatrix setmatrix bdx 0 3 -1 roll ashow
+} bind def
+end
+%%EndResource
+%!PS-Adobe-3.0 Resource-Encoding
+%%BeginResource: encoding TroffEncoding
+/TroffEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /trademark /bullet %00
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef %08
+/guilsinglleft /guilsinglright /.notdef /.notdef /perthousand /quotedblbase /quotedblleft /quotedblright %10
+/quotesinglbase /quotesingle /.notdef /.notdef /ff /ffi /ffl /square %18
+/space /exclam /quotedbl /numbersign /dollar /percent /ampersand /quoteright %20
+/parenleft /parenright /asterisk /plus /comma /minus /period /slash %28
+/zero /one /two /three /four /five /six /seven %30
+/eight /nine /colon /semicolon /less /equal /greater /question %38
+/at /A /B /C /D /E /F /G %40
+/H /I /J /K /L /M /N /O %48
+/P /Q /R /S /T /U /V /W %50
+/X /Y /Z /bracketleft /backslash /bracketright /asciicircum /underscore %58
+/quoteleft /a /b /c /d /e /f /g %60
+/h /i /j /k /l /m /n /o %68
+/p /q /r /s /t /u /v /w %70
+/x /y /z /braceleft /bar /braceright /asciitilde /.notdef %78
+/dagger /daggerdbl /ellipsis /Ydieresis /Lslash /OE /Scaron /Zcaron %80
+/emdash /endash /fi /fl /lslash /oe /scaron /zcaron %88
+/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent %90
+/dieresis /florin /ring /cedilla /fraction /hungarumlaut /ogonek /caron %98
+/space /exclamdown /cent /sterling /currency /yen /brokenbar /section %A0
+/dieresis /copyright /ordfeminine /guillemotleft /logicalnot /hyphen /registered /macron %A8
+/degree /plusminus /twosuperior /threesuperior /acute /mu /paragraph /periodcentered %B0
+/cedilla /onesuperior /ordmasculine /guillemotright /onequarter /onehalf /threequarters /questiondown %B8
+/Agrave /Aacute /Acircumflex /Atilde /Adieresis /Aring /AE /Ccedilla %C0
+/Egrave /Eacute /Ecircumflex /Edieresis /Igrave /Iacute /Icircumflex /Idieresis %C8
+/Eth /Ntilde /Ograve /Oacute /Ocircumflex /Otilde /Odieresis /multiply %D0
+/Oslash /Ugrave /Uacute /Ucircumflex /Udieresis /Yacute /Thorn /germandbls %D8
+/agrave /aacute /acircumflex /atilde /adieresis /aring /ae /ccedilla %E0
+/egrave /eacute /ecircumflex /edieresis /igrave /iacute /icircumflex /idieresis %E8
+/eth /ntilde /ograve /oacute /ocircumflex /otilde /odieresis /divide %F0
+/oslash /ugrave /uacute /ucircumflex /udieresis /yacute /thorn /ydieresis %F8
+] readonly def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+/setstrokeadjust where {pop true setstrokeadjust} if
+/fontset [
+/TroffEmu-Times-Roman findfont
+/TroffEmu-Times-Italic findfont
+/TroffEmu-Times-Bold findfont
+/TroffEmu-Symbol findfont
+/TroffEmu-Special1 findfont
+/ZapfDingbats findfont
+/TroffEmu-Supplement findfont
+] def
+%%EndSetup
+%%Page: 31 1
+save $troff begin Sc
+0 10 SF
+4320 45504(N)P
+0 8 SF
+4753 45504(ROFF)P
+0 10 SF
+5954 45504(/T)P
+0 8 SF
+6488 45504(ROFF)P
+0 10 SF
+7889 45504(User's)P
+9654 45504(Manual)P
+29633 45504(USD:24\25531)P
+2 12 SF
+17080 42792(Table)P
+19080 42792(II)P
+11735 41112(Input)P
+13695 41112(Naming)P
+16375 41112(Conventions)P
+20455 41112(for)P
+21615 41112(\222,)P
+22275 41112(\221,)P
+22935 41112(and)P
+24575 41112(-)P
+12260 40272(and)P
+13660 40272(for)P
+14820 40272(Non\255ASCII)P
+18580 40272(Special)P
+21020 40272(Characters)P
+2 10 SF
+4320 37392(Non\255)P
+2 9 SF
+5587 37392(ASCII)P
+2 10 SF
+7287 37392(characters)P
+10184 37392(and)P
+1 10 SF
+12 bd
+11352 37392(minus)Pbd
+2 10 SF
+13045 37392(on)P
+13879 37392(the)P
+14879 37392(standard)P
+17380 37392(fonts.)P
+1 10 SF
+6480 35952(Input)Pbd
+8424 35952(Character)Pbd
+19440 35952(Input)Pbd
+21384 35952(Character)Pbd
+4760 35232(Char)Pbd
+6480 35232(Name)Pbd
+8424 35232(Name)Pbd
+17720 35232(Char)Pbd
+19440 35232(Name)Pbd
+21384 35232(Name)Pbd
+0 10 SF
+5300 34368(')P
+6480 34368(\222)P
+8424 34368(close)P
+9856 34368(quote)P
+5300 33648(`)P
+6480 33648(\221)P
+8424 33648(open)P
+9790 33648(quote)P
+5100 32928(\210)P
+6480 32928(\\\(em)P
+8424 32928(3/4)P
+9391 32928(Em)P
+10425 32928(dash)P
+5300 32208(\255)P
+6480 32208(-)P
+8424 32208(hyphen)P
+10390 32208(or)P
+5300 31488(\255)P
+6480 31488(\\\(hy)P
+8424 31488(hyphen)P
+5231 30768(-)P
+6480 30768(\\-)P
+8424 30768(current)P
+10323 30768(font)P
+11490 30768(minus)P
+5295 30048(\007)P
+6480 30048(\\\(bu)P
+8424 30048(bullet)P
+5175 29328(\037)P
+6480 29328(\\\(sq)P
+8424 29328(square)P
+5250 28608 10 0 1 L
+6480 28608(\\\(ru)P
+8424 28608(rule)P
+5175 27888(\274)P
+6480 27888(\\\(14)P
+8424 27888(1/4)P
+5175 27168(\275)P
+6480 27168(\\\(12)P
+8424 27168(1/2)P
+5175 26448(\276)P
+6480 26448(\\\(34)P
+8424 26448(3/4)P
+18193 34368(\212)P
+19440 34368(\\\(\212)P
+21384 34368(\212)P
+18193 33648(\213)P
+19440 33648(\\\(\213)P
+21384 33648(\213)P
+18193 32928(\034)P
+19440 32928(\\\(ff)P
+21384 32928(ff)P
+18123 32208(\035)P
+19440 32208(\\\(Fi)P
+21384 32208(f\212)P
+18124 31488(\036)P
+19440 31488(\\\(Fl)P
+21384 31488(f\213)P
+18240 30768(\260)P
+19440 30768(\\\(de)P
+21384 30768(degree)P
+18210 30048(\200)P
+19440 30048(\\\(dg)P
+21384 30048(dagger)P
+3 10 SF
+18286 29328(\242)P
+0 10 SF
+19440 29328(\\\(fm)P
+21384 29328(foot)P
+22551 29328(mark)P
+18210 28608(\242)P
+19440 28608(\\\(ct)P
+21384 28608(cent)P
+22583 28608(sign)P
+18132 27888(\256)P
+19440 27888(\\\(rg)P
+21384 27888(registered)P
+18132 27168(\251)P
+19440 27168(\\\(co)P
+21384 27168(copyright)P
+2 10 SF
+4160 24648(Non\255)P
+2 9 SF
+5427 24648(ASCII)P
+2 10 SF
+7127 24648(characters)P
+10024 24648(and)P
+11192 24648(\222,)P
+11742 24648(\221,)P
+12292 24648 10 -100 1 L
+12692 24648(,)P
+3 10 SF
+13042 24648(+)P
+2 10 SF
+13371 24648(,)P
+3 10 SF
+13721 24648(-)P
+2 10 SF
+14050 24648(,)P
+3 10 SF
+14400 24648(=)P
+2 10 SF
+14729 24648(,)P
+15079 24648(and)P
+3 10 SF
+16247 24648(*)P
+2 10 SF
+16747 24648(on)P
+17581 24648(the)P
+18581 24648(special)P
+20514 24648(font.)P
+0 10 SF
+4160 23640(The)P
+5307 23640(ASCII)P
+7088 23640(characters)P
+9732 23640(@,)P
+10648 23640(#,)P
+11311 23640(",)P
+11919 23640(\222,)P
+12482 23640(\221,)P
+13045 23640(<,)P
+13746 23640(>,)P
+14447 23640(\\,)P
+14977 23640({,)P
+15628 23640(},)P
+16279 23640(~,)P
+16967 23640(^,)P
+17611 23640(and)P
+18690 23640 10 -100 1 L
+19203 23640(exist)P
+1 10 SF
+20549 23640(only)P
+0 10 SF
+21795 23640(on)P
+22608 23640(the)P
+23554 23640(special)P
+25432 23640(font)P
+26612 23640(and)P
+27691 23640(are)P
+28636 23640(printed)P
+30549 23640(as)P
+31261 23640(a)P
+31740 23640(1\255)P
+4160 22920(em)P
+5173 22920(space)P
+6784 22920(if)P
+7431 22920(that)P
+8611 22920(font)P
+9857 22920(is)P
+10536 22920(not)P
+11582 22920(mounted.)P
+14311 22920(The)P
+15523 22920(following)P
+18136 22920(characters)P
+20845 22920(exist)P
+22257 22920(only)P
+23603 22920(on)P
+24482 22920(the)P
+25494 22920(special)P
+27438 22920(font)P
+28684 22920(except)P
+30528 22920(for)P
+31507 22920(the)P
+4160 22200(upper)P
+5752 22200(case)P
+7009 22200(Greek)P
+8700 22200(letter)P
+10159 22200(names)P
+11917 22200(followed)P
+14276 22200(by)P
+15102 22200(\200)P
+15628 22200(which)P
+17320 22200(are)P
+18278 22200(mapped)P
+20402 22200(into)P
+21561 22200(upper)P
+23152 22200(case)P
+24408 22200(English)P
+26467 22200(letters)P
+28158 22200(in)P
+28850 22200(whatever)P
+31273 22200(font)P
+4160 21480(is)P
+4780 21480(mounted)P
+7100 21480(on)P
+7920 21480(font)P
+9107 21480(position)P
+11261 21480(one)P
+12347 21480(\(default)P
+14433 21480(Times)P
+16153 21480(Roman\).)P
+18656 21480(The)P
+19809 21480(special)P
+21694 21480(math)P
+23114 21480(plus,)P
+24484 21480(minus,)P
+26320 21480(and)P
+27405 21480(equals)P
+29156 21480(are)P
+30107 21480(provided)P
+4160 20760(to)P
+4827 20760(insulate)P
+6893 20760(the)P
+7826 20760(appearance)P
+10722 20760(of)P
+11422 20760(equations)P
+13921 20760(from)P
+15288 20760(the)P
+16221 20760(choice)P
+17986 20760(of)P
+18686 20760(standard)P
+20918 20760(fonts.)P
+1 10 SF
+6320 19320(Input)Pbd
+8264 19320(Character)Pbd
+19280 19320(Input)Pbd
+21224 19320(Character)Pbd
+4600 18600(Char)Pbd
+6320 18600(Name)Pbd
+8264 18600(Name)Pbd
+17560 18600(Char)Pbd
+19280 18600(Name)Pbd
+21224 18600(Name)Pbd
+3 10 SF
+5076 17736(+)P
+0 10 SF
+6320 17736(\\\(pl)P
+8264 17736(math)P
+9664 17736(plus)P
+3 10 SF
+5076 17016(-)P
+0 10 SF
+6320 17016(\\\(mi)P
+8264 17016(math)P
+9664 17016(minus)P
+3 10 SF
+5076 16296(=)P
+0 10 SF
+6320 16296(\\\(eq)P
+8264 16296(math)P
+9664 16296(equals)P
+3 10 SF
+5090 15576(*)P
+0 10 SF
+6320 15576(\\\(**)P
+8264 15576(math)P
+9664 15576(star)P
+5090 14856(\247)P
+6320 14856(\\\(sc)P
+8264 14856(section)P
+5140 14136(\222)P
+6320 14136(\\\(aa)P
+8264 14136(acute)P
+9729 14136(accent)P
+5140 13416(\221)P
+6320 13416(\\\(ga)P
+8264 13416(grave)P
+9796 13416(accent)P
+5090 12696 10 -100 1 L
+6320 12696(\\\(ul)P
+8264 12696(underrule)P
+5157 11976(/)P
+6320 11976(\\\(sl)P
+8264 11976(slash)P
+9663 11976(\(matching)P
+12296 11976(backslash\))P
+3 10 SF
+5051 11256(a)P
+0 10 SF
+6320 11256(\\\(*a)P
+8264 11256(alpha)P
+3 10 SF
+5076 10536(b)P
+0 10 SF
+6320 10536(\\\(*b)P
+8264 10536(beta)P
+3 10 SF
+5117 9816(g)P
+0 10 SF
+6320 9816(\\\(*g)P
+8264 9816(gamma)P
+3 10 SF
+5092 9096(d)P
+0 10 SF
+6320 9096(\\\(*d)P
+8264 9096(delta)P
+3 10 SF
+5109 8376(e)P
+0 10 SF
+6320 8376(\\\(*e)P
+8264 8376(epsilon)P
+3 10 SF
+5092 7656(z)P
+0 10 SF
+6320 7656(\\\(*z)P
+8264 7656(zeta)P
+3 10 SF
+5059 6936(h)P
+0 10 SF
+6320 6936(\\\(*y)P
+8264 6936(eta)P
+3 10 SF
+5084 6216(q)P
+0 10 SF
+6320 6216(\\\(*h)P
+8264 6216(theta)P
+3 10 SF
+5142 5496(i)P
+0 10 SF
+6320 5496(\\\(*i)P
+8264 5496(iota)P
+3 10 SF
+5076 4776(k)P
+0 10 SF
+6320 4776(\\\(*k)P
+8264 4776(kappa)P
+3 10 SF
+18036 17736(l)P
+0 10 SF
+19280 17736(\\\(*l)P
+21224 17736(lambda)P
+3 10 SF
+18027 17016(m)P
+0 10 SF
+19280 17016(\\\(*m)P
+21224 17016(mu)P
+3 10 SF
+18044 16296(n)P
+0 10 SF
+19280 16296(\\\(*n)P
+21224 16296(nu)P
+3 10 SF
+18052 15576(x)P
+0 10 SF
+19280 15576(\\\(*c)P
+21224 15576(xi)P
+3 10 SF
+18036 14856(o)P
+0 10 SF
+19280 14856(\\\(*o)P
+21224 14856(omicron)P
+3 10 SF
+18036 14136(p)P
+0 10 SF
+19280 14136(\\\(*p)P
+21224 14136(pi)P
+3 10 SF
+18036 13416(r)P
+0 10 SF
+19280 13416(\\\(*r)P
+21224 13416(rho)P
+3 10 SF
+18019 12696(s)P
+0 10 SF
+19280 12696(\\\(*s)P
+21224 12696(sigma)P
+3 10 SF
+18069 11976(V)P
+0 10 SF
+19280 11976(\\\(ts)P
+21224 11976(terminal)P
+23424 11976(sigma)P
+3 10 SF
+18069 11256(t)P
+0 10 SF
+19280 11256(\\\(*t)P
+21224 11256(tau)P
+3 10 SF
+18027 10536(u)P
+0 10 SF
+19280 10536(\\\(*u)P
+21224 10536(upsilon)P
+3 10 SF
+18044 9816(f)P
+0 10 SF
+19280 9816(\\\(*f)P
+21224 9816(phi)P
+3 10 SF
+18036 9096(c)P
+0 10 SF
+19280 9096(\\\(*x)P
+21224 9096(chi)P
+3 10 SF
+17994 8376(y)P
+0 10 SF
+19280 8376(\\\(*q)P
+21224 8376(psi)P
+3 10 SF
+17994 7656(w)P
+0 10 SF
+19280 7656(\\\(*w)P
+21224 7656(omega)P
+3 10 SF
+17984 6936(A)P
+0 10 SF
+19280 6936(\\\(*A)P
+21224 6936(Alpha\200)P
+3 10 SF
+18000 6216(B)P
+0 10 SF
+19280 6216(\\\(*B)P
+21224 6216(Beta\200)P
+3 10 SF
+18019 5496(G)P
+0 10 SF
+19280 5496(\\\(*G)P
+21224 5496(Gamma)P
+3 10 SF
+18017 4776(D)P
+0 10 SF
+19280 4776(\\\(*D)P
+21224 4776(Delta)P
+end restore showpage
+%%Page: 32 2
+save $troff begin Sc
+0 10 SF
+4160 45504(USD:24\25532)P
+25074 45504(N)P
+0 8 SF
+25507 45504(ROFF)P
+0 10 SF
+26708 45504(/T)P
+0 8 SF
+27242 45504(ROFF)P
+0 10 SF
+28643 45504(User's)P
+30408 45504(Manual)P
+1 10 SF
+12 bd
+6320 42912(Input)Pbd
+8264 42912(Character)Pbd
+19280 42912(Input)Pbd
+21224 42912(Character)Pbd
+4600 42192(Char)Pbd
+6320 42192(Name)Pbd
+8264 42192(Name)Pbd
+17560 42192(Char)Pbd
+19280 42192(Name)Pbd
+21224 42192(Name)Pbd
+3 10 SF
+5057 41328(E)P
+0 10 SF
+6320 41328(\\\(*E)P
+8264 41328(Epsilon\200)P
+3 10 SF
+5057 40608(Z)P
+0 10 SF
+6320 40608(\\\(*Z)P
+8264 40608(Zeta\200)P
+3 10 SF
+5024 39888(H)P
+0 10 SF
+6320 39888(\\\(*Y)P
+8264 39888(Eta\200)P
+3 10 SF
+5018 39168(Q)P
+0 10 SF
+6320 39168(\\\(*H)P
+8264 39168(Theta)P
+3 10 SF
+5140 38448(I)P
+0 10 SF
+6320 38448(\\\(*I)P
+8264 38448(Iota\200)P
+3 10 SF
+5024 37728(K)P
+0 10 SF
+6320 37728(\\\(*K)P
+8264 37728(Kappa\200)P
+3 10 SF
+5034 37008(L)P
+0 10 SF
+6320 37008(\\\(*L)P
+8264 37008(Lambda)P
+3 10 SF
+4974 36288(M)P
+0 10 SF
+6320 36288(\\\(*M)P
+8264 36288(Mu\200)P
+3 10 SF
+5024 35568(N)P
+0 10 SF
+6320 35568(\\\(*N)P
+8264 35568(Nu\200)P
+3 10 SF
+5047 34848(X)P
+0 10 SF
+6320 34848(\\\(*C)P
+8264 34848(Xi)P
+3 10 SF
+5024 34128(O)P
+0 10 SF
+6320 34128(\\\(*O)P
+8264 34128(Omicron\200)P
+3 10 SF
+5010 33408(P)P
+0 10 SF
+6320 33408(\\\(*P)P
+8264 33408(Pi)P
+3 10 SF
+5073 32688(R)P
+0 10 SF
+6320 32688(\\\(*R)P
+8264 32688(Rho\200)P
+3 10 SF
+5063 31968(S)P
+0 10 SF
+6320 31968(\\\(*S)P
+8264 31968(Sigma)P
+3 10 SF
+5057 31248(T)P
+0 10 SF
+6320 31248(\\\(*T)P
+8264 31248(Tau\200)P
+3 10 SF
+5054 30528(\241)P
+0 10 SF
+6320 30528(\\\(*U)P
+8264 30528(Upsilon)P
+3 10 SF
+5011 29808(F)P
+0 10 SF
+6320 29808(\\\(*F)P
+8264 29808(Phi)P
+3 10 SF
+5024 29088(C)P
+0 10 SF
+6320 29088(\\\(*X)P
+8264 29088(Chi\200)P
+3 10 SF
+5002 28368(Y)P
+0 10 SF
+6320 28368(\\\(*Q)P
+8264 28368(Psi)P
+3 10 SF
+5010 27648(W)P
+0 10 SF
+6320 27648(\\\(*W)P
+8264 27648(Omega)P
+3 10 SF
+5086 26928(\326)P
+0 10 SF
+6320 26928(\\\(sr)P
+8264 26928(square)P
+10029 26928(root)P
+5090 26208 10 900 1 L
+6320 26208(\\\(rn)P
+8264 26208(root)P
+9431 26208(en)P
+10197 26208(extender)P
+3 10 SF
+5076 25488(\263)P
+0 10 SF
+6320 25488(\\\(>=)P
+8264 25488(>=)P
+3 10 SF
+5076 24768(\243)P
+0 10 SF
+6320 24768(\\\(<=)P
+8264 24768(<=)P
+3 10 SF
+5076 24048(\272)P
+0 10 SF
+6320 24048(\\\(==)P
+8264 24048(identically)P
+10997 24048(equal)P
+4 10 SF
+5076 23328(=)P
+0 10 SF
+6320 23328(\\\(~=)P
+8264 23328(approx)P
+10130 23328(=)P
+3 10 SF
+5076 22608(~)P
+0 10 SF
+6320 22608(\\\(ap)P
+8264 22608(approximates)P
+3 10 SF
+5076 21888(\271)P
+0 10 SF
+6320 21888(\\\(!=)P
+8264 21888(not)P
+9231 21888(equal)P
+3 10 SF
+4944 21168(\256)P
+0 10 SF
+6320 21168(\\\()P
+3 10 SF
+6687 21168(-)P
+0 10 SF
+7016 21168(>)P
+8264 21168(right)P
+9598 21168(arrow)P
+3 10 SF
+4944 20448(\254)P
+0 10 SF
+6320 20448(\\\(<)P
+3 10 SF
+7025 20448(-)P
+0 10 SF
+8264 20448(left)P
+9264 20448(arrow)P
+3 10 SF
+5059 19728(\255)P
+0 10 SF
+6320 19728(\\\(ua)P
+8264 19728(up)P
+9064 19728(arrow)P
+3 10 SF
+5059 19008(\257)P
+0 10 SF
+6320 19008(\\\(da)P
+8264 19008(down)P
+9797 19008(arrow)P
+3 10 SF
+5076 18288(\264)P
+0 10 SF
+6320 18288(\\\(mu)P
+8264 18288(multiply)P
+3 10 SF
+5076 17568(\270)P
+0 10 SF
+6320 17568(\\\(di)P
+8264 17568(divide)P
+3 10 SF
+5076 16848(\261)P
+0 10 SF
+6320 16848(\\\(+)P
+3 10 SF
+7025 16848(-)P
+0 10 SF
+8264 16848(plus\255minus)P
+3 10 SF
+5010 16128(\310)P
+0 10 SF
+6320 16128(\\\(cu)P
+8264 16128(cup)P
+9330 16128(\(union\))P
+3 10 SF
+5010 15408(\307)P
+0 10 SF
+6320 15408(\\\(ca)P
+8264 15408(cap)P
+9296 15408(\(intersection\))P
+3 10 SF
+5026 14688(\314)P
+0 10 SF
+6320 14688(\\\(sb)P
+8264 14688(subset)P
+9963 14688(of)P
+3 10 SF
+5026 13968(\311)P
+0 10 SF
+6320 13968(\\\(sp)P
+8264 13968(superset)P
+10429 13968(of)P
+3 10 SF
+5026 13248(\315)P
+0 10 SF
+6320 13248(\\\(ib)P
+8264 13248(improper)P
+10664 13248(subset)P
+3 10 SF
+5026 12528(\312)P
+0 10 SF
+6320 12528(\\\(ip)P
+8264 12528(improper)P
+10664 12528(superset)P
+3 10 SF
+5026 11808(\245)P
+0 10 SF
+6320 11808(\\\(if)P
+8264 11808(infinity)P
+3 10 SF
+5092 11088(\266)P
+0 10 SF
+6320 11088(\\\(pd)P
+8264 11088(partial)P
+9997 11088(derivative)P
+3 10 SF
+5026 10368(\321)P
+0 10 SF
+6320 10368(\\\(gr)P
+8264 10368(gradient)P
+3 10 SF
+5026 9648(\330)P
+0 10 SF
+6320 9648(\\\(no)P
+8264 9648(not)P
+3 10 SF
+5158 8928(\362)P
+0 10 SF
+6320 8928(\\\(is)P
+8264 8928(integral)P
+10297 8928(sign)P
+3 10 SF
+5026 8208(\265)P
+0 10 SF
+6320 8208(\\\(pt)P
+8264 8208(proportional)P
+11431 8208(to)P
+3 10 SF
+4993 7488(\306)P
+0 10 SF
+6320 7488(\\\(es)P
+8264 7488(empty)P
+9964 7488(set)P
+3 10 SF
+5026 6768(\316)P
+0 10 SF
+6320 6768(\\\(mo)P
+8264 6768(member)P
+10430 6768(of)P
+5240 6048 10 br
+6320 6048(\\\(br)P
+8264 6048(box)P
+9364 6048(vertical)P
+11363 6048(rule)P
+5090 5328(\201)P
+6320 5328(\\\(dd)P
+8264 5328(double)P
+10097 5328(dagger)P
+5 10 SF
+4959 4608(+)P
+0 10 SF
+6320 4608(\\\(rh)P
+8264 4608(right)P
+9598 4608(hand)P
+6 10 SF
+17919 41328(L)P
+0 10 SF
+19280 41328(\\\(lh)P
+21224 41328(left)P
+22224 41328(hand)P
+3 10 SF
+17859 40608(\360)P
+0 10 SF
+19280 40608(\\\(bs)P
+21224 40608(Bell)P
+22424 40608(System)P
+24391 40608(logo)P
+25658 40608(\(typesetter\255dependent\))P
+3 10 SF
+18140 39888(|)P
+0 10 SF
+19280 39888(\\\(or)P
+21224 39888(or)P
+6 10 SF
+17975 39168(C)P
+0 10 SF
+19280 39168(\\\(ci)P
+21224 39168(circle)P
+4 10 SF
+18125 38448(P)P
+0 10 SF
+19280 38448(\\\(lt)P
+21224 38448(left)P
+22224 38448(top)P
+23191 38448(of)P
+23891 38448(big)P
+24858 38448(curly)P
+26291 38448(bracket)P
+4 10 SF
+18125 37728(Q)P
+0 10 SF
+19280 37728(\\\(lb)P
+21224 37728(left)P
+22224 37728(bottom)P
+4 10 SF
+18125 37008(R)P
+0 10 SF
+19280 37008(\\\(rt)P
+21224 37008(right)P
+22558 37008(top)P
+4 10 SF
+18125 36288(S)P
+0 10 SF
+19280 36288(\\\(rb)P
+21224 36288(right)P
+22558 36288(bot)P
+4 10 SF
+18125 35568(T)P
+0 10 SF
+19280 35568(\\\(lk)P
+21224 35568(left)P
+22224 35568(center)P
+23889 35568(of)P
+24589 35568(big)P
+25556 35568(curly)P
+26989 35568(bracket)P
+4 10 SF
+18125 34848(U)P
+0 10 SF
+19280 34848(\\\(rk)P
+21224 34848(right)P
+22558 34848(center)P
+24223 34848(of)P
+24923 34848(big)P
+25890 34848(curly)P
+27323 34848(bracket)P
+4 10 SF
+18125 34128(V)P
+0 10 SF
+19280 34128(\\\(bv)P
+21224 34128(bold)P
+22491 34128(vertical)P
+4 10 SF
+18125 33408(W)P
+0 10 SF
+19280 33408(\\\(lf)P
+21224 33408(left)P
+22224 33408(floor)P
+23591 33408(\(left)P
+24791 33408(bottom)P
+26692 33408(of)P
+27392 33408(big)P
+21224 32688(square)P
+22989 32688(bracket\))P
+4 10 SF
+18125 31968(X)P
+0 10 SF
+19280 31968(\\\(rf)P
+21224 31968(right)P
+22558 31968(floor)P
+23925 31968(\(right)P
+25459 31968(bottom\))P
+4 10 SF
+18125 31248(Y)P
+0 10 SF
+19280 31248(\\\(lc)P
+21224 31248(left)P
+22224 31248(ceiling)P
+24057 31248(\(left)P
+25257 31248(top\))P
+4 10 SF
+18125 30528(Z)P
+0 10 SF
+19280 30528(\\\(rc)P
+21224 30528(right)P
+22558 30528(ceiling)P
+24391 30528(\(right)P
+25925 30528(top\))P
+end restore showpage
+%%Trailer
+%%Pages: 2
+%%EOF

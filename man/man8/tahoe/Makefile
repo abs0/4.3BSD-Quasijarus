@@ -14,24 +14,19 @@
 # IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 # WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 #
-#	@(#)Makefile	5.2 (Berkeley) 7/9/88
+#	@(#)Makefile	5.3 (Berkeley) 10/20/04
 #
-MDIR=	/usr/man/cat8/tahoe
-SRCS=	crash.8 dlmpcc.8 enpload.8 reboot.8 vdformat.8
-OBJS=	crash.0 dlmpcc.0 enpload.0 reboot.0 vdformat.0
+MDIR=	/usr/man/man8
 
-.SUFFIXES: .8 .0
+all:
 
-.8.0:
-	${DESTDIR}/usr/man/manroff $*.8 > $*.0
-
-all: ${OBJS}
+psman: FRC
+	for i in *.8; do echo $$i; pstroff -man $$i > $$i.ps; done
 
 clean: FRC
-	rm -f ${OBJS}
+	rm -f *.ps
 
 install: FRC
-	cd ${DESTDIR}${MDIR}; rm -f *.0
-	install -c -o bin -g bin -m 444 ${OBJS} ${DESTDIR}${MDIR}
+	install -c -o bin -g bin -m 444 *.8 ${DESTDIR}${MDIR}
 
 FRC:

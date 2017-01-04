@@ -1,0 +1,543 @@
+h60985
+s 00005/00003/00185
+d D 6.9 88/04/05 15:09:55 karels 10 9
+c add herror to list of entries, update NO_DATA
+e
+s 00015/00002/00173
+d D 6.8 87/11/21 15:03:23 karels 9 8
+c refer to search procedure
+e
+s 00017/00004/00158
+d D 6.7 87/11/21 14:09:21 karels 8 7
+c add herror, hostname(7)
+e
+s 00000/00000/00162
+d D 6.6 86/05/20 08:29:17 anne 7 6
+c spelling check
+e
+s 00017/00015/00145
+d D 6.5 86/05/19 03:04:10 lepreau 6 5
+c correct meaning of stayopen with hosts file; formatting and grammar
+e
+s 00083/00060/00077
+d D 6.4 86/05/13 11:08:24 kjd 5 4
+c write up from the name server point of view
+e
+s 00008/00005/00129
+d D 6.3 86/05/10 16:07:03 lepreau 4 3
+c a little more name server; typos
+e
+s 00014/00004/00120
+d D 6.2 86/05/10 15:52:36 lepreau 3 2
+c correct meaning of stayopen flag; mention named and its consequences
+e
+s 00018/00003/00106
+d D 6.1 85/05/15 16:19:55 mckusick 2 1
+c 4.3BSD beta release manual page
+e
+s 00109/00000/00000
+d D 5.1 85/05/15 16:19:42 mckusick 1 0
+c manual page first distributed with 4.2BSD
+e
+u
+U
+t
+T
+I 1
+D 8
+.\" Copyright (c) 1983 Regents of the University of California.
+E 8
+I 8
+.\" Copyright (c) 1983,1987 Regents of the University of California.
+E 8
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH GETHOSTENT 3N "9 February 1983"
+E 2
+I 2
+D 5
+.TH GETHOSTENT 3N "%Q%"
+E 5
+I 5
+.TH GETHOSTBYNAME 3N "%Q%"
+E 5
+E 2
+.UC 5
+.SH NAME
+D 2
+gethostent, gethostbyaddr, gethostbyname, sethostent, endhostent \- get network host entry
+E 2
+I 2
+D 5
+gethostent, gethostbyaddr, gethostbyname, sethostent, endhostent, sethostfile \- get network host entry
+E 5
+I 5
+D 10
+gethostbyname, gethostbyaddr, gethostent, sethostent, endhostent \- get network host entry
+E 10
+I 10
+gethostbyname, gethostbyaddr, gethostent, sethostent, endhostent, herror \- get network host entry
+E 10
+E 5
+E 2
+.SH SYNOPSIS
+.B "#include <netdb.h>
+.PP
+D 5
+.B "struct hostent *gethostent()
+E 5
+I 5
+.B "extern int h_errno;
+E 5
+.PP
+.B "struct hostent *gethostbyname(name)
+.br
+.B "char *name;
+.PP
+.B "struct hostent *gethostbyaddr(addr, len, type)
+.br
+.B "char *addr; int len, type;
+.PP
+I 5
+.B "struct hostent *gethostent()
+.PP
+E 5
+.B "sethostent(stayopen)
+.br
+D 2
+.B "int stayopen
+E 2
+I 2
+.B "int stayopen;
+E 2
+.PP
+.B "endhostent()
+I 2
+.PP
+I 8
+.B "herror(string)
+.br
+.B "char *string;
+.PP
+E 8
+D 5
+.B "sethostfile(name)
+.br
+.B "char *name;
+E 5
+E 2
+.SH DESCRIPTION
+D 5
+.IR Gethostent ,
+.IR gethostbyname ,
+E 5
+I 5
+.I Gethostbyname
+E 5
+and
+.I gethostbyaddr
+each return a pointer to an object with the
+D 4
+following structure
+containing the broken-out
+E 4
+I 4
+D 9
+following structure.
+E 9
+I 9
+following structure describing an internet host
+referenced by name or by address, respectively.
+E 9
+D 5
+Depending on how the library is configured,
+this structure contains either the broken-out
+E 4
+fields of a line in the network host data base,
+D 4
+.IR /etc/hosts .
+E 4
+I 4
+.IR /etc/hosts ,
+or similar information obtained from the name server,
+.IR named (8).
+E 5
+I 5
+This structure contains either the information obtained from the name server,
+D 6
+.IR named (8)
+or broken-out fields in a line in 
+E 6
+I 6
+.IR named (8),
+or broken-out fields from a line in 
+E 6
+.IR /etc/hosts .
+If the local name server is not running these routines do a lookup in
+.IR /etc/hosts .
+E 5
+E 4
+.RS
+.PP
+.nf
+struct	hostent {
+	char	*h_name;	/* official name of host */
+	char	**h_aliases;	/* alias list */
+D 5
+	int	h_addrtype;	/* address type */
+E 5
+I 5
+	int	h_addrtype;	/* host address type */
+E 5
+	int	h_length;	/* length of address */
+D 5
+	char	*h_addr;	/* address */
+E 5
+I 5
+	char	**h_addr_list;	/* list of addresses from name server */
+E 5
+};
+I 5
+#define	h_addr  h_addr_list[0]	/* address, for backward compatibility */
+E 5
+.ft R
+.ad
+.fi
+.RE
+.PP
+The members of this structure are:
+D 5
+.TP \w'h_addrtype'u+2n
+E 5
+I 5
+.TP \w'h_addr_list'u+2n
+E 5
+h_name
+Official name of the host.
+D 5
+.TP \w'h_addrtype'u+2n
+E 5
+I 5
+.TP \w'h_addr_list'u+2n
+E 5
+h_aliases
+A zero terminated array of alternate names for the host.
+D 5
+.TP \w'h_addrtype'u+2n
+E 5
+I 5
+.TP \w'h_addr_list'u+2n
+E 5
+h_addrtype
+The type of address being returned; currently always AF_INET.
+D 5
+.TP \w'h_addrtype'u+2n
+E 5
+I 5
+.TP \w'h_addr_list'u+2n
+E 5
+h_length
+The length, in bytes, of the address.
+D 5
+.TP \w'h_addrtype'u+2n
+E 5
+I 5
+.TP \w'h_addr_list'u+2n
+h_addr_list
+A zero terminated array of network addresses for the host.
+Host addresses are returned in network byte order.
+.TP \w'h_addr_list'u+2n
+E 5
+h_addr
+D 5
+A pointer to the network address for the host.
+Host addresses are returned
+in network byte order.
+E 5
+I 5
+The first address in h_addr_list; this is for backward compatiblity.
+E 5
+.PP
+I 9
+When using the nameserver,
+.I gethostbyname
+will search for the named host in the current domain and its parents
+unless the name ends in a dot.
+If the name contains no dot, and if the environment variable ``HOSTALAIASES''
+contains the name of an alias file, the alias file will first be searched
+for an alias matching the input name.
+See
+.IR hostname (7)
+for the domain search procedure and the alias file format.
+.PP
+E 9
+D 5
+.I Gethostent
+reads the next line of the file, opening the file if necessary.
+.PP
+E 5
+.I Sethostent
+D 5
+opens and rewinds the file.  If the
+E 5
+I 5
+D 9
+allows a request for the use of a connected socket using TCP for queries.
+E 9
+I 9
+may be used to request the use of a connected TCP socket for queries.
+E 9
+If the
+E 5
+.I stayopen
+flag is non-zero,
+D 5
+the host data base will not be closed after each call to 
+E 5
+I 5
+this sets the option to send all queries to the name server using TCP
+and to retain the connection after each call to 
+E 5
+D 3
+.I gethostent
+(either directly, or indirectly through one of the other
+\*(lqgethost\*(rq calls).
+E 3
+I 3
+D 4
+.I gethosbyname
+E 4
+I 4
+.I gethostbyname
+E 4
+or
+.IR gethostbyaddr .
+I 9
+Otherwise, queries are performed using UDP datagrams.
+E 9
+E 3
+.PP
+.I Endhostent
+D 5
+closes the file.
+E 5
+I 5
+closes the TCP connection.
+.SH DIAGNOSTICS
+E 5
+I 2
+.PP
+D 5
+.I Sethostfile
+changes the default host table file to
+.I name
+thus allowing these routines to be used with alternate host tables.
+Note that it does
+.I not 
+close the previous file.
+If this is desired,
+.I endhostent
+should be called prior to it.
+E 2
+.PP
+E 5
+I 5
+Error return status from 
+E 5
+D 6
+.I Gethostbyname
+E 6
+I 6
+.I gethostbyname
+E 6
+and
+.I gethostbyaddr
+D 5
+sequentially search from the beginning
+of the file until a matching
+host name or
+host address is found,
+or until EOF is encountered.
+Host addresses are supplied in network order.
+E 5
+I 5
+is indicated by return of a null pointer.
+The external integer
+.IR h_errno
+may then be checked to see whether this is a temporary failure
+or an invalid or unknown host.
+I 8
+The routine
+.I herror
+can be used to print an error message describing the failure.
+If its argument
+.I string
+is non-NULL, it is printed, followed by a colon and a space.
+The error message is printed with a trailing newline.
+E 8
+.PP
+.IR h_errno
+can have the following values:
+.RS
+.IP HOST_NOT_FOUND \w'HOST_NOT_FOUND'u+2n
+No such host is known.
+.IP TRY_AGAIN \w'HOST_NOT_FOUND'u+2n
+This is usually a temporary error
+and means that the local server did not receive
+a response from an authoritative server.
+A retry at some later time may succeed.
+.IP NO_RECOVERY \w'HOST_NOT_FOUND'u+2n
+I 8
+Some unexpected server failure was encountered.
+E 8
+This is a non-recoverable error.
+D 10
+.IP NO_ADDRESS \w'HOST_NOT_FOUND'u+2n
+E 10
+I 10
+.IP NO_DATA \w'HOST_NOT_FOUND'u+2n
+E 10
+The requested name is valid but does not have an IP address; 
+this is not a temporary error.  
+D 8
+This means another type
+of request to the name server will result in an answer.
+E 8
+I 8
+D 10
+This means another type of request to the name server using this domain name
+E 10
+I 10
+This means that the name is known to the name server but there is no address
+associated with this name.
+Another type of request to the name server using this domain name
+E 10
+will result in an answer;
+for example, a mail-forwarder may be registered for this domain.
+E 8
+.RE
+E 5
+.SH FILES
+/etc/hosts
+.SH "SEE ALSO"
+D 3
+hosts(5)
+E 3
+I 3
+D 8
+hosts(5), resolver(3), named(8)
+E 8
+I 8
+resolver(3), hosts(5), hostname(7), named(8)
+E 8
+E 3
+D 5
+.SH DIAGNOSTICS
+Null pointer
+(0) returned on EOF or error.
+E 5
+I 5
+.SH CAVEAT
+.PP
+D 6
+.IR Gethostent
+E 6
+I 6
+.I Gethostent
+E 6
+is defined, and
+D 6
+.IR sethostent 
+is redefined,
+E 6
+I 6
+.I sethostent
+and
+.I endhostent
+are redefined,
+E 6
+when
+.IR libc
+is built to use only the routines to lookup in
+.IR /etc/hosts 
+and not the name server.
+.PP
+D 6
+.IR Gethostent
+E 6
+I 6
+.I Gethostent
+E 6
+reads the next line of
+D 6
+.IR /etc/hosts
+E 6
+I 6
+.IR /etc/hosts ,
+E 6
+opening the file if necessary.
+.PP
+D 6
+.IR Sethostent 
+is redefined to open and rewind the file.  If
+E 6
+I 6
+.I Sethostent 
+is redefined to open and rewind the file.  If the
+E 6
+.I stayopen
+D 6
+flag is non-zero,
+E 6
+I 6
+argument is non-zero,
+E 6
+the hosts data base will not be closed after each call to
+D 6
+.IR gethostent
+(either directly, or indirectly through 
+.IR gethostbyname
+E 6
+I 6
+.I gethostbyname
+E 6
+or
+D 6
+.IR gethostbyaddr).
+E 6
+I 6
+.IR gethostbyaddr .
+.I Endhostent
+is redefined to close the file.
+E 6
+E 5
+.SH BUGS
+All information
+is contained in a static area
+so it must be copied if it is
+to be saved.  Only the Internet
+address format is currently understood.
+I 3
+D 5
+.PP
+On sites configured to use the name server
+.IR named (8)
+D 4
+instead of 
+E 4
+I 4
+instead of
+E 4
+.IR /etc/hosts ,
+.I gethostent
+is not available
+and
+.I sethostfile
+is a no-op.
+E 5
+E 3
+E 1

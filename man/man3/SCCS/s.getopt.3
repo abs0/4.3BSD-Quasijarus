@@ -1,0 +1,275 @@
+h61076
+s 00010/00005/00153
+d D 6.8 88/07/09 11:40:17 bostic 8 7
+c install approved copyright notice
+e
+s 00003/00000/00155
+d D 6.7 88/05/06 14:18:19 bostic 7 6
+c mention disablement of opterr to get rid of error messages
+e
+s 00004/00005/00151
+d D 6.6 88/04/19 11:46:15 bostic 6 5
+c allow lone ``-'' as option letter
+e
+s 00009/00003/00147
+d D 6.5 88/04/13 11:51:05 bostic 5 4
+c add Berkeley specific manual header
+e
+s 00005/00005/00145
+d D 6.4 86/05/27 10:33:12 kjd 4 3
+c fix quotes
+e
+s 00001/00005/00149
+d D 6.3 86/05/12 19:07:43 karels 3 2
+c remove the untrue
+e
+s 00000/00002/00154
+d D 6.2 86/04/20 12:24:06 mckusick 2 1
+c delete incorrect reference
+e
+s 00156/00000/00000
+d D 6.1 85/05/15 16:45:43 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+D 5
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+E 5
+I 5
+.\" Copyright (c) 1988 Regents of the University of California.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms are permitted
+D 8
+.\" provided that this notice is preserved and that due credit is given
+.\" to the University of California at Berkeley. The name of the University
+.\" may not be used to endorse or promote products derived from this
+.\" software without specific prior written permission. This software
+.\" is provided ``as is'' without express or implied warranty.
+E 8
+I 8
+.\" provided that the above copyright notice and this paragraph are
+.\" duplicated in all such forms and that any documentation,
+.\" advertising materials, and other materials related to such
+.\" distribution and use acknowledge that the software was developed
+.\" by the University of California, Berkeley.  The name of the
+.\" University may not be used to endorse or promote products derived
+.\" from this software without specific prior written permission.
+.\" THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+.\" IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+.\" WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+E 8
+E 5
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH GETOPT 3 "%Q%"
+.UC 6
+.SH NAME
+getopt \- get option letter from argv
+.SH SYNOPSIS
+.ft B
+int getopt(argc, argv, optstring)
+.br
+int argc;
+.br
+char **argv;
+.br
+char *optstring;
+.sp
+extern char *optarg;
+.br
+extern int optind;
+I 7
+.br
+extern int opterr;
+E 7
+.ft
+.SH DESCRIPTION
+.I Getopt
+returns the next option letter in
+.I argv
+that matches a letter in
+.IR optstring .
+.I Optstring
+is a string of recognized option letters;
+if a letter is followed by a colon, the option is expected to have
+an argument that may or may not be separated from it by white space.
+.I Optarg
+is set to point to the start of the option argument on return from
+.IR getopt .
+.PP
+.I Getopt
+places in
+.I optind
+the
+.I argv
+index of the next argument to be processed.
+Because
+.I optind
+is external, it is normally initialized to zero automatically
+before the first call to 
+.IR getopt .
+.PP
+When all options have been processed (i.e., up to the first
+non-option argument),
+.I getopt
+returns
+.BR EOF .
+The special option
+.B \-\-
+may be used to delimit the end of the options;
+.B EOF
+will be returned, and
+.B \-\-
+will be skipped.
+D 2
+.SH SEE ALSO
+getopt(1)
+E 2
+.SH DIAGNOSTICS
+.I Getopt
+prints an error message on
+.I stderr
+and returns a question mark
+.RB ( ? )
+when it encounters an option letter not included in
+.IR optstring .
+I 7
+Setting \fIopterr\fP to a zero will disable this error message.
+E 7
+.SH EXAMPLE
+The following code fragment shows how one might process the arguments
+for a command that can take the mutually exclusive options
+.B a
+and
+.BR b ,
+and the options
+.B f
+and
+.BR o ,
+both of which require arguments:
+.PP
+.RS
+.nf
+main(argc, argv)
+int argc;
+char **argv;
+{
+	int c;
+	extern int optind;
+	extern char *optarg;
+	\&.
+	\&.
+	\&.
+	while ((c = getopt(argc, argv, "abf:o:")) != EOF)
+		switch (c) {
+D 4
+		case 'a':
+E 4
+I 4
+		case `a':
+E 4
+			if (bflg)
+				errflg++;
+			else
+				aflg++;
+			break;
+D 4
+		case 'b':
+E 4
+I 4
+		case `b':
+E 4
+			if (aflg)
+				errflg++;
+			else
+				bproc();
+			break;
+D 4
+		case 'f':
+E 4
+I 4
+		case `f':
+E 4
+			ifile = optarg;
+			break;
+D 4
+		case 'o':
+E 4
+I 4
+		case `o':
+E 4
+			ofile = optarg;
+			break;
+D 4
+		case '?':
+E 4
+I 4
+		case `?':
+E 4
+		default:
+			errflg++;
+			break;
+		}
+	if (errflg) {
+		fprintf(stderr, "Usage: ...");
+		exit(2);
+	}
+	for (; optind < argc; optind++) {
+		\&.
+		\&.
+		\&.
+	}
+	\&.
+	\&.
+	\&.
+}
+.RE
+D 3
+.PP
+A template similar to this can be found in
+.IR /usr/pub/template.c .
+E 3
+.SH HISTORY
+Written by Henry Spencer, working from a Bell Labs manual page.
+D 3
+Behavior believed identical to the Bell version.
+Modified by Keith Bostic to behave closer to the System V version.
+E 3
+I 3
+Modified by Keith Bostic to behave more like the System V version.
+E 3
+.SH BUGS
+D 6
+It is not obvious how
+`\-'
+standing alone should be treated;  this version treats it as
+a non-option argument, which is not always right.
+E 6
+I 6
+``-'' may be specified as an option letter, however it should never have
+an argument associated with it.  This allows getopt to be used with
+programs that think that ``-'' means standard input.
+E 6
+.PP
+D 6
+Option arguments are allowed to begin with `\-';
+E 6
+I 6
+Option arguments are allowed to begin with ``\-'';
+E 6
+this is reasonable but reduces the amount of error checking possible.
+.PP
+.I Getopt
+is quite flexible but the obvious price must be paid:  there is much
+it could do that it doesn't, like
+checking mutually exclusive options, checking type of
+option arguments, etc.
+E 1

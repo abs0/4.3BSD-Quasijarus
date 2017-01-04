@@ -1,0 +1,110 @@
+h44252
+s 00000/00010/00060
+d D 6.2 86/05/07 13:28:34 mckusick 4 3
+c delete author history
+e
+s 00001/00001/00069
+d D 6.1 85/04/29 15:06:01 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00002/00002/00068
+d D 5.1 85/04/29 15:05:47 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00070/00000/00000
+d D 4.1 85/04/29 15:05:35 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH UL 1
+E 2
+I 2
+D 3
+.TH UL 1 "18 January 1983"
+E 3
+I 3
+.TH UL 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+ul \- do underlining
+.SH SYNOPSIS
+.B ul
+[
+.B \-i
+] [
+.B \-t
+.I terminal
+]
+[
+.I name
+\&...
+]
+.SH DESCRIPTION
+.I Ul
+reads the named files (or standard input if none are given)
+D 2
+and translates occurances of underscores to the sequence
+E 2
+I 2
+and translates occurrences of underscores to the sequence
+E 2
+which indicates underlining for the terminal in use, as specified
+by the environment variable
+TERM.
+The
+.B \-t
+option overrides the terminal kind specified in the environment.
+The file
+.I /etc/termcap
+is read to determine the appropriate sequences for underlining.
+If the terminal is incapable of underlining, but is capable of
+a standout mode then that is used instead.
+If the terminal can overstrike,
+or handles underlining automatically,
+.I ul
+degenerates to
+.IR cat (1).
+If the terminal cannot underline, underlining is ignored.
+.PP
+The
+.B \-i
+option causes
+.I ul
+to indicate underlining onto by a separate line containing appropriate
+dashes `\-'; this is useful when you want to look at the underlining
+which is present in an
+.I nroff
+output stream on a crt-terminal.
+.SH "SEE ALSO"
+man(1), nroff(1), colcrt(1)
+D 4
+.SH AUTHOR
+Mark Horton wrote
+.IR ul .
+The
+.B \-i
+option was originally a option of the editor
+.IR ex (1),
+then an
+.I iul
+command.
+E 4
+.SH BUGS
+.I Nroff
+usually outputs a series of backspaces and underlines intermixed
+with the text to indicate underlining.  No attempt is made to optimize
+the backward motion.
+E 1

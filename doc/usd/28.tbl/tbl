@@ -1,4 +1,4 @@
-.\"	@(#)tbl	6.1 (Berkeley) 5/22/86
+.\"	@(#)tbl	6.7 (Berkeley) 2012/07/26
 .\"
 .EH 'USD:28-%''Tbl \(em A Program to Format Tables'
 .OH 'Tbl \(em A Program to Format Tables''USD:28-%'
@@ -310,7 +310,7 @@ to indicate an alphabetic subcolumn;
 all corresponding entries are aligned on the left, and positioned
 so that the widest is centered within the column (see
 example on page 12);
-.IP "\ \ \fBS\fR\ ori\ \fBs\fR
+.IP "\ \ \fBS\fR\ or\ \fBs\fR
 to indicate a spanned heading, i.e. to indicate that the
 entry from the previous column continues across this
 column
@@ -380,11 +380,9 @@ items;
 if necessary, the column width is increased to force this.
 This is not true for \fBn\fR type entries.
 .IP
-.bd I 3
-.ft I
+.ft BI
 Warning:
 .ft 1
-.bd I
 the \fBn\fR and \fBa\fR items should not be used in
 the same column.
 .IP
@@ -607,7 +605,7 @@ in the data.
 .IP "\fI##Full width horizontal lines\fR#"
 \(em An input
 .I line
-containing only the character $fat "\(ul" $ (underscore)
+containing only the character \fB_\fR (underscore)
 or \fB=\fR (equal sign) is taken to be a single or double
 line, respectively, extending the
 full width
@@ -616,7 +614,7 @@ of the
 .IP "\fI##Single column horizontal lines\fR#"
 \(em An input table
 .I entry
-containing only the character $fat "\(ul" $ or \fB=\fR
+containing only the character \fB_\fR or \fB=\fR
 is taken to be a single or double line extending
 the full width of the
 .I column.
@@ -628,7 +626,7 @@ follow them by a space before the usual tab or newline.
 .IP "\fI##Short horizontal lines\fR#"
 \(em An input table
 .I entry
-containing only the string $fat "\e\(ul"$
+containing only the string \fB\e\^_\fP
 is taken to be a single line as wide as the contents of
 the column.  It is not extended to meet
 adjoining lines.
@@ -661,8 +659,8 @@ that cannot conveniently be typed as a simple string between
 tabs.
 Note that the $fat roman "T}" $ end delimiter must begin a line;
 additional columns of data may follow after a tab on the same line.
-See the example on page 11 for an illustration of included text blocks
-.e1 aa 11
+See the example on page 10 for an illustration of included text blocks
+.e1 aa 10
 in a table.
 If more than twenty or thirty text blocks are used in a table,
 various limits in the
@@ -772,17 +770,15 @@ The outline of such a table input is:
 .ft R
 \&\*.TE
 .DE
-as in the examples on pages 10 and 13.
+as in the examples on pages 10 and 12.
 .e1 ab 10
-.e1 ac 13
+.e1 ac 12
 Using this procedure, each table line can be close to its corresponding format line.
-.bd I 3
 .br
 .sp 3p
-.ft I
+.ft BI
 Warning:
 .ft R
-.bd I
 it is not possible to change the number of columns, the space
 between columns, the global options such as \fIbox,\fR
 or the selection of columns to be made equal width.
@@ -930,11 +926,11 @@ tbl
 must be avoided by the user within tables;
 these include two-digit names from 31 to 99,
 and names of the forms
-#\fIx\fR, \fIx\fR+, \fIx\fR\ |, \v'3p'^\v'-3p'\fIx\fR, and \fIx\fR\(mi,
+#\fIx\fR, \fIx\fR+, \fIx\fR\^|\^, ^\fIx\fR, and \fIx\fR\-,
 where
 \fIx\fR is any lower case letter.
 The names
-##, #\(mi, and #^ are also used in certain circumstances.
+##, #\-, and #^ are also used in certain circumstances.
 To conserve number register names, the
 \fBn\fR
 and
@@ -987,7 +983,8 @@ Here are some examples illustrating features of
 .I
 tbl.
 .R
-.ds T \|\h'.4n'\v'-.2n'\s6\zT\s0\s10\v'.2n'\h'-.4n'\(ci\|\s0
+.\"ds T \|\h'.4n'\v'-.2n'\s6\zT\s0\s10\v'.2n'\h'-.4n'\(ci\|\s0
+.ds T \|\s10\h'.15m'\v'-.1m'\s0\s6\zT\s0\s10\v'.1m'\h'-.125m'\v'-.32m'\D'c .64m'\v'.32m'\s0\|
 The symbol \*T in the input represents a tab character.
 .de IN
 .po \\n(POu
@@ -1880,11 +1877,11 @@ $fat roman "T{" ~~ fat roman "T}"$	Text block	3
 v V	Vertical spacing change	2
 w W	Minimum width value	2
 \&\s+4.\s0\fIxx\fR	Included \fItroff\fR command	3
-\(bv	Vertical line	2
-\(bv\|\(bv	Double vertical line	2
+|	Vertical line	2
+|\||	Double vertical line	2
 \&\s+4\v'4p'^\v'-4p'\s0	Vertical span	2
 \e\&\s+4\v'4p'^\v'-4p'\s0	Vertical span	3
 \&=	Double horizontal line	2,3
-\&$fat "_"$	Horizontal line	2,3
-\&$fat "\e\|_"$	Short horizontal line	3
+\&_	Horizontal line	2,3
+\&\e\^_	Short horizontal line	3
 .TE

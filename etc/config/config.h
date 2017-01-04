@@ -14,7 +14,7 @@
  * IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
  * WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
  *
- *	@(#)config.h	5.8 (Berkeley) 6/18/88
+ *	@(#)config.h	5.10 (Berkeley) 3/20/04
  */
 
 /*
@@ -81,6 +81,7 @@ struct device {
 	struct	idlst *d_vec;		/* interrupt vectors */
 	int	d_pri;			/* interrupt priority */
 	int	d_addr;			/* address of csr */
+	int	d_node;			/* VAXBI/XMI node */
 	int	d_unit;			/* unit number */
 	int	d_drive;		/* drive number */
 	int	d_slave;		/* slave number */
@@ -147,7 +148,7 @@ char	*strcpy();
 char	*strcat();
 
 #if MACHINE_VAX
-int	seen_mba, seen_uba;
+int	seen_mba, seen_uba, seen_bva;
 #endif
 #if MACHINE_TAHOE
 int	seen_vba;

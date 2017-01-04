@@ -1,6 +1,6 @@
 .\"	@(#)table1	6.1 (Berkeley) 4/17/86
 .\"
-.pn 32
+.pn 30
 .rm mx
 .br
 .tr &&
@@ -63,8 +63,11 @@ The following fonts are printed in 12-point, with a vertical spacing of 14-point
 and with
 non-alphanumeric characters separated by \(14\|em space (all measurements
 on 8.5 \(mu 11 inch paper prior to photoreduction).
-This font sample is printed on an APS-5 phototypesetter at University of California,
-Berkeley.
+.ft I
+The present emulation of the historic \*(TR character set displayed here
+has been produced by 4.3BSD-Quasijarus
+.br
+pstroff \-T.
 .sp.5i
 .ps12
 .vs14p

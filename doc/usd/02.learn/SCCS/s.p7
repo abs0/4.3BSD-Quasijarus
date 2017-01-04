@@ -1,0 +1,37 @@
+h56502
+s 00026/00000/00000
+d D 6.1 86/05/23 09:24:49 kjd 1 0
+c date and time created 86/05/23 09:24:49 by kjd
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+.NH
+Acknowledgments
+.PP
+We are grateful to all those who have tried
+.ul
+learn,
+for we have benefited greatly from their
+suggestions and criticisms.
+In particular,
+M. E. Bittrich,
+J. L. Blue,
+S. I. Feldman,
+P. A. Fox,
+and
+M. J. McAlpin
+have provided substantial feedback.
+Conversations with E. Z. Rothkopf also provided many of the ideas in the system.
+We are also indebted to Don Jackowski
+for serving as a guinea pig for the second version,
+and to Tom Plum for his efforts to improve the C script.
+....SG \s-2MH\s0-1273/4-\s-2MEL/BWK\s0-unix
+.[
+$LIST$
+.]
+E 1

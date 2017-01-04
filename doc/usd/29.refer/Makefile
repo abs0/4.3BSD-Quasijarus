@@ -3,23 +3,21 @@
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile	6.1 (Berkeley) 6/2/86
+#	@(#)Makefile	6.2 (Berkeley) 10/24/04
 #
 # refer.mac should be typed on a 12 pitch Daisy wheel printer
 SRCS=	refer.bib
-MACROS=	-msU
-PRINTER=Pdp
+MACROS=	-ms
 REFER=	refer -p biblio
-TROFF=	ditroff -${PRINTER}
+TROFF=	pstroff
 
-paper:	paper.${PRINTER}
-	lpr -${PRINTER} -n paper.${PRINTER}
+all:	paper.ps
 
-paper.${PRINTER}: ${SRCS}
-	${REFER} ${SRCS} | ${TROFF} ${MACROS} -t > paper.${PRINTER}
+paper.ps: ${SRCS}
+	${REFER} ${SRCS} | ${TROFF} ${MACROS} -t > $@
 
 clean:
-	rm -f paper.[PT]* *.spell errs Errs make.out
+	rm -f *.ps *.spell errs Errs make.out biblio.ig
 
 spell:	${SRCS}
 	@for i in ${SRCS}; do \

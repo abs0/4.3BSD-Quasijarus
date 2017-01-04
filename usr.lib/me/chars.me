@@ -1,5 +1,5 @@
 .nr _0 \n(c.
-.\"	@(#)chars.me	2.4 (Berkeley) 5/21/88
+.\"	@(#)chars.me	2.6 (Berkeley) 10/28/04
 .\"
 .\" Copyright (c) 1988 Regents of the University of California.
 .\" All rights reserved.
@@ -36,8 +36,14 @@
 .\"			\" umlaut
 .ds : \k_\h'-(\\n(.wu*8/10-\*(#h+0.1m+\*(#f)'\v'-\*(#v'\*(#[\z.\h'0.2m+\*(#f'.\h'|\\n_u'\v'\*(#v'\*(#]
 .\"			\" circumflex and tilde
-.ds ^ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[^\h'|\\n_u'\*(#]
-.ds ~ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[~\h'|\\n_u'\*(#]
+.ie \n(.C \{\
+.	ds ^ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[\X93\h'|\\n_u'\*(#]
+.	ds ~ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[\X94\h'|\\n_u'\*(#]
+.\}
+.el \{\
+.	ds ^ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[^\h'|\\n_u'\*(#]
+.	ds ~ \k_\h'-(\\n(.wu-\*(#h-0.05m)'\*(#[~\h'|\\n_u'\*(#]
+.\}
 .\"			\" cedilla and czech
 .ds , \k_\h'-(\\n(.wu)'\*(#[,\h'|\\n_u'\*(#]
 .ds v \k_\h'-(\\n(.wu*9/10-\*(#h)'\v'-\*(#v'\*(#[\s-4v\s0\v'\*(#v'\h'|\\n_u'\*(#]
@@ -63,6 +69,12 @@
 .	ds o \&
 .	ds qe EXISTS
 .	ds qa FORALL
+.\}
+.\"			\" there exists and for all are Symbol characters
+.if \n(.C \
+\{\
+.	ds qe \S24
+.	ds qa \S22
 .\}
 .rm #[
 .rm #]

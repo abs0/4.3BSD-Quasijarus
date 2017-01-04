@@ -1,0 +1,76 @@
+To make a new pic,
+	make
+
+The output should be something like
+	yacc -d picy.y
+	
+	conflicts: 32 shift/reduce
+	cc  -c y.tab.c
+	rm y.tab.c
+	mv y.tab.o picy.o
+	lex  picl.l
+	1174/1300 nodes(%e), 3365/3500 positions(%p), 514/600 (%n), 26763 transitions
+	, 44/100 packed char classes(%k), 1313/1400 packed transitions(%a), 1035/1200 output slots(%o)
+	cc  -c lex.yy.c
+	rm lex.yy.c
+	mv lex.yy.o picl.o
+	cc  -c main.c
+	cc  -c print.c
+	cc  -c misc.c
+	cc  -c symtab.c
+	cc  -c blockgen.c
+	cc  -c boxgen.c
+	cc  -c circgen.c
+	cc  -c arcgen.c
+	cc  -c linegen.c
+	cc  -c movegen.c
+	cc  -c troffgen.c
+	cc  -c textgen.c
+	cc  -c pic2.c
+	cc  -c pltroff.c
+	cc  -i  picy.o picl.o main.o print.o misc.o symtab.o blockgen.o boxgen.o circgen.o  arcgen.o linegen.o movegen.o troffgen.o textgen.o  pic2.o pltroff.o  -lm
+
+You may have some trouble with Lex -- older versions of Lex have
+default sizes of arrays set poorly, and the pic lexical phase
+strains them.  If it complains about out of space in various ways,
+such as "calloc returns 0" or more specific messages,
+look at the output lines that say things like
+"1174/1300 nodes(%e)" and decrease the corresponding %e line
+at the top of picl.l to make the limit tighter.
+I have done this fairly tightly already, but you might
+squeeze a bit more if necessary.
+
+If you are using the standard version of Troff (i.e., the one that
+drives the Graphics Systems CAT), the following CAVEAT applies:
+
+
+I have included with this version of PIC code that in principle
+will drive the old (i.e., standard) version of Troff.  The way
+it works is to draw slanted lines, circles, etc., with millions
+of small periods, so as might be expected it is slow and produces
+voluminous input to troff.
+
+To set things up for your typesetter and troff, you may want
+to diddle some defaults.
+
+1.  The typesetter type has to be set in main.c; I have it set
+up for the Linotron 202, which is almost certainly not what you want.
+In main.c, set devtype to DEVCAT and res to 432.
+
+2.  When you compile with Make, you must one way or another
+define the constant OLDTROFF in pltroff.c, either by
+	make CFLAGS=-DOLDTROFF
+or by adding the line
+	#define OLDTROFF
+to pltroff.c.
+
+There are no guarantees with the old-style stuff, since I can't
+really give it an effective test.  I will be glad to take back
+improvements for subsequent distribution, however.
+
+Good luck.
+
+End of CAVEAT.
+
+The file UNDOC describes a couple of things that have been
+added to PIC since TM-80-1272-2 (June 9, 1980).

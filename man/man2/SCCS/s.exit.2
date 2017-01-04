@@ -1,0 +1,173 @@
+h44114
+s 00001/00001/00048
+d D 6.4 86/05/22 12:10:40 anne 6 5
+c grammar
+e
+s 00005/00002/00044
+d D 6.3 86/05/13 14:21:25 karels 5 4
+c clarifications
+e
+s 00001/00001/00045
+d D 6.2 85/06/28 16:37:23 sechrest 4 3
+c Added comma
+e
+s 00001/00001/00045
+d D 6.1 85/05/09 16:03:55 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00031/00036/00015
+d D 5.1 85/05/09 16:03:47 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00051/00000/00000
+d D 4.1 85/05/09 16:03:40 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH EXIT 2 
+E 2
+I 2
+D 3
+.TH EXIT 2 "27 July 1983"
+E 3
+I 3
+.TH EXIT 2 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+D 2
+exit \- terminate process
+E 2
+I 2
+_exit \- terminate a process
+E 2
+.SH SYNOPSIS
+.nf
+D 2
+.B exit(status)
+.B int status;
+.PP
+.B _exit(status)
+.B int status;
+E 2
+I 2
+.ft B
+_exit(status)
+int status;
+E 2
+.fi
+.SH DESCRIPTION
+D 2
+.I Exit
+is the normal means of terminating a process.
+.I Exit
+closes all the process's files and notifies the parent process
+if it is executing a
+.IR wait .
+The low-order 8 bits of 
+.I status
+are available to the parent process.
+E 2
+I 2
+.I _exit
+terminates a process with the following consequences:
+.in +5n
+E 2
+.PP
+D 2
+This call can never return.
+E 2
+I 2
+All of the descriptors open in the calling process are closed.
+I 5
+D 6
+This may entail delays, for example waiting for output to drain;
+E 6
+I 6
+This may entail delays, for example, waiting for output to drain;
+E 6
+a process in this state may not be killed, as it is already dying.
+E 5
+E 2
+.PP
+D 2
+The C function
+.I exit
+may cause cleanup actions before the
+final `sys exit'.
+The function
+.I _exit
+circumvents all cleanup, and should be used to terminate a child
+process after a
+.IR fork (2)
+or
+.IR vfork (2)
+to avoid flushing buffered output twice.
+E 2
+I 2
+If the parent process of the calling process is executing a
+.I wait
+or is interested in the SIGCHLD signal,
+then it is notified of the calling process's termination and
+the low-order eight bits of \fIstatus\fP are made available to it;
+see
+.IR wait (2).
+.PP
+The parent process ID of all of the calling process's existing child
+processes are also set to 1.  This means that the initialization process
+(see 
+.IR intro (2))
+inherits each of these processes as well.
+I 5
+Any stopped children are restarted with a hangup signal (SIGHUP).
+E 5
+.in -5n
+.PP
+Most C programs call the library routine
+D 4
+.IR exit (3)
+E 4
+I 4
+.IR exit (3),
+E 4
+D 5
+which performs cleanup actions in the standard i/o library before
+E 5
+I 5
+which performs cleanup actions in the standard I/O library before
+E 5
+calling \fI_exit\fP\|.
+.SH "RETURN VALUE"
+This call never returns.
+E 2
+.SH "SEE ALSO"
+D 2
+fork(2), vfork(2), wait(2)
+.SH "ASSEMBLER (PDP-11)"
+(exit = 1.)
+.br
+(status in r0)
+.br
+.B sys exit
+E 2
+I 2
+D 5
+fork(2), wait(2), exit(3)
+E 5
+I 5
+fork(2), sigvec(2), wait(2), exit(3)
+E 5
+E 2
+E 1

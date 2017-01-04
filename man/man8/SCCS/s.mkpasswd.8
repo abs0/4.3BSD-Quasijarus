@@ -1,0 +1,71 @@
+h44428
+s 00000/00001/00044
+d D 6.3 86/06/03 15:17:35 cuccia 3 2
+c got rid of empty BUGS: line.
+e
+s 00001/00001/00044
+d D 6.2 86/05/10 20:31:26 mckusick 2 1
+c format
+e
+s 00045/00000/00000
+d D 6.1 85/04/27 16:15:55 mckusick 1 0
+c manual page first distributed with 4.3BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1985 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+.TH MKPASSWD 8 "%Q%"
+.UC 6
+.SH NAME
+D 2
+mkpasswd - generate hashed password table
+E 2
+I 2
+mkpasswd \- generate hashed password table
+E 2
+.SH SYNOPSIS
+.B /etc/mkpasswd
+[
+.B \-v
+]
+passwdfile
+.SH DESCRIPTION
+.I Mkpasswd
+is used to generated the hashed password database used by the
+library routines
+.B getpwnam()
+and
+.BR getpwuid() .
+If the
+.B \-v
+option is supplied, each entry will be listed as it is added.
+The file
+.I passwdfile
+is usually /etc/ptmp (invoked by vipw(8)), and in any case
+must be in the format of /etc/passwd (see passwd(5)).
+.I Mkpasswd
+will generate database files named
+.I passwdfile.pag
+and
+.I passwdfile.dir.
+.I Mkpasswd
+will exit with a non-zero exit code if any errors are detected.
+.SH FILES
+.ta \w'passwdfile.dir    'u
+\fIpasswdfile\fR.pag	- database filenames
+.br
+\fIpasswdfile\fR.dir
+.SH SEE ALSO
+getpwent(3), vipw(8), passwd(5)
+D 3
+.SH BUGS
+E 3
+E 1

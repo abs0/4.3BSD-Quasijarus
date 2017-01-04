@@ -1,0 +1,140 @@
+h61384
+s 00001/00001/00032
+d D 6.1 85/04/29 15:10:28 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00012/00053/00021
+d D 5.1 85/04/29 15:10:20 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00074/00000/00000
+d D 4.1 85/04/29 15:10:13 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\" Copyright (c) 1980 Regents of the University of California.
+.\" All rights reserved.  The Berkeley software License Agreement
+.\" specifies the terms and conditions for redistribution.
+.\"
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH WC 1 
+E 2
+I 2
+D 3
+.TH WC 1  "1 June 1983"
+E 3
+I 3
+.TH WC 1 "%Q%"
+E 3
+E 2
+.UC 4
+.SH NAME
+wc \- word count
+.SH SYNOPSIS
+.B wc
+[
+D 2
+.B \-lwcpt
+] [
+.BI \-b baud
+] [
+.BI \-s pagesize
+] [
+.B \-u
+] [
+.B \-v
+] [ name ... ]
+E 2
+I 2
+.B \-lwc
+] 
+[ name ... ]
+E 2
+.SH DESCRIPTION
+I 2
+.PP
+E 2
+.I Wc
+D 2
+counts lines, words and characters,
+and optionally pages and the print time,
+in the named files,
+or in the standard input if no name appears.
+A word is a maximal string of characters
+delimited by spaces, tabs or newlines.
+E 2
+I 2
+counts lines, words and characters 
+in the named files, or in the standard input if no name appears.
+A word is a maximal string of characters delimited by spaces, tabs or newlines.
+E 2
+.PP
+D 2
+If an argument beginning with one of ``lwcpt'' is present,
+the specified counts (lines, words, characters, pages, or time)
+E 2
+I 2
+If an argument beginning with one of ``lwc'' is present,
+the specified counts (lines, words, or characters)
+E 2
+are selected by the letters
+.BR l ,
+.BR w ,
+D 2
+.BR c ,
+.BR p ,
+E 2
+or
+D 2
+.BR t .
+E 2
+I 2
+.BR c .
+E 2
+The default is
+D 2
+.B \-lwc
+unless
+.B \-v
+is specified.
+.PP
+The
+.B \-b
+option asks that the time be figured at
+the specified baud rate instead of the default 300 baud.
+.PP
+The
+.B \-s
+option specifies that pages are
+.I pagesize
+lines long instead of the default 66.
+.PP
+The
+.B \-u
+options asks that the time printed be based on uucp
+transmission time, about 90% as fast as normal.
+.PP
+The
+.B \-v
+option asks for a verbose output format,
+with headers and including pages and time by default.
+E 2
+I 2
+.BR \-lwc .
+E 2
+.SH BUGS
+D 2
+The times given do not take into account variable factors
+such as system load;
+delays due to tab expansion or tty driver delays,
+which can be a factor with cu;
+or uucp delays such as mail headers, auxillary protocol files, 
+or the time taken to initially connect to another site.
+E 2
+E 1

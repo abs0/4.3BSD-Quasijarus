@@ -1,0 +1,2838 @@
+
+
+
+
+
+
+
+
+
+             A Tour Through the Portable C Compiler
+
+
+                          S. C. Johnson
+
+                     AT&T Bell Laboratories
+
+
+
+                           Donn Seeley
+
+                 Department of Computer Science
+                       University of Utah
+
+
+                            ABSTRACT
+
+
+          Since its introduction, the  Portable  C  Compiler
+     has  become  the  standard  UNIX  C  compiler  for many
+     machines.  Three quarters or more of the  code  in  the
+     compiler  is  machine  independent and much of the rest
+     can be generated easily using knowledge of  the  target
+     architecture.   This  paper describes the structure and
+     organization of the compiler and tries to further  sim-
+     plify the job of the compiler porter.
+
+          This document originally appeared with the Seventh
+     Edition  of UNIX, and has been revised and extended for
+     publication with the Fourth Berkeley Software Distribu-
+     tion.   The new material covers changes which have been
+     made in the compiler since  the  Seventh  Edition,  and
+     includes some discussion of secondary topics which were
+     thought to be of interest in future ports of  the  com-
+     piler.
+
+
+     Revised April, 1986
+
+
+
+Introduction
+
+     A C compiler has been implemented  that  has  proved  to  be
+quite portable, serving as the basis for C compilers on roughly a
+dozen machines, including the DEC VAX, Honeywell 6000,  IBM  370,
+and Interdata 8/32.  The compiler is highly compatible with the C
+language standard.[1]
+
+     Among the goals of this compiler are portability, high reli-
+ability,  and  the  use  of state-of-the-art techniques and tools
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-2                   A Tour Through the Portable C Compiler
+
+
+wherever practical.  Although the  efficiency  of  the  compiling
+process  is not a primary goal, the compiler is efficient enough,
+and produces good enough code, to serve as a production compiler.
+
+     The language  implemented  is  highly  compatible  with  the
+current  PDP-11  version of C.  Moreover, roughly 75% of the com-
+piler, including nearly all the syntactic and semantic  routines,
+is  machine  independent.   The compiler also serves as the major
+portion of the program lint, described elsewhere.[2]
+
+     A number of earlier attempts to make portable compilers  are
+worth  noting.   While  on CO-OP assignment to Bell Labs in 1973,
+Alan Snyder wrote a portable C compiler which was  the  basis  of
+his  Master's Thesis at M.I.T.[3] This compiler was very slow and
+complicated, and contained a number of rather serious implementa-
+tion  difficulties;  nevertheless,  a  number  of  Snyder's ideas
+appear in this work.
+
+     Most earlier portable compilers,  including  Snyder's,  have
+proceeded  by defining an intermediate language, perhaps based on
+three-address code or code for a stack  machine,  and  writing  a
+machine  independent program to translate from the source code to
+this intermediate code.  The intermediate code is then read by  a
+second  pass,  and  interpreted  or  compiled.   This approach is
+elegant, and has a number of advantages, especially if the target
+machine  is  far  removed  from  the  host.  It suffers from some
+disadvantages as well.  Some constructions,  like  initialization
+and  subroutine prologs, are difficult or expensive to express in
+a machine independent way that still allows  them  to  be  easily
+adapted  to  the  target  assemblers.   Most  of these approaches
+require a symbol table to be constructed in the  second  (machine
+dependent)  pass,  and/or  require  powerful  target  assemblers.
+Also, many conversion operators may be  generated  that  have  no
+effect on a given machine, but may be needed on others (for exam-
+ple, pointer to pointer conversions usually do nothing in C,  but
+must  be generated because there are some machines where they are
+significant).
+
+     For these reasons, the first pass of the  portable  compiler
+is  not  entirely  machine independent.  It contains some machine
+dependent features, such as initialization, subroutine prolog and
+epilog, certain storage allocation functions, code for the switch
+statement, and code to throw out unneeded conversion operators.
+
+     As a crude measure of the  degree  of  portability  actually
+achieved,  the  Interdata 8/32 C compiler has roughly 600 machine
+dependent lines of source out of 4600 in Pass 1, and 1000 out  of
+3400 in Pass 2.  In total, 1600 out of 8000, or 20%, of the total
+source is machine dependent (12% in  Pass  1,  30%  in  Pass  2).
+These  percentages  can  be expected to rise slightly as the com-
+piler is tuned.  The percentage of machine-dependent code for the
+IBM  is  22%, for the Honeywell 25%.  If the assembler format and
+structure were the same for all these machines,  perhaps  another
+5-10% of the code would become machine independent.
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                   SMM:19-3
+
+
+     These figures are sufficiently misleading as  to  be  almost
+meaningless.   A large fraction of the machine dependent code can
+be converted in a straightforward, almost mechanical way.  On the
+other  hand, a certain amount of the code requires hard intellec-
+tual effort to convert, since the  algorithms  embodied  in  this
+part of the code are typically complicated and machine dependent.
+
+     To summarize, however, if you need a C compiler written  for
+a machine with a reasonable architecture, the compiler is already
+three quarters finished!
+
+Overview
+
+     This paper discusses the structure and organization  of  the
+portable compiler.  The intent is to give the big picture, rather
+than discussing the details of a particular  machine  implementa-
+tion.  After a brief overview and a discussion of the source file
+structure, the paper describes the  major  data  structures,  and
+then  delves  more  closely  into  the  two  passes.  Some of the
+theoretical work on which the compiler is based, and its applica-
+tion to the compiler, is discussed elsewhere.[4] One of the major
+design issues in any  C  compiler,  the  design  of  the  calling
+sequence  and  stack frame, is the subject of a separate memoran-
+dum.[5]
+
+     The compiler consists of two passes, pass1 and  pass2,  that
+together  turn  C  source code into assembler code for the target
+machine.  The two passes are preceded  by  a  preprocessor,  that
+handles the #define and #include statements, and related features
+(e.g., #ifdef, etc.).  The two passes may optionally be  followed
+by a machine dependent code improver.
+
+     The output of the preprocessor is a text file that  is  read
+as  the standard input of the first pass.  This produces as stan-
+dard output another text file that becomes the standard input  of
+the  second  pass.  The second pass produces, as standard output,
+the desired assembler language source code.  The  code  improver,
+if  used, converts the assembler code to more effective code, and
+the result is passed to the assembler.  The preprocessor and  the
+two  passes  all write error messages on the standard error file.
+Thus the compiler itself makes few demands  on  the  I/O  library
+support, aiding in the bootstrapping process.
+
+     The division of the compiler into  two  passes  is  somewhat
+artificial.   The  compiler can optionally be loaded so that both
+passes operate in the same program.  This ``one pass''  operation
+eliminates  the  overhead of reading and writing the intermediate
+file, so the compiler operates about 30% faster in this mode.  It
+also  occupies  about  30%  more space than the larger of the two
+component passes.  This ``one pass''  compiler  is  the  standard
+version on machines with large address spaces, such as the VAX.
+
+     Because the compiler  is  fundamentally  structured  as  two
+passes,   even  when  loaded  as  one,  this  document  primarily
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-4                   A Tour Through the Portable C Compiler
+
+
+describes the two pass version.
+
+     The first pass does the lexical analysis, parsing, and  sym-
+bol  table  maintenance.   It  also  constructs  parse  trees for
+expressions, and keeps track of the types of the nodes  in  these
+trees.   Additional  code  is devoted to initialization.  Machine
+dependent portions of the first pass serve to generate subroutine
+prologs  and  epilogs,  code for switches, and code for branches,
+label definitions,  alignment  operations,  changes  of  location
+counter, etc.
+
+     The intermediate file is a text file organized  into  lines.
+Lines beginning with a right parenthesis are copied by the second
+pass directly to its output file, with the  parenthesis  stripped
+off.   Thus,  when the first pass produces assembly code, such as
+subroutine prologs, etc., each line  is  prefaced  with  a  right
+parenthesis; the second pass passes these lines to through to the
+assembler.
+
+     The major job done by the second pass is generation of  code
+for  expressions.   The  expression  parse  trees produced in the
+first pass are written onto the intermediate file in Polish  Pre-
+fix  form:  first,  there is a line beginning with a period, fol-
+lowed by the source file  line  number  and  name  on  which  the
+expression  appeared  (for  debugging  purposes).  The successive
+lines represent the nodes of the parse tree, one node  per  line.
+Each  line  contains the node number, type, and any values (e.g.,
+values  of  constants)  that  may  appear  in  the  node.   Lines
+representing  nodes  with descendants are immediately followed by
+the left subtree of  descendants,  then  the  right.   Since  the
+number of descendants of any node is completely determined by the
+node number, there is no need to mark the end of the tree.
+
+     There are only two other  line  types  in  the  intermediate
+file.  Lines beginning with a left square bracket (`[') represent
+the beginning of blocks (delimited by { ... } in the  C  source);
+lines  beginning  with  right square brackets (`]') represent the
+end of blocks.  The remainder of these lines tell how much  stack
+space, and how many register variables, are currently in use.
+
+     Thus, the second pass reads the intermediate  files,  copies
+the  `)'  lines, makes note of the information in the `[' and `]'
+lines, and devotes most of its effort to the `.' lines and  their
+associated  expression  trees,  turning  them turns into assembly
+code to evaluate the expressions.
+
+     In the one pass version  of  the  compiler,  the  expression
+trees contain information useful to both logical passes.  Instead
+of writing the trees onto an  intermediate  file,  each  tree  is
+transformed in place into an acceptable form for the code genera-
+tor.  The code generator then writes the result of compiling this
+tree  onto  the standard output.  Instead of `[' and `]' lines in
+the intermediate file, the information is passed directly to  the
+second  pass  routines.  Assembly code produced by the first pass
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                   SMM:19-5
+
+
+is simply written out, without the need for `)' at  the  head  of
+each line.
+
+The Source Files
+
+     The compiler source consists of 25  source  files.   Several
+header  files  contain information which is needed across various
+source modules.  Manifest.h has declarations for node types, type
+manipulation macros and other macros, and some global data defin-
+itions.  Macdefs.h has machine-dependent definitions, such as the
+size and alignment of the various data representations.  Config.h
+defines symbols which control the configuration of the  compiler,
+including  such things as the sizes of various tables and whether
+the  compiler  is  ``one  pass''.   The  compiler   conditionally
+includes  another  file,  onepass.h,  which  contains definitions
+which are particular to a ``one pass'' compiler.   Ndu.h  defines
+the  basic  tree  building structure which is used throughout the
+compiler to construct expression trees.   Manifest.h  includes  a
+file  of  opcode and type definitions named pcclocal.h; this file
+is automatically generated from a header file specific to  the  C
+compiler   named   localdefs.h   and   a   public   header   file
+/usr/include/pcc.h.  Another file, pcctokens, is generated  in  a
+similar  way  and  contains  token definitions for the compiler's
+Yacc[6] grammar.  Two machine independent header  files,  pass1.h
+and  pass2.h, contain the data structure and manifest definitions
+for the first and second passes,  respectively.   In  the  second
+pass,  a  machine  dependent  header  file,  mac2defs.h, contains
+declarations of register names, etc.
+
+     Common.c contains machine independent routines used in  both
+passes.  These include routines for allocating and freeing trees,
+walking over trees, printing debugging information, and  printing
+error  messages.   This  file can be compiled in two flavors, one
+for pass 1 and one for pass 2, depending on what conditional com-
+pilation symbol is used.
+
+     Entire sections of this document are devoted to the detailed
+structure  of  the  passes.  For the moment, we just give a brief
+description of the files.  The first pass is obtained by  compil-
+ing  and  loading  cgram.y,  code.c,  common.c, local.c, optim.c,
+pftn.c, scan.c, stab.c, trees.c and xdefs.c.  Scan.c is the lexi-
+cal analyzer, which provides tokens to the bottom-up parser which
+is defined by the Yacc grammar cgram.y.  Xdefs.c is a short  file
+of  external definitions.  Pftn.c maintains the symbol table, and
+does initialization.  Trees.c builds the  expression  trees,  and
+computes  the  node types.  Optim.c does some machine independent
+optimizations on the expression trees.  Common.c contains service
+routines common to the two passes of the compiler.  All the above
+files are machine independent.  The files local.c and code.c con-
+tain  machine  dependent  code for generating subroutine prologs,
+switch code, and the like.   Stab.c  contains  machine  dependent
+code  for  producing  external symbol table information which can
+drive a symbolic debugger.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-6                   A Tour Through the Portable C Compiler
+
+
+     The second pass is produced by compiling and loading allo.c,
+common.c,  local2.c,  match.c,  order.c,  reader.c  and  table.c.
+Reader.c reads the intermediate  file,  and  controls  the  major
+logic  of  the  code  generation.  Allo.c keeps track of busy and
+free registers.  Match.c controls the matching of code  templates
+to  subtrees  of  the  expression  tree to be compiled.  Common.c
+defines certain service routines, as  in  the  first  pass.   The
+above  files  are  machine  independent.   Order.c  controls  the
+machine  dependent  details  of  the  code  generation  strategy.
+Local2.c has many small machine dependent routines, and tables of
+opcodes, register types, etc.   Table.c  has  the  code  template
+tables, which are also clearly machine dependent.
+
+Data Structure Considerations
+
+     This section discusses the node  numbers,  type  words,  and
+expression trees, used throughout both passes of the compiler.
+
+     The file manifest.h defines those  symbols  used  throughout
+both  passes.   The  intent is to use the same symbol name (e.g.,
+MINUS) for the given operator throughout  the  lexical  analysis,
+parsing,  tree  building, and code generation phases.  Manifest.h
+obtains some of its definitions  from  two  other  header  files,
+localdefs.h  and  pcc.h.   Localdefs.h  contains  definitions for
+operator symbols which are specific to  the  C  compiler.   Pcc.h
+contains definitions for operators and types which may be used by
+other compilers to communicate with  a  portable  code  generator
+based on pass 2; this code generator will be described later.
+
+     A token like MINUS may  be  seen  in  the  lexical  analyzer
+before  it  is  known  whether  it is a unary or binary operator;
+clearly, it is necessary to know this by the time the parse  tree
+is  constructed.  Thus, an operator (really a macro) called UNARY
+is provided, so that MINUS and UNARY MINUS are both distinct node
+numbers.  Similarly, many binary operators exist in an assignment
+form (for example, -=), and the operator ASG may  be  applied  to
+such node names to generate new ones, e.g. ASG MINUS.
+
+     It is frequently desirable to know if a  node  represents  a
+leaf  (no  descendants),  a  unary operator (one descendant) or a
+binary operator (two descendants).  The macro  optype(o)  returns
+one  of  the  manifest constants LTYPE, UTYPE, or BITYPE, respec-
+tively, depending on the  node  number  o.   Similarly,  asgop(o)
+returns  true  if o is an assignment operator number (=, +=, etc.
+), and logop(o) returns true if o is a relational or logical (&&,
+||, or !) operator.
+
+     C has a rich typing structure, with a  potentially  infinite
+number of types.  To begin with, there are the basic types: CHAR,
+SHORT, INT, LONG, the unsigned versions known as  UCHAR,  USHORT,
+UNSIGNED,  ULONG,  and FLOAT, DOUBLE, and finally STRTY (a struc-
+ture), UNIONTY, and ENUMTY.  Then, there are three operators that
+can  be  applied  to types to make others: if t is a type, we may
+potentially have types pointer to t, function  returning  t,  and
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                   SMM:19-7
+
+
+array of t's generated from t.  Thus, an arbitrary type in C con-
+sists of a basic type, and zero or more of these operators.
+
+     In the compiler,  a  type  is  represented  by  an  unsigned
+integer;  the  rightmost  four  bits hold the basic type, and the
+remaining bits are divided into two-bit fields, containing 0  (no
+operator),  or  one  of the three operators described above.  The
+modifiers are read right to left in the word, starting  with  the
+two-bit field adjacent to the basic type, until a field with 0 in
+it is reached.  The  macros  PTR,  FTN,  and  ARY  represent  the
+pointer  to,  function  returning,  and  array of operators.  The
+macro values are shifted so that they align with the  first  two-
+bit  field;  thus  PTR+INT  represents  the  type  for an integer
+pointer, and
+
+        ARY + (PTR<<2) + (FTN<<4) + DOUBLE
+
+represents the type of an array of pointers to functions  return-
+ing doubles.
+
+     The type words are ordinarily manipulated by macros.   If  t
+is  a  type  word,  BTYPE(t)  gives  the  basic  type.  ISPTR(t),
+ISARY(t), and ISFTN(t) ask  if  an  object  of  this  type  is  a
+pointer,  array,  or a function, respectively.  MODTYPE(t,b) sets
+the basic type of t to b.  DECREF(t)  gives  the  type  resulting
+from removing the first operator from t.  Thus, if t is a pointer
+to t', a function returning t', or an array of t', then DECREF(t)
+would  equal t'.  INCREF(t) gives the type representing a pointer
+to t.  Finally, there are operators for dealing with the unsigned
+types.   ISUNSIGNED(t) returns true if t is one of the four basic
+unsigned types; in this case, DEUNSIGN(t)  gives  the  associated
+`signed' type.  Similarly, UNSIGNABLE(t) returns true if t is one
+of  the  four  basic  types  that  could  become  unsigned,   and
+ENUNSIGN(t) returns the unsigned analogue of t in this case.
+
+     The other important global data structure is that of expres-
+sion  trees.   The actual shapes of the nodes are given in ndu.h.
+The information stored for each pass is not quite  the  same;  in
+the  first  pass,  nodes  contain dimension and size information,
+while in the second pass nodes contain register allocation infor-
+mation.   Nevertheless,  all nodes contain fields called op, con-
+taining the node number, and type, containing the type  word.   A
+function  called  talloc()  returns a pointer to a new tree node.
+To free a node, its op field need merely be  set  to  FREE.   The
+other  fields  in  the node will remain intact at least until the
+next allocation.
+
+     Nodes representing binary operators contain fields, left and
+right,  that  contain pointers to the left and right descendants.
+Unary operator nodes have the  left  field,  and  a  value  field
+called  rval.   Leaf  nodes,  with no descendants, have two value
+fields: lval and rval.
+
+     At appropriate times, the function tcheck() can  be  called,
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-8                   A Tour Through the Portable C Compiler
+
+
+to check that there are no busy nodes remaining.  This is used as
+a compiler consistency check.   The  function  tcopy(p)  takes  a
+pointer  p  that  points  to  an  expression  tree, and returns a
+pointer to a disjoint copy of the tree.  The function  walkf(p,f)
+performs  a  postorder  walk  of  the  tree  pointed to by p, and
+applies the function f to each node.  The  function  fwalk(p,f,d)
+does  a preorder walk of the tree pointed to by p.  At each node,
+it calls a function f, passing to it the node  pointer,  a  value
+passed  down  from its ancestor, and two pointers to values to be
+passed down to the left and  right  descendants  (if  any).   The
+value  d is the value passed down to the root.  Fwalk is used for
+a number of tree labeling and debugging activities.
+
+     The other major data structure,  the  symbol  table,  exists
+only in pass one, and will be discussed later.
+
+Pass One
+
+     The first pass does lexical analysis, parsing, symbol  table
+maintenance, tree building, optimization, and a number of machine
+dependent things.  This pass is largely machine independent,  and
+the  machine  independent  sections  can  be  pretty successfully
+ignored.  Thus, they will be only sketched here.
+
+Lexical Analysis
+
+     The lexical analyzer is a conceptually simple  routine  that
+reads  the  input  and returns the tokens of the C language as it
+encounters them: names, constants, operators, and keywords.   The
+conceptual  simplicity of this job is confounded a bit by several
+other simple jobs that unfortunately must go  on  simultaneously.
+These include
+
++    Keeping track of the current filename and line  number,  and
+     occasionally  setting  this  information  as  the  result of
+     preprocessor control lines.
+
++    Skipping comments.
+
++    Properly dealing with octal, decimal, hex,  floating  point,
+     and character constants, as well as character strings.
+
+     To achieve speed, the program maintains several tables  that
+are indexed into by character value, to tell the lexical analyzer
+what to do next.  To achieve portability, these  tables  must  be
+initialized  each  time  the  compiler  is run, in order that the
+table entries reflect the local character set values.
+
+Parsing
+
+     As mentioned above, the parser is generated by Yacc from the
+grammar  cgram.y.   The  grammar is relatively readable, but con-
+tains some unusual features that are worth comment.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                   SMM:19-9
+
+
+     Perhaps the strangest feature of the grammar is  the  treat-
+ment  of declarations.  The problem is to keep track of the basic
+type and the storage class while interpreting the various  stars,
+brackets,  and  parentheses  that may surround a given name.  The
+entire declaration mechanism must be  recursive,  since  declara-
+tions may appear within declarations of structures and unions, or
+even within a sizeof construction inside a dimension  in  another
+declaration!
+
+     There are some difficulties in  using  a  bottom-up  parser,
+such  as produced by Yacc, to handle constructions where a lot of
+left context information must be kept  around.   The  problem  is
+that  the original PDP-11 compiler is top-down in implementation,
+and some of the semantics of  C  reflect  this.   In  a  top-down
+parser,  the  input  rules  are  restricted somewhat, but one can
+naturally associate temporary storage with a rule at a very early
+stage  in  the  recognition of that rule.  In a bottom-up parser,
+there is more freedom in the specification of rules,  but  it  is
+more  difficult  to  know  what  rule  is being matched until the
+entire rule is seen.   The  parser  described  by  cgram.y  makes
+effective  use  of the bottom-up parsing mechanism in some places
+(notably the treatment of expressions), but struggles against the
+restrictions in others.  The usual result is that it is necessary
+to run a stack of values ``on the side'', independent of the Yacc
+value  stack, in order to be able to store and access information
+deep within inner constructions, where the  relationship  of  the
+rules being recognized to the total picture is not yet clear.
+
+     In the  case  of  declarations,  the  attribute  information
+(type,  etc.)  for a declaration is carefully kept immediately to
+the left of the declarator (that part of the declaration  involv-
+ing the name).  In this way, when it is time to declare the name,
+the  name  and  the  type  information  can  be  quickly  brought
+together.   The  ``$0''  mechanism  of Yacc is used to accomplish
+this.  The result is not pretty, but it works.  The storage class
+information  changes  more  slowly,  so it is kept in an external
+variable, and stacked if necessary.  Some of the grammar could be
+considerably  cleaned  up  by  using some more recent features of
+Yacc, notably actions within rules and the ability to return mul-
+tiple values for actions.
+
+     A stack is also used to keep track of the  current  location
+to  be  branched  to  when  a break or continue statement is pro-
+cessed.
+
+     This use of external stacks dates from the  time  when  Yacc
+did  not  permit values to be structures.  Some, or most, of this
+use of external stacks could be eliminated by redoing the grammar
+to  use  the mechanisms now provided.  There are some areas, how-
+ever,  particularly  the  processing  of  structure,  union,  and
+enumeration  declarations, function prologs, and switch statement
+processing, when having all the  affected  data  together  in  an
+array  speeds  later  processing;  in  this case, use of external
+storage seems essential.
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-10                  A Tour Through the Portable C Compiler
+
+
+     The cgram.y file also contains some small functions used  as
+utility functions in the parser.  These include routines for sav-
+ing case values and labels in processing switches,  and  stacking
+and popping values on the external stack described above.
+
+Storage Classes
+
+     C has a finite, but  fairly  extensive,  number  of  storage
+classes  available.   One of the compiler design decisions was to
+process the storage class information totally in the first  pass;
+by the second pass, this information must have been totally dealt
+with.  This means that all of the storage  allocation  must  take
+place  in  the  first  pass, so that references to automatics and
+parameters can be turned into references to cells lying a certain
+number  of  bytes offset from certain machine registers.  Much of
+this transformation is machine dependent, and strongly depends on
+the storage class.
+
+     The classes include EXTERN (for externally declared, but not
+defined  variables), EXTDEF (for external definitions), and simi-
+lar distinctions for USTATIC and  STATIC,  UFORTRAN  and  FORTRAN
+(for  fortran  functions)  and  ULABEL  and  LABEL.   The storage
+classes REGISTER and AUTO are obvious, as are STNAME, UNAME,  and
+ENAME (for structure, union, and enumeration tags), and the asso-
+ciated MOS, MOU, and MOE (for the members).  TYPEDEF  is  treated
+as  a  storage  class  as  well.   There  are two special storage
+classes: PARAM and SNULL.  SNULL is used to distinguish the  case
+where  no  explicit storage class has been given; before an entry
+is made in the symbol table the true storage class is discovered.
+Similarly,  PARAM  is  used for the temporary entry in the symbol
+table made before the declaration of function parameters is  com-
+pleted.
+
+     The most complexity in the storage class process comes  from
+bit  fields.  A separate storage class is kept for each width bit
+field; a k bit bit field has storage class k  plus  FIELD.   This
+enables the size to be quickly recovered from the storage class.
+
+Symbol Table Maintenance
+
+     The symbol table routines do  far  more  than  simply  enter
+names into the symbol table; considerable semantic processing and
+checking is done as well.  For  example,  if  a  new  declaration
+comes  in,  it  must  be  checked  to  see if there is a previous
+declaration of the same symbol.  If  there  is,  there  are  many
+cases.   The  declarations may agree and be compatible (for exam-
+ple, an extern declaration can appear twice) in  which  case  the
+new declaration is ignored.  The new declaration may add informa-
+tion (such as an explicit array dimension) to an already  present
+declaration.   The  new  declaration  may be different, but still
+correct (for example, an extern declaration of something  may  be
+entered,  and  then  later  the definition may be seen).  The new
+declaration may be incompatible, but appear in an inner block; in
+this  case, the old declaration is carefully hidden away, and the
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-11
+
+
+new one comes into force until the block is left.   Finally,  the
+declarations  may  be  incompatible, and an error message must be
+produced.
+
+     A number of other factors make  for  additional  complexity.
+The type declared by the user is not always the type entered into
+the symbol table (for example, if a formal parameter to  a  func-
+tion  is declared to be an array, C requires that this be changed
+into a pointer before entry  in  the  symbol  table).   Moreover,
+there  are  various  kinds  of illegal types that may be declared
+which are difficult to check for syntactically  (for  example,  a
+function  returning  an  array).   Finally,  there  is  a strange
+feature in C that requires structure tag names and  member  names
+for  structures  and  unions to be taken from a different logical
+symbol table than ordinary identifiers.  Keeping track  of  which
+kind  of  name is involved is a bit of struggle (consider typedef
+names used within structure declarations, for example).
+
+     The symbol table handling routines  have  been  rewritten  a
+number  of times to extend features, improve performance, and fix
+bugs.  They address the above problems with reasonable effective-
+ness but a singular lack of grace.
+
+     When a name is read in the input, it is hashed, and the rou-
+tine  lookup  is  called,  together with a flag which tells which
+symbol table should be searched (actually, both symbol tables are
+stored  in  one,  and  a  flag  is used to distinguish individual
+entries).  If the name is found, lookup returns the index to  the
+entry  found;  otherwise,  it  makes  a new entry, marks it UNDEF
+(undefined), and returns the index of the new entry.  This  index
+is stored in the rval field of a NAME node.
+
+     When a declaration is being parsed, this NAME node  is  made
+part of a tree with UNARY MUL nodes for each *, LB nodes for each
+array descriptor (the right descendant has  the  dimension),  and
+UNARY  CALL  nodes  for  each  function descriptor.  This tree is
+passed to the routine tymerge, along with the attribute  type  of
+the  whole declaration; this routine collapses the tree to a sin-
+gle node, by calling tyreduce, and  then  modifies  the  type  to
+reflect the overall type of the declaration.
+
+     Dimension and size information is stored in a  table  called
+dimtab.  To properly describe a type in C, one needs not just the
+type information but also size information  (for  structures  and
+enumerations)  and dimension information (for arrays).  Sizes and
+offsets are dealt with in the compiler by giving  the  associated
+indices into dimtab.  Tymerge and tyreduce call dstash to put the
+discovered  dimensions  away  into  the  dimtab  array.   Tymerge
+returns a pointer to a single node that contains the symbol table
+index in its rval field, and the size and  dimension  indices  in
+fields csiz and cdim, respectively.  This information is properly
+considered part of the type in the first  pass,  and  is  carried
+around at all times.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-12                  A Tour Through the Portable C Compiler
+
+
+     To enter an element into the symbol table, the routine defid
+is  called;  it  is  handed a storage class, and a pointer to the
+node produced by tymerge.  Defid calls fixtype, which adjusts and
+checks  the  given  type depending on the storage class, and con-
+verts null types appropriately.  It then  calls  fixclass,  which
+does  a  similar job for the storage class; it is here, for exam-
+ple, that register declarations are either allowed or changed  to
+auto.
+
+     The new declaration is now compared against an older one, if
+present,  and several pages of validity checks performed.  If the
+definitions are compatible, with possibly some added information,
+the  processing  is  straightforward.  If the definitions differ,
+the block levels of the current and the old declaration are  com-
+pared.   The  current  block level is kept in blevel, an external
+variable; the old declaration level is kept in the symbol  table.
+Block level 0 is for external declarations, 1 is for arguments to
+functions, and 2 and above are blocks within a function.  If  the
+current  block level is the same as the old declaration, an error
+results.  If the current block level is higher, the new  declara-
+tion  overrides  the old.  This is done by marking the old symbol
+table entry ``hidden'', and making a  new  entry,  marked  ``hid-
+ing''.   Lookup  will  skip over hidden entries.  When a block is
+left, the symbol table is searched, and any  entries  defined  in
+that  block  are  destroyed;  if  they hid other entries, the old
+entries are ``unhidden''.
+
+     This nice block structure is warped a bit because labels  do
+not  follow  the  block structure rules (one can do a goto into a
+block, for example); default definitions of  functions  in  inner
+blocks  also  persist  clear  out  to  the outermost scope.  This
+implies that cleaning up the symbol table  after  block  exit  is
+more subtle than it might first seem.
+
+     For successful new definitions,  defid  also  initializes  a
+``general  purpose'' field, offset, in the symbol table.  It con-
+tains the stack offset for automatics and parameters, the  regis-
+ter number for register variables, the bit offset into the struc-
+ture for structure members, and the  internal  label  number  for
+static  variables  and labels.  The offset field is set by falloc
+for bit fields, and dclstruct for structures and unions.
+
+     The symbol table entry itself thus contains the  name,  type
+word,  size  and dimension offsets, offset value, and declaration
+block level.  It also has a field of flags, describing what  sym-
+bol  table  the  name  is in, and whether the entry is hidden, or
+hides another.  Finally, a field gives the  line  number  of  the
+last use, or of the definition, of the name.  This is used mainly
+for diagnostics, but is useful to lint as well.
+
+     In some special cases, there is more than the  above  amount
+of  information  kept for the use of the compiler.  This is espe-
+cially true with structures; for use in initialization, structure
+declarations  must  have  access  to a list of the members of the
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-13
+
+
+structure.  This list is also kept in dimtab.  Because  a  struc-
+ture  can  be  mentioned long before the members are known, it is
+necessary to have another level of indirection in the table.  The
+two words following the csiz entry in dimtab are used to hold the
+alignment of the structure, and the index in dimtab of  the  list
+of  members.  This list contains the symbol table indices for the
+structure members, terminated by a -1.
+
+Tree Building
+
+     The portable compiler transforms expressions into expression
+trees.   As  the parser recognizes each rule making up an expres-
+sion, it calls buildtree which is given an operator  number,  and
+pointers  to  the  left  and  right descendants.  Buildtree first
+examines the left and right descendants, and, if  they  are  both
+constants,  and the operator is appropriate, simply does the con-
+stant computation at compile time, and returns the  result  as  a
+constant.   Otherwise, buildtree allocates a node for the head of
+the tree, attaches  the  descendants  to  it,  and  ensures  that
+conversion  operators  are generated if needed, and that the type
+of the new node is consistent with the  types  of  the  operands.
+There  is also a considerable amount of semantic complexity here;
+many combinations of types are illegal, and the portable compiler
+makes  a  strong effort to check the legality of expression types
+completely.  This is done both for lint purposes, and to  prevent
+such  semantic  errors from being passed through to the code gen-
+erator.
+
+     The heart of buildtree is a large  table,  accessed  by  the
+routine opact.  This routine maps the types of the left and right
+operands into a rather  smaller  set  of  descriptors,  and  then
+accesses  a  table (actually encoded in a switch statement) which
+for each operator and pair  of  types  causes  an  action  to  be
+returned.   The  actions are logical or's of a number of separate
+actions, which may be carried out by buildtree.  These  component
+actions  may  include checking the left side to ensure that it is
+an lvalue (can be stored into), applying a type conversion to the
+left  or  right  operand, setting the type of the new node to the
+type of the left or right operand, calling  various  routines  to
+balance the types of the left and right operands, and suppressing
+the ordinary  conversion  of  arrays  and  function  operands  to
+pointers.   An  important  operation  is OTHER, which causes some
+special code to be invoked in buildtree, to handle  issues  which
+are unique to a particular operator.  Examples of this are struc-
+ture and union reference (actually handled by the routine stref),
+the  building of NAME, ICON, STRING and FCON (floating point con-
+stant) nodes, unary * and &, structure assignment, and calls.  In
+the case of unary * and &, buildtree will cancel a * applied to a
+tree, the top node of which is &, and conversely.
+
+     Another special operation is PUN; this causes  the  compiler
+to  check  for  type mismatches, such as intermixing pointers and
+integers.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-14                  A Tour Through the Portable C Compiler
+
+
+     The treatment of conversion operators is  a  rather  strange
+area of the compiler (and of C!).  The introduction of type casts
+only confounded this situation.  Most of the conversion operators
+are  generated by calls to tymatch and ptmatch, both of which are
+given a tree, and asked to  make  the  operands  agree  in  type.
+Ptmatch  treats  the case where one of the operands is a pointer;
+tymatch treats  all  other  cases.   Where  these  routines  have
+decided  on  the  proper  type  for an operand, they call makety,
+which is handed a tree, and a type word,  dimension  offset,  and
+size  offset.  If necessary, it inserts a conversion operation to
+make the types correct.  Conversion operations are never inserted
+on the left side of assignment operators, however.  There are two
+conversion operators used; PCONV, if the conversion is to a  non-
+basic  type  (usually a pointer), and SCONV, if the conversion is
+to a basic type (scalar).
+
+     To allow for maximum flexibility,  every  node  produced  by
+buildtree  is  given  to  a  machine  dependent  routine, clocal,
+immediately after it is produced.  This is to allow more or  less
+immediate  rewriting of those nodes which must be adapted for the
+local machine.  The conversion operations are given to clocal  as
+well; on most machines, many of these conversions do nothing, and
+should be thrown away (being careful to  retain  the  type).   If
+this  operation is done too early, however, later calls to build-
+tree may get confused about correct type of  the  subtrees;  thus
+clocal  is  given the conversion operations only after the entire
+tree is built.  This topic will be  dealt  with  in  more  detail
+later.
+
+Initialization
+
+     Initialization is one of the messier areas in  the  portable
+compiler.   The  only  consolation is that most of the mess takes
+place in the machine independent part, where it is may be  safely
+ignored  by  the  implementor  of  the  compiler for a particular
+machine.
+
+     The basic problem is that the  semantics  of  initialization
+really  calls  for a co-routine structure; one collection of pro-
+grams reading constants from the  input  stream,  while  another,
+independent  set  of  programs  places  these  constants into the
+appropriate spots in memory.  The  dramatic  differences  in  the
+local  assemblers  also come to the fore here.  The parsing prob-
+lems are dealt with by keeping a rather extensive stack  contain-
+ing  the current state of the initialization; the assembler prob-
+lems are dealt with by having a fair number of machine  dependent
+routines.
+
+     The stack contains the symbol table number, type,  dimension
+index,  and  size index for the current identifier being initial-
+ized.  Another entry has the offset, in bits, of the beginning of
+the  current  identifier.   Another entry keeps track of how many
+elements have been seen, if the current identifier is  an  array.
+Still  another  entry  keeps  track  of  the  current member of a
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-15
+
+
+structure being initialized.  Finally, there is an entry contain-
+ing  flags which keep track of the current state of the initiali-
+zation process (e.g., tell if a `}' has been seen for the current
+identifier).
+
+     When  an  initialization  begins,  the  routine  beginit  is
+called;  it handles the alignment restrictions, if any, and calls
+instk to create the stack entry.  This is done by first making an
+entry on the top of the stack for the item being initialized.  If
+the top entry is an array, another entry is made on the stack for
+the  first  element.   If  the  top entry is a structure, another
+entry is made on the stack for the first member of the structure.
+This  continues  until  the top element of the stack is a scalar.
+Instk then returns, and the parser begins  collecting  initializ-
+ers.
+
+     When a constant is obtained, the routine doinit  is  called;
+it  examines  the stack, and does whatever is necessary to assign
+the current constant to the scalar  on  the  top  of  the  stack.
+gotscal  is  then  called, which rearranges the stack so that the
+next scalar to be initialized gets placed on top  of  the  stack.
+This process continues until the end of the initializers; endinit
+cleans up.  If a `{' or `}' is encountered in the string of  ini-
+tializers,  it  is handled by calling ilbrace or irbrace, respec-
+tively.
+
+     A central issue is the treatment of the ``holes'' that arise
+as  a  result  of alignment restrictions or explicit requests for
+holes in bit fields.  There is a global  variable,  inoff,  which
+contains the current offset in the initialization (all offsets in
+the first pass of the compiler are in bits).  Doinit figures  out
+from  the  top  entry on the stack the expected bit offset of the
+next identifier; it calls the machine dependent  routine  inforce
+which,  in  a  machine dependent way, forces the assembler to set
+aside space if need be so that the next scalar seen will go  into
+the appropriate bit offset position.  The scalar itself is passed
+to one of the machine dependent routines  fincode  (for  floating
+point  initialization), incode (for fields, and other initializa-
+tions less than an int in size), and cinit (for  all  other  ini-
+tializations).   The size is passed to all these routines, and it
+is up to the machine dependent routines to ensure that  the  ini-
+tializer occupies exactly the right size.
+
+     Character strings represent a bit of  an  exception.   If  a
+character  string  is  seen as the initializer for a pointer, the
+characters making up the string must be put out under a different
+location  counter.   When  the lexical analyzer sees the quote at
+the head of a character string, it returns the token STRING,  but
+does not do anything with the contents.  The parser calls getstr,
+which sets up the appropriate location counters  and  flags,  and
+calls lxstr to read and process the contents of the string.
+
+     If the string is being used to initialize a character array,
+lxstr  calls  putbyte,  which in effect simulates doinit for each
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-16                  A Tour Through the Portable C Compiler
+
+
+character read.  If the string is used to initialize a  character
+pointer,  lxstr  calls a machine dependent routine, bycode, which
+stashes away each character.  The pointer to this string is  then
+returned, and processed normally by doinit.
+
+     The null at the end of the string is treated as if  it  were
+read explicitly by lxstr.
+
+Statements
+
+     The first pass  addresses  four  main  areas;  declarations,
+expressions,  initialization, and statements.  The statement pro-
+cessing is relatively simple; most of it is carried  out  in  the
+parser  directly.  Most of the logic is concerned with allocating
+label numbers, defining the labels, and branching  appropriately.
+An  external symbol, reached, is 1 if a statement can be reached,
+0 otherwise; this is used to do a bit of simple flow analysis  as
+the  program  is  being  parsed, and also to avoid generating the
+subroutine  return  sequence  if  the  subroutine  cannot  ``fall
+through'' the last statement.
+
+     Conditional branches are handled by generating an expression
+node,  CBRANCH,  whose left descendant is the conditional expres-
+sion and the right descendant is  an  ICON  node  containing  the
+internal  label  number  to  be branched to.  For efficiency, the
+semantics are that the label is  gone  to  if  the  condition  is
+false.
+
+     The switch statement is  compiled  by  collecting  the  case
+entries, and an indication as to whether there is a default case;
+an internal label number is generated  for  each  of  these,  and
+remembered  in  a big array.  The expression comprising the value
+to be switched on is compiled when the switch keyword is  encoun-
+tered,  but  the  expression  tree  is  headed by a special node,
+FORCE, which tells the code generator to put the expression value
+into  a  special  distinguished  register (this same mechanism is
+used for processing the return statement).  When the end  of  the
+switch  block is reached, the array containing the case values is
+sorted, and checked for duplicate entries (an error); if  all  is
+correct,  the machine dependent routine genswitch is called, with
+this array of labels and values in increasing  order.   Genswitch
+can assume that the value to be tested is already in the register
+which is the usual integer return value register.
+
+Optimization
+
+     There is a machine independent file, optim.c, which contains
+a  relatively  short  optimization  routine, optim.  Actually the
+word optimization is something of a misnomer; the results are not
+optimum,  only improved, and the routine is in fact not optional;
+it must be called for proper operation of the compiler.
+
+     Optim is called after  an  expression  tree  is  built,  but
+before  the  code generator is called.  The essential part of its
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-17
+
+
+job is to call clocal  on  the  conversion  operators.   On  most
+machines,  the  treatment of & is also essential: by this time in
+the processing, the only node which is a legal descendant of & is
+NAME.   (Possible descendants of * have been eliminated by build-
+tree.) The address of a static name is, almost by  definition,  a
+constant, and can be represented by an ICON node on most machines
+(provided that the loader has enough power).  Unfortunately, this
+is  not  universally  true; on some machine, such as the IBM 370,
+the issue of addressability rears its  ugly  head;  thus,  before
+turning  a  NAME  node  into  an ICON node, the machine dependent
+function andable is called.
+
+     The optimization attempts of optim are quite limited.  It is
+primarily  concerned  with improving the behavior of the compiler
+with operations one of whose arguments is  a  constant.   In  the
+simplest  case, the constant is placed on the right if the opera-
+tion is commutative.  The compiler also makes  a  limited  search
+for expressions such as
+
+        ( x + a ) + b
+
+where a and b are constants, and attempts to combine a and  b  at
+compile time.  A number of special cases are also examined; addi-
+tions of 0 and multiplications by 1  are  removed,  although  the
+correct  processing of these cases to get the type of the result-
+ing tree correct is decidedly nontrivial.   In  some  cases,  the
+addition  or  multiplication  must  be  replaced  by a conversion
+operator to keep the types from becoming  fouled  up.   In  cases
+where  a  relational operation is being done and one operand is a
+constant, the operands are permuted and the operator altered,  if
+necessary,  to put the constant on the right.  Finally, multipli-
+cations by a power of 2 are changed to shifts.
+
+Machine Dependent Stuff
+
+     A number of the first pass machine dependent  routines  have
+been  discussed  above.   In general, the routines are short, and
+easy to adapt from machine to machine.   The  two  exceptions  to
+this  general  rule are clocal and the function prolog and epilog
+generation routines, bfcode and efcode.
+
+     Clocal has the job of rewriting, if appropriate  and  desir-
+able,  the  nodes  constructed by buildtree.  There are two major
+areas where this is important: NAME nodes and  conversion  opera-
+tions.   In  the case of NAME nodes, clocal must rewrite the NAME
+node to reflect the actual physical location of the name  in  the
+machine.   In  effect, the NAME node must be examined, the symbol
+table entry found (through the rval  field  of  the  node),  and,
+based  on the storage class of the node, the tree must be rewrit-
+ten.  Automatic variables and parameters are typically  rewritten
+by  treating  the reference to the variable as a structure refer-
+ence, off the register which holds the stack or argument pointer;
+the  stref  routine  is  set  up to be called in this way, and to
+build the appropriate tree.  In the most general case,  the  tree
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-18                  A Tour Through the Portable C Compiler
+
+
+consists  of  a  unary * node, whose descendant is a + node, with
+the stack or argument register as left operand,  and  a  constant
+offset  as  right  operand.   In  the  case of LABEL and internal
+static nodes, the rval field is rewritten to be the  negative  of
+the  internal  label number; a negative rval field is taken to be
+an internal label number.  Finally, a name of class REGISTER must
+be  converted into a REG node, and the rval field replaced by the
+register number.  In fact, this part of  the  clocal  routine  is
+nearly machine independent; only for machines with addressability
+problems (IBM 370 again!) does it  have  to  be  noticeably  dif-
+ferent.
+
+     The conversion operator treatment is rather tricky.   It  is
+necessary  to  handle  the application of conversion operators to
+constants in clocal, in order that all constant  expressions  can
+have  their values known at compile time.  In extreme cases, this
+may mean that some simulation of the  arithmetic  of  the  target
+machine  might  have to be done in a cross-compiler.  In the most
+common case, conversions from pointer to pointer do nothing.  For
+some  machines, however, conversion from byte pointer to short or
+long pointer might require a shift  or  rotate  operation,  which
+would have to be generated here.
+
+     The extension of the portable compiler to machines where the
+size  of  a pointer depends on its type would be straightforward,
+but has not yet been done.
+
+     Another machine dependent issue in the  first  pass  is  the
+generation  of  external ``symbol table'' information.  This sort
+of symbol table is used by programs such as symbolic debuggers to
+relate  object  code  back to source code.  Symbol table routines
+are provided in the file stab.c, which is included in the machine
+dependent  sources for the first pass.  The symbol table routines
+insert assembly code containing assembly pseudo-ops directly into
+the instruction stream generated by the compiler.
+
+     There are two basic kinds of symbol table  operations.   The
+simplest  operation  is  the  generation of a source line number;
+this serves to map an address in an executable image into a  line
+in  a  source  file  so  that a debugger can find the source code
+corresponding to the instructions being  executed.   The  routine
+psline  is called by the scanner to emit source line numbers when
+a nonempty source line is seen.   The  other  variety  of  symbol
+table operation is the generation of type and address information
+about C symbols.  This is done through the outstab routine, which
+is  normally  called  using the FIXDEF macro in the monster defid
+routine in pftn.c that enters symbols into the compiler's  inter-
+nal symbol table.
+
+     Yet another major machine dependent issue involves  function
+prolog  and  epilog generation.  The hard part here is the design
+of the stack frame and calling sequence;  this  design  issue  is
+discussed  elsewhere.[5]  The  routine  bfcode is called with the
+number of arguments the function is defined with,  and  an  array
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-19
+
+
+containing  the  symbol table indices of the declared parameters.
+Bfcode must generate the code to establish the new  stack  frame,
+save  the  return address and previous stack pointer value on the
+stack, and save whatever registers are to be  used  for  register
+variables.   The  stack size and the number of register variables
+is not known when bfcode is called,  so  these  numbers  must  be
+referred  to  by assembler constants, which are defined when they
+are known (usually in the second pass, after all  register  vari-
+ables,  automatics,  and  temporaries have been seen).  The final
+job is to find those parameters  which  may  have  been  declared
+register,  and  generate the code to initialize the register with
+the value passed on the stack.  Once again,  for  most  machines,
+the general logic of bfcode remains the same, but the contents of
+the printf calls in it  will  change  from  machine  to  machine.
+efcode  is  rather  simpler,  having just to generate the default
+return at the end of a function.  This may be nontrivial  in  the
+case of a function returning a structure or union, however.
+
+     There seems to be no really good place to discuss structures
+and  unions,  but this is as good a place as any.  The C language
+now supports structure assignment, and the passing of  structures
+as  arguments  to functions, and the receiving of structures back
+from functions.  This was added rather late to C, and thus to the
+portable  compiler.   Consequently, it fits in less well than the
+older features.  Moreover, most of the  burden  of  making  these
+features work is placed on the machine dependent code.
+
+     There are both conceptual and practical problems.  Conceptu-
+ally,  the compiler is structured around the idea that to compute
+something, you put it into a  register  and  work  on  it.   This
+notion  causes  a bit of trouble on some machines (e.g., machines
+with 3-address opcodes), but matches many  machines  quite  well.
+Unfortunately,  this  notion  breaks  down  with structures.  The
+closest that one can come is to keep the addresses of the  struc-
+tures  in  registers.   The  actual  code  sequences used to move
+structures vary from the trivial (a multiple byte  move)  to  the
+horrible (a function call), and are very machine dependent.
+
+     The practical problem is  more  painful.   When  a  function
+returning  a  structure is called, this function has to have some
+place to put the structure value.  If it places it on the  stack,
+it  has  difficulty  popping  its  stack frame.  If it places the
+value in a static temporary, the routine fails to  be  reentrant.
+The most logically consistent way of implementing this is for the
+caller to pass in a pointer to a spot where the  called  function
+should  put  the  value  before  returning.   This  is relatively
+straightforward, although a bit tedious, to implement, but  means
+that  the  caller  must have properly declared the function type,
+even if the value is never used.  On some machines, such  as  the
+Interdata  8/32,  the  return  value simply overlays the argument
+region (which on the 8/32 is part of the caller's  stack  frame).
+The  caller  takes  care  of  leaving enough room if the returned
+value is larger than the arguments.  This also assumes  that  the
+caller declares the function properly.
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-20                  A Tour Through the Portable C Compiler
+
+
+     The PDP-11 and the VAX have stack hardware which is used  in
+function  calls  and  returns; this makes it very inconvenient to
+use either of the above mechanisms.  In these machines, a  static
+area  within  the  called function is allocated, and the function
+return value is copied into it on return;  the  function  returns
+the  address of that region.  This is simple to implement, but is
+non-reentrant.  However, the function can now be called as a sub-
+routine  without  being  properly  declared, without the disaster
+which would otherwise ensue.  No matter what choice is taken, the
+convention  is  that the function actually returns the address of
+the return structure value.
+
+     In building expression trees, the portable compiler takes  a
+bit  for  granted  about  structures.   It assumes that functions
+returning structures actually return a pointer to the  structure,
+and  it  assumes  that  a  reference to a structure is actually a
+reference to its address.  The structure assignment  operator  is
+rebuilt  so that the left operand is the structure being assigned
+to, but the right operand is the address of the  structure  being
+assigned; this makes it easier to deal with
+
+        a = b = c
+
+and similar constructions.
+
+     There are four special  tree  nodes  associated  with  these
+operations:  STASG (structure assignment), STARG (structure argu-
+ment to a function call), and STCALL and UNARY STCALL (calls of a
+function  with  nonzero and zero arguments, respectively).  These
+four nodes are unique in that the size and alignment information,
+which  can  be determined by the type for all other objects in C,
+must be known to carry out these operations; special  fields  are
+set aside in these nodes to contain this information, and special
+intermediate code is used to transmit this information.
+
+First Pass Summary
+
+     There are may other issues which  have  been  ignored  here,
+partly  to justify the title ``tour'', and partially because they
+have seemed to cause little trouble.  There  are  some  debugging
+flags which may be turned on, by giving the compiler's first pass
+the argument
+
+        -X[flags]
+
+Some of the more interesting flags are -Xd for the  defining  and
+freeing  of symbols, -Xi for initialization comments, and -Xb for
+various comments about the building of  trees.   In  many  cases,
+repeating  the  flag more than once gives more information; thus,
+-Xddd gives more information than -Xd.  In the two  pass  version
+of  the  compiler, the flags should not be set when the output is
+sent to the second pass,  since  the  debugging  output  and  the
+intermediate code both go onto the standard output.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-21
+
+
+     We turn now to consideration of the second pass.
+
+Pass Two
+
+     Code generation is far less well understood than parsing  or
+lexical  analysis,  and  for  this  reason the second pass is far
+harder to discuss in a file by file manner.  A great deal of  the
+difficulty  is  in  understanding  the  issues and the strategies
+employed to meet them.  Any particular function is likely  to  be
+reasonably straightforward.
+
+     Thus, this part of the paper will concentrate a good deal on
+the  broader  aspects of strategy in the code generator, and will
+not get too intimate with the details.
+
+Overview
+
+     It is difficult to organize a code generator to be  flexible
+enough to generate code for a large number of machines, and still
+be efficient for any one of them.  Flexibility is also  important
+when it comes time to tune the code generator to improve the out-
+put code quality.  On the other hand, too  much  flexibility  can
+lead  to  semantically incorrect code, and potentially a combina-
+torial explosion in the number of cases to be considered  in  the
+compiler.
+
+     One goal of the code generator is to have a high  degree  of
+correctness.   It  is  very desirable to have the compiler detect
+its own inability to generate correct code, rather than  to  pro-
+duce  incorrect  code.   This goal is achieved by having a simple
+model of the job to be done (e.g., an expression tree) and a sim-
+ple  model of the machine state (e.g., which registers are free).
+The act of generating an instruction performs a transformation on
+the  tree  and  the machine state; hopefully, the tree eventually
+gets  reduced   to   a   single   node.    If   each   of   these
+instruction/transformation  pairs  is correct, and if the machine
+state model really represents the  actual  machine,  and  if  the
+transformations reduce the input tree to the desired single node,
+then the output code will be correct.
+
+     For most real machines, there is  no  definitive  theory  of
+code  generation  that encompasses all the C operators.  Thus the
+selection of which instruction/transformations to  generate,  and
+in  what  order,  will  have  a  heuristic  flavor.  If, for some
+expression tree, no transformation applies, or,  more  seriously,
+if      the      heuristics      select     a     sequence     of
+instruction/transformations that do not in fact reduce the  tree,
+the  compiler  will  report  its  inability to generate code, and
+abort.
+
+     A major part of the code generator  is  concerned  with  the
+model  and the transformations.  Most of this is machine indepen-
+dent, or depends only on simple tables.   The  flexibility  comes
+from  the heuristics that guide the transformations of the trees,
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-22                  A Tour Through the Portable C Compiler
+
+
+the selection of subgoals, and the ordering of the computation.
+
+The Machine Model
+
+     The machine is assumed to have a number of registers, of  at
+most  two  different types: A and B.  Within each register class,
+there may be scratch (temporary) registers and  dedicated  regis-
+ters   (e.g.,  register  variables,  the  stack  pointer,  etc.).
+Requests to allocate and free registers  involve  only  the  tem-
+porary registers.
+
+     Each of the registers in the machine is given a name  and  a
+number  in  the  mac2defs.h file; the numbers are used as indices
+into various tables that describe the registers, so  they  should
+be  kept  small.   One  such  table  is the rstatus table on file
+local2.c.  This table is indexed by register number, and contains
+expressions made up from manifest constants describing the regis-
+ter types: SAREG for dedicated AREG's, SAREG|STAREG  for  scratch
+AREG's,  and  SBREG and SBREG|STBREG similarly for BREG's.  There
+are macros that access this information: isbreg(r)  returns  true
+if  register  number  r  is a BREG, and istreg(r) returns true if
+register number r is a temporary AREG or  BREG.   Another  table,
+rnames,  contains  the  register names; this is used when putting
+out assembler code and diagnostics.
+
+     The usage of registers is kept track of by an  array  called
+busy.  Busy[r] is the number of uses of register r in the current
+tree being processed.  The allocation and  freeing  of  registers
+will be discussed later as part of the code generation algorithm.
+
+General Organization
+
+     As mentioned above, the second pass  reads  lines  from  the
+intermediate  file,  copying  through to the output unchanged any
+lines that begin with a `)', and making note of  the  information
+about  stack  usage  and  register  allocation contained on lines
+beginning with `]' and `['.  The expression trees,  whose  begin-
+ning  is  indicated  by  a  line beginning with `.', are read and
+rebuilt into trees.  If the compiler is loaded as one  pass,  the
+expression trees are immediately available to the code generator.
+
+     The actual code generation is done by a  hierarchy  of  rou-
+tines.  The routine delay is first given the tree; it attempts to
+delay some postfix ++ and -- computations that  might  reasonably
+be done after the smoke clears.  It also attempts to handle comma
+(`,') operators by computing the left side expression first,  and
+then  rewriting  the tree to eliminate the operator.  Delay calls
+codgen to control the actual  code  generation  process.   Codgen
+takes as arguments a pointer to the expression tree, and a second
+argument that, for socio-historical reasons, is called a  cookie.
+The  cookie describes a set of goals that would be acceptable for
+the code generation: these are assigned to  individual  bits,  so
+they  may  be  logically or'ed together to form a large number of
+possible goals.  Among the possible goals are FOREFF (compute for
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-23
+
+
+side  effects only; don't worry about the value), INTEMP (compute
+and store value into a  temporary  location  in  memory),  INAREG
+(compute  into  an A register), INTAREG (compute into a scratch A
+register), INBREG and INTBREG similarly, FORCC (compute for  con-
+dition  codes),  and  FORARG  (compute it as a function argument;
+e.g., stack it if appropriate).
+
+     Codgen first canonicalizes the tree by calling canon.   This
+routine  looks  for  certain  transformations  that  might now be
+applicable to the tree.  One,  which  is  very  common  and  very
+powerful, is to fold together an indirection operator (UNARY MUL)
+and a register (REG);  in  most  machines,  this  combination  is
+addressable  directly,  and  so  is  similar  to  a  NAME  in its
+behavior.  The UNARY MUL and REG  are  folded  together  to  make
+another  node  type called OREG.  In fact, in many machines it is
+possible to directly address not just the cell pointed  to  by  a
+register,  but also cells differing by a constant offset from the
+cell pointed to by the  register.   Canon  also  looks  for  such
+cases,  calling the machine dependent routine notoff to decide if
+the offset is acceptable (for example, in the IBM 370 the  offset
+must  be  between  0 and 4095 bytes).  Another optimization is to
+replace bit field operations by shifts and masks if the operation
+involves extracting the field.  Finally, a machine dependent rou-
+tine, sucomp, is called that computes  the  Sethi-Ullman  numbers
+for the tree (see below).
+
+     After the tree is canonicalized, codgen  calls  the  routine
+store whose job is to select a subtree of the tree to be computed
+and (usually) stored before beginning the computation of the full
+tree.  Store must return a tree that can be computed without need
+for any temporary storage locations.  In effect, the  only  store
+operations  generated  while  processing the subtree must be as a
+response to explicit assignment  operators  in  the  tree.   This
+division  of  the job marks one of the more significant, and suc-
+cessful, departures from most other compilers.  It means that the
+code  generator  can  operate under the assumption that there are
+enough registers to do its job, without worrying about  temporary
+storage.   If  a store into a temporary appears in the output, it
+is always as a direct result of logic in the store routine;  this
+makes debugging easier.
+
+     One consequence of this organization is  that  code  is  not
+generated by a treewalk.  There are theoretical results that sup-
+port this decision.[7] It may be  desirable  to  compute  several
+subtrees and store them before tackling the whole tree; if a sub-
+tree is to be stored, this is known before  the  code  generation
+for  the  subtree  is begun, and the subtree is computed when all
+scratch registers are available.
+
+     The store routine decides what subtrees, if any,  should  be
+stored  by  making  use  of numbers, called Sethi-Ullman numbers,
+that give, for each subtree of an expression  tree,  the  minimum
+number  of  scratch  registers  required  to compile the subtree,
+without  any  stores  into  temporaries.[8]  These  numbers   are
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-24                  A Tour Through the Portable C Compiler
+
+
+computed  by  the  machine-dependent  routine  sucomp,  called by
+canon.  The  basic  notion  is  that,  knowing  the  Sethi-Ullman
+numbers  for  the descendants of a node, and knowing the operator
+of the node and some information about the  machine,  the  Sethi-
+Ullman  number of the node itself can be computed.  If the Sethi-
+Ullman number for a tree exceeds the number of scratch  registers
+available,  some  subtree  must  be  stored.   Unfortunately, the
+theory behind the Sethi-Ullman numbers applies only to  uselessly
+simple  machines and operators.  For the rich set of C operators,
+and for machines with asymmetric registers, register pairs,  dif-
+ferent  kinds  of registers, and exceptional forms of addressing,
+the theory cannot be applied directly.  The basic idea of estima-
+tion  is a good one, however, and well worth applying; the appli-
+cation, especially when the compiler comes to be tuned  for  high
+code  quality,  goes  beyond the park of theory into the swamp of
+heuristics.  This topic will be taken up again later,  when  more
+of the compiler structure has been described.
+
+     After examining the Sethi-Ullman numbers,  store  selects  a
+subtree,  if  any,  to be stored, and returns the subtree and the
+associated cookie in the external variables stotree and  stocook.
+If  a subtree has been selected, or if the whole tree is ready to
+be processed, the routine  order  is  called,  with  a  tree  and
+cookie.   Order generates code for trees that do not require tem-
+porary locations.  Order may make recursive calls on itself, and,
+in some cases, on codgen; for example, when processing the opera-
+tors &&, ||, and comma (`,'), that have a left to  right  evalua-
+tion,  it  is  incorrect  for store examine the right operand for
+subtrees to be stored.  In these cases, order  will  call  codgen
+recursively  when it is permissible to work on the right operand.
+A similar issue arises with the ? : operator.
+
+     The order routine works by matching the current tree with  a
+set  of  code  templates.   If a template is discovered that will
+match the  current  tree  and  cookie,  the  associated  assembly
+language statement or statements are generated.  The tree is then
+rewritten, as specified by the template, to represent the  effect
+of  the  output  instruction(s).   If no template match is found,
+first an attempt is made to find a match with a different cookie;
+for example, in order to compute an expression with cookie INTEMP
+(store into a temporary storage location), it is  usually  neces-
+sary to compute the expression into a scratch register first.  If
+all attempts to match the tree fail, the heuristic  part  of  the
+algorithm becomes dominant.  Control is typically given to one of
+a number of machine-dependent routines that may  in  turn  recur-
+sively  call  order  to achieve a subgoal of the computation (for
+example, one of the arguments may be computed  into  a  temporary
+register).   After  this  subgoal  has been achieved, the process
+begins again with the modified tree.   If  the  machine-dependent
+heuristics  are  unable  to  reduce the tree further, a number of
+default rewriting rules may be considered appropriate.  For exam-
+ple,  if the left operand of a + is a scratch register, the + can
+be replaced by a += operator; the tree may then match a template.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-25
+
+
+     To close this introduction, we will  discuss  the  steps  in
+compiling code for the expression
+
+        a += b
+
+where a and b are static variables.
+
+     To begin with, the whole expression tree  is  examined  with
+cookie  FOREFF, and no match is found.  Search with other cookies
+is equally fruitless, so an attempt at rewriting is  made.   Sup-
+pose  we  are dealing with the Interdata 8/32 for the moment.  It
+is recognized that the left hand and right hand sides of  the  +=
+operator  are  addressable,  and in particular the left hand side
+has no side effects, so it is permissible to rewrite this as
+
+        a = a + b
+
+and this is done.  No match is found on this tree  either,  so  a
+machine dependent rewrite is done; it is recognized that the left
+hand side of the assignment is addressable, but  the  right  hand
+side  is not in a register, so order is called recursively, being
+asked to put the right hand side of the assignment into a  regis-
+ter.  This invocation of order searches the tree for a match, and
+fails.  The machine dependent rule for + notices that  the  right
+hand  operand  is addressable; it decides to put the left operand
+into a scratch register.  Another  recursive  call  to  order  is
+made,  with  the  tree  consisting  solely of the leaf a, and the
+cookie asking that the value be placed into a  scratch  register.
+This  now  matches a template, and a load instruction is emitted.
+The node consisting of a is rewritten in place to  represent  the
+register  into  which  a  is loaded, and this third call to order
+returns.  The second call to order now finds that it has the tree
+
+        reg + b
+
+to consider.  Once again, there is  no  match,  but  the  default
+rewriting  rule  rewrites  the + as a += operator, since the left
+operand is a scratch register.  When this is  done,  there  is  a
+match: in fact,
+
+        reg += b
+
+simply describes the effect of the add instruction on  a  typical
+machine.  After the add is emitted, the tree is rewritten to con-
+sist merely of the register node, since the result of the add  is
+now  in  the register.  This agrees with the cookie passed to the
+second  invocation  of  order,  so  this  invocation  terminates,
+returning to the first level.  The original tree has now become
+
+        a = reg
+
+which matches a template for the store instruction.  The store is
+output,  and  the tree rewritten to become just a single register
+node.  At this point, since the  top  level  call  to  order  was
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-26                  A Tour Through the Portable C Compiler
+
+
+interested  only  in side effects, the call to order returns, and
+the code generation is completed; we have generated a load,  add,
+and store, as might have been expected.
+
+     The effect of machine architecture on this is  considerable.
+For example, on the Honeywell 6000, the machine dependent heuris-
+tics recognize that there is an ``add to  storage''  instruction,
+so the strategy is quite different; b is loaded in to a register,
+and then an add to storage  instruction  generated  to  add  this
+register  in to a.  The transformations, involving as they do the
+semantics of C, are largely machine independent.   The  decisions
+as  to  when  to  use  them,  however, are almost totally machine
+dependent.
+
+     Having given a broad outline of the code generation process,
+we  shall  next  consider  the  heart of it: the templates.  This
+leads naturally into discussions of template matching and  regis-
+ter allocation, and finally a discussion of the machine dependent
+interfaces and strategies.
+
+The Templates
+
+     The templates describe the  effect  of  the  target  machine
+instructions  on  the  model of computation around which the com-
+piler is organized.  In effect, each template  has  five  logical
+sections, and represents an assertion of the form:
+
+     If we have a subtree of a given shape (1),  and  we  have  a
+     goal  (cookie)  or  goals to achieve (2), and we have suffi-
+     cient free resources (3), then we may emit an instruction or
+     instructions  (4),  and  rewrite the subtree in a particular
+     manner (5), and the rewritten tree will achieve the  desired
+     goals.
+
+     These five sections will be discussed in more detail  later.
+First, we give an example of a template:
+
+        ASG PLUS, INAREG,
+                  SAREG,    TINT,
+                  SNAME,    TINT,
+                            0,        RLEFT,
+                            "         add       AL,AR\n",
+
+The top line specifies the operator (+=) and the cookie  (compute
+the  value  of  the  subtree into an AREG).  The second and third
+lines specify the left and right  descendants,  respectively,  of
+the  +=  operator.   The  left  descendant  must  be  a REG node,
+representing an A register, and  have  integer  type,  while  the
+right  side must be a NAME node, and also have integer type.  The
+fourth line contains the resource requirements (no scratch regis-
+ters  or temporaries needed), and the rewriting rule (replace the
+subtree by the left descendant).  Finally, the quoted  string  on
+the  last line represents the output to the assembler: lower case
+letters, tabs, spaces, etc. are copied verbatim.  to the  output;
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-27
+
+
+upper  case letters trigger various macro-like expansions.  Thus,
+AL would expand into the Address  form  of  the  Left  operand  -
+presumably  the register number.  Similarly, AR would expand into
+the name of the right operand.  The add instruction of  the  last
+section might well be emitted by this template.
+
+     In principle, it would be possible  to  make  separate  tem-
+plates  for  all legal combinations of operators, cookies, types,
+and shapes.  In practice, the  number  of  combinations  is  very
+large.   Thus,  a  considerable amount of mechanism is present to
+permit a large number of subtrees to be matched by a single  tem-
+plate.   Most  of  the  shape  and type specifiers are individual
+bits, and can be logically or'ed together.  There are a number of
+special descriptors for matching classes of operators.  The cook-
+ies can also be combined.  As an example of the kind of  template
+that  really  arises  in  practice,  the  actual template for the
+Interdata 8/32 that subsumes the above example is:
+
+        ASG OPSIMP,         INAREG|FORCC,
+                  SAREG,    TINT|TUNSIGNED|TPOINT,
+                  SAREG|SNAME|SOREG|SCON,       TINT|TUNSIGNED|TPOINT,
+                            0,        RLEFT|RESCC,
+                            "         OI        AL,AR\n",
+
+Here, OPSIMP represents the operators +, -, |, &, and ^.  The  OI
+macro  in  the output string expands into the appropriate Integer
+Opcode for the  operator.   The  left  and  right  sides  can  be
+integers,  unsigned, or pointer types.  The right side can be, in
+addition to a name, a register, a memory location  whose  address
+is  given  by  a register and displacement (OREG), or a constant.
+Finally, these instructions set the condition codes, and  so  can
+be  used  in  condition  contexts: the cookie and rewriting rules
+reflect this.
+
+The Template Matching Algorithm
+
+     The heart of the second pass is the template matching  algo-
+rithm,  in  the routine match.  Match is called with a tree and a
+cookie; it attempts to match the given tree against some template
+that will transform it according to one of the goals given in the
+cookie.  If a match is successful, the transformation is applied;
+expand  is called to generate the assembly code, and then reclaim
+rewrites the tree, and reclaims the resources, such as registers,
+that might have become free as a result of the generated code.
+
+     This part of the compiler is among the most  time  critical.
+There  is  a  spectrum of implementation techniques available for
+doing this matching.  The most naive algorithm  simply  looks  at
+the templates one by one.  This can be considerably improved upon
+by restricting the search for an acceptable template.   It  would
+be possible to do better than this if the templates were given to
+a separate program that ate them and generated a template  match-
+ing subroutine.  This would make maintenance of the compiler much
+more complicated, however, so this has not been done.
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-28                  A Tour Through the Portable C Compiler
+
+
+     The matching algorithm is actually carried out by  restrict-
+ing the range in the table that must be searched for each opcode.
+This introduces a number of complications, however, and  needs  a
+bit  of  sympathetic help by the person constructing the compiler
+in order to obtain best results.  The exact tuning of this  algo-
+rithm  continues;  it is best to consult the code and comments in
+match for the latest version.
+
+     In order to match a template to a tree, it is  necessary  to
+match  not only the cookie and the operator of the root, but also
+the types and shapes of the left and right descendants  (if  any)
+of  the  tree.   A convention is established here that is carried
+out throughout the second  pass  of  the  compiler.   If  a  node
+represents  a unary operator, the single descendant is always the
+``left'' descendant.  If a node represents a unary operator or  a
+leaf  node  (no descendants) the ``right'' descendant is taken by
+convention to be the node  itself.   This  enables  templates  to
+easily  match  leaves  and  conversion  operators,  for  example,
+without any additional mechanism in the matching program.
+
+     The type matching is  straightforward;  it  is  possible  to
+specify  any  combination  of  basic types, general pointers, and
+pointers to one or more of the basic types.  The  shape  matching
+is somewhat more complicated, but still pretty simple.  Templates
+have a collection of possible operand shapes on which the  opcode
+might  match.   In  the  simplest case, an add operation might be
+able to add to either a register variable or a scratch  register,
+and  might  be able (with appropriate help from the assembler) to
+add an integer constant (ICON), a static memory cell (NAME), or a
+stack location (OREG).
+
+     It is usually attractive to specify a number of such shapes,
+and  distinguish  between  them when the assembler output is pro-
+duced.  It is possible to describe the union of  many  elementary
+shapes  such  as ICON, NAME, OREG, AREG or BREG (both scratch and
+register forms), etc.  To handle at least  the  simple  forms  of
+indirection,  one  can  also match some more complicated forms of
+trees: STARNM and STARREG can match more complicated trees headed
+by  an  indirection  operator,  and  SFLD can match certain trees
+headed by a FLD operator.  These patterns call machine  dependent
+routines  that match the patterns of interest on a given machine.
+The shape SWADD may be used to recognize NAME or OREG nodes  that
+lie  on  word  boundaries: this may be of some importance on word
+addressed machines.  Finally,  there  are  some  special  shapes:
+these  may  not be used in conjunction with the other shapes, but
+may be defined and extended in machine dependent ways.  The  spe-
+cial  shapes SZERO, SONE, and SMONE are predefined and match con-
+stants 0, 1, and -1, respectively; others are  easy  to  add  and
+match by using the machine dependent routine special.
+
+     When a template has been found that matches the root of  the
+tree,  the  cookie,  and the shapes and types of the descendants,
+there is still one bar to a total match: the  template  may  call
+for  some  resources  (for  example,  a  scratch  register).  The
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-29
+
+
+routine  allo  is  called,  and  it  attempts  to  allocate   the
+resources.  If it cannot, the match fails; no resources are allo-
+cated.  If successful, the allocated resources are given  numbers
+1,  2,  etc.  for  later reference when the assembly code is gen-
+erated.  The routines expand and reclaim are  then  called.   The
+match  routine  then returns a special value, MDONE.  If no match
+was found, the value MNOPE is returned; this is a signal  to  the
+caller  to  try  more cookie values, or attempt a rewriting rule.
+Match is also used to select rewriting rules, although the way of
+doing  this is pretty straightforward.  A special cookie, FORREW,
+is used to ask match to search for a rewriting rule.  The rewrit-
+ing  rules  are keyed to various opcodes; most are carried out in
+order.  Since the question of when to rewrite is one of  the  key
+issues in code generation, it will be taken up again later.
+
+Register Allocation
+
+     The register allocation routines, and the  allocation  stra-
+tegy,  play a central role in the correctness of the code genera-
+tion algorithm.  If there are bugs in the  Sethi-Ullman  computa-
+tion  that  cause  the  number of needed registers to be underes-
+timated, the compiler may run out of  scratch  registers;  it  is
+essential  that  the allocator keep track of those registers that
+are free and busy, in order to detect such conditions.
+
+     Allocation of registers takes place as the result of a  tem-
+plate  match;  the  routine allo is called with a word describing
+the number of A registers, B registers, and  temporary  locations
+needed.   The  allocation  of temporary locations on the stack is
+relatively straightforward, and will not be further covered;  the
+bookkeeping  is  a  bit  tricky,  but  conceptually  trivial, and
+requests for temporary space on the stack will never fail.
+
+     Register allocation is less straightforward.  The two  major
+complications  are  pairing  and sharing.  In many machines, some
+operations (such as multiplication  and  division),  and/or  some
+types  (such as longs or double precision) require even/odd pairs
+of registers.  Operations of the  first  type  are  exceptionally
+difficult  to deal with in the compiler; in fact, their theoreti-
+cal properties are rather bad as well.[9]  The  second  issue  is
+dealt with rather more successfully; a machine dependent function
+called szty(t) is called that returns 1 or 2,  depending  on  the
+number  of  A registers required to hold an object of type t.  If
+szty returns 2, an even/odd pair of A registers is allocated  for
+each  request.   As  part of its duties, the routine usable finds
+usable register pairs for various operations.  This task  is  not
+as  easy  as it sounds; it does not suffice to merely use szty on
+the expression tree, since there are situations in which a regis-
+ter  pair  temporary  is  needed  even  though  the result of the
+expression requires only  one  register.   This  can  occur  with
+assignment  operator expressions which have int type but a double
+right hand side, or with relational expressions where one operand
+is float and the other double.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-30                  A Tour Through the Portable C Compiler
+
+
+     The other issue, sharing, is more subtle, but important  for
+good  code quality.  When registers are allocated, it is possible
+to reuse registers that hold address information, and use them to
+contain the values computed or accessed.  For example, on the IBM
+360, if register 2 has a pointer to an integer in it, we may load
+the integer into register 2 itself by saying:
+
+        L       2,0(2)
+
+If register 2 had a byte pointer, however, the sequence for load-
+ing  a character involves clearing the target register first, and
+then inserting the desired character:
+
+        SR      3,3
+        IC      3,0(2)
+
+In the first case, if register 3 were  used  as  the  target,  it
+would  lead  to a larger number of registers used for the expres-
+sion than were required; the compiler would generate  inefficient
+code.   On  the other hand, if register 2 were used as the target
+in the second case, the code would simply be wrong.  In the first
+case, register 2 can be shared while in the second, it cannot.
+
+     In the specification of the register needs in the templates,
+it is possible to indicate whether required scratch registers may
+be shared with possible registers on the left or the right of the
+input  tree.   In  order  that  a  register be shared, it must be
+scratch, and it must be used only once, on the  appropriate  side
+of the tree being compiled.
+
+     The allo routine thus has a bit more to do  than  meets  the
+eye;  it calls freereg to obtain a free register for each A and B
+register request.  Freereg makes multiple calls  on  the  routine
+usable  to  decide  if  a given register can be used to satisfy a
+given need.  Usable calls shareit if the register  is  busy,  but
+might  be shared.  Finally, shareit calls ushare to decide if the
+desired register is actually in the appropriate subtree, and  can
+be shared.
+
+     Just to add additional complexity, on some machines (such as
+the  IBM 370) it is possible to have ``double indexing'' forms of
+addressing; these are represented by OREG's  with  the  base  and
+index  registers  encoded  into  the  register  field.  While the
+register allocation and deallocation per se is not made more dif-
+ficult  by this phenomenon, the code itself is somewhat more com-
+plex.
+
+     Having allocated the registers  and  expanded  the  assembly
+language,  it  is  time  to  reclaim  the  resources; the routine
+reclaim does this.  Many operations produce more than one result.
+For  example, many arithmetic operations may produce a value in a
+register, and also set the condition  codes.   Assignment  opera-
+tions  may  leave  results  both  in  a  register  and in memory.
+Reclaim is passed three parameters; the tree and cookie that were
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-31
+
+
+matched,  and the rewriting field of the template.  The rewriting
+field allows the specification of possible results; the  tree  is
+rewritten  to  reflect the results of the operation.  If the tree
+was computed for side effects only (FOREFF), the tree  is  freed,
+and  all resources in it reclaimed.  If the tree was computed for
+condition codes, the resources  are  also  freed,  and  the  tree
+replaced by a special node type, FORCC.  Otherwise, the value may
+be found in the left argument of the root, the right argument  of
+the  root, or one of the temporary resources allocated.  In these
+cases, first the resources of the tree, and the  newly  allocated
+resources, are freed; then the resources needed by the result are
+made busy again.  The final result must always match the shape of
+the   input   cookie;  otherwise,  the  compiler  error  ``cannot
+reclaim'' is generated.  There are some machine dependent ways of
+preferring results in registers or memory when there are multiple
+results matching multiple goals in the cookie.
+
+     Reclaim also implements,  in  a  curious  way,  C's  ``usual
+arithmetic  conversions''.  When a value is generated into a tem-
+porary register, reclaim decides what the type and  size  of  the
+result  will  be.   Unless  automatic  conversion is specifically
+suppressed in the code template with the T  macro,  reclaim  con-
+verts  char  and short results to int, unsigned char and unsigned
+short results to unsigned int, and float into double (for  double
+only  floating  point  arithmetic).   This conversion is a simple
+type pun; no instructions for converting the value  are  actually
+emitted.  This implies that registers must always contain a value
+that is at least as wide as a register, which  greatly  restricts
+the range of possible templates.
+
+The Machine Dependent Interface
+
+     The files order.c, local2.c, and table.c,  as  well  as  the
+header  file mac2defs, represent the machine dependent portion of
+the second pass.  The machine dependent portion  can  be  roughly
+divided  into  two:  the  easy portion and the hard portion.  The
+easy portion tells the compiler the names of the  registers,  and
+arranges that the compiler generate the proper assembler formats,
+opcode names, location counters, etc.  The hard portion  involves
+the  Sethi-Ullman  computation, the rewriting rules, and, to some
+extent, the templates.  It is hard  because  there  are  no  real
+algorithms  that  apply; most of this portion is based on heuris-
+tics.  This section discusses the easy portion; the next  several
+sections will discuss the hard portion.
+
+     If the compiler is adapted from a compiler for a machine  of
+similar architecture, the easy part is indeed easy.  In mac2defs,
+the register numbers are defined, as well as  various  parameters
+for the stack frame, and various macros that describe the machine
+architecture.  If double indexing is to be permitted,  for  exam-
+ple, the symbol R2REGS is defined.  Also, a number of macros that
+are involved in function call processing, especially for  unusual
+function call mechanisms, are defined here.
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-32                  A Tour Through the Portable C Compiler
+
+
+     In local2.c, a large number of simple functions are defined.
+These  do  things  such as write out opcodes, register names, and
+address forms for the assembler.  Part of the function call  code
+is  defined  here;  that  is  nontrivial to design, but typically
+rather straightforward to implement.  Among the easy routines  in
+order.c  are  routines for generating a created label, defining a
+label, and generating the arguments of a function call.
+
+     These routines tend to have a local effect, and depend on  a
+fairly straightforward way on the target assembler and the design
+decisions already made about the compiler.  Thus they will not be
+further treated here.
+
+The Rewriting Rules
+
+     When a tree fails to match any template, it becomes a candi-
+date  for  rewriting.   Before the tree is rewritten, the machine
+dependent routine nextcook  is  called  with  the  tree  and  the
+cookie;  it suggests another cookie that might be a better candi-
+date for the matching of the tree.  If all else fails,  the  tem-
+plates are searched with the cookie FORREW, to look for a rewrit-
+ing rule.  The rewriting rules are of two kinds; for most of  the
+common  operators,  there  are  machine dependent rewriting rules
+that may be applied; these are handled by machine dependent func-
+tions  that  are called and given the tree to be computed.  These
+routines may recursively call order or codgen  to  cause  certain
+subgoals  to  be achieved; if they actually call for some altera-
+tion of the tree, they return 1, and the  code  generation  algo-
+rithm  recanonicalizes and tries again.  If these routines choose
+not to deal with  the  tree,  the  default  rewriting  rules  are
+applied.
+
+     The assignment operators, when rewritten, call  the  routine
+setasg.   This  is  assumed  to  rewrite the tree at least to the
+point where there are no side effects in the left hand side.   If
+there  is  still  no  template match, a default rewriting is done
+that causes an expression such as
+
+        a += b
+
+to be rewritten as
+
+        a = a + b
+
+This is a useful default for certain mixtures  of  strange  types
+(for example, when a is a bit field and b an character) that oth-
+erwise might need separate table entries.
+
+     Simple assignment, structure assignment, and  all  forms  of
+calls  are  handled completely by the machine dependent routines.
+For historical reasons, the routines generating the calls  return
+1 on failure, 0 on success, unlike the other routines.
+
+     The  machine  dependent  routine   setbin   handles   binary
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-33
+
+
+operators;  it  too must do most of the job.  In particular, when
+it returns 0, it must do so with the left hand  side  in  a  tem-
+porary  register.   The default rewriting rule in this case is to
+convert the binary operator into the associated assignment opera-
+tor; since the left hand side is assumed to be a temporary regis-
+ter, this preserves the semantics and often allows a considerable
+saving in the template table.
+
+     The increment and decrement operators may be dealt with with
+the  machine  dependent routine setincr.  If this routine chooses
+not to deal with the tree, the rewriting rule replaces
+
+        x ++
+
+by
+
+        ( (x += 1) - 1)
+
+which preserves the semantics.   Once  again,  this  is  not  too
+attractive  for  the most common cases, but can generate close to
+optimal code when the type of x is unusual.
+
+     Finally, the indirection (UNARY MUL) operator is  also  han-
+dled  in a special way.  The machine dependent routine offstar is
+extremely important for the efficient generation of code.   Offs-
+tar  is  called  with  a  tree that is the direct descendant of a
+UNARY MUL node; its job is to transform this  tree  so  that  the
+combination  of  UNARY  MUL  with  the  transformed  tree becomes
+addressable.  On most machines, offstar can  simply  compute  the
+tree  into an A or B register, depending on the architecture, and
+then canon will make the resulting tree into an  OREG.   On  many
+machines, offstar can profitably choose to do less work than com-
+puting its entire argument into a register.  For example, if  the
+target  machine  supports  OREG's  with  a constant offset from a
+register, and offstar is called with a tree of the form
+
+        expr + const
+
+where const is a constant, then offstar need  only  compute  expr
+into  the appropriate form of register.  On machines that support
+double indexing, offstar may have even more choice as to  how  to
+proceed.   The  proper  tuning of offstar, which is not typically
+too difficult, should be one of the first tries  at  optimization
+attempted by the compiler writer.
+
+The Sethi-Ullman Computation
+
+     The heart of  the  heuristics  is  the  computation  of  the
+Sethi-Ullman  numbers.   This  computation is closely linked with
+the rewriting rules and the templates.  As mentioned before,  the
+Sethi-Ullman  numbers  are  expected  to  estimate  the number of
+scratch registers needed to compute the  subtrees  without  using
+any  stores.  However, the original theory does not apply to real
+machines.  For one thing, the theory assumes that  all  registers
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-34                  A Tour Through the Portable C Compiler
+
+
+are  interchangeable.  Real machines have general purpose, float-
+ing point, and index registers, register pairs, etc.  The  theory
+also  does  not  account for side effects; this rules out various
+forms of pathology that  arise  from  assignment  and  assignment
+operators.   Condition codes are also undreamed of.  Finally, the
+influence of types, conversions, and the  various  addressability
+restrictions and extensions of real machines are also ignored.
+
+     Nevertheless, for a ``useless'' theory, the basic insight of
+Sethi  and  Ullman  is  amazingly useful in a real compiler.  The
+notion that one should attempt to estimate the resource needs  of
+trees  before  starting  the  code  generation provides a natural
+means of splitting the code generation problem,  and  provides  a
+bit  of  redundancy and self checking in the compiler.  Moreover,
+if writing the Sethi-Ullman routines is hard,  describing,  writ-
+ing, and debugging the alternative (routines that attempt to free
+up registers by stores into temporaries ``on the fly'')  is  even
+worse.   Nevertheless, it should be clearly understood that these
+routines exist in a realm where there  is  no  ``right''  way  to
+write  them;  it  is an art, the realm of heuristics, and, conse-
+quently, a major source of bugs  in  the  compiler.   Often,  the
+early, crude versions of these routines give little trouble; only
+after the compiler is actually working and the  code  quality  is
+being  improved  do  serious  problem have to be faced.  Having a
+simple, regular machine architecture is worth quite a lot at this
+time.
+
+     The major problems arise from asymmetries in the  registers:
+register  pairs,  having  different  kinds  of registers, and the
+related problem of needing more than one register  (frequently  a
+pair)  to  store  certain  data types (such as longs or doubles).
+There appears to be no general  way  of  treating  this  problem;
+solutions  have  to  be fudged for each machine where the problem
+arises.  On the Honeywell 66, for example,  there  are  only  two
+general  purpose  registers,  so a need for a pair is the same as
+the need for two registers.  On the IBM 370,  the  register  pair
+(0,1)  is  used  to do multiplications and divisions; registers 0
+and 1 are not generally considered part of the scratch registers,
+and  so  do  not require allocation explicitly.  On the Interdata
+8/32, after much consideration, the decision was made not to  try
+to  deal  with the register pair issue; operations such as multi-
+plication and division that required pairs were simply assumed to
+take  all  of the scratch registers.  Several weeks of effort had
+failed to produce an algorithm that seemed to have much chance of
+running  successfully  without  inordinate debugging effort.  The
+difficulty of this issue should not be minimized;  it  represents
+one  of  the  main  intellectual efforts in porting the compiler.
+Nevertheless, this problem has been fudged with a degree of  suc-
+cess  on  nearly  a dozen machines, so the compiler writer should
+not abandon hope.
+
+     The Sethi-Ullman computations interact with the rest of  the
+compiler  in  a  number  of  rather subtle ways.  As already dis-
+cussed, the store routine uses the Sethi-Ullman numbers to decide
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-35
+
+
+which  subtrees  are  too  difficult to compute in registers, and
+must be stored.  There are also subtle interactions  between  the
+rewriting routines and the Sethi-Ullman numbers.  Suppose we have
+a tree such as
+
+        A - B
+
+where A and B are expressions; suppose further that B  takes  two
+registers, and A one.  It is possible to compute the full expres-
+sion in two registers by first computing B, and then,  using  the
+scratch  register  used by B, but not containing the answer, com-
+pute A.  The subtraction can then be done, computing the  expres-
+sion.   (Note that this assumes a number of things, not the least
+of which are register-to-register subtraction operators and  sym-
+metric  registers.) If the machine dependent routine setbin, how-
+ever, is not prepared to recognize this case and compute the more
+difficult  side  of the expression first, the Sethi-Ullman number
+must be set to three.  Thus, the Sethi-Ullman number for  a  tree
+should represent the code that the machine dependent routines are
+actually willing to generate.
+
+     The interaction can go the other way.  If we take an expres-
+sion such as
+
+        * ( p + i )
+
+where p is a pointer and i an integer, this can probably be  done
+in  one register on most machines.  Thus, its Sethi-Ullman number
+would probably be set to one.  If double indexing is possible  in
+the  machine,  a  possible  way of computing the expression is to
+load both p and i into registers, and then use  double  indexing.
+This  would use two scratch registers; in such a case, it is pos-
+sible that the scratch registers might be unobtainable, or  might
+make  some  other  part  of the computation run out of registers.
+The usual solution is to cause offstar  to  ignore  opportunities
+for double indexing that would tie up more scratch registers than
+the Sethi-Ullman number had reserved.
+
+     In summary, the Sethi-Ullman computation represents much  of
+the craftsmanship and artistry in any application of the portable
+compiler.  It is also a frequent source of bugs.  Algorithms  are
+available  that  will produce nearly optimal code for specialized
+machines,  but  unfortunately  most  existing  machines  are  far
+removed  from  these ideals.  The best way of proceeding in prac-
+tice is to start with a compiler for a  similar  machine  to  the
+target, and proceed very carefully.
+
+Register Allocation
+
+     After the Sethi-Ullman numbers are computed, order  calls  a
+routine,  rallo,  that  does register allocation, if appropriate.
+This routine does relatively little, in general;  this  is  espe-
+cially true if the target machine is fairly regular.  There are a
+few cases where it is assumed that the result  of  a  computation
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-36                  A Tour Through the Portable C Compiler
+
+
+takes  place in a particular register; switch and function return
+are the two major places.  The expression tree has a field, rall,
+that  may be filled with a register number; this is taken to be a
+preferred register, and the first temporary register allocated by
+a  template  match will be this preferred one, if it is free.  If
+not, no particular action is taken; this is just a heuristic.  If
+no register preference is present, the field contains NOPREF.  In
+some cases, the result must be placed in  a  given  register,  no
+matter what.  The register number is placed in rall, and the mask
+MUSTDO is logically or'ed in with it.  In this case, if the  sub-
+tree  is  requested  in  a register, and comes back in a register
+other than the demanded one, it is moved by calling  the  routine
+rmove.   If  the  target  register for this move is busy, it is a
+compiler error.
+
+     Note that this mechanism is the  only  one  that  will  ever
+cause  a  register-to-register  move  between  scratch  registers
+(unless such a move is buried in the depths  of  some  template).
+This  simplifies  debugging.   In  some  cases, there is a rather
+strange interaction  between  the  register  allocation  and  the
+Sethi-Ullman number; if there is an operator or situation requir-
+ing a particular register, the  allocator  and  the  Sethi-Ullman
+computation  must  conspire to ensure that the target register is
+not being used by some intermediate result  of  some  far-removed
+computation.   This  is  most  easily  done by making the special
+operation take all of the free registers,  preventing  any  other
+partially-computed results from cluttering up the works.
+
+Template Shortcuts
+
+     Some operations are just too hard or too clumsy to be imple-
+mented in code templates on a particular architecture.
+
+     One way to handle such operations is to  replace  them  with
+function  calls.   The intermediate file reading code in reader.c
+contains a call to an implementation  dependent  macro  MYREADER;
+this  can be defined to call various routines which walk the code
+tree and perform  transformations.   On  the  VAX,  for  example,
+unsigned division and remainder operations are far too complex to
+encode in a template.  The routine hardops is called from a  tree
+walk in myreader to detect these operations and replace them with
+calls to the C runtime functions udiv and urem.  (There are  com-
+plementary  functions  audiv and aurem which are provided as sup-
+port for unsigned assignment operator expressions; they are  dif-
+ferent  from  udiv  and  urem  because  the  left hand side of an
+assignment operator expression must be evaluated only once.) Note
+that  arithmetic  support routines are always expensive; the com-
+piler makes  an  effort  to  notice  common  operations  such  as
+unsigned  division  by  a  constant  power  of  two and generates
+optimal code for these inline.
+
+     Another escape involves the routine zzzcode.  This  function
+is called from expand to process template macros which start with
+the character Z.   On  the  VAX,  many  complex  code  generation
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-37
+
+
+problems  are  swept  under  the  rug  into zzzcode.  Scalar type
+conversions are a particularly annoying issue; they are primarily
+handled  using the macro ZA.  Rather than creating a template for
+each possible conversion and result, which would be  tedious  and
+complex  given  C's many scalar types, this macro allows the com-
+piler to take shortcuts.  Tough conversions such as unsigned into
+double  are easily handled using special code under ZA.  One con-
+vention which makes scalar conversions  somewhat  more  difficult
+than  they  might  otherwise  be  is  the strict requirement that
+values in registers must have a type that is  as  wide  or  wider
+than  a  single  register.   This convention is used primarily to
+implement the ``usual arithmetic conversions'' of C, but  it  can
+get  in the way when converting between (say) a char value and an
+unsigned short.  A routine named collapsible is used to determine
+whether  one  operation  or  two is needed to produce a register-
+width result.
+
+     Another convenient macro is ZP.  This macro is used to  gen-
+erate  an  appropriate conditional test after a comparison.  This
+makes it possible to avoid a profusion of template entries  which
+essentially duplicate each other, one entry for each type of test
+multiplied by the number of different comparison  conditions.   A
+related  macro,  ZN,  is  used to normalize the result of a rela-
+tional test by producing an integer 0 or 1.
+
+     The macro ZS does the unlovely job of  generating  code  for
+structure assignments.  It tests the size of the structure to see
+what VAX instruction can be used to move it, and  is  capable  of
+emitting a block move instruction for large structures.  On other
+architectures this macro could be used  to  generate  a  function
+call to a block copy routine.
+
+     The macro ZG was recently introduced to  handle  the  thorny
+issue  of  assignment operator expressions which have an integral
+left hand side and a  floating  point  right  hand  side.   These
+expressions  are  passed  to the code generator without the usual
+type balancing so that good  code  can  be  generated  for  them.
+Older  versions  of  the portable compiler computed these expres-
+sions with integer arithmetic; with the ZG operator, the  current
+compiler can convert the left hand side to the appropriate float-
+ing type, compute the expression with floating point  arithmetic,
+convert the result back to integral type and store it in the left
+hand side.  These operations are performed by recursive calls  to
+zzzcode and other routines related to expand.
+
+     An assortment of other macros finish the job of interpreting
+code templates.  Among the more interesting ones: ZC produces the
+number of words pushed on the argument stack, which is useful for
+function  calls;  ZD and ZE produce constant increment and decre-
+ment operations; ZL and ZR produce the assembler letter code  (l,
+w  or b) corresponding to the size and type of the left and right
+operand respectively.
+
+
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-38                  A Tour Through the Portable C Compiler
+
+
+Shared Code
+
+     The lint utility shares sources with the portable  compiler.
+Lint uses all of the machine independent pass 1 sources, and adds
+its own set of ``machine dependent'' routines,  contained  mostly
+in  lint.c.   Lint  uses a private intermediate file format and a
+private pass 2 whose source is lpass2.c.   Several  modifications
+were made to the C scanner in scan.c, conditionally compiled with
+the symbol LINT, in order to support lint's convention of passing
+``pragma''  information  inside  special  comments.   A few other
+minor modifications were also made, e.g. to skip over asm  state-
+ments.
+
+     The f77 and pc compilers use a code generator  which  shares
+sources  with pass 2 of the portable compiler.  This code genera-
+tor is very similar to pass 2 but uses a  different  intermediate
+file  format.   Three  source files are needed in addition to the
+pass 2 sources.  fort.c is  a  machine  independent  source  file
+which contains a pass 2 main routine that replaces the equivalent
+routine in reader.c, together with several routines  for  reading
+the binary intermediate file.  fort.c includes the machine depen-
+dent file fort.h, which defines two trivial label generation rou-
+tines.   A header file /usr/include/pcc.h defines opcode and type
+symbols which are needed to provide a standard intermediate  file
+format; this file is also included by the Fortran and Pascal com-
+pilers.  The creation of this header file made  it  necessary  to
+make  some  changes  in the way the portable C compiler is built.
+These changes were made with the aim of minimizing the number  of
+lines  changed  in  the original sources.  Macro symbols in pcc.h
+are flagged with a unique prefix to avoid symbol name  collisions
+in  the Fortran and Pascal compilers, which have their own inter-
+nal opcode and type symbols.  A sed(1) script is  used  to  strip
+these  prefixes, producing an include file named pcclocal.h which
+is specific to the portable C compiler and contains  opcode  sym-
+bols  which  are  compatible with the original opcode symbols.  A
+similar sed script is used to produce a file of Yacc  tokens  for
+the C grammar.
+
+     A number of changes to existing source files  were  made  to
+accommodate  the  Fortran-style pass 2.  These changes are condi-
+tionally compiled using  the  symbol  FORT.   Many  changes  were
+needed  to  implement  single-precision arithmetic; other changes
+concern such things as  the  avoidance  of  floating  point  move
+instructions,  which  on  the VAX can cause floating point faults
+when a datum is not a normalized floating point value.   In  ear-
+lier  implementations  of  the  Fortran-style pass 2 there were a
+number of stub files which served only to define the symbol  FORT
+in  a  particular  source file; these files have been removed for
+4.3BSD in favor of a new compilation strategy which yields up  to
+three  different  objects from a single source file, depending on
+what compilation control symbols are defined for that file.
+
+     The Fortran-style pass 2 uses a Polish Postfix  intermediate
+file.   The  file  is  in binary format, and is logically divided
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-39
+
+
+into a stream of 32-bit records.   Each  record  consists  of  an
+(opcode,  value,  type)  triple, possibly followed inline by more
+descriptive information.  The opcode and type are  selected  from
+the  list  in  pcc.h; the type encodes a basic type, around which
+may be wrapped type modifiers such as ``pointer to''  or  ``array
+of''  to  produce  more complex types.  The function of the value
+parameter depends on the opcode; it may be used  for  a  flag,  a
+register  number or the value of a constant, or it may be unused.
+The optional inline data is often a null-terminated  string,  but
+it may also be a binary offset from a register or from a symbolic
+constant; sometimes both a string and an offset appear.
+
+     Here are a few samples  of  intermediate  file  records  and
+their interpretation:
+
+                       Optional
+Opcode Type Value        Data              Interpretation
+_________________________________________________________________
+ICON   int  flag=0 binary=5         the integer constant 5
+NAME   char flag=1 binary=1,        a character*1 element in a
+                   string="_foo_"   Fortran common block foo at
+                                    offset 1
+OREG   char reg=11 offset=1,        the second element of a For-
+                   string="v.2-v.1" tran character*1 array, ex-
+                                    pressed as an offset from a
+                                    static base register
+PLUS   float                        a single precision add
+FTEXT       size=2 string=".text 0" an inline assembler directive
+                                    of length 2 (32-bit records)
+
+
+Compiler Bugs
+
+     The portable compiler has an excellent record of  generating
+correct code.  The requirement for reasonable cooperation between
+the  register  allocation,  Sethi-Ullman  computation,  rewriting
+rules,  and  templates  builds quite a bit of redundancy into the
+compiling process.  The effect of this is that, in a surprisingly
+short  time,  the compiler will start generating correct code for
+those programs that it can compile.  The hard  part  of  the  job
+then  becomes  finding and eliminating those situations where the
+compiler refuses to compile a program because it knows it  cannot
+do it right.  For example, a template may simply be missing; this
+may either give a compiler error of the form ``no  match  for  op
+...''  , or cause the compiler to go into an infinite loop apply-
+ing various rewriting rules.  The compiler has a  variable,  nre-
+cur,  that  is  set  to 0 at the beginning of an expressions, and
+incremented at key spots in  the  compilation  process;  if  this
+parameter  gets  too  large, the compiler decides that it is in a
+loop, and aborts.  Loops are also characteristic  of  botches  in
+the machine-dependent rewriting rules.  Bad Sethi-Ullman computa-
+tions usually cause the scratch registers to run out; this  often
+means  that  the Sethi-Ullman number was underestimated, so store
+did not store something it should  have;  alternatively,  it  can
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-40                  A Tour Through the Portable C Compiler
+
+
+mean  that  the rewriting rules were not smart enough to find the
+sequence that sucomp assumed would be used.
+
+     The best approach when a compiler error is detected involves
+several  stages.   First, try to get a small example program that
+steps on the bug.  Second, turn on various debugging flags in the
+code  generator, and follow the tree through the process of being
+matched and rewritten.  Some flags  of  interest  are  -e,  which
+prints the expression tree, -r, which gives information about the
+allocation of registers, -a, which gives  information  about  the
+performance  of  rallo, and -o, which gives information about the
+behavior of order.  This technique should allow most bugs  to  be
+found relatively quickly.
+
+     Unfortunately, finding the bug is  usually  not  enough;  it
+must  also  be fixed!  The difficulty arises because a fix to the
+particular bug of interest tends to break other code that already
+works.  Regression tests, tests that compare the performance of a
+new compiler against the performance of an older  one,  are  very
+valuable in preventing major catastrophes.
+
+Compiler Extensions
+
+     The portable C  compiler  makes  a  few  extensions  to  the
+language described by Ritchie.
+
+     Single precision arithmetic.  ``All floating arithmetic in C
+is carried out in double-precision; whenever a float appears in a
+an expression it is lengthened  to  double  by  zero-padding  its
+fraction.''  --Dennis  Ritchie.[1]  Programmers who would like to
+use C to write numerical applications  often  shy  away  from  it
+because  C  programs  cannot perform single precision arithmetic.
+On machines such as the VAX which can cleanly support  arithmetic
+on  two  (or more) sizes of floating point values, programs which
+can take advantage of single precision arithmetic will  run  fas-
+ter.  A very popular proposal for the ANSI C standard states that
+implementations may perform single  precision  computations  with
+single   precision  arithmetic;  some  actual  C  implementations
+already do this, and now the Berkeley compiler joins them.
+
+     The changes are implemented in the compiler with  a  set  of
+conditional  compilation  directives  based on the symbol SPRECC;
+thus two compilers are generated, one with only double  precision
+arithmetic  and  one with both double and single precision arith-
+metic.  The cc program uses a flag -f to select the single/double
+version  of the compiler (/lib/sccom) instead of the default dou-
+ble only version (/lib/ccom).  It is expected that at  some  time
+in  the  future  the double only compiler will be retired and the
+single/double compiler will become the default.
+
+     There are a few implementation details of the  single/double
+compiler which will be of interest to users and compiler porters.
+To maintain compatibility with functions compiled by  the  double
+only  compiler,  single  precision  actual  arguments  are  still
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-41
+
+
+coerced to double  precision,  and  formal  arguments  which  are
+declared  single precision are still ``really'' double precision.
+This may change if function prototypes of the sort  proposed  for
+the  ANSI C standard are eventually adopted.  Floating point con-
+stants are now classified into single precision and double preci-
+sion  types.  The precision of a constant is determined from con-
+text; if a floating constant appears in an arithmetic  expression
+with  a single precision value, the constant is treated as having
+single precision type and the arithmetic expression  is  computed
+using single precision arithmetic.
+
+     Remarkably little code in the compiler needed to be  changed
+to  implement  the  single/double  compiler.   In  many cases the
+changes overlapped with special cases  which  are  used  for  the
+Fortran-style  pass  2  (/lib/f1).   Most of the single precision
+changes were implemented by Sam Leffler.
+
+     Preprocessor extensions.  The portable C  compiler  is  nor-
+mally  distributed  with  a  macro  preprocessor written by J. F.
+Reiser.  This preprocessor implements the features  described  in
+Ritchie's  reference  manual;  it removes comments, expands macro
+definitions and removes or inserts code based on conditional com-
+pilation  directives.  Two interesting extensions are provided by
+this version of the preprocessor:
+
++    When comments are removed, no  white  space  is  necessarily
+     substituted;  this  has  the  effect  of re-tokenizing code,
+     since the PCC will reanalyze the  input.   Macros  can  thus
+     create  new  tokens by clever use of comments.  For example,
+     the macro definition ``#define foo(a,b) a/**/b''  creates  a
+     macro  foo  which  concatenates its two arguments, forming a
+     new token.
+
++    Macro bodies are analyzed for macro arguments without regard
+     to  the  boundaries  of  string or character constants.  The
+     definition ``#define bar(a) "a\n"'' creates  a  macro  which
+     returns  the  literal  form  of  its  argument embedded in a
+     string with a newline appended.
+
+     These extensions are not portable to a  number  of  other  C
+preprocessors.  They may be replaced in the future by correspond-
+ing ANSI C features, when the ANSI C standard  has  been  formal-
+ized.
+
+Summary and Conclusion
+
+     The portable compiler has been a useful tool for providing C
+capability on a large number of diverse machines, and for testing
+a number of theoretical constructs in a  practical  setting.   It
+has many blemishes, both in style and functionality.  It has been
+applied to many more machines than first anticipated, of  a  much
+wider  range than originally dreamed of.  Its use has also spread
+much faster than expected, leaving parts of  the  compiler  still
+somewhat raw in shape.
+
+
+
+                        November 17, 2004
+
+
+
+
+
+SMM:19-42                  A Tour Through the Portable C Compiler
+
+
+     On the theoretical side, there is some hope that the  skele-
+ton  of  the  sucomp routine could be generated for many machines
+directly from the templates; this would give a considerable boost
+to  the  portability  and  correctness of the compiler, but might
+affect tunability and code quality.  There is also room for  more
+optimization,  both  within  optim  and in the form of a portable
+``peephole'' optimizer.
+
+     On the practical, development side, the compiler could prob-
+ably  be sped up and made smaller without doing too much violence
+to its basic structure.  Parts of  the  compiler  deserve  to  be
+rewritten;  the  initialization  code,  register  allocation, and
+parser are prime candidates.  It might be that doing some or  all
+of  the parsing with a recursive descent parser might save enough
+space and time to be worthwhile;  it  would  certainly  ease  the
+problem  of  moving  the compiler to an environment where Yacc is
+not already present.
+
+Acknowledgements
+
+     I would like to thank the many people who  have  sympatheti-
+cally, and even enthusiastically, helped me grapple with what has
+been a frustrating program to write, test, and  install.   D.  M.
+Ritchie  and E. N. Pinson provided needed early encouragement and
+philosophical guidance; M. E. Lesk, R. Muha, T. G.  Peterson,  G.
+Riddle, L. Rosler, R. W. Mitze, B. R. Rowland, S. I. Feldman, and
+T. B. London have all contributed ideas, gripes, and all, at  one
+time or another, climbed ``into the pits'' with me to help debug.
+Without their help this effort would have not been possible; with
+it, it was often kind of fun.  --S. C. Johnson
+
+
+     Many people have contributed fixes and improvements  to  the
+current  Berkeley  version  of  the compiler.  A number of really
+valuable fixes were contributed by Ralph Campbell,  Sam  Leffler,
+Kirk  McKusick,  Arthur  Olsen,  Donn Seeley, Don Speck and Chris
+Torek, but most of the bugs were spotted by the legions of virtu-
+ous  C  programmers  who were kind enough to let us know that the
+compiler was broken and when the heck were we  going  to  get  it
+fixed?  Thank you all.  --Donn Seeley
+
+
+
+
+References
+
+
+1.   B. W.  Kernighan  and  D.  M.  Ritchie,  The  C  Programming
+     Language, Prentice-Hall, Englewood Cliffs, New Jersey, 1978.
+
+2.   S. C. Johnson, "Lint, a C Program Checker," Comp. Sci. Tech.
+     Rep. No. 65, 1978.  updated version TM 78-1273-3
+
+3.   A. Snyder, A Portable Compiler for the Language C,  Master's
+
+
+
+                        November 17, 2004
+
+
+
+
+
+A Tour Through the Portable C Compiler                  SMM:19-43
+
+
+     Thesis, M.I.T., Cambridge, Mass., 1974.
+
+4.   S. C. Johnson, "A Portable Compiler: Theory  and  Practice,"
+     Proc.  5th ACM Symp. on Principles of Programming Languages,
+     pp. 97-104, January 1978.
+
+5.   M. E. Lesk, S. C. Johnson, and D. M. Ritchie, The C Language
+     Calling Sequence, 1977.
+
+6.   S. C. Johnson,  "Yacc  -   Yet  Another  Compiler-Compiler,"
+     Comp.  Sci.  Tech.  Rep.  No.  32, Bell Laboratories, Murray
+     Hill, New Jersey, July 1975.
+
+7.   A. V. Aho and S. C. Johnson, "Optimal  Code  Generation  for
+     Expression  Trees,"  J.  Assoc. Comp. Mach., vol. 23, no. 3,
+     pp. 488-501, 1975.  Also in Proc. ACM  Symp.  on  Theory  of
+     Computing, pp. 207-217, 1975.
+
+8.   R. Sethi and J. D. Ullman, "The Generation of  Optimal  Code
+     for Arithmetic Expressions," J. Assoc. Comp. Mach., vol. 17,
+     no. 4, pp. 715-728, October 1970.  Reprinted as pp.  229-247
+     in Compiler Techniques, ed. B. W. Pollack, Auerbach, Prince-
+     ton NJ (1972).
+
+9.   A. V. Aho, S. C. Johnson, and J. D. Ullman, "Code Generation
+     for  Machines  with Multiregister Operations," Proc. 4th ACM
+     Symp. on Principles of  Programming  Languages,  pp.  21-28,
+     January 1977.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        November 17, 2004
+
+

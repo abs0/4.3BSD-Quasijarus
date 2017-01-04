@@ -1,0 +1,78 @@
+h35708
+s 00001/00001/00038
+d D 6.1 85/04/27 14:18:10 mckusick 3 2
+c 4.3BSD beta release manual page
+e
+s 00003/00003/00036
+d D 5.1 85/04/27 14:17:44 mckusick 2 1
+c manual page distributed with 4.2BSD
+e
+s 00039/00000/00000
+d D 4.1 85/04/27 14:17:24 mckusick 1 0
+c manual page distributed with 4.1BSD
+e
+u
+U
+t
+T
+I 1
+.\"	%W% (Berkeley) %G%
+.\"
+D 2
+.TH UPDATE 8 "4/1/81"
+E 2
+I 2
+D 3
+.TH UPDATE 8  "4 February 1983"
+E 3
+I 3
+.TH UPDATE 8 "%Q%"
+E 3
+E 2
+.AT 3
+.SH NAME
+update \- periodically update the super block
+.SH SYNOPSIS
+.B /etc/update
+.SH DESCRIPTION
+.I Update
+is a program that executes
+the
+.IR sync (2)
+primitive every 30 seconds.
+This insures that the file system
+is fairly up to date in case of a crash.
+This command should not be executed directly,
+but should be executed out of the
+initialization shell command file.
+.SH "SEE ALSO"
+D 2
+sync(2), sync(1), init(8)
+E 2
+I 2
+sync(2), sync(8), init(8), rc(8)
+E 2
+.SH BUGS
+With
+.I update
+running,
+if the CPU is
+halted just as
+the
+.I sync
+is executed,
+a file system can be damaged.
+This is partially due to DEC hardware that
+writes zeros when NPR requests fail.
+A fix would be to have
+D 2
+.IR sync (1)
+E 2
+I 2
+.IR sync (8)
+E 2
+temporarily increment the system time by at
+least 30 seconds to trigger the execution of
+.I update.
+This would give 30 seconds grace to halt the CPU.
+E 1

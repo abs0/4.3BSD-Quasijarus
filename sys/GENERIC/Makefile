@@ -1,11 +1,11 @@
-IDENT=-DGENERIC -DVAX650 -DVAX630 -DVAX730 -DVAX750 -DVAX780 -DVAX8200 -DVAX8600 -DTCP_COMPAT_42 -DNS -DINET -DQUOTA
-PARAM=-DTIMEZONE=480 -DDST=1 -DMAXUSERS=8
+IDENT=-DGENERIC -DVAX650 -DVAX630 -DVAX730 -DVAX750 -DVAX780 -DVAX8200 -DVAX8600 -DEMULDFLT -DEMULFFLT -DTCP_COMPAT_42 -DNS -DINET -DQUOTA
+PARAM=-DTIMEZONE=0 -DDST=0 -DMAXUSERS=8
 #
 # Copyright (c) 1980, 1986 Regents of the University of California.
 # All rights reserved.  The Berkeley software License Agreement
 # specifies the terms and conditions for redistribution.
 #
-#	@(#)Makefile.vax	7.8 (Berkeley) 10/22/87
+#	@(#)Makefile.vax	7.9 (Berkeley) 1/4/04
 #
 # Makefile for 4.3 BSD
 #
@@ -39,35 +39,40 @@ CFLAGS=	-O ${COPTS}
 AHEADS=	../vax/pcb.m
 
 OBJS=af.o if.o if_loop.o raw_cb.o raw_usrreq.o route.o if_ether.o in.o \
-	in_pcb.o in_proto.o ip_icmp.o ip_input.o ip_output.o raw_ip.o \
-	tcp_debug.o tcp_input.o tcp_output.o tcp_subr.o tcp_timer.o \
-	tcp_usrreq.o udp_usrreq.o idp_usrreq.o ns.o ns_error.o ns_ip.o \
-	ns_input.o ns_output.o ns_pcb.o ns_proto.o spp_debug.o \
-	spp_usrreq.o init_main.o init_sysent.o kern_acct.o kern_clock.o \
-	kern_descrip.o kern_exec.o kern_exit.o kern_fork.o kern_malloc.o \
-	kern_mman.o kern_proc.o kern_prot.o kern_resource.o kern_sig.o \
-	kern_subr.o kern_synch.o kern_time.o kern_xxx.o quota_kern.o \
-	quota_subr.o quota_sys.o quota_ufs.o subr_log.o subr_prf.o \
-	subr_rmap.o subr_xxx.o sys_generic.o sys_inode.o sys_process.o \
-	sys_socket.o tty.o tty_conf.o tty_pty.o tty_subr.o tty_tty.o \
-	ufs_alloc.o ufs_bio.o ufs_bmap.o ufs_disksubr.o ufs_fio.o \
-	ufs_inode.o ufs_mount.o ufs_namei.o ufs_subr.o ufs_syscalls.o \
-	ufs_tables.o ufs_xxx.o uipc_domain.o uipc_mbuf.o uipc_proto.o \
-	uipc_socket.o uipc_socket2.o uipc_syscalls.o uipc_usrreq.o \
-	vm_drum.o vm_mem.o vm_mon.o vm_page.o vm_proc.o vm_pt.o \
-	vm_sched.o vm_subr.o vm_sw.o vm_swap.o vm_swp.o vm_text.o \
-	autoconf.o clock.o conf.o cons.o cpudata.o crl.o dkbad.o flp.o \
-	in_cksum.o ka650.o ka630.o ka730.o ka750.o ka780.o ka820.o \
+	in_pcb.o in_proto.o ip_gre.o ip_icmp.o ip_input.o ip_output.o \
+	raw_ip.o tcp_debug.o tcp_input.o tcp_output.o tcp_subr.o \
+	tcp_timer.o tcp_usrreq.o udp_usrreq.o idp_usrreq.o ns.o \
+	ns_error.o ns_ip.o ns_input.o ns_output.o ns_pcb.o ns_proto.o \
+	spp_debug.o spp_usrreq.o init_main.o init_sysent.o kern_acct.o \
+	kern_clock.o kern_descrip.o kern_exec.o kern_exit.o kern_fork.o \
+	kern_malloc.o kern_mman.o kern_proc.o kern_prot.o \
+	kern_resource.o kern_sig.o kern_subr.o kern_synch.o kern_time.o \
+	kern_xxx.o quota_kern.o quota_subr.o quota_sys.o quota_ufs.o \
+	subr_log.o subr_prf.o subr_rmap.o subr_xxx.o sys_generic.o \
+	sys_inode.o sys_process.o sys_socket.o tty.o tty_conf.o \
+	tty_kbhacks.o tty_pty.o tty_subr.o tty_tty.o ufs_alloc.o \
+	ufs_bio.o ufs_bmap.o ufs_disksubr.o ufs_fio.o ufs_inode.o \
+	ufs_mount.o ufs_namei.o ufs_subr.o ufs_syscalls.o ufs_tables.o \
+	ufs_xxx.o uipc_domain.o uipc_mbuf.o uipc_proto.o uipc_socket.o \
+	uipc_socket2.o uipc_syscalls.o uipc_usrreq.o vm_drum.o vm_mem.o \
+	vm_mon.o vm_page.o vm_proc.o vm_pt.o vm_sched.o vm_subr.o \
+	vm_sw.o vm_swap.o vm_swp.o vm_text.o autoconf.o clock.o conf.o \
+	cons.o cpudata.o cpuid.o crl.o cvax.o dkbad.o flp.o in_cksum.o \
+	ka410.o ka42.o ka630.o ka650.o ka730.o ka750.o ka780.o ka820.o \
 	ka860.o machdep.o mem.o mscp.o ns_cksum.o rx50.o sys_machdep.o \
-	trap.o tu.o udiv.o ufs_machdep.o urem.o vm_machdep.o bi.o kdb.o \
-	if_de.o if_ec.o if_ex.o if_il.o if_qe.o if_uba.o hp.o ht.o mba.o \
-	mt.o dh.o dhu.o dmf.o dmx.o dmz.o dz.o idc.o lp.o rk.o rl.o tm.o \
-	tmscp.o ts.o uba.o uda.o up.o ut.o qv.o qfont.o qd.o 
+	trap.o tu.o udiv.o ufs_machdep.o urem.o vm_machdep.o emul_ashp.o \
+	emul_cvtlp.o emul_cvtpl.o emul_decarith.o emul_deccvt.o \
+	emul_decimal.o emul_dflt.o emul_editpc.o emul_fflt.o \
+	emul_float.o emul_opspec.o emul_resinstr.o emul_samemode.o \
+	emul_string.o bi.o bidevtab.o kdb.o if_de.o if_ec.o if_ex.o \
+	if_il.o if_qe.o if_uba.o hp.o ht.o mba.o mt.o dh.o dhu.o dmf.o \
+	dmx.o dmz.o dz.o idc.o lp.o rk.o rl.o tm.o tmscp.o ts.o uba.o \
+	uda.o up.o ut.o qv.o qfont.o qd.o 
 
 CFILES=../net/af.c ../net/if.c ../net/if_loop.c ../net/raw_cb.c \
 	../net/raw_usrreq.c ../net/route.c ../netinet/if_ether.c \
 	../netinet/in.c ../netinet/in_pcb.c ../netinet/in_proto.c \
-	../netinet/ip_icmp.c ../netinet/ip_input.c \
+	../netinet/ip_gre.c ../netinet/ip_icmp.c ../netinet/ip_input.c \
 	../netinet/ip_output.c ../netinet/raw_ip.c \
 	../netinet/tcp_debug.c ../netinet/tcp_input.c \
 	../netinet/tcp_output.c ../netinet/tcp_subr.c \
@@ -86,41 +91,42 @@ CFILES=../net/af.c ../net/if.c ../net/if_loop.c ../net/raw_cb.c \
 	../sys/subr_log.c ../sys/subr_prf.c ../sys/subr_rmap.c \
 	../sys/subr_xxx.c ../sys/sys_generic.c ../sys/sys_inode.c \
 	../sys/sys_process.c ../sys/sys_socket.c ../sys/tty.c \
-	../sys/tty_conf.c ../sys/tty_pty.c ../sys/tty_subr.c \
-	../sys/tty_tty.c ../sys/ufs_alloc.c ../sys/ufs_bio.c \
-	../sys/ufs_bmap.c ../sys/ufs_disksubr.c ../sys/ufs_fio.c \
-	../sys/ufs_inode.c ../sys/ufs_mount.c ../sys/ufs_namei.c \
-	../sys/ufs_subr.c ../sys/ufs_syscalls.c ../sys/ufs_tables.c \
-	../sys/ufs_xxx.c ../sys/uipc_domain.c ../sys/uipc_mbuf.c \
-	../sys/uipc_proto.c ../sys/uipc_socket.c ../sys/uipc_socket2.c \
-	../sys/uipc_syscalls.c ../sys/uipc_usrreq.c ../sys/vm_drum.c \
-	../sys/vm_mem.c ../sys/vm_mon.c ../sys/vm_page.c \
-	../sys/vm_proc.c ../sys/vm_pt.c ../sys/vm_sched.c \
-	../sys/vm_subr.c ../sys/vm_sw.c ../sys/vm_swap.c ../sys/vm_swp.c \
-	../sys/vm_text.c ../vax/autoconf.c ../vax/clock.c ../vax/conf.c \
-	../vax/cons.c ../vax/cpudata.c ../vax/crl.c ../vax/dkbad.c \
-	../vax/flp.c ../vax/in_cksum.c ../vax/ka650.c ../vax/ka630.c \
-	../vax/ka730.c ../vax/ka750.c ../vax/ka780.c ../vax/ka820.c \
-	../vax/ka860.c ../vax/machdep.c ../vax/mem.c ../vax/mscp.c \
-	../vax/ns_cksum.c ../vax/rx50.c ../vax/sys_machdep.c \
-	../vax/trap.c ../vax/tu.c ../vax/ufs_machdep.c \
-	../vax/vm_machdep.c ../vaxbi/bi.c ../vaxbi/kdb.c \
-	../vaxif/if_de.c ../vaxif/if_ec.c ../vaxif/if_ex.c \
-	../vaxif/if_il.c ../vaxif/if_qe.c ../vaxif/if_uba.c \
-	../vaxmba/hp.c ../vaxmba/ht.c ../vaxmba/mba.c ../vaxmba/mt.c \
-	../vaxuba/dh.c ../vaxuba/dhu.c ../vaxuba/dmf.c ../vaxuba/dmx.c \
-	../vaxuba/dmz.c ../vaxuba/dz.c ../vaxuba/idc.c ../vaxuba/lp.c \
-	../vaxuba/rk.c ../vaxuba/rl.c ../vaxuba/tm.c ../vaxuba/tmscp.c \
-	../vaxuba/ts.c ../vaxuba/uba.c ../vaxuba/uda.c ../vaxuba/up.c \
-	../vaxuba/ut.c ../vaxuba/qv.c ../vaxuba/qfont.c ../vaxuba/qd.c \
-	../vax/swapgeneric.c 
+	../sys/tty_conf.c ../sys/tty_kbhacks.c ../sys/tty_pty.c \
+	../sys/tty_subr.c ../sys/tty_tty.c ../sys/ufs_alloc.c \
+	../sys/ufs_bio.c ../sys/ufs_bmap.c ../sys/ufs_disksubr.c \
+	../sys/ufs_fio.c ../sys/ufs_inode.c ../sys/ufs_mount.c \
+	../sys/ufs_namei.c ../sys/ufs_subr.c ../sys/ufs_syscalls.c \
+	../sys/ufs_tables.c ../sys/ufs_xxx.c ../sys/uipc_domain.c \
+	../sys/uipc_mbuf.c ../sys/uipc_proto.c ../sys/uipc_socket.c \
+	../sys/uipc_socket2.c ../sys/uipc_syscalls.c \
+	../sys/uipc_usrreq.c ../sys/vm_drum.c ../sys/vm_mem.c \
+	../sys/vm_mon.c ../sys/vm_page.c ../sys/vm_proc.c ../sys/vm_pt.c \
+	../sys/vm_sched.c ../sys/vm_subr.c ../sys/vm_sw.c \
+	../sys/vm_swap.c ../sys/vm_swp.c ../sys/vm_text.c \
+	../vax/autoconf.c ../vax/clock.c ../vax/conf.c ../vax/cons.c \
+	../vax/cpudata.c ../vax/crl.c ../vax/cvax.c ../vax/dkbad.c \
+	../vax/flp.c ../vax/in_cksum.c ../vax/ka410.c ../vax/ka42.c \
+	../vax/ka630.c ../vax/ka650.c ../vax/ka730.c ../vax/ka750.c \
+	../vax/ka780.c ../vax/ka820.c ../vax/ka860.c ../vax/machdep.c \
+	../vax/mem.c ../vax/mscp.c ../vax/ns_cksum.c ../vax/rx50.c \
+	../vax/sys_machdep.c ../vax/trap.c ../vax/tu.c \
+	../vax/ufs_machdep.c ../vax/vm_machdep.c ../vaxbi/bi.c \
+	../vaxbi/bidevtab.c ../vaxbi/kdb.c ../vaxif/if_de.c \
+	../vaxif/if_ec.c ../vaxif/if_ex.c ../vaxif/if_il.c \
+	../vaxif/if_qe.c ../vaxif/if_uba.c ../vaxmba/hp.c ../vaxmba/ht.c \
+	../vaxmba/mba.c ../vaxmba/mt.c ../vaxuba/dh.c ../vaxuba/dhu.c \
+	../vaxuba/dmf.c ../vaxuba/dmx.c ../vaxuba/dmz.c ../vaxuba/dz.c \
+	../vaxuba/idc.c ../vaxuba/lp.c ../vaxuba/rk.c ../vaxuba/rl.c \
+	../vaxuba/tm.c ../vaxuba/tmscp.c ../vaxuba/ts.c ../vaxuba/uba.c \
+	../vaxuba/uda.c ../vaxuba/up.c ../vaxuba/ut.c ../vaxuba/qv.c \
+	../vaxuba/qfont.c ../vaxuba/qd.c ../vax/swapgeneric.c 
 
-vmunix: Makefile ../machine/symbols.sort ${INLINECMD} locore.o emulate.o ${OBJS} param.o ioconf.o swapgeneric.o
+vmunix: Makefile ../machine/symbols.sort ${INLINECMD} locore.o ${OBJS} param.o ioconf.o swapgeneric.o
 	@echo loading vmunix
 	@rm -f vmunix
 	@sh ../conf/newvers.sh
 	@${CC} $(CFLAGS) -c vers.c
-	@${LD} -n -o vmunix -e start -x -T 80000000 locore.o emulate.o ${OBJS} vers.o ioconf.o param.o swapgeneric.o
+	@${LD} -n -o vmunix -e start -x -T 80000000 locore.o ${OBJS} vers.o ioconf.o param.o swapgeneric.o
 	@echo rearranging symbols
 	@-symorder ../vax/symbols.sort vmunix
 	@size vmunix
@@ -161,9 +167,6 @@ locore.o: assym.s ${AHEADS} ../vax/rpb.s ../vax/scb.s ubvec.s \
 	@echo 'as -o locore.o $${AHEADS} locore.i'
 	@as -o locore.o ${AHEADS} locore.i
 	@rm locore.i
-
-emulate.o: ../vax/emulate.s
-	/lib/cpp -I. ${COPTS} ../vax/emulate.s | ${AS} -o emulate.o
 
 # the following is necessary because autoconf.o depends on #if GENERIC
 autoconf.o tu.o: Makefile
@@ -278,6 +281,11 @@ in_proto.o: ../netinet/in_proto.c
 	${CC} -c -S ${COPTS} ../netinet/in_proto.c
 	${C2} in_proto.s | ${INLINE} | ${AS} -o in_proto.o
 	rm -f in_proto.s
+
+ip_gre.o: ../netinet/ip_gre.c
+	${CC} -c -S ${COPTS} ../netinet/ip_gre.c
+	${C2} ip_gre.s | ${INLINE} | ${AS} -o ip_gre.o
+	rm -f ip_gre.s
 
 ip_icmp.o: ../netinet/ip_icmp.c
 	${CC} -c -S ${COPTS} ../netinet/ip_icmp.c
@@ -544,6 +552,11 @@ tty_conf.o: ../sys/tty_conf.c
 	${C2} tty_conf.s | ${INLINE} | ${AS} -o tty_conf.o
 	rm -f tty_conf.s
 
+tty_kbhacks.o: ../sys/tty_kbhacks.c
+	${CC} -c -S ${COPTS} ../sys/tty_kbhacks.c
+	${C2} tty_kbhacks.s | ${INLINE} | ${AS} -o tty_kbhacks.o
+	rm -f tty_kbhacks.s
+
 tty_pty.o: ../sys/tty_pty.c
 	${CC} -c -S ${COPTS} ../sys/tty_pty.c
 	${C2} tty_pty.s | ${INLINE} | ${AS} -o tty_pty.o
@@ -739,10 +752,20 @@ cpudata.o: ../vax/cpudata.c
 	${C2} cpudata.s | ${INLINE} | ${AS} -o cpudata.o
 	rm -f cpudata.s
 
+cpuid.o: ../vax/cpuid.s
+	-ln -s ../vax/cpuid.s cpuid.c
+	${CC} -E ${COPTS} cpuid.c | ${AS} -o cpuid.o
+	rm -f cpuid.c
+
 crl.o: ../vax/crl.c
 	${CC} -c -S ${COPTS} ../vax/crl.c
 	${C2} crl.s | ${INLINE} | ${AS} -o crl.o
 	rm -f crl.s
+
+cvax.o: ../vax/cvax.c
+	${CC} -c -S ${COPTS} ../vax/cvax.c
+	${C2} cvax.s | ${INLINE} | ${AS} -o cvax.o
+	rm -f cvax.s
 
 dkbad.o: ../vax/dkbad.c
 	${CC} -c -S ${COPTS} ../vax/dkbad.c
@@ -759,15 +782,25 @@ in_cksum.o: ../vax/in_cksum.c
 	${C2} in_cksum.s | ${INLINE} | ${AS} -o in_cksum.o
 	rm -f in_cksum.s
 
-ka650.o: ../vax/ka650.c
-	${CC} -c -S ${COPTS} ../vax/ka650.c
-	${C2} ka650.s | ${INLINE} | ${AS} -o ka650.o
-	rm -f ka650.s
+ka410.o: ../vax/ka410.c
+	${CC} -c -S ${COPTS} ../vax/ka410.c
+	${C2} ka410.s | ${INLINE} | ${AS} -o ka410.o
+	rm -f ka410.s
+
+ka42.o: ../vax/ka42.c
+	${CC} -c -S ${COPTS} ../vax/ka42.c
+	${C2} ka42.s | ${INLINE} | ${AS} -o ka42.o
+	rm -f ka42.s
 
 ka630.o: ../vax/ka630.c
 	${CC} -c -S ${COPTS} ../vax/ka630.c
 	${C2} ka630.s | ${INLINE} | ${AS} -o ka630.o
 	rm -f ka630.s
+
+ka650.o: ../vax/ka650.c
+	${CC} -c -S ${COPTS} ../vax/ka650.c
+	${C2} ka650.s | ${INLINE} | ${AS} -o ka650.o
+	rm -f ka650.s
 
 ka730.o: ../vax/ka730.c
 	${CC} -c -S ${COPTS} ../vax/ka730.c
@@ -854,10 +887,85 @@ vm_machdep.o: ../vax/vm_machdep.c
 	${C2} vm_machdep.s | ${INLINE} | ${AS} -o vm_machdep.o
 	rm -f vm_machdep.s
 
+emul_ashp.o: ../vax/emul/emul_ashp.s
+	-ln -s ../vax/emul/emul_ashp.s emul_ashp.c
+	${CC} -E ${COPTS} emul_ashp.c | ${AS} -o emul_ashp.o
+	rm -f emul_ashp.c
+
+emul_cvtlp.o: ../vax/emul/emul_cvtlp.s
+	-ln -s ../vax/emul/emul_cvtlp.s emul_cvtlp.c
+	${CC} -E ${COPTS} emul_cvtlp.c | ${AS} -o emul_cvtlp.o
+	rm -f emul_cvtlp.c
+
+emul_cvtpl.o: ../vax/emul/emul_cvtpl.s
+	-ln -s ../vax/emul/emul_cvtpl.s emul_cvtpl.c
+	${CC} -E ${COPTS} emul_cvtpl.c | ${AS} -o emul_cvtpl.o
+	rm -f emul_cvtpl.c
+
+emul_decarith.o: ../vax/emul/emul_decarith.s
+	-ln -s ../vax/emul/emul_decarith.s emul_decarith.c
+	${CC} -E ${COPTS} emul_decarith.c | ${AS} -o emul_decarith.o
+	rm -f emul_decarith.c
+
+emul_deccvt.o: ../vax/emul/emul_deccvt.s
+	-ln -s ../vax/emul/emul_deccvt.s emul_deccvt.c
+	${CC} -E ${COPTS} emul_deccvt.c | ${AS} -o emul_deccvt.o
+	rm -f emul_deccvt.c
+
+emul_decimal.o: ../vax/emul/emul_decimal.s
+	-ln -s ../vax/emul/emul_decimal.s emul_decimal.c
+	${CC} -E ${COPTS} emul_decimal.c | ${AS} -o emul_decimal.o
+	rm -f emul_decimal.c
+
+emul_dflt.o: ../vax/emul/emul_dflt.s
+	-ln -s ../vax/emul/emul_dflt.s emul_dflt.c
+	${CC} -E ${COPTS} emul_dflt.c | ${AS} -o emul_dflt.o
+	rm -f emul_dflt.c
+
+emul_editpc.o: ../vax/emul/emul_editpc.s
+	-ln -s ../vax/emul/emul_editpc.s emul_editpc.c
+	${CC} -E ${COPTS} emul_editpc.c | ${AS} -o emul_editpc.o
+	rm -f emul_editpc.c
+
+emul_fflt.o: ../vax/emul/emul_fflt.s
+	-ln -s ../vax/emul/emul_fflt.s emul_fflt.c
+	${CC} -E ${COPTS} emul_fflt.c | ${AS} -o emul_fflt.o
+	rm -f emul_fflt.c
+
+emul_float.o: ../vax/emul/emul_float.s
+	-ln -s ../vax/emul/emul_float.s emul_float.c
+	${CC} -E ${COPTS} emul_float.c | ${AS} -o emul_float.o
+	rm -f emul_float.c
+
+emul_opspec.o: ../vax/emul/emul_opspec.s
+	-ln -s ../vax/emul/emul_opspec.s emul_opspec.c
+	${CC} -E ${COPTS} emul_opspec.c | ${AS} -o emul_opspec.o
+	rm -f emul_opspec.c
+
+emul_resinstr.o: ../vax/emul/emul_resinstr.s
+	-ln -s ../vax/emul/emul_resinstr.s emul_resinstr.c
+	${CC} -E ${COPTS} emul_resinstr.c | ${AS} -o emul_resinstr.o
+	rm -f emul_resinstr.c
+
+emul_samemode.o: ../vax/emul/emul_samemode.s
+	-ln -s ../vax/emul/emul_samemode.s emul_samemode.c
+	${CC} -E ${COPTS} emul_samemode.c | ${AS} -o emul_samemode.o
+	rm -f emul_samemode.c
+
+emul_string.o: ../vax/emul/emul_string.s
+	-ln -s ../vax/emul/emul_string.s emul_string.c
+	${CC} -E ${COPTS} emul_string.c | ${AS} -o emul_string.o
+	rm -f emul_string.c
+
 bi.o: ../vaxbi/bi.c
 	${CC} -c -S ${COPTS} ../vaxbi/bi.c
 	${C2} -i bi.s | ${INLINE} | ${AS} -o bi.o
 	rm -f bi.s
+
+bidevtab.o: ../vaxbi/bidevtab.c
+	${CC} -c -S ${COPTS} ../vaxbi/bidevtab.c
+	${C2} bidevtab.s | ${INLINE} | ${AS} -o bidevtab.o
+	rm -f bidevtab.s
 
 kdb.o: ../vaxbi/kdb.c
 	${CC} -c -S ${COPTS} ../vaxbi/kdb.c
@@ -1027,28 +1135,29 @@ if.o: ../h/mbuf.h ../h/systm.h ../h/socket.h ../h/socketvar.h ../h/protosw.h
 if.o: ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h
 if.o: ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h ../h/kernel.h
 if.o: ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h ../h/errno.h ../net/if.h
-if.o: ../net/../net/if_arp.h ../net/af.h ether.h
+if.o: ../net/../net/if_arp.h ../net/af.h ether.h netmon.h
 if_loop.o: ../net/if_loop.c ../h/param.h ../h/types.h ../h/signal.h
 if_loop.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 if_loop.o: ../h/systm.h ../h/mbuf.h ../h/socket.h ../h/errno.h ../h/ioctl.h
 if_loop.o: ../h/ttychars.h ../h/ttydev.h ../net/../net/if.h
 if_loop.o: ../net/../net/../net/if_arp.h ../net/../net/netisr.h
 if_loop.o: ../net/../net/route.h ../net/../machine/mtpr.h
-if_loop.o: ../net/../netinet/in.h ../net/../netinet/in_systm.h
-if_loop.o: ../net/../netinet/in_var.h ../net/../netinet/ip.h
-if_loop.o: ../net/../netns/ns.h ../net/../netns/ns_if.h
+if_loop.o: ../net/../machine/../vax/cpucond.h ../net/../netinet/in.h
+if_loop.o: ../net/../netinet/in_systm.h ../net/../netinet/in_var.h
+if_loop.o: ../net/../netinet/ip.h ../net/../netns/ns.h ../net/../netns/ns_if.h
 raw_cb.o: ../net/raw_cb.c ../h/param.h ../h/types.h ../h/signal.h
 raw_cb.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 raw_cb.o: ../h/systm.h ../h/mbuf.h ../h/socket.h ../h/socketvar.h ../h/domain.h
 raw_cb.o: ../h/protosw.h ../h/errno.h ../net/if.h ../net/../net/if_arp.h
 raw_cb.o: ../net/route.h ../net/raw_cb.h ../net/../netinet/in.h
-raw_cb.o: ../net/../machine/mtpr.h
+raw_cb.o: ../net/../machine/mtpr.h ../net/../machine/../vax/cpucond.h
 raw_usrreq.o: ../net/raw_usrreq.c ../h/param.h ../h/types.h ../h/signal.h
 raw_usrreq.o: ../h/../machine/trap.h ../h/../machine/machparam.h
 raw_usrreq.o: machine/endian.h ../h/mbuf.h ../h/domain.h ../h/protosw.h
 raw_usrreq.o: ../h/socket.h ../h/socketvar.h ../h/errno.h ../net/if.h
 raw_usrreq.o: ../net/../net/if_arp.h ../net/route.h ../net/netisr.h
 raw_usrreq.o: ../net/raw_cb.h ../net/../machine/mtpr.h
+raw_usrreq.o: ../net/../machine/../vax/cpucond.h
 route.o: ../net/route.c ../h/param.h ../h/types.h ../h/signal.h
 route.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 route.o: ../h/systm.h ../h/mbuf.h ../h/protosw.h ../h/socket.h ../h/dir.h
@@ -1085,6 +1194,13 @@ in_proto.o: ../netinet/in_proto.c ../h/param.h ../h/types.h ../h/signal.h
 in_proto.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 in_proto.o: ../h/socket.h ../h/protosw.h ../h/domain.h ../h/mbuf.h
 in_proto.o: ../netinet/in.h ../netinet/in_systm.h imp.h hy.h
+ip_gre.o: ../netinet/ip_gre.c ../h/param.h ../h/types.h ../h/signal.h
+ip_gre.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
+ip_gre.o: ../h/mbuf.h ../h/protosw.h ../h/socket.h ../h/socketvar.h
+ip_gre.o: ../h/errno.h ../h/syslog.h ../netinet/../net/if.h
+ip_gre.o: ../netinet/../net/../net/if_arp.h ../netinet/in.h
+ip_gre.o: ../netinet/in_systm.h ../netinet/in_var.h ../netinet/if_ether.h
+ip_gre.o: ../netinet/ip.h ../netinet/gre.h
 ip_icmp.o: ../netinet/ip_icmp.c ../h/param.h ../h/types.h ../h/signal.h
 ip_icmp.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 ip_icmp.o: ../h/systm.h ../h/mbuf.h ../h/protosw.h ../h/socket.h ../h/time.h
@@ -1108,6 +1224,7 @@ ip_output.o: ../netinet/../net/../net/if_arp.h ../netinet/../net/route.h
 ip_output.o: ../netinet/in.h ../netinet/in_pcb.h ../netinet/in_systm.h
 ip_output.o: ../netinet/in_var.h ../netinet/ip.h ../netinet/ip_var.h
 ip_output.o: ../netinet/../machine/mtpr.h
+ip_output.o: ../netinet/../machine/../vax/cpucond.h
 raw_ip.o: ../netinet/raw_ip.c ../h/param.h ../h/types.h ../h/signal.h
 raw_ip.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 raw_ip.o: ../h/mbuf.h ../h/socket.h ../h/protosw.h ../h/socketvar.h
@@ -1217,7 +1334,7 @@ ns_output.o: machine/endian.h ../h/mbuf.h ../h/errno.h ../h/socket.h
 ns_output.o: ../h/socketvar.h ../netns/../net/if.h
 ns_output.o: ../netns/../net/../net/if_arp.h ../netns/../net/route.h
 ns_output.o: ../netns/ns.h ../netns/ns_if.h ../netns/idp.h ../netns/idp_var.h
-ns_output.o: ../netns/../vax/mtpr.h
+ns_output.o: ../netns/../vax/mtpr.h ../netns/../vax/../vax/cpucond.h
 ns_pcb.o: ../netns/ns_pcb.c ../h/param.h ../h/types.h ../h/signal.h
 ns_pcb.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 ns_pcb.o: ../h/systm.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h
@@ -1259,7 +1376,7 @@ init_main.o: ../h/inode.h ../h/seg.h ../h/conf.h ../h/buf.h ../h/vm.h
 init_main.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
 init_main.o: ../h/vmmeter.h ../h/vmsystm.h ../h/cmap.h ../h/text.h ../h/clist.h
 init_main.o: ../h/protosw.h ../h/quota.h ../h/reboot.h ../sys/../machine/reg.h
-init_main.o: ../sys/../machine/cpu.h loop.h kg.h sl.h
+init_main.o: ../sys/../machine/cpu.h loop.h kg.h sl.h ppp.h
 init_sysent.o: ../sys/init_sysent.c ../h/param.h ../h/types.h ../h/signal.h
 init_sysent.o: ../h/../machine/trap.h ../h/../machine/machparam.h
 init_sysent.o: machine/endian.h ../h/systm.h
@@ -1278,7 +1395,7 @@ kern_clock.o: ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h
 kern_clock.o: ../h/kernel.h ../h/proc.h ../h/vm.h ../h/vmparam.h
 kern_clock.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
 kern_clock.o: ../h/vmsystm.h ../h/text.h ../sys/../machine/mtpr.h
-kern_clock.o: ../sys/../machine/clock.h
+kern_clock.o: ../sys/../machine/../vax/cpucond.h ../sys/../machine/clock.h
 kern_descrip.o: ../sys/kern_descrip.c ../h/param.h ../h/types.h ../h/signal.h
 kern_descrip.o: ../h/../machine/trap.h ../h/../machine/machparam.h
 kern_descrip.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
@@ -1288,15 +1405,16 @@ kern_descrip.o: ../h/proc.h ../h/file.h ../h/socket.h ../h/socketvar.h
 kern_descrip.o: ../h/mount.h ../h/stat.h ../h/ioctl.h ../h/ttychars.h
 kern_descrip.o: ../h/ttydev.h
 kern_exec.o: ../sys/kern_exec.c ../sys/../machine/reg.h ../sys/../machine/pte.h
-kern_exec.o: ../sys/../machine/psl.h ../sys/../machine/mtpr.h ../h/param.h
-kern_exec.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
-kern_exec.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h
-kern_exec.o: ../h/map.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
-kern_exec.o: ../h/dmap.h ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h
-kern_exec.o: ../h/errno.h ../h/kernel.h ../h/proc.h ../h/buf.h ../h/inode.h
-kern_exec.o: ../h/seg.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
-kern_exec.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/text.h ../h/file.h
-kern_exec.o: ../h/uio.h ../h/acct.h ../h/exec.h
+kern_exec.o: ../sys/../machine/psl.h ../sys/../machine/mtpr.h
+kern_exec.o: ../sys/../machine/../vax/cpucond.h ../h/param.h ../h/types.h
+kern_exec.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
+kern_exec.o: machine/endian.h ../h/systm.h ../h/map.h ../h/dir.h ../h/user.h
+kern_exec.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
+kern_exec.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/kernel.h ../h/proc.h
+kern_exec.o: ../h/buf.h ../h/inode.h ../h/seg.h ../h/vm.h ../h/vmparam.h
+kern_exec.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
+kern_exec.o: ../h/vmsystm.h ../h/text.h ../h/file.h ../h/uio.h ../h/acct.h
+kern_exec.o: ../h/exec.h
 kern_exit.o: ../sys/kern_exit.c ../sys/../machine/reg.h ../sys/../machine/psl.h
 kern_exit.o: ../h/param.h ../h/types.h ../h/signal.h ../h/../machine/trap.h
 kern_exit.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h
@@ -1332,7 +1450,7 @@ kern_mman.o: ../h/vmmeter.h ../h/vmsystm.h ../h/text.h ../h/file.h
 kern_mman.o: ../h/vadvise.h ../h/cmap.h ../h/trace.h ../h/mman.h ../h/conf.h
 kern_mman.o: ../sys/../machine/cpu.h ../sys/../machine/reg.h
 kern_mman.o: ../sys/../machine/psl.h ../sys/../machine/pte.h
-kern_mman.o: ../sys/../machine/mtpr.h
+kern_mman.o: ../sys/../machine/mtpr.h ../sys/../machine/../vax/cpucond.h
 kern_proc.o: ../sys/kern_proc.c ../sys/../machine/reg.h ../sys/../machine/pte.h
 kern_proc.o: ../sys/../machine/psl.h ../h/param.h ../h/types.h ../h/signal.h
 kern_proc.o: ../h/../machine/trap.h ../h/../machine/machparam.h
@@ -1356,29 +1474,30 @@ kern_resource.o: machine/endian.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
 kern_resource.o: ../h/dmap.h ../h/time.h ../h/resource.h ../h/namei.h
 kern_resource.o: ../h/uio.h ../h/errno.h ../h/proc.h
 kern_sig.o: ../sys/kern_sig.c ../sys/../machine/reg.h ../sys/../machine/pte.h
-kern_sig.o: ../sys/../machine/psl.h ../sys/../machine/mtpr.h ../h/param.h
-kern_sig.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
-kern_sig.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h
-kern_sig.o: ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h
-kern_sig.o: ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h
-kern_sig.o: ../h/inode.h ../h/proc.h ../h/timeb.h ../h/times.h ../h/buf.h
-kern_sig.o: ../h/mount.h ../h/text.h ../h/seg.h ../h/vm.h ../h/vmparam.h
-kern_sig.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
-kern_sig.o: ../h/vmsystm.h ../h/acct.h ../h/uio.h ../h/kernel.h
+kern_sig.o: ../sys/../machine/psl.h ../sys/../machine/mtpr.h
+kern_sig.o: ../sys/../machine/../vax/cpucond.h ../h/param.h ../h/types.h
+kern_sig.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
+kern_sig.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
+kern_sig.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
+kern_sig.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/inode.h ../h/proc.h
+kern_sig.o: ../h/timeb.h ../h/times.h ../h/buf.h ../h/mount.h ../h/text.h
+kern_sig.o: ../h/seg.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
+kern_sig.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/acct.h ../h/uio.h
+kern_sig.o: ../h/kernel.h
 kern_subr.o: ../sys/kern_subr.c ../h/param.h ../h/types.h ../h/signal.h
 kern_subr.o: ../h/../machine/trap.h ../h/../machine/machparam.h
 kern_subr.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
 kern_subr.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
 kern_subr.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/uio.h
 kern_synch.o: ../sys/kern_synch.c ../sys/../machine/pte.h
-kern_synch.o: ../sys/../machine/psl.h ../sys/../machine/mtpr.h ../h/param.h
-kern_synch.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
-kern_synch.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h
-kern_synch.o: ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h
-kern_synch.o: ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h
-kern_synch.o: ../h/proc.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
-kern_synch.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/kernel.h
-kern_synch.o: ../h/buf.h
+kern_synch.o: ../sys/../machine/psl.h ../sys/../machine/mtpr.h
+kern_synch.o: ../sys/../machine/../vax/cpucond.h ../h/param.h ../h/types.h
+kern_synch.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
+kern_synch.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
+kern_synch.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
+kern_synch.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/proc.h ../h/vm.h
+kern_synch.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
+kern_synch.o: ../h/vmmeter.h ../h/vmsystm.h ../h/kernel.h ../h/buf.h
 kern_time.o: ../sys/kern_time.c ../h/param.h ../h/types.h ../h/signal.h
 kern_time.o: ../h/../machine/trap.h ../h/../machine/machparam.h
 kern_time.o: machine/endian.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
@@ -1429,6 +1548,7 @@ subr_prf.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
 subr_prf.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/proc.h ../h/ioctl.h
 subr_prf.o: ../h/ttychars.h ../h/ttydev.h ../h/tty.h ../h/ttychars.h
 subr_prf.o: ../h/ttydev.h ../h/syslog.h ../sys/../machine/mtpr.h
+subr_prf.o: ../sys/../machine/../vax/cpucond.h
 subr_rmap.o: ../sys/subr_rmap.c ../h/param.h ../h/types.h ../h/signal.h
 subr_rmap.o: ../h/../machine/trap.h ../h/../machine/machparam.h
 subr_rmap.o: machine/endian.h ../h/systm.h ../h/map.h ../h/dir.h ../h/user.h
@@ -1478,10 +1598,13 @@ tty.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
 tty.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/ioctl.h ../h/ttychars.h
 tty.o: ../h/ttydev.h ../h/tty.h ../h/ttychars.h ../h/ttydev.h ../h/proc.h
 tty.o: ../h/file.h ../h/conf.h ../h/dkstat.h ../h/uio.h ../h/kernel.h
+tty.o: ../h/malloc.h sl.h ppp.h
 tty_conf.o: ../sys/tty_conf.c ../h/param.h ../h/types.h ../h/signal.h
 tty_conf.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 tty_conf.o: ../h/systm.h ../h/buf.h ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h
 tty_conf.o: ../h/tty.h ../h/ttychars.h ../h/ttydev.h ../h/conf.h bk.h tb.h sl.h
+tty_conf.o: ppp.h lk.h
+tty_kbhacks.o: ../sys/tty_kbhacks.c
 tty_pty.o: ../sys/tty_pty.c pty.h ../h/param.h ../h/types.h ../h/signal.h
 tty_pty.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 tty_pty.o: ../h/systm.h ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h ../h/tty.h
@@ -1635,7 +1758,7 @@ vm_mem.o: ../h/errno.h ../h/proc.h ../h/text.h ../h/vm.h ../h/vmparam.h
 vm_mem.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
 vm_mem.o: ../h/file.h ../h/buf.h ../h/mount.h ../h/trace.h ../h/map.h
 vm_mem.o: ../sys/../machine/cpu.h ../sys/../machine/pte.h
-vm_mem.o: ../sys/../machine/mtpr.h
+vm_mem.o: ../sys/../machine/mtpr.h ../sys/../machine/../vax/cpucond.h
 vm_mon.o: ../sys/vm_mon.c ../h/param.h ../h/types.h ../h/signal.h
 vm_mon.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 vm_mon.o: ../h/systm.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h
@@ -1650,7 +1773,7 @@ vm_page.o: ../h/text.h ../h/cmap.h ../h/vm.h ../h/vmparam.h
 vm_page.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
 vm_page.o: ../h/file.h ../h/trace.h ../sys/../machine/cpu.h
 vm_page.o: ../sys/../machine/reg.h ../sys/../machine/pte.h
-vm_page.o: ../sys/../machine/mtpr.h
+vm_page.o: ../sys/../machine/mtpr.h ../sys/../machine/../vax/cpucond.h
 vm_proc.o: ../sys/vm_proc.c ../h/param.h ../h/types.h ../h/signal.h
 vm_proc.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 vm_proc.o: ../h/systm.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
@@ -1658,15 +1781,17 @@ vm_proc.o: ../h/dmap.h ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h
 vm_proc.o: ../h/errno.h ../h/proc.h ../h/map.h ../h/cmap.h ../h/text.h
 vm_proc.o: ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
 vm_proc.o: ../h/vmmeter.h ../h/vmsystm.h ../sys/../machine/pte.h
-vm_proc.o: ../sys/../machine/mtpr.h ../sys/../machine/cpu.h
+vm_proc.o: ../sys/../machine/mtpr.h ../sys/../machine/../vax/cpucond.h
+vm_proc.o: ../sys/../machine/cpu.h
 vm_pt.o: ../sys/vm_pt.c ../sys/../machine/pte.h ../sys/../machine/mtpr.h
-vm_pt.o: ../h/param.h ../h/types.h ../h/signal.h ../h/../machine/trap.h
-vm_pt.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/dir.h
-vm_pt.o: ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h
-vm_pt.o: ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h ../h/proc.h
-vm_pt.o: ../h/map.h ../h/cmap.h ../h/vm.h ../h/vmparam.h
-vm_pt.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
-vm_pt.o: ../h/buf.h ../h/text.h ../h/mount.h ../h/inode.h ../h/kernel.h
+vm_pt.o: ../sys/../machine/../vax/cpucond.h ../h/param.h ../h/types.h
+vm_pt.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
+vm_pt.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
+vm_pt.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
+vm_pt.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/proc.h ../h/map.h
+vm_pt.o: ../h/cmap.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
+vm_pt.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/buf.h ../h/text.h
+vm_pt.o: ../h/mount.h ../h/inode.h ../h/kernel.h
 vm_sched.o: ../sys/vm_sched.c ../h/param.h ../h/types.h ../h/signal.h
 vm_sched.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 vm_sched.o: ../h/systm.h ../h/seg.h ../h/dir.h ../h/user.h
@@ -1675,13 +1800,14 @@ vm_sched.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/proc.h ../h/text.h
 vm_sched.o: ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
 vm_sched.o: ../h/vmmeter.h ../h/vmsystm.h ../h/cmap.h ../h/kernel.h
 vm_subr.o: ../sys/vm_subr.c ../sys/../machine/pte.h ../sys/../machine/mtpr.h
-vm_subr.o: ../h/param.h ../h/types.h ../h/signal.h ../h/../machine/trap.h
-vm_subr.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/dir.h
-vm_subr.o: ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h
-vm_subr.o: ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h ../h/vm.h
-vm_subr.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
-vm_subr.o: ../h/vmsystm.h ../h/proc.h ../h/cmap.h ../h/inode.h ../h/buf.h
-vm_subr.o: ../h/text.h ../h/fs.h
+vm_subr.o: ../sys/../machine/../vax/cpucond.h ../h/param.h ../h/types.h
+vm_subr.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
+vm_subr.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
+vm_subr.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
+vm_subr.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/vm.h ../h/vmparam.h
+vm_subr.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
+vm_subr.o: ../h/proc.h ../h/cmap.h ../h/inode.h ../h/buf.h ../h/text.h
+vm_subr.o: ../h/fs.h
 vm_sw.o: ../sys/vm_sw.c ../h/param.h ../h/types.h ../h/signal.h
 vm_sw.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 vm_sw.o: ../h/systm.h ../h/buf.h ../h/conf.h ../h/dir.h ../h/user.h
@@ -1696,6 +1822,7 @@ vm_swap.o: ../h/errno.h ../h/proc.h ../h/text.h ../h/map.h ../h/buf.h
 vm_swap.o: ../h/cmap.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
 vm_swap.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../sys/../machine/cpu.h
 vm_swap.o: ../sys/../machine/pte.h ../sys/../machine/mtpr.h
+vm_swap.o: ../sys/../machine/../vax/cpucond.h
 vm_swp.o: ../sys/vm_swp.c ../sys/../machine/pte.h ../h/param.h ../h/types.h
 vm_swp.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
 vm_swp.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
@@ -1712,42 +1839,51 @@ vm_text.o: ../h/errno.h ../h/proc.h ../h/text.h ../h/inode.h ../h/buf.h
 vm_text.o: ../h/seg.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
 vm_text.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/cmap.h ../h/uio.h
 vm_text.o: ../h/exec.h ../sys/../machine/pte.h ../sys/../machine/cpu.h
-autoconf.o: ../vax/autoconf.c mba.h uba.h kra.h ../h/param.h ../h/types.h
-autoconf.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
-autoconf.o: machine/endian.h ../h/systm.h ../h/map.h ../h/buf.h ../h/dkstat.h
-autoconf.o: ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
-autoconf.o: ../h/vmmeter.h ../h/vmsystm.h ../h/malloc.h ../h/conf.h ../h/dmap.h
-autoconf.o: ../h/reboot.h ../vax/pte.h ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h
-autoconf.o: ../vax/nexus.h ../vax/scb.h ../vax/ioa.h ../vax/../vaxbi/bireg.h
+autoconf.o: ../vax/autoconf.c mba.h uba.h vaxbi.h bva.h ../h/param.h
+autoconf.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
+autoconf.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h
+autoconf.o: ../h/map.h ../h/buf.h ../h/dkstat.h ../h/vm.h ../h/vmparam.h
+autoconf.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
+autoconf.o: ../h/vmsystm.h ../h/malloc.h ../h/conf.h ../h/dmap.h ../h/reboot.h
+autoconf.o: ../vax/pte.h ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h
+autoconf.o: ../vax/../vax/cpucond.h ../vax/nexus.h ../vax/scb.h ../vax/ioa.h
+autoconf.o: ../vax/../vaxbi/bireg.h ../vax/../vaxbi/bivar.h
 autoconf.o: ../vax/../vaxmba/mbareg.h ../vax/../vaxmba/mbavar.h
-autoconf.o: ../vax/../vaxuba/ubareg.h ../vax/../vaxuba/ubavar.h bi.h
+autoconf.o: ../vax/../vaxuba/ubareg.h ../vax/../vaxuba/ubavar.h
+autoconf.o: ../vax/../babyvax/bvvar.h
 clock.o: ../vax/clock.c ../h/param.h ../h/types.h ../h/signal.h
 clock.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-clock.o: ../h/time.h ../h/kernel.h ../vax/mtpr.h ../vax/clock.h ../vax/cpu.h
+clock.o: ../h/time.h ../h/kernel.h ../vax/mtpr.h ../vax/../vax/cpucond.h
+clock.o: ../vax/clock.h ../vax/cpu.h ../vax/cpucond.h
 conf.o: ../vax/conf.c ../h/param.h ../h/types.h ../h/signal.h
 conf.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 conf.o: ../h/systm.h ../h/buf.h ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h
 conf.o: ../h/tty.h ../h/ttychars.h ../h/ttydev.h ../h/conf.h hp.h tu.h rk.h
 conf.o: te.h tms.h ts.h mu.h ra.h kra.h up.h tj.h rb.h rx.h uu.h rl.h np.h
-conf.o: acc.h ct.h dh.h dmf.h dz.h lp.h va.h vp.h pty.h lpa.h dn.h ik.h ps.h
-conf.o: ad.h dhu.h vs.h dmz.h qv.h qd.h
+conf.o: acc.h ct.h dh.h dmf.h dz.h ss.h lp.h va.h vp.h pty.h lpa.h dn.h ik.h
+conf.o: ps.h ad.h dhu.h vs.h dmz.h qv.h qd.h netmon.h pppaux.h
 cons.o: ../vax/cons.c ../h/param.h ../h/types.h ../h/signal.h
 cons.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 cons.o: ../h/conf.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h
 cons.o: ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h
 cons.o: ../h/proc.h ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h ../h/tty.h
 cons.o: ../h/ttychars.h ../h/ttydev.h ../h/systm.h ../h/uio.h ../vax/cpu.h
-cons.o: ../vax/cons.h ../vax/mtpr.h
+cons.o: ../vax/cons.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 cpudata.o: ../vax/cpudata.c ../vax/pte.h ../h/param.h ../h/types.h
 cpudata.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
-cpudata.o: machine/endian.h ../vax/cpu.h ../vax/nexus.h ../vax/ioa.h
-cpudata.o: ../vax/../vaxbi/bireg.h ../vax/../vaxuba/ubareg.h
+cpudata.o: machine/endian.h ../vax/cpu.h ../vax/cpucond.h ../vax/nexus.h
+cpudata.o: ../vax/ioa.h ../vax/../vaxbi/bireg.h ../vax/../vaxuba/ubareg.h
 crl.o: ../vax/crl.c ../h/param.h ../h/types.h ../h/signal.h
 crl.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 crl.o: ../h/systm.h ../h/conf.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
 crl.o: ../h/dmap.h ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h
 crl.o: ../h/errno.h ../h/buf.h ../h/uio.h ../vax/cons.h ../vax/cpu.h
-crl.o: ../vax/crl.h ../vax/mtpr.h
+crl.o: ../vax/crl.h ../vax/mtpr.h ../vax/../vax/cpucond.h
+cvax.o: ../vax/cvax.c ../vax/cpucond.h ../h/param.h ../h/types.h ../h/signal.h
+cvax.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
+cvax.o: ../h/time.h ../h/kernel.h ../h/systm.h ../vax/cpu.h ../vax/psl.h
+cvax.o: ../vax/mem.h ../vax/mtpr.h ../vax/../vax/cpucond.h ../vax/cvax.h
+cvax.o: ../vax/ka650.h
 dkbad.o: ../vax/dkbad.c ../h/param.h ../h/types.h ../h/signal.h
 dkbad.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 dkbad.o: ../h/buf.h ../h/dkbad.h
@@ -1756,33 +1892,37 @@ flp.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 flp.o: ../h/systm.h ../h/conf.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
 flp.o: ../h/dmap.h ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h
 flp.o: ../h/errno.h ../h/buf.h ../h/uio.h ../vax/cons.h ../vax/cpu.h
-flp.o: ../vax/flp.h ../vax/mtpr.h
+flp.o: ../vax/flp.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 in_cksum.o: ../vax/in_cksum.c ../h/types.h ../h/mbuf.h
-ka650.o: ../vax/ka650.c ../h/param.h ../h/types.h ../h/signal.h
-ka650.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-ka650.o: ../h/time.h ../h/kernel.h ../h/systm.h ../vax/cpu.h ../vax/clock.h
-ka650.o: ../vax/psl.h ../vax/mem.h ../vax/mtpr.h ../vax/ka650.h
+ka410.o: ../vax/ka410.c
+ka42.o: ../vax/ka42.c
 ka630.o: ../vax/ka630.c ../h/param.h ../h/types.h ../h/signal.h
 ka630.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-ka630.o: ../h/time.h ../h/kernel.h ../h/vmmac.h ../vax/mtpr.h ../vax/cpu.h
-ka630.o: ../vax/clock.h ../vax/pte.h ../vax/ka630.h
+ka630.o: ../h/time.h ../h/kernel.h ../h/vmmac.h ../vax/mtpr.h
+ka630.o: ../vax/../vax/cpucond.h ../vax/cpu.h ../vax/clock.h ../vax/pte.h
+ka630.o: ../vax/78032.h ../vax/ka630.h
+ka650.o: ../vax/ka650.c ../h/param.h ../h/types.h ../h/signal.h
+ka650.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
+ka650.o: ../h/time.h ../h/kernel.h ../h/systm.h ../vax/cpu.h ../vax/psl.h
+ka650.o: ../vax/mem.h ../vax/mtpr.h ../vax/../vax/cpucond.h ../vax/cvax.h
+ka650.o: ../vax/ka650.h
 ka730.o: ../vax/ka730.c ../h/param.h ../h/types.h ../h/signal.h
 ka730.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-ka730.o: ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h
+ka730.o: ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 ka750.o: ../vax/ka750.c ../h/param.h ../h/types.h ../h/signal.h
 ka750.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-ka750.o: ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h
+ka750.o: ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 ka780.o: ../vax/ka780.c ../h/param.h ../h/types.h ../h/signal.h
 ka780.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-ka780.o: ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h
+ka780.o: ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 ka820.o: ../vax/ka820.c ../h/param.h ../h/types.h ../h/signal.h
 ka820.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 ka820.o: ../h/time.h ../h/kernel.h ../h/vmmac.h ../vax/cpu.h ../vax/clock.h
-ka820.o: ../vax/ka820.h ../vax/mem.h ../vax/mtpr.h ../vax/pte.h
-ka820.o: ../vax/../vaxbi/bireg.h
+ka820.o: ../vax/ka820.h ../vax/mem.h ../vax/mtpr.h ../vax/../vax/cpucond.h
+ka820.o: ../vax/pte.h ../vax/../vaxbi/bireg.h
 ka860.o: ../vax/ka860.c ../h/param.h ../h/types.h ../h/signal.h
 ka860.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-ka860.o: ../vax/cpu.h ../vax/mtpr.h
+ka860.o: ../vax/cpu.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 machdep.o: ../vax/machdep.c ../h/param.h ../h/types.h ../h/signal.h
 machdep.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 machdep.o: ../h/systm.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
@@ -1793,16 +1933,17 @@ machdep.o: ../h/vmsystm.h ../h/proc.h ../h/buf.h ../h/reboot.h ../h/conf.h
 machdep.o: ../h/inode.h ../h/file.h ../h/text.h ../h/clist.h ../h/callout.h
 machdep.o: ../h/cmap.h ../h/mbuf.h ../h/msgbuf.h ../h/quota.h ../vax/reg.h
 machdep.o: ../vax/pte.h ../vax/psl.h ../vax/frame.h ../vax/clock.h
-machdep.o: ../vax/cons.h ../vax/cpu.h ../vax/mem.h ../vax/mtpr.h ../vax/rpb.h
-machdep.o: ../vax/ka630.h ../vax/ka650.h ../vax/../vaxuba/ubavar.h
-machdep.o: ../vax/../vaxuba/ubareg.h qv.h qd.h
+machdep.o: ../vax/cons.h ../vax/cpu.h ../vax/cpucond.h ../vax/mem.h
+machdep.o: ../vax/mtpr.h ../vax/../vax/cpucond.h ../vax/rpb.h ../vax/ka630.h
+machdep.o: ../vax/ka650.h ../vax/../vaxuba/ubavar.h ../vax/../vaxuba/ubareg.h
+machdep.o: ../vax/../mdec/vmb.h qv.h qd.h
 mem.o: ../vax/mem.c ../vax/pte.h ../h/param.h ../h/types.h ../h/signal.h
 mem.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 mem.o: ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h
 mem.o: ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h ../h/conf.h
 mem.o: ../h/buf.h ../h/systm.h ../h/vm.h ../h/vmparam.h
 mem.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
-mem.o: ../h/cmap.h ../h/uio.h ../vax/mtpr.h
+mem.o: ../h/cmap.h ../h/uio.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 mscp.o: ../vax/mscp.c ../h/param.h ../h/types.h ../h/signal.h
 mscp.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 mscp.o: ../h/buf.h ../h/errno.h ../h/dkstat.h ../h/ioctl.h ../h/ttychars.h
@@ -1821,19 +1962,20 @@ sys_machdep.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/ioctl.h
 sys_machdep.o: ../h/ttychars.h ../h/ttydev.h ../h/file.h ../h/proc.h ../h/uio.h
 sys_machdep.o: ../h/kernel.h ../h/mtio.h ../h/buf.h ../h/trace.h ../vax/dkio.h
 sys_machdep.o: ../vax/pte.h ../vax/../vaxuba/ubareg.h ../vax/../vaxuba/ubavar.h
+sys_machdep.o: uba.h
 trap.o: ../vax/trap.c ../vax/psl.h ../vax/reg.h ../vax/pte.h ../vax/vmparam.h
 trap.o: ../h/param.h ../h/types.h ../h/signal.h ../h/../machine/trap.h
 trap.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/dir.h
 trap.o: ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h
 trap.o: ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h assym.s
 trap.o: ../h/proc.h ../h/seg.h ../vax/trap.h ../h/acct.h ../h/kernel.h
-trap.o: ../vax/mtpr.h
+trap.o: ../vax/mtpr.h ../vax/../vax/cpucond.h
 tu.o: ../vax/tu.c ../h/param.h ../h/types.h ../h/signal.h
 tu.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 tu.o: ../h/systm.h ../h/buf.h ../h/conf.h ../h/dir.h ../h/user.h
 tu.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
 tu.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/kernel.h ../vax/cpu.h
-tu.o: ../vax/mtpr.h ../vax/rsp.h
+tu.o: ../vax/mtpr.h ../vax/../vax/cpucond.h ../vax/rsp.h
 ufs_machdep.o: ../vax/ufs_machdep.c ../vax/pte.h ../h/param.h ../h/types.h
 ufs_machdep.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
 ufs_machdep.o: machine/endian.h ../h/systm.h ../h/dir.h ../h/user.h
@@ -1849,11 +1991,15 @@ vm_machdep.o: ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
 vm_machdep.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/proc.h ../h/cmap.h
 vm_machdep.o: ../h/mount.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
 vm_machdep.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/text.h
-vm_machdep.o: ../vax/pte.h ../vax/mtpr.h
+vm_machdep.o: ../vax/pte.h ../vax/mtpr.h ../vax/../vax/cpucond.h
 bi.o: ../vaxbi/bi.c ../h/param.h ../h/types.h ../h/signal.h
 bi.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
-bi.o: ../vaxbi/../vax/cpu.h ../vaxbi/../vax/mtpr.h ../vaxbi/../vax/nexus.h
-bi.o: ../vaxbi/bireg.h
+bi.o: ../vaxbi/../vax/cpu.h ../vaxbi/../vax/mtpr.h
+bi.o: ../vaxbi/../vax/../vax/cpucond.h ../vaxbi/../vax/nexus.h ../vaxbi/bireg.h
+bidevtab.o: ../vaxbi/bidevtab.c kra.h ../h/param.h ../h/types.h ../h/signal.h
+bidevtab.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
+bidevtab.o: ../h/buf.h ../vaxbi/../vaxuba/ubavar.h ../vaxbi/bireg.h
+bidevtab.o: ../vaxbi/bivar.h
 kdb.o: ../vaxbi/kdb.c kra.h ../h/param.h ../h/types.h ../h/signal.h
 kdb.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 kdb.o: ../h/systm.h ../h/malloc.h ../h/map.h ../h/buf.h ../h/conf.h ../h/dir.h
@@ -1863,7 +2009,9 @@ kdb.o: ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
 kdb.o: ../h/vmmeter.h ../h/vmsystm.h ../h/dkstat.h ../h/cmap.h ../h/syslog.h
 kdb.o: ../h/kernel.h ../vaxbi/../vax/pte.h ../vaxbi/../vax/cpu.h
 kdb.o: ../vaxbi/../vax/mscp.h ../vaxbi/../vax/mscpvar.h ../vaxbi/../vax/mtpr.h
-kdb.o: ../vaxbi/bireg.h ../vaxbi/kdbreg.h ../vaxbi/../vaxuba/ubavar.h
+kdb.o: ../vaxbi/../vax/../vax/cpucond.h ../vaxbi/../vax/nexus.h
+kdb.o: ../vaxbi/../vax/scb.h ../vaxbi/bireg.h ../vaxbi/kdbreg.h
+kdb.o: ../vaxbi/../vaxuba/ubavar.h
 if_de.o: ../vaxif/if_de.c de.h ../vaxif/../machine/pte.h ../h/param.h
 if_de.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
 if_de.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/mbuf.h
@@ -1875,8 +2023,8 @@ if_de.o: ../vaxif/../netinet/in.h ../vaxif/../netinet/in_systm.h
 if_de.o: ../vaxif/../netinet/in_var.h ../vaxif/../netinet/ip.h
 if_de.o: ../vaxif/../netinet/if_ether.h ../vaxif/../netns/ns.h
 if_de.o: ../vaxif/../netns/ns_if.h ../vaxif/../vax/cpu.h ../vaxif/../vax/mtpr.h
-if_de.o: ../vaxif/if_dereg.h ../vaxif/if_uba.h ../vaxif/../vaxuba/ubareg.h
-if_de.o: ../vaxif/../vaxuba/ubavar.h
+if_de.o: ../vaxif/../vax/../vax/cpucond.h ../vaxif/if_dereg.h ../vaxif/if_uba.h
+if_de.o: ../vaxif/../vaxuba/ubareg.h ../vaxif/../vaxuba/ubavar.h
 if_ec.o: ../vaxif/if_ec.c ec.h ../vaxif/../machine/pte.h ../h/param.h
 if_ec.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
 if_ec.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/mbuf.h
@@ -1888,8 +2036,8 @@ if_ec.o: ../vaxif/../netinet/in.h ../vaxif/../netinet/in_systm.h
 if_ec.o: ../vaxif/../netinet/in_var.h ../vaxif/../netinet/ip.h
 if_ec.o: ../vaxif/../netinet/if_ether.h ../vaxif/../netns/ns.h
 if_ec.o: ../vaxif/../netns/ns_if.h ../vaxif/../vax/cpu.h ../vaxif/../vax/mtpr.h
-if_ec.o: ../vaxif/if_ecreg.h ../vaxif/if_uba.h ../vaxif/../vaxuba/ubareg.h
-if_ec.o: ../vaxif/../vaxuba/ubavar.h
+if_ec.o: ../vaxif/../vax/../vax/cpucond.h ../vaxif/if_ecreg.h ../vaxif/if_uba.h
+if_ec.o: ../vaxif/../vaxuba/ubareg.h ../vaxif/../vaxuba/ubavar.h
 if_ex.o: ../vaxif/if_ex.c ex.h ../h/param.h ../h/types.h ../h/signal.h
 if_ex.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 if_ex.o: ../h/systm.h ../h/mbuf.h ../h/buf.h ../h/protosw.h ../h/socket.h
@@ -1900,8 +2048,9 @@ if_ex.o: ../vaxif/../netinet/in.h ../vaxif/../netinet/in_systm.h
 if_ex.o: ../vaxif/../netinet/in_var.h ../vaxif/../netinet/ip.h
 if_ex.o: ../vaxif/../netinet/if_ether.h ../vaxif/../netns/ns.h
 if_ex.o: ../vaxif/../netns/ns_if.h ../vaxif/../vax/pte.h ../vaxif/../vax/cpu.h
-if_ex.o: ../vaxif/../vax/mtpr.h ../vaxif/if_exreg.h ../vaxif/if_uba.h
-if_ex.o: ../vaxif/../vaxuba/ubareg.h ../vaxif/../vaxuba/ubavar.h
+if_ex.o: ../vaxif/../vax/mtpr.h ../vaxif/../vax/../vax/cpucond.h
+if_ex.o: ../vaxif/if_exreg.h ../vaxif/if_uba.h ../vaxif/../vaxuba/ubareg.h
+if_ex.o: ../vaxif/../vaxuba/ubavar.h
 if_il.o: ../vaxif/if_il.c il.h ../vaxif/../machine/pte.h ../h/param.h
 if_il.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
 if_il.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/mbuf.h
@@ -1913,8 +2062,9 @@ if_il.o: ../vaxif/../netinet/in.h ../vaxif/../netinet/in_systm.h
 if_il.o: ../vaxif/../netinet/in_var.h ../vaxif/../netinet/ip.h
 if_il.o: ../vaxif/../netinet/if_ether.h ../vaxif/../netns/ns.h
 if_il.o: ../vaxif/../netns/ns_if.h ../vaxif/../vax/cpu.h ../vaxif/../vax/mtpr.h
-if_il.o: ../vaxif/if_il.h ../vaxif/if_ilreg.h ../vaxif/if_uba.h
-if_il.o: ../vaxif/../vaxuba/ubareg.h ../vaxif/../vaxuba/ubavar.h
+if_il.o: ../vaxif/../vax/../vax/cpucond.h ../vaxif/if_il.h ../vaxif/if_ilreg.h
+if_il.o: ../vaxif/if_uba.h ../vaxif/../vaxuba/ubareg.h
+if_il.o: ../vaxif/../vaxuba/ubavar.h
 if_qe.o: ../vaxif/if_qe.c qe.h ../h/param.h ../h/types.h ../h/signal.h
 if_qe.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 if_qe.o: ../h/systm.h ../h/mbuf.h ../h/buf.h ../h/protosw.h ../h/socket.h
@@ -1925,26 +2075,28 @@ if_qe.o: ../vaxif/../net/route.h ../vaxif/../netinet/in.h
 if_qe.o: ../vaxif/../netinet/in_systm.h ../vaxif/../netinet/in_var.h
 if_qe.o: ../vaxif/../netinet/ip.h ../vaxif/../netinet/if_ether.h
 if_qe.o: ../vaxif/../netns/ns.h ../vaxif/../netns/ns_if.h ../vaxif/../vax/pte.h
-if_qe.o: ../vaxif/../vax/cpu.h ../vaxif/../vax/mtpr.h ../vaxif/if_qereg.h
-if_qe.o: ../vaxif/if_uba.h ../vaxif/../vaxuba/ubareg.h
-if_qe.o: ../vaxif/../vaxuba/ubavar.h
+if_qe.o: ../vaxif/../vax/cpu.h ../vaxif/../vax/mtpr.h
+if_qe.o: ../vaxif/../vax/../vax/cpucond.h ../vaxif/if_qereg.h ../vaxif/if_uba.h
+if_qe.o: ../vaxif/../vaxuba/ubareg.h ../vaxif/../vaxuba/ubavar.h
 if_uba.o: ../vaxif/if_uba.c ../h/param.h ../h/types.h ../h/signal.h
 if_uba.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 if_uba.o: ../h/systm.h ../h/mbuf.h ../h/map.h ../h/buf.h ../h/cmap.h
 if_uba.o: ../h/vmmac.h ../h/socket.h ../h/syslog.h ../h/malloc.h
 if_uba.o: ../vaxif/../net/if.h ../vaxif/../net/../net/if_arp.h
-if_uba.o: ../vaxif/../vax/pte.h ../vaxif/../vax/mtpr.h ../vaxif/if_uba.h
+if_uba.o: ../vaxif/../vax/pte.h ../vaxif/../vax/mtpr.h
+if_uba.o: ../vaxif/../vax/../vax/cpucond.h ../vaxif/if_uba.h
 if_uba.o: ../vaxif/../vaxuba/ubareg.h ../vaxif/../vaxuba/ubavar.h
 hp.o: ../vaxmba/hp.c hp.h ../h/param.h ../h/types.h ../h/signal.h
 hp.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 hp.o: ../h/systm.h ../h/dkstat.h ../h/buf.h ../h/conf.h ../h/dir.h ../h/file.h
 hp.o: ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
 hp.o: ../h/namei.h ../h/uio.h ../h/errno.h ../h/map.h ../vaxmba/../vax/mtpr.h
-hp.o: ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h
-hp.o: ../h/vmmeter.h ../h/vmsystm.h ../h/cmap.h ../h/dkbad.h ../h/disklabel.h
-hp.o: ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h ../h/uio.h ../h/syslog.h
-hp.o: ../h/stat.h ../vaxmba/../machine/pte.h ../vaxmba/../vax/dkio.h
-hp.o: ../vaxmba/mbareg.h ../vaxmba/mbavar.h ../vaxmba/hpreg.h
+hp.o: ../vaxmba/../vax/../vax/cpucond.h ../h/vm.h ../h/vmparam.h
+hp.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
+hp.o: ../h/cmap.h ../h/dkbad.h ../h/disklabel.h ../h/ioctl.h ../h/ttychars.h
+hp.o: ../h/ttydev.h ../h/uio.h ../h/syslog.h ../h/stat.h
+hp.o: ../vaxmba/../machine/pte.h ../vaxmba/../vax/dkio.h ../vaxmba/mbareg.h
+hp.o: ../vaxmba/mbavar.h ../vaxmba/hpreg.h
 ht.o: ../vaxmba/ht.c tu.h ../h/param.h ../h/types.h ../h/signal.h
 ht.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 ht.o: ../h/systm.h ../h/buf.h ../h/conf.h ../h/dir.h ../h/file.h ../h/user.h
@@ -1959,9 +2111,10 @@ mba.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
 mba.o: ../h/../machine/machparam.h machine/endian.h ../h/systm.h ../h/dkstat.h
 mba.o: ../h/buf.h ../h/conf.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h
 mba.o: ../h/dmap.h ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h
-mba.o: ../h/errno.h ../h/proc.h ../h/map.h ../vaxmba/../vax/mtpr.h ../h/vm.h
-mba.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
-mba.o: ../h/vmsystm.h ../vaxmba/mbareg.h ../vaxmba/mbavar.h
+mba.o: ../h/errno.h ../h/proc.h ../h/map.h ../vaxmba/../vax/mtpr.h
+mba.o: ../vaxmba/../vax/../vax/cpucond.h ../h/vm.h ../h/vmparam.h
+mba.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
+mba.o: ../vaxmba/mbareg.h ../vaxmba/mbavar.h
 mt.o: ../vaxmba/mt.c mu.h ../h/param.h ../h/types.h ../h/signal.h
 mt.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
 mt.o: ../h/systm.h ../h/buf.h ../h/conf.h ../h/dir.h ../h/file.h ../h/user.h
@@ -2091,7 +2244,8 @@ tmscp.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
 tmscp.o: ../h/vmsystm.h ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h
 tmscp.o: ../h/syslog.h ../h/mtio.h ../h/cmap.h ../h/uio.h ../h/tty.h
 tmscp.o: ../h/ttychars.h ../h/ttydev.h ../vaxuba/../vax/pte.h
-tmscp.o: ../vaxuba/../vax/cpu.h ../vaxuba/../vax/mtpr.h ../vaxuba/ubareg.h
+tmscp.o: ../vaxuba/../vax/cpu.h ../vaxuba/../vax/mtpr.h
+tmscp.o: ../vaxuba/../vax/../vax/cpucond.h ../vaxuba/ubareg.h
 tmscp.o: ../vaxuba/ubavar.h ../vaxuba/tmscpreg.h ../vaxuba/../vax/tmscp.h
 ts.o: ../vaxuba/ts.c ts.h ../h/param.h ../h/types.h ../h/signal.h
 ts.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
@@ -2110,7 +2264,8 @@ uba.o: ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h
 uba.o: ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h
 uba.o: ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h ../h/proc.h
 uba.o: ../h/conf.h ../h/dkstat.h ../h/kernel.h ../vaxuba/../vax/pte.h
-uba.o: ../vaxuba/../vax/cpu.h ../vaxuba/../vax/mtpr.h ../vaxuba/../vax/nexus.h
+uba.o: ../vaxuba/../vax/cpu.h ../vaxuba/../vax/mtpr.h
+uba.o: ../vaxuba/../vax/../vax/cpucond.h ../vaxuba/../vax/nexus.h
 uba.o: ../vaxuba/ubareg.h ../vaxuba/ubavar.h ik.h vs.h
 uda.o: ../vaxuba/uda.c ra.h ../h/param.h ../h/types.h ../h/signal.h
 uda.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
@@ -2123,6 +2278,7 @@ uda.o: ../h/dkstat.h ../h/cmap.h ../h/disklabel.h ../h/syslog.h ../h/stat.h
 uda.o: ../vaxuba/../machine/pte.h ../vaxuba/../vax/cpu.h ../vaxuba/ubareg.h
 uda.o: ../vaxuba/ubavar.h ../vaxuba/udareg.h ../vaxuba/../vax/mscp.h
 uda.o: ../vaxuba/../vax/mscpvar.h ../vaxuba/../vax/mtpr.h
+uda.o: ../vaxuba/../vax/../vax/cpucond.h
 up.o: ../vaxuba/up.c up.h ../vaxuba/../machine/pte.h ../h/param.h ../h/types.h
 up.o: ../h/signal.h ../h/../machine/trap.h ../h/../machine/machparam.h
 up.o: machine/endian.h ../h/systm.h ../h/dkstat.h ../h/dkbad.h ../h/ioctl.h
@@ -2152,27 +2308,29 @@ qv.o: ../h/ttychars.h ../h/ttydev.h ../h/map.h ../h/buf.h ../h/vm.h
 qv.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
 qv.o: ../h/vmsystm.h bk.h ../h/clist.h ../h/file.h ../h/uio.h ../h/kernel.h
 qv.o: ../h/syslog.h ../vaxuba/../machine/cpu.h ../vaxuba/../machine/mtpr.h
-qv.o: ../vaxuba/ubareg.h ../vaxuba/ubavar.h
+qv.o: ../vaxuba/../machine/../vax/cpucond.h ../vaxuba/ubareg.h
+qv.o: ../vaxuba/ubavar.h
 qfont.o: ../vaxuba/qfont.c
 qd.o: ../vaxuba/qd.c qd.h ../h/types.h ../vaxuba/../machine/pte.h
-qd.o: ../vaxuba/../machine/mtpr.h ../vaxuba/../machine/cpu.h ../h/param.h
-qd.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
-qd.o: ../h/../machine/machparam.h machine/endian.h ../h/conf.h ../h/dir.h
-qd.o: ../h/user.h ../h/../machine/pcb.h ../h/dmap.h ../h/time.h ../h/resource.h
-qd.o: ../h/namei.h ../h/uio.h ../h/errno.h ../vaxuba/qdioctl.h ../h/ioctl.h
-qd.o: ../h/ttychars.h ../h/ttydev.h ../h/tty.h ../h/ttychars.h ../h/ttydev.h
-qd.o: ../h/map.h ../h/buf.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
-qd.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h bk.h ../h/clist.h ../h/file.h
-qd.o: ../h/uio.h ../h/kernel.h ../h/exec.h ../h/proc.h ../vaxuba/ubareg.h
-qd.o: ../vaxuba/ubavar.h ../h/syslog.h ../vaxuba/qduser.h ../vaxuba/qevent.h
-qd.o: ../vaxuba/qdreg.h
+qd.o: ../vaxuba/../machine/mtpr.h ../vaxuba/../machine/../vax/cpucond.h
+qd.o: ../vaxuba/../machine/cpu.h ../h/param.h ../h/types.h ../h/signal.h
+qd.o: ../h/../machine/trap.h ../h/../machine/machparam.h machine/endian.h
+qd.o: ../h/conf.h ../h/dir.h ../h/user.h ../h/../machine/pcb.h ../h/dmap.h
+qd.o: ../h/time.h ../h/resource.h ../h/namei.h ../h/uio.h ../h/errno.h
+qd.o: ../vaxuba/qdioctl.h ../h/ioctl.h ../h/ttychars.h ../h/ttydev.h ../h/tty.h
+qd.o: ../h/ttychars.h ../h/ttydev.h ../h/map.h ../h/buf.h ../h/vm.h
+qd.o: ../h/vmparam.h ../h/../machine/vmparam.h ../h/vmmac.h ../h/vmmeter.h
+qd.o: ../h/vmsystm.h bk.h ../h/clist.h ../h/file.h ../h/uio.h ../h/kernel.h
+qd.o: ../h/exec.h ../h/proc.h ../vaxuba/ubareg.h ../vaxuba/ubavar.h
+qd.o: ../h/syslog.h ../vaxuba/qduser.h ../vaxuba/qevent.h ../vaxuba/qdreg.h
 swapgeneric.o: ../vax/swapgeneric.c mba.h ../vax/pte.h ../h/param.h
 swapgeneric.o: ../h/types.h ../h/signal.h ../h/../machine/trap.h
 swapgeneric.o: ../h/../machine/machparam.h machine/endian.h ../h/conf.h
 swapgeneric.o: ../h/buf.h ../h/vm.h ../h/vmparam.h ../h/../machine/vmparam.h
 swapgeneric.o: ../h/vmmac.h ../h/vmmeter.h ../h/vmsystm.h ../h/systm.h
 swapgeneric.o: ../h/reboot.h ../vax/cons.h ../vax/mtpr.h
-swapgeneric.o: ../vax/../vaxmba/mbareg.h ../vax/../vaxmba/mbavar.h
-swapgeneric.o: ../vax/../vaxuba/ubareg.h ../vax/../vaxuba/ubavar.h
+swapgeneric.o: ../vax/../vax/cpucond.h ../vax/../vaxmba/mbareg.h
+swapgeneric.o: ../vax/../vaxmba/mbavar.h ../vax/../vaxuba/ubareg.h
+swapgeneric.o: ../vax/../vaxuba/ubavar.h
 
 # IF YOU PUT ANYTHING HERE IT WILL GO AWAY

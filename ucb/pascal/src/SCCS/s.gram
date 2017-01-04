@@ -1,0 +1,177 @@
+h00092
+s 00000/00000/00061
+d D 2.1 84/02/08 20:41:37 aoki 9 8
+c synchronize to version 2
+e
+s 00006/00002/00055
+d D 1.8 83/08/19 05:09:11 thien 8 7
+c Changed for linting
+e
+s 00005/00002/00052
+d D 1.7 83/08/18 00:21:34 thien 7 6
+c 
+e
+s 00000/00000/00054
+d D 1.6 83/08/18 00:12:29 thien 6 5
+c 
+e
+s 00008/00007/00046
+d D 1.5 83/08/18 00:07:59 thien 5 4
+c 
+e
+s 00011/00003/00042
+d D 1.4 83/08/15 13:52:57 thien 4 3
+c 
+e
+s 00002/00002/00043
+d D 1.3 80/08/27 23:33:57 peter 3 2
+c w => w! to overwrite existing y.tab.h
+e
+s 00003/00003/00042
+d D 1.2 80/08/27 22:43:44 peter 2 1
+c @ => @@ to non-conflict sccsid
+e
+s 00045/00000/00000
+d D 1.1 80/08/27 19:57:38 peter 1 0
+c date and time created 80/08/27 19:57:38 by peter
+e
+u
+U
+t
+T
+I 1
+"%Z%%M% %I% %G%"
+D 4
+/yyval/s//*&/
+E 4
+I 4
+/yyval/s/int/union semstack/
+s/ 0//
+/yypv/s/int/union semstack/
+E 4
+/\*yysterm\[]/,$d
+1;/yyactr/ka
+'a,$s/yypv/yyYpv/g
+'aa
+D 4
+	register int **yyYpv;
+	register int *p, *q;
+E 4
+I 4
+	register union semstack *yyYpv;
+	register struct tnode *p, *q;
+E 4
+	yyYpv = yypv;
+.
+D 3
+1;/^##/-w y.tab.h
+E 3
+I 3
+1;/^##/-w! y.tab.h
+E 3
+/^int yylval 0/d
+/extern int yychar,/s//extern/
+/yyclearin/d
+/yyerrok/d
+1;/^##/d
+I 4
+D 5
+/yyact/s\[]/& =/
+/yypact/s\[]/& =/
+/yyr1/s\[]/& =/
+/yyr2/s\[]/& =/
+/yygo/s\[]/& =/
+/yypgo/s\[]/& =/
+E 5
+E 4
+$a
+
+yyEactr(__np__, var)
+int __np__;
+char *var;
+{
+switch(__np__) {
+default:
+return (1);
+I 8
+break;
+E 8
+.
+D 2
+g/case.*@/s/@//\
+E 2
+I 2
+g/case.*@@/s/@@//\
+E 2
+.m$
+D 2
+g/@/ka\
+E 2
+I 2
+g/@@/ka\
+E 2
+'a;?case?,?case?t$\
+'am$\
+a\
+}\
+I 8
+break;
+E 8
+D 5
+break;
+E 5
+$a
+}
+I 8
+/*NOTREACHED*/
+E 8
+}
+.
+D 2
+1,$s/@//
+E 2
+I 2
+1,$s/@@//
+E 2
+/int nterms/d
+/int nnonter/d
+/int nstate/d
+/int yyerrval/d
+I 5
+/yyact\[/s/ {/ = {/
+/yypact/s/ {/ = {/
+/yyr1/s/ {/ = {/
+/yyr2/s/ {/ = {/
+/yygo/s/ {/ = {/
+/yypgo/s/ {/ = {/
+D 7
+/static/s/static/\/\* &/
+s/$/ \*\//
+E 7
+I 7
+/static/i
+D 8
+\#ifndef lint
+E 8
+I 8
+#ifndef lint
+E 8
+.
+/static/a
+D 8
+\#endif
+E 8
+I 8
+#endif
+.
+E 8
+E 7
+E 5
+D 3
+w
+E 3
+I 3
+w!
+E 3
+q
+E 1

@@ -11,3 +11,7 @@ For each release (and the qjsrc-se53pra0 changes)
 * An appropriate tag has been created
 
 For more details on 4.3BSD Quasijarus please see http://gunkies.org/wiki/4.3_BSD_Quasijarus
+
+Please note that this repository contains files that differ only
+in case (eg astoks.h and astoks.H), so you will need to clone onto
+a case sensitive filesystem.

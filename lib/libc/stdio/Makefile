@@ -58,7 +58,7 @@ link.vax:
 	(cd ../library; rm -f  ${STDOBJ} ${VAXOBJ})
 	(cd ../profiled; rm -f  ${STDOBJ} ${VAXOBJ})
 	ln  ${STDOBJ} ${VAXOBJ} ../library
-	(cd profiled; ln  ${STDOBJ} ${VAXOBJ} ../../profiled)
+	ln  ${STDOBJ} ${VAXOBJ} ../profiled
 
 link.tahoe:
 	(cd ../library; rm -f  ${STDOBJ} ${TAHOEOBJ})

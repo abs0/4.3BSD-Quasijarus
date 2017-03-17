@@ -19,7 +19,7 @@ link: ${OBJS}
 	(cd ../library; rm -f ${OBJS})
 	(cd ../profiled; rm -f ${OBJS})
 	ln ${OBJS} ../library
-	(cd profiled; ln ${OBJS} ../../profiled)
+	ln ${OBJS} ../profiled
 
 tags:
 	cwd=`pwd`; \

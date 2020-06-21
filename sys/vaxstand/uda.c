@@ -152,7 +152,7 @@ udcmd(op, io)
 	for (;;) {
 		if (u->uda1_ca.ca_cmdint)
 			u->uda1_ca.ca_cmdint = 0;
-		if (u->uda_ca.ca_rspdc & MSCP_OWN)
+		if (u->uda1_ca.ca_rspdsc & MSCP_OWN)
 			continue;
 		u->uda1_ca.ca_rspint = 0;
 		if (mp->mscp_opcode == (op | M_OP_END))
